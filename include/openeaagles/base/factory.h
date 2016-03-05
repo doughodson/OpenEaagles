@@ -3,7 +3,7 @@
 #define __oe_base_factory_H__
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class Object;
 

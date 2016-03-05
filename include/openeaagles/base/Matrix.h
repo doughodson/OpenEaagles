@@ -15,7 +15,7 @@
 #include <cmath>
 
 namespace oe {
-namespace basic {
+namespace base {
    class CVector; // Column vector
    class RVector; // Row vector
 

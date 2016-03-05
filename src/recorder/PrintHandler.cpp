@@ -28,8 +28,8 @@ END_SLOTTABLE(PrintHandler)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(PrintHandler)
-   ON_SLOT( 1, setFilename,        basic::String)
-   ON_SLOT( 2, setPathName,        basic::String)
+   ON_SLOT( 1, setFilename,        base::String)
+   ON_SLOT( 2, setPathName,        base::String)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintHandler)
@@ -285,18 +285,18 @@ void PrintHandler::setFullFilename(const char* const name)
    }
 }
 
-bool PrintHandler::setFilename(const basic::String* const msg)
+bool PrintHandler::setFilename(const base::String* const msg)
 {
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
-   if (msg != nullptr) filename = new basic::String(*msg);
+   if (msg != nullptr) filename = new base::String(*msg);
 
     return true;
 }
 
-bool PrintHandler::setPathName(const basic::String* const msg)
+bool PrintHandler::setPathName(const base::String* const msg)
 {
    if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
-   if (msg != nullptr) pathname = new basic::String(*msg);
+   if (msg != nullptr) pathname = new base::String(*msg);
 
    return true;
 }
@@ -330,7 +330,7 @@ void PrintHandler::printToOutput(const char* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* PrintHandler::getSlotByIndex(const int si)
+base::Object* PrintHandler::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

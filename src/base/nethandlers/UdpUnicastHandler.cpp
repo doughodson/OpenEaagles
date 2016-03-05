@@ -33,7 +33,7 @@
 #include <cstring>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // Class: UdpUnicastHandler
@@ -240,6 +240,6 @@ std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, cons
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

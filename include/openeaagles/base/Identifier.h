@@ -7,7 +7,7 @@
 #include "openeaagles/base/String.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Identifier
@@ -31,7 +31,7 @@ public:
     void catStr(const char* string) override;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

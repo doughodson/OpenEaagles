@@ -6,7 +6,7 @@
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class Color;
       class PairStream;
       class Identifier;
@@ -50,7 +50,7 @@ class Material;
 //  name             <String>      ! Display name (default: " ")
 //  colorTable       <PairStream>  ! Color table (default: 0)
 //  normalFont       <Font>        ! Normal font; Font (default: 0)
-//  normalFont       <Identifier>  ! Normal font; basic::Identifier (default: 0)
+//  normalFont       <Identifier>  ! Normal font; base::Identifier (default: 0)
 //  left             <Number>      ! Left ortho bound (default: -0.5)
 //  right            <Number>      ! Right ortho bound (default: 640.5)
 //  bottom           <Number>      ! Bottom ortho bound (default: -0.5)
@@ -100,7 +100,7 @@ public:
    bool isSubdisplay() const;                   // Is this a subwindow
 
    const char* getName() const;                 // Returns the display's (window) name
-   bool setName(basic::String* const n);        // Sets the display's name
+   bool setName(base::String* const n);        // Sets the display's name
 
    virtual void select();                       // Selects this display.
 
@@ -120,13 +120,13 @@ public:
    virtual void reshapeIt(int w, int h);        // Resizes the displays's width and height
 
    const osg::Vec4& getClearColor() const;      // Returns the clear (background) color as a Vec4 vector (RGBA).
-   void setClearColor(const basic::Color& ccolor); // Set the display's clear (background) color
+   void setClearColor(const base::Color& ccolor); // Set the display's clear (background) color
 
    GLclampd getClearDepth() const;              // Returns the value that the depth buffer is cleared to.
    void setClearDepth(const GLclampd depth);    //  Sets the value that the depth buffer is cleared to (see notes)
 
    virtual void loadTextures();                 // Load the texture table
-   const basic::PairStream* getTextures() const; // Returns a ptr to the list of textures
+   const base::PairStream* getTextures() const; // Returns a ptr to the list of textures
 
    // ---
    // Global (display) graphic parameters
@@ -142,21 +142,21 @@ public:
    void setColor(const osg::Vec4& color);       // Sets the current color by an RGBA vector.
    void setColor(const char* cname1);           // Sets the current color by name (color table)
 
-   basic::Color* getColor(const char* const name); // Returns a color by name from the color table
-   basic::Color* getColor(const int idx);       // Returns a color by index from the color table
+   base::Color* getColor(const char* const name); // Returns a color by name from the color table
+   base::Color* getColor(const int idx);       // Returns a color by index from the color table
 
-   bool setColorTable(basic::PairStream* const list); // Sets the color table to this list of colors
-   void addColor(basic::Color*);                // Adds a color to the color table
-   void addColor(basic::Pair*);                 // Adds a color to the color table
+   bool setColorTable(base::PairStream* const list); // Sets the color table to this list of colors
+   void addColor(base::Color*);                // Adds a color to the color table
+   void addColor(base::Pair*);                 // Adds a color to the color table
 
-   basic::PairStream* defaultColors();          // Generates a list of default colors; returns a pre-ref'ed() ptr
+   base::PairStream* defaultColors();          // Generates a list of default colors; returns a pre-ref'ed() ptr
                                                 //  -- black, red, green, yellow, blue, magenta, cyan, and white.
 
    // Returns the Material object by material table name
-   Material* getMaterial(const basic::Identifier* name);
+   Material* getMaterial(const base::Identifier* name);
 
    // Returns the texture ID by texture table name.
-   GLuint getTextureByName(const basic::Identifier* name);
+   GLuint getTextureByName(const base::Identifier* name);
 
 
    // ---
@@ -259,8 +259,8 @@ public:
    Font* getFont(const char* const name);                // Returns a font by name.
    const Font* getFont(const char* const name) const;    // const version
 
-   Font* getFont(const basic::Identifier* const name);   // Returns a font by name (using an Identifier)
-   const Font* getFont(const basic::Identifier* const name) const; // const version
+   Font* getFont(const base::Identifier* const name);   // Returns a font by name (using an Identifier)
+   const Font* getFont(const base::Identifier* const name) const; // const version
 
    Font* getFont(const int index);              // Returns a font by its font table index.
    const Font* getFont(const int index) const;  // const version
@@ -275,7 +275,7 @@ public:
    // Sets the normal text font
    bool setNormalFont(Font* const f);
    bool setNormalFont(const char* const fontName);
-   bool setNormalFont(const basic::Identifier* const fontName);
+   bool setNormalFont(const base::Identifier* const fontName);
 
    // Sets the current font) based on the font mode flags.
    void selectFont(const bool reversed, const bool underlined, Font* newFont = 0);
@@ -283,11 +283,11 @@ public:
    Font* getCurrentFont();                      // Returns a pointer to the current font
    void setFont(Font* newFont);                 // Sets the current font.
 
-   const basic::Color* getNormColor() const;          // Returns the normal text color
-   void setNormColor(const basic::Color* const nc);   // Sets the normal text color
+   const base::Color* getNormColor() const;          // Returns the normal text color
+   void setNormColor(const base::Color* const nc);   // Sets the normal text color
 
-   const basic::Color* getHighlightColor() const;        // Returns the highlighted text color
-   void setHighlightColor(const basic::Color* const nc); // Sets the highlighted text color
+   const base::Color* getHighlightColor() const;        // Returns the highlighted text color
+   void setHighlightColor(const base::Color* const nc); // Sets the highlighted text color
 
    void drawLeftBracket(const int ln, const int cp);  // Draws the left bracket at ln, cp
    void drawRightBracket(const int ln, const int cp); // Draws the right bracket at ln, cp
@@ -321,33 +321,33 @@ public:
    // ---
    // Slot functions
    // ---
-   bool setSlotLeftOrthoBound(const basic::Number* const sloobj);
-   bool setSlotRightOrthoBound(const basic::Number* const sroobj);
-   bool setSlotBottomOrthoBound(const basic::Number* const sbobobj);
-   bool setSlotTopOrthoBound(const basic::Number* const stobobj);
-   bool setSlotNearOrthoBound(const basic::Number* const snobobj);
-   bool setSlotFarOrthoBound(const basic::Number* const sfobobj);
-   bool setSlotViewportXOrigin(const basic::Number* const svxoobj);
-   bool setSlotViewportYOrigin(const basic::Number* const svyoobj);
-   bool setSlotViewportWidth(const basic::Number* const svwobj);
-   bool setSlotViewportHeight(const basic::Number* const svhobj);
-   bool setSlotSubdisplayStream(basic::PairStream* const dsobj);
+   bool setSlotLeftOrthoBound(const base::Number* const sloobj);
+   bool setSlotRightOrthoBound(const base::Number* const sroobj);
+   bool setSlotBottomOrthoBound(const base::Number* const sbobobj);
+   bool setSlotTopOrthoBound(const base::Number* const stobobj);
+   bool setSlotNearOrthoBound(const base::Number* const snobobj);
+   bool setSlotFarOrthoBound(const base::Number* const sfobobj);
+   bool setSlotViewportXOrigin(const base::Number* const svxoobj);
+   bool setSlotViewportYOrigin(const base::Number* const svyoobj);
+   bool setSlotViewportWidth(const base::Number* const svwobj);
+   bool setSlotViewportHeight(const base::Number* const svhobj);
+   bool setSlotSubdisplayStream(base::PairStream* const dsobj);
    bool setSlotSubdisplaySingle(Display* const dobj);
-   bool setSlotStdLineWidth(const basic::Number* const svhobj);
-   bool setSlotTexturesStream(basic::PairStream* const obj);
+   bool setSlotStdLineWidth(const base::Number* const svhobj);
+   bool setSlotTexturesStream(base::PairStream* const obj);
    bool setSlotTexturesSingle(Texture* const obj);
-   bool setSlotClearColor(const basic::Color* const msg);
-   bool setSlotLeftBracketCharacter(const basic::Number* const svhob);
-   bool setSlotLeftBracketCharacter(const basic::String* const svhob);
-   bool setSlotRightBracketCharacter(const basic::Number* const svhob);
-   bool setSlotRightBracketCharacter(const basic::String* const svhob);
-   bool setSlotReverseVideoBrackets(const basic::Number* const svhobj);
-   bool setFontList(basic::PairStream* const dsobj);
-   bool setSlotClearDepth(const basic::Number* const msg);
-   bool setSlotDisplayOrientation(const basic::String* const msg);
-   bool setSlotMaterials(basic::PairStream* const msg);
+   bool setSlotClearColor(const base::Color* const msg);
+   bool setSlotLeftBracketCharacter(const base::Number* const svhob);
+   bool setSlotLeftBracketCharacter(const base::String* const svhob);
+   bool setSlotRightBracketCharacter(const base::Number* const svhob);
+   bool setSlotRightBracketCharacter(const base::String* const svhob);
+   bool setSlotReverseVideoBrackets(const base::Number* const svhobj);
+   bool setFontList(base::PairStream* const dsobj);
+   bool setSlotClearDepth(const base::Number* const msg);
+   bool setSlotDisplayOrientation(const base::String* const msg);
+   bool setSlotMaterials(base::PairStream* const msg);
    bool setSlotMaterials(Material* const msg);
-   bool setSlotAntialias(const basic::Number* const msg);
+   bool setSlotAntialias(const base::Number* const msg);
 
    // sync double buffer swapping flag
    // (just in case we don't want to swap buffers every time, we can wait)
@@ -361,8 +361,8 @@ protected:
    // Configures the display's GL modes
    virtual void configure();
 
-   basic::PairStream* getTextures();
-   basic::PairStream* subDisplays();
+   base::PairStream* getTextures();
+   base::PairStream* subDisplays();
    void setSubdisplayFlag(const bool flg);
 
 private:
@@ -372,13 +372,13 @@ private:
     bool processTextures();
     bool processMaterials();
 
-    basic::String* name;               // Display Name
-    basic::PairStream* subdisplays;    // Sub-displays
+    base::String* name;               // Display Name
+    base::PairStream* subdisplays;    // Sub-displays
 
     Graphic* focusPtr;                 // Input focus
-    basic::PairStream* materials;      // list of material objects
+    base::PairStream* materials;      // list of material objects
 
-    basic::PairStream* textures;       // List of textures
+    base::PairStream* textures;       // List of textures
 
     GLsizei  vpX, vpY, vpWidth, vpHeight;                   // viewport size
     GLdouble oLeft, oRight, oBottom, oTop, oNear, oFar;     // Ortho parameters
@@ -393,17 +393,17 @@ private:
     Orientation orientation;           // Display orientation
 
     GLclampd  clearDepth;              // Display clear depth
-    basic::PairStream* colorTable;     // Color table
+    base::PairStream* colorTable;     // Color table
     osg::Vec4 color;                   // Current Color
     osg::Vec4 clearColor;              // Clear (background) color
-    basic::Identifier* colorName;      // Current color name
-    const basic::Color* normColor;     // Color of a normal text field
-    const basic::Color* hiColor;       // Color of a high lighted text field.
+    base::Identifier* colorName;      // Current color name
+    const base::Color* normColor;     // Color of a normal text field
+    const base::Color* hiColor;       // Color of a high lighted text field.
 
-    basic::PairStream* fontList;       // List of fonts
+    base::PairStream* fontList;       // List of fonts
     Font* currentFont;                 // Current font
     Font* normalFont;                  // Normal font
-    basic::Identifier* normalFontName; // Normal font name
+    base::Identifier* normalFontName; // Normal font name
     bool    reversedFlg;               // Current font setting
     bool    underlinedFlg;             // Current font setting
 
@@ -440,8 +440,8 @@ inline Font* Display::getCurrentFont()                      { return currentFont
 inline bool Display::isFontReversed() const                 { return reversedFlg; }
 inline bool Display::isFontUnderlined() const               { return underlinedFlg; }
 inline bool Display::isDefaultFont() const                  { return currentFont == 0; }
-inline const basic::Color* Display::getNormColor() const    { return normColor; }
-inline const basic::Color* Display::getHighlightColor() const { return hiColor; }
+inline const base::Color* Display::getNormColor() const    { return normColor; }
+inline const base::Color* Display::getHighlightColor() const { return hiColor; }
 inline char Display::getLeftBracketCharacter() const        { return leftBracketChar; }
 inline bool Display::setLeftBracketCharacter(const char c)  { leftBracketChar = c; return true; }
 inline char Display::getRightBracketCharacter() const       { return rightBracketChar; }
@@ -449,10 +449,10 @@ inline bool Display::setRightBracketCharacter(const char c) { rightBracketChar =
 inline bool Display::getReverseVideoBrackets() const        { return rvBrackets; }
 inline bool Display::setReverseVideoBrackets(const bool f)  { rvBrackets = f; return true; }
 
-inline basic::PairStream* Display::getTextures()            { return textures; }
-inline const basic::PairStream* Display::getTextures() const { return textures; }
+inline base::PairStream* Display::getTextures()            { return textures; }
+inline const base::PairStream* Display::getTextures() const { return textures; }
 
-inline basic::PairStream* Display::subDisplays()            { return subdisplays; }
+inline base::PairStream* Display::subDisplays()            { return subdisplays; }
 inline void Display::setSubdisplayFlag(const bool flg)      { subdisplayFlg = flg; }
 inline bool Display::isOkToSwap() const                     { return okToSwap; }
 inline void Display::setOkToSwap(const bool x)              { okToSwap = x; }

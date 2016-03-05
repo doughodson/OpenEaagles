@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class IoData;
    class IoDevice;
 
@@ -20,8 +20,8 @@ namespace basic {
 //              device objects.
 //
 //------------------------------------------------------------------------------
-class IoAdapter : public basic::Component {
-    DECLARE_SUBCLASS(IoAdapter,basic::Component)
+class IoAdapter : public base::Component {
+    DECLARE_SUBCLASS(IoAdapter,base::Component)
 
 public:
    IoAdapter();
@@ -41,7 +41,7 @@ public:
       ) =0;
 };
 
-} // end basic
-} // end oe namespace
+}
+}
 
 #endif

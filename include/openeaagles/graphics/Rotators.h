@@ -38,11 +38,11 @@ public:
 
     // Get functions
     LCreal getXRotation()    const  { return xRot; }
-    LCreal getXRotationDeg() const  { return xRot * static_cast<LCreal>(basic::Angle::R2DCC); }
+    LCreal getXRotationDeg() const  { return xRot * static_cast<LCreal>(base::Angle::R2DCC); }
     LCreal getYRotation()    const  { return yRot; }
-    LCreal getYRotationDeg() const  { return yRot * static_cast<LCreal>(basic::Angle::R2DCC); }
+    LCreal getYRotationDeg() const  { return yRot * static_cast<LCreal>(base::Angle::R2DCC); }
     LCreal getZRotation()    const  { return zRot; }
-    LCreal getZRotationDeg() const  { return zRot * static_cast<LCreal>(basic::Angle::R2DCC); }
+    LCreal getZRotationDeg() const  { return zRot * static_cast<LCreal>(base::Angle::R2DCC); }
     // get all angles
     void getRotationAngles(LCreal& x, LCreal& y, LCreal& z);
 
@@ -57,19 +57,19 @@ public:
     bool setRotationsDeg(const LCreal x, const LCreal y = 0, const LCreal z = 0);
 
     void draw() override;
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     // Event callbacks
-    bool onXRotate(const basic::Angle* const rotation);
-    bool onXRotate(const basic::Number* const rotation);
-    bool onXRotateDeg(const basic::Number* const rotation);
-    bool onYRotate(const basic::Angle* const rotation);
-    bool onYRotate(const basic::Number* const rotation);
-    bool onYRotateDeg(const basic::Number* const rotation);
-    bool onZRotate(const basic::Angle* const rotation);
-    bool onZRotate(const basic::Number* const rotation);
-    bool onZRotateDeg(const basic::Number* const rotation);
+    bool onXRotate(const base::Angle* const rotation);
+    bool onXRotate(const base::Number* const rotation);
+    bool onXRotateDeg(const base::Number* const rotation);
+    bool onYRotate(const base::Angle* const rotation);
+    bool onYRotate(const base::Number* const rotation);
+    bool onYRotateDeg(const base::Number* const rotation);
+    bool onZRotate(const base::Angle* const rotation);
+    bool onZRotate(const base::Number* const rotation);
+    bool onZRotateDeg(const base::Number* const rotation);
 
     LCreal xRot;  // x axis rotation
     LCreal yRot;  // y axis rotation

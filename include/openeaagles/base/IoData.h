@@ -7,7 +7,7 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  IoData
@@ -99,7 +99,7 @@ public:
    virtual void clear();
 };
 
-} // end basic namespace
+} // End base namespace
 } // end oe namespace
 
 #endif

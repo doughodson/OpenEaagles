@@ -18,9 +18,9 @@ namespace simulation {
 //
 // Factory name: SensorMsg
 //------------------------------------------------------------------------------
-class SensorMsg : public basic::Object
+class SensorMsg : public base::Object
 {
-   DECLARE_SUBCLASS(SensorMsg,basic::Object)
+   DECLARE_SUBCLASS(SensorMsg,base::Object)
 
 public:
    SensorMsg();
@@ -139,8 +139,8 @@ public:
    const Player* getTarget() const              { return target; }
 
    // Optional: data message attached to sensor message
-   basic::Object* getDataMessage()              { return dataMsg; }
-   const basic::Object* getDataMessage() const  { return dataMsg; }
+   base::Object* getDataMessage()              { return dataMsg; }
+   const base::Object* getDataMessage() const  { return dataMsg; }
 
    // Sets the gimbal that generated this message
    void setGimbal(Gimbal* const t);
@@ -152,7 +152,7 @@ public:
    void setTarget(Player* const p);
 
    // Sets the optional data message attached to sensor message
-   void setDataMessage(basic::Object* const msg);
+   void setDataMessage(base::Object* const msg);
 
 
    // Clear data
@@ -172,9 +172,9 @@ private:
    osg::Vec3d      losT2O;         // Normalized target to ownship LOS vector (target's NED)
    osg::Vec3d      aoi;            // Normalized target Angle Of Incidence (AOI) vector
    Gimbal*         gimbal;         // The gimbal that transmitted the message
-   basic::safe_ptr<Player>    ownship;     // The originating (ownship) player
-   basic::safe_ptr<Player>    target;      // The Target player
-   basic::safe_ptr<basic::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
+   base::safe_ptr<Player>    ownship;     // The originating (ownship) player
+   base::safe_ptr<Player>    target;      // The Target player
+   base::safe_ptr<base::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
    bool            returnReq;      // Return Request
    bool            localOnly;      // Local players only flag
 };

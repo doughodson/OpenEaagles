@@ -26,7 +26,7 @@
 #include "openeaagles/base/Statistic.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class Component;
 
 //------------------------------------------------------------------------------
@@ -68,7 +68,7 @@ namespace basic {
 //
 //    Windows Only: the default process priority class is 'HIGH_PRIORITY_CLASS'.  To use
 //    the Windows highest process priority class, 'REALTIME_PRIORITY_CLASS', define the
-//    macro 'USE_REALTIME_PRI_CLASS' in the file 'src/basic/windows/Thread.cxx', which
+//    macro 'USE_REALTIME_PRI_CLASS' in the file 'src/base/windows/Thread.cxx', which
 //    will set REALTIME_PRIORITY_CLASS class and use the thread priorities below.
 //
 //            Priority        Windows(REALTIME_PRIORITY_CLASS)
@@ -265,7 +265,7 @@ private:
    void* completedSig;  // completed signal
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class PairStream;
    }
 namespace simulation {
@@ -56,8 +56,8 @@ public:
    virtual void triggerAction(Action* const act);
 
    // Legacy function (will be removed in a future major release)
-   virtual int getShootList(basic::safe_ptr<Track>* const tlist, const int max);
-   virtual int getShootList(basic::safe_ptr<const Track>* const tlist, const int max) const;
+   virtual int getShootList(base::safe_ptr<Track>* const tlist, const int max);
+   virtual int getShootList(base::safe_ptr<const Track>* const tlist, const int max) const;
 
    void reset() override;
    void updateData(const LCreal dt = 0.0) override;
@@ -73,7 +73,7 @@ protected:
    bool shutdownNotification() override;
 
 private:
-   basic::safe_ptr<Action> action;  // Current steerpoint action
+   base::safe_ptr<Action> action;  // Current steerpoint action
    Track*         nextToShoot;      // Next to shoot track
 };
 

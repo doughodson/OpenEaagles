@@ -43,7 +43,7 @@ void Nib::initData()
    ntm = nullptr;
    entityTypeChecked = false;
 
-   lcStrcpy(pname, PNAME_BUF_SIZE, "EAAGLES");
+   lcStrcpy(pname, PNAME_BUF_SIZE, "OPENEAAGLES");
    side = Player::BLUE;
    mode = Player::INACTIVE;
 
@@ -240,7 +240,7 @@ void Nib::setPlayerName(const char* s)
 //------------------------------------------------------------------------------
 // Federate name as String
 //------------------------------------------------------------------------------
-const basic::String* Nib::getFederateName() const
+const base::String* Nib::getFederateName() const
 {
    return federateName;
 }
@@ -248,7 +248,7 @@ const basic::String* Nib::getFederateName() const
 //------------------------------------------------------------------------------
 // Sets our federate name
 //------------------------------------------------------------------------------
-bool Nib::setFederateName(const basic::String* const msg)
+bool Nib::setFederateName(const base::String* const msg)
 {
    federateName = msg;
    return true;
@@ -584,11 +584,11 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
             // find all missiles missiles
             const StoresMgr* sm = gv->getStoresManagement();
             if (sm != nullptr) {
-               const basic::PairStream* stores = sm->getStores();
+               const base::PairStream* stores = sm->getStores();
                if (stores != nullptr) {
-                  const basic::List::Item* item = stores->getFirstItem();
+                  const base::List::Item* item = stores->getFirstItem();
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
-                     const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
+                     const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
                      if (pair != nullptr) {
                         const Missile* msl = dynamic_cast<const Missile*>( pair->object() );
                         if (msl != nullptr) {
@@ -665,10 +665,10 @@ void Nib::playerState2Nib()
    if (player != nullptr) {
       // Player name
       const char* cname = nullptr;
-      const basic::String* sname = player->getName();
+      const base::String* sname = player->getName();
       if (sname != nullptr) cname = *sname;
       if (cname != nullptr) setPlayerName(cname);
-      else setPlayerName("EAAGLES");
+      else setPlayerName("OPENEAAGLES");
 
       freeze( player->isFrozen() );
       if (!isMode(Player::DELETE_REQUEST)) setMode( player->getMode() );
@@ -826,7 +826,7 @@ bool Nib::resetDeadReckoning(
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
       const double len = err.length();
-      if (len < (2.0 * basic::Distance::KM2M) ) {
+      if (len < (2.0 * base::Distance::KM2M) ) {
          smoothVel = err/drTime;
          smoothTime = drTime;
       }
@@ -886,7 +886,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT;
       }
@@ -897,7 +897,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT + drA0*(0.5*dT*dT);
       }
@@ -930,7 +930,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
@@ -946,7 +946,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         basic::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::Nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);

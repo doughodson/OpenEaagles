@@ -29,7 +29,7 @@ static const unsigned short ALTERNATE_MODE_C     = 0x0004;
 bool Nib::IffManager(const LCreal curExecTime)
 {
    NetIO* disIO = static_cast<NetIO*>(getNetIO());
-   const basic::Pair* pair = getPlayer()->getRadioByType(typeid(simulation::Iff));
+   const base::Pair* pair = getPlayer()->getRadioByType(typeid(simulation::Iff));
 
    // OK if the player has an IFF transponder and we're the correct version.
    bool ok = (disIO->getVersion() >= NetIO::VERSION_1278_1A) && (pair != nullptr);
@@ -83,7 +83,7 @@ bool Nib::IffManager(const LCreal curExecTime)
          pdu.eventID.eventNumber = disIO->getNewIffEventID();
 
          //pdu.dumpData();
-         if (basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
+         if (base::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
          ok = disIO->sendData(reinterpret_cast<char*>(&pdu), sizeof(pdu));
 
          iffLastExecTime = curExecTime;

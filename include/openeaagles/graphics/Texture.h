@@ -7,7 +7,7 @@
 #include "openeaagles/graphics/Image.h"
 
 namespace oe {
-   namespace basic { class Number; class Identifier; }
+   namespace base { class Number; class Identifier; }
 
 namespace graphics {
 
@@ -144,18 +144,18 @@ public:
 
 protected:
    // Slot functions
-   bool setSlotWidth(const basic::Number* const size);
-   bool setSlotHeight(const basic::Number* const size);
-   bool setSlotRedScale(const basic::Number* const s);
-   bool setSlotRedBias(const basic::Number* const b);
-   bool setSlotGreenScale(const basic::Number* const s);
-   bool setSlotGreenBias(const basic::Number* const b);
-   bool setSlotBlueScale(const basic::Number* const s);
-   bool setSlotBlueBias(const basic::Number* const b);
-   bool setSlotWrapS(const basic::Identifier* const v);
-   bool setSlotWrapT(const basic::Identifier* const v);
-   bool setSlotMagFilter(const basic::Identifier* const v);
-   bool setSlotMinFilter(const basic::Identifier* const v);
+   bool setSlotWidth(const base::Number* const size);
+   bool setSlotHeight(const base::Number* const size);
+   bool setSlotRedScale(const base::Number* const s);
+   bool setSlotRedBias(const base::Number* const b);
+   bool setSlotGreenScale(const base::Number* const s);
+   bool setSlotGreenBias(const base::Number* const b);
+   bool setSlotBlueScale(const base::Number* const s);
+   bool setSlotBlueBias(const base::Number* const b);
+   bool setSlotWrapS(const base::Identifier* const v);
+   bool setSlotWrapT(const base::Identifier* const v);
+   bool setSlotMagFilter(const base::Identifier* const v);
+   bool setSlotMinFilter(const base::Identifier* const v);
 
 private:
    void initData();

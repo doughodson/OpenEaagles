@@ -15,7 +15,7 @@ namespace JSBSim {
 
 namespace oe {
 
-namespace basic {
+namespace base {
     class String;
     class Integer;
 };
@@ -79,12 +79,12 @@ public:
     bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
 
     // slot methods
-    const basic::String* getRootDir() const  { return rootDir;    }   // JSBSim root directory
-    virtual bool setRootDir(const basic::String* const);
-    const basic::String* getModel() const    { return model;      }   // JSBSim model
-    virtual bool setModel(const basic::String* const);
+    const base::String* getRootDir() const  { return rootDir;    }   // JSBSim root directory
+    virtual bool setRootDir(const base::String* const);
+    const base::String* getModel() const    { return model;      }   // JSBSim model
+    virtual bool setModel(const base::String* const);
     int getDebugLevel() const                { return debugLevel; }   // JSBSim debug level
-    virtual bool setDebugLevel(const basic::Integer* const);
+    virtual bool setDebugLevel(const base::Integer* const);
 
 protected:
 
@@ -94,8 +94,8 @@ protected:
 private:
     void initData();
 
-    const basic::String* rootDir;   // root directory for JSBSim models
-    const basic::String* model;     // JSBSim model
+    const base::String* rootDir;   // root directory for JSBSim models
+    const base::String* model;     // JSBSim model
     int   debugLevel;
 
     LCreal pitchTrimPos;    // +/- 1.0

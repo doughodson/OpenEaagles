@@ -7,7 +7,7 @@
 #include "openeaagles/linearsystem/FirstOrderTf.h"
 
 namespace oe {
-   namespace basic { class Time; }
+   namespace base { class Time; }
 
 namespace linearsystem {
 
@@ -43,8 +43,8 @@ public:
    LCreal getTau() const                         { return tau; }
    virtual bool setTau(const LCreal v);
 
-   virtual bool setSlotTau(const basic::Time* const msg);
-   virtual bool setSlotTau(const basic::Number* const msg);
+   virtual bool setSlotTau(const base::Time* const msg);
+   virtual bool setSlotTau(const base::Number* const msg);
 
 private:
    LCreal tau;    // filter time constant (seconds)

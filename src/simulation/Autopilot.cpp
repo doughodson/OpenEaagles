@@ -25,7 +25,7 @@ namespace simulation {
    // default flight control attributes associated with flying a pattern
    const double Autopilot::STD_RATE_TURN_DPS   = 3.0;       // 3.0 degrees per second
    const double Autopilot::STD_MAX_BANK_ANGLE  = 30.0;      // 30.0 degrees of roll
-   const double Autopilot::STD_MAX_CLIMB_RATE  = 2000.0 * (basic::Distance::FT2M) / (basic::Time::M2S);
+   const double Autopilot::STD_MAX_CLIMB_RATE  = 2000.0 * (base::Distance::FT2M) / (base::Time::M2S);
    const double Autopilot::STD_MAX_PITCH_ANGLE = 10.0;      // 10.0 degrees of pitch
    const double Autopilot::STD_MAX_ACCEL_NPS   = 5.0;       // NPS
 
@@ -64,32 +64,32 @@ END_SLOTTABLE(Autopilot)
 
 //  Map slot names to handlers
 BEGIN_SLOT_MAP(Autopilot)
-    ON_SLOT( 1, setSlotNavMode,                    basic::Number)
-    ON_SLOT( 2, setSlotHoldAltitude,               basic::Distance)
-    ON_SLOT( 3, setSlotAltitudeHoldMode,           basic::Number)
-    ON_SLOT( 4, setSlotHoldVelocityKts,            basic::Number)
-    ON_SLOT( 5, setSlotVelocityHoldMode,           basic::Number)
-    ON_SLOT( 6, setSlotHoldHeading,                basic::Angle)
-    ON_SLOT( 7, setSlotHeadingHoldMode,            basic::Number)
-    ON_SLOT( 8, setSlotLoiterMode,                 basic::Number)
-    ON_SLOT( 9, setSlotLoiterPatternLength,        basic::Distance)
-    ON_SLOT( 9, setSlotLoiterPatternLength,        basic::Number)
-    ON_SLOT(10, setSlotLoiterPatternCcwFlag,       basic::Number)
-    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, basic::Distance)
-    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, basic::Number)
-    ON_SLOT(12, setSlotLeadFollowingDistanceRight, basic::Distance)
-    ON_SLOT(12, setSlotLeadFollowingDistanceRight, basic::Number)
-    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, basic::Distance)
-    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, basic::Number)
-    ON_SLOT(14, setSlotLeadPlayerName,             basic::Identifier)
-    ON_SLOT(15, setSlotFollowTheLeadMode,          basic::Number)
-    ON_SLOT(16, setSlotMaxRateOfTurnDps,           basic::Number)
-    ON_SLOT(17, setSlotMaxBankAngle,               basic::Number)
-    ON_SLOT(18, setSlotMaxClimbRateFpm,            basic::Number)
-    ON_SLOT(19, setSlotMaxClimbRateMps,            basic::Number)
-    ON_SLOT(20, setSlotMaxPitchAngle,              basic::Number)
-    ON_SLOT(21, setSlotLoiterPatternTime,          basic::Time)
-    ON_SLOT(22, setSlotMaxVelAccNps,               basic::Number)
+    ON_SLOT( 1, setSlotNavMode,                    base::Number)
+    ON_SLOT( 2, setSlotHoldAltitude,               base::Distance)
+    ON_SLOT( 3, setSlotAltitudeHoldMode,           base::Number)
+    ON_SLOT( 4, setSlotHoldVelocityKts,            base::Number)
+    ON_SLOT( 5, setSlotVelocityHoldMode,           base::Number)
+    ON_SLOT( 6, setSlotHoldHeading,                base::Angle)
+    ON_SLOT( 7, setSlotHeadingHoldMode,            base::Number)
+    ON_SLOT( 8, setSlotLoiterMode,                 base::Number)
+    ON_SLOT( 9, setSlotLoiterPatternLength,        base::Distance)
+    ON_SLOT( 9, setSlotLoiterPatternLength,        base::Number)
+    ON_SLOT(10, setSlotLoiterPatternCcwFlag,       base::Number)
+    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::Distance)
+    ON_SLOT(11, setSlotLeadFollowingDistanceTrail, base::Number)
+    ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::Distance)
+    ON_SLOT(12, setSlotLeadFollowingDistanceRight, base::Number)
+    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::Distance)
+    ON_SLOT(13, setSlotLeadFollowingDeltaAltitude, base::Number)
+    ON_SLOT(14, setSlotLeadPlayerName,             base::Identifier)
+    ON_SLOT(15, setSlotFollowTheLeadMode,          base::Number)
+    ON_SLOT(16, setSlotMaxRateOfTurnDps,           base::Number)
+    ON_SLOT(17, setSlotMaxBankAngle,               base::Number)
+    ON_SLOT(18, setSlotMaxClimbRateFpm,            base::Number)
+    ON_SLOT(19, setSlotMaxClimbRateMps,            base::Number)
+    ON_SLOT(20, setSlotMaxPitchAngle,              base::Number)
+    ON_SLOT(21, setSlotLoiterPatternTime,          base::Time)
+    ON_SLOT(22, setSlotMaxVelAccNps,               base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -138,9 +138,9 @@ Autopilot::Autopilot()
    loiterTime = 0.0;
    loiterTimeBased = false;
 
-   setLeadFollowingDistanceTrail( basic::Distance::NM2M );             // Default: 1 NM trail
-   setLeadFollowingDistanceRight( basic::Distance::NM2M );             // Default: 1 NM right
-   setLeadFollowingDeltaAltitude( -2000.0f * basic::Distance::FT2M );  // Default: 2000ft below
+   setLeadFollowingDistanceTrail( base::Distance::NM2M );             // Default: 1 NM trail
+   setLeadFollowingDistanceRight( base::Distance::NM2M );             // Default: 1 NM right
+   setLeadFollowingDeltaAltitude( -2000.0f * base::Distance::FT2M );  // Default: 2000ft below
 
    lead = nullptr;
    leadName = nullptr;
@@ -372,7 +372,7 @@ bool Autopilot::flyLoiterEntry()
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
-      const double MAX_BANK_RAD = maxBankAngleDegs * basic::Angle::D2RCC;
+      const double MAX_BANK_RAD = maxBankAngleDegs * base::Angle::D2RCC;
 //      const double OFFSET_MTR   = 20.0;
 
       //----------------------------------------------------
@@ -403,16 +403,16 @@ bool Autopilot::flyLoiterEntry()
       // Player only data
       const double velMps    = pPlr->getTotalVelocity();
       const double rocMtr    = velMps * velMps / oe::ETHGM / std::tan(MAX_BANK_RAD);
-      const double rocNM     = rocMtr * basic::Distance::M2NM;
-      const double obCrsDeg  = basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
+      const double rocNM     = rocMtr * base::Distance::M2NM;
+      const double obCrsDeg  = base::Angle::aepcdDeg(loiterInboundCourse + 180.0);
 
       // this is for flying to the loiter first, go back to that
       double brgDeg = 0.0;
       double distNM = 0.0;
-      basic::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
+      base::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
 
-      const double hdgErrDeg = basic::Angle::aepcdDeg(hdgDeg - loiterInboundCourse);
-//      double posErrDeg = basic::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
+      const double hdgErrDeg = base::Angle::aepcdDeg(hdgDeg - loiterInboundCourse);
+//      double posErrDeg = base::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
       double distCmdNM = 0.0;
       double hdgCmdDeg = 0.0;
 
@@ -483,7 +483,7 @@ bool Autopilot::flyLoiterEntry()
          {
             if (loiterEntryPhase == 1) {
                setCommandedHeadingD(obCrsDeg);
-               //distCmdNM = velMps * 60.0 * basic::Distance::M2NM;  // 1 min = 60 sec
+               //distCmdNM = velMps * 60.0 * base::Distance::M2NM;  // 1 min = 60 sec
                distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
                if (distNM > distCmdNM) loiterEntryPhase = 2;
             }
@@ -506,10 +506,10 @@ bool Autopilot::flyLoiterEntry()
          case TEARDROP:
          {
             if (loiterEntryPhase == 1) {
-               if (!loiterCcwFlag)  { hdgCmdDeg = basic::Angle::aepcdDeg(obCrsDeg - 30.0); }
-               else                 { hdgCmdDeg = basic::Angle::aepcdDeg(obCrsDeg + 30.0); }
+               if (!loiterCcwFlag)  { hdgCmdDeg = base::Angle::aepcdDeg(obCrsDeg - 30.0); }
+               else                 { hdgCmdDeg = base::Angle::aepcdDeg(obCrsDeg + 30.0); }
                setCommandedHeadingD(hdgCmdDeg);
-               //distCmdNM = velMps * 60.0 * basic::Distance::M2NM;  // 1 min = 60 sec
+               //distCmdNM = velMps * 60.0 * base::Distance::M2NM;  // 1 min = 60 sec
                distCmdNM = 4.0 * rocNM;  // 1/tan(15 deg) = 0.268 = 3.732 ~= 4.0
                if (distNM > distCmdNM) { loiterEntryPhase = 2; }
             }
@@ -558,28 +558,28 @@ bool Autopilot::flyLoiter()
       // get current data
       const double osLatDeg = pPlr->getLatitude();
       const double osLonDeg = pPlr->getLongitude();
-      const double obCrs = basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
+      const double obCrs = base::Angle::aepcdDeg(loiterInboundCourse + 180.0);
       calcMirrorLatLon();
 
       double brgDeg = 0.0;
       double distNM = 0.0;
       if (isInbound) {
-         ok = basic::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
+         ok = base::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
       }
       else {
-         ok = basic::Nav::fll2bd(osLatDeg, osLonDeg, loiterMirrorLat, loiterMirrorLon, &brgDeg, &distNM);
+         ok = base::Nav::fll2bd(osLatDeg, osLonDeg, loiterMirrorLat, loiterMirrorLon, &brgDeg, &distNM);
       }
 
       // get position error to determine inbound or outbound
       double posErrDeg = 0.0;
       if (isInbound) {
          ok = flyCRS(loiterAnchorLat, loiterAnchorLon, loiterInboundCourse);
-         posErrDeg = basic::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
+         posErrDeg = base::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
          if (std::fabs(posErrDeg) > 90.0) { isInbound = false; }
       }
       else {
          ok = flyCRS(loiterMirrorLat, loiterMirrorLon, obCrs);
-         posErrDeg = basic::Angle::aepcdDeg(brgDeg - obCrs);
+         posErrDeg = base::Angle::aepcdDeg(brgDeg - obCrs);
          if (std::fabs(posErrDeg) > 90.0) { isInbound = true; }
       }
    }
@@ -602,8 +602,8 @@ bool Autopilot::calcMirrorLatLon()
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
-      const double MAX_BANK_RAD  = maxBankAngleDegs * basic::Angle::D2RCC;
-      const double SRT_RPS       = STD_RATE_TURN_DPS * basic::Angle::D2RCC;
+      const double MAX_BANK_RAD  = maxBankAngleDegs * base::Angle::D2RCC;
+      const double SRT_RPS       = STD_RATE_TURN_DPS * base::Angle::D2RCC;
 
       //----------------------------------------------------
       // get current data
@@ -614,16 +614,16 @@ bool Autopilot::calcMirrorLatLon()
 
       // radius of the center (nautical miles)
       const double rocMtr    = velMps * velMps / (oe::ETHGM * std::tan(phiCmdRad));
-      const double rocNM     = rocMtr * basic::Distance::M2NM;
+      const double rocNM     = rocMtr * base::Distance::M2NM;
       const double xtDistNM  = 2.0 * rocNM;
 
       // do our outbound distance based on time or length
       // default to 2 minutes
-      double obTimeSec = 2.0 * basic::Time::M2S;
+      double obTimeSec = 2.0 * base::Time::M2S;
       double obDistNM = 0;
       if (loiterTimeBased) {
          obTimeSec = loiterTime;
-         obDistNM  = velMps * obTimeSec * basic::Distance::M2NM;
+         obDistNM  = velMps * obTimeSec * base::Distance::M2NM;
       }
       else obDistNM = loiterLength;
 
@@ -632,14 +632,14 @@ bool Autopilot::calcMirrorLatLon()
       //if (altFt > 14000.0) { obDistNM *= 1.5; }
 
       const double distNM    = std::sqrt(xtDistNM*xtDistNM + obDistNM*obDistNM);
-      const double obCrsDeg  = basic::Angle::aepcdDeg(loiterInboundCourse + 180.0);
-      double brgDeg          = std::atan2(xtDistNM, obDistNM) * basic::Angle::R2DCC;
+      const double obCrsDeg  = base::Angle::aepcdDeg(loiterInboundCourse + 180.0);
+      double brgDeg          = std::atan2(xtDistNM, obDistNM) * base::Angle::R2DCC;
 
       // turning clockwise
-      if (!loiterCcwFlag) brgDeg = basic::Angle::aepcdDeg(obCrsDeg - brgDeg);
-      else brgDeg = basic::Angle::aepcdDeg(obCrsDeg + brgDeg);
+      if (!loiterCcwFlag) brgDeg = base::Angle::aepcdDeg(obCrsDeg - brgDeg);
+      else brgDeg = base::Angle::aepcdDeg(obCrsDeg + brgDeg);
 
-      ok = basic::Nav::fbd2ll(loiterAnchorLat, loiterAnchorLon, brgDeg, distNM, &loiterMirrorLat, &loiterMirrorLon);
+      ok = base::Nav::fbd2ll(loiterAnchorLat, loiterAnchorLon, brgDeg, distNM, &loiterMirrorLat, &loiterMirrorLon);
    }
 
    return ok;
@@ -662,7 +662,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
-      const double MAX_BANK_RAD = maxBankAngleDegs * basic::Angle::D2RCC;
+      const double MAX_BANK_RAD = maxBankAngleDegs * base::Angle::D2RCC;
       const double OFFSET_MTR   = 20.0;
 
       //----------------------------------------------------
@@ -674,19 +674,19 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
       const double osLon  = pPlr->getLongitude();
       double brgDeg = 0.0;
       double distNM = 0.0;
-      basic::Nav::fll2bd(osLat, osLon, latDeg, lonDeg, &brgDeg, &distNM);
+      base::Nav::fll2bd(osLat, osLon, latDeg, lonDeg, &brgDeg, &distNM);
 
       //-------------------------------------------------------
       // get current gama error (deg)
       //-------------------------------------------------------
-      const double posErrDeg = basic::Angle::aepcdDeg(brgDeg - crsDeg);
-      const double posErrRad = posErrDeg * basic::Angle::D2RCC;
+      const double posErrDeg = base::Angle::aepcdDeg(brgDeg - crsDeg);
+      const double posErrRad = posErrDeg * base::Angle::D2RCC;
 
       const double rocMtr    = velMps * velMps / oe::ETHGM / std::tan(MAX_BANK_RAD);
-      //double rocNM     = rocMtr * basic::Distance::M2NM;
+      //double rocNM     = rocMtr * base::Distance::M2NM;
 
       const double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
-      const double xtRngMtr  = xtRngNM * basic::Distance::NM2M;
+      const double xtRngMtr  = xtRngNM * base::Distance::NM2M;
       const double xtRngRoc  = xtRngMtr / rocMtr;
 
       double hdgCmdDeg = hdgDeg;
@@ -697,13 +697,13 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
          double x = 1.0 - xtRngRoc;
          if (x >  1.0) x =  1.0;
          if (x < -1.0) x = -1.0;
-         const double alfaDeg = std::acos(x) * basic::Angle::R2DCC;
+         const double alfaDeg = std::acos(x) * base::Angle::R2DCC;
 
          const double y = (rocMtr - OFFSET_MTR) / rocMtr;
-         const double betaDeg = std::acos(y) * basic::Angle::R2DCC;
+         const double betaDeg = std::acos(y) * base::Angle::R2DCC;
 
          const double gamaDeg = sign(posErrDeg) * (alfaDeg - betaDeg);
-         hdgCmdDeg = basic::Angle::aepcdDeg(gamaDeg + crsDeg);
+         hdgCmdDeg = base::Angle::aepcdDeg(gamaDeg + crsDeg);
       }
 
       //-------------------------------------------------------
@@ -733,7 +733,7 @@ bool Autopilot::flySRT()
       //----------------------------------------------------
       // define local constants
       //----------------------------------------------------
-      const double SRT_RPS       = STD_RATE_TURN_DPS * basic::Angle::D2RCC;
+      const double SRT_RPS       = STD_RATE_TURN_DPS * base::Angle::D2RCC;
 
       //----------------------------------------------------
       // get current data
@@ -750,7 +750,7 @@ bool Autopilot::flySRT()
 
       const double hdg = pPlr->getHeadingD();
       // set our commanded heading as our current heading + the heading to get a standard rate of turn
-      const double phiCmdDeg = phiCmdRad * basic::Angle::R2DCC;
+      const double phiCmdDeg = phiCmdRad * base::Angle::R2DCC;
       setCommandedHeadingD(hdg + phiCmdDeg);
    }
 
@@ -787,13 +787,13 @@ bool Autopilot::processModeFollowTheLead()
          // our lead's heading
 
          // ... first check for angle wrap around.
-         double newHdg = basic::Angle::aepcdRad( lead->getHeading() );
+         double newHdg = base::Angle::aepcdRad( lead->getHeading() );
          if ( (leadHdg - newHdg) >  PI) newHdg += (2.0 * PI);
          if ( (leadHdg - newHdg) < -PI) newHdg -= (2.0 * PI);
 
          // ... then filter it
          const double leadHdg0 = 0.98 * leadHdg + 0.02 * newHdg;
-         leadHdg = basic::Angle::aepcdRad( leadHdg0 );
+         leadHdg = base::Angle::aepcdRad( leadHdg0 );
       }
 
       // ---
@@ -856,13 +856,13 @@ bool Autopilot::processModeFollowTheLead()
       // Compute commanded heading, velocity and altitude
       // ---
       const double dhdg = std::atan2(uy,ux);
-      const double chhdg = basic::Angle::aepcdRad(dhdg + leadHdg);
-      setCommandedHeadingD( chhdg * basic::Angle::R2DCC );
+      const double chhdg = base::Angle::aepcdRad(dhdg + leadHdg);
+      setCommandedHeadingD( chhdg * base::Angle::R2DCC );
 
       const double calt = lead->getAltitude() + (-leadOffset.z());
-      setCommandedAltitudeFt( calt * basic::Distance::M2FT );
+      setCommandedAltitudeFt( calt * base::Distance::M2FT );
 
-      const double vKts = vt * basic::Time::H2S / basic::Distance::NM2M;
+      const double vKts = vt * base::Time::H2S / base::Distance::NM2M;
       setCommandedVelocityKts( vKts );
       ok = true;
    }
@@ -903,19 +903,19 @@ bool Autopilot::processModeFollowTheLead()
 //      const double AOG = 32.174;  // Acceleration of gravity, 32.174 feet/sec/sec
 //      const double SRT = 3.0;     // Standard rate turn, 3 degrees/sec (also, 180 deg/min)
 //
-//      double airSpeedFps   = speed * basic::Distance::NM2FT / basic::Time::H2S;  // airspeed  [feet/sec]
-//      double turnRateRps   = SRT * basic::Angle::D2RCC;                          // standard rate turn  [radians/sec]
+//      double airSpeedFps   = speed * base::Distance::NM2FT / base::Time::H2S;  // airspeed  [feet/sec]
+//      double turnRateRps   = SRT * base::Angle::D2RCC;                          // standard rate turn  [radians/sec]
 //      double tanBankAngle  = airSpeedFps * turnRateRps / AOG;                    // standard rate turn tan(bank angle)  [no units]
 //      double radiusFT      = airSpeedFps * airSpeedFps / AOG / tanBankAngle;     // standard rate turn radius  [feet]
-//      //double bankAngleDeg  = std::atan(tanBankAngle) * basic::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
+//      //double bankAngleDeg  = std::atan(tanBankAngle) * base::Angle::R2DCC;      // standard rate turn bank angle  [degrees]
 //      double orbitOffsetFt = 2.0 * radiusFT;
 //
 //      // ---
 //      // Pattern length (ft)
 //      //  -- must be at least 1 nm greater than the offset
 //
-//      double orbitLengthFt = length * basic::Distance::NM2FT;
-//      const double lengthLowerLimit = orbitOffsetFt + basic::Distance::NM2FT;
+//      double orbitLengthFt = length * base::Distance::NM2FT;
+//      const double lengthLowerLimit = orbitOffsetFt + base::Distance::NM2FT;
 //      if (orbitLengthFt < lengthLowerLimit) {
 //         orbitLengthFt = lengthLowerLimit;
 //      }
@@ -923,15 +923,15 @@ bool Autopilot::processModeFollowTheLead()
 //      // ---
 //      // Bearing to mirror point (degs)
 //      // ---
-//      double relBrgDeg = std::atan2(orbitOffsetFt, -orbitLengthFt) * basic::Angle::R2DCC;
+//      double relBrgDeg = std::atan2(orbitOffsetFt, -orbitLengthFt) * base::Angle::R2DCC;
 //      double trueBrgDeg = 0;
 //      if (ccwFlg) {
 //         // Counter-clockwise (left) turn
-//         trueBrgDeg = basic::Angle::aepcdDeg( crs - relBrgDeg );
+//         trueBrgDeg = base::Angle::aepcdDeg( crs - relBrgDeg );
 //      }
 //      else {
 //         // Clockwise (right) turn
-//         trueBrgDeg = basic::Angle::aepcdDeg( crs + relBrgDeg );
+//         trueBrgDeg = base::Angle::aepcdDeg( crs + relBrgDeg );
 //      }
 //
 //
@@ -939,13 +939,13 @@ bool Autopilot::processModeFollowTheLead()
 //      // Distance to mirror point (nm)
 //      // ---
 //      double distFt = sqrt( orbitLengthFt*orbitLengthFt + orbitOffsetFt*orbitOffsetFt );
-//      double distNM = distFt * basic::Distance::FT2NM;
+//      double distNM = distFt * base::Distance::FT2NM;
 //
 //      // ---
 //      // Calculate mirror point
 //      // ---
 //      double lat2, lon2;
-//      basic::Nav::gbd2ll(alat, alon, trueBrgDeg, distNM, &lat2, &lon2);
+//      base::Nav::gbd2ll(alat, alon, trueBrgDeg, distNM, &lat2, &lon2);
 //      *mlat = lat2;
 //      *mlon = lon2;
 //
@@ -996,7 +996,7 @@ bool Autopilot::altitudeController()
       DynamicsModel* md = pv->getDynamicsModel();
       if (md != nullptr) {
          if ( isAltitudeHoldOn() || isNavModeOn() ) {
-            md->setCommandedAltitude(getCommandedAltitudeFt() * basic::Distance::FT2M,  maxClimbRateMps, maxPitchAngleDegs);
+            md->setCommandedAltitude(getCommandedAltitudeFt() * base::Distance::FT2M,  maxClimbRateMps, maxPitchAngleDegs);
             md->setAltitudeHoldOn( true );
          } else {
             md->setAltitudeHoldOn( false );
@@ -1042,9 +1042,9 @@ const Player* Autopilot::getLeadPlayer()
       // find the player in the simulation
       const Simulation* const sim = getSimulation();
       if (sim != nullptr) {
-         const basic::PairStream* players = sim->getPlayers();
+         const base::PairStream* players = sim->getPlayers();
          if (players != nullptr) {
-            const basic::Pair* pair = players->findByName(*leadName);
+            const base::Pair* pair = players->findByName(*leadName);
             if (pair != nullptr) {
                setLeadPlayer( static_cast<const Player*>( pair->object() ) );
             }
@@ -1282,15 +1282,15 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 }
 
 // set the lead player dynamically by name
-bool Autopilot::setLeadPlayerName(const basic::Identifier* const msg)
+bool Autopilot::setLeadPlayerName(const base::Identifier* const msg)
 {
    // find the player in the simulation
    const Simulation* const sim = getSimulation();
    bool found = false;
    if (sim != nullptr) {
-      const basic::PairStream* players = sim->getPlayers();
+      const base::PairStream* players = sim->getPlayers();
       if (players != nullptr) {
-         const basic::Pair* pair = players->findByName(*msg);
+         const base::Pair* pair = players->findByName(*msg);
          if (pair != nullptr) {
             setLeadPlayer( static_cast<const Player*>( pair->object() ) );
             found = true;
@@ -1312,9 +1312,9 @@ bool Autopilot::setLeadPlayerName(const char* x)
    const Simulation* const sim = getSimulation();
    bool found = false;
    if (sim != nullptr) {
-      const basic::PairStream* players = sim->getPlayers();
+      const base::PairStream* players = sim->getPlayers();
       if (players != nullptr) {
-         const basic::Pair* pair = players->findByName(x);
+         const base::Pair* pair = players->findByName(x);
          if (pair != nullptr) {
             setLeadPlayer( static_cast<const Player*>( pair->object() ) );
             found = true;
@@ -1398,7 +1398,7 @@ int Autopilot::setThrottles(const LCreal* const positions, const unsigned int nu
 //-----------------------------------------------------------------------------
 
 // Nav (route follow) mode flag
-bool Autopilot::setSlotNavMode(const basic::Number* const msg)
+bool Autopilot::setSlotNavMode(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1408,18 +1408,18 @@ bool Autopilot::setSlotNavMode(const basic::Number* const msg)
 }
 
 // Hold altitude (alt hold mode)
-bool Autopilot::setSlotHoldAltitude(const basic::Distance* const msg)
+bool Autopilot::setSlotHoldAltitude(const base::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       ok = setCommandedAltitudeFt( basic::Feet::convertStatic( *msg ) );
+       ok = setCommandedAltitudeFt( base::Feet::convertStatic( *msg ) );
        holdAltSet = ok;
     }
     return ok;
 }
 
 // Altitude hold mode flag
-bool Autopilot::setSlotAltitudeHoldMode(const basic::Number* const msg)
+bool Autopilot::setSlotAltitudeHoldMode(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1429,7 +1429,7 @@ bool Autopilot::setSlotAltitudeHoldMode(const basic::Number* const msg)
 }
 
 // Hold velocity (kts)
-bool Autopilot::setSlotHoldVelocityKts(const basic::Number* const msg)
+bool Autopilot::setSlotHoldVelocityKts(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1440,7 +1440,7 @@ bool Autopilot::setSlotHoldVelocityKts(const basic::Number* const msg)
 }
 
 // Velocity hold mode flag
-bool Autopilot::setSlotVelocityHoldMode(const basic::Number* const msg)
+bool Autopilot::setSlotVelocityHoldMode(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1451,18 +1451,18 @@ bool Autopilot::setSlotVelocityHoldMode(const basic::Number* const msg)
 
 
 // Hold heading
-bool Autopilot::setSlotHoldHeading(const basic::Angle* const msg)
+bool Autopilot::setSlotHoldHeading(const base::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       ok = setCommandedHeadingD( static_cast<LCreal>(basic::Degrees::convertStatic( *msg )) );
+       ok = setCommandedHeadingD( static_cast<LCreal>(base::Degrees::convertStatic( *msg )) );
        holdHdgSet = ok;
     }
     return ok;
 }
 
 // Heading altitude mode flag
-bool Autopilot::setSlotHeadingHoldMode(const basic::Number* const msg)
+bool Autopilot::setSlotHeadingHoldMode(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1472,7 +1472,7 @@ bool Autopilot::setSlotHeadingHoldMode(const basic::Number* const msg)
 }
 
 // Loiter mode flag
-bool Autopilot::setSlotLoiterMode(const basic::Number* const msg)
+bool Autopilot::setSlotLoiterMode(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1482,18 +1482,18 @@ bool Autopilot::setSlotLoiterMode(const basic::Number* const msg)
 }
 
 // Set slot: Loiter orbit pattern length
-bool Autopilot::setSlotLoiterPatternLength(const basic::Distance* const msg)
+bool Autopilot::setSlotLoiterPatternLength(const base::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       const LCreal lenNM = basic::NauticalMiles::convertStatic(*msg);
+       const LCreal lenNM = base::NauticalMiles::convertStatic(*msg);
        ok = setLoiterPatternLengthNM( lenNM );
     }
     return ok;
 }
 
 // Set slot: Loiter orbit pattern length (NM)
-bool Autopilot::setSlotLoiterPatternLength(const basic::Number* const msg)
+bool Autopilot::setSlotLoiterPatternLength(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1503,11 +1503,11 @@ bool Autopilot::setSlotLoiterPatternLength(const basic::Number* const msg)
 }
 
 // Set slot: Loiter orbit pattern time
-bool Autopilot::setSlotLoiterPatternTime(const basic::Time* const msg)
+bool Autopilot::setSlotLoiterPatternTime(const base::Time* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       loiterTime = basic::Seconds::convertStatic(*msg);
+       loiterTime = base::Seconds::convertStatic(*msg);
        loiterTimeBased = true;
        ok = true;
     }
@@ -1516,7 +1516,7 @@ bool Autopilot::setSlotLoiterPatternTime(const basic::Time* const msg)
 
 
 // Set slot: Loiter orbit pattern counter-clockwise flag
-bool Autopilot::setSlotLoiterPatternCcwFlag(const basic::Number* const msg)
+bool Autopilot::setSlotLoiterPatternCcwFlag(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1526,18 +1526,18 @@ bool Autopilot::setSlotLoiterPatternCcwFlag(const basic::Number* const msg)
 }
 
 // Set slot: Desired distance behind(+) the lead
-bool Autopilot::setSlotLeadFollowingDistanceTrail(const basic::Distance* const msg)
+bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       LCreal distM = basic::Meters::convertStatic(*msg);
+       LCreal distM = base::Meters::convertStatic(*msg);
        ok = setLeadFollowingDistanceTrail( distM );
     }
     return ok;
 }
 
 // Set slot: Desired distance (meters) behind(+) the lead
-bool Autopilot::setSlotLeadFollowingDistanceTrail(const basic::Number* const msg)
+bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1547,18 +1547,18 @@ bool Autopilot::setSlotLeadFollowingDistanceTrail(const basic::Number* const msg
 }
 
 // Set slot: Desired distance right(+) of the lead
-bool Autopilot::setSlotLeadFollowingDistanceRight(const basic::Distance* const msg)
+bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       const LCreal distM = basic::Meters::convertStatic(*msg);
+       const LCreal distM = base::Meters::convertStatic(*msg);
        ok = setLeadFollowingDistanceRight( distM );
     }
     return ok;
 }
 
 // Set slot: Desired distance (meters) right(+) of the lead
-bool Autopilot::setSlotLeadFollowingDistanceRight(const basic::Number* const msg)
+bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1568,18 +1568,18 @@ bool Autopilot::setSlotLeadFollowingDistanceRight(const basic::Number* const msg
 }
 
 // Set slot: Desired delta altitude above(+) the lead
-bool Autopilot::setSlotLeadFollowingDeltaAltitude(const basic::Distance* const msg)
+bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       const LCreal distM = basic::Meters::convertStatic(*msg);
+       const LCreal distM = base::Meters::convertStatic(*msg);
        ok = setLeadFollowingDeltaAltitude( distM );
     }
     return ok;
 }
 
 // Set slot: Desired delta altitude (meters) above(+) the lead
-bool Autopilot::setSlotLeadFollowingDeltaAltitude(const basic::Number* const msg)
+bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1589,7 +1589,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const basic::Number* const msg
 }
 
 // Initial name of our lead player
-bool Autopilot::setSlotLeadPlayerName(const basic::Identifier* const p)
+bool Autopilot::setSlotLeadPlayerName(const base::Identifier* const p)
 {
    if (leadName != nullptr) leadName->unref();
    leadName = p;
@@ -1599,7 +1599,7 @@ bool Autopilot::setSlotLeadPlayerName(const basic::Identifier* const p)
 
 
 // Set slot: "Follow the lead" mode flag
-bool Autopilot::setSlotFollowTheLeadMode(const basic::Number* const msg)
+bool Autopilot::setSlotFollowTheLeadMode(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1615,7 +1615,7 @@ bool Autopilot::setSlotFollowTheLeadMode(const basic::Number* const msg)
 }
 
 // Set slot: Maximum turn rate - limits how fast (or slow) the pilot turns
-bool Autopilot::setSlotMaxRateOfTurnDps(const basic::Number* const msg)
+bool Autopilot::setSlotMaxRateOfTurnDps(const base::Number* const msg)
 {
    bool ok = (msg != nullptr);
    if (ok) ok = setMaxTurnRateDps(msg->getDouble());
@@ -1623,7 +1623,7 @@ bool Autopilot::setSlotMaxRateOfTurnDps(const basic::Number* const msg)
 }
 
 // Set slot: Maximum bank angle - limits how far the pilot can bank
-bool Autopilot::setSlotMaxBankAngle(const basic::Number* const msg)
+bool Autopilot::setSlotMaxBankAngle(const base::Number* const msg)
 {
    bool ok = (msg != nullptr);
    if (ok) ok = setMaxBankAngleDeg(msg->getDouble());
@@ -1631,15 +1631,15 @@ bool Autopilot::setSlotMaxBankAngle(const basic::Number* const msg)
 }
 
 // Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
-bool Autopilot::setSlotMaxClimbRateFpm(const basic::Number* const msg)
+bool Autopilot::setSlotMaxClimbRateFpm(const base::Number* const msg)
 {
    bool ok = (msg != nullptr);
-   if (ok) ok = setMaxClimbRateMps((msg->getDouble() * basic::Distance::FT2M / basic::Time::M2S));
+   if (ok) ok = setMaxClimbRateMps((msg->getDouble() * base::Distance::FT2M / base::Time::M2S));
    return ok;
 }
 
 // Set slot: Maximum climb / dive rate - limits how fast the pilot can dive/climb
-bool Autopilot::setSlotMaxClimbRateMps(const basic::Number* const msg)
+bool Autopilot::setSlotMaxClimbRateMps(const base::Number* const msg)
 {
    bool ok = (msg != nullptr);
    if (ok) ok = setMaxClimbRateMps(msg->getDouble());
@@ -1647,7 +1647,7 @@ bool Autopilot::setSlotMaxClimbRateMps(const basic::Number* const msg)
 }
 
 // Set slot: Maximum pitch angle - limits how much pitch the pilot can climb/dive to
-bool Autopilot::setSlotMaxPitchAngle(const basic::Number* const msg)
+bool Autopilot::setSlotMaxPitchAngle(const base::Number* const msg)
 {
    bool ok = (msg != nullptr);
    if (ok) ok = setMaxPitchAngleDeg(msg->getDouble());
@@ -1655,7 +1655,7 @@ bool Autopilot::setSlotMaxPitchAngle(const basic::Number* const msg)
 }
 
 // Set slot: Maximum acceleration - limits how fast the pilot can accelerate
-bool Autopilot::setSlotMaxVelAccNps(const basic::Number* const msg)
+bool Autopilot::setSlotMaxVelAccNps(const base::Number* const msg)
 {
    bool ok = (msg != nullptr);
    if (ok) ok = setMaxVelAccNps(msg->getDouble());
@@ -1712,7 +1712,7 @@ std::ostream& Autopilot::serialize(std::ostream& sout, const int i, const bool s
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Autopilot::getSlotByIndex(const int si)
+base::Object* Autopilot::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

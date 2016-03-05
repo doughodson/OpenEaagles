@@ -29,14 +29,14 @@ static const LCreal DEFAULT_MIN_LAUNCH_RANGE =  2000.0f;     // Default min laun
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SamVehicle)
-    "minLaunchRange",         // 1: Min launch range (basic::Distance)
-    "maxLaunchRange",         // 2: Max launch range (basic::Distance)
+    "minLaunchRange",         // 1: Min launch range (base::Distance)
+    "maxLaunchRange",         // 2: Max launch range (base::Distance)
 END_SLOTTABLE(SamVehicle)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(SamVehicle)
-    ON_SLOT(1, setSlotMinLaunchRange,    basic::Distance)
-    ON_SLOT(2, setSlotMaxLaunchRange,    basic::Distance)
+    ON_SLOT(1, setSlotMinLaunchRange,    base::Distance)
+    ON_SLOT(2, setSlotMaxLaunchRange,    base::Distance)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -45,7 +45,7 @@ END_SLOT_MAP()
 SamVehicle::SamVehicle()
 {
    STANDARD_CONSTRUCTOR()
-   static basic::String generic("GenericSamSite");
+   static base::String generic("GenericSamSite");
    setType(&generic);
 
    maxMslRng = DEFAULT_MAX_LAUNCH_RANGE;
@@ -84,11 +84,11 @@ void SamVehicle::updateData(const LCreal dt)
    if (sm != nullptr) {
 
       // We have a stores manager -- but do we have any available SAMs?
-      const basic::PairStream* stores = sm->getStores();
+      const base::PairStream* stores = sm->getStores();
       if (stores != nullptr) {
-         const basic::List::Item* item = stores->getFirstItem();
+         const base::List::Item* item = stores->getFirstItem();
          while (item != nullptr) {
-            const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
+            const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
             if (pair != nullptr) {
                const Sam* sam = dynamic_cast<const Sam*>( pair->object() );
                if (sam != nullptr) {
@@ -152,22 +152,22 @@ bool SamVehicle::setMinLaunchRange(const LCreal rng)
 // Slot functions
 //------------------------------------------------------------------------------
 
-// maxLaunchRange: Max launch range (basic::Distance)
-bool SamVehicle::setSlotMaxLaunchRange(const basic::Distance* const msg)
+// maxLaunchRange: Max launch range (base::Distance)
+bool SamVehicle::setSlotMaxLaunchRange(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setMaxLaunchRange( basic::Meters::convertStatic( *msg ) );
+      ok = setMaxLaunchRange( base::Meters::convertStatic( *msg ) );
    }
    return ok;
 }
 
-// minLaunchRange: Min launch range (basic::Distance)
-bool SamVehicle::setSlotMinLaunchRange(const basic::Distance* const msg)
+// minLaunchRange: Min launch range (base::Distance)
+bool SamVehicle::setSlotMinLaunchRange(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setMinLaunchRange( basic::Meters::convertStatic( *msg ) );
+      ok = setMinLaunchRange( base::Meters::convertStatic( *msg ) );
    }
    return ok;
 }
@@ -175,7 +175,7 @@ bool SamVehicle::setSlotMinLaunchRange(const basic::Distance* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* SamVehicle::getSlotByIndex(const int si)
+base::Object* SamVehicle::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

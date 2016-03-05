@@ -51,7 +51,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // ----------------------------------------------------------------------------
 // Defined Mass Conversion Constants:
@@ -177,7 +177,7 @@ public:
     LCreal fromMass(const LCreal a) const override   { return a * KG2SL; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -8,7 +8,7 @@
 #include "openeaagles/base/List.h"
 
 namespace oe {
-   namespace basic { class List; }
+   namespace base { class List; }
 
 namespace recorder {
    class DataRecordHandle;
@@ -60,17 +60,17 @@ protected:
    bool isDataTypeEnabled(const DataRecordHandle* const handle) const;
 
    void processComponents(
-         basic::PairStream* const list,        // Source list of components
+         base::PairStream* const list,        // Source list of components
          const std::type_info& filter,           // Type filter
-         basic::Pair* const add = 0,           // Optional pair to add
-         basic::Component* const remove = 0    // Optional subcomponent to remove
+         base::Pair* const add = 0,           // Optional pair to add
+         base::Component* const remove = 0    // Optional subcomponent to remove
       ) override;
    bool shutdownNotification() override;
 
 private:
    void initData();
 
-   basic::List queue; // Data Record Queue
+   base::List queue; // Data Record Queue
    mutable long semaphore;
 };
 

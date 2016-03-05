@@ -32,22 +32,22 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include "openeaagles/basic/Parser.h"
-#include "openeaagles/basic/support.h"
-#include "openeaagles/basic/Object.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Float.h"
-#include "openeaagles/basic/Boolean.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/List.h"
+#include "openeaagles/base/Parser.h"
+#include "openeaagles/base/support.h"
+#include "openeaagles/base/Object.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Float.h"
+#include "openeaagles/base/Boolean.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/List.h"
 #include "Lexical.h"
 
-static oe::basic::Object*  result;          // Result of all our work
-static oe::basic::Lexical* lex;             // Lex generator
-static oe::basic::ParserFormFunc formFunc;  // Factory function 
+static oe::base::Object*  result;           // Result of all our work
+static oe::base::Lexical* lex;              // Lex generator
+static oe::base::ParserFormFunc formFunc;   // Factory function 
 static int errCount;                        // Error count
 
 //------------------------------------------------------------------------------
@@ -73,10 +73,10 @@ inline void yyerror(const char* s)
 // gufParse() -- Returns an object of type 'formname' with its slots set to
 //                values in 'argList'.
 //------------------------------------------------------------------------------
-static oe::basic::Object* gufParse(const char* formname, oe::basic::PairStream* argList)
+static oe::base::Object* gufParse(const char* formname, oe::base::PairStream* argList)
 {
     char emsg[256];
-    oe::basic::Object* form = 0;
+    oe::base::Object* form = 0;
 
     if (formFunc != 0) {
 
@@ -86,9 +86,9 @@ static oe::basic::Object* gufParse(const char* formname, oe::basic::PairStream* 
 
        // set slots in our new object
        if (form != 0 && argList != 0) {
-          oe::basic::List::Item* item = argList->getFirstItem();
+          oe::base::List::Item* item = argList->getFirstItem();
           while (item != 0) {
-               oe::basic::Pair* p = static_cast<oe::basic::Pair*>(item->getValue());
+               oe::base::Pair* p = static_cast<oe::base::Pair*>(item->getValue());
                bool ok = form->setSlotByName(*p->slot(), p->object());
                if (!ok) {
                   oe::lcStrcpy(emsg, sizeof(emsg), "error while setting slot name: ");
@@ -119,15 +119,15 @@ static oe::basic::Object* gufParse(const char* formname, oe::basic::PairStream* 
 
 // Defines types that our values can be, yylval.
 %union {
-   double                           dval;
-   long                             lval;
-   bool                             bval;
-   char*                            cvalp;
-   oe::basic::Object*          ovalp;
-   oe::basic::Pair*            pvalp;
-   oe::basic::PairStream*      svalp;
-   oe::basic::List*            lvalp;
-   oe::basic::Number*          nvalp;
+   double                     dval;
+   long                       lval;
+   bool                       bval;
+   char*                      cvalp;
+   oe::base::Object*          ovalp;
+   oe::base::Pair*            pvalp;
+   oe::base::PairStream*      svalp;
+   oe::base::List*            lvalp;
+   oe::base::Number*          nvalp;
 }
 
 // Add types to some for our tokens and rules
@@ -150,16 +150,16 @@ static oe::basic::Object* gufParse(const char* formname, oe::basic::PairStream* 
 //--------------------------------------------------------------------------
 %%
 file    : form                      { result = $1; }
-        | SLOT_ID form              { if ($2 != 0) { result = new oe::basic::Pair($1, $2); delete[] $1; $2->unref(); } }
+        | SLOT_ID form              { if ($2 != 0) { result = new oe::base::Pair($1, $2); delete[] $1; $2->unref(); } }
         ;
 
-arglist :                           { $$ = new oe::basic::PairStream(); }
+arglist :                           { $$ = new oe::base::PairStream(); }
 
         | arglist form              { if ($2 != 0) {
                                         int i = $1->entries();
                                         char cbuf[20];
                                         std::sprintf(cbuf,"%i",i+1);
-                                        oe::basic::Pair* p = new oe::basic::Pair(cbuf, $2);
+                                        oe::base::Pair* p = new oe::base::Pair(cbuf, $2);
                                         $2->unref();
                                         $1->put(p);
                                         p->unref();
@@ -171,7 +171,7 @@ arglist :                           { $$ = new oe::basic::PairStream(); }
                                     int i = $1->entries();
                                     char cbuf[20];
                                     std::sprintf(cbuf,"%i",i+1);
-                                    oe::basic::Pair* p = new oe::basic::Pair(cbuf, $2);
+                                    oe::base::Pair* p = new oe::base::Pair(cbuf, $2);
                                     $2->unref();
                                     $1->put(p);
                                     p->unref();
@@ -184,33 +184,33 @@ arglist :                           { $$ = new oe::basic::PairStream(); }
 
 form    : '(' IDENT arglist ')'     { $$ = gufParse($2, $3); delete[] $2; $3->unref(); }
 
-        | '{' arglist '}'           { $$ = (oe::basic::Object*) $2; }
+        | '{' arglist '}'           { $$ = (oe::base::Object*) $2; }
         ;
 
 
-slot_value  : SLOT_ID prim          { $$ = new oe::basic::Pair($1, $2); delete[] $1; $2->unref(); }
-        | SLOT_ID form              { $$ = new oe::basic::Pair($1, $2); delete[] $1; $2->unref(); }
+slot_value  : SLOT_ID prim          { $$ = new oe::base::Pair($1, $2); delete[] $1; $2->unref(); }
+        | SLOT_ID form              { $$ = new oe::base::Pair($1, $2); delete[] $1; $2->unref(); }
         ;
 
-prim    : STRING_LITERAL            { $$ = new oe::basic::String($1); delete[] $1; }
-        | IDENT                     { $$ = new oe::basic::Identifier($1); delete[] $1; }
-        | BOOLconstant              { $$ = new oe::basic::Boolean($1); }
+prim    : STRING_LITERAL            { $$ = new oe::base::String($1); delete[] $1; }
+        | IDENT                     { $$ = new oe::base::Identifier($1); delete[] $1; }
+        | BOOLconstant              { $$ = new oe::base::Boolean($1); }
         | '[' numlist ']'           { $$ = $2; }
         | number                    { $$ = $1; }
         ;
 
-numlist : number                    { $$ = new oe::basic::List(); $$->put($1); $1->unref(); }
+numlist : number                    { $$ = new oe::base::List(); $$->put($1); $1->unref(); }
         | numlist number            { $$ = $1; $$->put($2); $2->unref(); }
         ;
 
-number  : INTEGERconstant       { $$ = new oe::basic::Integer($1); }
-        | FLOATINGconstant      { $$ = new oe::basic::Float($1); }
+number  : INTEGERconstant       { $$ = new oe::base::Integer($1); }
+        | FLOATINGconstant      { $$ = new oe::base::Float($1); }
         ;
 %%
 
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // parse() -- Returns an Object that was constructed from
@@ -240,5 +240,5 @@ Object* lcParser(const char* filename, ParserFormFunc func, int* numErrors)
     return q;
 }
 
-} // End basic namespace
-} // End oe namespace
+}
+}

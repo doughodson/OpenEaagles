@@ -7,7 +7,7 @@
 #include "openeaagles/base/nethandlers/TcpHandler.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: TcpServerSingle
@@ -41,7 +41,7 @@ protected:
    virtual bool acceptConnection();
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

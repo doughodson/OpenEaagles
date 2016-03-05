@@ -29,8 +29,8 @@ END_SLOTTABLE(FileWriter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(FileWriter)
-    ON_SLOT( 1, setFilename, basic::String)
-    ON_SLOT( 2, setPathName, basic::String)
+    ON_SLOT( 1, setFilename, base::String)
+    ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -391,18 +391,18 @@ void FileWriter::setFullFilename(const char* const name)
    }
 }
 
-bool FileWriter::setFilename(const basic::String* const msg)
+bool FileWriter::setFilename(const base::String* const msg)
 {
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
-   if (msg != nullptr) filename = new basic::String(*msg);
+   if (msg != nullptr) filename = new base::String(*msg);
 
     return true;
 }
 
-bool FileWriter::setPathName(const basic::String* const msg)
+bool FileWriter::setPathName(const base::String* const msg)
 {
    if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
-   if (msg != nullptr) pathname = new basic::String(*msg);
+   if (msg != nullptr) pathname = new base::String(*msg);
 
    return true;
 }
@@ -410,7 +410,7 @@ bool FileWriter::setPathName(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* FileWriter::getSlotByIndex(const int si)
+base::Object* FileWriter::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

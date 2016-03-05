@@ -35,16 +35,16 @@ END_SLOTTABLE(Font)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Font)
-    ON_SLOT(1,setSlotFontWidth,basic::Number)
-    ON_SLOT(2,setSlotFontHeight,basic::Number)
-    ON_SLOT(3,setSlotFontPosition,basic::List)
-    ON_SLOT(4,setSlotBitmapWidth,basic::Number)
-    ON_SLOT(5,setSlotBitmapHeight,basic::Number)
-    ON_SLOT(6,setSlotFontPath,basic::String)
-    ON_SLOT(7,setSlotFTGLFontFileName,basic::String)
-    ON_SLOT(8,setSlotLookupTable,basic::List)
-    ON_SLOT(9,setSlotCharacterSpacing,basic::Number);
-    ON_SLOT(10,setSlotLineSpacing,basic::Number);
+    ON_SLOT(1,setSlotFontWidth,base::Number)
+    ON_SLOT(2,setSlotFontHeight,base::Number)
+    ON_SLOT(3,setSlotFontPosition,base::List)
+    ON_SLOT(4,setSlotBitmapWidth,base::Number)
+    ON_SLOT(5,setSlotBitmapHeight,base::Number)
+    ON_SLOT(6,setSlotFontPath,base::String)
+    ON_SLOT(7,setSlotFTGLFontFileName,base::String)
+    ON_SLOT(8,setSlotLookupTable,base::List)
+    ON_SLOT(9,setSlotCharacterSpacing,base::Number);
+    ON_SLOT(10,setSlotLineSpacing,base::Number);
 END_SLOT_MAP()
 
 
@@ -218,7 +218,7 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Font
 //------------------------------------------------------------------------------
-basic::Object* Font::getSlotByIndex(const int si)
+base::Object* Font::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -310,7 +310,7 @@ std::ostream& Font::serialize(std::ostream& sout, const int i, const bool slotsO
 //------------------------------------------------------------------------------
 // setSlotFontWidth () -- sets the font width
 //------------------------------------------------------------------------------
-bool Font::setSlotFontWidth(const basic::Number* const sfwobj)
+bool Font::setSlotFontWidth(const base::Number* const sfwobj)
 {
     if (sfwobj != nullptr) setFontWidth( sfwobj->getDouble() );
     return true;
@@ -319,7 +319,7 @@ bool Font::setSlotFontWidth(const basic::Number* const sfwobj)
 //------------------------------------------------------------------------------
 //  setSlotFontHeight() - sets the font height
 //------------------------------------------------------------------------------
-bool Font::setSlotFontHeight (const basic::Number* const sfhobj)
+bool Font::setSlotFontHeight (const base::Number* const sfhobj)
 {
     if (sfhobj != nullptr) setFontHeight( sfhobj->getDouble() );
     return true;
@@ -328,7 +328,7 @@ bool Font::setSlotFontHeight (const basic::Number* const sfhobj)
 //------------------------------------------------------------------------------
 //  setSlotFontPosition() - sets the font position
 //------------------------------------------------------------------------------
-bool Font::setSlotFontPosition (const basic::List* const sfpobj)
+bool Font::setSlotFontPosition (const base::List* const sfpobj)
 {
     bool ok = true;
     if (sfpobj != nullptr) {
@@ -349,7 +349,7 @@ bool Font::setSlotFontPosition (const basic::List* const sfpobj)
 //------------------------------------------------------------------------------
 //  setSlotBitmapWidth() - sets the bitmap width
 //------------------------------------------------------------------------------
-bool Font::setSlotBitmapWidth(const basic::Number* const sbwobj)
+bool Font::setSlotBitmapWidth(const base::Number* const sbwobj)
 {
     if (sbwobj != nullptr) setBitmapWidth( sbwobj->getInt() );
     return true;
@@ -358,7 +358,7 @@ bool Font::setSlotBitmapWidth(const basic::Number* const sbwobj)
 //------------------------------------------------------------------------------
 //  setBitmapHeight() - sets the bitmap height
 //------------------------------------------------------------------------------
-bool Font::setSlotBitmapHeight(const basic::Number* const sbhobj)
+bool Font::setSlotBitmapHeight(const base::Number* const sbhobj)
 {
     if (sbhobj != nullptr) setBitmapHeight( sbhobj->getInt() );
     return true;
@@ -367,7 +367,7 @@ bool Font::setSlotBitmapHeight(const basic::Number* const sbhobj)
 //------------------------------------------------------------------------------
 //  setSlotFontPath() - sets the path to the font directory
 //------------------------------------------------------------------------------
-bool Font::setSlotFontPath(const basic::String* const sfpobj)
+bool Font::setSlotFontPath(const base::String* const sfpobj)
 {
     bool ok = true;
     if (sfpobj != nullptr) {
@@ -389,7 +389,7 @@ bool Font::setSlotFontPath(const basic::String* const sfpobj)
 //------------------------------------------------------------------------------
 //  setSlotFTGLFontFileName() - sets the FTGL Font File Name
 //------------------------------------------------------------------------------
-bool Font::setSlotFTGLFontFileName(const basic::String* const sgffnobj)
+bool Font::setSlotFTGLFontFileName(const base::String* const sgffnobj)
 {
     bool ok = true;
     if (sgffnobj != nullptr) {
@@ -411,7 +411,7 @@ bool Font::setSlotFTGLFontFileName(const basic::String* const sgffnobj)
 //------------------------------------------------------------------------------
 //  setSlotLookupTable() - sets the lookup table
 //------------------------------------------------------------------------------
-bool Font::setSlotLookupTable(const basic::List* const sltobj)
+bool Font::setSlotLookupTable(const base::List* const sltobj)
 {
     bool ok = true;
     if (sltobj != nullptr) {
@@ -440,14 +440,14 @@ bool Font::setSlotLookupTable(const basic::List* const sltobj)
     return ok;
 }
 
-bool Font::setSlotCharacterSpacing(const basic::Number* const newCharSpacing)
+bool Font::setSlotCharacterSpacing(const base::Number* const newCharSpacing)
 {
     // set our character spacing
     if (newCharSpacing != nullptr) setCharacterSpacing( newCharSpacing->getFloat() );
     return true;
 }
 
-bool Font::setSlotLineSpacing(const basic::Number* const newLineSpacing)
+bool Font::setSlotLineSpacing(const base::Number* const newLineSpacing)
 {
     // set our line spacing
     if (newLineSpacing != nullptr) setLineSpacing( newLineSpacing->getFloat() );

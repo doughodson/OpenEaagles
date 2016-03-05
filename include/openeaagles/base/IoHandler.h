@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class Frequency;
    class IoData;
    class Number;
@@ -119,10 +119,10 @@ private:
 
    LCreal rate;               // Thread Rate (hz)
    LCreal pri;                // Priority of the thread (0->lowest, 1->highest)
-   safe_ptr<basic::Thread> thread; // The thread
+   safe_ptr<base::Thread> thread; // The thread
 };
 
-} // end basic
-} // end oe namespace
+}
+}
 
 #endif

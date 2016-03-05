@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Decibel
@@ -261,7 +261,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Decibel& n)
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

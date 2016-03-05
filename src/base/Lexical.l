@@ -16,16 +16,16 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-#include "openeaagles/basic/support.h"
-#include "openeaagles/basic/Object.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Integer.h"
-#include "openeaagles/basic/Float.h"
-#include "openeaagles/basic/Boolean.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/List.h"
+#include "openeaagles/base/support.h"
+#include "openeaagles/base/Object.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Float.h"
+#include "openeaagles/base/Boolean.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/List.h"
 #include "Lexical.h"
 #include "Parser.hpp"
 
@@ -44,11 +44,11 @@ using namespace std;
 /* no calls to yywrap */
 %option nounistd
 
-/* change the name of the scanner class - results in "basicFlexLexer" */
-%option prefix="basic"
+/* change the name of the scanner class - results in "baseFlexLexer" */
+%option prefix="base"
 
-/* derived 'oe::basic::Lexical' is a subclass of yyFlexLexer */
-%option yyclass="oe::basic::Lexical"
+/* derived 'oe::base::Lexical' is a subclass of yyFlexLexer */
+%option yyclass="oe::base::Lexical"
 
 
 

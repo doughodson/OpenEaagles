@@ -7,7 +7,7 @@
 #include "openeaagles/base/Color.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Rgb
@@ -44,7 +44,7 @@ public:
     virtual bool setSlotAlpha(Number* const msg);
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

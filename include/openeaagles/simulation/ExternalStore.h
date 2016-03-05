@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
-   namespace basic { class String; }
+   namespace base { class String; }
 
 namespace simulation {
 
@@ -20,7 +20,7 @@ namespace simulation {
 //
 // Factory name: ExternalStore
 // Slots:
-//    type         <basic::String>  ! Type string (default: 0)
+//    type         <base::String>  ! Type string (default: 0)
 //    jettisonable <Boolean>        ! Store can be jettisoned (default: true )
 //
 // Events:
@@ -41,7 +41,7 @@ class ExternalStore : public System
 public:
    ExternalStore();
 
-   const basic::String* getType() const;
+   const base::String* getType() const;
 
    bool isJettisonable() const;  // True if the weapon can be jettisoned
    bool isJettisoned() const;    // True if the weapon has been jettisoned
@@ -49,20 +49,20 @@ public:
    // Event handler(s)
    virtual bool onJettisonEvent();
 
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
    bool setJettisonable(const bool f);    // Sets the jettison enable flag
 
    // Slot function(s)
-   virtual bool setSlotType(const basic::String* const msg);
-   virtual bool setSlotJettisonable(basic::Number* const p);
+   virtual bool setSlotType(const base::String* const msg);
+   virtual bool setSlotJettisonable(base::Number* const p);
 
 private:
    void initData();
 
-   basic::safe_ptr<const basic::String> type; // Type string for external store
+   base::safe_ptr<const base::String> type; // Type string for external store
    bool        canJettison;     // Weapon can be jettisoned.
    bool        jettisoned;      // Weapon has been jettisoned.
 };

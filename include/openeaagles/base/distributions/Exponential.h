@@ -5,7 +5,7 @@
 #include "../Rng.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //====================================================================
 // Exponential
@@ -44,7 +44,7 @@ protected:
 
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

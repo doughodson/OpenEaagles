@@ -27,11 +27,11 @@ class MfdPage : public graphics::Page
 public:
     MfdPage();
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // ---
-    // MFD button event functions (see "openeaagles/basic/eventTokens.h")
+    // MFD button event functions (see "openeaagles/base/eventTokens.h")
     //  -- These are virtual and do not get a unique name because
     //     they may need to be overridden by subclass pages.
     //  -- Supports up to a 10x10 MFD

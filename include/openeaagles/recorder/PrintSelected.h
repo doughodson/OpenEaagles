@@ -15,7 +15,7 @@
 #include "google/protobuf/message.h"
 
 namespace oe {
-      namespace basic { class Float; class Integer; }
+      namespace base { class Float; class Integer; }
 namespace recorder {
    namespace pb {
       class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
@@ -32,13 +32,13 @@ namespace recorder {
 //
 // Factory name: PrintSelected
 // Slots:
-//   messageToken    <basic::Number>   ! Message ID (token)
-//   fieldName       <basic::String>   ! Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
-//   compareToValS   <basic::String>   ! value to compare (string)
-//   compareToValI   <basic::Number>   ! value to compare (num)
-//   compareToValD   <basic::Number>   ! value to compare (dbl)
-//   condition       <basic::String>   ! EQ, LT, or GT (ignored for bool and strings)
-//   timeOnly        <basic::Number>   ! match time conditions only. Print ALL messages that match
+//   messageToken    <base::Number>   ! Message ID (token)
+//   fieldName       <base::String>   ! Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
+//   compareToValS   <base::String>   ! value to compare (string)
+//   compareToValI   <base::Number>   ! value to compare (num)
+//   compareToValD   <base::Number>   ! value to compare (dbl)
+//   condition       <base::String>   ! EQ, LT, or GT (ignored for bool and strings)
+//   timeOnly        <base::Number>   ! match time conditions only. Print ALL messages that match
 //------------------------------------------------------------------------------
 class PrintSelected : public PrintHandler
 {
@@ -48,14 +48,14 @@ public:
 
    PrintSelected();
 
-   virtual bool setSlotMsgToken(const basic::Number* const msg);
-   virtual bool setSlotFieldName(const basic::String* const msg);
+   virtual bool setSlotMsgToken(const base::Number* const msg);
+   virtual bool setSlotFieldName(const base::String* const msg);
 
-   virtual bool setSlotCompareToStr(const basic::String* const msg);
-   virtual bool setSlotCompareToNum(const basic::Number* const msg);
-   virtual bool setSlotCompareToDbl(const basic::Number* const msg);
-   virtual bool setSlotCondition(const basic::String* const msg);
-   virtual bool setSlotTimeOnly(const basic::Number* const msg);
+   virtual bool setSlotCompareToStr(const base::String* const msg);
+   virtual bool setSlotCompareToNum(const base::Number* const msg);
+   virtual bool setSlotCompareToDbl(const base::Number* const msg);
+   virtual bool setSlotCondition(const base::String* const msg);
+   virtual bool setSlotTimeOnly(const base::Number* const msg);
    enum Condition { EQ, LT, GT };
 
    unsigned int getMsgToken() const;

@@ -7,7 +7,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //////////////////////////////////////////////////////////////////////
 // Force() --
@@ -182,6 +182,6 @@ EMPTY_COPYDATA(Poundals)
 EMPTY_DELETEDATA(Poundals)
 
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

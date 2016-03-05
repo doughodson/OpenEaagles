@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Boolean
@@ -180,7 +180,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Boolean& n)
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

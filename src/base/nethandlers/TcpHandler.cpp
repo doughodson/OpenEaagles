@@ -36,7 +36,7 @@
 #include <cstdio>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // Class: TcpHandler
@@ -204,6 +204,6 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
    return n;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

@@ -21,14 +21,14 @@ EMPTY_SERIALIZER(IrSystem)
 
 // Slot table
 BEGIN_SLOTTABLE(IrSystem)
-   "seekerName",        //  1: Name of the requested Seeker  (basic::String)
+   "seekerName",        //  1: Name of the requested Seeker  (base::String)
    "disableQueries",    //  2: Disable sending queries packets flag (default: false)
 END_SLOTTABLE(IrSystem)
 
 //  Map slot table
 BEGIN_SLOT_MAP(IrSystem)
-   ON_SLOT(1,  setSlotSeekerName,  basic::String)
-   ON_SLOT(2,  setSlotDisableQueries,  basic::Number)
+   ON_SLOT(1,  setSlotSeekerName,  base::String)
+   ON_SLOT(2,  setSlotDisableQueries,  base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void IrSystem::copyData(const IrSystem& org, const bool cc)
 
    // No seeker yet
    setSeeker(nullptr);
-   basic::String* p = const_cast<basic::String*>(static_cast<const basic::String*>(org.getSeekerName()));
+   base::String* p = const_cast<base::String*>(static_cast<const base::String*>(org.getSeekerName()));
    setSlotSeekerName( p );
 }
 
@@ -158,7 +158,7 @@ void IrSystem::processPlayersOfInterest()
    // Do we have a seeker?
    // ---
    if (getSeeker() != nullptr) {
-      basic::PairStream* poi = nullptr;
+      base::PairStream* poi = nullptr;
       Simulation* sim = getSimulation();
       if ( sim != nullptr && !areQueriesDisabled() )
          poi = getSimulation()->getPlayers();
@@ -200,7 +200,7 @@ const IrSeeker* IrSystem::getSeeker() const
 }
 
 // Name of the seeker model, or zero (0) if none
-const basic::String* IrSystem::getSeekerName() const
+const base::String* IrSystem::getSeekerName() const
 {
    return seekerName;
 }
@@ -233,8 +233,8 @@ bool IrSystem::setSeeker(IrSeeker* const p)
 // Slot Functions  (return 'true' if the slot was set, else 'false')
 //------------------------------------------------------------------------------
 
-// seekerName: IrSeeker name  (basic::String)
-bool IrSystem::setSlotSeekerName(basic::String* const p)
+// seekerName: IrSeeker name  (base::String)
+bool IrSystem::setSlotSeekerName(base::String* const p)
 {
    if (seekerName != nullptr) {
       seekerName->unref();
@@ -247,7 +247,7 @@ bool IrSystem::setSlotSeekerName(basic::String* const p)
 }
 
 // setSlotDisableQueries() -- sets the disable sending emissions flag
-bool IrSystem::setSlotDisableQueries(basic::Number* const msg)
+bool IrSystem::setSlotDisableQueries(base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -259,7 +259,7 @@ bool IrSystem::setSlotDisableQueries(basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* IrSystem::getSlotByIndex(const int si)
+base::Object* IrSystem::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

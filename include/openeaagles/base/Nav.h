@@ -12,7 +12,7 @@
 #include "openeaagles/base/units/Distances.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class EarthModel;
 
 //------------------------------------------------------------------------------
@@ -783,7 +783,7 @@ public:
 // inline functions
 #include "openeaagles/base/Nav.inl"
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

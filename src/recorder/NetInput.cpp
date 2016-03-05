@@ -21,8 +21,8 @@ END_SLOTTABLE(NetInput)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetInput)
-    ON_SLOT(1, setSlotNetwork,   oe::basic::NetHandler)
-    ON_SLOT(2, setSlotNoWait,    oe::basic::Number)
+    ON_SLOT(1, setSlotNetwork,   oe::base::NetHandler)
+    ON_SLOT(2, setSlotNoWait,    oe::base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -163,14 +163,14 @@ const DataRecordHandle* NetInput::readRecordImp()
 //------------------------------------------------------------------------------
 
 // Network Handler
-bool NetInput::setSlotNetwork(oe::basic::NetHandler* const msg)
+bool NetInput::setSlotNetwork(oe::base::NetHandler* const msg)
 {
    netHandler = msg;
    return true;
 }
 
 // No wait (unblocked) I/O flag
-bool NetInput::setSlotNoWait(oe::basic::Number* const msg)
+bool NetInput::setSlotNoWait(oe::base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -183,7 +183,7 @@ bool NetInput::setSlotNoWait(oe::basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-oe::basic::Object* NetInput::getSlotByIndex(const int si)
+oe::base::Object* NetInput::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

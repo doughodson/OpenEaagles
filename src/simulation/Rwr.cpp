@@ -149,7 +149,7 @@ void Rwr::receive(const LCreal dt)
             // Store received power for real-beam display
             const LCreal sigDbl = 10.0f * lcLog10(signal);
             const LCreal signal10 = (sigDbl + 50.0f)/50.f;
-            const int idx = getRayIndex( static_cast<LCreal>(basic::Angle::R2DCC * aoa) );
+            const int idx = getRayIndex( static_cast<LCreal>(base::Angle::R2DCC * aoa) );
             rays[0][idx] = lim01(rays[0][idx] + signal10);
             //if (idx == 0 && getOwnship()->getID() == 1011) {
             //   std::cout << "sig = " << signal10 << std::endl;

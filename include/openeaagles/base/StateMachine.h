@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class PairStream;
 
 //------------------------------------------------------------------------------
@@ -350,7 +350,7 @@ private:
    safe_ptr<PairStream> stMachList;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -26,13 +26,13 @@ class CigiOutgoingMsg;
 
 #include "openeaagles/simulation/Otw.h"
 
-namespace Eaagles {
+namespace oe {
 
-   namespace Basic {
+   namespace base {
       class NetHandler;
    }
 
-   namespace Simulation {
+   namespace simulation {
       class AirVehicle;
       class Building;
       class Effects;
@@ -45,21 +45,21 @@ namespace Eaagles {
       class Weapon;
    }
 
-namespace Otw {
+namespace otw {
 
 class CigiClV2;
 class OtwModelCigiClV2;
 class CigiClV2NetworkSignalProcessing;
 
 //------------------------------------------------------------------------------
-// Class:	OtwCigiClV2
-// Base class:	Basic::Object -> Component -> Otw -> OtwCigiClV2
+// Class: OtwCigiClV2
+// Base class: base::Object -> Component -> Otw -> OtwCigiClV2
 //
 // Description: Boeing's Common Image Generator Interface (CIGI)
 //
-// Form name: OtwCigiClV2
+// Factory name: OtwCigiClV2
 // Slots:
-//    cigi                 (CigiClV2)         CIGI interface context
+//    cigi                 (CigiClV2)     CIGI interface context
 //    async                (Number)       True (non-zero) to run in CIGI async mode (default: false - CIGI sync)
 //    hideOwnshipModel     (Number)       True to hide the ownship's model (default: false - ownship's model is seen)
 //    ownshipModel         (Number)       Ownship's model ID
@@ -75,9 +75,9 @@ class CigiClV2NetworkSignalProcessing;
 // startOfFrame() callback (i.e., sync'd with the IG).
 //
 //------------------------------------------------------------------------------
-class OtwCigiClV2 : public Simulation::Otw
+class OtwCigiClV2 : public simulation::Otw
 {
-    DECLARE_SUBCLASS(OtwCigiClV2,Simulation::Otw)
+    DECLARE_SUBCLASS(OtwCigiClV2, simulation::Otw)
 
 public:
    static const unsigned int NUM_BUFFERS = 2;
@@ -134,14 +134,14 @@ public:
 
    // Set Slot functions
    virtual bool setSlotCigi(CigiClV2* const msg);
-   virtual bool setSlotASyncMode(const Basic::Number* const msg);
-   virtual bool setSlotHideOwnshipModel(const Basic::Number* const msg);
-   virtual bool setSlotOwnshipModel(const Basic::Number* const msg);
-   virtual bool setSlotMslTrailModel(const Basic::Number* const msg);
-   virtual bool setSlotSmokePlumeModel(const Basic::Number* const msg);
-   virtual bool setSlotAirExplosionModel(const Basic::Number* const msg);
-   virtual bool setSlotGroundExplosionModel(const Basic::Number* const msg);
-   virtual bool setSlotShipWakeModel(const Basic::Number* const msg);
+   virtual bool setSlotASyncMode(const base::Number* const msg);
+   virtual bool setSlotHideOwnshipModel(const base::Number* const msg);
+   virtual bool setSlotOwnshipModel(const base::Number* const msg);
+   virtual bool setSlotMslTrailModel(const base::Number* const msg);
+   virtual bool setSlotSmokePlumeModel(const base::Number* const msg);
+   virtual bool setSlotAirExplosionModel(const base::Number* const msg);
+   virtual bool setSlotGroundExplosionModel(const base::Number* const msg);
+   virtual bool setSlotShipWakeModel(const base::Number* const msg);
 
    // Component interface
    virtual void updateData(const LCreal dt = 0.0);
@@ -155,9 +155,9 @@ protected:
 
     // Access functions
     CigiIGCtrlV2* getIgControlPacket()                   { return igc; }
-    CigiLosVectReqV2* getLosRangeRequestPacket()      { return los; }
+    CigiLosVectReqV2* getLosRangeRequestPacket()         { return los; }
     CigiViewCtrlV2* getViewControlPacket()               { return view; }
-    CigiViewDefV2* getViewDefinitionPacket()         { return fov; }
+    CigiViewDefV2* getViewDefinitionPacket()             { return fov; }
     CigiCompCtrlV2* getOwnshipComponentControlPacket(const unsigned int buffer) {
         return (buffer < NUM_BUFFERS ? ownshipCC[buffer] : 0);
     }
@@ -208,19 +208,19 @@ protected:
     virtual void sendElevationRequests();   // Sends terrain height requests
     virtual void recvElevations();          // Receives terrain height data
     virtual void frameSync();               // Send frame sync (if any)
-    virtual Simulation::OtwModel* modelFactory();       // Create OtwModel objects unique to interface
-    virtual Simulation::OtwModel* hotFactory();         // Create OtwHot objects unique to interface
+    virtual simulation::OtwModel* modelFactory();       // Create OtwModel objects unique to interface
+    virtual simulation::OtwModel* hotFactory();         // Create OtwHot objects unique to interface
 
-    virtual bool setAirVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::AirVehicle* const p);
-    virtual bool setBuildingData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Building* const p);
-    virtual bool setEffectsData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Effects* const p);
-    virtual bool setGndVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::GroundVehicle* const p);
-    virtual bool setLifeFormData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::LifeForm* const p);
-    virtual bool setMissileData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Missile* const p);
-    virtual bool setShipData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Ship* const p);
-    virtual bool setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::SpaceVehicle* const p);
-    virtual bool setWeaponData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Weapon* const p);
-    virtual bool setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned short entity, const Simulation::Player* const p);
+    virtual bool setAirVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::AirVehicle* const p);
+    virtual bool setBuildingData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Building* const p);
+    virtual bool setEffectsData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Effects* const p);
+    virtual bool setGndVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::GroundVehicle* const p);
+    virtual bool setLifeFormData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::LifeForm* const p);
+    virtual bool setMissileData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Missile* const p);
+    virtual bool setShipData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Ship* const p);
+    virtual bool setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::SpaceVehicle* const p);
+    virtual bool setWeaponData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Weapon* const p);
+    virtual bool setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned short entity, const simulation::Player* const p);
 
 private:
     Basic::safe_ptr<CigiClV2> cigi;       // CIGI handler (direct, networked, ...)
@@ -274,16 +274,16 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	CigiClV2
-// Base class:	Basic::Object -> CigiClV2
+// Class: CigiClV2
+// Base class: base::Object -> CigiClV2
 //
 // Description: CIGI handler
 //
-// Form name: CigiClV2
+// Factory name: CigiClV2
 //------------------------------------------------------------------------------
-class CigiClV2 : public Basic::Object
+class CigiClV2 : public base::Object
 {
-    DECLARE_SUBCLASS(CigiClV2,Basic::Object)
+    DECLARE_SUBCLASS(CigiClV2, base::Object)
 
 public:
    CigiClV2();
@@ -343,25 +343,25 @@ private:
 
 //------------------------------------------------------------------------------
 // Class: CigiClV2Network
-// Base class: Basic::Object -> CigiClV2 -> CigiClV2Network
+// Base class: base::Object -> CigiClV2 -> CigiClV2Network
 //
 // Description: Networked CIGI interface to the IG system
 //
-// Form name: CigiClV2Network
+// Factory name: CigiClV2Network
 // Slots:
 //    netInput       (NetHandler)   Network input handler
 //    netOutput      (NetHandler)   Network output handler
 //------------------------------------------------------------------------------
 class CigiClV2Network : public CigiClV2
 {
-    DECLARE_SUBCLASS(CigiClV2Network,CigiClV2)
+    DECLARE_SUBCLASS(CigiClV2Network, CigiClV2)
 
 public:
    CigiClV2Network();
 
    // Set Slot functions
-   virtual bool setSlotNetInput(Basic::NetHandler* const msg);
-   virtual bool setSlotNetOutput(Basic::NetHandler* const msg);
+   virtual bool setSlotNetInput(base::NetHandler* const msg);
+   virtual bool setSlotNetOutput(base::NetHandler* const msg);
 
    // CIGI's (sync-mode) main network loop
    virtual void mainLoop();
@@ -387,8 +387,8 @@ protected:
    bool initCigiNetwork();          // Initialize the network
 
 private:
-   Basic::safe_ptr<Basic::NetHandler> netInput;   // Input network handler
-   Basic::safe_ptr<Basic::NetHandler> netOutput;  // Output network handler
+   base::safe_ptr<base::NetHandler> netInput;   // Input network handler
+   base::safe_ptr<base::NetHandler> netOutput;  // Output network handler
    bool haveThread;                        // Have a network thread
    bool networkInitialized;                // CIGI has been initialized
    bool networkInitFailed;                 // CIGI initialization has failed
@@ -399,20 +399,20 @@ private:
 };
 
 //------------------------------------------------------------------------------
-// Class:	OtwModelCigiClV2
-// Base class:	Basic::Object -> OtwModel -> OtwModelCigiClV2
+// Class: OtwModelCigiClV2
+// Base class:  base::Object -> OtwModel -> OtwModelCigiClV2
 // Description: CIGI OTW model
 //------------------------------------------------------------------------------
-class OtwModelCigiClV2 : public Simulation::OtwModel
+class OtwModelCigiClV2 : public simulation::OtwModel
 {
-    DECLARE_SUBCLASS(OtwModelCigiClV2,Simulation::OtwModel)
+    DECLARE_SUBCLASS(OtwModelCigiClV2, simulation::OtwModel)
 
 public:
     OtwModelCigiClV2();
 
     // OtwModel interface
     virtual void clear();
-    virtual void initialize(Simulation::Player* const p);
+    virtual void initialize(simulation::Player* const p);
 
     unsigned short getID() const          { return id; }
     void setID(const unsigned short i)    { id = i; }
@@ -422,11 +422,11 @@ public:
     CigiEntityCtrlV2* trailEC[OtwCigiClV2::NUM_BUFFERS];     // (entity_id+1) Trails (missile, smoke, wake, etc.)
     CigiEntityCtrlV2* explosionEC[OtwCigiClV2::NUM_BUFFERS]; // (entity_id+2) Expolsions (air or ground)
     CigiEntityCtrlV2* smokeEC[OtwCigiClV2::NUM_BUFFERS];     // (entity_id+3) Smoke from damage
-    CigiCompCtrlV2* damageCC[OtwCigiClV2::NUM_BUFFERS];    // Damage Component Control (CC)
-    CigiCompCtrlV2* animationCC[OtwCigiClV2::NUM_BUFFERS]; // animation component control
+    CigiCompCtrlV2* damageCC[OtwCigiClV2::NUM_BUFFERS];      // Damage Component Control (CC)
+    CigiCompCtrlV2* animationCC[OtwCigiClV2::NUM_BUFFERS];   // animation component control
     CigiEntityCtrlV2* attachedEC[OtwCigiClV2::NUM_BUFFERS];  // (entity_id+4) Attached missile
     CigiArtPartCtrlV2* launcherAPC[OtwCigiClV2::NUM_BUFFERS];  // Entity's launcher Articulated Part Control (APC)
-    CigiCompCtrlV2* attachedCC[OtwCigiClV2::NUM_BUFFERS];  // attached missile component control
+    CigiCompCtrlV2* attachedCC[OtwCigiClV2::NUM_BUFFERS];      // attached missile component control
 
     bool parentActive;
     bool trailActive;
@@ -446,7 +446,7 @@ private:
    unsigned short id;
 };
 
-} // End Otw namespace
-} // End Eaagles namespace
+}
+}
 
 #endif

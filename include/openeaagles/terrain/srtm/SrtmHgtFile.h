@@ -7,7 +7,7 @@
 #include "../DataFile.h"
 
 namespace oe {
-   namespace basic { class Number; }
+   namespace base { class Number; }
 namespace terrain {
 
 //------------------------------------------------------------------------------

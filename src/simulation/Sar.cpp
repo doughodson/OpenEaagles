@@ -20,12 +20,12 @@ EMPTY_SERIALIZER(Sar)
 
 // slot table for this class type
 BEGIN_SLOTTABLE(Sar)
-    "chipSize",         // 1) Chip size (pixels)   <basic::Number>
+    "chipSize",         // 1) Chip size (pixels)   <base::Number>
 END_SLOTTABLE(Sar)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(Sar)
-    ON_SLOT( 1, setSlotChipSize,  basic::Number)
+    ON_SLOT( 1, setSlotChipSize,  base::Number)
 END_SLOT_MAP()
 
 // Default parameters
@@ -121,9 +121,9 @@ bool Sar::isSystemReady() const
 }
 
 // Return a list of all images
-basic::PairStream* Sar::getImages()
+base::PairStream* Sar::getImages()
 {
-    basic::PairStream* p = imgList;
+    base::PairStream* p = imgList;
     if (p != nullptr) p->ref();
     return p;
 }
@@ -133,7 +133,7 @@ const Image* Sar::getImage() const
 {
     const Image* p = nullptr;
     if (imgList != nullptr) {
-        const basic::Pair* pair = imgList->getPosition( imgList->entries() );    // Last item
+        const base::Pair* pair = imgList->getPosition( imgList->entries() );    // Last item
         p = dynamic_cast<const Image*>(pair->object());
         if (p != nullptr) p->ref();
     }
@@ -156,7 +156,7 @@ bool Sar::setStarePoint(const double lat, const double lon, const LCreal elev)
 // Set functions
 //-----------------------------------------------------------------------------
 
-bool Sar::setSlotChipSize(const basic::Number* const msg)
+bool Sar::setSlotChipSize(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -226,7 +226,7 @@ void Sar::process(const LCreal dt)
          const double refLon = s->getRefLongitude();
 
          osg::Vec3 pos;
-         basic::Nav::convertLL2PosVec(
+         base::Nav::convertLL2PosVec(
             refLat, refLon,                           // Ref point (at sea level)
             getStarePointLatitude(), getStarePointLongitude(), getStarePointElevation(),
             &pos); // x,y,z  NED
@@ -241,8 +241,8 @@ void Sar::process(const LCreal dt)
          xyz2AzEl(posB, &tgt_az, &tgt_el);
 
          // Command to that position
-         const LCreal az = tgt_az * static_cast<LCreal>(basic::Angle::D2RCC);
-         const LCreal el = tgt_el * static_cast<LCreal>(basic::Angle::D2RCC);
+         const LCreal az = tgt_az * static_cast<LCreal>(base::Angle::D2RCC);
+         const LCreal el = tgt_el * static_cast<LCreal>(base::Angle::D2RCC);
 
          ant->setRefAzimuth(az);
          ant->setRefElevation(el);
@@ -267,8 +267,8 @@ void Sar::process(const LCreal dt)
             std::cout << "Sar:: Generating test image: resolution: " << getResolution() << std::endl;
          }
          if (getResolution() > 0) p->setResolution( getResolution() );
-         else p->setResolution( 3.0 * basic::Distance::FT2M );
-         basic::Pair* pp = new basic::Pair("image", p);
+         else p->setResolution( 3.0 * base::Distance::FT2M );
+         base::Pair* pp = new base::Pair("image", p);
          addImage(pp);
          // ### TEST
 
@@ -303,12 +303,12 @@ bool Sar::setChipSize(const unsigned int pixels)
 //------------------------------------------------------------------------------
 // addImage() -- Add an image to the end of the list of images
 //------------------------------------------------------------------------------
-bool Sar::addImage(basic::Pair* const newImage)
+bool Sar::addImage(base::Pair* const newImage)
 {
     bool ok = false;
     if (newImage != nullptr) {
         if (imgList == nullptr) {
-            imgList = new basic::PairStream();
+            imgList = new base::PairStream();
         }
         imgList->put(newImage);
     }
@@ -323,12 +323,12 @@ void Sar::xyz2AzEl(const LCreal x, const LCreal y, const LCreal z, LCreal* const
 {
    // Compute azimuth (degs)
    if (az != nullptr) {
-      *az = lcAtan2(y, x) * static_cast<LCreal>(basic::Angle::R2DCC);
+      *az = lcAtan2(y, x) * static_cast<LCreal>(base::Angle::R2DCC);
    }
 
    if (el != nullptr) {
       const LCreal r = lcSqrt(x * x + y * y);
-      *el = lcAtan2(-z, r) * static_cast<LCreal>(basic::Angle::R2DCC);
+      *el = lcAtan2(-z, r) * static_cast<LCreal>(base::Angle::R2DCC);
    }
 }
 
@@ -339,7 +339,7 @@ void Sar::xyz2AzEl(const osg::Vec3& vec, LCreal* const az, LCreal* const el)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Sar::getSlotByIndex(const int si)
+base::Object* Sar::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

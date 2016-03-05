@@ -7,14 +7,14 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Number
 //
 // Description:  Base class for number objects (Float, Integer, Boolean, 
 //               Decibel and LatLon), numerical operators (Add, Subtract,
-//               Multiply and Divide), and various units (see basic/units/*.h)
+//               Multiply and Divide), and various units (see base/units/*.h)
 //
 // Slots:
 //     value  <Number>  ! Sets the value of this number. (default: 0)
@@ -61,7 +61,7 @@ protected:
    double val;   // value of this object
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

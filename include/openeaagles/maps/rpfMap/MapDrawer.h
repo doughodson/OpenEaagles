@@ -9,13 +9,13 @@
 // Subroutines:
 //
 // setSlotMapIntensity() -
-//      bool MapDrawer::setSlotMapIntensity(const basic::Number* const x)
+//      bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
 //
 // setSlotDrawGridMode() -
-//      bool MapDrawer::setSlotDrawGridMode(const basic::Number* const x)
+//      bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
 //
 // setSlotShowMap() -
-//      bool MapDrawer::setSlotShowMap(const basic::Number* const x)
+//      bool MapDrawer::setSlotShowMap(const base::Number* const x)
 //
 // setGridSize() - does our initial setup.
 //      bool MapDrawer::setGridSize(const int aGridSize)
@@ -42,7 +42,7 @@
 //      void MapDrawer::drawTexture(const int row, const int column, const int idx)
 //
 // getSlotByIndex()
-//      basic::Object* MapDrawer::getSlotByIndex(const int si)
+//      base::Object* MapDrawer::getSlotByIndex(const int si)
 //
 // -------------------------------------------------------------------------------
 
@@ -52,7 +52,7 @@
 #include "openeaagles/graphics/MapPage.h"
 
 namespace oe {
-namespace basic { class String; }
+namespace base { class String; }
 namespace maps {
 namespace rpf {
 
@@ -83,9 +83,9 @@ public:
     void updateData(const LCreal dt = 0.0) override;
 
 protected:
-    bool setSlotMapIntensity(const basic::Number* const x);
-    bool setSlotDrawGridMode(const basic::Number* const x);
-    bool setSlotShowMap(const basic::Number* const x);
+    bool setSlotMapIntensity(const base::Number* const x);
+    bool setSlotDrawGridMode(const base::Number* const x);
+    bool setSlotShowMap(const base::Number* const x);
 
 private:
     static const int MAX_PAGERS = 2;

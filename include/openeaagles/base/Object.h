@@ -8,7 +8,7 @@
 #include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Object
@@ -158,8 +158,8 @@ namespace basic {
 //       const char* Foo::getFactoryName()
 //          Static function that returns the factory name of class Foo.
 //
-//    (For examples of factory classes, see basic/Factory.cpp, graphics/Factory.cpp,
-//     simulation/Factory.cpp, as well as the various OpenEaagles examples)
+//    (For examples of factory functions, see base/factory.cpp, graphics/factory.cpp,
+//     simulation/factory.cpp, as well as the various OpenEaagles examples)
 //
 //
 // Slots and the Slot table:
@@ -425,7 +425,7 @@ private:
    static unsigned int numClasses;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

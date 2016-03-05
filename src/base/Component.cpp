@@ -22,7 +22,7 @@
 #endif
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Component,"Component")
 
@@ -1481,6 +1481,6 @@ Object* Component::SendData::getValue(const bool value)
     else return nullptr;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

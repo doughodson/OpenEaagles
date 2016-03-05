@@ -8,7 +8,7 @@
 #include <fstream>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Logger
@@ -91,7 +91,7 @@ private:
     bool           failed;       // Open or write failed
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

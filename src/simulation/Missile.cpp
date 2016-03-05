@@ -31,14 +31,14 @@ END_SLOTTABLE(Missile)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Missile)
-   ON_SLOT(1, setSlotVpMin, basic::Number)
-   ON_SLOT(2, setSlotVpMax, basic::Number)
-   ON_SLOT(3, setSlotVpMaxG, basic::Number)
-   ON_SLOT(4, setSlotMaxG, basic::Number)
-   ON_SLOT(5, setSlotMaxAccel, basic::Number)
-   ON_SLOT(6, setSlotCmdPitch, basic::Number)
-   ON_SLOT(7, setSlotCmdHeading, basic::Number)
-   ON_SLOT(8, setSlotCmdVelocity, basic::Number)
+   ON_SLOT(1, setSlotVpMin, base::Number)
+   ON_SLOT(2, setSlotVpMax, base::Number)
+   ON_SLOT(3, setSlotVpMaxG, base::Number)
+   ON_SLOT(4, setSlotMaxG, base::Number)
+   ON_SLOT(5, setSlotMaxAccel, base::Number)
+   ON_SLOT(6, setSlotCmdPitch, base::Number)
+   ON_SLOT(7, setSlotCmdHeading, base::Number)
+   ON_SLOT(8, setSlotCmdVelocity, base::Number)
 END_SLOT_MAP()
 
 // Event() map
@@ -56,7 +56,7 @@ Missile::Missile()
 {
    STANDARD_CONSTRUCTOR()
 
-   static basic::String generic("GenericMissile");
+   static base::String generic("GenericMissile");
    setType(&generic);
 
    setMaxTOF(60.0);
@@ -182,7 +182,7 @@ bool Missile::calculateVectors(const Player* const tgt, const Track* const trk, 
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool Missile::setSlotVpMin(const basic::Number* const msg)
+bool Missile::setSlotVpMin(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -192,7 +192,7 @@ bool Missile::setSlotVpMin(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotVpMax(const basic::Number* const msg)
+bool Missile::setSlotVpMax(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -202,7 +202,7 @@ bool Missile::setSlotVpMax(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotVpMaxG(const basic::Number* const msg)
+bool Missile::setSlotVpMaxG(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -212,7 +212,7 @@ bool Missile::setSlotVpMaxG(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotMaxG(const basic::Number* const msg)
+bool Missile::setSlotMaxG(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -222,7 +222,7 @@ bool Missile::setSlotMaxG(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotMaxAccel(const basic::Number* const msg)
+bool Missile::setSlotMaxAccel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -232,7 +232,7 @@ bool Missile::setSlotMaxAccel(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdPitch(const basic::Number* const msg)
+bool Missile::setSlotCmdPitch(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -242,7 +242,7 @@ bool Missile::setSlotCmdPitch(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdHeading(const basic::Number* const msg)
+bool Missile::setSlotCmdHeading(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -252,7 +252,7 @@ bool Missile::setSlotCmdHeading(const basic::Number* const msg)
    return ok;
 }
 
-bool Missile::setSlotCmdVelocity(const basic::Number* const msg)
+bool Missile::setSlotCmdVelocity(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -546,7 +546,7 @@ void Missile::weaponDynamics(const LCreal dt)
 
    // Roll angle proportional to max turn rate - filtered
    LCreal pa = 0.0;
-   const LCreal newPhi = static_cast<LCreal>( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (basic::Angle::D2RCC * 60.0)) );
+   const LCreal newPhi = static_cast<LCreal>( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (base::Angle::D2RCC * 60.0)) );
 
    // Sent angular values
    setEulerAngles(newPhi, newTheta, newPsi);
@@ -612,7 +612,7 @@ bool Missile::setMaxAccel(const LCreal v)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Missile::getSlotByIndex(const int si)
+base::Object* Missile::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

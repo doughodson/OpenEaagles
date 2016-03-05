@@ -34,8 +34,8 @@ END_SLOTTABLE(SimAgent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(SimAgent)
-   ON_SLOT(1, setSlotActorPlayerName, basic::String )
-   ON_SLOT(2, setSlotActorComponentName, basic::String )
+   ON_SLOT(1, setSlotActorPlayerName, base::String )
+   ON_SLOT(2, setSlotActorComponentName, base::String )
 END_SLOT_MAP()
 
 SimAgent::SimAgent()
@@ -93,15 +93,15 @@ void SimAgent::initActor()
       else {
          Simulation* sim = getSimulation();
          if ( sim != nullptr ) {
-            basic::Component* player = sim->findPlayerByName(actorPlayerName->getString());
+            base::Component* player = sim->findPlayerByName(actorPlayerName->getString());
             if (actorComponentName == nullptr) {
                // no player component specified, so the player is the actor
                setActor(player);
             }
             else if (player != nullptr) {
-               basic::Pair* pair = player->findByName(actorComponentName->getString());
+               base::Pair* pair = player->findByName(actorComponentName->getString());
                if (pair != nullptr) {
-                  setActor(dynamic_cast<basic::Component*>( pair->object() ));
+                  setActor(dynamic_cast<base::Component*>( pair->object() ));
                }
             }
          }
@@ -111,17 +111,17 @@ void SimAgent::initActor()
 
 void SimAgent::setActorPlayerByName(const char* x)
 {
-   actorPlayerName = new basic::String(x);
+   actorPlayerName = new base::String(x);
 }
 void SimAgent::setActorComponentByName(const char* x)
 {
-   actorComponentName = new basic::String(x);
+   actorComponentName = new base::String(x);
 }
 //------------------------------------------------------------------------------
 // set slot functions
 //------------------------------------------------------------------------------
 
-bool SimAgent::setSlotActorPlayerName(const basic::String* const x)
+bool SimAgent::setSlotActorPlayerName(const base::String* const x)
 {
    bool ok = false;
    if ( x != nullptr ) {
@@ -131,7 +131,7 @@ bool SimAgent::setSlotActorPlayerName(const basic::String* const x)
    return ok;
 }
 
-bool SimAgent::setSlotActorComponentName(const basic::String* const x)
+bool SimAgent::setSlotActorComponentName(const base::String* const x)
 {
    bool ok = false;
    if ( x != nullptr ) {
@@ -144,7 +144,7 @@ bool SimAgent::setSlotActorComponentName(const basic::String* const x)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* SimAgent::getSlotByIndex(const int si)
+base::Object* SimAgent::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

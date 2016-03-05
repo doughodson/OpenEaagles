@@ -14,9 +14,9 @@ namespace simulation {
 // Description: A snapshot of position state at a given time
 //
 //------------------------------------------------------------------------------
-class SynchronizedState : public basic::Object
+class SynchronizedState : public base::Object
 {
-   DECLARE_SUBCLASS(SynchronizedState, basic::Object)
+   DECLARE_SUBCLASS(SynchronizedState, base::Object)
 
 public:
    SynchronizedState();

@@ -8,7 +8,7 @@
 #include "openeaagles/base/Identifier.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Pair
@@ -47,7 +47,7 @@ private:
    Object* obj;            // Object
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

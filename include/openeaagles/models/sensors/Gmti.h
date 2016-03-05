@@ -9,7 +9,7 @@
 
 namespace oe {
 
-namespace basic { class List; }
+namespace base { class List; }
 
 namespace models {
 
@@ -25,7 +25,7 @@ public:
     void setPoi(const osg::Vec3& newPos);
 
 protected:
-    bool setSlotPoi(basic::List* const numList);                // Set Point of Interest
+    bool setSlotPoi(base::List* const numList);                // Set Point of Interest
 
     void dynamics(const LCreal dt) override;
 

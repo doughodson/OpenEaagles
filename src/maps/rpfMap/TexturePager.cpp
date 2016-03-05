@@ -93,7 +93,7 @@ void TexturePager::setSize(int tableSize)
     if (stack != nullptr) {
         stack->clear();
     }
-    else stack = new basic::List();
+    else stack = new base::List();
 
     for (int i = 0; i < size; i++) {
         graphics::Texture* t = new graphics::Texture();
@@ -255,7 +255,7 @@ void TexturePager::loadNewTextures()
                     graphics::Texture* texObj = table.getTexture(r, c);
                     if (texObj == nullptr && map->isValidFrame(r + row, c + col, this)) {
                         if (stack != nullptr) {
-                            basic::List::Item* item = stack->getFirstItem();
+                            base::List::Item* item = stack->getFirstItem();
                             if (item != nullptr) {
                                 graphics::Texture* obj = dynamic_cast<graphics::Texture*>(item->getValue());
                                 if (obj != nullptr) {

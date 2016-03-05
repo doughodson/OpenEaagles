@@ -56,7 +56,7 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     simulation::Player* tPlayer = nullptr;
     if (tSiteId == getSiteID() && tApplicationId == getApplicationID()) {
         // Must be local
-        basic::safe_ptr<basic::PairStream> players( getSimulation()->getPlayers() );
+        base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
         tPlayer = getSimulation()->findPlayer(tPlayerId);
     }
     //std::cout << "Net Fire(2) tPlayer = " << tPlayer << std::endl;

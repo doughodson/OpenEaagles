@@ -106,7 +106,7 @@
 // --- --- ---
 
 // ---
-// Basic events
+// Base events
 // ---
 #define  EID_SHUTDOWN_EVENT         1001  /* Shutdown notification event */
 

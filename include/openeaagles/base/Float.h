@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Float
@@ -377,7 +377,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Float& n)
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 

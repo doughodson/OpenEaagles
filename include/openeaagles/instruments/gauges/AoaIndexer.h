@@ -49,12 +49,12 @@ public:
 protected:
 
     // slot functions
-    virtual bool setSlotAoaRedMin(const basic::Number* const newRMin);
-    virtual bool setSlotAoaRedMax(const basic::Number* const newRMax);
-    virtual bool setSlotAoaYellowMin(const basic::Number* const newYMin);
-    virtual bool setSlotAoaYellowMax(const basic::Number* const newYMax);
-    virtual bool setSlotAoaGreenMax(const basic::Number* const newGMax);
-    virtual bool setSlotAoaGreenMin(const basic::Number* const newGMin);
+    virtual bool setSlotAoaRedMin(const base::Number* const newRMin);
+    virtual bool setSlotAoaRedMax(const base::Number* const newRMax);
+    virtual bool setSlotAoaYellowMin(const base::Number* const newYMin);
+    virtual bool setSlotAoaYellowMax(const base::Number* const newYMax);
+    virtual bool setSlotAoaGreenMax(const base::Number* const newGMax);
+    virtual bool setSlotAoaGreenMin(const base::Number* const newGMin);
 
 private:
 

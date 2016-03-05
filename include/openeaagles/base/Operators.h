@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Add
@@ -116,7 +116,7 @@ public:
     void operation() override;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

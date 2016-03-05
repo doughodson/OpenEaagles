@@ -22,13 +22,13 @@ END_SLOTTABLE(Tape)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Tape)
-    ON_SLOT(1, setSlotRange, basic::Number)
-    ON_SLOT(2, setSlotHeight, basic::Number)
-    ON_SLOT(3, setSlotIncrement, basic::Number)
-    ON_SLOT(4, setSlotVertical, basic::Number)
-    ON_SLOT(5, setSlotMaxNum, basic::Number)
-    ON_SLOT(6, setSlotMinNum, basic::Number)
-    ON_SLOT(7, setSlotConvert, basic::Number)
+    ON_SLOT(1, setSlotRange, base::Number)
+    ON_SLOT(2, setSlotHeight, base::Number)
+    ON_SLOT(3, setSlotIncrement, base::Number)
+    ON_SLOT(4, setSlotVertical, base::Number)
+    ON_SLOT(5, setSlotMaxNum, base::Number)
+    ON_SLOT(6, setSlotMinNum, base::Number)
+    ON_SLOT(7, setSlotConvert, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ EMPTY_DELETEDATA(Tape)
 //------------------------------------------------------------------------------
 // setSlotRange() - set the range of our data
 //------------------------------------------------------------------------------
-bool Tape::setSlotRange(const basic::Number* const x)
+bool Tape::setSlotRange(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setRange(x->getInt());
@@ -111,7 +111,7 @@ bool Tape::setSlotRange(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotHeight() - set the height of our viewable tape area
 //------------------------------------------------------------------------------
-bool Tape::setSlotHeight(const basic::Number* const x)
+bool Tape::setSlotHeight(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setHeight(x->getReal());
@@ -121,7 +121,7 @@ bool Tape::setSlotHeight(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotIncrement() - increment of our tape
 //------------------------------------------------------------------------------
-bool Tape::setSlotIncrement(const basic::Number* const x)
+bool Tape::setSlotIncrement(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setIncrement(x->getInt());
@@ -131,7 +131,7 @@ bool Tape::setSlotIncrement(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotVertical() - vertical or horizontal tape
 //------------------------------------------------------------------------------
-bool Tape::setSlotVertical(const basic::Number* const x)
+bool Tape::setSlotVertical(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setVertical(x->getBoolean());
@@ -141,7 +141,7 @@ bool Tape::setSlotVertical(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotMaxNum() - set the tape's maximum value
 //------------------------------------------------------------------------------
-bool Tape::setSlotMaxNum(const basic::Number* const x)
+bool Tape::setSlotMaxNum(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setMaxNumber(x->getReal());
@@ -152,7 +152,7 @@ bool Tape::setSlotMaxNum(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotMinNum() - set the tape's minimum value
 //------------------------------------------------------------------------------
-bool Tape::setSlotMinNum(const basic::Number* const x)
+bool Tape::setSlotMinNum(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setMinNumber(x->getReal());
@@ -162,7 +162,7 @@ bool Tape::setSlotMinNum(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotConvert() - conver to degrees instead of units?  (for circular tapes)
 //------------------------------------------------------------------------------
-bool Tape::setSlotConvert(const basic::Number* const x)
+bool Tape::setSlotConvert(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setConvert(x->getBoolean());
@@ -256,7 +256,7 @@ void Tape::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Tape
 //------------------------------------------------------------------------------
-basic::Object* Tape::getSlotByIndex(const int si)
+base::Object* Tape::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

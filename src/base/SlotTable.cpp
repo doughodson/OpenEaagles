@@ -3,7 +3,7 @@
 #include <cstring>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Constructors
@@ -129,6 +129,6 @@ std::ostream& SlotTable::serialize(std::ostream& sout, const int, const bool) co
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

@@ -8,7 +8,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class Angle;
 class Time;
@@ -132,7 +132,7 @@ private:
 
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

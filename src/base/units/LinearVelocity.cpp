@@ -5,7 +5,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //---------------------------------------------------------------------
 // Conversion Constants
@@ -310,5 +310,5 @@ bool LinearVelocity::setSeconds(const LCreal newTime)
 }
 
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

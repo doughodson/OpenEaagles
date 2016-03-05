@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       Knob
-// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Rotators -> Knob
+// Base class:  base::Object -> base::Component -> graphics::Graphic -> Rotators -> Knob
 // Description: Basic knob that will rotate from a starting fixed angle to a
 // given finish angle, and you can specify the values returned from those angles based on
 // start and finish value (Table1)
@@ -18,7 +18,7 @@
 #include "openeaagles/instruments/buttons/Button.h"
 
 namespace oe {
-namespace basic { class Table1; }
+namespace base { class Table1; }
 namespace instruments {
 
 class Knob : public Button{
@@ -39,21 +39,21 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // Sets the Event ID to newEvent
-    bool setSlotValueTable(basic::Table1* const x);
-    bool setSlotEndless(const basic::Number* const x);
-    bool setSlotEndlessStart(const basic::Number* const x);
-    bool setSlotEndlessLimit(const basic::Number* const x);
+    bool setSlotValueTable(base::Table1* const x);
+    bool setSlotEndless(const base::Number* const x);
+    bool setSlotEndlessStart(const base::Number* const x);
+    bool setSlotEndlessLimit(const base::Number* const x);
 
     // event functions
     bool onMotion();
 
 private:
     void computeRotation();     // translate our x,y to rotation from 0 values
-    basic::Table1* table;     // holds our values for rotation and value
+    base::Table1* table;     // holds our values for rotation and value
     LCreal value;               // value we currently have
     int startX;                 // starting mouse x position (pixels) of the center of our graphic
     int startY;                 // starting mouse y position (pixels) of the center of our graphic

@@ -18,10 +18,10 @@ END_SLOTTABLE(AnalogGauge)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(AnalogGauge)
-    ON_SLOT(1, setSlotLeftBoundary, basic::Number)
-    ON_SLOT(2, setSlotRightBoundary, basic::Number)
-    ON_SLOT(3, setSlotIsOutlined, basic::Number)
-    ON_SLOT(4, setSlotIsVertical, basic::Number)
+    ON_SLOT(1, setSlotLeftBoundary, base::Number)
+    ON_SLOT(2, setSlotRightBoundary, base::Number)
+    ON_SLOT(3, setSlotIsOutlined, base::Number)
+    ON_SLOT(4, setSlotIsVertical, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ void AnalogGauge::drawFunc()
 //------------------------------------------------------------------------------
 // setSlotLeftBoundary() -- sets the left side of the gauge
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotLeftBoundary(const basic::Number* const newLB)
+bool AnalogGauge::setSlotLeftBoundary(const base::Number* const newLB)
 {
     bool ok = false;
     if (newLB != nullptr) ok = setLeftBoundary(newLB->getReal());
@@ -105,7 +105,7 @@ bool AnalogGauge::setSlotLeftBoundary(const basic::Number* const newLB)
 //------------------------------------------------------------------------------
 // setSlotRightBoundary() -- sets the right side of the gauge
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotRightBoundary(const basic::Number* const newRB)
+bool AnalogGauge::setSlotRightBoundary(const base::Number* const newRB)
 {
     bool ok = false;
     if (newRB != nullptr) ok = setRightBoundary(newRB->getReal());
@@ -114,7 +114,7 @@ bool AnalogGauge::setSlotRightBoundary(const basic::Number* const newRB)
 //------------------------------------------------------------------------------
 // setSlotIsOutlined() -- determines whether we are a filled bar or outlined
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotIsOutlined(const basic::Number* const newO)
+bool AnalogGauge::setSlotIsOutlined(const base::Number* const newO)
 {
     bool ok = false;
     if (newO != nullptr) ok = setIsOutlined(newO->getBoolean());
@@ -123,7 +123,7 @@ bool AnalogGauge::setSlotIsOutlined(const basic::Number* const newO)
 //------------------------------------------------------------------------------
 // setSlotIsVertical() - sets our vertical flag
 //------------------------------------------------------------------------------
-bool AnalogGauge::setSlotIsVertical(const basic::Number* const newV)
+bool AnalogGauge::setSlotIsVertical(const base::Number* const newV)
 {
     bool ok = false;
     if (newV != nullptr) ok = setIsVertical(newV->getBoolean());
@@ -180,7 +180,7 @@ bool AnalogGauge::setDrawMe(const bool x)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for AnalogGauge
 //------------------------------------------------------------------------------
-basic::Object* AnalogGauge::getSlotByIndex(const int si)
+base::Object* AnalogGauge::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

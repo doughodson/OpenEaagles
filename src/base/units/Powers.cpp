@@ -7,7 +7,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //////////////////////////////////////////////////////////////////////
 // Power() --
@@ -231,5 +231,5 @@ DecibelMilliWatts::DecibelMilliWatts(const Power& org) : Power()
 EMPTY_COPYDATA(DecibelMilliWatts)
 EMPTY_DELETEDATA(DecibelMilliWatts)
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

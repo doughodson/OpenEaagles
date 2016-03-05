@@ -7,7 +7,7 @@
 #include "openeaagles/base/Hsv.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Hsva
@@ -62,7 +62,7 @@ public:
     );
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

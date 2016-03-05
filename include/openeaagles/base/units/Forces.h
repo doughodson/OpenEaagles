@@ -59,7 +59,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // ----------------------------------------------------------------------------
 // Defined Force Conversion Constants:
@@ -204,7 +204,7 @@ public:
     LCreal fromForce(const LCreal a) const override    { return a * N2PD; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

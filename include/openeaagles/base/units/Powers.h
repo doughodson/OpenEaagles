@@ -64,7 +64,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // ---------------------------------------------------------------------------
 // Defined Power Conversion Constants:
@@ -252,7 +252,7 @@ public:
 
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

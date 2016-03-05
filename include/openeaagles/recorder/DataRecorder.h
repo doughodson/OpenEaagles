@@ -8,7 +8,7 @@
 
 namespace oe {
    namespace simulation { class Player; class Track; class Emission; }
-   namespace basic { class String; }
+   namespace base { class String; }
 
 namespace recorder {
    namespace pb { class DataRecord; class PlayerId; class PlayerState;
@@ -82,15 +82,15 @@ protected:
 
    // Set functions
    bool setOutputHandler(OutputHandler* const msg);
-   bool setSlotEventName(basic::String* const msg);
-   bool setSlotApplication(basic::String* const msg);
-   bool setSlotCaseNum(basic::Number* const msg);
-   bool setSlotMissionNum(basic::Number* const msg);
-   bool setSlotSubjectNum(basic::Number* const msg);
-   bool setSlotRunNum(basic::Number* const msg);
-   bool setSlotDay(basic::Number* const msg);
-   bool setSlotMonth(basic::Number* const msg);
-   bool setSlotYear(basic::Number* const msg);
+   bool setSlotEventName(base::String* const msg);
+   bool setSlotApplication(base::String* const msg);
+   bool setSlotCaseNum(base::Number* const msg);
+   bool setSlotMissionNum(base::Number* const msg);
+   bool setSlotSubjectNum(base::Number* const msg);
+   bool setSlotRunNum(base::Number* const msg);
+   bool setSlotDay(base::Number* const msg);
+   bool setSlotMonth(base::Number* const msg);
+   bool setSlotYear(base::Number* const msg);
 
    // data filler functions
    virtual void genPlayerId( pb::PlayerId* const id, const simulation::Player* const player );
@@ -103,33 +103,33 @@ protected:
    void setFirstPass(const bool f);
 
    // Recorder data event handlers
-   virtual bool recordMarker(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordAI(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordDI(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordNewPlayer(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordPlayerRemoved(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordPlayerData(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordPlayerDamaged(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordPlayerCollision(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordPlayerCrash(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordPlayerKilled(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordWeaponReleased(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordWeaponHung(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordWeaponDetonation(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordGunFired(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordNewTrack(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordTrackRemoved(const basic::Object* objs[4], const double values[4]);
-   virtual bool recordTrackData(const basic::Object* objs[4], const double values[4]);
+   virtual bool recordMarker(const base::Object* objs[4], const double values[4]);
+   virtual bool recordAI(const base::Object* objs[4], const double values[4]);
+   virtual bool recordDI(const base::Object* objs[4], const double values[4]);
+   virtual bool recordNewPlayer(const base::Object* objs[4], const double values[4]);
+   virtual bool recordPlayerRemoved(const base::Object* objs[4], const double values[4]);
+   virtual bool recordPlayerData(const base::Object* objs[4], const double values[4]);
+   virtual bool recordPlayerDamaged(const base::Object* objs[4], const double values[4]);
+   virtual bool recordPlayerCollision(const base::Object* objs[4], const double values[4]);
+   virtual bool recordPlayerCrash(const base::Object* objs[4], const double values[4]);
+   virtual bool recordPlayerKilled(const base::Object* objs[4], const double values[4]);
+   virtual bool recordWeaponReleased(const base::Object* objs[4], const double values[4]);
+   virtual bool recordWeaponHung(const base::Object* objs[4], const double values[4]);
+   virtual bool recordWeaponDetonation(const base::Object* objs[4], const double values[4]);
+   virtual bool recordGunFired(const base::Object* objs[4], const double values[4]);
+   virtual bool recordNewTrack(const base::Object* objs[4], const double values[4]);
+   virtual bool recordTrackRemoved(const base::Object* objs[4], const double values[4]);
+   virtual bool recordTrackData(const base::Object* objs[4], const double values[4]);
 
    // simulation::DataRecorder class protected interface functions
    virtual bool recordDataImp(
       const unsigned int id,              // Recorder event Id
-      const basic::Object* pObjects[4],   // Sample objects
+      const base::Object* pObjects[4],   // Sample objects
       const double values[4]              // Sample values
    );
    virtual bool processUnhandledId(const unsigned int id);
 
-   // basic::Component protected interface
+   // base::Component protected interface
    bool shutdownNotification() override;
 
 private:

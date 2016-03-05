@@ -11,7 +11,7 @@
 #include "openeaagles/simulation/Player.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Distance;
       class Identifier;
       class Time;
@@ -61,10 +61,10 @@ public:
     virtual bool setLauncherPosition(const LCreal rad);
 
     // Slot functions
-    virtual bool setSlotCommandedPosition(const basic::Identifier* const msg);
-    virtual bool setSlotLauncherDownAngle(const basic::Angle* const msg);
-    virtual bool setSlotLauncherUpAngle(const basic::Angle* const msg);
-    virtual bool setSlotLauncherMoveTime(const basic::Time* const msg);
+    virtual bool setSlotCommandedPosition(const base::Identifier* const msg);
+    virtual bool setSlotLauncherDownAngle(const base::Angle* const msg);
+    virtual bool setSlotLauncherUpAngle(const base::Angle* const msg);
+    virtual bool setSlotLauncherMoveTime(const base::Time* const msg);
 
     unsigned int getMajorType() const override;
 

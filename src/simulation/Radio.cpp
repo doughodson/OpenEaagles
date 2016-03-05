@@ -25,7 +25,7 @@ IMPLEMENT_SUBCLASS(Radio,"Radio")
 // Slot table
 BEGIN_SLOTTABLE(Radio)
    "numChannels",       // 1: Number of channels (less than or equal MAX_CHANNELS)
-   "channels",          // 2: Our channels (list of basic::Frequency objects)
+   "channels",          // 2: Our channels (list of base::Frequency objects)
    "channel",           // 3: Channel number [ 1 .. numChanels ]
    "maxDetectRange",    // 4: maximum detection capability (NM) (def: 120NM)
    "radioID",           // 5: radioID used by DIS
@@ -33,11 +33,11 @@ END_SLOTTABLE(Radio)
 
 //  Map slot table
 BEGIN_SLOT_MAP(Radio)
-    ON_SLOT(1, setSlotNumChannels,  basic::Number)
-    ON_SLOT(2, setSlotChannels,     basic::PairStream)
-    ON_SLOT(3, setSlotChannel,      basic::Number)
-    ON_SLOT(4, setSlotMaxDetectRange, basic::Number)
-    ON_SLOT(5, setSlotRadioId,      basic::Number)
+    ON_SLOT(1, setSlotNumChannels,  base::Number)
+    ON_SLOT(2, setSlotChannels,     base::PairStream)
+    ON_SLOT(3, setSlotChannel,      base::Number)
+    ON_SLOT(4, setSlotMaxDetectRange, base::Number)
+    ON_SLOT(5, setSlotRadioId,      base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -300,7 +300,7 @@ void Radio::receivedEmissionReport(Emission* const)
 // Slot Functions  (return 'true' if the slot was set, else 'false')
 //------------------------------------------------------------------------------
 
-bool Radio::setSlotNumChannels(basic::Number* const msg)
+bool Radio::setSlotNumChannels(base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -312,7 +312,7 @@ bool Radio::setSlotNumChannels(basic::Number* const msg)
    return ok;
 }
 
-bool Radio::setSlotChannels(const basic::PairStream* const msg)
+bool Radio::setSlotChannels(const base::PairStream* const msg)
 {
    // ---
    // Quick out if the number of channels hasn't been set.
@@ -325,13 +325,13 @@ bool Radio::setSlotChannels(const basic::PairStream* const msg)
 
    {
       unsigned short chan = 1;
-      const basic::List::Item* item = msg->getFirstItem();
+      const base::List::Item* item = msg->getFirstItem();
       while (chan <= nc && item != nullptr) {
 
-         const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
-         const basic::Frequency* p = static_cast<const basic::Frequency*>(pair->object());
+         const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
+         const base::Frequency* p = static_cast<const base::Frequency*>(pair->object());
          if (p != nullptr) {
-            LCreal freq = basic::Hertz::convertStatic( *p );
+            LCreal freq = base::Hertz::convertStatic( *p );
             bool ok = setChannelFrequency(chan, freq);
             if (!ok) {
                std::cerr << "Radio::setSlotChannels() Error setting frequency for channel " << chan << "; with freq = " << *p << std::endl;
@@ -350,7 +350,7 @@ bool Radio::setSlotChannels(const basic::PairStream* const msg)
 }
 
 // channel: Channel the radio is set to
-bool Radio::setSlotChannel(basic::Number* const msg)
+bool Radio::setSlotChannel(base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -363,7 +363,7 @@ bool Radio::setSlotChannel(basic::Number* const msg)
 }
 
 // maxDetectRange: maximum detection capability (NM)
-bool Radio::setSlotMaxDetectRange(basic::Number* const num)
+bool Radio::setSlotMaxDetectRange(base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -374,7 +374,7 @@ bool Radio::setSlotMaxDetectRange(basic::Number* const num)
 }
 
 // radio ID: the radio id used for DIS
-bool Radio::setSlotRadioId(basic::Number* const num)
+bool Radio::setSlotRadioId(base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -387,7 +387,7 @@ bool Radio::setSlotRadioId(basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Radio::getSlotByIndex(const int si)
+base::Object* Radio::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -414,7 +414,7 @@ std::ostream& Radio::serialize(std::ostream& sout, const int i, const bool slots
       for (unsigned short chan = 1; chan <= getNumberOfChannels(); chan++) {
          LCreal freq = getChannelFrequency(chan);
          indent(sout,i+j+4);
-         sout << "( MegaHertz " << (freq * basic::Frequency::Hz2MHz) << " )" << std::endl;
+         sout << "( MegaHertz " << (freq * base::Frequency::Hz2MHz) << " )" << std::endl;
       }
 
       indent(sout,i+j);
@@ -513,7 +513,7 @@ bool CommRadio::setDatalink(Datalink* const p)
 // transmitDataMessage() -- send a data message emission;
 // returns true if the data emission was sent.
 //------------------------------------------------------------------------------
-bool CommRadio::transmitDataMessage(basic::Object* const msg)
+bool CommRadio::transmitDataMessage(base::Object* const msg)
 {
    bool sent = false;
    // Transmitting, scanning and have an antenna?
@@ -551,7 +551,7 @@ void CommRadio::receivedEmissionReport(Emission* const em)
    if (em != nullptr && datalink != nullptr) {
       // If we have a datalink and this emission contains a message, then it
       // must be a datalink message.
-      basic::Object* msg = em->getDataMessage();
+      base::Object* msg = em->getDataMessage();
       if (msg != nullptr) datalink->event(DATALINK_MESSAGE, msg);
    }
 }

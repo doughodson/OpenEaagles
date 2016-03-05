@@ -7,7 +7,7 @@
 #include "openeaagles/base/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class String;
 
@@ -44,7 +44,7 @@ protected:
    bool  noWait;                // TCP's no wait I/O flag
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -39,9 +39,9 @@ namespace dis {
 //    )
 //
 //------------------------------------------------------------------------------
-class EmissionPduHandler : public basic::Object
+class EmissionPduHandler : public base::Object
 {
-    DECLARE_SUBCLASS(EmissionPduHandler,basic::Object)
+    DECLARE_SUBCLASS(EmissionPduHandler,base::Object)
 
 public:
    enum { MAX_EM_BEAMS   = 6 };
@@ -153,12 +153,12 @@ public:
    virtual bool updateOutgoing(const LCreal curExecTime, Nib* const nib);
 
    // Slot functions
-   virtual bool setSlotEmitterName(const basic::Number* const msg);      // Sets our DIS Emitter Name
-   virtual bool setSlotEmitterFunction(const basic::Number* const msg);  // Sets our DIS Emitter Function
+   virtual bool setSlotEmitterName(const base::Number* const msg);      // Sets our DIS Emitter Name
+   virtual bool setSlotEmitterFunction(const base::Number* const msg);  // Sets our DIS Emitter Function
    virtual bool setSlotSensorTemplate(simulation::RfSensor* const msg);    // Sets our template sensor model
    virtual bool setSlotAntennaTemplate(simulation::Antenna* const msg);    // Sets our template antenna model
-   virtual bool setSlotDefaultIn(const basic::Number* const msg);
-   virtual bool setSlotDefaultOut(const basic::Number* const msg);
+   virtual bool setSlotDefaultIn(const base::Number* const msg);
+   virtual bool setSlotDefaultOut(const base::Number* const msg);
 
 protected:
     const EmissionSystem* getSavedEmissionSystemData() const;
@@ -191,9 +191,9 @@ private:
    unsigned char emitterIdNumber;   // Unique ID number for each emitter system
    unsigned char emitterFunction;   // Emitter function code
 
-   basic::safe_ptr<simulation::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
-   basic::safe_ptr<simulation::RfSensor> sensorModel;         // Our template sensor model
-   basic::safe_ptr<simulation::Antenna>  antennaModel;        // Our template antenna model
+   base::safe_ptr<simulation::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
+   base::safe_ptr<simulation::RfSensor> sensorModel;         // Our template sensor model
+   base::safe_ptr<simulation::Antenna>  antennaModel;        // Our template antenna model
 
    LCreal           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
 };

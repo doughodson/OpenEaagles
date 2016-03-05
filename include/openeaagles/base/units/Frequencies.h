@@ -50,7 +50,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // -----------------------------------------------------------------------------
 // Defined constants:
@@ -201,7 +201,7 @@ public:
     LCreal fromFrequency(const LCreal a) const override  { return a * Hz2THz; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

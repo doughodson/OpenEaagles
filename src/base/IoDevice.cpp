@@ -7,7 +7,7 @@
 #include "openeaagles/base/PairStream.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // IoDevice

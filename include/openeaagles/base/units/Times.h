@@ -56,7 +56,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // ----------------------------------------------------------------------------
 // Defined Power Conversion Constants:
@@ -301,7 +301,7 @@ public:
     LCreal fromTime(const LCreal a) const override { return a * S2D; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

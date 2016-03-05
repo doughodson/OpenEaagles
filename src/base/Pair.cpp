@@ -6,7 +6,7 @@
 #include "openeaagles/base/String.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Pair, "Pair")
 EMPTY_SLOTTABLE(Pair)
@@ -117,6 +117,6 @@ std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) 
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

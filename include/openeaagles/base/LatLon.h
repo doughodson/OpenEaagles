@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class String;
 class Number;
@@ -109,7 +109,7 @@ private:
     double  sec;                // seconds
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -6,7 +6,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 
 //==============================================================================
@@ -206,5 +206,5 @@ TeraHertz::TeraHertz(const Frequency& value) : Frequency()
 EMPTY_COPYDATA(TeraHertz)
 EMPTY_DELETEDATA(TeraHertz)
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

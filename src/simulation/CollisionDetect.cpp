@@ -32,14 +32,14 @@ END_SLOTTABLE(CollisionDetect)
 
 //  Map slot table
 BEGIN_SLOT_MAP(CollisionDetect)
-    ON_SLOT( 1,  setSlotCollisionRange,      basic::Distance)
-    ON_SLOT( 2,  setSlotMaxPlayers,          basic::Number)
-    ON_SLOT( 3,  setSlotPlayerTypes,         basic::PairStream)
-    ON_SLOT( 4,  setSlotMaxRange2Players,    basic::Distance)
-    ON_SLOT( 5,  setSlotMaxAngle2Players,    basic::Angle)
-    ON_SLOT( 6,  setSlotLocalOnly,           basic::Number)
-    ON_SLOT( 7,  setSlotUseWorldCoordinates, basic::Number)
-    ON_SLOT( 8,  setSlotSendCrashEvents,     basic::Number)
+    ON_SLOT( 1,  setSlotCollisionRange,      base::Distance)
+    ON_SLOT( 2,  setSlotMaxPlayers,          base::Number)
+    ON_SLOT( 3,  setSlotPlayerTypes,         base::PairStream)
+    ON_SLOT( 4,  setSlotMaxRange2Players,    base::Distance)
+    ON_SLOT( 5,  setSlotMaxAngle2Players,    base::Angle)
+    ON_SLOT( 6,  setSlotLocalOnly,           base::Number)
+    ON_SLOT( 7,  setSlotUseWorldCoordinates, base::Number)
+    ON_SLOT( 8,  setSlotSendCrashEvents,     base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void CollisionDetect::initData()
    poiLock = 0;
 
    playerTypes = 0xFFFF;      // Default: all types
-   maxRange2Players = (1.0 * basic::Distance::NM2M); // Default: 1.0 NM
+   maxRange2Players = (1.0 * base::Distance::NM2M); // Default: 1.0 NM
    maxAngle2Players = 0.0;    // Default: all angles
    collisionRange = 4.0;      // Default: 4 meters
    useWorld = true;           // Default: Using ECEF
@@ -210,15 +210,15 @@ void CollisionDetect::updateData(const LCreal dt)
    // ---
    // Scan the player list ---
    // ---
-   basic::PairStream* plist = sim->getPlayers();
+   base::PairStream* plist = sim->getPlayers();
    if (plist != nullptr) {
 
-      basic::List::Item* item = plist->getFirstItem();
+      base::List::Item* item = plist->getFirstItem();
       bool finished = false;
       while ( item != nullptr && !finished ) {
 
          // Get the pointer to the target player
-         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          Player* target = static_cast<Player*>(pair->object());
 
          // Did we complete the local only players?
@@ -551,11 +551,11 @@ void CollisionDetect::clearPoiList()
 //------------------------------------------------------------------------------
 // Slot Functions
 //------------------------------------------------------------------------------
-bool CollisionDetect::setSlotCollisionRange(const basic::Distance* const msg)
+bool CollisionDetect::setSlotCollisionRange(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double meters = basic::Meters::convertStatic(*msg);
+      const double meters = base::Meters::convertStatic(*msg);
       if (meters >= 0.0) {
          ok = setCollisionRange( meters );
       }
@@ -563,7 +563,7 @@ bool CollisionDetect::setSlotCollisionRange(const basic::Distance* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotMaxPlayers(const basic::Number* const msg)
+bool CollisionDetect::setSlotMaxPlayers(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -575,15 +575,15 @@ bool CollisionDetect::setSlotMaxPlayers(const basic::Number* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotPlayerTypes(const basic::PairStream* const msg)
+bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
       unsigned int mask = 0;
-      const basic::List::Item* item = msg->getFirstItem();
+      const base::List::Item* item = msg->getFirstItem();
       while (item != nullptr) {
-         const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
-         const basic::String* type = dynamic_cast<const basic::String*>( pair->object() );
+         const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
+         const base::String* type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
             if ( lcStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
@@ -614,11 +614,11 @@ bool CollisionDetect::setSlotPlayerTypes(const basic::PairStream* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotMaxRange2Players(const basic::Distance* const msg)
+bool CollisionDetect::setSlotMaxRange2Players(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double meters = basic::Meters::convertStatic(*msg);
+      const double meters = base::Meters::convertStatic(*msg);
       if (meters >= 0.0) {
          ok = setMaxRange2Players( meters );
       }
@@ -626,11 +626,11 @@ bool CollisionDetect::setSlotMaxRange2Players(const basic::Distance* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotMaxAngle2Players(const basic::Angle* const msg)
+bool CollisionDetect::setSlotMaxAngle2Players(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double radians = basic::Radians::convertStatic(*msg);
+      const double radians = base::Radians::convertStatic(*msg);
       if (radians >= 0.0) {
          ok = setMaxAngle2Players( radians );
       }
@@ -638,7 +638,7 @@ bool CollisionDetect::setSlotMaxAngle2Players(const basic::Angle* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotUseWorldCoordinates(const basic::Number* const msg)
+bool CollisionDetect::setSlotUseWorldCoordinates(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -647,7 +647,7 @@ bool CollisionDetect::setSlotUseWorldCoordinates(const basic::Number* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotLocalOnly(const basic::Number* const msg)
+bool CollisionDetect::setSlotLocalOnly(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -656,7 +656,7 @@ bool CollisionDetect::setSlotLocalOnly(const basic::Number* const msg)
    return ok;
 }
 
-bool CollisionDetect::setSlotSendCrashEvents(const basic::Number* const msg)
+bool CollisionDetect::setSlotSendCrashEvents(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -669,7 +669,7 @@ bool CollisionDetect::setSlotSendCrashEvents(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* CollisionDetect::getSlotByIndex(const int si)
+base::Object* CollisionDetect::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

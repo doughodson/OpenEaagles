@@ -33,9 +33,9 @@ namespace simulation {
 // Factory name: DynamicsModel
 //
 //==============================================================================
-class DynamicsModel : public basic::Component
+class DynamicsModel : public base::Component
 {
-    DECLARE_SUBCLASS(DynamicsModel, basic::Component)
+    DECLARE_SUBCLASS(DynamicsModel, base::Component)
 
 public:
     DynamicsModel();

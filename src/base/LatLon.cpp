@@ -7,7 +7,7 @@
 #include <cmath>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(LatLon,"LatLon")
 
@@ -247,5 +247,5 @@ bool LatLon::setSeconds(const Number* const ssobj)
    return ok;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

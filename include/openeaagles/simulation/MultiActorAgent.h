@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       namespace ubf { class Behavior; class State; }
    }
 
@@ -28,9 +28,9 @@ class Station;
 //    state       <State>           ! state
 //    agentList   <PairStream>      ! behavior pairstream
 //------------------------------------------------------------------------------
-class MultiActorAgent : public basic::Component
+class MultiActorAgent : public base::Component
 {
-   DECLARE_SUBCLASS(MultiActorAgent, basic::Component)
+   DECLARE_SUBCLASS(MultiActorAgent, base::Component)
 
 public:
    MultiActorAgent();
@@ -42,33 +42,33 @@ protected:
    // generic controller
    virtual void controller(const LCreal dt = 0.0);
 
-   void setState(basic::ubf::State* const);
-   basic::ubf::State* getState() const                { return state; }
+   void setState(base::ubf::State* const);
+   base::ubf::State* getState() const                { return state; }
 
-   void setActor(basic::Component* c);
-   basic::Component*      getActor() { return actor;}
+   void setActor(base::Component* c);
+   base::Component*      getActor() { return actor;}
 
    Station*     getStation();
    Simulation*  getSimulation();
 
    struct AgentItem
    {
-      basic::safe_ptr<basic::String> actorName;
-      basic::safe_ptr<basic::ubf::Behavior> behavior;
-      basic::safe_ptr<basic::Component> actor;
+      base::safe_ptr<base::String> actorName;
+      base::safe_ptr<base::ubf::Behavior> behavior;
+      base::safe_ptr<base::Component> actor;
    };
 
    static const unsigned int MAX_AGENTS = 10;
    bool clearAgentList();
-   bool addAgent( basic::String* name, basic::ubf::Behavior* const b);
+   bool addAgent( base::String* name, base::ubf::Behavior* const b);
 
    // slot functions
-   bool setSlotState(basic::ubf::State* const state);
-   bool setSlotAgentList(basic::PairStream* const msg);
+   bool setSlotState(base::ubf::State* const state);
+   bool setSlotAgentList(base::PairStream* const msg);
 
 private:
-   basic::Component* actor;
-   basic::ubf::State* state;
+   base::Component* actor;
+   base::ubf::State* state;
    Station*     myStation;
 
    // agent/behavior list
@@ -76,7 +76,7 @@ private:
    AgentItem agentList[MAX_AGENTS];
 };
 
-inline void MultiActorAgent::setActor(basic::Component* c) { actor=c; }
+inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }
 
 } // End simulation namespace
 } // End oe namespace

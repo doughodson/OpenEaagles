@@ -7,7 +7,7 @@
 #include "openeaagles/base/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class String;
 
@@ -97,7 +97,7 @@ private:
     bool  initialized;              // handler has been initialized
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

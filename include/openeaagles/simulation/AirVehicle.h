@@ -13,7 +13,7 @@ namespace simulation {
 //==============================================================================
 // Class AirVehicle
 //
-// Base class: basic::Object -> basic::Component -> Player -> AirVehicle
+// Base class: base::Object -> base::Component -> Player -> AirVehicle
 //                                           ..  -> AirVehicle -> Aircraft
 //                                           ..  -> AirVehicle -> Helicopter
 //                                           ..  -> AirVehicle -> UnmannedAirVehicle
@@ -21,8 +21,8 @@ namespace simulation {
 // Factory name: AirVehicle
 // Slots:
 //  initGearPos     ! Initial gear position (default: up),
-//                  !   <basic::String>: "up" or "down"
-//                  !   <basic::Number>: zero(0) for up, non-zero for down
+//                  !   <base::String>: "up" or "down"
+//                  !   <base::Number>: zero(0) for up, non-zero for down
 //
 //
 // Description: Generic Air Vehicles
@@ -150,8 +150,8 @@ protected:
    AerodynamicsModel* getAerodynamicsModel();
    const AerodynamicsModel* getAerodynamicsModel() const;
 
-   bool setInitGearPos(const basic::String* const pos);
-   bool setInitGearPos(const basic::Number* const pos);
+   bool setInitGearPos(const base::String* const pos);
+   bool setInitGearPos(const base::Number* const pos);
 
 private:
    LCreal initGearPos;     // initial gear position

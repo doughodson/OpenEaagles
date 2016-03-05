@@ -6,7 +6,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Window/Linux specific code
@@ -384,6 +384,6 @@ bool ThreadPeriodicTask::setVariableDeltaTimeFlag(const bool enable)
    return true;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

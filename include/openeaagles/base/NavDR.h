@@ -7,7 +7,7 @@
 #include "openeaagles/base/support.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: NavDR
@@ -134,7 +134,7 @@ public:
 //--------------------------------------------------------------------------
 #include "openeaagles/base/NavDR.inl"
 
-}  // end namespace basic
+}  // end namespace base
 }  // end namespace oe
 
 #endif

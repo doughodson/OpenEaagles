@@ -43,13 +43,13 @@ END_SLOTTABLE(PrintSelected)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(PrintSelected)
-   ON_SLOT( 1, setSlotMsgToken,        basic::Number)
-   ON_SLOT( 2, setSlotFieldName,       basic::String)
-   ON_SLOT( 3, setSlotCompareToStr,    basic::String)
-   ON_SLOT( 4, setSlotCompareToNum,    basic::Number)
-   ON_SLOT( 5, setSlotCompareToDbl,    basic::Number)
-   ON_SLOT( 6, setSlotCondition,       basic::String)
-   ON_SLOT( 7, setSlotTimeOnly,        basic::Number)
+   ON_SLOT( 1, setSlotMsgToken,        base::Number)
+   ON_SLOT( 2, setSlotFieldName,       base::String)
+   ON_SLOT( 3, setSlotCompareToStr,    base::String)
+   ON_SLOT( 4, setSlotCompareToNum,    base::Number)
+   ON_SLOT( 5, setSlotCompareToDbl,    base::Number)
+   ON_SLOT( 6, setSlotCondition,       base::String)
+   ON_SLOT( 7, setSlotTimeOnly,        base::Number)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintSelected)
@@ -110,7 +110,7 @@ void PrintSelected::deleteData()
 
 // Slots
 
-bool PrintSelected::setSlotMsgToken(const basic::Number* const msg)
+bool PrintSelected::setSlotMsgToken(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -120,7 +120,7 @@ bool PrintSelected::setSlotMsgToken(const basic::Number* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotFieldName(const basic::String* const msg)
+bool PrintSelected::setSlotFieldName(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -131,7 +131,7 @@ bool PrintSelected::setSlotFieldName(const basic::String* const msg)
 
 }
 
-bool PrintSelected::setSlotCompareToStr(const basic::String* const msg)
+bool PrintSelected::setSlotCompareToStr(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -141,7 +141,7 @@ bool PrintSelected::setSlotCompareToStr(const basic::String* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotCompareToNum(const basic::Number* const msg)
+bool PrintSelected::setSlotCompareToNum(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -151,7 +151,7 @@ bool PrintSelected::setSlotCompareToNum(const basic::Number* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotCompareToDbl(const basic::Number* const msg)
+bool PrintSelected::setSlotCompareToDbl(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -162,7 +162,7 @@ bool PrintSelected::setSlotCompareToDbl(const basic::Number* const msg)
 }
 
 
-bool PrintSelected::setSlotCondition(const basic::String* const msg)
+bool PrintSelected::setSlotCondition(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -186,7 +186,7 @@ bool PrintSelected::setSlotCondition(const basic::String* const msg)
    return ok;
 }
 
-bool PrintSelected::setSlotTimeOnly(const basic::Number* const msg)
+bool PrintSelected::setSlotTimeOnly(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -198,7 +198,7 @@ bool PrintSelected::setSlotTimeOnly(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* PrintSelected::getSlotByIndex(const int si)
+base::Object* PrintSelected::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -792,7 +792,7 @@ std::string PrintSelected::printTimeMsg(double time)
     LCreal ss = 0;  // Sec
 
     // utc time
-    basic::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     std::string timeStr;
     timeStr.assign(cbuf);

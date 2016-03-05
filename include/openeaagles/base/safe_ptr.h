@@ -5,7 +5,7 @@
 #define __oe_base_safe_ptr_H__
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Template safe_ptr<T>
@@ -17,12 +17,12 @@ namespace basic {
 //
 //    Object* p = new Object();         // New object; ref cnt is one
 //
-//    basic::safe_ptr<Object> sp1( p ); // ref cnt is two
+//    base::safe_ptr<Object> sp1( p ); // ref cnt is two
 //
-//    basic::safe_ptr<Object> sp2();    // 'sp2' is null
+//    base::safe_ptr<Object> sp2();    // 'sp2' is null
 //    sp2 = p;                          // ref cnt is three
 //
-//    basic::safe_ptr<Object> sp3(sp2); // ref cnt is four
+//    base::safe_ptr<Object> sp3(sp2); // ref cnt is four
 //
 //    p->unref();                // ref cnt is three
 //    sp3 = 0;                   // ref cnt is two
@@ -32,12 +32,12 @@ namespace basic {
 //
 // Example #2
 //
-//    basic::safe_ptr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
+//    base::safe_ptr<Object> sp1( new Object(), false );  // new object; ref cnt stays at one
 //
 //
 // Example #3
 //
-//    basic::safe_ptr<Object> sp1();   // 'sp1' is null
+//    base::safe_ptr<Object> sp1();   // 'sp1' is null
 //    sp1.set( new Object(), false );  // new object; ref cnt stays at one
 //
 //------------------------------------------------------------------------------

@@ -6,7 +6,7 @@
 #include "openeaagles/base/functors/Functions.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class List;
 class Number;
@@ -128,7 +128,7 @@ public:
 };
 
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

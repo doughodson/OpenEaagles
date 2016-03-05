@@ -8,7 +8,7 @@
 #include "openeaagles/base/osg/Matrix"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class Angle;
 class Number;
@@ -142,7 +142,7 @@ protected:
     void computeMatrix() override;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

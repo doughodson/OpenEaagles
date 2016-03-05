@@ -37,8 +37,8 @@ namespace graphics {
 //                                 (default: (0,0,0,1))
 //    shininess      <Number>      ! How shiny our material is (0 = dull, 128 = really shiny) (default: 0)
 //------------------------------------------------------------------------------
-class Material : public basic::Component {
-    DECLARE_SUBCLASS(Material,basic::Component)
+class Material : public base::Component {
+    DECLARE_SUBCLASS(Material,base::Component)
 
 public:
     Material();
@@ -62,15 +62,15 @@ public:
     LCreal     getShininess()           { return shininess; }
 
 protected:
-    bool setSlotAmbientColor(const basic::PairStream* const x);
-    bool setSlotAmbientColor(const basic::Number* const x);
-    bool setSlotDiffuseColor(const basic::PairStream* const x);
-    bool setSlotDiffuseColor(const basic::Number* const x);
-    bool setSlotEmissiveColor(const basic::PairStream* const x);
-    bool setSlotEmissiveColor(const basic::Number* const x);
-    bool setSlotSpecularColor(const basic::PairStream* const x);
-    bool setSlotSpecularColor(const basic::Number* const x);
-    bool setSlotShininess(const basic::Number*const x);
+    bool setSlotAmbientColor(const base::PairStream* const x);
+    bool setSlotAmbientColor(const base::Number* const x);
+    bool setSlotDiffuseColor(const base::PairStream* const x);
+    bool setSlotDiffuseColor(const base::Number* const x);
+    bool setSlotEmissiveColor(const base::PairStream* const x);
+    bool setSlotEmissiveColor(const base::Number* const x);
+    bool setSlotSpecularColor(const base::PairStream* const x);
+    bool setSlotSpecularColor(const base::Number* const x);
+    bool setSlotShininess(const base::Number*const x);
 
 private:
     osg::Vec4 ambientColor;     // ambient color

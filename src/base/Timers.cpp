@@ -3,7 +3,7 @@
 #include "openeaagles/base/units/Times.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // Class Timer
@@ -254,6 +254,6 @@ DownTimer::DownTimer(const double rtime) : Timer(DOWN,rtime)
 }
 
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

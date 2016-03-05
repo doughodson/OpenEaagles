@@ -1,6 +1,6 @@
-basic/FlexLexer.h
-basic/Lexical.cpp
-basic/Parser.cpp
+base/FlexLexer.h
+base/Lexical.cpp
+base/Parser.cpp
 graphics/Reformat.l
 graphics/Reformat.cpp
 

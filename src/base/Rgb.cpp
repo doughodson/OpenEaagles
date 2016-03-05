@@ -5,7 +5,7 @@
 #include "openeaagles/base/Float.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Rgb,"rgb")
 
@@ -132,5 +132,5 @@ std::ostream& Rgb::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

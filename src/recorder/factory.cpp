@@ -18,9 +18,9 @@
 namespace oe {
 namespace recorder {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
     if ( std::strcmp(name, FileWriter::getFactoryName()) == 0 ) {
         obj = new FileWriter();

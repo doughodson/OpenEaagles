@@ -10,7 +10,7 @@
 #include "openeaagles/base/functors/Function.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class FStorage;
 class List;
@@ -98,7 +98,7 @@ public:
 //
 // Factory names: Polynomial
 // Slots:
-//    coefficients   <basic::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
+//    coefficients   <base::List>  ! Constant coefficients vector: [ a0 a1 a2 ... aN ]
 //
 // Notes
 //    1) The degree of the polynomial is determined by the size of the coefficients vector.
@@ -141,7 +141,7 @@ private:
    unsigned short m;       // Number of coefficients (degree + 1)
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

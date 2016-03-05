@@ -9,7 +9,7 @@
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class Number;
       class List;
       class String;
@@ -135,8 +135,8 @@ namespace graphics {
 //
 //Comment section last updated: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
-class Font : public basic::Object {
-    DECLARE_SUBCLASS(Font,basic::Object)
+class Font : public base::Object {
+    DECLARE_SUBCLASS(Font,base::Object)
 
 public:
     static const size_t MAX_MESSAGE_LENGTH = 256; // Max length of character buffers
@@ -185,7 +185,7 @@ public:
 
 public:
     // Exceptions
-    class ExpInvalidFont : public basic::Object::Exception {
+    class ExpInvalidFont : public base::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}
             const char* getDescription() const override     { return "font is invalid"; }
@@ -193,16 +193,16 @@ public:
 
 protected:
     // Slot functions
-    bool setSlotFontWidth(const basic::Number* const sfwobj);
-    bool setSlotFontHeight (const basic::Number* const sfhobj);
-    bool setSlotFontPosition (const basic::List* const sfpobj);
-    bool setSlotBitmapWidth(const basic::Number* const sbwobj);
-    bool setSlotBitmapHeight(const basic::Number* const sbhobj);
-    bool setSlotFontPath(const basic::String* const sfpobj);
-    bool setSlotFTGLFontFileName(const basic::String* const sgffnobj);
-    bool setSlotLookupTable(const basic::List* const sltobj);
-    bool setSlotCharacterSpacing(const basic::Number* const newCharSpacing);
-    bool setSlotLineSpacing(const basic::Number* const newLineSpacing);
+    bool setSlotFontWidth(const base::Number* const sfwobj);
+    bool setSlotFontHeight (const base::Number* const sfhobj);
+    bool setSlotFontPosition (const base::List* const sfpobj);
+    bool setSlotBitmapWidth(const base::Number* const sbwobj);
+    bool setSlotBitmapHeight(const base::Number* const sbhobj);
+    bool setSlotFontPath(const base::String* const sfpobj);
+    bool setSlotFTGLFontFileName(const base::String* const sgffnobj);
+    bool setSlotLookupTable(const base::List* const sltobj);
+    bool setSlotCharacterSpacing(const base::Number* const newCharSpacing);
+    bool setSlotLineSpacing(const base::Number* const newLineSpacing);
 
 
     static const size_t MSG_BUF_LEN = (MAX_MESSAGE_LENGTH+1); // Max length of character buffers

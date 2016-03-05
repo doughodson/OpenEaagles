@@ -11,9 +11,9 @@
 namespace oe {
 namespace simulation {
 
-class Image : public basic::Object
+class Image : public base::Object
 {
-    DECLARE_SUBCLASS(Image,basic::Object)
+    DECLARE_SUBCLASS(Image,base::Object)
 
 public:
     Image();

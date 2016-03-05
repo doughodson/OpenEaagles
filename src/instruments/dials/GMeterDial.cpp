@@ -60,7 +60,7 @@ void GMeterDial::reset()
 //------------------------------------------------------------------------------
 void GMeterDial::drawFunc()
 {
-   basic::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
       subcomponents->unref();
       subcomponents = nullptr;
@@ -125,7 +125,7 @@ void GMeterDial::updateData(const LCreal dt)
     // update our values here
 
     {
-       basic::PairStream* subcomponents = getComponents();
+       base::PairStream* subcomponents = getComponents();
        if (subcomponents == nullptr) return;
        subcomponents->unref();
        subcomponents = nullptr;

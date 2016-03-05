@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/ExternalStore.h"
 
 namespace oe {
-   namespace basic { class Number; class PairStream; }
+   namespace base { class Number; class PairStream; }
 
 namespace simulation {
    class Weapon;
@@ -23,7 +23,7 @@ namespace simulation {
 //    numStations <Number>             ! Number of stations (less than or equal MAX_STATIONS)
 //                                     ! (default: 0)
 //
-//    stores      <basic::PairStream>  ! Our weapons and other external stores (default 0)
+//    stores      <base::PairStream>  ! Our weapons and other external stores (default 0)
 //                                     ! -- make sure to set the number of stations first,
 //
 //    selected    <Number>             ! Selected weapon station number (default: 0)
@@ -120,8 +120,8 @@ public:
 
    unsigned int getNumberOfStations() const;    // Number of stations on the launcher
 
-   basic::PairStream* getStores();              // List of external stores (Pre-ref()'d)
-   const basic::PairStream* getStores() const;  // List of external stores (Pre-ref()'d) (const version)
+   base::PairStream* getStores();              // List of external stores (Pre-ref()'d)
+   const base::PairStream* getStores() const;  // List of external stores (Pre-ref()'d) (const version)
 
    unsigned int getNumberOfWeapons() const;     // Number of weapons on the launcher
    virtual unsigned int available() const;      // Number of weapons available for release
@@ -175,7 +175,7 @@ public:
 
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
@@ -192,12 +192,12 @@ protected:
    virtual bool assignExtStoreToStation(const unsigned int station, ExternalStore* const esPtr);
 
    // Sends a Reset Event to all players
-   void resetStores(basic::PairStream* const list);
+   void resetStores(base::PairStream* const list);
 
    // Slot functions
-   virtual bool setSlotNumStations(basic::Number* const msg);       // Number of stations
-   virtual bool setSlotStores(const basic::PairStream* const msg); // (clones the 'msg' list)
-   virtual bool setSlotSelected(basic::Number* const msg);         // Selected station
+   virtual bool setSlotNumStations(base::Number* const msg);       // Number of stations
+   virtual bool setSlotStores(const base::PairStream* const msg); // (clones the 'msg' list)
+   virtual bool setSlotSelected(base::Number* const msg);         // Selected station
 
    void process(const LCreal dt) override;
 
@@ -205,13 +205,13 @@ private:
    void initData();
 
    // Full external stores list; set by setSlotStores()
-   basic::safe_ptr<basic::PairStream> storesList;
+   base::safe_ptr<base::PairStream> storesList;
 
    // Station tables
-   basic::safe_ptr<Weapon> weaponTbl[MAX_STATIONS];    // Weapons by station
+   base::safe_ptr<Weapon> weaponTbl[MAX_STATIONS];    // Weapons by station
    unsigned int numWpn;                                // Number of weapons in table
 
-   basic::safe_ptr<ExternalStore> esTbl[MAX_STATIONS]; // External store by station
+   base::safe_ptr<ExternalStore> esTbl[MAX_STATIONS]; // External store by station
    unsigned int numEs;                                 // Number of external stores in table
 
    unsigned int ns;                       // Number of Stations

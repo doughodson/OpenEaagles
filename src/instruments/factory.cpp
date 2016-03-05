@@ -54,9 +54,9 @@
 namespace oe {
 namespace instruments {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = 0;
+    base::Object* obj = 0;
 
     // Instrument
     if ( std::strcmp(name, Instrument::getFactoryName()) == 0 ) {

@@ -7,7 +7,7 @@
 #include "openeaagles/base/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class String;
 class Number;
@@ -51,7 +51,7 @@ private:
     char* networkMask;           // Network Mask
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

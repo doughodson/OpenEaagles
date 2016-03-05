@@ -7,7 +7,7 @@
 #include <cstdlib>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List,"List")
 
@@ -423,5 +423,5 @@ std::ostream& List::serialize(std::ostream& sout, const int, const bool) const
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

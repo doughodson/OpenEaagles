@@ -22,10 +22,10 @@ END_SLOTTABLE(ScalerFunc)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(ScalerFunc)
-   ON_SLOT( 1, setSlotRate, basic::Frequency)
-   ON_SLOT( 1, setSlotRate, basic::Number)
-   ON_SLOT( 2, setSlotX0,  basic::Number)
-   ON_SLOT( 3, setSlotY0, basic::Number)
+   ON_SLOT( 1, setSlotRate, base::Frequency)
+   ON_SLOT( 1, setSlotRate, base::Number)
+   ON_SLOT( 2, setSlotX0,  base::Number)
+   ON_SLOT( 3, setSlotY0, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -179,11 +179,11 @@ bool ScalerFunc::setRate(const unsigned int v)
 //------------------------------------------------------------------------------
 // Set slot functions
 //------------------------------------------------------------------------------
-bool ScalerFunc::setSlotRate(const basic::Frequency* const msg)
+bool ScalerFunc::setSlotRate(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      int v = static_cast<int>( basic::Hertz::convertStatic( *msg ) + 0.5f );
+      int v = static_cast<int>( base::Hertz::convertStatic( *msg ) + 0.5f );
       if (v > 0) {
          setRate( static_cast<unsigned int>(v) );
          ok = true;
@@ -192,7 +192,7 @@ bool ScalerFunc::setSlotRate(const basic::Frequency* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotRate(const basic::Number* const msg)
+bool ScalerFunc::setSlotRate(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -205,7 +205,7 @@ bool ScalerFunc::setSlotRate(const basic::Number* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotX0(const basic::Number* const msg)
+bool ScalerFunc::setSlotX0(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -215,7 +215,7 @@ bool ScalerFunc::setSlotX0(const basic::Number* const msg)
    return ok;
 }
 
-bool ScalerFunc::setSlotY0(const basic::Number* const msg)
+bool ScalerFunc::setSlotY0(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -228,7 +228,7 @@ bool ScalerFunc::setSlotY0(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for ScalerFunc
 //------------------------------------------------------------------------------
-basic::Object* ScalerFunc::getSlotByIndex(const int si)
+base::Object* ScalerFunc::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

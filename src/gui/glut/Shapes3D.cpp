@@ -66,20 +66,20 @@ END_SLOTTABLE(Torus)
 //  Map slot tables
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Sphere)
-    ON_SLOT(1,setSlotStacks,basic::Number)
+    ON_SLOT(1,setSlotStacks,base::Number)
 END_SLOT_MAP()
 
 BEGIN_SLOT_MAP(Cylinder)
-    ON_SLOT(1,setSlotTopRadius,basic::Number)
-    ON_SLOT(2,setSlotHeight,basic::Number)
+    ON_SLOT(1,setSlotTopRadius,base::Number)
+    ON_SLOT(2,setSlotHeight,base::Number)
 END_SLOT_MAP()
 
 BEGIN_SLOT_MAP(Cube)
-    ON_SLOT(1,setSlotSize,basic::Number)
+    ON_SLOT(1,setSlotSize,base::Number)
 END_SLOT_MAP()
 
 BEGIN_SLOT_MAP(Torus)
-    ON_SLOT(1,setSlotOuterRadius,basic::Number)
+    ON_SLOT(1,setSlotOuterRadius,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -281,7 +281,7 @@ void Teapot::drawFunc()
 //------------------------------------------------------------------------------
 //  setSlotStacks() -- for Sphere
 //------------------------------------------------------------------------------
-bool Sphere::setSlotStacks(const basic::Number* const x)
+bool Sphere::setSlotStacks(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setStacks(x->getInt());
@@ -290,7 +290,7 @@ bool Sphere::setSlotStacks(const basic::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotTopRadius() -- for Cylinder
 //------------------------------------------------------------------------------
-bool Cylinder::setSlotTopRadius(const basic::Number* const x)
+bool Cylinder::setSlotTopRadius(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setTopRadius(x->getReal());
@@ -299,7 +299,7 @@ bool Cylinder::setSlotTopRadius(const basic::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotHeight() -- for Cylinder
 //------------------------------------------------------------------------------
-bool Cylinder::setSlotHeight(const basic::Number* const x)
+bool Cylinder::setSlotHeight(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setHeight(x->getReal());
@@ -309,7 +309,7 @@ bool Cylinder::setSlotHeight(const basic::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotSize() -- for Cube
 //------------------------------------------------------------------------------
-bool Cube::setSlotSize(const basic::Number* const x)
+bool Cube::setSlotSize(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setSize(x->getReal());
@@ -319,7 +319,7 @@ bool Cube::setSlotSize(const basic::Number* const x)
 //------------------------------------------------------------------------------
 //  setSlotOuterRadius() -- for Torus
 //------------------------------------------------------------------------------
-bool Torus::setSlotOuterRadius(const basic::Number* const x)
+bool Torus::setSlotOuterRadius(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setOuterRadius(x->getReal());
@@ -419,22 +419,22 @@ std::ostream& Torus::serialize(std::ostream& sout, const int i, const bool slots
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Sphere::getSlotByIndex(const int si)
+base::Object* Sphere::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-basic::Object* Cylinder::getSlotByIndex(const int si)
+base::Object* Cylinder::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-basic::Object* Cube::getSlotByIndex(const int si)
+base::Object* Cube::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
 
-basic::Object* Torus::getSlotByIndex(const int si)
+base::Object* Torus::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

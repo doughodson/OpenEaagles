@@ -52,7 +52,7 @@
 #include <cmath>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // -----------------------------------------------------------------------------
 // Defined constants:
@@ -239,7 +239,7 @@ public:
     double fromAngle(const double a) const override  { return a; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -8,7 +8,7 @@
 #include "openeaagles/base/osg/Matrix"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class MonitorMetrics;
 class Table1;
@@ -146,7 +146,7 @@ private:
     osg::Vec3 refwhiteCIE;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 

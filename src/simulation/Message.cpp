@@ -24,7 +24,7 @@ void Message::initData()
    timeStamp = 0.0;
    lifeSpan = 5.0;    // seconds
    ack = ACK;
-   senderName = new basic::String();
+   senderName = new base::String();
    destNames = nullptr;
 }
 
@@ -67,7 +67,7 @@ void Message::copyData(const Message& org, const bool cc)
 //-------------------------------------------------------------------------
 // set sender information
 //-------------------------------------------------------------------------
-void Message::setSenderName(const basic::String* const sName)
+void Message::setSenderName(const base::String* const sName)
 {
    if(sName != nullptr) {
       *senderName = *sName;
@@ -84,12 +84,12 @@ void Message::setSenderName(const char* const sName)
 //-------------------------------------------------------------------------
 // add / remove / clear destination methods
 //-------------------------------------------------------------------------
-bool Message::addDestName(basic::String* const name)
+bool Message::addDestName(base::String* const name)
 {
    bool ret = false;
    if(name != nullptr) {
       if (destNames == nullptr)
-         destNames = new basic::List();
+         destNames = new base::List();
       destNames->addTail(name);
       ret = true;
    }
@@ -100,13 +100,13 @@ bool Message::addDestName(const char* const name)
 {
    bool ret = false;
    if (name != nullptr) {
-      basic::String* p = new basic::String(name);
+      base::String* p = new base::String(name);
       ret = addDestName(p);
    }
    return ret;
 }
 
-void Message::removeDestName(basic::String* const name)
+void Message::removeDestName(base::String* const name)
 {
    if (destNames != nullptr) {
       destNames->remove(name);

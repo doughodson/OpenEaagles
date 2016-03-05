@@ -9,7 +9,7 @@
 #include "Times.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 //------------------------------------------------------------------------------
 // Classes: FlowRate
 //
@@ -65,7 +65,7 @@ private:
     LCreal    flowRate;       // holds our velocity
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

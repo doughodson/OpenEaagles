@@ -6,13 +6,13 @@
 #define __oe_simulation_Player_Inline__
 
 // The player's type string (.e.g, "F-16C")
-inline const basic::String* Player::getType() const
+inline const base::String* Player::getType() const
 {
    return type;
 }
 
 // True if the player's name matches
-inline bool Player::isName(const basic::Identifier* const tst) const
+inline bool Player::isName(const base::Identifier* const tst) const
 {
    return (*tst == pname);
 }
@@ -24,7 +24,7 @@ inline bool Player::isName(const char* const tst) const
 }
 
 // The player's name
-inline const basic::Identifier* Player::getName() const
+inline const base::Identifier* Player::getName() const
 {
    return &pname;
 }
@@ -134,7 +134,7 @@ inline double Player::getRollR() const
 // Roll Euler angle (degs)
 inline double Player::getRollD() const
 {
-   return (basic::Angle::R2DCC * angles[IROLL]);
+   return (base::Angle::R2DCC * angles[IROLL]);
 }
 
 // Sin of the Euler roll angle
@@ -164,7 +164,7 @@ inline double Player::getPitchR() const
 // Pitch Euler angle (degs)
 inline double Player::getPitchD() const
 {
-   return (basic::Angle::R2DCC * angles[IPITCH]);
+   return (base::Angle::R2DCC * angles[IPITCH]);
 }
 
 // Sin of the pitch Euler angle
@@ -194,7 +194,7 @@ inline double Player::getHeadingR() const
 // Yaw Euler angle (degs)
 inline double Player::getHeadingD() const
 {
-   return (basic::Angle::R2DCC * angles[IYAW]);
+   return (base::Angle::R2DCC * angles[IYAW]);
 }
 
 // Sin of the yaw Euler angle
@@ -339,7 +339,7 @@ inline double Player::getAltitudeM() const
 // Altitude HAE (ft)
 inline double Player::getAltitudeFt() const
 {
-   return getAltitude() * basic::Distance::M2FT;
+   return getAltitude() * base::Distance::M2FT;
 }
 
 // Altitude AGL (meters) 
@@ -357,7 +357,7 @@ inline double Player::getAltitudeAglM() const
 // Altitude AGL (ft)
 inline double Player::getAltitudeAglFt() const
 {
-   return getAltitudeAgl() * basic::Distance::M2FT;
+   return getAltitudeAgl() * base::Distance::M2FT;
 }
 
 // Player's total velocity (m/s)
@@ -369,13 +369,13 @@ inline LCreal Player::getTotalVelocity() const
 // Player's total velocity (ft/s)
 inline LCreal Player::getTotalVelocityFPS() const
 {
-   return getTotalVelocity() * basic::Distance::M2FT;
+   return getTotalVelocity() * base::Distance::M2FT;
 }
 
 // Player's total velocity (kts)
 inline LCreal Player::getTotalVelocityKts() const
 {
-   return getTotalVelocity() * basic::Distance::M2NM * 3600.0f;
+   return getTotalVelocity() * base::Distance::M2NM * 3600.0f;
 }
 
 // Player's ground speed (m/s)
@@ -387,13 +387,13 @@ inline LCreal Player::getGroundSpeed() const
 // Player's ground speed (ft/s)
 inline LCreal Player::getGroundSpeedFPS() const
 {
-   return getGroundSpeed() * basic::Distance::M2FT;
+   return getGroundSpeed() * base::Distance::M2FT;
 }
 
 // Player's ground speed (kts)
 inline LCreal Player::getGroundSpeedKts() const 
 {
-   return getGroundSpeed() * basic::Distance::M2NM * 3600.0f;
+   return getGroundSpeed() * base::Distance::M2NM * 3600.0f;
 }
 
 // Player's ground track (rad)
@@ -411,7 +411,7 @@ inline LCreal Player::getGroundTrackR() const
 // Player's ground track (degs)
 inline LCreal Player::getGroundTrackD() const
 {
-   return static_cast<LCreal>(basic::Angle::R2DCC * gndTrk);
+   return static_cast<LCreal>(base::Angle::R2DCC * gndTrk);
 }
 
 // Velocity vector; NED (m/s)
@@ -621,7 +621,7 @@ inline LCreal Player::getTerrainElevationM() const
 // Returns terrain elevation (Feet)
 inline LCreal Player::getTerrainElevationFt() const
 { 
-   return getTerrainElevation() * basic::Distance::M2FT;
+   return getTerrainElevation() * base::Distance::M2FT;
 }
 
 // Ground clamping offset from the terrain to our CG (meters)

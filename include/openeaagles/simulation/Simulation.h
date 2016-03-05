@@ -8,7 +8,7 @@
 #include "openeaagles/base/safe_queue.h"
 
 namespace oe {
-   namespace basic { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }
+   namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }
    namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 
 namespace simulation {
@@ -30,51 +30,51 @@ namespace simulation {
 //
 // Factory name: Simulation
 // Slots --
-//    players        <basic::PairStream>     ! Local player list (basic::PairStream of Player) (default: 0)
+//    players        <base::PairStream>     ! Local player list (base::PairStream of Player) (default: 0)
 //
-//    latitude       <basic::LatLon>         ! Reference (gaming area) latitude (default: 0.0)
-//                   <basic::Number>         ! Reference (gaming area) latitude (deg)
+//    latitude       <base::LatLon>         ! Reference (gaming area) latitude (default: 0.0)
+//                   <base::Number>         ! Reference (gaming area) latitude (deg)
 //
-//    longitude      <basic::LatLon>         ! reference (gaming area) longitude (default 0.0)
-//                   <basic::Number>         ! reference (gaming area) longitude (deg)
+//    longitude      <base::LatLon>         ! reference (gaming area) longitude (default 0.0)
+//                   <base::Number>         ! reference (gaming area) longitude (deg)
 //
-//    gamingAreaRange <basic::Distance>      ! Max valid range of the simulation's gaming area or zero for unlimited
+//    gamingAreaRange <base::Distance>      ! Max valid range of the simulation's gaming area or zero for unlimited
 //                                           !   default: zero -- unlimited range
 //
-//    earthModel     <basic::EarthModel>     ! Earth model for geodetic lat/lon (default is WGS-84)
-//                   <basic::Identifier>     ! Earth model by name (see EarthModel.h)
+//    earthModel     <base::EarthModel>     ! Earth model for geodetic lat/lon (default is WGS-84)
+//                   <base::Identifier>     ! Earth model by name (see EarthModel.h)
 //
-//    gamingAreaUseEarthModel <basic::Boolean> ! If true, use the 'earthModel' or its WGS-84 default for flat
+//    gamingAreaUseEarthModel <base::Boolean> ! If true, use the 'earthModel' or its WGS-84 default for flat
 //                                           ! earth projections between geodetic lat/lon and the gaming
 //                                           ! area's NED coordinates.  Otherwise, use a standard spherical
 //                                           ! earth with a radius of Nav::ERAD60. (default: false)
 //
-//    simulationTime <basic::Time>           ! Initial simulated time since midnight (UTC) (second),
+//    simulationTime <base::Time>           ! Initial simulated time since midnight (UTC) (second),
 //                                           ! or -1 to use current time of day (default: -1)
 //
-//    day            <basic::Number>         ! Initial simulated day of month [ 1 .. 31 ],
+//    day            <base::Number>         ! Initial simulated day of month [ 1 .. 31 ],
 //                                           ! or zero to use current day (default: 0)
 //
-//    month          <basic::Number>         ! Initial simulated month [ 1 .. 12 ],
+//    month          <base::Number>         ! Initial simulated month [ 1 .. 12 ],
 //                                           ! or zero to use current month (default: 0)
 //
-//    year           <basic::Number>         ! Initial simulated year [ 1970 .. 2100 ],
+//    year           <base::Number>         ! Initial simulated year [ 1970 .. 2100 ],
 //                                           ! or zero to use current year (default: 0)
 //
 //    airportLoader  <dafif::AirportLoader>  ! Airport database (default: 0)
 //    navaidLoader   <dafif::NavaidLoader>   ! NAVAID database (default: 0)
 //    waypointLoader <dafif::WaypointLoader> ! Waypoint database (default: 0)
 //
-//    terrain        <basic::Terrain>        ! Terrain elevation database (default: 0)
+//    terrain        <base::Terrain>        ! Terrain elevation database (default: 0)
 //    irAtmosphere   <IrAtmosphere>          ! Atmosphere database for IR algorithms (default: 0)
 //
-//    firstWeaponId  <basic::Number>         ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
+//    firstWeaponId  <base::Number>         ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
 //
-//    numTcThreads   <basic::Number>         ! Number of T/C threads to use with the player list
+//    numTcThreads   <base::Number>         ! Number of T/C threads to use with the player list
 //                                           !   default: 1 -- no additional threads)
 //                                           !   range: [ 1 .. (#CPUs-1) ]; minimum of one
 //
-//    numBgThreads   <basic::Number>         ! Number of background threads to use with the player list
+//    numBgThreads   <base::Number>         ! Number of background threads to use with the player list
 //                                           !   default: 1 -- no additional threads)
 //                                           !   range: [ 1 .. (#CPUs-1) ]; minimum of one
 //
@@ -112,7 +112,7 @@ namespace simulation {
 //
 //    The reference latitude and longitude is the center of the simulation's
 //    gaming area.  Each player has a position, [ x y z ] NED in meters, from this
-//    reference point that is computed using flat earth equations (see basic::Nav)
+//    reference point that is computed using flat earth equations (see base::Nav)
 //    and using the cosine of this reference latitude.  The NED coordinate system's
 //    'down' is perpendicular to this tangent plane.
 //
@@ -193,7 +193,7 @@ namespace simulation {
 //       'month' and 'year' to override the computer system's time and/or
 //       date with your own simulated time and/or date.
 //
-//    4) See "openeaagles/basic/support.h" for additional get time and time
+//    4) See "openeaagles/base/support.h" for additional get time and time
 //       conversion functions.
 //
 //
@@ -220,9 +220,9 @@ namespace simulation {
 //    other components.
 //
 //------------------------------------------------------------------------------
-class Simulation : public basic::Component
+class Simulation : public base::Component
 {
-    DECLARE_SUBCLASS(Simulation,basic::Component)
+    DECLARE_SUBCLASS(Simulation,base::Component)
 
 public:
    // Minimum released weapon ID
@@ -235,8 +235,8 @@ public:
 public:
     Simulation();
 
-    basic::PairStream* getPlayers();               // Returns the player list; pre-ref()'d
-    const basic::PairStream* getPlayers() const;   // Returns the player list; pre-ref()'d (const version)
+    base::PairStream* getPlayers();               // Returns the player list; pre-ref()'d
+    const base::PairStream* getPlayers() const;   // Returns the player list; pre-ref()'d (const version)
 
     double getRefLatitude() const;                 // Returns the reference latitude (degs)
     double getRefLongitude() const;                // Returns the reference longitude (degs)
@@ -251,8 +251,8 @@ public:
                                                    //       Vned  = M * Vecef
                                                    //       Vecef = Vned * M;
 
-    const basic::EarthModel* getEarthModel() const; // Returns a pointer to the EarthModel
-                                                   // (default: if zero we're using basic::EarthModel::wgs84)
+    const base::EarthModel* getEarthModel() const; // Returns a pointer to the EarthModel
+                                                   // (default: if zero we're using base::EarthModel::wgs84)
 
     bool isGamingAreaUsingEarthModel() const;      // Gaming area using the earth model?
 
@@ -276,7 +276,7 @@ public:
     unsigned short getNewWeaponEventID();          // Generates a unique weapon event ID [1 .. 65535]
     unsigned short getNewReleasedWeaponID();       // Generates a unique ID number for released weapons
 
-    const basic::Terrain* getTerrain() const;      // Returns the terrain elevation database
+    const base::Terrain* getTerrain() const;      // Returns the terrain elevation database
 
     IrAtmosphere* getIrAtmosphere();               // Returns the atmosphere database for IR algorithms
     const IrAtmosphere* getIrAtmosphere() const;   // Returns the atmosphere database for IR algorithms (const version)
@@ -297,7 +297,7 @@ public:
     const Player* findPlayerByName(const char* const playerName) const; // Find a player by name (const version)
 
     virtual bool addNewPlayer(const char* const playerName, Player* const player); // Add a new player
-    virtual bool addNewPlayer(basic::Pair* const player);                          // Add a new player (pair: name, player)
+    virtual bool addNewPlayer(base::Pair* const player);                          // Add a new player (pair: name, player)
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 
@@ -311,14 +311,14 @@ public:
 
 public:
     void updateTcPlayerList(
-       basic::PairStream* const playerList,
+       base::PairStream* const playerList,
        const LCreal dt,
        const unsigned int idx,
        const unsigned int n
     );
 
     void updateBgPlayerList(
-       basic::PairStream* const playerList,
+       base::PairStream* const playerList,
        const LCreal dt,
        const unsigned int idx,
        const unsigned int n
@@ -326,11 +326,11 @@ public:
 
 protected:
     virtual void updatePlayerList();                  // Updates the current player list
-    bool setSlotPlayers(basic::PairStream* const msg);
+    bool setSlotPlayers(base::PairStream* const msg);
 
-    basic::Terrain* getTerrain();                     // Returns the terrain elevation database
+    base::Terrain* getTerrain();                     // Returns the terrain elevation database
 
-    virtual bool setEarthModel(const basic::EarthModel* const msg); // Sets our earth model
+    virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
     virtual bool setGamingAreaUseEarthModel(const bool flg);
 
     virtual bool setRefLatitude(const double v);      // Sets Ref latitude
@@ -352,35 +352,35 @@ private:
    void initData();
    Station* getStationImp();
 
-   bool insertPlayerSort(basic::Pair* const newPlayer, basic::PairStream* const newList);
+   bool insertPlayerSort(base::Pair* const newPlayer, base::PairStream* const newList);
    Player* findPlayerPrivate(const short id, const int netID) const;
    Player* findPlayerByNamePrivate(const char* const playerName) const;
 
-   bool setSlotRefLatitude(const basic::LatLon* const msg);
-   bool setSlotRefLatitude(const basic::Number* const msg);
-   bool setSlotRefLongitude(const basic::LatLon* const msg);
-   bool setSlotRefLongitude(const basic::Number* const msg);
-   bool setSlotSimulationTime(const basic::Time* const msg);
-   bool setSlotDay(const basic::Number* const msg);
-   bool setSlotMonth(const basic::Number* const msg);
-   bool setSlotYear(const basic::Number* const msg);
-   bool setSlotTerrain(basic::Terrain* const msg);
+   bool setSlotRefLatitude(const base::LatLon* const msg);
+   bool setSlotRefLatitude(const base::Number* const msg);
+   bool setSlotRefLongitude(const base::LatLon* const msg);
+   bool setSlotRefLongitude(const base::Number* const msg);
+   bool setSlotSimulationTime(const base::Time* const msg);
+   bool setSlotDay(const base::Number* const msg);
+   bool setSlotMonth(const base::Number* const msg);
+   bool setSlotYear(const base::Number* const msg);
+   bool setSlotTerrain(base::Terrain* const msg);
    bool setSlotIrAtmosphere(IrAtmosphere* const msg);
-   bool setSlotFirstWeaponId(const basic::Number* const msg);
-   bool setSlotNumTcThreads(const basic::Number* const msg);
-   bool setSlotNumBgThreads(const basic::Number* const msg);
-   bool setSlotGamingAreaRange(const basic::Distance* const msg);
-   bool setSlotEarthModel(const basic::EarthModel* const msg);
-   bool setSlotEarthModel(const basic::String* const msg);
-   bool setSlotGamingAreaEarthModel(const basic::Number* const msg);
+   bool setSlotFirstWeaponId(const base::Number* const msg);
+   bool setSlotNumTcThreads(const base::Number* const msg);
+   bool setSlotNumBgThreads(const base::Number* const msg);
+   bool setSlotGamingAreaRange(const base::Distance* const msg);
+   bool setSlotEarthModel(const base::EarthModel* const msg);
+   bool setSlotEarthModel(const base::String* const msg);
+   bool setSlotGamingAreaEarthModel(const base::Number* const msg);
 
-   basic::safe_ptr<basic::PairStream> players;     // Main player list (sorted by network and player IDs)
-   basic::safe_ptr<basic::PairStream> origPlayers; // Original player list
+   base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
+   base::safe_ptr<base::PairStream> origPlayers; // Original player list
 
    bool loggedHeadings;          // set true once headings have been added to output file
 
-   // Our Earth Model, or default to using basic::EarthModel::wgs84 if zero
-   const basic::EarthModel* em;
+   // Our Earth Model, or default to using base::EarthModel::wgs84 if zero
+   const base::EarthModel* em;
 
    double  refLat;               // Reference (center of gaming area) latitude (deg)
    double  refLon;               // Reference (center of gaming area) longitude (deg)
@@ -418,10 +418,10 @@ private:
    unsigned short eventWpnID;    // Weapon event ID
    unsigned short relWpnId;      // Current released weapon ID
 
-   basic::safe_queue<basic::Pair*> newPlayerQueue;   // Queue of new players
+   base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
    IrAtmosphere*          irAtmosphere; // Atmosphere data for IR algorithms
-   basic::Terrain*        terrain;      // Terrain data
+   base::Terrain*        terrain;      // Terrain data
    dafif::AirportLoader*  airports;     // Airport loader
    dafif::NavaidLoader*   navaids;      // NAVAID loader
    dafif::WaypointLoader* waypoints;    // Waypoint loader

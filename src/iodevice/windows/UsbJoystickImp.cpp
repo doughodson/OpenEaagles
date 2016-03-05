@@ -111,7 +111,7 @@ void UsbJoystickImp::reset()
 //------------------------------------------------------------------------------
 // Go get our AIs and DIs here
 //------------------------------------------------------------------------------
-void UsbJoystickImp::processInputs(const oe::LCreal dt, basic::IoData* const pInData)
+void UsbJoystickImp::processInputs(const oe::LCreal dt, base::IoData* const pInData)
 {
    JOYINFOEX js;
    js.dwFlags = JOY_RETURNALL;   // return all joystick information
@@ -199,5 +199,5 @@ bool UsbJoystickImp::setInputScaled(unsigned int cn, LCreal raw)
    return ok;
 }
 
-} // iodevice namespace
-} // end oe namespace
+}
+}

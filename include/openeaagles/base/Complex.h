@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class Number;
 
 //==============================================================================
@@ -138,7 +138,7 @@ private:
 
 #include "openeaagles/base/Complex.inl"
 
-}  // end namespace basic
+}  // end namespace base
 }  // end namespace oe
 
 #endif

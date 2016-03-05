@@ -9,7 +9,7 @@
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class List;
    }
 
@@ -225,10 +225,10 @@ public:
    void clearDisplayMode(const int t)     { dmode &= ~t; }
    void clearAllDisplayModes()            { dmode = 0; }
 
-   basic::String::Justify justification() const;
-   basic::String::Justify justification(const basic::String::Justify t);
+   base::String::Justify justification() const;
+   base::String::Justify justification(const base::String::Justify t);
 
-   virtual bool setPosition(const basic::List* const spobj);
+   virtual bool setPosition(const base::List* const spobj);
 
    virtual bool withinField(const int ln, const int cp) const;
    virtual void setText(const char newString[]);
@@ -256,10 +256,10 @@ public:
    bool isInheritColor() const                      { return inheritColor; }
    bool setInheritColor(const bool i)               { inheritColor = i; return true; }
 
-   virtual bool onSetLine(const basic::Number* const oslobj);
-   virtual bool onSetColumn(const basic::Number* const oscobj);
+   virtual bool onSetLine(const base::Number* const oslobj);
+   virtual bool onSetColumn(const base::Number* const oscobj);
 
-   const basic::String& getInputExample() const  { return inputExample; }
+   const base::String& getInputExample() const  { return inputExample; }
    int getCharacterPos() const                   { return icp; }
 
    bool cursor(int* ln, int* cp) const override;
@@ -270,21 +270,21 @@ public:
 
 protected:
    //slot table macro functions
-   virtual bool setSlotWidth(const basic::Number* const swobj);
-   virtual bool setSlotHighlight(const basic::Number* const shobj);
-   virtual bool setSlotUnderline(const basic::Number* const suobj);
-   virtual bool setSlotReversed(const basic::Number* const srobj);
-   virtual bool setSlotJustification(const basic::String* const sjobj);
-   virtual bool setSlotVertical(const basic::Number* const ssobj);
-   virtual bool setSlotBrackets(const basic::Number* const obj);
-   virtual bool setSlotLinked(const basic::Number* const msg);
-   virtual bool setSlotInheritColor(const basic::Number* const ic);
-   virtual bool setSlotFont(const basic::String* const font);
-   virtual bool setSlotStartCharPos(const basic::Number* const x);
+   virtual bool setSlotWidth(const base::Number* const swobj);
+   virtual bool setSlotHighlight(const base::Number* const shobj);
+   virtual bool setSlotUnderline(const base::Number* const suobj);
+   virtual bool setSlotReversed(const base::Number* const srobj);
+   virtual bool setSlotJustification(const base::String* const sjobj);
+   virtual bool setSlotVertical(const base::Number* const ssobj);
+   virtual bool setSlotBrackets(const base::Number* const obj);
+   virtual bool setSlotLinked(const base::Number* const msg);
+   virtual bool setSlotInheritColor(const base::Number* const ic);
+   virtual bool setSlotFont(const base::String* const font);
+   virtual bool setSlotStartCharPos(const base::Number* const x);
 
-   basic::String origStr;        // Original text saved by setText
-   basic::String inputExample;   // Input Template String
-   basic::String str;            // Text stored in field
+   base::String origStr;        // Original text saved by setText
+   base::String inputExample;   // Input Template String
+   base::String str;            // Text stored in field
    Mode     mode;                // Current mode
    int      icp;                 // Input character pointer
    int      inpDspMode;          // Auto switches to this display mode during input mode
@@ -300,9 +300,9 @@ private:
    unsigned int startCP;            // our starting character position that we "write" from
 
    int      dmode;                  // Display mode flags
-   basic::String::Justify jmode;    // Justification mode
+   base::String::Justify jmode;    // Justification mode
    bool     inheritColor;           // Inherit color instead of using a default color
-   basic::String* fontName;         // name of the font we want our display to use (if overridden)
+   base::String* fontName;         // name of the font we want our display to use (if overridden)
 };
 
 } // End graphics namespace

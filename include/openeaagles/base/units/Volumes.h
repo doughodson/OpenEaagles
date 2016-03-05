@@ -50,7 +50,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // ----------------------------------------------------------------------------
 // Define Volumes Conversion Constants:
@@ -189,7 +189,7 @@ public:
     LCreal fromVolume(const LCreal a) const override { return a * CM2L; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

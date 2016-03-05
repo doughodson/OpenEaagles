@@ -8,7 +8,7 @@
 #include "openeaagles/base/support.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
 
       class Object;
       typedef Object* (*ParserFormFunc)(const char* formname);

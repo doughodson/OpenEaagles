@@ -4,7 +4,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Number,"Number")
 EMPTY_SERIALIZER(Number)
@@ -58,5 +58,5 @@ bool Number::setSlotValue(const Number* const svobj)
    return ok;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

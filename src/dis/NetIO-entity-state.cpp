@@ -78,7 +78,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                nib->setApplicationID(app);
                char cbuff[32];
                makeFederateName(cbuff, 32, site, app);
-               basic::String* fname = new basic::String(cbuff);
+               base::String* fname = new base::String(cbuff);
                nib->setFederateName(fname);
                fname->unref();
             }

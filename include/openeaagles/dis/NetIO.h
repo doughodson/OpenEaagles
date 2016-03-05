@@ -10,7 +10,7 @@
 #include "openeaagles/simulation/NetIO.h"
 
 namespace oe {
-   namespace basic { class NetHandler; }
+   namespace base { class NetHandler; }
    namespace simulation { class Iff; class RfSensor; }
 
 namespace network {
@@ -50,10 +50,10 @@ namespace dis {
 // Description: Distributed-Interactive-Simulation (DIS) protocol manager.
 //
 // Slots:
-//    netInput    <basic::NetHandler>     ! Network input handler
-//    netOutput   <basic::NetHandler>     ! Network output handler
+//    netInput    <base::NetHandler>     ! Network input handler
+//    netOutput   <base::NetHandler>     ! Network output handler
 //
-//    version     <basic::Number>         ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
+//    version     <base::Number>         ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
 //                                        !   0 => Other
 //                                        !   1 => DIS PDU version 1.0 (May 92)
 //                                        !   2 => IEEE 1278-1993
@@ -63,26 +63,26 @@ namespace dis {
 //                                        !   6 => IEEE 1278.1A-1998
 //                                        !   7 => IEEE 1278.1 -- draft 15
 //
-//    siteID         <basic::Number>      ! Site Identification (default: 1)
-//    applicationID  <basic::Number>      ! Application Identification (default: 1)
-//    exerciseID     <basic::Number>      ! Exercise Identification (default: 1)
+//    siteID         <base::Number>      ! Site Identification (default: 1)
+//    applicationID  <base::Number>      ! Application Identification (default: 1)
+//    exerciseID     <base::Number>      ! Exercise Identification (default: 1)
 //
-//    maxTimeDR   <basic::Time>           ! Max DR time (default: 5 seconds)
-//                <basic::PairStream>     ! List of max DR times by kinds and domains (see note #4)
+//    maxTimeDR   <base::Time>           ! Max DR time (default: 5 seconds)
+//                <base::PairStream>     ! List of max DR times by kinds and domains (see note #4)
 //
-//    maxPositionError <basic::Distance>  ! Max DR position error (default: 3 meters)
-//                   <basic::PairStream> ! List of max DR position errors by kinds and domains (see note #4)
+//    maxPositionError <base::Distance>  ! Max DR position error (default: 3 meters)
+//                   <base::PairStream> ! List of max DR position errors by kinds and domains (see note #4)
 //
-//    maxOrientationError <basic::Angle>  ! Max DR angular error (default: 3 degrees)
-//                    <basic::PairStream> ! List of max DR angular errors by kinds and domains (see note #4)
+//    maxOrientationError <base::Angle>  ! Max DR angular error (default: 3 degrees)
+//                    <base::PairStream> ! List of max DR angular errors by kinds and domains (see note #4)
 //
-//    maxAge         <basic::Time>        ! Max age (without update) (default: 12.5 seconds)
-//                   <basic::PairStream>  ! List of max ages (without update) by kinds and domains (see note #4)
+//    maxAge         <base::Time>        ! Max age (without update) (default: 12.5 seconds)
+//                   <base::PairStream>  ! List of max ages (without update) by kinds and domains (see note #4)
 //
-//    maxEntityRange <basic::Distance>    ! Max entity range, or zero for no max range (default: 0 -- no range filtering)
-//                   <basic::PairStream>  ! List of max entity ranges by kinds and domains (see note #4)
+//    maxEntityRange <base::Distance>    ! Max entity range, or zero for no max range (default: 0 -- no range filtering)
+//                   <base::PairStream>  ! List of max entity ranges by kinds and domains (see note #4)
 //
-//    EmissionPduHandlers <basic::PairStream> ! List of Electromagnetic-Emission PDU handlers
+//    EmissionPduHandlers <base::PairStream> ! List of Electromagnetic-Emission PDU handlers
 //
 //
 // Notes:
@@ -98,7 +98,7 @@ namespace dis {
 //       being order by player ID, site ID and app ID.
 //
 //    4) For the slots maxTimeDR, maxPositionError, maxOrientationError, maxAge and
-//       maxEntityRange, if the slot type is basic::Time, basic::Angle or basic::Distance then that
+//       maxEntityRange, if the slot type is base::Time, base::Angle or base::Distance then that
 //       parameter is set for entity types of all kinds and domains.  If a pair stream
 //       is given then individual entity kind/domain parameters can be set.  To set the
 //       parameters for individual entity kind/domain types, the slot name must have
@@ -328,39 +328,39 @@ protected:
    virtual bool setApplicationID(const unsigned short v);   // Sets the network's application ID
    virtual bool setExerciseID(const unsigned char v);       // Sets the network's exercise ID
 
-   virtual bool setSlotNetInput(basic::NetHandler* const msg);                // Network input handler
-   virtual bool setSlotNetOutput(basic::NetHandler* const msg);               // Network output handler
-   virtual bool setSlotVersion(const basic::Number* const num);               // DIS version
-   virtual bool setSlotMaxTimeDR(const basic::PairStream* const msg);         // Sets the max DR time(s) for selected entity types
-   bool setSlotMaxTimeDR(const basic::Time* const msg) override;              // Sets the max DR time(s) for all entity types
-   virtual bool setSlotMaxPositionErr(const basic::PairStream* const msg);    // Sets the max positional error(s) for selected entity types
-   bool setSlotMaxPositionErr(const basic::Distance* const msg) override;     // Sets the max positional error(s) for all entity types
-   virtual bool setSlotMaxOrientationErr(const basic::PairStream* const msg); // Sets the max orientation error(s) for selected entity types
-   bool setSlotMaxOrientationErr(const basic::Angle* const msg) override;     // Sets the max orientation error(s) for all entity types
-   virtual bool setSlotMaxAge(const basic::PairStream* const msg);            // Sets the max age(s) for selected entity types
-   bool setSlotMaxAge(const basic::Time* const msg) override;                 // Sets the max age(s) for all entity types
-   virtual bool setSlotMaxEntityRange(const basic::PairStream* const msg);    // Sets the max entity range(s) for selected entity types
-   bool setSlotMaxEntityRange(const basic::Distance* const msg) override;     // Sets the max entity range(s) for all entity types
-   virtual bool setSlotEmissionPduHandlers(basic::PairStream* const msg);     // Sets the list of Electromagnetic Emission PDU handlers
-   virtual bool setSlotSiteID(const basic::Number* const num);                // Sets Site ID
-   virtual bool setSlotApplicationID(const basic::Number* const num);         // Sets Application ID
-   virtual bool setSlotExerciseID(const basic::Number* const num);            // Sets Exercise ID
+   virtual bool setSlotNetInput(base::NetHandler* const msg);                // Network input handler
+   virtual bool setSlotNetOutput(base::NetHandler* const msg);               // Network output handler
+   virtual bool setSlotVersion(const base::Number* const num);               // DIS version
+   virtual bool setSlotMaxTimeDR(const base::PairStream* const msg);         // Sets the max DR time(s) for selected entity types
+   bool setSlotMaxTimeDR(const base::Time* const msg) override;              // Sets the max DR time(s) for all entity types
+   virtual bool setSlotMaxPositionErr(const base::PairStream* const msg);    // Sets the max positional error(s) for selected entity types
+   bool setSlotMaxPositionErr(const base::Distance* const msg) override;     // Sets the max positional error(s) for all entity types
+   virtual bool setSlotMaxOrientationErr(const base::PairStream* const msg); // Sets the max orientation error(s) for selected entity types
+   bool setSlotMaxOrientationErr(const base::Angle* const msg) override;     // Sets the max orientation error(s) for all entity types
+   virtual bool setSlotMaxAge(const base::PairStream* const msg);            // Sets the max age(s) for selected entity types
+   bool setSlotMaxAge(const base::Time* const msg) override;                 // Sets the max age(s) for all entity types
+   virtual bool setSlotMaxEntityRange(const base::PairStream* const msg);    // Sets the max entity range(s) for selected entity types
+   bool setSlotMaxEntityRange(const base::Distance* const msg) override;     // Sets the max entity range(s) for all entity types
+   virtual bool setSlotEmissionPduHandlers(base::PairStream* const msg);     // Sets the list of Electromagnetic Emission PDU handlers
+   virtual bool setSlotSiteID(const base::Number* const num);                // Sets Site ID
+   virtual bool setSlotApplicationID(const base::Number* const num);         // Sets Application ID
+   virtual bool setSlotExerciseID(const base::Number* const num);            // Sets Exercise ID
 
    virtual bool slot2KD(const char* const slotname, unsigned char* const k, unsigned char* const d);
    virtual bool setMaxTimeDR(const LCreal v, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxTimeDR(const basic::Time* const p, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxTimeDR(const base::Time* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxPositionErr(const LCreal v, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxPositionErr(const basic::Distance* const p, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxPositionErr(const base::Distance* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxOrientationErr(const LCreal v, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxOrientationErr(const basic::Angle* const p, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxOrientationErr(const base::Angle* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxAge(const LCreal v, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxAge(const basic::Time* const p, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxAge(const base::Time* const p, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxEntityRange(const LCreal v, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxEntityRange(const basic::Distance* const p, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxEntityRange(const base::Distance* const p, const unsigned char kind, const unsigned char domain);
 
    // NetIO Interface (overriding these slots!)
-   bool setSlotFederateName(const basic::String* const msg) override;         // Sets our federate name
-   bool setSlotFederationName(const basic::String* const msg) override;       // Sets our federation name
+   bool setSlotFederateName(const base::String* const msg) override;         // Sets our federate name
+   bool setSlotFederationName(const base::String* const msg) override;       // Sets our federation name
 
    // NetIO Interface
    bool initNetwork() override;                                                   // Initialize the network
@@ -374,8 +374,8 @@ protected:
 private:
     void initData();
 
-    basic::safe_ptr<basic::NetHandler>   netInput;    // Input network handler
-    basic::safe_ptr<basic::NetHandler>   netOutput;   // Output network handler
+    base::safe_ptr<base::NetHandler>   netInput;    // Input network handler
+    base::safe_ptr<base::NetHandler>   netOutput;   // Output network handler
     unsigned char             version;                // Version number [ 0 .. 6 ]
 
    // Network Model IDs

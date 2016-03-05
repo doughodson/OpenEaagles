@@ -64,14 +64,14 @@ END_SLOTTABLE(FtglHaloFont)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(FtglFonts)
-    ON_SLOT(1,setFaceSize,basic::Number)
+    ON_SLOT(1,setFaceSize,base::Number)
 END_SLOT_MAP()
 BEGIN_SLOT_MAP(FtglExtrdFont)
-    ON_SLOT(1, setDepth, basic::Number)
+    ON_SLOT(1, setDepth, base::Number)
 END_SLOT_MAP()
 BEGIN_SLOT_MAP(FtglHaloFont)
-    ON_SLOT(1, setHaloColor, basic::Color)
-    ON_SLOT(2, setLinewidth, basic::Number)
+    ON_SLOT(1, setHaloColor, base::Color)
+    ON_SLOT(2, setLinewidth, base::Number)
 END_SLOT_MAP()
 
 
@@ -138,15 +138,15 @@ FtglHaloFont::FtglHaloFont()
 //------------------------------------------------------------------------------
 // getSlotByIndex() for FtglFonts and FtglExtrdFonts
 //------------------------------------------------------------------------------
-basic::Object* FtglFonts::getSlotByIndex(const int si)
+base::Object* FtglFonts::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
-basic::Object* FtglExtrdFont::getSlotByIndex(const int si)
+base::Object* FtglExtrdFont::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
-basic::Object* FtglHaloFont::getSlotByIndex(const int si)
+base::Object* FtglHaloFont::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -242,7 +242,7 @@ void FtglHaloFont::deleteData()
 //------------------------------------------------------------------------------
 // slot table functions FtglFonts and FtglExtrdFonts
 //------------------------------------------------------------------------------
-bool FtglFonts::setFaceSize(const basic::Number* const faceSize)
+bool FtglFonts::setFaceSize(const base::Number* const faceSize)
 {
     // get our new face size, else we return to a default face size
     if (faceSize != nullptr) fSize = faceSize->getInt();
@@ -250,7 +250,7 @@ bool FtglFonts::setFaceSize(const basic::Number* const faceSize)
     return true;
 };
 
-bool FtglExtrdFont::setDepth(const basic::Number* const newDepth)
+bool FtglExtrdFont::setDepth(const base::Number* const newDepth)
 {
     // set our depth
     if (newDepth != nullptr) depth = newDepth->getFloat();
@@ -258,7 +258,7 @@ bool FtglExtrdFont::setDepth(const basic::Number* const newDepth)
     return true;
 }
 
-bool FtglHaloFont::setHaloColor(basic::Color* x)
+bool FtglHaloFont::setHaloColor(base::Color* x)
 {
     // set our halo color
     if (haloColor != nullptr) haloColor->unref();
@@ -269,7 +269,7 @@ bool FtglHaloFont::setHaloColor(basic::Color* x)
     }
     return true;
 }
-bool FtglHaloFont::setLinewidth(const basic::Number* const x )
+bool FtglHaloFont::setLinewidth(const base::Number* const x )
 {
     bool ok = false;
     if (x != nullptr) {

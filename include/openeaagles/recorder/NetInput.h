@@ -7,7 +7,7 @@
 #include "openeaagles/recorder/InputHandler.h"
 
 namespace oe {
-   namespace basic { class NetHandler; class Number; }
+   namespace base { class NetHandler; class Number; }
 
 namespace recorder {
 
@@ -37,15 +37,15 @@ public:
 
 protected:
    // Slot functions
-   virtual bool setSlotNetwork(basic::NetHandler* const msg);
-   virtual bool setSlotNoWait(basic::Number* const msg);
+   virtual bool setSlotNetwork(base::NetHandler* const msg);
+   virtual bool setSlotNoWait(base::Number* const msg);
 
    const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();
 
-    basic::safe_ptr<oe::basic::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
+    base::safe_ptr<oe::base::NetHandler> netHandler;   // Network handler (input/output, or just output if netInput is defined)
     bool   networkInitialized;                     // Network has been initialized
     bool   networkInitFailed;                      // Network initialization has failed
     bool   noWaitFlag;                             // No wait (unblocked) I/O flag

@@ -4,7 +4,7 @@
 #include "openeaagles/base/Integer.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Integer,"int")
 
@@ -25,5 +25,5 @@ std::ostream& Integer::serialize(std::ostream& sout, const int, const bool) cons
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

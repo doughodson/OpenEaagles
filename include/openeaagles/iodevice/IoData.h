@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace basic { class Number; }
+namespace base { class Number; }
 
 namespace iodevice {
 
@@ -28,9 +28,9 @@ namespace iodevice {
 //    numDO    <Number>   ! Number of discrete outputs (DOs)
 //
 //------------------------------------------------------------------------------
-class IoData : public basic::IoData
+class IoData : public base::IoData
 {
-   DECLARE_SUBCLASS(IoData,basic::IoData)
+   DECLARE_SUBCLASS(IoData,base::IoData)
 
 public:
    IoData();
@@ -55,10 +55,10 @@ public:
    void clear() override;
 
 protected:
-   bool setSlotNumAI(const basic::Number* const msg);
-   bool setSlotNumAO(const basic::Number* const msg);
-   bool setSlotNumDI(const basic::Number* const msg);
-   bool setSlotNumDO(const basic::Number* const msg);
+   bool setSlotNumAI(const base::Number* const msg);
+   bool setSlotNumAO(const base::Number* const msg);
+   bool setSlotNumDI(const base::Number* const msg);
+   bool setSlotNumDO(const base::Number* const msg);
 
 private:
    void initData();

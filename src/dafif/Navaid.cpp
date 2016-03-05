@@ -153,7 +153,7 @@ void Navaid::printRecord(std::ostream& sout) const
 void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const
 {
    double bearing(0.0), range(0.0), grdrange(0.0);
-   basic::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
 
    bool rangeIsValid = true;
    bool bearingIsValid = true;

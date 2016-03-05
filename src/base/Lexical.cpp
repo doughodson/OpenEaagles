@@ -20,7 +20,7 @@
      * We will address this in a future release of flex, or omit the C++ scanner
      * altogether.
      */
-    #define yyFlexLexer basicFlexLexer
+    #define yyFlexLexer baseFlexLexer
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
 
@@ -328,7 +328,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int oe::basic::Lexical::yylex()
+#define YY_DECL int oe::base::Lexical::yylex()
 static yyconst flex_int16_t yy_nxt[][128] =
     {
     {
@@ -2033,8 +2033,8 @@ using namespace std;
 /* no calls to yywrap */
 /* no calls to yywrap */
 #define YY_NO_UNISTD_H 1
-/* change the name of the scanner class - results in "basicFlexLexer" */
-/* derived 'oe::basic::Lexical' is a subclass of yyFlexLexer */
+/* change the name of the scanner class - results in "baseFlexLexer" */
+/* derived 'oe::base::Lexical' is a subclass of yyFlexLexer */
 #line 2039 "Lexical.cpp"
 
 #define INITIAL 0

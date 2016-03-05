@@ -2,7 +2,7 @@
 #include "openeaagles/base/util/lfi.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // lfi - One dimensional Linear Function Interpolator

@@ -41,30 +41,30 @@ public:
 
     void draw() override;
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     // event functions
-    bool onEventSetAltitude(const basic::Number* const x);
-    bool onEventSetAirspeed(const basic::Number* const x);
-    bool onEventSetHeading(const basic::Number* const x);
-    bool onEventSetAOA(const basic::Number* const x);
-    bool onEventSetVVI(const basic::Number* const x);
-    bool onEventSetPitch(const basic::Number* const x);
-    bool onEventSetRoll(const basic::Number* const x);
-    bool onEventSetMach(const basic::Number* const x);
-    bool onEventSetGLoad(const basic::Number* const x);
-    bool onEventSetLandingMode(const basic::Number* const x);
-    bool onEventSetPitchSteeringCmd(const basic::Number* const x);
-    bool onEventSetRollSteeringCmd(const basic::Number* const x);
-    bool onEventSetPitchSteeringValid(const basic::Number* const x);
-    bool onEventSetRollSteeringValid(const basic::Number* const x);
-    bool onEventSetGlideslopeDev(const basic::Number* const x);
-    bool onEventSetLocalizerDev(const basic::Number* const x);
-    bool onEventSetTurnRate(const basic::Number* const x);
-    bool onEventSetSlipInd(const basic::Number* const x);
-    bool onEventSetGlideslopeValid(const basic::Number* const x);
-    bool onEventSetLocalizerValid(const basic::Number* const x);
+    bool onEventSetAltitude(const base::Number* const x);
+    bool onEventSetAirspeed(const base::Number* const x);
+    bool onEventSetHeading(const base::Number* const x);
+    bool onEventSetAOA(const base::Number* const x);
+    bool onEventSetVVI(const base::Number* const x);
+    bool onEventSetPitch(const base::Number* const x);
+    bool onEventSetRoll(const base::Number* const x);
+    bool onEventSetMach(const base::Number* const x);
+    bool onEventSetGLoad(const base::Number* const x);
+    bool onEventSetLandingMode(const base::Number* const x);
+    bool onEventSetPitchSteeringCmd(const base::Number* const x);
+    bool onEventSetRollSteeringCmd(const base::Number* const x);
+    bool onEventSetPitchSteeringValid(const base::Number* const x);
+    bool onEventSetRollSteeringValid(const base::Number* const x);
+    bool onEventSetGlideslopeDev(const base::Number* const x);
+    bool onEventSetLocalizerDev(const base::Number* const x);
+    bool onEventSetTurnRate(const base::Number* const x);
+    bool onEventSetSlipInd(const base::Number* const x);
+    bool onEventSetGlideslopeValid(const base::Number* const x);
+    bool onEventSetLocalizerValid(const base::Number* const x);
 
     void globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal rollCmd, bool psValid, bool rcValid, bool landMode);
     void scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal slipInd, bool gsValid, bool locValid, bool landMode);

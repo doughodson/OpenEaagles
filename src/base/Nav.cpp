@@ -6,7 +6,7 @@
 #include <cmath>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Navigation constants
@@ -2008,5 +2008,5 @@ bool Nav::convertUtm2LL(
    return true;
 }
 
-}  // End basic namespace
+}  // End base namespace
 }  // End oe namespace

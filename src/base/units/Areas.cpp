@@ -8,7 +8,7 @@
 #include "openeaagles/base/SlotTable.h"  
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //////////////////////////////////////////////////////////////////////
 // Area()
@@ -315,5 +315,5 @@ DecibelSquareMeters::DecibelSquareMeters(const Area& value) : Area()
 EMPTY_COPYDATA(DecibelSquareMeters)
 EMPTY_DELETEDATA(DecibelSquareMeters)
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

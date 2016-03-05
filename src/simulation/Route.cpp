@@ -35,20 +35,20 @@ IMPLEMENT_SUBCLASS(Route,"Route")
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Route)
-    "to",               // 1) Initial "TO" steerpoint: by name (basic::Identifier) or index (basic::Number)
+    "to",               // 1) Initial "TO" steerpoint: by name (base::Identifier) or index (base::Number)
     "autoSequence",     // 2) Auto sequence flag
-    "autoSeqDistance",  // 3) Distance to auto sequence    (basic::Distance)
+    "autoSeqDistance",  // 3) Distance to auto sequence    (base::Distance)
     "wrap",             // 4) Route wrap flag (wrap back to the beginning when past the end)
 END_SLOTTABLE(Route)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Route)
-    ON_SLOT(1,setSlotTo,basic::Identifier)
-    ON_SLOT(1,setSlotTo,basic::Number)
-    ON_SLOT(2,setSlotAutoSequence,basic::Number)
-    ON_SLOT(3,setSlotAutoSeqDistance,basic::Distance)
-    ON_SLOT(3,setSlotAutoSeqDistance,basic::Number)
-    ON_SLOT(4,setSlotWrap,basic::Number)
+    ON_SLOT(1,setSlotTo,base::Identifier)
+    ON_SLOT(1,setSlotTo,base::Number)
+    ON_SLOT(2,setSlotAutoSequence,base::Number)
+    ON_SLOT(3,setSlotAutoSeqDistance,base::Distance)
+    ON_SLOT(3,setSlotAutoSeqDistance,base::Number)
+    ON_SLOT(4,setSlotWrap,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ void Route::copyData(const Route& org, const bool cc)
     to = nullptr; // find it using 'initToStptName' or 'initToStptIdx'
 
     {
-        basic::String* n = nullptr;
+        base::String* n = nullptr;
         if (org.initToStptName != nullptr) n = org.initToStptName->clone();
         initToStptName = n;
         if (n != nullptr) n->unref();  // safe_ptr<> has it
@@ -123,7 +123,7 @@ void Route::reset()
    // reset the initial 'to' steerpoint
    // ---
    directTo(static_cast<unsigned int>(0));
-   basic::PairStream* steerpoints = getComponents();
+   base::PairStream* steerpoints = getComponents();
    if (steerpoints != nullptr) {
 
       // First try to find by name
@@ -175,7 +175,7 @@ void Route::updateData(const LCreal dt)
 void Route::computeSteerpointData(const LCreal, const Navigation* const nav)
 {
    if (nav != nullptr) {
-      basic::PairStream* steerpoints = getComponents();
+      base::PairStream* steerpoints = getComponents();
       if (steerpoints != nullptr) {
 
          // Until we pass the 'to' steerpoint, the 'from' pointer will be
@@ -184,9 +184,9 @@ void Route::computeSteerpointData(const LCreal, const Navigation* const nav)
          // pointer will help compute each from-to leg of the route.
          Steerpoint* from = nullptr;
 
-         basic::List::Item* item = steerpoints->getFirstItem();
+         base::List::Item* item = steerpoints->getFirstItem();
          while (item != nullptr) {
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             Steerpoint* stpt = static_cast<Steerpoint*>(pair->object());
             stpt->compute(nav,from);
             if (pair == to || from != nullptr) from = stpt;
@@ -209,7 +209,7 @@ void Route::autoSequencer(const LCreal, const Navigation* const nav)
       if (toSP->getDistNM() <= autoSeqDistNM) {
          // We're within range of the steerpoint, so compute our relative
          // to see if we just passed it.
-         const double rbrg = basic::Angle::aepcdDeg(toSP->getTrueBrgDeg() - nav->getHeadingDeg());
+         const double rbrg = base::Angle::aepcdDeg(toSP->getTrueBrgDeg() - nav->getHeadingDeg());
          if ( std::fabs(rbrg) >= 90.0) {
             // We're within range and we're going away from it, so ...
             triggerAction();
@@ -271,7 +271,7 @@ bool Route::setAutoSeqDistance(const double nm)
 bool Route::incStpt()
 {
     bool ok = false;
-    const basic::PairStream* steerpoints = getComponents();
+    const base::PairStream* steerpoints = getComponents();
     if (steerpoints != nullptr) {
         unsigned int n = steerpoints->entries();
         unsigned int idx = stptIdx + 1;
@@ -286,7 +286,7 @@ bool Route::incStpt()
 bool Route::decStpt()
 {
     bool ok = false;
-    const basic::PairStream* steerpoints = getComponents();
+    const base::PairStream* steerpoints = getComponents();
     if (steerpoints != nullptr) {
         unsigned int n = steerpoints->entries();
         unsigned int idx = stptIdx - 1;
@@ -327,10 +327,10 @@ const char* Route::getSteerpointName() const
 bool Route::directTo(const Steerpoint* const stpt)
 {
     bool ok = false;
-    basic::PairStream* steerpoints = getComponents();
+    base::PairStream* steerpoints = getComponents();
     if (steerpoints != nullptr && stpt != nullptr) {
         // When we have steerpoints (components) and a steerpoint to switch to ...
-        basic::Pair* sp = findSteerpoint(stpt);
+        base::Pair* sp = findSteerpoint(stpt);
         if (sp != nullptr) {
             to = sp;
             stptIdx = steerpoints->getIndex(sp);
@@ -355,10 +355,10 @@ bool Route::directTo(const Steerpoint* const stpt)
 bool Route::directTo(const char* const name)
 {
     bool ok = false;
-    basic::PairStream* steerpoints = getComponents();
+    base::PairStream* steerpoints = getComponents();
     if (steerpoints != nullptr && name != nullptr) {
         // When we have steerpoints (components) and a name of a steerpoint
-        basic::Pair* sp = findSteerpoint(name);
+        base::Pair* sp = findSteerpoint(name);
         if (sp != nullptr) {
             to = sp;
             stptIdx = steerpoints->getIndex(sp);
@@ -385,7 +385,7 @@ bool Route::directTo(const unsigned int idx)
     bool ok = false;
 
     if (idx != 0) {
-        basic::Pair* sp = findSteerpoint(idx);
+        base::Pair* sp = findSteerpoint(idx);
         if (sp != nullptr) {
             to = sp;
             stptIdx = idx;
@@ -407,14 +407,14 @@ bool Route::directTo(const unsigned int idx)
 // findSteerpoint() -- Find a steerpoint (pair)
 //------------------------------------------------------------------------------
 
-const basic::Pair* Route::findSteerpointImp(const Steerpoint* const stpt) const
+const base::Pair* Route::findSteerpointImp(const Steerpoint* const stpt) const
 {
-    const basic::Pair* sp = nullptr;
-    const basic::PairStream* steerpoints = getComponents();
+    const base::Pair* sp = nullptr;
+    const base::PairStream* steerpoints = getComponents();
     if (steerpoints != nullptr && stpt != nullptr) {
-        const basic::List::Item* item = steerpoints->getFirstItem();
+        const base::List::Item* item = steerpoints->getFirstItem();
         while (item != nullptr && sp == nullptr) {
-            const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
+            const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
             const Steerpoint* p = static_cast<const Steerpoint*>(pair->object());
             if (stpt == p) sp = pair;
             item = item->getNext();
@@ -429,10 +429,10 @@ const basic::Pair* Route::findSteerpointImp(const Steerpoint* const stpt) const
     return sp;
 }
 
-const basic::Pair* Route::findSteerpointImp(const char* const name) const
+const base::Pair* Route::findSteerpointImp(const char* const name) const
 {
-    const basic::Pair* sp = nullptr;
-    const basic::PairStream* steerpoints = getComponents();
+    const base::Pair* sp = nullptr;
+    const base::PairStream* steerpoints = getComponents();
     if (steerpoints != nullptr && name != nullptr) {
         sp = steerpoints->findByName(name);
     }
@@ -445,10 +445,10 @@ const basic::Pair* Route::findSteerpointImp(const char* const name) const
     return sp;
 }
 
-const basic::Pair* Route::findSteerpointImp(const unsigned int idx) const
+const base::Pair* Route::findSteerpointImp(const unsigned int idx) const
 {
-    const basic::Pair* sp = nullptr;
-    const basic::PairStream* steerpoints = getComponents();
+    const base::Pair* sp = nullptr;
+    const base::PairStream* steerpoints = getComponents();
     if (steerpoints != nullptr) {
         sp = steerpoints->getPosition(idx);
         steerpoints->unref();
@@ -460,17 +460,17 @@ const basic::Pair* Route::findSteerpointImp(const unsigned int idx) const
 //------------------------------------------------------------------------------
 // getSteerpoints() -- Get the route we're flying to (starting at 'to')
 //------------------------------------------------------------------------------
-unsigned int Route::getSteerpoints(basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
+unsigned int Route::getSteerpoints(base::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
 {
     unsigned int i = 0;
-    basic::PairStream* steerpoints = getComponents();
+    base::PairStream* steerpoints = getComponents();
     if (stptList != nullptr && max > 0 && steerpoints != nullptr) {
 
         // Find our 'to' steerpoint
         bool found = false;
-        basic::List::Item* item = steerpoints->getFirstItem();
+        base::List::Item* item = steerpoints->getFirstItem();
         while (item != nullptr && !found) {
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             found = (pair == to);
             if (!found) {
                 item = item->getNext();
@@ -479,7 +479,7 @@ unsigned int Route::getSteerpoints(basic::safe_ptr<Steerpoint>* const stptList, 
 
         // Get the route we're flying 'to'
         while (item != nullptr && i < max) {
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             Steerpoint* p = dynamic_cast<Steerpoint*>(pair->object());
             if (p != nullptr) {
                 stptList[i++] = p;
@@ -499,14 +499,14 @@ unsigned int Route::getSteerpoints(basic::safe_ptr<Steerpoint>* const stptList, 
 //------------------------------------------------------------------------------
 // getAllSteerpoints() -- Get all of the steerpoints in the route
 //------------------------------------------------------------------------------
-unsigned int Route::getAllSteerpoints(basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
+unsigned int Route::getAllSteerpoints(base::safe_ptr<Steerpoint>* const stptList, const unsigned int max)
 {
     unsigned int i = 0;
-    basic::PairStream* steerpoints = getComponents();
+    base::PairStream* steerpoints = getComponents();
     if (stptList != nullptr && max > 0 && steerpoints != nullptr) {
-        basic::List::Item* item = steerpoints->getFirstItem();
+        base::List::Item* item = steerpoints->getFirstItem();
         while (item != nullptr && i < max) {
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             Steerpoint* p = dynamic_cast<Steerpoint*>(pair->object());
             if (p != nullptr) {
                 stptList[i++] = p;
@@ -539,24 +539,24 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
     // now we have the slot name, which is the next number in the steerpoint list
     // now create a new pair, and if we have a component list, add it to it, if
     // not, then create a new component list
-    basic::Pair* p = new basic::Pair(numString, newStpt);
+    base::Pair* p = new base::Pair(numString, newStpt);
     if (p != nullptr) {
 
         // We're its container
         newStpt->container(this);
 
         // Get our steerpoints
-        basic::PairStream* steerpoints = getComponents();
+        base::PairStream* steerpoints = getComponents();
 
         // now we have to add it to our component list
         if (steerpoints != nullptr && num != 0) {
 
             // Copy the current steerpoint list
-            basic::PairStream* tempList = new basic::PairStream();
+            base::PairStream* tempList = new base::PairStream();
             {
-               basic::List::Item* item = steerpoints->getFirstItem();
+               base::List::Item* item = steerpoints->getFirstItem();
                while (item != nullptr) {
-                  basic::Pair* pair = (basic::Pair*) item->getValue();
+                  base::Pair* pair = (base::Pair*) item->getValue();
                   tempList->put(pair);
                   item = item->getNext();
                }
@@ -576,7 +576,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
                 // count to our position, then insert it
                 int counter = 1;
-                basic::List::Item* item = tempList->getFirstItem();
+                base::List::Item* item = tempList->getFirstItem();
                 while (counter < pos && item != nullptr) {
                     item = item->getNext();
                     counter++;
@@ -584,7 +584,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
                 // now we should have the reference pair at the 'pos' position
                 if (item != nullptr) {
-                    basic::List::Item* newItem = new basic::List::Item;
+                    base::List::Item* newItem = new base::List::Item;
                     newItem->value = p;
                     p->ref();
                     // insert 'newItem' just before 'item'
@@ -594,7 +594,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
             // swap our current steerpoint (components) list for this new one
             if (ok) {
-               basic::Component::processComponents(tempList,typeid(Steerpoint));
+               base::Component::processComponents(tempList,typeid(Steerpoint));
             }
 
             tempList->unref();
@@ -604,7 +604,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
         // if we have no components, we need to start a new component list
         else {
-            basic::Component::processComponents(nullptr, typeid(Steerpoint), p);
+            base::Component::processComponents(nullptr, typeid(Steerpoint), p);
             ok = true;
         }
 
@@ -638,13 +638,13 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 //------------------------------------------------------------------------------
 // Replace the complete steerpoint list with a new one
 //------------------------------------------------------------------------------
-bool Route::replaceAllSteerpoints(basic::PairStream* const newSteerpointList, unsigned int newStptIdx)
+bool Route::replaceAllSteerpoints(base::PairStream* const newSteerpointList, unsigned int newStptIdx)
 {
    bool ok = false;
 
    if (newSteerpointList != nullptr) {
 
-      basic::Component::processComponents(newSteerpointList, typeid(Steerpoint));
+      base::Component::processComponents(newSteerpointList, typeid(Steerpoint));
 
       // Try to force a 'Direct to' the new 'stptIdx' or default to stpt #1
       directTo(static_cast<unsigned int>(0));
@@ -665,8 +665,8 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
    const Steerpoint* p = getSteerpoint();
 
    // remove the steerpoint
-   basic::PairStream* steerpoints = getComponents();
-   basic::Component::processComponents(steerpoints,typeid(Steerpoint),nullptr,sp);
+   base::PairStream* steerpoints = getComponents();
+   base::Component::processComponents(steerpoints,typeid(Steerpoint),nullptr,sp);
    if (steerpoints != nullptr) {
       steerpoints->unref();
       steerpoints = nullptr;
@@ -695,7 +695,7 @@ bool Route::deleteSteerpoint(Steerpoint* const sp)
 bool Route::deleteAllSteerpoints()
 {
    // This will create a new null(0) steerpoint (components) list
-   basic::Component::processComponents(nullptr, typeid(Steerpoint));
+   base::Component::processComponents(nullptr, typeid(Steerpoint));
 
    // No steerpoints, so we're going nowhere
    directTo(static_cast<unsigned int>(0));
@@ -708,19 +708,19 @@ bool Route::deleteAllSteerpoints()
 //    type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Route::processComponents(
-      basic::PairStream* const list,
+      base::PairStream* const list,
       const std::type_info&,
-      basic::Pair* const add,
-      basic::Component* const remove
+      base::Pair* const add,
+      base::Component* const remove
    )
 {
-   basic::Component::processComponents(list, typeid(Steerpoint), add, remove);
+   base::Component::processComponents(list, typeid(Steerpoint), add, remove);
 }
 
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool Route::setSlotTo(const basic::Identifier* const msg)
+bool Route::setSlotTo(const base::Identifier* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -730,7 +730,7 @@ bool Route::setSlotTo(const basic::Identifier* const msg)
     return ok;
 }
 
-bool Route::setSlotTo(const basic::Number* const msg)
+bool Route::setSlotTo(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -740,7 +740,7 @@ bool Route::setSlotTo(const basic::Number* const msg)
     return ok;
 }
 
-bool Route::setSlotAutoSequence(const basic::Number* const msg)
+bool Route::setSlotAutoSequence(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -750,16 +750,16 @@ bool Route::setSlotAutoSequence(const basic::Number* const msg)
     return ok;
 }
 
-bool Route::setSlotAutoSeqDistance(const basic::Distance* const msg)
+bool Route::setSlotAutoSeqDistance(const base::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        autoSeqDistNM = basic::NauticalMiles::convertStatic(*msg);
+        autoSeqDistNM = base::NauticalMiles::convertStatic(*msg);
         ok = true;
     }
     return ok;
 }
-bool Route::setSlotAutoSeqDistance(const basic::Number* const msg)
+bool Route::setSlotAutoSeqDistance(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -770,7 +770,7 @@ bool Route::setSlotAutoSeqDistance(const basic::Number* const msg)
     return ok;
 }
 
-bool Route::setSlotWrap(const basic::Number* const msg)
+bool Route::setSlotWrap(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -783,7 +783,7 @@ bool Route::setSlotWrap(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Route::getSlotByIndex(const int si)
+base::Object* Route::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

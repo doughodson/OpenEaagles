@@ -6,25 +6,26 @@ Changes since v15.07
 general
 
 -- Renamed 'Eaagles' namespace to 'oe' to align with project name
--- Renamed all namespaces to lowercase names - this complies with typical C++
-   convention and avoids confusion with classnames
+-- Renamed all namespaces to lowercase names - this aligns with typical C++
+   conventions and avoids confusion with classnames
+-- Renamed 'basic' library to 'base'
+-- Renamed 'basicGL' library to 'graphics'
+-- Renamed 'ioDevice' library to 'iodevice'
+-- Renamed 'linearSys' library to 'linearsystem'
+-- Created 'models' libraries, it now includes was used to be in 'dynamics' and 'sensors'
 
 -- Removed legacy support for 'formnames' in base Object
--- All form functions have now been removed -- should use 'Factory' functions
+-- All form functions and Factory classes have been removed -- should use 'factory' functions
 
 -- Renamed global framework configuration options to start with 'OE' instead
    of 'EAAGLES'
 
 --------------------------------------------------------------------------------
-basic
+base
 
    -- removed legacy support for factory names "BroadcastHandler", "MulticastHandler",
       and "UdpHandler" - instead use "UdpBroadcastHandler", "UdpMulticastHandler"
 	  and "UdpUnicastHandler"
-
---------------------------------------------------------------------------------
-basicGL
-
 
 --------------------------------------------------------------------------------
 dafif
@@ -35,29 +36,37 @@ dis
 
 
 --------------------------------------------------------------------------------
-dynamics
+glut
 
-   JSBSimModel class
-      -- Added new slot parameter ('debugLevel') to set the debug level for JSBSim
-         model instance. This controls the verbosity (i.e., output printed to console)
-         of the model itself.  Slot parameter accepts an integer value.
+
+--------------------------------------------------------------------------------
+graphics
+
 
 --------------------------------------------------------------------------------
 instruments
 
 
 --------------------------------------------------------------------------------
-ioDevice
+iodevice
 
 
 --------------------------------------------------------------------------------
-linearSys
+linearsystem
 
 
 
 --------------------------------------------------------------------------------
 maps
 
+
+--------------------------------------------------------------------------------
+models
+
+   JSBSimModel class
+      -- Added new slot parameter ('debugLevel') to set the debug level for JSBSim
+         model instance. This controls the verbosity (i.e., output printed to console)
+         of the model itself.  Slot parameter accepts an integer value.
 
 --------------------------------------------------------------------------------
 otw
@@ -79,4 +88,3 @@ terrain
  
 
 --------------------------------------------------------------------------------
-

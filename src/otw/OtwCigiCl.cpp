@@ -93,14 +93,14 @@ END_SLOTTABLE(OtwCigiCl)
 // Map slot table to handles
 BEGIN_SLOT_MAP(OtwCigiCl)
    ON_SLOT(1, setSlotCigi,                  CigiCl)
-   ON_SLOT(2, setSlotASyncMode,             basic::Number)
-   ON_SLOT(3, setSlotHideOwnshipModel,      basic::Number)
-   ON_SLOT(4, setSlotOwnshipModel,          basic::Number)
-   ON_SLOT(5, setSlotMslTrailModel,         basic::Number)
-   ON_SLOT(6, setSlotSmokePlumeModel,       basic::Number)
-   ON_SLOT(7, setSlotAirExplosionModel,     basic::Number)
-   ON_SLOT(8, setSlotGroundExplosionModel,  basic::Number)
-   ON_SLOT(9, setSlotShipWakeModel,         basic::Number)
+   ON_SLOT(2, setSlotASyncMode,             base::Number)
+   ON_SLOT(3, setSlotHideOwnshipModel,      base::Number)
+   ON_SLOT(4, setSlotOwnshipModel,          base::Number)
+   ON_SLOT(5, setSlotMslTrailModel,         base::Number)
+   ON_SLOT(6, setSlotSmokePlumeModel,       base::Number)
+   ON_SLOT(7, setSlotAirExplosionModel,     base::Number)
+   ON_SLOT(8, setSlotGroundExplosionModel,  base::Number)
+   ON_SLOT(9, setSlotShipWakeModel,         base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -478,7 +478,7 @@ int OtwCigiCl::updateModels()
 
       // For all active models in the table ...
       for (unsigned short i = 0; i < getModelTableSize(); i++) {
-         basic::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
+         base::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
          if (model != nullptr) {
 
             if (model->getState() != simulation::OtwModel::INACTIVE) {
@@ -858,11 +858,11 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
       // find all attached missiles
       const simulation::StoresMgr* sm = p->getStoresManagement();
       if (sm != nullptr) {
-         const basic::PairStream* stores = sm->getStores();
+         const base::PairStream* stores = sm->getStores();
          if (stores != nullptr) {
-            const basic::List::Item* item = stores->getFirstItem();
+            const base::List::Item* item = stores->getFirstItem();
             while (item != nullptr && apartNumMissiles == 0) {
-               const basic::Pair* pair = static_cast<const basic::Pair*>(item->getValue());
+               const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
                if (pair != nullptr) {
                   const simulation::Missile* msl = dynamic_cast<const simulation::Missile*>( pair->object() );
                   if (msl != nullptr) apartNumMissiles++;
@@ -878,7 +878,7 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
       launcherAPC->SetEntityID(entity);
       launcherAPC->SetArtPartID(1);       // for MAZ-543; 1 is the launcher
       launcherAPC->SetPitchEn(true);  // Pitch enabled
-      launcherAPC->SetPitch( static_cast<float>(p->getLauncherPosition() * basic::Angle::R2DCC) );
+      launcherAPC->SetPitch( static_cast<float>(p->getLauncherPosition() * base::Angle::R2DCC) );
       m->launcherApcActive = true;
 
       // Attached missile
@@ -1468,7 +1468,7 @@ bool OtwCigiCl::setSlotCigi(CigiCl* const msg)
 }
 
 // Set/clear the ASYNC mode
-bool OtwCigiCl::setSlotASyncMode(const basic::Number* const msg)
+bool OtwCigiCl::setSlotASyncMode(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1478,7 +1478,7 @@ bool OtwCigiCl::setSlotASyncMode(const basic::Number* const msg)
 }
 
 // Set/clear the hide ownship model flag
-bool OtwCigiCl::setSlotHideOwnshipModel(const basic::Number* const msg)
+bool OtwCigiCl::setSlotHideOwnshipModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1487,7 +1487,7 @@ bool OtwCigiCl::setSlotHideOwnshipModel(const basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiCl::setSlotOwnshipModel(const basic::Number* const msg)
+bool OtwCigiCl::setSlotOwnshipModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1499,7 +1499,7 @@ bool OtwCigiCl::setSlotOwnshipModel(const basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiCl::setSlotMslTrailModel(const basic::Number* const msg)
+bool OtwCigiCl::setSlotMslTrailModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1511,7 +1511,7 @@ bool OtwCigiCl::setSlotMslTrailModel(const basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiCl::setSlotSmokePlumeModel(const basic::Number* const msg)
+bool OtwCigiCl::setSlotSmokePlumeModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1523,7 +1523,7 @@ bool OtwCigiCl::setSlotSmokePlumeModel(const basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiCl::setSlotAirExplosionModel(const basic::Number* const msg)
+bool OtwCigiCl::setSlotAirExplosionModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1535,7 +1535,7 @@ bool OtwCigiCl::setSlotAirExplosionModel(const basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiCl::setSlotGroundExplosionModel(const basic::Number* const msg)
+bool OtwCigiCl::setSlotGroundExplosionModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1547,7 +1547,7 @@ bool OtwCigiCl::setSlotGroundExplosionModel(const basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiCl::setSlotShipWakeModel(const basic::Number* const msg)
+bool OtwCigiCl::setSlotShipWakeModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1563,7 +1563,7 @@ bool OtwCigiCl::setSlotShipWakeModel(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* OtwCigiCl::getSlotByIndex(const int si)
+base::Object* OtwCigiCl::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -1622,7 +1622,7 @@ bool OtwCigiCl::sendCigiData()
          int sendSize = cigi->getOutgoingBufferSize();
          int maxAge = getModelTableSize();
          for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
-            basic::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
+            base::safe_ptr<OtwModelCigiCl> model( static_cast<OtwModelCigiCl*>(table[i]) );
             if (model != nullptr) {
 
                // For all active models in the table ...
@@ -1715,8 +1715,8 @@ bool OtwCigiCl::sendCigiData()
 
          // For all active elevation requests in the table ...
          // -- look for the oldest request ---
-         basic::safe_ptr<OtwModelCigiCl> oldest( nullptr );
-         basic::safe_ptr<OtwModelCigiCl> model( nullptr );
+         base::safe_ptr<OtwModelCigiCl> oldest( nullptr );
+         base::safe_ptr<OtwModelCigiCl> model( nullptr );
          for (unsigned short i = 0; i < getElevationTableSize(); i++) {
             model = table[i];
             if (model != nullptr) {
@@ -1748,7 +1748,7 @@ bool OtwCigiCl::sendCigiData()
                hotRequest.SetReqType(CigiHatHotReqV3::HOT);
                //osg::Vec3 pos = oldest->getPlayer()->getPosition();
                //LCreal alt;
-               //basic::Nav::convertPosVec2LL(
+               //base::Nav::convertPosVec2LL(
                //         getRefLatitude(), getRefLongitude(),
                //         pos,
                //         &hotRequest.lat, &hotRequest.lon, &alt);
@@ -1942,7 +1942,7 @@ void OtwCigiCl::hatHotResp(const CigiHatHotRespV3* const p)
       //}
 
       OtwModelCigiCl** const table = reinterpret_cast<OtwModelCigiCl**>( getElevationTable() );
-      basic::safe_ptr<OtwModelCigiCl> model(nullptr);
+      base::safe_ptr<OtwModelCigiCl> model(nullptr);
       for (unsigned int i = 0; i < getElevationTableSize() && model == nullptr; i++) {
          if (table[i]->getID() == id) model = table[i];
       }
@@ -2267,9 +2267,9 @@ void CigiClNetworkSignalProcessing::OnSensorResp(CigiBasePacket* packet)
 // CigiClNetwork main loop thread
 //==============================================================================
 
-class NetThread : public basic::ThreadSingleTask {
-   DECLARE_SUBCLASS(NetThread,basic::ThreadSingleTask)
-public: NetThread(basic::Component* const parent, const LCreal priority);
+class NetThread : public base::ThreadSingleTask {
+   DECLARE_SUBCLASS(NetThread,base::ThreadSingleTask)
+public: NetThread(base::Component* const parent, const LCreal priority);
 private: virtual unsigned long userFunc();
 };
 
@@ -2279,8 +2279,8 @@ EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
 EMPTY_SERIALIZER(NetThread)
 
-NetThread::NetThread(basic::Component* const parent, const LCreal priority)
-: basic::ThreadSingleTask(parent, priority)
+NetThread::NetThread(base::Component* const parent, const LCreal priority)
+: base::ThreadSingleTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -2314,8 +2314,8 @@ END_SLOTTABLE(CigiClNetwork)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(CigiClNetwork)
-   ON_SLOT(1, setSlotNetInput,  basic::NetHandler)
-   ON_SLOT(2, setSlotNetOutput, basic::NetHandler)
+   ON_SLOT(1, setSlotNetInput,  base::NetHandler)
+   ON_SLOT(2, setSlotNetOutput, base::NetHandler)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -2622,12 +2622,12 @@ void CigiClNetwork::mainLoop()
 //------------------------------------------------------------------------------
 // get a pre-ref'd pointers to the network handlers
 //------------------------------------------------------------------------------
-basic::NetHandler* CigiClNetwork::getInputHandler()
+base::NetHandler* CigiClNetwork::getInputHandler()
 {
    return netInput.getRefPtr();
 }
 
-basic::NetHandler* CigiClNetwork::getOutputHandler()
+base::NetHandler* CigiClNetwork::getOutputHandler()
 {
    return netOutput.getRefPtr();
 }
@@ -2637,14 +2637,14 @@ basic::NetHandler* CigiClNetwork::getOutputHandler()
 //------------------------------------------------------------------------------
 
 // Set Network Input Handler
-bool CigiClNetwork::setSlotNetInput(basic::NetHandler* const msg)
+bool CigiClNetwork::setSlotNetInput(base::NetHandler* const msg)
 {
    netInput = msg;
    return true;
 }
 
 // Net Network Output Handler
-bool CigiClNetwork::setSlotNetOutput(basic::NetHandler* const msg)
+bool CigiClNetwork::setSlotNetOutput(base::NetHandler* const msg)
 {
    netOutput = msg;
    return true;
@@ -2653,7 +2653,7 @@ bool CigiClNetwork::setSlotNetOutput(basic::NetHandler* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* CigiClNetwork::getSlotByIndex(const int si)
+base::Object* CigiClNetwork::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

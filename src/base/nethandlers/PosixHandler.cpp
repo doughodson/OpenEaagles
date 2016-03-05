@@ -35,7 +35,7 @@
 #include <cstring>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // Class: PosixHandler
@@ -666,6 +666,6 @@ std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const boo
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

@@ -5,7 +5,7 @@
 #include "openeaagles/base/ubf/Action.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 namespace ubf {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Action, "UbfAction")
@@ -26,6 +26,6 @@ void Action::copyData(const Action& org, const bool cc)
 }
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

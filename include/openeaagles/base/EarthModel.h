@@ -7,7 +7,7 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class Distance;
    class Number;
 
@@ -97,7 +97,7 @@ inline double EarthModel::getB() const  { return b; }
 inline double EarthModel::getF() const  { return f; }
 inline double EarthModel::getE2() const { return e2; }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

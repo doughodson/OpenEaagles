@@ -25,10 +25,10 @@ END_SLOTTABLE(Knob)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Knob)
-    ON_SLOT(1, setSlotValueTable, basic::Table1)
-    ON_SLOT(2, setSlotEndless, basic::Number)
-    ON_SLOT(3, setSlotEndlessStart, basic::Number)
-    ON_SLOT(4, setSlotEndlessLimit, basic::Number)
+    ON_SLOT(1, setSlotValueTable, base::Table1)
+    ON_SLOT(2, setSlotEndless, base::Number)
+    ON_SLOT(3, setSlotEndlessStart, base::Number)
+    ON_SLOT(4, setSlotEndlessLimit, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ void Knob::deleteData()
 //------------------------------------------------------------------------------
 // setSlotValueTable() - set the table for degrees rotation to value
 //------------------------------------------------------------------------------
-bool Knob::setSlotValueTable(basic::Table1* const x)
+bool Knob::setSlotValueTable(base::Table1* const x)
 {
     if (table != nullptr) table->unref();
     table = nullptr;
@@ -108,7 +108,7 @@ bool Knob::setSlotValueTable(basic::Table1* const x)
 //------------------------------------------------------------------------------
 // setSlotEndless() - set up our table to be endless or not
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndless(const basic::Number* const x)
+bool Knob::setSlotEndless(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndless(x->getBoolean());
@@ -118,7 +118,7 @@ bool Knob::setSlotEndless(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotEndlessStart() - start value of endless knob
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndlessStart(const basic::Number* const x)
+bool Knob::setSlotEndlessStart(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndlessStart(x->getReal());
@@ -128,7 +128,7 @@ bool Knob::setSlotEndlessStart(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotEndlessLimit() - limit value of endless knob
 //------------------------------------------------------------------------------
-bool Knob::setSlotEndlessLimit(const basic::Number* const x)
+bool Knob::setSlotEndlessLimit(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setEndlessLimit(x->getReal());
@@ -217,7 +217,7 @@ void Knob::computeRotation()
            angle = atan2f(static_cast<float>(posMoveY), static_cast<float>(-posMoveX));
         }
 
-        angle *= static_cast<LCreal>(basic::Angle::R2DCC);
+        angle *= static_cast<LCreal>(base::Angle::R2DCC);
 
         if (start) {
             startAngle = static_cast<LCreal>(degsRotation);
@@ -303,8 +303,8 @@ void Knob::draw()
 {
     // rotate our knob!
     lcSaveMatrix();
-    if (endless) lcRotate(angle * static_cast<LCreal>(basic::Angle::D2RCC));
-    else lcRotate(-degsRotation * static_cast<LCreal>(basic::Angle::D2RCC));
+    if (endless) lcRotate(angle * static_cast<LCreal>(base::Angle::D2RCC));
+    else lcRotate(-degsRotation * static_cast<LCreal>(base::Angle::D2RCC));
     Graphic::draw();
     lcRestoreMatrix();
 }
@@ -322,7 +322,7 @@ void Knob::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Knob
 //------------------------------------------------------------------------------
-basic::Object* Knob::getSlotByIndex(const int si)
+base::Object* Knob::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Airport
-// Base class: basic::Object -> basic::String -> Record -> Airport
+// Base class: base::Object -> base::String -> Record -> Airport
 //
 // Description: DAFIF Airport record class
 //

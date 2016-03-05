@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-   namespace basic { class String; }
+   namespace base { class String; }
 
 namespace simulation {
 
@@ -22,7 +22,7 @@ class Simulation;
 //
 // Factory name: System
 // Slots:
-//    powerSwitch    <basic::String>   ! Power switch position ("OFF", "STBY", "ON") (default: "ON")
+//    powerSwitch    <base::String>   ! Power switch position ("OFF", "STBY", "ON") (default: "ON")
 //
 //
 // Events:
@@ -57,9 +57,9 @@ class Simulation;
 //       (e.g., circular references).  (see Component::shutdownNotification())
 //
 //------------------------------------------------------------------------------
-class System : public basic::Component
+class System : public base::Component
 {
-   DECLARE_SUBCLASS(System,basic::Component)
+   DECLARE_SUBCLASS(System,base::Component)
 
 public:
    // Power switch enumerations (can be expanded by derived classes)
@@ -87,13 +87,13 @@ public:
 
    void updateData(const LCreal dt = 0.0) override;
    void updateTC(const LCreal dt = 0.0) override;
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
    bool isFrozen() const override;
 
 protected:
    // Slot function(s)
-   virtual bool setSlotPowerSwitch(const basic::String* const msg);
+   virtual bool setSlotPowerSwitch(const base::String* const msg);
 
    // Time critical phase callbacks --
    // --- to be used by the derived classes, as needed

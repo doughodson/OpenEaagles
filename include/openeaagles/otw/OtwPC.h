@@ -9,7 +9,7 @@
 
 namespace oe {
 
-namespace basic { class NetHandler; }
+namespace base { class NetHandler; }
 
 namespace otw {
 
@@ -38,9 +38,9 @@ private:
     bool initNetwork();                     // Initialize the network
 
     // Set Slot functions
-    bool setSlotNetOutput(basic::NetHandler* const msg);
+    bool setSlotNetOutput(base::NetHandler* const msg);
 
-    basic::safe_ptr<basic::NetHandler> netOutput;  // Output network handler
+    base::safe_ptr<base::NetHandler> netOutput;  // Output network handler
     bool netInit;                              // Network has been initialized
     bool netInitFail;                          // Initialization attempt failed
     int scnt;                                  // Send timer

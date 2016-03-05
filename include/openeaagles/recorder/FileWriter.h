@@ -7,7 +7,7 @@
 #include "openeaagles/recorder/OutputHandler.h"
 
 namespace oe {
-   namespace basic { class String; }
+   namespace base { class String; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -56,8 +56,8 @@ public:
                                           // (valid only while file is open)
 
    // File and path names; set before calling openFile()
-   virtual bool setFilename(const basic::String* const msg);
-   virtual bool setPathName(const basic::String* const msg);
+   virtual bool setFilename(const base::String* const msg);
+   virtual bool setPathName(const base::String* const msg);
 
 protected:
    void setFullFilename(const char* const name);
@@ -72,8 +72,8 @@ private:
    std::ofstream* sout;             // Output stream
 
    char* fullFilename;              // Full file name of the output file
-   const basic::String* filename;   // Output file name
-   const basic::String* pathname;   // Path to the output file directory
+   const base::String* filename;   // Output file name
+   const base::String* pathname;   // Path to the output file directory
 
    bool fileOpened;                 // File opened
    bool fileFailed;                 // Open or write failed

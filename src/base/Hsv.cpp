@@ -6,7 +6,7 @@
 #include "openeaagles/base/units/Angles.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Hsv,"hsv")
 
@@ -354,5 +354,5 @@ std::ostream& Hsv::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

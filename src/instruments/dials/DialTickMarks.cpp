@@ -17,8 +17,8 @@ END_SLOTTABLE(DialTickMarks)
 //  Map slot table to handles for Analog Dial
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(DialTickMarks)
-    ON_SLOT(1, setSlotLength, basic::Number)
-    ON_SLOT(2, setSlotQuantity, basic::Number)
+    ON_SLOT(1, setSlotLength, base::Number)
+    ON_SLOT(2, setSlotQuantity, base::Number)
     ON_SLOT(3, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
@@ -99,7 +99,7 @@ void DialTickMarks::drawFunc()
 //------------------------------------------------------------------------------
 // setSlotLength() -- sets our tick mark length
 //------------------------------------------------------------------------------
-bool DialTickMarks::setSlotLength(const basic::Number* const newLength)
+bool DialTickMarks::setSlotLength(const base::Number* const newLength)
 {
     bool ok = true;
     if (newLength != nullptr) ok = setLength(newLength->getReal());
@@ -109,7 +109,7 @@ bool DialTickMarks::setSlotLength(const basic::Number* const newLength)
 //------------------------------------------------------------------------------
 // setSlotQuantity() -- sets the number of tick marks
 //------------------------------------------------------------------------------
-bool DialTickMarks::setSlotQuantity(const basic::Number* const newQ)
+bool DialTickMarks::setSlotQuantity(const base::Number* const newQ)
 {
     bool ok = true;
     if (newQ != nullptr) ok = setQuantity(newQ->getInt());
@@ -155,7 +155,7 @@ bool DialTickMarks::setQuantity(const int newQ)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for DialTickMarks
 //------------------------------------------------------------------------------
-basic::Object* DialTickMarks::getSlotByIndex(const int si)
+base::Object* DialTickMarks::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

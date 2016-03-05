@@ -120,7 +120,7 @@ enum {
 // --- --- ---
 
 // ---
-// Basic events
+// Base events
 // ---
     SHUTDOWN_EVENT        = 1001,  // Shutdown notification event
 

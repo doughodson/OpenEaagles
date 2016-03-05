@@ -15,9 +15,9 @@ EMPTY_DELETEDATA(Translator)
 // Event Handler (s)
 // -----------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Translator)
-    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateX, basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateY, basic::Number)
-    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateZ, basic::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE, onUpdateX, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateY, base::Number)
+    ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateZ, base::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ void Translator::draw()
 //------------------------------------------------------------------------------
 // onUpdateX() - update our x position (inches)
 //------------------------------------------------------------------------------
-bool Translator::onUpdateX(const basic::Number* const newX)
+bool Translator::onUpdateX(const base::Number* const newX)
 {
     bool ok = false;
     if (newX != nullptr) ok = setXPos(newX->getReal());
@@ -69,7 +69,7 @@ bool Translator::onUpdateX(const basic::Number* const newX)
 //------------------------------------------------------------------------------
 // onUpdateY() - update our y position (inches)
 //------------------------------------------------------------------------------
-bool Translator::onUpdateY(const basic::Number* const newY)
+bool Translator::onUpdateY(const base::Number* const newY)
 {
     bool ok = false;
     if (newY != nullptr) ok = setYPos(newY->getReal());
@@ -78,7 +78,7 @@ bool Translator::onUpdateY(const basic::Number* const newY)
 //------------------------------------------------------------------------------
 // onUpdateY() - update our z position (inches)
 //------------------------------------------------------------------------------
-bool Translator::onUpdateZ(const basic::Number* const newZ)
+bool Translator::onUpdateZ(const base::Number* const newZ)
 {
     bool ok = false;
     if (newZ != nullptr) ok = setZPos(newZ->getReal());

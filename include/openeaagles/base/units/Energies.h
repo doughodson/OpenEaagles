@@ -70,7 +70,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 // ----------------------------------------------------------------------------
 // Define Energy Conversion Constants:
@@ -240,7 +240,7 @@ public:
     LCreal fromEnergy(const LCreal a) const override  { return a * J2FP; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

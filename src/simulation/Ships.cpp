@@ -19,7 +19,7 @@ EMPTY_SERIALIZER(Ship)
 Ship::Ship()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericShip");
+    static base::String generic("GenericShip");
     setType(&generic);
 }
 

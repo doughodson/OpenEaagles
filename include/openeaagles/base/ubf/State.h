@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 namespace ubf {
 
 //------------------------------------------------------------------------------
@@ -17,20 +17,20 @@ namespace ubf {
 //
 // Factory name: UbfState
 //------------------------------------------------------------------------------
-class State : public basic::Component
+class State : public base::Component
 {
-   DECLARE_SUBCLASS(State, basic::Component)
+   DECLARE_SUBCLASS(State, base::Component)
 public:
    State();
 
    virtual void updateGlobalState(void);
-   virtual void updateState(const basic::Component* const actor);
+   virtual void updateState(const base::Component* const actor);
 
    virtual const State* getUbfStateByType(const std::type_info& type) const;
 };
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

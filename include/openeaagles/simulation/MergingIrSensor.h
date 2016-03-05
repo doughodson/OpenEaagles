@@ -12,7 +12,7 @@
 
 namespace oe {
 
-namespace basic { class Integer; class Number; class String; }
+namespace base { class Integer; class Number; class String; }
 
 namespace simulation {
 
@@ -42,8 +42,8 @@ protected:
    virtual void mergeIrReturns();
 
    // Slot functions
-   virtual bool setSlotAzimuthBin(const basic::Number* const msg);     // Sets the Azimuth Bin
-   virtual bool setSlotElevationBin(const basic::Number* const msg);   // Sets the Elevation Bin
+   virtual bool setSlotAzimuthBin(const base::Number* const msg);     // Sets the Azimuth Bin
+   virtual bool setSlotElevationBin(const base::Number* const msg);   // Sets the Elevation Bin
 
 private:
    LCreal azimuthBin;         // minimum azimuth we can distinguish -- two signals whose

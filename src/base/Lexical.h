@@ -3,28 +3,28 @@
 //------------------------------------------------------------------------------
 #include <fstream>
 
-#ifndef _oe_basic_Lexical_H_
-#define _oe_basic_Lexical_H_
+#ifndef _oe_base_Lexical_H_
+#define _oe_base_Lexical_H_
 
 #ifndef __FLEX_LEXER_H
-#define yyFlexLexer basicFlexLexer
+#define yyFlexLexer baseFlexLexer
 #include "../base/FlexLexer.h"
 #undef yyFlexLexer
 #endif
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Lexical
-// Base class:  FlexLexer -> basicFlexLexer -> Lexical
+// Base class:  FlexLexer -> baseFlexLexer -> Lexical
 //
 // Description:  Lexical generator for the input files.
 //
 //------------------------------------------------------------------------------
-class Lexical : public basicFlexLexer {
+class Lexical : public baseFlexLexer {
 public:
-    Lexical(std::fstream* f) : basicFlexLexer(f) {
+    Lexical(std::fstream* f) : baseFlexLexer(f) {
         fname[0] = 0;
         line = 1;
     }
@@ -40,8 +40,8 @@ private:
 
 };
 
-} // End basic namespace
-} // End oe namespace
+}
+}
 
 #endif
 

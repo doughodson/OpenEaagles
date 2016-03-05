@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Weapon.h"
 
 namespace oe {
-   namespace basic { class Identifier; }
+   namespace base { class Identifier; }
 
 namespace simulation {
 
@@ -90,13 +90,13 @@ protected:
     virtual bool setDragIndex(const LCreal v);
 
     // slot functions
-    bool setSlotDragIndex(basic::Number* const p);
-    bool setSlotArmingOption(basic::Identifier* const p);
-    bool setSlotNoseFuze(basic::Number* const p);
-    bool setSlotMidFuze(basic::Number* const p);
-    bool setSlotTailFuze(basic::Number* const p);
-    bool setSlotFuzeAltitude(basic::Number* const p);
-    bool setSlotFuzeTime(basic::Number* const p);
+    bool setSlotDragIndex(base::Number* const p);
+    bool setSlotArmingOption(base::Identifier* const p);
+    bool setSlotNoseFuze(base::Number* const p);
+    bool setSlotMidFuze(base::Number* const p);
+    bool setSlotTailFuze(base::Number* const p);
+    bool setSlotFuzeAltitude(base::Number* const p);
+    bool setSlotFuzeTime(base::Number* const p);
 
     void weaponGuidance(const LCreal dt) override;
     void weaponDynamics(const LCreal dt) override;

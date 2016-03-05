@@ -24,17 +24,17 @@
 #include "openeaagles/simulation/StoresMgr.h"
 #include "openeaagles/simulation/Weapon.h"
 
-#include "openeaagles/basic/SlotTable.h"
-#include "openeaagles/basic/Identifier.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/osg/Vec4"
-#include "openeaagles/basic/osg/Vec3"
-#include "openeaagles/basic/units/Distances.h"
-#include "openeaagles/basic/units/Angles.h"
+#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.h"
 
 #include "cigicl/CigiEntityCtrlV2.h"
 #include "cigicl/CigiCompCtrlV2.h"
@@ -59,8 +59,8 @@
 
 #include <cstdio>
 
-namespace Eaagles {
-namespace Otw {
+namespace oe {
+namespace otw {
 
 //==============================================================================
 // OtwCigiClV2 class
@@ -87,14 +87,14 @@ END_SLOTTABLE(OtwCigiClV2)
 // Map slot table to handles
 BEGIN_SLOT_MAP(OtwCigiClV2)
     ON_SLOT(1, setSlotCigi,                  CigiClV2);
-    ON_SLOT(2, setSlotASyncMode,             Basic::Number);
-    ON_SLOT(3, setSlotHideOwnshipModel,      Basic::Number);
-    ON_SLOT(4, setSlotOwnshipModel,          Basic::Number);
-    ON_SLOT(5, setSlotMslTrailModel,         Basic::Number);
-    ON_SLOT(6, setSlotSmokePlumeModel,       Basic::Number);
-    ON_SLOT(7, setSlotAirExplosionModel,     Basic::Number);
-    ON_SLOT(8, setSlotGroundExplosionModel,  Basic::Number);
-    ON_SLOT(9, setSlotShipWakeModel,         Basic::Number);
+    ON_SLOT(2, setSlotASyncMode,             base::Number);
+    ON_SLOT(3, setSlotHideOwnshipModel,      base::Number);
+    ON_SLOT(4, setSlotOwnshipModel,          base::Number);
+    ON_SLOT(5, setSlotMslTrailModel,         base::Number);
+    ON_SLOT(6, setSlotSmokePlumeModel,       base::Number);
+    ON_SLOT(7, setSlotAirExplosionModel,     base::Number);
+    ON_SLOT(8, setSlotGroundExplosionModel,  base::Number);
+    ON_SLOT(9, setSlotShipWakeModel,         base::Number);
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -244,7 +244,7 @@ void OtwCigiClV2::deleteData()
 //------------------------------------------------------------------------------
 // modelFactory() -- Create OtwModel objects unique to interface
 //------------------------------------------------------------------------------
-Simulation::OtwModel* OtwCigiClV2::modelFactory()
+simulation::OtwModel* OtwCigiClV2::modelFactory()
 {
    OtwModelCigiClV2* p = new OtwModelCigiClV2();
    p->setID( ++entityIdCount );
@@ -254,7 +254,7 @@ Simulation::OtwModel* OtwCigiClV2::modelFactory()
 //------------------------------------------------------------------------------
 // hotFactory() -- Create OtwHot objects unique to interface
 //------------------------------------------------------------------------------
-Simulation::OtwModel* OtwCigiClV2::hotFactory()
+simulation::OtwModel* OtwCigiClV2::hotFactory()
 {
    OtwModelCigiClV2* p = new OtwModelCigiClV2();
    p->setID( ++elevReqIdCount );
@@ -399,7 +399,7 @@ bool OtwCigiClV2::updateOwnshipModel()
     // Ownship active and type air vehicle?
     bool active = false;
     if (getOwnship() != nullptr) active = getOwnship()->isActive();
-    const Simulation::Player* av = getOwnship();
+    const simulation::Player* av = getOwnship();
 
     if (active && av != nullptr && getOwnshipEntityControlPacket(iw) != nullptr) {
         // We have an active, AirVehicle type ownship and an entity control packet ...
@@ -420,7 +420,7 @@ bool OtwCigiClV2::updateOwnshipModel()
         ec->SetOpacity(100.0f);
         ec->SetTemp(0.0f);
         if (getOwnshipComponentControlPacket(iw) != 0) {
-            const Simulation::LifeForm* player = dynamic_cast<const Simulation::LifeForm*>(getOwnship());
+            const simulation::LifeForm* player = dynamic_cast<const simulation::LifeForm*>(getOwnship());
             CigiCompCtrlV2* animation = ownshipCC[iw];
             animation->SetCompClassV2(CigiCompCtrlV2::EntityV2);
             animation->SetInstanceID(0);
@@ -431,17 +431,17 @@ bool OtwCigiClV2::updateOwnshipModel()
 
             if (player != 0 && animation != 0) {
                 // get our ownship models id and our model
-                Simulation::LifeForm* lf = (Simulation::LifeForm*)player;
+                simulation::LifeForm* lf = (simulation::LifeForm*)player;
                 if (lf != 0) {
                     if (lf->getDamage() < 1) {
                         // Choose Animation state
-                        if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
+                        if (lf->getActionState() == simulation::LifeForm::UPRIGHT_STANDING) {
                             animation->SetCompState(STANDING);
                         }
-                        else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
+                        else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_WALKING) {
                             animation->SetCompState(WALK);
                         }
-                        else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
+                        else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_RUNNING) {
                             animation->SetCompState(RUN);
                         }
                         else {
@@ -466,15 +466,15 @@ int OtwCigiClV2::updateModels()
     int n = 0;
 
     // Do we have models?
-    Simulation::OtwModel** const table = getModelTable();
+    simulation::OtwModel** const table = getModelTable();
     if (table != nullptr && getModelTableSize() > 0) {
 
         // For all active models in the table ...
         for (unsigned short i = 0; i < getModelTableSize(); i++) {
-            Basic::safe_ptr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
+            base::safe_ptr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
             if (model != nullptr) {
 
-               if (model->getState() != Simulation::OtwModel::INACTIVE) {
+               if (model->getState() != simulation::OtwModel::INACTIVE) {
                   unsigned short entity = model->getID()* 8 + 1; // Save a block of four entities per model
                                                    //  (id*8+1) is parent entity
                                                    //  (id*8+2) is smoke trail entity
@@ -483,31 +483,31 @@ int OtwCigiClV2::updateModels()
                                                    //  (id*8+5) is attached part entity
 
                   // Get the player
-                  const Simulation::Player* player = model->getPlayer();
+                  const simulation::Player* player = model->getPlayer();
 
                   // Set the model data and ...
-                  if (player->isMajorType(Simulation::Player::AIR_VEHICLE)) {
-                     setAirVehicleData(model, entity, (const Simulation::AirVehicle*) player);
+                  if (player->isMajorType(simulation::Player::AIR_VEHICLE)) {
+                     setAirVehicleData(model, entity, (const simulation::AirVehicle*) player);
                   }
-                  else if (player->isMajorType(Simulation::Player::GROUND_VEHICLE)) {
-                     setGndVehicleData(model, entity, (const Simulation::GroundVehicle*) player);
+                  else if (player->isMajorType(simulation::Player::GROUND_VEHICLE)) {
+                     setGndVehicleData(model, entity, (const simulation::GroundVehicle*) player);
                   }
-                  else if (player->isMajorType(Simulation::Player::SHIP)) {
-                     setShipData(model, entity, (const Simulation::Ship*) player);
+                  else if (player->isMajorType(simulation::Player::SHIP)) {
+                     setShipData(model, entity, (const simulation::Ship*) player);
                   }
-                  else if (player->isMajorType(Simulation::Player::SPACE_VEHICLE)) {
-                     setSpaceVehicleData(model, entity, (const Simulation::SpaceVehicle*) player);
+                  else if (player->isMajorType(simulation::Player::SPACE_VEHICLE)) {
+                     setSpaceVehicleData(model, entity, (const simulation::SpaceVehicle*) player);
                   }
-                  else if (player->isMajorType(Simulation::Player::LIFE_FORM)) {
-                     setLifeFormData(model, entity, (const Simulation::LifeForm*) player);
+                  else if (player->isMajorType(simulation::Player::LIFE_FORM)) {
+                     setLifeFormData(model, entity, (const simulation::LifeForm*) player);
                   }
-                  else if (player->isMajorType(Simulation::Player::BUILDING)) {
-                     setBuildingData(model, entity, (const Simulation::Building*) player);
+                  else if (player->isMajorType(simulation::Player::BUILDING)) {
+                     setBuildingData(model, entity, (const simulation::Building*) player);
                   }
-                  else if (player->isMajorType(Simulation::Player::WEAPON)) {
-                     const Simulation::Effects* effect   = dynamic_cast<const Simulation::Effects*>(model->getPlayer());
-                     const Simulation::Missile* msl      = dynamic_cast<const Simulation::Missile*>(model->getPlayer());
-                     const Simulation::Weapon* wpn       = dynamic_cast<const Simulation::Weapon*>(model->getPlayer());
+                  else if (player->isMajorType(simulation::Player::WEAPON)) {
+                     const simulation::Effects* effect   = dynamic_cast<const simulation::Effects*>(model->getPlayer());
+                     const simulation::Missile* msl      = dynamic_cast<const simulation::Missile*>(model->getPlayer());
+                     const simulation::Weapon* wpn       = dynamic_cast<const simulation::Weapon*>(model->getPlayer());
                      if (effect != nullptr) // Effects before general weapons (because effects are also weapons)
                         setEffectsData(model, entity, effect);
                      else if (msl != nullptr) // Missiles before general weapons (because missiles are also weapons)
@@ -528,7 +528,7 @@ int OtwCigiClV2::updateModels()
 // setCommonModelData() --
 //  -- Sets a CigiEntityCtrlV2 structure with common data entity data
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned short entity, const Simulation::Player* const p)
+bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned short entity, const simulation::Player* const p)
 {
     bool ok = (ec != nullptr && p != nullptr);
 
@@ -551,7 +551,7 @@ bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned 
 
         // Set position
         double lat(0.0), lon(0.0), alt(0.0);
-        Basic::Nav::convertPosVec2LL(getRefLatitude(), getRefLongitude(), pos, &lat, &lon, &alt);
+        base::Nav::convertPosVec2LL(getRefLatitude(), getRefLongitude(), pos, &lat, &lon, &alt);
         ec->SetLat(lat);
         ec->SetLon(lon);
         ec->SetAlt(alt);
@@ -563,7 +563,7 @@ bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned 
 // setAirVehicleData()
 //  -- Sets a CigiEntityCtrlV2 structure to an air vheicle's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::AirVehicle* const p)
+bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::AirVehicle* const p)
 {
     // Make sure we have an entity control block
     if (m->parentEC[iw] == nullptr) {
@@ -579,12 +579,12 @@ bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned sh
     CigiEntityCtrlV2* const smoke = m->smokeEC[iw];
 
     // As long as we're active, update the entity control
-    if (m->getState() == Simulation::OtwModel::ACTIVE) {
+    if (m->getState() == simulation::OtwModel::ACTIVE) {
         bool ok = setCommonModelData(ec,entity,p);
         if (ok) {
             // Set the entity type
             unsigned int tt = 0;
-            const Simulation::Otm* otm = m->getTypeMapper();
+            const simulation::Otm* otm = m->getTypeMapper();
             if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
             ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -637,7 +637,7 @@ bool OtwCigiClV2::setAirVehicleData(OtwModelCigiClV2* const m, const unsigned sh
 //------------------------------------------------------------------------------
 // setBuildingData() -- Sets a 'model_t' structure to a building's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Building* const p)
+bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Building* const p)
 {
     // Make sure we have an entity control block
     if (m->parentEC[iw] == nullptr) {
@@ -665,13 +665,13 @@ bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned shor
     CigiCompCtrlV2* const damage = m->damageCC[iw];
 
     // As long as we're active, update the entity control
-    if (m->getState() == Simulation::OtwModel::ACTIVE) {
+    if (m->getState() == simulation::OtwModel::ACTIVE) {
         bool ok = setCommonModelData(ec,entity,p);
         if (ok) {
 
             // Set the entity type
             unsigned int tt = 0;
-            const Simulation::Otm* otm = m->getTypeMapper();
+            const simulation::Otm* otm = m->getTypeMapper();
             if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
             ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -737,7 +737,7 @@ bool OtwCigiClV2::setBuildingData(OtwModelCigiClV2* const m, const unsigned shor
 //------------------------------------------------------------------------------
 // setGndVehicleData() -- Sets a 'model_t' structure to a ground vheicle's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::GroundVehicle* const p)
+bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::GroundVehicle* const p)
 {
     // Make sure we have an entity control block
     if (m->parentEC[iw] == nullptr) {
@@ -786,13 +786,13 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
     CigiCompCtrlV2* const attachedPartCC = m->attachedCC[iw];
 
     // As long as we're active, update the entity control
-    if (m->getState() == Simulation::OtwModel::ACTIVE) {
+    if (m->getState() == simulation::OtwModel::ACTIVE) {
         bool ok = setCommonModelData(ec,entity,p);
         if (ok) {
 
             // Set the entity type
             unsigned int tt = 0;
-            const Simulation::Otm* otm = m->getTypeMapper();
+            const simulation::Otm* otm = m->getTypeMapper();
             if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
             ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -859,15 +859,15 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
        unsigned int apartNumMissiles = 0; // Number of attached missiles
 
        // find all attached missiles
-       const Simulation::StoresMgr* sm = p->getStoresManagement();
+       const simulation::StoresMgr* sm = p->getStoresManagement();
        if (sm != nullptr) {
-          const Basic::PairStream* stores = sm->getStores();
+          const base::PairStream* stores = sm->getStores();
           if (stores != nullptr) {
-             const Basic::List::Item* item = stores->getFirstItem();
+             const base::List::Item* item = stores->getFirstItem();
              while (item != nullptr && apartNumMissiles == 0) {
-                const Basic::Pair* pair = (Basic::Pair*) item->getValue();
+                const base::Pair* pair = (base::Pair*) item->getValue();
                 if (pair != nullptr) {
-                   const Simulation::Missile* msl = dynamic_cast<const Simulation::Missile*>( pair->object() );
+                   const simulation::Missile* msl = dynamic_cast<const simulation::Missile*>( pair->object() );
                    if (msl != nullptr) apartNumMissiles++;
                 }
                 item = item->getNext();
@@ -880,8 +880,8 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
        // Launcher articulation
        launcherAPC->SetEntityID(entity);
        launcherAPC->SetArtPartID(1);       // for MAZ-543; 1 is the launcher
-       launcherAPC->SetPitchEn(true);  // Pitch enabled
-       launcherAPC->SetPitch(p->getLauncherPosition() * (LCreal) Basic::Angle::R2DCC);
+       launcherAPC->SetPitchEn(true);      // Pitch enabled
+       launcherAPC->SetPitch(p->getLauncherPosition() * (LCreal) base::Angle::R2DCC);
        m->launcherApcActive = true;
 
        // Attached missile
@@ -930,7 +930,7 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
 //------------------------------------------------------------------------------
 // setEffectsData() -- Sets a 'model_t' structure to a effects' state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Effects* const p)
+bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Effects* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -945,10 +945,10 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
    }
    CigiEntityCtrlV2* const trail = m->trailEC[iw];
 
-   if (m->getState() == Simulation::OtwModel::ACTIVE) {
+   if (m->getState() == simulation::OtwModel::ACTIVE) {
 
       // As long as we're active, update the entity control
-      if (p->isClassType(typeid(Simulation::Decoy))) {
+      if (p->isClassType(typeid(simulation::Decoy))) {
          // Decoy
 
          // Load the parent entity control
@@ -956,7 +956,7 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
 
          // Set the entity type
          unsigned int tt = 0;
-         const Simulation::Otm* otm = m->getTypeMapper();
+         const simulation::Otm* otm = m->getTypeMapper();
          if (otm != 0) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned short only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -995,14 +995,14 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
          }
       }
 
-      else if (p->isClassType(typeid(Simulation::Flare))) {
+      else if (p->isClassType(typeid(simulation::Flare))) {
          // FLARES
          bool ok = setCommonModelData(ec,entity,p);
          if (ok) {
 
             // Set the entity type
             unsigned int tt = 0;
-            const Simulation::Otm* otm = m->getTypeMapper();
+            const simulation::Otm* otm = m->getTypeMapper();
             if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
             ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1035,7 +1035,7 @@ bool OtwCigiClV2::setEffectsData(OtwModelCigiClV2* const m, const unsigned short
 //------------------------------------------------------------------------------
 // setLifeFormData() -- Sets a 'model_t' structure to a lifeform's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::LifeForm* const p)
+bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::LifeForm* const p)
 {
 
     // Make sure we have an entity control block
@@ -1058,12 +1058,12 @@ bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned shor
     CigiCompCtrlV2* const animation = m->animationCC[iw];
 
     // As long as we're active, update the entity control
-    if (m->getState() == Simulation::OtwModel::ACTIVE) {
+    if (m->getState() == simulation::OtwModel::ACTIVE) {
         bool ok = setCommonModelData(ec,entity,p);
         if (ok) {
             // Set the entity type
             unsigned int tt = 0;
-            const Simulation::Otm* otm = m->getTypeMapper();
+            const simulation::Otm* otm = m->getTypeMapper();
             if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
             ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1078,17 +1078,17 @@ bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned shor
         }
         m->parentActive = ok;
 
-        Simulation::LifeForm* lf = (Simulation::LifeForm*)p;
+        simulation::LifeForm* lf = (simulation::LifeForm*)p;
 
         if (lf->getDamage() <= 0.9f) {
             // Choose Animation state
-            if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_STANDING) {
+            if (lf->getActionState() == simulation::LifeForm::UPRIGHT_STANDING) {
                 animation->SetCompState(STANDING);
             }
-            else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_WALKING) {
+            else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_WALKING) {
                 animation->SetCompState(WALK);
             }
-            else if (lf->getActionState() == Simulation::LifeForm::UPRIGHT_RUNNING) {
+            else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_RUNNING) {
                 animation->SetCompState(RUN);
             }
             else {
@@ -1112,7 +1112,7 @@ bool OtwCigiClV2::setLifeFormData(OtwModelCigiClV2* const m, const unsigned shor
 //------------------------------------------------------------------------------
 // setMissileData() -- Sets a 'model_t' structure to a missile's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Missile* const p)
+bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Missile* const p)
 {
     // Make sure we have an entity control block, ...
     if (m->parentEC[iw] == nullptr) {
@@ -1154,13 +1154,13 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
     CigiEntityCtrlV2* const explosion = m->explosionEC[iw];
 
     // As long as we're active, update the entity control
-    if (m->getState() == Simulation::OtwModel::ACTIVE) {
+    if (m->getState() == simulation::OtwModel::ACTIVE) {
         // Load the parent entity control
         setCommonModelData(ec,entity,p);
 
         // Set the entity type
         unsigned int tt = 0;
-        const Simulation::Otm* otm = m->getTypeMapper();
+        const simulation::Otm* otm = m->getTypeMapper();
         if (otm != 0) tt = otm->getTypeId();
         if (tt > 0xffff) tt = 0;   // unsigned shorts only
         ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1202,7 +1202,7 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
     else {
         ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
         trail->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
-        if (m->getState() == Simulation::OtwModel::DEAD) {
+        if (m->getState() == simulation::OtwModel::DEAD) {
            // Start air explosion at last known location of missile
            explosion->SetRoll(ec->GetRoll());
            explosion->SetPitch(ec->GetPitch());
@@ -1224,7 +1224,7 @@ bool OtwCigiClV2::setMissileData(OtwModelCigiClV2* const m, const unsigned short
 //------------------------------------------------------------------------------
 // setShipData() -- Sets a 'model_t' structure to a ship's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Ship* const p)
+bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Ship* const p)
 {
    // Make sure we have an entity control block
    if (m->parentEC[iw] == nullptr) {
@@ -1240,13 +1240,13 @@ bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short en
    CigiEntityCtrlV2* const wake = m->trailEC[iw];
 
    // As long as we're active, update the entity control
-   if (m->getState() == Simulation::OtwModel::ACTIVE) {
+   if (m->getState() == simulation::OtwModel::ACTIVE) {
       bool ok = setCommonModelData(ec,entity,p);
       if (ok) {
 
          // Set the entity type
          unsigned int tt = 0;
-         const Simulation::Otm* otm = m->getTypeMapper();
+         const simulation::Otm* otm = m->getTypeMapper();
          if (otm != nullptr) tt = otm->getTypeId();
          if (tt > 0xffff) tt = 0;   // unsigned shorts only
          ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1296,7 +1296,7 @@ bool OtwCigiClV2::setShipData(OtwModelCigiClV2* const m, const unsigned short en
 // setSpaceVehicleData()
 //  -- Sets a CigiEntityCtrlV2 structure to a space vheicle's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::SpaceVehicle* const p)
+bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::SpaceVehicle* const p)
 {
     // Make sure we have an entity control block
     if (m->parentEC[iw] == nullptr) {
@@ -1305,12 +1305,12 @@ bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned 
     CigiEntityCtrlV2* const ec = m->parentEC[iw];
 
     // As long as we're active, update the entity control
-    if (m->getState() == Simulation::OtwModel::ACTIVE) {
+    if (m->getState() == simulation::OtwModel::ACTIVE) {
         bool ok = setCommonModelData(ec,entity,p);
         if (ok) {
             // Set the entity type
             unsigned int tt = 0;
-            const Simulation::Otm* otm = m->getTypeMapper();
+            const simulation::Otm* otm = m->getTypeMapper();
             if (otm != nullptr) tt = otm->getTypeId();
             if (tt > 0xffff) tt = 0;   // unsigned short only
 
@@ -1335,7 +1335,7 @@ bool OtwCigiClV2::setSpaceVehicleData(OtwModelCigiClV2* const m, const unsigned 
 //------------------------------------------------------------------------------
 // setWeaponData() -- Sets a 'model_t' structure to a weapon's state
 //------------------------------------------------------------------------------
-bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short entity, const Simulation::Weapon* const p)
+bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short entity, const simulation::Weapon* const p)
 {
     // Make sure we have an entity control block, ...
     if (m->parentEC[iw] == nullptr) {
@@ -1370,13 +1370,13 @@ bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short 
     CigiEntityCtrlV2* const explosion = m->explosionEC[iw];
 
     // As long as we're active, update the entity control
-    if (m->getState() == Simulation::OtwModel::ACTIVE) {
+    if (m->getState() == simulation::OtwModel::ACTIVE) {
         // Load the parent entity control
         setCommonModelData(ec,entity,p);
 
         // Set the entity type
         unsigned int tt = 0;
-        const Simulation::Otm* otm = m->getTypeMapper();
+        const simulation::Otm* otm = m->getTypeMapper();
         if (otm != nullptr) tt = otm->getTypeId();
         if (tt > 0xffff) tt = 0;   // unsigned shorts only
         ec->SetEntityType(static_cast<unsigned short>(tt));
@@ -1392,7 +1392,7 @@ bool OtwCigiClV2::setWeaponData(OtwModelCigiClV2* const m, const unsigned short 
     }
     else {
         ec->SetEntityState(CigiEntityCtrlV2::LoadHideV2);
-        if (m->getState() == Simulation::OtwModel::DEAD) {
+        if (m->getState() == simulation::OtwModel::DEAD) {
             // Start air explosion at last known location of missile
             explosion->SetRoll(ec->GetRoll());
             explosion->SetPitch(ec->GetPitch());
@@ -1478,7 +1478,7 @@ bool OtwCigiClV2::setSlotCigi(CigiClV2* const msg)
 }
 
 // Set/clear the ASYNC mode
-bool OtwCigiClV2::setSlotASyncMode(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotASyncMode(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1488,7 +1488,7 @@ bool OtwCigiClV2::setSlotASyncMode(const Basic::Number* const msg)
 }
 
 // Set/clear the hide ownship model flag
-bool OtwCigiClV2::setSlotHideOwnshipModel(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotHideOwnshipModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1497,7 +1497,7 @@ bool OtwCigiClV2::setSlotHideOwnshipModel(const Basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiClV2::setSlotOwnshipModel(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotOwnshipModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1509,7 +1509,7 @@ bool OtwCigiClV2::setSlotOwnshipModel(const Basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiClV2::setSlotMslTrailModel(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotMslTrailModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1521,7 +1521,7 @@ bool OtwCigiClV2::setSlotMslTrailModel(const Basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiClV2::setSlotSmokePlumeModel(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotSmokePlumeModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1533,7 +1533,7 @@ bool OtwCigiClV2::setSlotSmokePlumeModel(const Basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiClV2::setSlotAirExplosionModel(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotAirExplosionModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1545,7 +1545,7 @@ bool OtwCigiClV2::setSlotAirExplosionModel(const Basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiClV2::setSlotGroundExplosionModel(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotGroundExplosionModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1557,7 +1557,7 @@ bool OtwCigiClV2::setSlotGroundExplosionModel(const Basic::Number* const msg)
    return ok;
 }
 
-bool OtwCigiClV2::setSlotShipWakeModel(const Basic::Number* const msg)
+bool OtwCigiClV2::setSlotShipWakeModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1573,7 +1573,7 @@ bool OtwCigiClV2::setSlotShipWakeModel(const Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* OtwCigiClV2::getSlotByIndex(const int si)
+base::Object* OtwCigiClV2::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -1634,14 +1634,14 @@ bool OtwCigiClV2::sendCigiData()
             int sendSize = cigi->getOutgoingBufferSize();
             int maxAge = getModelTableSize();
             for (unsigned short i = 0; i < getModelTableSize() && sendSize < (MAX_BUF_SIZE - padding); i++) {
-                Basic::safe_ptr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
+                base::safe_ptr<OtwModelCigiClV2> model( (OtwModelCigiClV2*) table[i] );
                 if (model != nullptr) {
 
                   // For all active models in the table ...
                   // (send ground models only after 'maxAge' frames)
                   // (always update the inactive models to clear them)
                   model->incAgeCount();
-                  bool updateThisOne = !model->isGroundPlayer || model->isState(Simulation::OtwModel::OUT_OF_RANGE) || (model->isGroundPlayer && model->getAgeCount() >= maxAge);
+                  bool updateThisOne = !model->isGroundPlayer || model->isState(simulation::OtwModel::OUT_OF_RANGE) || (model->isGroundPlayer && model->getAgeCount() >= maxAge);
 
                   if (updateThisOne) {
                      //if (model->isGroundPlayer) {
@@ -1701,8 +1701,8 @@ bool OtwCigiClV2::sendCigiData()
                         }
 
                         // Clear the model?
-                        if (model->getState() != Simulation::OtwModel::ACTIVE) {
-                           model->setState( Simulation::OtwModel::CLEARED );
+                        if (model->getState() != simulation::OtwModel::ACTIVE) {
+                           model->setState( simulation::OtwModel::CLEARED );
                         }
                      }
                      model->setAgeCount(0);
@@ -1725,8 +1725,8 @@ bool OtwCigiClV2::sendCigiData()
 
             // For all active elevation requests in the table ...
             // -- look for the oldest request ---
-            Basic::safe_ptr<OtwModelCigiClV2> oldest( nullptr );
-            Basic::safe_ptr<OtwModelCigiClV2> model( nullptr );
+            base::safe_ptr<OtwModelCigiClV2> oldest( nullptr );
+            base::safe_ptr<OtwModelCigiClV2> model( nullptr );
             for (unsigned short i = 0; i < getElevationTableSize(); i++) {
                 model = table[i];
                 if (model != nullptr) {
@@ -1757,7 +1757,7 @@ bool OtwCigiClV2::sendCigiData()
                   hotRequest.SetLon(hotLon);
                   //osg::Vec3 pos = oldest->getPlayer()->getPosition();
                   //LCreal alt;
-                  //Basic::Nav::convertPosVec2LL(
+                  //base::Nav::convertPosVec2LL(
                   //         getRefLatitude(), getRefLongitude(),
                   //         pos,
                   //         &hotRequest.lat, &hotRequest.lon, &alt);
@@ -1951,7 +1951,7 @@ void OtwCigiClV2::hotResp(const CigiHotRespV2* const p)
         unsigned short id = p->GetHatHotID();
         //std::cout << "hotResp: id = " << id << std::endl;
         OtwModelCigiClV2** const table = (OtwModelCigiClV2**) getElevationTable();
-        Basic::safe_ptr<OtwModelCigiClV2> model(nullptr);
+        base::safe_ptr<OtwModelCigiClV2> model(nullptr);
         for (unsigned int i = 0; i < getElevationTableSize() && model == nullptr; i++) {
            if (table[i]->getID() == id) model = table[i];
         }
@@ -2251,8 +2251,8 @@ END_SLOTTABLE(CigiClV2Network)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(CigiClV2Network)
-    ON_SLOT(1, setSlotNetInput,  Basic::NetHandler)
-    ON_SLOT(2, setSlotNetOutput, Basic::NetHandler)
+    ON_SLOT(1, setSlotNetInput,  base::NetHandler)
+    ON_SLOT(2, setSlotNetOutput, base::NetHandler)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -2562,14 +2562,14 @@ void CigiClV2Network::mainLoop()
 //------------------------------------------------------------------------------
 
 // Set Network Input Handler
-bool CigiClV2Network::setSlotNetInput(Basic::NetHandler* const msg)
+bool CigiClV2Network::setSlotNetInput(base::NetHandler* const msg)
 {
     netInput = msg;
     return true;
 }
 
 // Net Network Output Handler
-bool CigiClV2Network::setSlotNetOutput(Basic::NetHandler* const msg)
+bool CigiClV2Network::setSlotNetOutput(base::NetHandler* const msg)
 {
     netOutput = msg;
     return true;
@@ -2578,7 +2578,7 @@ bool CigiClV2Network::setSlotNetOutput(Basic::NetHandler* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* CigiClV2Network::getSlotByIndex(const int si)
+base::Object* CigiClV2Network::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -2676,9 +2676,9 @@ void OtwModelCigiClV2::deleteData()
 // ---
 // initialize() -- initialize the model
 // ---
-void OtwModelCigiClV2::initialize(Simulation::Player* const p)
+void OtwModelCigiClV2::initialize(simulation::Player* const p)
 {
-   isGroundPlayer = p->isClassType(typeid(Simulation::GroundVehicle));
+   isGroundPlayer = p->isClassType(typeid(simulation::GroundVehicle));
    BaseClass::initialize(p);
 }
 
@@ -2701,5 +2701,5 @@ void OtwModelCigiClV2::clear()
    BaseClass::clear();
 }
 
-} // End Otw namespace
-} // End Eaagles namespace
+}
+}

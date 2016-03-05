@@ -18,9 +18,9 @@
 namespace oe {
 namespace models {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-   basic::Object* obj = nullptr;
+   base::Object* obj = nullptr;
 
    // dynamics models
    if (std::strcmp(name, RacModel::getFactoryName()) == 0) {              // RAC

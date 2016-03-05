@@ -7,7 +7,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //////////////////////////////////////////////////////////////////////
 // Volume() --
@@ -175,6 +175,6 @@ Liters::Liters(const Volume& value) : Volume()
 EMPTY_COPYDATA(Liters)
 EMPTY_DELETEDATA(Liters)
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

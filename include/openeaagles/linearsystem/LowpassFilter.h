@@ -39,8 +39,8 @@ public:
    LCreal getWc() const                           { return wc; }
    virtual bool setWc(const LCreal v);
 
-   virtual bool setSlotWc(const basic::Frequency* const msg);
-   virtual bool setSlotWc(const basic::Number* const msg);
+   virtual bool setSlotWc(const base::Frequency* const msg);
+   virtual bool setSlotWc(const base::Number* const msg);
 
 private:
    LCreal wc;    // Cutoff frequency (rad/sec)

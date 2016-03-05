@@ -39,8 +39,8 @@ typedef double LCreal;
 #define lcExp       std::exp
 #define lcLog       std::log
 #define lcLog10     std::log10
-#define lcAepcDeg   basic::Angle::aepcdDeg   // needs basic/units/Angles.h
-#define lcAepcRad   basic::Angle::aepcdRad   // needs basic/units/Angles.h
+#define lcAepcDeg   base::Angle::aepcdDeg   // needs base/units/Angles.h
+#define lcAepcRad   base::Angle::aepcdRad   // needs base/units/Angles.h
 
 }
 

@@ -28,8 +28,8 @@ END_SLOTTABLE(FileReader)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(FileReader)
-    ON_SLOT( 1, setFilename, basic::String)
-    ON_SLOT( 2, setPathName, basic::String)
+    ON_SLOT( 1, setFilename, base::String)
+    ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -296,18 +296,18 @@ const DataRecordHandle* FileReader::readRecordImp()
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
-bool FileReader::setFilename(const basic::String* const msg)
+bool FileReader::setFilename(const base::String* const msg)
 {
    if (filename != nullptr) { filename->unref(); filename = nullptr; }
-   if (msg != nullptr) filename = new basic::String(*msg);
+   if (msg != nullptr) filename = new base::String(*msg);
 
    return true;
 }
 
-bool FileReader::setPathName(const basic::String* const msg)
+bool FileReader::setPathName(const base::String* const msg)
 {
    if (pathname != nullptr) { pathname->unref(); pathname = nullptr; }
-   if (msg != nullptr) pathname = new basic::String(*msg);
+   if (msg != nullptr) pathname = new base::String(*msg);
 
    return true;
 }
@@ -315,7 +315,7 @@ bool FileReader::setPathName(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* FileReader::getSlotByIndex(const int si)
+base::Object* FileReader::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

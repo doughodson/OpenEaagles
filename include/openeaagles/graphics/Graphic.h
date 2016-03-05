@@ -11,7 +11,7 @@
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class Color;
       class Identifier;
       class Transform;
@@ -227,9 +227,9 @@ class Material;
 //      lower than this, so there is no confusion in the pick() routine.
 //
 //------------------------------------------------------------------------------
-class Graphic : public basic::Component
+class Graphic : public base::Component
 {
-    DECLARE_SUBCLASS(Graphic, basic::Component)
+    DECLARE_SUBCLASS(Graphic, base::Component)
 
 public:
    Graphic();
@@ -257,18 +257,18 @@ public:
    bool setLineWidth(const GLfloat v);                                  // Sets the line width attribute.
 
    // Color functions
-   basic::Color* getColor()                                  { return color; }
-   const basic::Color* getColor() const                      { return color; }
-   const basic::Identifier* getColorName() const             { return colorName; }
-   virtual bool setColor(const basic::Color* const msg);
-   virtual bool setColor(const basic::Identifier* const msg);
-   virtual bool setColor(const basic::Number* const msg);
+   base::Color* getColor()                                  { return color; }
+   const base::Color* getColor() const                      { return color; }
+   const base::Identifier* getColorName() const             { return colorName; }
+   virtual bool setColor(const base::Color* const msg);
+   virtual bool setColor(const base::Identifier* const msg);
+   virtual bool setColor(const base::Number* const msg);
 
    // material functions
-   const basic::Identifier* getMaterialName() const { return materialName; } // returns a pointer to our material name
+   const base::Identifier* getMaterialName() const { return materialName; } // returns a pointer to our material name
    graphics::Material* getMaterial()                 { return materialObj; }  // returns our material object!
    const graphics::Material* getMaterial() const     { return materialObj; }
-   virtual bool setMaterial(const basic::Identifier* const msg);
+   virtual bool setMaterial(const base::Identifier* const msg);
    virtual bool setMaterial(const graphics::Material* const msg);
 
    // Flash rate functions
@@ -339,7 +339,7 @@ public:
    // Select (pick) functions
    GLuint getSelectName() const                     { return selName; }
    bool setSelectName(const GLuint v);
-   virtual basic::Pair* findBySelectName(const GLuint name);
+   virtual base::Pair* findBySelectName(const GLuint name);
 
    // Subcomponent graphics
    bool isPostDrawComponents() const                { return postDraw; }
@@ -397,39 +397,39 @@ public:
 protected:
 
    // event handlers
-   virtual bool onSetTextureId(const basic::Number* const msg);
-   virtual bool onSetLineWidthEvent(const basic::Number* const msg);
-   virtual bool onSetFlashRateEvent(const basic::Number* const msg);
-   virtual bool onSetVisibilityEvent(const basic::Number* const msg);
+   virtual bool onSetTextureId(const base::Number* const msg);
+   virtual bool onSetLineWidthEvent(const base::Number* const msg);
+   virtual bool onSetFlashRateEvent(const base::Number* const msg);
+   virtual bool onSetVisibilityEvent(const base::Number* const msg);
 
    // set slot functions
-   virtual bool setSlotFlashRate(const basic::Number* const msg);
-   virtual bool setSlotLineWidth(const basic::Number* const msg);
-   virtual bool setSlotSelectName(const basic::Number* const msg);
-   virtual bool setSlotTransformList(basic::PairStream* msg);      // Set the transformation list
-   virtual bool setSlotSingleTransform(basic::Transform* const msg);
-   virtual bool setSlotNoDisplayList(const basic::Number* const msg);
-   virtual bool setSlotSubcomponentsFirst(const basic::Number* const msg);
-   virtual bool setSlotVertices(const basic::PairStream* const msg);
-   virtual bool setSlotNormals(const basic::PairStream* const msg);
-   virtual bool setSlotTexCoord(const basic::PairStream* const msg);
-   virtual bool setSlotMask(const basic::Number* const msg);
-   virtual bool setSlotTextureName(basic::Identifier* msg);
-   virtual bool setSlotScissorX(const basic::Number* const msg);
-   virtual bool setSlotScissorY(const basic::Number* const msg);
-   virtual bool setSlotScissorWidth(const basic::Number* const msg);
-   virtual bool setSlotScissorHeight(const basic::Number* const msg);
-   virtual bool setSlotStippling(const basic::Number* const msg);
-   virtual bool setSlotStippleFactor(const basic::Number* const msg);
-   virtual bool setSlotStipplePattern(const basic::Number* const msg);
-   virtual bool setSlotVisibility(const basic::Number* const msg);
-   virtual bool setSlotTranslateLight(basic::PairStream* const msg);
+   virtual bool setSlotFlashRate(const base::Number* const msg);
+   virtual bool setSlotLineWidth(const base::Number* const msg);
+   virtual bool setSlotSelectName(const base::Number* const msg);
+   virtual bool setSlotTransformList(base::PairStream* msg);      // Set the transformation list
+   virtual bool setSlotSingleTransform(base::Transform* const msg);
+   virtual bool setSlotNoDisplayList(const base::Number* const msg);
+   virtual bool setSlotSubcomponentsFirst(const base::Number* const msg);
+   virtual bool setSlotVertices(const base::PairStream* const msg);
+   virtual bool setSlotNormals(const base::PairStream* const msg);
+   virtual bool setSlotTexCoord(const base::PairStream* const msg);
+   virtual bool setSlotMask(const base::Number* const msg);
+   virtual bool setSlotTextureName(base::Identifier* msg);
+   virtual bool setSlotScissorX(const base::Number* const msg);
+   virtual bool setSlotScissorY(const base::Number* const msg);
+   virtual bool setSlotScissorWidth(const base::Number* const msg);
+   virtual bool setSlotScissorHeight(const base::Number* const msg);
+   virtual bool setSlotStippling(const base::Number* const msg);
+   virtual bool setSlotStippleFactor(const base::Number* const msg);
+   virtual bool setSlotStipplePattern(const base::Number* const msg);
+   virtual bool setSlotVisibility(const base::Number* const msg);
+   virtual bool setSlotTranslateLight(base::PairStream* const msg);
 
    void processComponents(            // Process our subcomponent list (which should be other Graphics)
-        basic::PairStream* const list,        // Source list of components
+        base::PairStream* const list,        // Source list of components
         const std::type_info& filter,         // Type filter
-        basic::Pair* const add = 0,           // Optional pair to add
-        basic::Component* const remove = 0    // Optional subcomponent to remove
+        base::Pair* const add = 0,           // Optional pair to add
+        base::Component* const remove = 0    // Optional subcomponent to remove
    ) override;
 
 private:
@@ -437,7 +437,7 @@ private:
    void          setupMatrix();
    void          setupMaterial();
 
-   basic::PairStream* transforms;  // transformations
+   base::PairStream* transforms;  // transformations
    osg::Matrix   m;                // transformation matrix
    osg::Matrix   m1;               // saved 'm'
    bool          haveMatrix;       // Have a transformation matrix flag
@@ -445,15 +445,15 @@ private:
 
    bool          postDraw;                       // Post draw component (child) graphic
    GLuint        texture;                        // Texture
-   basic::safe_ptr<basic::Identifier> texName;   // Texture name
+   base::safe_ptr<base::Identifier> texName;   // Texture name
 
    bool          visible;          // True if this object is visible
    GLfloat       linewidth;        // Linewidth
    GLuint        selName;          // Select name
    LCreal        fRate;            // Flash rate
 
-   basic::Color*  color;           // Color
-   basic::Identifier*  colorName;  // Color name (if from color table)
+   base::Color*  color;           // Color
+   base::Identifier*  colorName;  // Color name (if from color table)
 
    osg::Vec3*       vertices;      // Vertices
    unsigned int     nv;            // Number of vertices
@@ -481,7 +481,7 @@ private:
    GLuint        stippleFactor;    // line stipple factor (multiplier for each bit in line stipple pattern)
    GLushort      stipplePattern;   // line stipple pattern (16-bit pattern for which fragments of line to draw)
    bool          mask;             // are we masking?
-   basic::Identifier* materialName;   // our material name
+   base::Identifier* materialName;   // our material name
    graphics::Material* materialObj;   // material object, if we have one.
 
    osg::Vec4 lightPos;             // light position relative to us (default is leave it where it was)

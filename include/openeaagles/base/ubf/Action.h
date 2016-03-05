@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace basic {
+namespace base {
    class Component;
 
 namespace ubf {
@@ -22,9 +22,9 @@ namespace ubf {
 //
 // Factory name: UbfAction
 //------------------------------------------------------------------------------
-class Action : public basic::Object
+class Action : public base::Object
 {
-   DECLARE_SUBCLASS(Action, basic::Object)
+   DECLARE_SUBCLASS(Action, base::Object)
 
 public:
    Action();
@@ -33,7 +33,7 @@ public:
    void setVote(const unsigned int x);
 
    // Execute the behavior
-   virtual bool execute(basic::Component* actor)=0;
+   virtual bool execute(base::Component* actor)=0;
 
 private:
    unsigned int vote;
@@ -43,7 +43,7 @@ inline void Action::setVote(const unsigned int x)      { vote = x; return; }
 inline unsigned int Action::getVote() const            { return vote; }
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

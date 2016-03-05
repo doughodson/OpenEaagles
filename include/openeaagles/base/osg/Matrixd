@@ -229,7 +229,7 @@ class Matrixd
         /** ortho-normalize the 3x3 rotation & scale matrix */ 
         void orthoNormalize(const Matrixd& rhs); 
 
-        // basic utility functions to create new matrices
+        // utility functions to create new matrices
         inline static Matrixd identity( void );
         inline static Matrixd scale( const Vec3f& sv);
         inline static Matrixd scale( const Vec3d& sv);

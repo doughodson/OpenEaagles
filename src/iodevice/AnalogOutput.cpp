@@ -29,12 +29,12 @@ END_SLOTTABLE(AnalogOutput)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(AnalogOutput)
-    ON_SLOT( 1, setSlotLocation, basic::Number)
-    ON_SLOT( 2, setSlotChannel,  basic::Number)
-    ON_SLOT( 3, setSlotValue,    basic::Number)
-    ON_SLOT( 4, setSlotOffset,   basic::Number)
-    ON_SLOT( 5, setSlotGain,     basic::Number)
-    ON_SLOT( 6, setTable,        basic::Table1)
+    ON_SLOT( 1, setSlotLocation, base::Number)
+    ON_SLOT( 2, setSlotChannel,  base::Number)
+    ON_SLOT( 3, setSlotValue,    base::Number)
+    ON_SLOT( 4, setSlotOffset,   base::Number)
+    ON_SLOT( 5, setSlotGain,     base::Number)
+    ON_SLOT( 6, setTable,        base::Table1)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ void AnalogOutput::copyData(const AnalogOutput& org, const bool cc)
    gain = org.gain;
    offset = org.offset;
    {
-      const basic::Table1* copy = nullptr;
+      const base::Table1* copy = nullptr;
       if (org.table != nullptr) {
          copy = org.table->clone();
       }
@@ -118,7 +118,7 @@ LCreal AnalogOutput::getGain() const
    return gain;
 }
 
-const basic::Table1* AnalogOutput::getTable() const
+const base::Table1* AnalogOutput::getTable() const
 {
    return table;
 }
@@ -163,7 +163,7 @@ bool AnalogOutput::setGain(const LCreal v)
 }
 
 // table: Shaping function table
-bool AnalogOutput::setTable(const basic::Table1* const msg)
+bool AnalogOutput::setTable(const base::Table1* const msg)
 {
     bool ok = true;
 
@@ -195,14 +195,14 @@ bool AnalogOutput::setTable(const basic::Table1* const msg)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void AnalogOutput::processInputs(const LCreal, const basic::IoDevice* const, basic::IoData* const)
+void AnalogOutput::processInputs(const LCreal, const base::IoDevice* const, base::IoData* const)
 {
 }
 
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void AnalogOutput::processOutputs(const LCreal, const basic::IoData* const outData, basic::IoDevice* const device)
+void AnalogOutput::processOutputs(const LCreal, const base::IoData* const outData, base::IoDevice* const device)
 {
    // Get a value form the cockpit output handler
    if (outData != nullptr) {
@@ -224,7 +224,7 @@ void AnalogOutput::processOutputs(const LCreal, const basic::IoData* const outDa
 //------------------------------------------------------------------------------
 
 // location: Output array index (location)
-bool AnalogOutput::setSlotLocation(const basic::Number* const msg)
+bool AnalogOutput::setSlotLocation(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -237,7 +237,7 @@ bool AnalogOutput::setSlotLocation(const basic::Number* const msg)
 }
 
 // channel: AI card's channel number
-bool AnalogOutput::setSlotChannel(const basic::Number* const msg)
+bool AnalogOutput::setSlotChannel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -250,7 +250,7 @@ bool AnalogOutput::setSlotChannel(const basic::Number* const msg)
 }
 
 // value: Initial value (default: 0)
-bool AnalogOutput::setSlotValue(const basic::Number* const msg)
+bool AnalogOutput::setSlotValue(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -260,7 +260,7 @@ bool AnalogOutput::setSlotValue(const basic::Number* const msg)
 }
 
 // offset: Offset value
-bool AnalogOutput::setSlotOffset(const basic::Number* const msg)
+bool AnalogOutput::setSlotOffset(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -270,7 +270,7 @@ bool AnalogOutput::setSlotOffset(const basic::Number* const msg)
 }
 
 // gain: Gain value
-bool AnalogOutput::setSlotGain(const basic::Number* const msg)
+bool AnalogOutput::setSlotGain(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -288,7 +288,7 @@ bool AnalogOutput::setSlotGain(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* AnalogOutput::getSlotByIndex(const int si)
+base::Object* AnalogOutput::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

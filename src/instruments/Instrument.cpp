@@ -21,16 +21,16 @@ END_SLOTTABLE(Instrument)
 //  Map slot table to handles for Instrument
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Instrument)
-    ON_SLOT(1, setSlotScalingTable, basic::Table1)
-    ON_SLOT(2, setSlotInstVal, basic::Number)
-    ON_SLOT(3, setSlotAllowValPass, basic::Number)
+    ON_SLOT(1, setSlotScalingTable, base::Table1)
+    ON_SLOT(2, setSlotInstVal, base::Number)
+    ON_SLOT(3, setSlotAllowValPass, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
 //  Event table
 //------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Instrument)
-    ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdateInstVal, basic::Number)
+    ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdateInstVal, base::Number)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ void Instrument::copyData(const Instrument& org, const bool cc)
     if (cc) myTable = 0;
 
     if (org.myTable != 0) {
-        basic::Table1* copy = org.myTable->clone();
+        base::Table1* copy = org.myTable->clone();
         setSlotScalingTable( copy );
         copy->unref();
     }
@@ -84,7 +84,7 @@ void Instrument::deleteData()
 //------------------------------------------------------------------------------
 // setSlotScalingTable() --
 //------------------------------------------------------------------------------
-bool Instrument::setSlotScalingTable(const basic::Table1* const newTable)
+bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 {
    bool ok = false;
    if (newTable != 0) {
@@ -99,7 +99,7 @@ bool Instrument::setSlotScalingTable(const basic::Table1* const newTable)
 //------------------------------------------------------------------------------
 // setSlotInstVal() -- sets our instrument value slot
 //------------------------------------------------------------------------------
-bool Instrument::setSlotInstVal(const basic::Number* const newVal)
+bool Instrument::setSlotInstVal(const base::Number* const newVal)
 {
     bool ok = false;
     if (newVal != 0) ok = setInstVal(newVal->getReal());
@@ -109,7 +109,7 @@ bool Instrument::setSlotInstVal(const basic::Number* const newVal)
 //------------------------------------------------------------------------------
 // setSlotAllowValPass() --
 //------------------------------------------------------------------------------
-bool Instrument::setSlotAllowValPass(const basic::Number* const newAVP)
+bool Instrument::setSlotAllowValPass(const base::Number* const newAVP)
 {
     bool ok = false;
     if (newAVP != 0) ok = setAllowValPass(newAVP->getBoolean());
@@ -131,7 +131,7 @@ bool Instrument::setAllowValPass(const bool newVP)
 //------------------------------------------------------------------------------
 // onUpdateInstVal() -- update our instrument value
 //------------------------------------------------------------------------------
-bool Instrument::onUpdateInstVal(const basic::Number* const newPos)
+bool Instrument::onUpdateInstVal(const base::Number* const newPos)
 {
     bool ok = false;
     // now call our set function
@@ -168,15 +168,15 @@ void Instrument::updateData(const LCreal dt)
    // only tell the rest of our instruments our value if we want them to know it
    if (allowPassing) {
       // sort out the instruments from our components
-      basic::PairStream* ps = getComponents();
+      base::PairStream* ps = getComponents();
       if (ps != 0) {
-         basic::List::Item* item = ps->getFirstItem();
+         base::List::Item* item = ps->getFirstItem();
          while(item != 0) {
-            basic::Pair* pair = (basic::Pair*) item->getValue();
+            base::Pair* pair = (base::Pair*) item->getValue();
             if (pair != 0) {
                // send the value down to all of our instrument components
                Instrument* myInst = dynamic_cast<Instrument*>(pair->object());
-               basic::Number n = preScaleInstVal;
+               base::Number n = preScaleInstVal;
                if (myInst != 0) myInst->event(UPDATE_INSTRUMENTS, &n);
             }
             item = item->getNext();
@@ -190,7 +190,7 @@ void Instrument::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Instrument
 //------------------------------------------------------------------------------
-basic::Object* Instrument::getSlotByIndex(const int si)
+base::Object* Instrument::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

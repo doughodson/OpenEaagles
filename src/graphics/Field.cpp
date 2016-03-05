@@ -38,18 +38,18 @@ END_SLOTTABLE(Field)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Field)
-    ON_SLOT(1, setPosition, basic::List)
-    ON_SLOT(2, setSlotWidth, basic::Number)
-    ON_SLOT(3, setSlotHighlight, basic::Number)
-    ON_SLOT(4, setSlotUnderline, basic::Number)
-    ON_SLOT(5, setSlotReversed, basic::Number)
-    ON_SLOT(6, setSlotJustification, basic::String)
-    ON_SLOT(7, setSlotVertical, basic::Number)
-    ON_SLOT(8, setSlotBrackets, basic::Number)
-    ON_SLOT(9, setSlotLinked, basic::Number)
-    ON_SLOT(10, setSlotInheritColor,basic::Number)
-    ON_SLOT(11, setSlotFont, basic::String)
-    ON_SLOT(12, setSlotStartCharPos, basic::Number)
+    ON_SLOT(1, setPosition, base::List)
+    ON_SLOT(2, setSlotWidth, base::Number)
+    ON_SLOT(3, setSlotHighlight, base::Number)
+    ON_SLOT(4, setSlotUnderline, base::Number)
+    ON_SLOT(5, setSlotReversed, base::Number)
+    ON_SLOT(6, setSlotJustification, base::String)
+    ON_SLOT(7, setSlotVertical, base::Number)
+    ON_SLOT(8, setSlotBrackets, base::Number)
+    ON_SLOT(9, setSlotLinked, base::Number)
+    ON_SLOT(10, setSlotInheritColor,base::Number)
+    ON_SLOT(11, setSlotFont, base::String)
+    ON_SLOT(12, setSlotStartCharPos, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -72,14 +72,14 @@ BEGIN_EVENT_HANDLER(Field)
             }
         }
     }
-    ON_EVENT_OBJ(SET_POSITION,setPosition,basic::List)
-    ON_EVENT_OBJ(SET_LINE,onSetLine,basic::Number)
-    ON_EVENT_OBJ(SET_COLUMN,onSetColumn,basic::Number)
-    ON_EVENT_OBJ(SET_WIDTH,setSlotWidth,basic::Number)
-    ON_EVENT_OBJ(SET_HIGHLIGHT,setSlotHighlight,basic::Number)
-    ON_EVENT_OBJ(SET_UNDERLINE,setSlotUnderline,basic::Number)
-    ON_EVENT_OBJ(SET_REVERSED,setSlotReversed,basic::Number)
-    ON_EVENT_OBJ(SET_JUSTIFICATION,setSlotJustification,basic::String)
+    ON_EVENT_OBJ(SET_POSITION,setPosition,base::List)
+    ON_EVENT_OBJ(SET_LINE,onSetLine,base::Number)
+    ON_EVENT_OBJ(SET_COLUMN,onSetColumn,base::Number)
+    ON_EVENT_OBJ(SET_WIDTH,setSlotWidth,base::Number)
+    ON_EVENT_OBJ(SET_HIGHLIGHT,setSlotHighlight,base::Number)
+    ON_EVENT_OBJ(SET_UNDERLINE,setSlotUnderline,base::Number)
+    ON_EVENT_OBJ(SET_REVERSED,setSlotReversed,base::Number)
+    ON_EVENT_OBJ(SET_JUSTIFICATION,setSlotJustification,base::String)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -92,7 +92,7 @@ Field::Field() : origStr(), inputExample(), str()
     cp = 0;
     w  = 0;
     dmode = 0;
-    jmode = basic::String::NONE;
+    jmode = base::String::NONE;
     mode = display;
     icp = 0;
     inpDspMode = 0;
@@ -139,7 +139,7 @@ void Field::deleteData()
     w  = 0;
     str.empty();
     dmode = 0;
-    jmode = basic::String::NONE;
+    jmode = base::String::NONE;
     mode  = display;
     icp   = 0;
     inpDspMode = 0;
@@ -231,12 +231,12 @@ void Field::setText(const char newString[])
 //------------------------------------------------------------------------------
 // justification() --
 //------------------------------------------------------------------------------
-basic::String::Justify Field::justification() const
+base::String::Justify Field::justification() const
 {
     return jmode;
 }
 
-basic::String::Justify Field::justification(const basic::String::Justify t)
+base::String::Justify Field::justification(const base::String::Justify t)
 {
     jmode = t;
     if (mode == display) adjust();
@@ -479,7 +479,7 @@ void Field::drawFunc()
 
     if (!isInheritColor()) {
         if (getColorName() == nullptr && getColor() == nullptr) {
-            const basic::Color* cc = nullptr;
+            const base::Color* cc = nullptr;
             if (isHighLighted()) cc = dsp->getHighlightColor();
             else cc = dsp->getNormColor();
             if (cc != nullptr) {
@@ -532,7 +532,7 @@ void Field::drawFunc()
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Field
 //------------------------------------------------------------------------------
-basic::Object* Field::getSlotByIndex(const int si)
+base::Object* Field::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -541,7 +541,7 @@ basic::Object* Field::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // setPosition() -- set position: [ Line Column ]
 //------------------------------------------------------------------------------
-bool Field::setPosition(const basic::List* const spobj)
+bool Field::setPosition(const base::List* const spobj)
 {
     bool ok = true;
     if (spobj != nullptr) {
@@ -565,7 +565,7 @@ bool Field::setPosition(const basic::List* const spobj)
 //------------------------------------------------------------------------------
 // setLine() --
 //------------------------------------------------------------------------------
-bool Field::onSetLine(const basic::Number* const oslobj)
+bool Field::onSetLine(const base::Number* const oslobj)
 {
     if (oslobj != nullptr) line(oslobj->getInt());
     return true;
@@ -574,7 +574,7 @@ bool Field::onSetLine(const basic::Number* const oslobj)
 //------------------------------------------------------------------------------
 // setColumn() --
 //------------------------------------------------------------------------------
-bool Field::onSetColumn(const basic::Number* const oscobj)
+bool Field::onSetColumn(const base::Number* const oscobj)
 {
    if (oscobj != nullptr) column(oscobj->getInt());
    return true;
@@ -583,7 +583,7 @@ bool Field::onSetColumn(const basic::Number* const oscobj)
 //------------------------------------------------------------------------------
 // setSlotWidth() --
 //------------------------------------------------------------------------------
-bool Field::setSlotWidth(const basic::Number* const swobj)
+bool Field::setSlotWidth(const base::Number* const swobj)
 {
 
     if (swobj != nullptr) width(swobj->getInt());
@@ -593,7 +593,7 @@ bool Field::setSlotWidth(const basic::Number* const swobj)
 //------------------------------------------------------------------------------
 // setSlotHighlight() --
 //------------------------------------------------------------------------------
-bool Field::setSlotHighlight(const basic::Number* const shobj)
+bool Field::setSlotHighlight(const base::Number* const shobj)
 {
     if (shobj != nullptr) {
         // Set our mode
@@ -606,12 +606,12 @@ bool Field::setSlotHighlight(const basic::Number* const shobj)
             clearDisplayMode(highlight1);
         }
 
-        basic::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents = getComponents();
         if (subcomponents != nullptr) {
 
-            const basic::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
+                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotHighlight(shobj); //changed from obj
                 item = item->getNext();
@@ -627,7 +627,7 @@ bool Field::setSlotHighlight(const basic::Number* const shobj)
 //------------------------------------------------------------------------------
 // setSlotUnderline() --
 //------------------------------------------------------------------------------
-bool Field::setSlotUnderline(const basic::Number* const suobj)
+bool Field::setSlotUnderline(const base::Number* const suobj)
 {
     if (suobj != nullptr) {
 
@@ -642,12 +642,12 @@ bool Field::setSlotUnderline(const basic::Number* const suobj)
         }
 
         // Set our children's mode
-        basic::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents = getComponents();
         if (subcomponents != nullptr) {
 
-            const basic::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
+                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotUnderline(suobj);
                 item = item->getNext();
@@ -663,7 +663,7 @@ bool Field::setSlotUnderline(const basic::Number* const suobj)
 //------------------------------------------------------------------------------
 // setSlotReversed() --
 //------------------------------------------------------------------------------
-bool Field::setSlotReversed(const basic::Number* const srobj)
+bool Field::setSlotReversed(const base::Number* const srobj)
 {
 
     if (srobj != nullptr) {
@@ -679,12 +679,12 @@ bool Field::setSlotReversed(const basic::Number* const srobj)
         }
 
         // Set our children's mode
-        basic::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents = getComponents();
         if (subcomponents != nullptr) {
 
-            const basic::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
+                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotReversed(srobj);
                 item = item->getNext();
@@ -701,7 +701,7 @@ bool Field::setSlotReversed(const basic::Number* const srobj)
 //------------------------------------------------------------------------------
 // setSlotVertical() --
 //------------------------------------------------------------------------------
-bool Field::setSlotVertical(const basic::Number* const ssobj)
+bool Field::setSlotVertical(const base::Number* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -721,7 +721,7 @@ bool Field::setSlotVertical(const basic::Number* const ssobj)
 //------------------------------------------------------------------------------
 // setSlotBrackets() --
 //------------------------------------------------------------------------------
-bool Field::setSlotBrackets(const basic::Number* const ssobj)
+bool Field::setSlotBrackets(const base::Number* const ssobj)
 {
     if (ssobj != nullptr) {
         // Set our mode
@@ -740,7 +740,7 @@ bool Field::setSlotBrackets(const basic::Number* const ssobj)
 //------------------------------------------------------------------------------
 // setSlotLinked() --
 //------------------------------------------------------------------------------
-bool Field::setSlotLinked(const basic::Number* const msg)
+bool Field::setSlotLinked(const base::Number* const msg)
 {
     if (msg != nullptr) {
         setLinked( msg->getBoolean() );
@@ -751,7 +751,7 @@ bool Field::setSlotLinked(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // setSlotInheritColor() --
 //------------------------------------------------------------------------------
-bool Field::setSlotInheritColor(const basic::Number* const ic)
+bool Field::setSlotInheritColor(const base::Number* const ic)
 {
     bool ok = false;
     if (ic != nullptr) {
@@ -763,20 +763,20 @@ bool Field::setSlotInheritColor(const basic::Number* const ic)
 //------------------------------------------------------------------------------
 // setSlotJustification() --
 //------------------------------------------------------------------------------
-bool Field::setSlotJustification(const basic::String* const sjobj)
+bool Field::setSlotJustification(const base::String* const sjobj)
 {
     bool ok = true;
     if (sjobj != nullptr) {
 
         // Set our justification
         if ( *sjobj == "none" )
-            justification(basic::String::NONE);
+            justification(base::String::NONE);
         else if ( *sjobj == "left" )
-            justification(basic::String::LEFT);
+            justification(base::String::LEFT);
         else if ( *sjobj == "center" )
-            justification(basic::String::CENTER);
+            justification(base::String::CENTER);
         else if ( *sjobj == "right" )
-            justification(basic::String::RIGHT);
+            justification(base::String::RIGHT);
         else {
               if (isMessageEnabled(MSG_ERROR)) {
             std::cerr << "Field::setJustification: No proper inputs" << std::endl;
@@ -785,12 +785,12 @@ bool Field::setSlotJustification(const basic::String* const sjobj)
         }
 
         // Set our children's justification
-        basic::PairStream* subcomponents = getComponents();
+        base::PairStream* subcomponents = getComponents();
         if (subcomponents != nullptr) {
 
-            const basic::List::Item* item = subcomponents->getFirstItem();
+            const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                basic::Pair* p = const_cast<basic::Pair*>(static_cast<const basic::Pair*>(item->getValue()));
+                base::Pair* p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
                 Field* child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotJustification(sjobj);
                 item = item->getNext();
@@ -803,7 +803,7 @@ bool Field::setSlotJustification(const basic::String* const sjobj)
     return ok;
 }
 
-bool Field::setSlotFont(const basic::String* const font)
+bool Field::setSlotFont(const base::String* const font)
 {
     bool ok = false;
     if (fontName != nullptr) fontName->unref();
@@ -816,7 +816,7 @@ bool Field::setSlotFont(const basic::String* const font)
     return ok;
 }
 
-bool Field::setSlotStartCharPos(const basic::Number* const msg) {
+bool Field::setSlotStartCharPos(const base::Number* const msg) {
     bool ok = false;
     if (msg != nullptr) {
         int ii = msg->getInt();
@@ -881,10 +881,10 @@ std::ostream& Field::serialize(std::ostream& sout, const int i, const bool slots
     indent(sout,i+j);
     sout << "justification: ";
     switch (jmode) {
-        case basic::String::NONE   : sout << "\"none\"";    break;
-        case basic::String::LEFT   : sout << "\"left\"";    break;
-        case basic::String::CENTER : sout << "\"center\"";  break;
-        case basic::String::RIGHT  : sout << "\"right\"";   break;
+        case base::String::NONE   : sout << "\"none\"";    break;
+        case base::String::LEFT   : sout << "\"left\"";    break;
+        case base::String::CENTER : sout << "\"center\"";  break;
+        case base::String::RIGHT  : sout << "\"right\"";   break;
     }
     sout << std::endl;
 

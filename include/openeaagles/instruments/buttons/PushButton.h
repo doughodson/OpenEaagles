@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       PushButton
-// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button -> PushButton
+// Base class:  base::Object -> base::Component -> graphics::Graphic -> Button -> PushButton
 // Description: Button which will select one or another graphic based on being pressed or not.
 //------------------------------------------------------------------------------
 #ifndef __oe_instruments_PushButton_H__
@@ -34,12 +34,12 @@ public:
    bool onCancel() override;
 
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // sets the pushbutton type to momentary = false or maintained = true
-   bool setSlotFunction(const basic::Number* const newFunction);
-   bool setSlotStartState(const basic::Number* const newFunction);
+   bool setSlotFunction(const base::Number* const newFunction);
+   bool setSlotStartState(const base::Number* const newFunction);
 
 private:
    bool  functionType;     //false = momentary, true = maintained

@@ -12,9 +12,9 @@ namespace oe {
 
 namespace otw {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
     // Common Image Generation Interface (CIGI)
     if ( std::strcmp(name, OtwCigiCl::getFactoryName()) == 0 ) {

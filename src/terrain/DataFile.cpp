@@ -178,11 +178,11 @@ unsigned int DataFile::getElevations(
 
    // Spacing between points (in each direction)
    double deltaPoint = maxRng / (n - 1);
-   double dirR = direction * basic::Angle::D2RCC;
-   double deltaNorth = deltaPoint * std::cos(dirR) * basic::Distance::M2NM;  // (NM)
-   double deltaEast  = deltaPoint * std::sin(dirR) * basic::Distance::M2NM;
+   double dirR = direction * base::Angle::D2RCC;
+   double deltaNorth = deltaPoint * std::cos(dirR) * base::Distance::M2NM;  // (NM)
+   double deltaEast  = deltaPoint * std::sin(dirR) * base::Distance::M2NM;
    double deltaLat = deltaNorth/60.0;
-   double deltaLon = deltaEast/(60.0 * std::cos(lat * basic::Angle::D2RCC));
+   double deltaLon = deltaEast/(60.0 * std::cos(lat * base::Angle::D2RCC));
    double deltaPointsLat = deltaLat / latSpacing;
    double deltaPointsLon = deltaLon / lonSpacing;
 

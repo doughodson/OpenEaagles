@@ -49,22 +49,22 @@ IMPLEMENT_SUBCLASS(Player,"Player")
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Player)
    // Player's initial position relative to the simulation's reference point
-   "initXPos",          //  1) Initial X position    (meters, basic::Distance)
-   "initYPos",          //  2) Initial Y position    (meters, basic::Distance)
-   "initAlt",           //  3) Initial Altitude      (meters, basic::Distance)
+   "initXPos",          //  1) Initial X position    (meters, base::Distance)
+   "initYPos",          //  2) Initial Y position    (meters, base::Distance)
+   "initAlt",           //  3) Initial Altitude      (meters, base::Distance)
    "initPosition",      //  4) Initial Position Vector: meters [ north east down ]
 
    // Player's initial position in latitude, longitude and altitude (from initAlt above)
-   "initLatitude",      //  5) Initial latitude    (basic::Angle, basic::LatLon or degrees)
-   "initLongitude",     //  6) Initial longitude    (basic::Angle, basic::LatLon or degrees)
+   "initLatitude",      //  5) Initial latitude    (base::Angle, base::LatLon or degrees)
+   "initLongitude",     //  6) Initial longitude    (base::Angle, base::LatLon or degrees)
 
    // Player's initial geocentric position
    "initGeocentric",    //  7) Initial geocentric position vector [ x y z ] (meters)
 
    // Player's initial Euler angles
-   "initRoll",          //  8) Initial roll:    (radians, basic::Angle) (or use initEuler)
-   "initPitch",         //  9) Initial pitch:   (radians, basic::Angle) (or use initEuler)
-   "initHeading",       // 10) Initial heading: (radians, basic::Angle) (or use initEuler)
+   "initRoll",          //  8) Initial roll:    (radians, base::Angle) (or use initEuler)
+   "initPitch",         //  9) Initial pitch:   (radians, base::Angle) (or use initEuler)
+   "initHeading",       // 10) Initial heading: (radians, base::Angle) (or use initEuler)
    "initEuler",         // 11) Initial Euler Angles: radians [ roll pitch yaw ] (or use below)
 
    // Player's initial velocity
@@ -83,7 +83,7 @@ BEGIN_SLOTTABLE(Player)
 
    "terrainElevReq",    // 21) Terrain elevation update requested
    "interpolateTerrain",// 22) Interpolate our terrain1 data
-   "terrainOffset",     // 23) Ground clamp offset from terrain to player's CG (basic::Distance)
+   "terrainOffset",     // 23) Ground clamp offset from terrain to player's CG (base::Distance)
 
    "positionFreeze",    // 24) Position freeze
    "altitudeFreeze",    // 25) Altitude freeze
@@ -108,69 +108,69 @@ END_SLOTTABLE(Player)
 // Map slot table to handles
 BEGIN_SLOT_MAP(Player)
 
-   ON_SLOT( 1, setSlotInitXPos, basic::Distance)
-   ON_SLOT( 1, setSlotInitXPos, basic::Number)
+   ON_SLOT( 1, setSlotInitXPos, base::Distance)
+   ON_SLOT( 1, setSlotInitXPos, base::Number)
 
-   ON_SLOT( 2, setSlotInitYPos, basic::Distance)
-   ON_SLOT( 2, setSlotInitYPos, basic::Number)
+   ON_SLOT( 2, setSlotInitYPos, base::Distance)
+   ON_SLOT( 2, setSlotInitYPos, base::Number)
 
-   ON_SLOT( 3, setSlotInitAlt,  basic::Distance)
-   ON_SLOT( 3, setSlotInitAlt,  basic::Number)
+   ON_SLOT( 3, setSlotInitAlt,  base::Distance)
+   ON_SLOT( 3, setSlotInitAlt,  base::Number)
 
-   ON_SLOT( 4, setSlotInitPosition, basic::List)
+   ON_SLOT( 4, setSlotInitPosition, base::List)
 
-   ON_SLOT( 5, setSlotInitLat, basic::LatLon)
-   ON_SLOT( 5, setSlotInitLat, basic::Angle)
-   ON_SLOT( 5, setSlotInitLat, basic::Number)
+   ON_SLOT( 5, setSlotInitLat, base::LatLon)
+   ON_SLOT( 5, setSlotInitLat, base::Angle)
+   ON_SLOT( 5, setSlotInitLat, base::Number)
 
-   ON_SLOT( 6, setSlotInitLon, basic::LatLon)
-   ON_SLOT( 6, setSlotInitLon, basic::Angle)
-   ON_SLOT( 6, setSlotInitLon, basic::Number)
+   ON_SLOT( 6, setSlotInitLon, base::LatLon)
+   ON_SLOT( 6, setSlotInitLon, base::Angle)
+   ON_SLOT( 6, setSlotInitLon, base::Number)
 
-   ON_SLOT( 7, setSlotInitGeocentric, basic::List)
+   ON_SLOT( 7, setSlotInitGeocentric, base::List)
 
-   ON_SLOT( 8, setSlotInitRoll, basic::Angle)
-   ON_SLOT( 8, setSlotInitRoll, basic::Number)
+   ON_SLOT( 8, setSlotInitRoll, base::Angle)
+   ON_SLOT( 8, setSlotInitRoll, base::Number)
 
-   ON_SLOT( 9, setSlotInitPitch, basic::Angle)
-   ON_SLOT( 9, setSlotInitPitch, basic::Number)
+   ON_SLOT( 9, setSlotInitPitch, base::Angle)
+   ON_SLOT( 9, setSlotInitPitch, base::Number)
 
-   ON_SLOT(10, setSlotInitHeading, basic::Angle)
-   ON_SLOT(10, setSlotInitHeading, basic::Number)
+   ON_SLOT(10, setSlotInitHeading, base::Angle)
+   ON_SLOT(10, setSlotInitHeading, base::Number)
 
-   ON_SLOT(11, setSlotInitEulerAngles, basic::List)
-   ON_SLOT(12, setSlotInitVelocity, basic::Number)
-   ON_SLOT(13, setSlotInitVelocityKts, basic::Number)
+   ON_SLOT(11, setSlotInitEulerAngles, base::List)
+   ON_SLOT(12, setSlotInitVelocity, base::Number)
+   ON_SLOT(13, setSlotInitVelocityKts, base::Number)
 
-   ON_SLOT(14, setType, basic::String)
-   ON_SLOT(15, setSlotID, basic::Number)
-   ON_SLOT(16, setSlotSide, basic::String)
-   ON_SLOT(17, setSlotInitMode, basic::String)
+   ON_SLOT(14, setType, base::String)
+   ON_SLOT(15, setSlotID, base::Number)
+   ON_SLOT(16, setSlotSide, base::String)
+   ON_SLOT(17, setSlotInitMode, base::String)
 
    ON_SLOT(18, setSlotSignature, RfSignature)
    ON_SLOT(19, setSlotIrSignature, IrSignature)
-   ON_SLOT(20, setSlotCamouflageType, basic::Number)
+   ON_SLOT(20, setSlotCamouflageType, base::Number)
 
-   ON_SLOT(21, setSlotTerrainElevReq, basic::Number)
-   ON_SLOT(22, setSlotInterpolateTerrain, basic::Number)
-   ON_SLOT(23, setSlotTerrainOffset, basic::Distance)
+   ON_SLOT(21, setSlotTerrainElevReq, base::Number)
+   ON_SLOT(22, setSlotInterpolateTerrain, base::Number)
+   ON_SLOT(23, setSlotTerrainOffset, base::Distance)
 
-   ON_SLOT(24, setSlotPositionFreeze, basic::Number)
-   ON_SLOT(25, setSlotAltitudeFreeze, basic::Number)
-   ON_SLOT(26, setSlotAttitudeFreeze, basic::Number)
-   ON_SLOT(27, setSlotFuelFreeze, basic::Number)
-   ON_SLOT(28, setSlotCrashOverride, basic::Number)
-   ON_SLOT(29, setSlotKillOverride, basic::Number)
-   ON_SLOT(30, setSlotKillRemoval, basic::Number)
-   ON_SLOT(31, setSlotEnableNetOutput, basic::Number)
-   ON_SLOT(32, setSlotDataLogTime, basic::Time)
+   ON_SLOT(24, setSlotPositionFreeze, base::Number)
+   ON_SLOT(25, setSlotAltitudeFreeze, base::Number)
+   ON_SLOT(26, setSlotAttitudeFreeze, base::Number)
+   ON_SLOT(27, setSlotFuelFreeze, base::Number)
+   ON_SLOT(28, setSlotCrashOverride, base::Number)
+   ON_SLOT(29, setSlotKillOverride, base::Number)
+   ON_SLOT(30, setSlotKillRemoval, base::Number)
+   ON_SLOT(31, setSlotEnableNetOutput, base::Number)
+   ON_SLOT(32, setSlotDataLogTime, base::Time)
 
-   ON_SLOT(33, setSlotTestRollRate, basic::Angle)
-   ON_SLOT(34, setSlotTestPitchRate, basic::Angle)
-   ON_SLOT(35, setSlotTestYawRate, basic::Angle)
-   ON_SLOT(36, setSlotTestBodyAxis, basic::Number)
+   ON_SLOT(33, setSlotTestRollRate, base::Angle)
+   ON_SLOT(34, setSlotTestPitchRate, base::Angle)
+   ON_SLOT(35, setSlotTestYawRate, base::Angle)
+   ON_SLOT(36, setSlotTestBodyAxis, base::Number)
 
-   ON_SLOT(37, setSlotUseCoordSys, basic::String)
+   ON_SLOT(37, setSlotUseCoordSys, base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -194,25 +194,25 @@ BEGIN_EVENT_HANDLER(Player)
    ON_EVENT_OBJ(RF_EMISSION,onRfEmissionEventPlayer,Emission)
 
    // Another player is requesting reflection of the R/F emission hitting us
-   ON_EVENT_OBJ(RF_REFLECTIONS_REQUEST, onReflectionsRequest, basic::Component)
+   ON_EVENT_OBJ(RF_REFLECTIONS_REQUEST, onReflectionsRequest, base::Component)
 
    // We were just hit by a reflected R/F emission
    ON_EVENT_OBJ(RF_REFLECTED_EMISSION,onRfReflectedEmissionEventPlayer,Emission)
 
    // Another player is cancelling its request for reflected R/F emissions
-   ON_EVENT_OBJ(RF_REFLECTIONS_CANCEL,  onReflectionsCancel,  basic::Component)
+   ON_EVENT_OBJ(RF_REFLECTIONS_CANCEL,  onReflectionsCancel,  base::Component)
 
    // Data link message event
-   ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEventPlayer,basic::Object)
+   ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEventPlayer,base::Object)
 
    // Weapon release button event (with switch state)
-   ON_EVENT_OBJ(WPN_REL_EVENT,onWpnRelEvent,basic::Boolean)
+   ON_EVENT_OBJ(WPN_REL_EVENT,onWpnRelEvent,base::Boolean)
 
    // Weapon release button event
    ON_EVENT(WPN_REL_EVENT,onWpnRelEvent)
 
    // Trigger switch (with switch state)
-   ON_EVENT_OBJ(TRIGGER_SW_EVENT,onTriggerSwEvent,basic::Boolean)
+   ON_EVENT_OBJ(TRIGGER_SW_EVENT,onTriggerSwEvent,base::Boolean)
 
    // Trigger event
    ON_EVENT(TRIGGER_SW_EVENT,onTriggerSwEvent)
@@ -224,7 +224,7 @@ BEGIN_EVENT_HANDLER(Player)
    ON_EVENT_OBJ(IR_QUERY,onIrMsgEventPlayer,IrQueryMsg)
 
    // We were just hit with a directed energy emission
-   ON_EVENT_OBJ(DE_EMISSION,onDeEmissionEvent,basic::Object)
+   ON_EVENT_OBJ(DE_EMISSION,onDeEmissionEvent,base::Object)
 
 END_EVENT_HANDLER()
 
@@ -245,7 +245,7 @@ Player::Player()
 //------------------------------------------------------------------------------
 void Player::initData()
 {
-   static basic::String generic("GenericPlayer");
+   static base::String generic("GenericPlayer");
    type = nullptr;
    setType(&generic);
 
@@ -257,13 +257,13 @@ void Player::initData()
    latitude = 0.0;
    longitude = 0.0;
    altitude = 0.0;
-   basic::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
 
    angles.set(0,0,0);
-   basic::Nav::computeRotationalMatrix(angles, &rm, &scPhi, &scTheta, &scPsi);
+   base::Nav::computeRotationalMatrix(angles, &rm, &scPhi, &scTheta, &scPsi);
 
    rmW2B = rm * wm;
-   basic::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    q.set(rm);
 
@@ -374,8 +374,8 @@ void Player::copyData(const Player& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   const basic::String* tt = org.type;
-   setType( const_cast<basic::String*>(static_cast<const basic::String*>(tt)) );
+   const base::String* tt = org.type;
+   setType( const_cast<base::String*>(static_cast<const base::String*>(tt)) );
 
    id = org.id;
 
@@ -839,7 +839,7 @@ bool Player::isHeadingHoldOn() const
 // Return commanded heading, default (radians)
 double Player::getCommandedHeading() const
 {
-   return getCommandedHeadingD() * static_cast<LCreal>(basic::Angle::D2RCC);
+   return getCommandedHeadingD() * static_cast<LCreal>(base::Angle::D2RCC);
 }
 
 // Return commanded heading (degrees)
@@ -854,7 +854,7 @@ double Player::getCommandedHeadingD() const
 // Return commanded heading (radians)
 double Player::getCommandedHeadingR() const
 {
-   return getCommandedHeadingD() * static_cast<LCreal>(basic::Angle::D2RCC);
+   return getCommandedHeadingD() * static_cast<LCreal>(base::Angle::D2RCC);
 }
 
 // Return true if velocity-hold mode is on
@@ -878,13 +878,13 @@ double Player::getCommandedVelocityKts() const
 // Commanded (true) velocity (Feet/Sec)
 double Player::getCommandedVelocityFps() const
 {
-   return getCommandedVelocityKts() * basic::Distance::NM2FT / basic::Time::H2S;
+   return getCommandedVelocityKts() * base::Distance::NM2FT / base::Time::H2S;
 }
 
 // Commanded (true) velocity (Meters/Sec)
 double Player::getCommandedVelocityMps() const
 {
-   return getCommandedVelocityKts() * basic::Distance::NM2M / basic::Time::H2S;
+   return getCommandedVelocityKts() * base::Distance::NM2M / base::Time::H2S;
 }
 
 // Return true if altitude-hold mode is on
@@ -914,7 +914,7 @@ double Player::getCommandedAltitudeM() const
 // Get commanded (HAE) altitude (feet)
 double Player::getCommandedAltitudeFt() const
 {
-   return getCommandedAltitude() * basic::Distance::M2FT;
+   return getCommandedAltitude() * base::Distance::M2FT;
 }
 
 // True if player is destroyed
@@ -946,18 +946,18 @@ const Nib* Player::getLocalNib(const unsigned int netId) const
 // Earth radius (meters)
 double Player::getEarthRadius() const
 {
-   double erad = basic::Nav::ERAD60 * basic::Distance::NM2M;  // (default)
+   double erad = base::Nav::ERAD60 * base::Distance::NM2M;  // (default)
 
    const Simulation* sim = getSimulation();
    if (sim != nullptr) {
-      const basic::EarthModel* pModel = sim->getEarthModel();
-      if (pModel == nullptr) pModel = &basic::EarthModel::wgs84;
+      const base::EarthModel* pModel = sim->getEarthModel();
+      if (pModel == nullptr) pModel = &base::EarthModel::wgs84;
 
       const double b  = pModel->getB();   // semi-major axis
       const double e2 = pModel->getE2();  // eccentricity squared
 
       const double slat = getLatitude();
-      const double cosSlat = std::cos(basic::Angle::D2RCC * slat);
+      const double cosSlat = std::cos(base::Angle::D2RCC * slat);
 
       erad = b / std::sqrt(1.0 - e2*cosSlat*cosSlat);
    }
@@ -1017,7 +1017,7 @@ const DynamicsModel* Player::getDynamicsModel() const
 }
 
 // Name of the Player's dynamics model
-const basic::Identifier* Player::getDynamicsModelName() const
+const base::Identifier* Player::getDynamicsModelName() const
 {
    return (dyn != nullptr) ? dyn->slot() : nullptr;
 }
@@ -1039,7 +1039,7 @@ const Pilot* Player::getPilot() const
 }
 
 // Name of the player's pilot model
-const basic::Identifier* Player::getPilotName() const
+const base::Identifier* Player::getPilotName() const
 {
    return (pilot != nullptr) ? pilot->slot() : nullptr;
 }
@@ -1062,7 +1062,7 @@ Pilot* Player::getPilotByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getPilotName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1090,9 +1090,9 @@ Pilot* Player::getPilotByName(const char* const name1)
 }
 
 // Returns a Pilot model by its type
-basic::Pair* Player::getPilotByType(const std::type_info& type)
+base::Pair* Player::getPilotByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;  // Our return value
+   base::Pair* p = nullptr;  // Our return value
 
    if (pilot != nullptr) {
       Pilot* root = getPilot();  // Root node of the list
@@ -1126,7 +1126,7 @@ const StoresMgr* Player::getStoresManagement() const
 }
 
 // Name of the player's stores (weapons, fuel) manager model
-const basic::Identifier* Player::getStoresManagementName() const
+const base::Identifier* Player::getStoresManagementName() const
 {
    return (sms != nullptr) ? sms->slot() : nullptr;
 }
@@ -1148,7 +1148,7 @@ const Datalink* Player::getDatalink() const
 }
 
 // Name of the player's top level Datalink model
-const basic::Identifier* Player::getDatalinkName() const
+const base::Identifier* Player::getDatalinkName() const
 {
    return (datalink != nullptr) ? datalink->slot() : nullptr;
 }
@@ -1171,7 +1171,7 @@ Datalink* Player::getDatalinkByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getDatalinkName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1199,9 +1199,9 @@ Datalink* Player::getDatalinkByName(const char* const name1)
 }
 
 // Returns a Datalink model by its type
-basic::Pair* Player::getDatalinkByType(const std::type_info& type)
+base::Pair* Player::getDatalinkByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;                 // Our return value
+   base::Pair* p = nullptr;                 // Our return value
 
    if (datalink != nullptr) {
       Datalink* root = getDatalink();  // Root node of the list
@@ -1235,7 +1235,7 @@ const Gimbal* Player::getGimbal() const
 }
 
 // Name of the player's top level Gimbal model
-const basic::Identifier* Player::getGimbalName() const
+const base::Identifier* Player::getGimbalName() const
 {
    return (gimbal != nullptr) ? gimbal->slot() : nullptr;
 }
@@ -1258,7 +1258,7 @@ Gimbal* Player::getGimbalByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getGimbalName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1286,9 +1286,9 @@ Gimbal* Player::getGimbalByName(const char* const name1)
 }
 
 // Returns a Gimbal model by its type
-basic::Pair* Player::getGimbalByType(const std::type_info& type)
+base::Pair* Player::getGimbalByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;                // Our return value
+   base::Pair* p = nullptr;                // Our return value
 
    if (gimbal != nullptr) {
       Gimbal* root = getGimbal();   // Root node of the list
@@ -1322,7 +1322,7 @@ const Navigation* Player::getNavigation() const
 }
 
 // Name of the player's top level Navigation model
-const basic::Identifier* Player::getNavigationName() const
+const base::Identifier* Player::getNavigationName() const
 {
    return (nav != nullptr) ? nav->slot() : nullptr;
 }
@@ -1345,7 +1345,7 @@ Navigation* Player::getNavigationByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getNavigationName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
@@ -1373,9 +1373,9 @@ Navigation* Player::getNavigationByName(const char* const name1)
 }
 
 // Returns a Navigation model by its type
-basic::Pair* Player::getNavigationByType(const std::type_info& type)
+base::Pair* Player::getNavigationByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;                 // Our return value
+   base::Pair* p = nullptr;                 // Our return value
 
    if (nav != nullptr) {
       Navigation* root = getNavigation();    // Root node of the list
@@ -1409,7 +1409,7 @@ const OnboardComputer* Player::getOnboardComputer() const
 }
 
 // Name of the player's top level OnboardComputer model
-const basic::Identifier* Player::getOnboardComputerName() const
+const base::Identifier* Player::getOnboardComputerName() const
 {
    return (obc != nullptr) ? obc->slot() : nullptr;
 }
@@ -1432,7 +1432,7 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getOnboardComputerName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
@@ -1460,9 +1460,9 @@ OnboardComputer* Player::getOnboardComputerByName(const char* const name1)
 }
 
 // Returns an OnboardComputer model by its type
-basic::Pair* Player::getOnboardComputerByType(const std::type_info& type)
+base::Pair* Player::getOnboardComputerByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;                // Our return value
+   base::Pair* p = nullptr;                // Our return value
 
    if (obc != nullptr) {
       OnboardComputer* root = getOnboardComputer();    // Root node of the list
@@ -1496,7 +1496,7 @@ const Radio* Player::getRadio() const
 }
 
 // Name of the player's top level Radio model
-const basic::Identifier* Player::getRadioName() const
+const base::Identifier* Player::getRadioName() const
 {
    return (radio != nullptr) ? radio->slot() : nullptr;
 }
@@ -1519,7 +1519,7 @@ Radio* Player::getRadioByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of the root system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getRadioName() == fname ) {
          // The first name matches our root name ...
          if (name[i] == '.') {
@@ -1547,9 +1547,9 @@ Radio* Player::getRadioByName(const char* const name1)
 }
 
 // Returns a Radio model by its type
-basic::Pair* Player::getRadioByType(const std::type_info& type)
+base::Pair* Player::getRadioByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;                // Our return value
+   base::Pair* p = nullptr;                // Our return value
 
    if (radio != nullptr) {
       Radio* root = getRadio();    // Root node of the list
@@ -1583,7 +1583,7 @@ const RfSensor* Player::getSensor() const
 }
 
 // Name of the player's top level R/F sensor model
-const basic::Identifier* Player::getSensorName() const
+const base::Identifier* Player::getSensorName() const
 {
    return (sensor != nullptr) ? sensor->slot() : nullptr;
 }
@@ -1606,7 +1606,7 @@ RfSensor* Player::getSensorByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getSensorName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1634,9 +1634,9 @@ RfSensor* Player::getSensorByName(const char* const name1)
 }
 
 // Returns a R/F sensor model by its type
-basic::Pair* Player::getSensorByType(const std::type_info& type)
+base::Pair* Player::getSensorByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;                // Our return value
+   base::Pair* p = nullptr;                // Our return value
 
    if (sensor != nullptr) {
       RfSensor* root = getSensor();   // Root node of the list
@@ -1670,7 +1670,7 @@ const IrSystem* Player::getIrSystem() const
 }
 
 // Name of the player's top level IR sensor model
-const basic::Identifier* Player::getIrSystemName() const
+const base::Identifier* Player::getIrSystemName() const
 {
    return (irSystem != nullptr) ? irSystem->slot() : nullptr;
 }
@@ -1693,7 +1693,7 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
       fname[i] = '\0';
 
       // Now compare the first name with the name of our top level system
-      basic::Pair* pair = nullptr;
+      base::Pair* pair = nullptr;
       if ( *getIrSystemName() == fname ) {
          // The first name matches our top level system name ...
          if (name[i] == '.') {
@@ -1721,9 +1721,9 @@ IrSystem* Player::getIrSystemByName(const char* const name1)
 }
 
 // Returns a IR sensor model by its type
-basic::Pair* Player::getIrSystemByType(const std::type_info& type)
+base::Pair* Player::getIrSystemByType(const std::type_info& type)
 {
-   basic::Pair* p = nullptr;                // Our return value
+   base::Pair* p = nullptr;                // Our return value
 
    if (irSystem != nullptr) {
       IrSystem* root = getIrSystem();   // Root node of the list
@@ -1745,10 +1745,10 @@ basic::Pair* Player::getIrSystemByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Sets player's type string ("F-16A", "Tank", "SA-6", etc)
-bool Player::setType(const basic::String* const msg)
+bool Player::setType(const base::String* const msg)
 {
    if (msg != nullptr) {
-      basic::String* p = msg->clone();
+      base::String* p = msg->clone();
       type.set(p, false);
    }
    else {
@@ -1758,7 +1758,7 @@ bool Player::setType(const basic::String* const msg)
 }
 
 // Set the player's name
-void Player::setName(const basic::Identifier& n)
+void Player::setName(const base::Identifier& n)
 {
    pname = n;
 }
@@ -1904,7 +1904,7 @@ bool Player::setHeadingHoldOn(const bool b)
 // Sets the commanded (true) heading (radians)
 bool Player::setCommandedHeading(const double h)
 {
-   return setCommandedHeadingD( h * basic::Angle::R2DCC );
+   return setCommandedHeadingD( h * base::Angle::R2DCC );
 }
 
 // Sets commanded (true) heading (true: degs)
@@ -1919,7 +1919,7 @@ bool Player::setCommandedHeadingD(const double h)
 // Sets the commanded (true) heading (radians)
 bool Player::setCommandedHeadingR(const double h)
 {
-   return setCommandedHeadingD( h * basic::Angle::R2DCC );
+   return setCommandedHeadingD( h * base::Angle::R2DCC );
 }
 
 // Enable/Disable velocity hold
@@ -1967,7 +1967,7 @@ bool Player::setCommandedAltitudeM(const double a)
 // Sets commanded (HAE) altitude (feet)
 bool Player::setCommandedAltitudeFt(const double a)
 {
-   return setCommandedAltitude( a * basic::Distance::FT2M );
+   return setCommandedAltitude( a * base::Distance::FT2M );
 }
 
 // Sets a pointer to the Network Interface Block (NIB)
@@ -2073,7 +2073,7 @@ bool Player::setPosition(const double n, const double e, const double d, const b
 {
    Simulation* s = getSimulation();
    const double maxRefRange = s->getMaxRefRange();
-   const basic::EarthModel* em = s->getEarthModel();
+   const base::EarthModel* em = s->getEarthModel();
 
    // Set the position vector relative to sim ref pt
    posVecNED.set(n, e, d);
@@ -2088,14 +2088,14 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       const double sinRlat = s->getSinRefLat();
-      basic::Nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
+      base::Nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
    }
    else {
-      basic::Nav::convertPosVec2llS(refLat, refLon, cosRlat, posVecNED, &latitude, &longitude, &altitude);
+      base::Nav::convertPosVec2llS(refLat, refLon, cosRlat, posVecNED, &latitude, &longitude, &altitude);
    }
 
    // compute the world matrix
-   basic::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
@@ -2103,7 +2103,7 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    // Compute & set the  geocentric position
    double lla[3] = { latitude, longitude, altitude };
    double ecef[3] = { 0, 0, 0 };
-   basic::Nav::convertGeod2Ecef(lla, ecef, em);
+   base::Nav::convertGeod2Ecef(lla, ecef, em);
    posVecECEF.set( ecef[0], ecef[1], ecef[2] );
 
    altSlaved = slaved;
@@ -2135,7 +2135,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
 {
    Simulation* s = getSimulation();
    const double maxRefRange = s->getMaxRefRange();
-   const basic::EarthModel* em = s->getEarthModel();
+   const base::EarthModel* em = s->getEarthModel();
 
    // Set the lat/lon position
    latitude = lat;
@@ -2143,7 +2143,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    altitude = alt;
 
    // compute the world matrix
-   basic::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
@@ -2154,10 +2154,10 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       const double sinRlat = s->getSinRefLat();
-      basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);
+      base::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);
    }
    else {
-      basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);
+      base::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);
    }
 
    // The position vector is valid if the gaming area range is unlimited (zero) or
@@ -2167,7 +2167,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    // Compute & set the geocentric position
    double lla[3] = { lat, lon, alt };
    double ecef[3] = { 0, 0, 0 };
-   basic::Nav::convertGeod2Ecef(lla, ecef, em);
+   base::Nav::convertGeod2Ecef(lla, ecef, em);
    posVecECEF.set( ecef[0], ecef[1], ecef[2] );
 
    altSlaved = slaved;
@@ -2182,7 +2182,7 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
 {
    Simulation* s = getSimulation();
    const double maxRefRange = s->getMaxRefRange();
-   const basic::EarthModel* em = s->getEarthModel();
+   const base::EarthModel* em = s->getEarthModel();
 
    // Set the geocentric position
    posVecECEF = pos;
@@ -2190,13 +2190,13 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
    // Compute & set the geodetic position
    double ecef[3] = { posVecECEF[0], posVecECEF[1], posVecECEF[2] };
    double lla[3] = { 0, 0, 0 };
-   basic::Nav::convertEcef2Geod(ecef, lla, em);
-   latitude = lla[basic::Nav::ILAT];
-   longitude = lla[basic::Nav::ILON];
-   altitude = lla[basic::Nav::IALT];
+   base::Nav::convertEcef2Geod(ecef, lla, em);
+   latitude = lla[base::Nav::ILAT];
+   longitude = lla[base::Nav::ILON];
+   altitude = lla[base::Nav::IALT];
 
    // compute the world matrix
-   basic::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
@@ -2207,10 +2207,10 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
    const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       const double sinRlat = s->getSinRefLat();
-      basic::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);
+      base::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);
    }
    else {
-      basic::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);
+      base::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);
    }
 
    // The position vector is valid if the gaming area range is unlimited (zero) or
@@ -2231,7 +2231,7 @@ bool Player::setEulerAngles(const double r, const double p, const double y)
    angles.set(r,p,y);
 
    // Compute rotational matrix and the sin/cos values of the angles
-   basic::Nav::computeRotationalMatrix(r, p, y, &rm, &scPhi, &scTheta, &scPsi);
+   base::Nav::computeRotationalMatrix(r, p, y, &rm, &scPhi, &scTheta, &scPsi);
 
    // Set quaternions
    q.set(rm);
@@ -2240,7 +2240,7 @@ bool Player::setEulerAngles(const double r, const double p, const double y)
    rmW2B = rm * wm;
 
    // compute geocentric orientation angles and their sin/cos values
-   basic::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    return true;
 }
@@ -2258,7 +2258,7 @@ bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
    anglesW = newAngles;
 
    // Compute sin/cos values and directional cosine matrix
-   basic::Nav::computeRotationalMatrix(anglesW, &rmW2B, &scPhiW, &scThetaW, &scPsiW);
+   base::Nav::computeRotationalMatrix(anglesW, &rmW2B, &scPhiW, &scThetaW, &scPsiW);
 
    // Transpose the world matrix
    osg::Matrixd wmT = wm;
@@ -2268,7 +2268,7 @@ bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
    rm = rmW2B * wmT;
 
    // compute Geodetic orientation angles
-   basic::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
+   base::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // Set quaternions
    q.set(rm);
@@ -2286,13 +2286,13 @@ bool Player::setRotMat(const osg::Matrixd& rr)
    q.set(rm);
 
    // Compute the Euler angles and the sin/cos values of the angles
-   basic::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
+   base::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
 
    // compute geocentric orientation angles and their sin/cos values
-   basic::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    return true;
 }
@@ -2307,13 +2307,13 @@ bool Player::setQuaternions(const osg::Quat& newQ)
    rm.makeRotate(q);
 
    // Compute the Euler angles and the sin/cos values of the angles
-   basic::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
+   base::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
 
    // compute geocentric orientation angles and their sin/cos values
-   basic::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    return true;
 }
@@ -2636,11 +2636,11 @@ bool Player::killedNotification(Player* const p)
 
       // Let all of our subcomponents know that we were just killed
       {
-         basic::PairStream* subcomponents = getComponents();
+         base::PairStream* subcomponents = getComponents();
          if (subcomponents != nullptr) {
-            for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-               basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
-               basic::Component* sc = static_cast<basic::Component*>(pair->object());
+            for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+               base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+               base::Component* sc = static_cast<base::Component*>(pair->object());
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2689,11 +2689,11 @@ bool Player::collisionNotification(Player* const p)
 
       // Let all of our subcomponents know that we were just killed
       {
-         basic::PairStream* subcomponents = getComponents();
+         base::PairStream* subcomponents = getComponents();
          if (subcomponents != nullptr) {
-            for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-               basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
-               basic::Component* sc = static_cast<basic::Component*>(pair->object());
+            for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+               base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+               base::Component* sc = static_cast<base::Component*>(pair->object());
                sc->event(KILL_EVENT, p);
             }
             subcomponents->unref();
@@ -2735,11 +2735,11 @@ bool Player::crashNotification()
       // Let our sensors know we were just killed
       // Let all of our subcomponents know that we were just killed
       {
-         basic::PairStream* subcomponents = getComponents();
+         base::PairStream* subcomponents = getComponents();
          if (subcomponents != nullptr) {
-            for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-               basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
-               basic::Component* sc = static_cast<basic::Component*>(pair->object());
+            for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+               base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+               base::Component* sc = static_cast<base::Component*>(pair->object());
                sc->event(KILL_EVENT);
             }
             subcomponents->unref();
@@ -2772,7 +2772,7 @@ bool Player::crashNotification()
 //------------------------------------------------------------------------------
 // onWpnRelEvent() -- Manage the Wpn Release event
 //------------------------------------------------------------------------------
-bool Player::onWpnRelEvent(const basic::Boolean* const sw)
+bool Player::onWpnRelEvent(const base::Boolean* const sw)
 {
    bool used = false;
 
@@ -2795,7 +2795,7 @@ bool Player::onWpnRelEvent(const basic::Boolean* const sw)
 //------------------------------------------------------------------------------
 // onTriggerSwEvent() -- Manage the trigger switch event
 //------------------------------------------------------------------------------
-bool Player::onTriggerSwEvent(const basic::Boolean* const sw)
+bool Player::onTriggerSwEvent(const base::Boolean* const sw)
 {
    bool used = false;
 
@@ -2919,7 +2919,7 @@ bool Player::onRfReflectedEmissionEventPlayer(Emission* const)
 // onReflectionsRequest() -- request reflected R/F emissions
 //                           (must continue to request once per second)
 //------------------------------------------------------------------------------
-bool Player::onReflectionsRequest(basic::Component* const p)
+bool Player::onReflectionsRequest(base::Component* const p)
 {
    bool ok = false;           // Did we succeed?
    unsigned int idx = 0;      // Empty slot index
@@ -2954,7 +2954,7 @@ bool Player::onReflectionsRequest(basic::Component* const p)
 //------------------------------------------------------------------------------
 // onReflectionsCancel() -- cancel a request for reflected R/F emissions
 //------------------------------------------------------------------------------
-bool Player::onReflectionsCancel(const basic::Component* const p)
+bool Player::onReflectionsCancel(const base::Component* const p)
 {
    bool ok = false;        // Did we succeed?
 
@@ -3031,7 +3031,7 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
 }
 
 // onDatalinkMessageEventPlayer() -- process datalink message events
-bool Player::onDatalinkMessageEventPlayer(basic::Object* const msg)
+bool Player::onDatalinkMessageEventPlayer(base::Object* const msg)
 {
    // Just pass it down to all of our datalink system
    if (getDatalink() != nullptr) {
@@ -3041,7 +3041,7 @@ bool Player::onDatalinkMessageEventPlayer(basic::Object* const msg)
 }
 
 // Handles the DE_EMISSION event
-bool Player::onDeEmissionEvent(basic::Object* const)
+bool Player::onDeEmissionEvent(base::Object* const)
 {
    return false;
 }
@@ -3215,11 +3215,11 @@ void Player::positionUpdate(const LCreal dt)
 
          if (!pfrz) {
 
-            double slat = std::sin(latitude * basic::Angle::D2RCC);
-            double clat = std::cos(latitude * basic::Angle::D2RCC);
+            double slat = std::sin(latitude * base::Angle::D2RCC);
+            double clat = std::cos(latitude * base::Angle::D2RCC);
 
-            const basic::EarthModel* em = getSimulation()->getEarthModel();
-            if (em == nullptr) em = &basic::EarthModel::wgs84;
+            const base::EarthModel* em = getSimulation()->getEarthModel();
+            if (em == nullptr) em = &base::EarthModel::wgs84;
 
             const double a  = em->getA();   // semi-major axis (meters)
             const double e2 = em->getE2();  // eccentricity squared
@@ -3232,14 +3232,14 @@ void Player::positionUpdate(const LCreal dt)
             // ### May not support crossing the north or south pole correctly ###
             double dn = (ue + ue0) * 0.5 * dt;
             double dlatR = ( 1.0 / rm ) * dn;
-            newLatitude += (dlatR * basic::Angle::R2DCC);
+            newLatitude += (dlatR * base::Angle::R2DCC);
             if (newLatitude >  90.0) {
                newLatitude = 180.0 - newLatitude;
-               newLongitude = basic::Angle::aepcdDeg( newLongitude + 180.0 );
+               newLongitude = base::Angle::aepcdDeg( newLongitude + 180.0 );
             }
             if (newLatitude < -90.0) {
                newLatitude = -180.0 - newLatitude;
-               newLongitude = basic::Angle::aepcdDeg( newLongitude + 180.0 );
+               newLongitude = base::Angle::aepcdDeg( newLongitude + 180.0 );
             }
 
             // Update longitude
@@ -3247,7 +3247,7 @@ void Player::positionUpdate(const LCreal dt)
                double de = (ve + ve0) * 0.5 * dt;
                double dlonR = ( 1.0 / (rn * clat) ) * de;
 
-               newLongitude += (dlonR * basic::Angle::R2DCC);
+               newLongitude += (dlonR * base::Angle::R2DCC);
                if (newLongitude >  180.0) newLongitude -= 360.0;
                if (newLongitude < -180.0) newLongitude += 360.0;
             }
@@ -3301,11 +3301,11 @@ void Player::positionUpdate(const LCreal dt)
                double ecef[3] = { newPosVecECEF[0], newPosVecECEF[1], newPosVecECEF[2] };
                double lla[3] = { 0, 0, 0 };
 
-               const basic::EarthModel* em = getSimulation()->getEarthModel();
-               basic::Nav::convertEcef2Geod(ecef, lla, em);
+               const base::EarthModel* em = getSimulation()->getEarthModel();
+               base::Nav::convertEcef2Geod(ecef, lla, em);
 
                // 3) Set position using these ground clamped coordinates
-               setPositionLLA(lla[basic::Nav::ILAT], lla[basic::Nav::ILON], alt);
+               setPositionLLA(lla[base::Nav::ILAT], lla[base::Nav::ILON], alt);
             }
          }
 
@@ -3348,9 +3348,9 @@ void Player::positionUpdate(const LCreal dt)
       // Update angles
       osg::Vec3d oldAngles = getEulerAngles();
       osg::Vec3d newAngles;
-      newAngles[0] = basic::Angle::aepcdRad(oldAngles[0] + (pe * dt));
-      newAngles[1] = basic::Angle::aepcdRad(oldAngles[1] + (qe * dt));
-      newAngles[2] = basic::Angle::aepcdRad(oldAngles[2] + (re * dt));
+      newAngles[0] = base::Angle::aepcdRad(oldAngles[0] + (pe * dt));
+      newAngles[1] = base::Angle::aepcdRad(oldAngles[1] + (qe * dt));
+      newAngles[2] = base::Angle::aepcdRad(oldAngles[2] + (re * dt));
       if (newAngles[1] >  PI/2) newAngles[1] -= PI;
       if (newAngles[1] < -PI/2) newAngles[1] += PI;
       setEulerAngles(newAngles);
@@ -3361,11 +3361,11 @@ void Player::positionUpdate(const LCreal dt)
 
       if (isMessageEnabled(MSG_INFO)) {
          std::cout << "r1[ " << getRollD() << ", " << getPitchD() << ", " << getHeadingD() << " ]";
-         std::cout << " tr[ " << testAngRates[0]*basic::Angle::R2DCC << ", " << testAngRates[1]*basic::Angle::R2DCC << ", " << testAngRates[2]*basic::Angle::R2DCC << " ]";
-         std::cout << " er[ " << pe*basic::Angle::R2DCC << ", " << qe*basic::Angle::R2DCC << ", " << re*basic::Angle::R2DCC << " ]";
-         std::cout << " br[ " << pa*basic::Angle::R2DCC << ", " << qa*basic::Angle::R2DCC << ", " << ra*basic::Angle::R2DCC << " ]";
-         std::cout << " na[ " << newAngles[0]*basic::Angle::R2DCC << ", " << newAngles[1]*basic::Angle::R2DCC << ", " << newAngles[2]*basic::Angle::R2DCC << " ]";
-         std::cout << " oa[ " << oldAngles[0]*basic::Angle::R2DCC << ", " << oldAngles[1]*basic::Angle::R2DCC << ", " << oldAngles[2]*basic::Angle::R2DCC << " ]";
+         std::cout << " tr[ " << testAngRates[0]*base::Angle::R2DCC << ", " << testAngRates[1]*base::Angle::R2DCC << ", " << testAngRates[2]*base::Angle::R2DCC << " ]";
+         std::cout << " er[ " << pe*base::Angle::R2DCC << ", " << qe*base::Angle::R2DCC << ", " << re*base::Angle::R2DCC << " ]";
+         std::cout << " br[ " << pa*base::Angle::R2DCC << ", " << qa*base::Angle::R2DCC << ", " << ra*base::Angle::R2DCC << " ]";
+         std::cout << " na[ " << newAngles[0]*base::Angle::R2DCC << ", " << newAngles[1]*base::Angle::R2DCC << ", " << newAngles[2]*base::Angle::R2DCC << " ]";
+         std::cout << " oa[ " << oldAngles[0]*base::Angle::R2DCC << ", " << oldAngles[1]*base::Angle::R2DCC << ", " << oldAngles[2]*base::Angle::R2DCC << " ]";
          std::cout << std::endl;
       }
    }
@@ -3406,12 +3406,12 @@ void Player::deadReckonPosition(const LCreal dt)
          double alt = tElev + tOffset;
 
          // 2) Compute the geodetic lat/lon position
-         const basic::EarthModel* em = getSimulation()->getEarthModel();
+         const base::EarthModel* em = getSimulation()->getEarthModel();
          double ecef[3] = { drPos[0], drPos[1], drPos[2] };
          double lla[3] = { 0, 0, 0 };
-         basic::Nav::convertEcef2Geod(ecef, lla, em);
-         double lat = lla[basic::Nav::ILAT];
-         double lon = lla[basic::Nav::ILON];
+         base::Nav::convertEcef2Geod(ecef, lla, em);
+         double lat = lla[base::Nav::ILAT];
+         double lon = lla[base::Nav::ILON];
 
          // 3) Set position using these ground clamped coordinates
          setPositionLLA(lat, lon, alt);
@@ -3436,7 +3436,7 @@ void Player::deadReckonPosition(const LCreal dt)
 void Player::updateSystemPointers()
 {
    // ---
-   // Set basic::Pair pointers for our primary systems located in our list of subcomponents
+   // Set base::Pair pointers for our primary systems located in our list of subcomponents
    // ---
    loadSysPtrs = false;
    setDynamicsModel( findByType(typeid(DynamicsModel)) );
@@ -3456,14 +3456,14 @@ void Player::updateSystemPointers()
 // type Steerpoint (or derived); tell them that we are their container
 //------------------------------------------------------------------------------
 void Player::processComponents(
-   basic::PairStream* const list,
+   base::PairStream* const list,
    const std::type_info& filter,
-   basic::Pair* const add,
-   basic::Component* const remove
+   base::Pair* const add,
+   base::Component* const remove
    )
 {
    // Set the 'load system pointers' flag if anything changes
-   basic::Component::processComponents(list,filter,add,remove);
+   base::Component::processComponents(list,filter,add,remove);
    loadSysPtrs = true;
 }
 
@@ -3494,7 +3494,7 @@ void Player::updateElevation()
    // elevation is from the OTW system.
    const Simulation* s = getSimulation();
    if (s != nullptr && !isTerrainElevationRequired()) {
-      const basic::Terrain* terrain = s->getTerrain();
+      const base::Terrain* terrain = s->getTerrain();
       if (terrain != nullptr) {
          LCreal el = 0;
          terrain->getElevation(&el, getLatitude(), getLongitude(), isDtedTerrainInterpolationEnabled());
@@ -3508,14 +3508,14 @@ void Player::updateElevation()
 //------------------------------------------------------------------------------
 void Player::printTimingStats()
 {
-   const basic::Statistic* ts = getTimingStats();
+   const base::Statistic* ts = getTimingStats();
    std::cout << "Player(" << getSimulation()->cycle() << "," << getSimulation()->frame() << "," << getSimulation()->phase() << "): dt=" << ts->value() << ", ave=" << ts->mean() << ", max=" << ts->maxValue() << std::endl;
 }
 
 //------------------------------------------------------------------------------
 // setDynamicsModel() -- Sets our dynamics models
 //------------------------------------------------------------------------------
-bool Player::setDynamicsModel(basic::Pair* const sys)
+bool Player::setDynamicsModel(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3535,7 +3535,7 @@ bool Player::setDynamicsModel(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setDatalink() -- Sets our Datalink models
 //------------------------------------------------------------------------------
-bool Player::setDatalink(basic::Pair* const sys)
+bool Player::setDatalink(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3555,7 +3555,7 @@ bool Player::setDatalink(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setGimbal() -- Sets our gimbal/antenna/optic models
 //------------------------------------------------------------------------------
-bool Player::setGimbal(basic::Pair* const sys)
+bool Player::setGimbal(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3575,7 +3575,7 @@ bool Player::setGimbal(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setNavigation() -- Set our navigation system
 //------------------------------------------------------------------------------
-bool Player::setNavigation(basic::Pair* const sys)
+bool Player::setNavigation(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3595,7 +3595,7 @@ bool Player::setNavigation(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setOnboardComputer() -- Sets our onboard computer model
 //------------------------------------------------------------------------------
-bool Player::setOnboardComputer(basic::Pair* const sys)
+bool Player::setOnboardComputer(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3615,7 +3615,7 @@ bool Player::setOnboardComputer(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setPilot() -- Set our pilot model
 //------------------------------------------------------------------------------
-bool Player::setPilot(basic::Pair* const sys)
+bool Player::setPilot(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3635,7 +3635,7 @@ bool Player::setPilot(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setRadio() -- Sets our radio models
 //------------------------------------------------------------------------------
-bool Player::setRadio(basic::Pair* const sys)
+bool Player::setRadio(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3655,7 +3655,7 @@ bool Player::setRadio(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setSensor() -- Sets our sensor models
 //------------------------------------------------------------------------------
-bool Player::setSensor(basic::Pair* const sys)
+bool Player::setSensor(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3675,7 +3675,7 @@ bool Player::setSensor(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setIrSystem() -- Sets our IR sensor models
 //------------------------------------------------------------------------------
-bool Player::setIrSystem(basic::Pair* const sys)
+bool Player::setIrSystem(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3695,7 +3695,7 @@ bool Player::setIrSystem(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 // setStoresMgr() -- Set our stores management system
 //------------------------------------------------------------------------------
-bool Player::setStoresMgr(basic::Pair* const sys)
+bool Player::setStoresMgr(base::Pair* const sys)
 {
    bool ok = false;
    if (sys == nullptr) {
@@ -3717,19 +3717,19 @@ bool Player::setStoresMgr(basic::Pair* const sys)
 //------------------------------------------------------------------------------
 
 // initXPos: X position (+north)
-bool Player::setSlotInitXPos(const basic::Distance* const msg)
+bool Player::setSlotInitXPos(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
       osg::Vec2d pos = getInitPosition();
-      pos[INORTH] = basic::Meters::convertStatic(*msg);
+      pos[INORTH] = base::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
    }
    return ok;
 }
 
 // initXPos: X position (+north) (meters)
-bool Player::setSlotInitXPos(const basic::Number* const msg)
+bool Player::setSlotInitXPos(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3741,19 +3741,19 @@ bool Player::setSlotInitXPos(const basic::Number* const msg)
 }
 
 // initYPos: Y position (+east)
-bool Player::setSlotInitYPos(const basic::Distance* const msg)
+bool Player::setSlotInitYPos(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
       osg::Vec2d pos = getInitPosition();
-      pos[IEAST] = basic::Meters::convertStatic(*msg);
+      pos[IEAST] = base::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
    }
    return ok;
 }
 
 // initYPos: Y position (+east)(meters)
-bool Player::setSlotInitYPos(const basic::Number* const msg)
+bool Player::setSlotInitYPos(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3765,11 +3765,11 @@ bool Player::setSlotInitYPos(const basic::Number* const msg)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up)
-bool Player::setSlotInitAlt(const basic::Distance* const msg)
+bool Player::setSlotInitAlt(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal value = basic::Meters::convertStatic(*msg);
+      const LCreal value = base::Meters::convertStatic(*msg);
       setInitAltitude( value );
       ok = true;
    }
@@ -3777,7 +3777,7 @@ bool Player::setSlotInitAlt(const basic::Distance* const msg)
 }
 
 // initAlt: Altitude (HAE @ sim ref pt) (+up) (meters)
-bool Player::setSlotInitAlt(const basic::Number* const msg)
+bool Player::setSlotInitAlt(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3789,7 +3789,7 @@ bool Player::setSlotInitAlt(const basic::Number* const msg)
 }
 
 // initPosition: Position Vector: meters [ north east down ]
-bool Player::setSlotInitPosition(const basic::List* const msg)
+bool Player::setSlotInitPosition(const base::List* const msg)
 {
    bool ok = false;
    double values[3];
@@ -3803,7 +3803,7 @@ bool Player::setSlotInitPosition(const basic::List* const msg)
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const basic::LatLon* const msg)
+bool Player::setSlotInitLat(const base::LatLon* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3819,11 +3819,11 @@ bool Player::setSlotInitLat(const basic::LatLon* const msg)
 }
 
 // initLatitude: Latitude
-bool Player::setSlotInitLat(const basic::Angle* const msg)
+bool Player::setSlotInitLat(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double val = static_cast<LCreal>(basic::Degrees::convertStatic(*msg));
+      const double val = static_cast<LCreal>(base::Degrees::convertStatic(*msg));
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
@@ -3835,7 +3835,7 @@ bool Player::setSlotInitLat(const basic::Angle* const msg)
 }
 
 // initLatitude: Latitude (degrees)
-bool Player::setSlotInitLat(const basic::Number* const msg)
+bool Player::setSlotInitLat(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3851,7 +3851,7 @@ bool Player::setSlotInitLat(const basic::Number* const msg)
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const basic::LatLon* const msg)
+bool Player::setSlotInitLon(const base::LatLon* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3867,11 +3867,11 @@ bool Player::setSlotInitLon(const basic::LatLon* const msg)
 }
 
 // initLongitude: Longitude
-bool Player::setSlotInitLon(const basic::Angle* const msg)
+bool Player::setSlotInitLon(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double val = static_cast<LCreal>(basic::Degrees::convertStatic(*msg));
+      const double val = static_cast<LCreal>(base::Degrees::convertStatic(*msg));
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }
@@ -3883,7 +3883,7 @@ bool Player::setSlotInitLon(const basic::Angle* const msg)
 }
 
 // initLongitude: Longitude (degrees)
-bool Player::setSlotInitLon(const basic::Number* const msg)
+bool Player::setSlotInitLon(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3899,7 +3899,7 @@ bool Player::setSlotInitLon(const basic::Number* const msg)
 }
 
 // initGeocentric: Position vector [ x y z ] (meters)
-bool Player::setSlotInitGeocentric(const basic::List* const msg)
+bool Player::setSlotInitGeocentric(const base::List* const msg)
 {
    bool ok = false;
    double values[3];
@@ -3912,11 +3912,11 @@ bool Player::setSlotInitGeocentric(const basic::List* const msg)
 }
 
 // initRoll: Initial roll angle
-bool Player::setSlotInitRoll(const basic::Angle* const msg)
+bool Player::setSlotInitRoll(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double value = basic::Radians::convertStatic(*msg);
+      const double value = base::Radians::convertStatic(*msg);
       if ( value >= -PI && value <= PI ) {
          initAngles[IROLL] = value;
          ok = true;
@@ -3930,7 +3930,7 @@ bool Player::setSlotInitRoll(const basic::Angle* const msg)
 }
 
 // initRoll: Initial roll angle (radians)
-bool Player::setSlotInitRoll(const basic::Number* const msg)
+bool Player::setSlotInitRoll(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3948,11 +3948,11 @@ bool Player::setSlotInitRoll(const basic::Number* const msg)
 }
 
 // initPitch: Initial pitch angle
-bool Player::setSlotInitPitch(const basic::Angle* const msg)
+bool Player::setSlotInitPitch(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double value = basic::Radians::convertStatic(*msg);
+      const double value = base::Radians::convertStatic(*msg);
       if ( value >= -(PI/2.0) && value <= (PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
@@ -3966,7 +3966,7 @@ bool Player::setSlotInitPitch(const basic::Angle* const msg)
 }
 
 // initPitch: Initial pitch angle (radians)
-bool Player::setSlotInitPitch(const basic::Number* const msg)
+bool Player::setSlotInitPitch(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -3984,11 +3984,11 @@ bool Player::setSlotInitPitch(const basic::Number* const msg)
 }
 
 // initHeading: Initial heading angle
-bool Player::setSlotInitHeading(const basic::Angle* const msg)
+bool Player::setSlotInitHeading(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      double value = basic::Radians::convertStatic(*msg);
+      double value = base::Radians::convertStatic(*msg);
       if ( value >= -PI && value <= (2.0*PI+0.001) ) {
          if (value >= 2.0*PI) value -= 2.0*PI;
          initAngles[IYAW] = value;
@@ -4003,7 +4003,7 @@ bool Player::setSlotInitHeading(const basic::Angle* const msg)
 }
 
 // initHeading: Initial heading angle (radians)
-bool Player::setSlotInitHeading(const basic::Number* const msg)
+bool Player::setSlotInitHeading(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -4022,7 +4022,7 @@ bool Player::setSlotInitHeading(const basic::Number* const msg)
 }
 
 // initEuler: Initial Euler Angles: radians [ roll pitch yaw ]
-bool Player::setSlotInitEulerAngles(const basic::List* const numList)
+bool Player::setSlotInitEulerAngles(const base::List* const numList)
 {
    bool ok = false;
    double values[3];
@@ -4045,11 +4045,11 @@ bool Player::setSlotInitEulerAngles(const basic::List* const numList)
 }
 
 // testRollRate: Test roll rate
-bool Player::setSlotTestRollRate(const basic::Angle* const msg)
+bool Player::setSlotTestRollRate(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double value = basic::Radians::convertStatic(*msg);
+      const double value = base::Radians::convertStatic(*msg);
       testAngRates[IROLL] = value;
       ok = true;
    }
@@ -4058,11 +4058,11 @@ bool Player::setSlotTestRollRate(const basic::Angle* const msg)
 }
 
 // testPitchRate: Test pitch rate
-bool Player::setSlotTestPitchRate(const basic::Angle* const msg)
+bool Player::setSlotTestPitchRate(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double value = basic::Radians::convertStatic(*msg);
+      const double value = base::Radians::convertStatic(*msg);
       testAngRates[IPITCH] = value;
       ok = true;
    }
@@ -4071,11 +4071,11 @@ bool Player::setSlotTestPitchRate(const basic::Angle* const msg)
 }
 
 // testHeadingRate: Test heading rate
-bool Player::setSlotTestYawRate(const basic::Angle* const msg)
+bool Player::setSlotTestYawRate(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double value = basic::Radians::convertStatic(*msg);
+      const double value = base::Radians::convertStatic(*msg);
       testAngRates[IYAW] = value;
       ok = true;
    }
@@ -4084,7 +4084,7 @@ bool Player::setSlotTestYawRate(const basic::Angle* const msg)
 }
 
 // testBodyAxis: Test rates are in the body axis else they're Euler rates (default: false)
-bool Player::setSlotTestBodyAxis(const basic::Number* const msg)
+bool Player::setSlotTestBodyAxis(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -4096,7 +4096,7 @@ bool Player::setSlotTestBodyAxis(const basic::Number* const msg)
 
 
 // initVelocity: Initial Velocity: meters/second
-bool Player::setSlotInitVelocity(const basic::Number* const msg)
+bool Player::setSlotInitVelocity(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -4107,11 +4107,11 @@ bool Player::setSlotInitVelocity(const basic::Number* const msg)
 }
 
 // initVelocityKts: Initial Velocity: knots (NM/hour)
-bool Player::setSlotInitVelocityKts(const basic::Number* const msg)
+bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      initVp = (msg->getReal() * oe::basic::Distance::NM2M) / 3600.0f;
+      initVp = (msg->getReal() * oe::base::Distance::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;
@@ -4119,7 +4119,7 @@ bool Player::setSlotInitVelocityKts(const basic::Number* const msg)
 
 
 // id: Player id  [ 1 .. 65535 ]
-bool Player::setSlotID(const basic::Number* const num)
+bool Player::setSlotID(const base::Number* const num)
 {
    bool ok = false;
    int newID = num->getInt();
@@ -4134,7 +4134,7 @@ bool Player::setSlotID(const basic::Number* const num)
 }
 
 // side: Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
-bool Player::setSlotSide(basic::String* const msg)
+bool Player::setSlotSide(base::String* const msg)
 {
    bool ok = false;
    if (*msg == "blue" || *msg == "BLUE") { setSide(BLUE); ok = true; }
@@ -4147,7 +4147,7 @@ bool Player::setSlotSide(basic::String* const msg)
 }
 
 // mode: Initial player mode ( INACTIVE, ACTIVE, DEAD )
-bool Player::setSlotInitMode(basic::String* const msg)
+bool Player::setSlotInitMode(base::String* const msg)
 {
    bool ok = false;
    if (*msg == "inactive" || *msg == "INACTIVE") { setInitMode(INACTIVE); ok = true; }
@@ -4160,7 +4160,7 @@ bool Player::setSlotInitMode(basic::String* const msg)
 }
 
 // useCoordSys: Coord system to use for updating player position
-bool Player::setSlotUseCoordSys(basic::String* const msg)
+bool Player::setSlotUseCoordSys(base::String* const msg)
 {
    bool ok = false;
    if (*msg == "local" || *msg == "LOCAL") { setUseCoordSys(CS_LOCAL); ok = true; }
@@ -4190,7 +4190,7 @@ bool Player::setSlotIrSignature(IrSignature* const s)
 }
 
 // camouflageType: User defined camouflage type (positive integer or zero for none)
-bool Player::setSlotCamouflageType(const basic::Number* const msg)
+bool Player::setSlotCamouflageType(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -4203,7 +4203,7 @@ bool Player::setSlotCamouflageType(const basic::Number* const msg)
 }
 
 // terrainElevReq: Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
-bool Player::setSlotTerrainElevReq(const basic::Number* const num)
+bool Player::setSlotTerrainElevReq(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4213,7 +4213,7 @@ bool Player::setSlotTerrainElevReq(const basic::Number* const num)
 }
 
 // interpolateTerrain: Interpolate our DTED terrain elevation data (default: false)
-bool Player::setSlotInterpolateTerrain(const basic::Number* const msg)
+bool Player::setSlotInterpolateTerrain(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -4222,18 +4222,18 @@ bool Player::setSlotInterpolateTerrain(const basic::Number* const msg)
    return ok;
 }
 
-// terrainOffset: Ground clamp offset from terrain to player's CG (basic::Distance)
-bool Player::setSlotTerrainOffset(const basic::Distance* const msg)
+// terrainOffset: Ground clamp offset from terrain to player's CG (base::Distance)
+bool Player::setSlotTerrainOffset(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setTerrainOffset( basic::Meters::convertStatic( *msg ) );
+      ok = setTerrainOffset( base::Meters::convertStatic( *msg ) );
    }
    return ok;
 }
 
 // positionFreeze: Position freeze (default: false)
-bool Player::setSlotPositionFreeze(const basic::Number* const num)
+bool Player::setSlotPositionFreeze(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4243,7 +4243,7 @@ bool Player::setSlotPositionFreeze(const basic::Number* const num)
 }
 
 // altitudeFreeze: Altitude freeze (default: false)
-bool Player::setSlotAltitudeFreeze(const basic::Number* const num)
+bool Player::setSlotAltitudeFreeze(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4253,7 +4253,7 @@ bool Player::setSlotAltitudeFreeze(const basic::Number* const num)
 }
 
 // attitudeFreeze: Attitude freeze (default: false)
-bool Player::setSlotAttitudeFreeze(const basic::Number* const num)
+bool Player::setSlotAttitudeFreeze(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4263,7 +4263,7 @@ bool Player::setSlotAttitudeFreeze(const basic::Number* const num)
 }
 
 // fuelFreeze: Fuel freeze (default: false)
-bool Player::setSlotFuelFreeze(const basic::Number* const num)
+bool Player::setSlotFuelFreeze(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4273,7 +4273,7 @@ bool Player::setSlotFuelFreeze(const basic::Number* const num)
 }
 
 // crashOverride: Crash Override (i.e., ignore collision and crash events)(default: false)
-bool Player::setSlotCrashOverride(const basic::Number* const num)
+bool Player::setSlotCrashOverride(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4283,7 +4283,7 @@ bool Player::setSlotCrashOverride(const basic::Number* const num)
 }
 
 // killOverride: Kill/Damage Override -- player can not be killed/damaged (default: false)
-bool Player::setSlotKillOverride(const basic::Number* const num)
+bool Player::setSlotKillOverride(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4293,7 +4293,7 @@ bool Player::setSlotKillOverride(const basic::Number* const num)
 }
 
 // killRemoval: If true destroyed players are set to KILLED and are eventually removed (default: false)
-bool Player::setSlotKillRemoval(const basic::Number* const msg)
+bool Player::setSlotKillRemoval(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -4303,7 +4303,7 @@ bool Player::setSlotKillRemoval(const basic::Number* const msg)
 }
 
 // enableNetOutput: Enable network output of this player (default: true)
-bool Player::setSlotEnableNetOutput(const basic::Number* const msg)
+bool Player::setSlotEnableNetOutput(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -4313,7 +4313,7 @@ bool Player::setSlotEnableNetOutput(const basic::Number* const msg)
 }
 
 // dataLogTime: Time between player data samples to an optional data
-bool Player::setSlotDataLogTime(const basic::Time* const num)
+bool Player::setSlotDataLogTime(const base::Time* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -4326,7 +4326,7 @@ bool Player::setSlotDataLogTime(const basic::Time* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Player::getSlotByIndex(const int si)
+base::Object* Player::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -4403,17 +4403,17 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
       sout << "initYPos: ( Meters " << vec.y() << " )" << std::endl;
 
       indent(sout, i+j);
-      sout << "initAlt: ( Feet " << (getInitAltitude() * basic::Distance::M2FT) << " )" << std::endl;
+      sout << "initAlt: ( Feet " << (getInitAltitude() * base::Distance::M2FT) << " )" << std::endl;
    }
 
    indent(sout,i+j);
-   sout << "initRoll: ( Degrees " << (initAngles[IROLL] * basic::Angle::R2DCC) << " )" << std::endl;
+   sout << "initRoll: ( Degrees " << (initAngles[IROLL] * base::Angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "initPitch: ( Degrees " << (initAngles[IPITCH] * basic::Angle::R2DCC) << " )" << std::endl;
+   sout << "initPitch: ( Degrees " << (initAngles[IPITCH] * base::Angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "initYawRate: ( Degrees " << (initAngles[IYAW] * basic::Angle::R2DCC) << " )" << std::endl;
+   sout << "initYawRate: ( Degrees " << (initAngles[IYAW] * base::Angle::R2DCC) << " )" << std::endl;
 
 
    // Velocity (ft/s)
@@ -4510,7 +4510,7 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    }
 
    indent(sout, i+j);
-   sout << "terrainOffset: ( Feet " << (getTerrainOffset() * basic::Distance::M2FT) << " )" << std::endl;
+   sout << "terrainOffset: ( Feet " << (getTerrainOffset() * base::Distance::M2FT) << " )" << std::endl;
 
 
    // Position Freeze (default: false)
@@ -4565,13 +4565,13 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    sout << "dataLogTime: ( Seconds " << dataLogTime << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "testRollRate: ( Degrees " << (testAngRates[IROLL] * basic::Angle::R2DCC) << " )" << std::endl;
+   sout << "testRollRate: ( Degrees " << (testAngRates[IROLL] * base::Angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "testPitchRate: ( Degrees " << (testAngRates[IPITCH] * basic::Angle::R2DCC) << " )" << std::endl;
+   sout << "testPitchRate: ( Degrees " << (testAngRates[IPITCH] * base::Angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "testHeadingRate: ( Degrees " << (testAngRates[IYAW] * basic::Angle::R2DCC) << " )" << std::endl;
+   sout << "testHeadingRate: ( Degrees " << (testAngRates[IYAW] * base::Angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
 

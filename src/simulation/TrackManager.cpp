@@ -40,13 +40,13 @@ END_SLOTTABLE(TrackManager)
 
 //  Map slot table
 BEGIN_SLOT_MAP(TrackManager)
-   ON_SLOT(1, setSlotMaxTracks,basic::Number)
-   ON_SLOT(2, setSlotMaxTrackAge,basic::Number)
-   ON_SLOT(3, setSlotFirstTrackId,basic::Number)
-   ON_SLOT(4, setSlotAlpha, basic::Number)
-   ON_SLOT(5, setSlotBeta,  basic::Number)
-   ON_SLOT(6, setSlotGamma, basic::Number)
-   ON_SLOT(7, setSlotLogTrackUpdates, basic::Number)
+   ON_SLOT(1, setSlotMaxTracks,base::Number)
+   ON_SLOT(2, setSlotMaxTrackAge,base::Number)
+   ON_SLOT(3, setSlotFirstTrackId,base::Number)
+   ON_SLOT(4, setSlotAlpha, base::Number)
+   ON_SLOT(5, setSlotBeta,  base::Number)
+   ON_SLOT(6, setSlotGamma, base::Number)
+   ON_SLOT(7, setSlotLogTrackUpdates, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -271,7 +271,7 @@ bool TrackManager::setMaxTrackAge(const double s)
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int TrackManager::getTrackList(basic::safe_ptr<Track>* const tlist, const unsigned int max) const
+int TrackManager::getTrackList(base::safe_ptr<Track>* const tlist, const unsigned int max) const
 {
    int n = 0;
 
@@ -290,7 +290,7 @@ int TrackManager::getTrackList(basic::safe_ptr<Track>* const tlist, const unsign
 // getTrackList() -- Sets entries in 'tlist' to a maximum of 'max' target
 //                  tracks and returns the actual number of tracks.
 //------------------------------------------------------------------------------
-int TrackManager::getTrackList(basic::safe_ptr<const Track>* const tlist, const unsigned int max) const
+int TrackManager::getTrackList(base::safe_ptr<const Track>* const tlist, const unsigned int max) const
 {
    int n = 0;
 
@@ -431,7 +431,7 @@ void TrackManager::makeMatrixA(LCreal dt)
 //------------------------------------------------------------------------------
 // setMaxTracks() -- Sets the maximum number of active tracks
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotMaxTracks(const basic::Number* const num)
+bool TrackManager::setSlotMaxTracks(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -450,13 +450,13 @@ bool TrackManager::setSlotMaxTracks(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotMaxTrackAge() -- Sets the maximum age of tracks
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotMaxTrackAge(const basic::Number* const num)
+bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
 {
    LCreal age = 0.0;
-   const basic::Time* p = dynamic_cast<const basic::Time*>(num);
+   const base::Time* p = dynamic_cast<const base::Time*>(num);
    if (p != nullptr) {
       // We have a time and we want it in seconds ...
-      basic::Seconds seconds;
+      base::Seconds seconds;
       age = seconds.convert(*p);
    }
    else if (num != nullptr) {
@@ -479,7 +479,7 @@ bool TrackManager::setSlotMaxTrackAge(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // setSlotFirstTrackId() -- Sets the first (starting) track id number
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotFirstTrackId(const basic::Number* const num)
+bool TrackManager::setSlotFirstTrackId(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -499,7 +499,7 @@ bool TrackManager::setSlotFirstTrackId(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // Sets alpha
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotAlpha(const basic::Number* const msg)
+bool TrackManager::setSlotAlpha(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -512,7 +512,7 @@ bool TrackManager::setSlotAlpha(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets beta
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotBeta(const basic::Number* const msg)
+bool TrackManager::setSlotBeta(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -525,7 +525,7 @@ bool TrackManager::setSlotBeta(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets gamma
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotGamma(const basic::Number* const msg)
+bool TrackManager::setSlotGamma(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -538,7 +538,7 @@ bool TrackManager::setSlotGamma(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // Sets logTrackUpdates
 //------------------------------------------------------------------------------
-bool TrackManager::setSlotLogTrackUpdates(const basic::Number* const num)
+bool TrackManager::setSlotLogTrackUpdates(const base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
@@ -559,7 +559,7 @@ bool TrackManager::setLogTrackUpdates (const bool b)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* TrackManager::getSlotByIndex(const int si)
+base::Object* TrackManager::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -635,9 +635,9 @@ END_SLOTTABLE(AirTrkMgr)
 
 //  Map slot table
 BEGIN_SLOT_MAP(AirTrkMgr)
-   ON_SLOT(1, setPositionGate, basic::Number)
-   ON_SLOT(2, setRangeGate, basic::Number)
-   ON_SLOT(3, setVelocityGate, basic::Number)
+   ON_SLOT(1, setPositionGate, base::Number)
+   ON_SLOT(2, setRangeGate, base::Number)
+   ON_SLOT(3, setVelocityGate, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -654,7 +654,7 @@ void AirTrkMgr::initData()
 {
    setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
 
-   posGate =  2.0 * basic::Distance::NM2M;
+   posGate =  2.0 * base::Distance::NM2M;
    rngGate =  500.0;
    velGate =   10.0;
 
@@ -999,13 +999,13 @@ void AirTrkMgr::processTrackList(const LCreal dt)
 //------------------------------------------------------------------------------
 // setPositionGate() -- Sets the size of the position gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setPositionGate(const basic::Number* const num)
+bool AirTrkMgr::setPositionGate(const base::Number* const num)
 {
    LCreal value = 0.0;
-   const basic::Distance* p = dynamic_cast<const basic::Distance*>(num);
+   const base::Distance* p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
-      basic::Meters meters;
+      base::Meters meters;
       value = meters.convert(*p);
    }
    else if (num != nullptr) {
@@ -1028,13 +1028,13 @@ bool AirTrkMgr::setPositionGate(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // setRangeGate() -- Sets the size of the range gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setRangeGate(const basic::Number* const num)
+bool AirTrkMgr::setRangeGate(const base::Number* const num)
 {
    LCreal value = 0.0;
-   const basic::Distance* p = dynamic_cast<const basic::Distance*>(num);
+   const base::Distance* p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
-      basic::Meters meters;
+      base::Meters meters;
       value = meters.convert(*p);
    }
    else if (num != nullptr) {
@@ -1057,7 +1057,7 @@ bool AirTrkMgr::setRangeGate(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // setVelocityGate() -- Sets the size of the velocity gate
 //------------------------------------------------------------------------------
-bool AirTrkMgr::setVelocityGate(const basic::Number* const num)
+bool AirTrkMgr::setVelocityGate(const base::Number* const num)
 {
    LCreal value = 0.0;
    if (num != nullptr) {
@@ -1080,7 +1080,7 @@ bool AirTrkMgr::setVelocityGate(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* AirTrkMgr::getSlotByIndex(const int si)
+base::Object* AirTrkMgr::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

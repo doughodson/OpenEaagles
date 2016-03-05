@@ -5,7 +5,7 @@
 #include "openeaagles/base/IoAdapter.h"
 
 namespace oe {
-   namespace basic { class Number; }
+   namespace base { class Number; }
 
 namespace iodevice {
    class IoDevice;
@@ -27,9 +27,9 @@ namespace iodevice {
 // Note: If 'num' is less than zero then the DIs are stored in reverse
 //       order (i.e., 'di' location is decremented).
 //------------------------------------------------------------------------------
-class DiscreteInput : public basic::IoAdapter
+class DiscreteInput : public base::IoAdapter
 {
-   DECLARE_SUBCLASS(DiscreteInput, basic::IoAdapter)
+   DECLARE_SUBCLASS(DiscreteInput, base::IoAdapter)
 
 public:
    DiscreteInput();
@@ -48,17 +48,17 @@ public:
    bool setInvertFlag(const bool);
    bool setNumber(const int);
 
-   void processInputs(const LCreal dt, const basic::IoDevice* const device, basic::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const basic::IoData* const outData, basic::IoDevice* const device) override;
+   void processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
-   virtual bool setSlotLocation(const basic::Number* const msg);
-   virtual bool setSlotPort(const basic::Number* const msg);
-   virtual bool setSlotChannel(const basic::Number* const msg);
-   virtual bool setSlotValue(const basic::Number* const msg);
-   virtual bool setSlotInverted(const basic::Number* const msg);
-   virtual bool setSlotNum(const basic::Number* const msg);
+   virtual bool setSlotLocation(const base::Number* const msg);
+   virtual bool setSlotPort(const base::Number* const msg);
+   virtual bool setSlotChannel(const base::Number* const msg);
+   virtual bool setSlotValue(const base::Number* const msg);
+   virtual bool setSlotInverted(const base::Number* const msg);
+   virtual bool setSlotNum(const base::Number* const msg);
 
 private:
    void initData();

@@ -7,7 +7,7 @@
 #include "openeaagles/base/units/Angles.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 
 //==============================================================================
@@ -382,5 +382,5 @@ bool Transform::setComputematrix4(const Number* const sc4obj)
     return ok;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

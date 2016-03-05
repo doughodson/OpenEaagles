@@ -26,9 +26,9 @@ BEGIN_SLOTTABLE(MapDrawer)
 END_SLOTTABLE(MapDrawer)
 
 BEGIN_SLOT_MAP(MapDrawer)
-    ON_SLOT(1, setSlotMapIntensity, basic::Number)
-    ON_SLOT(2, setSlotDrawGridMode, basic::Number)
-    ON_SLOT(3, setSlotShowMap, basic::Number)
+    ON_SLOT(1, setSlotMapIntensity, base::Number)
+    ON_SLOT(2, setSlotDrawGridMode, base::Number)
+    ON_SLOT(3, setSlotShowMap, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -138,7 +138,7 @@ void MapDrawer::deleteData()
 //------------------------------------------------------------------------------
 // setSlotMapIntensity() -
 //------------------------------------------------------------------------------
-bool MapDrawer::setSlotMapIntensity(const basic::Number* const x)
+bool MapDrawer::setSlotMapIntensity(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setMapIntensity(x->getReal());
@@ -148,7 +148,7 @@ bool MapDrawer::setSlotMapIntensity(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotDrawGridMode() -
 //------------------------------------------------------------------------------
-bool MapDrawer::setSlotDrawGridMode(const basic::Number* const x)
+bool MapDrawer::setSlotDrawGridMode(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setDrawGridMode(x->getBoolean());
@@ -158,7 +158,7 @@ bool MapDrawer::setSlotDrawGridMode(const basic::Number* const x)
 //------------------------------------------------------------------------------
 // setSlotShowMap() -
 //------------------------------------------------------------------------------
-bool MapDrawer::setSlotShowMap(const basic::Number* const x)
+bool MapDrawer::setSlotShowMap(const base::Number* const x)
 {
    bool ok = false;
    if (x != nullptr) ok = setShowMap(x->getBoolean());
@@ -386,8 +386,8 @@ void MapDrawer::drawMap(const int zone, const int idx)
             if (!nu) {
                 const GLfloat hdg = static_cast<GLfloat>(getHeadingDeg());
                 glRotatef(hdg, 0.0f, 0.0f, 1.0f);
-                sinAng = static_cast<LCreal>(lcSin(hdg * static_cast<LCreal>(basic::Angle::D2RCC)));
-                cosAng = static_cast<LCreal>(lcCos(hdg * static_cast<LCreal>(basic::Angle::D2RCC)));
+                sinAng = static_cast<LCreal>(lcSin(hdg * static_cast<LCreal>(base::Angle::D2RCC)));
+                cosAng = static_cast<LCreal>(lcCos(hdg * static_cast<LCreal>(base::Angle::D2RCC)));
             }
 
             // Translate down the pixels first
@@ -498,7 +498,7 @@ void MapDrawer::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* MapDrawer::getSlotByIndex(const int si)
+base::Object* MapDrawer::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

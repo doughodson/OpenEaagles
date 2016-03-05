@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class:       Button
-// Base class:  basic::Object -> basic::Component -> graphics::Graphic -> Button
+// Base class:  base::Object -> base::Component -> graphics::Graphic -> Button
 // Description: Generic button that knows when it is clicked
 //------------------------------------------------------------------------------
 #ifndef __oe_instruments_Button_H__
@@ -30,11 +30,11 @@ public:
     // Cancel
     virtual bool onCancel();
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // Sets the Event ID to newEvent
-    virtual bool setSlotEventId(const basic::Number* const newEvent);
+    virtual bool setSlotEventId(const base::Number* const newEvent);
 
 private:
     int eventId;        // holds our event number

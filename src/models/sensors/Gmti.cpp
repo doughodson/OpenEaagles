@@ -28,7 +28,7 @@ END_SLOTTABLE(Gmti)
 
 //  Map slot table
 BEGIN_SLOT_MAP(Gmti)
-    ON_SLOT(1,setSlotPoi,basic::List)
+    ON_SLOT(1,setSlotPoi,base::List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -92,15 +92,15 @@ void Gmti::dynamics(const LCreal dt)
         getAntenna()->getScanVolume(&width, &height);
 
         // Limit to within search scan limits of antenna
-        if (az < basic::Angle::aepcdRad(leftLim + width/2.0))
-            az = basic::Angle::aepcdRad(leftLim + width/2.0);
-        else if (az > basic::Angle::aepcdRad(rightLim - width/2.0))
-            az = basic::Angle::aepcdRad(rightLim - width/2.0);
+        if (az < base::Angle::aepcdRad(leftLim + width/2.0))
+            az = base::Angle::aepcdRad(leftLim + width/2.0);
+        else if (az > base::Angle::aepcdRad(rightLim - width/2.0))
+            az = base::Angle::aepcdRad(rightLim - width/2.0);
 
-        if (el < basic::Angle::aepcdRad(lowerLim + height/2.0))
-            el = basic::Angle::aepcdRad(lowerLim + height/2.0);
-        else if (el > basic::Angle::aepcdRad(upperLim - height/2.0))
-            el = basic::Angle::aepcdRad(upperLim - height/2.0);
+        if (el < base::Angle::aepcdRad(lowerLim + height/2.0))
+            el = base::Angle::aepcdRad(lowerLim + height/2.0);
+        else if (el > base::Angle::aepcdRad(upperLim - height/2.0))
+            el = base::Angle::aepcdRad(upperLim - height/2.0);
 
         // Set the reference 'look' angles
         getAntenna()->setRefAzimuth(az);
@@ -126,7 +126,7 @@ void Gmti::setPoi(const osg::Vec3& newPoi)
 //------------------------------------------------------------------------------
 // setSlotPoi:  Set Slot POI Vector [ north east down ]
 //------------------------------------------------------------------------------
-bool Gmti::setSlotPoi(basic::List* const numList)
+bool Gmti::setSlotPoi(base::List* const numList)
 {
     bool ok = false;
     LCreal values[3];
@@ -141,7 +141,7 @@ bool Gmti::setSlotPoi(basic::List* const numList)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Gmti::getSlotByIndex(const int si)
+base::Object* Gmti::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

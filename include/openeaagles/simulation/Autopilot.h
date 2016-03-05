@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Pilot.h"
 
 namespace oe {
-   namespace basic { class Angle; class Distance; class Identifier; class Number; class Time; }
+   namespace base { class Angle; class Distance; class Identifier; class Number; class Time; }
 
 namespace simulation {
 
@@ -134,7 +134,7 @@ public:
    virtual double getLeadFollowingDistanceRight() const { return  leadOffset[1]; }
    virtual double getLeadFollowingDeltaAltitude() const { return -leadOffset[2]; }
    virtual bool isFollowTheLeadModeOn() const           { return followLeadModeOn; }  // "Follow the lead" mode flag
-   virtual const basic::Identifier* getLeadPlayerName() { return leadName; }
+   virtual const base::Identifier* getLeadPlayerName() { return leadName; }
    virtual const Player* getLeadPlayer();                            // Our lead player
 
    // get pilot limits
@@ -148,7 +148,7 @@ public:
    virtual bool setLeadFollowingDistanceRight(const double right);   // Desired distance (meters) right(+) of the lead
    virtual bool setLeadFollowingDeltaAltitude(const double above);   // Desired delta altitude (meters) above(+) the lead
    virtual bool setFollowTheLeadMode(const bool f);                  // "Follow the lead" mode flag
-   virtual bool setLeadPlayerName(const basic::Identifier* const);   // Changes the name of our lead player
+   virtual bool setLeadPlayerName(const base::Identifier* const);   // Changes the name of our lead player
    virtual bool setLeadPlayerName(const char* x);                    // set the lead player name by characters
    virtual bool setLeadPlayer(const Player* const);                  // Our lead player
 
@@ -216,32 +216,32 @@ public:
 
 protected:
    // Slot functions
-   bool setSlotNavMode(const basic::Number* const msg);                       // Nav (route follow) mode flag
-   bool setSlotHoldAltitude(const basic::Distance* const msg);                // Hold altitude
-   bool setSlotAltitudeHoldMode(const basic::Number* const msg);              // Altitude hold mode flag
-   bool setSlotHoldVelocityKts(const basic::Number* const msg);               // Hold velocity (kts)
-   bool setSlotVelocityHoldMode(const basic::Number* const msg);              // Velocity hold mode flag
-   bool setSlotHoldHeading(const basic::Angle* const msg);                    // Hold heading
-   bool setSlotHeadingHoldMode(const basic::Number* const msg);               // Heading altitude mode flag
-   bool setSlotLoiterMode(const basic::Number* const msg);                    // Loiter mode flag
-   bool setSlotLoiterPatternLength(const basic::Distance* const msg);         // Loiter orbit pattern length
-   bool setSlotLoiterPatternLength(const basic::Number* const msg);           // Loiter orbit pattern length (NM)
-   bool setSlotLoiterPatternTime(const basic::Time* const msg);               // Loiter orbit pattern length (seconds)
-   bool setSlotLoiterPatternCcwFlag(const basic::Number* const msg);          // Loiter orbit pattern counter-clockwise flag
-   bool setSlotLeadFollowingDistanceTrail(const basic::Distance* const msg);  // Desired distance behind(+) the lead
-   bool setSlotLeadFollowingDistanceTrail(const basic::Number* const msg);    // Desired distance (meters) behind(+) the lead
-   bool setSlotLeadFollowingDistanceRight(const basic::Distance* const msg);  // Desired distance right(+) of the lead
-   bool setSlotLeadFollowingDistanceRight(const basic::Number* const msg);    // Desired distance (meters) right(+) of the lead
-   bool setSlotLeadFollowingDeltaAltitude(const basic::Distance* const msg);  // Desired delta altitude above(+) the lead
-   bool setSlotLeadFollowingDeltaAltitude(const basic::Number* const msg);    // Desired delta altitude (meters) above(+) the lead
-   bool setSlotLeadPlayerName(const basic::Identifier* const msg);            // Name of the player we are following
-   bool setSlotFollowTheLeadMode(const basic::Number* const msg);             // "Follow the lead" mode flag
-   bool setSlotMaxRateOfTurnDps(const basic::Number* const msg);              // Maximum turn rate - degrees per second
-   bool setSlotMaxBankAngle(const basic::Number* const msg);                  // Maximum bank angle - degrees
-   bool setSlotMaxClimbRateMps(const basic::Number* const msg);               // Max climb/dive rate - meters per second
-   bool setSlotMaxClimbRateFpm(const basic::Number* const msg);               // Max climb/dive rate - feet per minute
-   bool setSlotMaxPitchAngle(const basic::Number* const msg);                 // Max pitch angle - degrees
-   bool setSlotMaxVelAccNps(const basic::Number* const msg);                  // Maximum velocity acceleration (Nps)
+   bool setSlotNavMode(const base::Number* const msg);                       // Nav (route follow) mode flag
+   bool setSlotHoldAltitude(const base::Distance* const msg);                // Hold altitude
+   bool setSlotAltitudeHoldMode(const base::Number* const msg);              // Altitude hold mode flag
+   bool setSlotHoldVelocityKts(const base::Number* const msg);               // Hold velocity (kts)
+   bool setSlotVelocityHoldMode(const base::Number* const msg);              // Velocity hold mode flag
+   bool setSlotHoldHeading(const base::Angle* const msg);                    // Hold heading
+   bool setSlotHeadingHoldMode(const base::Number* const msg);               // Heading altitude mode flag
+   bool setSlotLoiterMode(const base::Number* const msg);                    // Loiter mode flag
+   bool setSlotLoiterPatternLength(const base::Distance* const msg);         // Loiter orbit pattern length
+   bool setSlotLoiterPatternLength(const base::Number* const msg);           // Loiter orbit pattern length (NM)
+   bool setSlotLoiterPatternTime(const base::Time* const msg);               // Loiter orbit pattern length (seconds)
+   bool setSlotLoiterPatternCcwFlag(const base::Number* const msg);          // Loiter orbit pattern counter-clockwise flag
+   bool setSlotLeadFollowingDistanceTrail(const base::Distance* const msg);  // Desired distance behind(+) the lead
+   bool setSlotLeadFollowingDistanceTrail(const base::Number* const msg);    // Desired distance (meters) behind(+) the lead
+   bool setSlotLeadFollowingDistanceRight(const base::Distance* const msg);  // Desired distance right(+) of the lead
+   bool setSlotLeadFollowingDistanceRight(const base::Number* const msg);    // Desired distance (meters) right(+) of the lead
+   bool setSlotLeadFollowingDeltaAltitude(const base::Distance* const msg);  // Desired delta altitude above(+) the lead
+   bool setSlotLeadFollowingDeltaAltitude(const base::Number* const msg);    // Desired delta altitude (meters) above(+) the lead
+   bool setSlotLeadPlayerName(const base::Identifier* const msg);            // Name of the player we are following
+   bool setSlotFollowTheLeadMode(const base::Number* const msg);             // "Follow the lead" mode flag
+   bool setSlotMaxRateOfTurnDps(const base::Number* const msg);              // Maximum turn rate - degrees per second
+   bool setSlotMaxBankAngle(const base::Number* const msg);                  // Maximum bank angle - degrees
+   bool setSlotMaxClimbRateMps(const base::Number* const msg);               // Max climb/dive rate - meters per second
+   bool setSlotMaxClimbRateFpm(const base::Number* const msg);               // Max climb/dive rate - feet per minute
+   bool setSlotMaxPitchAngle(const base::Number* const msg);                 // Max pitch angle - degrees
+   bool setSlotMaxVelAccNps(const base::Number* const msg);                  // Maximum velocity acceleration (Nps)
 
    virtual bool modeManager();
    virtual bool headingController();
@@ -255,7 +255,7 @@ protected:
    // System class Interface -- phase() callbacks
    void process(const LCreal dt) override;     // Phase 3
 
-   // basic::Component protected interface
+   // base::Component protected interface
    bool shutdownNotification() override;
 
 private:
@@ -327,7 +327,7 @@ private:
    // Follow that lead mode data
    osg::Vec3d leadOffset;     // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
    const Player* lead;        // Our lead player
-   const basic::Identifier* leadName;   // Name of our lead player
+   const base::Identifier* leadName;   // Name of our lead player
    double leadHdg;            // lead's heading (rad)
    bool   followLeadModeOn;   // Follow the lead mode flag
 

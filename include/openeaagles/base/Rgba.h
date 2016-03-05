@@ -7,7 +7,7 @@
 #include "openeaagles/base/Rgb.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Rgba
@@ -37,7 +37,7 @@ public:
 
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

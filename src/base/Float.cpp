@@ -4,7 +4,7 @@
 #include "openeaagles/base/Float.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Float,"float")
 
@@ -25,5 +25,5 @@ std::ostream& Float::serialize(std::ostream& sout, const int, const bool) const
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

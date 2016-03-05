@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/System.h"
 
 namespace oe {
-   namespace basic { class Decibel; }
+   namespace base { class Decibel; }
 
 namespace simulation {
    class Antenna;
@@ -31,34 +31,34 @@ namespace simulation {
 //
 // Factory name: RfSystem
 // Slots:
-//    antennaName        <basic::String>        ! Name of the requested Antenna
+//    antennaName        <base::String>        ! Name of the requested Antenna
 //
-//    frequency          <basic::Frequency>     ! Radio's Main Frequency (default: 0 hz)
-//                       <basic::Number>        ! Radio's Main Frequency (hz)
+//    frequency          <base::Frequency>     ! Radio's Main Frequency (default: 0 hz)
+//                       <base::Number>        ! Radio's Main Frequency (hz)
 //
-//    bandwidth          <basic::Frequency>     ! Radio's Bandwidth (default: 1.0 hz)
-//                       <basic::Number>        ! Radio's Bandwidth (Hz)
+//    bandwidth          <base::Frequency>     ! Radio's Bandwidth (default: 1.0 hz)
+//                       <base::Number>        ! Radio's Bandwidth (Hz)
 //
-//    bandwidthNoise     <basic::Frequency>     ! Radio's Bandwidth Noise (default: 'bandwidth', 1.0)
-//                       <basic::Number>        ! Radio's Bandwidth Noise (Hz)
+//    bandwidthNoise     <base::Frequency>     ! Radio's Bandwidth Noise (default: 'bandwidth', 1.0)
+//                       <base::Number>        ! Radio's Bandwidth Noise (Hz)
 //
-//    powerPeak          <basic::Watts>         ! Peak Power (default: 0.0)
-//                       <basic::Number>        ! Peak Power in watts
+//    powerPeak          <base::Watts>         ! Peak Power (default: 0.0)
+//                       <base::Number>        ! Peak Power in watts
 //
-//    threshold          <basic::Decibel>       ! Receiver threshold above noise (dB, default: 0.0)
+//    threshold          <base::Decibel>       ! Receiver threshold above noise (dB, default: 0.0)
 //
-//    noiseFigure        <basic::Number>        ! Noise Figure (> 1)            (no units; def: 1.0)
+//    noiseFigure        <base::Number>        ! Noise Figure (> 1)            (no units; def: 1.0)
 //
-//    systemTemperature  <basic::Number>        ! System Temperature            (Kelvin; def: 290.0)
+//    systemTemperature  <base::Number>        ! System Temperature            (Kelvin; def: 290.0)
 //
-//    lossXmit           <basic::Number>        ! Transmit loss                 (no units; def: 1.0)
-//                       <basic::Decibel>       ! Transmit loss                 (dB)
+//    lossXmit           <base::Number>        ! Transmit loss                 (no units; def: 1.0)
+//                       <base::Decibel>       ! Transmit loss                 (dB)
 //
-//    lossRecv           <basic::Number>        ! Receive loss                  (no units; def: 1.0)
-//                       <basic::Decibel>       ! Receive loss                  (dB)
+//    lossRecv           <base::Number>        ! Receive loss                  (no units; def: 1.0)
+//                       <base::Decibel>       ! Receive loss                  (dB)
 //
-//    lossSignalProcess  <basic::Number>        ! Signal Processing loss        (no units; def: 1.0)
-//                       <basic::Decibel>       ! Signal Processing loss        (dB)
+//    lossSignalProcess  <base::Number>        ! Signal Processing loss        (no units; def: 1.0)
+//                       <base::Decibel>       ! Signal Processing loss        (dB)
 //
 //    disableEmissions   <Number>               ! Disable sending emission packets flag (default: false)
 //
@@ -94,8 +94,8 @@ public:
    virtual const Antenna* getAntenna() const;            // Pointer to the antenna model, or zero (0) if none
    virtual bool setAntenna(Antenna* const p);            // Sets the R/F system's antenna
 
-   virtual basic::String* getAntennaName();
-   virtual const basic::String* getAntennaName() const;  // Name of the antenna model, or zero (0) if none
+   virtual base::String* getAntennaName();
+   virtual const base::String* getAntennaName() const;  // Name of the antenna model, or zero (0) if none
 
    // Tests if the received emission can affect the RfSystem and be processed by it.
    virtual bool affectsRfSystem(Emission* const em) const;
@@ -123,18 +123,18 @@ public:
    virtual void rfReceivedEmission(Emission* const em, Antenna* const ra, const LCreal raGain);
 
    // Slot functions
-   virtual bool setSlotAntennaName(basic::String* const msg);
-   virtual bool setSlotPeakPower(basic::Number* const msg);
-   virtual bool setSlotFrequency(basic::Number* const msg);
-   virtual bool setSlotBandwidth(basic::Number* const msg);
-   virtual bool setSlotBandwidthNoise(basic::Number* const msg);
-   virtual bool setSlotRfThreshold(basic::Decibel* const msg);
-   virtual bool setSlotRfNoiseFigure(basic::Number* const msg);
-   virtual bool setSlotRfSysTemp(basic::Number* const msg);
-   virtual bool setSlotRfTransmitLoss(basic::Number* const msg);
-   virtual bool setSlotRfReceiveLoss(basic::Number* const msg);
-   virtual bool setSlotRfSignalProcessLoss(basic::Number* const msg);
-   virtual bool setSlotDisableEmissions(basic::Number* const msg);
+   virtual bool setSlotAntennaName(base::String* const msg);
+   virtual bool setSlotPeakPower(base::Number* const msg);
+   virtual bool setSlotFrequency(base::Number* const msg);
+   virtual bool setSlotBandwidth(base::Number* const msg);
+   virtual bool setSlotBandwidthNoise(base::Number* const msg);
+   virtual bool setSlotRfThreshold(base::Decibel* const msg);
+   virtual bool setSlotRfNoiseFigure(base::Number* const msg);
+   virtual bool setSlotRfSysTemp(base::Number* const msg);
+   virtual bool setSlotRfTransmitLoss(base::Number* const msg);
+   virtual bool setSlotRfReceiveLoss(base::Number* const msg);
+   virtual bool setSlotRfSignalProcessLoss(base::Number* const msg);
+   virtual bool setSlotDisableEmissions(base::Number* const msg);
 
    void updateData(const LCreal dt = 0.0) override;
    void reset() override;
@@ -160,14 +160,14 @@ protected:
    // Callbacks by phase -- to be used by the derived classes, as needed
    void process(const LCreal dt) override;     // Phase 3
 
-   // basic::Component protected interface
+   // base::Component protected interface
    bool shutdownNotification() override;
 
 private:
    void initData();
 
    Antenna*  antenna;            // Our antenna
-   basic::String* antennaName;        // Name of our antenna
+   base::String* antennaName;        // Name of our antenna
 
    bool     xmitEnable;          // Transmitter enabled
    bool     recvEnable;          // Receiver enabled

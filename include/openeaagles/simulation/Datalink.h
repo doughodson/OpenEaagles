@@ -8,7 +8,7 @@
 #include "openeaagles/base/safe_queue.h"
 
 namespace oe {
-   namespace basic { class Distance; class Number; class String; }
+   namespace base { class Distance; class Number; class String; }
 
 namespace simulation {
    class CommRadio;
@@ -28,7 +28,7 @@ namespace simulation {
 //    trackManagerName  <Identifier> ! Track Manager Name (default: 0)
 //
 // Events:
-//    DATALINK_MESSAGE  (basic::Object)  Default handler: Pass messages to subcomponents.
+//    DATALINK_MESSAGE  (base::Object)  Default handler: Pass messages to subcomponents.
 //
 //  Notes:
 //    1) If both 'radioId' and 'radioName' are given and 'radioId' is not zero
@@ -44,8 +44,8 @@ class Datalink : public System
 public:
    Datalink();
 
-   virtual bool sendMessage(basic::Object* const msg);
-   virtual basic::Object* receiveMessage();
+   virtual bool sendMessage(base::Object* const msg);
+   virtual base::Object* receiveMessage();
 
    unsigned short getRadioID() const;
 
@@ -53,8 +53,8 @@ public:
    const CommRadio* getRadio() const                                   { return radio; }
    virtual bool setRadio(CommRadio* const);
 
-   const basic::String* getRadioName() const                           { return radioName; }
-   virtual bool setRadioName(const basic::String* const name);
+   const base::String* getRadioName() const                           { return radioName; }
+   virtual bool setRadioName(const base::String* const name);
 
    // Max range (nm) of datalink without radio
    double getMaxRange() const                                          { return noRadioMaxRange; }
@@ -69,29 +69,29 @@ public:
    virtual bool setNetworkQueueEnabled(const bool flg);
 
    // For network handler to get to the messages
-   basic::safe_queue<basic::Object*>* getOutputQueue()                 { return outQueue; }
+   base::safe_queue<base::Object*>* getOutputQueue()                 { return outQueue; }
 
    TrackManager* getTrackManager()                                     { return trackManager; }
    const TrackManager* getTrackManager() const                         { return trackManager; }
    virtual bool setTrackManager(TrackManager* const tm);
 
-   const basic::String* getTrackManagerName() const                    { return tmName; }
-   virtual bool setTrackManagerName(const basic::String* const name);
+   const base::String* getTrackManagerName() const                    { return tmName; }
+   virtual bool setTrackManagerName(const base::String* const name);
 
    // Event handler(s)
-   virtual bool onDatalinkMessageEvent(basic::Object* const);
+   virtual bool onDatalinkMessageEvent(base::Object* const);
 
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
-   virtual bool queueIncomingMessage(basic::Object* const msg);  // Queue up an incoming message
-   virtual bool queueOutgoingMessage(basic::Object* const msg);  // Queue up an outgoing message
+   virtual bool queueIncomingMessage(base::Object* const msg);  // Queue up an incoming message
+   virtual bool queueOutgoingMessage(base::Object* const msg);  // Queue up an outgoing message
    virtual void clearQueues(); // Clear all queues
 
    // Slot functions
-   virtual bool setSlotRadioId(const basic::Number* const num);
-   virtual bool setSlotMaxRange(const basic::Distance* const num);
+   virtual bool setSlotRadioId(const base::Number* const num);
+   virtual bool setSlotMaxRange(const base::Distance* const num);
 
    void dynamics(const LCreal dt) override;
 
@@ -102,11 +102,11 @@ private:
 
    static const int MAX_MESSAGES = 1000;  // Max number of messages in queues
 
-   basic::safe_queue<basic::Object*>* inQueue;   // Received message queue
-   basic::safe_queue<basic::Object*>* outQueue;  // Queue for messages going out over the network/DIS
+   base::safe_queue<base::Object*>* inQueue;   // Received message queue
+   base::safe_queue<base::Object*>* outQueue;  // Queue for messages going out over the network/DIS
    double noRadioMaxRange;                       // Max range of our datalink (NM)
 
-   const basic::String* radioName;    // Name of our radio
+   const base::String* radioName;    // Name of our radio
    CommRadio* radio;                  // Our radio
 
    unsigned short radioId;            // Radio ID input
@@ -116,7 +116,7 @@ private:
    bool queueForNetwork;              // Send the message to the network output queue
 
    TrackManager* trackManager;        // Track manager
-   const basic::String* tmName;       // Track manager name
+   const base::String* tmName;       // Track manager name
 };
 
 } // End simulation namespace

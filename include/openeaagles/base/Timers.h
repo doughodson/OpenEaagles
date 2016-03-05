@@ -7,7 +7,7 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class Number;
 class Time;
@@ -149,7 +149,7 @@ public:
     DownTimer(const double rtime = 0.0);
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

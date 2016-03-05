@@ -11,7 +11,7 @@
 #include "openeaagles/base/String.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 namespace ubf {
 
 //
@@ -104,7 +104,7 @@ void Agent::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 void Agent::controller(const LCreal dt)
 {
-   basic::Component* actor = getActor();
+   base::Component* actor = getActor();
 
    if ( (actor!=nullptr) && (getState()!=nullptr) && (getBehavior()!=nullptr) ) {
 
@@ -148,7 +148,7 @@ void Agent::setState(State* const x)
    state = x;
    state->ref();
    state->container(this);
-   basic::Pair* p = new basic::Pair("", state);
+   base::Pair* p = new base::Pair("", state);
    addComponent(p);
    p->unref();
 }
@@ -196,7 +196,7 @@ bool Agent::setSlotBehavior(Behavior* const x)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Agent::getSlotByIndex(const int si)
+base::Object* Agent::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -231,6 +231,6 @@ void AgentTC::updateData(const LCreal dt)
 }
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

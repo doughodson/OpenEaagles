@@ -29,17 +29,17 @@ END_SLOTTABLE(Datalink)
 
 //  Map slot table
 BEGIN_SLOT_MAP(Datalink)
-    ON_SLOT(1,setSlotRadioId,basic::Number)
-    ON_SLOT(2,setSlotMaxRange,basic::Distance)
-    ON_SLOT(3,setRadioName,basic::String)
-    ON_SLOT(4,setTrackManagerName,basic::String)
+    ON_SLOT(1,setSlotRadioId,base::Number)
+    ON_SLOT(2,setSlotMaxRange,base::Distance)
+    ON_SLOT(3,setRadioName,base::String)
+    ON_SLOT(4,setTrackManagerName,base::String)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
 // Event() map
 //------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Datalink)
-    ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEvent,basic::Object)
+    ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEvent,base::Object)
 END_EVENT_HANDLER()
 
 //------------------------------------------------------------------------------
@@ -68,8 +68,8 @@ void Datalink::initData()
    trackManager = nullptr;
    tmName = nullptr;
 
-   inQueue = new basic::safe_queue<basic::Object*>(MAX_MESSAGES);
-   outQueue = new basic::safe_queue<basic::Object*>(MAX_MESSAGES);
+   inQueue = new base::safe_queue<base::Object*>(MAX_MESSAGES);
+   outQueue = new base::safe_queue<base::Object*>(MAX_MESSAGES);
 }
 
 void Datalink::copyData(const Datalink& org, const bool cc)
@@ -85,7 +85,7 @@ void Datalink::copyData(const Datalink& org, const bool cc)
    queueForNetwork = org.queueForNetwork;
 
    {
-      const basic::String* p = nullptr;
+      const base::String* p = nullptr;
       if (org.radioName != nullptr) {
          p = org.radioName->clone();
       }
@@ -94,7 +94,7 @@ void Datalink::copyData(const Datalink& org, const bool cc)
    }
 
    {
-      const basic::String* p = nullptr;
+      const base::String* p = nullptr;
       if (org.tmName != nullptr) {
          p = org.tmName->clone();
       }
@@ -187,7 +187,7 @@ bool Datalink::setRadio(CommRadio* const p)
 }
 
 //  Sets our radio's name
-bool Datalink::setRadioName(const basic::String* const p)
+bool Datalink::setRadioName(const base::String* const p)
 {
     if (radioName != nullptr) {
         radioName->unref();
@@ -213,7 +213,7 @@ bool Datalink::setTrackManager(TrackManager* const tm)
 }
 
 // set the track manager's name
-bool Datalink::setTrackManagerName(const basic::String* const name)
+bool Datalink::setTrackManagerName(const base::String* const name)
 {
     if (tmName != nullptr) {
         tmName->unref();
@@ -286,11 +286,11 @@ void Datalink::reset()
 void Datalink::dynamics(const LCreal)
 {
     //age queues
-    oe::basic::Object* tempInQueue[MAX_MESSAGES];
+    oe::base::Object* tempInQueue[MAX_MESSAGES];
     int numIn = 0;
     oe::simulation::Message* msg = nullptr;
     while((numIn < MAX_MESSAGES) && inQueue->isNotEmpty()) {
-        oe::basic::Object* tempObj = inQueue->get();
+        oe::base::Object* tempObj = inQueue->get();
         msg = dynamic_cast<oe::simulation::Message*>(tempObj);
         if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
@@ -311,11 +311,11 @@ void Datalink::dynamics(const LCreal)
         }
     }
 
-    oe::basic::Object* tempOutQueue[MAX_MESSAGES];
+    oe::base::Object* tempOutQueue[MAX_MESSAGES];
     int numOut = 0;
     msg = nullptr;
     while((numOut < MAX_MESSAGES) && outQueue->isNotEmpty()) {
-        oe::basic::Object* tempObj = outQueue->get();
+        oe::base::Object* tempObj = outQueue->get();
         msg = dynamic_cast<oe::simulation::Message*>(tempObj);
         if(msg != nullptr) {
             if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
@@ -340,7 +340,7 @@ void Datalink::dynamics(const LCreal)
 //------------------------------------------------------------------------------
 // sendMessage() -- send the datalink message out to the world.
 //------------------------------------------------------------------------------
-bool Datalink::sendMessage(basic::Object* const msg)
+bool Datalink::sendMessage(base::Object* const msg)
 {
    bool sent = false;
 
@@ -360,13 +360,13 @@ bool Datalink::sendMessage(basic::Object* const msg)
          Simulation* sim = getSimulation();
          if (sim != nullptr) {
 
-            basic::PairStream* players = sim->getPlayers();
+            base::PairStream* players = sim->getPlayers();
             if (players != nullptr) {
 
-            basic::List::Item* playerItem = players->getFirstItem();
+            base::List::Item* playerItem = players->getFirstItem();
             while (playerItem != nullptr) {
 
-               basic::Pair* playerPair = static_cast<basic::Pair*>(playerItem->getValue());
+               base::Pair* playerPair = static_cast<base::Pair*>(playerItem->getValue());
                Player* player = static_cast<Player*>(playerPair->object());
 
                if (player->isLocalPlayer()) {
@@ -410,7 +410,7 @@ bool Datalink::sendMessage(basic::Object* const msg)
 //------------------------------------------------------------------------------
 // receiveMessage() --
 //------------------------------------------------------------------------------
-basic::Object* Datalink::receiveMessage()
+base::Object* Datalink::receiveMessage()
 {
    // Get the next one off of the incoming message queue.
    return inQueue->get();
@@ -419,7 +419,7 @@ basic::Object* Datalink::receiveMessage()
 //------------------------------------------------------------------------------
 // queueIncomingMessage() -- Queue up an incoming message
 //------------------------------------------------------------------------------
-bool Datalink::queueIncomingMessage(basic::Object* const msg)
+bool Datalink::queueIncomingMessage(base::Object* const msg)
 {
    // Only queue message if Ownship is local.  IPlayer messages are processed on their local systems
    if ((getOwnship() == nullptr) || !(getOwnship()->isLocalPlayer())) {
@@ -436,7 +436,7 @@ bool Datalink::queueIncomingMessage(basic::Object* const msg)
       }
 
       for(int i = 0; i < 10; i++) {
-         basic::Object* obj = inQueue->get();
+         base::Object* obj = inQueue->get();
          obj->unref();
       } //clear out 10 oldest messages
    }
@@ -450,7 +450,7 @@ bool Datalink::queueIncomingMessage(basic::Object* const msg)
 //------------------------------------------------------------------------------
 // queueOutgoingMessage() -- Queue up an out going message --
 //------------------------------------------------------------------------------
-bool Datalink::queueOutgoingMessage(basic::Object* const msg)
+bool Datalink::queueOutgoingMessage(base::Object* const msg)
 {
     //if (isMessageEnabled(MSG_INFO)) {
     //std::cout << getOwnship()->getID() << "\tOutgoing QQueue Size: " << outQueue->entries() << std::endl;
@@ -462,7 +462,7 @@ bool Datalink::queueOutgoingMessage(basic::Object* const msg)
         }
 
         for(int i = 0; i < 10; i++) {
-            basic::Object* obj = outQueue->get();
+            base::Object* obj = outQueue->get();
             if (obj != nullptr) obj->unref();
         } //clear out 10 oldest messages
     }
@@ -478,7 +478,7 @@ bool Datalink::queueOutgoingMessage(basic::Object* const msg)
 //------------------------------------------------------------------------------
 void Datalink::clearQueues()
 {
-   basic::Object* msg = inQueue->get();
+   base::Object* msg = inQueue->get();
    while (msg != nullptr) {
       msg->unref();
       msg = inQueue->get();
@@ -496,14 +496,14 @@ void Datalink::clearQueues()
 //------------------------------------------------------------------------------
 
 // DATALINK_MESSAGE event handler
-bool Datalink::onDatalinkMessageEvent(basic::Object* const msg)
+bool Datalink::onDatalinkMessageEvent(base::Object* const msg)
 {
    // Just pass it down to all of our subcomponents
-   basic::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
-      for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
-         basic::Component* sc = static_cast<basic::Component*>(pair->object());
+      for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         base::Component* sc = static_cast<base::Component*>(pair->object());
          sc->event(DATALINK_MESSAGE, msg);
       }
       subcomponents->unref();
@@ -516,7 +516,7 @@ bool Datalink::onDatalinkMessageEvent(basic::Object* const msg)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool Datalink::setSlotRadioId(const basic::Number* const msg)
+bool Datalink::setSlotRadioId(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -530,11 +530,11 @@ bool Datalink::setSlotRadioId(const basic::Number* const msg)
    return ok;
 }
 
-bool Datalink::setSlotMaxRange(const basic::Distance* const msg)
+bool Datalink::setSlotMaxRange(const base::Distance* const msg)
 {
    bool ok = false;
    if(msg != nullptr) {
-      const double rng = basic::NauticalMiles::convertStatic(*msg);
+      const double rng = base::NauticalMiles::convertStatic(*msg);
       ok = setMaxRange(rng);
    }
    return ok;
@@ -543,7 +543,7 @@ bool Datalink::setSlotMaxRange(const basic::Distance* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Datalink::getSlotByIndex(const int si)
+base::Object* Datalink::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

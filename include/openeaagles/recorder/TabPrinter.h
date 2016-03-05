@@ -45,11 +45,11 @@ public:
    bool isSimReset() const;                          // True if reset msg recorded
 
    // set divider string
-   bool setSlotDivider(const basic::String* const msg);
+   bool setSlotDivider(const base::String* const msg);
 
 protected:
 
-   virtual bool setSlotMsgHdr(const basic::String* const msg);
+   virtual bool setSlotMsgHdr(const base::String* const msg);
 
    // Print functions
 

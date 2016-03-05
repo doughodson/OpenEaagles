@@ -74,7 +74,7 @@
 #include <cstring>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 Object* factory(const char* name)
 {

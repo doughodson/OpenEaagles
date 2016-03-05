@@ -15,19 +15,19 @@ namespace terrain {
 // Description: Manage up to 4 elevation files in a 2x2 pattern
 // Factory name: QuadMap
 //------------------------------------------------------------------------------
-class QuadMap : public basic::Terrain
+class QuadMap : public base::Terrain
 {
-   DECLARE_SUBCLASS(QuadMap,basic::Terrain)
+   DECLARE_SUBCLASS(QuadMap,base::Terrain)
 
 public:
    QuadMap();
 
     unsigned int getNumDataFiles() const;
-    const basic::Terrain* getDataFile(const unsigned int i) const;
-    bool setDataFile(const unsigned int i, basic::Terrain* newDF);
+    const base::Terrain* getDataFile(const unsigned int i) const;
+    bool setDataFile(const unsigned int i, base::Terrain* newDF);
 
    // ---
-   // basic::Terrain interface
+   // base::Terrain interface
    // ---
 
    bool isDataLoaded() const override;
@@ -64,7 +64,7 @@ protected:
 private:
    static const unsigned int MAX_DATA_FILES = 4;    // Only 4 files (as in Quad!)
 
-   const basic::Terrain* dataFiles[MAX_DATA_FILES]; // Terrain data files
+   const base::Terrain* dataFiles[MAX_DATA_FILES]; // Terrain data files
    unsigned int numDataFiles;                       // Number of data files
 
    bool loadData() override;

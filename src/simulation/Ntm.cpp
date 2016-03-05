@@ -66,7 +66,7 @@ bool Ntm::setSlotTemplatePlayer(const Player* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Ntm::getSlotByIndex(const int si)
+base::Object* Ntm::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -88,7 +88,7 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
       //sout << "template:" << std::endl;
       //tPlayer->serialize(sout,(i+j+4));
       sout << "template: ( " << tPlayer->getFactoryName();
-      const basic::String* tt = tPlayer->getType();
+      const base::String* tt = tPlayer->getType();
       if (tt != nullptr) {
          sout << " type: " << *tt;
       }

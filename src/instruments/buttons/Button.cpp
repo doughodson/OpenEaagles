@@ -19,7 +19,7 @@ END_SLOTTABLE(Button)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Button)
-    ON_SLOT(1, setSlotEventId, basic::Number)
+    ON_SLOT(1, setSlotEventId, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -56,7 +56,7 @@ EMPTY_DELETEDATA(Button)
 //------------------------------------------------------------------------------
 // setSlotEventId() - sets our slot event Id
 //------------------------------------------------------------------------------
-bool Button::setSlotEventId(const basic::Number* const newEvent)
+bool Button::setSlotEventId(const base::Number* const newEvent)
 {
     bool ok = false;
     if (newEvent != nullptr) {
@@ -97,7 +97,7 @@ bool Button::onCancel()
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Button
 //------------------------------------------------------------------------------
-basic::Object* Button::getSlotByIndex(const int si)
+base::Object* Button::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

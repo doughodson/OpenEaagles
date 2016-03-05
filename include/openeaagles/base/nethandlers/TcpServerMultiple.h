@@ -7,7 +7,7 @@
 #include "openeaagles/base/nethandlers/TcpHandler.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: TcpServerMultiple
@@ -59,7 +59,7 @@ private:
    unsigned int backlog;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

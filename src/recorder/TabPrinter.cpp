@@ -34,8 +34,8 @@ END_SLOTTABLE(TabPrinter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(TabPrinter)
-   ON_SLOT( 1, setSlotMsgHdr,      basic::String)
-   ON_SLOT( 2, setSlotDivider,     basic::String)
+   ON_SLOT( 1, setSlotMsgHdr,      base::String)
+   ON_SLOT( 2, setSlotDivider,     base::String)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(TabPrinter)
@@ -109,7 +109,7 @@ void TabPrinter::setMsgHeaders(const bool f)
 //------------------------------------------------------------------------------
 // setSlotMsgHdr
 //------------------------------------------------------------------------------
-bool TabPrinter::setSlotMsgHdr(const basic::String* const msg)
+bool TabPrinter::setSlotMsgHdr(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -143,7 +143,7 @@ bool TabPrinter::setSlotMsgHdr(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // setSlotDivider
 //------------------------------------------------------------------------------
-bool TabPrinter::setSlotDivider(const basic::String* const msg)
+bool TabPrinter::setSlotDivider(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -158,7 +158,7 @@ bool TabPrinter::setSlotDivider(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* TabPrinter::getSlotByIndex(const int si)
+base::Object* TabPrinter::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -1368,7 +1368,7 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
          double pLon(0.0);
          double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
-            oe::basic::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
+            oe::base::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
             sout << pLat << divider << pLon << divider << pAlt << divider;
          }
@@ -1392,17 +1392,17 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
       // angles (convert to degrees)
       if (msg->has_angles()) {
          if (msg->angles().has_x()) {
-            sout << msg->angles().x() * basic::Angle::R2DCC << divider;
+            sout << msg->angles().x() * base::Angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_y()) {
-            sout << msg->angles().y() * basic::Angle::R2DCC << divider;
+            sout << msg->angles().y() * base::Angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_z()) {
-            sout << msg->angles().z() * basic::Angle::R2DCC << divider;
+            sout << msg->angles().z() * base::Angle::R2DCC << divider;
          }
          else sout << divider;
       }
@@ -1503,17 +1503,17 @@ void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData
       else sout << divider;
 
       if (msg->has_true_az()) {
-         sout << msg->true_az() * basic::Angle::R2DCC << divider;
+         sout << msg->true_az() * base::Angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_rel_az()) {
-         sout << msg->rel_az() * basic::Angle::R2DCC << divider;
+         sout << msg->rel_az() * base::Angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_elevation()) {
-         sout << msg->elevation() * basic::Angle::R2DCC << divider;
+         sout << msg->elevation() * base::Angle::R2DCC << divider;
       }
       else sout << divider;
 
@@ -1663,12 +1663,12 @@ void TabPrinter::printEmissionDataMsg(std::ostream& sout, const pb::EmissionData
       else sout << " " << divider;
       if (msg->has_azimuth_aoi()) {
          // Convert to degrees
-         sout << msg->azimuth_aoi() * basic::Angle::R2DCC << divider;
+         sout << msg->azimuth_aoi() * base::Angle::R2DCC << divider;
       }
       else sout << " " << divider;
       if (msg->elevation_aoi()) {
          // Convert to degrees
-         sout << msg->elevation_aoi() * basic::Angle::R2DCC << divider;
+         sout << msg->elevation_aoi() * base::Angle::R2DCC << divider;
       }
       else sout << " " << divider;
    }
@@ -1877,7 +1877,7 @@ void TabPrinter::printExecTimeMsg(std::ostream& sout, double execTime)
     double ss = 0;  // Sec
 
     // exec time
-    basic::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1893,7 +1893,7 @@ void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
     LCreal ss = 0;  // Sec
 
     // sim time
-    basic::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1909,7 +1909,7 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     LCreal ss = 0;  // Sec
 
     // utc time
-    basic::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }

@@ -11,7 +11,7 @@ namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class: LimitFunc
-// Base class:  basic::Object -> ScalerFunc -> LimitFunc
+// Base class:  base::Object -> ScalerFunc -> LimitFunc
 //
 // Description: Generic limits function: limits X to the upper and lower boundaries.
 //

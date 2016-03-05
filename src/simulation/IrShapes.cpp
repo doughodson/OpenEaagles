@@ -26,7 +26,7 @@ BEGIN_SLOTTABLE(IrShape)
 END_SLOTTABLE(IrShape)
 
 BEGIN_SLOT_MAP(IrShape)
-ON_SLOT(1,setSlotIrShapeArea,basic::Number)
+ON_SLOT(1,setSlotIrShapeArea,base::Number)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(IrShape)
@@ -50,17 +50,17 @@ void IrShape::copyData(const IrShape& org, const bool)
    area = org.area;
 }
 
-basic::Object* IrShape::getSlotByIndex(const int si)
+base::Object* IrShape::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrShape::setSlotIrShapeArea(const oe::basic::Number* const num)
+bool IrShape::setSlotIrShapeArea(const oe::base::Number* const num)
 {
    LCreal value = 0.0;
-   const basic::Area* a = dynamic_cast<const basic::Area*>(num);
+   const base::Area* a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
-      basic::SquareMeters sm;
+      base::SquareMeters sm;
       value = static_cast<LCreal>(sm.convert(*a));
    }
    else if (num != nullptr) {
@@ -98,7 +98,7 @@ BEGIN_SLOTTABLE(IrSphere)
 END_SLOTTABLE(IrSphere)
 
 BEGIN_SLOT_MAP(IrSphere)
-ON_SLOT(1,setSlotIrSphereRadius,basic::Number)
+ON_SLOT(1,setSlotIrSphereRadius,base::Number)
 END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -125,18 +125,18 @@ void IrSphere::deleteData()
 {
 }
 
-basic::Object* IrSphere::getSlotByIndex(const int si)
+base::Object* IrSphere::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrSphere::setSlotIrSphereRadius(const oe::basic::Number* const s)
+bool IrSphere::setSlotIrSphereRadius(const oe::base::Number* const s)
 {
    LCreal value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
+      base::Meters m;
       value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != nullptr) {
@@ -168,9 +168,9 @@ BEGIN_SLOTTABLE(IrBox)
 END_SLOTTABLE(IrBox)
 
 BEGIN_SLOT_MAP(IrBox)
-ON_SLOT(1,setSlotIrBoxX,basic::Number)
-ON_SLOT(2,setSlotIrBoxY,basic::Number)
-ON_SLOT(3,setSlotIrBoxZ,basic::Number)
+ON_SLOT(1,setSlotIrBoxX,base::Number)
+ON_SLOT(2,setSlotIrBoxY,base::Number)
+ON_SLOT(3,setSlotIrBoxZ,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -202,18 +202,18 @@ void IrBox::deleteData()
 {
 }
 
-basic::Object* IrBox::getSlotByIndex(const int si)
+base::Object* IrBox::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
-bool IrBox::setSlotIrBoxX(const oe::basic::Number* const s)
+bool IrBox::setSlotIrBoxX(const oe::base::Number* const s)
 {
    LCreal value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
+      base::Meters m;
       value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != nullptr) {
@@ -223,13 +223,13 @@ bool IrBox::setSlotIrBoxX(const oe::basic::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxY(const oe::basic::Number* const s)
+bool IrBox::setSlotIrBoxY(const oe::base::Number* const s)
 {
    LCreal value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
+      base::Meters m;
       value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != nullptr) {
@@ -239,13 +239,13 @@ bool IrBox::setSlotIrBoxY(const oe::basic::Number* const s)
    return true;
 }
 
-bool IrBox::setSlotIrBoxZ(const oe::basic::Number* const s)
+bool IrBox::setSlotIrBoxZ(const oe::base::Number* const s)
 {
    LCreal value = 0.0;
 
-   const basic::Distance* d = dynamic_cast<const basic::Distance*>(s);
+   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
-      basic::Meters m;
+      base::Meters m;
       value = static_cast<LCreal>(m.convert(*d));
    }
    else if (s != nullptr) {
@@ -273,11 +273,11 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    //If the angle to the target is outside the IFOV, then return an area of 0.
    //This will cause the target to be discarded from further IR signature processing.
    if (angleOffBoresight > maxAngle){
-      //std::cout << angleOffBoresight * basic::Angle::R2DCC << " " << msg->getGimbalAzimuth() * basic::Angle::R2DCC << " " << msg->getGimbalElevation() * basic::Angle::R2DCC << " DETECTED" << std::endl;
+      //std::cout << angleOffBoresight * base::Angle::R2DCC << " " << msg->getGimbalAzimuth() * base::Angle::R2DCC << " " << msg->getGimbalElevation() * base::Angle::R2DCC << " DETECTED" << std::endl;
       return area;
    }
 
-   //std::cout << angleOffBoresight * basic::Angle::R2DCC << " " << msg->getGimbalAzimuth() * basic::Angle::R2DCC << " " << msg->getGimbalElevation() * basic::Angle::R2DCC << " DETECTED" << std::endl;
+   //std::cout << angleOffBoresight * base::Angle::R2DCC << " " << msg->getGimbalAzimuth() * base::Angle::R2DCC << " " << msg->getGimbalElevation() * base::Angle::R2DCC << " DETECTED" << std::endl;
 
    //Calculate the projected area of the box.
    const osg::Vec3d targetAoiVector = msg->getAoiVector();

@@ -28,12 +28,12 @@ END_SLOTTABLE(DiscreteOutput)
 
 //  Map slot table to handles
 BEGIN_SLOT_MAP(DiscreteOutput)
-    ON_SLOT( 1, setSlotLocation, basic::Number)
-    ON_SLOT( 2, setSlotPort,     basic::Number)
-    ON_SLOT( 3, setSlotChannel,  basic::Number)
-    ON_SLOT( 4, setSlotValue,    basic::Number)
-    ON_SLOT( 5, setSlotInverted, basic::Number)
-    ON_SLOT( 6, setSlotNum,      basic::Number)
+    ON_SLOT( 1, setSlotLocation, base::Number)
+    ON_SLOT( 2, setSlotPort,     base::Number)
+    ON_SLOT( 3, setSlotChannel,  base::Number)
+    ON_SLOT( 4, setSlotValue,    base::Number)
+    ON_SLOT( 5, setSlotInverted, base::Number)
+    ON_SLOT( 6, setSlotNum,      base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -158,14 +158,14 @@ bool DiscreteOutput::setNumber(const int n)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void DiscreteOutput::processInputs(const LCreal, const basic::IoDevice* const, basic::IoData* const)
+void DiscreteOutput::processInputs(const LCreal, const base::IoDevice* const, base::IoData* const)
 {
 }
 
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void DiscreteOutput::processOutputs(const LCreal, const basic::IoData* const outData, basic::IoDevice* const device)
+void DiscreteOutput::processOutputs(const LCreal, const base::IoData* const outData, base::IoDevice* const device)
 {
    if (device != nullptr && devEnb) {
       unsigned int chan = channel;
@@ -197,7 +197,7 @@ void DiscreteOutput::processOutputs(const LCreal, const basic::IoData* const out
 //------------------------------------------------------------------------------
 
 // location: Output array index (location)
-bool DiscreteOutput::setSlotLocation(const basic::Number* const msg)
+bool DiscreteOutput::setSlotLocation(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -210,7 +210,7 @@ bool DiscreteOutput::setSlotLocation(const basic::Number* const msg)
 }
 
 // port: DiHandler's port number
-bool DiscreteOutput::setSlotPort(const basic::Number* const msg)
+bool DiscreteOutput::setSlotPort(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -223,7 +223,7 @@ bool DiscreteOutput::setSlotPort(const basic::Number* const msg)
 }
 
 // channel: DiHandler's channel (bit) number on the port
-bool DiscreteOutput::setSlotChannel(const basic::Number* const msg)
+bool DiscreteOutput::setSlotChannel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -236,7 +236,7 @@ bool DiscreteOutput::setSlotChannel(const basic::Number* const msg)
 }
 
 // value: Initial value (default: false)
-bool DiscreteOutput::setSlotValue(const basic::Number* const msg)
+bool DiscreteOutput::setSlotValue(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -246,7 +246,7 @@ bool DiscreteOutput::setSlotValue(const basic::Number* const msg)
 }
 
 // invert: Inverted bit flag (default: false)
-bool DiscreteOutput::setSlotInverted(const basic::Number* const msg)
+bool DiscreteOutput::setSlotInverted(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -255,7 +255,7 @@ bool DiscreteOutput::setSlotInverted(const basic::Number* const msg)
    return ok;
 }
 
-bool DiscreteOutput::setSlotNum(const basic::Number* const msg)
+bool DiscreteOutput::setSlotNum(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -268,7 +268,7 @@ bool DiscreteOutput::setSlotNum(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-basic::Object* DiscreteOutput::getSlotByIndex(const int si)
+base::Object* DiscreteOutput::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -38,7 +38,7 @@ EMPTY_DELETEDATA(IrisGLCompat)
 //------------------------------------------------------------------------------
 void IrisGLCompat::arc(float x, float y, float r, float startAng, float endAng)
 {
-    float ang = static_cast<float>(startAng * basic::Angle::D2RCC);
+    float ang = static_cast<float>(startAng * base::Angle::D2RCC);
     float fraction = static_cast<float>((endAng - startAng) / 360.0);
     int numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
     float delta = static_cast<float>((2.0 * PI * fraction) / static_cast<float>(numPoints));
@@ -57,7 +57,7 @@ void IrisGLCompat::arc(float x, float y, float r, float startAng, float endAng)
 //------------------------------------------------------------------------------
 void IrisGLCompat::arcf(float x, float y, float r, float startAng, float endAng)
 {
-    float ang = static_cast<float>(startAng * basic::Angle::D2RCC);
+    float ang = static_cast<float>(startAng * base::Angle::D2RCC);
     float fraction = static_cast<float>((endAng - startAng) / 360.0);
     int numPoints = static_cast<int>((static_cast<float>(MAX_POINTS)) * fraction);
     float delta = static_cast<float>((2.0 * PI * fraction) / static_cast<float>(numPoints));

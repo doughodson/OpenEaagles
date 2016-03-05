@@ -40,17 +40,17 @@ public:
 
     void drawFunc() override;
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
-    bool setSlotOriginAngle(const basic::Number* const newAngle);
-    bool setSlotMobile(const basic::Number* const newM);
-    bool setSlotSweepAngle(const basic::Number* const newSweepAngle);
-    bool setSlotRadius(const basic::Number* const newR);
-    bool setSlotSlices(const basic::Number* const x);
+    bool setSlotOriginAngle(const base::Number* const newAngle);
+    bool setSlotMobile(const base::Number* const newM);
+    bool setSlotSweepAngle(const base::Number* const newSweepAngle);
+    bool setSlotRadius(const base::Number* const newR);
+    bool setSlotSlices(const base::Number* const x);
     // event function
-    virtual bool onUpdateRadius(const basic::Number* const x);
+    virtual bool onUpdateRadius(const base::Number* const x);
 
 private:
     LCreal originAngle;             // angle we start drawing ticks from (degrees, default is 0)

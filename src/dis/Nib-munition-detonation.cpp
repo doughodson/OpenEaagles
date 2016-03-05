@@ -116,15 +116,15 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 
     // World Coordinates
     osg::Vec3d geocPos = mPlayer->getGeocPosition();
-    pdu.location.X_coord = geocPos[basic::Nav::IX];
-    pdu.location.Y_coord = geocPos[basic::Nav::IY];
-    pdu.location.Z_coord = geocPos[basic::Nav::IZ];
+    pdu.location.X_coord = geocPos[base::Nav::IX];
+    pdu.location.Y_coord = geocPos[base::Nav::IY];
+    pdu.location.Z_coord = geocPos[base::Nav::IZ];
 
     // Velocity
     osg::Vec3d geocVel = mPlayer->getGeocVelocity();
-    pdu.velocity.component[0] = static_cast<float>(geocVel[basic::Nav::IX]);
-    pdu.velocity.component[1] = static_cast<float>(geocVel[basic::Nav::IY]);
-    pdu.velocity.component[2] = static_cast<float>(geocVel[basic::Nav::IZ]);
+    pdu.velocity.component[0] = static_cast<float>(geocVel[base::Nav::IX]);
+    pdu.velocity.component[1] = static_cast<float>(geocVel[base::Nav::IY]);
+    pdu.velocity.component[2] = static_cast<float>(geocVel[base::Nav::IZ]);
 
     // ---
     // Burst
@@ -161,7 +161,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     // ---
     // Send the PDU
     // ---
-    if (basic::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
+    if (base::NetHandler::isNotNetworkByteOrder()) pdu.swapBytes();
     ok = disIO->sendData(reinterpret_cast<char*>(&pdu), sizeof(pdu));
 
     // Set the detonation message sent flag so that we don't do this again.

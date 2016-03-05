@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 namespace ubf {
 
 class State;
@@ -23,9 +23,9 @@ class Action;
 //    vote     <Number>    ! default vote/weight value for actions generated
 //                         ! by this behavior
 //------------------------------------------------------------------------------
-class Behavior : public basic::Component
+class Behavior : public base::Component
 {
-   DECLARE_SUBCLASS(Behavior, basic::Component)
+   DECLARE_SUBCLASS(Behavior, base::Component)
 
 public:
    Behavior();
@@ -37,7 +37,7 @@ protected:
    unsigned int getVote() const;
    virtual void setVote(const unsigned int x);
 
-   bool setSlotVote(const basic::Number* const num);
+   bool setSlotVote(const base::Number* const num);
 
 private:
    unsigned int vote;
@@ -48,7 +48,7 @@ inline unsigned int Behavior::getVote() const          { return vote; }
 
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

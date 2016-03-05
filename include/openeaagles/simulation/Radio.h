@@ -7,7 +7,7 @@
 #include "RfSystem.h"
 
 namespace oe {
-   namespace basic { class PairStream; }
+   namespace base { class PairStream; }
 
 namespace simulation {
 class Datalink;
@@ -47,16 +47,16 @@ class Datalink;
 //
 // Factory name: Radio
 // Slots:
-//    numChannels    <basic::Number>      ! Number of channels (less than or equal MAX_CHANNELS) (default: 0)
+//    numChannels    <base::Number>      ! Number of channels (less than or equal MAX_CHANNELS) (default: 0)
 //
-//    channels       <basic::PairStream>  ! Our channels (list of basic::Frequency objects) --
+//    channels       <base::PairStream>  ! Our channels (list of base::Frequency objects) --
 //                                        ! -- make sure to set the number of channels first. (default: 0)
 //
-//    channel        <basic::Number>      ! Channel number [ 1 .. 'numChannels' ] (default: 0) ### NES Should the lower value be 0?
+//    channel        <base::Number>      ! Channel number [ 1 .. 'numChannels' ] (default: 0) ### NES Should the lower value be 0?
 //
-//    maxDetectRange <basic::Number>      ! Maximum detection capability (NM) (default: 120NM)
+//    maxDetectRange <base::Number>      ! Maximum detection capability (NM) (default: 120NM)
 //
-//    radioID        <basic::Number>      ! ID number used by DIS (default: 0)
+//    radioID        <base::Number>      ! ID number used by DIS (default: 0)
 //
 //
 // Example EDL:
@@ -124,11 +124,11 @@ protected:
    virtual bool setNumberOfChannels(const unsigned short n);
 
    // Slot functions
-   virtual bool setSlotNumChannels(basic::Number* const msg);
-   virtual bool setSlotChannels(const basic::PairStream* const msg);
-   virtual bool setSlotChannel(basic::Number* const msg);
-   virtual bool setSlotMaxDetectRange(basic::Number* const num);
-   virtual bool setSlotRadioId(basic::Number* const num);
+   virtual bool setSlotNumChannels(base::Number* const msg);
+   virtual bool setSlotChannels(const base::PairStream* const msg);
+   virtual bool setSlotChannel(base::Number* const msg);
+   virtual bool setSlotMaxDetectRange(base::Number* const num);
+   virtual bool setSlotRadioId(base::Number* const num);
 
    void receive(const LCreal dt) override;
 
@@ -164,7 +164,7 @@ public:
    virtual bool setDatalink(Datalink* const p);
 
    // Transmit a datalink message
-   virtual bool transmitDataMessage(basic::Object* const msg);
+   virtual bool transmitDataMessage(base::Object* const msg);
 
 protected:
    void receivedEmissionReport(Emission* const em) override;
@@ -172,7 +172,7 @@ protected:
 private:
    void initData();
 
-   basic::safe_ptr<Datalink> datalink;   // Our companion datalink system
+   base::safe_ptr<Datalink> datalink;   // Our companion datalink system
 };
 
 } // End simulation namespace

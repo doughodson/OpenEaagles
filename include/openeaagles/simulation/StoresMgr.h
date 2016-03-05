@@ -7,7 +7,7 @@
 #include "openeaagles/simulation/Stores.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Boolean;
       class PairStream;
    }
@@ -35,7 +35,7 @@ class Weapon;
 // Factory name: BaseStoresMgr
 //
 // Events:
-//    WPN_REL_EVENT  <basic::Boolean>    ! Weapon release switch with position
+//    WPN_REL_EVENT  <base::Boolean>    ! Weapon release switch with position
 //    WPN_REL_EVENT  <none>              ! Weapon release switch (single shot)
 //    WPN_RELOAD     <none>              ! Request reload of weapons
 //
@@ -70,14 +70,14 @@ public:
 public:
    StoresMgr();
 
-   basic::PairStream* getWeapons();                    // List of all weapons (Pre-ref()'d)
-   const basic::PairStream* getWeapons() const;        // List of all weapons (Pre-ref()'d) (const version)
+   base::PairStream* getWeapons();                    // List of all weapons (Pre-ref()'d)
+   const base::PairStream* getWeapons() const;        // List of all weapons (Pre-ref()'d) (const version)
 
-   basic::PairStream* getExternalStores();             // List of all external equipment (Pre-ref()'d)
-   const basic::PairStream* getExternalStores() const; // List of all external equipment (Pre-ref()'d) (const version)
+   base::PairStream* getExternalStores();             // List of all external equipment (Pre-ref()'d)
+   const base::PairStream* getExternalStores() const; // List of all external equipment (Pre-ref()'d) (const version)
 
-   basic::PairStream* getExtFuelTanks();               // List of all external fuel tanks (Pre-ref()'d)
-   const basic::PairStream* getExtFuelTanks() const;   // List of all external fuel tanks (Pre-ref()'d) (const version)
+   base::PairStream* getExtFuelTanks();               // List of all external fuel tanks (Pre-ref()'d)
+   const base::PairStream* getExtFuelTanks() const;   // List of all external fuel tanks (Pre-ref()'d) (const version)
 
    Gun* getGun();                                      // The primary gun
    const Gun* getGun() const;                          // The primary gun (const version)
@@ -123,14 +123,14 @@ public:
    virtual Decoy* releaseOneDecoy();                  // Simple decoy release function (Pre-ref()'d)
 
    // Event handlers
-   virtual bool onWpnRelEvent(const basic::Boolean* const sw = 0);
-   virtual bool onTriggerSwEvent(const basic::Boolean* const sw = 0);
+   virtual bool onWpnRelEvent(const base::Boolean* const sw = 0);
+   virtual bool onTriggerSwEvent(const base::Boolean* const sw = 0);
    virtual bool onWpnReload();
 
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-   bool setSlotStores(const basic::PairStream* const msg) override;
+   bool setSlotStores(const base::PairStream* const msg) override;
 
    void process(const LCreal dt) override;
 
@@ -138,12 +138,12 @@ protected:
 
 private:
    void initData();
-   void searchAndAdd(basic::PairStream* const, const std::type_info&, basic::PairStream*);
+   void searchAndAdd(base::PairStream* const, const std::type_info&, base::PairStream*);
 
-   basic::safe_ptr<basic::PairStream> weaponsList;  // Weapon list; set by setSlotStores()
-   basic::safe_ptr<basic::PairStream> externalList; // External equipment list; set by setSlotStores()
-   basic::safe_ptr<basic::PairStream> fuelList;     // External fuel tank list; set by setSlotStores()
-   basic::safe_ptr<Gun> gunPtr;                     // Gun model; set by setSlotStores()
+   base::safe_ptr<base::PairStream> weaponsList;  // Weapon list; set by setSlotStores()
+   base::safe_ptr<base::PairStream> externalList; // External equipment list; set by setSlotStores()
+   base::safe_ptr<base::PairStream> fuelList;     // External fuel tank list; set by setSlotStores()
+   base::safe_ptr<Gun> gunPtr;                     // Gun model; set by setSlotStores()
 
    bool   gunFlg;          // Gun has been selected
    unsigned int   mode;               // Weapon delivery mode
@@ -175,10 +175,10 @@ public:
    int getNumCurrentWeapons() const;                     // Number of weapons with current weapon ID (e.g. # MK84 bombs on the platform)
 
    // Get the first missile of type weaponType from our weapons list (Pre-ref()'d)
-   virtual Missile* getSpecificMissile(const basic::String* const missileType);
+   virtual Missile* getSpecificMissile(const base::String* const missileType);
 
    // Get the first bomb of type weaponType from our weapons list (Pre-ref()'d)
-   virtual Bomb* getSpecificBomb(const basic::String* const bombType);
+   virtual Bomb* getSpecificBomb(const base::String* const bombType);
 
    // Get the first weapon by type from our weapons list (Pre-ref()'d)
    virtual Weapon* getSpecificWeapon(const std::type_info& type);
@@ -188,8 +188,8 @@ public:
 
    virtual bool setWeaponReleaseTimer(const LCreal v);   // Sets the release timer
 
-   bool onWpnRelEvent(const basic::Boolean* const sw = 0) override;
-   bool onTriggerSwEvent(const basic::Boolean* const sw = 0) override;
+   bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
+   bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
 
    Weapon* getCurrentWeapon() override;
    const Weapon* getCurrentWeapon() const override;

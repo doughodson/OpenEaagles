@@ -7,7 +7,7 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class Number;
 class String;
@@ -173,7 +173,7 @@ inline const char* FileReader::getFirstRecord()
    return getRecord();
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

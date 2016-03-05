@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: NetHandler
@@ -260,7 +260,7 @@ inline void NetHandler::fromNetOrder(double* const vout, const double vin)
     return toNetOrder(vout,vin);
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

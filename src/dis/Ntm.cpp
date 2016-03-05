@@ -18,12 +18,12 @@ IMPLEMENT_SUBCLASS(Ntm,"DisNtm")
 // slot table for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Ntm)
-    "disEntityType", // 1) DIS Entity type (basic::List -- number vector)  [ kind domain country category ... ]
+    "disEntityType", // 1) DIS Entity type (base::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
-    ON_SLOT(1, setSlotDisEntityType, basic::List)
+    ON_SLOT(1, setSlotDisEntityType, base::List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ bool Ntm::setEntityType(
 //------------------------------------------------------------------------------
 // Set DIS entity type enumerations
 //------------------------------------------------------------------------------
-bool Ntm::setSlotDisEntityType(const basic::List* const msg)
+bool Ntm::setSlotDisEntityType(const base::List* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -203,7 +203,7 @@ bool Ntm::setSlotDisEntityType(const basic::List* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Ntm::getSlotByIndex(const int si)
+base::Object* Ntm::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

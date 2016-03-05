@@ -41,8 +41,8 @@ protected:
 private:
    void initData();
 
-   basic::safe_ptr<dafif::AirportLoader> apdb; // Pointer to Airport loader
-   basic::safe_ptr<dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader
+   base::safe_ptr<dafif::AirportLoader> apdb; // Pointer to Airport loader
+   base::safe_ptr<dafif::NavaidLoader> nvdb;  // Pointer to Navaid loader
 
    double latitude;                 // Ownship Latitude
    double longitude;                // Ownship Longitude

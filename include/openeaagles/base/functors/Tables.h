@@ -9,7 +9,7 @@
 #include "openeaagles/base/functors/Table.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class List;
 class Number;
@@ -265,7 +265,7 @@ private:
    unsigned int nv;    // Number of v breakpoints
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

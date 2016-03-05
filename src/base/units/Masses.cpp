@@ -7,7 +7,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //////////////////////////////////////////////////////////////////////
 // Mass() --
@@ -151,5 +151,5 @@ Slugs::Slugs(const Mass& value) : Mass()
 EMPTY_COPYDATA(Slugs)
 EMPTY_DELETEDATA(Slugs)
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

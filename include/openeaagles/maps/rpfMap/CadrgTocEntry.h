@@ -35,9 +35,9 @@ namespace oe {
 namespace maps {
 namespace rpf {
 
-class CadrgTocEntry : public basic::Object
+class CadrgTocEntry : public base::Object
 {
-    DECLARE_SUBCLASS(CadrgTocEntry, basic::Object)
+    DECLARE_SUBCLASS(CadrgTocEntry, base::Object)
 
 public:
     CadrgTocEntry();

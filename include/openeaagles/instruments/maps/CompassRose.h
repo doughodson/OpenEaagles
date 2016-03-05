@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: CompassRose
-// Base Class: basic::Object -> graphics::Graphic -> CompassRose
+// Base Class: base::Object -> graphics::Graphic -> CompassRose
 //
 // Description: Generic compass used as a direction indicator.  It will
 // rotate about a heading either by someone telling it through a member function.
@@ -35,7 +35,7 @@ public:
     virtual bool setDisplacement(const LCreal newD);
     virtual bool setCentered(const bool newC);
 
-    LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(basic::Angle::R2DCC); }
+    LCreal getRotationDeg() const      { return rot * static_cast<LCreal>(base::Angle::R2DCC); }
     LCreal getRotationRad() const      { return rot; }
     LCreal getCenteredRadius() const   { return cenRadius; }
     LCreal getDeCenteredRadius() const { return decRadius; }
@@ -45,21 +45,21 @@ public:
     void draw() override;
 
     void updateData(const LCreal dt = 0.0) override;
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
-    bool setSlotCenteredRadius(const basic::Number* const newR);
-    bool setSlotDeCenteredRadius(const basic::Number* const newR);
-    bool setSlotDisplacement(const basic::Number* const newD);
+    bool setSlotCenteredRadius(const base::Number* const newR);
+    bool setSlotDeCenteredRadius(const base::Number* const newR);
+    bool setSlotDisplacement(const base::Number* const newD);
 
     // event functions
-    bool onUpdateRotDeg(const basic::Number* const x);
-    bool onUpdateRadius(const basic::Number* const x);
-    bool onUpdateCenRad(const basic::Number* const x);
-    bool onUpdateDecRadius(const basic::Number* const x);
-    bool onUpdateDisplacement(const basic::Number* const x);
-    bool onUpdateCentered(const basic::Number* const x);
+    bool onUpdateRotDeg(const base::Number* const x);
+    bool onUpdateRadius(const base::Number* const x);
+    bool onUpdateCenRad(const base::Number* const x);
+    bool onUpdateDecRadius(const base::Number* const x);
+    bool onUpdateDisplacement(const base::Number* const x);
+    bool onUpdateCentered(const base::Number* const x);
 
 private:
     LCreal rot;         // rotation angle (rads)

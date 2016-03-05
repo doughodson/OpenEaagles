@@ -68,7 +68,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Distance
@@ -324,7 +324,7 @@ public:
     LCreal fromDistance(const LCreal a) const override { return a * M2SM; }
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

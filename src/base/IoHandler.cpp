@@ -10,7 +10,7 @@
 #include "openeaagles/base/units/Frequencies.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //=============================================================================
 // Declare the I/O thread
@@ -483,5 +483,5 @@ unsigned long IoThread::userFunc(const LCreal dt)
    return 0;
 }
 
-} // End basic
-} // end oe namespace
+}
+}

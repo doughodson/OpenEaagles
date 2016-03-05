@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class IoData;
 
 //------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ namespace basic {
 //       example: AI channels range from 0 to (getNumAnalogInputs() - 1)
 //
 //    2) Use the reset() function, reset(), to open the device, and the
-//       deleteData() function, basic::Object::deleteData(), to close the
+//       deleteData() function, base::Object::deleteData(), to close the
 //       device (both as required).
 //
 //    3) Both processInputs() and processOutputs() are passed an I/O data
@@ -46,8 +46,8 @@ namespace basic {
 //    devices  <PairStream>   ! List of IoDevice objects; i.e., sub-devices (default: none)
 //
 //------------------------------------------------------------------------------
-class IoDevice : public basic::Component {
-    DECLARE_SUBCLASS(IoDevice,basic::Component)
+class IoDevice : public base::Component {
+    DECLARE_SUBCLASS(IoDevice,base::Component)
 
 public:
    IoDevice();
@@ -86,7 +86,7 @@ protected:
    virtual bool setSlotAdapters(PairStream* const list);
    virtual bool setSlotDevices(PairStream* const list);
 
-   // basic::Component protected functions
+   // base::Component protected functions
    bool shutdownNotification() override;
 
 private:

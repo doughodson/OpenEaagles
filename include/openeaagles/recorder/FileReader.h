@@ -7,7 +7,7 @@
 #include "openeaagles/recorder/InputHandler.h"
 
 namespace oe {
-   namespace basic { class String; }
+   namespace base { class String; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -42,8 +42,8 @@ public:
    virtual void closeFile();        // Close the data file
 
    // File and path names; set before calling openFile()
-   virtual bool setFilename(const basic::String* const msg);
-   virtual bool setPathName(const basic::String* const msg);
+   virtual bool setFilename(const base::String* const msg);
+   virtual bool setPathName(const base::String* const msg);
 
 protected:
    const DataRecordHandle* readRecordImp() override;
@@ -54,8 +54,8 @@ private:
    char* ibuf;                      // Input data buffer
 
    std::ifstream* sin;              // Input stream
-   const basic::String* filename;   // File name
-   const basic::String* pathname;   // Path to the data file's directory
+   const base::String* filename;   // File name
+   const base::String* pathname;   // Path to the data file's directory
    bool fileOpened;                 // File opened
    bool fileFailed;                 // Open or read failed
    bool firstPassFlg;               // First pass flag

@@ -8,7 +8,7 @@
 
 namespace oe {
 
-   namespace basic {
+   namespace base {
       class Number;
    }
 
@@ -53,15 +53,15 @@ public:
     bool isFilled()         { return filled; }
     int getSlices()         { return slices; }
 
-    bool event(const int event, basic::Object* const obj = nullptr) override;
+    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-    bool setSlotRadius(const basic::Number* const x);
-    bool setSlotFilled(const basic::Number* const x);
-    bool setSlotSlices(const basic::Number* const x);
+    bool setSlotRadius(const base::Number* const x);
+    bool setSlotFilled(const base::Number* const x);
+    bool setSlotSlices(const base::Number* const x);
 
     // event functions
-    bool updateRadius(const basic::Number* const x);
+    bool updateRadius(const base::Number* const x);
 
 private:
     LCreal radius;
@@ -92,7 +92,7 @@ public:
     LCreal getOuterRadius()     { return outerRadius; }
 
 protected:
-    bool setSlotOuterRadius(const basic::Number* const x);
+    bool setSlotOuterRadius(const base::Number* const x);
 
 private:
     LCreal outerRadius;          // portion that is occluded
@@ -138,9 +138,9 @@ public:
     bool  isConnected()                         { return connected; }
 
 protected:
-    bool setSlotStartAngle(const basic::Number* const x);
-    bool setSlotArcLength(const basic::Number* const x);
-    bool setSlotIsConnected(const basic::Number* const x);
+    bool setSlotStartAngle(const base::Number* const x);
+    bool setSlotArcLength(const base::Number* const x);
+    bool setSlotIsConnected(const base::Number* const x);
 
 private:
     LCreal startAngle;
@@ -171,7 +171,7 @@ public:
     LCreal getOuterRadius()              { return outerRadius; }
 
 protected:
-    bool setSlotOuterRadius(const basic::Number* const x);
+    bool setSlotOuterRadius(const base::Number* const x);
 
 private:
     LCreal outerRadius;          // portion that is occluded
@@ -244,7 +244,7 @@ public:
     bool isSegmented() { return segment; }
 
 protected:
-    bool setSlotSegments(const basic::Number* const x);
+    bool setSlotSegments(const base::Number* const x);
 
 private:
     bool segment;            // True if line segments
@@ -270,7 +270,7 @@ public:
     void drawFunc() override;
 
 protected:
-    bool setSlotStrip(const basic::Number* const x);
+    bool setSlotStrip(const base::Number* const x);
     bool strip;     // are we a Quad Strip?
 
 };
@@ -295,7 +295,7 @@ public:
     void drawFunc() override;
 
 protected:
-    bool setSlotFan(const basic::Number* const x);
+    bool setSlotFan(const base::Number* const x);
 
 private:
     bool fan;       // are we a triangle fan?

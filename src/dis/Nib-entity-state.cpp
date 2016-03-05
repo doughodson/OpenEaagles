@@ -63,9 +63,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // from the PDU and use them to reset the dead reckoning.
    {
       osg::Vec3d geocPos;
-      geocPos[basic::Nav::IX] = pdu->entityLocation.X_coord;
-      geocPos[basic::Nav::IY] = pdu->entityLocation.Y_coord;
-      geocPos[basic::Nav::IZ] = pdu->entityLocation.Z_coord;
+      geocPos[base::Nav::IX] = pdu->entityLocation.X_coord;
+      geocPos[base::Nav::IY] = pdu->entityLocation.Y_coord;
+      geocPos[base::Nav::IZ] = pdu->entityLocation.Z_coord;
       //std::cout << "entityStatePdu2Nib(): geoc POS(";
       //std::cout << geocPos[0] << ", ";
       //std::cout << geocPos[1] << ", ";
@@ -73,9 +73,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       //std::cout << std::endl;
 
       osg::Vec3d geocVel;
-      geocVel[basic::Nav::IX] = pdu->entityLinearVelocity.component[0];
-      geocVel[basic::Nav::IY] = pdu->entityLinearVelocity.component[1];
-      geocVel[basic::Nav::IZ] = pdu->entityLinearVelocity.component[2];
+      geocVel[base::Nav::IX] = pdu->entityLinearVelocity.component[0];
+      geocVel[base::Nav::IY] = pdu->entityLinearVelocity.component[1];
+      geocVel[base::Nav::IZ] = pdu->entityLinearVelocity.component[2];
       //std::cout << "entityStatePdu2Nib(): geoc VEL(";
       //std::cout << geocVel[0] << ", ";
       //std::cout << geocVel[1] << ", ";
@@ -83,19 +83,19 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       //std::cout << std::endl;
 
       osg::Vec3d geocAcc;
-      geocAcc[basic::Nav::IX] = pdu->DRentityLinearAcceleration.component[0];
-      geocAcc[basic::Nav::IY] = pdu->DRentityLinearAcceleration.component[1];
-      geocAcc[basic::Nav::IZ] = pdu->DRentityLinearAcceleration.component[2];
+      geocAcc[base::Nav::IX] = pdu->DRentityLinearAcceleration.component[0];
+      geocAcc[base::Nav::IY] = pdu->DRentityLinearAcceleration.component[1];
+      geocAcc[base::Nav::IZ] = pdu->DRentityLinearAcceleration.component[2];
 
       osg::Vec3d geocAngles;
-      geocAngles[basic::Nav::IPHI] = pdu->entityOrientation.phi;
-      geocAngles[basic::Nav::ITHETA] = pdu->entityOrientation.theta;
-      geocAngles[basic::Nav::IPSI] = pdu->entityOrientation.psi;
+      geocAngles[base::Nav::IPHI] = pdu->entityOrientation.phi;
+      geocAngles[base::Nav::ITHETA] = pdu->entityOrientation.theta;
+      geocAngles[base::Nav::IPSI] = pdu->entityOrientation.psi;
 
       osg::Vec3d arates;
-      arates[basic::Nav::IX] = pdu->DRentityAngularVelocity.x_axis;
-      arates[basic::Nav::IY] = pdu->DRentityAngularVelocity.y_axis;
-      arates[basic::Nav::IZ] = pdu->DRentityAngularVelocity.z_axis;
+      arates[base::Nav::IX] = pdu->DRentityAngularVelocity.x_axis;
+      arates[base::Nav::IY] = pdu->DRentityAngularVelocity.y_axis;
+      arates[base::Nav::IZ] = pdu->DRentityAngularVelocity.z_axis;
 
 #if 0
       // (re)initialize the dead reckoning function
@@ -291,7 +291,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                // If needed, create the stores manager
                if (sms == nullptr) {
                   sms = new simulation::StoresMgr();
-                  basic::Pair* pair = new basic::Pair("storesMgr", sms);
+                  base::Pair* pair = new base::Pair("storesMgr", sms);
                   sms->unref();   // pair owns it
                   p->addComponent(pair);
                   pair->unref(); // player owns it
@@ -304,13 +304,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                   simulation::Weapon* wpn = nullptr;
 
                   // find the weapon at station 'sta'
-                  basic::PairStream* stores = sms->getStores();
+                  base::PairStream* stores = sms->getStores();
                   if (stores != nullptr) {
-                     basic::List::Item* item = stores->getFirstItem();
+                     base::List::Item* item = stores->getFirstItem();
                      while (item != nullptr && wpn == nullptr) {
                         unsigned int s = 0;
-                        basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
-                        const basic::Identifier* slot = pair->slot();
+                        base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+                        const base::Identifier* slot = pair->slot();
                         if (slot->isNumber()) s = static_cast<unsigned int>(slot->getNumber());
                         if (s == sta) {
                            wpn = static_cast<simulation::Weapon*>(pair->object());  // Found it
@@ -347,7 +347,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                               wpn = static_cast<simulation::Weapon*>(tp->clone());  // clone and cast to a Weapon
                               char cbuf[20];
                               std::sprintf(cbuf,"%i",sta);
-                              basic::Pair* pair = new basic::Pair(cbuf, wpn);
+                              base::Pair* pair = new base::Pair(cbuf, wpn);
                               wpn->unref();   // pair owns it
                               sms->addComponent(pair);
                               pair->unref(); // sms owns it
@@ -523,17 +523,17 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Entity location (WorldCoordinates)
          // ---
          osg::Vec3d geocPos = getDrPosition();
-         pdu->entityLocation.X_coord = geocPos[basic::Nav::IX];
-         pdu->entityLocation.Y_coord = geocPos[basic::Nav::IY];
-         pdu->entityLocation.Z_coord = geocPos[basic::Nav::IZ];
+         pdu->entityLocation.X_coord = geocPos[base::Nav::IX];
+         pdu->entityLocation.Y_coord = geocPos[base::Nav::IY];
+         pdu->entityLocation.Z_coord = geocPos[base::Nav::IZ];
 
          // ---
          // Entity orientation (EulerAngles)
          // ---
          osg::Vec3d geocAngles = getDrEulerAngles();
-         pdu->entityOrientation.phi   = static_cast<float>(geocAngles[basic::Nav::IPHI]);
-         pdu->entityOrientation.theta = static_cast<float>(geocAngles[basic::Nav::ITHETA]);
-         pdu->entityOrientation.psi   = static_cast<float>(geocAngles[basic::Nav::IPSI]);
+         pdu->entityOrientation.phi   = static_cast<float>(geocAngles[base::Nav::IPHI]);
+         pdu->entityOrientation.theta = static_cast<float>(geocAngles[base::Nav::ITHETA]);
+         pdu->entityOrientation.psi   = static_cast<float>(geocAngles[base::Nav::IPSI]);
       }
 
       // ---
@@ -679,9 +679,9 @@ bool Nib::entityStateManager(const LCreal curExecTime)
          // Dead reckoning angular velocity (AngularVelocityVectorDIS)
          // ---
          osg::Vec3d geocAngVel = getDrAngularVelocities();
-         pdu->DRentityAngularVelocity.x_axis = static_cast<float>(geocAngVel[basic::Nav::IX]);
-         pdu->DRentityAngularVelocity.y_axis = static_cast<float>(geocAngVel[basic::Nav::IY]);
-         pdu->DRentityAngularVelocity.z_axis = static_cast<float>(geocAngVel[basic::Nav::IZ]);
+         pdu->DRentityAngularVelocity.x_axis = static_cast<float>(geocAngVel[base::Nav::IX]);
+         pdu->DRentityAngularVelocity.y_axis = static_cast<float>(geocAngVel[base::Nav::IY]);
+         pdu->DRentityAngularVelocity.z_axis = static_cast<float>(geocAngVel[base::Nav::IZ]);
       }
 
       // ---
@@ -715,7 +715,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
       unsigned short length = sizeof(EntityStatePDU) + (pdu->numberOfArticulationParameters * sizeof(VpArticulatedPart));
       pdu->header.length = length;
 
-      if (basic::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
+      if (base::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
       ok = disIO->sendData( reinterpret_cast<char*>(pdu), length );
    }
    return ok;

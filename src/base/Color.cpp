@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Color, "Color")
 EMPTY_SERIALIZER(Color)
@@ -150,5 +150,5 @@ void Color::setDefaultAlpha(const LCreal alpha)
     defaultAlpha = alpha;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

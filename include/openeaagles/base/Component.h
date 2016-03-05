@@ -7,7 +7,7 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class Identifier;
 class Logger;
@@ -178,7 +178,7 @@ class String;
 //    event tokens must be processed quickly, similar to interrupt handlers.
 //
 //    Standard event tokens are defined in the file, eventTokens.h, which is included
-//    by this Component class and are therefore within the oe::basic::Component
+//    by this Component class and are therefore within the oe::base::Component
 //    namespace.  There is a companion file, eventTokens.epp, which can be included
 //    as part of the oe Description Language (EDL) input files.
 //
@@ -440,7 +440,7 @@ private:
    bool shutdown;                   // True if this component is being (or has been) shutdown
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 

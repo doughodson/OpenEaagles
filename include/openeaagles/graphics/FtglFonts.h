@@ -15,7 +15,7 @@ class FTGLOutlineFont;
 #endif
 
 namespace oe {
-namespace basic { class Color; }
+namespace base { class Color; }
 namespace graphics {
 
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ public:
     FtglFonts();
 
     // Slot table Set Functions
-    virtual bool setFaceSize(const basic::Number* const faceSize);
+    virtual bool setFaceSize(const base::Number* const faceSize);
 
     // Get Functions
     unsigned int getFaceSize()      { return fSize; };
@@ -108,7 +108,7 @@ public:
 //   depth         <Number>    ! Depth (default: 5.0f)
 //
 // public member functions:
-//   setDepth(const basic::Number* const newDepth)
+//   setDepth(const base::Number* const newDepth)
 //   -- sets the depth of the extruded font
 //
 //   outputText(double x, double y, char* txt, int n, bool vf)
@@ -134,7 +134,7 @@ public:
     void loadFont() override;
 
     // slot table functions
-    bool setDepth(const basic::Number* const newDepth);
+    bool setDepth(const base::Number* const newDepth);
 
 private:
     static const float DEFAULT_DEPTH;
@@ -263,17 +263,17 @@ public:
     void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
     void loadFont() override;
 
-    basic::Color* getHaloColor()    { return haloColor; }
+    base::Color* getHaloColor()    { return haloColor; }
     float getHaloLineWidth()        { return linewidth; }
     FTGLOutlineFont* getOutline()   { return outline; }
 
 protected:
-    bool setHaloColor(basic::Color* x);
-    bool setLinewidth(const basic::Number* const x);
+    bool setHaloColor(base::Color* x);
+    bool setLinewidth(const base::Number* const x);
 
 private:
     FTGLOutlineFont* outline;
-    basic::Color* haloColor;
+    base::Color* haloColor;
     float linewidth;
 };
 

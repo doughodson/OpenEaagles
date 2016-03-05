@@ -36,7 +36,7 @@
 #include <cstdio>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(TcpServerMultiple, "TcpServerMultiple")
 
@@ -221,6 +221,6 @@ std::ostream& TcpServerMultiple::serialize(std::ostream& sout, const int i, cons
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

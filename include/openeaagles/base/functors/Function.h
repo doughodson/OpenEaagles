@@ -5,7 +5,7 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class FStorage;
 class List;
@@ -57,7 +57,7 @@ public:
    FStorage();
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

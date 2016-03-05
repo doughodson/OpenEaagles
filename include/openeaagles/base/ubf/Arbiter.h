@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace basic {
+namespace base {
    class List;
 
 namespace ubf {
@@ -39,7 +39,7 @@ public:
    Action* genAction(const State* const state, const LCreal dt) override;
 
 protected:
-   basic::List* getBehaviors();
+   base::List* getBehaviors();
 
    // evaluates a list of actions and return an optional "complex action"
    // (default: returns the action with the highest vote value)
@@ -49,16 +49,16 @@ protected:
    void addBehavior(Behavior* const);
 
    // slot functions
-   bool setSlotBehaviors(basic::PairStream* const);
+   bool setSlotBehaviors(base::PairStream* const);
 
 private:
-   basic::List* behaviors;
+   base::List* behaviors;
 };
 
-inline basic::List* Arbiter::getBehaviors()                 { return behaviors; }
+inline base::List* Arbiter::getBehaviors()                 { return behaviors; }
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

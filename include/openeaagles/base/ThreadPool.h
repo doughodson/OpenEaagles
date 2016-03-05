@@ -8,7 +8,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
    class Component;
    class ThreadPoolThread;
 
@@ -145,7 +145,7 @@ private:
    Object* unthreadedObj;
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

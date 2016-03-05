@@ -2,7 +2,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // flowRate --
@@ -223,5 +223,5 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

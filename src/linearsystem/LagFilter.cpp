@@ -20,8 +20,8 @@ END_SLOTTABLE(LagFilter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(LagFilter)
-   ON_SLOT( 1, setSlotTau, basic::Time)
-   ON_SLOT( 1, setSlotTau, basic::Number)
+   ON_SLOT( 1, setSlotTau, base::Time)
+   ON_SLOT( 1, setSlotTau, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -73,11 +73,11 @@ bool LagFilter::setTau(const LCreal v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool LagFilter::setSlotTau(const basic::Time* const msg)
+bool LagFilter::setSlotTau(const base::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal tsec = basic::Seconds::convertStatic(*msg);
+      LCreal tsec = base::Seconds::convertStatic(*msg);
       if (tsec > 0) {
          setTau( tsec );
          ok = true;
@@ -91,7 +91,7 @@ bool LagFilter::setSlotTau(const basic::Time* const msg)
    return ok;
 }
 
-bool LagFilter::setSlotTau(const basic::Number* const msg)
+bool LagFilter::setSlotTau(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -113,7 +113,7 @@ bool LagFilter::setSlotTau(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LagFilter
 //------------------------------------------------------------------------------
-basic::Object* LagFilter::getSlotByIndex(const int si)
+base::Object* LagFilter::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

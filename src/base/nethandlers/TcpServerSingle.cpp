@@ -36,7 +36,7 @@
 #include <cstdio>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(TcpServerSingle, "TcpServerSingle")
 EMPTY_SLOTTABLE(TcpServerSingle)
@@ -185,6 +185,6 @@ bool TcpServerSingle::acceptConnection()
    return true;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

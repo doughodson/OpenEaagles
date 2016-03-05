@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace basic { class Number; }
+namespace base { class Number; }
 
 namespace simulation {
 
@@ -19,15 +19,15 @@ class IrQueryMsg;
 // Description: Base class for infrared shape
 // Factory name: IrShape
 //------------------------------------------------------------------------------
-class IrShape : public basic::Object
+class IrShape : public base::Object
 {
-   DECLARE_SUBCLASS(IrShape,basic::Object)
+   DECLARE_SUBCLASS(IrShape,base::Object)
 public:
    IrShape();
 
    virtual LCreal getArea();            // returns the effective area as a number in square meters
    virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
-   virtual bool setSlotIrShapeArea(const basic::Number* const s);
+   virtual bool setSlotIrShapeArea(const base::Number* const s);
 private:
    LCreal area;
 };
@@ -51,7 +51,7 @@ public:
 
    LCreal getRadius()              { return radius; }
 
-   virtual bool setSlotIrSphereRadius(const basic::Number* const s);
+   virtual bool setSlotIrSphereRadius(const base::Number* const s);
 
 private:
 
@@ -78,9 +78,9 @@ public:
    LCreal getArea() override;
    LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
 
-   virtual bool setSlotIrBoxX(const basic::Number* const s);
-   virtual bool setSlotIrBoxY(const basic::Number* const s);
-   virtual bool setSlotIrBoxZ(const basic::Number* const s);
+   virtual bool setSlotIrBoxX(const base::Number* const s);
+   virtual bool setSlotIrBoxY(const base::Number* const s);
+   virtual bool setSlotIrBoxZ(const base::Number* const s);
 
 private:
 

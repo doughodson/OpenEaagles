@@ -8,7 +8,7 @@
 
 namespace oe {
 
-namespace basic {
+namespace base {
 
 class Hsva;
 class String;
@@ -200,7 +200,7 @@ private:
 };
 
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

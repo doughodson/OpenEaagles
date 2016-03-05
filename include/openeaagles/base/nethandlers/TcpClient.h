@@ -7,7 +7,7 @@
 #include "openeaagles/base/nethandlers/TcpHandler.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: TcpClient
@@ -55,7 +55,7 @@ private:
     char* ipAddr;                // IP Address
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

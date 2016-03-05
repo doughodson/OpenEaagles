@@ -36,10 +36,10 @@ public:
 
 protected:
     // slot functions
-    bool setSlotTickMarkLength(const basic::Number* const newLength);
-    bool setSlotQuantity(const basic::Number* const newQ);
-    bool setSlotGaugeLength(const basic::Number* const newL);
-    bool setSlotFlip(const basic::Number* const x);
+    bool setSlotTickMarkLength(const base::Number* const newLength);
+    bool setSlotQuantity(const base::Number* const newQ);
+    bool setSlotGaugeLength(const base::Number* const newL);
+    bool setSlotFlip(const base::Number* const x);
 
 private:
     LCreal lengthTM;       // tick mark length (if not a graphic)

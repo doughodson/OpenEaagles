@@ -25,7 +25,7 @@ Sam::Sam()
 {
     STANDARD_CONSTRUCTOR()
 
-   static basic::String gsam(getDescription());
+   static base::String gsam(getDescription());
    setType(&gsam);
 }
 

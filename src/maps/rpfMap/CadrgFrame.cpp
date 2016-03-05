@@ -96,9 +96,9 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
         frameEntry->ref();
     }
 
-    basic::String* string = nullptr;
+    base::String* string = nullptr;
     if (frameEntry != nullptr) {
-        string = new basic::String(frameEntry->getDirectory());
+        string = new base::String(frameEntry->getDirectory());
         string->catStr(frameEntry->getFileName());
     }
     if (string == nullptr) {

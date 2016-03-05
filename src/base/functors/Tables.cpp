@@ -10,7 +10,7 @@
 #include "openeaagles/base/Pair.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // Class Table1
@@ -1365,5 +1365,5 @@ void Table5::printData(std::ostream& sout, const LCreal* tbl, const unsigned int
     sout << "}" << std::endl;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

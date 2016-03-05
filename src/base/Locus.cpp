@@ -2,7 +2,7 @@
 #include "openeaagles/base/Locus.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Locus,"Locus")
 EMPTY_SLOTTABLE(Locus)
@@ -147,5 +147,5 @@ void Locus::clearData()
    setData(nullptr, 0, 0, 0, 0, 0, 0);
 }
 
-} // end basic namespace}
+} // End base namespace}
 } // end oe namespace

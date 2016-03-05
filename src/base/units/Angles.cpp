@@ -6,7 +6,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 
 //==============================================================================
@@ -154,5 +154,5 @@ Semicircles::Semicircles(const Angle& value) : Angle()
 EMPTY_COPYDATA(Semicircles)
 EMPTY_DELETEDATA(Semicircles)
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

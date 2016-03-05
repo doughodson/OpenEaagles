@@ -18,7 +18,7 @@
 #include "openeaagles/simulation/SynchronizedState.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Angle;
       class Boolean;
       class Distance;
@@ -71,84 +71,84 @@ class Track;
 //
 //    ! 1: Player's initial position vector (NED) on the simulation's gaming area
 //
-//    initXPos       <basic::Distance>    ! X position (+north) (default: 0)
-//    initXPos       <basic::Number>      ! X position (+north) (meters)
+//    initXPos       <base::Distance>    ! X position (+north) (default: 0)
+//    initXPos       <base::Number>      ! X position (+north) (meters)
 //
-//    initYPos       <basic::Distance>    ! Y position (+east) (default: 0)
-//    initYPos       <basic::Number>      ! Y position (+east)(meters)
+//    initYPos       <base::Distance>    ! Y position (+east) (default: 0)
+//    initYPos       <base::Number>      ! Y position (+east)(meters)
 //
-//    initAlt        <basic::Distance>    ! Altitude (+up) (default: 0)
-//    initAlt        <basic::Number>      ! Altitude (+up) (meters)
+//    initAlt        <base::Distance>    ! Altitude (+up) (default: 0)
+//    initAlt        <base::Number>      ! Altitude (+up) (meters)
 //
-//    initPosition   <basic::List>        ! Position Vector: meters [ north east down ]
+//    initPosition   <base::List>        ! Position Vector: meters [ north east down ]
 //                                        !   *** initPosition will be removed in later release (use below slots instead) ***
 //
 //    ! 2: Player's initial geodetic position
 //
-//    initLatitude   <basic::LatLon>      ! Latitude (default: 0)
-//    initLatitude   <basic::Angle>       ! Latitude
-//    initLatitude   <basic::Number>      ! Latitude (degs)
+//    initLatitude   <base::LatLon>      ! Latitude (default: 0)
+//    initLatitude   <base::Angle>       ! Latitude
+//    initLatitude   <base::Number>      ! Latitude (degs)
 //
-//    initLongitude  <basic::LatLon>      ! Longitude (default: 0)
-//    initLongitude  <basic::Angle>       ! Longitude
-//    initLongitude  <basic::Number>      ! Longitude (degs)
+//    initLongitude  <base::LatLon>      ! Longitude (default: 0)
+//    initLongitude  <base::Angle>       ! Longitude
+//    initLongitude  <base::Number>      ! Longitude (degs)
 //
-//    initAlt        <basic::Distance>    ! Altitude (HAE) (+up)  ### NES Is this being used?
-//    initAlt        <basic::Number>      ! Altitude (HAE) (+up) (meters)
+//    initAlt        <base::Distance>    ! Altitude (HAE) (+up)  ### NES Is this being used?
+//    initAlt        <base::Number>      ! Altitude (HAE) (+up) (meters)
 //
 //
 //    ! 3: Player's initial world position
 //
-//    initGeocentric <basic::List>        ! Position vector [ x y z ] (ECEF) (meters) (default: 0,0,0)
+//    initGeocentric <base::List>        ! Position vector [ x y z ] (ECEF) (meters) (default: 0,0,0)
 //
 //
 //    ! ---
 //    ! Player's initial Euler angles
 //    ! ---
-//    initRoll       <basic::Angle>       ! Initial roll angle (default: 0)
-//    initRoll       <basic::Number>      ! Initial roll angle (radians)
+//    initRoll       <base::Angle>       ! Initial roll angle (default: 0)
+//    initRoll       <base::Number>      ! Initial roll angle (radians)
 //
-//    initPitch      <basic::Angle>       ! Initial pitch angle (default: 0)
-//    initPitch      <basic::Number>      ! Initial pitch angle (radians)
+//    initPitch      <base::Angle>       ! Initial pitch angle (default: 0)
+//    initPitch      <base::Number>      ! Initial pitch angle (radians)
 //
-//    initHeading    <basic::Angle>       ! Initial heading angle (default: 0)
-//    initHeading    <basic::Number>      ! Initial heading angle (radians)
+//    initHeading    <base::Angle>       ! Initial heading angle (default: 0)
+//    initHeading    <base::Number>      ! Initial heading angle (radians)
 //
-//    initEuler      <basic::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
+//    initEuler      <base::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
 //
 //    ! ---
 //    ! Player's initial velocity
 //    ! ---
-//    initVelocity   <basic::Number>      ! Initial Velocity: meters/sec (default: 0)
+//    initVelocity   <base::Number>      ! Initial Velocity: meters/sec (default: 0)
 //
 //    ! ---
 //    ! Player's type, id and and other parameters
 //    ! ---
-//    type           <basic::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
-//    id             <basic::Integer>     ! Player id  [ 1 .. 65535 ] (default: 0)
-//    side           <basic::String>      ! Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE } (default: GRAY)
-//    mode           <basic::String>      ! Initial player mode ( INACTIVE, ACTIVE, DEAD ) (default: ACTIVE)
-//    useCoordSys    <basic::String>      ! Coord system to use for updating player position { WORLD, GEOD, LOCAL }
+//    type           <base::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
+//    id             <base::Integer>     ! Player id  [ 1 .. 65535 ] (default: 0)
+//    side           <base::String>      ! Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE } (default: GRAY)
+//    mode           <base::String>      ! Initial player mode ( INACTIVE, ACTIVE, DEAD ) (default: ACTIVE)
+//    useCoordSys    <base::String>      ! Coord system to use for updating player position { WORLD, GEOD, LOCAL }
 //                                        !   (default: based on the coord system used to set the initial position)
 //
 //    signature      <RfSignature>        ! Player's RCS signature (default: 0)
 //    irSignature    <IrSignature>        ! Player's IR signature (default: 0)
-//    camouflageType <basic::Integer>     ! User defined camouflage type (positive integer or zero for none) (default: 0)
+//    camouflageType <base::Integer>     ! User defined camouflage type (positive integer or zero for none) (default: 0)
 //
-//    terrainElevReq <basic::Boolean>     ! Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
-//    interpolateTerrain <basic::Boolean> ! Interpolate our DTED terrain elevation data (default: false)
-//    terrainOffset  <basic::Distance>    ! Ground clamp offset from terrain to player's CG (basic::Distance)
+//    terrainElevReq <base::Boolean>     ! Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
+//    interpolateTerrain <base::Boolean> ! Interpolate our DTED terrain elevation data (default: false)
+//    terrainOffset  <base::Distance>    ! Ground clamp offset from terrain to player's CG (base::Distance)
 //
-//    positionFreeze <basic::Boolean>     ! Position freeze (default: false)
-//    altitudeFreeze <basic::Boolean>     ! Altitude freeze (default: false)
-//    attitudeFreeze <basic::Boolean>     ! Attitude freeze (default: false)
-//    fuelFreeze     <basic::Boolean>     ! Fuel freeze (default: false)
-//    crashOverride  <basic::Boolean>     ! Crash Override (i.e., ignore collision and crash events)(default: false)
-//    killOverride   <basic::Boolean>     ! Kill/Damage Override -- player can not be killed/damaged (default: false)
-//    killRemoval    <basic::Boolean>     ! If true destroyed players are set to KILLED and are eventually removed (default: false)
-//    enableNetOutput <basic::Boolean>    ! Enable network output of this player (default: true)
+//    positionFreeze <base::Boolean>     ! Position freeze (default: false)
+//    altitudeFreeze <base::Boolean>     ! Altitude freeze (default: false)
+//    attitudeFreeze <base::Boolean>     ! Attitude freeze (default: false)
+//    fuelFreeze     <base::Boolean>     ! Fuel freeze (default: false)
+//    crashOverride  <base::Boolean>     ! Crash Override (i.e., ignore collision and crash events)(default: false)
+//    killOverride   <base::Boolean>     ! Kill/Damage Override -- player can not be killed/damaged (default: false)
+//    killRemoval    <base::Boolean>     ! If true destroyed players are set to KILLED and are eventually removed (default: false)
+//    enableNetOutput <base::Boolean>    ! Enable network output of this player (default: true)
 //
-//    dataLogTime    <basic::Time>        ! Time between player data samples to an optional data
+//    dataLogTime    <base::Time>        ! Time between player data samples to an optional data
 //                                        ! logger, or zero if none (default: 0)
 //
 //    ! ---
@@ -156,10 +156,10 @@ class Track;
 //    !     If non-zero the Euler angles are updated using the body angular rates.
 //    !     For use only without a dynamics model.
 //    ! ---
-//    testRollRate   <basic::Angle>       ! Test roll rate (body) (units per second) (default: 0)
-//    testPitchRate  <basic::Angle>       ! Test pitch rate (body) (units per second) (default: 0)
-//    testYawRate    <basic::Angle>       ! Test heading rate (body) (units per second) (default: 0)
-//    testBodyAxis   <basic::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
+//    testRollRate   <base::Angle>       ! Test roll rate (body) (units per second) (default: 0)
+//    testPitchRate  <base::Angle>       ! Test pitch rate (body) (units per second) (default: 0)
+//    testYawRate    <base::Angle>       ! Test heading rate (body) (units per second) (default: 0)
+//    testBodyAxis   <base::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
 //
 //
 // --------------------
@@ -168,14 +168,14 @@ class Track;
 //    CRASH_EVENT             <Player>             ! Collision with
 //    CRASH_EVENT             (none)               ! Crashed
 //    RF_EMISSION             <Emission>           ! Hit by RF emission
-//    RF_REFLECTIONS_REQUEST  <basic::Component>   ! Requests for reflected R/F emissions (must re-request once a second)
-//    RF_REFLECTIONS_CANCEL   <basic::Component>   ! Cancel requests for reflected R/F emissions
-//    WPN_REL_EVENT           <basic::Boolean>     ! Weapon release switch with position
+//    RF_REFLECTIONS_REQUEST  <base::Component>   ! Requests for reflected R/F emissions (must re-request once a second)
+//    RF_REFLECTIONS_CANCEL   <base::Component>   ! Cancel requests for reflected R/F emissions
+//    WPN_REL_EVENT           <base::Boolean>     ! Weapon release switch with position
 //    WPN_REL_EVENT           (none)               ! Weapon release switch (single shot)
-//    TRIGGER_SW_EVENT        <basic::Boolean>     ! Trigger switch with position
+//    TRIGGER_SW_EVENT        <base::Boolean>     ! Trigger switch with position
 //    TRIGGER_SW_EVENT        (none)               ! Trigger switch (single shot)
 //    TGT_STEP_EVENT          (none)               ! Target step switch
-//    DATALINK_MESSAGE        <basic::Object>      ! Hit with a datalink message
+//    DATALINK_MESSAGE        <base::Object>      ! Hit with a datalink message
 //    IR_QUERY_MSG            <IrQueryMsg>         ! IR seeker requests signature
 //
 //
@@ -363,9 +363,9 @@ class Track;
 //
 //
 //------------------------------------------------------------------------------
-class Player : public basic::Component
+class Player : public base::Component
 {
-   DECLARE_SUBCLASS(Player,basic::Component)
+   DECLARE_SUBCLASS(Player,base::Component)
 
 public:
 
@@ -424,14 +424,14 @@ public:
    virtual unsigned int getMajorType() const;      // The player's 'major type' enum
    bool isMajorType(const unsigned int tst) const; // True if player is of these (bit-wise or'd) major types
 
-   const basic::String* getType() const;           // The player's type string (.e.g, "F-16C")
+   const base::String* getType() const;           // The player's type string (.e.g, "F-16C")
 
    bool isID(const unsigned short tst) const;      // True if player's ID matches
    unsigned short getID() const;                   // The player's ID
 
-   bool isName(const basic::Identifier* const tst) const; // True if the player's name matches
+   bool isName(const base::Identifier* const tst) const; // True if the player's name matches
    bool isName(const char* const tst) const;              // True if the player's name matches
-   const basic::Identifier* getName() const;              // The player's name
+   const base::Identifier* getName() const;              // The player's name
 
    Side getSide() const;                           // The 'side' that the player is on.
    bool isSide(const unsigned int tst) const;      // True if player is with one of these (bit-wise or'd) sides
@@ -655,66 +655,66 @@ public:
 
    DynamicsModel* getDynamicsModel();                          // Player's dynamics model
    const DynamicsModel* getDynamicsModel() const;              // Player's dynamics model (const version)
-   const basic::Identifier* getDynamicsModelName() const;      // Name of the player's dynamics model
+   const base::Identifier* getDynamicsModelName() const;      // Name of the player's dynamics model
 
    Pilot* getPilot();                                          // Player's top level pilot model
    const Pilot* getPilot() const;                              // Player's top level pilot model (const version)
-   const basic::Identifier* getPilotName() const;              // Name of the player's top level pilot model
+   const base::Identifier* getPilotName() const;              // Name of the player's top level pilot model
    Pilot* getPilotByName(const char* const name);              // Returns a pilot model by its name
-   basic::Pair* getPilotByType(const std::type_info& type);    // Returns a pilot model by its type
+   base::Pair* getPilotByType(const std::type_info& type);    // Returns a pilot model by its type
 
    StoresMgr* getStoresManagement();                           // Player's stores (weapons, fuel, etc...) manager model
    const StoresMgr* getStoresManagement() const;               // Player's stores (weapons, fuel, etc...) manager model (const version)
-   const basic::Identifier* getStoresManagementName() const;   // Name of the player's stores (weapons, fuel, etc...) manager model
+   const base::Identifier* getStoresManagementName() const;   // Name of the player's stores (weapons, fuel, etc...) manager model
 
    Datalink* getDatalink();                                    // Player's top level Datalink model
    const Datalink* getDatalink() const;                        // Player's top level Datalink (const version)
-   const basic::Identifier* getDatalinkName() const;           // Name of the player's top level Datalink model
+   const base::Identifier* getDatalinkName() const;           // Name of the player's top level Datalink model
    Datalink* getDatalinkByName(const char* const name);        // Returns a Datalink model by its name
-   basic::Pair* getDatalinkByType(const std::type_info& type); // Returns a Datalink model by its type
+   base::Pair* getDatalinkByType(const std::type_info& type); // Returns a Datalink model by its type
 
    Gimbal* getGimbal();                                        // Player's top level Gimbal model
    const Gimbal* getGimbal() const;                            // Player's top level Gimbal (const version)
-   const basic::Identifier* getGimbalName() const;             // Name of the player's top level Gimbal model
+   const base::Identifier* getGimbalName() const;             // Name of the player's top level Gimbal model
    Gimbal* getGimbalByName(const char* const name);            // Returns a Gimbal model by its name
-   basic::Pair* getGimbalByType(const std::type_info& type);   // Returns a Gimbal model by its type
+   base::Pair* getGimbalByType(const std::type_info& type);   // Returns a Gimbal model by its type
 
    Navigation* getNavigation();                                // Player's top level Navigation model
    const Navigation* getNavigation() const;                    // Player's top level Navigation (const version)
-   const basic::Identifier* getNavigationName() const;         // Name of the player's top level Navigation model
+   const base::Identifier* getNavigationName() const;         // Name of the player's top level Navigation model
    Navigation* getNavigationByName(const char* const name);    // Returns a Navigation model by its name
-   basic::Pair* getNavigationByType(const std::type_info& type); // Returns a Navigation model by its type
+   base::Pair* getNavigationByType(const std::type_info& type); // Returns a Navigation model by its type
 
    OnboardComputer* getOnboardComputer();                      // Player's top level OnboardComputer model
    const OnboardComputer* getOnboardComputer() const;          // Player's top level OnboardComputer (const version)
-   const basic::Identifier* getOnboardComputerName() const;    // Name of the player's top level OnboardComputer model
+   const base::Identifier* getOnboardComputerName() const;    // Name of the player's top level OnboardComputer model
    OnboardComputer* getOnboardComputerByName(const char* const name); // Returns an OnboardComputer model by its name
-   basic::Pair* getOnboardComputerByType(const std::type_info& type); // Returns an OnboardComputer model by its type
+   base::Pair* getOnboardComputerByType(const std::type_info& type); // Returns an OnboardComputer model by its type
 
    Radio* getRadio();                                             // Player's top level Radio model
    const Radio* getRadio() const;                              // Player's top level Radio (const version)
-   const basic::Identifier* getRadioName() const;              // Name of the player's top level Radio model
+   const base::Identifier* getRadioName() const;              // Name of the player's top level Radio model
    Radio* getRadioByName(const char* const name);              // Returns a Radio model by its name
-   basic::Pair* getRadioByType(const std::type_info& type);    // Returns a Radio model by its type
+   base::Pair* getRadioByType(const std::type_info& type);    // Returns a Radio model by its type
 
    RfSensor* getSensor();                                      // Player's top level R/F sensor model
    const RfSensor* getSensor() const;                          // Player's top level R/F sensor model (const version)
-   const basic::Identifier* getSensorName() const;             // Name of the player's top level R/F sensor model
+   const base::Identifier* getSensorName() const;             // Name of the player's top level R/F sensor model
    RfSensor* getSensorByName(const char* const name);          // Returns a R/F sensor model by its name
-   basic::Pair* getSensorByType(const std::type_info& type);   // Returns a R/F sensor model by its type
+   base::Pair* getSensorByType(const std::type_info& type);   // Returns a R/F sensor model by its type
 
    IrSystem* getIrSystem();                                    // Player's top level IR sensor model
    const IrSystem* getIrSystem() const;                        // Player's top level IR sensor model (const version)
-   const basic::Identifier* getIrSystemName() const;           // Name of the player's top level IR sensor model
+   const base::Identifier* getIrSystemName() const;           // Name of the player's top level IR sensor model
    IrSystem* getIrSystemByName(const char* const name);        // Returns a IR sensor model by its name
-   basic::Pair* getIrSystemByType(const std::type_info& type); // Returns a IR sensor model by its type
+   base::Pair* getIrSystemByType(const std::type_info& type); // Returns a IR sensor model by its type
 
    // ---
    // Set functions
    // ---
 
-   virtual bool setType(const basic::String* const newTypeString); // Sets the player's type string
-   virtual void setName(const basic::Identifier& newName);     // Sets the player's name (basic::String version)
+   virtual bool setType(const base::String* const newTypeString); // Sets the player's type string
+   virtual void setName(const base::Identifier& newName);     // Sets the player's name (base::String version)
    virtual void setName(const char* const newName);            // Sets the player's name (char* version)
    virtual void setID(const unsigned short newId);             // Sets the player's ID
    virtual void setSide(const Side newSide);                   // Sets the player's side enum
@@ -934,81 +934,81 @@ public:
    virtual bool killedNotification(Player* const killedBy = 0);         // Handles the KILL_EVENT event
    virtual bool collisionNotification(Player* const msg);               // Handles the CRASH_EVENT event with another player
    virtual bool crashNotification();                                    // Handles the CRASH_EVENT event
-   virtual bool onWpnRelEvent(const basic::Boolean* const msg = 0);     // Handles the WPN_REL_EVENT event
-   virtual bool onTriggerSwEvent(const basic::Boolean* const msg = 0);  // Handles the TRIGGER_SW_EVENT event
+   virtual bool onWpnRelEvent(const base::Boolean* const msg = 0);     // Handles the WPN_REL_EVENT event
+   virtual bool onTriggerSwEvent(const base::Boolean* const msg = 0);  // Handles the TRIGGER_SW_EVENT event
    virtual bool onTgtStepEvent();                                       // Handles the TGT_STEP_EVENT event
    virtual bool onRfEmissionEventPlayer(Emission* const msg);           // Handles the RF_EMISSION event
    virtual bool onRfReflectedEmissionEventPlayer(Emission* const msg);  // Handles the RF_EMISSION event reflected to a 3rd party
-   virtual bool onReflectionsRequest(basic::Component* const msg);      // Handles the RF_REFLECTIONS_REQUEST event
-   virtual bool onReflectionsCancel(const basic::Component* const msg); // Handles the RF_REFLECTIONS_CANCEL event
+   virtual bool onReflectionsRequest(base::Component* const msg);      // Handles the RF_REFLECTIONS_REQUEST event
+   virtual bool onReflectionsCancel(const base::Component* const msg); // Handles the RF_REFLECTIONS_CANCEL event
    virtual bool onIrMsgEventPlayer(IrQueryMsg* const msg);              // Handle IR_QUERY_MSG event
-   virtual bool onDatalinkMessageEventPlayer(basic::Object* const msg); // Handles the DATALINK_MESSAGE event
-   virtual bool onDeEmissionEvent(basic::Object* const msg);            // Handles the DE_EMISSION event
+   virtual bool onDatalinkMessageEventPlayer(base::Object* const msg); // Handles the DATALINK_MESSAGE event
+   virtual bool onDeEmissionEvent(base::Object* const msg);            // Handles the DE_EMISSION event
 
    // ---
    // Slot functions
    // ---
-   virtual bool setSlotInitXPos(const basic::Distance* const msg);
-   virtual bool setSlotInitXPos(const basic::Number* const msg);
-   virtual bool setSlotInitYPos(const basic::Distance* const msg);
-   virtual bool setSlotInitYPos(const basic::Number* const msg);
-   virtual bool setSlotInitAlt(const basic::Distance* const msg);
-   virtual bool setSlotInitAlt(const basic::Number* const msg);
-   virtual bool setSlotInitPosition(const basic::List* const msg);
+   virtual bool setSlotInitXPos(const base::Distance* const msg);
+   virtual bool setSlotInitXPos(const base::Number* const msg);
+   virtual bool setSlotInitYPos(const base::Distance* const msg);
+   virtual bool setSlotInitYPos(const base::Number* const msg);
+   virtual bool setSlotInitAlt(const base::Distance* const msg);
+   virtual bool setSlotInitAlt(const base::Number* const msg);
+   virtual bool setSlotInitPosition(const base::List* const msg);
 
-   virtual bool setSlotInitLat(const basic::LatLon* const msg);
-   virtual bool setSlotInitLat(const basic::Angle* const msg);
-   virtual bool setSlotInitLat(const basic::Number* const msg);
-   virtual bool setSlotInitLon(const basic::LatLon* const msg);
-   virtual bool setSlotInitLon(const basic::Angle* const msg);
-   virtual bool setSlotInitLon(const basic::Number* const msg);
+   virtual bool setSlotInitLat(const base::LatLon* const msg);
+   virtual bool setSlotInitLat(const base::Angle* const msg);
+   virtual bool setSlotInitLat(const base::Number* const msg);
+   virtual bool setSlotInitLon(const base::LatLon* const msg);
+   virtual bool setSlotInitLon(const base::Angle* const msg);
+   virtual bool setSlotInitLon(const base::Number* const msg);
 
-   virtual bool setSlotInitGeocentric(const basic::List* const msg);
+   virtual bool setSlotInitGeocentric(const base::List* const msg);
 
-   virtual bool setSlotInitRoll(const basic::Angle* const msg);
-   virtual bool setSlotInitRoll(const basic::Number* const msg);
-   virtual bool setSlotInitPitch(const basic::Angle* const msg);
-   virtual bool setSlotInitPitch(const basic::Number* const msg);
-   virtual bool setSlotInitHeading(const basic::Angle* const msg);
-   virtual bool setSlotInitHeading(const basic::Number* const msg);
-   virtual bool setSlotInitEulerAngles(const basic::List* const msg);
+   virtual bool setSlotInitRoll(const base::Angle* const msg);
+   virtual bool setSlotInitRoll(const base::Number* const msg);
+   virtual bool setSlotInitPitch(const base::Angle* const msg);
+   virtual bool setSlotInitPitch(const base::Number* const msg);
+   virtual bool setSlotInitHeading(const base::Angle* const msg);
+   virtual bool setSlotInitHeading(const base::Number* const msg);
+   virtual bool setSlotInitEulerAngles(const base::List* const msg);
 
-   virtual bool setSlotInitVelocity(const basic::Number* const msg);
-   virtual bool setSlotInitVelocityKts(const basic::Number* const msg);
+   virtual bool setSlotInitVelocity(const base::Number* const msg);
+   virtual bool setSlotInitVelocityKts(const base::Number* const msg);
 
-   virtual bool setSlotID(const basic::Number* const msg);
-   virtual bool setSlotSide(basic::String* const msg);
-   virtual bool setSlotInitMode(basic::String* const msg);
-   virtual bool setSlotUseCoordSys(basic::String* const msg);
+   virtual bool setSlotID(const base::Number* const msg);
+   virtual bool setSlotSide(base::String* const msg);
+   virtual bool setSlotInitMode(base::String* const msg);
+   virtual bool setSlotUseCoordSys(base::String* const msg);
 
    virtual bool setSlotSignature(RfSignature* const msg);
    virtual bool setSlotIrSignature(IrSignature* const msg);
-   virtual bool setSlotCamouflageType(const basic::Number* const msg);
+   virtual bool setSlotCamouflageType(const base::Number* const msg);
 
-   virtual bool setSlotTerrainElevReq(const basic::Number* const msg);
-   virtual bool setSlotInterpolateTerrain(const basic::Number* const msg);
-   virtual bool setSlotTerrainOffset(const basic::Distance* const msg);
+   virtual bool setSlotTerrainElevReq(const base::Number* const msg);
+   virtual bool setSlotInterpolateTerrain(const base::Number* const msg);
+   virtual bool setSlotTerrainOffset(const base::Distance* const msg);
 
-   virtual bool setSlotPositionFreeze(const basic::Number* const msg);
-   virtual bool setSlotAltitudeFreeze(const basic::Number* const msg);
-   virtual bool setSlotAttitudeFreeze(const basic::Number* const msg);
-   virtual bool setSlotFuelFreeze(const basic::Number* const msg);
-   virtual bool setSlotCrashOverride(const basic::Number* const msg);
-   virtual bool setSlotKillOverride(const basic::Number* const msg);
-   virtual bool setSlotKillRemoval(const basic::Number* const msg);
-   virtual bool setSlotEnableNetOutput(const basic::Number* const msg);
-   virtual bool setSlotDataLogTime(const basic::Time* const msg);
+   virtual bool setSlotPositionFreeze(const base::Number* const msg);
+   virtual bool setSlotAltitudeFreeze(const base::Number* const msg);
+   virtual bool setSlotAttitudeFreeze(const base::Number* const msg);
+   virtual bool setSlotFuelFreeze(const base::Number* const msg);
+   virtual bool setSlotCrashOverride(const base::Number* const msg);
+   virtual bool setSlotKillOverride(const base::Number* const msg);
+   virtual bool setSlotKillRemoval(const base::Number* const msg);
+   virtual bool setSlotEnableNetOutput(const base::Number* const msg);
+   virtual bool setSlotDataLogTime(const base::Time* const msg);
 
-   virtual bool setSlotTestRollRate(const basic::Angle* const msg);
-   virtual bool setSlotTestPitchRate(const basic::Angle* const msg);
-   virtual bool setSlotTestYawRate(const basic::Angle* const msg);
-   virtual bool setSlotTestBodyAxis(const basic::Number* const msg);
+   virtual bool setSlotTestRollRate(const base::Angle* const msg);
+   virtual bool setSlotTestPitchRate(const base::Angle* const msg);
+   virtual bool setSlotTestYawRate(const base::Angle* const msg);
+   virtual bool setSlotTestBodyAxis(const base::Number* const msg);
 
    bool isFrozen() const override;
    void reset() override;
    void updateTC(const LCreal dt = 0.0) override;
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero
@@ -1031,22 +1031,22 @@ protected:
    void printTimingStats() override;
 
    // These systems, from our subcomponent list, can only be set by reset()
-   virtual bool setDynamicsModel(basic::Pair* const sys); // Sets our dynamics model
-   virtual bool setDatalink(basic::Pair* const n);        // Sets our Datalink models
-   virtual bool setGimbal(basic::Pair* const n);          // Sets our gimbal/antenna/optic models
-   virtual bool setNavigation(basic::Pair* const n);      // Sets our navigation model
-   virtual bool setOnboardComputer(basic::Pair* const s); // Sets our onboard computer model
-   virtual bool setPilot(basic::Pair* const p);           // Sets our pilot model
-   virtual bool setRadio(basic::Pair* const n);           // Sets our radio models
-   virtual bool setSensor(basic::Pair* const n);          // Sets our sensor models
-   virtual bool setIrSystem(basic::Pair* const n);        // Sets our IR sensors models
-   virtual bool setStoresMgr(basic::Pair* const s);       // Sets our stores management model
+   virtual bool setDynamicsModel(base::Pair* const sys); // Sets our dynamics model
+   virtual bool setDatalink(base::Pair* const n);        // Sets our Datalink models
+   virtual bool setGimbal(base::Pair* const n);          // Sets our gimbal/antenna/optic models
+   virtual bool setNavigation(base::Pair* const n);      // Sets our navigation model
+   virtual bool setOnboardComputer(base::Pair* const s); // Sets our onboard computer model
+   virtual bool setPilot(base::Pair* const p);           // Sets our pilot model
+   virtual bool setRadio(base::Pair* const n);           // Sets our radio models
+   virtual bool setSensor(base::Pair* const n);          // Sets our sensor models
+   virtual bool setIrSystem(base::Pair* const n);        // Sets our IR sensors models
+   virtual bool setStoresMgr(base::Pair* const s);       // Sets our stores management model
 
    void processComponents(                  // Process our subcomponent list (which should be other steer points)
-      basic::PairStream* const list,        // Source list of components
+      base::PairStream* const list,        // Source list of components
       const std::type_info& filter,         // Type filter
-      basic::Pair* const add = 0,           // Optional pair to add
-      basic::Component* const remove = 0    // Optional subcomponent to remove
+      base::Pair* const add = 0,           // Optional pair to add
+      base::Component* const remove = 0    // Optional subcomponent to remove
       ) override;
 
 private:
@@ -1056,9 +1056,9 @@ private:
    // ---
    // Player identity
    // ---
-   basic::safe_ptr<basic::String>  type; // Type of vehicle
+   base::safe_ptr<base::String>  type; // Type of vehicle
    unsigned short id;                    // Player ID
-   basic::Identifier  pname;             // Player's Name
+   base::Identifier  pname;             // Player's Name
    Side           side;                  // Which side (see above)
 
    // ---
@@ -1131,8 +1131,8 @@ private:
    // ---
    // Appearance
    // ---
-   basic::safe_ptr<RfSignature> signature;   // Player's RCS signature
-   basic::safe_ptr<IrSignature> irSignature; // Player's IR signature
+   base::safe_ptr<RfSignature> signature;   // Player's RCS signature
+   base::safe_ptr<IrSignature> irSignature; // Player's IR signature
    unsigned int camouflage;                  // Camouflage type (0 is none)
    LCreal      damage;                       // Damage state from no damage(0.0) to destroyed (1.0)
    LCreal      smoking;                      // Smoke state from no smoke (0.0) to maximum (1.0)
@@ -1183,23 +1183,23 @@ private:
    // ---
    Simulation* sim;              // The simulation system that owns us (not ref()'d)
 
-   basic::Pair* dyn;             // Dynamics Model (ref()'d)
-   basic::Pair* datalink;        // Datalink model (ref()'d)
-   basic::Pair* gimbal;          // Gimbal/antenna/optic models (ref()'d)
-   basic::Pair* nav;             // Navigation (ref()'d)
-   basic::Pair* obc;             // Onboard Computer (ref()'d)
-   basic::Pair* pilot;           // Pilot Model (e.g., autopilot, PDL) (ref()'d)
-   basic::Pair* radio;           // Radio models (ref()'d)
-   basic::Pair* sensor;          // R/F Sensor models (ref()'d)
-   basic::Pair* irSystem;        // IR Sensor models (ref()'d)
-   basic::Pair* sms;             // Stores Management System (ref()'d)
+   base::Pair* dyn;             // Dynamics Model (ref()'d)
+   base::Pair* datalink;        // Datalink model (ref()'d)
+   base::Pair* gimbal;          // Gimbal/antenna/optic models (ref()'d)
+   base::Pair* nav;             // Navigation (ref()'d)
+   base::Pair* obc;             // Onboard Computer (ref()'d)
+   base::Pair* pilot;           // Pilot Model (e.g., autopilot, PDL) (ref()'d)
+   base::Pair* radio;           // Radio models (ref()'d)
+   base::Pair* sensor;          // R/F Sensor models (ref()'d)
+   base::Pair* irSystem;        // IR Sensor models (ref()'d)
+   base::Pair* sms;             // Stores Management System (ref()'d)
    bool loadSysPtrs;             // Load system pointers flag
 
    // ---
    // Reflected emissions
    // ---
    static const unsigned int MAX_RF_REFLECTIONS = 4;   // Max number of reflected emissions we'll send (let's keep it small)
-   basic::Component* rfReflect[MAX_RF_REFLECTIONS];    // Objects that are interested in the emissions hitting us
+   base::Component* rfReflect[MAX_RF_REFLECTIONS];    // Objects that are interested in the emissions hitting us
    LCreal  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
 
    // ---

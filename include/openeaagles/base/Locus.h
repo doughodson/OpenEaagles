@@ -7,7 +7,7 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Locus
@@ -75,7 +75,7 @@ private:
 };
 
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

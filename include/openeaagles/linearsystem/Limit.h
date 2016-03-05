@@ -11,7 +11,7 @@ namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class: Limit
-// Base class:  basic::Object -> ScalerFunc -> LimitFunc -> Limit
+// Base class:  base::Object -> ScalerFunc -> LimitFunc -> Limit
 //
 // Description: Limits function: limits X to the upper and lower boundaries.
 //
@@ -29,8 +29,8 @@ public:
    Limit(const LCreal lower, const LCreal upper);
 
    // Set slot functions
-   virtual bool setSlotLowerLimit(const basic::Number* const msg);
-   virtual bool setSlotUpperLimit(const basic::Number* const msg);
+   virtual bool setSlotLowerLimit(const base::Number* const msg);
+   virtual bool setSlotUpperLimit(const base::Number* const msg);
 };
 
 } // End linearsystem namespace

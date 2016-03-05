@@ -7,7 +7,7 @@
 #include "openeaagles/base/Color.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Cmy
@@ -77,7 +77,7 @@ protected:
 };
 
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Integer
@@ -425,7 +425,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Integer& n)
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

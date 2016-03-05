@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace basic { class Number; }
+namespace base { class Number; }
 
 namespace iodevice {
 
@@ -38,9 +38,9 @@ class IoDevice;
 //      inverted     <Boolean>   Inverted bit flag (default: false)
 //
 //------------------------------------------------------------------------------
-class Ai2DiSwitch : public basic::IoAdapter
+class Ai2DiSwitch : public base::IoAdapter
 {
-   DECLARE_SUBCLASS(Ai2DiSwitch, basic::IoAdapter)
+   DECLARE_SUBCLASS(Ai2DiSwitch, base::IoAdapter)
 
 public:
    Ai2DiSwitch();
@@ -55,15 +55,15 @@ public:
    bool setLevel(const LCreal);
    bool setInvertFlag(const bool);
 
-   void processInputs(const LCreal dt, const basic::IoDevice* const device, basic::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const basic::IoData* const outData, basic::IoDevice* const device) override;
+   void processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
-   virtual bool setSlotLocation(const basic::Number* const msg);
-   virtual bool setSlotChannel(const basic::Number* const msg);
-   virtual bool setSlotLevel(const basic::Number* const msg);
-   virtual bool setSlotInverted(const basic::Number* const msg);
+   virtual bool setSlotLocation(const base::Number* const msg);
+   virtual bool setSlotChannel(const base::Number* const msg);
+   virtual bool setSlotLevel(const base::Number* const msg);
+   virtual bool setSlotInverted(const base::Number* const msg);
 
 private:
    void initData();

@@ -41,8 +41,8 @@ public:
 
 protected:
     // slot functions
-    bool setSlotGearDownValue(const basic::Number* const newDV);
-    bool setSlotGearUpValue(const basic::Number* const newUV);
+    bool setSlotGearDownValue(const base::Number* const newDV);
+    bool setSlotGearUpValue(const base::Number* const newUV);
 
 private:
     int gearState;      // is our gear down, up, or in transit?

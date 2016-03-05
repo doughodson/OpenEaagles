@@ -4,7 +4,7 @@
 #include "openeaagles/base/Statistic.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Statistic,"Statistic")
 EMPTY_SERIALIZER(Statistic)
@@ -55,5 +55,5 @@ void Statistic::clear()
   value1 = 0.0;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

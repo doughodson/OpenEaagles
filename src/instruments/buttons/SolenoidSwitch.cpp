@@ -24,12 +24,12 @@ END_SLOTTABLE(SolenoidSwitch)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(SolenoidSwitch)
-    ON_SLOT(1, setSlotHoldTimer, basic::Number)
-    ON_SLOT(2, setSlotEventMap, basic::PairStream)
+    ON_SLOT(1, setSlotHoldTimer, base::Number)
+    ON_SLOT(2, setSlotEventMap, base::PairStream)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(SolenoidSwitch)
-    ON_EVENT_OBJ(SELECT, selectLatch, basic::Number)
+    ON_EVENT_OBJ(SELECT, selectLatch, base::Number)
 END_EVENT_HANDLER()
 
 
@@ -90,7 +90,7 @@ void SolenoidSwitch::deleteData()
 //------------------------------------------------------------------------------
 // setSlotHoldTimer() - set how long to hold our button before state change
 //------------------------------------------------------------------------------
-bool SolenoidSwitch::setSlotHoldTimer(const basic::Number* const x)
+bool SolenoidSwitch::setSlotHoldTimer(const base::Number* const x)
 {
     bool ok = false;
     if (x != nullptr) ok = setHoldTimer(x->getReal());
@@ -104,15 +104,15 @@ bool SolenoidSwitch::setSlotHoldTimer(const basic::Number* const x)
 // will map that event to this one and will send that to the display to be
 // processed.
 //------------------------------------------------------------------------------
-bool SolenoidSwitch::setSlotEventMap(const basic::PairStream* const x)
+bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
 {
     if (x != nullptr) {
         if (x->entries() != 3) std::cout << "SolenoidSwitch::setSlotEventMap() - Need 3 eventIds for the button, will not send eventIds for the ones without it" << std::endl;
         int count = 0;
-        const basic::List::Item* item = x->getFirstItem();
+        const base::List::Item* item = x->getFirstItem();
         while (item != nullptr && count < 3) {
-            basic::Pair* pair = (basic::Pair*)item->getValue();
-            basic::Number* num = dynamic_cast<basic::Number*>(pair->object());
+            base::Pair* pair = (base::Pair*)item->getValue();
+            base::Number* num = dynamic_cast<base::Number*>(pair->object());
             if (num != nullptr) eventMap[count] = num->getInt();
             count++;
             item = item->getNext();
@@ -125,7 +125,7 @@ bool SolenoidSwitch::setSlotEventMap(const basic::PairStream* const x)
 //------------------------------------------------------------------------------
 // selectLatch() - tells our switch if it's ok to "latch"
 //------------------------------------------------------------------------------
-bool SolenoidSwitch::selectLatch(const basic::Number* const x)
+bool SolenoidSwitch::selectLatch(const base::Number* const x)
 {
     if (x != nullptr) {
         latched = x->getBoolean();
@@ -141,7 +141,7 @@ bool SolenoidSwitch::setHoldTimer(const LCreal x)
 {
     if (timer != nullptr) timer->alarm(x);
     else {
-        timer = new basic::UpTimer();
+        timer = new base::UpTimer();
         timer->alarm(x);
     }
     return true;
@@ -269,7 +269,7 @@ void SolenoidSwitch::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* SolenoidSwitch::getSlotByIndex(const int si)
+base::Object* SolenoidSwitch::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -283,7 +283,7 @@ EMPTY_SERIALIZER(SolenoidButton)
 //------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(SolenoidButton)
    ON_EVENT(INPUT_LEFT_EDGE, onMouseDown)
-   ON_EVENT_OBJ(USER_KEY_EVENT, onPicked, basic::Number)
+   ON_EVENT_OBJ(USER_KEY_EVENT, onPicked, base::Number)
 END_EVENT_HANDLER()
 
 
@@ -333,7 +333,7 @@ bool SolenoidButton::onSingleClick()
     return true;
 }
 
-bool SolenoidButton::onPicked(const basic::Number* const x)
+bool SolenoidButton::onPicked(const base::Number* const x)
 {
     if (x != nullptr) pushed = x->getBoolean();
     return true;

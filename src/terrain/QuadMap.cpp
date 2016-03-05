@@ -85,7 +85,7 @@ unsigned int QuadMap::getNumDataFiles() const
     return numDataFiles;
 }
 
-const basic::Terrain* QuadMap::getDataFile(const unsigned int i)  const
+const base::Terrain* QuadMap::getDataFile(const unsigned int i)  const
 {
     if (i < MAX_DATA_FILES) return dataFiles[i];
     else return nullptr;
@@ -168,13 +168,13 @@ void QuadMap::findDataFiles()
 
    // Find the DataFile objects
    {
-      basic::PairStream* subcomponents = getComponents();
+      base::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
          unsigned int count = 0;
-         basic::List::Item* item = subcomponents->getFirstItem();
+         base::List::Item* item = subcomponents->getFirstItem();
          while (item != nullptr && count < MAX_DATA_FILES) {
-            basic::Pair* pair = static_cast<basic::Pair*>( item->getValue() );
-            basic::Terrain* dataFile = dynamic_cast<basic::Terrain*>( pair->object() );
+            base::Pair* pair = static_cast<base::Pair*>( item->getValue() );
+            base::Terrain* dataFile = dynamic_cast<base::Terrain*>( pair->object() );
             if (dataFile != nullptr && dataFile->isDataLoaded()) {
                dataFile->ref();
                dataFiles[count] = dataFile;
@@ -243,7 +243,7 @@ void QuadMap::findDataFiles()
 // data files it wishes to use, then will also override the
 // find data files so it this data does not get cleared out.
 //------------------------------------------------------------------------------
-bool QuadMap::setDataFile(const unsigned int i, basic::Terrain* newDF)
+bool QuadMap::setDataFile(const unsigned int i, base::Terrain* newDF)
 {
     if (i < MAX_DATA_FILES && newDF != nullptr ) {
         if (dataFiles[i] == nullptr) {

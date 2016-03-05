@@ -7,7 +7,7 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 namespace ubf {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Behavior, "UbfBehavior")
@@ -24,7 +24,7 @@ END_SLOTTABLE(Behavior)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(Behavior)
-   ON_SLOT(1, setSlotVote, basic::Number)
+   ON_SLOT(1, setSlotVote, base::Number)
 END_SLOT_MAP()
 
 
@@ -43,7 +43,7 @@ Behavior::Behavior()
 //------------------------------------------------------------------------------
 
 // [ 1 .. 65535 ]
-bool Behavior::setSlotVote(const basic::Number* const num)
+bool Behavior::setSlotVote(const base::Number* const num)
 {
    bool ok = false;
    int vote = num->getInt();
@@ -58,12 +58,12 @@ bool Behavior::setSlotVote(const basic::Number* const num)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* Behavior::getSlotByIndex(const int si)
+base::Object* Behavior::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 

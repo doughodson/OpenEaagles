@@ -7,7 +7,7 @@
 #include "openeaagles/base/List.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Stack
@@ -71,7 +71,7 @@ inline int Stack::operator!=(const Stack& list) const
     return *s1 != *s2;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

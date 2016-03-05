@@ -4,7 +4,7 @@
 #include "openeaagles/base/Decibel.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel,"dB")
 
@@ -72,5 +72,5 @@ std::ostream& Decibel::serialize(std::ostream& sout, const int, const bool) cons
    return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

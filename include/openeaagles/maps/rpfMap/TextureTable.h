@@ -37,9 +37,9 @@ namespace graphics { class Texture; }
 namespace maps {
 namespace rpf {
 
-class TextureTable : public basic::Object
+class TextureTable : public base::Object
 {
-    DECLARE_SUBCLASS(TextureTable, basic::Object)
+    DECLARE_SUBCLASS(TextureTable, base::Object)
 
 public:
     TextureTable();

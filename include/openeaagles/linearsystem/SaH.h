@@ -41,8 +41,8 @@ public:
    virtual bool setSampleRate(const unsigned int v);   // hz
 
    // Set slot functions
-   virtual bool setSlotSampleRate(const basic::Frequency* const msg);
-   virtual bool setSlotSampleRate(const basic::Number* const msg);
+   virtual bool setSlotSampleRate(const base::Frequency* const msg);
+   virtual bool setSlotSampleRate(const base::Number* const msg);
 
    LCreal g(const LCreal x) override;
    bool isValid() const override;

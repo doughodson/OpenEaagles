@@ -21,8 +21,8 @@ END_SLOTTABLE(LowpassFilter)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(LowpassFilter)
-   ON_SLOT( 1, setSlotWc, basic::Frequency)
-   ON_SLOT( 1, setSlotWc, basic::Number)
+   ON_SLOT( 1, setSlotWc, base::Frequency)
+   ON_SLOT( 1, setSlotWc, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -65,11 +65,11 @@ bool LowpassFilter::setWc(const LCreal v)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool LowpassFilter::setSlotWc(const basic::Frequency* const msg)
+bool LowpassFilter::setSlotWc(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal hz = basic::Hertz::convertStatic(*msg);
+      LCreal hz = base::Hertz::convertStatic(*msg);
       LCreal rps = static_cast<LCreal>( hz * 2.0 * PI);
       if (rps > 0) {
          setWc( rps );
@@ -84,7 +84,7 @@ bool LowpassFilter::setSlotWc(const basic::Frequency* const msg)
    return ok;
 }
 
-bool LowpassFilter::setSlotWc(const basic::Number* const msg)
+bool LowpassFilter::setSlotWc(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -105,7 +105,7 @@ bool LowpassFilter::setSlotWc(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LowpassFilter
 //------------------------------------------------------------------------------
-basic::Object* LowpassFilter::getSlotByIndex(const int si)
+base::Object* LowpassFilter::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

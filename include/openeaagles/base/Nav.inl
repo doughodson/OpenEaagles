@@ -461,9 +461,9 @@ inline bool Nav::computeEulerAnglesDeg(
    bool ok = computeEulerAngles(rm, &angles, scPhi, scTht, scPsi);
    if (ok && anglesD != nullptr) {
       anglesD->set(
-         angles[0] * basic::Angle::R2DCC,
-         angles[1] * basic::Angle::R2DCC,
-         angles[2] * basic::Angle::R2DCC
+         angles[0] * base::Angle::R2DCC,
+         angles[1] * base::Angle::R2DCC,
+         angles[2] * base::Angle::R2DCC
          );
    }
    return ok;

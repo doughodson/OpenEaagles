@@ -30,13 +30,13 @@ public:
     virtual bool setConvert(const bool x)               { convert = x; return true; }
 
 protected:
-    bool setSlotRange(const basic::Number* const x);
-    bool setSlotHeight(const basic::Number* const x);
-    bool setSlotIncrement(const basic::Number* const x);
-    bool setSlotVertical(const basic::Number* const x);
-    bool setSlotMaxNum(const basic::Number* const x);
-    bool setSlotMinNum(const basic::Number* const x);
-    bool setSlotConvert(const basic::Number* const x);
+    bool setSlotRange(const base::Number* const x);
+    bool setSlotHeight(const base::Number* const x);
+    bool setSlotIncrement(const base::Number* const x);
+    bool setSlotVertical(const base::Number* const x);
+    bool setSlotMaxNum(const base::Number* const x);
+    bool setSlotMinNum(const base::Number* const x);
+    bool setSlotConvert(const base::Number* const x);
 
 private:
     SendData transTapeGraphicSD;    // our translation of our tape graphic

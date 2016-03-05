@@ -8,7 +8,7 @@
 #include "Pair.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class Identifier;
 
@@ -112,7 +112,7 @@ public:
 
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 namespace ubf {
 
 class Behavior;
@@ -32,9 +32,9 @@ class Action;
 //    state       <State>     ! The agent's state object
 //    behavior    <Behavior>  ! behavior
 //------------------------------------------------------------------------------
-class Agent : public basic::Component
+class Agent : public base::Component
 {
-   DECLARE_SUBCLASS(Agent, basic::Component)
+   DECLARE_SUBCLASS(Agent, base::Component)
 
 public:
    Agent();
@@ -55,8 +55,8 @@ protected:
 
    virtual void initActor();
 
-   basic::Component* getActor();
-   void setActor(basic::Component* const myActor);
+   base::Component* getActor();
+   void setActor(base::Component* const myActor);
 
    // slot functions
    virtual bool setSlotBehavior(Behavior* const);
@@ -65,11 +65,11 @@ protected:
 private:
    Behavior* behavior;
    State* state;
-   safe_ptr<basic::Component> myActor;
+   safe_ptr<base::Component> myActor;
 };
 
-inline void Agent::setActor(basic::Component* const actor)      { myActor = actor; return; }
-inline basic::Component* Agent::getActor()                      { return myActor; }
+inline void Agent::setActor(base::Component* const actor)      { myActor = actor; return; }
+inline base::Component* Agent::getActor()                      { return myActor; }
 
 
 //------------------------------------------------------------------------------
@@ -93,7 +93,7 @@ public:
 };
 
 } // End ubf namespace
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

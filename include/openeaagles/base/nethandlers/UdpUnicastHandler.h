@@ -7,7 +7,7 @@
 #include "openeaagles/base/nethandlers/PosixHandler.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 class String;
 
@@ -75,7 +75,7 @@ private:
    char* ipAddr;   // Host's name or IP Address
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

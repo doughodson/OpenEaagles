@@ -12,7 +12,7 @@ namespace linearsystem {
 
 //------------------------------------------------------------------------------
 // Class:  Sz2
-// Base class:  basic::Object -> ScalerFunc-> DiffEquation -> SecondOrderTf -> Sz2
+// Base class:  base::Object -> ScalerFunc-> DiffEquation -> SecondOrderTf -> Sz2
 //
 // Description: Models a second order continuous transfer function in the discrete
 //              z-domain using a difference equation with Tustin coefficients.
@@ -51,12 +51,12 @@ public:
    Sz2();
 
    // Set slot functions
-   virtual bool setSlotN1(const basic::Number* const msg);
-   virtual bool setSlotN2(const basic::Number* const msg);
-   virtual bool setSlotN3(const basic::Number* const msg);
-   virtual bool setSlotD1(const basic::Number* const msg);
-   virtual bool setSlotD2(const basic::Number* const msg);
-   virtual bool setSlotD3(const basic::Number* const msg);
+   virtual bool setSlotN1(const base::Number* const msg);
+   virtual bool setSlotN2(const base::Number* const msg);
+   virtual bool setSlotN3(const base::Number* const msg);
+   virtual bool setSlotD1(const base::Number* const msg);
+   virtual bool setSlotD2(const base::Number* const msg);
+   virtual bool setSlotD3(const base::Number* const msg);
 };
 
 } // End linearsystem namespace

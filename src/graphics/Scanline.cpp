@@ -188,7 +188,7 @@ void Scanline::setArea(
    cy = yCenter;
    sx = xSize;
    sy = ySize;
-   angle = zRotDeg * static_cast<LCreal>(basic::Angle::D2RCC);
+   angle = zRotDeg * static_cast<LCreal>(base::Angle::D2RCC);
    setMatrix();
 }
 

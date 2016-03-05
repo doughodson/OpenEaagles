@@ -48,13 +48,13 @@ END_SLOTTABLE(GlutDisplay)
 //  Map slot table to handles
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(GlutDisplay)
-   ON_SLOT(1,setSlotFullScreen,basic::Number)
-   ON_SLOT(2,setSlotIdleSleepTime,basic::Number)
-   ON_SLOT(3,setSlotResizeWindows,basic::Number)
-   ON_SLOT(4,setSlotPickWidth,basic::Number)
-   ON_SLOT(5,setSlotPickHeight,basic::Number)
-   ON_SLOT(6,setSlotAccumBuff,basic::Number)
-   ON_SLOT(7,setSlotStencilBuff,basic::Number)
+   ON_SLOT(1,setSlotFullScreen,base::Number)
+   ON_SLOT(2,setSlotIdleSleepTime,base::Number)
+   ON_SLOT(3,setSlotResizeWindows,base::Number)
+   ON_SLOT(4,setSlotPickWidth,base::Number)
+   ON_SLOT(5,setSlotPickHeight,base::Number)
+   ON_SLOT(6,setSlotAccumBuff,base::Number)
+   ON_SLOT(7,setSlotStencilBuff,base::Number)
 END_SLOT_MAP()
 
 //-----------------------------------------------------------------------------
@@ -212,9 +212,9 @@ int GlutDisplay::createWindow()
 
       // Create sub windows (if any)
       if (subDisplays() != nullptr) {
-         basic::List::Item* item = subDisplays()->getFirstItem();
+         base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            basic::Pair* pair = dynamic_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
                GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
@@ -289,9 +289,9 @@ int GlutDisplay::createSubWindow(const int mainId)
 
       // Create sub windows (if any)
       if (subDisplays() != nullptr) {
-         basic::List::Item* item = subDisplays()->getFirstItem();
+         base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            basic::Pair* pair = dynamic_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
                GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
@@ -362,9 +362,9 @@ void GlutDisplay::reshapeIt(int w, int h)
       if (subDisplays() != nullptr && okToResize) {
 
          // go through and put our new numbers in
-         basic::List::Item* item = subDisplays()->getFirstItem();
+         base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
+            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
                GlutDisplay* gd = dynamic_cast<GlutDisplay*>(pair->object());
                if (gd != nullptr) gd->reshapeSubWindow();
@@ -590,7 +590,7 @@ graphics::Graphic* GlutDisplay::findSelected(const GLint hits, const GLuint sbuf
    // Find the Graphic with this id
    // ---
    if (id > 0) {
-      basic::Pair* pair = findBySelectName(id);
+      base::Pair* pair = findBySelectName(id);
       if (pair != nullptr) {
          sel = static_cast<Graphic*>(pair->object());
       }
@@ -955,7 +955,7 @@ void GlutDisplay::entryFuncCB(int state)
 //-----------------------------------------------------------------------------
 
 // setSlotFullScreen()
-bool GlutDisplay::setSlotFullScreen(const basic::Number* const msg)
+bool GlutDisplay::setSlotFullScreen(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -966,7 +966,7 @@ bool GlutDisplay::setSlotFullScreen(const basic::Number* const msg)
 }
 
 // setSlotIdleSleepTime()
-bool GlutDisplay::setSlotIdleSleepTime(const basic::Number* const msg)
+bool GlutDisplay::setSlotIdleSleepTime(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -980,7 +980,7 @@ bool GlutDisplay::setSlotIdleSleepTime(const basic::Number* const msg)
 }
 
 // setSlotResizeWindows()
-bool GlutDisplay::setSlotResizeWindows(const basic::Number* const msg)
+bool GlutDisplay::setSlotResizeWindows(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -990,7 +990,7 @@ bool GlutDisplay::setSlotResizeWindows(const basic::Number* const msg)
 }
 
 // pickWidth -- Width of the pick area
-bool GlutDisplay::setSlotPickWidth(const basic::Number* const msg)
+bool GlutDisplay::setSlotPickWidth(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1007,7 +1007,7 @@ bool GlutDisplay::setSlotPickWidth(const basic::Number* const msg)
 }
 
 // pickHeight -- Height of the pick area
-bool GlutDisplay::setSlotPickHeight(const basic::Number* const msg)
+bool GlutDisplay::setSlotPickHeight(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1023,7 +1023,7 @@ bool GlutDisplay::setSlotPickHeight(const basic::Number* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotAccumBuff(const basic::Number* const msg)
+bool GlutDisplay::setSlotAccumBuff(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1033,7 +1033,7 @@ bool GlutDisplay::setSlotAccumBuff(const basic::Number* const msg)
    return ok;
 }
 
-bool GlutDisplay::setSlotStencilBuff(const basic::Number* const msg)
+bool GlutDisplay::setSlotStencilBuff(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1046,7 +1046,7 @@ bool GlutDisplay::setSlotStencilBuff(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Page
 //------------------------------------------------------------------------------
-basic::Object* GlutDisplay::getSlotByIndex(const int si)
+base::Object* GlutDisplay::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

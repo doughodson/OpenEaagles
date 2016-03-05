@@ -62,15 +62,15 @@
 typedef union YYSTYPE
 #line 115 "Parser.y"
 {
-   double                      dval;
-   long                        lval;
-   bool                        bval;
-   char*                       cvalp;
-   oe::basic::Object*          ovalp;
-   oe::basic::Pair*            pvalp;
-   oe::basic::PairStream*      svalp;
-   oe::basic::List*            lvalp;
-   oe::basic::Number*          nvalp;
+   double                     dval;
+   long                       lval;
+   bool                       bval;
+   char*                      cvalp;
+   oe::base::Object*          ovalp;
+   oe::base::Pair*            pvalp;
+   oe::base::PairStream*      svalp;
+   oe::base::List*            lvalp;
+   oe::base::Number*          nvalp;
 }
 /* Line 1489 of yacc.c.  */
 #line 77 "Parser.hpp"

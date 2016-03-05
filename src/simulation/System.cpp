@@ -23,7 +23,7 @@ END_SLOTTABLE(System)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(System)
-   ON_SLOT( 1, setSlotPowerSwitch, basic::String)
+   ON_SLOT( 1, setSlotPowerSwitch, base::String)
 END_SLOT_MAP()
 
 
@@ -175,11 +175,11 @@ void System::process(const LCreal)
 bool System::killedNotification(Player* const p)
 {
    // Just let all of our subcomponents know that we were just killed
-   basic::PairStream* subcomponents = getComponents();
+   base::PairStream* subcomponents = getComponents();
    if(subcomponents != nullptr) {
-      for (basic::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-         basic::Pair* pair = static_cast<basic::Pair*>(item->getValue());
-         basic::Component* sc = static_cast<basic::Component*>(pair->object());
+      for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
+         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+         base::Component* sc = static_cast<base::Component*>(pair->object());
          sc->event(KILL_EVENT, p);
       }
       subcomponents->unref();
@@ -256,7 +256,7 @@ bool System::findOwnship()
 //-----------------------------------------------------------------------------
 // Set functions
 //-----------------------------------------------------------------------------
-bool System::setSlotPowerSwitch(const basic::String* const msg)
+bool System::setSlotPowerSwitch(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -270,7 +270,7 @@ bool System::setSlotPowerSwitch(const basic::String* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* System::getSlotByIndex(const int si)
+base::Object* System::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }

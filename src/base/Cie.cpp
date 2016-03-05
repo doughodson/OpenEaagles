@@ -9,7 +9,7 @@
 #include <cstdio>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Cie,"cie")
 
@@ -412,5 +412,5 @@ Object* MonitorMetrics::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

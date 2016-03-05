@@ -7,7 +7,7 @@
 #include <iostream>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: SlotTable
@@ -54,7 +54,7 @@ private:
    unsigned int nslots1;   // Number of slots in table
 };
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

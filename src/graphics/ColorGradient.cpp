@@ -14,7 +14,7 @@ BEGIN_SLOTTABLE(ColorGradient)
 END_SLOTTABLE(ColorGradient)
 
 BEGIN_SLOT_MAP(ColorGradient)
-    ON_SLOT(1, setSlotColors, basic::PairStream)
+    ON_SLOT(1, setSlotColors, base::PairStream)
 END_SLOT_MAP()
 
 ColorGradient::ColorGradient()
@@ -53,7 +53,7 @@ void ColorGradient::deleteData()
 }
 
 // set our slot colors via a pairstream
-bool ColorGradient::setSlotColors(basic::PairStream* const newStream)
+bool ColorGradient::setSlotColors(base::PairStream* const newStream)
 {
     if (myColors != nullptr) {
         myColors->unref();
@@ -66,14 +66,14 @@ bool ColorGradient::setSlotColors(basic::PairStream* const newStream)
     return true;
 }
 
-basic::Color* ColorGradient::getColorByIdx(const int idx)
+base::Color* ColorGradient::getColorByIdx(const int idx)
 {
-    basic::Color* fCol = nullptr;
+    base::Color* fCol = nullptr;
 
     if (myColors != nullptr) {
-        basic::Pair* pair = myColors->getPosition(idx);
+        base::Pair* pair = myColors->getPosition(idx);
         if (pair != nullptr) {
-            fCol = dynamic_cast<basic::Color*>(pair->object());
+            fCol = dynamic_cast<base::Color*>(pair->object());
         }
     }
     return fCol;
@@ -82,7 +82,7 @@ basic::Color* ColorGradient::getColorByIdx(const int idx)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for ColorGradient
 //------------------------------------------------------------------------------
-basic::Object* graphics::ColorGradient::getSlotByIndex(const int si)
+base::Object* graphics::ColorGradient::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

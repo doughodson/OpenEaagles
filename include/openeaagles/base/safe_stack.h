@@ -5,7 +5,7 @@
 #define __oe_base_safe_stack_H__
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Template safe_stack<T>
@@ -18,7 +18,7 @@ namespace basic {
 //    3) push(), pop() and clear() are internally protected by a semaphore
 //
 // Examples:
-//    basic::safe_stack<int>* q1 = new basic::safe_stack<int>(100); // stack size 100 items
+//    base::safe_stack<int>* q1 = new base::safe_stack<int>(100); // stack size 100 items
 //    s1->push(1);          // pushes 1 on to the queue
 //    s1->push(2);          // pushes 2 on to the queue
 //    int i = s1->pop();    // i is equal to 2

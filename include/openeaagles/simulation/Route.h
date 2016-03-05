@@ -7,7 +7,7 @@
 #include "openeaagles/base/Component.h"
 
 namespace oe {
-   namespace basic {
+   namespace base {
       class Identifier;
       class Distance;
       class NauticalMiles;
@@ -38,21 +38,21 @@ class Steerpoint;
 //
 // Factory name: Route
 // Slots:
-//    to                <basic::Number>      ! Initial "TO" steerpoint by steerpoint index number (default: 0)
-//                      <basic::Identifier>  ! or by steerpoint name (default: 0)
+//    to                <base::Number>      ! Initial "TO" steerpoint by steerpoint index number (default: 0)
+//                      <base::Identifier>  ! or by steerpoint name (default: 0)
 //
-//    autoSequence      <basic::Number>      ! Auto sequence flag (default: true)
+//    autoSequence      <base::Number>      ! Auto sequence flag (default: true)
 //
-//    autoSeqDistance   <basic::Distance>    ! Distance to auto sequence by distance unit
-//                      <basic::Number>      ! or by nautical miles (default: 2.0NM)
+//    autoSeqDistance   <base::Distance>    ! Distance to auto sequence by distance unit
+//                      <base::Number>      ! or by nautical miles (default: 2.0NM)
 //
-//    wrap              <basic::Boolean>     ! Route wrap flag (wrap back to the beginning when past the end)
+//    wrap              <base::Boolean>     ! Route wrap flag (wrap back to the beginning when past the end)
 //                                           ! (default: true)
 //
 //------------------------------------------------------------------------------
-class Route : public basic::Component
+class Route : public base::Component
 {
-   DECLARE_SUBCLASS(Route, basic::Component)
+   DECLARE_SUBCLASS(Route, base::Component)
 
 public:
    Route();
@@ -85,16 +85,16 @@ public:
    virtual bool directTo(const unsigned int idx);
 
    // Find steerpoint (pair)
-   virtual basic::Pair* findSteerpoint(const Steerpoint* const sp);
-   virtual basic::Pair* findSteerpoint(const char* const name);
-   virtual basic::Pair* findSteerpoint(const unsigned int idx);
-   virtual const basic::Pair* findSteerpoint(const Steerpoint* const sp) const;
-   virtual const basic::Pair* findSteerpoint(const char* const name) const;
-   virtual const basic::Pair* findSteerpoint(const unsigned int idx) const;
+   virtual base::Pair* findSteerpoint(const Steerpoint* const sp);
+   virtual base::Pair* findSteerpoint(const char* const name);
+   virtual base::Pair* findSteerpoint(const unsigned int idx);
+   virtual const base::Pair* findSteerpoint(const Steerpoint* const sp) const;
+   virtual const base::Pair* findSteerpoint(const char* const name) const;
+   virtual const base::Pair* findSteerpoint(const unsigned int idx) const;
 
-   // Get the route -- or use basic::Component::getComponents()
-   virtual unsigned int getSteerpoints(basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max);    // Start from 'to'
-   virtual unsigned int getAllSteerpoints(basic::safe_ptr<Steerpoint>* const stptList, const unsigned int max); // All
+   // Get the route -- or use base::Component::getComponents()
+   virtual unsigned int getSteerpoints(base::safe_ptr<Steerpoint>* const stptList, const unsigned int max);    // Start from 'to'
+   virtual unsigned int getAllSteerpoints(base::safe_ptr<Steerpoint>* const stptList, const unsigned int max); // All
    virtual unsigned int getNumberOfSteerpoints() const;   // return the number of steerpoint (components) in our route
 
    // Insert a steerpoint at 'pos' position in our list;
@@ -108,7 +108,7 @@ public:
    virtual bool deleteSteerpoint(Steerpoint* const sp);
 
    // Replace all of our steerpoints and sets our 'to' steerpoint to 'newStptIdx'
-   virtual bool replaceAllSteerpoints(basic::PairStream* const newSteerpointList, unsigned int newStptIdx = 1);
+   virtual bool replaceAllSteerpoints(base::PairStream* const newSteerpointList, unsigned int newStptIdx = 1);
 
    // clears out all of our steerpoints
    virtual bool deleteAllSteerpoints();
@@ -117,7 +117,7 @@ public:
    virtual void triggerAction();
 
    void updateData(const LCreal dt = 0.0) override;
-   bool event(const int event, basic::Object* const obj = nullptr) override;
+   bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
@@ -128,28 +128,28 @@ protected:
     virtual void autoSequencer(const LCreal dt, const  Navigation* const nav);
 
     // Slot functions
-    bool setSlotTo(const basic::Identifier* const msg);
-    bool setSlotTo(const basic::Number* const msg);
-    bool setSlotAutoSequence(const basic::Number* const msg);
-    bool setSlotAutoSeqDistance(const basic::Distance* const msg);
-    bool setSlotAutoSeqDistance(const basic::Number* const msg);
-    bool setSlotWrap(const basic::Number* const msg);
+    bool setSlotTo(const base::Identifier* const msg);
+    bool setSlotTo(const base::Number* const msg);
+    bool setSlotAutoSequence(const base::Number* const msg);
+    bool setSlotAutoSeqDistance(const base::Distance* const msg);
+    bool setSlotAutoSeqDistance(const base::Number* const msg);
+    bool setSlotWrap(const base::Number* const msg);
 
     void processComponents(
-         basic::PairStream* const list,        // Source list of components
+         base::PairStream* const list,        // Source list of components
          const std::type_info& filter,         // Type filter
-         basic::Pair* const add = 0,           // Optional pair to add
-         basic::Component* const remove = 0    // Optional subcomponent to remove
+         base::Pair* const add = 0,           // Optional pair to add
+         base::Component* const remove = 0    // Optional subcomponent to remove
        ) override;
 
 private:
-   const basic::Pair* findSteerpointImp(const Steerpoint* const sp) const;
-   const basic::Pair* findSteerpointImp(const char* const name) const;
-   const basic::Pair* findSteerpointImp(const unsigned int idx) const;
+   const base::Pair* findSteerpointImp(const Steerpoint* const sp) const;
+   const base::Pair* findSteerpointImp(const char* const name) const;
+   const base::Pair* findSteerpointImp(const unsigned int idx) const;
    const Steerpoint* getSteerpointImp() const;
 
-   basic::safe_ptr<basic::Pair>         to;             // "To" Steerpoint pair [ name steerpoint ]
-   basic::safe_ptr<const basic::String> initToStptName; // Name of the initial "to" steerpoint
+   base::safe_ptr<base::Pair>         to;             // "To" Steerpoint pair [ name steerpoint ]
+   base::safe_ptr<const base::String> initToStptName; // Name of the initial "to" steerpoint
    unsigned int              initToStptIdx;             // Index of the initial "to" steerpoint
    unsigned int              stptIdx;                   // Steerpoint index [ 1 ... n ] in list
    LCreal                    autoSeqDistNM;             // Distance to auto sequence (NM)
@@ -191,32 +191,32 @@ inline double Route::getAutoSeqDistance() const
    return autoSeqDistNM;
 }
 
-inline basic::Pair* Route::findSteerpoint(const Steerpoint* const sp)
+inline base::Pair* Route::findSteerpoint(const Steerpoint* const sp)
 {
-   return const_cast<basic::Pair*>(static_cast<const basic::Pair*>(findSteerpointImp(sp)));
+   return const_cast<base::Pair*>(static_cast<const base::Pair*>(findSteerpointImp(sp)));
 }
 
-inline basic::Pair* Route::findSteerpoint(const char* const name)
+inline base::Pair* Route::findSteerpoint(const char* const name)
 {
-   return const_cast<basic::Pair*>(static_cast<const basic::Pair*>(findSteerpointImp(name)));
+   return const_cast<base::Pair*>(static_cast<const base::Pair*>(findSteerpointImp(name)));
 }
 
-inline basic::Pair* Route::findSteerpoint(const unsigned int idx)
+inline base::Pair* Route::findSteerpoint(const unsigned int idx)
 {
-   return const_cast<basic::Pair*>(static_cast<const basic::Pair*>(findSteerpointImp(idx)));
+   return const_cast<base::Pair*>(static_cast<const base::Pair*>(findSteerpointImp(idx)));
 }
 
-inline const basic::Pair* Route::findSteerpoint(const Steerpoint* const sp) const
+inline const base::Pair* Route::findSteerpoint(const Steerpoint* const sp) const
 {
    return findSteerpointImp(sp);
 }
 
-inline const basic::Pair* Route::findSteerpoint(const char* const name) const
+inline const base::Pair* Route::findSteerpoint(const char* const name) const
 {
    return findSteerpointImp(name);
 }
 
-inline const basic::Pair* Route::findSteerpoint(const unsigned int idx) const
+inline const base::Pair* Route::findSteerpoint(const unsigned int idx) const
 {
    return findSteerpointImp(idx);
 }

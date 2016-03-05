@@ -15,7 +15,7 @@
 #include "openeaagles/base/Matrix.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: RVector

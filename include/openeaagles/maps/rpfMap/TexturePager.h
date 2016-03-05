@@ -46,16 +46,16 @@
 #include "TextureTable.h"
 
 namespace oe {
-namespace basic { class List; }
+namespace base { class List; }
 namespace maps {
 namespace rpf {
 
 class CadrgMap;
 class CadrgTocEntry;
 
-class TexturePager : public basic::Object
+class TexturePager : public base::Object
 {
-    DECLARE_SUBCLASS(TexturePager, basic::Object)
+    DECLARE_SUBCLASS(TexturePager, base::Object)
 
 public:
     TexturePager();
@@ -79,7 +79,7 @@ private:
     void reuseTextures();
     void loadNewTextures();
 
-    basic::List* stack;
+    base::List* stack;
 
     TextureTable table;
     int maxTableSize;

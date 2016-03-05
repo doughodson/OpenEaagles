@@ -26,8 +26,8 @@ END_SLOTTABLE(AirVehicle)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(AirVehicle)
-    ON_SLOT(1,setInitGearPos,basic::String)
-    ON_SLOT(1,setInitGearPos,basic::Number)
+    ON_SLOT(1,setInitGearPos,base::String)
+    ON_SLOT(1,setInitGearPos,base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ AirVehicle::AirVehicle()
 {
     STANDARD_CONSTRUCTOR()
 
-    static basic::String generic("GenericAirVehicle");
+    static base::String generic("GenericAirVehicle");
     setType(&generic);
 
     initGearPos = 0.0;
@@ -92,17 +92,17 @@ void AirVehicle::reset()
 //------------------------------------------------------------------------------
 LCreal AirVehicle::getAngleOfAttackD() const
 {
-   return ( static_cast<LCreal>(basic::Angle::R2DCC) * getAngleOfAttack() );
+   return ( static_cast<LCreal>(base::Angle::R2DCC) * getAngleOfAttack() );
 }
 
 LCreal AirVehicle::getFlightPathD() const
 {
-   return ( static_cast<LCreal>(basic::Angle::R2DCC) * getFlightPath() );
+   return ( static_cast<LCreal>(base::Angle::R2DCC) * getFlightPath() );
 }
 
 LCreal AirVehicle::getSideSlipD() const
 {
-   return ( static_cast<LCreal>(basic::Angle::R2DCC) * getSideSlip() );
+   return ( static_cast<LCreal>(base::Angle::R2DCC) * getSideSlip() );
 }
 
 AerodynamicsModel* AirVehicle::getAerodynamicsModel()
@@ -118,7 +118,7 @@ const AerodynamicsModel* AirVehicle::getAerodynamicsModel() const
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-basic::Object* AirVehicle::getSlotByIndex(const int si)
+base::Object* AirVehicle::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -129,7 +129,7 @@ basic::Object* AirVehicle::getSlotByIndex(const int si)
 //-----------------------------------------------------------------------------
 
 // Set initial gear position by name: up, down
-bool AirVehicle::setInitGearPos(const basic::String* const pos)
+bool AirVehicle::setInitGearPos(const base::String* const pos)
 {
    bool ok = false;
    if (pos != nullptr) {
@@ -156,7 +156,7 @@ bool AirVehicle::setInitGearPos(const basic::String* const pos)
 }
 
 // Set initial gear position by number: zero is up, non-zero is down
-bool AirVehicle::setInitGearPos(const basic::Number* const pos)
+bool AirVehicle::setInitGearPos(const base::Number* const pos)
 {
    bool ok = false;
    if (pos != nullptr) {
@@ -612,7 +612,7 @@ EMPTY_SERIALIZER(Aircraft)
 Aircraft::Aircraft()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericAircraft");
+    static base::String generic("GenericAircraft");
     setType(&generic);
 }
 
@@ -641,7 +641,7 @@ EMPTY_SERIALIZER(Helicopter)
 Helicopter::Helicopter()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericHelicopter");
+    static base::String generic("GenericHelicopter");
     setType(&generic);
 }
 
@@ -670,7 +670,7 @@ EMPTY_SERIALIZER(UnmannedAirVehicle)
 UnmannedAirVehicle::UnmannedAirVehicle()
 {
     STANDARD_CONSTRUCTOR()
-    static basic::String generic("GenericUnmannedAirVehicle");
+    static base::String generic("GenericUnmannedAirVehicle");
     setType(&generic);
 }
 

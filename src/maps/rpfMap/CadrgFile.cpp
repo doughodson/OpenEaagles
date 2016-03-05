@@ -133,7 +133,7 @@ void CadrgFile::setEntries(CadrgTocEntry* newEntries[MAX_TOC_ENTRIES])
 void CadrgFile::setDirectory(const char* x)
 {
     if (originalDir != nullptr) originalDir->setStr(x);
-    else originalDir = new basic::String(x);
+    else originalDir = new base::String(x);
 }
 
 //--------------------------------------------------------------------------
@@ -180,7 +180,7 @@ bool CadrgFile::checkForMap(const char* dir)
     bool ok = false;
     // Try to find and open our a.toc file
     std::ifstream toc;
-    basic::String* string = new basic::String(dir);
+    base::String* string = new base::String(dir);
     string->catStr("A.TOC");
 
     #if defined(WIN32)
@@ -260,9 +260,9 @@ bool CadrgFile::initialize(const char* dir)
 
     // Try to find and open our a.toc file
     std::ifstream toc;
-    basic::String* string = new basic::String(dir);
+    base::String* string = new base::String(dir);
     if (originalDir != nullptr) originalDir->setStr(dir);
-    else originalDir = new basic::String(dir);
+    else originalDir = new base::String(dir);
     string->catStr("A.TOC");
 
     #if defined(WIN32)

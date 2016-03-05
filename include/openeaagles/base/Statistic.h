@@ -9,7 +9,7 @@
 #include <cmath>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Statistic

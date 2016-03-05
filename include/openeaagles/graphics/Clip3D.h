@@ -18,8 +18,8 @@ namespace graphics {
 // Description: 3D polygon clipping
 //
 //------------------------------------------------------------------------------
-class Clip3D : public basic::Object {
-    DECLARE_SUBCLASS(Clip3D,basic::Object)
+class Clip3D : public base::Object {
+    DECLARE_SUBCLASS(Clip3D,base::Object)
 
 public:
    Clip3D();

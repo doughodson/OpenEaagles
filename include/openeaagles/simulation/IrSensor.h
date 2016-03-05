@@ -14,7 +14,7 @@
 
 namespace oe {
 
-namespace basic { class Integer; class Number; class String; }
+namespace base { class Integer; class Number; class String; }
 
 namespace simulation {
 
@@ -133,25 +133,25 @@ public:
    virtual LCreal getMaximumRange() const {return maximumRange; };   // Returns maximum Range
    virtual bool setMaximumRange(const LCreal maximumRange);          // Sets maximum Range
 
-   virtual const basic::String* getTrackManagerName() const; // Returns the requested track manager's name
-   virtual bool setTrackManagerName(basic::String* const a); // Sets the name of the track manager to use
+   virtual const base::String* getTrackManagerName() const; // Returns the requested track manager's name
+   virtual bool setTrackManagerName(base::String* const a); // Sets the name of the track manager to use
 
    virtual TrackManager* getTrackManager();               // Returns our current track manager
    virtual const TrackManager* getTrackManager() const;   // Returns our current track manager (const version)
    virtual bool setTrackManager(TrackManager* const a);   // Sets the track manager
 
    // Slot functions
-   virtual bool setSlotLowerWavelength(const basic::Number* const msg);   // Sets lower wavelength
-   virtual bool setSlotUpperWavelength(const basic::Number* const msg);   // Sets upper wavelength
-   virtual bool setSlotNEI(const basic::Number* const msg);               // Sets Noise Equivalent Irradiance
-   virtual bool setSlotThreshold(const basic::Number* const msg);         // Sets Signal to Noise Threshold
-   virtual bool setSlotIFOV(const basic::Number* const msg);              // Sets Instantaneous Field of View
-   virtual bool setSlotSensorType(const basic::String* const msg);        // Sets the Sensor Type
-   //virtual bool setSlotFieldOfRegard(const basic::Number* const msg);   // Sets the field of regard
-   //virtual bool setSlotAzimuthBin(const basic::Number* const msg);      // Sets the Azimuth Bin
-   //virtual bool setSlotElevationBin(const basic::Number* const msg);    // Sets the Elevation Bin
-   virtual bool setSlotMaximumRange(const basic::Number* const msg);      // Sets the Maximum Range
-   virtual bool setSlotTrackManagerName(basic::String* const v);          // Sets our track manager by name
+   virtual bool setSlotLowerWavelength(const base::Number* const msg);   // Sets lower wavelength
+   virtual bool setSlotUpperWavelength(const base::Number* const msg);   // Sets upper wavelength
+   virtual bool setSlotNEI(const base::Number* const msg);               // Sets Noise Equivalent Irradiance
+   virtual bool setSlotThreshold(const base::Number* const msg);         // Sets Signal to Noise Threshold
+   virtual bool setSlotIFOV(const base::Number* const msg);              // Sets Instantaneous Field of View
+   virtual bool setSlotSensorType(const base::String* const msg);        // Sets the Sensor Type
+   //virtual bool setSlotFieldOfRegard(const base::Number* const msg);   // Sets the field of regard
+   //virtual bool setSlotAzimuthBin(const base::Number* const msg);      // Sets the Azimuth Bin
+   //virtual bool setSlotElevationBin(const base::Number* const msg);    // Sets the Elevation Bin
+   virtual bool setSlotMaximumRange(const base::Number* const msg);      // Sets the Maximum Range
+   virtual bool setSlotTrackManagerName(base::String* const v);          // Sets our track manager by name
 
    // Store sensor reports until we are ready to pass on to track manager.
    void addStoredMessage(IrQueryMsg* msg);
@@ -170,7 +170,7 @@ protected:
    virtual IrQueryMsg* getStoredMessage();
    virtual IrQueryMsg* peekStoredMessage(unsigned int i);
 
-   basic::safe_queue<IrQueryMsg*> storedMessagesQueue;
+   base::safe_queue<IrQueryMsg*> storedMessagesQueue;
    mutable long storedMessagesLock;          // Semaphore to protect 'storedMessagesQueue'
 
 private:
@@ -192,7 +192,7 @@ private:
    //LCreal fieldOfRegardTheta;       // Field of Regard planar angle, where fieldOfRegard = 2 * pi * (1-cos(fieldOfRegardTheta/2)
 
    // above results in a simple cone.
-   basic::String* tmName;          // Name of our track manager
+   base::String* tmName;          // Name of our track manager
    TrackManager*  trackManager;    // Our Track manager -- managed by the onboard computer
 
    //LCreal azimuthBin;            // minimum azimuth we can distinguish -- two signals whose

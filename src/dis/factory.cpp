@@ -13,9 +13,9 @@ namespace oe {
 namespace network {
 namespace dis {
 
-basic::Object* factory(const char* name)
+base::Object* factory(const char* name)
 {
-    basic::Object* obj = nullptr;
+    base::Object* obj = nullptr;
 
     if ( std::strcmp(name, dis::NetIO::getFactoryName()) == 0 ) {
         obj = new dis::NetIO();

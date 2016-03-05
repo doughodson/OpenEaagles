@@ -4,13 +4,13 @@
 
 namespace oe {
 
-namespace basic { class Object; }
+namespace base { class Object; }
 
 namespace network {
 namespace dis {
 
 // factory function
-basic::Object* factory(const char* name);
+base::Object* factory(const char* name);
 
 }
 }

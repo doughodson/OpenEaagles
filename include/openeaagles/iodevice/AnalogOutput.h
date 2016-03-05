@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace basic { class Number; class Table1; }
+namespace base { class Number; class Table1; }
 
 namespace iodevice {
 
@@ -36,9 +36,9 @@ namespace iodevice {
 //      table        <Table1>    Shaping function table (default: none)
 //
 //------------------------------------------------------------------------------
-class AnalogOutput : public basic::IoAdapter
+class AnalogOutput : public base::IoAdapter
 {
-   DECLARE_SUBCLASS(AnalogOutput, basic::IoAdapter)
+   DECLARE_SUBCLASS(AnalogOutput, base::IoAdapter)
 
 public:
    AnalogOutput();
@@ -48,25 +48,25 @@ public:
    LCreal getValue() const;
    LCreal getOffset() const;
    LCreal getGain() const;
-   const basic::Table1* getTable() const;
+   const base::Table1* getTable() const;
 
    bool setLocation(const unsigned int);
    bool setChannel(const unsigned int);
    bool setValue(const LCreal);
    bool setOffset(const LCreal);
    bool setGain(const LCreal);
-   bool setTable(const basic::Table1* const);
+   bool setTable(const base::Table1* const);
 
-   void processInputs(const LCreal dt, const basic::IoDevice* const device, basic::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const basic::IoData* const outData, basic::IoDevice* const device) override;
+   void processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const LCreal dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
-   virtual bool setSlotLocation(const basic::Number* const msg);
-   virtual bool setSlotChannel(const basic::Number* const msg);
-   virtual bool setSlotValue(const basic::Number* const msg);
-   virtual bool setSlotOffset(const basic::Number* const msg);
-   virtual bool setSlotGain(const basic::Number* const msg);
+   virtual bool setSlotLocation(const base::Number* const msg);
+   virtual bool setSlotChannel(const base::Number* const msg);
+   virtual bool setSlotValue(const base::Number* const msg);
+   virtual bool setSlotOffset(const base::Number* const msg);
+   virtual bool setSlotGain(const base::Number* const msg);
 
 private:
    void initData();
@@ -77,7 +77,7 @@ private:
    LCreal       value;        // Initial value
    LCreal       offset;       // Offset:  value = gain * (vin - offset)
    LCreal       gain;         // Gain:    value = gain * (vin - offset)
-   const basic::Table1* table; // Shaping table
+   const base::Table1* table; // Shaping table
 };
 
 } // end iodevice

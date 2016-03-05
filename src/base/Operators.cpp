@@ -4,7 +4,7 @@
 #include "openeaagles/base/Operators.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 IMPLEMENT_SUBCLASS(Add,"+")
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Subtract,"-")
@@ -202,5 +202,5 @@ bool Add::setSecondNumber(const Number* const ssnobj)
     return true;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

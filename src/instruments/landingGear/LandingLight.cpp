@@ -16,7 +16,7 @@ END_SLOTTABLE(LandingLight)
 //  Map slot table to handles for LandingGear
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LandingLight)
-    ON_SLOT(1, setSlotLightRadius, basic::Number)
+    ON_SLOT(1, setSlotLightRadius, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ bool LandingLight::setLightRadius(const LCreal newLR)
 //------------------------------------------------------------------------------
 // setSlotLightRadius() - sets our light radius to be drawn
 //------------------------------------------------------------------------------
-bool LandingLight::setSlotLightRadius(const basic::Number* const newLR)
+bool LandingLight::setSlotLightRadius(const base::Number* const newLR)
 {
     bool ok = false;
     if (newLR != nullptr) ok = setLightRadius(newLR->getReal());
@@ -140,7 +140,7 @@ void LandingLight::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for LandingLight
 //------------------------------------------------------------------------------
-basic::Object* LandingLight::getSlotByIndex(const int si)
+base::Object* LandingLight::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

@@ -9,7 +9,7 @@
 #include "Volumes.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 //------------------------------------------------------------------------------
 // Classes: Density
 //
@@ -81,7 +81,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Density& n)
     return sout;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif

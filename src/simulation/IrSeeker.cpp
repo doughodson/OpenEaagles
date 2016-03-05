@@ -111,7 +111,7 @@ void IrSeeker::reset()
 //------------------------------------------------------------------------------
 // Process the Players-Of-Interest (POI) list
 //------------------------------------------------------------------------------
-unsigned int IrSeeker::processPlayersOfInterest(basic::PairStream* const poi)
+unsigned int IrSeeker::processPlayersOfInterest(base::PairStream* const poi)
 {
    TdbIr* tdb0 = new TdbIr(getMaxPlayersOfInterest(), this);
 
@@ -222,7 +222,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
       const osg::Vec3d* losO2T = tdb0->getLosVectors();
       const osg::Vec3d* losT2O = tdb0->getTargetLosVectors();
       Player** targets = tdb0->getTargets();
-      const LCreal maximumRange = irQuery->getMaxRangeNM()*basic::Distance::NM2M;
+      const LCreal maximumRange = irQuery->getMaxRangeNM()*base::Distance::NM2M;
 
       // ---
       // Send query packets to the targets
@@ -370,7 +370,7 @@ void TdbIr::deleteData()
 // range rate, normalized Line-Of-Sight (LOS) vectors for each target player.
 // (Background task)
 //------------------------------------------------------------------------------
-unsigned int TdbIr::processPlayers(basic::PairStream* const players)
+unsigned int TdbIr::processPlayers(base::PairStream* const players)
 {
    // Clear the old data
    clearArrays();
@@ -380,7 +380,7 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
    // ---
    if (gimbal == 0 || ownship == nullptr || players == nullptr || maxTargets == 0) return 0;
 
-   //const basic::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
+   //const base::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
    //if (p == 0) return 0;
 
    // FAB - refactored
@@ -407,11 +407,11 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
    // 1) Scan the player list --- compute the normalized Line-Of-Sight (LOS) vectors,
    // range, and range rate for each target.
    // ---
-   for (basic::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
+   for (base::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
 
 
       // Get the pointer to the target player
-      basic::Pair* pair = (basic::Pair*)(item->getValue());
+      base::Pair* pair = (base::Pair*)(item->getValue());
       Player* target = (Player*)(pair->object());
 
      // FAB - testing - exclude our launch vehicle in tdb
@@ -478,7 +478,7 @@ unsigned int TdbIr::processPlayers(basic::PairStream* const players)
       //   LCreal fieldOfRegardTheta = 0;
       //   LCreal sensorMaxRange = 0;
       //   {
-      //      //const basic::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
+      //      //const base::Pair* p = ((Player*)ownship)->getIrSystemByType( typeid(IrSensor) );
       //      //if (p != 0) {
       //         //const IrSensor* irSensor = (const IrSensor*)( p->object() );
       //         // fieldOfRegardTheta = irSensor->getFieldOfRegardTheta();
@@ -533,14 +533,14 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
    //LET .FIRST.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .FIRST.NODE.POSITION(3), 1.0) )
 
-   LCreal distance1 = lcSqrt( static_cast<LCreal>(2.0f * basic::Nav::ERADM * -position1.z()) );
+   LCreal distance1 = lcSqrt( static_cast<LCreal>(2.0f * base::Nav::ERADM * -position1.z()) );
    if (distance1 < 1.0f) distance1 = 1.0f;
 
 
    //      LET .SECOND.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .SECOND.NODE.POSITION(3), 1.0) )
 
-   LCreal distance2 = lcSqrt( static_cast<LCreal>(2.0f * basic::Nav::ERADM * -position2.z()) );
+   LCreal distance2 = lcSqrt( static_cast<LCreal>(2.0f * base::Nav::ERADM * -position2.z()) );
    if (distance2 < 1.0f) distance2 = 1.0f;
 
    //LET .RELATIVE.POSITION(*)

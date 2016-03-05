@@ -8,7 +8,7 @@
 
 namespace oe {
 
-   namespace basic { class Distance; class LatLon; class Number; }
+   namespace base { class Distance; class LatLon; class Number; }
 
 namespace simulation {
 
@@ -33,15 +33,15 @@ class Steerpoint;
 //  4) Any action that will take time to complete must have a manager
 //     passed via trigger().
 //
-//  5) Derived from an UBF action (see "openeaagles/basic/ubf/Action.h").
+//  5) Derived from an UBF action (see "openeaagles/base/ubf/Action.h").
 //  The execute() function's 'actor' must be our OnboardComputer or our
 //  ownship, which can be  used to find our OnboardComputer.  The execute()
 //  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
-class Action : public basic::ubf::Action
+class Action : public base::ubf::Action
 {
-    DECLARE_SUBCLASS(Action,basic::ubf::Action)
+    DECLARE_SUBCLASS(Action,base::ubf::Action)
 
 public:
    Action();
@@ -57,7 +57,7 @@ public:
    int getRefId() const    { return refId; }          // Message Ref ID
    virtual void setRefId(const int id);               // Sets the message ref ID
 
-   bool execute(basic::Component* actor) override;
+   bool execute(base::Component* actor) override;
 
 protected:
    OnboardComputer* getManager()   { return manager; } // Our manager
@@ -66,7 +66,7 @@ protected:
    virtual void setCompleted(const bool flg);      // Sets the completed flag
 
 private:
-   basic::safe_ptr<OnboardComputer> manager;   // Our manager (only set while we're in progress)
+   base::safe_ptr<OnboardComputer> manager;   // Our manager (only set while we're in progress)
    int            refId;            // Ref ID
    bool           completed;        // True if action has been completed
 };
@@ -108,11 +108,11 @@ public:
    virtual LCreal computeOrientation(const Steerpoint* const wp);
 
    // Slot functions
-   virtual bool setSlotSarLat(const basic::LatLon* const msg);
-   virtual bool setSlotSarLon(const basic::LatLon* const msg);
-   virtual bool setSlotSarElev(const basic::Distance* const msg);
-   virtual bool setSlotResolution(const basic::Distance* const msg);
-   virtual bool setSlotImageSize(const basic::Number* const msg);
+   virtual bool setSlotSarLat(const base::LatLon* const msg);
+   virtual bool setSlotSarLon(const base::LatLon* const msg);
+   virtual bool setSlotSarElev(const base::Distance* const msg);
+   virtual bool setSlotResolution(const base::Distance* const msg);
+   virtual bool setSlotImageSize(const base::Number* const msg);
 
    bool trigger(OnboardComputer* const mgr) override;
    bool cancel() override;
@@ -169,10 +169,10 @@ public:
    bool trigger(OnboardComputer* const mgr) override;
 
 protected:
-   bool setSlotTargetLat(const basic::LatLon* newLat);
-   bool setSlotTargetLon(const basic::LatLon* newLon);
-   bool setSlotTargetElev(const basic::Number* newElev);
-   bool setSlotStationNum(const basic::Number* newStation);
+   bool setSlotTargetLat(const base::LatLon* newLat);
+   bool setSlotTargetLon(const base::LatLon* newLon);
+   bool setSlotTargetElev(const base::Number* newElev);
+   bool setSlotStationNum(const base::Number* newStation);
 
 private:
    double targetLatitude;        // latitude (deg)
@@ -206,8 +206,8 @@ public:
     bool trigger(OnboardComputer* const mgr) override;
 
 protected:
-    bool setSlotInterval(const basic::Number* x);
-    bool setSlotNumToLaunch(const basic::Number* x);
+    bool setSlotInterval(const base::Number* x);
+    bool setSlotNumToLaunch(const base::Number* x);
 
 private:
     int numToLaunch;    // how many decoys to launch this action?
@@ -236,7 +236,7 @@ public:
 
    unsigned int getCamouflageType() const   { return camouflage; }         // Returns the user defined camouflage type (or zero for none)
    virtual bool setCamouflageType(const unsigned int v);                   // Sets the user defined camouflage type (or zero for none)
-   virtual bool setSlotCamouflageType(const basic::Number* const msg);   // Sets user defined camouflage type
+   virtual bool setSlotCamouflageType(const base::Number* const msg);   // Sets user defined camouflage type
 
    virtual bool trigger(OnboardComputer* const mgr) override;
 

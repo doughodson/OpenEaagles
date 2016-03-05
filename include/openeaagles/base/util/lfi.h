@@ -5,7 +5,7 @@
 #include "openeaagles/base/support.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // Linear Function Interpolators

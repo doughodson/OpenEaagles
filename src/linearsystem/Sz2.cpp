@@ -30,18 +30,18 @@ END_SLOTTABLE(Sz2)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Sz2)
-   ON_SLOT( 1, setSlotN1,   basic::Number)
-   ON_SLOT( 2, setSlotN1,   basic::Number)
-   ON_SLOT( 3, setSlotN2,   basic::Number)
-   ON_SLOT( 4, setSlotN2,   basic::Number)
-   ON_SLOT( 5, setSlotN3,   basic::Number)
-   ON_SLOT( 6, setSlotN3,   basic::Number)
-   ON_SLOT( 7, setSlotD1,   basic::Number)
-   ON_SLOT( 8, setSlotD1,   basic::Number)
-   ON_SLOT( 9, setSlotD2,   basic::Number)
-   ON_SLOT(10, setSlotD2,   basic::Number)
-   ON_SLOT(11, setSlotD3,   basic::Number)
-   ON_SLOT(12, setSlotD3,   basic::Number)
+   ON_SLOT( 1, setSlotN1,   base::Number)
+   ON_SLOT( 2, setSlotN1,   base::Number)
+   ON_SLOT( 3, setSlotN2,   base::Number)
+   ON_SLOT( 4, setSlotN2,   base::Number)
+   ON_SLOT( 5, setSlotN3,   base::Number)
+   ON_SLOT( 6, setSlotN3,   base::Number)
+   ON_SLOT( 7, setSlotD1,   base::Number)
+   ON_SLOT( 8, setSlotD1,   base::Number)
+   ON_SLOT( 9, setSlotD2,   base::Number)
+   ON_SLOT(10, setSlotD2,   base::Number)
+   ON_SLOT(11, setSlotD3,   base::Number)
+   ON_SLOT(12, setSlotD3,   base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ EMPTY_DELETEDATA(Sz2)
 // Set slot functions
 //------------------------------------------------------------------------------
 
-bool Sz2::setSlotN1(const basic::Number* const msg)
+bool Sz2::setSlotN1(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -70,7 +70,7 @@ bool Sz2::setSlotN1(const basic::Number* const msg)
    return ok;
 }
 
-bool Sz2::setSlotN2(const basic::Number* const msg)
+bool Sz2::setSlotN2(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -80,7 +80,7 @@ bool Sz2::setSlotN2(const basic::Number* const msg)
    return ok;
 }
 
-bool Sz2::setSlotN3(const basic::Number* const msg)
+bool Sz2::setSlotN3(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -90,7 +90,7 @@ bool Sz2::setSlotN3(const basic::Number* const msg)
    return ok;
 }
 
-bool Sz2::setSlotD1(const basic::Number* const msg)
+bool Sz2::setSlotD1(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -100,7 +100,7 @@ bool Sz2::setSlotD1(const basic::Number* const msg)
    return ok;
 }
 
-bool Sz2::setSlotD2(const basic::Number* const msg)
+bool Sz2::setSlotD2(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -110,7 +110,7 @@ bool Sz2::setSlotD2(const basic::Number* const msg)
    return ok;
 }
 
-bool Sz2::setSlotD3(const basic::Number* const msg)
+bool Sz2::setSlotD3(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -123,7 +123,7 @@ bool Sz2::setSlotD3(const basic::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Sz2
 //------------------------------------------------------------------------------
-basic::Object* Sz2::getSlotByIndex(const int si)
+base::Object* Sz2::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }

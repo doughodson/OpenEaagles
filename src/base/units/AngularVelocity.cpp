@@ -5,7 +5,7 @@
 #include "openeaagles/base/SlotTable.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // AngularVelocity
@@ -287,5 +287,5 @@ void AngularVelocity::deleteData()
 {
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

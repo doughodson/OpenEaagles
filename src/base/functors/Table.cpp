@@ -6,7 +6,7 @@
 #include "openeaagles/base/Pair.h"
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //==============================================================================
 // Class TableStorage
@@ -278,5 +278,5 @@ void Table::printVector(std::ostream& sout, const LCreal* table, const unsigned 
     sout << " ]";
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace

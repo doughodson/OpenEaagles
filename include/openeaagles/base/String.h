@@ -11,7 +11,7 @@
 #include <cstring>
 
 namespace oe {
-namespace basic {
+namespace base {
 
 //------------------------------------------------------------------------------
 // Class: String
@@ -454,7 +454,7 @@ inline std::istream& operator>>(std::istream& sin, String& s)
     return sin;
 }
 
-} // End basic namespace
+} // End base namespace
 } // End oe namespace
 
 #endif
