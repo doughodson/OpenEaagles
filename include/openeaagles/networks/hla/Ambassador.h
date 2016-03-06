@@ -2,21 +2,20 @@
 // Class: Ambassador
 //------------------------------------------------------------------------------
 
-#ifndef __Eaagles_Network_Hla_Ambassador_H__
-#define __Eaagles_Network_Hla_Ambassador_H__
+#ifndef __oe_hla_Ambassador_H__
+#define __oe_hla_Ambassador_H__
 
 #include <RTI.hh>
 #include <fedtime.hh>
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
+namespace oe {
+namespace hla {
 
 class NetIO;
 
 //------------------------------------------------------------------------------
 // Class: Ambassador
-// Base class: RTI::FederateAmbassador -> Hla::Ambassador
+// Base class: RTI::FederateAmbassador -> hla::Ambassador
 //
 // Description: Basic ambassador to the Federation.  Our federate unique
 //              ambassadors will be derived from this class.  (Notes on
@@ -25,7 +24,7 @@ class NetIO;
 //
 // Public member functions:
 //
-//      Hla::NetIO* getNetIO()
+//      hla::NetIO* getNetIO()
 //          Returns a pointer to the HLA Network I/O class that is controlling
 //          this ambassador.
 //
@@ -414,9 +413,8 @@ public:
 
 };
 
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
 
 #endif
 

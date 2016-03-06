@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
-// Class: Hla::Ntm
+// Class: hla::rprfom::Ntm
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Hla_RprFom_Ntm_H__
-#define __Eaagles_Network_Hla_RprFom_Ntm_H__
+#ifndef __oe_hla_rprfom_Ntm_H__
+#define __oe_hla_rprfom_Ntm_H__
 
 #include "openeaagles/simulation/Ntm.h"
-#include "openeaagles/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //------------------------------------------------------------------------------
-// Class: Hla::Ntm
+// Class: hla::rprfom::Ntm
 // Description: HLA Network Type Mapper
 //
 //    This class, which is derived from the Simulation::Ntm, maps Eaagles
@@ -26,9 +25,9 @@ namespace RprFom {
 //                            !  example: [ 1 2 333 4 5 6 7 ]
 //
 //------------------------------------------------------------------------------
-class Ntm : public Simulation::Ntm
+class Ntm : public simulation::Ntm
 {
-    DECLARE_SUBCLASS(Ntm, Simulation::Ntm)
+    DECLARE_SUBCLASS(Ntm, simulation::Ntm)
 
 public:
    Ntm();
@@ -53,10 +52,10 @@ public:
    );
 
    // Slot functions
-   virtual bool setSlotEntityType(const Basic::List* const msg);         // Sets entity type enumerations
+   virtual bool setSlotEntityType(const base::List* const msg);         // Sets entity type enumerations
 
    // Simulation::Ntm class functions
-   virtual bool copyEntityType(Simulation::Nib* const targetNib) const;
+   virtual bool copyEntityType(simulation::Nib* const targetNib) const;
 
 private:
     // Standard type codes
@@ -69,9 +68,8 @@ private:
     unsigned char  extra;
 };
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}
 
 #endif

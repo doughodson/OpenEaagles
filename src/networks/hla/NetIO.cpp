@@ -2,13 +2,13 @@
 // Class: NetIO
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/NetIO.h"
-#include "openeaagles/hla/Nib.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/NetIO.h"
+#include "openeaagles/networks/hla/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
 
 #include <cstring>
 
@@ -16,9 +16,8 @@
 #include "unistd.h"
 #endif
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
+namespace oe {
+namespace hla {
 
 IMPLEMENT_PARTIAL_SUBCLASS(NetIO, "HlaNetIO")
 
@@ -33,9 +32,9 @@ END_SLOTTABLE(NetIO)
 
 // Map slot table to handles 
 BEGIN_SLOT_MAP(NetIO)
-   ON_SLOT(1, setSlotFedFile,Basic::String)
-   ON_SLOT(2, setSlotRegulatingTime,Basic::Number)
-   ON_SLOT(3, setSlotConstrainedTime,Basic::Number)
+   ON_SLOT(1, setSlotFedFile, base::String)
+   ON_SLOT(2, setSlotRegulatingTime, base::Number)
+   ON_SLOT(3, setSlotConstrainedTime, base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -140,9 +139,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const Basic::String* s = org.getFederationName();
+      const base::String* s = org.getFederationName();
       if (s != nullptr) {
-         setFederationName( static_cast<Basic::String*>(s->clone()) );
+         setFederationName( static_cast<base::String*>(s->clone()) );
       }
       else {
          setFederationName(nullptr);
@@ -150,9 +149,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const Basic::String* s = org.getFederateName();
+      const base::String* s = org.getFederateName();
       if (s != nullptr) {
-         setFederateName( static_cast<Basic::String*>(s->clone()) );
+         setFederateName( static_cast<base::String*>(s->clone()) );
       }
       else {
          setFederateName(nullptr);
@@ -160,9 +159,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const Basic::String* s = org.getFederateName();
+      const base::String* s = org.getFederateName();
       if (s != nullptr) {
-         setFederateName( static_cast<Basic::String*>(s->clone()) );
+         setFederateName( static_cast<base::String*>(s->clone()) );
       }
       else {
          setFederateName(nullptr);
@@ -170,9 +169,9 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    }
 
    {
-      const Basic::String* s = org.fedFileName;
+      const base::String* s = org.fedFileName;
       if (s != nullptr) {
-         fedFileName = static_cast<Basic::String*>(s->clone());
+         fedFileName = static_cast<base::String*>(s->clone());
       }
       else {
          fedFileName = nullptr;
@@ -564,8 +563,8 @@ bool NetIO::createAndJoinFederation()
 {
     bool ok = false;
     
-    const Basic::String* federation = getFederationName();
-    const Basic::String* federate   = getFederateName();
+    const base::String* federation = getFederationName();
+    const base::String* federate   = getFederateName();
 
     if (federation != nullptr && federate != nullptr) {
 
@@ -632,7 +631,7 @@ bool NetIO::createAndJoinFederation()
 //------------------------------------------------------------------------------
 bool NetIO::resignAndDestroyFederation()
 {
-    const Basic::String* federation = getFederationName();
+    const base::String* federation = getFederationName();
 
     if (federation != nullptr) {
        try {
@@ -787,13 +786,13 @@ bool NetIO::doTick()
 //------------------------------------------------------------------------------
 // Set slot routines
 //------------------------------------------------------------------------------
-bool NetIO::setSlotFedFile(Basic::String* const msg)
+bool NetIO::setSlotFedFile(base::String* const msg)
 {
    fedFileName = msg;
    return true;
 }
 
-bool NetIO::setSlotRegulatingTime(Basic::Number* const msg)
+bool NetIO::setSlotRegulatingTime(base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -804,7 +803,7 @@ bool NetIO::setSlotRegulatingTime(Basic::Number* const msg)
    return ok;
 }
 
-bool NetIO::setSlotConstrainedTime(Basic::Number* const msg)
+bool NetIO::setSlotConstrainedTime(base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -818,7 +817,7 @@ bool NetIO::setSlotConstrainedTime(Basic::Number* const msg)
 //------------------------------------------------------------------------------
 // addNibToObjectTables() -- adds a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::addNibToObjectTables(Simulation::Nib* const nib, const IoType ioType)
+void NetIO::addNibToObjectTables(simulation::Nib* const nib, const IoType ioType)
 {
    Nib* hlaNib = dynamic_cast<Nib*>(nib);
 
@@ -879,7 +878,7 @@ void NetIO::addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n)
 //------------------------------------------------------------------------------
 // removeNibFromObjectTables() -- removes a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::removeNibFromObjectTables(Simulation::Nib* const nib, const IoType ioType)
+void NetIO::removeNibFromObjectTables(simulation::Nib* const nib, const IoType ioType)
 {
    Nib* hlaNib = dynamic_cast<Nib*>(nib);
 
@@ -954,18 +953,18 @@ Nib* NetIO::findNibByObjectName(const char* name, const IoType ioType)
 //------------------------------------------------------------------------------
 // Destroy the NIB s
 //------------------------------------------------------------------------------
-void NetIO::destroyInputNib(Simulation::Nib* const nib)
+void NetIO::destroyInputNib(simulation::Nib* const nib)
 {
    std::cout << "NetIO::destroyInputNib(" << nib << ")" << std::endl;
    if (nib != nullptr) {
       // Remove it from our object name and handle tables
-      removeNibFromObjectTables(nib, Simulation::NetIO::INPUT_NIB);
+      removeNibFromObjectTables(nib, simulation::NetIO::INPUT_NIB);
       // Let our base class handle the rest
       BaseClass::destroyInputNib(nib);
    }
 }
 
-void NetIO::destroyOutputNib(Simulation::Nib* const nib0)
+void NetIO::destroyOutputNib(simulation::Nib* const nib0)
 {
    std::cout << "NetIO::destroyOutputNib(" << nib0 << ")" << std::endl;
    Nib* nib = dynamic_cast<Nib*>(nib0);
@@ -1029,7 +1028,7 @@ int NetIO::compareObjHandles(const void* p1, const void* p2)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* NetIO::getSlotByIndex(const int si)
+base::Object* NetIO::getSlotByIndex(const int si)
 {
    return BaseClass::getSlotByIndex(si);
 }
@@ -1042,7 +1041,7 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
     int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
-        sout << "( " << getFormName() << std::endl;
+        sout << "( " << getFactoryName() << std::endl;
         j = 4;
     }
 
@@ -1063,7 +1062,6 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
 

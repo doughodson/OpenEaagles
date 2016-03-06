@@ -1,7 +1,7 @@
 #
-include ../makedefs
+include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeHla.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboehla.a
 
 CPPFLAGS += -I$(HLA_INC_DIR)
 CPPFLAGS += -DRTI_USES_STD_FSTREAM

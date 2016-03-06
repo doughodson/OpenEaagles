@@ -3,21 +3,20 @@
 // Description: Portions of class defined to support weapon fire
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/NetIO.h"
-#include "openeaagles/hla/rprFom/RprFom.h"
-#include "openeaagles/hla/rprFom/Nib.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //------------------------------------------------------------------------------
 // publishAndSubscribe()
@@ -179,7 +178,7 @@ bool NetIO::publishAndSubscribeWeaponFire()
 //------------------------------------------------------------------------------
 bool NetIO::receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParameters)
 {
-    std::cout << "RprFom::Nib::receiveWeaponFire() HERE!!" << std::endl;
+    std::cout << "rprfom::Nib::receiveWeaponFire() HERE!!" << std::endl;
     RTI::ULong length;
     char netBuffer[1000];
     for (RTI::ULong i = 0 ; i < theParameters.size(); i++ ) {
@@ -200,7 +199,6 @@ bool NetIO::receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParamet
     return true;
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

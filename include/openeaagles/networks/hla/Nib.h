@@ -1,23 +1,22 @@
 //------------------------------------------------------------------------------
 // Class: Nib
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Hla_Nib_H__
-#define __Eaagles_Network_Hla_Nib_H__
+#ifndef __oe_hla_Nib_H__
+#define __oe_hla_Nib_H__
 
 #include "openeaagles/simulation/Nib.h"
-#include "openeaagles/hla/NetIO.h"
+#include "openeaagles/networks/hla/NetIO.h"
 
 #include <RTI.hh>
 #include <fedtime.hh>
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
+namespace oe {
+namespace hla {
 
 class Ambassador;
 
 //==============================================================================
-// Class: Hla::Nib
+// Class: hla::Nib
 // Base class: Basic::Object -> Simulation::Nib -> Hla::Nib
 // Description: Unique NIB for HLA support.
 //
@@ -25,12 +24,12 @@ class Ambassador;
 //        -- (input)  an attribute has received a value (via reflectAttributeValues())
 //        -- (output) an attribute update is required (via provideAttributeValueUpdate())
 //==============================================================================
-class Nib : public Simulation::Nib
+class Nib : public simulation::Nib
 {
-   DECLARE_SUBCLASS(Nib, Simulation::Nib)
+   DECLARE_SUBCLASS(Nib, simulation::Nib)
 
 public:
-   Nib(const Simulation::NetIO::IoType ioType);
+   Nib(const simulation::NetIO::IoType ioType);
 
    // Returns true if the object has been registered
    bool isRegistered() const                                { return (handle != 0); }
@@ -77,16 +76,15 @@ protected:
     virtual void clearAllAttributeUpdateRequiredFlags();
 
 private:
-    Basic::String  oname;                       // Our object name
+    base::String oname;                         // Our object name
     RTI::ObjectHandle handle;                   // Our object handle
     unsigned int objectClassIndex;              // We are of this FOM object class
     bool updateEnabled[NetIO::MAX_ATTRIBUTES];  // If true, an attribute update is enabled
     bool updateRequired[NetIO::MAX_ATTRIBUTES]; // If true, an attribute update is required (see note above)
 };
 
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
 
 #endif
 

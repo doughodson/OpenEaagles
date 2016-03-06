@@ -1,27 +1,25 @@
 //------------------------------------------------------------------------------
-// Class: Hla::RprFom::NetIO
+// Class: hla::rprfom::NetIO
 //
-// Form Name: RprFomNetIO
+// Factory name: RprFomNetIO
 //
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Hla_RprFom_NetIO_H__
-#define __Eaagles_Network_Hla_RprFom_NetIO_H__
+#ifndef __oe_hla_rprfom_NetIO_H__
+#define __oe_hla_rprfom_NetIO_H__
 
-#include "openeaagles/hla/NetIO.h"
+#include "openeaagles/networks/hla/NetIO.h"
 
-namespace Eaagles {
+namespace oe {
 
-namespace Simulation { class Player; }
+namespace simulation { class Player; }
 
-namespace Network {
-
-namespace Hla {
+namespace hla {
 
 class Ambassador;
 
-namespace RprFom {
+namespace rprfom {
 
 class BaseEntity;
 class EmitterBeam;
@@ -32,9 +30,9 @@ class Ntm;
 // Class: Hla::RprFom::NetIO
 // Form Name: RprFomNetIO
 //==============================================================================
-class NetIO : public Hla::NetIO
+class NetIO : public hla::NetIO
 {
-    DECLARE_SUBCLASS(NetIO, Hla::NetIO)
+    DECLARE_SUBCLASS(NetIO, hla::NetIO)
 
 public:
     // Object Class Indexes
@@ -208,8 +206,8 @@ public:
     );
 
     // Simulation::NetIO interface
-    virtual Simulation::Nib* createNewOutputNib(Simulation::Player* const player);
-    virtual Simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const;
+    virtual simulation::Nib* createNewOutputNib(simulation::Player* const player);
+    virtual simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const;
 
 protected:
     virtual bool receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParameters);
@@ -224,12 +222,11 @@ protected:
 
     // Simulation::NetIO Interface (Callbacks)
     virtual void processInputList();    // Update players/systems from the Input-list
-    virtual Simulation::Nib* nibFactory(const Simulation::NetIO::IoType ioType);   // Create a new RprFom::Nib
+    virtual simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType);   // Create a new RprFom::Nib
 };
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}
 
 #endif

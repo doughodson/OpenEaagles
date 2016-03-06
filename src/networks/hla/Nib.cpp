@@ -2,12 +2,12 @@
 // Class: Nib
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/Nib.h"
-#include "openeaagles/hla/NetIO.h"
-#include "openeaagles/hla/Ambassador.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Number.h"
-#include "openeaagles/basic/Pair.h"
+#include "openeaagles/networks/hla/Nib.h"
+#include "openeaagles/networks/hla/NetIO.h"
+#include "openeaagles/networks/hla/Ambassador.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Pair.h"
 
 #include <cstdio>
 
@@ -17,9 +17,8 @@
 # pragma warning(disable: 4996)
 #endif
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
+namespace oe {
+namespace hla {
 
 //==============================================================================
 // Class: Nib
@@ -28,7 +27,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
-Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType), oname()
+Nib::Nib(const simulation::NetIO::IoType ioType) : simulation::Nib(ioType), oname()
 {
    STANDARD_CONSTRUCTOR()
    handle = 0;
@@ -38,7 +37,7 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Simulation::Nib(ioType), onam
    clearAllAttributeUpdateRequiredFlags();
 }
 
-Nib::Nib(const Nib& org) : Simulation::Nib(org.getIoType())
+Nib::Nib(const Nib& org) : simulation::Nib(org.getIoType())
 { 
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
@@ -235,7 +234,6 @@ void Nib::provideAttributeValueUpdate(const RTI::AttributeHandleSet& theAttribut
    }
 }
 
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
 

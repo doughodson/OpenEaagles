@@ -2,11 +2,11 @@
 // Class: NetIO
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/NetIO.h"
-#include "openeaagles/hla/rprFom/Nib.h"
-#include "openeaagles/hla/rprFom/Ntm.h"
-#include "openeaagles/hla/rprFom/RprFom.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/rprFom/Ntm.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/GroundVehicle.h"
@@ -17,25 +17,24 @@
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Signatures.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/Number.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //==============================================================================
 // Class: Hla::RprFom::NtmInputNode
 // Description: RPR FOM incoming NTM class
 //==============================================================================
 
-class NtmInputNode : public Simulation::NetIO::NtmInputNode {
-   DECLARE_SUBCLASS(NtmInputNode, Simulation::NetIO::NtmInputNode)
+class NtmInputNode : public simulation::NetIO::NtmInputNode {
+   DECLARE_SUBCLASS(NtmInputNode, simulation::NetIO::NtmInputNode)
 
 public:
    enum { ROOT_LVL, KIND_LVL, DOMAIN_LVL, COUNTRYCODE_LVL,
@@ -55,15 +54,15 @@ public:
       ) const;
 
    // NetIO::NtmOutputNode class functions
-   virtual const Simulation::Ntm* findNetworkTypeMapper(const Simulation::Nib* const nib) const;
-   virtual bool add2OurLists(Simulation::Ntm* const ntm);
+   virtual const simulation::Ntm* findNetworkTypeMapper(const simulation::Nib* const nib) const;
+   virtual bool add2OurLists(simulation::Ntm* const ntm);
    virtual void print(std::ostream& sout, const int icnt) const;
 
 private:
    unsigned int level;        // Level
    unsigned int code;         // Code for this level
    const Ntm* ourNtm;         // Our default NTM
-   Basic::List* subnodeList;  // List of NtmInputNode nodes below this level
+   base::List* subnodeList;   // List of NtmInputNode nodes below this level
 };
 
 
@@ -133,7 +132,7 @@ unsigned int NetIO::getNumberOfInteractionParameters() const
 //------------------------------------------------------------------------------
 // Create a new output NIB
 //------------------------------------------------------------------------------
-Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
+simulation::Nib* NetIO::createNewOutputNib(simulation::Player* const player)
 {
     // ---
     // Check if we are enabled to register this class of objects and 
@@ -141,31 +140,31 @@ Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
     // ---
     unsigned int idx = 0;
     BaseEntity* baseEntity = nullptr;
-    if (player->isClassType(typeid(Simulation::AirVehicle))) {
+    if (player->isClassType(typeid(simulation::AirVehicle))) {
         if (isObjectClassRegistrationEnabled( AIRCRAFT_CLASS )) {
             baseEntity = new Aircraft();
             idx = AIRCRAFT_CLASS;
         }
     }
-    else if (player->isClassType(typeid(Simulation::Missile))) {
+    else if (player->isClassType(typeid(simulation::Missile))) {
         if (isObjectClassRegistrationEnabled( MUNITION_CLASS )) {
             baseEntity = new Munition();
             idx = MUNITION_CLASS;
         }
     }
-    else if (player->isClassType(typeid(Simulation::LifeForm))) {
+    else if (player->isClassType(typeid(simulation::LifeForm))) {
         if (isObjectClassRegistrationEnabled( HUMAN_CLASS )) {
             baseEntity = new Human();
             idx = HUMAN_CLASS;
         }
     }
-    else if (player->isClassType(typeid(Simulation::GroundVehicle))) {
+    else if (player->isClassType(typeid(simulation::GroundVehicle))) {
         if (isObjectClassRegistrationEnabled( GROUND_VEHICLE_CLASS )) {
             baseEntity = new GroundVehicle();
             idx = GROUND_VEHICLE_CLASS;
         }
     }
-    else if (player->isClassType(typeid(Simulation::Ship))) {
+    else if (player->isClassType(typeid(simulation::Ship))) {
         if (isObjectClassRegistrationEnabled( SURFACE_VESSEL_CLASS )) {
             baseEntity = new SurfaceVessel();
             idx = SURFACE_VESSEL_CLASS;
@@ -177,7 +176,7 @@ Simulation::Nib* NetIO::createNewOutputNib(Simulation::Player* const player)
     // ---
     Nib* nib = nullptr;
     if (baseEntity != nullptr) {
-        nib = static_cast<Nib*>(nibFactory(Simulation::NetIO::OUTPUT_NIB));
+        nib = static_cast<Nib*>(nibFactory(simulation::NetIO::OUTPUT_NIB));
         if (nib != nullptr) {
            nib->setBaseEntity(baseEntity);
            nib->setNetIO(this);
@@ -236,7 +235,7 @@ void NetIO::processInputList()
 //------------------------------------------------------------------------------
 // nibFactory() -- Create a new NIB
 //------------------------------------------------------------------------------
-Simulation::Nib* NetIO::nibFactory(const Simulation::NetIO::IoType ioType)
+simulation::Nib* NetIO::nibFactory(const simulation::NetIO::IoType ioType)
 {
     return new Nib(ioType);
 }
@@ -319,9 +318,9 @@ const Ntm* NetIO::findNtmByTypeCodes(
          const unsigned char  extra
       ) const
 {
-   const Hla::RprFom::Ntm* result = nullptr;
+   const hla::rprfom::Ntm* result = nullptr;
 
-   const Hla::RprFom::NtmInputNode* root = dynamic_cast<const Hla::RprFom::NtmInputNode*>( getRootNtmInputNode() );
+   const hla::rprfom::NtmInputNode* root = dynamic_cast<const hla::rprfom::NtmInputNode*>( getRootNtmInputNode() );
    if (root != nullptr) {
       result = root->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
    }
@@ -340,9 +339,9 @@ EMPTY_SERIALIZER(NtmInputNode)
 //------------------------------------------------------------------------------
 // root incoming NTM node factory
 //------------------------------------------------------------------------------
-Simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
+simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
-   return new Hla::RprFom::NtmInputNode(Hla::RprFom::NtmInputNode::ROOT_LVL, 0); // root level
+   return new hla::rprfom::NtmInputNode(hla::rprfom::NtmInputNode::ROOT_LVL, 0); // root level
 }
 
 //------------------------------------------------------------------------------
@@ -357,7 +356,7 @@ NtmInputNode::NtmInputNode(const unsigned int l, const unsigned int c, const Ntm
       ourNtm = ntm;
       ourNtm->ref();
    }
-   subnodeList = new Basic::List();
+   subnodeList = new base::List();
 }
 
 void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
@@ -405,11 +404,11 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM based on the incoming entity type codes in the NIB
 //------------------------------------------------------------------------------
-const Simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const Simulation::Nib* const nib) const
+const simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const simulation::Nib* const nib) const
 {
-   const Simulation::Ntm* result = nullptr;
+   const simulation::Ntm* result = nullptr;
 
-   const Hla::RprFom::Nib* rprFomNib = dynamic_cast<const Hla::RprFom::Nib*>( nib );
+   const hla::rprfom::Nib* rprFomNib = dynamic_cast<const hla::rprfom::Nib*>( nib );
    if (rprFomNib != nullptr) {
       result = findNtmByTypeCodes(
             rprFomNib->getEntityKind(),
@@ -460,7 +459,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
          // First, if we're not the last 'extra' level then search
          // our subnodes to see if they can find a match
          if (level < EXTRA_LVL) {
-            const Basic::List::Item* item = subnodeList->getFirstItem();
+            const base::List::Item* item = subnodeList->getFirstItem();
             while (item != nullptr && result == nullptr) {
                const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
                result = subnode->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
@@ -485,12 +484,12 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
 //------------------------------------------------------------------------------
 // Add the NTM to our sublist of nodes.
 //------------------------------------------------------------------------------
-bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
+bool NtmInputNode::add2OurLists(simulation::Ntm* const ntm)
 {
    bool ok = false;
 
    // Make sure we have the correct kind of NTM ...
-   Hla::RprFom::Ntm* disNtm = dynamic_cast<Hla::RprFom::Ntm*>( ntm );
+   hla::rprfom::Ntm* disNtm = dynamic_cast<hla::rprfom::Ntm*>( ntm );
    if (disNtm != nullptr) {
 
       // Make sure that the NTM's code for this level matches our code
@@ -583,7 +582,7 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
 
             // make sure the terminal node doesn't already exist.
             bool alreadyExists = false;
-            const Basic::List::Item* item = subnodeList->getFirstItem();
+            const base::List::Item* item = subnodeList->getFirstItem();
             while (item != nullptr && !alreadyExists) {
                NtmInputNode* subnode = (NtmInputNode*) item->getValue();
                alreadyExists = (nextLevelCode == subnode->code);
@@ -613,7 +612,7 @@ bool NtmInputNode::add2OurLists(Simulation::Ntm* const ntm)
          // Case #3; if we're at a level less than the 'specific' level, so try
          // to add the NTM to one of our existing subnodes.
          if (!ok && !err && level < SPECIFIC_LVL) {
-            const Basic::List::Item* item = subnodeList->getFirstItem();
+            const base::List::Item* item = subnodeList->getFirstItem();
             while (item != nullptr && !ok) {
                NtmInputNode* subnode = (NtmInputNode*) item->getValue();
                if (nextLevelCode == subnode->code) {
@@ -656,7 +655,7 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
 
    // Print our subnodes
    {
-      const Basic::List::Item* item = subnodeList->getFirstItem();
+      const base::List::Item* item = subnodeList->getFirstItem();
       while (item != nullptr) {
          const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
          subnode->print(sout,icnt+4);
@@ -668,8 +667,6 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
    sout << ")" << std::endl;
 }
 
-
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

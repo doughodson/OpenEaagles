@@ -2,13 +2,13 @@
 // Class: RprFom::Nib
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
 
-#include "openeaagles/hla/rprFom/NetIO.h"
-#include "openeaagles/hla/rprFom/RprFom.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
-#include "openeaagles/dis/Ntm.h"
+#include "openeaagles/networks/dis/Ntm.h"
 
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Missile.h"
@@ -16,17 +16,16 @@
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Signatures.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
-#include "openeaagles/basic/Number.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/Number.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib,"Nib")
 EMPTY_SLOTTABLE(Nib)
@@ -35,7 +34,7 @@ EMPTY_SERIALIZER(Nib)
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Nib::Nib(const Simulation::NetIO::IoType ioType) : Hla::Nib(ioType) 
+Nib::Nib(const simulation::NetIO::IoType ioType) : hla::Nib(ioType) 
 {
    STANDARD_CONSTRUCTOR()
 
@@ -61,7 +60,7 @@ Nib::Nib(const Simulation::NetIO::IoType ioType) : Hla::Nib(ioType)
    appID = 0;
 }
 
-Nib::Nib(const Nib& org) : Hla::Nib(org.getIoType())
+Nib::Nib(const Nib& org) : hla::Nib(org.getIoType())
 { 
    STANDARD_CONSTRUCTOR()
     copyData(org,true);
@@ -158,7 +157,7 @@ bool Nib::setEntityType(
     )
 {
    // Some simple validity checks
-   bool ok = (k < Dis::NetIO::NUM_ENTITY_KINDS) || (d < Dis::NetIO::MAX_ENTITY_DOMAINS);
+   bool ok = (k < dis::NetIO::NUM_ENTITY_KINDS) || (d < dis::NetIO::MAX_ENTITY_DOMAINS);
 
    if (ok) {
       disKind = k;    
@@ -201,7 +200,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateTheIPlayer()
 {
-   Simulation::Player* p = getPlayer();
+   simulation::Player* p = getPlayer();
 
    // ---
    // If we haven't tried to created the IPlayer yet and we have at least position,
@@ -222,7 +221,6 @@ void Nib::updateTheIPlayer()
    }
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

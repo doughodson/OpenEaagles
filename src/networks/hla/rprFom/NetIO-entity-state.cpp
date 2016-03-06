@@ -3,20 +3,19 @@
 // Description: Portions of class defined to support entity state
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/NetIO.h"
-#include "openeaagles/hla/rprFom/RprFom.h"
-#include "openeaagles/hla/rprFom/Nib.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //------------------------------------------------------------------------------
 // publishAndSubscribe()
@@ -209,7 +208,6 @@ bool NetIO::publishAndSubscribePlatforms()
    return ok;
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

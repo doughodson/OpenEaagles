@@ -38,8 +38,8 @@
 //    7.6.2    EmissionSystem (part of Electromagnetic Emission PDU)
 //    7.6.2    EmitterBeamData (part of Electromagnetic Emission PDU)
 //--------------------------------------------------------------
-#ifndef __oe_network_dis_Struct_H__
-#define __oe_network_dis_Struct_H__
+#ifndef __oe_dis_Struct_H__
+#define __oe_dis_Struct_H__
 
 #include <iostream>
 #include <cstdint>

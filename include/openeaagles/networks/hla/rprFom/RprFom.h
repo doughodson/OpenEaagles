@@ -2,16 +2,15 @@
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Hla_RprFom_H__
-#define __Eaagles_Network_Hla_RprFom_H__
+#ifndef __oe_hla_rprfom_H__
+#define __oe_hla_rprfom_H__
 
 #include <RTI.hh>
-#include "openeaagles/basic/Object.h"
+#include "openeaagles/base/Object.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //------------------------------------------------------------------------------
 // RPR-ROM: Enumerated Data
@@ -711,8 +710,8 @@ struct VectoringNozzleSystemDataStruct {
 //
 // ---
 
-class BaseEntity : public Basic::Object {
-   DECLARE_SUBCLASS(BaseEntity, Basic::Object)
+class BaseEntity : public base::Object {
+   DECLARE_SUBCLASS(BaseEntity, base::Object)
 public:
    BaseEntity();
 
@@ -1108,9 +1107,8 @@ struct MunitionDetonation {
    WarheadTypeEnum16 warheadType;               // The type of warhead on the munition.
 };
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}
 
 #endif

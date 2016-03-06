@@ -1,16 +1,18 @@
 //------------------------------------------------------------------------------
 // hlaFormFunc() -- parser form function for HLA networks
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Hla_FormFunc_H__
-#define __Eaagles_Network_Hla_FormFunc_H__
+#ifndef __oe_hla_FormFunc_H__
+#define __oe_hla_FormFunc_H__
 
-namespace Eaagles {
-   namespace Network {
-      namespace Basic { class Object; }
-      namespace Hla {
-         extern Basic::Object* hlaFormFunc(const char* const formname);
-      }
-   }
+namespace oe {
+
+namespace base { class Object; }
+
+namespace hla {
+
+extern base::Object* hlaFormFunc(const char* const formname);
+
+}
 }
 
 #endif

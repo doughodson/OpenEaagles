@@ -3,28 +3,27 @@
 // Description: Portions of class defined to support munition detonation
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/NetIO.h"
-#include "openeaagles/hla/rprFom/RprFom.h"
-#include "openeaagles/hla/rprFom/Nib.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //------------------------------------------------------------------------------
 // munitionDetonationMsgFactory() -- (Output) Munition detonation message factory
 //------------------------------------------------------------------------------
 bool Nib::munitionDetonationMsgFactory(const LCreal)
 {
-   std::cout << "RprFom::Nib::sendMunitionDetonation() HERE!!" << std::endl;
+   std::cout << "rprfom::Nib::sendMunitionDetonation() HERE!!" << std::endl;
 
    // Early out -- we must be registered
    if (!isRegistered()) return false;
@@ -36,10 +35,10 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
       RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER );
 
    // Set our mode so that we don't do this again.
-   setMode(Simulation::Player::DETONATED);
+   setMode(simulation::Player::DETONATED);
 
    // If our player just detonated, then it must be a weapon!
-   Simulation::Weapon* mPlayer = dynamic_cast<Simulation::Weapon*>(getPlayer());
+   simulation::Weapon* mPlayer = dynamic_cast<simulation::Weapon*>(getPlayer());
    if (mPlayer == nullptr) return false;   // Early out -- it wasn't a weapon
 
    // ---
@@ -47,7 +46,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    // ---
    unsigned short fireEvent = getWeaponFireEvent();
    EventIdentifierStruct eventIdentifier;
-   Basic::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
+   base::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
    lcStrncpy(
       reinterpret_cast<char*>(&eventIdentifier.issuingObjectIdentifier.id[0]),
       sizeof(eventIdentifier.issuingObjectIdentifier.id),
@@ -68,9 +67,9 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 
       // World Coordinates
       WorldLocationStruct detonationLocation;
-      Basic::NetHandler::toNetOrder(&detonationLocation.x, geocPos[Basic::Nav::IX]);
-      Basic::NetHandler::toNetOrder(&detonationLocation.y, geocPos[Basic::Nav::IY]);
-      Basic::NetHandler::toNetOrder(&detonationLocation.z, geocPos[Basic::Nav::IZ]);
+      base::NetHandler::toNetOrder(&detonationLocation.x, geocPos[base::Nav::IX]);
+      base::NetHandler::toNetOrder(&detonationLocation.y, geocPos[base::Nav::IY]);
+      base::NetHandler::toNetOrder(&detonationLocation.z, geocPos[base::Nav::IZ]);
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::DETONATION_LOCATION_MD_PI), 
          reinterpret_cast<char*>(&detonationLocation), 
@@ -78,9 +77,9 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 
       // Velocity
       VelocityVectorStruct finalVelocityVector; 
-      Basic::NetHandler::toNetOrder(&finalVelocityVector.xVelocity, static_cast<float>(geocVel[Basic::Nav::IX]));
-      Basic::NetHandler::toNetOrder(&finalVelocityVector.yVelocity, static_cast<float>(geocVel[Basic::Nav::IY]));
-      Basic::NetHandler::toNetOrder(&finalVelocityVector.zVelocity, static_cast<float>(geocVel[Basic::Nav::IZ]));
+      base::NetHandler::toNetOrder(&finalVelocityVector.xVelocity, static_cast<float>(geocVel[base::Nav::IX]));
+      base::NetHandler::toNetOrder(&finalVelocityVector.yVelocity, static_cast<float>(geocVel[base::Nav::IY]));
+      base::NetHandler::toNetOrder(&finalVelocityVector.zVelocity, static_cast<float>(geocVel[base::Nav::IZ]));
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FINAL_VELOCITY_VECTOR_MD_PI), 
          reinterpret_cast<char*>(&finalVelocityVector), 
@@ -112,13 +111,13 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    // ---
    {
       Nib* fNib = nullptr;
-      Simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+      simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
       if (fPlayer != nullptr) {
          if (fPlayer->isNetworkedPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
          }
          else {
-            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, Simulation::NetIO::OUTPUT_NIB) );
+            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, simulation::NetIO::OUTPUT_NIB) );
          }
       }
 
@@ -145,11 +144,11 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    // ---
    {
       Nib* tNib = nullptr;
-      Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
+      simulation::Player* tPlayer = mPlayer->getTargetPlayer();
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr)
-            tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, Simulation::NetIO::OUTPUT_NIB) );
+            tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, simulation::NetIO::OUTPUT_NIB) );
       }
 
       if (tNib != nullptr) {
@@ -173,7 +172,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
       EntityTypeStruct munitionType;
       munitionType.entityKind = getEntityKind();
       munitionType.domain = getEntityDomain();
-      Basic::NetHandler::toNetOrder(&munitionType.countryCode, getEntityCountry() );
+      base::NetHandler::toNetOrder(&munitionType.countryCode, getEntityCountry() );
       munitionType.category  = getEntityCategory();
       munitionType.subcategory = getEntitySubcategory();
       munitionType.specific   = getEntitySpecific();
@@ -190,7 +189,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    {
       FuseTypeEnum16 fuseType = FuseTypeOther;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
+      base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FUSE_TYPE_MD_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -203,7 +202,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    {
       unsigned short quantityFired = 1;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, quantityFired );
+      base::NetHandler::toNetOrder(&netBuffer, quantityFired );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::QUANTITY_FIRED_MD_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -216,7 +215,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    {
       unsigned short rateOfFire = 0;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, rateOfFire );
+      base::NetHandler::toNetOrder(&netBuffer, rateOfFire );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::RATE_OF_FIRE_MD_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -229,7 +228,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    {
       WarheadTypeEnum16 warheadType = WarheadTypeOther;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
+      base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::WARHEAD_TYPE_MD_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -246,9 +245,9 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
       relativeDetonationLocation.bodyZDistance = 0;
 
       RelativePositionStruct netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer.bodyXDistance, relativeDetonationLocation.bodyXDistance );
-      Basic::NetHandler::toNetOrder(&netBuffer.bodyYDistance, relativeDetonationLocation.bodyYDistance );
-      Basic::NetHandler::toNetOrder(&netBuffer.bodyZDistance, relativeDetonationLocation.bodyZDistance );
+      base::NetHandler::toNetOrder(&netBuffer.bodyXDistance, relativeDetonationLocation.bodyXDistance );
+      base::NetHandler::toNetOrder(&netBuffer.bodyYDistance, relativeDetonationLocation.bodyYDistance );
+      base::NetHandler::toNetOrder(&netBuffer.bodyZDistance, relativeDetonationLocation.bodyZDistance );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::RELATIVE_DETONATION_LOCATION_MD_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -261,25 +260,25 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    {
       DetonationResultCodeEnum8 detonationResultCode;
       switch ( mPlayer->getDetonationResults() ) {
-         case Simulation::Weapon::DETONATE_OTHER :
+         case simulation::Weapon::DETONATE_OTHER :
             detonationResultCode = DetonationResultCodeOther;
             break;
-         case Simulation::Weapon::DETONATE_ENTITY_IMPACT :
+         case simulation::Weapon::DETONATE_ENTITY_IMPACT :
             detonationResultCode = EntityImpact;
             break;
-         case Simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION :
+         case simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION :
             detonationResultCode = EntityProximateDetonation;
             break;
-         case Simulation::Weapon::DETONATE_GROUND_IMPACT :
+         case simulation::Weapon::DETONATE_GROUND_IMPACT :
             detonationResultCode = GroundImpact;
             break;
-         case Simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION :
+         case simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION :
             detonationResultCode = GroundProximateDetonation;
             break;
-         case Simulation::Weapon::DETONATE_DETONATION :
+         case simulation::Weapon::DETONATE_DETONATION :
             detonationResultCode = Detonation;
             break;
-         case Simulation::Weapon::DETONATE_NONE :
+         case simulation::Weapon::DETONATE_NONE :
             detonationResultCode = None;
             break;
          default :
@@ -306,7 +305,6 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
    return ok;
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

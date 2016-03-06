@@ -2,18 +2,17 @@
 // Class: Ambassador
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/Ambassador.h"
-#include "openeaagles/hla/NetIO.h"
-#include "openeaagles/hla/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.h"
+#include "openeaagles/networks/hla/NetIO.h"
+#include "openeaagles/networks/hla/Nib.h"
 
 #include <iostream>
 
 // turn off the "unreferenced formal parameter" warning.
 #pragma warning(disable:4100)
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
+namespace oe {
+namespace hla {
 
 //------------------------------------------------------------------------------
 // Constructor
@@ -187,7 +186,7 @@ throw (
    Nib* nib = netIO->findNibByObjectHandle(theObject, NetIO::INPUT_NIB);
    if (nib != nullptr) {
       // set NIB delete request (Simulation::NetIO::cleanupInputList() should handle this)
-      nib->setMode(Simulation::Player::DELETE_REQUEST);
+      nib->setMode(simulation::Player::DELETE_REQUEST);
    }
 }
 
@@ -640,7 +639,6 @@ throw (
    std::cout << "Unhandled requestRetraction()" << std::endl;
 }
 
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
 

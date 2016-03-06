@@ -1,10 +1,9 @@
 
-#include "openeaagles/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
  
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //==============================================================================
 // BaseEntity Structure (S)
@@ -243,7 +242,6 @@ SurfaceVessel::SurfaceVessel() :  Platform() {}
 EMPTY_COPYDATA(SurfaceVessel)
 EMPTY_DELETEDATA(SurfaceVessel)
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

@@ -1,36 +1,35 @@
 //------------------------------------------------------------------------------
-// Class: Hla::RprFom::Nib
+// Class: hla::rprfom::Nib
 //
 // Real-time Platform Reference FOM (RPR-FOM) Data Structures
 // RPR-FOM Version: 2.0 Draft 17
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Hla_RprFom_Nib_H__
-#define __Eaagles_Network_Hla_RprFom_Nib_H__
+#ifndef __oe_hla_rprfom_Nib_H__
+#define __oe_hla_rprfom_Nib_H__
 
-#include "openeaagles/hla/Nib.h"
+#include "openeaagles/networks/hla/Nib.h"
 
-namespace Eaagles {
+namespace oe {
 
-namespace Simulation { class Player; }
+namespace simulation { class Player; }
 
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace hla {
+namespace rprfom {
 
 class BaseEntity;
 
 //==============================================================================
-// Class:       Nib
+// Class: Nib
 //==============================================================================
-class Nib : public Hla::Nib
+class Nib : public hla::Nib
 {
-   DECLARE_SUBCLASS(Nib, Hla::Nib)
+   DECLARE_SUBCLASS(Nib, hla::Nib)
 
 public:
    static const unsigned int MAX_EMITTER_BEAMS = 6;
 
 public:
-   Nib(const Simulation::NetIO::IoType ioType);
+   Nib(const simulation::NetIO::IoType ioType);
 
    unsigned short getWeaponFireEvent() const                  { return fireEvent; }
    virtual void setWeaponFireEvent(const unsigned short e);
@@ -107,9 +106,8 @@ private:
    bool haveOrientationFlg;
 };
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}
 
 #endif

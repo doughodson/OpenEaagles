@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
 // Class: NetIO
 //------------------------------------------------------------------------------
-#ifndef __Eaagles_Network_Hla_NetIO_H__
-#define __Eaagles_Network_Hla_NetIO_H__
+#ifndef __oe_hla_NetIO_H__
+#define __oe_hla_NetIO_H__
 
 #include "openeaagles/simulation/NetIO.h"
-#include "openeaagles/basic/String.h"
-#include "openeaagles/basic/safe_ptr.h"
+#include "openeaagles/base/String.h"
+#include "openeaagles/base/safe_ptr.h"
 
 #include <RTI.hh>
 #include <fedtime.hh>
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
+namespace oe {
+namespace hla {
 
 class Ambassador;
 class Nib;
@@ -31,9 +30,9 @@ class Nib;
 //      constrainedTime:    ! constrained time flag
 //
 //==============================================================================
-class NetIO : public Simulation::NetIO
+class NetIO : public simulation::NetIO
 {
-   DECLARE_SUBCLASS(NetIO, Simulation::NetIO)
+   DECLARE_SUBCLASS(NetIO, simulation::NetIO)
 
 public:
 
@@ -137,8 +136,8 @@ public:
     // NIB lookup/search support
     Nib* findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType);
     Nib* findNibByObjectName(const char* name, const IoType ioType);
-    virtual void addNibToObjectTables(Simulation::Nib* const nib, const IoType ioType);
-    virtual void removeNibFromObjectTables(Simulation::Nib* const nib, const IoType ioType);
+    virtual void addNibToObjectTables(simulation::Nib* const nib, const IoType ioType);
+    virtual void removeNibFromObjectTables(simulation::Nib* const nib, const IoType ioType);
 
     // ---
     // Other RTI functions
@@ -170,9 +169,9 @@ public:
     const RTI::Boolean getConstrained() const               { return cFlag; }
     void setConstrained(const RTI::Boolean flag)            { cFlag = flag; }
 
-    // Simulation::NetIO Interface
-    virtual void destroyInputNib(Simulation::Nib* const nib);
-    virtual void destroyOutputNib(Simulation::Nib* const nib);
+    // simulation::NetIO Interface
+    virtual void destroyInputNib(simulation::Nib* const nib);
+    virtual void destroyOutputNib(simulation::Nib* const nib);
 
 protected:
     virtual void clearAllObjectClassHandles();
@@ -200,9 +199,9 @@ protected:
     virtual bool doTick();
 
     // Slot functions
-    bool setSlotFedFile(Basic::String* const msg);
-    bool setSlotRegulatingTime(Basic::Number* const msg);
-    bool setSlotConstrainedTime(Basic::Number* const msg);
+    bool setSlotFedFile(base::String* const msg);
+    bool setSlotRegulatingTime(base::Number* const msg);
+    bool setSlotConstrainedTime(base::Number* const msg);
 
 private:
    RTI::ObjectClassHandle  objectClassHandles[MAX_CLASSES];                // Object class handles
@@ -219,7 +218,7 @@ private:
 
    RTI::RTIambassador* rtiAmb;                   // RTI's Ambassador
    Ambassador* fedAmb;                           // Our Fed Ambassador
-   Basic::safe_ptr<Basic::String> fedFileName;   // FED filename
+   base::safe_ptr<base::String> fedFileName;     // FED filename
 
    RTIfedTime      lookAhead;              // lookahead time
    RTIfedTime      timeIncrement;          // time to increment clock by
@@ -255,9 +254,8 @@ private:
    static int compareObjHandles(const void* key, const void* nib);
 };
 
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
 
 #endif
 

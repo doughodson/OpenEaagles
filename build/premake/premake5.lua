@@ -28,6 +28,18 @@ OEIncPath         = "../../include"
 OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 
 --
+-- directory location for HLA include and library paths
+--
+HLA_ROOT = "../../../portico-2.0.1"
+HLAIncPath = HLA_ROOT.."/include/hla13"
+if (_ACTION == "vs2010") then
+  HLALibPath = HLA_ROOT.."/lib/vc10"
+end
+if (_ACTION == "vs2012") then
+  HLALibPath = HLA_ROOT.."/lib/vc11"
+end
+
+--
 -- determine target directories for project/solution files and 
 -- compiled libraries
 --
@@ -151,6 +163,16 @@ solution "oe"
       }
       targetname "dis"
 
+   -- IEEE HLA interface library
+   project "hla"
+      files {
+         "../../include/openeaagles/networks/hla/**.h",
+         "../../src/networks/hla/**.cpp"
+      }
+      includedirs { HLAIncPath }
+      defines { "RTI_USES_STD_FSTREAM" }
+      targetname "Hla"
+	  
    -- graphical instruments library
    project "instruments"
       files {

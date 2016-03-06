@@ -2,19 +2,18 @@
 // hlaFormFunc() -- parser form function for HLA networks
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/hlaFF.h"
+#include "openeaagles/networks/hla/hlaFF.h"
 
 //#include "rpr_fomRprFomIO.h"
 
 #include <cstring>
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
+namespace oe {
+namespace hla {
 
-Basic::Object* hlaFormFunc(const char* const formname)
+base::Object* hlaFormFunc(const char* const formname)
 {
-    Basic::Object* newform = nullptr;
+    base::Object* newform = nullptr;
 
     //if ( std::strcmp(formname, getFormName()) == 0 ) {
     //    newform = new Mc02FomIO();
@@ -26,6 +25,5 @@ Basic::Object* hlaFormFunc(const char* const formname)
     return newform;
 }
 
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}

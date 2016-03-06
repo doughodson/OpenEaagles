@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Classes: EmissionPduHandler
 //------------------------------------------------------------------------------
-#ifndef __oe_network_dis_EmissionPduHandler_H__
-#define __oe_network_dis_EmissionPduHandler_H__
+#ifndef __oe_dis_EmissionPduHandler_H__
+#define __oe_dis_EmissionPduHandler_H__
 
 #include "openeaagles/networks/dis/NetIO.h"
 #include "openeaagles/networks/dis/structs.h"

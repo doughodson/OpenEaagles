@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Ntm
 //------------------------------------------------------------------------------
-#ifndef __oe_network_dis_Ntm_H__
-#define __oe_network_dis_Ntm_H__
+#ifndef __oe_dis_Ntm_H__
+#define __oe_dis_Ntm_H__
 
 #include "openeaagles/simulation/Ntm.h"
 #include "openeaagles/networks/dis/NetIO.h"

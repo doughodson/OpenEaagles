@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: dis::Nib
 //------------------------------------------------------------------------------
-#ifndef __oe_network_dis_Nib_H__
-#define __oe_network_dis_Nib_H__
+#ifndef __oe_dis_Nib_H__
+#define __oe_dis_Nib_H__
 
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/networks/dis/NetIO.h"

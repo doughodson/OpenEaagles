@@ -4,8 +4,8 @@
 //    dis::Nib    -- DIS Network Interface Block class
 //    dis::Ntm    -- DIS Type Mapper class
 //------------------------------------------------------------------------------
-#ifndef __oe_network_dis_NetIO_H__
-#define __oe_network_dis_NetIO_H__
+#ifndef __oe_dis_NetIO_H__
+#define __oe_dis_NetIO_H__
 
 #include "openeaagles/simulation/NetIO.h"
 

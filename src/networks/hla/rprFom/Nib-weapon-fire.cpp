@@ -3,28 +3,27 @@
 // Description: Portions of class defined to support weapon fire
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/NetIO.h"
-#include "openeaagles/hla/rprFom/RprFom.h"
-#include "openeaagles/hla/rprFom/Nib.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- (Output support) Weapon fire message factory
 //------------------------------------------------------------------------------
 bool Nib::weaponFireMsgFactory(const LCreal)
 {
-   std::cout << "RprFom::Nib::sendWeaponFire() HERE!!" << std::endl;
+   std::cout << "rprFom::Nib::sendWeaponFire() HERE!!" << std::endl;
 
    // Early out -- we must be registered
    if (!isRegistered()) return false;
@@ -37,10 +36,10 @@ bool Nib::weaponFireMsgFactory(const LCreal)
       RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER );
 
    // Set our mode so that we don't do this again.
-   setMode(Simulation::Player::ACTIVE);
+   setMode(simulation::Player::ACTIVE);
 
    // If our player just launched, then it must be a weapon!
-   Simulation::Weapon* mPlayer = dynamic_cast<Simulation::Weapon*>(getPlayer());
+   simulation::Weapon* mPlayer = dynamic_cast<simulation::Weapon*>(getPlayer());
    if (mPlayer == nullptr) return false;  // Early out -- it wasn't a weapon! 
 
    // ---
@@ -48,7 +47,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    // ---
    unsigned short fireEvent = mPlayer->getReleaseEventID();
    EventIdentifierStruct eventIdentifier;
-   Basic::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
+   base::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
    lcStrncpy(
       reinterpret_cast<char*>(&eventIdentifier.issuingObjectIdentifier.id[0]), 
       sizeof(eventIdentifier.issuingObjectIdentifier.id),
@@ -70,9 +69,9 @@ bool Nib::weaponFireMsgFactory(const LCreal)
 
       // World Coordinates
       WorldLocationStruct firingLocation;
-      Basic::NetHandler::toNetOrder(&firingLocation.x, geocPos[Basic::Nav::IX]);
-      Basic::NetHandler::toNetOrder(&firingLocation.y, geocPos[Basic::Nav::IY]);
-      Basic::NetHandler::toNetOrder(&firingLocation.z, geocPos[Basic::Nav::IZ]);
+      base::NetHandler::toNetOrder(&firingLocation.x, geocPos[base::Nav::IX]);
+      base::NetHandler::toNetOrder(&firingLocation.y, geocPos[base::Nav::IY]);
+      base::NetHandler::toNetOrder(&firingLocation.z, geocPos[base::Nav::IZ]);
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRING_LOCATION_WF_PI), 
          reinterpret_cast<char*>(&firingLocation),
@@ -80,9 +79,9 @@ bool Nib::weaponFireMsgFactory(const LCreal)
 
       // Velocity
       VelocityVectorStruct initialVelocityVector; 
-      Basic::NetHandler::toNetOrder(&initialVelocityVector.xVelocity, static_cast<float>(geocVel[Basic::Nav::IX]));
-      Basic::NetHandler::toNetOrder(&initialVelocityVector.yVelocity, static_cast<float>(geocVel[Basic::Nav::IY]));
-      Basic::NetHandler::toNetOrder(&initialVelocityVector.zVelocity, static_cast<float>(geocVel[Basic::Nav::IZ]));
+      base::NetHandler::toNetOrder(&initialVelocityVector.xVelocity, static_cast<float>(geocVel[base::Nav::IX]));
+      base::NetHandler::toNetOrder(&initialVelocityVector.yVelocity, static_cast<float>(geocVel[base::Nav::IY]));
+      base::NetHandler::toNetOrder(&initialVelocityVector.zVelocity, static_cast<float>(geocVel[base::Nav::IZ]));
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::INITIAL_VELOCITY_VECTOR_WF_PI), 
          reinterpret_cast<char*>(&initialVelocityVector),
@@ -114,13 +113,13 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    // ---
    {
       Nib* fNib = nullptr;
-      Simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+      simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
       if (fPlayer != nullptr) {
          if (fPlayer->isNetworkedPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
          }
          else {
-            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, Simulation::NetIO::OUTPUT_NIB) );
+            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, simulation::NetIO::OUTPUT_NIB) );
          }
       }
 
@@ -147,10 +146,10 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    // ---
    {
       Nib* tNib = nullptr;
-      Simulation::Player* tPlayer = mPlayer->getTargetPlayer();
+      simulation::Player* tPlayer = mPlayer->getTargetPlayer();
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
-         if (tNib == nullptr) tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, Simulation::NetIO::OUTPUT_NIB) );
+         if (tNib == nullptr) tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, simulation::NetIO::OUTPUT_NIB) );
       }
 
       if (tNib != nullptr) {
@@ -174,7 +173,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
       EntityTypeStruct munitionType;
       munitionType.entityKind = getEntityKind();
       munitionType.domain = getEntityDomain();
-      Basic::NetHandler::toNetOrder(&munitionType.countryCode, getEntityCountry() );
+      base::NetHandler::toNetOrder(&munitionType.countryCode, getEntityCountry() );
       munitionType.category  = getEntityCategory();
       munitionType.subcategory = getEntitySubcategory();
       munitionType.specific   = getEntitySpecific();
@@ -191,7 +190,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    // ---
    {
       float fireControlSolutionRange(0.0);
-      Basic::NetHandler::toNetOrder(&fireControlSolutionRange, 0 );
+      base::NetHandler::toNetOrder(&fireControlSolutionRange, 0 );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRE_CONTROL_SOLUTION_RANGE_WF_PI),
          reinterpret_cast<char*>(&fireControlSolutionRange),
@@ -204,7 +203,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    {
       uint32_t fireMissionIndex = 0;
       uint32_t netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, fireMissionIndex );
+      base::NetHandler::toNetOrder(&netBuffer, fireMissionIndex );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRE_MISSION_INDEX_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -217,7 +216,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    {
       FuseTypeEnum16 fuseType = FuseTypeOther;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
+      base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(fuseType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FUSE_TYPE_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -230,7 +229,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    {
       unsigned short quantityFired = 1;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, quantityFired );
+      base::NetHandler::toNetOrder(&netBuffer, quantityFired );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::QUANTITY_FIRED_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -243,7 +242,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    {
       unsigned short rateOfFire = 0;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, rateOfFire );
+      base::NetHandler::toNetOrder(&netBuffer, rateOfFire );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::RATE_OF_FIRE_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -256,7 +255,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    {
       WarheadTypeEnum16 warheadType = WarheadTypeOther;
       unsigned short netBuffer;
-      Basic::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
+      base::NetHandler::toNetOrder(&netBuffer, static_cast<unsigned short>(warheadType) );
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::WARHEAD_TYPE_WF_PI),
          reinterpret_cast<char*>(&netBuffer),
@@ -276,7 +275,6 @@ bool Nib::weaponFireMsgFactory(const LCreal)
    return ok;
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

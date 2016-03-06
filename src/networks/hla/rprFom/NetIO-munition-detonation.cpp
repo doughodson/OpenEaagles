@@ -3,24 +3,23 @@
 // Description: Portions of class defined to support munition detonation
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/NetIO.h"
-#include "openeaagles/hla/rprFom/RprFom.h"
-#include "openeaagles/hla/rprFom/Nib.h"
-#include "openeaagles/hla/Ambassador.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/basic/Nav.h"
-#include "openeaagles/basic/NetHandler.h"
+#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NetHandler.h"
 
 #include <iostream>
 #include <cstring>
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 //------------------------------------------------------------------------------
 // publishAndSubscribe()
@@ -171,7 +170,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     RTIObjectIdStruct firingObjectIdentifier;
     RTIObjectIdStruct munitionObjectIdentifier;
     RTIObjectIdStruct targetObjectIdentifier;
-    Simulation::Weapon::Detonation detonationResult = Simulation::Weapon::DETONATE_NONE;
+    simulation::Weapon::Detonation detonationResult = simulation::Weapon::DETONATE_NONE;
 
     // ---
     // Extract the required data from the interaction's parameters
@@ -191,28 +190,28 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
 
             switch ( DetonationResultCodeEnum8( netBuffer[0] ) ) {
                 case DetonationResultCodeOther :
-                    detonationResult = Simulation::Weapon::DETONATE_OTHER;
+                    detonationResult = simulation::Weapon::DETONATE_OTHER;
                     break;
                 case EntityImpact :
-                    detonationResult = Simulation::Weapon::DETONATE_ENTITY_IMPACT;
+                    detonationResult = simulation::Weapon::DETONATE_ENTITY_IMPACT;
                     break;
                 case EntityProximateDetonation :
-                    detonationResult = Simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION;
+                    detonationResult = simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION;
                     break;
                 case GroundImpact :
-                    detonationResult = Simulation::Weapon::DETONATE_GROUND_IMPACT;
+                    detonationResult = simulation::Weapon::DETONATE_GROUND_IMPACT;
                     break;
                 case GroundProximateDetonation :
-                    detonationResult = Simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION;
+                    detonationResult = simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION;
                     break;
                 case Detonation :
-                    detonationResult = Simulation::Weapon::DETONATE_DETONATION;
+                    detonationResult = simulation::Weapon::DETONATE_DETONATION;
                     break;
                 case None :
-                    detonationResult = Simulation::Weapon::DETONATE_NONE;
+                    detonationResult = simulation::Weapon::DETONATE_NONE;
                     break;
                 default :
-                    detonationResult = Simulation::Weapon::DETONATE_OTHER;
+                    detonationResult = simulation::Weapon::DETONATE_OTHER;
                     break;
             };
         }
@@ -252,9 +251,9 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     // ---
     // 1) Find the target (local) player
     // ---
-    Simulation::Player* tPlayer = nullptr;
+    simulation::Player* tPlayer = nullptr;
     if ( std::strlen(reinterpret_cast<const char*>(targetObjectIdentifier.id)) > 0 ) {
-        Simulation::Nib* tNib = findNibByObjectName( reinterpret_cast<char*>(targetObjectIdentifier.id), OUTPUT_NIB);
+        simulation::Nib* tNib = findNibByObjectName( reinterpret_cast<char*>(targetObjectIdentifier.id), OUTPUT_NIB);
         if (tNib != nullptr) tPlayer = tNib->getPlayer();
     }
     
@@ -267,8 +266,8 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // ---
         // 2) Find the firing player and munitions (networked) IPlayers
         // ---
-        Simulation::Nib* fNib = nullptr;
-        Simulation::Nib* mNib = nullptr;
+        simulation::Nib* fNib = nullptr;
+        simulation::Nib* mNib = nullptr;
         if ( std::strlen(reinterpret_cast<const char*>(firingObjectIdentifier.id)) > 0 ) {
             fNib = findNibByObjectName( reinterpret_cast<char*>(firingObjectIdentifier.id), INPUT_NIB);
         }
@@ -279,7 +278,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // ---
         // 3) Tell the target player that it was killed by the firing player
         // ---
-        if (detonationResult == Simulation::Weapon::DETONATE_ENTITY_IMPACT) {
+        if (detonationResult == simulation::Weapon::DETONATE_ENTITY_IMPACT) {
             if (fNib != nullptr) {
                 tPlayer->event(KILL_EVENT,fNib->getPlayer());
             }
@@ -292,19 +291,18 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // 4) Update the mode of the munition IPlayer
         // ---
         if (mNib != nullptr) {
-            Simulation::Weapon* mPlayer = dynamic_cast<Simulation::Weapon*>(mNib->getPlayer());
+            simulation::Weapon* mPlayer = dynamic_cast<simulation::Weapon*>(mNib->getPlayer());
             if (mPlayer != nullptr) {
-                mPlayer->setMode(Simulation::Player::DETONATED);
+                mPlayer->setMode(simulation::Player::DETONATED);
                 mPlayer->setDetonationResults(detonationResult);
             }
-            mNib->setMode(Simulation::Player::DETONATED);
+            mNib->setMode(simulation::Player::DETONATED);
         }
     }
 
     return true;
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

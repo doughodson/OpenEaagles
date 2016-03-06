@@ -2,16 +2,15 @@
 // Class: Hla::Ntm
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/Ntm.h"
-#include "openeaagles/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/rprFom/Ntm.h"
+#include "openeaagles/networks/hla/rprFom/Nib.h"
 
-#include "openeaagles/basic/Pair.h"
-#include "openeaagles/basic/PairStream.h"
+#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.h"
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
 IMPLEMENT_SUBCLASS(Ntm,"HlaNtm")
 EMPTY_DELETEDATA(Ntm)
@@ -25,7 +24,7 @@ END_SLOTTABLE(Ntm)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
-    ON_SLOT(1, setSlotEntityType, Basic::List)
+    ON_SLOT(1, setSlotEntityType, base::List)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
@@ -63,7 +62,7 @@ void Ntm::copyData(const Ntm& org, const bool)
 //------------------------------------------------------------------------------
 // This function will copy our type codes to the target NIB, 'targetNib', object.
 //------------------------------------------------------------------------------
-bool Ntm::copyEntityType(Simulation::Nib* const targetNib) const
+bool Ntm::copyEntityType(simulation::Nib* const targetNib) const
 {
    bool ok = false;
    Nib* tgtNib = dynamic_cast<Nib*>(targetNib);
@@ -105,7 +104,7 @@ bool Ntm::setEntityType(
 //------------------------------------------------------------------------------
 // Set entity type enumerations
 //------------------------------------------------------------------------------
-bool Ntm::setSlotEntityType(const Basic::List* const msg)
+bool Ntm::setSlotEntityType(const base::List* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -198,7 +197,7 @@ bool Ntm::setSlotEntityType(const Basic::List* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex()
 //------------------------------------------------------------------------------
-Basic::Object* Ntm::getSlotByIndex(const int si)
+base::Object* Ntm::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -211,7 +210,7 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    int j = 0;
    if ( !slotsOnly ) {
       indent(sout,i);
-      sout << "( " << getFormName() << std::endl;
+      sout << "( " << getFactoryName() << std::endl;
       j = 4;
    }
 
@@ -236,7 +235,6 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}

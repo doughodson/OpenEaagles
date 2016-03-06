@@ -2,29 +2,27 @@
 // rprFormFunc() -- parser form function for HLA RPR FOM
 //------------------------------------------------------------------------------
 
-#include "openeaagles/hla/rprFom/rprFomFF.h"
+#include "openeaagles/networks/hla/rprFom/rprFomFF.h"
 
-#include "openeaagles/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprFom/NetIO.h"
 
 #include <cstring>
 
-namespace Eaagles {
-namespace Network {
-namespace Hla {
-namespace RprFom {
+namespace oe {
+namespace hla {
+namespace rprfom {
 
-Basic::Object* formFunc(const char* const formname)
+base::Object* formFunc(const char* const formname)
 {
-    Basic::Object* newform = nullptr;
+    base::Object* newform = nullptr;
 
-    if ( std::strcmp(formname, Hla::RprFom::NetIO::getFormName()) == 0 ) {
-        newform = new Hla::RprFom::NetIO();
+    if ( std::strcmp(formname, hla::rprfom::NetIO::getFactoryName()) == 0 ) {
+        newform = new hla::rprfom::NetIO();
     }
 
     return newform;
 }
 
-} // End RprFom namespace
-} // End Hla namespace
-} // End Network namespace
-} // End Eaagles namespace
+}
+}
+}
