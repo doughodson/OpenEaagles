@@ -34,7 +34,7 @@
 #include <cstdint>
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 //-----------------------------------------------
@@ -1164,8 +1164,7 @@ struct ActionResponsePDU_R {
    };
 };
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
+}
+}
 
 #endif

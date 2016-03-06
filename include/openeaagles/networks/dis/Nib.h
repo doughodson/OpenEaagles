@@ -8,8 +8,9 @@
 #include "openeaagles/networks/dis/NetIO.h"
 
 namespace oe {
-namespace network {
+
 namespace dis {
+
 class Ntm;
 
 //==============================================================================
@@ -114,8 +115,7 @@ private:
    double timeOffset;
 };
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
+}
+}
 
 #endif

@@ -32,7 +32,7 @@
 #endif
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 static const unsigned int CAMOUFLAGE_BIT  = 0x00000001;   // Paint scheme (camouflage) bit (0 - Uniform color; 1 - Camouflaged)
@@ -872,6 +872,5 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    return cnt;
 }
 
-} // End dis namespace
-} // End Network namespace
-} // End oe namespace
+}
+}

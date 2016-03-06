@@ -12,8 +12,8 @@ general
 -- Renamed 'basicGL' library to 'graphics'
 -- Renamed 'ioDevice' library to 'iodevice'
 -- Renamed 'linearSys' library to 'linearsystem'
--- Created 'models' libraries, it now includes was used to be in 'dynamics' and 'sensors'
--- Moved 'dis' folder into new 'networks' folder.  This so that interoperability interfaces
+-- Created 'models' libraries, it now includes what used to be in 'dynamics' and 'sensors'
+-- Moved 'dis' directory into 'networks'.  This so that interoperability interfaces
    are logically grouped together.
 
 -- Removed legacy support for 'formnames' in base Object

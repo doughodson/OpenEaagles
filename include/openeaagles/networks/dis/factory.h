@@ -6,13 +6,11 @@ namespace oe {
 
 namespace base { class Object; }
 
-namespace network {
 namespace dis {
 
 // factory function
 base::Object* factory(const char* name);
 
-}
 }
 }
 

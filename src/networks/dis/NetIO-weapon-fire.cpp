@@ -16,7 +16,7 @@
 #include "openeaagles/base/PairStream.h"
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -76,6 +76,5 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // --- Nothing really needs to be done.
 }
 
-} // End dis namespace
-} // End Network namespace
-} // End oe namespace
+}
+}

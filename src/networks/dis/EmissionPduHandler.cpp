@@ -22,7 +22,7 @@
 #include <cstring>
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 //==============================================================================
@@ -840,7 +840,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // player is notOK, or not transmitting
          // this should only result in one YES result, thereafter no change, unless
          // player becomes OK, or transmitter is re-enabled
-         network::dis::EmitterBeamData bd;
+         dis::EmitterBeamData bd;
          bd.beamIDNumber = (ib+1);
 
          if (disIO->getVersion() >= NetIO::VERSION_7)
@@ -853,7 +853,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          // ---
          // Compute beam data length (in 32bit words, including the track/jam targets)
          // ---
-         unsigned char lenB = sizeof(network::dis::EmitterBeamData);
+         unsigned char lenB = sizeof(dis::EmitterBeamData);
          bd.beamDataLength = (lenB/4);
          // ---
          // compare & transfer the emitter beam data
@@ -971,6 +971,5 @@ unsigned short EmissionPduHandler::emissionSystemData2PDU(EmissionSystem* const 
     return totalLength;    // Returning the length of the Emission system data in bytes
 }
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
+}
+}

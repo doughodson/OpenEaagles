@@ -9,7 +9,7 @@
 #include "openeaagles/base/PairStream.h"
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 IMPLEMENT_SUBCLASS(Ntm,"DisNtm")
@@ -241,6 +241,5 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End dis namespace
-} // End Network namespace
-} // End oe namespace
+}
+}

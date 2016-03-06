@@ -17,7 +17,7 @@
 #include "openeaagles/base/PairStream.h"
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -170,6 +170,5 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
     return ok;
 }
 
-} // End dis namespace
-} // End Network namespace
-} // End oe namespace
+}
+}

@@ -8,7 +8,7 @@
 #include "openeaagles/networks/dis/NetIO.h"
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -69,8 +69,7 @@ private:
     unsigned char  disExtra;     // DIS extra code
 };
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
+}
+}
 
 #endif

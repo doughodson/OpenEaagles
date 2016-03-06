@@ -8,10 +8,9 @@
 #include "openeaagles/networks/dis/structs.h"
 
 namespace oe {
-   namespace simulation {
-      class Antenna;
-   }
-namespace network {
+
+namespace simulation { class Antenna; }
+
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -232,8 +231,7 @@ inline const TrackJamTargets* EmissionPduHandler::getSavedTrackJamTargetData(con
    return (ibeam < MAX_EM_BEAMS && ifield < MAX_TARGETS_IN_TJ_FIELD ? &tjTargetsN1[ibeam][ifield] : 0);
 }
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
+}
+}
 
 #endif

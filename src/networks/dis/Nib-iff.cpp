@@ -13,7 +13,7 @@
 #include "openeaagles/base/PairStream.h"
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -257,6 +257,5 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const simulation::Iff* c
    return (result == YES);
 }
 
-} // End dis namespace
-} // End Network namespace
-} // End oe namespace
+}
+}

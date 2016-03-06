@@ -10,7 +10,7 @@
 #include <cstring>
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 base::Object* factory(const char* name)
@@ -30,6 +30,5 @@ base::Object* factory(const char* name)
     return obj;
 }
 
-}
 }
 }

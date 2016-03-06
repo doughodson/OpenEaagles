@@ -7,7 +7,6 @@
 #define __oe_network_dis_Enum_H__
 
 namespace oe {
-namespace network {
 namespace dis {
 
 //--------------------------------------------------------------
@@ -89,8 +88,7 @@ namespace dis {
 #define DETONATION_RESULT_WATER_IMPACT                24
 #define DETONATION_RESULT_AIR_BURST                   25
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
+}
+}
 
 #endif

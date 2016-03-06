@@ -15,7 +15,7 @@
 #include "openeaagles/base/PairStream.h"
 
 namespace oe {
-namespace network {
+
 namespace dis {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib,"DisNib")
@@ -482,6 +482,5 @@ bool Nib::emitterBeamsManager(const LCreal curExecTime)
    return true;
 }
 
-} // End dis namespace
-} // End Network namespace
-} // End oe namespace
+}
+}

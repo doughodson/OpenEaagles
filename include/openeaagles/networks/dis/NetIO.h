@@ -10,10 +10,9 @@
 #include "openeaagles/simulation/NetIO.h"
 
 namespace oe {
-   namespace base { class NetHandler; }
-   namespace simulation { class Iff; class RfSensor; }
 
-namespace network {
+namespace base { class NetHandler; }
+namespace simulation { class Iff; class RfSensor; }
 
 namespace dis {
    class Nib;
@@ -406,8 +405,7 @@ private:
 };
 
 
-} // End dis namespace
-} // End network namespace
-} // End oe namespace
+}
+}
 
 #endif
