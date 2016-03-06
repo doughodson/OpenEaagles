@@ -4,8 +4,8 @@
 #ifndef __oe_network_dis_EmissionPduHandler_H__
 #define __oe_network_dis_EmissionPduHandler_H__
 
-#include "openeaagles/dis/NetIO.h"
-#include "openeaagles/dis/structs.h"
+#include "openeaagles/networks/dis/NetIO.h"
+#include "openeaagles/networks/dis/structs.h"
 
 namespace oe {
    namespace simulation {

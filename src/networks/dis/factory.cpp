@@ -1,11 +1,11 @@
 
-#include "openeaagles/dis/factory.h"
+#include "openeaagles/networks/dis/factory.h"
 
 #include "openeaagles/base/Object.h"
 
-#include "openeaagles/dis/NetIO.h"
-#include "openeaagles/dis/Ntm.h"
-#include "openeaagles/dis/EmissionPduHandler.h"
+#include "openeaagles/networks/dis/NetIO.h"
+#include "openeaagles/networks/dis/Ntm.h"
+#include "openeaagles/networks/dis/EmissionPduHandler.h"
 
 #include <cstring>
 

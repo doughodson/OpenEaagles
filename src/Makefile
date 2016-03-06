@@ -6,13 +6,13 @@ include makedefs
 # base         : -
 # graphics     : freeglut, FTGL, freetype
 # dafif        : -
-# dis          : -
 # gui          :
-# hla          : HLA RTI
 # instruments  : -
 # iodevice     : -
 # linearsystem : -
 # models       : JSBSim
+# networks/dis : -
+# networks/hla : HLA RTI
 # maps         : -
 # otw          : CIGICL 3.x
 # recorder     : Google protocol buffers
@@ -20,30 +20,35 @@ include makedefs
 # terrain      : -
 #
 PROJECTS = base
-PROJECTS += graphics instruments
 PROJECTS += dafif
 PROJECTS += iodevice
 PROJECTS += linearsystem 
 PROJECTS += simulation terrain
-PROJECTS += dis
 PROJECTS += models
 PROJECTS += maps
 PROJECTS += recorder
+
+#
+# OpenGL-based graphics libraries
+#
+PROJECTS += graphics
+PROJECTS += instruments
 
 #
 # GUI interface libraries
 #
 PROJECTS += "gui/glut"
 
+#
+# Interoperability interfaces
+#
+PROJECTS += networks/dis
+#PROJECTS += networks/hla
+
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface
 # - download and install cigicl
 PROJECTS += otw
-
-#
-# HLA interface library
-#
-#PROJECTS += "hla"
 
 #
 # Rules

@@ -3,9 +3,9 @@
 // Description: Portions of class defined to support weapon fire PDUs
 //------------------------------------------------------------------------------
 
-#include "openeaagles/dis/NetIO.h"
-#include "openeaagles/dis/Nib.h"
-#include "openeaagles/dis/pdu.h"
+#include "openeaagles/networks/dis/NetIO.h"
+#include "openeaagles/networks/dis/Nib.h"
+#include "openeaagles/networks/dis/pdu.h"
 
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/Simulation.h"

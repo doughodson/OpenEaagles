@@ -2,11 +2,11 @@
 // Classes: dis::NetIO and dis::NtmInputNode
 //==============================================================================
 
-#include "openeaagles/dis/NetIO.h"
-#include "openeaagles/dis/Nib.h"
-#include "openeaagles/dis/Ntm.h"
-#include "openeaagles/dis/EmissionPduHandler.h"
-#include "openeaagles/dis/pdu.h"
+#include "openeaagles/networks/dis/NetIO.h"
+#include "openeaagles/networks/dis/Nib.h"
+#include "openeaagles/networks/dis/Ntm.h"
+#include "openeaagles/networks/dis/EmissionPduHandler.h"
+#include "openeaagles/networks/dis/pdu.h"
 
 #include "openeaagles/simulation/Radar.h"
 #include "openeaagles/simulation/Simulation.h"

@@ -5,7 +5,7 @@
 #define __oe_network_dis_Nib_H__
 
 #include "openeaagles/simulation/Nib.h"
-#include "openeaagles/dis/NetIO.h"
+#include "openeaagles/networks/dis/NetIO.h"
 
 namespace oe {
 namespace network {

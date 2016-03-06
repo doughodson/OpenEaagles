@@ -146,8 +146,8 @@ solution "oe"
    -- IEEE DIS interface library
    project "dis"
       files {
-         "../../include/openeaagles/dis/**.h",
-         "../../src/dis/**.cpp"
+         "../../include/openeaagles/networks/dis/**.h",
+         "../../src/networks/dis/**.cpp"
       }
       targetname "dis"
 

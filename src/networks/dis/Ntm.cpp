@@ -2,8 +2,8 @@
 // Class: dis::Ntm
 //------------------------------------------------------------------------------
 
-#include "openeaagles/dis/Ntm.h"
-#include "openeaagles/dis/Nib.h"
+#include "openeaagles/networks/dis/Ntm.h"
+#include "openeaagles/networks/dis/Nib.h"
 
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"

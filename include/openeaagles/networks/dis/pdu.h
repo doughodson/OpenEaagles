@@ -26,8 +26,8 @@
 #ifndef __oe_network_dis_Pdu_H__
 #define __oe_network_dis_Pdu_H__
 
-#include "openeaagles/dis/structs.h"
-#include "openeaagles/dis/enums.h"
+#include "openeaagles/networks/dis/structs.h"
+#include "openeaagles/networks/dis/enums.h"
 
 #include <cstring>
 #include <string>

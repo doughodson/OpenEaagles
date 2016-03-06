@@ -2,9 +2,9 @@
 // Electromagnetic Emission PDU (Portions of NetIO and Nib)
 //------------------------------------------------------------------------------
 
-#include "openeaagles/dis/EmissionPduHandler.h"
-#include "openeaagles/dis/Nib.h"
-#include "openeaagles/dis/pdu.h"
+#include "openeaagles/networks/dis/EmissionPduHandler.h"
+#include "openeaagles/networks/dis/Nib.h"
+#include "openeaagles/networks/dis/pdu.h"
 
 #include "openeaagles/simulation/Antenna.h"
 #include "openeaagles/simulation/Track.h"

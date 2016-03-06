@@ -1,5 +1,5 @@
 #
-include ../makedefs
+include ../../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboedis.a
 
@@ -16,7 +16,6 @@ OBJS =  \
 	$(LIB)(Nib-munition-detonation.o) \
 	$(LIB)(Nib-weapon-fire.o) \
 	$(LIB)(Ntm.o)
-
 
 all: ${OBJS}
 
