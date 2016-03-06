@@ -4,9 +4,6 @@
 #ifndef __oe_base_Parser_H__
 #define __oe_base_Parser_H__
 
-// parser and form functions
-#include "openeaagles/base/support.h"
-
 namespace oe {
    namespace base {
 
