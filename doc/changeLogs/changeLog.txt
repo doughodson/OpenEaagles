@@ -15,6 +15,7 @@ general
 -- Created 'models' libraries, it now includes what used to be in 'dynamics' and 'sensors'
 -- Moved 'dis' directory into 'networks'.  This so that interoperability interfaces
    are logically grouped together.
+-- Added hla library to 'networks' directory.
 
 -- Removed legacy support for 'formnames' in base Object
 -- All form functions and Factory classes have been removed -- should use 'factory' functions
@@ -44,6 +45,11 @@ glut
 --------------------------------------------------------------------------------
 graphics
 
+
+--------------------------------------------------------------------------------
+hla
+
+   -- added code to support HLA interface
 
 --------------------------------------------------------------------------------
 instruments
