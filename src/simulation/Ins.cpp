@@ -55,12 +55,12 @@ void Ins::copyData(const Ins& org, const bool)
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
-void Ins::setDopplerBias(const LCreal b)
+void Ins::setDopplerBias(const double b)
 {
    dBias = b;
 }
 
-void Ins::setDopplerScaleFactor(const LCreal sf)
+void Ins::setDopplerScaleFactor(const double sf)
 {
    dSFact = sf;
 }
@@ -84,7 +84,7 @@ void Ins::setAccelBias(const osg::Vec3* const p)
     }
 }
 
-void Ins::setWanderAngle(const LCreal v)
+void Ins::setWanderAngle(const double v)
 {
     wander = v;
 }
@@ -94,7 +94,7 @@ void Ins::setAlignmentTTG(const double v)
     alignTTG = v;
 }
 
-void Ins::setQuality(const LCreal v)
+void Ins::setQuality(const double v)
 {
     quality = v;
 }

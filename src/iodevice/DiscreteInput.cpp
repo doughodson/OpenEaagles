@@ -158,7 +158,7 @@ bool DiscreteInput::setNumber(const int n)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void DiscreteInput::processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData)
+void DiscreteInput::processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData)
 {
    if (inData != nullptr) {
       unsigned int chan = channel;
@@ -187,7 +187,7 @@ void DiscreteInput::processInputs(const LCreal dt, const base::IoDevice* const d
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void DiscreteInput::processOutputs(const LCreal, const base::IoData* const, base::IoDevice* const)
+void DiscreteInput::processOutputs(const double, const base::IoData* const, base::IoDevice* const)
 {
 }
 

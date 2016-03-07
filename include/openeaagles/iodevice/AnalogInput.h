@@ -58,25 +58,25 @@ public:
 
    unsigned int getLocation() const;
    unsigned int getChannel() const;
-   LCreal getValue() const;
-   LCreal getDeadband() const;
-   LCreal getOffset() const;
-   LCreal getGain() const;
+   double getValue() const;
+   double getDeadband() const;
+   double getOffset() const;
+   double getGain() const;
    const base::Table1* getTable() const;
 
    bool setLocation(const unsigned int);
    bool setChannel(const unsigned int);
-   bool setValue(const LCreal);
-   bool setDeadband(const LCreal);
-   bool setOffset(const LCreal);
-   bool setGain(const LCreal);
+   bool setValue(const double);
+   bool setDeadband(const double);
+   bool setOffset(const double);
+   bool setGain(const double);
    bool setTable(const base::Table1* const);
 
-   void processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
-   virtual LCreal convert(const LCreal vin, const LCreal dt);
+   virtual double convert(const double vin, const double dt);
 
    // Slot functions
    virtual bool setSlotLocation(const base::Number* const msg);
@@ -92,10 +92,10 @@ private:
    bool devEnb;            // Device enabled
    unsigned int location;  // IoData analog input channel number
    unsigned int channel;   // Analog channel number
-   LCreal value;            // Initial value
-   LCreal deadband;         // Deadband value
-   LCreal offset;           // Offset
-   LCreal gain;             // Gain
+   double value;            // Initial value
+   double deadband;         // Deadband value
+   double offset;           // Offset
+   double gain;             // Gain
    const base::Table1* table; // Shaping table
 };
 

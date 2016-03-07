@@ -30,7 +30,7 @@ class Emission;
 // Class: RfSignature
 // Descriptions: Abstract class for signatures
 // Public member functions:
-//      LCreal getRCS(Emission* em)
+//      double getRCS(Emission* em)
 //          Computes the Radar Cross Section for the emission.
 //------------------------------------------------------------------------------
 class RfSignature : public base::Component
@@ -38,7 +38,7 @@ class RfSignature : public base::Component
     DECLARE_SUBCLASS(RfSignature, base::Component)
 public:
     RfSignature();
-    virtual LCreal getRCS(const Emission* const em)=0;
+    virtual double getRCS(const Emission* const em)=0;
 };
 
 //------------------------------------------------------------------------------
@@ -54,14 +54,14 @@ class SigConstant : public RfSignature
     DECLARE_SUBCLASS(SigConstant,RfSignature)
 public:
     SigConstant();
-    SigConstant(const LCreal c);
+    SigConstant(const double c);
     SigConstant(const base::Number* const c);
 
     virtual bool setRCS(const base::Number* const num);
 
-    LCreal getRCS(const Emission* const em) override;
+    double getRCS(const Emission* const em) override;
 private:
-    LCreal rcs;         // Constant RCS value
+    double rcs;         // Constant RCS value
 };
 
 //------------------------------------------------------------------------------
@@ -77,15 +77,15 @@ class SigSphere : public RfSignature
     DECLARE_SUBCLASS(SigSphere,RfSignature)
 public:
     SigSphere();
-    SigSphere(const LCreal r);
+    SigSphere(const double r);
     virtual bool setRadiusFromSlot(base::Number* const num);
-    LCreal computeRcs(const LCreal r)                          { return static_cast<float>(PI * r * r); }
-    void setRadius(const LCreal r)                             { radius = r; rcs = computeRcs(radius); }
+    double computeRcs(const double r)                          { return static_cast<float>(PI * r * r); }
+    void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 
-    LCreal getRCS(const Emission* const em) override;
+    double getRCS(const Emission* const em) override;
 private:
-    LCreal radius;      // Sphere radius
-    LCreal rcs;         // RCS of sphere
+    double radius;      // Sphere radius
+    double rcs;         // RCS of sphere
 };
 
 //------------------------------------------------------------------------------
@@ -103,18 +103,18 @@ class SigPlate : public RfSignature
     DECLARE_SUBCLASS(SigPlate,RfSignature)
 public:
     SigPlate();
-    SigPlate(const LCreal a, const LCreal b);
+    SigPlate(const double a, const double b);
 
-    LCreal getA() const                             { return a; }
-    LCreal getB() const                             { return b; }
+    double getA() const                             { return a; }
+    double getB() const                             { return b; }
 
     virtual bool setA(base::Number* const num);
     virtual bool setB(base::Number* const num);
 
-    LCreal getRCS(const Emission* const em) override;
+    double getRCS(const Emission* const em) override;
 private:
-    LCreal a;       // Length dimension
-    LCreal b;       // Width dimension
+    double a;       // Length dimension
+    double b;       // Width dimension
 };
 
 //------------------------------------------------------------------------------
@@ -128,11 +128,11 @@ class SigDihedralCR : public SigPlate
     DECLARE_SUBCLASS(SigDihedralCR,SigPlate)
 public:
     SigDihedralCR();
-    SigDihedralCR(const LCreal a);
+    SigDihedralCR(const double a);
 
-    LCreal getRCS(const Emission* const em) override;
+    double getRCS(const Emission* const em) override;
 private:
-    LCreal length;      // Length dimension
+    double length;      // Length dimension
 };
 
 
@@ -147,9 +147,9 @@ class SigTrihedralCR : public SigDihedralCR
     DECLARE_SUBCLASS(SigTrihedralCR,SigDihedralCR)
 public:
     SigTrihedralCR();
-    SigTrihedralCR(const LCreal a);
+    SigTrihedralCR(const double a);
 
-    LCreal getRCS(const Emission* const em) override;
+    double getRCS(const Emission* const em) override;
 };
 
 
@@ -166,7 +166,7 @@ class SigSwitch : public RfSignature
 public:
    SigSwitch();
 
-   LCreal getRCS(const Emission* const em) override;
+   double getRCS(const Emission* const em) override;
 };
 
 
@@ -227,7 +227,7 @@ public:
    virtual bool setSlotInDegrees(const base::Number* const msg);
    virtual bool setSlotDecibel(const base::Number* const msg);
 
-   LCreal getRCS(const Emission* const em) override;
+   double getRCS(const Emission* const em) override;
 protected:
    const base::Table2* tbl;      // The table
    bool swapOrderFlg;               // Swap independent data order from az/el to el/az

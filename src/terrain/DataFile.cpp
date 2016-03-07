@@ -147,13 +147,13 @@ bool DataFile::isDataLoaded() const
 // returns the number of points found within this DataFile
 //------------------------------------------------------------------------------
 unsigned int DataFile::getElevations(
-      LCreal* const elevations,     // The elevation array (meters)
+      double* const elevations,     // The elevation array (meters)
       bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
       const unsigned int n,         // Size of elevation and valdFlags arrays
       const double lat,             // Starting latitude (degs)
       const double lon,             // Starting longitude (degs)
-      const LCreal direction,       // True direction (heading) angle of the data (degs)
-      const LCreal maxRng,          // Range to last elevation point (meters)
+      const double direction,       // True direction (heading) angle of the data (degs)
+      const double maxRng,          // Range to last elevation point (meters)
       const bool interp            // Interpolate between elevation posts (if true)
    ) const
 {
@@ -196,7 +196,7 @@ unsigned int DataFile::getElevations(
           (pointsLon >= 0 && pointsLon <= maxLonPoint) ) {  // and within longitude range ...
 
             // We're within our data limits
-            LCreal value = 0;          // the elevation (meters)
+            double value = 0;          // the elevation (meters)
 
             // ---
             // Interpolating between elevation posts?
@@ -211,20 +211,20 @@ unsigned int DataFile::getElevations(
                if (icol > (nptlong-2)) icol = (nptlong-2);
 
                // delta from s-w corner post
-               LCreal deltaLat = static_cast<LCreal>(pointsLat - static_cast<double>(irow));
-               LCreal deltaLon = static_cast<LCreal>(pointsLon - static_cast<double>(icol));
+               double deltaLat = static_cast<double>(pointsLat - static_cast<double>(irow));
+               double deltaLon = static_cast<double>(pointsLon - static_cast<double>(icol));
 
                // Get the elevations at each corner
-               LCreal elevSW = static_cast<LCreal>(columns[icol][irow]);
-               LCreal elevNW = static_cast<LCreal>(columns[icol][irow+1]);
-               LCreal elevSE = static_cast<LCreal>(columns[icol+1][irow]);
-               LCreal elevNE = static_cast<LCreal>(columns[icol+1][irow+1]);
+               double elevSW = static_cast<double>(columns[icol][irow]);
+               double elevNW = static_cast<double>(columns[icol][irow+1]);
+               double elevSE = static_cast<double>(columns[icol+1][irow]);
+               double elevNE = static_cast<double>(columns[icol+1][irow+1]);
 
                // Interpolate the west point
-               LCreal westPoint = elevSW + (elevNW - elevSW) * deltaLat;
+               double westPoint = elevSW + (elevNW - elevSW) * deltaLat;
 
                // Interpolate the east point
-               LCreal eastPoint = elevSE + (elevNE - elevSE) * deltaLat;
+               double eastPoint = elevSE + (elevNE - elevSE) * deltaLat;
 
                // Interpolate between the west and east points
                value = westPoint + (eastPoint - westPoint) * deltaLon;
@@ -240,7 +240,7 @@ unsigned int DataFile::getElevations(
                if (icol >= nptlong) icol = (nptlong-1);
 
                // Get the elevation post at the current indices.
-               value = static_cast<LCreal>(columns[icol][irow]);
+               value = static_cast<double>(columns[icol][irow]);
             }
 
             // Pass the elevation value and valid flag to the user's arrays
@@ -264,13 +264,13 @@ unsigned int DataFile::getElevations(
 // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
 //------------------------------------------------------------------------------
 bool DataFile::getElevation(
-      LCreal* const elev,     // The elevation value (meters)
+      double* const elev,     // The elevation value (meters)
       const double lat,       // Reference latitude (degs)
       const double lon,       // Reference longitude (degs)
       const bool interp       // Interpolate between elevation posts (if true)
    ) const
 {
-   LCreal value = 0;          // the elevation (meters)
+   double value = 0;          // the elevation (meters)
 
    // Early out tests
    if ( !isDataLoaded() ||          // Not loaded or
@@ -303,20 +303,20 @@ bool DataFile::getElevation(
       if (icol > (nptlong-2)) icol = (nptlong-2);
 
       // delta from s-w corner post
-      LCreal deltaLat = static_cast<LCreal>(pointsLat - static_cast<double>(irow));
-      LCreal deltaLon = static_cast<LCreal>(pointsLon - static_cast<double>(icol));
+      double deltaLat = static_cast<double>(pointsLat - static_cast<double>(irow));
+      double deltaLon = static_cast<double>(pointsLon - static_cast<double>(icol));
 
       // Get the elevations at each corner
-      LCreal elevSW = static_cast<LCreal>(columns[icol][irow]);
-      LCreal elevNW = static_cast<LCreal>(columns[icol][irow+1]);
-      LCreal elevSE = static_cast<LCreal>(columns[icol+1][irow]);
-      LCreal elevNE = static_cast<LCreal>(columns[icol+1][irow+1]);
+      double elevSW = static_cast<double>(columns[icol][irow]);
+      double elevNW = static_cast<double>(columns[icol][irow+1]);
+      double elevSE = static_cast<double>(columns[icol+1][irow]);
+      double elevNE = static_cast<double>(columns[icol+1][irow+1]);
 
       // Interpolate the west point
-      LCreal westPoint = elevSW + (elevNW - elevSW) * deltaLat;
+      double westPoint = elevSW + (elevNW - elevSW) * deltaLat;
 
       // Interpolate the east point
-      LCreal eastPoint = elevSE + (elevNE - elevSE) * deltaLat;
+      double eastPoint = elevSE + (elevNE - elevSE) * deltaLat;
 
       // Interpolate between the west and east points
       value = westPoint + (eastPoint - westPoint) * deltaLon;
@@ -332,7 +332,7 @@ bool DataFile::getElevation(
       if (icol >= nptlong) icol = (nptlong-1);
 
       // Get the elevation post at the current indices.
-      value = static_cast<LCreal>(columns[icol][irow]);
+      value = static_cast<double>(columns[icol][irow]);
    }
 
    // ---

@@ -19,15 +19,15 @@ class Tape : public Instrument
 public:
     Tape();
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
-    virtual bool setRange(const int x)                  { range = x; return true; }
-    virtual bool setHeight(const oe::LCreal x)     { height = x; return true; }
+    virtual bool setRange(const int x)                  { range = x; return true;     }
+    virtual bool setHeight(const double x)              { height = x; return true;    }
     virtual bool setIncrement(const int x)              { increment = x; return true; }
-    virtual bool setVertical(const bool x)              { vertical = x; return true; }
-    virtual bool setMaxNumber(const oe::LCreal x)  { maxNum = x; return true; }
-    virtual bool setMinNumber(const oe::LCreal x)  { minNum = x; return true; }
-    virtual bool setConvert(const bool x)               { convert = x; return true; }
+    virtual bool setVertical(const bool x)              { vertical = x; return true;  }
+    virtual bool setMaxNumber(const double x)           { maxNum = x; return true;    }
+    virtual bool setMinNumber(const double x)           { minNum = x; return true;    }
+    virtual bool setConvert(const bool x)               { convert = x; return true;   }
 
 protected:
     bool setSlotRange(const base::Number* const x);
@@ -52,15 +52,15 @@ private:
     SendData numberValsHundsVisSD[MAX_NUMBERS];
     SendData numberValsThousVisSD[MAX_NUMBERS];
     int range;
-    LCreal height;
+    double height;
     int increment;
     bool vertical;
-    LCreal maxNum;
-    LCreal minNum;
+    double maxNum;
+    double minNum;
     bool convert;
 };
 
-}  // end of Instruments namespace
-}  // end of oe namespace
+}
+}
 
 #endif

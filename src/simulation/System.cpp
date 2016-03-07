@@ -91,7 +91,7 @@ void System::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void System::updateData(const LCreal dt)
+void System::updateData(const double dt)
 {
    // We're nothing without an ownship ...
    if (ownship == nullptr && getOwnship() == nullptr) return;
@@ -102,7 +102,7 @@ void System::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void System::updateTC(const LCreal dt0)
+void System::updateTC(const double dt0)
 {
    // We're nothing without an ownship ...
    if (ownship == nullptr && getOwnship() == nullptr) return;
@@ -112,11 +112,11 @@ void System::updateTC(const LCreal dt0)
    // ---
 
    // real or frozen?
-   LCreal dt = dt0;
+   double dt = dt0;
    if (isFrozen()) dt = 0.0;
 
    // Delta time for methods that are running every fourth phase
-   LCreal dt4 = dt * 4.0f;
+   double dt4 = dt * 4.0f;
 
    // ---
    // Four phases per frame
@@ -153,19 +153,19 @@ void System::updateTC(const LCreal dt0)
 //------------------------------------------------------------------------------
 // Default phase callbacks
 //------------------------------------------------------------------------------
-void System::dynamics(const LCreal)
+void System::dynamics(const double)
 {
 }
 
-void System::transmit(const LCreal)
+void System::transmit(const double)
 {
 }
 
-void System::receive(const LCreal)
+void System::receive(const double)
 {
 }
 
-void System::process(const LCreal)
+void System::process(const double)
 {
 }
 

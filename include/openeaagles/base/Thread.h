@@ -92,9 +92,9 @@ class Thread : public Object {
    DECLARE_SUBCLASS(Thread,Object)
 
 public:
-   Thread(Component* const parent, const LCreal priority);
+   Thread(Component* const parent, const double priority);
 
-   LCreal getPriority() const;
+   double getPriority() const;
    bool isTerminated() const;
 
    // thread stack size in bytes (or zero if using the default stack size)
@@ -138,7 +138,7 @@ private: // Functions
 
 private: // Data
    Component* parent;   // Our parent component that created us.
-   LCreal priority;     // Thread priority (0->lowest, 1->highest)
+   double priority;     // Thread priority (0->lowest, 1->highest)
    bool killed;         // Are we terminated?
    size_t stackSize;    // Stack size in bytes (zero to use the system default stack size)
 
@@ -157,7 +157,7 @@ class ThreadSingleTask : public Thread {
    DECLARE_SUBCLASS(ThreadSingleTask,Thread)
 
 public:
-   ThreadSingleTask(Component* const parent, const LCreal priority);
+   ThreadSingleTask(Component* const parent, const double priority);
 
    // User defined work function
    private:  virtual unsigned long userFunc() =0;
@@ -184,9 +184,9 @@ class ThreadPeriodicTask : public Thread {
    DECLARE_SUBCLASS(ThreadPeriodicTask,Thread)
 
 public:
-   ThreadPeriodicTask(Component* const parent, const LCreal priority, const LCreal rate);
+   ThreadPeriodicTask(Component* const parent, const double priority, const double rate);
 
-   LCreal getRate() const;                         // Update rate (must be greater than zero)
+   double getRate() const;                         // Update rate (must be greater than zero)
    unsigned int getTotalFrameCount() const;        // Total frame count
 
    // Busted (overrun) frames statistics; overrun frames time (seconds)
@@ -201,7 +201,7 @@ public:
    bool setVariableDeltaTimeFlag(const bool enable);
 
    // User defined work function
-   private: virtual unsigned long userFunc(const LCreal dt) =0;
+   private: virtual unsigned long userFunc(const double dt) =0;
 
 protected:
    ThreadPeriodicTask();
@@ -209,7 +209,7 @@ protected:
 private:
    unsigned long mainThreadFunc() override;
 
-   LCreal rate;         // Loop rate (hz); until our parent shuts down
+   double rate;         // Loop rate (hz); until our parent shuts down
    Statistic bfStats;   // Busted (overrun) frame statistics (windows only)
    unsigned int tcnt;   // total frame count
    bool vdtFlg;         // Variable delta time flag
@@ -232,7 +232,7 @@ class ThreadSyncTask : public Thread {
    DECLARE_SUBCLASS(ThreadSyncTask,Thread)
 
 public:
-   ThreadSyncTask(Component* const parent, const LCreal priority);
+   ThreadSyncTask(Component* const parent, const double priority);
 
    void signalStart();
    void waitForCompleted();

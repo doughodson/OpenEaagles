@@ -282,37 +282,37 @@ double NetIO::getCurrentTime()
 }
 
 // Entity filter: Returns max entity ranged (meters)
-LCreal NetIO::getMaxEntityRange(const Nib* const) const
+double NetIO::getMaxEntityRange(const Nib* const) const
 {
    return maxEntityRange;
 }
 
 // Entity filter: Returns max entity ranged squared (meters^2)
-LCreal NetIO::getMaxEntityRangeSquared(const Nib* const) const
+double NetIO::getMaxEntityRangeSquared(const Nib* const) const
 {
    return maxEntityRange2;
 }
 
 // Dead-Reckoning: Returns max DR time before next 'heart beat' (seconds)
-LCreal NetIO::getMaxTimeDR(const Nib* const) const
+double NetIO::getMaxTimeDR(const Nib* const) const
 {
    return maxTimeDR;
     }
 
 // Dead-Reckoning: Returns max DR position error (meters)
-LCreal NetIO::getMaxPositionErr(const Nib* const) const
+double NetIO::getMaxPositionErr(const Nib* const) const
 {
    return maxPositionErr;
 }
 
 // Dead-Reckoning: Returns max DR orientation error (radians)
-LCreal NetIO::getMaxOrientationErr(const Nib* const) const
+double NetIO::getMaxOrientationErr(const Nib* const) const
 {
    return maxOrientationErr;
 }
 
 // Dead-Reckoning: Returns max age before a networked player is removed (seconds)
-LCreal NetIO::getMaxAge(const Nib* const) const
+double NetIO::getMaxAge(const Nib* const) const
 {
    return maxAge;
 }
@@ -352,35 +352,35 @@ bool NetIO::setTimeline(const TSource ts)
 }
 
 // Sets the max dead-rec time; forces next update (sec)
-bool NetIO::setMaxTimeDR(const LCreal v)
+bool NetIO::setMaxTimeDR(const double v)
 {
    maxTimeDR = v;
    return true;
 }
 
 // Sets the max positional error (meters)
-bool NetIO::setMaxPositionErr(const LCreal v)
+bool NetIO::setMaxPositionErr(const double v)
 {
    maxPositionErr = v;
    return true;
 }
 
 // Sets the max orientation error (rad)
-bool NetIO::setMaxOrientationErr(const LCreal v)
+bool NetIO::setMaxOrientationErr(const double v)
 {
    maxOrientationErr = v;
    return true;
 }
 
 // Sets the max age; for removal (sec)
-bool NetIO::setMaxAge(const LCreal v)
+bool NetIO::setMaxAge(const double v)
 {
    maxAge = v;
    return true;
 }
 
 // Sets the max entity range (meters)
-bool NetIO::setMaxEntityRange(const LCreal v)
+bool NetIO::setMaxEntityRange(const double v)
 {
    maxEntityRange = v;
    maxEntityRange2 = (v*v);
@@ -404,7 +404,7 @@ bool NetIO::setFederationName(const base::String* const msg)
 //------------------------------------------------------------------------------
 // inputFrame() -- input side of the network
 //------------------------------------------------------------------------------
-void NetIO::inputFrame(const LCreal)
+void NetIO::inputFrame(const double)
 {
    if (isNetworkInitialized()) {
       netInputHander();     // Input handler
@@ -416,7 +416,7 @@ void NetIO::inputFrame(const LCreal)
 //------------------------------------------------------------------------------
 // outputFrame() -- output side of the network
 //------------------------------------------------------------------------------
-void NetIO::outputFrame(const LCreal)
+void NetIO::outputFrame(const double)
 {
    if (isNetworkInitialized()) {
       updateOutputList();   // Update the Output-List from the simulation player list
@@ -624,21 +624,21 @@ void NetIO::processOutputList()
 
          // Send a detonation message
          if (nib->getPlayer()->isMode(Player::DETONATED) && !nib->wasDetonationMessageSent()) {
-            nib->munitionDetonationMsgFactory(static_cast<LCreal>(curExecTime));
+            nib->munitionDetonationMsgFactory(static_cast<double>(curExecTime));
          }
 
          // Manager entity state updates (do this after detonation check because it updates the NIB's mode)
-         nib->entityStateManager(static_cast<LCreal>(curExecTime));
+         nib->entityStateManager(static_cast<double>(curExecTime));
 
          // Send a fire message; if a fire event was needed, we delayed sending
          // until after the weapon's entity state has been sent at least once.
          if (fired) {
             // Weapon player has just gone active and its entity state packet has been sent.
-            nib->weaponFireMsgFactory(static_cast<LCreal>(curExecTime));
+            nib->weaponFireMsgFactory(static_cast<double>(curExecTime));
          }
 
          // Manage all systems that require network functionality (IFF, Radios, Emitters, etc)
-         nib->networkOutputManagers(static_cast<LCreal>(curExecTime));
+         nib->networkOutputManagers(static_cast<double>(curExecTime));
 
       }
    }
@@ -1270,7 +1270,7 @@ bool NetIO::setSlotMaxTimeDR(const base::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal time = base::Seconds::convertStatic( *msg );
+      const double time = base::Seconds::convertStatic( *msg );
       ok = setMaxTimeDR( time );
    }
    return ok;
@@ -1281,7 +1281,7 @@ bool NetIO::setSlotMaxPositionErr(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal err = base::Meters::convertStatic( *msg );
+      const double err = base::Meters::convertStatic( *msg );
       ok = setMaxPositionErr( err );
    }
    return ok;
@@ -1292,7 +1292,7 @@ bool NetIO::setSlotMaxOrientationErr(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal err = static_cast<LCreal>(base::Radians::convertStatic( *msg ));
+      const double err = static_cast<double>(base::Radians::convertStatic( *msg ));
       ok = setMaxOrientationErr( err );
    }
    return ok;
@@ -1303,7 +1303,7 @@ bool NetIO::setSlotMaxAge(const base::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal age = base::Seconds::convertStatic( *msg );
+      const double age = base::Seconds::convertStatic( *msg );
       ok = setMaxAge( age );
    }
    return ok;
@@ -1314,7 +1314,7 @@ bool NetIO::setSlotMaxEntityRange(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal rng = base::Meters::convertStatic( *msg );
+      const double rng = base::Meters::convertStatic( *msg );
       ok = setMaxEntityRange( rng );
    }
    return ok;

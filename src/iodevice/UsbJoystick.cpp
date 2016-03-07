@@ -111,7 +111,7 @@ unsigned short UsbJoystick::getNumAnalogInputs() const
    return numAI;
 }
 
-bool UsbJoystick::getAnalogInput(LCreal* const value, const unsigned int channel) const
+bool UsbJoystick::getAnalogInput(double* const value, const unsigned int channel) const
 {
    bool ok = false;
    if (value != nullptr && channel < numAI) {

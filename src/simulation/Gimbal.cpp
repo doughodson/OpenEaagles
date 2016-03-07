@@ -259,7 +259,7 @@ bool Gimbal::shutdownNotification()
 //------------------------------------------------------------------------------
 // dynamics() -- System class "Dynamics phase" call back
 //------------------------------------------------------------------------------
-void Gimbal::dynamics(const LCreal dt)
+void Gimbal::dynamics(const double dt)
 {
    servoController(dt);
    BaseClass::dynamics(dt);

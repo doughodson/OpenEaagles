@@ -15,20 +15,20 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Time, "Time")
 EMPTY_SLOTTABLE(Time)
 
 // Conversion constants
-const LCreal Time::S2NS = 1000000000.0f;           // Seconds => nanoseconds
-const LCreal Time::NS2S = (1.0f / 1000000000.0f);  // nanoseconds => Seconds
-const LCreal Time::S2US = 1000000.0f;              // Seconds => microseconds
-const LCreal Time::US2S = (1.0f / 1000000.0f);     // microseconds => Seconds
-const LCreal Time::S2MS = 1000.0f;                 // Seconds => MilliSeconds
-const LCreal Time::MS2S = (1.0f / 1000.0f);        // MilliSeconds => Seconds
-const LCreal Time::M2S  =  60.0f;                  // Minutes => Seconds
-const LCreal Time::S2M  = (1.0f / 60.0f);          // Seconds => Minutes
-const LCreal Time::H2S  = 3600.0f;                 // Hours => Seconds
-const LCreal Time::S2H  = (1.0f / 3600.0f);        // Seconds => Hours
-const LCreal Time::D2M  = 1440.0f;                 // Days => Minutes
-const LCreal Time::M2D  = (1.0f / 1440.0f);        // Minutes => Days
-const LCreal Time::D2S  = 86400.0f;                // Days => Seconds
-const LCreal Time::S2D  = (1.0f / 86400.0f);       // Seconds => Days
+const double Time::S2NS = 1000000000.0f;           // Seconds => nanoseconds
+const double Time::NS2S = (1.0f / 1000000000.0f);  // nanoseconds => Seconds
+const double Time::S2US = 1000000.0f;              // Seconds => microseconds
+const double Time::US2S = (1.0f / 1000000.0f);     // microseconds => Seconds
+const double Time::S2MS = 1000.0f;                 // Seconds => MilliSeconds
+const double Time::MS2S = (1.0f / 1000.0f);        // MilliSeconds => Seconds
+const double Time::M2S  =  60.0f;                  // Minutes => Seconds
+const double Time::S2M  = (1.0f / 60.0f);          // Seconds => Minutes
+const double Time::H2S  = 3600.0f;                 // Hours => Seconds
+const double Time::S2H  = (1.0f / 3600.0f);        // Seconds => Hours
+const double Time::D2M  = 1440.0f;                 // Days => Minutes
+const double Time::M2D  = (1.0f / 1440.0f);        // Minutes => Days
+const double Time::D2S  = 86400.0f;                // Days => Seconds
+const double Time::S2D  = (1.0f / 86400.0f);       // Seconds => Days
 
 //------------------------------------------------------------------------------
 // constructors
@@ -38,7 +38,7 @@ Time::Time() : Number()
     STANDARD_CONSTRUCTOR()
 }
 
-Time::Time(const LCreal value) : Number(value)
+Time::Time(const double value) : Number(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -93,7 +93,7 @@ Seconds::Seconds() : Time()
     STANDARD_CONSTRUCTOR()
 }
 
-Seconds::Seconds(const LCreal value) : Time(value)
+Seconds::Seconds(const double value) : Time(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -119,7 +119,7 @@ MilliSeconds::MilliSeconds() : Time()
     STANDARD_CONSTRUCTOR()
 }
 
-MilliSeconds::MilliSeconds(const LCreal value) : Time(value)
+MilliSeconds::MilliSeconds(const double value) : Time(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -144,7 +144,7 @@ MicroSeconds::MicroSeconds() : Time()
     STANDARD_CONSTRUCTOR()
 }
 
-MicroSeconds::MicroSeconds(const LCreal value) : Time(value)
+MicroSeconds::MicroSeconds(const double value) : Time(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -169,7 +169,7 @@ NanoSeconds::NanoSeconds() : Time()
     STANDARD_CONSTRUCTOR()
 }
 
-NanoSeconds::NanoSeconds(const LCreal value) : Time(value)
+NanoSeconds::NanoSeconds(const double value) : Time(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -195,7 +195,7 @@ Minutes::Minutes() : Time()
     STANDARD_CONSTRUCTOR()
 }
 
-Minutes::Minutes(const LCreal value) : Time(value)
+Minutes::Minutes(const double value) : Time(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -221,7 +221,7 @@ Hours::Hours() : Time()
     STANDARD_CONSTRUCTOR()
 }
 
-Hours::Hours(const LCreal value) : Time(value)
+Hours::Hours(const double value) : Time(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -247,7 +247,7 @@ Days::Days() : Time()
     STANDARD_CONSTRUCTOR()
 }
 
-Days::Days(const LCreal value) : Time(value)
+Days::Days(const double value) : Time(value)
 {
     STANDARD_CONSTRUCTOR()
 }

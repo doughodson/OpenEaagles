@@ -23,13 +23,13 @@ public:
 
     void drawFunc() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
     void reset() override;
 
 private:
-    LCreal rotation;    // our rotation angle (of the gauge arrow)
-    LCreal maxG;        // max g value
-    LCreal minG;        // min g value
+    double rotation;    // our rotation angle (of the gauge arrow)
+    double maxG;        // max g value
+    double minG;        // min g value
 
     SendData gsSD;      // actual gs
     SendData minGSD;    // min gs

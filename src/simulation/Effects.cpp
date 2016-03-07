@@ -91,7 +91,7 @@ bool Effects::collisionNotification(Player* const p)
 //------------------------------------------------------------------------------
 // updateTOF -- default time of flight
 //------------------------------------------------------------------------------
-void Effects::updateTOF(const LCreal dt)
+void Effects::updateTOF(const double dt)
 {
    // As long as we're active ...
    if (isMode(ACTIVE)) {
@@ -111,10 +111,10 @@ void Effects::updateTOF(const LCreal dt)
 //------------------------------------------------------------------------------
 // weaponDynamics -- default dynamics; using Robot Aircraft (RAC) dynamics
 //------------------------------------------------------------------------------
-void Effects::weaponDynamics(const LCreal dt)
+void Effects::weaponDynamics(const double dt)
 {
    // Useful constant
-   static const LCreal g = ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)
@@ -138,8 +138,8 @@ void Effects::weaponDynamics(const LCreal dt)
    // ---
    // .. Only after setVelocity has been called ...
    // ---
-   LCreal vp = getTotalVelocity();
-   LCreal vg = getGroundSpeed();
+   double vp = getTotalVelocity();
+   double vg = getGroundSpeed();
 
    // ---
    // Set velocity vector (body)
@@ -150,8 +150,8 @@ void Effects::weaponDynamics(const LCreal dt)
    // ---
    // Sent angular values
    // ---
-   LCreal newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
-   LCreal newTheta = lcAtan2( -ve1[IDOWN], vg );
+   double newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
+   double newTheta = lcAtan2( -ve1[IDOWN], vg );
    setEulerAngles(0.0, newTheta, newPsi);
    setAngularVelocities(0.0, 0.0, 0.0);
 

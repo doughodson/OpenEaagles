@@ -162,7 +162,7 @@ void LaeroModel::copyData(const LaeroModel& org, const bool cc)
 //----------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //----------------------------------------------------------
-void LaeroModel::dynamics(const LCreal dt)
+void LaeroModel::dynamics(const double dt)
 {
     update4DofModel(dt);
     dT = dt;
@@ -177,7 +177,7 @@ void LaeroModel::reset()
 
    simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pPlr != nullptr) {
-      LCreal initVel = pPlr->getInitVelocity();
+      double initVel = pPlr->getInitVelocity();
       u = initVel * base::Distance::NM2M / base::Time::H2S;
    }
 }
@@ -185,7 +185,7 @@ void LaeroModel::reset()
 //----------------------------------------------------------
 // update4DofModel -- update equations of motion
 //----------------------------------------------------------
-void LaeroModel::update4DofModel(const LCreal dt)
+void LaeroModel::update4DofModel(const double dt)
 {
    //-------------------------------------------------------
    // get data pointers

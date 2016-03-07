@@ -28,11 +28,11 @@ class DialTickMarks : public AnalogDial
 public:
     DialTickMarks();
 
-    LCreal getLength() const                    { return length; }
+    double getLength() const                    { return length; }
     int  getQuantity() const                    { return quantity; }
     graphics::Graphic* getTickGraphic() const    { return myGraphic;  }
 
-    virtual bool setLength(const LCreal newLength);
+    virtual bool setLength(const double newLength);
     virtual bool setQuantity(const int newQ);
     virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
 
@@ -44,7 +44,7 @@ protected:
     bool setSlotQuantity(const base::Number* const newQ);
 
 private:
-    LCreal      length;             // tick mark length (if not a graphic)
+    double      length;             // tick mark length (if not a graphic)
     int         quantity;           // how many tick marks will we have?
     graphics::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
 };

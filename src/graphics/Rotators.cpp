@@ -50,7 +50,7 @@ void Rotators::copyData(const Rotators& org, const bool)
 //------------------------------------------------------------------------------
 // setXRotation() -- Sets the X rotation angle (rad)
 //------------------------------------------------------------------------------
-bool Rotators::setXRotation(const LCreal angle)
+bool Rotators::setXRotation(const double angle)
 {
     xRot = angle;
     return true;
@@ -59,16 +59,16 @@ bool Rotators::setXRotation(const LCreal angle)
 //------------------------------------------------------------------------------
 // setXRotationDeg() -- Sets the rotation angle (deg)
 //------------------------------------------------------------------------------
-bool Rotators::setXRotationDeg(const LCreal angle)
+bool Rotators::setXRotationDeg(const double angle)
 {
-    xRot = angle * static_cast<LCreal>(base::Angle::D2RCC);
+    xRot = angle * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 
 //------------------------------------------------------------------------------
 // setYRotation() -- Sets the Y rotation angle (rad)
 //------------------------------------------------------------------------------
-bool Rotators::setYRotation(const LCreal angle)
+bool Rotators::setYRotation(const double angle)
 {
     yRot = angle;
     return true;
@@ -77,25 +77,25 @@ bool Rotators::setYRotation(const LCreal angle)
 //------------------------------------------------------------------------------
 // setYRotationDeg() -- Sets the Y rotation angle (deg)
 //------------------------------------------------------------------------------
-bool Rotators::setYRotationDeg(const LCreal angle)
+bool Rotators::setYRotationDeg(const double angle)
 {
-    yRot = angle * static_cast<LCreal>(base::Angle::D2RCC);
+    yRot = angle * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 
 //------------------------------------------------------------------------------
 // setZRotationDeg() -- Sets the Z rotation angle (deg)
 //------------------------------------------------------------------------------
-bool Rotators::setZRotationDeg(const LCreal angle)
+bool Rotators::setZRotationDeg(const double angle)
 {
-    zRot = angle * static_cast<LCreal>(base::Angle::D2RCC);
+    zRot = angle * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 
 //------------------------------------------------------------------------------
 // setZRotation() -- Sets the Z rotation angle (rad)
 //------------------------------------------------------------------------------
-bool Rotators::setZRotation(const LCreal angle)
+bool Rotators::setZRotation(const double angle)
 {
     zRot = angle;
     return true;
@@ -104,7 +104,7 @@ bool Rotators::setZRotation(const LCreal angle)
 //------------------------------------------------------------------------------
 // setRotations() -- set all of our rotations
 //------------------------------------------------------------------------------
-bool Rotators::setRotations(const LCreal x, const LCreal y, const LCreal z)
+bool Rotators::setRotations(const double x, const double y, const double z)
 {
     xRot = x;
     yRot = y;
@@ -115,11 +115,11 @@ bool Rotators::setRotations(const LCreal x, const LCreal y, const LCreal z)
 //------------------------------------------------------------------------------
 // setRotationsDeg() -- set all of our rotations (deg)
 //------------------------------------------------------------------------------
-bool Rotators::setRotationsDeg(const LCreal x, const LCreal y, const LCreal z)
+bool Rotators::setRotationsDeg(const double x, const double y, const double z)
 {
-    xRot = x * static_cast<LCreal>(base::Angle::D2RCC);
-    yRot = y * static_cast<LCreal>(base::Angle::D2RCC);
-    zRot = z * static_cast<LCreal>(base::Angle::D2RCC);
+    xRot = x * static_cast<double>(base::Angle::D2RCC);
+    yRot = y * static_cast<double>(base::Angle::D2RCC);
+    zRot = z * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 
@@ -139,7 +139,7 @@ bool Rotators::onXRotate(const base::Number* const rotation)
 bool Rotators::onXRotate(const base::Angle* const rotation)
 {
     if (rotation != nullptr)
-        return setXRotation(static_cast<LCreal>(base::Radians::convertStatic(*rotation)));
+        return setXRotation(static_cast<double>(base::Radians::convertStatic(*rotation)));
     return false;
 }
 
@@ -167,7 +167,7 @@ bool Rotators::onYRotate(const base::Number* const rotation)
 bool Rotators::onYRotate(const base::Angle* const rotation)
 {
     if (rotation != nullptr)
-        return setYRotation(static_cast<LCreal>(base::Radians::convertStatic(*rotation)));
+        return setYRotation(static_cast<double>(base::Radians::convertStatic(*rotation)));
     return false;
 }
 
@@ -195,7 +195,7 @@ bool Rotators::onZRotate(const base::Number* const rotation)
 bool Rotators::onZRotate(const base::Angle* const rotation)
 {
     if (rotation != nullptr)
-        return setZRotation(static_cast<LCreal>(base::Radians::convertStatic(*rotation)));
+        return setZRotation(static_cast<double>(base::Radians::convertStatic(*rotation)));
     return false;
 }
 

@@ -281,7 +281,7 @@ void postMultVec3Array(
 //------------
 // Returns the sine and cosine of an angle (radians)
 //------------
-void lcSinCos(const LCreal src, LCreal* const dst1, LCreal* const dst2)
+void lcSinCos(const double src, double* const dst1, double* const dst2)
 {
    if (dst1 != nullptr && dst2 != nullptr) {
       *dst1 = lcSin(src);
@@ -308,10 +308,10 @@ void sinCos(const float src, float* const dst1, float* const dst2)
 //------------
 // Computes the sines of an array of 'n' angles (radians)
 //------------
-void lcSinArray(const LCreal* const src, LCreal* const dst, const int n)
+void lcSinArray(const double* const src, double* const dst, const int n)
 {
-   const LCreal* ps = src;
-   LCreal* pd = dst;
+   const double* ps = src;
+   double* pd = dst;
    for (int i = 0; i < n; i++) {
       *pd++ = lcSin(*ps++);
    }
@@ -338,10 +338,10 @@ void sinArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Computes the cosines of an array of 'n' angles (radians)
 //------------
-void lcCosArray(const LCreal* const src, LCreal* const dst, const int n)
+void lcCosArray(const double* const src, double* const dst, const int n)
 {
-   const LCreal* ps = src;
-   LCreal* pd = dst;
+   const double* ps = src;
+   double* pd = dst;
    for (int i = 0; i < n; i++) {
       *pd++ = lcCos(*ps++);
    }
@@ -368,11 +368,11 @@ void cosArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Computes the sines and cosines of an array of 'n' angles (radians)
 //------------
-void lcSinCosArray(const LCreal* const src, LCreal* const dst1, LCreal* const dst2, const int n)
+void lcSinCosArray(const double* const src, double* const dst1, double* const dst2, const int n)
 {
-   const LCreal* ps = src;
-   LCreal* pd1 = dst1;
-   LCreal* pd2 = dst2;
+   const double* ps = src;
+   double* pd1 = dst1;
+   double* pd2 = dst2;
    for (int i = 0; i < n; i++) {
       *pd1++ = lcSin(*ps);
       *pd2++ = lcCos(*ps++);
@@ -404,10 +404,10 @@ void sinCosArray(const float* const src, float* const dst1, float* const dst2, c
 //------------
 // Computes the arc-cosines of an array of 'n' angles (radians)
 //------------
-void lcAcosArray(const LCreal* const src, LCreal* const dst, const int n)
+void lcAcosArray(const double* const src, double* const dst, const int n)
 {
-   LCreal* pd = dst;
-   const LCreal* ps = src;
+   double* pd = dst;
+   const double* ps = src;
    for (int i = 0; i < n; i++) {
       *pd++ = lcAcos(*ps++);
    }
@@ -434,11 +434,11 @@ void acosArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Computes the arc-tangants for two, 'n' element arrays (yValues and xValues)
 //------------
-void lcAtan2Array(const LCreal* const yValues, const LCreal* const xValues, LCreal* const dst, const int n)
+void lcAtan2Array(const double* const yValues, const double* const xValues, double* const dst, const int n)
 {
-   LCreal* pd = dst;
-   const LCreal* ps1 = yValues;
-   const LCreal* ps2 = xValues;
+   double* pd = dst;
+   const double* ps1 = yValues;
+   const double* ps2 = xValues;
    for (int i = 0; i < n; i++) {
       *pd++ = lcAtan2(*ps1++,*ps2++);
    }
@@ -467,10 +467,10 @@ void atan2Array(const float* const yValues, const float* const xValues, float* c
 //------------
 // Computes the square roots of 'n' real values
 //------------
-void lcSqrtArray(const LCreal* const src, LCreal* const dst, const int n)
+void lcSqrtArray(const double* const src, double* const dst, const int n)
 {
-   const LCreal* ps = src;
-   LCreal* pd = dst;
+   const double* ps = src;
+   double* pd = dst;
    for (int i = 0; i < n; i++) {
       *pd++ = std::sqrt(*ps++);
    }
@@ -497,12 +497,12 @@ void sqrtArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Raises 10 to the power of 'n' src values and returns the results in 'dst'
 //------------
-void lcPow10Array(const LCreal* const src, LCreal* const dst, const int n)
+void lcPow10Array(const double* const src, double* const dst, const int n)
 {
-   LCreal* pd = dst;
-   const LCreal* ps = src;
+   double* pd = dst;
+   const double* ps = src;
    for (int i = 0; i < n; i++) {
-      *pd++ = lcPow( static_cast<LCreal>(10.0), *ps++);
+      *pd++ = lcPow( static_cast<double>(10.0), *ps++);
    }
 }
 
@@ -527,10 +527,10 @@ void pow10Array(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Multiply an array of reals with a constant
 //------------
-void lcMultArrayConst(const LCreal* const src, const LCreal c, LCreal* const dst, const int n)
+void lcMultArrayConst(const double* const src, const double c, double* const dst, const int n)
 {
-   LCreal* pd = dst;
-   const LCreal* ps = src;
+   double* pd = dst;
+   const double* ps = src;
    for (int i = 0; i < n; i++) {
       *pd++ = *ps++ * c;
    }
@@ -545,9 +545,9 @@ void multArrayConst(const double* const src, const double c, double* const dst, 
    }
 }
 
-void multArrayConst(const float* const src, const float c, LCreal* const dst, const unsigned int n)
+void multArrayConst(const float* const src, const float c, double* const dst, const unsigned int n)
 {
-   LCreal* pd = dst;
+   double* pd = dst;
    const float* ps = src;
    for (unsigned int i = 0; i < n; i++) {
       *pd++ = *ps++ * c;

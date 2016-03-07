@@ -43,12 +43,12 @@ namespace simulation {
 class SimTcThread : public base::ThreadSyncTask {
    DECLARE_SUBCLASS(SimTcThread, base::ThreadSyncTask)
 public:
-   SimTcThread(base::Component* const parent, const LCreal priority);
+   SimTcThread(base::Component* const parent, const double priority);
 
    // Parent thread signals start to this child thread with these parameters.
    void start(
       base::PairStream* const pl0,
-      const LCreal dt0,
+      const double dt0,
       const unsigned int idx0,
       const unsigned int n0
    );
@@ -59,7 +59,7 @@ private:
 
 private:
    base::PairStream* pl0;
-   LCreal dt0;
+   double dt0;
    unsigned int idx0;
    unsigned int n0;
 };
@@ -67,12 +67,12 @@ private:
 class SimBgThread : public base::ThreadSyncTask {
    DECLARE_SUBCLASS(SimBgThread,base::ThreadSyncTask)
 public:
-   SimBgThread(base::Component* const parent, const LCreal priority);
+   SimBgThread(base::Component* const parent, const double priority);
 
    // Parent thread signals start to this child thread with these parameters.
    void start(
       base::PairStream* const pl0,
-      const LCreal dt0,
+      const double dt0,
       const unsigned int idx0,
       const unsigned int n0
    );
@@ -83,7 +83,7 @@ private:
 
 private:
    base::PairStream* pl0;
-   LCreal dt0;
+   double dt0;
    unsigned int idx0;
    unsigned int n0;
 };
@@ -521,7 +521,7 @@ void Simulation::reset()
    if (reqTcThreads > 1 && numTcThreads == 0 && !tcThreadsFailed) {
 
       // Use the T/C priority from our container Station.
-      LCreal pri = Station::DEFAULT_TC_THREAD_PRI;
+      double pri = Station::DEFAULT_TC_THREAD_PRI;
       const Station* sta = static_cast<const Station*>(findContainerByType( typeid(Station) ));
       if (sta != nullptr) {
          pri = sta->getTimeCriticalPriority();
@@ -555,7 +555,7 @@ void Simulation::reset()
    if (reqBgThreads > 1 && numBgThreads == 0 && !bgThreadsFailed) {
 
       // Use the background priority from our container Station.
-      LCreal pri = Station::DEFAULT_BG_THREAD_PRI;
+      double pri = Station::DEFAULT_BG_THREAD_PRI;
       const Station* sta = static_cast<const Station*>(findContainerByType( typeid(Station) ));
       if (sta != nullptr) {
          pri = sta->getBackgroundPriority();
@@ -735,7 +735,7 @@ bool Simulation::shutdownNotification()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::updateTC(const LCreal dt)
+void Simulation::updateTC(const double dt)
 {
    // ---
    // Update the executive time
@@ -775,7 +775,7 @@ void Simulation::updateTC(const LCreal dt)
    // ---
    // Delta-Time (Frozen?)
    // ---
-   LCreal dt0 = dt;
+   double dt0 = dt;
    if (isFrozen()) dt0 = 0.0;
 
    // ---
@@ -877,7 +877,7 @@ void Simulation::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 void Simulation::updateTcPlayerList(
    base::PairStream* const playerList,
-   const LCreal dt,
+   const double dt,
    const unsigned int idx,
    const unsigned int n)
 {
@@ -901,10 +901,10 @@ void Simulation::updateTcPlayerList(
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::updateData(const LCreal dt)
+void Simulation::updateData(const double dt)
 {
     // Delta-Time (Frozen?)
-    LCreal dt0 = dt;
+    double dt0 = dt;
     if (isFrozen()) dt0 = 0.0;
 
     // Update base classes stuff
@@ -970,7 +970,7 @@ void Simulation::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 void Simulation::updateBgPlayerList(
          base::PairStream* const playerList,
-         const LCreal dt,
+         const double dt,
          const unsigned int idx,
          const unsigned int n)
 {
@@ -2075,7 +2075,7 @@ EMPTY_COPYDATA(SimTcThread)
 EMPTY_DELETEDATA(SimTcThread)
 EMPTY_SERIALIZER(SimTcThread)
 
-SimTcThread::SimTcThread(base::Component* const parent, const LCreal priority)
+SimTcThread::SimTcThread(base::Component* const parent, const double priority)
       : base::ThreadSyncTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
@@ -2088,7 +2088,7 @@ SimTcThread::SimTcThread(base::Component* const parent, const LCreal priority)
 
 void SimTcThread::start(
          base::PairStream* const pl1,
-         const LCreal dt1,
+         const double dt1,
          const unsigned int idx1,
          const unsigned int n1
       )
@@ -2122,7 +2122,7 @@ EMPTY_COPYDATA(SimBgThread)
 EMPTY_DELETEDATA(SimBgThread)
 EMPTY_SERIALIZER(SimBgThread)
 
-SimBgThread::SimBgThread(base::Component* const parent, const LCreal priority)
+SimBgThread::SimBgThread(base::Component* const parent, const double priority)
       : base::ThreadSyncTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
@@ -2135,7 +2135,7 @@ SimBgThread::SimBgThread(base::Component* const parent, const LCreal priority)
 
 void SimBgThread::start(
          base::PairStream* const pl1,
-         const LCreal dt1,
+         const double dt1,
          const unsigned int idx1,
          const unsigned int n1
       )

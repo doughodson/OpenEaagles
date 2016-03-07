@@ -115,7 +115,7 @@ bool RotarySwitch::onSingleClick()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void RotarySwitch::updateData(const LCreal dt)
+void RotarySwitch::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 

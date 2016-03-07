@@ -19,7 +19,7 @@ public:
     Stt();
 
 protected:
-    void dynamics(const LCreal dt) override;
+    void dynamics(const double dt) override;
 };
 
 }

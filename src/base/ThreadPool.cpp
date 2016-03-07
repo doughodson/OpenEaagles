@@ -16,7 +16,7 @@ class ThreadPoolThread : public ThreadSyncTask {
    friend class ThreadPool;
 
 public:
-   ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const LCreal priority, Object* const obj);
+   ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const double priority, Object* const obj);
 
 protected:
    Object* getPersistentObj();
@@ -38,7 +38,7 @@ EMPTY_SLOTTABLE(ThreadPoolThread)
 EMPTY_COPYDATA(ThreadPoolThread)
 EMPTY_SERIALIZER(ThreadPoolThread)
 
-ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const LCreal priority, Object* const obj)
+ThreadPoolThread::ThreadPoolThread(Component* const parent, ThreadPool* const pool, ThreadPoolManager* const mgr, const double priority, Object* const obj)
    : ThreadSyncTask(parent, priority), threadPool(pool), manager(mgr), persistentObj(obj), currentObj(nullptr)
 {
    STANDARD_CONSTRUCTOR()
@@ -162,7 +162,7 @@ ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num )
    initData();
 }
 
-ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num, const LCreal pri )
+ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num, const double pri )
    : manager(nullptr), numThreads(num), priority(pri)
 {
    STANDARD_CONSTRUCTOR()
@@ -407,7 +407,7 @@ bool ThreadPool::setSlotPriority(const Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal pri = msg->getReal();
+      double pri = msg->getReal();
       if (pri >= 0 && pri <= 1.0f) {
          priority = pri;
          ok = true;

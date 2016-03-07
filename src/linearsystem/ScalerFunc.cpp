@@ -121,8 +121,8 @@ void ScalerFunc::allocateMemory(unsigned int n0)
       }
       // Allocate the new space
       if (n0 > 0) {
-         px = new LCreal[n0];
-         py = new LCreal[n0];
+         px = new double[n0];
+         py = new double[n0];
          n = n0;
       }
    }
@@ -143,7 +143,7 @@ void ScalerFunc::clearMemory()
 // Set functions
 //------------------------------------------------------------------------------
 
-bool ScalerFunc::setX0(const LCreal v)
+bool ScalerFunc::setX0(const double v)
 {
    x0 = v;
    if (px != nullptr) {
@@ -154,7 +154,7 @@ bool ScalerFunc::setX0(const LCreal v)
    return true;
 }
 
-bool ScalerFunc::setY0(const LCreal v)
+bool ScalerFunc::setY0(const double v)
 {
    y0 = v;
    if (py != nullptr) {

@@ -45,11 +45,11 @@ public:
 
     void drawFunc() override;
 
-    virtual bool setRadius(const LCreal x)   { radius = x; return true; }
+    virtual bool setRadius(const double x)   { radius = x; return true; }
     virtual bool setFilled(const bool x)    { filled = x; return true; }
     virtual bool setSlices(const int x)     { slices = x; return true; }
 
-    LCreal getRadius()       { return radius; }
+    double getRadius()       { return radius; }
     bool isFilled()         { return filled; }
     int getSlices()         { return slices; }
 
@@ -64,7 +64,7 @@ protected:
     bool updateRadius(const base::Number* const x);
 
 private:
-    LCreal radius;
+    double radius;
     bool  filled;
     int   slices;
 };
@@ -87,15 +87,15 @@ public:
 
     void drawFunc() override;
 
-    virtual bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }
+    virtual bool setOuterRadius(const double x)  { outerRadius = x; return true; }
 
-    LCreal getOuterRadius()     { return outerRadius; }
+    double getOuterRadius()     { return outerRadius; }
 
 protected:
     bool setSlotOuterRadius(const base::Number* const x);
 
 private:
-    LCreal outerRadius;          // portion that is occluded
+    double outerRadius;          // portion that is occluded
 };
 
 
@@ -129,12 +129,12 @@ public:
 
     void drawFunc() override;
 
-    virtual bool setStartAngle(const LCreal x)  { startAngle = x; return true; }
-    virtual bool setArcLength(const LCreal x)   { arcLength = x; return true; }
+    virtual bool setStartAngle(const double x)  { startAngle = x; return true; }
+    virtual bool setArcLength(const double x)   { arcLength = x; return true; }
     virtual bool setIsConnected(const bool x)   { connected = x; return true; }
 
-    LCreal getStartAngle()                      { return startAngle; }
-    LCreal getArcLength()                       { return arcLength; }
+    double getStartAngle()                      { return startAngle; }
+    double getArcLength()                       { return arcLength; }
     bool  isConnected()                         { return connected; }
 
 protected:
@@ -143,8 +143,8 @@ protected:
     bool setSlotIsConnected(const base::Number* const x);
 
 private:
-    LCreal startAngle;
-    LCreal arcLength;
+    double startAngle;
+    double arcLength;
     bool  connected;
 };
 
@@ -166,15 +166,15 @@ public:
 
     void drawFunc() override;
 
-    bool setOuterRadius(const LCreal x)  { outerRadius = x; return true; }
+    bool setOuterRadius(const double x)  { outerRadius = x; return true; }
 
-    LCreal getOuterRadius()              { return outerRadius; }
+    double getOuterRadius()              { return outerRadius; }
 
 protected:
     bool setSlotOuterRadius(const base::Number* const x);
 
 private:
-    LCreal outerRadius;          // portion that is occluded
+    double outerRadius;          // portion that is occluded
 };
 
 

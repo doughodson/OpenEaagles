@@ -136,7 +136,7 @@ void UsbJoystickImp::reset()
 //------------------------------------------------------------------------------
 // Go get our AIs and DIs here
 //------------------------------------------------------------------------------
-void UsbJoystickImp::processInputs(const oe::LCreal dt, base::IoData* const pInData)
+void UsbJoystickImp::processInputs(const double dt, base::IoData* const pInData)
 {
    js_event js; // joystick event structure
 

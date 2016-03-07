@@ -140,7 +140,7 @@ bool PushButton::onMouseDown()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void PushButton::updateData(const LCreal dt)
+void PushButton::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 

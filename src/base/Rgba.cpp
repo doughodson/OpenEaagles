@@ -24,8 +24,8 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Rgba::Rgba(const LCreal r, const LCreal g,
-               const LCreal b, const LCreal a) : Rgb(r,g,b)
+Rgba::Rgba(const double r, const double g,
+               const double b, const double a) : Rgb(r,g,b)
 {
    STANDARD_CONSTRUCTOR()
    color[Color::ALPHA] = a;

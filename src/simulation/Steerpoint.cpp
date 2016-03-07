@@ -282,7 +282,7 @@ void Steerpoint::reset()
 // Data access functions
 //------------------------------------------------------------------------------
 
-LCreal Steerpoint::getElevationFt() const
+double Steerpoint::getElevationFt() const
 {
     return getElevationM() * base::Distance::M2FT;
 }
@@ -310,7 +310,7 @@ double Steerpoint::getLongitude() const
     return ll;
 }
 
-LCreal Steerpoint::getCmdAltitudeFt() const
+double Steerpoint::getCmdAltitudeFt() const
 {
     return getCmdAltitude() * base::Distance::M2FT;
 }
@@ -323,7 +323,7 @@ bool Steerpoint::setElevation(const base::Terrain* const terrain, const bool int
 {
    bool ok = false;
    if (!needLL) {
-      LCreal elev = 0;
+      double elev = 0;
       ok = terrain->getElevation(&elev, latitude, longitude, interp);
       if (ok) setElevation(elev);
    }
@@ -333,7 +333,7 @@ bool Steerpoint::setElevation(const base::Terrain* const terrain, const bool int
 //------------------------------------------------------------------------------
 // Data set functions
 //------------------------------------------------------------------------------
-void Steerpoint::setPosition(const LCreal x, const LCreal y, const LCreal z)
+void Steerpoint::setPosition(const double x, const double y, const double z)
 {
     posVec.set(x, y, z);
     needPosVec = false;
@@ -361,7 +361,7 @@ void Steerpoint::setLongitude(const double v)
     needLL = false;
 }
 
-void Steerpoint::setElevation(const LCreal x)
+void Steerpoint::setElevation(const double x)
 {
     elevation = x;
     posVec[Player::IDOWN] = -x;
@@ -372,13 +372,13 @@ void Steerpoint::setDescription(const base::String* const d)
     description = d;
 }
 
-void Steerpoint::setCmdAltitude(const LCreal x)
+void Steerpoint::setCmdAltitude(const double x)
 {
    cmdAlt = x;
    haveCmdAlt = true;
 }
 
-void Steerpoint::setCmdAirspeedKts(const LCreal x)
+void Steerpoint::setCmdAirspeedKts(const double x)
 {
    cmdAirspeed = x;
    haveCmdAs = true;
@@ -463,7 +463,7 @@ bool Steerpoint::setSlotPosition(const base::List* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        LCreal values[3];
+        double values[3];
         const int n = msg->getNumberList(values, 3);
         if (n == 3) {
             initPosVec[0] = values[0];
@@ -581,7 +581,7 @@ bool Steerpoint::setSlotMagVar(const base::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        initMagVar = static_cast<LCreal>(base::Degrees::convertStatic(*msg));
+        initMagVar = static_cast<double>(base::Degrees::convertStatic(*msg));
         haveInitMagVar = true;
         ok = true;
     }
@@ -691,7 +691,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             magvar = initMagVar;
         }
         else {
-            magvar = static_cast<LCreal>(nav->getMagVarDeg());
+            magvar = static_cast<double>(nav->getMagVarDeg());
         }
 
         // ---
@@ -701,7 +701,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // Compute our lat/lon when we only have the Pos Vec
             double elev = 0.0;
             base::Nav::convertPosVec2LL(nav->getRefLatitude(), nav->getRefLongitude(), posVec, &latitude, &longitude, &elev);
-            elevation  = static_cast<LCreal>(elev);
+            elevation  = static_cast<double>(elev);
             needLL = false;
         }
         if ( isLatLonValid() && !isPosVecValid() ) {
@@ -722,14 +722,14 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             double toTTG = 0.0;
             base::Nav::gll2bd(nav->getLatitude(), nav->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
 
-            setTrueBrgDeg( static_cast<LCreal>(toBrg) );
-            setDistNM( static_cast<LCreal>(toDist) );
+            setTrueBrgDeg( static_cast<double>(toBrg) );
+            setDistNM( static_cast<double>(toDist) );
             setMagBrgDeg( lcAepcDeg( getTrueBrgDeg() - getMagVarDeg() ) );
 
             if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
                 toTTG = (toDist/nav->getGroundSpeedKts()) * base::Time::H2S;
             }
-            setTTG(static_cast<LCreal>(toTTG));
+            setTTG(static_cast<double>(toTTG));
 
             // ---
             // Compute 'leg' course, distance & time, as well as enroute distance & times
@@ -740,13 +740,13 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             if (from != nullptr) {
                 // When we have a 'from' steerpoint, we can compute this leg's data
                 base::Nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
-                setTrueCrsDeg( static_cast<LCreal>(toBrg) );
+                setTrueCrsDeg( static_cast<double>(toBrg) );
                 setMagCrsDeg( lcAepcDeg( getTrueCrsDeg() - getMagVarDeg() ) );
-                setLegDistNM( static_cast<LCreal>(toDist) );
+                setLegDistNM( static_cast<double>(toDist) );
                 if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
                     toTTG = (toDist/nav->getGroundSpeedKts()) * base::Time::H2S;
                 }
-                setLegTime( static_cast<LCreal>(toTTG) );
+                setLegTime( static_cast<double>(toTTG) );
                 setDistEnrouteNM( from->getDistEnrouteNM() + getLegDistNM() );
                 setETE( from->getETE() + getLegTime() );
             }
@@ -763,8 +763,8 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // ---
             // Compute Est Time of Arrival and the PTA Early/Late time
             // ---
-            setETA( static_cast<LCreal>(getETE() + nav->getUTC()) );
-            LCreal delta = getPTA() - getETA();
+            setETA( static_cast<double>(getETE() + nav->getUTC()) );
+            double delta = getPTA() - getETA();
             if (delta >= base::Time::D2S) delta -= base::Time::D2S;
             setELT( delta );
 
@@ -772,7 +772,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // Compute Cross-track error (NM); negative values are when the desired track
             //  to this point is left of our navigation position
             // ---
-            LCreal aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<LCreal>(base::Angle::D2RCC);
+            double aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<double>(base::Angle::D2RCC);
             setCrossTrackErrNM( getDistNM() * lcSin(aa) );
 
             // ---

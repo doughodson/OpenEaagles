@@ -132,7 +132,7 @@ public:
 protected:
    bool setSlotStores(const base::PairStream* const msg) override;
 
-   void process(const LCreal dt) override;
+   void process(const double dt) override;
 
    bool shutdownNotification() override;
 
@@ -186,7 +186,7 @@ public:
    // Get the target track
    virtual Track* getNextTarget();
 
-   virtual bool setWeaponReleaseTimer(const LCreal v);   // Sets the release timer
+   virtual bool setWeaponReleaseTimer(const double v);   // Sets the release timer
 
    bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
    bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
@@ -213,10 +213,10 @@ public:
    Flare* releaseOneFlare() override;
    Decoy* releaseOneDecoy() override;
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
-   void process(const LCreal dt) override;
+   void process(const double dt) override;
 
 private:
    void initData();
@@ -228,7 +228,7 @@ private:
    Flare* getNextFlareImp();            // First available flare from our weapons list (Pre-ref()'d) (const version)
    Decoy* getNextDecoyImp();            // First available decoy from our weapons list (Pre-ref()'d) (const version)
 
-   LCreal wpnRelTimer;     // Weapon released timer
+   double wpnRelTimer;     // Weapon released timer
    int    curWpnID;        // Current Weapon ID
    int    nCurWpn;         // Number of weapons of the current type
 };

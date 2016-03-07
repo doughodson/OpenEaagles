@@ -29,12 +29,12 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Yiq(const LCreal y, const LCreal i, const LCreal q)
+//      Yiq(const double y, const double i, const double q)
 //          Special constructor that initializes the object to y, i, and q
 //
-//      LCreal y()
-//      LCreal i()
-//      LCreal q()
+//      double y()
+//      double i()
+//      double q()
 //          Data access routines.  Returns the individual YIQ components.
 //
 //      getYIQ(osg::Vec3 yiq)
@@ -61,12 +61,12 @@ public:
     enum { Y, I, Q };
 
 public:
-    Yiq(const LCreal y, const LCreal i, const LCreal q);
+    Yiq(const double y, const double i, const double q);
     Yiq();
 
-    LCreal y() const;
-    LCreal i() const;
-    LCreal q() const;
+    double y() const;
+    double i() const;
+    double q() const;
     void getYIQ(osg::Vec3& yiq) const;
 
     virtual bool setY(Number* const msg);

@@ -33,7 +33,7 @@ LowpassFilter::LowpassFilter() : wc(0.0)
    STANDARD_CONSTRUCTOR()
 }
 
-LowpassFilter::LowpassFilter(const unsigned int rate, const LCreal w)
+LowpassFilter::LowpassFilter(const unsigned int rate, const double w)
                         : FirstOrderTf(rate, 0.0f, w, 1.0f, w)
 {
    STANDARD_CONSTRUCTOR()
@@ -48,7 +48,7 @@ EMPTY_DELETEDATA(LowpassFilter)
 // Set functions
 //------------------------------------------------------------------------------
 
-bool LowpassFilter::setWc(const LCreal v)
+bool LowpassFilter::setWc(const double v)
 {
    wc = v;
 
@@ -69,8 +69,8 @@ bool LowpassFilter::setSlotWc(const base::Frequency* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal hz = base::Hertz::convertStatic(*msg);
-      LCreal rps = static_cast<LCreal>( hz * 2.0 * PI);
+      double hz = base::Hertz::convertStatic(*msg);
+      double rps = static_cast<double>( hz * 2.0 * PI);
       if (rps > 0) {
          setWc( rps );
          ok = true;
@@ -88,7 +88,7 @@ bool LowpassFilter::setSlotWc(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal rps = msg->getReal();
+      double rps = msg->getReal();
       if (rps > 0) {
          setWc( rps );
          ok = true;

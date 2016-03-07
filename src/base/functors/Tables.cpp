@@ -35,13 +35,13 @@ Table1::Table1() : Table()
    nx = 0;
 }
 
-Table1::Table1(const LCreal* dtbl, const unsigned int dsize,
-                   const LCreal* xtbl, const unsigned int xsize)
+Table1::Table1(const double* dtbl, const unsigned int dsize,
+                   const double* xtbl, const unsigned int xsize)
                    : Table(dtbl, dsize), xtable(nullptr), nx(0)
 {
     STANDARD_CONSTRUCTOR()
     if (xtbl != nullptr && xsize > 0) {   /* Copy the x breakpoints */
-        xtable = new LCreal[xsize];
+        xtable = new double[xsize];
         if (xtable != nullptr) {
             for (unsigned int i = 0; i < xsize; i++) xtable[i] = xtbl[i];
             nx = xsize;
@@ -60,7 +60,7 @@ void Table1::copyData(const Table1& org, const bool cc)
     // Copy new data
     nx = org.nx;
     if (org.xtable != nullptr) {
-        xtable = new LCreal[nx];
+        xtable = new double[nx];
         for (unsigned int i = 0; i < nx; i++) xtable[i] = org.xtable[i];
     }
     else xtable = nullptr;
@@ -78,14 +78,14 @@ void Table1::deleteData()
 // Load a 1D vector with nx values.
 // Example:  [ 1 2 3 ]
 //------------------------------------------------------------------------------
-bool Table1::loadData(const List& list, LCreal* const table)
+bool Table1::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     unsigned int n1 = list.entries();
     if (n1 <= 0 || n1 != nx) return false;
 
     // Transfer numbers from the list to a temp table
-    LCreal* p = new LCreal[nx];
+    double* p = new double[nx];
     unsigned int n2 = list.getNumberList(p, nx);
     bool ok = (nx == n2);
     if (ok) {
@@ -118,7 +118,7 @@ unsigned int Table1::tableSize() const
 //     Return the min/max values from the breakpoint tables
 //     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
-LCreal Table1::getMinX() const
+double Table1::getMinX() const
 {
     if (xtable != nullptr && nx > 0)
         return (xtable[0] < xtable[nx - 1]) ? xtable[0] : xtable[nx - 1];
@@ -126,7 +126,7 @@ LCreal Table1::getMinX() const
         throw new ExpInvalidTable();    //invalid table - throw an exception
 }
 
-LCreal Table1::getMaxX() const
+double Table1::getMaxX() const
 {
     if (xtable != nullptr && nx > 0)
         return (xtable[0] < xtable[nx - 1]) ? xtable[nx - 1] : xtable[0];
@@ -137,8 +137,8 @@ LCreal Table1::getMaxX() const
 //------------------------------------------------------------------------------
 //  1D LFI
 //------------------------------------------------------------------------------
-LCreal
-Table1::lfi(const LCreal iv1, FStorage* const f) const
+double
+Table1::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -202,7 +202,7 @@ std::ostream& Table1::serialize(std::ostream& sout, const int i, const bool slot
 //------------------------------------------------------------------------------
 //  Print 1D table
 //------------------------------------------------------------------------------
-void Table1::printData(std::ostream& sout, const LCreal* tbl, const unsigned int ns) const
+void Table1::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
 {
     indent(sout, ns);
     printVector(sout, tbl, nx);
@@ -233,14 +233,14 @@ Table2::Table2() : Table1()
    ny = 0;
 }
 
-Table2::Table2(const LCreal* dtbl, const unsigned int dsize,
-                   const LCreal* xtbl, const unsigned int xsize,
-                   const LCreal* ytbl, const unsigned int ysize)
+Table2::Table2(const double* dtbl, const unsigned int dsize,
+                   const double* xtbl, const unsigned int xsize,
+                   const double* ytbl, const unsigned int ysize)
                    : Table1(dtbl, dsize, xtbl, xsize), ytable(nullptr), ny(0)
 {
     STANDARD_CONSTRUCTOR()
     if (ytbl != nullptr && ysize > 0) {   /* Copy the y breakpoints */
-        ytable = new LCreal[ysize];
+        ytable = new double[ysize];
         if (ytable != nullptr) {
             for (unsigned int i = 0; i < ysize; i++) ytable[i] = ytbl[i];
             ny = ysize;
@@ -259,7 +259,7 @@ void Table2::copyData(const Table2& org, const bool cc)
     // Copy new data
     ny = org.ny;
     if (org.ytable != nullptr) {
-        ytable = new LCreal[ny];
+        ytable = new double[ny];
         for (unsigned int i = 0; i < ny; i++) ytable[i] = org.ytable[i];
     }
     else ytable = nullptr;
@@ -277,7 +277,7 @@ void Table2::deleteData()
 // 2D table is input as a list of 1D vectors.
 // Example:  { [ 11 12 13 ] [ 21 22 23 ] [ 31 32 33 ] }
 //------------------------------------------------------------------------------
-bool Table2::loadData(const List& list, LCreal* const table)
+bool Table2::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     unsigned int n1 = list.entries();
@@ -323,7 +323,7 @@ unsigned int Table2::tableSize() const
 //     Return the min/max values from the breakpoint tables
 //     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
-LCreal Table2::getMinY() const
+double Table2::getMinY() const
 {
     if (ytable != nullptr && ny > 0)
         return (ytable[0] < ytable[ny - 1]) ? ytable[0] : ytable[ny - 1];
@@ -331,7 +331,7 @@ LCreal Table2::getMinY() const
         throw new ExpInvalidTable();    //invalid table - throw an exception
 }
 
-LCreal Table2::getMaxY() const
+double Table2::getMaxY() const
 {
     if (ytable != nullptr && ny > 0)
         return (ytable[0] < ytable[ny - 1]) ? ytable[ny - 1] : ytable[0];
@@ -342,8 +342,8 @@ LCreal Table2::getMaxY() const
 //------------------------------------------------------------------------------
 //  2D LFIs
 //------------------------------------------------------------------------------
-LCreal
-Table2::lfi(const LCreal iv1, FStorage* const f) const
+double
+Table2::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -363,8 +363,8 @@ Table2::lfi(const LCreal iv1, FStorage* const f) const
    }
 }
 
-LCreal
-Table2::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
+double
+Table2::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -433,7 +433,7 @@ std::ostream& Table2::serialize(std::ostream& sout, const int i, const bool slot
 //------------------------------------------------------------------------------
 //  Print 2D table
 //------------------------------------------------------------------------------
-void Table2::printData(std::ostream& sout, const LCreal* tbl, const unsigned int ns) const
+void Table2::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
 {
     indent(sout, ns);
     sout << "{" << std::endl;
@@ -475,16 +475,16 @@ Table3::Table3() : Table2()
    nz = 0;
 }
 
-Table3::Table3(const LCreal* dtbl, const unsigned int dsize,
-                   const LCreal* xtbl, const unsigned int xsize,
-                   const LCreal* ytbl, const unsigned int ysize,
-                   const LCreal* ztbl, const unsigned int zsize)
+Table3::Table3(const double* dtbl, const unsigned int dsize,
+                   const double* xtbl, const unsigned int xsize,
+                   const double* ytbl, const unsigned int ysize,
+                   const double* ztbl, const unsigned int zsize)
                    : Table2(dtbl, dsize, xtbl, xsize, ytbl, ysize),
                      ztable(nullptr), nz(0)
 {
     STANDARD_CONSTRUCTOR()
     if (ztbl != nullptr && zsize > 0) {   /* Copy the z breakpoints */
-        ztable = new LCreal[zsize];
+        ztable = new double[zsize];
         if (ztable != nullptr) {
             for (unsigned int i = 0; i < zsize; i++) ztable[i] = ztbl[i];
             nz = zsize;
@@ -503,7 +503,7 @@ void Table3::copyData(const Table3& org, const bool cc)
     // Copy new data
     nz = org.nz;
     if (org.ztable != nullptr) {
-        ztable = new LCreal[nz];
+        ztable = new double[nz];
         for (unsigned int i = 0; i < nz; i++) ztable[i] = org.ztable[i];
     }
     else ztable = nullptr;
@@ -523,7 +523,7 @@ void Table3::deleteData()
 //             { [ 211 212 213 ] [ 221 222 223 ] [ 231 232 233 ] }
 //             { [ 311 312 313 ] [ 321 322 323 ] [ 331 332 333 ] } }
 //------------------------------------------------------------------------------
-bool Table3::loadData(const List& list, LCreal* const table)
+bool Table3::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     unsigned int n1 = list.entries();
@@ -569,7 +569,7 @@ unsigned int Table3::tableSize() const
 //     Return the min/max values from the breakpoint tables
 //     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
-LCreal Table3::getMinZ() const
+double Table3::getMinZ() const
 {
     if (ztable != nullptr && nz > 0)
         return (ztable[0] < ztable[nz - 1]) ? ztable[0] : ztable[nz - 1];
@@ -577,7 +577,7 @@ LCreal Table3::getMinZ() const
         throw new ExpInvalidTable();    //invalid table - throw an exception
 }
 
-LCreal Table3::getMaxZ() const
+double Table3::getMaxZ() const
 {
     if (ztable != nullptr && nz > 0)
         return (ztable[0] < ztable[nz - 1]) ? ztable[nz - 1] : ztable[0];
@@ -588,12 +588,12 @@ LCreal Table3::getMaxZ() const
 //------------------------------------------------------------------------------
 //  3D LFIs
 //------------------------------------------------------------------------------
-LCreal
-Table3::lfi(const LCreal iv1, FStorage* const f) const
+double
+Table3::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const LCreal* y_data = getYData();
+   const double* y_data = getYData();
    if (f != nullptr) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -610,8 +610,8 @@ Table3::lfi(const LCreal iv1, FStorage* const f) const
    }
 }
 
-LCreal
-Table3::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
+double
+Table3::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -631,8 +631,8 @@ Table3::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
    }
 }
 
-LCreal
-Table3::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const f) const
+double
+Table3::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -701,7 +701,7 @@ std::ostream& Table3::serialize(std::ostream& sout, const int i, const bool slot
 //------------------------------------------------------------------------------
 //  Print 3D table
 //------------------------------------------------------------------------------
-void Table3::printData(std::ostream& sout, const LCreal* tbl, const unsigned int ns) const
+void Table3::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
 {
     indent(sout, ns);
     sout << "{" << std::endl;
@@ -742,17 +742,17 @@ Table4::Table4() : Table3()
    wtable = nullptr;
    nw = 0;
 }
-Table4::Table4(const LCreal* dtbl, const unsigned int dsize,
-                   const LCreal* xtbl, const unsigned int xsize,
-                   const LCreal* ytbl, const unsigned int ysize,
-                   const LCreal* ztbl, const unsigned int zsize,
-                   const LCreal* wtbl, const unsigned int wsize)
+Table4::Table4(const double* dtbl, const unsigned int dsize,
+                   const double* xtbl, const unsigned int xsize,
+                   const double* ytbl, const unsigned int ysize,
+                   const double* ztbl, const unsigned int zsize,
+                   const double* wtbl, const unsigned int wsize)
                    : Table3(dtbl, dsize, xtbl, xsize, ytbl, ysize, ztbl, zsize),
                      wtable(nullptr), nw(0)
 {
     STANDARD_CONSTRUCTOR()
     if (wtbl != nullptr && wsize > 0) {   /* Copy the w breakpoints */
-        wtable = new LCreal[wsize];
+        wtable = new double[wsize];
         if (wtable != nullptr) {
             for (unsigned int i = 0; i < wsize; i++) wtable[i] = wtbl[i];
             nw = wsize;
@@ -771,7 +771,7 @@ void Table4::copyData(const Table4& org, const bool cc)
     // Copy new data
     nw = org.nw;
     if (org.wtable != nullptr) {
-        wtable = new LCreal[nw];
+        wtable = new double[nw];
         for (unsigned int i = 0; i < nw; i++) wtable[i] = org.wtable[i];
     }
     else wtable = nullptr;
@@ -803,7 +803,7 @@ void Table4::deleteData()
 //             { { [ 4211 4212 4213 ] [ 4221 4222 4223 ] [ 4231 4232 4233 ] } }
 //             { { [ 4311 4312 4313 ] [ 4321 4322 4323 ] [ 4331 4332 4333 ] } } }
 //------------------------------------------------------------------------------
-bool Table4::loadData(const List& list, LCreal* const table)
+bool Table4::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     unsigned int n1 = list.entries();
@@ -849,7 +849,7 @@ unsigned int Table4::tableSize() const
 //     Return the min/max values from the breakpoint tables
 //     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
-LCreal Table4::getMinW() const
+double Table4::getMinW() const
 {
     if (wtable != nullptr && nw > 0)
         return (wtable[0] < wtable[nw - 1]) ? wtable[0] : wtable[nw - 1];
@@ -857,7 +857,7 @@ LCreal Table4::getMinW() const
         throw new ExpInvalidTable();    //invalid table - throw an exception
 }
 
-LCreal Table4::getMaxW() const
+double Table4::getMaxW() const
 {
     if (wtable != nullptr && nw > 0)
         return (wtable[0] < wtable[nw - 1]) ? wtable[nw - 1] : wtable[0];
@@ -869,13 +869,13 @@ LCreal Table4::getMaxW() const
 //------------------------------------------------------------------------------
 //  4D LFIs
 //------------------------------------------------------------------------------
-LCreal
-Table4::lfi(const LCreal iv1, FStorage* const f) const
+double
+Table4::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const LCreal* y_data = getYData();
-   const LCreal* z_data = getZData();
+   const double* y_data = getYData();
+   const double* z_data = getZData();
    if (f != nullptr) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -894,12 +894,12 @@ Table4::lfi(const LCreal iv1, FStorage* const f) const
    }
 }
 
-LCreal
-Table4::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
+double
+Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const LCreal* z_data = getZData();
+   const double* z_data = getZData();
    if (f != nullptr) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -918,8 +918,8 @@ Table4::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
    }
 }
 
-LCreal
-Table4::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const f) const
+double
+Table4::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -941,8 +941,8 @@ Table4::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* cons
    }
 }
 
-LCreal
-Table4::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const f) const
+double
+Table4::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -1013,7 +1013,7 @@ std::ostream& Table4::serialize(std::ostream& sout, const int i, const bool slot
 //------------------------------------------------------------------------------
 //  print 4D table
 //------------------------------------------------------------------------------
-void Table4::printData(std::ostream& sout, const LCreal* tbl, const unsigned int ns) const
+void Table4::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
 {
     indent(sout, ns);
     sout << "{" << std::endl;
@@ -1055,18 +1055,18 @@ Table5::Table5() : Table4()
    nv = 0;
 }
 
-Table5::Table5(const LCreal* dtbl, const unsigned int dsize,
-                   const LCreal* xtbl, const unsigned int xsize,
-                   const LCreal* ytbl, const unsigned int ysize,
-                   const LCreal* ztbl, const unsigned int zsize,
-                   const LCreal* wtbl, const unsigned int wsize,
-                   const LCreal* vtbl, const unsigned int vsize)
+Table5::Table5(const double* dtbl, const unsigned int dsize,
+                   const double* xtbl, const unsigned int xsize,
+                   const double* ytbl, const unsigned int ysize,
+                   const double* ztbl, const unsigned int zsize,
+                   const double* wtbl, const unsigned int wsize,
+                   const double* vtbl, const unsigned int vsize)
                    : Table4(dtbl, dsize, xtbl, xsize, ytbl, ysize, ztbl, zsize, wtbl, wsize),
                      vtable(nullptr), nv(0)
 {
     STANDARD_CONSTRUCTOR()
     if (vtbl != nullptr && vsize > 0) {   /* Copy the v breakpoints */
-        vtable = new LCreal[vsize];
+        vtable = new double[vsize];
         if (vtable != nullptr) {
             for (unsigned int i = 0; i < vsize; i++) vtable[i] = vtbl[i];
             nv = vsize;
@@ -1085,7 +1085,7 @@ void Table5::copyData(const Table5& org, const bool cc)
     // Copy new data
     nv = org.nv;
     if (org.vtable != nullptr) {
-        vtable = new LCreal[nv];
+        vtable = new double[nv];
         for (unsigned int i = 0; i < nv; i++) vtable[i] = org.vtable[i];
     }
     else vtable = nullptr;
@@ -1102,7 +1102,7 @@ void Table5::deleteData()
 //------------------------------------------------------------------------------
 // 5D table is input as a list of 4D sub-tables.
 //------------------------------------------------------------------------------
-bool Table5::loadData(const List& list, LCreal* const table)
+bool Table5::loadData(const List& list, double* const table)
 {
     // Make sure we have the proper number of entries in the list
     unsigned int n1 = list.entries();
@@ -1148,7 +1148,7 @@ unsigned int Table5::tableSize() const
 //     Return the min/max values from the breakpoint tables
 //     Throw an ExpInvalidTable exception if the breakpoint table is empty
 //------------------------------------------------------------------------------
-LCreal Table5::getMinV() const
+double Table5::getMinV() const
 {
     if (vtable != nullptr && nv > 0)
         return (vtable[0] < vtable[nv - 1]) ? vtable[0] : vtable[nv - 1];
@@ -1156,7 +1156,7 @@ LCreal Table5::getMinV() const
         throw new ExpInvalidTable();    //invalid table - throw an exception
 }
 
-LCreal Table5::getMaxV() const
+double Table5::getMaxV() const
 {
     if (vtable != nullptr && nv > 0)
         return (vtable[0] < vtable[nv - 1]) ? vtable[nv - 1] : vtable[0];
@@ -1167,14 +1167,14 @@ LCreal Table5::getMaxV() const
 //------------------------------------------------------------------------------
 //  5D LFIs
 //------------------------------------------------------------------------------
-LCreal
-Table5::lfi(const LCreal iv1, FStorage* const f) const
+double
+Table5::lfi(const double iv1, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const LCreal* y_data = getYData();
-   const LCreal* z_data = getZData();
-   const LCreal* w_data = getWData();
+   const double* y_data = getYData();
+   const double* z_data = getZData();
+   const double* w_data = getWData();
    if (f != nullptr) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -1195,13 +1195,13 @@ Table5::lfi(const LCreal iv1, FStorage* const f) const
    }
 }
 
-LCreal
-Table5::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
+double
+Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const LCreal* z_data = getZData();
-   const LCreal* w_data = getWData();
+   const double* z_data = getZData();
+   const double* w_data = getWData();
    if (f != nullptr) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -1222,12 +1222,12 @@ Table5::lfi(const LCreal iv1, const LCreal iv2, FStorage* const f) const
    }
 }
 
-LCreal
-Table5::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const f) const
+double
+Table5::lfi(const double iv1, const double iv2, const double iv3, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
-   const LCreal* w_data = getWData();
+   const double* w_data = getWData();
    if (f != nullptr) {
       TableStorage* s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
@@ -1248,8 +1248,8 @@ Table5::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* cons
    }
 }
 
-LCreal
-Table5::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const f) const
+double
+Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -1273,8 +1273,8 @@ Table5::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal i
    }
 }
 
-LCreal
-Table5::lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, const LCreal iv5, FStorage* const f) const
+double
+Table5::lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const f) const
 {
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
@@ -1347,7 +1347,7 @@ std::ostream& Table5::serialize(std::ostream& sout, const int i, const bool slot
 //------------------------------------------------------------------------------
 //  Print 5D table
 //------------------------------------------------------------------------------
-void Table5::printData(std::ostream& sout, const LCreal* tbl, const unsigned int ns) const
+void Table5::printData(std::ostream& sout, const double* tbl, const unsigned int ns) const
 {
     indent(sout, ns);
     sout << "{" << std::endl;

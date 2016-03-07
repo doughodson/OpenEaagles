@@ -239,8 +239,8 @@ enum {
     CURSOR_ZERO_EVENT     = 1421,  // Passes requested switch state as Boolean
                                         // or no argument for one-shot event
 
-    CURSOR_X_EVENT        = 1422,  // Passes requested position state as LCreal
-    CURSOR_Y_EVENT        = 1423,  // Passes requested position state as LCreal
+    CURSOR_X_EVENT        = 1422,  // Passes requested position state as double
+    CURSOR_Y_EVENT        = 1423,  // Passes requested position state as double
 
     USER_EVENTS           = 2000   // First user defined event
 

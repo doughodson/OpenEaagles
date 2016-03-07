@@ -106,7 +106,7 @@
 //      const char* CadrgMap::getLevel()
 //
 // updateData() - Update map data.
-//      void CadrgMap::updateData(LCreal dt)
+//      void CadrgMap::updateData(double dt)
 //
 // getSlotByIndex() - Get the slot data.
 //      base::Object* CadrgMap::getSlotByIndex(const int si)
@@ -181,7 +181,7 @@ public:
 
     int getMaxTableSize()   { return maxTableSize; }
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
     virtual void sortMaps(const int count);             // simple function to sort our maps.
 

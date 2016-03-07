@@ -98,13 +98,13 @@ public:
 
    // Get a channel's frequency (Hz)
    // Returns -1 if the channel is invalid
-   LCreal getChannelFrequency(const unsigned short chan) const;
+   double getChannelFrequency(const unsigned short chan) const;
 
    // Set a channel's frequency (Hz)
-   virtual  bool setChannelFrequency(const unsigned short chan, const LCreal freq);
+   virtual  bool setChannelFrequency(const unsigned short chan, const double freq);
 
    // Returns the radio's maximum detection range (NM)
-   LCreal getMaxDetectRange() const;
+   double getMaxDetectRange() const;
 
    // DIS radio ID
    unsigned short getRadioId() const;
@@ -115,7 +115,7 @@ public:
    virtual bool setChannel(const unsigned short chan = 0);
 
    virtual bool setRadioId(const unsigned short num);
-   virtual bool setMaxDetectRange(const LCreal num);
+   virtual bool setMaxDetectRange(const double num);
 
 protected:
    virtual void receivedEmissionReport(Emission* const em);
@@ -130,7 +130,7 @@ protected:
    virtual bool setSlotMaxDetectRange(base::Number* const num);
    virtual bool setSlotRadioId(base::Number* const num);
 
-   void receive(const LCreal dt) override;
+   void receive(const double dt) override;
 
 private:
    void initData();
@@ -139,9 +139,9 @@ private:
    unsigned short numChan;    // Number of channels
 
    // Channel table
-   LCreal* chanFreqTbl;       // Channel Frequency table (hertz)
+   double* chanFreqTbl;       // Channel Frequency table (hertz)
 
-   LCreal  maxDetectRange;      // Radio maximum detection range  (NM)
+   double  maxDetectRange;      // Radio maximum detection range  (NM)
    unsigned short radioId;
 };
 

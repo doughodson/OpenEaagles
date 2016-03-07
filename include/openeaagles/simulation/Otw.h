@@ -74,7 +74,7 @@ public:
     const Player* getOwnship() const      { return ownship; }        // Our ownship -- the player that we're following
     unsigned int getMaxModels() const     { return maxModels; }      // Max number of active, in-range player/models
     unsigned int getMaxElevations() const { return maxElevations; }  // Max number of terrain elevation requests
-    LCreal getMaxRange() const            { return maxRange; }       // Max range of active player/models
+    double getMaxRange() const            { return maxRange; }       // Max range of active player/models
     double getRefLatitude() const         { return refLat; }         // Visual database reference latitude  (degs)
     double getRefLongitude() const        { return refLon; }         // Visual database reference longitude (degs)
     virtual bool isResetInProgress() const;                          // True if visual system is resetting
@@ -83,7 +83,7 @@ public:
     virtual bool setRefLongitude(const double v);                    // Sets the visual database reference longitude (degs)
     virtual void setPlayerList(base::PairStream* const newPlayerList); // Sets the player list that we're to use to generate player/models
 
-    bool setMaxRange(const LCreal r);                                // Sets the max range (meters)
+    bool setMaxRange(const double r);                                // Sets the max range (meters)
     bool setMaxModels(const unsigned int n);                         // Sets the max number of active, in-range player/models
     bool setMaxElevations(const unsigned int n);                     // Sets the max number of player terrain elevation requests
 
@@ -100,14 +100,14 @@ public:
     virtual bool setSlotRefLongitude(const base::Number* const msg);     // Sets the visual database reference longitude (degs) slot
     virtual bool setSlotOtwModelTypes(const base::PairStream* const msg); // Sets the list of OTW model type IDs (Otm objects)
 
-    void updateTC(const LCreal dt = 0.0) override;
+    void updateTC(const double dt = 0.0) override;
     void reset() override;
 
 protected:
     virtual void setOwnship0(Player* const newOwnship);     // Sets our ownship player
 
     // Computers the range (meters) from our ownship to this player.
-    virtual LCreal computeRangeToPlayer(const Player* const ip) const;
+    virtual double computeRangeToPlayer(const Player* const ip) const;
 
     // Find a player's model object in table 'type' by the player IDs
     virtual OtwModel* findModel(const unsigned short playerID, const base::String* const federateName, const TableType type);
@@ -169,7 +169,7 @@ private:
    OtwModel* newElevEntry(Player* const ip);      // Create a new elevation entry for this player & return the table index
 
    // Parameters
-   LCreal         maxRange;                        // Max range of visual system  (meters)
+   double         maxRange;                        // Max range of visual system  (meters)
    unsigned int   maxModels;                       // Max number of models (must be <= MAX_MODELS)
    unsigned int   maxElevations;                   // Max number of terrain elevation requests
 

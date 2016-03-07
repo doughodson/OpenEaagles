@@ -18,8 +18,8 @@ namespace base {
 
 class IoThread : public ThreadPeriodicTask {
    DECLARE_SUBCLASS(IoThread,ThreadPeriodicTask)
-   public: IoThread(Component* const parent, const LCreal priority, const LCreal rate);
-   private: virtual unsigned long userFunc(const LCreal dt);
+   public: IoThread(Component* const parent, const double priority, const double rate);
+   private: virtual unsigned long userFunc(const double dt);
 };
 
 //==============================================================================
@@ -156,8 +156,8 @@ const IoData* IoHandler::getInputData() const   { return inData; }
 IoData* IoHandler::getOutputData()              { return outData; }
 const IoData* IoHandler::getOutputData() const  { return outData; }
 
-LCreal IoHandler::getPriority() const           { return pri; }
-LCreal IoHandler::getRate() const               { return rate; }
+double IoHandler::getPriority() const           { return pri; }
+double IoHandler::getRate() const               { return rate; }
 
 //------------------------------------------------------------------------------
 // reset() -- Reset the I/O handler
@@ -240,7 +240,7 @@ bool IoHandler::initNetworks()
 //------------------------------------------------------------------------------
 // Handle input devices
 //------------------------------------------------------------------------------
-void IoHandler::inputDevices(const LCreal dt)
+void IoHandler::inputDevices(const double dt)
 {
    if (thread == nullptr) inputDevicesImp(dt);
 }
@@ -248,7 +248,7 @@ void IoHandler::inputDevices(const LCreal dt)
 //------------------------------------------------------------------------------
 // Handle output devices
 //------------------------------------------------------------------------------
-void IoHandler::outputDevices(const LCreal dt)
+void IoHandler::outputDevices(const double dt)
 {
    if (thread == nullptr) outputDevicesImp(dt);
 }
@@ -256,7 +256,7 @@ void IoHandler::outputDevices(const LCreal dt)
 //------------------------------------------------------------------------------
 // Implementation of the input devices handler
 //------------------------------------------------------------------------------
-void IoHandler::inputDevicesImp(const LCreal dt)
+void IoHandler::inputDevicesImp(const double dt)
 {
    // process our I/O devices
    if (devices != nullptr) {
@@ -276,7 +276,7 @@ void IoHandler::inputDevicesImp(const LCreal dt)
 //------------------------------------------------------------------------------
 // Implementation of the output devices handler
 //------------------------------------------------------------------------------
-void IoHandler::outputDevicesImp(const LCreal dt)
+void IoHandler::outputDevicesImp(const double dt)
 {
    // update the output data buffers before the output devices
    if (outData != nullptr) outData->processOutputs();
@@ -366,7 +366,7 @@ bool IoHandler::setSlotRate(const Frequency* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        LCreal x = Hertz::convertStatic(*msg);
+        double x = Hertz::convertStatic(*msg);
         if (x > 0) {
             rate = x;
             ok = true;
@@ -382,7 +382,7 @@ bool IoHandler::setSlotPriority(const Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
-       LCreal x = num->getReal();
+       double x = num->getReal();
         if (x >= 0 && x <= 1.0f) {
             pri = x;
             ok = true;
@@ -469,17 +469,17 @@ EMPTY_COPYDATA(IoThread)
 EMPTY_DELETEDATA(IoThread)
 EMPTY_SERIALIZER(IoThread)
 
-IoThread::IoThread(Component* const parent, const LCreal priority, const LCreal rate)
+IoThread::IoThread(Component* const parent, const double priority, const double rate)
       : ThreadPeriodicTask(parent, priority, rate)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-unsigned long IoThread::userFunc(const LCreal dt)
+unsigned long IoThread::userFunc(const double dt)
 {
    IoHandler* ioHandler = static_cast<IoHandler*>(getParent());
-   ioHandler->inputDevicesImp( static_cast<LCreal>(dt) );
-   ioHandler->outputDevicesImp( static_cast<LCreal>(dt) );
+   ioHandler->inputDevicesImp( static_cast<double>(dt) );
+   ioHandler->outputDevicesImp( static_cast<double>(dt) );
    return 0;
 }
 

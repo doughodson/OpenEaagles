@@ -35,7 +35,7 @@ public:
    unsigned int getSampleRate() const         { return sampleRate; } // hz
 
    // Time since last sample (sec) [ 0 .. 1/getSampleRate() ]
-   LCreal getAge() const                      { return time; }
+   double getAge() const                      { return time; }
 
    // Set Parameter
    virtual bool setSampleRate(const unsigned int v);   // hz
@@ -44,7 +44,7 @@ public:
    virtual bool setSlotSampleRate(const base::Frequency* const msg);
    virtual bool setSlotSampleRate(const base::Number* const msg);
 
-   LCreal g(const LCreal x) override;
+   double g(const double x) override;
    bool isValid() const override;
 
 protected:
@@ -55,8 +55,8 @@ private:
 
    static const unsigned int ORDER = 1;
 
-   LCreal       time;       // Current time since last sample (s)
-   LCreal       stime;      // Sample time: time of next sample (s)
+   double       time;       // Current time since last sample (s)
+   double       stime;      // Sample time: time of next sample (s)
    unsigned int sampleRate; // Sample rate (hz)
 };
 

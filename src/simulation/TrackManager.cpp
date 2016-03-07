@@ -208,7 +208,7 @@ bool TrackManager::shutdownNotification()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void TrackManager::process(const LCreal dt)
+void TrackManager::process(const double dt)
 {
    processTrackList(dt);
    BaseClass::process(dt);
@@ -217,7 +217,7 @@ void TrackManager::process(const LCreal dt)
 //------------------------------------------------------------------------------
 // Get track manager attributes
 //------------------------------------------------------------------------------
-LCreal TrackManager::getMaxTrackAge() const
+double TrackManager::getMaxTrackAge() const
 {
    return maxTrackAge;
 }
@@ -261,7 +261,7 @@ bool TrackManager::setMaxTrackAge(const double s)
 {
    bool ok = false;
    if (s > 0) {
-      maxTrackAge = static_cast<LCreal>(s);
+      maxTrackAge = static_cast<double>(s);
       ok = true;
    }
    return ok;
@@ -354,7 +354,7 @@ bool TrackManager::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 // newReport() -- Accept a new emission report
 //------------------------------------------------------------------------------
-void TrackManager::newReport(Emission* em, LCreal sn)
+void TrackManager::newReport(Emission* em, double sn)
 {
    // Queue up emissions reports
    if (em != nullptr) {
@@ -372,7 +372,7 @@ void TrackManager::newReport(Emission* em, LCreal sn)
 //------------------------------------------------------------------------------
 // getReport() -- Get the next 'new' report of the queue
 //------------------------------------------------------------------------------
-Emission* TrackManager::getReport(LCreal* const sn)
+Emission* TrackManager::getReport(double* const sn)
 {
    Emission* em = nullptr;
 
@@ -407,10 +407,10 @@ bool TrackManager::addTrack(Track* const t)
 //------------------------------------------------------------------------------
 // makeMatrixA() -- make standard A matrix
 //------------------------------------------------------------------------------
-void TrackManager::makeMatrixA(LCreal dt)
+void TrackManager::makeMatrixA(double dt)
 {
    // Delta time (default: 50 hz)
-   LCreal t = dt;
+   double t = dt;
    if (t == 0) t = 1.0 / 50.0;
 
    A[0][0] = 1;
@@ -452,7 +452,7 @@ bool TrackManager::setSlotMaxTracks(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
 {
-   LCreal age = 0.0;
+   double age = 0.0;
    const base::Time* p = dynamic_cast<const base::Time*>(num);
    if (p != nullptr) {
       // We have a time and we want it in seconds ...
@@ -729,9 +729,9 @@ void AirTrkMgr::deleteData()
 //  (Based on Hovanessian, "Radar Detection & Tracking Systems")
 //
 //------------------------------------------------------------------------------
-void AirTrkMgr::processTrackList(const LCreal dt)
+void AirTrkMgr::processTrackList(const double dt)
 {
-   LCreal tmp;
+   double tmp;
 
    // Make sure we have an ownship to work with
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
@@ -745,7 +745,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    // ---
    osg::Vec3 osVel = ownship->getVelocity();
    osg::Vec3 osAccel = ownship->getAcceleration();
-   LCreal osGndTrk = ownship->getGroundTrack();
+   double osGndTrk = ownship->getGroundTrack();
 
    lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
@@ -761,8 +761,8 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    // Get each new emission report from the queue
    unsigned int nReports = 0;
    Emission* emissions[MAX_REPORTS];
-   LCreal newSignal[MAX_REPORTS];
-   LCreal newRdot[MAX_REPORTS];
+   double newSignal[MAX_REPORTS];
+   double newRdot[MAX_REPORTS];
    osg::Vec3 tgtPos[MAX_REPORTS];
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
 
@@ -828,7 +828,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    // 5) Create inputs for current tracks
    // ---
    osg::Vec3 u[MAX_TRKS];
-   LCreal age[MAX_TRKS];
+   double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
 
    lcLock(trkListLock);
@@ -866,7 +866,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
    //      X(k) is the state vector [ pos vel accel ]
    //      U(k) is the difference between the observed & predicted positions
    // ---
-   LCreal d2 = posGate * posGate;    // position gate squared
+   double d2 = posGate * posGate;    // position gate squared
    lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
@@ -877,11 +877,11 @@ void AirTrkMgr::processTrackList(const LCreal dt)
       if (haveU[i]) {
          // Have Input vector U, use ...
          // where B is ...
-         LCreal b0 = alpha;
-         LCreal b1 = 0.0;
+         double b0 = alpha;
+         double b1 = 0.0;
          if (age[i] != 0) b1 = beta / age[i];
-         LCreal b2 = 0.0;
-         //LCreal b2 = gamma * 2.0f / (age[i]*age[i]);
+         double b2 = 0.0;
+         //double b2 = gamma * 2.0f / (age[i]*age[i]);
          if (u[i].length2() > d2) {
             // Large position change: just set position
             b0 = 1.0;
@@ -1001,7 +1001,7 @@ void AirTrkMgr::processTrackList(const LCreal dt)
 //------------------------------------------------------------------------------
 bool AirTrkMgr::setPositionGate(const base::Number* const num)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    const base::Distance* p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
@@ -1030,7 +1030,7 @@ bool AirTrkMgr::setPositionGate(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool AirTrkMgr::setRangeGate(const base::Number* const num)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    const base::Distance* p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
@@ -1059,7 +1059,7 @@ bool AirTrkMgr::setRangeGate(const base::Number* const num)
 //------------------------------------------------------------------------------
 bool AirTrkMgr::setVelocityGate(const base::Number* const num)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    if (num != nullptr) {
       // We have only a number, assume it's in meters ...
       value = num->getReal();
@@ -1201,9 +1201,9 @@ void GmtiTrkMgr::deleteData()
 //------------------------------------------------------------------------------
 // processTrackList() -- process the track list
 //------------------------------------------------------------------------------
-void GmtiTrkMgr::processTrackList(const LCreal dt)
+void GmtiTrkMgr::processTrackList(const double dt)
 {
-   LCreal tmp;
+   double tmp;
 
    // Make sure we have an ownship to work with
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
@@ -1217,7 +1217,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
    // ---
    const osg::Vec3 osVel = ownship->getVelocity();
    const osg::Vec3 osAccel = ownship->getAcceleration();
-   const LCreal osGndTrk = ownship->getGroundTrack();
+   const double osGndTrk = ownship->getGroundTrack();
    lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
@@ -1232,8 +1232,8 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
    // Get each new emission report from the queue
    unsigned int nReports = 0;
    Emission* emissions[MAX_REPORTS];
-   LCreal newSignal[MAX_REPORTS];
-   LCreal newRdot[MAX_REPORTS];
+   double newSignal[MAX_REPORTS];
+   double newRdot[MAX_REPORTS];
    osg::Vec3 tgtPos[MAX_REPORTS];
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
@@ -1288,7 +1288,7 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
    // 5) Create inputs for current tracks
    // ---
    osg::Vec3 u[MAX_TRKS];
-   LCreal age[MAX_TRKS];
+   double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
@@ -1337,11 +1337,11 @@ void GmtiTrkMgr::processTrackList(const LCreal dt)
          // Have Input vector U, use ...
          // X(k+1) = A*X(k) + B*U(k)
          // where B is ...
-         LCreal b0 = alpha;
-         LCreal b1 = 0.0;
+         double b0 = alpha;
+         double b1 = 0.0;
          if (age[i] != 0) b1 = beta / age[i];
-         LCreal b2 = 0.0;
-         //LCreal b2 = gamma * 2.0 / (age[i]*age[i]);
+         double b2 = 0.0;
+         //double b2 = gamma * 2.0 / (age[i]*age[i]);
          tracks[i]->setPosition(     (tpos*A[0][0] + tvel*A[0][1] + tacc*A[0][2]) + (u[i]*b0) );
          tracks[i]->setVelocity(     (tpos*A[1][0] + tvel*A[1][1] + tacc*A[1][2]) + (u[i]*b1) );
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]) + (u[i]*b2) );
@@ -1532,7 +1532,7 @@ void RwrTrkMgr::deleteData()
 //------------------------------------------------------------------------------
 // processTrackList() -- process the track list
 //------------------------------------------------------------------------------
-void RwrTrkMgr::processTrackList(const LCreal dt)
+void RwrTrkMgr::processTrackList(const double dt)
 {
    // Make sure we have an ownship to work with
    Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
@@ -1546,7 +1546,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    // ---
    osg::Vec3 osVel = ownship->getVelocity();
    osg::Vec3 osAccel = ownship->getAcceleration();
-   LCreal osGndTrk = ownship->getGroundTrack();
+   double osGndTrk = ownship->getGroundTrack();
    lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
@@ -1561,10 +1561,10 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    // Get each new emission report from the queue
    unsigned int nReports = 0;
    Emission* emissions[MAX_REPORTS];
-   LCreal newSignal[MAX_REPORTS];
-   LCreal newRdot[MAX_REPORTS];
+   double newSignal[MAX_REPORTS];
+   double newRdot[MAX_REPORTS];
    osg::Vec3 tgtPos[MAX_REPORTS];
-   LCreal tmp = 0.0;
+   double tmp = 0.0;
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
          // save the report
@@ -1613,7 +1613,7 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
    // 5) Create input vectors for the current tracks
    // ---
    osg::Vec3 u[MAX_TRKS];
-   //LCreal age[MAX_TRKS];
+   //double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
    lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
@@ -1662,9 +1662,9 @@ void RwrTrkMgr::processTrackList(const LCreal dt)
          // Have Input vector U, use ...
          // X(k+1) = A*X(k) + B*U(k)
          // where B is ...
-         LCreal b0 = alpha;
-         LCreal b1 = 0.0;
-         LCreal b2 = 0.0;
+         double b0 = alpha;
+         double b1 = 0.0;
+         double b2 = 0.0;
          tracks[i]->setPosition(     (tpos*A[0][0] + tvel*A[0][1] + tacc*A[0][2]) + (u[i]*b0) );
          tracks[i]->setVelocity(     (tpos*A[1][0] + tvel*A[1][1] + tacc*A[1][2]) + (u[i]*b1) );
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]) + (u[i]*b2) );

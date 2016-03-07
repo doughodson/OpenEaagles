@@ -38,16 +38,16 @@ class LagFilter : public FirstOrderTf
 
 public:
    LagFilter();
-   LagFilter(const unsigned int rate, const LCreal tau);
+   LagFilter(const unsigned int rate, const double tau);
 
-   LCreal getTau() const                         { return tau; }
-   virtual bool setTau(const LCreal v);
+   double getTau() const                         { return tau; }
+   virtual bool setTau(const double v);
 
    virtual bool setSlotTau(const base::Time* const msg);
    virtual bool setSlotTau(const base::Number* const msg);
 
 private:
-   LCreal tau;    // filter time constant (seconds)
+   double tau;    // filter time constant (seconds)
 };
 
 } // End linearsystem namespace

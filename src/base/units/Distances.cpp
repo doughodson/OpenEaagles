@@ -17,27 +17,27 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Distance, "Distance")
 EMPTY_SLOTTABLE(Distance)
 
 // Conversion constants
-const LCreal Distance::FT2M =  0.30480f;                  // Feet => Meters
-const LCreal Distance::M2FT = (1 / Distance::FT2M);       // Meters => Feet
-const LCreal Distance::IN2M =  0.02540f;                  // Inches => Meters
-const LCreal Distance::M2IN =  (1 / Distance::IN2M);      // Meters => Inches
+const double Distance::FT2M =  0.30480f;                  // Feet => Meters
+const double Distance::M2FT = (1 / Distance::FT2M);       // Meters => Feet
+const double Distance::IN2M =  0.02540f;                  // Inches => Meters
+const double Distance::M2IN =  (1 / Distance::IN2M);      // Meters => Inches
 
-const LCreal Distance::NM2M = 1852.0f;                    // Nautical Miles => Meters
-const LCreal Distance::M2NM = (1 / Distance::NM2M);       // Meters => Nautical Miles
-const LCreal Distance::NM2FT = (NM2M * M2FT);             // Nautical Miles => Feet
-const LCreal Distance::FT2NM = 1/NM2FT;                   // Feet => Nautical Miles
+const double Distance::NM2M = 1852.0f;                    // Nautical Miles => Meters
+const double Distance::M2NM = (1 / Distance::NM2M);       // Meters => Nautical Miles
+const double Distance::NM2FT = (NM2M * M2FT);             // Nautical Miles => Feet
+const double Distance::FT2NM = 1/NM2FT;                   // Feet => Nautical Miles
 
-const LCreal Distance::SM2M = 1609.344f;                  // Statue Miles => Meters
-const LCreal Distance::M2SM = (1 / Distance::SM2M);       // Meters => Statue Miles
-const LCreal Distance::SM2FT = 5280.0f;                   // Statue Miles => Feet
-const LCreal Distance::FT2SM = (1 / Distance::SM2FT);     // Feet => Statue Miles
+const double Distance::SM2M = 1609.344f;                  // Statue Miles => Meters
+const double Distance::M2SM = (1 / Distance::SM2M);       // Meters => Statue Miles
+const double Distance::SM2FT = 5280.0f;                   // Statue Miles => Feet
+const double Distance::FT2SM = (1 / Distance::SM2FT);     // Feet => Statue Miles
 
-const LCreal Distance::KM2M = 1000.0f;                    // Kilometers => Meters
-const LCreal Distance::M2KM = (1 / Distance::KM2M);       // Meters => Kilometers
-const LCreal Distance::CM2M = 0.01f;                      // Centimeters => Meters
-const LCreal Distance::M2CM = (1 / Distance::CM2M);       // Meters => Centimeters
-const LCreal Distance::UM2M = 0.000001f;                  // Micrometer (Micron) => Meters
-const LCreal Distance::M2UM = (1 / Distance::UM2M);       // Meters => Micrometer (Micron)
+const double Distance::KM2M = 1000.0f;                    // Kilometers => Meters
+const double Distance::M2KM = (1 / Distance::KM2M);       // Meters => Kilometers
+const double Distance::CM2M = 0.01f;                      // Centimeters => Meters
+const double Distance::M2CM = (1 / Distance::CM2M);       // Meters => Centimeters
+const double Distance::UM2M = 0.000001f;                  // Micrometer (Micron) => Meters
+const double Distance::M2UM = (1 / Distance::UM2M);       // Meters => Micrometer (Micron)
 
 
 // ---
@@ -48,7 +48,7 @@ Distance::Distance() : Number()
     STANDARD_CONSTRUCTOR()
 }
 
-Distance::Distance(const LCreal value) : Number(value)
+Distance::Distance(const double value) : Number(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -103,7 +103,7 @@ Meters::Meters() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-Meters::Meters(const LCreal value) : Distance(value)
+Meters::Meters(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -129,7 +129,7 @@ CentiMeters::CentiMeters() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-CentiMeters::CentiMeters(const LCreal value) : Distance(value)
+CentiMeters::CentiMeters(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -156,7 +156,7 @@ MicroMeters::MicroMeters() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-MicroMeters::MicroMeters(const LCreal value) : Distance(value)
+MicroMeters::MicroMeters(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -181,7 +181,7 @@ Microns::Microns() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-Microns::Microns(const LCreal value) : Distance(value)
+Microns::Microns(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -206,7 +206,7 @@ KiloMeters::KiloMeters() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-KiloMeters::KiloMeters(const LCreal value) : Distance(value)
+KiloMeters::KiloMeters(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -232,7 +232,7 @@ Inches::Inches() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-Inches::Inches(const LCreal value) : Distance(value)
+Inches::Inches(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -258,7 +258,7 @@ Feet::Feet() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-Feet::Feet(const LCreal value) : Distance(value)
+Feet::Feet(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -284,7 +284,7 @@ NauticalMiles::NauticalMiles() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-NauticalMiles::NauticalMiles(const LCreal value) : Distance(value)
+NauticalMiles::NauticalMiles(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -310,7 +310,7 @@ StatuteMiles::StatuteMiles() : Distance()
     STANDARD_CONSTRUCTOR()
 }
 
-StatuteMiles::StatuteMiles(const LCreal value) : Distance(value)
+StatuteMiles::StatuteMiles(const double value) : Distance(value)
 {
     STANDARD_CONSTRUCTOR()
 }

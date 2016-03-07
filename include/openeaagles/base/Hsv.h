@@ -40,12 +40,12 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Hsv(const LCreal h, const LCreal s, const LCreal v)
+//      Hsv(const double h, const double s, const double v)
 //          Special constructor that initializes the object to h, s, and v
 //
-//      LCreal hue()
-//      LCreal saturation()
-//      LCreal value()
+//      double hue()
+//      double saturation()
+//      double value()
 //          Data access routines.  Returns the individual HSV components.
 //
 //      getHSV(osg::Vec3 hsv)
@@ -91,12 +91,12 @@ public:
     enum { HUE, SATURATION, VALUE, /* ALPHA */ };
 
 public:
-    Hsv(const LCreal h, const LCreal s, const LCreal v);
+    Hsv(const double h, const double s, const double v);
     Hsv();
 
-    LCreal hue() const;                               // Hue value (0.0 to 360.0) (see Hsv.h)
-    LCreal saturation() const;                        // Saturation: 0.0 (white) to 1.0 (pure color)
-    LCreal value() const;                             // Value: 0.0 (black) to 1.0 (full)
+    double hue() const;                               // Hue value (0.0 to 360.0) (see Hsv.h)
+    double saturation() const;                        // Saturation: 0.0 (white) to 1.0 (pure color)
+    double value() const;                             // Value: 0.0 (black) to 1.0 (full)
 
     void getHSV(osg::Vec3& vec) const;                // Returns the hsv vector
     bool setHSV(const osg::Vec3& vec);                // Sets the hsv vector

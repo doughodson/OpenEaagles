@@ -150,7 +150,7 @@ void Field::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void Field::updateData(const LCreal dt)
+void Field::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 

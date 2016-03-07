@@ -136,7 +136,7 @@ public:
    virtual bool updateSymbolPositionXYScreen(const int idx, const double xPos, const double yPos);
 
    // Updates the symbols true heading
-   virtual bool updateSymbolHeading(const int idx, const LCreal hdg);
+   virtual bool updateSymbolHeading(const int idx, const double hdg);
 
    // Updates the symbol's value
    virtual bool updateSymbolValue(const int idx, base::Object* const value);
@@ -145,13 +145,13 @@ public:
    virtual bool updateSymbolText(const int idx, const char* name, const char newString[]);
 
    // Updates the value of the named NumericReadout type subcomponent
-   virtual bool updateSymbolText(const int idx, const char* name, const LCreal newVal);
+   virtual bool updateSymbolText(const int idx, const char* name, const double newVal);
 
    // Sets the visibility flag for a symbol's subcomponent
    virtual bool setSymbolVisible(const int idx, const char* name, bool visibility);
 
    // Sets the flash rate (hz) for a symbol's subcomponent
-   virtual bool setSymbolFlashRate(const int idx, const char* name, const LCreal flashRate);
+   virtual bool setSymbolFlashRate(const int idx, const char* name, const double flashRate);
 
    // Change the color of a symbol (if 'name' == 0) or its subcomponent
    virtual bool setSymbolColor(const int idx, const char* name, const base::Color* cobj);
@@ -169,7 +169,7 @@ public:
    void draw() override;
    void drawFunc() override;
 
-   void updateTC(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
 
 protected:
    bool setSlotTemplates(base::PairStream* myTemps);
@@ -222,8 +222,8 @@ public:
    double getScreenXPos() const;             // X screen position (inches)
    double getScreenYPos() const;             // Y screen position (inches)
 
-   LCreal getHeadingDeg() const;             // Returns heading (degs)
-   LCreal getHeadingRad() const;             // heading (rads)
+   double getHeadingDeg() const;             // Returns heading (degs)
+   double getHeadingRad() const;             // heading (rads)
    base::Degrees* getHdgAngleObj() const;   // base::Angle object that holds the heading value
    Graphic* getHdgGraphics() const;          // Graphic object named 'hdg' to handle heading rotation
 
@@ -241,7 +241,7 @@ public:
    void setYScreenPos(const double v);       // Sets the Y screen pos (inches) (does not include displacement)
 
    void setSymbolPair(base::Pair* const p);     // Sets the graphical component
-   void setHeadingDeg(const LCreal h);           // Sets the (optional) heading (degrees)
+   void setHeadingDeg(const double h);           // Sets the (optional) heading (degrees)
    void setHdgAngleObj(base::Degrees* const p); // Sets the base::Angle object that holds the heading value
    void setHdgGraphics(Graphic* const p);        // Sets the graphic object named 'hdg' to handle heading rotation
 
@@ -264,7 +264,7 @@ private:
    double xScreenPos;      // x position: Screen
    double yScreenPos;      // y position: Screen
 
-   LCreal hdg;             // symbol heading (degrees)
+   double hdg;             // symbol heading (degrees)
    bool hdgValid;          // Heading valid flag
    Graphic* phdg;          // Object named 'hdg' to handle heading rotation
    base::Degrees* hdgAng; // Value sent to the heading 'hdg' object
@@ -315,8 +315,8 @@ inline double SlSymbol::getYPosition() const             { return yPos; }
 inline double SlSymbol::getScreenXPos() const            { return xScreenPos; }
 inline double SlSymbol::getScreenYPos() const            { return yScreenPos; }
 
-inline LCreal SlSymbol::getHeadingDeg() const            { return hdg; }
-inline LCreal SlSymbol::getHeadingRad() const            { return static_cast<LCreal>(hdg * base::Angle::D2RCC); }
+inline double SlSymbol::getHeadingDeg() const            { return hdg; }
+inline double SlSymbol::getHeadingRad() const            { return static_cast<double>(hdg * base::Angle::D2RCC); }
 inline base::Degrees* SlSymbol::getHdgAngleObj() const  { return hdgAng; }
 inline Graphic* SlSymbol::getHdgGraphics() const         { return phdg; }
 

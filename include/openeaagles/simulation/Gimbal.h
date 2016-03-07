@@ -347,7 +347,7 @@ protected:
    bool setCurrentTdb(Tdb* const newTdb);
 
    // System Interface -- Callbacks by phase
-   void dynamics(const LCreal dt) override;    // Phase 0
+   void dynamics(const double dt) override;    // Phase 0
 
    // base::Component protected interface
    bool shutdownNotification() override;

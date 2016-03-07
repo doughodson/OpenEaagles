@@ -62,12 +62,12 @@ Table::Table() : valid(false), extFlg(false)
    nd = 0;
 }
 
-Table::Table(const LCreal* dtbl, const unsigned int dsize)
+Table::Table(const double* dtbl, const unsigned int dsize)
    : valid(false), dtable(nullptr), nd(0), extFlg(false)
 {
     STANDARD_CONSTRUCTOR()
     if (dtbl != nullptr && dsize > 0) {   /* Copy the data table */
-        dtable = new LCreal[dsize];
+        dtable = new double[dsize];
         if (dtable != nullptr) {
             for (unsigned int i = 0; i < dsize; i++) dtable[i] = dtbl[i];
             nd = dsize;
@@ -109,7 +109,7 @@ void Table::copyData(const Table& org, const bool cc)
     // Copy new data
     nd = org.nd;
     if (org.dtable != nullptr) {
-        dtable = new LCreal[nd];
+        dtable = new double[nd];
         for (unsigned int i = 0; i < nd; i++) dtable[i] = org.dtable[i];
     }
     else dtable = nullptr;
@@ -161,11 +161,11 @@ bool Table::setExtrapolationEnabled(const Number* const msg)
 //------------------------------------------------------------------------------
 // findMinMax() -- find the minimum and maximum values of the table
 //------------------------------------------------------------------------------
-void Table::findMinMax(LCreal* minValue, LCreal* maxValue) const
+void Table::findMinMax(double* minValue, double* maxValue) const
 {
     if (nd > 0) {
-        LCreal minv = dtable[0];
-        LCreal maxv = dtable[0];
+        double minv = dtable[0];
+        double maxv = dtable[0];
         for (unsigned int i = 1; i < nd; i++) {
             if (dtable[i] < minv) minv = dtable[i];
             if (dtable[i] > maxv) maxv = dtable[i];
@@ -179,12 +179,12 @@ void Table::findMinMax(LCreal* minValue, LCreal* maxValue) const
 //------------------------------------------------------------------------------
 // loadVector() --
 //------------------------------------------------------------------------------
-bool Table::loadVector(const List& list, LCreal** table, unsigned int* nn)
+bool Table::loadVector(const List& list, double** table, unsigned int* nn)
 {
     unsigned int n = list.entries();
     if (n <= 0) return false;
 
-    LCreal* p = new LCreal[n];
+    double* p = new double[n];
     unsigned int n2 = list.getNumberList(p, n);
     bool ok = (n == n2);
     if (ok) {
@@ -213,7 +213,7 @@ bool Table::setDataTable(const List* const sdtobj)
         unsigned int ts = tableSize();
         if (ts > 0) {
             // Allocate table space and load the table
-            LCreal* p = new LCreal[ts];
+            double* p = new double[ts];
             ok = loadData(*sdtobj, p);
             if (ok) {
                 // Loading completed, so
@@ -269,7 +269,7 @@ std::ostream& Table::serialize(std::ostream& sout, const int i, const bool slots
 //------------------------------------------------------------------------------
 // printVector() -- print a vector of breakpoints
 //------------------------------------------------------------------------------
-void Table::printVector(std::ostream& sout, const LCreal* table, const unsigned int n)
+void Table::printVector(std::ostream& sout, const double* table, const unsigned int n)
 {
     sout << "[";
     if (table != nullptr) {

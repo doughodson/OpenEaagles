@@ -89,7 +89,7 @@ unsigned int Ai2DiSwitch::getChannel() const
    return channel;
 }
 
-LCreal Ai2DiSwitch::getLevel() const
+double Ai2DiSwitch::getLevel() const
 {
    return level;
 }
@@ -115,7 +115,7 @@ bool Ai2DiSwitch::setChannel(const unsigned int v)
    return true;
 }
 
-bool Ai2DiSwitch::setLevel(const LCreal v)
+bool Ai2DiSwitch::setLevel(const double v)
 {
    level = v;
    return true;
@@ -130,10 +130,10 @@ bool Ai2DiSwitch::setInvertFlag(const bool f)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void Ai2DiSwitch::processInputs(const LCreal, const base::IoDevice* const device, base::IoData* const inData)
+void Ai2DiSwitch::processInputs(const double, const base::IoDevice* const device, base::IoData* const inData)
 {
    // Default is our initial value
-   LCreal vin(0.0);
+   double vin(0.0);
 
    // Get data from the AI device
    if (device != nullptr && devEnb) {
@@ -151,7 +151,7 @@ void Ai2DiSwitch::processInputs(const LCreal, const base::IoDevice* const device
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void Ai2DiSwitch::processOutputs(const LCreal, const base::IoData* const, base::IoDevice* const)
+void Ai2DiSwitch::processOutputs(const double, const base::IoData* const, base::IoDevice* const)
 {
 }
 

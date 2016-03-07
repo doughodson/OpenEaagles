@@ -13,11 +13,11 @@
 namespace oe {
 namespace instruments {
 
-static LCreal GROUND[3] = { 0.588235294f, 0.294117647f, 0.0f };
-static LCreal SKY[3] =    { 0.0f, 0.5f, 1.0f };
-static LCreal WHITE[3] =  { 1.0f, 1.0f, 1.0f };
-static LCreal BLACK[3] =  { 0.0f, 0.0f, 0.0f };
-static LCreal GREEN[3] =  { 0.0f, 1.0f, 0.0f };
+static double GROUND[3] = { 0.588235294f, 0.294117647f, 0.0f };
+static double SKY[3] =    { 0.0f, 0.5f, 1.0f };
+static double WHITE[3] =  { 1.0f, 1.0f, 1.0f };
+static double BLACK[3] =  { 0.0f, 0.0f, 0.0f };
+static double GREEN[3] =  { 0.0f, 1.0f, 0.0f };
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Eadi3DPage,"Eadi3DPage")
 EMPTY_SERIALIZER(Eadi3DPage)
@@ -387,7 +387,7 @@ void Eadi3DPage::draw()
         GLsizei vpWidth;
         GLsizei vpHeight;
         dsp->getViewportSize(&vpWidth, &vpHeight);
-        LCreal ratio = static_cast<LCreal>(vpWidth) / static_cast<LCreal>(vpHeight);
+        double ratio = static_cast<double>(vpWidth) / static_cast<double>(vpHeight);
 
         bool depthTest = false;
         if (glIsEnabled(GL_DEPTH_TEST))
@@ -410,7 +410,7 @@ void Eadi3DPage::draw()
         const char* airSpeedType = "C";
         scales(glideslopeDevDOTS, localizerDevDOTS, turnRateDOTS, slipIndDOTS, glideslopeDevValid, localizerDevValid, landingMode);
         windows(airspeedKTS, altitudeFT, aoaDEG, machNo, vviFPM, airSpeedType, Gload);
-        LCreal hdgCmd = 0.0;
+        double hdgCmd = 0.0;
         heading(headingDEG, hdgCmd);
 
         glMatrixMode(GL_PROJECTION);
@@ -429,12 +429,12 @@ void Eadi3DPage::draw()
 //------------------------------------------------------------------------------
 // globeBall() - draw the globe given specific input parameters
 //------------------------------------------------------------------------------
-void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal rollCmd, bool psValid, bool rcValid, bool landMode)
+void Eadi3DPage::globeBall(double pitch, double roll, double pitchCmd, double rollCmd, bool psValid, bool rcValid, bool landMode)
 {
-    static LCreal    fdPscV1[2] = {-0.5833f, 0.0f};
-    static LCreal    fdPscV2[2] = {0.5833f, 0.0f};
-    static LCreal    fdBscV1[2] = {0.0f, -0.5833f};
-    static LCreal    fdBscV2[2] = {0.0f, 0.5833f};
+    static double    fdPscV1[2] = {-0.5833f, 0.0f};
+    static double    fdPscV2[2] = {0.5833f, 0.0f};
+    static double    fdBscV1[2] = {0.0f, -0.5833f};
+    static double    fdBscV2[2] = {0.0f, 0.5833f};
 
     glLineWidth(1.0);
 
@@ -481,7 +481,7 @@ void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal ro
 
     if (landMode) {
         if (psValid) {
-            LCreal x = static_cast<LCreal>(pitchCmd / 30.0 * 1.625);   /* pitch fd command */
+            double x = static_cast<double>(pitchCmd / 30.0 * 1.625);   /* pitch fd command */
             glPushMatrix();
             glTranslated(0.0, static_cast<GLdouble>(x), 0.0);
             glBegin(GL_LINES);
@@ -491,7 +491,7 @@ void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal ro
             glPopMatrix();
         }
         if (rcValid) {
-            LCreal x = static_cast<LCreal>(rollCmd / 30.0 * 1.625);    /* roll fd command */
+            double x = static_cast<double>(rollCmd / 30.0 * 1.625);    /* roll fd command */
             glPushMatrix();
             glTranslated(static_cast<GLdouble>(x), 0.0, 0.0);
             glBegin(GL_LINES);
@@ -508,7 +508,7 @@ void Eadi3DPage::globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal ro
 //------------------------------------------------------------------------------
 // scales() - draw the scales
 //------------------------------------------------------------------------------
-void Eadi3DPage::scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal slipInd, bool gsValid, bool locValid, bool landMode)
+void Eadi3DPage::scales(double gsDev, double locDev, double turnRate, double slipInd, bool gsValid, bool locValid, bool landMode)
 {
 
     if (landMode) {
@@ -518,7 +518,7 @@ void Eadi3DPage::scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal sli
         eadiObjs.drawObj(Eadi3DObjects::GLIDESLOPE);
 
         if (gsValid) {
-            LCreal x = static_cast<LCreal>(gsDev / 2.0);
+            double x = static_cast<double>(gsDev / 2.0);
             glPushMatrix();
             glTranslated(-2.0, static_cast<GLdouble>(x), 0.);
             eadiObjs.drawObj(Eadi3DObjects::GS_TEXT1);
@@ -530,7 +530,7 @@ void Eadi3DPage::scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal sli
         eadiObjs.drawObj(Eadi3DObjects::LOCALIZER);
 
         if (locValid) {
-            LCreal x = static_cast<LCreal>(locDev / 2.0);
+            double x = static_cast<double>(locDev / 2.0);
             glPushMatrix();
             glTranslated(static_cast<GLdouble>(x), 2.0, 0.);
             eadiObjs.drawObj(Eadi3DObjects::LOC_TEXT1);
@@ -541,14 +541,14 @@ void Eadi3DPage::scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal sli
     glLineWidth(2.0);
     lcColor3v(WHITE);
 
-    LCreal x = static_cast<LCreal>(turnRate / 2.0 * 0.8125);
+    double x = static_cast<double>(turnRate / 2.0 * 0.8125);
 
     glPushMatrix();
     glTranslated(static_cast<GLdouble>(x), -2.125, 0.);
     eadiObjs.drawObj(Eadi3DObjects::UP_TRIANGLE);
     glPopMatrix();
 
-    x = static_cast<LCreal>(slipInd / 2. * 0.40625);
+    x = static_cast<double>(slipInd / 2. * 0.40625);
     glPushMatrix();
     glTranslated(static_cast<GLdouble>(x), -2.4375, 0.);
     eadiObjs.drawObj(Eadi3DObjects::SLIP_BALL);
@@ -560,21 +560,21 @@ void Eadi3DPage::scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal sli
 //------------------------------------------------------------------------------
 // windows() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal vvi, const char* airSpeedType, LCreal gload)
+void Eadi3DPage::windows(double cas, double alt, double aoa, double mach, double vvi, const char* airSpeedType, double gload)
 {
-    LCreal a = cas;
+    double a = cas;
     if (a > 9999.) a = 9999.;
     if (a < 0.) a = 0.;
 
     int airC[4];
     airC[0] = static_cast<int>(a) / 1000;
-    a -= static_cast<LCreal>(airC[0] * 1000);
+    a -= static_cast<double>(airC[0] * 1000);
 
     airC[1] = static_cast<int>(a) / 100;
-    a -= static_cast<LCreal>(airC[1] * 100);
+    a -= static_cast<double>(airC[1] * 100);
 
     airC[2] = static_cast<int>(a) / 10;
-    a -= static_cast<LCreal>(airC[2] * 10);
+    a -= static_cast<double>(airC[2] * 10);
 
     airC[3] = static_cast<int>(a);
     for (int i = 0, j = 1; (i < 3) & j; i++) {
@@ -588,21 +588,21 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
 
     int altC[5];
     altC[0] = static_cast<int>(a) / 10000;
-    a -= static_cast<LCreal>(altC[0] * 10000);
+    a -= static_cast<double>(altC[0] * 10000);
 
     altC[1] = static_cast<int>(a) / 1000;
-    a -= static_cast<LCreal>(altC[1] * 1000);
+    a -= static_cast<double>(altC[1] * 1000);
     altC[2] = static_cast<int>(a) / 100;
-    a -= static_cast<LCreal>(altC[2] * 100);
+    a -= static_cast<double>(altC[2] * 100);
     altC[3] = static_cast<int>(a) / 10;
-    a -= static_cast<LCreal>(altC[3] * 10);
+    a -= static_cast<double>(altC[3] * 10);
     altC[4] = static_cast<int>(a);
     for (int i = 0, j = 1; (i < 4) & j; i++) {
         if (altC[i] == 0) altC[i] = -1;
         else j = 0;
     }
 
-    a = static_cast<LCreal>(aoa * 10.0);
+    a = static_cast<double>(aoa * 10.0);
     int aoaC[4];
     if (a < 0) {
         a = -a;
@@ -611,10 +611,10 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
     else aoaC[0] = -1;
     if (a > 999.) a = 999.;
     aoaC[1] = static_cast<int>(a) / 100;
-    a -= static_cast<LCreal>(aoaC[1] * 100);
+    a -= static_cast<double>(aoaC[1] * 100);
 
     aoaC[2] = static_cast<int>(a) / 10;
-    a -= static_cast<LCreal>(aoaC[2] * 10);
+    a -= static_cast<double>(aoaC[2] * 10);
 
     aoaC[3] = static_cast<int>(a);
     for (int i = 1, j = 1; (i < 3) & j; i++) {
@@ -628,7 +628,7 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
         else j = 0;
     }
 
-    a = static_cast<LCreal>(mach * 100.0);
+    a = static_cast<double>(mach * 100.0);
     int machC[3];
     if (a < 0) {
         a = 0.0;
@@ -637,20 +637,20 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
         a = 999.;
     }
     machC[0] = static_cast<int>(a) / 100;
-    a -= static_cast<LCreal>(machC[0] * 100);
+    a -= static_cast<double>(machC[0] * 100);
 
     machC[1] = static_cast<int>(a) / 10;
-    a -= static_cast<LCreal>(machC[1] * 10);
+    a -= static_cast<double>(machC[1] * 10);
 
     machC[2] = static_cast<int>(a);
-    a = static_cast<LCreal>(gload * 10.0);
+    a = static_cast<double>(gload * 10.0);
     int gloadC[2];
 
     if (a < 0) a = 0.0;
     if (a > 99.) a = 99.;
 
     gloadC[0] = static_cast<int>(a) / 10;
-    a -= static_cast<LCreal>(gloadC[0] * 10);
+    a -= static_cast<double>(gloadC[0] * 10);
 
     gloadC[1] = static_cast<int>(a);
 
@@ -665,13 +665,13 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
     if (a > 9999.) a = 9999.;
 
     vviC[1] = static_cast<int>(a) / 1000;
-    a -= static_cast<LCreal>(vviC[1] * 1000);
+    a -= static_cast<double>(vviC[1] * 1000);
 
     vviC[2] = static_cast<int>(a) / 100;
-    a -= static_cast<LCreal>(vviC[2] * 100);
+    a -= static_cast<double>(vviC[2] * 100);
 
     vviC[3] = static_cast<int>(a) / 10;
-    a -= static_cast<LCreal>(vviC[3] * 10);
+    a -= static_cast<double>(vviC[3] * 10);
 
     vviC[4] = static_cast<int>(a);
 
@@ -813,12 +813,12 @@ void Eadi3DPage::windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal
 //------------------------------------------------------------------------------
 // heading() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::heading(LCreal hdg, LCreal hdgCmd)
+void Eadi3DPage::heading(double hdg, double hdgCmd)
 {
-    static LCreal baseLineV1[2] = {-1.6f, 2.1875f};   /* base line */
-    static LCreal baseLineV2[2] = {1.6f, 2.1875f};
-    static LCreal refTicV1[2] = {0.0f, 2.1875f};      /* reference tic */
-    static LCreal refTicV2[2] = {0.0f, 2.125f};
+    static double baseLineV1[2] = {-1.6f, 2.1875f};   /* base line */
+    static double baseLineV2[2] = {1.6f, 2.1875f};
+    static double refTicV1[2] = {0.0f, 2.1875f};      /* reference tic */
+    static double refTicV2[2] = {0.0f, 2.125f};
 
 
     glLineWidth(2.0);
@@ -828,9 +828,9 @@ void Eadi3DPage::heading(LCreal hdg, LCreal hdgCmd)
     lcColor3v(WHITE);
 
     if (hdg < 0.0) hdg += 360.0;
-    LCreal x = static_cast<LCreal>(hdg / 10.0);
+    double x = static_cast<double>(hdg / 10.0);
     int i = static_cast<int>(x);
-    x = static_cast<LCreal>(i) - x;
+    x = static_cast<double>(i) - x;
 
     int ihu[4];
     int ihl[4];
@@ -875,7 +875,7 @@ void Eadi3DPage::heading(LCreal hdg, LCreal hdgCmd)
     glEnd();
     glLineWidth(2.0);
 
-    x = static_cast<LCreal>(hdgCmd / 10.0);
+    x = static_cast<double>(hdgCmd / 10.0);
     lcColor3v(GREEN);
     glPushMatrix();
     glTranslated(static_cast<GLdouble>(x), 2.1875, 0.0);
@@ -942,7 +942,7 @@ void Eadi3DPage::background()
 //------------------------------------------------------------------------------
 // setAltitude() - sets our altitude
 //------------------------------------------------------------------------------
-void Eadi3DPage::setAltitude(const LCreal alt)
+void Eadi3DPage::setAltitude(const double alt)
 {
     altitudeFT = alt;
 }
@@ -950,7 +950,7 @@ void Eadi3DPage::setAltitude(const LCreal alt)
 //------------------------------------------------------------------------------
 // setAirspeed() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setAirspeed(const LCreal spd)
+void Eadi3DPage::setAirspeed(const double spd)
 {
     airspeedKTS = spd;
 }
@@ -958,7 +958,7 @@ void Eadi3DPage::setAirspeed(const LCreal spd)
 //------------------------------------------------------------------------------
 // setHeading() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setHeading(const LCreal hdg)
+void Eadi3DPage::setHeading(const double hdg)
 {
     headingDEG = hdg;
 }
@@ -966,7 +966,7 @@ void Eadi3DPage::setHeading(const LCreal hdg)
 //------------------------------------------------------------------------------
 // setAOA() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setAOA(const LCreal aoa)
+void Eadi3DPage::setAOA(const double aoa)
 {
     aoaDEG = aoa;
 }
@@ -974,7 +974,7 @@ void Eadi3DPage::setAOA(const LCreal aoa)
 //------------------------------------------------------------------------------
 // setMach() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setMach(const LCreal mach)
+void Eadi3DPage::setMach(const double mach)
 {
     machNo = mach;
 }
@@ -982,7 +982,7 @@ void Eadi3DPage::setMach(const LCreal mach)
 //------------------------------------------------------------------------------
 // setVVI() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setVVI(const LCreal vvi)
+void Eadi3DPage::setVVI(const double vvi)
 {
     vviFPM = vvi;
 }
@@ -990,7 +990,7 @@ void Eadi3DPage::setVVI(const LCreal vvi)
 //------------------------------------------------------------------------------
 // setPitch() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setPitch(const LCreal pitch)
+void Eadi3DPage::setPitch(const double pitch)
 {
     pitchDEG = pitch;
 }
@@ -998,7 +998,7 @@ void Eadi3DPage::setPitch(const LCreal pitch)
 //------------------------------------------------------------------------------
 // setRoll() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setRoll(const LCreal roll)
+void Eadi3DPage::setRoll(const double roll)
 {
     rollDEG = roll;
 }
@@ -1006,7 +1006,7 @@ void Eadi3DPage::setRoll(const LCreal roll)
 //------------------------------------------------------------------------------
 // setGLoad() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setGLoad(const LCreal gload)
+void Eadi3DPage::setGLoad(const double gload)
 {
     Gload = gload;
 }
@@ -1022,7 +1022,7 @@ void Eadi3DPage::setLandingMode(const bool landMode)
 //------------------------------------------------------------------------------
 // setPitchSteeringCmd() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setPitchSteeringCmd(const LCreal pitchCmd)
+void Eadi3DPage::setPitchSteeringCmd(const double pitchCmd)
 {
      pitchSteeringCmd = pitchCmd;
 }
@@ -1030,7 +1030,7 @@ void Eadi3DPage::setPitchSteeringCmd(const LCreal pitchCmd)
 //------------------------------------------------------------------------------
 // setRollingSteeringCmd() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setRollSteeringCmd(const LCreal rollCmd)
+void Eadi3DPage::setRollSteeringCmd(const double rollCmd)
 {
     rollSteeringCmd = rollCmd;
 }
@@ -1054,7 +1054,7 @@ void Eadi3DPage::setRollSteeringValid(const bool rcValid)
 //------------------------------------------------------------------------------
 // setGlideslopeDev() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setGlideslopeDev(const LCreal gsDev)
+void Eadi3DPage::setGlideslopeDev(const double gsDev)
 {
     glideslopeDevDOTS = gsDev;
 }
@@ -1062,7 +1062,7 @@ void Eadi3DPage::setGlideslopeDev(const LCreal gsDev)
 //------------------------------------------------------------------------------
 // setLocalizerDev() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setLocalizerDev(const LCreal locdev)
+void Eadi3DPage::setLocalizerDev(const double locdev)
 {
     localizerDevDOTS = locdev;
 }
@@ -1070,7 +1070,7 @@ void Eadi3DPage::setLocalizerDev(const LCreal locdev)
 //------------------------------------------------------------------------------
 // setTurnRate() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setTurnRate(const LCreal turnRate)
+void Eadi3DPage::setTurnRate(const double turnRate)
 {
     turnRateDOTS = turnRate;
 }
@@ -1078,7 +1078,7 @@ void Eadi3DPage::setTurnRate(const LCreal turnRate)
 //------------------------------------------------------------------------------
 // setSlipInd() -
 //------------------------------------------------------------------------------
-void Eadi3DPage::setSlipInd(const LCreal slipInd)
+void Eadi3DPage::setSlipInd(const double slipInd)
 {
     slipIndDOTS = slipInd;
 }

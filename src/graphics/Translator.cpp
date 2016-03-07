@@ -88,19 +88,19 @@ bool Translator::onUpdateZ(const base::Number* const newZ)
 //------------------------------------------------------------------------------
 // functions for setting member variables
 //------------------------------------------------------------------------------
-bool Translator::setXPos(const LCreal xPos)
+bool Translator::setXPos(const double xPos)
 {
     myXPos = xPos;
     return true;
 }
 
-bool Translator::setYPos(const LCreal yPos)
+bool Translator::setYPos(const double yPos)
 {
     myYPos = yPos;
     return true;
 }
 
-bool Translator::setZPos(const LCreal zPos)
+bool Translator::setZPos(const double zPos)
 {
     myZPos = zPos;
     return true;

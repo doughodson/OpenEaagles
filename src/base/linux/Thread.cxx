@@ -202,7 +202,7 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
       // ---
       // User defined tasks
       // ---
-      this->userFunc( static_cast<LCreal>(dt) );
+      this->userFunc(dt);
       tcnt++;
 
       // ---

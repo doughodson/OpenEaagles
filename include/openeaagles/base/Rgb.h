@@ -26,7 +26,7 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Rgb(const LCreal r, const LCreal g, const LCreal b)
+//      Rgb(const double r, const double g, const double b)
 //          Special constructor what initializes the object to r, g, and b
 //
 //------------------------------------------------------------------------------
@@ -34,7 +34,7 @@ class Rgb : public Color {
     DECLARE_SUBCLASS(Rgb,Color)
 
 public:
-    Rgb(const LCreal r, const LCreal g, const LCreal b);
+    Rgb(const double r, const double g, const double b);
     Rgb();
 
     // Slot methods

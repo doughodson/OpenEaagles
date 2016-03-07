@@ -29,39 +29,39 @@ class JSBSimModel : public simulation::AerodynamicsModel
 public:
     JSBSimModel();
 
-    LCreal getGload() const override;
-    LCreal getMach() const override;
-    LCreal getAngleOfAttack() const override;
-    LCreal getSideSlip() const override;
-    LCreal getFlightPath() const override;
-    LCreal getCalibratedAirspeed() const override;
-    LCreal getGrossWeight() const override;
-    LCreal getFuelWt() const override;
-    LCreal getFuelWtMax() const override;
-    LCreal getSpeedBrakePosition() const override;
-    LCreal getLandingGearPosition() const override;
+    double getGload() const override;
+    double getMach() const override;
+    double getAngleOfAttack() const override;
+    double getSideSlip() const override;
+    double getFlightPath() const override;
+    double getCalibratedAirspeed() const override;
+    double getGrossWeight() const override;
+    double getFuelWt() const override;
+    double getFuelWtMax() const override;
+    double getSpeedBrakePosition() const override;
+    double getLandingGearPosition() const override;
     bool isWeightOnWheels() const override;
     int getNumberOfEngines() const override;
-    int getEngThrust(LCreal* const fn, const int max) const override;
-    int getEngRPM(LCreal* const rpm, const int max) const override;
-    int getEngFuelFlow(LCreal* const ff, const int max) const override;
-    int getEngOilPressure(LCreal* const oil, const int max) const override;    // Pressure: psi
-    int getEngInletTemp(LCreal* const tmp, const int max) const override;      // Temp: C
-    int getEngNozzle(LCreal* const noz, const int max) const override;         // Nozzle Pos: %
-    int getEngPLA(LCreal* const pla, const int max) const override;
-    void setControlStickRollInput(const LCreal roll) override;
-    void setControlStickPitchInput(const LCreal pitch) override;
-    void setTrimSwitchRollInput(const LCreal rollTrim) override;
-    void setTrimSwitchPitchInput(const LCreal pitchTrim) override;
-    void setGearHandleSwitch(const LCreal sw) override;
-    void setSpeedBrakesSwitch(const LCreal sw) override;
-    void setBrakes(const LCreal left, const LCreal right) override;
-    int setThrottles(const LCreal* const positions, const int num) override;
-    void setRudderPedalInput(const LCreal pedal) override;
+    int getEngThrust(double* const fn, const int max) const override;
+    int getEngRPM(double* const rpm, const int max) const override;
+    int getEngFuelFlow(double* const ff, const int max) const override;
+    int getEngOilPressure(double* const oil, const int max) const override;    // Pressure: psi
+    int getEngInletTemp(double* const tmp, const int max) const override;      // Temp: C
+    int getEngNozzle(double* const noz, const int max) const override;         // Nozzle Pos: %
+    int getEngPLA(double* const pla, const int max) const override;
+    void setControlStickRollInput(const double roll) override;
+    void setControlStickPitchInput(const double pitch) override;
+    void setTrimSwitchRollInput(const double rollTrim) override;
+    void setTrimSwitchPitchInput(const double pitchTrim) override;
+    void setGearHandleSwitch(const double sw) override;
+    void setSpeedBrakesSwitch(const double sw) override;
+    void setBrakes(const double left, const double right) override;
+    int setThrottles(const double* const positions, const int num) override;
+    void setRudderPedalInput(const double pedal) override;
 
     void reset() override;
 
-    void dynamics(const LCreal  dt = 0.0) override;
+    void dynamics(const double  dt = 0.0) override;
 
     bool isHeadingHoldOn() const override;
     double getCommandedHeadingD() const override;
@@ -98,12 +98,12 @@ private:
     const base::String* model;     // JSBSim model
     int   debugLevel;
 
-    LCreal pitchTrimPos;    // +/- 1.0
-    LCreal pitchTrimRate;   // maxVal(1.0) per sec
-    LCreal pitchTrimSw;
-    LCreal rollTrimPos;     // +/- 1.0
-    LCreal rollTrimRate;    // maxVal(1.0) per sec
-    LCreal rollTrimSw;
+    double pitchTrimPos;    // +/- 1.0
+    double pitchTrimRate;   // maxVal(1.0) per sec
+    double pitchTrimSw;
+    double rollTrimPos;     // +/- 1.0
+    double rollTrimRate;    // maxVal(1.0) per sec
+    double rollTrimSw;
 
     bool        headingHoldOn;
     bool        altitudeHoldOn;

@@ -241,7 +241,7 @@ void Navigation::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update Non-time critical stuff here
 //------------------------------------------------------------------------------
-void Navigation::updateData(const LCreal dt)
+void Navigation::updateData(const double dt)
 {
    // ---
    // Update the BaseClass and our primary route
@@ -252,7 +252,7 @@ void Navigation::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // Process phase
 //------------------------------------------------------------------------------
-void Navigation::process(const LCreal dt)
+void Navigation::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -381,13 +381,13 @@ bool Navigation::areWindsValid() const
 }
 
 // Returns the wind 'from' direction (degs)
-LCreal Navigation::getWindDirD() const
+double Navigation::getWindDirD() const
 {
    return windDirD;
 }
 
 // Returns the wind speed (kts)
-LCreal Navigation::getWindSpeedKts() const
+double Navigation::getWindSpeedKts() const
 {
    return windSpdKts;
 }
@@ -411,19 +411,19 @@ bool Navigation::isVelocityDataValid() const
 }
 
 // Returns ground speed (kts)
-LCreal Navigation::getGroundSpeedKts() const
+double Navigation::getGroundSpeedKts() const
 {
    return gs;
 }
 
 // Returns true airspeed (kts)
-LCreal Navigation::getTrueAirspeedKts() const
+double Navigation::getTrueAirspeedKts() const
 {
    return tas;
 }
 
 // Returns true ground track (degs)
-LCreal Navigation::getGroundTrackDeg() const
+double Navigation::getGroundTrackDeg() const
 {
    return tk;
 }
@@ -447,49 +447,49 @@ bool Navigation::isNavSteeringValid() const
 }
 
 // Returns true bearing to dest (degs)
-LCreal Navigation::getTrueBrgDeg() const
+double Navigation::getTrueBrgDeg() const
 {
    return tbrg;
 }
 
 // Returns mag bearing to dest (degs)
-LCreal Navigation::getMagBrgDeg() const
+double Navigation::getMagBrgDeg() const
 {
    return mbrg;
 }
 
 // Returns distance to dest (NM)
-LCreal Navigation::getDistNM() const
+double Navigation::getDistNM() const
 {
    return dst;
 }
 
 // Returns true course to dest (degs)
-LCreal Navigation::getTrueCrsDeg() const
+double Navigation::getTrueCrsDeg() const
 {
    return tcrs;
 }
 
 // Returns mag course to dest (degs)
-LCreal Navigation::getMagCrsDeg() const
+double Navigation::getMagCrsDeg() const
 {
    return mcrs;
 }
 
 // Returns cross track error (NM)
-LCreal Navigation::getCrossTrackErrorNM() const
+double Navigation::getCrossTrackErrorNM() const
 {
    return xte;
 }
 
 // Returns Time-To-Go to dest (sec)
-LCreal Navigation::getTTG() const
+double Navigation::getTTG() const
 {
    return ttg;
 }
 
 // Returns Est-Time-of-Arrival at dest (sec)
-LCreal Navigation::getETA() const
+double Navigation::getETA() const
 {
    return eta;
 }
@@ -585,7 +585,7 @@ bool Navigation::setMagVar(const bool flg)
    return true;
 }
 
-bool Navigation::setWinds(const LCreal dirDeg, const LCreal speedKts)
+bool Navigation::setWinds(const double dirDeg, const double speedKts)
 {
    windDirD = dirDeg;
    windSpdKts = speedKts;
@@ -612,19 +612,19 @@ bool Navigation::setUTC(const bool flg)
    return true;
 }
 
-bool Navigation::setGroundSpeedKts(const LCreal kts)
+bool Navigation::setGroundSpeedKts(const double kts)
 {
    gs = kts;
    return true;
 }
 
-bool Navigation::setTrueAirspeedKts(const LCreal kts)
+bool Navigation::setTrueAirspeedKts(const double kts)
 {
    tas = kts;
    return true;
 }
 
-bool Navigation::setGroundTrackDeg(const LCreal degs)
+bool Navigation::setGroundTrackDeg(const double degs)
 {
    tk = degs;
    return true;
@@ -648,49 +648,49 @@ bool Navigation::setVelocityDataValid(const bool flg)
    return true;
 }
 
-bool Navigation::setTrueBrgDeg(const LCreal v)
+bool Navigation::setTrueBrgDeg(const double v)
 {
    tbrg = v;
    return true;
 }
 
-bool Navigation::setMagBrgDeg(const LCreal v)
+bool Navigation::setMagBrgDeg(const double v)
 {
    mbrg = v;
    return true;
 }
 
-bool Navigation::setDistNM(const LCreal v)
+bool Navigation::setDistNM(const double v)
 {
    dst = v;
    return true;
 }
 
-bool Navigation::setTrueCrsDeg(const LCreal v)
+bool Navigation::setTrueCrsDeg(const double v)
 {
    tcrs = v;
    return true;
 }
 
-bool Navigation::setMagCrsDeg(const LCreal v)
+bool Navigation::setMagCrsDeg(const double v)
 {
    mcrs = v;
    return true;
 }
 
-bool Navigation::setCrossTrackErrorNM(const LCreal v)
+bool Navigation::setCrossTrackErrorNM(const double v)
 {
    xte = v;
    return true;
 }
 
-bool Navigation::setTTG(const LCreal v)
+bool Navigation::setTTG(const double v)
 {
    ttg = v;
    return true;
 }
 
-bool Navigation::setETA(const LCreal v)
+bool Navigation::setETA(const double v)
 {
    eta = v;
    return true;
@@ -888,7 +888,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
                 const base::Object* obj2 = p->object();
                 const base::List* msg2 = dynamic_cast<const base::List*>(obj2);
                 if (msg2 != nullptr) {
-                    LCreal values[2];
+                    double values[2];
                     int n = 0;
 
                     { // Get the north (first) distance

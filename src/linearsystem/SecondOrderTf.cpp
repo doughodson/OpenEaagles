@@ -22,8 +22,8 @@ SecondOrderTf::SecondOrderTf()
 }
 
 SecondOrderTf::SecondOrderTf(const unsigned int ir,
-         const LCreal in1, const LCreal in2, const LCreal in3,
-         const LCreal id1, const LCreal id2, const LCreal id3
+         const double in1, const double in2, const double in3,
+         const double id1, const double id2, const double id3
          ) : DiffEquation(ir)
 
 {
@@ -126,42 +126,42 @@ void SecondOrderTf::initialize()
 // Set functions
 //------------------------------------------------------------------------------
 
-bool SecondOrderTf::setN1(const LCreal v)
+bool SecondOrderTf::setN1(const double v)
 {
    n1 = v;
    initialize();
    return true;
 }
 
-bool SecondOrderTf::setN2(const LCreal v)
+bool SecondOrderTf::setN2(const double v)
 {
    n2 = v;
    initialize();
    return true;
 }
 
-bool SecondOrderTf::setN3(const LCreal v)
+bool SecondOrderTf::setN3(const double v)
 {
    n3 = v;
    initialize();
    return true;
 }
 
-bool SecondOrderTf::setD1(const LCreal v)
+bool SecondOrderTf::setD1(const double v)
 {
    d1 = v;
    initialize();
    return true;
 }
 
-bool SecondOrderTf::setD2(const LCreal v)
+bool SecondOrderTf::setD2(const double v)
 {
    d2 = v;
    initialize();
    return true;
 }
 
-bool SecondOrderTf::setD3(const LCreal v)
+bool SecondOrderTf::setD3(const double v)
 {
    d3 = v;
    initialize();

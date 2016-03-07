@@ -469,7 +469,7 @@ bool SymbolLoader::updateSymbolPositionXYScreen(const int idx, const double xPos
 //------------------------------------------------------------------------------
 // Update the symbol's heading
 //------------------------------------------------------------------------------
-bool SymbolLoader::updateSymbolHeading(const int idx, const LCreal hdg)
+bool SymbolLoader::updateSymbolHeading(const int idx, const double hdg)
 {
    bool ok = false;
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
@@ -551,7 +551,7 @@ bool SymbolLoader::updateSymbolText(const int idx, const char* name, const char 
 //------------------------------------------------------------------------------
 // Updates the value of the named NumericReadout type subcomponent
 //------------------------------------------------------------------------------
-bool SymbolLoader::updateSymbolText(const int idx, const char* name, const LCreal x)
+bool SymbolLoader::updateSymbolText(const int idx, const char* name, const double x)
 {
    bool ok = false;
 
@@ -647,7 +647,7 @@ bool SymbolLoader:: setSymbolVisible(const int idx, const char* name, bool visib
 //------------------------------------------------------------------------------
 // setSymbolFlashRate() - set symbol and child components flashing
 //------------------------------------------------------------------------------
-bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const LCreal flashRate )
+bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const double flashRate )
 {
    bool ok = false;
 
@@ -807,7 +807,7 @@ SlSymbol* SymbolLoader::symbolFactory()
 //------------------------------------------------------------------------------
 // updateTC() - update time-critical threads here
 //------------------------------------------------------------------------------
-void SymbolLoader::updateTC(const LCreal)
+void SymbolLoader::updateTC(const double)
 {
    // Do nothing here!
 
@@ -845,14 +845,14 @@ void SymbolLoader::draw()
    if (isVisible()) {
 
       // Y Displacement (ie, decentered)
-      LCreal displacement = 0;
+      double displacement = 0;
       if (!getCentered()) displacement = getDisplacement();
 
       // Radius (ie., range)
-      LCreal radius = 0;
+      double radius = 0;
       if (!getCentered()) radius = getOuterRadiusDC();
       else radius = getOuterRadius();
-      LCreal radius2 = radius * radius;
+      double radius2 = radius * radius;
 
       // ---
       // Setup the drawing parameters for all of our symbols ...
@@ -869,26 +869,26 @@ void SymbolLoader::draw()
                graphics::Graphic* g = static_cast<graphics::Graphic*>(p->object());
 
                // We need the symbol's position in screen coordinates (inches) ...
-               LCreal xScn = static_cast<LCreal>(symbols[i]->getScreenXPos());
-               LCreal yScn = static_cast<LCreal>(symbols[i]->getScreenYPos());
+               double xScn = static_cast<double>(symbols[i]->getScreenXPos());
+               double yScn = static_cast<double>(symbols[i]->getScreenYPos());
 
                if ( !(symbols[i]->isPositionScreen()) ) {
 
                   // But when we were not give screen coordinates,
                   // we'll need to compute them from A/C coordinates
-                  LCreal acX = 0.0;
-                  LCreal acY = 0.0;
+                  double acX = 0.0;
+                  double acY = 0.0;
 
                   // 1) when given A/C coordinates ...
                   if ( symbols[i]->isPositionAC() ) {
-                     acX = static_cast<LCreal>(symbols[i]->getXPosition());
-                     acY = static_cast<LCreal>(symbols[i]->getYPosition());
+                     acX = static_cast<double>(symbols[i]->getXPosition());
+                     acY = static_cast<double>(symbols[i]->getYPosition());
                   }
 
                   // 2) when given NED or L/L coordinates ..
                   else {
-                     LCreal north = 0;
-                     LCreal east  = 0;
+                     double north = 0;
+                     double east  = 0;
 
                      if (symbols[i]->isPositionLL()) {
                         // 2a) we were give L/L so convert to NED coordinates
@@ -898,8 +898,8 @@ void SymbolLoader::draw()
                      }
                      else {
                         // 2b) we were give NED coordinates
-                        north = static_cast<LCreal>(symbols[i]->getXPosition());
-                        east  = static_cast<LCreal>(symbols[i]->getYPosition());
+                        north = static_cast<double>(symbols[i]->getXPosition());
+                        east  = static_cast<double>(symbols[i]->getYPosition());
                      }
 
                      // 2c) convert the NED coordinates to aircraft coordinates
@@ -1145,7 +1145,7 @@ void SlSymbol::deleteData()
 // Member functions
 //------------------------------------------------------------------------------
 
-void SlSymbol::setHeadingDeg(const LCreal h)
+void SlSymbol::setHeadingDeg(const double h)
 {
    hdg = h;
    hdgValid = true;

@@ -43,9 +43,9 @@ public:
     virtual unsigned int getArmingOption() const;
     virtual bool isArmingOption(const unsigned int a) const;
 
-    virtual LCreal getFuzeAltitude() const;
-    virtual LCreal getFuzeTime() const;
-    virtual LCreal getDragIndex() const;
+    virtual double getFuzeAltitude() const;
+    virtual double getFuzeTime() const;
+    virtual double getDragIndex() const;
 
     virtual bool isNoseFuze() const;
     virtual bool isMidFuze() const;
@@ -56,11 +56,11 @@ public:
     virtual bool impactPrediction(
       const osg::Vec3* const initPos,  // Initial position (meters)
       const osg::Vec3* const initVel,  // Initial velocity (meters per sec)
-      const LCreal groundPlane,        // Ground plane (meters)
-      const LCreal dt,                 // Time step (sec)
-      const LCreal maxTime,            // Max TOF (sec)
+      const double groundPlane,        // Ground plane (meters)
+      const double dt,                 // Time step (sec)
+      const double maxTime,            // Max TOF (sec)
       osg::Vec3* const finalPos,       // Final position (meters)
-      LCreal* const tof                // TOF (sec)
+      double* const tof                // TOF (sec)
     ) const;
 
     // Predict bomb's TOF and final position.
@@ -68,12 +68,12 @@ public:
     static bool weaponImpactPrediction(
       const osg::Vec3* const initPos,  // Initial position (meters)
       const osg::Vec3* const initVel,  // Initial velocity (meters per sec)
-      const LCreal groundPlane,        // Ground plane (meters)
-      const LCreal dt,                 // Time step (sec)
-      const LCreal maxTime,            // Max TOF (sec)
-      const LCreal dragIndex,          // Drag index
+      const double groundPlane,        // Ground plane (meters)
+      const double dt,                 // Time step (sec)
+      const double maxTime,            // Max TOF (sec)
+      const double dragIndex,          // Drag index
       osg::Vec3* const finalPos,       // Final position (meters)
-      LCreal* const tof                // TOF (sec)
+      double* const tof                // TOF (sec)
     );
 
     const char* getDescription() const override;
@@ -85,9 +85,9 @@ protected:
     virtual bool setMidFuze(const bool f);
     virtual bool setTailFuze(const bool f);
     virtual bool setArmingOption(const unsigned int a);
-    virtual bool setFuzeAltitude(const LCreal v);
-    virtual bool setFuzeTime(const LCreal v);
-    virtual bool setDragIndex(const LCreal v);
+    virtual bool setFuzeAltitude(const double v);
+    virtual bool setFuzeTime(const double v);
+    virtual bool setDragIndex(const double v);
 
     // slot functions
     bool setSlotDragIndex(base::Number* const p);
@@ -98,19 +98,19 @@ protected:
     bool setSlotFuzeAltitude(base::Number* const p);
     bool setSlotFuzeTime(base::Number* const p);
 
-    void weaponGuidance(const LCreal dt) override;
-    void weaponDynamics(const LCreal dt) override;
+    void weaponGuidance(const double dt) override;
+    void weaponDynamics(const double dt) override;
 
 private:
     void initData();
 
-    LCreal    dragIndex;             // Drag Index
+    double    dragIndex;             // Drag Index
 
    // common guidance stuff
     osg::Vec3 missDistRef;           // Miss distance vector (ref sys)  (meters)
     osg::Vec3 tgtRangeRef;           // Target range vector  (ref sys)  (meters)
-    LCreal    cmdStrAz;              // Commanded steering azimuth   (radians)
-    LCreal    cmdStrEl;              // Commanded steering elevation (radians)
+    double    cmdStrAz;              // Commanded steering azimuth   (radians)
+    double    cmdStrEl;              // Commanded steering elevation (radians)
     bool      guidanceValid;         // is guidance data valid.
 
    // Common arming stuff
@@ -118,8 +118,8 @@ private:
    bool noseFuze;          // Nose fuze flag
    bool midFuze;           // Middle fuze flag
    bool tailFuze;          // Tail fuze flag
-   LCreal fuzeAlt;         // Fuze arming Altitude
-   LCreal fuzeTime;        // Fuze Arming Time
+   double fuzeAlt;         // Fuze arming Altitude
+   double fuzeTime;        // Fuze Arming Time
 };
 
 } // End simulation namespace

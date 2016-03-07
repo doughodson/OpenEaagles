@@ -93,15 +93,15 @@ public:
    double getReferenceLonDeg() const;  // reference longitude (degs)
    double getReferenceLatRad() const;  // reference lat (rads)
    double getReferenceLonRad() const;  // reference lon (rads)
-   LCreal getCosRefLat() const;        // reference latitude cosine
-   LCreal getHeadingDeg() const;       // true heading (degrees)
-   LCreal getHeadingRad() const;       // true heading (radians)
-   LCreal getOuterRadius() const;      // outer radius (units, centered)
-   LCreal getCurrentRadius() const;    // return our current radius (dependent on centered/decentered)
-   LCreal getOuterRadiusDC() const;    // outer radius (units, decentered)
-   LCreal getRange() const;            // range (NM)
-   LCreal getScale() const;            // scale factor: screen units per NM
-   LCreal getDisplacement() const;     // de-centered displacement (units)
+   double getCosRefLat() const;        // reference latitude cosine
+   double getHeadingDeg() const;       // true heading (degrees)
+   double getHeadingRad() const;       // true heading (radians)
+   double getOuterRadius() const;      // outer radius (units, centered)
+   double getCurrentRadius() const;    // return our current radius (dependent on centered/decentered)
+   double getOuterRadiusDC() const;    // outer radius (units, decentered)
+   double getRange() const;            // range (NM)
+   double getScale() const;            // scale factor: screen units per NM
+   double getDisplacement() const;     // de-centered displacement (units)
    bool   getCentered() const;         // centered flag
    bool   getNorthUp() const;          // north up flag
 
@@ -110,31 +110,31 @@ public:
    virtual bool setReferenceLonDeg(const double newLon); // reference longitude (degs)
    virtual bool setReferenceLatRad(const double newLat); // reference latitude (rads)
    virtual bool setReferenceLonRad(const double newLon); // reference longitude (rads)
-   virtual bool setHeadingDeg(const LCreal newHeading);  // true heading (degrees)
-   virtual bool setHeadingRad(const LCreal newHeading);  // true heading (radians)
-   virtual bool setOuterRadius(const LCreal newRadius);  // the outer radius (centered mode) (units)
-   virtual bool setOuterRadiusDC(const LCreal newRadiusDC); // the outer radius (de-centered mode) (units)
-   virtual bool setRange(const LCreal newRange);         // the range to the outer radius (NM)
-   virtual bool setDisplacement(const LCreal newD);      // the de-centered displacement (units)
+   virtual bool setHeadingDeg(const double newHeading);  // true heading (degrees)
+   virtual bool setHeadingRad(const double newHeading);  // true heading (radians)
+   virtual bool setOuterRadius(const double newRadius);  // the outer radius (centered mode) (units)
+   virtual bool setOuterRadiusDC(const double newRadiusDC); // the outer radius (de-centered mode) (units)
+   virtual bool setRange(const double newRange);         // the range to the outer radius (NM)
+   virtual bool setDisplacement(const double newD);      // the de-centered displacement (units)
    virtual bool setCentered(const bool newC);            // the 'centered' flag
    virtual bool toggleCentered();
    virtual bool setNorthUp(const bool x);
 
    // converts lat/lon to screen coordinates
-   virtual bool latLon2Screen(const double lat, const double lon, LCreal* const screenX, LCreal* const screenY) const;
+   virtual bool latLon2Screen(const double lat, const double lon, double* const screenX, double* const screenY) const;
 
    // converts screen to lat/lon coordinates
-   virtual bool screen2LatLon(const LCreal screenX, const LCreal screenY, double* const lat, double* const lon) const;
+   virtual bool screen2LatLon(const double screenX, const double screenY, double* const lat, double* const lon) const;
 
    // converts aircraft (ie, player) coordinates (NM) to screen coordinates (units)
    // (screen coordinates do not include the map displacement)
-   virtual bool aircraft2Screen(const LCreal acX, const LCreal acY, LCreal* const screenX, LCreal* const screenY) const;
+   virtual bool aircraft2Screen(const double acX, const double acY, double* const screenX, double* const screenY) const;
 
    // earth coordinates (NED: NM) to aircraft (ie, player) coordinates (NM)
-   virtual bool earth2Aircraft(const LCreal earthX, const LCreal earthY, LCreal* const acX, LCreal* const acY) const;
+   virtual bool earth2Aircraft(const double earthX, const double earthY, double* const acX, double* const acY) const;
 
    // lat/lon (deg) to earth (NED: NM)
-   virtual bool latLon2Earth(const double lat, const double lon, LCreal* const earthX, LCreal* const earthY) const;
+   virtual bool latLon2Earth(const double lat, const double lon, double* const earthX, double* const earthY) const;
 
    // move our reference lat/lon of our map.
    virtual void moveMap(const int startX, const int startY, const int endX, const int endY);
@@ -142,7 +142,7 @@ public:
    // convert viewport pixel position to lat / lon
    virtual void pixelsToLatLon(const int x, const int y, double &lat, double &lon);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
@@ -199,22 +199,22 @@ inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }
 inline double MapPage::getReferenceLonDeg() const  { return referenceLon; }
 inline double MapPage::getReferenceLatRad() const  { return referenceLat * base::Angle::D2RCC; }
 inline double MapPage::getReferenceLonRad() const  { return referenceLon * base::Angle::D2RCC; }
-inline LCreal MapPage::getCosRefLat() const        { return static_cast<LCreal>(cosineLatReference); }
-inline LCreal MapPage::getHeadingDeg() const       { return static_cast<LCreal>(heading); }
-inline LCreal MapPage::getHeadingRad() const       { return static_cast<LCreal>(heading * base::Angle::D2RCC); }
-inline LCreal MapPage::getOuterRadius() const      { return static_cast<LCreal>(outerRadius); }
-inline LCreal MapPage::getCurrentRadius() const    { return static_cast<LCreal>(isCentered ? outerRadius : outerRadiusDC);  }
-inline LCreal MapPage::getOuterRadiusDC() const    { return static_cast<LCreal>(outerRadiusDC); }
-inline LCreal MapPage::getRange() const            { return static_cast<LCreal>(range); }
-inline LCreal MapPage::getScale() const            { return static_cast<LCreal>(nm2Screen); }
-inline LCreal MapPage::getDisplacement() const     { return static_cast<LCreal>(displacement); }
+inline double MapPage::getCosRefLat() const        { return static_cast<double>(cosineLatReference); }
+inline double MapPage::getHeadingDeg() const       { return static_cast<double>(heading); }
+inline double MapPage::getHeadingRad() const       { return static_cast<double>(heading * base::Angle::D2RCC); }
+inline double MapPage::getOuterRadius() const      { return static_cast<double>(outerRadius); }
+inline double MapPage::getCurrentRadius() const    { return static_cast<double>(isCentered ? outerRadius : outerRadiusDC);  }
+inline double MapPage::getOuterRadiusDC() const    { return static_cast<double>(outerRadiusDC); }
+inline double MapPage::getRange() const            { return static_cast<double>(range); }
+inline double MapPage::getScale() const            { return static_cast<double>(nm2Screen); }
+inline double MapPage::getDisplacement() const     { return static_cast<double>(displacement); }
 inline bool   MapPage::getCentered() const         { return isCentered; }
 inline bool   MapPage::getNorthUp() const          { return northUp; }
 
 inline bool MapPage::setReferenceLatDeg(const double newLat)
 {
    referenceLat = newLat;
-   cosineLatReference = static_cast<LCreal>(std::cos((base::Angle::D2RCC*referenceLat)));
+   cosineLatReference = static_cast<double>(std::cos((base::Angle::D2RCC*referenceLat)));
    return true;
 }
 
@@ -226,7 +226,7 @@ inline bool MapPage::setReferenceLonDeg(const double newLon)
 
 inline bool MapPage::setReferenceLatRad(const double newLat)
 {
-   cosineLatReference = static_cast<LCreal>(std::cos(newLat));
+   cosineLatReference = static_cast<double>(std::cos(newLat));
    referenceLat = newLat * base::Angle::R2DCC;
    return true;
 }
@@ -237,44 +237,44 @@ inline bool MapPage::setReferenceLonRad(const double newLon)
    return true;
 }
 
-inline bool MapPage::setHeadingDeg(const LCreal newHeading)
+inline bool MapPage::setHeadingDeg(const double newHeading)
 {
-   LCreal hdgRad = static_cast<LCreal>(base::Angle::D2RCC * newHeading);
+   double hdgRad = static_cast<double>(base::Angle::D2RCC * newHeading);
    heading = newHeading;
-   headingSin = static_cast<LCreal>(std::sin(hdgRad));
-   headingCos = static_cast<LCreal>(std::cos(hdgRad));
+   headingSin = static_cast<double>(std::sin(hdgRad));
+   headingCos = static_cast<double>(std::cos(hdgRad));
    return true;
 }
 
-inline bool MapPage::setHeadingRad(const LCreal newHeading)
+inline bool MapPage::setHeadingRad(const double newHeading)
 {
-   heading = newHeading * static_cast<LCreal>(base::Angle::R2DCC);
-   LCreal temp = newHeading;
+   heading = newHeading * static_cast<double>(base::Angle::R2DCC);
+   double temp = newHeading;
    if (northUp) temp = 0;
-   headingSin = static_cast<LCreal>(std::sin(temp));
-   headingCos = static_cast<LCreal>(std::cos(temp));
+   headingSin = static_cast<double>(std::sin(temp));
+   headingCos = static_cast<double>(std::cos(temp));
    return true;
 }
 
-inline bool MapPage::setOuterRadius(const LCreal newRadius)
+inline bool MapPage::setOuterRadius(const double newRadius)
 {
    outerRadius = newRadius;
    return true;
 }
 
-inline bool MapPage::setOuterRadiusDC(const LCreal newRadiusDC)
+inline bool MapPage::setOuterRadiusDC(const double newRadiusDC)
 {
    outerRadiusDC = newRadiusDC;
    return true;
 }
 
-inline bool MapPage::setRange(const LCreal newRange)
+inline bool MapPage::setRange(const double newRange)
 {
    range = newRange;
    return true;
 }
 
-inline bool MapPage::setDisplacement(const LCreal newD)
+inline bool MapPage::setDisplacement(const double newD)
 {
    displacement = newD;
    return true;

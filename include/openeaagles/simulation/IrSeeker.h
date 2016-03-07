@@ -55,7 +55,7 @@ public:
 protected:
    void clearQueues();
 
-   void process(const LCreal dt) override;
+   void process(const double dt) override;
 
    bool shutdownNotification() override;
 

@@ -50,13 +50,13 @@ public:
    virtual unsigned int getNumDiscreteInputChannels() const;
 
    // Returns the value of the analog input 'channel' in 'value'
-   virtual bool getAnalogInput(const unsigned int channel, LCreal* const value) const;
+   virtual bool getAnalogInput(const unsigned int channel, double* const value) const;
 
    // Returns the state of the discrete input bit 'channel' in 'value'
    virtual bool getDiscreteInput(const unsigned int channel, bool* const value) const;
 
    // Sets an analog input 'channel' to 'value'.
-   virtual bool setAnalogInput(const unsigned int channel, const LCreal value);
+   virtual bool setAnalogInput(const unsigned int channel, const double value);
 
    // Sets the discrete input 'channel' to 'value'.
    virtual bool setDiscreteInput(const unsigned int channel, const bool value);
@@ -73,13 +73,13 @@ public:
    virtual unsigned int getNumAnalogOutputChannels() const;
 
    // Returns the value of the analog output 'channel' in 'value'
-   virtual bool getAnalogOutput(const unsigned int channel, LCreal* const value) const;
+   virtual bool getAnalogOutput(const unsigned int channel, double* const value) const;
 
    // Returns the state of the output bit 'channel' in 'value'
    virtual bool getDiscreteOutput(const unsigned int channel, bool* const value) const;
 
    // Sets an analog output 'channel' to 'value'.
-   virtual bool setAnalogOutput(const unsigned int channel, const LCreal value);
+   virtual bool setAnalogOutput(const unsigned int channel, const double value);
 
    // Sets the discrete output 'channel' to 'value'.
    virtual bool setDiscreteOutput(const unsigned int channel, const bool value);

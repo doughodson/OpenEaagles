@@ -105,13 +105,13 @@ void IrQueryMsg::clearIrSignature()
 }
 
 // Sets the range to the target
-void IrQueryMsg::setRange(const LCreal r)
+void IrQueryMsg::setRange(const double r)
 {
    BaseClass::setRange(r);
 }
 
 //Set the signature by waveband
-void IrQueryMsg::setSignatureByWaveband(LCreal* const sig)
+void IrQueryMsg::setSignatureByWaveband(double* const sig)
 {
 //   if (signatureByWaveband != 0) signatureByWaveband->unref();
    signatureByWaveband = sig;

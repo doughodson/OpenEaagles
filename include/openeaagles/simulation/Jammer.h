@@ -23,7 +23,7 @@ public:
     Jammer();
 
 protected:
-    void transmit(const LCreal dt) override;
+    void transmit(const double dt) override;
 };
 
 } // End simulation namespace

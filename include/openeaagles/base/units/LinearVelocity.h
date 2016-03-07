@@ -62,22 +62,22 @@ class Time;
 // LinearVelocity();
 //  Constructor for input parser:
 //
-// LinearVelocity(LCreal newLinearVelocityMetersPerSec);
+// LinearVelocity(double newLinearVelocityMetersPerSec);
 //  Constructor with input as meters per second:
 //
 // LinearVelocity(Distance* newDistance, Seconds* newTime);
 //  Constructor with distance in units desired and time in units desired:
 //
-// LCreal getMetersPerSecond();
+// double getMetersPerSecond();
 //  Returns in meters/second:
 //
-// bool setMetersPerSecond(LCreal newLinearVelocity);
+// bool setMetersPerSecond(double newLinearVelocity);
 //  Sets in meters/second - returns true if successful:
 //
-// bool setMeters(LCreal newDistance);
+// bool setMeters(double newDistance);
 //  Input distance in (meters)
 //
-// bool setSeconds(LCreal newTime);
+// bool setSeconds(double newTime);
 //  Input time in (seconds)
 //
 // bool setSlotDistance(Number* number);
@@ -106,7 +106,7 @@ public:
     //Constructor for input parser:
     LinearVelocity();
     //Constructor with input as meters per second:
-    LinearVelocity(const LCreal newLinearVelocityMetersPerSec);
+    LinearVelocity(const double newLinearVelocityMetersPerSec);
     //Constructor with distance in units desired and time in units desired:
     LinearVelocity(const Distance* const newDistance, const Time* const newTime);
 
@@ -115,23 +115,23 @@ public:
     //---------------------------------------------------------------------
 
     //Returns in meters/second:
-    LCreal getMetersPerSecond() const;
+    double getMetersPerSecond() const;
     //Convert routine - converts Linear velocity and outputs in units specified:
-    LCreal convert(Distance* newDistance, Time* newTime);
+    double convert(Distance* newDistance, Time* newTime);
 
     //---------------------------------------------------------------------
     //Set functions:
     //---------------------------------------------------------------------
 
 
-    bool setMetersPerSecond(const LCreal newLinearVelocity);
+    bool setMetersPerSecond(const double newLinearVelocity);
 
     //---------------------------------------------------------------------
     //Slot Table functions
     //---------------------------------------------------------------------
 
-    bool setMeters(const LCreal newDistance);             //Input distance in (meters)
-    bool setSeconds(const LCreal newTime);                //Input time in (seconds)
+    bool setMeters(const double newDistance);             //Input distance in (meters)
+    bool setSeconds(const double newTime);                //Input time in (seconds)
     bool setSlotDistance(const Distance* const msg);      //Input as type of distance (Meters, Degrees, ...)
     bool setSlotTime(const Time* const msg);              //Input as type of time (Seconds, MilliSeconds, ...)
 
@@ -142,8 +142,8 @@ public:
     static const double FPS2KTSCC;    // feet per second to knots (conversion constant)
 
 private:
-    LCreal        distance;                // holds our distance (meters)
-    LCreal        time;                    // holds our time seconds)
+    double        distance;                // holds our distance (meters)
+    double        time;                    // holds our time seconds)
 
 };
 

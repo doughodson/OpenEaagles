@@ -125,8 +125,8 @@ public:
    const simulation::Antenna* getAntennaModel() const;         // Our template antenna model
    virtual bool setAntennaModel(simulation::Antenna* const msg); // Sets our template antenna model
 
-   LCreal getEmPduExecTime() const { return emPduExecTime; }
-   virtual void setEmPduExecTime(const LCreal v);
+   double getEmPduExecTime() const { return emPduExecTime; }
+   virtual void setEmPduExecTime(const double v);
 
    bool isDefaultIncomingHandler() const;    // Is this the default incoming emission PDU handler?
    bool setDefaultIn(const bool flg);
@@ -149,7 +149,7 @@ public:
    virtual void setTimedOut();
 
    // Check to see if a PDU needs to be sent; returns true if a PDU was sent
-   virtual bool updateOutgoing(const LCreal curExecTime, Nib* const nib);
+   virtual bool updateOutgoing(const double curExecTime, Nib* const nib);
 
    // Slot functions
    virtual bool setSlotEmitterName(const base::Number* const msg);      // Sets our DIS Emitter Name
@@ -170,7 +170,7 @@ protected:
     bool setSavedTrackJamTargetData(const unsigned int ibeam, const unsigned int ifield, const TrackJamTargets& newTJT);
 
     virtual unsigned short emissionSystemData2PDU(EmissionSystem* const es);
-    virtual bool isUpdateRequired(const LCreal curExecTime, bool* const stateChg, Nib* const nib);
+    virtual bool isUpdateRequired(const double curExecTime, bool* const stateChg, Nib* const nib);
 
     bool getTemplatesFound() const;
     bool setTemplatesFound(const bool flg);
@@ -194,7 +194,7 @@ private:
    base::safe_ptr<simulation::RfSensor> sensorModel;         // Our template sensor model
    base::safe_ptr<simulation::Antenna>  antennaModel;        // Our template antenna model
 
-   LCreal           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
+   double           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
 };
 
 

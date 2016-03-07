@@ -103,17 +103,17 @@ unsigned int AnalogOutput::getChannel() const
    return channel;
 }
 
-LCreal AnalogOutput::getValue() const
+double AnalogOutput::getValue() const
 {
    return value;
 }
 
-LCreal AnalogOutput::getOffset() const
+double AnalogOutput::getOffset() const
 {
    return offset;
 }
 
-LCreal AnalogOutput::getGain() const
+double AnalogOutput::getGain() const
 {
    return gain;
 }
@@ -140,19 +140,19 @@ bool AnalogOutput::setChannel(const unsigned int v)
    return true;
 }
 
-bool AnalogOutput::setValue(const LCreal v)
+bool AnalogOutput::setValue(const double v)
 {
    value = v;
    return true;
 }
 
-bool AnalogOutput::setOffset(const LCreal v)
+bool AnalogOutput::setOffset(const double v)
 {
    offset = v;
    return true;
 }
 
-bool AnalogOutput::setGain(const LCreal v)
+bool AnalogOutput::setGain(const double v)
 {
    bool ok = false;
    if (v != 0) {
@@ -195,14 +195,14 @@ bool AnalogOutput::setTable(const base::Table1* const msg)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void AnalogOutput::processInputs(const LCreal, const base::IoDevice* const, base::IoData* const)
+void AnalogOutput::processInputs(const double, const base::IoDevice* const, base::IoData* const)
 {
 }
 
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void AnalogOutput::processOutputs(const LCreal, const base::IoData* const outData, base::IoDevice* const device)
+void AnalogOutput::processOutputs(const double, const base::IoData* const outData, base::IoDevice* const device)
 {
    // Get a value form the cockpit output handler
    if (outData != nullptr) {
@@ -211,7 +211,7 @@ void AnalogOutput::processOutputs(const LCreal, const base::IoData* const outDat
 
    // Send the scaled data to the AO card
    if (device != nullptr && devEnb) {
-      LCreal vout = 0;
+      double vout = 0;
       if (gain != 0) {
          vout = (value / gain ) + offset;
       }

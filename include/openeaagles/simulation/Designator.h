@@ -26,8 +26,8 @@ public:
       double      latitude;      // Latitude                         (degs)
       double      longitude;     // Longitude                        (degs)
       double      elevation;     // Elevation                        (m)
-      LCreal      freq;          // Frequency                        (Hz)
-      LCreal      power;         // Effective Radiated Power (ERP)   (Watts)
+      double      freq;          // Frequency                        (Hz)
+      double      power;         // Effective Radiated Power (ERP)   (Watts)
       unsigned short code;       // LASER code
       unsigned short padding;    // LASER code
    };
@@ -38,8 +38,8 @@ public:
    double getLatitude() const       { return data.latitude; }
    double getLongitude() const      { return data.longitude; }
    double getElevation() const      { return data.elevation; }
-   LCreal getFrequency() const      { return data.freq; }
-   LCreal getPower() const          { return data.power; }
+   double getFrequency() const      { return data.freq; }
+   double getPower() const          { return data.power; }
    unsigned short getCode() const   { return data.code; }
    const Data* getDataBuffer() const   { return &data; }
 
@@ -49,8 +49,8 @@ public:
       data.longitude = lon;
       data.elevation = elev;
    }
-   virtual void setFrequency(const LCreal v)       { data.freq = v; }
-   virtual void setPower(const LCreal v)           { data.power = v; }
+   virtual void setFrequency(const double v)       { data.freq = v; }
+   virtual void setPower(const double v)           { data.power = v; }
    virtual void setCode(const unsigned short c)    { data.code = c; }
 
    virtual void setDataBuffer(const Data* const d) {

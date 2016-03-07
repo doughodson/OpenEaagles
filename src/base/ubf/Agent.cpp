@@ -85,7 +85,7 @@ void Agent::reset()
 //------------------------------------------------------------------------------
 // updateTC() -
 //------------------------------------------------------------------------------
-void Agent::updateTC(const LCreal dt)
+void Agent::updateTC(const double dt)
 {
 }
 
@@ -93,7 +93,7 @@ void Agent::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Agent::updateData(const LCreal dt)
+void Agent::updateData(const double dt)
 {
    controller(dt);
 }
@@ -102,7 +102,7 @@ void Agent::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Agent::controller(const LCreal dt)
+void Agent::controller(const double dt)
 {
    base::Component* actor = getActor();
 
@@ -218,7 +218,7 @@ EMPTY_DELETEDATA(AgentTC)
 //------------------------------------------------------------------------------
 // updateTC() - Calls the controller
 //------------------------------------------------------------------------------
-void AgentTC::updateTC(const LCreal dt)
+void AgentTC::updateTC(const double dt)
 {
    controller(dt);
 }
@@ -226,7 +226,7 @@ void AgentTC::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void AgentTC::updateData(const LCreal dt)
+void AgentTC::updateData(const double dt)
 {
 }
 

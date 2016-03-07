@@ -35,7 +35,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Cie::Cie(const MonitorMetrics*, const LCreal l, const LCreal x, const LCreal y)
+Cie::Cie(const MonitorMetrics*, const double l, const double x, const double y)
 {
    STANDARD_CONSTRUCTOR()
    cie[LUMINANCE] = l;   // set the values
@@ -75,17 +75,17 @@ void Cie::deleteData()
 //------------------------------------------------------------------------------
 // Data access functions
 //------------------------------------------------------------------------------
-LCreal Cie::luminance() const
+double Cie::luminance() const
 {
     return cie[LUMINANCE];
 }
 
-LCreal Cie::x() const
+double Cie::x() const
 {
     return cie[X];
 }
 
-LCreal Cie::y() const
+double Cie::y() const
 {
     return cie[Y];
 }
@@ -101,7 +101,7 @@ void Cie::getCIE(osg::Vec3& hhh) const
 bool Cie::setLuminance(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[LUMINANCE] = value; cie2rgb(color,cie,monitor); }
     else std::cerr << "Cie::setLuminance: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -114,7 +114,7 @@ bool Cie::setLuminance(Number* const msg)
 bool Cie::setX(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[X] = value; cie2rgb(color,cie,monitor); }
     else std::cerr << "Cie::setX: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -127,7 +127,7 @@ bool Cie::setX(Number* const msg)
 bool Cie::setY(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[Y] = value; cie2rgb(color,cie,monitor); }
     else std::cerr << "Cie::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;

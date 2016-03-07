@@ -25,12 +25,12 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Hls(const LCreal h, const LCreal l, const LCreal s)
+//      Hls(const double h, const double l, const double s)
 //          Special constructor that initializes the object to h, l, and s
 //
-//      LCreal hue()
-//      LCreal saturation()
-//      LCreal lightness()
+//      double hue()
+//      double saturation()
+//      double lightness()
 //          Data access routines.  Returns the individual HLS components.
 //
 //      getHLS(osg::Vec3 hls)
@@ -57,12 +57,12 @@ public:
     enum { HUE, LIGHTNESS, SATURATION };
 
 public:
-    Hls(const LCreal h, const LCreal l, const LCreal s);
+    Hls(const double h, const double l, const double s);
     Hls();
 
-    LCreal hue() const;
-    LCreal lightness() const;
-    LCreal saturation() const;
+    double hue() const;
+    double lightness() const;
+    double saturation() const;
     void getHLS(osg::Vec3& hls) const;
 
     virtual bool setHue(Number* const msg);
@@ -73,7 +73,7 @@ public:
     static void rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb);
 
 private:
-    static LCreal value(LCreal n1, LCreal n2, LCreal hue);
+    static double value(double n1, double n2, double hue);
 
 protected:
     osg::Vec3 hls;

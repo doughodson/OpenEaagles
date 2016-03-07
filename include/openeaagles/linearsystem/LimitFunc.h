@@ -21,15 +21,15 @@ class LimitFunc : public ScalerFunc {
 
 public:
    LimitFunc();
-   LimitFunc(const LCreal lower, const LCreal upper);
+   LimitFunc(const double lower, const double upper);
 
-   LCreal getLowerLimit() const  { return lower; }
-   LCreal getUpperLimit() const  { return upper; }
+   double getLowerLimit() const  { return lower; }
+   double getUpperLimit() const  { return upper; }
 
-   virtual bool setLowerLimit(const LCreal v);
-   virtual bool setUpperLimit(const LCreal v);
+   virtual bool setLowerLimit(const double v);
+   virtual bool setUpperLimit(const double v);
 
-   LCreal g(const LCreal x) override;
+   double g(const double x) override;
    bool isValid() const override;
 
 protected:
@@ -40,8 +40,8 @@ private:
 
    static const unsigned int ORDER = 1;
 
-   LCreal       lower;      // Lower limit
-   LCreal       upper;      // Upper limit
+   double       lower;      // Lower limit
+   double       upper;      // Upper limit
 };
 
 } // End linearsystem namespace

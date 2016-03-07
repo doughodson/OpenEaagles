@@ -55,24 +55,24 @@ class TrackManager;
 //    bool isScanOn()
 //       Returns true if the Sensor scanning
 //
-//    LCreal getLowerWavelength()
-//    bool setLowerWavelength(const LCreal w)
+//    double getLowerWavelength()
+//    bool setLowerWavelength(const double w)
 //       Gets/Sets the lower wavelength (microns; must be greater than 0)
 //
-//    LCreal getUpperWavelength()
-//    bool setUpperWavelength(const LCreal w)
+//    double getUpperWavelength()
+//    bool setUpperWavelength(const double w)
 //       Gets/Sets the upper wavelength (microns; must be greater than 0)
 //
-//    LCreal getNEI()
-//    bool setNEI(const LCreal n)
+//    double getNEI()
+//    bool setNEI(const double n)
 //       Gets/Sets the Noise Equivalent Irradiance  (watts/str-cm^2); must be greater than 0)
 //
-//    LCreal getThreshold()
-//    bool setThreshold(const LCreal t)
+//    double getThreshold()
+//    bool setThreshold(const double t)
 //       Gets/Sets the Signal to Noise Threshold
 //
-//    LCreal getIFOV()
-//    bool setIFOV(const LCreal i)
+//    double getIFOV()
+//    bool setIFOV(const double i)
 //       Gets/Sets the Instantaneous Field of View  (steradians)
 //       What the sensor can see with no gimbal movement
 //
@@ -81,8 +81,8 @@ class TrackManager;
 //       Gets/Sets the Type of sensor whether hot spot (only objects hotter than the environment
 //           are detected) or contrast (objects hotter and cooler than the environment are observed)
 //
-//    LCreal getFieldOfRegard()
-//    bool setFieldOfRegard(const LCreal fov)
+//    double getFieldOfRegard()
+//    bool setFieldOfRegard(const double fov)
 //       Gets/Sets the Field of Regard  (steradians)
 //       What the sensor can see with gimbal's full range of movement
 //
@@ -101,37 +101,37 @@ public:
 
    IrSensor();
 
-   virtual LCreal getLowerWavelength() const {return lowerWavelength; };   // Returns the lower wavelength (microns)
-   virtual bool setLowerWavelength(const LCreal w);                        // Sets the lower wavelength (microns; must be greater than 0)
+   virtual double getLowerWavelength() const {return lowerWavelength; };   // Returns the lower wavelength (microns)
+   virtual bool setLowerWavelength(const double w);                        // Sets the lower wavelength (microns; must be greater than 0)
 
-   virtual LCreal getUpperWavelength() const {return upperWavelength; };   // Returns the upper wavelength (microns)
-   virtual bool setUpperWavelength(const LCreal w);                        // Sets the upper wavelength (microns; must be greater than 0)
+   virtual double getUpperWavelength() const {return upperWavelength; };   // Returns the upper wavelength (microns)
+   virtual bool setUpperWavelength(const double w);                        // Sets the upper wavelength (microns; must be greater than 0)
 
-   virtual LCreal getNEI() const {return nei; };   // Returns the Noise Equivalent Irradiance  (watts/str-cm^2)
-   virtual bool setNEI(const LCreal n);            // Sets the Noise Equivalent Irradiance  (watts/str-cm^2); must be greater than 0)
+   virtual double getNEI() const {return nei; };   // Returns the Noise Equivalent Irradiance  (watts/str-cm^2)
+   virtual bool setNEI(const double n);            // Sets the Noise Equivalent Irradiance  (watts/str-cm^2); must be greater than 0)
 
-   virtual LCreal getThreshold() const {return threshold; };   // Returns the Signal to Noise Threshold
-   virtual bool setThreshold(const LCreal t);                  // Sets the Signal to Noise Threshold
+   virtual double getThreshold() const {return threshold; };   // Returns the Signal to Noise Threshold
+   virtual bool setThreshold(const double t);                  // Sets the Signal to Noise Threshold
 
-   virtual LCreal getIFOVTheta() const {return ifovTheta; };   // Returns ifov planar angle (radians)
-   virtual LCreal getIFOV() const {return ifov; };             // Returns the Instantaneous Field of View  (steradians)
-   virtual bool setIFOV(const LCreal i);                       // Sets the Instantaneous Field of View  (steradians)
+   virtual double getIFOVTheta() const {return ifovTheta; };   // Returns ifov planar angle (radians)
+   virtual double getIFOV() const {return ifov; };             // Returns the Instantaneous Field of View  (steradians)
+   virtual bool setIFOV(const double i);                       // Sets the Instantaneous Field of View  (steradians)
 
    virtual SensorType getSensorType() const {return sensorType; } ;  // Returns the type of sensor
    virtual bool setSensorType(const SensorType st);                  // Sets the type of sensor
 
-   //virtual LCreal getFieldOfRegardTheta() const {return fieldOfRegardTheta; };   // Returns Field of Regard planar angle (radians)
-   //virtual LCreal getFieldOfRegard() const { return fieldOfRegard; };            // Returns the Field of Regard  (steradians)
-   //virtual bool setFieldOfRegard(const LCreal fov);                              // Sets the Field of Regard  (steradians)
+   //virtual double getFieldOfRegardTheta() const {return fieldOfRegardTheta; };   // Returns Field of Regard planar angle (radians)
+   //virtual double getFieldOfRegard() const { return fieldOfRegard; };            // Returns the Field of Regard  (steradians)
+   //virtual bool setFieldOfRegard(const double fov);                              // Sets the Field of Regard  (steradians)
 
-   //virtual LCreal getAzimuthBin() const {return azimuthBin; };       // Returns min azimuth distance
-   //virtual bool setAzimuthBin(const LCreal azimuthBin);              // Sets min Azimuth Distance
+   //virtual double getAzimuthBin() const {return azimuthBin; };       // Returns min azimuth distance
+   //virtual bool setAzimuthBin(const double azimuthBin);              // Sets min Azimuth Distance
 
-   //virtual LCreal getElevationBin() const {return elevationBin; };     // Returns min azimuth distance
-   //virtual bool setElevationBin(const LCreal elevationBin);            // Sets min Azimuth Distance
+   //virtual double getElevationBin() const {return elevationBin; };     // Returns min azimuth distance
+   //virtual bool setElevationBin(const double elevationBin);            // Sets min Azimuth Distance
 
-   virtual LCreal getMaximumRange() const {return maximumRange; };   // Returns maximum Range
-   virtual bool setMaximumRange(const LCreal maximumRange);          // Sets maximum Range
+   virtual double getMaximumRange() const {return maximumRange; };   // Returns maximum Range
+   virtual bool setMaximumRange(const double maximumRange);          // Sets maximum Range
 
    virtual const base::String* getTrackManagerName() const; // Returns the requested track manager's name
    virtual bool setTrackManagerName(base::String* const a); // Sets the name of the track manager to use
@@ -158,12 +158,12 @@ public:
 
    virtual bool calculateIrQueryReturn(IrQueryMsg* const irQuery);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
-   void transmit(const LCreal dt) override;
-   void process(const LCreal dt) override;
+   void transmit(const double dt) override;
+   void process(const double dt) override;
 
    bool shutdownNotification() override;
 
@@ -179,29 +179,29 @@ private:
    void clearTracksAndQueues();
 
    // Characteristics
-   LCreal lowerWavelength;          // Lower wavelength limit (microns)
-   LCreal upperWavelength;          // Upper wavelength limit (microns)
-   LCreal nei;                      // Noise Equivalent Irradiance  (watts/str-cm^2)
-   LCreal threshold;                // Signal to Noise Threshold
-   LCreal ifov;                     // Instantaneous Field of View  (steradians) (what is in view without gimbal movement)
-   LCreal ifovTheta;                // IFOV planar angle, where ifov = 2 * pi * (1-cos(ifovTheta/2)
+   double lowerWavelength;          // Lower wavelength limit (microns)
+   double upperWavelength;          // Upper wavelength limit (microns)
+   double nei;                      // Noise Equivalent Irradiance  (watts/str-cm^2)
+   double threshold;                // Signal to Noise Threshold
+   double ifov;                     // Instantaneous Field of View  (steradians) (what is in view without gimbal movement)
+   double ifovTheta;                // IFOV planar angle, where ifov = 2 * pi * (1-cos(ifovTheta/2)
 
    // results in a simple cone.
    SensorType sensorType;             // Sensor Type(CONTRAST, HOTSPOT)
-   //LCreal fieldOfRegard;            // Field of Regard (steradians) (what can be in view to gimbals limits)
-   //LCreal fieldOfRegardTheta;       // Field of Regard planar angle, where fieldOfRegard = 2 * pi * (1-cos(fieldOfRegardTheta/2)
+   //double fieldOfRegard;            // Field of Regard (steradians) (what can be in view to gimbals limits)
+   //double fieldOfRegardTheta;       // Field of Regard planar angle, where fieldOfRegard = 2 * pi * (1-cos(fieldOfRegardTheta/2)
 
    // above results in a simple cone.
    base::String* tmName;          // Name of our track manager
    TrackManager*  trackManager;    // Our Track manager -- managed by the onboard computer
 
-   //LCreal azimuthBin;            // minimum azimuth we can distinguish -- two signals whose
+   //double azimuthBin;            // minimum azimuth we can distinguish -- two signals whose
                                    // azimuth differs by less than this will be merged
 
-   //LCreal elevationBin;          // minimum azimuth we can distinguish -- two signals whose
+   //double elevationBin;          // minimum azimuth we can distinguish -- two signals whose
                                    // azimuth differs by less than this will be merged
 
-   LCreal maximumRange;            // max sensor range.
+   double maximumRange;            // max sensor range.
 };
 
 }

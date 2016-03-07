@@ -35,12 +35,12 @@ class MultiActorAgent : public base::Component
 public:
    MultiActorAgent();
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
    // generic controller
-   virtual void controller(const LCreal dt = 0.0);
+   virtual void controller(const double dt = 0.0);
 
    void setState(base::ubf::State* const);
    base::ubf::State* getState() const                { return state; }

@@ -25,19 +25,19 @@ class LandingGear : public Instrument
 public:
     LandingGear();
 
-    virtual bool setGearDownValue(const LCreal newDV);
-    virtual bool setGearUpValue(const LCreal newUV);
+    virtual bool setGearDownValue(const double newDV);
+    virtual bool setGearUpValue(const double newUV);
 
-    LCreal getGearUpValue() const   { return gearUV; }
-    LCreal getGearDownValue() const { return gearDV; }
+    double getGearUpValue() const   { return gearUV; }
+    double getGearDownValue() const { return gearDV; }
     int getGearState() const        { return gearState; }
     bool getInTransit() const       { return inTransit; }
-    LCreal getGearPos() const       { return gearPos; }
+    double getGearPos() const       { return gearPos; }
     bool getHaveRotary() const      { return haveRotary; }
 
     void drawFunc() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
     // slot functions
@@ -47,9 +47,9 @@ protected:
 private:
     int gearState;      // is our gear down, up, or in transit?
     bool inTransit;     // are we going from one commanded position to another?
-    LCreal gearPos;     // our gear position
-    LCreal gearDV;      // our gear down indicator value
-    LCreal gearUV;      // our gear up indicator value
+    double gearPos;     // our gear position
+    double gearDV;      // our gear down indicator value
+    double gearUV;      // our gear up indicator value
 
     SendData gearSelSD; // which gear position we are setting
     bool haveRotary;    // do we have a rotary now that is our components (we won't draw if we do)

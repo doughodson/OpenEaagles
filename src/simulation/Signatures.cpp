@@ -73,7 +73,7 @@ SigConstant::SigConstant()
     rcs = 0.0;
 }
 
-SigConstant::SigConstant(const LCreal r)
+SigConstant::SigConstant(const double r)
 {
     STANDARD_CONSTRUCTOR()
     rcs = r;
@@ -104,7 +104,7 @@ void SigConstant::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigConstant::getRCS(const Emission* const)
+double SigConstant::getRCS(const Emission* const)
 {
     return rcs;
 }
@@ -115,7 +115,7 @@ LCreal SigConstant::getRCS(const Emission* const)
 bool SigConstant::setRCS(const base::Number* const num)
 {
     bool ok = false;
-    LCreal r = -1.0;
+    double r = -1.0;
 
     const base::Area* d = dynamic_cast<const base::Area*>(num);
     if (d != nullptr) {
@@ -168,7 +168,7 @@ SigSphere::SigSphere()
     setRadius(0);
 }
 
-SigSphere::SigSphere(const LCreal r)
+SigSphere::SigSphere(const double r)
 {
     STANDARD_CONSTRUCTOR()
     setRadius(r);
@@ -193,7 +193,7 @@ void SigSphere::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigSphere::getRCS(const Emission* const)
+double SigSphere::getRCS(const Emission* const)
 {
     return rcs;
 }
@@ -204,7 +204,7 @@ LCreal SigSphere::getRCS(const Emission* const)
 bool SigSphere::setRadiusFromSlot(base::Number* const num)
 {
     bool ok = false;
-    LCreal r = -1.0;
+    double r = -1.0;
 
     base::Distance* d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
@@ -260,7 +260,7 @@ SigPlate::SigPlate()
     b = 0.0;
 }
 
-SigPlate::SigPlate(const LCreal a1, const LCreal b1)
+SigPlate::SigPlate(const double a1, const double b1)
 {
     STANDARD_CONSTRUCTOR()
     a = a1;
@@ -287,7 +287,7 @@ void SigPlate::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigPlate::getRCS(const Emission* const em)
+double SigPlate::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
     if (em != nullptr) {
@@ -298,7 +298,7 @@ LCreal SigPlate::getRCS(const Emission* const em)
             rcs = (4.0 * PI * area * area) / (lambda * lambda);
         }
     }
-    return static_cast<LCreal>(rcs);
+    return static_cast<double>(rcs);
 }
 
 //------------------------------------------------------------------------------
@@ -307,7 +307,7 @@ LCreal SigPlate::getRCS(const Emission* const em)
 bool SigPlate::setA(base::Number* const num)
 {
     bool ok = false;
-    LCreal v = -1.0;
+    double v = -1.0;
 
     base::Distance* d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
@@ -331,7 +331,7 @@ bool SigPlate::setA(base::Number* const num)
 bool SigPlate::setB(base::Number* const num)
 {
     bool ok = false;
-    LCreal v = -1.0;
+    double v = -1.0;
 
     base::Distance* d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
@@ -373,7 +373,7 @@ SigDihedralCR::SigDihedralCR()
     length = 0.0;
 }
 
-SigDihedralCR::SigDihedralCR(const LCreal a) : SigPlate(a, 0.0)
+SigDihedralCR::SigDihedralCR(const double a) : SigPlate(a, 0.0)
 {
     STANDARD_CONSTRUCTOR()
     length = 0.0;
@@ -397,7 +397,7 @@ void SigDihedralCR::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigDihedralCR::getRCS(const Emission* const em)
+double SigDihedralCR::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
     if (em != nullptr) {
@@ -408,7 +408,7 @@ LCreal SigDihedralCR::getRCS(const Emission* const em)
             rcs = (8.0 * PI * a*a*a*a) / (lambda*lambda);
         }
     }
-    return static_cast<LCreal>(rcs);
+    return static_cast<double>(rcs);
 }
 
 
@@ -426,7 +426,7 @@ SigTrihedralCR::SigTrihedralCR()
     STANDARD_CONSTRUCTOR()
 }
 
-SigTrihedralCR::SigTrihedralCR(const LCreal a) : SigDihedralCR(a)
+SigTrihedralCR::SigTrihedralCR(const double a) : SigDihedralCR(a)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -449,7 +449,7 @@ void SigTrihedralCR::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigTrihedralCR::getRCS(const Emission* const em)
+double SigTrihedralCR::getRCS(const Emission* const em)
 {
     double rcs = 0.0;
     if (em != nullptr) {
@@ -460,7 +460,7 @@ LCreal SigTrihedralCR::getRCS(const Emission* const em)
             rcs = (12.0 * PI * a*a*a*a) / (lambda*lambda);
         }
     }
-    return static_cast<LCreal>(rcs);
+    return static_cast<double>(rcs);
 }
 
 //==============================================================================
@@ -497,9 +497,9 @@ void SigSwitch::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigSwitch::getRCS(const Emission* const em)
+double SigSwitch::getRCS(const Emission* const em)
 {
-   LCreal rcs = 0.0;
+   double rcs = 0.0;
 
    // Find our ownship player ...
    const Player* ownship = static_cast<const Player*>(findContainerByType(typeid(Player)));
@@ -612,14 +612,14 @@ void SigAzEl::deleteData()
 //------------------------------------------------------------------------------
 // getRCS() -- Get the RCS
 //------------------------------------------------------------------------------
-LCreal SigAzEl::getRCS(const Emission* const em)
+double SigAzEl::getRCS(const Emission* const em)
 {
-   LCreal rcs = 0.0;
+   double rcs = 0.0;
    if (em != nullptr && tbl != nullptr) {
 
       // angle of arrival (radians)
-      LCreal iv1 = em->getAzimuthAoi();
-      LCreal iv2 = em->getElevationAoi();
+      double iv1 = em->getAzimuthAoi();
+      double iv2 = em->getElevationAoi();
 
       // If the table's independent variable's order is swapped: (El, Az)
       if (isOrderSwapped()) {
@@ -629,15 +629,15 @@ LCreal SigAzEl::getRCS(const Emission* const em)
 
       // If the table's independent variables are in degrees ..
       if (isInDegrees()) {
-         iv1 *= static_cast<LCreal>(base::Angle::R2DCC);
-         iv2 *= static_cast<LCreal>(base::Angle::R2DCC);
+         iv1 *= static_cast<double>(base::Angle::R2DCC);
+         iv2 *= static_cast<double>(base::Angle::R2DCC);
       }
 
       rcs = tbl->lfi(iv1,iv2);
 
       // If the dependent data is in decibels ...
       if (isDecibel()) {
-         rcs = lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(rcs / 10.0));
+         rcs = lcPow(static_cast<double>(10.0), static_cast<double>(rcs / 10.0));
       }
    }
    return rcs;

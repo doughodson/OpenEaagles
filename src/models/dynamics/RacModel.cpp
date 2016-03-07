@@ -90,7 +90,7 @@ void RacModel::reset()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void RacModel::dynamics(const LCreal dt)
+void RacModel::dynamics(const double dt)
 {
     updateRAC(dt);
     BaseClass::dynamics(dt);
@@ -99,34 +99,34 @@ void RacModel::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // Get Vehicle data
 //------------------------------------------------------------------------------
-LCreal RacModel::getGload() const
+double RacModel::getGload() const
 {
    return -1;
 }
 
-LCreal RacModel::getMach() const
+double RacModel::getMach() const
 {
    return 0.5;
 }
 
-LCreal RacModel::getAngleOfAttack() const
+double RacModel::getAngleOfAttack() const
 {
    return 0.0;
 }
 
-LCreal RacModel::getSideSlip() const
+double RacModel::getSideSlip() const
 {
    return 0.0;
 }
 
-LCreal RacModel::getFlightPath() const
+double RacModel::getFlightPath() const
 {
    const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pp == nullptr) return 0;
-   return static_cast<LCreal>(pp->getPitchR());
+   return static_cast<double>(pp->getPitchR());
 }
 
-LCreal RacModel::getCalibratedAirspeed() const
+double RacModel::getCalibratedAirspeed() const
 {
    const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pp == nullptr) return 0;
@@ -208,20 +208,20 @@ bool RacModel::setCommandedAltitude(const double m, const double, const double)
 //------------------------------------------------------------------------------
 // updateRAC -- update Robot Aircraft
 //------------------------------------------------------------------------------
-void RacModel::updateRAC(const LCreal dt)
+void RacModel::updateRAC(const double dt)
 {
    // Get our Player (must have one!)
    simulation::Player* pp = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
-   LCreal g = ETHG * base::Distance::FT2M;
+   double g = ETHG * base::Distance::FT2M;
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)
-       cmdAltitude = static_cast<LCreal>(pp->getAltitudeM());
+       cmdAltitude = static_cast<double>(pp->getAltitudeM());
    if (cmdHeading < -9000.0)
-       cmdHeading = static_cast<LCreal>(pp->getHeadingD());
+       cmdHeading = static_cast<double>(pp->getHeadingD());
    if (cmdVelocity < -9000.0)
        cmdVelocity = pp->getTotalVelocityKts();
 
@@ -240,7 +240,7 @@ void RacModel::updateRAC(const LCreal dt)
 
    // Compute commanded flight path angle (gamma)
    double cmdPitch = 0;
-   LCreal vt = pp->getTotalVelocity();
+   double vt = pp->getTotalVelocity();
    if (vt > 0) {
       cmdPitch = std::asin( cmdAltRate/vt );
    }
@@ -248,7 +248,7 @@ void RacModel::updateRAC(const LCreal dt)
    // ---
    // Compute Max G
    // ---
-   LCreal gmax = gMax;                     // Max g,s
+   double gmax = gMax;                     // Max g,s
    if(pp->getTotalVelocity() < vpMaxG) {
       gmax = 1.0f + (gMax - 1.0f) * (pp->getTotalVelocity() - vpMin) / (vpMaxG - vpMin);
    }
@@ -256,9 +256,9 @@ void RacModel::updateRAC(const LCreal dt)
    // ---
    // Computer max turn rate, max/min pitch rates
    // ---
-   LCreal ra_max = gmax * g / pp->getTotalVelocity();    // Turn rate base on vp and g,s (rad/sec)
-   LCreal qa_max = ra_max;                           // Max pull up pitch rate (rad/sec)
-   LCreal qa_min = -qa_max;                          // Max pushover pitch rate (rad/sec)
+   double ra_max = gmax * g / pp->getTotalVelocity();    // Turn rate base on vp and g,s (rad/sec)
+   double qa_max = ra_max;                           // Max pull up pitch rate (rad/sec)
+   double qa_min = -qa_max;                          // Max pushover pitch rate (rad/sec)
    if(gmax > 2.0) {
       // Max yaw rate (rad/sec)
       qa_min = -( 2.0f * g / pp->getTotalVelocity());
@@ -268,9 +268,9 @@ void RacModel::updateRAC(const LCreal dt)
    // Get old angular values
    // ---
    const osg::Vec3 oldRates = pp->getAngularVelocities();
-   //LCreal pa1 = oldRates[simulation::Player::IROLL];
-   LCreal qa1 = oldRates[simulation::Player::IPITCH];
-   LCreal ra1 = oldRates[simulation::Player::IYAW];
+   //double pa1 = oldRates[simulation::Player::IROLL];
+   double qa1 = oldRates[simulation::Player::IPITCH];
+   double ra1 = oldRates[simulation::Player::IYAW];
 
    // ---
    // Find pitch rate and update pitch
@@ -292,10 +292,10 @@ void RacModel::updateRAC(const LCreal dt)
    }
 
    // Using Pitch rate, integrate pitch
-   double newTheta = static_cast<LCreal>(pp->getPitch() + (qa + qa1) * dt / 2.0);
+   double newTheta = static_cast<double>(pp->getPitch() + (qa + qa1) * dt / 2.0);
 
    // Use turn rate integrate heading
-   double newPsi = static_cast<LCreal>(pp->getHeading() + (ra + ra1) * dt / 2.0);
+   double newPsi = static_cast<double>(pp->getHeading() + (ra + ra1) * dt / 2.0);
    if(newPsi > 2.0*PI) newPsi -= 2.0*PI;
    if(newPsi < 0.0) newPsi += 2.0*PI;
 
@@ -317,10 +317,10 @@ void RacModel::updateRAC(const LCreal dt)
    pp->setAngularVelocities(pa, qa, ra);
 
    // Set our velocity vector (body coordinates)
-   pp->setVelocityBody( static_cast<LCreal>(newVP), 0.0, 0.0);
+   pp->setVelocityBody( static_cast<double>(newVP), 0.0, 0.0);
 
    // Set our acceleration vector (body coordinates)
-   pp->setAccelerationBody( static_cast<LCreal>(vpdot), 0.0, 0.0);
+   pp->setAccelerationBody( static_cast<double>(vpdot), 0.0, 0.0);
 }
 
 

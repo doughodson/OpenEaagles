@@ -34,16 +34,16 @@ class LowpassFilter : public FirstOrderTf
 
 public:
    LowpassFilter();
-   LowpassFilter(const unsigned int rate, const LCreal w);
+   LowpassFilter(const unsigned int rate, const double w);
 
-   LCreal getWc() const                           { return wc; }
-   virtual bool setWc(const LCreal v);
+   double getWc() const                           { return wc; }
+   virtual bool setWc(const double v);
 
    virtual bool setSlotWc(const base::Frequency* const msg);
    virtual bool setSlotWc(const base::Number* const msg);
 
 private:
-   LCreal wc;    // Cutoff frequency (rad/sec)
+   double wc;    // Cutoff frequency (rad/sec)
 };
 
 } // End linearsystem namespace

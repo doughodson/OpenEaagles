@@ -17,7 +17,7 @@ Decibel::Decibel()
    STANDARD_CONSTRUCTOR()
 }
 
-Decibel::Decibel(const LCreal value)
+Decibel::Decibel(const double value)
 {
    STANDARD_CONSTRUCTOR()
    setValueDB(value);
@@ -38,16 +38,16 @@ EMPTY_DELETEDATA(Decibel)
 //------------------------------------------------------------------------------
 // Set functions
 //------------------------------------------------------------------------------
-void Decibel::setValueDB(const LCreal v)
+void Decibel::setValueDB(const double v)
 {
    db = v;
-   val = lcPow( static_cast<LCreal>(10.0), static_cast<LCreal>(db/10.0) );
+   val = lcPow( static_cast<double>(10.0), static_cast<double>(db/10.0) );
 }
 
 void Decibel::setValue(const double v)
 {
    BaseClass::setValue(v);
-   db = lcLog10(static_cast<LCreal>(v)) * 10.0f;
+   db = lcLog10(static_cast<double>(v)) * 10.0f;
 }
 
 //------------------------------------------------------------------------------

@@ -271,15 +271,15 @@ void MapDrawer::drawFunc()
             myMap->latLonToTileRowColumn(rLat, rLon, originRow[CENTER_PAGER], originCol[CENTER_PAGER], textureRow[CENTER_PAGER], textureCol[CENTER_PAGER], pixelRow[CENTER_PAGER], \
                 pixelCol[CENTER_PAGER], pagers[CENTER_PAGER]);
             // Take the distance in nautical miles, and then convert to degrees
-            const LCreal quickRange = getRange();
-            const LCreal disDegN = quickRange / 60.0f;
-            const LCreal disDegE = static_cast<LCreal>(quickRange / (60.0 * getCosRefLat()));
+            const double quickRange = getRange();
+            const double disDegN = quickRange / 60.0f;
+            const double disDegE = static_cast<double>(quickRange / (60.0 * getCosRefLat()));
             // Get the space (in latitude degrees) between each pixel
             CadrgTocEntry* te = pagers[CENTER_PAGER]->getToc();
-            LCreal n = 1, e = 1;
+            double n = 1, e = 1;
             if (te != nullptr) {
-                n = static_cast<LCreal>(te->getVertInterval());
-                e = static_cast<LCreal>(te->getHorizInterval());
+                n = static_cast<double>(te->getVertInterval());
+                e = static_cast<double>(te->getHorizInterval());
             }
 
             // OK, so we know how far we want to look out (disDeg, and how far it is per pixel, so we can find
@@ -288,8 +288,8 @@ void MapDrawer::drawFunc()
             vpWL = disDegE / e;
 
             // Scale our viewport by the ratio of our map page to our actual ortho, to make our background map fit into our range circle
-            const LCreal rad = getOuterRadius();
-            const LCreal radRatio = static_cast<LCreal>(dTop / rad);
+            const double rad = getOuterRadius();
+            const double radRatio = static_cast<double>(dTop / rad);
             vpHL *= radRatio;
             vpWL *= radRatio;
 
@@ -307,7 +307,7 @@ void MapDrawer::drawFunc()
             drawMap(zones[CENTER_PAGER], CENTER_PAGER);
 
             // Check to see if we need to have zones around us (depending on the range)
-            const LCreal rngDeg = (quickRange * 2) / 60.0f;
+            const double rngDeg = (quickRange * 2) / 60.0f;
             const int tZone = myMap->findBestZone(rLat + rngDeg, rLon);
 
             // Now determine if there are other zones to draw
@@ -370,9 +370,9 @@ void MapDrawer::drawMap(const int zone, const int idx)
         glPushMatrix();
             // Not centered, move the whole map down the displacement value.
             if (!getCentered()) {
-                const LCreal dis = getOuterRadius();
-                //LCreal scale = getScale();
-                const LCreal myScale = vpHL / dis;
+                const double dis = getOuterRadius();
+                //double scale = getScale();
+                const double myScale = vpHL / dis;
                 glTranslatef(0, static_cast<GLfloat>(getDisplacement() * myScale), 0);
             }
             glTranslatef(0, 0, -0.1f);
@@ -386,8 +386,8 @@ void MapDrawer::drawMap(const int zone, const int idx)
             if (!nu) {
                 const GLfloat hdg = static_cast<GLfloat>(getHeadingDeg());
                 glRotatef(hdg, 0.0f, 0.0f, 1.0f);
-                sinAng = static_cast<LCreal>(lcSin(hdg * static_cast<LCreal>(base::Angle::D2RCC)));
-                cosAng = static_cast<LCreal>(lcCos(hdg * static_cast<LCreal>(base::Angle::D2RCC)));
+                sinAng = static_cast<double>(lcSin(hdg * static_cast<double>(base::Angle::D2RCC)));
+                cosAng = static_cast<double>(lcCos(hdg * static_cast<double>(base::Angle::D2RCC)));
             }
 
             // Translate down the pixels first
@@ -447,8 +447,8 @@ void MapDrawer::drawTexture(const int row, const int column, const int idx)
             glBindTexture(GL_TEXTURE_2D, newTex->getTexture());
             glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-            const LCreal transX = static_cast<LCreal>(column * pixPerTile * scalingEast[idx]);
-            const LCreal transY = static_cast<LCreal>(-row * pixPerTile * scalingNorth[idx]);
+            const double transX = static_cast<double>(column * pixPerTile * scalingEast[idx]);
+            const double transY = static_cast<double>(-row * pixPerTile * scalingNorth[idx]);
             glPushMatrix();
                 glTranslatef(static_cast<GLfloat>(transX), static_cast<GLfloat>(transY), 0.0f);
                 glBegin(GL_POLYGON);
@@ -483,7 +483,7 @@ void MapDrawer::goDrawGrid(const int row, const int column, const int idx)
 //------------------------------------------------------------------------------
 // Update data
 //------------------------------------------------------------------------------
-void MapDrawer::updateData(const LCreal dt)
+void MapDrawer::updateData(const double dt)
 {
     // Update our baseclass
     BaseClass::updateData(dt);

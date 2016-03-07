@@ -31,7 +31,7 @@ public:
    Behavior();
 
    // Returns a pre-ref'd Action (or zero if no action is generated)
-   virtual Action* genAction(const State* const state, const LCreal dt) = 0;
+   virtual Action* genAction(const State* const state, const double dt) = 0;
 
 protected:
    unsigned int getVote() const;

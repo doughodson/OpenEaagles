@@ -140,12 +140,12 @@ void LifeForm::fire()
 }
 
 // override our set velocity, so we can determine if we are walking, running, or standing
-bool LifeForm::setVelocity(const LCreal ue, const LCreal ve, const LCreal we)
+bool LifeForm::setVelocity(const double ue, const double ve, const double we)
 {
     bool ok = BaseClass::setVelocity(ue, ve, we);
     // based on our velocity, we will run or walk, or stand still
-    const LCreal tempX = lcAbs(ue);
-    const LCreal tempY = lcAbs(ve);
+    const double tempX = lcAbs(ue);
+    const double tempY = lcAbs(ve);
 
     // we only change our appearance bit if we are parachuting
     if (actionState != PARACHUTING) {
@@ -158,13 +158,13 @@ bool LifeForm::setVelocity(const LCreal ue, const LCreal ve, const LCreal we)
     return ok;
 }
 
-void LifeForm::move(const LCreal fwd, const LCreal sdws)
+void LifeForm::move(const double fwd, const double sdws)
 {
     if (getDamage() < 1) {
         osg::Vec3 old = getEulerAngles();
-        LCreal hdg = old.z();
+        double hdg = old.z();
 
-        LCreal tempFwd = fwd, tempSdws = sdws;
+        double tempFwd = fwd, tempSdws = sdws;
 
         // our deadband (if we are barely moving, just stop)
         if (lcAbs(tempFwd) < 0.9f) tempFwd = 0;
@@ -173,30 +173,30 @@ void LifeForm::move(const LCreal fwd, const LCreal sdws)
         const double yVel = tempFwd * (lcSin(hdg));
 
         // now calculate our sideways velocity
-        const double xxVel = tempSdws * (lcCos((hdg + (90 * static_cast<LCreal>(base::Angle::D2RCC)))));
-        const double yyVel = tempSdws * (lcSin((hdg + (90 * static_cast<LCreal>(base::Angle::D2RCC)))));
+        const double xxVel = tempSdws * (lcCos((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
+        const double yyVel = tempSdws * (lcSin((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
 
         // now add the vectors
         const double newXVel = xVel + xxVel;
         const double newYVel = yVel + yyVel;
 
-        LCreal zVel = 0.0;
-        setVelocity(static_cast<LCreal>(newXVel), static_cast<LCreal>(newYVel), zVel);
+        double zVel = 0.0;
+        setVelocity(static_cast<double>(newXVel), static_cast<double>(newYVel), zVel);
     }
     else setVelocity(0, 0, 0);
 }
 
-void LifeForm::look(const LCreal up, const LCreal sdws)
+void LifeForm::look(const double up, const double sdws)
 {
     if (getDamage() < 1) {
         if (lockMode != LOCKED) {
             lockMode = SEARCHING;
             // our up and sideways come in as -5 to 5, which is a rate to adjust heading
             const osg::Vec3 old = getEulerAngles();
-            LCreal hdg = old.z();
-            LCreal ptc = lookAngle;
-            LCreal tempSdws = sdws;
-            LCreal tempUp = up;
+            double hdg = old.z();
+            double ptc = lookAngle;
+            double tempSdws = sdws;
+            double tempUp = up;
             if (lcAbs(tempSdws) < 0.00005) tempSdws = 0;
             if (lcAbs(tempUp) < 0.05) tempUp = 0;
             hdg += tempSdws;
@@ -217,11 +217,11 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
             const osg::Vec3 myPos = getPosition();
             osg::Vec3 tgtPos;
             osg::Vec3 vecPos;
-            LCreal az = 0.0, el = 0.0, range = 0.0, diffAz = 0.0, diffEl = 0.0;
-            const LCreal maxAz = (0.7f * static_cast<LCreal>(base::Angle::D2RCC));
-            const LCreal maxEl = (0.7f * static_cast<LCreal>(base::Angle::D2RCC));
-            //LCreal maxRange = 1500.0f; // long range right now
-            const LCreal la = lookAngle * static_cast<LCreal>(base::Angle::D2RCC);
+            double az = 0.0, el = 0.0, range = 0.0, diffAz = 0.0, diffEl = 0.0;
+            const double maxAz = (0.7f * static_cast<double>(base::Angle::D2RCC));
+            const double maxEl = (0.7f * static_cast<double>(base::Angle::D2RCC));
+            //double maxRange = 1500.0f; // long range right now
+            const double la = lookAngle * static_cast<double>(base::Angle::D2RCC);
             Simulation* sim = getSimulation();
             if (sim != nullptr) {
                 base::PairStream* players = sim->getPlayers();
@@ -240,7 +240,7 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
                                 range = std::sqrt(range);
                                 // now get our elevation
                                 el = lcAtan2(-vecPos.z(), range);
-                                diffAz = lcAbs(lcAepcRad(az - static_cast<LCreal>(getHeadingR())));
+                                diffAz = lcAbs(lcAepcRad(az - static_cast<double>(getHeadingR())));
                                 diffEl = lcAbs(lcAepcRad(la - el));
                                 if ((diffAz <= maxAz) && (diffEl <= maxEl)) {
                                     lockMode = TGT_IN_SIGHT;
@@ -265,13 +265,13 @@ void LifeForm::look(const LCreal up, const LCreal sdws)
             if (tgtPlayer == nullptr) lockMode = SEARCHING;
             else {
                 const osg::Vec3 vecPos = tgtPlayer->getPosition() - getPosition();
-                const LCreal az = lcAtan2(vecPos.y(), vecPos.x());
-                LCreal range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
+                const double az = lcAtan2(vecPos.y(), vecPos.x());
+                double range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
                 range = std::sqrt(range);
                 // now get our elevation
-                const LCreal el = lcAtan2(-vecPos.z(), range);
+                const double el = lcAtan2(-vecPos.z(), range);
                 // now force that on us
-                setLookAngle(el * static_cast<LCreal>(base::Angle::R2DCC));
+                setLookAngle(el * static_cast<double>(base::Angle::R2DCC));
                 setEulerAngles(0, 0, az);
             }
         }

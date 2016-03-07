@@ -275,7 +275,7 @@ void NetIO::discoverObjectInstance(
          nib->setObjectHandle(theObject);
          nib->setObjectName(theObjectName);
          nib->setClassIndex(idx);
-         nib->setTimeExec( (LCreal) getCurrentTime() );
+         nib->setTimeExec( (double) getCurrentTime() );
          nib->setBaseEntity(baseEntity);
          addNib2InputList(nib);
          addNibToObjectTables(nib, INPUT_NIB);

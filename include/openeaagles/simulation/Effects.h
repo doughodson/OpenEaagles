@@ -30,8 +30,8 @@ class Effects : public Weapon
 public:
     Effects();
 
-    LCreal getDragIndex() const                    { return dragIndex; }
-    void setDragIndex(const LCreal v)              { dragIndex = v; }
+    double getDragIndex() const                    { return dragIndex; }
+    void setDragIndex(const double v)              { dragIndex = v; }
 
     const char* getDescription() const override;
     const char* getNickname() const override;
@@ -43,11 +43,11 @@ public:
 protected:
    bool setSlotDragIndex(base::Number* const p);
 
-   void weaponDynamics(const LCreal dt) override;
-   void updateTOF(const LCreal dt) override;
+   void weaponDynamics(const double dt) override;
+   void updateTOF(const double dt) override;
 
 private:
-    LCreal dragIndex;             // Drag Index
+    double dragIndex;             // Drag Index
 };
 
 //------------------------------------------------------------------------------

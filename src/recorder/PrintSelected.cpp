@@ -789,10 +789,10 @@ std::string PrintSelected::printTimeMsg(double time)
     char cbuf[16];
     int hh = 0;     // Hours
     int mm = 0;     // Min
-    LCreal ss = 0;  // Sec
+    double ss = 0;  // Sec
 
     // utc time
-    base::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<double>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     std::string timeStr;
     timeStr.assign(cbuf);

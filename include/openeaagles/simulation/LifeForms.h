@@ -37,15 +37,15 @@ public:
     int getActionState() const { return actionState; }
 
     // move our player (vector him according to strafe)
-    virtual void move(const LCreal fwd, const LCreal sdws);
+    virtual void move(const double fwd, const double sdws);
 
     // have our player look
-    virtual void look(const LCreal up, const LCreal sdws);
-    virtual bool setLookAngle(const LCreal x) { lookAngle = x; return true; }
+    virtual void look(const double up, const double sdws);
+    virtual bool setLookAngle(const double x) { lookAngle = x; return true; }
 
-    bool setVelocity(const LCreal ue, const LCreal ve, const LCreal we) override;
+    bool setVelocity(const double ue, const double ve, const double we) override;
 
-    LCreal getLookAngle() const { return lookAngle; }
+    double getLookAngle() const { return lookAngle; }
     bool isTargetAquired() const { return tgtAquired; }
     int getLockMode() const { return lockMode; }
     virtual void setLockedMode(const int x) { lockMode = x; }
@@ -66,7 +66,7 @@ protected:
 
 private:
     int actionState;    // the action we are doing (for DIS enumerations)
-    LCreal lookAngle;   // the look angle we are looking at (up or down 90 degs)
+    double lookAngle;   // the look angle we are looking at (up or down 90 degs)
     bool tgtAquired;    // we have a target in our crosshairs
     int lockMode;       // the mode we are in (searching, tgt in sight, locked)
     Player* tgtPlayer;  // our target player that we have aquired

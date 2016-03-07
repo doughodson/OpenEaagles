@@ -129,7 +129,7 @@ public:
 protected:
    void clearQueues();
 
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
    bool shutdownNotification() override;
 

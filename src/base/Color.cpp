@@ -13,7 +13,7 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Color, "Color")
 EMPTY_SERIALIZER(Color)
 EMPTY_DELETEDATA(Color)
 
-LCreal Color::defaultAlpha = 1.0f;
+double Color::defaultAlpha = 1.0f;
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -52,25 +52,25 @@ Color::operator const osg::Vec4*() const
 }
 
 // Return the color vector of color array index PF_RED
-LCreal Color::red() const
+double Color::red() const
 {
     return color[RED];
 }
 
 // Return the color vector of color array index PF_GREEN
-LCreal Color::green() const
+double Color::green() const
 {
     return color[GREEN];
 }
 
 // Return the color vector of color array index PF_BLUE
-LCreal Color::blue() const
+double Color::blue() const
 {
     return color[BLUE];
 }
 
 // Return the color vector of color array index PF_ALPHA
-LCreal Color::alpha() const
+double Color::alpha() const
 {
     return color[ALPHA];
 }
@@ -93,28 +93,28 @@ const osg::Vec4* Color::getRGBA() const
 // Set functions
 //------------------------------------------------------------------------------
 
-bool Color::setRed(const LCreal value)
+bool Color::setRed(const double value)
 {
     bool ok = (value >= 0 && value <= 1);
     if (ok) color[Color::RED] = value;
     return ok;
 }
 
-bool Color::setGreen(const LCreal value)
+bool Color::setGreen(const double value)
 {
     bool ok = (value >= 0 && value <= 1);
     if (ok) color[Color::GREEN] = value;
     return ok;
 }
 
-bool Color::setBlue(const LCreal value)
+bool Color::setBlue(const double value)
 {
     bool ok = (value >= 0 && value <= 1);
     if (ok) color[Color::BLUE] = value;
     return ok;
 }
 
-bool Color::setAlpha(const LCreal value)
+bool Color::setAlpha(const double value)
 {
     bool ok = (value >= 0 && value <= 1);
     if (ok) color[Color::ALPHA] = value;
@@ -137,7 +137,7 @@ bool operator!=(const Color& c1, const Color& c2)
 //------------------------------------------------------------------------------
 // getDefaultAlpha() -- returns the default alpha value
 //------------------------------------------------------------------------------
-LCreal Color::getDefaultAlpha()
+double Color::getDefaultAlpha()
 {
    return defaultAlpha;
 }
@@ -145,7 +145,7 @@ LCreal Color::getDefaultAlpha()
 //------------------------------------------------------------------------------
 // setDefaultAlpha()
 //------------------------------------------------------------------------------
-void Color::setDefaultAlpha(const LCreal alpha)
+void Color::setDefaultAlpha(const double alpha)
 {
     defaultAlpha = alpha;
 }

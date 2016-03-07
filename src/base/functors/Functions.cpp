@@ -33,7 +33,7 @@ double Func1::f(const double iv1, FStorage* const s) const
    const Table1* p = static_cast<const Table1*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(static_cast<LCreal>(iv1),s);
+      value = p->lfi(static_cast<double>(iv1),s);
    }
 
    return value;
@@ -73,7 +73,7 @@ double Func2::f(const double iv1, const double iv2, FStorage* const s) const
    const Table2* p = static_cast<const Table2*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), s);
+      value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2), s);
    }
 
    return value;
@@ -113,7 +113,7 @@ double Func3::f(const double iv1, const double iv2, const double iv3, FStorage* 
    const Table3* p = static_cast<const Table3*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), static_cast<LCreal>(iv3), s);
+      value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2), static_cast<double>(iv3), s);
    }
 
    return value;
@@ -153,8 +153,8 @@ double Func4::f(const double iv1, const double iv2, const double iv3, const doub
    const Table4* p = static_cast<const Table4*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2),
-                     static_cast<LCreal>(iv3), static_cast<LCreal>(iv4), s);
+      value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2),
+                     static_cast<double>(iv3), static_cast<double>(iv4), s);
    }
 
    return value;
@@ -194,8 +194,8 @@ double Func5::f(const double iv1, const double iv2, const double iv3, const doub
    const Table5* p = static_cast<const Table5*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
-      value = p->lfi(static_cast<LCreal>(iv1), static_cast<LCreal>(iv2), static_cast<LCreal>(iv3),
-                     static_cast<LCreal>(iv4), static_cast<LCreal>(iv5) ,s);
+      value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2), static_cast<double>(iv3),
+                     static_cast<double>(iv4), static_cast<double>(iv5) ,s);
    }
 
    return value;

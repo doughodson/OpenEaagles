@@ -27,31 +27,32 @@ namespace iodevice {
 //             6         POV: back(1.0); forward(-1.0); center(0.0)
 //             7         POV: right(1.0); left(-1.0); center(0.0)
 //
-// Form Name: UsbJoystick
+// Factory name: UsbJoystick
 //
 //------------------------------------------------------------------------------
-class UsbJoystickImp : public UsbJoystick {
+class UsbJoystickImp : public UsbJoystick
+{
     DECLARE_SUBCLASS(UsbJoystickImp,UsbJoystick)
 
 public:
    UsbJoystickImp();
 
    // base::IoDevice functions
-   void processInputs(const LCreal dt, base::IoData* const inData) override;
+   void processInputs(const double dt, base::IoData* const inData) override;
 
    // base::Component functions
    void reset() override;
 
 private:
    void initData();
-   bool setMaxMin(unsigned int channel, LCreal max, LCreal min);
-   bool setInputScaled(unsigned int channel, LCreal raw);
+   bool setMaxMin(unsigned int channel, double max, double min);
+   bool setInputScaled(unsigned int channel, double raw);
 
    // ---
    // analog
    // ---
-   LCreal cmin[MAX_AI];     // channel min values
-   LCreal cmax[MAX_AI];     // channel max values
+   double cmin[MAX_AI];     // channel min values
+   double cmax[MAX_AI];     // channel max values
 
 };
 

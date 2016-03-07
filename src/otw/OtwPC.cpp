@@ -196,7 +196,7 @@ base::Object* OtwPC::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 void OtwPC::sendPcData()
 {
-    //const LCreal DEG2MR = (PI / 180.0f * 1000.0f);
+    //const double DEG2MR = (PI / 180.0f * 1000.0f);
 
     // Ownship type air vehicle?
     const simulation::AirVehicle* av = dynamic_cast<const simulation::AirVehicle*>(getOwnship());

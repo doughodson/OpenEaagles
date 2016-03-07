@@ -257,7 +257,7 @@ bool Nib::setFederateName(const base::String* const msg)
 //------------------------------------------------------------------------------
 // entityStateManager() -- default entity state manager
 //------------------------------------------------------------------------------
-bool Nib::entityStateManager(const LCreal)
+bool Nib::entityStateManager(const double)
 {
    return true;
 }
@@ -265,7 +265,7 @@ bool Nib::entityStateManager(const LCreal)
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- default weapon fire message factory
 //------------------------------------------------------------------------------
-bool Nib::weaponFireMsgFactory(const LCreal)
+bool Nib::weaponFireMsgFactory(const double)
 {
    return true;
 }
@@ -273,7 +273,7 @@ bool Nib::weaponFireMsgFactory(const LCreal)
 //------------------------------------------------------------------------------
 // munitionDetonationMsgFactory() -- default munition detonation message factory
 //------------------------------------------------------------------------------
-bool Nib::munitionDetonationMsgFactory(const LCreal)
+bool Nib::munitionDetonationMsgFactory(const double)
 {
    return true;
 }
@@ -281,7 +281,7 @@ bool Nib::munitionDetonationMsgFactory(const LCreal)
 //------------------------------------------------------------------------------
 // networkOutputManagers() --  default networkOutputManagers()
 //------------------------------------------------------------------------------
-bool Nib::networkOutputManagers(const LCreal)
+bool Nib::networkOutputManagers(const double)
 {
     return true;
 }
@@ -335,12 +335,12 @@ bool Nib::setNetIO(NetIO* const p)
 // Player data set functions
 //------------------------------------------------------------------------------
 
-void Nib::setTimeExec(const LCreal t)
+void Nib::setTimeExec(const double t)
 {
     execTime = t;
 }
 
-void Nib::setTimeUtc(const LCreal t)
+void Nib::setTimeUtc(const double t)
 {
     utcTime = t;
 }
@@ -366,9 +366,9 @@ void Nib::setEntityTypeChecked(const bool f)
 }
 
 // Sets the damage for this player
-bool Nib::setDamage(const LCreal v)
+bool Nib::setDamage(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    damage = x;
@@ -376,9 +376,9 @@ bool Nib::setDamage(const LCreal v)
 }
 
 // Sets the smoke for this player
-bool Nib::setSmoke(const LCreal v)
+bool Nib::setSmoke(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    smoking = x;
@@ -386,9 +386,9 @@ bool Nib::setSmoke(const LCreal v)
 }
 
 // Sets the flames for this player
-bool Nib::setFlames(const LCreal v)
+bool Nib::setFlames(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    flames = x;
@@ -413,7 +413,7 @@ bool Nib::setDetonationMessageSent(const bool flg)
 //------------------------------------------------------------------------------
 // isPlayerStateUpdateRequired() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
+bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 {
    enum { NO, YES, UNSURE } result = UNSURE;
 
@@ -436,9 +436,9 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
    // ---
    if ( (result == UNSURE) && player->isLocalPlayer()) {
 
-      //LCreal drTime = curExecTime - getTimeExec();
+      //double drTime = curExecTime - getTimeExec();
       SynchronizedState playerState = player->getSynchronizedState();
-      const LCreal drTime = static_cast<LCreal>(playerState.getTimeExec()) - getTimeExec();
+      const double drTime = static_cast<double>(playerState.getTimeExec()) - getTimeExec();
 
       // 3-a) Freeze flag has changed
       if ( (player->isFrozen() && isNotFrozen()) || (!player->isFrozen() && isFrozen()) ) {
@@ -475,8 +475,8 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          if (!player->isPositionFrozen() && !player->isAltitudeFrozen()) {
 
             // max position error (meters)
-            const LCreal maxPosErr = getNetIO()->getMaxPositionErr(this);
-            const LCreal maxPosErr2 = maxPosErr*maxPosErr;  // squared
+            const double maxPosErr = getNetIO()->getMaxPositionErr(this);
+            const double maxPosErr2 = maxPosErr*maxPosErr;  // squared
 
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
@@ -492,7 +492,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
          if (result == UNSURE && !player->isAttitudeFrozen()) {
 
             // max angle error (radians)
-            const LCreal maxAngleErr = getNetIO()->getMaxOrientationErr(this);
+            const double maxAngleErr = getNetIO()->getMaxOrientationErr(this);
 
             // Compute angular error
             //osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
@@ -522,7 +522,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the position is greater than zero or if we've previously been
       // sending the wing sweep (count > 0).
       {
-         const LCreal angle = av->getWingSweepAngle();  //  radians
+         const double angle = av->getWingSweepAngle();  //  radians
          if (angle > 0 || apartWingSweepCnt > 0) {
             // Check if the angle has changed.
             if (angle != apartWingSweep) {
@@ -537,7 +537,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the gear is not up (pos != 0) or if we've previously been
       // sending the gear position (count > 0).
       {
-         const LCreal pos = av->getLandingGearPosition(); // (0% up; 100% down)
+         const double pos = av->getLandingGearPosition(); // (0% up; 100% down)
          if (pos > 0 || apartGearPosCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartLandingGear) {
@@ -552,7 +552,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       // an part if the door is not closed (pos != 0) or if we've previously been
       // sending the door position (count > 0).
       {
-         const LCreal pos = av->getWeaponBayDoorPosition(); // % (0% closed; 100% open)
+         const double pos = av->getWeaponBayDoorPosition(); // % (0% closed; 100% open)
          if (pos > 0 || apartBayDoorCnt > 0) {
             // Check if the pos has changed.
             if (pos != apartBayDoor) {
@@ -576,7 +576,7 @@ bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
       //       (on SamVehicles and Artillery only)
       if ( gv->isClassType(typeid(SamVehicle)) || gv->isClassType(typeid(Artillery)) ) {
 
-         const LCreal angle = gv->getLauncherPosition();  //  (radians)
+         const double angle = gv->getLauncherPosition();  //  (radians)
 
          // First pass --
          if (apartLnchrElevCnt == 0) {
@@ -699,10 +699,10 @@ void Nib::playerState2Nib()
 
       // mark the current times
       //Simulation* sim = getNetIO()->getSimulation();
-      //setTimeExec( static_cast<LCreal>(sim->getExecTimeSec()) );
-      setTimeExec( static_cast<LCreal>(player->getSynchronizedState().getTimeExec()) );
-      //setTimeUtc( static_cast<LCreal>(sim->getSysTimeOfDay()) );
-      setTimeUtc( static_cast<LCreal>(player->getSynchronizedState().getTimeUtc()) );
+      //setTimeExec( static_cast<double>(sim->getExecTimeSec()) );
+      setTimeExec( static_cast<double>(player->getSynchronizedState().getTimeExec()) );
+      //setTimeUtc( static_cast<double>(sim->getSysTimeOfDay()) );
+      setTimeUtc( static_cast<double>(player->getSynchronizedState().getTimeUtc()) );
 
       {
          //osg::Vec3d pos = player->getGeocPosition();
@@ -749,7 +749,7 @@ void Nib::nib2PlayerState()
 // update entity dead reckoning (incoming entities only)
 //------------------------------------------------------------------------------
 bool Nib::updateDeadReckoning(
-      const LCreal dt,
+      const double dt,
       osg::Vec3d* const pNewPos,
       osg::Vec3d* const pNewAngles
    )

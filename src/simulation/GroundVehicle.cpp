@@ -18,9 +18,9 @@ namespace simulation {
 IMPLEMENT_SUBCLASS(GroundVehicle,"GroundVehicle")
 EMPTY_SERIALIZER(GroundVehicle)
 
-static const LCreal DEFAULT_LAUNCHER_UP_ANGLE = static_cast<LCreal>(PI/2.0); // Default max launcher angle (rad)
-static const LCreal DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                       // Default min launcher angle (rad)
-static const LCreal DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;                     // Default max launcher movement time (sec)
+static const double DEFAULT_LAUNCHER_UP_ANGLE = static_cast<double>(PI/2.0); // Default max launcher angle (rad)
+static const double DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                       // Default min launcher angle (rad)
+static const double DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;                     // Default max launcher movement time (sec)
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -117,7 +117,7 @@ void GroundVehicle::reset()
 //------------------------------------------------------------------------------
 // dynamics() -- update vehicle dynamics
 //------------------------------------------------------------------------------
-void GroundVehicle::dynamics(const LCreal dt)
+void GroundVehicle::dynamics(const double dt)
 {
    BaseClass::dynamics(dt);
    launcherDynamics(dt);
@@ -126,12 +126,12 @@ void GroundVehicle::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // Launcher dynamics -- moves launcher to its commanded position
 //------------------------------------------------------------------------------
-void GroundVehicle::launcherDynamics(const LCreal dt)
+void GroundVehicle::launcherDynamics(const double dt)
 {
    if (lnchrMoveTime > 0 && cmdLnchrPos != NONE) {
 
-      LCreal rate = (lnchrUpAngle - lnchrDownAngle) / lnchrMoveTime;
-      LCreal angle = lnchrAngle;
+      double rate = (lnchrUpAngle - lnchrDownAngle) / lnchrMoveTime;
+      double angle = lnchrAngle;
 
       if (cmdLnchrPos == UP && lnchrAngle != lnchrUpAngle) {
          angle = lnchrAngle + (rate * dt);
@@ -156,29 +156,29 @@ void GroundVehicle::launcherDynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // Access functions
 //------------------------------------------------------------------------------
-LCreal GroundVehicle::getGrossWeight() const
+double GroundVehicle::getGrossWeight() const
 {
     return 0.0;
 }
 
-LCreal GroundVehicle::getFuelWt() const
+double GroundVehicle::getFuelWt() const
 {
     return 0.0;
 }
 
-LCreal GroundVehicle::getFuelWtMax() const
+double GroundVehicle::getFuelWtMax() const
 {
     return 0.0;
 }
 
 // Launcher position (rad)
-LCreal GroundVehicle::getLauncherPosition() const
+double GroundVehicle::getLauncherPosition() const
 {
    return lnchrAngle;
 }
 
 // Launcher rate (rad/sec)
-LCreal GroundVehicle::getLauncherRate() const
+double GroundVehicle::getLauncherRate() const
 {
    return lnchrRate;
 }
@@ -201,7 +201,7 @@ bool GroundVehicle::commandLauncher(const LauncherCommand cmd)
 }
 
 // Sets the launcher elevation angle (rad), and removes the old position command
-bool GroundVehicle::setLauncherPosition(const LCreal rad)
+bool GroundVehicle::setLauncherPosition(const double rad)
 {
    lnchrAngle = rad;
    lnchrRate = 0.0;
@@ -237,7 +237,7 @@ bool GroundVehicle::setSlotLauncherDownAngle(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      lnchrDownAngle = static_cast<LCreal>(base::Radians::convertStatic( *msg ));
+      lnchrDownAngle = static_cast<double>(base::Radians::convertStatic( *msg ));
       ok = true;
    }
    return ok;
@@ -248,7 +248,7 @@ bool GroundVehicle::setSlotLauncherUpAngle(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      lnchrUpAngle = static_cast<LCreal>(base::Radians::convertStatic( *msg ));
+      lnchrUpAngle = static_cast<double>(base::Radians::convertStatic( *msg ));
       ok = true;
    }
    return ok;

@@ -23,7 +23,7 @@ namespace base {
 //     Object* FlowRate::getSlotByIndex(const int si)
 //
 // set() -- sets our velocity from some other velocity
-//     bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
+//     bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)
 //
 // setSlotVolume() -- sets our volume object.
 //     bool FlowRate::setSlotVolume(Volume* newVol)
@@ -32,10 +32,10 @@ namespace base {
 //     bool FlowRate::setSlotTime(Time* newTime)
 //
 // set() -- sets our velocity from some other velocity
-//     bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
+//     bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)
 //
 // convert() -- converts from one volume/time ratio to another
-//     LCreal FlowRate::convert(Volume* newVolume, Time* newTime)
+//     double FlowRate::convert(Volume* newVolume, Time* newTime)
 //
 // serialize() -- print the value of this object to the output stream sout.
 //     std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
@@ -46,15 +46,15 @@ class FlowRate : public Number
     DECLARE_SUBCLASS(FlowRate, Number)
 
 public:
-    FlowRate(LCreal newFlowRate, Volume* volume, Time* time);
+    FlowRate(double newFlowRate, Volume* volume, Time* time);
     FlowRate();
 
     // dynamic convert routine
-    LCreal convert(Volume* newVolume, Time* newTime);
+    double convert(Volume* newVolume, Time* newTime);
     // get functions
-    LCreal getFlowRate()                 { return flowRate; };
+    double getFlowRate()                 { return flowRate; };
     // set functions
-    bool set(const LCreal newFlowRate, Volume* newVolume, Time* newTime);
+    bool set(const double newFlowRate, Volume* newVolume, Time* newTime);
     // slot table functions
     bool setSlotVolume(Volume* newVol);
     bool setSlotTime(Time* newTime);
@@ -62,7 +62,7 @@ public:
 private:
     Volume*   myVolume;       // holds our distance type
     Time*     myTime;         // holds our time type
-    LCreal    flowRate;       // holds our velocity
+    double    flowRate;       // holds our velocity
 };
 
 } // End base namespace

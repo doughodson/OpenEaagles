@@ -79,7 +79,7 @@ bool Material::setSlotAmbientColor(const base::PairStream* const x)
         // go through and get our data from the pairstream, and set our ambient color
         const base::List::Item* item = x->getFirstItem();
         int count = 0;
-        LCreal temp[4] = { 1,1,1,1 };
+        double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
             base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
@@ -103,7 +103,7 @@ bool Material::setSlotAmbientColor(const base::PairStream* const x)
 bool Material::setSlotAmbientColor(const base::Number* const x)
 {
     if (x != nullptr) {
-        LCreal temp = x->getFloat();
+        double temp = x->getFloat();
         ambientColor.set(temp, temp, temp, 1);
     }
     return true;
@@ -119,7 +119,7 @@ bool Material::setSlotDiffuseColor(const base::PairStream* const x)
         // go through and get our data from the pairstream, and set our ambient color
         const base::List::Item* item = x->getFirstItem();
         int count = 0;
-        LCreal temp[4] = { 1,1,1,1 };
+        double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
             base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
@@ -143,7 +143,7 @@ bool Material::setSlotDiffuseColor(const base::PairStream* const x)
 bool Material::setSlotDiffuseColor(const base::Number* const x)
 {
     if (x != nullptr) {
-        LCreal temp = x->getFloat();
+        double temp = x->getFloat();
         diffuseColor.set(temp, temp, temp, 1);
     }
     return true;
@@ -159,7 +159,7 @@ bool Material::setSlotEmissiveColor(const base::PairStream* const x)
         // go through and get our data from the pairstream, and set our ambient color
         const base::List::Item* item = x->getFirstItem();
         int count = 0;
-        LCreal temp[4] = { 1,1,1,1 };
+        double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
             base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
@@ -183,7 +183,7 @@ bool Material::setSlotEmissiveColor(const base::PairStream* const x)
 bool Material::setSlotEmissiveColor(const base::Number* const x)
 {
     if (x != nullptr) {
-        LCreal temp = x->getFloat();
+        double temp = x->getFloat();
         emissiveColor.set(temp, temp, temp, 1);
     }
     return true;
@@ -199,7 +199,7 @@ bool Material::setSlotSpecularColor(const base::PairStream* const x)
         // go through and get our data from the pairstream, and set our ambient color
         const base::List::Item* item = x->getFirstItem();
         int count = 0;
-        LCreal temp[4] = { 1,1,1,1 };
+        double temp[4] = { 1,1,1,1 };
         while (item != nullptr && count < 4) {
             base::Pair* pair = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             if (pair != nullptr) {
@@ -223,7 +223,7 @@ bool Material::setSlotSpecularColor(const base::PairStream* const x)
 bool Material::setSlotSpecularColor(const base::Number* const x)
 {
     if (x != nullptr) {
-        LCreal temp = x->getFloat();
+        double temp = x->getFloat();
         specularColor.set(temp, temp, temp, 1);
     }
     return true;
@@ -240,14 +240,14 @@ bool Material::setSlotShininess(const base::Number* const x)
 }
 
 //------------------------------------------------------------------------------
-// setAmbientColor() - set our ambient color with an OSG or LCreal
+// setAmbientColor() - set our ambient color with an OSG or double
 //------------------------------------------------------------------------------
 bool Material::setAmbientColor(osg::Vec4 x)
 {
     ambientColor = x;
     return true;
 }
-bool Material::setAmbientColor(LCreal x, LCreal y, LCreal z, LCreal w)
+bool Material::setAmbientColor(double x, double y, double z, double w)
 {
     ambientColor.set(x, y, z, w);
     return true;
@@ -260,7 +260,7 @@ bool Material::setDiffuseColor(osg::Vec4 x)
     diffuseColor = x;
     return true;
 }
-bool Material::setDiffuseColor(LCreal x, LCreal y, LCreal z, LCreal w)
+bool Material::setDiffuseColor(double x, double y, double z, double w)
 {
     diffuseColor.set(x, y, z, w);
     return true;
@@ -273,7 +273,7 @@ bool Material::setEmissiveColor(osg::Vec4 x)
     emissiveColor = x;
     return true;
 }
-bool Material::setEmissiveColor(LCreal x, LCreal y, LCreal z, LCreal w)
+bool Material::setEmissiveColor(double x, double y, double z, double w)
 {
     emissiveColor.set(x, y, z, w);
     return true;
@@ -286,7 +286,7 @@ bool Material::setSpecularColor(osg::Vec4 x)
     specularColor = x;
     return true;
 }
-bool Material::setSpecularColor(LCreal x, LCreal y, LCreal z, LCreal w)
+bool Material::setSpecularColor(double x, double y, double z, double w)
 {
     specularColor.set(x, y, z, w);
     return true;
@@ -294,7 +294,7 @@ bool Material::setSpecularColor(LCreal x, LCreal y, LCreal z, LCreal w)
 //------------------------------------------------------------------------------
 // setShininess() - set our shininess
 //------------------------------------------------------------------------------
-bool Material::setShininess(LCreal x)
+bool Material::setShininess(double x)
 {
     shininess = x;
     return true;

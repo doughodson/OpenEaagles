@@ -45,20 +45,20 @@ public:
 
    unsigned int getLocation() const;
    unsigned int getChannel() const;
-   LCreal getValue() const;
-   LCreal getOffset() const;
-   LCreal getGain() const;
+   double getValue() const;
+   double getOffset() const;
+   double getGain() const;
    const base::Table1* getTable() const;
 
    bool setLocation(const unsigned int);
    bool setChannel(const unsigned int);
-   bool setValue(const LCreal);
-   bool setOffset(const LCreal);
-   bool setGain(const LCreal);
+   bool setValue(const double);
+   bool setOffset(const double);
+   bool setGain(const double);
    bool setTable(const base::Table1* const);
 
-   void processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
@@ -74,9 +74,9 @@ private:
    bool  devEnb;              // Device enabled
    unsigned int location;     // IoData analog output channel number
    unsigned int channel;      // Analog channel number
-   LCreal       value;        // Initial value
-   LCreal       offset;       // Offset:  value = gain * (vin - offset)
-   LCreal       gain;         // Gain:    value = gain * (vin - offset)
+   double       value;        // Initial value
+   double       offset;       // Offset:  value = gain * (vin - offset)
+   double       gain;         // Gain:    value = gain * (vin - offset)
    const base::Table1* table; // Shaping table
 };
 

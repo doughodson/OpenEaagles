@@ -163,7 +163,7 @@ inline bool operator||(const Boolean& b1, const bool b2)
 //------------------------------------------------------------------------------
 inline std::istream& operator>>(std::istream& sin, Boolean& n)
 {
-    LCreal tmp;
+    double tmp;
     sin >> tmp;
     if (tmp != 0.0f) tmp = 1.0f;
     else tmp = 0.0f;

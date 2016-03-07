@@ -27,18 +27,18 @@ class Knob : public Button{
 public:
     Knob();
 
-    LCreal const getValue() { return value; }
+    double const getValue() { return value; }
 
     bool onSingleClick() override;
 
     virtual bool setEndless(const bool x)           { endless = x; return true; }
-    virtual bool setEndlessStart(const LCreal x)    { endlessStart = x; return true; }
-    virtual bool setEndlessLimit(const LCreal x)    { endlessLimit = x; return true; }
+    virtual bool setEndlessStart(const double x)    { endlessStart = x; return true; }
+    virtual bool setEndlessLimit(const double x)    { endlessLimit = x; return true; }
 
     void drawFunc() override;
     void draw() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
     bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
@@ -54,19 +54,19 @@ protected:
 private:
     void computeRotation();     // translate our x,y to rotation from 0 values
     base::Table1* table;     // holds our values for rotation and value
-    LCreal value;               // value we currently have
+    double value;               // value we currently have
     int startX;                 // starting mouse x position (pixels) of the center of our graphic
     int startY;                 // starting mouse y position (pixels) of the center of our graphic
-    LCreal angle;               // current angle
-    LCreal lastAngle;           // our last angle
+    double angle;               // current angle
+    double lastAngle;           // our last angle
     int degsRotation;           // how much to rotate
-    LCreal findStartTimer;
+    double findStartTimer;
     bool start;
-    LCreal running;
-    LCreal startAngle;
+    double running;
+    double startAngle;
     bool endless;               // does our knob keep spinning?
-    LCreal endlessStart;        // start value of the endless knob (default to 0)
-    LCreal endlessLimit;        // end value of the endless knob (default to 360)
+    double endlessStart;        // start value of the endless knob (default to 0)
+    double endlessLimit;        // end value of the endless knob (default to 360)
 };
 
 }  // end instruments namespace

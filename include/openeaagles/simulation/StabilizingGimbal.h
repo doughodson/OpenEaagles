@@ -44,11 +44,11 @@ public:
    virtual bool setSlotMountPosition(base::String* const msg);
 
 protected:
-   virtual void stabilizingController(const LCreal dt = 0.0);
-   virtual void rollStabilizingController(const LCreal dt = 0.0);
-   virtual void elevationStabilizingController(const LCreal dt = 0.0);
+   virtual void stabilizingController(const double dt = 0.0);
+   virtual void rollStabilizingController(const double dt = 0.0);
+   virtual void elevationStabilizingController(const double dt = 0.0);
 
-   void dynamics(const LCreal dt) override;
+   void dynamics(const double dt) override;
 
 private:
    StabilizingMode  stabilizingMode; // Gimbal stabilization mode

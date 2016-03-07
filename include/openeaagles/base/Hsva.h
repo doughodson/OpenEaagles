@@ -22,7 +22,7 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Hsva(LCreal h, LCreal s, LCreal v, LCreal a)
+//      Hsva(double h, double s, double v, double a)
 //          Special constructor that initializes the object to h, s, v and a
 //
 //      getHSVA(osg::Vec4 hsv)
@@ -31,8 +31,8 @@ namespace base {
 //      setHSVA(const osg::Vec4& vec)
 //          Sets the HSVA components in a vector.
 //
-//      bool Hsva::colorInterpolate( const LCreal value, const LCreal minValue,
-//                                   const LCreal maxValue,  const Hsva& minColor,
+//      bool Hsva::colorInterpolate( const double value, const double minValue,
+//                                   const double maxValue,  const Hsva& minColor,
 //                                   const Hsva& maxColor}
 //          Color map interpolation - given a value, min & max limit, and HSV colors
 //          for the min & max limits.  This routine will interpolate the HSV colors
@@ -47,16 +47,16 @@ class Hsva : public Hsv {
     DECLARE_SUBCLASS(Hsva,Hsv)
 
 public:
-    Hsva(const LCreal h, const LCreal s, const LCreal v, const LCreal a);
+    Hsva(const double h, const double s, const double v, const double a);
     Hsva();
 
     void getHSVA(osg::Vec4& hsva) const   { Hsv::getHSVA(hsva);        }
     bool setHSVA(const osg::Vec4& vec)    { return Hsv::setHSVA(vec);  }
 
     bool colorInterpolate(
-      const LCreal value,      // Value
-      const LCreal minValue,   // Minimum Value
-      const LCreal maxValue,   // Maximum Value
+      const double value,      // Value
+      const double minValue,   // Minimum Value
+      const double maxValue,   // Maximum Value
       const Hsva& minColor,    // Minimum HSV color
       const Hsva& maxColor     // Minimum HSV color
     );

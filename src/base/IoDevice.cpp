@@ -149,7 +149,7 @@ bool IoDevice::shutdownNotification()
 //------------------------------------------------------------------------------
 // Process device input channels and components (default)
 //------------------------------------------------------------------------------
-void IoDevice::processInputs(const LCreal dt, IoData* const inData)
+void IoDevice::processInputs(const double dt, IoData* const inData)
 {
    // ### Since we'll process all of the input adapters, our derived I/O device
    // classes should process their device inputs BEFORE calling this base
@@ -182,7 +182,7 @@ void IoDevice::processInputs(const LCreal dt, IoData* const inData)
 //------------------------------------------------------------------------------
 // Process device output channels and components (default)
 //------------------------------------------------------------------------------
-void IoDevice::processOutputs(const LCreal dt, const IoData* const outData)
+void IoDevice::processOutputs(const double dt, const IoData* const outData)
 {
    // ### Since we'll process all of the output I/O adapters, our derived I/O
    // device classes should process their device outputs AFTER calling this
@@ -253,7 +253,7 @@ unsigned short IoDevice::getNumAnalogInputs() const
    return 0;
 }
 
-bool IoDevice::getAnalogInput(LCreal* const, const unsigned int) const
+bool IoDevice::getAnalogInput(double* const, const unsigned int) const
 {
    return false;
 }
@@ -263,7 +263,7 @@ unsigned short IoDevice::getNumAnalogOutputs() const
    return 0;
 }
 
-bool IoDevice::setAnalogOutput(const LCreal, const unsigned int)
+bool IoDevice::setAnalogOutput(const double, const unsigned int)
 {
    return false;
 }

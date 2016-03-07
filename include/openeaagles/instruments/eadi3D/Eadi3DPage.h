@@ -18,24 +18,24 @@ class Eadi3DPage : public graphics::Page{
 public:
     Eadi3DPage();
 
-    void setAltitude(const LCreal alt);                 // feet
-    void setAirspeed(const LCreal spd);                 // knots
-    void setHeading(const LCreal hdg);                  // deg
-    void setAOA(const LCreal aoa);                      // deg
-    void setVVI(const LCreal vvi);                      // ft/min
-    void setPitch(const LCreal pitch);                  // deg
-    void setRoll(const LCreal roll);                    // deg
-    void setMach(const LCreal mach);                    // mach number
-    void setGLoad(const LCreal gload);                  // Gs
+    void setAltitude(const double alt);                 // feet
+    void setAirspeed(const double spd);                 // knots
+    void setHeading(const double hdg);                  // deg
+    void setAOA(const double aoa);                      // deg
+    void setVVI(const double vvi);                      // ft/min
+    void setPitch(const double pitch);                  // deg
+    void setRoll(const double roll);                    // deg
+    void setMach(const double mach);                    // mach number
+    void setGLoad(const double gload);                  // Gs
     void setLandingMode(const bool landMode);           // T = landing mode
-    void setPitchSteeringCmd(const LCreal pitchCmd);    // [-1, 1]
-    void setRollSteeringCmd(const LCreal rollCmd);      // [-1, 1]
+    void setPitchSteeringCmd(const double pitchCmd);    // [-1, 1]
+    void setRollSteeringCmd(const double rollCmd);      // [-1, 1]
     void setPitchSteeringValid(const bool psValid);     // T = valid
     void setRollSteeringValid(const bool rcValid);      // T = valid
-    void setGlideslopeDev(const LCreal gsDev);          // dots [-2, 2]
-    void setLocalizerDev(const LCreal locDev);          // dots [-2, 2]
-    void setTurnRate(const LCreal turnRate);            // dots [-2, 2]
-    void setSlipInd(const LCreal slipInd);              // dots [-2, 2]
+    void setGlideslopeDev(const double gsDev);          // dots [-2, 2]
+    void setLocalizerDev(const double locDev);          // dots [-2, 2]
+    void setTurnRate(const double turnRate);            // dots [-2, 2]
+    void setSlipInd(const double slipInd);              // dots [-2, 2]
     void setGlideslopeValid(const bool gsValid);        // T = valid
     void setLocalizerValid(const bool locValid);        // T = valid
 
@@ -66,34 +66,34 @@ private:
     bool onEventSetGlideslopeValid(const base::Number* const x);
     bool onEventSetLocalizerValid(const base::Number* const x);
 
-    void globeBall(LCreal pitch, LCreal roll, LCreal pitchCmd, LCreal rollCmd, bool psValid, bool rcValid, bool landMode);
-    void scales(LCreal gsDev, LCreal locDev, LCreal turnRate, LCreal slipInd, bool gsValid, bool locValid, bool landMode);
-    void windows(LCreal cas, LCreal alt, LCreal aoa, LCreal mach, LCreal vvi, const char* airSpeedType, LCreal gload);
-    void heading(LCreal hdg, LCreal hdgCmd);
+    void globeBall(double pitch, double roll, double pitchCmd, double rollCmd, bool psValid, bool rcValid, bool landMode);
+    void scales(double gsDev, double locDev, double turnRate, double slipInd, bool gsValid, bool locValid, bool landMode);
+    void windows(double cas, double alt, double aoa, double mach, double vvi, const char* airSpeedType, double gload);
+    void heading(double hdg, double hdgCmd);
     void background();
 
-    LCreal radius;
+    double radius;
     Eadi3DObjects eadiObjs;
 
-    LCreal altitudeFT;
-    LCreal airspeedKTS;
-    LCreal headingDEG;
-    LCreal aoaDEG;
-    LCreal vviFPM;
-    LCreal pitchDEG;
-    LCreal rollDEG;
-    LCreal machNo;
+    double altitudeFT;
+    double airspeedKTS;
+    double headingDEG;
+    double aoaDEG;
+    double vviFPM;
+    double pitchDEG;
+    double rollDEG;
+    double machNo;
 
-    LCreal Gload;
+    double Gload;
     bool   landingMode;
-    LCreal pitchSteeringCmd;
-    LCreal rollSteeringCmd;
+    double pitchSteeringCmd;
+    double rollSteeringCmd;
     bool   pitchSteeringValid;
     bool   rollSteeringValid;
-    LCreal glideslopeDevDOTS;
-    LCreal localizerDevDOTS;
-    LCreal turnRateDOTS;
-    LCreal slipIndDOTS;
+    double glideslopeDevDOTS;
+    double localizerDevDOTS;
+    double turnRateDOTS;
+    double slipIndDOTS;
     bool   glideslopeDevValid;
     bool   localizerDevValid;
 };

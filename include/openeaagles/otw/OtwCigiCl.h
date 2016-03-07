@@ -142,7 +142,7 @@ public:
    virtual bool setSlotGroundExplosionModel(const base::Number* const msg);
    virtual bool setSlotShipWakeModel(const base::Number* const msg);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
@@ -183,7 +183,7 @@ protected:
       double* const lat,      // Point latitude         (deg)
       double* const lon,      // Point longitude        (deg)
       double* const alt,      // Point altitude         (m)
-      LCreal* const rng,      // Range to point         (m)
+      double* const rng,      // Range to point         (m)
       int* const material     // Material code - not used in Cigi V3, returns 0
       );
 
@@ -192,10 +192,10 @@ protected:
       const double lat,          // Source latitude         (deg)
       const double lon,          // Source longitude        (deg)
       const double alt,          // Source altitude         (m)
-      const LCreal hdg,          // Source heading          (deg)
-      const LCreal pitch,        // Source pitch            (deg)
-      const LCreal minRange,     // Request minimum range   (m)
-      const LCreal maxRange      // Request maximum range   (m)
+      const double hdg,          // Source heading          (deg)
+      const double pitch,        // Source pitch            (deg)
+      const double minRange,     // Request minimum range   (m)
+      const double maxRange      // Request maximum range   (m)
       );
 
    // Set functions
@@ -232,18 +232,18 @@ private:
 
    // Terrain elevation request data
    bool    elevReqFlg;                   // Elevation request flag
-   LCreal  elevReqTimer;                 // Elevation request timer
+   double  elevReqTimer;                 // Elevation request timer
 
    // Line of sight (LOS) data
    double  losRespLat;                   // LOS Response latitude intersection point (deg)
    double  losRespLon;                   // LOS Response longitude intersection point (deg)
    double  losRespAlt;                   // LOS Response altitude intersection point (m)
-   LCreal  losRespRange;                 // LOS response range (m)
+   double  losRespRange;                 // LOS response range (m)
    unsigned short losRespId;             // LOS Response ID
    bool    losRespDataValid;             // LOS response data is valid flag
    unsigned short losReqId;              // LOS Request ID
    bool    newLosReq;                    // New LOS request flag
-   LCreal  losReqTimer;                  // LOS request timer
+   double  losReqTimer;                  // LOS request timer
 
    // CIGI entity data buffers
    unsigned int iw;                      // Write buffer index
@@ -443,7 +443,7 @@ public:
    bool attachedCcActive;
 
    bool isGroundPlayer;
-   LCreal effectsTimer;
+   double effectsTimer;
 
 private:
    // Entity ID

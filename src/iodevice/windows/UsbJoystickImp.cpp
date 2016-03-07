@@ -90,12 +90,12 @@ void UsbJoystickImp::reset()
          numAI = 8;
 
          // Set channel max/min values
-         setMaxMin( 0, static_cast<LCreal>(jsCaps.wXmax), static_cast<LCreal>(jsCaps.wXmin) );
-         setMaxMin( 1, static_cast<LCreal>(jsCaps.wYmax), static_cast<LCreal>(jsCaps.wYmin) );
-         setMaxMin( 2, static_cast<LCreal>(jsCaps.wZmax), static_cast<LCreal>(jsCaps.wZmin) );
-         setMaxMin( 3, static_cast<LCreal>(jsCaps.wRmax), static_cast<LCreal>(jsCaps.wRmin) );
-         setMaxMin( 4, static_cast<LCreal>(jsCaps.wUmax), static_cast<LCreal>(jsCaps.wUmin) );
-         setMaxMin( 5, static_cast<LCreal>(jsCaps.wVmax), static_cast<LCreal>(jsCaps.wVmin) );
+         setMaxMin( 0, static_cast<double>(jsCaps.wXmax), static_cast<double>(jsCaps.wXmin) );
+         setMaxMin( 1, static_cast<double>(jsCaps.wYmax), static_cast<double>(jsCaps.wYmin) );
+         setMaxMin( 2, static_cast<double>(jsCaps.wZmax), static_cast<double>(jsCaps.wZmin) );
+         setMaxMin( 3, static_cast<double>(jsCaps.wRmax), static_cast<double>(jsCaps.wRmin) );
+         setMaxMin( 4, static_cast<double>(jsCaps.wUmax), static_cast<double>(jsCaps.wUmin) );
+         setMaxMin( 5, static_cast<double>(jsCaps.wVmax), static_cast<double>(jsCaps.wVmin) );
 
          // number of bits
          {
@@ -111,7 +111,7 @@ void UsbJoystickImp::reset()
 //------------------------------------------------------------------------------
 // Go get our AIs and DIs here
 //------------------------------------------------------------------------------
-void UsbJoystickImp::processInputs(const oe::LCreal dt, base::IoData* const pInData)
+void UsbJoystickImp::processInputs(double dt, base::IoData* const pInData)
 {
    JOYINFOEX js;
    js.dwFlags = JOY_RETURNALL;   // return all joystick information
@@ -122,17 +122,17 @@ void UsbJoystickImp::processInputs(const oe::LCreal dt, base::IoData* const pInD
    if (status == JOYERR_NOERROR) {
 
       // First 6 channels are X, Y, Z, R, U, V, and they need to be scaled.
-      setInputScaled(0, static_cast<LCreal>(js.dwXpos));
-      setInputScaled(1, static_cast<LCreal>(js.dwYpos));
-      setInputScaled(2, static_cast<LCreal>(js.dwZpos));
-      setInputScaled(3, static_cast<LCreal>(js.dwRpos));
-      setInputScaled(4, static_cast<LCreal>(js.dwUpos));
-      setInputScaled(5, static_cast<LCreal>(js.dwVpos));
+      setInputScaled(0, static_cast<double>(js.dwXpos));
+      setInputScaled(1, static_cast<double>(js.dwYpos));
+      setInputScaled(2, static_cast<double>(js.dwZpos));
+      setInputScaled(3, static_cast<double>(js.dwRpos));
+      setInputScaled(4, static_cast<double>(js.dwUpos));
+      setInputScaled(5, static_cast<double>(js.dwVpos));
 
       // Last two channels are set using the POV angle
       {
-         LCreal povLR = 0;
-         LCreal povFB = 0;
+         double povLR = 0;
+         double povFB = 0;
          if (js.dwPOV != JOY_POVCENTERED) {
 
             // right/left
@@ -175,7 +175,7 @@ void UsbJoystickImp::processInputs(const oe::LCreal dt, base::IoData* const pInD
 //------------------------------------------------------------------------------
 
 // Set an analog input channels min/max values
-bool UsbJoystickImp::setMaxMin(unsigned int channel, LCreal max, LCreal min)
+bool UsbJoystickImp::setMaxMin(unsigned int channel, double max, double min)
 {
    bool ok = false;
    if (channel < numAI) {
@@ -187,12 +187,12 @@ bool UsbJoystickImp::setMaxMin(unsigned int channel, LCreal max, LCreal min)
 }
 
 // Set an analog input channel values using a raw input and the max/min values
-bool UsbJoystickImp::setInputScaled(unsigned int cn, LCreal raw)
+bool UsbJoystickImp::setInputScaled(unsigned int cn, double raw)
 {
    bool ok = false;
    if (cn < numAI) {
-      LCreal normalized = (raw - cmin[cn])/(cmax[cn] - cmin[cn]);  // range: [ 0 ... 1 ]
-      LCreal v11 = (normalized * 2.0f) - 1.0f;                     // range: [ -1 ... 1 ]
+      double normalized = (raw - cmin[cn])/(cmax[cn] - cmin[cn]);  // range: [ 0 ... 1 ]
+      double v11 = (normalized * 2.0f) - 1.0f;                     // range: [ -1 ... 1 ]
       inData[cn] = v11;
       ok = true;
    }

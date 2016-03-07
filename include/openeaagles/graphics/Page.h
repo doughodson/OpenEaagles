@@ -131,8 +131,8 @@ public:
    base::Pair* findBySelectName(const GLuint name) override;
    bool event(const int event, base::Object* const obj = nullptr) override;
 
-   void updateTC(const LCreal dt = 0.0) override;
-   void updateData(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:

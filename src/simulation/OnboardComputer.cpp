@@ -84,7 +84,7 @@ void OnboardComputer::reset()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void OnboardComputer::process(const LCreal dt)
+void OnboardComputer::process(const double dt)
 {
    BaseClass::process(dt);
 }
@@ -92,7 +92,7 @@ void OnboardComputer::process(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void OnboardComputer::updateData(const LCreal dt)
+void OnboardComputer::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 
@@ -133,7 +133,7 @@ void OnboardComputer::triggerAction(Action* const toAction)
 //------------------------------------------------------------------------------
 // Manage the active action
 //------------------------------------------------------------------------------
-void OnboardComputer::actionManager(const LCreal dt)
+void OnboardComputer::actionManager(const double dt)
 {
    if (action != nullptr) {
       // update the action

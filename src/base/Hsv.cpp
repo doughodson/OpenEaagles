@@ -29,7 +29,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Hsv::Hsv(const LCreal h, const LCreal s, const LCreal v)
+Hsv::Hsv(const double h, const double s, const double v)
 {
    STANDARD_CONSTRUCTOR()
    hsv[HUE]        = h;     // set the values
@@ -65,17 +65,17 @@ EMPTY_DELETEDATA(Hsv)
 //------------------------------------------------------------------------------
 // Data access functions
 //------------------------------------------------------------------------------
-LCreal Hsv::hue() const
+double Hsv::hue() const
 {
     return hsv[HUE];
 }
 
-LCreal Hsv::saturation() const
+double Hsv::saturation() const
 {
     return hsv[SATURATION];
 }
 
-LCreal Hsv::value() const
+double Hsv::value() const
 {
     return hsv[VALUE];
 }
@@ -96,7 +96,7 @@ void Hsv::getHSVA(osg::Vec4& hhh) const
 bool Hsv::setHue(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 360);
     if (ok) { hsv[HUE] = value; hsv2rgb(color,hsv); }
     else std::cerr << "Hsv::setHue: invalid entry(" << value << "), valid range: 0 to 360" << std::endl;
@@ -109,7 +109,7 @@ bool Hsv::setHue(Number* const msg)
 bool Hsv::setSaturation(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hsv[SATURATION] = value; hsv2rgb(color,hsv); }
     else std::cerr << "Hsv::setSaturation: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -122,7 +122,7 @@ bool Hsv::setSaturation(Number* const msg)
 bool Hsv::setValue(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hsv[VALUE] = value; hsv2rgb(color,hsv); }
     else std::cerr << "Hsv::setValue: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -135,7 +135,7 @@ bool Hsv::setValue(Number* const msg)
 bool Hsv::setAlpha(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hsv[ALPHA] = value; hsv2rgb(color,hsv); }
     else std::cerr << "Hsv::setAlpha: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -170,10 +170,10 @@ bool Hsv::setHSVA(const osg::Vec4& vec)
 void Hsv::hsv2rgb(osg::Vec3& rgb, const osg::Vec3& hsv)
 {
     // local HSV values
-    LCreal h = lcAepcDeg(hsv[HUE]);
+    double h = lcAepcDeg(hsv[HUE]);
     if (h < 0.0f) h += 360.0f;
-    LCreal s = hsv[SATURATION];
-    LCreal v = hsv[VALUE];
+    double s = hsv[SATURATION];
+    double v = hsv[VALUE];
 
     if (s != 0.0) {
 
@@ -184,10 +184,10 @@ void Hsv::hsv2rgb(osg::Vec3& rgb, const osg::Vec3& hsv)
         // computer some parameters
         //int i = ffloor(h);
         int i = static_cast<int>(h);
-        LCreal f = h - static_cast<LCreal>(i);
-        LCreal p = v * (1.0f - s);
-        LCreal q = v * (1.0f - (s * f));
-        LCreal t = v * (1.0f - (s * (1.0f - f)));
+        double f = h - static_cast<double>(i);
+        double p = v * (1.0f - s);
+        double q = v * (1.0f - (s * f));
+        double t = v * (1.0f - (s * (1.0f - f)));
 
         switch (i) {
             case 0 : {
@@ -270,20 +270,20 @@ void Hsv::hsv2rgb(osg::Vec4& rgb, const osg::Vec4& hsv)
 //------------------------------------------------------------------------------
 void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
 {
-   LCreal cmax = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]) );
-   LCreal cmin = lcMin( rgb[RED], lcMin(rgb[GREEN],rgb[BLUE]) );
-   LCreal cdelta = cmax - cmin;
-   LCreal h = 0;
-   LCreal s = 0;
+   double cmax = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]) );
+   double cmin = lcMin( rgb[RED], lcMin(rgb[GREEN],rgb[BLUE]) );
+   double cdelta = cmax - cmin;
+   double h = 0;
+   double s = 0;
 
    if ( cmax != 0.0 )
       s = cdelta / cmax;
 
    if ( s != 0.0 )
    {
-      LCreal rc = (cmax - rgb[RED]) / cdelta;
-      LCreal gc = (cmax - rgb[GREEN]) / cdelta;
-      LCreal bc = (cmax - rgb[BLUE]) / cdelta;
+      double rc = (cmax - rgb[RED]) / cdelta;
+      double gc = (cmax - rgb[GREEN]) / cdelta;
+      double bc = (cmax - rgb[BLUE]) / cdelta;
 
       if ( rgb[RED] == cmax )
          h = bc - gc;

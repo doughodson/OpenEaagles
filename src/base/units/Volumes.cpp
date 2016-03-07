@@ -16,12 +16,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Volume, "Volume")
 EMPTY_SLOTTABLE(Volume)
 
 // Conversion constants
-const LCreal Volume::CM2CFT = 35.3146667215f;         // CubicMeters => CubicFeet
-const LCreal Volume::CFT2CM = (1 / Volume::CM2CFT); // CubicFeet => CubicMeters
-const LCreal Volume::CM2CIN = 61023.7440947f;         // CubicMeters => CubicInches
-const LCreal Volume::CIN2CM = (1 / Volume::CM2CIN); // CubicInches => CubicMeters
-const LCreal Volume::CM2L = 1000.0f;                  // CubicMeters => Liters
-const LCreal Volume::L2CM = (1 / Volume::CM2L);     // Liters => CubicMeters
+const double Volume::CM2CFT = 35.3146667215f;         // CubicMeters => CubicFeet
+const double Volume::CFT2CM = (1 / Volume::CM2CFT); // CubicFeet => CubicMeters
+const double Volume::CM2CIN = 61023.7440947f;         // CubicMeters => CubicInches
+const double Volume::CIN2CM = (1 / Volume::CM2CIN); // CubicInches => CubicMeters
+const double Volume::CM2L = 1000.0f;                  // CubicMeters => Liters
+const double Volume::L2CM = (1 / Volume::CM2L);     // Liters => CubicMeters
 
 //------------------------------------------------------------------------------
 //constructors
@@ -31,7 +31,7 @@ Volume::Volume()
     STANDARD_CONSTRUCTOR()
 }
 
-Volume::Volume(const LCreal value) : Number(value)
+Volume::Volume(const double value) : Number(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -89,7 +89,7 @@ CubicMeters::CubicMeters() : Volume()
     STANDARD_CONSTRUCTOR()
 }
 
-CubicMeters::CubicMeters(const LCreal value) : Volume(value)
+CubicMeters::CubicMeters(const double value) : Volume(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -114,7 +114,7 @@ CubicFeet::CubicFeet() : Volume()
     STANDARD_CONSTRUCTOR()
 }
 
-CubicFeet::CubicFeet(const LCreal value) : Volume(value)
+CubicFeet::CubicFeet(const double value) : Volume(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -138,7 +138,7 @@ CubicInches::CubicInches() : Volume()
     STANDARD_CONSTRUCTOR()
 }
 
-CubicInches::CubicInches(const LCreal value) : Volume(value)
+CubicInches::CubicInches(const double value) : Volume(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -162,7 +162,7 @@ Liters::Liters() : Volume()
     STANDARD_CONSTRUCTOR()
 }
 
-Liters::Liters(const LCreal value) : Volume(value)
+Liters::Liters(const double value) : Volume(value)
 {
     STANDARD_CONSTRUCTOR()
 }

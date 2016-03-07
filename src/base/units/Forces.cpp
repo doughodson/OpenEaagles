@@ -16,12 +16,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Force, "Force")
 EMPTY_SLOTTABLE(Force)
 
 // Conversion constants
-const LCreal Force::N2KN = 0.001f;                // Newtons => KiloNewtons
-const LCreal Force::KN2N = (1 / Force::N2KN);   // KiloNewtons => Newtons
-const LCreal Force::N2PF = 0.224809f;             // Newtons => PoundForces
-const LCreal Force::PF2N = (1 / Force::N2PF);   // PoundForces => Newtons
-const LCreal Force::N2PD = 7.23301f;              // Newtons => Poundals
-const LCreal Force::PD2N = (1 / Force::N2PD);   // Poundals => Newtons
+const double Force::N2KN = 0.001f;                // Newtons => KiloNewtons
+const double Force::KN2N = (1 / Force::N2KN);   // KiloNewtons => Newtons
+const double Force::N2PF = 0.224809f;             // Newtons => PoundForces
+const double Force::PF2N = (1 / Force::N2PF);   // PoundForces => Newtons
+const double Force::N2PD = 7.23301f;              // Newtons => Poundals
+const double Force::PD2N = (1 / Force::N2PD);   // Poundals => Newtons
 
 //------------------------------------------------------------------------------
 //constructors
@@ -31,7 +31,7 @@ Force::Force()
     STANDARD_CONSTRUCTOR()
 }
 
-Force::Force(const LCreal value) : Number(value)
+Force::Force(const double value) : Number(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -88,7 +88,7 @@ Newtons::Newtons() : Force()
     STANDARD_CONSTRUCTOR()
 }
 
-Newtons::Newtons(const LCreal value) : Force(value)
+Newtons::Newtons(const double value) : Force(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -114,7 +114,7 @@ KiloNewtons::KiloNewtons() : Force()
     STANDARD_CONSTRUCTOR()
 }
 
-KiloNewtons::KiloNewtons(const LCreal value) : Force(value)
+KiloNewtons::KiloNewtons(const double value) : Force(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -141,7 +141,7 @@ PoundForces::PoundForces() : Force()
 }
 
 
-PoundForces::PoundForces(const LCreal value) : Force(value)
+PoundForces::PoundForces(const double value) : Force(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -167,7 +167,7 @@ Poundals::Poundals() : Force()
     STANDARD_CONSTRUCTOR()
 }
 
-Poundals::Poundals(const LCreal value) : Force(value)
+Poundals::Poundals(const double value) : Force(value)
 {
     STANDARD_CONSTRUCTOR()
 }

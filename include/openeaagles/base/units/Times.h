@@ -15,26 +15,26 @@
 //
 // Public methods (Defined in Time, and inherited by all derived classes):
 //
-//     set(const LCreal v)
-//        Sets an Time derived instance with an LCreal.
+//     set(const double v)
+//        Sets an Time derived instance with an double.
 //
 //     set(const Time& n)
 //        Sets, and converts if necessary, a Time derived instance with
 //          another Time derived instance.
 //
-//     LCreal convert(const Time& n)
+//     double convert(const Time& n)
 //        Converts the value of an Time derived instance into
 //        the units of another Time derived instance.
 //
 //     Conversion routines:
-//        LCreal SecondsToMilliSeconds(const LCreal v) { return v * S2MS; }
-//        LCreal MilliSecondsToSeconds(const LCreal v) { return v * MS2S; }
-//        LCreal MinutesToSeconds(const LCreal v)      { return v * M2S; }
-//        LCreal SecondsToMinutes(const LCreal v)      { return v * S2M; }
-//        LCreal HoursToMinutes(const LCreal v)        { return (v * H2S) * S2M; }
-//        LCreal MinutesToHours(const LCreal v)        { return (v * M2S) * S2H; }
-//        LCreal DaysToHours(const LCreal v)           { return (v * D2S) * S2H; }
-//        LCreal HoursToDays(const LCreal v)           { return (v * H2S) * S2D; }
+//        double SecondsToMilliSeconds(const double v) { return v * S2MS; }
+//        double MilliSecondsToSeconds(const double v) { return v * MS2S; }
+//        double MinutesToSeconds(const double v)      { return v * M2S; }
+//        double SecondsToMinutes(const double v)      { return v * S2M; }
+//        double HoursToMinutes(const double v)        { return (v * H2S) * S2M; }
+//        double MinutesToHours(const double v)        { return (v * M2S) * S2H; }
+//        double DaysToHours(const double v)           { return (v * D2S) * S2H; }
+//        double HoursToDays(const double v)           { return (v * H2S) * S2D; }
 //        Return the appropriate conversion factors.
 //
 //      Output stream operator:  >>
@@ -45,7 +45,7 @@
 //
 // Public methods (For classes:  Seconds, MilliSeconds, Minutes, Hours, Days):
 //
-//     LCreal convertStatic(const Time& n)
+//     double convertStatic(const Time& n)
 //        Static function to convert the given Time derived
 //        instance into the units of another Time derived instance.
 //
@@ -82,50 +82,50 @@ class Time : public Number
 
 public:
     Time();
-    Time(const LCreal value);
+    Time(const double value);
 
-    void set(const LCreal v) { val = v; }
+    void set(const double v) { val = v; }
     void set(const Time& n)  { val = fromTime(n.toTime()); }
 
-    virtual LCreal toTime() const =0;
-    virtual LCreal fromTime(const LCreal a) const =0;
-    LCreal convert(const Time& n)                        { return fromTime(n.toTime()); }
+    virtual double toTime() const =0;
+    virtual double fromTime(const double a) const =0;
+    double convert(const Time& n)                        { return fromTime(n.toTime()); }
 
     // Conversions between times
-    static LCreal SecondsToMilliSeconds(const LCreal v)  { return v * S2MS; }
-    static LCreal MilliSecondsToSeconds(const LCreal v)  { return v * MS2S; }
+    static double SecondsToMilliSeconds(const double v)  { return v * S2MS; }
+    static double MilliSecondsToSeconds(const double v)  { return v * MS2S; }
 
-    static LCreal MinutesToSeconds(const LCreal v)       { return v * M2S; }
-    static LCreal SecondsToMinutes(const LCreal v)       { return v * S2M; }
+    static double MinutesToSeconds(const double v)       { return v * M2S; }
+    static double SecondsToMinutes(const double v)       { return v * S2M; }
 
-    static LCreal HoursToMinutes(const LCreal v)         { return (v * H2S) * S2M; }
-    static LCreal MinutesToHours(const LCreal v)         { return (v * M2S) * S2H; }
+    static double HoursToMinutes(const double v)         { return (v * H2S) * S2M; }
+    static double MinutesToHours(const double v)         { return (v * M2S) * S2H; }
 
-    static LCreal DaysToHours(const LCreal v)            { return (v * D2S) * S2H; }
-    static LCreal HoursToDays(const LCreal v)            { return (v * H2S) * S2D; }
+    static double DaysToHours(const double v)            { return (v * D2S) * S2H; }
+    static double HoursToDays(const double v)            { return (v * H2S) * S2D; }
 
     // Convert integer hours, minutes and seconds to time in seconds
-    static LCreal putHHMMSS(const int hh, const int mm, const int ss);
+    static double putHHMMSS(const int hh, const int mm, const int ss);
 
     // Convert time in seconds to integer hours, minutes and seconds
-    static void getHHMMSS(const LCreal sec, int* const hh, int* const mm, int* const ss);
-    static void getHHMMSS(const LCreal sec, int* const hh, int* const mm, LCreal* const ss);
+    static void getHHMMSS(const double sec, int* const hh, int* const mm, int* const ss);
+    static void getHHMMSS(const double sec, int* const hh, int* const mm, double* const ss);
 
     // Conversion constants
-    static const LCreal S2NS;    // Seconds to nanoseconds
-    static const LCreal NS2S;    // Nanoseconds to seconds
-    static const LCreal S2US;    // Seconds to microseconds
-    static const LCreal US2S;    // Microseconds to seconds
-    static const LCreal S2MS;    // Seconds to milliseconds
-    static const LCreal MS2S;    // Milliseconds to seconds
-    static const LCreal S2M;     // Seconds to minutes
-    static const LCreal M2S;     // Minutes to seconds
-    static const LCreal S2H;     // Seconds to hours
-    static const LCreal H2S;     // Hours to seconds
-    static const LCreal M2D;     // Minutes to days
-    static const LCreal D2M;     // Days to minutes
-    static const LCreal S2D;     // Seconds to days
-    static const LCreal D2S;     // Days to seconds
+    static const double S2NS;    // Seconds to nanoseconds
+    static const double NS2S;    // Nanoseconds to seconds
+    static const double S2US;    // Seconds to microseconds
+    static const double US2S;    // Microseconds to seconds
+    static const double S2MS;    // Seconds to milliseconds
+    static const double MS2S;    // Milliseconds to seconds
+    static const double S2M;     // Seconds to minutes
+    static const double M2S;     // Minutes to seconds
+    static const double S2H;     // Seconds to hours
+    static const double H2S;     // Hours to seconds
+    static const double M2D;     // Minutes to days
+    static const double D2M;     // Days to minutes
+    static const double S2D;     // Seconds to days
+    static const double D2S;     // Days to seconds
 };
 
 
@@ -134,33 +134,33 @@ inline std::ostream& operator<<(std::ostream& sout, const Time& n)
 
 
 // getHHMMSS -- convert time in seconds to integer hours, minutes and seconds
-inline void Time::getHHMMSS(const LCreal sec, int* const hh, int* const mm, int* const ss)
+inline void Time::getHHMMSS(const double sec, int* const hh, int* const mm, int* const ss)
 {
-    LCreal rem = sec;
+    double rem = sec;
 
     *hh  = int(rem / 3600.0f);
-    rem -= static_cast<LCreal>(*hh) * 3600.0f;
+    rem -= static_cast<double>(*hh) * 3600.0f;
     *mm  = int(rem / 60.0f);
-    rem -= static_cast<LCreal>(*mm) * 60.0f;
+    rem -= static_cast<double>(*mm) * 60.0f;
     *ss  = nint(rem);
 }
 
 // getHHMMSS -- convert time in seconds to integer hours, minutes and seconds
-inline void Time::getHHMMSS(const LCreal sec, int* const hh, int* const mm, LCreal* const ss)
+inline void Time::getHHMMSS(const double sec, int* const hh, int* const mm, double* const ss)
 {
-    LCreal rem = sec;
+    double rem = sec;
 
     *hh  = int(rem / 3600.0f);
-    rem -= static_cast<LCreal>(*hh) * 3600.0f;
+    rem -= static_cast<double>(*hh) * 3600.0f;
     *mm  = int(rem / 60.0f);
-    rem -= static_cast<LCreal>(*mm) * 60.0f;
+    rem -= static_cast<double>(*mm) * 60.0f;
     *ss  = rem;
 }
 
 // putHHMMSS -- convert integer hours, minutes and seconds to time in seconds
-inline LCreal Time::putHHMMSS(const int hh, const int mm, const int ss)
+inline double Time::putHHMMSS(const int hh, const int mm, const int ss)
 {
-    return static_cast<LCreal>((3600.0f * hh) + (60.0f * mm) + ss);
+    return static_cast<double>((3600.0f * hh) + (60.0f * mm) + ss);
 }
 
 //------------------------------------------------------------------------------
@@ -173,12 +173,12 @@ class Seconds : public Time
 
 public:
     Seconds();
-    Seconds(const LCreal value);
+    Seconds(const double value);
     Seconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)      { return n.toTime(); }
-    LCreal toTime() const override                  { return static_cast<LCreal>(val); }
-    LCreal fromTime(const LCreal a) const override  { return a; }
+    static double convertStatic(const Time &n)      { return n.toTime(); }
+    double toTime() const override                  { return static_cast<double>(val); }
+    double fromTime(const double a) const override  { return a; }
 };
 
 
@@ -193,12 +193,12 @@ class MilliSeconds : public Time
 
 public:
     MilliSeconds();
-    MilliSeconds(const LCreal value);
+    MilliSeconds(const double value);
     MilliSeconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2MS; }
-    LCreal toTime() const override                  { return static_cast<LCreal>(val * MS2S); }
-    LCreal fromTime(const LCreal a) const override  { return a * S2MS; }
+    static double convertStatic(const Time &n)      { return n.toTime() * S2MS; }
+    double toTime() const override                  { return static_cast<double>(val * MS2S); }
+    double fromTime(const double a) const override  { return a * S2MS; }
 };
 
 
@@ -213,12 +213,12 @@ class MicroSeconds : public Time
 
 public:
     MicroSeconds();
-    MicroSeconds(const LCreal value);
+    MicroSeconds(const double value);
     MicroSeconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2US; }
-    LCreal toTime() const override                  { return static_cast<LCreal>(val * US2S); }
-    LCreal fromTime(const LCreal a) const override  { return a * S2US; }
+    static double convertStatic(const Time &n)      { return n.toTime() * S2US; }
+    double toTime() const override                  { return static_cast<double>(val * US2S); }
+    double fromTime(const double a) const override  { return a * S2US; }
 };
 
 
@@ -233,12 +233,12 @@ class NanoSeconds : public Time
 
 public:
     NanoSeconds();
-    NanoSeconds(const LCreal value);
+    NanoSeconds(const double value);
     NanoSeconds(const Time& org);
 
-    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2NS; }
-    LCreal toTime() const override                  { return static_cast<LCreal>(val * NS2S); }
-    LCreal fromTime(const LCreal a) const override  { return a * S2NS; }
+    static double convertStatic(const Time &n)      { return n.toTime() * S2NS; }
+    double toTime() const override                  { return static_cast<double>(val * NS2S); }
+    double fromTime(const double a) const override  { return a * S2NS; }
 };
 
 
@@ -253,12 +253,12 @@ class Minutes : public Time
 
 public:
     Minutes();
-    Minutes(const LCreal value);
+    Minutes(const double value);
     Minutes(const Time& org);
 
-    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2M; }
-    LCreal toTime() const override                  { return static_cast<LCreal>(val * M2S); }
-    LCreal fromTime(const LCreal a) const override  { return a * S2M; }
+    static double convertStatic(const Time &n)      { return n.toTime() * S2M; }
+    double toTime() const override                  { return static_cast<double>(val * M2S); }
+    double fromTime(const double a) const override  { return a * S2M; }
 };
 
 
@@ -273,12 +273,12 @@ class Hours : public Time
 
 public:
     Hours();
-    Hours(const LCreal value);
+    Hours(const double value);
     Hours(const Time& org);
 
-    static LCreal convertStatic(const Time &n)      { return n.toTime() * S2H; }
-    LCreal toTime() const override                  { return static_cast<LCreal>(val * H2S); }
-    LCreal fromTime(const LCreal a) const override  { return a * S2H; }
+    static double convertStatic(const Time &n)      { return n.toTime() * S2H; }
+    double toTime() const override                  { return static_cast<double>(val * H2S); }
+    double fromTime(const double a) const override  { return a * S2H; }
 };
 
 
@@ -293,12 +293,12 @@ class Days : public Time
 
 public:
     Days();
-    Days(const LCreal value);
+    Days(const double value);
     Days(const Time& org);
 
-    static LCreal convertStatic(const Time &n)     { return n.toTime() * S2D; }
-    LCreal toTime() const override                 { return static_cast<LCreal>(val * D2S); }
-    LCreal fromTime(const LCreal a) const override { return a * S2D; }
+    static double convertStatic(const Time &n)     { return n.toTime() * S2D; }
+    double toTime() const override                 { return static_cast<double>(val * D2S); }
+    double fromTime(const double a) const override { return a * S2D; }
 };
 
 } // End base namespace

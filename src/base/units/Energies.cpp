@@ -17,14 +17,14 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Energy, "Energy")
 EMPTY_SLOTTABLE(Energy)
 
 // Conversion constants
-const LCreal Energy::J2KWH = 0.0000002777777778f;     // Joules => KiloWattHours
-const LCreal Energy::KWH2J = (1 / Energy::J2KWH);   // KiloWattHours => Joules
-const LCreal Energy::J2BTU = 0.0009478f;              // Joules => BTUs
-const LCreal Energy::BTU2J = (1 / Energy::J2BTU);   // BTUs => Joules
-const LCreal Energy::J2FP = 0.7376f;                  // Joules => FootPounds
-const LCreal Energy::FP2J = (1 / Energy::J2FP);     // FootPounds => Joules
-const LCreal Energy::J2C = 0.2388888889f;             // Joules => Calories
-const LCreal Energy::C2J = (1 / Energy::J2C);       // Calories => Joules
+const double Energy::J2KWH = 0.0000002777777778f;     // Joules => KiloWattHours
+const double Energy::KWH2J = (1 / Energy::J2KWH);   // KiloWattHours => Joules
+const double Energy::J2BTU = 0.0009478f;              // Joules => BTUs
+const double Energy::BTU2J = (1 / Energy::J2BTU);   // BTUs => Joules
+const double Energy::J2FP = 0.7376f;                  // Joules => FootPounds
+const double Energy::FP2J = (1 / Energy::J2FP);     // FootPounds => Joules
+const double Energy::J2C = 0.2388888889f;             // Joules => Calories
+const double Energy::C2J = (1 / Energy::J2C);       // Calories => Joules
 
 
 //------------------------------------------------------------------------------
@@ -35,7 +35,7 @@ Energy::Energy()
     STANDARD_CONSTRUCTOR()
 }
 
-Energy::Energy(const LCreal value) : Number(value)
+Energy::Energy(const double value) : Number(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -93,7 +93,7 @@ KiloWattHours::KiloWattHours() : Energy()
     STANDARD_CONSTRUCTOR()
 }
 
-KiloWattHours::KiloWattHours(const LCreal value) : Energy(value)
+KiloWattHours::KiloWattHours(const double value) : Energy(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -119,7 +119,7 @@ BTUs::BTUs() : Energy()
     STANDARD_CONSTRUCTOR()
 }
 
-BTUs::BTUs(const LCreal value) : Energy(value)
+BTUs::BTUs(const double value) : Energy(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -146,7 +146,7 @@ Calories::Calories() : Energy()
 }
 
 
-Calories::Calories(const LCreal value) : Energy(value)
+Calories::Calories(const double value) : Energy(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -172,7 +172,7 @@ Joules::Joules() : Energy()
     STANDARD_CONSTRUCTOR()
 }
 
-Joules::Joules(const LCreal value) : Energy(value)
+Joules::Joules(const double value) : Energy(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -198,7 +198,7 @@ FootPounds::FootPounds() : Energy()
     STANDARD_CONSTRUCTOR()
 }
 
-FootPounds::FootPounds(const LCreal value) : Energy(value)
+FootPounds::FootPounds(const double value) : Energy(value)
 {
     STANDARD_CONSTRUCTOR()
 }

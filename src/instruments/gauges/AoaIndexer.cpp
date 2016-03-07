@@ -237,12 +237,12 @@ void AoAIndexer::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() -- updates non-critical time threads
 //------------------------------------------------------------------------------
-void AoAIndexer::updateData(const LCreal dt)
+void AoAIndexer::updateData(const double dt)
 {
     // update our baseclass
     BaseClass::updateData(dt);
 
-    LCreal aoa = getInstValue();
+    double aoa = getInstValue();
 
     // let's get our values
     //std::cout << "AOA RED MAX = " << aoaRedMax << std::endl;
@@ -330,7 +330,7 @@ bool AoAIndexer::setSlotAoaGreenMin(const base::Number* const newGMin)
 //------------------------------------------------------------------------------
 // setAoaRedMin() - set min "red" value
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaRedMin(const LCreal a)
+bool AoAIndexer::setAoaRedMin(const double a)
 {
     aoaRedMin = a;
     return true;
@@ -339,7 +339,7 @@ bool AoAIndexer::setAoaRedMin(const LCreal a)
 //------------------------------------------------------------------------------
 // setAoaRedMax() - set the max "red" value
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaRedMax(const LCreal b)
+bool AoAIndexer::setAoaRedMax(const double b)
 {
     aoaRedMax = b;
     return true;
@@ -348,7 +348,7 @@ bool AoAIndexer::setAoaRedMax(const LCreal b)
 //------------------------------------------------------------------------------
 // setAoaYellowMin() - set "yellow" minimum
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaYellowMin(const LCreal a)
+bool AoAIndexer::setAoaYellowMin(const double a)
 {
     aoaYellowMin = a;
     return true;
@@ -357,7 +357,7 @@ bool AoAIndexer::setAoaYellowMin(const LCreal a)
 //------------------------------------------------------------------------------
 // setAoaYellowMax() - set "yellow" max
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaYellowMax(const LCreal b)
+bool AoAIndexer::setAoaYellowMax(const double b)
 {
     aoaYellowMax = b;
     return true;
@@ -366,7 +366,7 @@ bool AoAIndexer::setAoaYellowMax(const LCreal b)
 //------------------------------------------------------------------------------
 // setAoaGreenMin() - set "green" min
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaGreenMin(const LCreal a)
+bool AoAIndexer::setAoaGreenMin(const double a)
 {
     aoaGreenMin = a;
     return true;
@@ -375,7 +375,7 @@ bool AoAIndexer::setAoaGreenMin(const LCreal a)
 //------------------------------------------------------------------------------
 // setAoaGreenMax() - set "green" max
 //------------------------------------------------------------------------------
-bool AoAIndexer::setAoaGreenMax(const LCreal b)
+bool AoAIndexer::setAoaGreenMax(const double b)
 {
     aoaGreenMax = b;
     return true;

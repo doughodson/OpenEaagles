@@ -29,7 +29,7 @@ BEGIN_SLOT_MAP(Sar)
 END_SLOT_MAP()
 
 // Default parameters
-static const LCreal DEFAULT_SAR_TIME = 10.0f;
+static const double DEFAULT_SAR_TIME = 10.0f;
 
 //------------------------------------------------------------------------------
 // Constructor
@@ -143,7 +143,7 @@ const Image* Sar::getImage() const
 //------------------------------------------------------------------------------
 // setStarePoint() -- Set the stare point (lat and lon are in degrees, elev is in meters)
 //------------------------------------------------------------------------------
-bool Sar::setStarePoint(const double lat, const double lon, const LCreal elev)
+bool Sar::setStarePoint(const double lat, const double lon, const double elev)
 {
     stareLatitude = lat;
     stareLongitude = lon;
@@ -168,7 +168,7 @@ bool Sar::setSlotChipSize(const base::Number* const msg)
     return ok;
 }
 
-bool Sar::setResolution(const LCreal res)
+bool Sar::setResolution(const double res)
 {
    resolution = res;
    return true;
@@ -180,7 +180,7 @@ bool Sar::setResolution(const LCreal res)
 bool Sar::requestImage(
         const unsigned int w,           // Image width (pixels)
         const unsigned int h,           // Image height (pixels)
-        const LCreal r)                 // Image Resolution (meters/pixel)
+        const double r)                 // Image Resolution (meters/pixel)
 {
    bool ok = false;
    if ( isSystemReady() ) {
@@ -208,7 +208,7 @@ void Sar::cancel()
 //------------------------------------------------------------------------------
 // process() --
 //------------------------------------------------------------------------------
-void Sar::process(const LCreal dt)
+void Sar::process(const double dt)
 {
     BaseClass::process(dt);
 
@@ -236,13 +236,13 @@ void Sar::process(const LCreal dt)
          const osg::Vec3 posB = getOwnship()->getRotMat() * posP;
 
          // Convert to az/el
-         LCreal tgt_az = 0.0;   // Angle (degs)
-         LCreal tgt_el = 0.0;   // Angle (degs)
+         double tgt_az = 0.0;   // Angle (degs)
+         double tgt_el = 0.0;   // Angle (degs)
          xyz2AzEl(posB, &tgt_az, &tgt_el);
 
          // Command to that position
-         const LCreal az = tgt_az * static_cast<LCreal>(base::Angle::D2RCC);
-         const LCreal el = tgt_el * static_cast<LCreal>(base::Angle::D2RCC);
+         const double az = tgt_az * static_cast<double>(base::Angle::D2RCC);
+         const double el = tgt_el * static_cast<double>(base::Angle::D2RCC);
 
          ant->setRefAzimuth(az);
          ant->setRefElevation(el);
@@ -252,7 +252,7 @@ void Sar::process(const LCreal dt)
       // ---
       // Process timer
       // ---
-      LCreal ttimer = timer - dt;
+      double ttimer = timer - dt;
       if (ttimer <= 0) {
 
          // ### test -- Generate a test image ###
@@ -319,20 +319,20 @@ bool Sar::addImage(base::Pair* const newImage)
 //------------------------------------------------------------------------------
 // xyz2AzEl() -- converts relative position vector to azimuth and elevation (degs)
 //------------------------------------------------------------------------------
-void Sar::xyz2AzEl(const LCreal x, const LCreal y, const LCreal z, LCreal* const az, LCreal* const el)
+void Sar::xyz2AzEl(const double x, const double y, const double z, double* const az, double* const el)
 {
    // Compute azimuth (degs)
    if (az != nullptr) {
-      *az = lcAtan2(y, x) * static_cast<LCreal>(base::Angle::R2DCC);
+      *az = lcAtan2(y, x) * static_cast<double>(base::Angle::R2DCC);
    }
 
    if (el != nullptr) {
-      const LCreal r = lcSqrt(x * x + y * y);
-      *el = lcAtan2(-z, r) * static_cast<LCreal>(base::Angle::R2DCC);
+      const double r = lcSqrt(x * x + y * y);
+      *el = lcAtan2(-z, r) * static_cast<double>(base::Angle::R2DCC);
    }
 }
 
-void Sar::xyz2AzEl(const osg::Vec3& vec, LCreal* const az, LCreal* const el)
+void Sar::xyz2AzEl(const osg::Vec3& vec, double* const az, double* const el)
 {
    xyz2AzEl(vec.x(), vec.y(), vec.z(), az, el);
 }

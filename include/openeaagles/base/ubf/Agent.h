@@ -39,13 +39,13 @@ class Agent : public base::Component
 public:
    Agent();
 
-   void updateTC(const LCreal dt = 0.0) override;
-   void updateData(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
    // generic controller
-   virtual void controller(const LCreal dt = 0.0);
+   virtual void controller(const double dt = 0.0);
 
    Behavior* getBehavior() const          { return behavior; }
    void setBehavior(Behavior* const);
@@ -88,8 +88,8 @@ public:
    AgentTC();
 
    // Component interface
-   void updateTC(const LCreal dt = 0.0) override;
-   void updateData(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 };
 
 } // End ubf namespace

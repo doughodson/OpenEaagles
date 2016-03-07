@@ -21,7 +21,7 @@ namespace rprfom {
 //------------------------------------------------------------------------------
 // munitionDetonationMsgFactory() -- (Output) Munition detonation message factory
 //------------------------------------------------------------------------------
-bool Nib::munitionDetonationMsgFactory(const LCreal)
+bool Nib::munitionDetonationMsgFactory(const double)
 {
    std::cout << "rprfom::Nib::sendMunitionDetonation() HERE!!" << std::endl;
 

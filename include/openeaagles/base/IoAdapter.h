@@ -28,14 +28,14 @@ public:
 
    // Process input data item(s) from the input device to the input buffer
    virtual void processInputs(
-         const LCreal dt,
+         const double dt,
          const IoDevice* const device,
          IoData* const inData
       ) =0;
 
    // Process output data item(s) from the output buffer to the output device
    virtual void processOutputs(
-         const LCreal dt,
+         const double dt,
          const IoData* const outData,
          IoDevice* const device
       ) =0;

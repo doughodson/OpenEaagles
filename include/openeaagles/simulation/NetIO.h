@@ -166,10 +166,10 @@ public:
    NetIO();
 
    // Updates the 'input' side of the network
-   virtual void inputFrame(const LCreal dt);
+   virtual void inputFrame(const double dt);
 
    // Updates the 'output' side of the network
-   virtual void outputFrame(const LCreal dt);
+   virtual void outputFrame(const double dt);
 
    // Network ID number
    unsigned short getNetworkID() const { return netID; }
@@ -196,22 +196,22 @@ public:
    bool isRelayEnabled() const { return (relayFlg && isInputEnabled() && isOutputEnabled()); }
 
    // Entity filter: Returns max entity ranged (meters)
-   virtual LCreal getMaxEntityRange(const Nib* const nib = 0) const;
+   virtual double getMaxEntityRange(const Nib* const nib = 0) const;
 
    // Entity filter: Returns max entity ranged squared (meters^2)
-   virtual LCreal getMaxEntityRangeSquared(const Nib* const nib = 0) const;
+   virtual double getMaxEntityRangeSquared(const Nib* const nib = 0) const;
 
    // Dead-Reckoning: Returns max DR time before next 'heart beat' (seconds)
-   virtual LCreal getMaxTimeDR(const Nib* const nib = 0) const;
+   virtual double getMaxTimeDR(const Nib* const nib = 0) const;
 
    // Dead-Reckoning: Returns max DR position error (meters)
-   virtual LCreal getMaxPositionErr(const Nib* const nib = 0) const;
+   virtual double getMaxPositionErr(const Nib* const nib = 0) const;
 
    // Dead-Reckoning: Returns max DR orientation error (radians)
-   virtual LCreal getMaxOrientationErr(const Nib* const nib = 0) const;
+   virtual double getMaxOrientationErr(const Nib* const nib = 0) const;
 
    // Dead-Reckoning: Returns max age before a networked player is removed (seconds)
-   virtual LCreal getMaxAge(const Nib* const nib = 0) const;
+   virtual double getMaxAge(const Nib* const nib = 0) const;
 
    // Network initialization
    bool isNetworkInitialized() const { return netInit; }
@@ -246,11 +246,11 @@ protected:
    // Set functions
    virtual bool setNetworkID(const unsigned short v);       // Sets the Network's ID
    virtual bool setTimeline(const TSource ts);              // Sets the timeline (UTC or EXEC)
-   virtual bool setMaxTimeDR(const LCreal v);               // Sets the max dead-rec time; forces next update (sec)
-   virtual bool setMaxPositionErr(const LCreal v);          // Sets the max positional error (meters)
-   virtual bool setMaxOrientationErr(const LCreal v);       // Sets the max orientation error (rad)
-   virtual bool setMaxAge(const LCreal v);                  // Sets the max age; for removal (sec)
-   virtual bool setMaxEntityRange(const LCreal v);          // Sets the max entity range (meters)
+   virtual bool setMaxTimeDR(const double v);               // Sets the max dead-rec time; forces next update (sec)
+   virtual bool setMaxPositionErr(const double v);          // Sets the max positional error (meters)
+   virtual bool setMaxOrientationErr(const double v);       // Sets the max orientation error (rad)
+   virtual bool setMaxAge(const double v);                  // Sets the max age; for removal (sec)
+   virtual bool setMaxEntityRange(const double v);          // Sets the max entity range (meters)
    virtual bool setFederateName(const base::String* const msg);   // Sets our federate name
    virtual bool setFederationName(const base::String* const msg); // Sets our federation name
 
@@ -433,14 +433,14 @@ private:
    bool              netInitFail;      // Initialization attempt failed
 
    // Distance filter by entity kind/domain
-   LCreal            maxEntityRange;   // Max range from ownship           (meters)
-   LCreal            maxEntityRange2;  // Max range squared from ownship   (meters^2)
+   double            maxEntityRange;   // Max range from ownship           (meters)
+   double            maxEntityRange2;  // Max range squared from ownship   (meters^2)
 
    // Dead Reckoning (DR) parameters by entity kind/domain
-   LCreal            maxTimeDR;          // Maximum DR time                  (seconds)
-   LCreal            maxPositionErr;     // Maximum position error           (meters)
-   LCreal            maxOrientationErr;  // Maximum orientation error        (radians)
-   LCreal            maxAge;             // Maximum age of networked players (seconds)
+   double            maxTimeDR;          // Maximum DR time                  (seconds)
+   double            maxPositionErr;     // Maximum position error           (meters)
+   double            maxOrientationErr;  // Maximum orientation error        (radians)
+   double            maxAge;             // Maximum age of networked players (seconds)
 
 private: // Nib related private
    // input tables

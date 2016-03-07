@@ -28,7 +28,7 @@ EMPTY_SERIALIZER(Thread)
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-Thread::Thread(Component* const p, const LCreal pri) : parent(p), priority(pri)
+Thread::Thread(Component* const p, const double pri) : parent(p), priority(pri)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -108,7 +108,7 @@ bool Thread::isTerminated() const
    return killed;
 }
 
-LCreal Thread::getPriority() const
+double Thread::getPriority() const
 {
    return priority;
 }
@@ -157,7 +157,7 @@ EMPTY_SERIALIZER(ThreadSingleTask)
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-ThreadSingleTask::ThreadSingleTask(Component* const p, const LCreal pri) : Thread(p,pri)
+ThreadSingleTask::ThreadSingleTask(Component* const p, const double pri) : Thread(p,pri)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -217,7 +217,7 @@ EMPTY_SERIALIZER(ThreadSyncTask)
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-ThreadSyncTask::ThreadSyncTask(Component* const p, const LCreal pri) : Thread(p, pri)
+ThreadSyncTask::ThreadSyncTask(Component* const p, const double pri) : Thread(p, pri)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -324,7 +324,7 @@ EMPTY_SERIALIZER(ThreadPeriodicTask)
 //------------------------------------------------------------------------------
 // Constructor
 //------------------------------------------------------------------------------
-ThreadPeriodicTask::ThreadPeriodicTask(Component* const p, const LCreal pri, const LCreal rt)
+ThreadPeriodicTask::ThreadPeriodicTask(Component* const p, const double pri, const double rt)
                                        : Thread(p, pri), rate(rt), bfStats(), tcnt(0), vdtFlg(false)
 {
    STANDARD_CONSTRUCTOR()
@@ -358,7 +358,7 @@ void ThreadPeriodicTask::deleteData()
 //------------------------------------------------------------------------------
 // get/set functions
 //------------------------------------------------------------------------------
-LCreal ThreadPeriodicTask::getRate() const
+double ThreadPeriodicTask::getRate() const
 {
    return rate;
 }

@@ -104,7 +104,7 @@ void TabLogger::copyData(const TabLogger& org, const bool)
 //------------------------------------------------------------------------------
 // updateTC() -- Update the simulation log time
 //------------------------------------------------------------------------------
-void TabLogger::updateTC(const LCreal dt)
+void TabLogger::updateTC(const double dt)
 {
     BaseClass::updateTC(dt);
 }
@@ -113,7 +113,7 @@ void TabLogger::updateTC(const LCreal dt)
 // updateData() -- During background we'll build & send the descriptions of the
 //                 simulation events to the log file.
 //------------------------------------------------------------------------------
-void TabLogger::updateData(const LCreal dt)
+void TabLogger::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 }
@@ -821,7 +821,7 @@ EMPTY_SERIALIZER(TabLogger::LogWeaponActivity)
 
 // Constructor
 TabLogger::LogWeaponActivity::LogWeaponActivity(const int callType, const Player* const lancher, const Player* const wpn,
-                                                const Player* const tgt, const unsigned int t, const LCreal d)
+                                                const Player* const tgt, const unsigned int t, const double d)
 {
     STANDARD_CONSTRUCTOR()
     theType   = callType;

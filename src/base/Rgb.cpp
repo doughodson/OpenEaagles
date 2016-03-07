@@ -28,7 +28,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Rgb::Rgb(const LCreal r, const LCreal g, const LCreal b)
+Rgb::Rgb(const double r, const double g, const double b)
 {
    STANDARD_CONSTRUCTOR()
    color[Color::RED]   = r;
@@ -62,7 +62,7 @@ void Rgb::deleteData()
 //------------------------------------------------------------------------------
 bool Rgb::setSlotRed(Number* const msg)
 {
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = setRed( value );
     if (!ok) std::cerr << "Rgb::setRed: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -70,7 +70,7 @@ bool Rgb::setSlotRed(Number* const msg)
 
 bool Rgb::setSlotGreen(Number* const msg)
 {
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = setGreen( value );
     if (!ok) std::cerr << "Rgb::setGreen: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -78,7 +78,7 @@ bool Rgb::setSlotGreen(Number* const msg)
 
 bool Rgb::setSlotBlue(Number* const msg)
 {
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = setBlue( value );
     if (!ok) std::cerr << "Rgb::setBlue: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -86,7 +86,7 @@ bool Rgb::setSlotBlue(Number* const msg)
 
 bool Rgb::setSlotAlpha(Number* const msg)
 {
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = setAlpha( value );
     if (!ok) std::cerr << "Rgb::setAlpha: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;

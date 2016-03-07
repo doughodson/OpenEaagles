@@ -142,7 +142,7 @@ bool Instrument::onUpdateInstVal(const base::Number* const newPos)
 //------------------------------------------------------------------------------
 // setInstVal() -- sets our instrument val
 //------------------------------------------------------------------------------
-bool Instrument::setInstVal(const LCreal newPos)
+bool Instrument::setInstVal(const double newPos)
 {
     // store our raw instrument value, in case some instruments need them
     preScaleInstVal = newPos;
@@ -156,7 +156,7 @@ bool Instrument::setInstVal(const LCreal newPos)
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Instrument::updateData(const LCreal dt)
+void Instrument::updateData(const double dt)
 {
    // update our base class
    BaseClass::updateData(dt);

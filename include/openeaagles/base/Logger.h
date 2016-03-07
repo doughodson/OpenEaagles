@@ -31,10 +31,10 @@ namespace base {
 //      log(LogEvent* event)
 //          Add an entry to the log file.
 //
-//      updateTC(LCreal dt)
+//      updateTC(double dt)
 //          Update time critical part of this component (empty)
 //
-//      updateData(LCreal dt)
+//      updateData(double dt)
 //          Update background part of this component (tries to open the logfile)
 //------------------------------------------------------------------------------
 class Logger : public Component
@@ -72,8 +72,8 @@ public:
     virtual void log(const char* const msg);
     virtual void log(LogEvent* const event);
 
-    void updateTC(const LCreal dt = 0.0) override;
-    void updateData(const LCreal dt = 0.0) override;
+    void updateTC(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
     virtual bool openFile();

@@ -16,12 +16,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Power, "Power")
 EMPTY_SLOTTABLE(Power)
 
 // Conversion constants
-const LCreal Power::W2KW = 0.001f;                // Watts => KiloWatts
-const LCreal Power::KW2W = (1 / Power::W2KW);   // KiloWatts => Watts
-const LCreal Power::W2HP = 1341.0f;               // Watts => Horsepower
-const LCreal Power::HP2W = (1 / Power::W2HP);   // Horsepower => Watts
-const LCreal Power::W2MW = 1000.0f;               // Watts => MilliWatts
-const LCreal Power::MW2W = (1 / Power::W2MW);   // MilliWatts => Watts
+const double Power::W2KW = 0.001f;                // Watts => KiloWatts
+const double Power::KW2W = (1 / Power::W2KW);   // KiloWatts => Watts
+const double Power::W2HP = 1341.0f;               // Watts => Horsepower
+const double Power::HP2W = (1 / Power::W2HP);   // Horsepower => Watts
+const double Power::W2MW = 1000.0f;               // Watts => MilliWatts
+const double Power::MW2W = (1 / Power::W2MW);   // MilliWatts => Watts
 
 //------------------------------------------------------------------------------
 //constructors
@@ -31,7 +31,7 @@ Power::Power()
    STANDARD_CONSTRUCTOR()
 }
 
-Power::Power(const LCreal value) : Number(value)
+Power::Power(const double value) : Number(value)
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -88,7 +88,7 @@ KiloWatts::KiloWatts() : Power()
     STANDARD_CONSTRUCTOR()
 }
 
-KiloWatts::KiloWatts(const LCreal value) : Power(value)
+KiloWatts::KiloWatts(const double value) : Power(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -114,7 +114,7 @@ Watts::Watts() : Power()
     STANDARD_CONSTRUCTOR()
 }
 
-Watts::Watts(const LCreal value) : Power(value)
+Watts::Watts(const double value) : Power(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -141,7 +141,7 @@ Horsepower::Horsepower() : Power()
 }
 
 
-Horsepower::Horsepower(const LCreal value) : Power(value)
+Horsepower::Horsepower(const double value) : Power(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -166,7 +166,7 @@ DecibelWatts::DecibelWatts() : Power()
     STANDARD_CONSTRUCTOR()
 }
 
-DecibelWatts::DecibelWatts(const LCreal value) : Power(value)
+DecibelWatts::DecibelWatts(const double value) : Power(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -191,7 +191,7 @@ MilliWatts::MilliWatts() : Power()
     STANDARD_CONSTRUCTOR()
 }
 
-MilliWatts::MilliWatts(const LCreal value) : Power(value)
+MilliWatts::MilliWatts(const double value) : Power(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -217,7 +217,7 @@ DecibelMilliWatts::DecibelMilliWatts() : Power()
     STANDARD_CONSTRUCTOR()
 }
 
-DecibelMilliWatts::DecibelMilliWatts(const LCreal value) : Power(value)
+DecibelMilliWatts::DecibelMilliWatts(const double value) : Power(value)
 {
     STANDARD_CONSTRUCTOR()
 }

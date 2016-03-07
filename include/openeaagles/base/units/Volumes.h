@@ -12,24 +12,24 @@
 //
 // Public methods (Defined in Volume, and inherited by all derived classes):
 //
-//     set(const LCreal v)
-//        Sets a Volume derived instance with an LCreal.
+//     set(const double v)
+//        Sets a Volume derived instance with an double.
 //
 //     set(const Volume& n)
 //        Sets, and converts if necessary, a Volume derived
 //        instance with another Volume derived instance.
 //
-//     LCreal convert(const Volume& n)
+//     double convert(const Volume& n)
 //        Converts the value of a Volume derived instance into
 //        the units of another Volume derived instance.
 //
 //    Conversion routines:
-//      LCreal cubicMetersToFeet(const LCreal v)   { return v * CM2CFT; }
-//      LCreal cubicFeetToMeters(const LCreal v)   { return v * CFT2CM; }
-//      LCreal litersToCubicMeters(const LCreal v) { return v * L2CM; }
-//      LCreal cubicMetersToLiters(const LCreal v) { return v * CM2L; }
-//      LCreal cubicFeetToInches(const LCreal v)   { return (v * CFT2CM) * CM2CIN; }
-//      LCreal cubicInchesToFeet(const LCreal v)   { return (v * CIN2CM) * CM2CFT; }
+//      double cubicMetersToFeet(const double v)   { return v * CM2CFT; }
+//      double cubicFeetToMeters(const double v)   { return v * CFT2CM; }
+//      double litersToCubicMeters(const double v) { return v * L2CM; }
+//      double cubicMetersToLiters(const double v) { return v * CM2L; }
+//      double cubicFeetToInches(const double v)   { return (v * CFT2CM) * CM2CIN; }
+//      double cubicInchesToFeet(const double v)   { return (v * CIN2CM) * CM2CFT; }
 //
 //   Output stream operator:<<
 //        ostream& operator<<(ostream& sout, const Volume& n)
@@ -38,7 +38,7 @@
 //
 //
 // Public methods (For classes: CubicMeters, CubicFeet, CubicInches, Liters):
-//    LCreal convertStatic(const Volume &n)
+//    double convertStatic(const Volume &n)
 //    Static function to convert the given Volume derived instance
 //    into the units of a specific Volume derived class.
 //
@@ -76,32 +76,32 @@ class Volume : public Number
 
 public:
     Volume();
-    Volume(const LCreal value);
+    Volume(const double value);
 
-    void set(const LCreal v)  { val = v; }
+    void set(const double v)  { val = v; }
     void set(const Volume& n) { val = fromVolume(n.toVolume()); }
 
-    virtual LCreal toVolume() const = 0;
-    virtual LCreal fromVolume(const LCreal a) const = 0;
-    LCreal convert(const Volume& n) const  { return fromVolume(n.toVolume()); }
+    virtual double toVolume() const = 0;
+    virtual double fromVolume(const double a) const = 0;
+    double convert(const Volume& n) const  { return fromVolume(n.toVolume()); }
 
     // Conversion routines
-    static LCreal cubicMetersToFeet(const LCreal v)   { return v * CM2CFT; }
-    static LCreal cubicFeetToMeters(const LCreal v)   { return v * CFT2CM; }
+    static double cubicMetersToFeet(const double v)   { return v * CM2CFT; }
+    static double cubicFeetToMeters(const double v)   { return v * CFT2CM; }
 
-    static LCreal litersToCubicMeters(const LCreal v) { return v * L2CM; }
-    static LCreal cubicMetersToLiters(const LCreal v) { return v * CM2L; }
+    static double litersToCubicMeters(const double v) { return v * L2CM; }
+    static double cubicMetersToLiters(const double v) { return v * CM2L; }
 
-    static LCreal cubicFeetToInches(const LCreal v)   { return (v * CFT2CM) * CM2CIN; }
-    static LCreal cubicInchesToFeet(const LCreal v)   { return (v * CIN2CM) * CM2CFT; }
+    static double cubicFeetToInches(const double v)   { return (v * CFT2CM) * CM2CIN; }
+    static double cubicInchesToFeet(const double v)   { return (v * CIN2CM) * CM2CFT; }
 
     // Conversion constants
-    static const LCreal CM2CFT;  // CubicMeters -> CubicFeet
-    static const LCreal CFT2CM;  // CubicFeet -> CubicMeters
-    static const LCreal CM2CIN;  // CubicMeters -> CubicInches
-    static const LCreal CIN2CM;  // CubicInches -> CubicMeters
-    static const LCreal CM2L;    // CubicMeters -> Liters
-    static const LCreal L2CM;    // Liters -> CubicMeters
+    static const double CM2CFT;  // CubicMeters -> CubicFeet
+    static const double CFT2CM;  // CubicFeet -> CubicMeters
+    static const double CM2CIN;  // CubicMeters -> CubicInches
+    static const double CIN2CM;  // CubicInches -> CubicMeters
+    static const double CM2L;    // CubicMeters -> Liters
+    static const double L2CM;    // Liters -> CubicMeters
 };
 
 
@@ -121,12 +121,12 @@ class CubicMeters : public Volume
 
 public:
     CubicMeters();
-    CubicMeters(const LCreal value);
+    CubicMeters(const double value);
     CubicMeters(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)      { return n.toVolume(); }
-    LCreal toVolume() const override                  { return static_cast<LCreal>(val); }
-    LCreal fromVolume(const LCreal a) const override  { return a; }
+    static double convertStatic(const Volume &n)      { return n.toVolume(); }
+    double toVolume() const override                  { return static_cast<double>(val); }
+    double fromVolume(const double a) const override  { return a; }
 };
 
 
@@ -141,12 +141,12 @@ class CubicFeet : public Volume
 
 public:
     CubicFeet();
-    CubicFeet(const LCreal value);
+    CubicFeet(const double value);
     CubicFeet(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2CFT; }
-    LCreal toVolume() const override                 { return static_cast<LCreal>(val * CFT2CM); }
-    LCreal fromVolume(const LCreal a) const override { return a * CM2CFT; }
+    static double convertStatic(const Volume &n)     { return n.toVolume() * CM2CFT; }
+    double toVolume() const override                 { return static_cast<double>(val * CFT2CM); }
+    double fromVolume(const double a) const override { return a * CM2CFT; }
 };
 
 
@@ -161,12 +161,12 @@ class CubicInches : public Volume
 
 public:
     CubicInches();
-    CubicInches(const LCreal value);
+    CubicInches(const double value);
     CubicInches(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2CIN; }
-    LCreal toVolume() const override                 { return static_cast<LCreal>(val * CIN2CM); }
-    LCreal fromVolume(const LCreal a) const override { return a * CM2CIN; }
+    static double convertStatic(const Volume &n)     { return n.toVolume() * CM2CIN; }
+    double toVolume() const override                 { return static_cast<double>(val * CIN2CM); }
+    double fromVolume(const double a) const override { return a * CM2CIN; }
 };
 
 
@@ -181,12 +181,12 @@ class Liters : public Volume
 
 public:
     Liters();
-    Liters(const LCreal value);
+    Liters(const double value);
     Liters(const Volume& value);
 
-    static LCreal convertStatic(const Volume &n)     { return n.toVolume() * CM2L; }
-    LCreal toVolume() const override                 { return static_cast<LCreal>(val * L2CM); }
-    LCreal fromVolume(const LCreal a) const override { return a * CM2L; }
+    static double convertStatic(const Volume &n)     { return n.toVolume() * CM2L; }
+    double toVolume() const override                 { return static_cast<double>(val * L2CM); }
+    double fromVolume(const double a) const override { return a * CM2L; }
 };
 
 } // End base namespace

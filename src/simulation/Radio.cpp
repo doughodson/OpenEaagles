@@ -122,10 +122,10 @@ unsigned short Radio::getNumberOfChannels() const
 
 // Get a channel's frequency (Hz)
 // Returns -1 if the channel is invalid
-LCreal Radio::getChannelFrequency(const unsigned short chan) const
+double Radio::getChannelFrequency(const unsigned short chan) const
 {
    unsigned short nc = getNumberOfChannels();
-   LCreal freq = -1;
+   double freq = -1;
    if (chanFreqTbl != nullptr && nc > 0 && chan > 0 && chan <= nc) {
       freq = chanFreqTbl[chan-1];
    }
@@ -133,7 +133,7 @@ LCreal Radio::getChannelFrequency(const unsigned short chan) const
 }
 
 // Returns the radio's maximum detection range (NM)
-LCreal Radio::getMaxDetectRange() const
+double Radio::getMaxDetectRange() const
 {
    return maxDetectRange;
 }
@@ -176,7 +176,7 @@ bool Radio::setChannel(const unsigned short chan)
 }
 
 // Set a channel's frequency; channel numbers [ 1 .. getNumberOfChannels() ]
-bool Radio::setChannelFrequency(const unsigned short chan, const LCreal freq)
+bool Radio::setChannelFrequency(const unsigned short chan, const double freq)
 {
    bool ok = false;
 
@@ -208,7 +208,7 @@ bool Radio::setNumberOfChannels(const unsigned short n)
    else if (n <= MAX_CHANNELS) {
       // delete the old table and create a new one.
       if (chanFreqTbl != nullptr) delete[] chanFreqTbl;
-      chanFreqTbl = new LCreal[n];
+      chanFreqTbl = new double[n];
       numChan = n;
    }
 
@@ -222,7 +222,7 @@ bool Radio::setNumberOfChannels(const unsigned short n)
 }
 
 // setMaxDetectRange() -- set the max range (NM)
-bool Radio::setMaxDetectRange(const LCreal num)
+bool Radio::setMaxDetectRange(const double num)
 {
    maxDetectRange = num;
    return true;
@@ -238,19 +238,19 @@ bool Radio::setRadioId(const unsigned short num)
 //------------------------------------------------------------------------------
 // receive() -- process received emissions
 //------------------------------------------------------------------------------
-void Radio::receive(const LCreal dt)
+void Radio::receive(const double dt)
 {
    BaseClass::receive(dt);
 
    // Receiver losses
-   LCreal noise = getRfRecvNoise();
+   double noise = getRfRecvNoise();
 
    // ---
    // Process Emissions
    // ---
 
    Emission* em = nullptr;
-   LCreal signal = 0;
+   double signal = 0;
 
    // Get an emission from the queue
    lcLock(packetLock);
@@ -265,8 +265,8 @@ void Radio::receive(const LCreal dt)
 
 
       // Signal/Noise  (Equation 2-9)
-      LCreal sn = signal / noise;
-      LCreal snDbl = 10.0 * lcLog10(sn);
+      double sn = signal / noise;
+      double snDbl = 10.0 * lcLog10(sn);
 
       // Is S/N above receiver threshold?
       if ( snDbl >= getRfThreshold() ) {
@@ -331,7 +331,7 @@ bool Radio::setSlotChannels(const base::PairStream* const msg)
          const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
          const base::Frequency* p = static_cast<const base::Frequency*>(pair->object());
          if (p != nullptr) {
-            LCreal freq = base::Hertz::convertStatic( *p );
+            double freq = base::Hertz::convertStatic( *p );
             bool ok = setChannelFrequency(chan, freq);
             if (!ok) {
                std::cerr << "Radio::setSlotChannels() Error setting frequency for channel " << chan << "; with freq = " << *p << std::endl;
@@ -412,7 +412,7 @@ std::ostream& Radio::serialize(std::ostream& sout, const int i, const bool slots
       sout << "channels: }" << std::endl;
 
       for (unsigned short chan = 1; chan <= getNumberOfChannels(); chan++) {
-         LCreal freq = getChannelFrequency(chan);
+         double freq = getChannelFrequency(chan);
          indent(sout,i+j+4);
          sout << "( MegaHertz " << (freq * base::Frequency::Hz2MHz) << " )" << std::endl;
       }

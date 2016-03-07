@@ -171,7 +171,7 @@ Cursor::Cursor()
 //------------------------------------------------------------------------------
 // updateData --
 //------------------------------------------------------------------------------
-void Cursor::updateData(const LCreal dt)
+void Cursor::updateData(const double dt)
 {
    int ln = 0;
    int cp = 0;
@@ -298,7 +298,7 @@ void NumericReadout::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void NumericReadout::updateData(const LCreal dt)
+void NumericReadout::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 }

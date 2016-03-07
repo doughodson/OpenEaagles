@@ -25,8 +25,8 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Hsva::Hsva(const LCreal h, const LCreal s,
-               const LCreal v, const LCreal a) : Hsv(h,s,v)
+Hsva::Hsva(const double h, const double s,
+               const double v, const double a) : Hsv(h,s,v)
 {
     STANDARD_CONSTRUCTOR()
     hsv[ALPHA] = a;
@@ -51,14 +51,14 @@ EMPTY_DELETEDATA(Hsva)
 // find the HSV color for the given value.
 //------------------------------------------------------------------------------
 bool Hsva::colorInterpolate(
-      const LCreal value,      // Value
-      const LCreal minValue,   // Minimum Value
-      const LCreal maxValue,   // Maximum Value 
+      const double value,      // Value
+      const double minValue,   // Minimum Value
+      const double maxValue,   // Maximum Value 
       const Hsva& minColor,  // Minimum HSV color
       const Hsva& maxColor   // Minimum HSV color
  )
 {
-   LCreal p = (value - minValue) / (maxValue - minValue );
+   double p = (value - minValue) / (maxValue - minValue );
    osg::Vec4 deltaColor = maxColor.hsv - minColor.hsv;
    deltaColor[base::Hsv::HUE] = lcAepcDeg(deltaColor[base::Hsv::HUE]);
    osg::Vec4 newColor = minColor.hsv + deltaColor * p;

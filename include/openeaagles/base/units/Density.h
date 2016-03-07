@@ -39,7 +39,7 @@ namespace base {
 //     void Density::set(const Density& n)
 
 // convert() -- converts from one mass/volume ratio to another
-//     LCreal Density::convert(const Density& n) const
+//     double Density::convert(const Density& n) const
 
 // serialize() -- print the value of this object to the output stream sout.
 //     std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
@@ -52,10 +52,10 @@ class Density : public Number
     DECLARE_SUBCLASS(Density, Number)
 
 public:
-    Density(LCreal newDensity, const Mass* newMass, const Volume* newVolume);
+    Density(double newDensity, const Mass* newMass, const Volume* newVolume);
     Density();
 
-    LCreal convert(const Density& n) const;
+    double convert(const Density& n) const;
     void set(const Density& n);
     const Mass* getMass() const;
     const Volume* getVolume() const;

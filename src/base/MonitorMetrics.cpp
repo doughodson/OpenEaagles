@@ -57,16 +57,16 @@ MonitorMetrics::MonitorMetrics()
 {
     // default configuration based on data from an unknown CRT monitor
     const int npoints = 21;
-    LCreal luminanceLevels[npoints] = { 0.0f,     0.05f,    0.1f,    0.15f,   0.2f,    0.25f,    0.3f,
+    double luminanceLevels[npoints] = { 0.0f,     0.05f,    0.1f,    0.15f,   0.2f,    0.25f,    0.3f,
                                         0.35f,    0.4f,     0.45f,   0.5f,    0.55f,   0.6f,     0.65f,
                                         0.7f,     0.75f,    0.8f,    0.85f,   0.9f,    0.95f,    1.0f };
-    LCreal luminanceRed[npoints] =    { 0.0f,     0.0f,     1.613f,  3.3f,    5.487f,  7.657f,  10.19f,
+    double luminanceRed[npoints] =    { 0.0f,     0.0f,     1.613f,  3.3f,    5.487f,  7.657f,  10.19f,
                                        13.02f,  16.49f,   19.36f,  22.57f,  26.21f,  30.32f,   33.67f,
                                        37.4f,   41.65f,   46.25f,  49.96f,  54.33f,  59.19f,   63.43f };
-    LCreal luminanceGreen[npoints] =  { 0.0f,     0.0f,     3.14f,   7.482f, 13.28f,  20.13f,   27.91f,
+    double luminanceGreen[npoints] =  { 0.0f,     0.0f,     3.14f,   7.482f, 13.28f,  20.13f,   27.91f,
                                        36.77f,  47.04f,   55.47f,  66.16f,  77.91f,  90.12f,  100.9f,
                                       113.4f, 127.3f,   142.2f,  152.7f,  165.8f,  178.7f,   191.0f };
-    LCreal luminanceBlue[npoints] =   { 0.0f,     0.7603f,  2.025f,  3.653f,  5.554f,  7.427f,   9.427f,
+    double luminanceBlue[npoints] =   { 0.0f,     0.7603f,  2.025f,  3.653f,  5.554f,  7.427f,   9.427f,
                                        11.71f,  14.25f,   16.47f,  18.97f,  21.6f,   24.15f,   26.67f,
                                        29.51f,  32.16f,   35.22f,  37.61f,  40.53f,  43.4f,    45.99f };
 
@@ -138,7 +138,7 @@ bool MonitorMetrics::setSlotBlue(const Table1* blue)
 
 bool MonitorMetrics::setSlotPhosphors(const List* phosphors)
 {
-    LCreal listItems[6];
+    double listItems[6];
 
     if ( phosphors == nullptr ) return false;
     if ( phosphors->entries() != 6 ) return false;
@@ -154,7 +154,7 @@ bool MonitorMetrics::setSlotPhosphors(const List* phosphors)
 
 bool MonitorMetrics::setSlotWhiteRGB(const List* whiteRGB)
 {
-    LCreal listItems[3];
+    double listItems[3];
 
     if ( whiteRGB == nullptr ) return false;
     if ( whiteRGB->entries() != 6 ) return false;
@@ -166,7 +166,7 @@ bool MonitorMetrics::setSlotWhiteRGB(const List* whiteRGB)
 
 bool MonitorMetrics::setSlotWhiteCIE(const List* whiteCIE)
 {
-    LCreal listItems[3];
+    double listItems[3];
 
     if ( whiteCIE == nullptr ) return false;
     if ( whiteCIE->entries() != 6 ) return false;

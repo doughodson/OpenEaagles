@@ -305,21 +305,21 @@ public:
     virtual bool setNavaids(dafif::NavaidLoader* const p);     // Sets the NAVAID loader
     virtual bool setWaypoints(dafif::WaypointLoader* const p); // Sets the waypoint loader
 
-    void updateTC(const LCreal dt = 0.0) override;
-    void updateData(const LCreal dt = 0.0) override;
+    void updateTC(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
     void reset() override;
 
 public:
     void updateTcPlayerList(
        base::PairStream* const playerList,
-       const LCreal dt,
+       const double dt,
        const unsigned int idx,
        const unsigned int n
     );
 
     void updateBgPlayerList(
        base::PairStream* const playerList,
-       const LCreal dt,
+       const double dt,
        const unsigned int idx,
        const unsigned int n
     );

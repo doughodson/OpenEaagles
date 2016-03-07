@@ -52,7 +52,7 @@ public:
 
    virtual bool trigger(OnboardComputer* const mgr);  // Starts this action
    virtual bool cancel();                             // Cancels this action
-   virtual void process(const LCreal dt);             // Action processing
+   virtual void process(const double dt);             // Action processing
 
    int getRefId() const    { return refId; }          // Message Ref ID
    virtual void setRefId(const int id);               // Sets the message ref ID
@@ -94,18 +94,18 @@ public:
    double getSarLatitude() const       { return sarLatitude;  }   // SAR latitude in degrees
    double getSarLongitude() const      { return sarLongitude; }   // SAR longitude in degrees
    double getSarElevation() const      { return sarElevation; }   // SAR elevation in meters
-   LCreal getResolution() const        { return resolution;   }   // Image resolution in meters
+   double getResolution() const        { return resolution;   }   // Image resolution in meters
    unsigned int getImageSize() const   { return imgSize;      }   // Image size
-   LCreal getOrientation() const       { return orientation;  }   // Planned image orientation (Deg) (true)
+   double getOrientation() const       { return orientation;  }   // Planned image orientation (Deg) (true)
 
    virtual bool setSarLatitude(const double v);       // Sets the SAR latitude in degrees
    virtual bool setSarLongitude(const double v);      // Sets the SAR longitude in degrees
    virtual bool setSarElevation(const double v);      // Sets the SAR elevation in meters
-   virtual bool setResolution(const LCreal v);        // Sets the SAR image resolution (meters)
+   virtual bool setResolution(const double v);        // Sets the SAR image resolution (meters)
    virtual bool setImageSize(const unsigned int v);   // Sets the image size
 
    // Computes the planned image orientation (degs)
-   virtual LCreal computeOrientation(const Steerpoint* const wp);
+   virtual double computeOrientation(const Steerpoint* const wp);
 
    // Slot functions
    virtual bool setSlotSarLat(const base::LatLon* const msg);
@@ -116,7 +116,7 @@ public:
 
    bool trigger(OnboardComputer* const mgr) override;
    bool cancel() override;
-   void process(const LCreal dt) override;
+   void process(const double dt) override;
 
 protected:
    Sar* getSarSystem()        { return sar; }
@@ -128,8 +128,8 @@ private:
    double sarLatitude;        // Latitude (deg)
    double sarLongitude;       // Longitude (deg)
    double sarElevation;       // Elevation (meters)
-   LCreal resolution;         // Image resolution (meters)
-   LCreal orientation;        // orientation (true) (degrees)
+   double resolution;         // Image resolution (meters)
+   double orientation;        // orientation (true) (degrees)
    unsigned int imgSize;      // Image size (pixels)
    double timer;              // Time-Out timer
    Sar* sar;                  // SAR system
@@ -199,9 +199,9 @@ public:
     ActionDecoyRelease();
 
     // set functions
-    virtual bool setInterval(const LCreal x) { interval = x; return true; }
+    virtual bool setInterval(const double x) { interval = x; return true; }
     virtual bool setNumToLaunch(const int x) { numToLaunch = x; return true; }
-    virtual void process(const LCreal dt);
+    virtual void process(const double dt);
 
     bool trigger(OnboardComputer* const mgr) override;
 
@@ -211,7 +211,7 @@ protected:
 
 private:
     int numToLaunch;    // how many decoys to launch this action?
-    LCreal interval;    // seconds delay between launch... default is 0
+    double interval;    // seconds delay between launch... default is 0
     double tod;         // the sim time of day (we are going to add to it)
     double startTOD;    // our starting tod (that way we know when we've elapsed so far)
 };

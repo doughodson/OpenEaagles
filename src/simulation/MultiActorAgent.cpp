@@ -88,14 +88,14 @@ void MultiActorAgent::reset()
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void MultiActorAgent::updateData(const LCreal dt)
+void MultiActorAgent::updateData(const double dt)
 {
    // update base class stuff first
    BaseClass::updateData(dt);
    controller(dt);
 }
 
-void MultiActorAgent::controller(const LCreal dt)
+void MultiActorAgent::controller(const double dt)
 {
    if ( (getState() != nullptr) && (nAgents>0) ) {
       // update global state once for all agents

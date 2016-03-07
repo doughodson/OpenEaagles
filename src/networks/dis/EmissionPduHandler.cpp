@@ -180,7 +180,7 @@ bool EmissionPduHandler::setAntennaModel(simulation::Antenna* const msg)
 }
 
 // PDU exec time (last send)
-void EmissionPduHandler::setEmPduExecTime(const LCreal v)
+void EmissionPduHandler::setEmPduExecTime(const double v)
 {
     emPduExecTime = v;
 }
@@ -462,7 +462,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                antenna->setRefAzimuth( 0 );
                antenna->setRefElevation( bd->beamData.beamElevationCenter );
                antenna->setScanMode( simulation::ScanGimbal::CIRCULAR_SCAN );
-               antenna->setCmdRate( (24.0f * static_cast<LCreal>(base::Angle::D2RCC)), 0 );  // default rates
+               antenna->setCmdRate( (24.0f * static_cast<double>(base::Angle::D2RCC)), 0 );  // default rates
          }
          else {
             // Standard search volume parameters
@@ -499,7 +499,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
 //------------------------------------------------------------------------------
 // updateOutgoing() -- Check to see if a PDU needs to be sent; returns true if a PDU was sent
 //------------------------------------------------------------------------------
-bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib)
+bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib)
 {
    bool pduSent = false;
 
@@ -575,7 +575,7 @@ bool EmissionPduHandler::updateOutgoing(const LCreal curExecTime, Nib* const nib
 // isUpdateRequired() -- check to see if an update is required for the
 //                         electromagnetic emission PDU.
 //------------------------------------------------------------------------------
-bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const stateChg, Nib* const nib)
+bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const stateChg, Nib* const nib)
 {
    bool sc = false;
    enum { NO, YES, UNSURE } result = UNSURE;
@@ -595,14 +595,14 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
    // possibly intended to reduce amount of processing expended for no PDUs sent?
    // otherwise, could be entirely removed.
    if (disIO->getVersion() >= NetIO::VERSION_7) {
-      LCreal drTime = curExecTime - getEmPduExecTime();
+      double drTime = curExecTime - getEmPduExecTime();
       if ( drTime < (disIO->getHbtPduEe() / 10.0f) ) {
          result = NO;
       }
    }
    else {
       if ( (result == UNSURE) ) {
-         LCreal drTime = curExecTime - getEmPduExecTime();
+         double drTime = curExecTime - getEmPduExecTime();
          if ( drTime < (disIO->getMaxTimeDR(nib) /10.0f) ) {
             result = NO;
          }
@@ -652,9 +652,9 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
          bd.parameterData.frequencyRange  = static_cast<float>(beam->getBandwidth());      // Hz
 
          // Compute effected radiated power (watts)
-         LCreal power = beam->getPeakPower();
-         LCreal loss = beam->getRfTransmitLoss();
-         if (ant != nullptr) power = (power * static_cast<LCreal>(ant->getGain()));
+         double power = beam->getPeakPower();
+         double loss = beam->getRfTransmitLoss();
+         if (ant != nullptr) power = (power * static_cast<double>(ant->getGain()));
          if (loss >= 1.0f) power = (power / loss);
 
          // Effected radiated power -- dBm (dB milliwatts)
@@ -889,7 +889,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
       // ---
       if (disIO->getVersion() >= NetIO::VERSION_7) {
          if ( playerOk && (result == UNSURE) && nib->getPlayer()->isLocalPlayer() ) {
-            LCreal drTime = curExecTime - getEmPduExecTime();
+            double drTime = curExecTime - getEmPduExecTime();
             if ( drTime >= disIO->getHbtPduEe() ) {
                result = YES;
                sc = true;
@@ -898,7 +898,7 @@ bool EmissionPduHandler::isUpdateRequired(const LCreal curExecTime, bool* const 
       }
       else {
          if ( (result == UNSURE) && nib->getPlayer()->isLocalPlayer()) {
-            LCreal drTime = curExecTime - getEmPduExecTime();
+            double drTime = curExecTime - getEmPduExecTime();
             if ( drTime >= disIO->getMaxTimeDR(nib) ) {
                result = YES;
                sc = true;

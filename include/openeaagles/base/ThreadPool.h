@@ -87,7 +87,7 @@ public:
    ThreadPool();
    ThreadPool(ThreadPoolManager* mgr);
    ThreadPool(ThreadPoolManager* mgr, const unsigned int num);
-   ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const LCreal pri);
+   ThreadPool(ThreadPoolManager* mgr, const unsigned int num, const double pri);
 
    // Sets a manager for the thread pool. Will often need to call this if
    // the thread pool is created as a slot (as opposed to creating it
@@ -130,7 +130,7 @@ private:
 
    ThreadPoolManager* manager;
    unsigned int numThreads;
-   LCreal priority;
+   double priority;
 
    unsigned int actualThreads;
    ThreadPoolThread* allThreads[MAX_THREADS];

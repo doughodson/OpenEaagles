@@ -56,7 +56,7 @@ public:
    virtual bool setSlotSeekerName(base::String* const p);
    virtual bool setSlotDisableQueries(base::Number* const msg);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:

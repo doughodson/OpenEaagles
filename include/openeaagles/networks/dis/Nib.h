@@ -42,11 +42,11 @@ public:
    virtual void entityStatePdu2Nib(const EntityStatePDU* const pdu);
 
    // Update check functions
-   virtual bool isIffUpdateRequired(const LCreal curExecTime, const simulation::Iff* const iffSystem);
+   virtual bool isIffUpdateRequired(const double curExecTime, const simulation::Iff* const iffSystem);
 
    //These are all going to be moved to separate classes, but for now, are just virtual functions, see above in disIO)
-   virtual bool IffManager(const LCreal curExecTime);
-   virtual bool emitterBeamsManager(const LCreal curExecTime);
+   virtual bool IffManager(const double curExecTime);
+   virtual bool emitterBeamsManager(const double curExecTime);
    virtual bool processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* const pdu);
 
    // Standard (DIS) entity type codes
@@ -69,10 +69,10 @@ public:
       const unsigned char  extra = 0
    );
 
-    bool entityStateManager(const LCreal curExecTime) override;
-    bool weaponFireMsgFactory(const LCreal curExecTime) override;
-    bool munitionDetonationMsgFactory(const LCreal curExecTime) override;
-    bool networkOutputManagers(const LCreal curExecTime) override;
+    bool entityStateManager(const double curExecTime) override;
+    bool weaponFireMsgFactory(const double curExecTime) override;
+    bool munitionDetonationMsgFactory(const double curExecTime) override;
+    bool networkOutputManagers(const double curExecTime) override;
 
 protected:
    unsigned char manageArticulationParameters(EntityStatePDU* const pdu);
@@ -91,7 +91,7 @@ private:
 
    // IFF PDU data
    FundamentalOpData* iffFunOpData;   // IFF Functional Operational Data
-   LCreal        iffLastExecTime;     // Exec time of last IFF update
+   double        iffLastExecTime;     // Exec time of last IFF update
    unsigned short iffEventId;         // IFF event ID
    unsigned char  iffOptions;         // IFF PDU option bits
 

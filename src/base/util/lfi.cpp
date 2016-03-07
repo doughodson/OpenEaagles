@@ -7,11 +7,11 @@ namespace base {
 //------------------------------------------------------------------------------
 // lfi - One dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi_1D(
-         const LCreal x,            // Independent variable #1
-         const LCreal* x_data,      // Table of independent variable #1 breakpoints
+double lfi_1D(
+         const double x,            // Independent variable #1
+         const double* x_data,      // Table of independent variable #1 breakpoints
          const unsigned int nx,     // Size of x_data table
-         const LCreal* a_data,      // Table of dependent variable data
+         const double* a_data,      // Table of dependent variable data
          const bool eFlg,           // Extrapolation is enabled beyond the table
          unsigned int* const xbp    // Previous X breakpoint (optional)
       )
@@ -76,21 +76,21 @@ LCreal lfi_1D(
    // Linear interpolation
    // ---
    const unsigned int x1 = x2 - delta;
-   const LCreal m = (x - x_data[x1]) / (x_data[x2] - x_data[x1]);
+   const double m = (x - x_data[x1]) / (x_data[x2] - x_data[x1]);
    return m * (a_data[x2] - a_data[x1]) + a_data[x1];
 }
 
 //------------------------------------------------------------------------------
 // lfi - Two dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi_2D(
-         const LCreal x,            // Independent variable #1
-         const LCreal y,            // Independent variable #2
-         const LCreal* x_data,      // Table of independent variable #1 breakpoints
+double lfi_2D(
+         const double x,            // Independent variable #1
+         const double y,            // Independent variable #2
+         const double* x_data,      // Table of independent variable #1 breakpoints
          const unsigned int nx,     // Size of x_data table
-         const LCreal* y_data,      // Table of independent variable #2 breakpoints
+         const double* y_data,      // Table of independent variable #2 breakpoints
          const unsigned int ny,     // Size of y_data table
-         const LCreal* a_data,      // Table of dependent variable data
+         const double* a_data,      // Table of dependent variable data
          const bool eFlg,           // Extrapolation is enabled beyond the table
          unsigned int* const xbp,   // Previous X breakpoint (optional)
          unsigned int* const ybp    // Previous Y breakpoint (optional)
@@ -162,31 +162,31 @@ LCreal lfi_2D(
    // ---
    const unsigned int y1 = y2 - delta;
    const unsigned int ax1 = nx * y1;
-   const LCreal a1 = lfi_1D(x, x_data, nx, &a_data[ax1], eFlg, xbp);
+   const double a1 = lfi_1D(x, x_data, nx, &a_data[ax1], eFlg, xbp);
    const unsigned int ax2 = nx * y2;
-   const LCreal a2 = lfi_1D(x, x_data, nx, &a_data[ax2], eFlg, xbp);
+   const double a2 = lfi_1D(x, x_data, nx, &a_data[ax2], eFlg, xbp);
 
    // ---
    // Final linear interpolation
    // ---
-   const LCreal m = (y - y_data[y1]) / (y_data[y2] - y_data[y1]);
+   const double m = (y - y_data[y1]) / (y_data[y2] - y_data[y1]);
    return m * (a2 - a1) + a1;
 }
 
 //------------------------------------------------------------------------------
 // lfi - Three dimensional Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi_3D(
-         const LCreal x,            // Independent variable #1
-         const LCreal y,            // Independent variable #2
-         const LCreal z,            // Independent variable #3
-         const LCreal* x_data,      // Table of independent variable #1 breakpoints
+double lfi_3D(
+         const double x,            // Independent variable #1
+         const double y,            // Independent variable #2
+         const double z,            // Independent variable #3
+         const double* x_data,      // Table of independent variable #1 breakpoints
          const unsigned int nx,     // Size of x_data table
-         const LCreal* y_data,      // Table of independent variable #2 breakpoints
+         const double* y_data,      // Table of independent variable #2 breakpoints
          const unsigned int ny,     // Size of y_data table
-         const LCreal* z_data,      // Table of independent variable #3 breakpoints
+         const double* z_data,      // Table of independent variable #3 breakpoints
          const unsigned int nz,     // Size of z_data table
-         const LCreal* a_data,      // Table of dependent variable data
+         const double* a_data,      // Table of dependent variable data
          const bool eFlg,           // Extrapolation is enabled beyond the table
          unsigned int* const xbp,   // Previous X breakpoint (optional)
          unsigned int* const ybp,   // Previous Y breakpoint (optional)
@@ -260,34 +260,34 @@ LCreal lfi_3D(
    // ---
    const unsigned int z1 = z2 - delta;
    const unsigned int ax1 = nx * ny * z1;
-   const LCreal a1 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax1], eFlg, xbp, ybp);
+   const double a1 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax1], eFlg, xbp, ybp);
    const unsigned int ax2 = nx * ny * z2;
-   const LCreal a2 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax2], eFlg, xbp, ybp);
+   const double a2 = lfi_2D(x, y, x_data, nx, y_data, ny, &a_data[ax2], eFlg, xbp, ybp);
 
    // ---
    // Final linear interpolation
    // ---
-   const LCreal m = (z - z_data[z1]) / (z_data[z2] - z_data[z1]);
+   const double m = (z - z_data[z1]) / (z_data[z2] - z_data[z1]);
    return m * (a2 - a1) + a1;
 }
 
 //------------------------------------------------------------------------------
 // lfi - Four dimension Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi_4D(
-         const LCreal x,            // Independent variable #1
-         const LCreal y,            // Independent variable #2
-         const LCreal z,            // Independent variable #3
-         const LCreal w,            // Independent variable #4
-         const LCreal* x_data,      // Table of independent variable #1 breakpoints
+double lfi_4D(
+         const double x,            // Independent variable #1
+         const double y,            // Independent variable #2
+         const double z,            // Independent variable #3
+         const double w,            // Independent variable #4
+         const double* x_data,      // Table of independent variable #1 breakpoints
          const unsigned int nx,     // Size of x_data table
-         const LCreal* y_data,      // Table of independent variable #2 breakpoints
+         const double* y_data,      // Table of independent variable #2 breakpoints
          const unsigned int ny,     // Size of y_data table
-         const LCreal* z_data,      // Table of independent variable #3 breakpoints
+         const double* z_data,      // Table of independent variable #3 breakpoints
          const unsigned int nz,     // Size of z_data table
-         const LCreal* w_data,      // Table of independent variable #4 breakpoints
+         const double* w_data,      // Table of independent variable #4 breakpoints
          const unsigned int nw,     // Size of w_data table
-         const LCreal* a_data,      // Table of dependent variable data
+         const double* a_data,      // Table of dependent variable data
          const bool eFlg,           // Extrapolation is enabled beyond the table
          unsigned int* const xbp,   // Previous X breakpoint (optional)
          unsigned int* const ybp,   // Previous Y breakpoint (optional)
@@ -363,37 +363,37 @@ LCreal lfi_4D(
    // ---
    const unsigned int w1 = w2 - delta;
    const unsigned int ax1 = nx * ny * nz * w1;
-   const LCreal a1 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax1], eFlg, xbp, ybp, zbp);
+   const double a1 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax1], eFlg, xbp, ybp, zbp);
    const unsigned int ax2 = nx * ny * nz * w2;
-   const LCreal a2 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax2], eFlg, xbp, ybp, zbp);
+   const double a2 = lfi_3D(x, y, z, x_data, nx, y_data, ny, z_data, nz, &a_data[ax2], eFlg, xbp, ybp, zbp);
 
    // ---
    // Final linear interpolation
    // ---
-   const LCreal m  = (w - w_data[w1]) / (w_data[w2] - w_data[w1]);
+   const double m  = (w - w_data[w1]) / (w_data[w2] - w_data[w1]);
    return m * (a2 - a1) + a1;
 }
 
 //------------------------------------------------------------------------------
 // lfi - Five dimension Linear Function Interpolator
 //------------------------------------------------------------------------------
-LCreal lfi_5D(
-         const LCreal x,            // Independent variable #1
-         const LCreal y,            // Independent variable #2
-         const LCreal z,            // Independent variable #3
-         const LCreal w,            // Independent variable #4
-         const LCreal v,            // Independent variable #5
-         const LCreal* x_data,      // Table of independent variable #1 breakpoints
+double lfi_5D(
+         const double x,            // Independent variable #1
+         const double y,            // Independent variable #2
+         const double z,            // Independent variable #3
+         const double w,            // Independent variable #4
+         const double v,            // Independent variable #5
+         const double* x_data,      // Table of independent variable #1 breakpoints
          const unsigned int nx,     // Size of x_data table
-         const LCreal* y_data,      // Table of independent variable #2 breakpoints
+         const double* y_data,      // Table of independent variable #2 breakpoints
          const unsigned int ny,     // Size of y_data table
-         const LCreal* z_data,      // Table of independent variable #3 breakpoints
+         const double* z_data,      // Table of independent variable #3 breakpoints
          const unsigned int nz,     // Size of z_data table
-         const LCreal* w_data,      // Table of independent variable #4 breakpoints
+         const double* w_data,      // Table of independent variable #4 breakpoints
          const unsigned int nw,     // Size of w_data table
-         const LCreal* v_data,      // Table of independent variable #5 breakpoints
+         const double* v_data,      // Table of independent variable #5 breakpoints
          const unsigned int nv,     // Size of v_data table
-         const LCreal* a_data,      // Table of dependent variable data
+         const double* a_data,      // Table of dependent variable data
          const bool eFlg,           // Extrapolation is enabled beyond the table
          unsigned int* const xbp,   // Previous X breakpoint (optional)
          unsigned int* const ybp,   // Previous Y breakpoint (optional)
@@ -471,14 +471,14 @@ LCreal lfi_5D(
    // ---
    const unsigned int v1 = v2 - delta;
    const unsigned int ax1 = nx * ny * nz * nw * v1;
-   const LCreal a1 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax1], eFlg, xbp, ybp, zbp, wbp);
+   const double a1 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax1], eFlg, xbp, ybp, zbp, wbp);
    const unsigned int ax2 = nx * ny * nz * nw * v2;
-   const LCreal a2 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax2], eFlg, xbp, ybp, zbp, wbp);
+   const double a2 = lfi_4D(x, y, z, w, x_data, nx, y_data, ny, z_data, nz, w_data, nw, &a_data[ax2], eFlg, xbp, ybp, zbp, wbp);
 
    // ---
    // Final linear interpolation
    // ---
-   const LCreal m  = (v - v_data[v1]) / (v_data[v2] - v_data[v1]);
+   const double m  = (v - v_data[v1]) / (v_data[v2] - v_data[v1]);
    return m * (a2 - a1) + a1;
 }
 

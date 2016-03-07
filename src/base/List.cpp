@@ -19,7 +19,7 @@ List::List() : headP(nullptr), tailP(nullptr), num(0)
     STANDARD_CONSTRUCTOR()
 }
 
-List::List(const LCreal values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
+List::List(const double values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
 {
     STANDARD_CONSTRUCTOR()
 

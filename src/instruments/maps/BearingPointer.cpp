@@ -74,7 +74,7 @@ void BearingPointer::deleteData()
 void BearingPointer::draw()
 {
     bool c = isCentered();
-    LCreal dis = getDisplacement();
+    double dis = getDisplacement();
     lcSaveMatrix();
         if (!c) lcTranslate(0, dis);
         lcRotate(myRotation);
@@ -91,7 +91,7 @@ bool BearingPointer::onUpdateRadBearingPointer(const base::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-        setBearingRad( static_cast<LCreal>(base::Radians::convertStatic( *msg )) );
+        setBearingRad( static_cast<double>(base::Radians::convertStatic( *msg )) );
         ok = true;
     }
     return ok;
@@ -127,16 +127,16 @@ bool BearingPointer::onUpdateDegBearingPointer(const base::Number* const msg)
 //------------------------------------------------------------------------------
 //  setBearingDeg() -
 //------------------------------------------------------------------------------
-bool BearingPointer::setBearingDeg(const LCreal newB)
+bool BearingPointer::setBearingDeg(const double newB)
 {
-    bearing = newB * static_cast<LCreal>(base::Angle::D2RCC);
+    bearing = newB * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 
 //------------------------------------------------------------------------------
 //  setBearingRad() -
 //------------------------------------------------------------------------------
-bool BearingPointer::setBearingRad(const LCreal newB)
+bool BearingPointer::setBearingRad(const double newB)
 {
     bearing = newB;
     return true;
@@ -197,22 +197,22 @@ void BearingPointer::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() - updates our non time-critical threads here
 //------------------------------------------------------------------------------
-void BearingPointer::updateData(const LCreal dt)
+void BearingPointer::updateData(const double dt)
 {
     // update our base class first
     BaseClass::updateData(dt);
 
     // get our heading and bearing (hopefully they are in radians, if not, the
     // calculation will be skewed
-    LCreal hdg = getRotationRad();
+    double hdg = getRotationRad();
 
     // stay between +- 3.14 radians
     bearing = lcAepcRad(bearing - hdg);
-    LCreal dbrg = lcAepcRad(myRotation - bearing);
+    double dbrg = lcAepcRad(myRotation - bearing);
 
     // if we are over the max, rotate the other way
-    LCreal dd0 = dbrg * dt;
-    LCreal maxdd0 = (90.0f * static_cast<LCreal>(base::Angle::D2RCC)) * dt;      // Limit to 90 degs/sec
+    double dd0 = dbrg * dt;
+    double maxdd0 = (90.0f * static_cast<double>(base::Angle::D2RCC)) * dt;      // Limit to 90 degs/sec
     if (dd0 < -maxdd0) dd0 = -maxdd0;
     if (dd0 > maxdd0) dd0 = maxdd0;
     bearing += dd0;

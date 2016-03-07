@@ -116,16 +116,16 @@ public:
    // Trigger the 'to' steerpoint action; auto sequencing only
    virtual void triggerAction();
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
     // Compute nav steering data for each steerpoint.
-    virtual void computeSteerpointData(const LCreal dt, const Navigation* const nav);
+    virtual void computeSteerpointData(const double dt, const Navigation* const nav);
 
     // Auto Sequence through Steerpoints
-    virtual void autoSequencer(const LCreal dt, const  Navigation* const nav);
+    virtual void autoSequencer(const double dt, const  Navigation* const nav);
 
     // Slot functions
     bool setSlotTo(const base::Identifier* const msg);
@@ -152,7 +152,7 @@ private:
    base::safe_ptr<const base::String> initToStptName; // Name of the initial "to" steerpoint
    unsigned int              initToStptIdx;             // Index of the initial "to" steerpoint
    unsigned int              stptIdx;                   // Steerpoint index [ 1 ... n ] in list
-   LCreal                    autoSeqDistNM;             // Distance to auto sequence (NM)
+   double                    autoSeqDistNM;             // Distance to auto sequence (NM)
    bool                      autoSeq;                   // Auto sequence of steerpoint
    bool                      wrap;                      // Wrap around route when inc or dec 'to' steerpoint
 };

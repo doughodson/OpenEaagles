@@ -131,7 +131,7 @@ bool Action::cancel()
 //------------------------------------------------------------------------------
 // process() -- action processing
 //------------------------------------------------------------------------------
-void Action::process(const LCreal)
+void Action::process(const double)
 {
 }
 
@@ -283,7 +283,7 @@ bool ActionImagingSar::trigger(OnboardComputer* const mgr)
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "Requesting an image from the SAR: refId: " << getRefId() << std::endl;
          }
-         sar->setStarePoint( getSarLatitude(), getSarLongitude(), static_cast<LCreal>(getSarElevation()) );
+         sar->setStarePoint( getSarLatitude(), getSarLongitude(), static_cast<double>(getSarElevation()) );
          if (isMessageEnabled(MSG_INFO)) {
             std::cout << "And resolution: " << getResolution() << std::endl;
          }
@@ -314,7 +314,7 @@ bool ActionImagingSar::cancel()
 //------------------------------------------------------------------------------
 // process() -- action processing
 //------------------------------------------------------------------------------
-void ActionImagingSar::process(const LCreal dt)
+void ActionImagingSar::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -331,7 +331,7 @@ void ActionImagingSar::process(const LCreal dt)
 
       // Process safety time-out
       timer += dt;
-      static const LCreal MAX_SAR_TIME = 120.0f;
+      static const double MAX_SAR_TIME = 120.0f;
       if (timer > MAX_SAR_TIME) {
          // Cancel the SAR
          cancel();
@@ -374,7 +374,7 @@ bool ActionImagingSar::setSarElevation(const double v)
 }
 
 // Sets the SAR image resolution (meters)
-bool ActionImagingSar::setResolution(const LCreal r)
+bool ActionImagingSar::setResolution(const double r)
 {
    resolution = r;
    return true;
@@ -436,7 +436,7 @@ bool ActionImagingSar::setSlotSarElev(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal elev = base::Meters::convertStatic( *msg );
+      double elev = base::Meters::convertStatic( *msg );
       ok = setSarElevation( elev );
    }
    return ok;
@@ -446,7 +446,7 @@ bool ActionImagingSar::setSlotResolution(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal res = base::Meters::convertStatic( *msg );
+      double res = base::Meters::convertStatic( *msg );
       ok = setResolution( res );
    }
    return ok;
@@ -469,7 +469,7 @@ bool ActionImagingSar::setSlotImageSize(const base::Number* const msg)
 //------------------------------------------------------------------------------
 // Computes the planned image orientation (degs)
 //------------------------------------------------------------------------------
-LCreal ActionImagingSar::computeOrientation(const Steerpoint* const wp)
+double ActionImagingSar::computeOrientation(const Steerpoint* const wp)
 {
    if (wp != nullptr) {
       double slat = wp->getLatitude();
@@ -478,7 +478,7 @@ LCreal ActionImagingSar::computeOrientation(const Steerpoint* const wp)
       double dlon = getSarLongitude();
       double brg, distNM;
       base::Nav::gll2bd(slat, slon, dlat, dlon, &brg, &distNM);
-      orientation = static_cast<LCreal>(-brg);
+      orientation = static_cast<double>(-brg);
    }
    return orientation;
 }
@@ -821,7 +821,7 @@ bool ActionDecoyRelease::trigger(OnboardComputer* const mgr)
    return ok;
 }
 
-void ActionDecoyRelease::process(const LCreal)
+void ActionDecoyRelease::process(const double)
 {
     // keep counting until we have our "interval" of seconds
     OnboardComputer* mgr = getManager();

@@ -31,16 +31,16 @@ public:
     bool isDatalinkTransmitEnabled() const                   { return xmitEnble; }       // True if image is to be transmitted over datalink
     double getLatitude() const                               { return latitude; }        // Stare Point (Deg))
     double getLongitude() const                              { return longitude; }       // Stare Point (Deg)
-    LCreal getElevation() const                              { return elevation; }       // Stare Point (Meters)
-    LCreal getOrientation() const                            { return orientation; }     // Image orientation (Deg) (true)
-    LCreal getResolution() const                             { return resolution; }      // Image resolution (Meters/pixel)
+    double getElevation() const                              { return elevation; }       // Stare Point (Meters)
+    double getOrientation() const                            { return orientation; }     // Image orientation (Deg) (true)
+    double getResolution() const                             { return resolution; }      // Image resolution (Meters/pixel)
     virtual void setImageId(const int v)                     { id = v; }
     virtual void setDatalinkTransmitEnable(const bool flg)   { xmitEnble = flg; }
     virtual void setLatitude(const double v)                 { latitude = v; }
     virtual void setLongitude(const double v)                { longitude = v; }
-    virtual void setElevation(const LCreal v)                { elevation = v; }
-    virtual void setOrientation(const LCreal v)              { orientation = v; }
-    virtual void setResolution(const LCreal v)               { resolution = v; }
+    virtual void setElevation(const double v)                { elevation = v; }
+    virtual void setOrientation(const double v)              { orientation = v; }
+    virtual void setResolution(const double v)               { resolution = v; }
 
     // Original SAR image data
     const unsigned char* getOrigImageData() const            { return origData; }        // Original Image data
@@ -58,9 +58,9 @@ private:
     int    id;                  // image ID
     double latitude;            // (stare point) latitude (degrees)
     double longitude;           // (stare point) longitude (degrees)
-    LCreal elevation;           // (stare point) elevation (meters)
-    LCreal orientation;         // orientation (true) (degrees)
-    LCreal resolution;          // resolution (meters/pixel)
+    double elevation;           // (stare point) elevation (meters)
+    double orientation;         // orientation (true) (degrees)
+    double resolution;          // resolution (meters/pixel)
 
     // Image data
     unsigned char*  data;           // Pointer to the image data

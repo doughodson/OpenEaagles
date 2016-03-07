@@ -36,7 +36,7 @@ class Arbiter : public Behavior
 public:
    Arbiter();
 
-   Action* genAction(const State* const state, const LCreal dt) override;
+   Action* genAction(const State* const state, const double dt) override;
 
 protected:
    base::List* getBehaviors();

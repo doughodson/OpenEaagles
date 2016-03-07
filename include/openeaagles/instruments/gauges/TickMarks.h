@@ -23,13 +23,13 @@ class TickMarks : public AnalogGauge
 public:
     TickMarks();
 
-    virtual bool setTickMarkLength(const LCreal newLength);
+    virtual bool setTickMarkLength(const double newLength);
     virtual bool setQuantity(const int newQ);
-    virtual bool setGaugeLength(const LCreal newL);
+    virtual bool setGaugeLength(const double newL);
     virtual bool setFlip(const bool x);
     virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
 
-    LCreal getTickMarkLength() const { return lengthTM; }
+    double getTickMarkLength() const { return lengthTM; }
     int  getQuantity() const         { return quantity; }
 
     void drawFunc() override;
@@ -42,9 +42,9 @@ protected:
     bool setSlotFlip(const base::Number* const x);
 
 private:
-    LCreal lengthTM;       // tick mark length (if not a graphic)
+    double lengthTM;       // tick mark length (if not a graphic)
     int    quantity;       // how many tick marks will we have?
-    LCreal gaugeLength;    // length we are spanning our tick marks over
+    double gaugeLength;    // length we are spanning our tick marks over
     bool   flip;           // our flip variable
     graphics::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
 };

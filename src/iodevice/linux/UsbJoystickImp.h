@@ -15,7 +15,7 @@ namespace iodevice {
 // Description:  Linux version of the USB Joystick device.
 //               (See IoDevice::UsbJoystick)
 //
-// Form Name: UsbJoystick
+// Factory name: UsbJoystick
 //
 //------------------------------------------------------------------------------
 class UsbJoystickImp : public UsbJoystick
@@ -26,7 +26,7 @@ public:
    UsbJoystickImp();
 
    // base::IoDevice functions
-   void processInputs(const LCreal dt, base::IoData* const inData) override;
+   void processInputs(const double dt, base::IoData* const inData) override;
 
    // base::Component functions
    void reset() override;

@@ -22,7 +22,7 @@ SpaceDynamicsModel::SpaceDynamicsModel()
 // setControlStickYawInput(yaw) --  Control inputs: normalized
 //   yaw:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceDynamicsModel::setControlStickYawInput(const LCreal)
+bool SpaceDynamicsModel::setControlStickYawInput(const double)
 {
    return false;
 }
@@ -31,7 +31,7 @@ bool SpaceDynamicsModel::setControlStickYawInput(const LCreal)
 // setTranslateXStickInput(transx) --  Control inputs: normalized
 //   transx:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceDynamicsModel::setTranslateXInput(const LCreal)
+bool SpaceDynamicsModel::setTranslateXInput(const double)
 {
    return false;
 }
@@ -40,7 +40,7 @@ bool SpaceDynamicsModel::setTranslateXInput(const LCreal)
 // setTranslateYStickInput(transy) --  Control inputs: normalized
 //   transy:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceDynamicsModel::setTranslateYInput(const LCreal)
+bool SpaceDynamicsModel::setTranslateYInput(const double)
 {
    return false;
 }
@@ -49,7 +49,7 @@ bool SpaceDynamicsModel::setTranslateYInput(const LCreal)
 // setTranslateZStickInput(transz) --  Control inputs: normalized
 //   transz:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceDynamicsModel::setTranslateZInput(const LCreal)
+bool SpaceDynamicsModel::setTranslateZInput(const double)
 {
    return false;
 }

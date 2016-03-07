@@ -43,8 +43,8 @@ public:
    const char* getPathname() const;                      // Returns the path to the datafiles
    virtual bool setPathname(const String* const msg);    // Sets the path to the datafiles
 
-   LCreal getMinElevation() const { return minElev; }    // Minimum elevation in this database (meters)
-   LCreal getMaxElevation() const { return maxElev; }    // Maximum elevation in this database (meters)
+   double getMinElevation() const { return minElev; }    // Minimum elevation in this database (meters)
+   double getMaxElevation() const { return maxElev; }    // Maximum elevation in this database (meters)
    double getLatitudeSW() const   { return swLat;   }    // Southwest corner latitude of this database (degs)
    double getLongitudeSW() const  { return swLon;   }    // Southwest corner longitude of this database (degs)
    double getLatitudeNE() const   { return neLat;   }    // Northeast corner latitude of this database (degs)
@@ -56,20 +56,20 @@ public:
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this DataFile
    virtual unsigned int getElevations(
-         LCreal* const elevations,     // The elevation array (meters)
+         double* const elevations,     // The elevation array (meters)
          bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
          const unsigned int n,         // Size of elevation and valdFlags arrays
          const double lat,             // Starting latitude (degs)
          const double lon,             // Starting longitude (degs)
-         const LCreal direction,       // True direction (heading) angle of the data (degs)
-         const LCreal maxRng,          // Range to last elevation point (meters)
+         const double direction,       // True direction (heading) angle of the data (degs)
+         const double maxRng,          // Range to last elevation point (meters)
          const bool   interp = false   // Interpolate between elevation posts (default: false)
       ) const = 0;
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
    virtual bool getElevation(
-         LCreal* const elev,           // The elevation value (meters)
+         double* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)
@@ -79,10 +79,10 @@ public:
    virtual bool targetOcculting(
          const double refLat,          // Ref latitude (degs)
          const double refLon,          // Ref longitude (degs)
-         const LCreal refAlt,          // Ref altitude (meters)
+         const double refAlt,          // Ref altitude (meters)
          const double tgtLat,          // Target latitude (degs)
          const double tgtLon,          // Target longitude (degs)
-         const LCreal tgtAlt           // Target altitude (meters)
+         const double tgtAlt           // Target altitude (meters)
       ) const;
 
    // Returns true if any terrain in the 'truBrg' direction for 'dist' meters
@@ -99,19 +99,19 @@ public:
    // Returns true if the target at the altitude 'tgtAlt' and range 'range' is
    // occulted by the elevation points as seen from the reference altitude, 'refAlt'.
    static bool occultCheck(
-         const LCreal* const elevations, // The elevation array (meters)
+         const double* const elevations, // The elevation array (meters)
          const bool* const validFlags,   // (Optional) Valid elevation flag array (true if elevation was found)
          const unsigned int n,           // Size of elevation and valdFlags arrays
-         const LCreal range,             // Range (meters)
-         const LCreal refAlt,            // Ref altitude (meters)
-         const LCreal tgtAlt             // Target altitude (meters)
+         const double range,             // Range (meters)
+         const double refAlt,            // Ref altitude (meters)
+         const double tgtAlt             // Target altitude (meters)
       );
 
    // Returns true if any of the tangents of the angles (from level) to each
    // elevation point, as seen from the ref altitude, refAlt, is greater than
    // the tangent of the 'look' angle, 'tanLookAng'.
    static bool occultCheck2(
-         const LCreal* const elevations, // The elevation array (meters)
+         const double* const elevations, // The elevation array (meters)
          const bool* const validFlags,   // Valid elevation flag array (true if elevation was found)
          const unsigned int n,           // Size of the arrays
          const double range,             // Range (meters)
@@ -125,32 +125,32 @@ public:
    // altitude over the first point.  Returns true if successful
    static bool vbwShadowChecker(
          bool* const maskFlags,          // The array of mask flags
-         const LCreal* const elevations, // The elevation array (meters)
+         const double* const elevations, // The elevation array (meters)
          const bool* const validFlags,   // (Optional) Valid elevation flag array (true if elevation was found)
          const unsigned int n,           // Size of elevation and valdFlags arrays
-         const LCreal range,             // Range (meters)
-         const LCreal refAlt,            // Ref altitude (meters)
-         const LCreal beamAngle = 0,     // (optional) Center beam elevation angle (degs)
-         const LCreal beamWidth = 180    // (optional) Total beam width angle (degs)
+         const double range,             // Range (meters)
+         const double refAlt,            // Ref altitude (meters)
+         const double beamAngle = 0,     // (optional) Center beam elevation angle (degs)
+         const double beamWidth = 180    // (optional) Total beam width angle (degs)
       );
 
    // aac() -- Compute Aspect Angle Cosines; computes the cosine of the angle
    // inwhich the beam hits the terrain.
    static bool aac(
-         LCreal* const aacData,        // The array for the aspect angle cosines
-         const LCreal* const elevData, // The elevation array (meters)
+         double* const aacData,        // The array for the aspect angle cosines
+         const double* const elevData, // The elevation array (meters)
          const bool* const maskFlags,  // (Optional) The array of mask flags
          const unsigned int n,         // Size of the arrays
-         const LCreal range,           // Range (meters)
-         const LCreal refAlt           // Ref altitude (meters)
+         const double range,           // Range (meters)
+         const double refAlt           // Ref altitude (meters)
       );
 
    static bool cLight(
-      LCreal* const ldata,          // The array for the lighting factors
-      const LCreal* const elevData, // The elevation array (meters)
+      double* const ldata,          // The array for the lighting factors
+      const double* const elevData, // The elevation array (meters)
       const bool* const maskFlags,  // (Optional) The array of mask flags
       const unsigned int n,         // Size of the arrays
-      const LCreal range,           // Range (meters)
+      const double range,           // Range (meters)
       const osg::Vec2& lv           // Lighting vector
    );
 
@@ -169,9 +169,9 @@ public:
    //       white    @ >= maxz
    //
    static bool getElevationColor(
-      const LCreal elevation,           // Elevation
-      const LCreal minz,                // Min elevation (units: same as elevation)
-      const LCreal maxz,                // Max elevtion  (units: same as elevation)
+      const double elevation,           // Elevation
+      const double minz,                // Min elevation (units: same as elevation)
+      const double maxz,                // Max elevtion  (units: same as elevation)
       const Hsva** colorTable,          // Color table
       const unsigned int numColors,     // Number of colors
       osg::Vec3& rgb);                  // Color
@@ -181,8 +181,8 @@ public:
 protected:
    virtual void clearData();                       // Clear the data arrays
 
-   virtual bool setMinElevation(const LCreal v);   // Minimum elevation in this database (meters)
-   virtual bool setMaxElevation(const LCreal v);   // Maximum elevation in this database (meters)
+   virtual bool setMinElevation(const double v);   // Minimum elevation in this database (meters)
+   virtual bool setMaxElevation(const double v);   // Maximum elevation in this database (meters)
    virtual bool setLatitudeSW(const double v);     // Southwest corner latitude of this database (degs: +/-90)
    virtual bool setLongitudeSW(const double v);    // Southwest corner longitude of this database (degs: +/-180)
    virtual bool setLatitudeNE(const double v);     // Northeast corner latitude of this database (degs: +/-90)
@@ -195,8 +195,8 @@ private:
    const String* file;              // Data file name
    double neLat, neLon;             // Northeast lat/lon (degs)
    double swLat, swLon;             // Southwest lat/lon (degs)
-   LCreal   minElev;                // Minimum elevation (m)
-   LCreal   maxElev;                // Maximum elevation (m)
+   double   minElev;                // Minimum elevation (m)
+   double   maxElev;                // Maximum elevation (m)
 };
 
 

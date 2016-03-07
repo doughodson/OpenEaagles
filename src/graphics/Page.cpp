@@ -125,7 +125,7 @@ void Page::deleteData()
 //------------------------------------------------------------------------------
 // updateTC() -- Update time critical stuff here
 //------------------------------------------------------------------------------
-void Page::updateTC(const LCreal dt)
+void Page::updateTC(const double dt)
 {
    // Update our subpage and base class
    if (cp != nullptr) cp->tcFrame(dt);
@@ -135,7 +135,7 @@ void Page::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData() --
 //------------------------------------------------------------------------------
-void Page::updateData(const LCreal dt)
+void Page::updateData(const double dt)
 {
    // ---
    // Prime the pump -- when we don't have a current subpage (cp) and we do

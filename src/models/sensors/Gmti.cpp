@@ -60,7 +60,7 @@ void Gmti::deleteData()
 //------------------------------------------------------------------------------
 // dynamics() --  Update dynamics
 //------------------------------------------------------------------------------
-void Gmti::dynamics(const LCreal dt)
+void Gmti::dynamics(const double dt)
 {
     BaseClass::dynamics(dt);
 
@@ -113,7 +113,7 @@ void Gmti::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // setPoi() -- Gmti Point Of Interest
 //------------------------------------------------------------------------------
-void Gmti::setPoi(const LCreal x, const LCreal y, const LCreal z)
+void Gmti::setPoi(const double x, const double y, const double z)
 {
     poiVec.set(x, y, z);
 }
@@ -129,7 +129,7 @@ void Gmti::setPoi(const osg::Vec3& newPoi)
 bool Gmti::setSlotPoi(base::List* const numList)
 {
     bool ok = false;
-    LCreal values[3];
+    double values[3];
     int n = numList->getNumberList(values, 3);
     if (n == 3) {
         setPoi(values[0], values[1], values[2]);

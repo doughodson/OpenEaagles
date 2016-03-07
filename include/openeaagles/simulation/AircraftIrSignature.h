@@ -38,7 +38,7 @@ namespace simulation {
 //    hotPartsWavebandFactorTable     <Table2>      !
 //
 // Public member functions:
-//      LCreal getIrSignature(IrQueryMsg* msg)
+//      double getIrSignature(IrQueryMsg* msg)
 //          Computes the IR signature for the emission.
 //------------------------------------------------------------------------------
 class AircraftIrSignature : public IrSignature
@@ -59,35 +59,35 @@ public:
    virtual bool setSlotHotPartsWavebandFactorTable(const base::Table2* const tbl);
 
 protected:
-   virtual LCreal* getHeatSignature(IrQueryMsg* msg);
+   virtual double* getHeatSignature(IrQueryMsg* msg);
 
-   virtual LCreal getAirframeSignature(LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation);
-   virtual LCreal getAirframeWavebandFactor(LCreal midpoint, LCreal width);
+   virtual double getAirframeSignature(double velocity, double altitude, double azimuth, double elevation);
+   virtual double getAirframeWavebandFactor(double midpoint, double width);
 
-   virtual LCreal getPlumeSignature(LCreal pla, LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation);
-   virtual LCreal getPlumeWavebandFactor(LCreal midpoint, LCreal width);
+   virtual double getPlumeSignature(double pla, double velocity, double altitude, double azimuth, double elevation);
+   virtual double getPlumeWavebandFactor(double midpoint, double width);
 
-   virtual LCreal getHotPartsSignature(LCreal pla, LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation);
-   virtual LCreal getHotPartsWavebandFactor(LCreal midpoint, LCreal width);
+   virtual double getHotPartsSignature(double pla, double velocity, double altitude, double azimuth, double elevation);
+   virtual double getHotPartsWavebandFactor(double midpoint, double width);
 
-   virtual LCreal getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg);
+   virtual double getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg);
 
    // FAB - added to parallel plume and hotparts calculations
-   virtual void getAirframeSignatures(const IrQueryMsg* const msg, const LCreal lowerBound, const LCreal upperBound);
+   virtual void getAirframeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound);
 
-   virtual LCreal getPlumeRadiation(const IrQueryMsg* const msg);
+   virtual double getPlumeRadiation(const IrQueryMsg* const msg);
 
    virtual void getPlumeSignatures(const IrQueryMsg* const msg,
-                                   const LCreal lowerBound,
-                                   const LCreal upperBound);
+                                   const double lowerBound,
+                                   const double upperBound);
 
-   virtual LCreal getHotPartsRadiation(const IrQueryMsg* const msg);
+   virtual double getHotPartsRadiation(const IrQueryMsg* const msg);
 
    virtual void getHotPartsSignatures(const IrQueryMsg* const msg,
-                                      const LCreal lowerBound,
-                                      const LCreal upperBound);
+                                      const double lowerBound,
+                                      const double upperBound);
 
-   virtual LCreal getPLA(const AirVehicle* const airModel);
+   virtual double getPLA(const AirVehicle* const airModel);
 
 private:
    void initData();
@@ -137,9 +137,9 @@ private:
             // factor to get the plume energy in this particular waveband.
             // the different factors should all sum to 1.0  .
 
-   LCreal* airframeSig;       // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
-   LCreal* plumeSigs;         // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
-   LCreal* hotPartsSigs;      // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
+   double* airframeSig;       // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
+   double* plumeSigs;         // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
+   double* hotPartsSigs;      // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
 };
 
 

@@ -161,7 +161,7 @@ bool Antenna::shutdownNotification()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void Antenna::process(const LCreal dt)
+void Antenna::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -552,16 +552,16 @@ void Antenna::rfTransmit(Emission* const xmit)
                em->setGimbal(this);
                em->setOwnship(ownship);
 
-               em->setRange( static_cast<LCreal>(ranges[i]) );
+               em->setRange( static_cast<double>(ranges[i]) );
                em->setLosVec(losO2T[i]);
                em->setTgtLosVec(losT2O[i]);
-               em->setRangeRate( static_cast<LCreal>(rngRates[i]) );
+               em->setRangeRate( static_cast<double>(rngRates[i]) );
                em->setTarget(targets[i]);
 
-               em->setGimbalAzimuth( static_cast<LCreal>(getAzimuth()) );
-               em->setGimbalElevation( static_cast<LCreal>(getElevation()) );
-               em->setPower( static_cast<LCreal>(erp[i]) );
-               em->setGain( static_cast<LCreal>(aeGain[i]) );
+               em->setGimbalAzimuth( static_cast<double>(getAzimuth()) );
+               em->setGimbalElevation( static_cast<double>(getElevation()) );
+               em->setPower( static_cast<double>(erp[i]) );
+               em->setGain( static_cast<double>(aeGain[i]) );
                em->setPolarization(getPolarization());
                em->setLocalPlayersOnly( isLocalPlayersOfInterestOnly() );
 
@@ -722,7 +722,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          const double pGain = getPolarizationGain(em->getPolarization());
          const double raGain = aea * pGain;
 
-         sys1->rfReceivedEmission(em, this, static_cast<LCreal>(raGain));
+         sys1->rfReceivedEmission(em, this, static_cast<double>(raGain));
 
          sys1->unref();
       }
@@ -747,7 +747,7 @@ bool Antenna::onRfEmissionReturnEventAntenna(Emission* const em)
         double aea = getEffectiveArea(em->getGain(), em->getWavelength());
         // Same antenna -- polarization match -- polarization gain is 1.0
         // So just use Antenna effective area
-        sys1->rfReceivedEmission(em, this, static_cast<LCreal>(aea));
+        sys1->rfReceivedEmission(em, this, static_cast<double>(aea));
         used = true;
 
         sys1->unref();

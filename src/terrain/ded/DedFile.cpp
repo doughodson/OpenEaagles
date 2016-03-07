@@ -113,7 +113,7 @@ static const double DEG_TO_RAD   = 0.017453292;
 static const char* const SS_STDID = "SSYS";
 static const char* const PARTNO  = "DMA1";
 static const char* const REVNO   = "V1.0";
-static const LCreal NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree * 10.0
+static const double NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree * 10.0
 
 //------------------------------------------------------------------------------
 // Constructor
@@ -434,8 +434,8 @@ bool DedFile::getData( std::istream& in )
       }
 
       // reset min/max elevations
-      LCreal minElev0 = 99999.0;
-      LCreal maxElev0 = 0.0;
+      double minElev0 = 99999.0;
+      double maxElev0 = 0.0;
 
       // Read in the data
       const int NUM_BYTES_IN_COL = sizeof(short) * N;

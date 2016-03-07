@@ -736,7 +736,7 @@ const char* CadrgMap::getLevel()
 //------------------------------------------------------------------------------
 // updateData() - Update map data.
 //------------------------------------------------------------------------------
-void CadrgMap::updateData(LCreal dt)
+void CadrgMap::updateData(double dt)
 {
     BaseClass::updateData(dt);
 

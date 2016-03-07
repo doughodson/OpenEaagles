@@ -133,7 +133,7 @@ void ScanGimbal::reset()
 //------------------------------------------------------------------------------
 // dynamics() -- System class "Dynamics phase" call back
 //------------------------------------------------------------------------------
-void ScanGimbal::dynamics(const LCreal dt)
+void ScanGimbal::dynamics(const double dt)
 {
    scanController(dt);
 

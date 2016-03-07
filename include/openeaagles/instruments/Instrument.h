@@ -30,16 +30,16 @@ public:
 
     // get functions
     const base::Table1* getScalingTable() const    { return myTable; }
-    LCreal  getInstValue() const                    { return instVal; }
-    LCreal  getPreScaleInstValue() const            { return preScaleInstVal; }
+    double  getInstValue() const                    { return instVal; }
+    double  getPreScaleInstValue() const            { return preScaleInstVal; }
     bool isPassingAllowed() const                   { return allowPassing; }
 
     // set functions
     virtual bool setAllowValPass(const bool newVP);
-    virtual bool setInstVal(const LCreal newPos);
+    virtual bool setInstVal(const double newPos);
 
     bool event(const int event, base::Object* const obj = nullptr) override;
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
     // slot functions
@@ -53,8 +53,8 @@ protected:
 private:
     // member variables
     const base::Table1* myTable; // holds our scaling data
-    LCreal instVal;                 // our instrument value
-    LCreal preScaleInstVal;         // our pre-scaled instrument value (before linear interpolation)
+    double instVal;                 // our instrument value
+    double preScaleInstVal;         // our pre-scaled instrument value (before linear interpolation)
     bool allowPassing;              // do we pass our instrument value down to our components?
 };
 

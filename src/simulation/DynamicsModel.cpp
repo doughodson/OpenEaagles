@@ -37,7 +37,7 @@ void DynamicsModel::deleteData()
 // dynamics() -- one pass update of this dynamics model
 //               (called from Player::dynamics)
 //------------------------------------------------------------------------------
-void DynamicsModel::dynamics(const LCreal)
+void DynamicsModel::dynamics(const double)
 {
 }
 
@@ -54,17 +54,17 @@ void DynamicsModel::atReleaseInit()
 //------------------------------------------------------------------------------
 // Access functions
 //------------------------------------------------------------------------------
-LCreal DynamicsModel::getFuelWt() const
+double DynamicsModel::getFuelWt() const
 {
     return 0.0;
 }
 
-LCreal DynamicsModel::getFuelWtMax() const
+double DynamicsModel::getFuelWtMax() const
 {
     return 0.0;
 }
 
-LCreal DynamicsModel::getGrossWeight() const
+double DynamicsModel::getGrossWeight() const
 {
     return 0.0;
 }
@@ -74,7 +74,7 @@ int DynamicsModel::getNumberOfEngines() const
     return 0;
 }
 
-int DynamicsModel::getEngThrust(LCreal* const, const int) const
+int DynamicsModel::getEngThrust(double* const, const int) const
 {
     return 0;
 }
@@ -154,7 +154,7 @@ bool DynamicsModel::setCommandedAltitude(const double, const double, const doubl
 // setControlStickRollInput(Roll) --  Control inputs: normalized
 //   roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void DynamicsModel::setControlStickRollInput(const LCreal)
+void DynamicsModel::setControlStickRollInput(const double)
 {
 }
 
@@ -162,7 +162,7 @@ void DynamicsModel::setControlStickRollInput(const LCreal)
 // setControlStickPitchInput(Pitch) --  Control inputs: normalized
 //  pitch:  -1.0 -> max forward (nose down); 0.0 -> center;  1.0 -> max back (nose up)
 //------------------------------------------------------------------------------
-void DynamicsModel::setControlStickPitchInput(const LCreal)
+void DynamicsModel::setControlStickPitchInput(const double)
 {
 }
 
@@ -178,7 +178,7 @@ void DynamicsModel::setControlStickPitchInput(const LCreal)
 //    num -> number of throttle positions to get/set
 //    returns the actual number of throttle positions
 //------------------------------------------------------------------------------
-int DynamicsModel::setThrottles(const LCreal* const, const int)
+int DynamicsModel::setThrottles(const double* const, const int)
 {
     return 0;
 }
@@ -188,14 +188,14 @@ int DynamicsModel::setThrottles(const LCreal* const, const int)
 //               No brake force  -> 0.0
 //               Max brake force -> 1.0
 //------------------------------------------------------------------------------
-void DynamicsModel::setBrakes(const LCreal, const LCreal)
+void DynamicsModel::setBrakes(const double, const double)
 {
 }
 
 //------------------------------------------------------------------------------
 // Sets the fuel weight
 //------------------------------------------------------------------------------
-bool DynamicsModel::setFuelWt(const LCreal)
+bool DynamicsModel::setFuelWt(const double)
 {
    return false;
 }

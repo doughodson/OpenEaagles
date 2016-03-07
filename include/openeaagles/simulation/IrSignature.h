@@ -71,7 +71,7 @@ public:
 
    // IrSignature class interface
    virtual bool getIrSignature(IrQueryMsg* const);
-   virtual LCreal getSignatureArea(IrQueryMsg*); 
+   virtual double getSignatureArea(IrQueryMsg*); 
 
    // slot operations 
    virtual bool setSlotWaveBandSizes(const base::Table1* const);
@@ -86,16 +86,16 @@ protected:
    unsigned int getNumWaveBands()                         { return numWaveBands; };
 
    //Get the waveband centers from each bin
-   const LCreal* getWaveBandCenters() const;
+   const double* getWaveBandCenters() const;
 
    //Get the waveband widths from each bin
-   const LCreal* getWaveBandWidths() const;
+   const double* getWaveBandWidths() const;
 
    // Return the lowest wavelength for which data for the atmosphere is required. 
    //        It is higher of the bottom sensor waveband and the lowest waveband represented by the atmosphere.
-   LCreal getLowerEndOfWavelengthOverlap(
-      const LCreal lowerRadiationWaveband, // Lower end of the wavebands represented by the atmosphere (microns)
-      const LCreal lowerSensorWaveband     // Lower end of the sensor waveband (microns)
+   double getLowerEndOfWavelengthOverlap(
+      const double lowerRadiationWaveband, // Lower end of the wavebands represented by the atmosphere (microns)
+      const double lowerSensorWaveband     // Lower end of the sensor waveband (microns)
    ) const 
    {
      return ((lowerRadiationWaveband > lowerSensorWaveband) ? lowerRadiationWaveband : lowerSensorWaveband);
@@ -103,44 +103,44 @@ protected:
 
    // Return the highest wavelength for which data for the atmosphere is required. 
    //        It is lower of the top of the sensor waveband and the highest waveband represented by the atmosphere.
-   LCreal getUpperEndOfWavelengthOverlap(
-      const LCreal upperRadiationWaveband, // Upper end of the wavebands represented by the atmosphere (microns)
-      const LCreal upperSensorWaveband     // Upper end of the sensor waveband (microns)
+   double getUpperEndOfWavelengthOverlap(
+      const double upperRadiationWaveband, // Upper end of the wavebands represented by the atmosphere (microns)
+      const double upperSensorWaveband     // Upper end of the sensor waveband (microns)
    ) const
    {
      return ((upperRadiationWaveband < upperSensorWaveband) ? upperRadiationWaveband : upperSensorWaveband);
    }
 
    // Base heat signature (Watts per steradian)
-   LCreal getBaseHeatSignature() const                    { return baseHeatSignature; }
+   double getBaseHeatSignature() const                    { return baseHeatSignature; }
 
    //Set the Base heat signature (Watts per steradian)
-   bool setBaseHeatSignature(const LCreal x)              { baseHeatSignature = x; return true; }
+   bool setBaseHeatSignature(const double x)              { baseHeatSignature = x; return true; }
 
    // The emissivity for the player
-   LCreal getEmissivity() const                           { return emissivity; }
+   double getEmissivity() const                           { return emissivity; }
 
    // Set the emissivity for the player
-   bool setEmissivity(const LCreal x)                     { emissivity = x; return true; } 
+   bool setEmissivity(const double x)                     { emissivity = x; return true; } 
 
    // The effective area for heat calculations (m^2)
-   LCreal getEffectiveArea() const                        { return effectiveArea; }
+   double getEffectiveArea() const                        { return effectiveArea; }
 
    // Set the effective area for heat calculations (m^2)
-   bool setEffectiveArea(const LCreal x)                  { effectiveArea = x; return true; }
+   bool setEffectiveArea(const double x)                  { effectiveArea = x; return true; }
 
-   LCreal getCalculatedHeatSignature() const              { return baseHeatSignature * emissivity; }
+   double getCalculatedHeatSignature() const              { return baseHeatSignature * emissivity; }
 
 private:
 
    unsigned int numWaveBands;            // Total number of wavebands
    const base::Table1* waveBandTable;   // Table of waveband centers and widths
    IrShape* irShapeSignature;            // Shape of this IR signature
-   LCreal baseHeatSignature;             // The base heat signature   (Watts per steradian)
-   LCreal emissivity;                    // The emissivity for the player, what part of incident radiation
+   double baseHeatSignature;             // The base heat signature   (Watts per steradian)
+   double emissivity;                    // The emissivity for the player, what part of incident radiation
                                          // is absorbed. The value ranges from 0.0 for total reflection to
                                          // 1.0 for total absorption.
-   LCreal effectiveArea;                 // The effective area for heat calculations  (m^2)
+   double effectiveArea;                 // The effective area for heat calculations  (m^2)
 };
 
 } // End simulation namespace

@@ -152,9 +152,9 @@ class Station : public base::Component
 
 public:
    // Default priorities
-   static const LCreal DEFAULT_TC_THREAD_PRI;
-   static const LCreal DEFAULT_BG_THREAD_PRI;
-   static const LCreal DEFAULT_NET_THREAD_PRI;
+   static const double DEFAULT_TC_THREAD_PRI;
+   static const double DEFAULT_BG_THREAD_PRI;
+   static const double DEFAULT_NET_THREAD_PRI;
 
 public:
    Station();
@@ -194,16 +194,16 @@ public:
    // tasks if you're managing your own thread(s) from your main application
    // or a derived Station class.
    // ---
-   virtual void processTimeCriticalTasks(const LCreal dt);
-   virtual void processBackgroundTasks(const LCreal dt);
-   virtual void processNetworkInputTasks(const LCreal dt);
-   virtual void processNetworkOutputTasks(const LCreal dt);
+   virtual void processTimeCriticalTasks(const double dt);
+   virtual void processBackgroundTasks(const double dt);
+   virtual void processNetworkInputTasks(const double dt);
+   virtual void processNetworkOutputTasks(const double dt);
 
    // ---
    // Time-critical thread support
    // ---
-   LCreal getTimeCriticalRate() const;                       // Time-critical thread rate (Hz)
-   LCreal getTimeCriticalPriority() const;                   // Time-critical thread priority
+   double getTimeCriticalRate() const;                       // Time-critical thread rate (Hz)
+   double getTimeCriticalPriority() const;                   // Time-critical thread priority
    unsigned int getTimeCriticalStackSize() const;            // Time-critical thread stack size
    bool setTimeCriticalStackSize(const unsigned int bytes);  // Set Time-critical thread stack size  (bytes or zero for default)
 
@@ -220,8 +220,8 @@ public:
    // ---
    // Interoperability network(s) thread support
    // ---
-   LCreal getNetworkRate() const;                            // Network thread rate (Hz)
-   LCreal getNetworkPriority() const;                        // Network thread priority
+   double getNetworkRate() const;                            // Network thread rate (Hz)
+   double getNetworkPriority() const;                        // Network thread priority
    unsigned int getNetworkStackSize() const;                 // Network thread stack size
    bool setNetworkStackSize(const unsigned int bytes);       // Network thread stack size (bytes or zero for default)
    bool doWeHaveTheNetThread() const;                        // Do we have a network thread?
@@ -229,8 +229,8 @@ public:
    // ---
    // Background thread support.
    // ---
-   LCreal getBackgroundRate() const;                         // Background thread rate (Hz)
-   LCreal getBackgroundPriority() const;                     // Background thread priority
+   double getBackgroundRate() const;                         // Background thread rate (Hz)
+   double getBackgroundPriority() const;                     // Background thread priority
    unsigned int getBackgroundStackSize() const;              // Background thread stack size
    bool setBackgroundStackSize(const unsigned int bytes);    // Background thread stack size (bytes or zero for default)
    bool doWeHaveTheBgThread() const;                         // Do we have a background thread?
@@ -258,13 +258,13 @@ public:
    virtual bool setSlotFastForwardRate(const base::Number* const);
    virtual bool setSlotEnableUpdateTimers(const base::Number* const);
 
-   void updateTC(const LCreal dt = 0.0) override;
-   void updateData(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    void reset() override;
 
 protected:
-   virtual void inputDevices(const LCreal dt);    // Handle device inputs
-   virtual void outputDevices(const LCreal dt);   // Handle device output
+   virtual void inputDevices(const double dt);    // Handle device inputs
+   virtual void outputDevices(const double dt);   // Handle device output
 
    base::Thread* getTcThread();                  // Pre-ref() pointer to the Time-critical thread
    void setTcThread(base::Thread* h);
@@ -293,23 +293,23 @@ private:
    bool tmrUpdateEnbl;                       // Enable base::Timers::updateTimers() call from updateTC()
    DataRecorder* dataRecorder;               // Data Recorder
 
-   LCreal tcRate;                            // Time-critical thread Rate (hz)
-   LCreal tcPri;                             // Priority of the time-critical thread (0->lowest, 1->highest)
+   double tcRate;                            // Time-critical thread Rate (hz)
+   double tcPri;                             // Priority of the time-critical thread (0->lowest, 1->highest)
    unsigned int tcStackSize;                 // Time-critical thread stack size (bytes or zero for system default size)
    base::safe_ptr<base::Thread> tcThread;  // The Time-critical thread
    unsigned int fastForwardRate;             // Time-critical thread fast forward rate
 
-   LCreal netRate;                           // Network thread Rate (hz)
-   LCreal netPri;                            // Priority of the Network thread (0->lowest, 1->highest)
+   double netRate;                           // Network thread Rate (hz)
+   double netPri;                            // Priority of the Network thread (0->lowest, 1->highest)
    unsigned int netStackSize;                // Network thread stack size (bytes or zero for system default size)
    base::safe_ptr<base::Thread> netThread; // The optional network thread
 
-   LCreal bgRate;                            // Background thread Rate (hz)
-   LCreal bgPri;                             // Priority of the Background thread (0->lowest, 1->highest)
+   double bgRate;                            // Background thread Rate (hz)
+   double bgPri;                             // Priority of the Background thread (0->lowest, 1->highest)
    unsigned int bgStackSize;                 // Background thread stack size (bytes or zero for system default size)
    base::safe_ptr<base::Thread> bgThread;  // The optional background thread
 
-   LCreal startupResetTimer;               // Startup RESET timer (sends a RESET_EVENT after timeout)
+   double startupResetTimer;               // Startup RESET timer (sends a RESET_EVENT after timeout)
    const base::Time* startupResetTimer0;  // Init value of the startup RESET timer
 };
 

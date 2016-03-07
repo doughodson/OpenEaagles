@@ -13,24 +13,24 @@
 //
 // Public methods (Defined in Mass, and inherited by all derived classes):
 //
-//     set(const LCreal v)
-//        Sets an Mass derived instance with an LCreal.
+//     set(const double v)
+//        Sets an Mass derived instance with an double.
 //
 //     set(const Mass& n)
 //        Sets, and converts if necessary, an Mass derived instance with
 //        another Mass derived instance.
 //
-//     LCreal convert(const Mass& n)
+//     double convert(const Mass& n)
 //        Converts the value of an Mass derived instance into
 //        the units of another Mass derived instance.
 //
 //     Conversion routines:
-//        static LCreal gramsToKiloGrams(const LCreal v)  { return v * .001f; }
-//        static LCreal gramsToSlugs(const LCreal v)      { return v * .00006852f }
-//        static LCreal kiloGramsToGrams(const LCreal v)  { return v * 1000f }
-//        static LCreal kiloGramsToSlugs(const LCreal v)  { return v * 0.06854f}
-//        static LCreal slugsToGrams(const LCreal v)      { return v * 14590f }
-//        static LCreal slugsToKiloGrams(const LCreal v)  { return v * 14.59f }
+//        static double gramsToKiloGrams(const double v)  { return v * .001f; }
+//        static double gramsToSlugs(const double v)      { return v * .00006852f }
+//        static double kiloGramsToGrams(const double v)  { return v * 1000f }
+//        static double kiloGramsToSlugs(const double v)  { return v * 0.06854f}
+//        static double slugsToGrams(const double v)      { return v * 14590f }
+//        static double slugsToKiloGrams(const double v)  { return v * 14.59f }
 //
 //     Output stream operator: >>
 //        ostream& operator<<(ostream& sout, const Mass& n)
@@ -40,7 +40,7 @@
 //
 // Public methods (For classes:  Grams, KiloGrams, Slugs):
 //
-//     LCreal convertStatic(const Mass& n)
+//     double convertStatic(const Mass& n)
 //        Static function to convert the given Mass derived instance
 //        into the units of a specific Mass derived class.
 //
@@ -85,32 +85,32 @@ class Mass : public Number
 
 public:
     Mass();
-    Mass(const LCreal value);
+    Mass(const double value);
 
-    void set(const LCreal v) { val = v; }
+    void set(const double v) { val = v; }
     void set(const Mass& n)  { val = fromMass(n.toMass()); }
 
     //this goes to another mass (kilograms)
-    virtual LCreal toMass() const = 0;
+    virtual double toMass() const = 0;
     //this is coming from another mass (kilograms)
-    virtual LCreal fromMass(const LCreal a) const = 0;
-    LCreal convert(const Mass& n) const { return fromMass(n.toMass()); }
+    virtual double fromMass(const double a) const = 0;
+    double convert(const Mass& n) const { return fromMass(n.toMass()); }
 
     // Conversions between Masss
-    static LCreal gramsToKiloGrams(const LCreal v) { return v * G2KG; }
-    static LCreal gramsToSlugs(const LCreal v)     { return (v * G2KG) * KG2SL; }
-    static LCreal kiloGramsToGrams(const LCreal v) { return v * KG2G; }
-    static LCreal kiloGramsToSlugs(const LCreal v) { return v * KG2SL;}
-    static LCreal slugsToGrams(const LCreal v)     { return (v * SL2KG) * KG2G; }
-    static LCreal slugsToKiloGrams(const LCreal v) { return v * SL2KG; }
+    static double gramsToKiloGrams(const double v) { return v * G2KG; }
+    static double gramsToSlugs(const double v)     { return (v * G2KG) * KG2SL; }
+    static double kiloGramsToGrams(const double v) { return v * KG2G; }
+    static double kiloGramsToSlugs(const double v) { return v * KG2SL;}
+    static double slugsToGrams(const double v)     { return (v * SL2KG) * KG2G; }
+    static double slugsToKiloGrams(const double v) { return v * SL2KG; }
 
     // Conversion constant
-    static const LCreal KG2G;    // Kilograms -> Grams
-    static const LCreal G2KG;    // Grams -> Kilograms
-    static const LCreal KG2SL;   // Kilograms -> Slugs
-    static const LCreal SL2KG;   // Slugs -> Kilograms
-    static const LCreal KG2PM;   // Kilograms -> PoundsMass
-    static const LCreal PM2KG;   // PoundsMass -> Kilograms
+    static const double KG2G;    // Kilograms -> Grams
+    static const double G2KG;    // Grams -> Kilograms
+    static const double KG2SL;   // Kilograms -> Slugs
+    static const double SL2KG;   // Slugs -> Kilograms
+    static const double KG2PM;   // Kilograms -> PoundsMass
+    static const double PM2KG;   // PoundsMass -> Kilograms
 };
 
 
@@ -129,12 +129,12 @@ class KiloGrams : public Mass
 
 public:
     KiloGrams();
-    KiloGrams(const LCreal value);
+    KiloGrams(const double value);
     KiloGrams(const Mass& value);
 
-    static LCreal convertStatic(const Mass &n)       { return n.toMass(); }
-    LCreal toMass() const override                   { return static_cast<LCreal>(val); }
-    LCreal fromMass(const LCreal a) const override   { return a; }
+    static double convertStatic(const Mass &n)       { return n.toMass(); }
+    double toMass() const override                   { return static_cast<double>(val); }
+    double fromMass(const double a) const override   { return a; }
 };
 
 
@@ -149,12 +149,12 @@ class Grams : public Mass
 
 public:
     Grams();
-    Grams(const LCreal value);
+    Grams(const double value);
     Grams(const Mass& value);
 
-    static LCreal convertStatic(const Mass &n)       { return n.toMass() * KG2G; }
-    LCreal toMass() const override                   { return static_cast<LCreal>(val * G2KG); }
-    LCreal fromMass(const LCreal a) const override   { return a * KG2G; }
+    static double convertStatic(const Mass &n)       { return n.toMass() * KG2G; }
+    double toMass() const override                   { return static_cast<double>(val * G2KG); }
+    double fromMass(const double a) const override   { return a * KG2G; }
 };
 
 
@@ -169,12 +169,12 @@ class Slugs : public Mass
 
 public:
     Slugs();
-    Slugs(const LCreal value);
+    Slugs(const double value);
     Slugs(const Mass& value);
 
-    static LCreal convertStatic(const Mass &n)      { return n.toMass() * KG2SL; }
-    LCreal toMass() const override                   { return static_cast<LCreal>(val * SL2KG); }
-    LCreal fromMass(const LCreal a) const override   { return a * KG2SL; }
+    static double convertStatic(const Mass &n)      { return n.toMass() * KG2SL; }
+    double toMass() const override                   { return static_cast<double>(val * SL2KG); }
+    double fromMass(const double a) const override   { return a * KG2SL; }
 };
 
 } // End base namespace

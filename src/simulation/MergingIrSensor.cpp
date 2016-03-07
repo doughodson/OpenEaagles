@@ -73,7 +73,7 @@ void MergingIrSensor::reset()
    }
 }
 
-void MergingIrSensor::receive(const LCreal dt)
+void MergingIrSensor::receive(const double dt)
 {
    BaseClass::receive(dt);
    mergeIrReturns();
@@ -123,8 +123,8 @@ void MergingIrSensor::mergeIrReturns()
                for (int j = i+1; j < numRecords; j++) {
 
                   IrQueryMsg* nextMsg = storedMessagesQueue.peek0(j);
-                  LCreal azimuthDelta = currentMsg->getRelativeAzimuth() - nextMsg->getRelativeAzimuth();
-                  LCreal elevationDelta = currentMsg->getRelativeElevation()
+                  double azimuthDelta = currentMsg->getRelativeAzimuth() - nextMsg->getRelativeAzimuth();
+                  double elevationDelta = currentMsg->getRelativeElevation()
                      - nextMsg->getRelativeElevation();
 
                   if (azimuthDelta < 0)
@@ -138,8 +138,8 @@ void MergingIrSensor::mergeIrReturns()
                     // for the sensor to distinguish between them;
                     // we will merge the two signals based
                     // on their weighted signal-to-noise.
-                    LCreal currentRatio = 0.0;
-                    LCreal nextRatio = 0.0;
+                    double currentRatio = 0.0;
+                    double nextRatio = 0.0;
 
                     // find current ratio.
                     if (isMessageEnabled(MSG_DEBUG)) {
@@ -181,10 +181,10 @@ void MergingIrSensor::mergeIrReturns()
                     } // if next signal > background
 
                     // use ratios to find weights.
-                    LCreal sumRatio = currentRatio + nextRatio;
+                    double sumRatio = currentRatio + nextRatio;
 
-                    const LCreal currentWeight = currentRatio / sumRatio;
-                    const LCreal nextWeight = 1.0 - currentWeight;
+                    const double currentWeight = currentRatio / sumRatio;
+                    const double nextWeight = 1.0 - currentWeight;
 
                     //combine line-of-sight vector using weights
                     currentMsg->setLosVec((currentMsg->getLosVec() * currentWeight) +
@@ -260,14 +260,14 @@ base::Object* MergingIrSensor::getSlotByIndex(const int si)
 }
 
 // setAzimuthBin() - Sets the lower Azimuth Bin
-bool MergingIrSensor::setAzimuthBin(const LCreal w)
+bool MergingIrSensor::setAzimuthBin(const double w)
 {
    azimuthBin = w;
    return true;
 }
 
 // setElevationBin() - Sets the lower Elevation Bin
-bool MergingIrSensor::setElevationBin(const LCreal w)
+bool MergingIrSensor::setElevationBin(const double w)
 {
    elevationBin = w;
    return true;
@@ -275,12 +275,12 @@ bool MergingIrSensor::setElevationBin(const LCreal w)
 
 bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
    const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
    if (a != nullptr) {
        base::Radians r;
-       value = static_cast<LCreal>(r.convert(*a));
+       value = static_cast<double>(r.convert(*a));
    }
    else if (msg != nullptr) {
       value = msg->getReal();
@@ -291,12 +291,12 @@ bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
 
 bool MergingIrSensor::setSlotElevationBin(const base::Number* const msg)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
    const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
    if (a != nullptr) {
        base::Radians r;
-       value = static_cast<LCreal>(r.convert(*a));
+       value = static_cast<double>(r.convert(*a));
    }
    else if (msg != nullptr) {
       value = msg->getReal();

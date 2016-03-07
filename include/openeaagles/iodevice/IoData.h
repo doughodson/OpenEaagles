@@ -44,12 +44,12 @@ public:
    unsigned int getNumAnalogOutputChannels() const override;
    unsigned int getNumDiscreteInputChannels() const override;
    unsigned int getNumDiscreteOutputChannels() const override;
-   bool getAnalogInput(const unsigned int channel, LCreal* const value) const override;
-   bool getAnalogOutput(const unsigned int channel, LCreal* const value) const override;
+   bool getAnalogInput(const unsigned int channel, double* const value) const override;
+   bool getAnalogOutput(const unsigned int channel, double* const value) const override;
    bool getDiscreteInput(const unsigned int channel, bool* const value) const override;
    bool getDiscreteOutput(const unsigned int channel, bool* const value) const override;
-   bool setAnalogInput(const unsigned int channel, const LCreal value) override;
-   bool setAnalogOutput(const unsigned int channel, const LCreal value) override;
+   bool setAnalogInput(const unsigned int channel, const double value) override;
+   bool setAnalogOutput(const unsigned int channel, const double value) override;
    bool setDiscreteInput(const unsigned int channel, const bool value) override;
    bool setDiscreteOutput(const unsigned int channel, const bool value) override;
    void clear() override;
@@ -64,10 +64,10 @@ private:
    void initData();
 
    unsigned int numAI;  // Number of AIs
-   LCreal*  aiTable;    // AIs
+   double*  aiTable;    // AIs
 
    unsigned int numAO;  // Number of AOs
-   LCreal*  aoTable;    // AOs
+   double*  aoTable;    // AOs
 
    unsigned int numDI;  // Number of DIs
    bool*    diTable;    // DIs

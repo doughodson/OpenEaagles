@@ -110,7 +110,7 @@ void MapPage::copyData(const MapPage& org, const bool cc)
 //------------------------------------------------------------------------------
 // updateData() - updates the values
 //------------------------------------------------------------------------------
-void MapPage::updateData(const LCreal dt)
+void MapPage::updateData(const double dt)
 {
    // find our nearest map page above us and get the data from it!
    MapPage* page = static_cast<MapPage*>(findContainerByType(typeid(MapPage)));
@@ -178,9 +178,9 @@ void MapPage::pixelsToLatLon(const int x, const int y, double &lat, double &lon)
       ypos /= nm2Screen;
 
       if (!getNorthUp()) {
-         LCreal acX = 0;
-         LCreal acY = 0;
-         earth2Aircraft( static_cast<LCreal>(xpos), static_cast<LCreal>(ypos), &acX, &acY);
+         double acX = 0;
+         double acY = 0;
+         earth2Aircraft( static_cast<double>(xpos), static_cast<double>(ypos), &acX, &acY);
          xpos = acX;
          ypos = acY;
       }
@@ -237,7 +237,7 @@ void MapPage::moveMap(const int startX, const int startY, const int endX, const 
 // converts lat/lon to screen coordinates
 //------------------------------------------------------------------------------
 bool MapPage::latLon2Screen(const double lat, const double lon,
-                              LCreal* const x, LCreal* const y) const
+                              double* const x, double* const y) const
 {
    bool ok = false;
    if (x != nullptr && y != nullptr) {
@@ -266,8 +266,8 @@ bool MapPage::latLon2Screen(const double lat, const double lon,
       // Adjust for the decentered displayment
       if ( !getCentered() ) screenY += getDisplacement();
 
-      *x = static_cast<LCreal>(screenX);
-      *y = static_cast<LCreal>(screenY);
+      *x = static_cast<double>(screenX);
+      *y = static_cast<double>(screenY);
 
       ok = true;
    }
@@ -278,7 +278,7 @@ bool MapPage::latLon2Screen(const double lat, const double lon,
 //------------------------------------------------------------------------------
 // converts screen to lat/lon coordinates
 //------------------------------------------------------------------------------
-bool MapPage::screen2LatLon(const LCreal x, const LCreal y,
+bool MapPage::screen2LatLon(const double x, const double y,
                               double* const lat, double* const lon) const
 {
    bool ok = false;
@@ -324,7 +324,7 @@ bool MapPage::screen2LatLon(const LCreal x, const LCreal y,
 //------------------------------------------------------------------------------
 // aircraft2Screen() - converts real world coordinates to X, Y in inches.
 //------------------------------------------------------------------------------
-bool MapPage::aircraft2Screen(const LCreal acX, const LCreal acY, LCreal* const screenX, LCreal* const screenY) const
+bool MapPage::aircraft2Screen(const double acX, const double acY, double* const screenX, double* const screenY) const
 {
    bool ok = false;
 
@@ -334,8 +334,8 @@ bool MapPage::aircraft2Screen(const LCreal acX, const LCreal acY, LCreal* const 
       const double newY = (acY * nm2Screen);
 
       // now set the pointers to the new X and Y values
-      *screenX = static_cast<LCreal>(newY);
-      *screenY = static_cast<LCreal>(newX);
+      *screenX = static_cast<double>(newY);
+      *screenY = static_cast<double>(newX);
 
       ok = true;
    }
@@ -346,14 +346,14 @@ bool MapPage::aircraft2Screen(const LCreal acX, const LCreal acY, LCreal* const 
 //------------------------------------------------------------------------------
 // earth2Aircraft() - converts earth coordinates to aircraft coordinates.
 //------------------------------------------------------------------------------
-bool MapPage::earth2Aircraft(const LCreal earthX, const LCreal earthY, LCreal* const acX, LCreal* const acY) const
+bool MapPage::earth2Aircraft(const double earthX, const double earthY, double* const acX, double* const acY) const
 {
    bool ok = false;
    if (acX != nullptr && acY != nullptr) {
       const double x =  (earthX * headingCos) + (earthY * headingSin);
       const double y = -(earthX * headingSin) + (earthY * headingCos);
-      *acX = static_cast<LCreal>(x);
-      *acY = static_cast<LCreal>(y);
+      *acX = static_cast<double>(x);
+      *acY = static_cast<double>(y);
       ok = true;
    }
 
@@ -363,12 +363,12 @@ bool MapPage::earth2Aircraft(const LCreal earthX, const LCreal earthY, LCreal* c
 //------------------------------------------------------------------------------
 // latLonToEarth() - converts a latitude/longitude to earth coordinates.
 //------------------------------------------------------------------------------
-bool MapPage::latLon2Earth(const double lat, const double lon, LCreal* const earthX, LCreal* const earthY) const
+bool MapPage::latLon2Earth(const double lat, const double lon, double* const earthX, double* const earthY) const
 {
    bool ok = false;
    if (earthX != nullptr && earthY != nullptr) {
-      *earthX = static_cast<LCreal>((lat - referenceLat) * 60.0);
-      *earthY = static_cast<LCreal>((lon - referenceLon) * 60.0 * cosineLatReference);
+      *earthX = static_cast<double>((lat - referenceLat) * 60.0);
+      *earthY = static_cast<double>((lon - referenceLon) * 60.0 * cosineLatReference);
       ok = true;
    }
 

@@ -67,7 +67,7 @@ void StabilizingGimbal::deleteData()
 //------------------------------------------------------------------------------
 // dynamics() -- System class "Dynamics phase" call back
 //------------------------------------------------------------------------------
-void StabilizingGimbal::dynamics(const LCreal dt)
+void StabilizingGimbal::dynamics(const double dt)
 {
    stabilizingController(dt);
 
@@ -79,7 +79,7 @@ void StabilizingGimbal::dynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // stabilizingController() -- control the gimbal scanning
 //------------------------------------------------------------------------------
-void StabilizingGimbal::stabilizingController(const LCreal dt)
+void StabilizingGimbal::stabilizingController(const double dt)
 {
     switch (stabilizingMode) {
         case ROLL : { rollStabilizingController(dt); }
@@ -96,22 +96,22 @@ void StabilizingGimbal::stabilizingController(const LCreal dt)
 //------------------------------------------------------------------------------
 // rollStabilizingController() -- Roll stabilizes the gimbal
 //------------------------------------------------------------------------------
-void StabilizingGimbal::rollStabilizingController(const LCreal)
+void StabilizingGimbal::rollStabilizingController(const double)
 {
     if (getOwnship() == nullptr) return;
 
     osg::Vec3 tpos = getCmdPosition();
     if (mountPosition == NOSE){
-        tpos[ROLL_IDX] = static_cast<LCreal>(-getOwnship()->getRoll());
+        tpos[ROLL_IDX] = static_cast<double>(-getOwnship()->getRoll());
     }
     else if (mountPosition == TAIL){
-        tpos[ROLL_IDX] = static_cast<LCreal>(getOwnship()->getRoll());
+        tpos[ROLL_IDX] = static_cast<double>(getOwnship()->getRoll());
     }
     else if (mountPosition == RIGHT_WING){
-        tpos[ELEV_IDX] = static_cast<LCreal>(-getOwnship()->getPitch());
+        tpos[ELEV_IDX] = static_cast<double>(-getOwnship()->getPitch());
     }
     else if (mountPosition == LEFT_WING){
-        tpos[ELEV_IDX] = static_cast<LCreal>(getOwnship()->getPitch());
+        tpos[ELEV_IDX] = static_cast<double>(getOwnship()->getPitch());
     }
     setCmdPos( tpos );
 }
@@ -119,22 +119,22 @@ void StabilizingGimbal::rollStabilizingController(const LCreal)
 //------------------------------------------------------------------------------
 // elevationStabilizingController() -- Elevation stabilizes the gimbal
 //------------------------------------------------------------------------------
-void StabilizingGimbal::elevationStabilizingController(const LCreal)
+void StabilizingGimbal::elevationStabilizingController(const double)
 {
     if (getOwnship() == nullptr) return;
 
     osg::Vec3 tpos = getCmdPosition();
     if (mountPosition == NOSE){
-        tpos[ELEV_IDX] = static_cast<LCreal>(-getOwnship()->getPitch());
+        tpos[ELEV_IDX] = static_cast<double>(-getOwnship()->getPitch());
     }
     else if (mountPosition == TAIL){
-        tpos[ELEV_IDX] = static_cast<LCreal>(getOwnship()->getPitch());
+        tpos[ELEV_IDX] = static_cast<double>(getOwnship()->getPitch());
     }
     else if (mountPosition == RIGHT_WING){
-        tpos[ROLL_IDX] = static_cast<LCreal>(-getOwnship()->getRoll());
+        tpos[ROLL_IDX] = static_cast<double>(-getOwnship()->getRoll());
     }
     else if (mountPosition == LEFT_WING){
-        tpos[ROLL_IDX] = static_cast<LCreal>(getOwnship()->getRoll());
+        tpos[ROLL_IDX] = static_cast<double>(getOwnship()->getRoll());
     }
     setCmdPos( tpos );
 }

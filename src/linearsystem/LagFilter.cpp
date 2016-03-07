@@ -34,7 +34,7 @@ LagFilter::LagFilter()
    tau = 1.0;
 }
 
-LagFilter::LagFilter(const unsigned int rate, const LCreal t)
+LagFilter::LagFilter(const unsigned int rate, const double t)
                         : FirstOrderTf(rate, 0.0f, 1.0f, t, 1.0f)
 {
    STANDARD_CONSTRUCTOR()
@@ -56,7 +56,7 @@ EMPTY_DELETEDATA(LagFilter)
 // Set functions
 //------------------------------------------------------------------------------
 
-bool LagFilter::setTau(const LCreal v)
+bool LagFilter::setTau(const double v)
 {
    tau = v;
 
@@ -77,7 +77,7 @@ bool LagFilter::setSlotTau(const base::Time* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal tsec = base::Seconds::convertStatic(*msg);
+      double tsec = base::Seconds::convertStatic(*msg);
       if (tsec > 0) {
          setTau( tsec );
          ok = true;
@@ -95,7 +95,7 @@ bool LagFilter::setSlotTau(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal tsec = msg->getReal();
+      double tsec = msg->getReal();
       if (tsec > 0) {
          setTau( tsec );
          ok = true;

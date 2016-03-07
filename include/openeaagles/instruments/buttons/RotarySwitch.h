@@ -24,7 +24,7 @@ public:
 
    bool onSingleClick() override;
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
     bool setSlotAngles(const base::PairStream* const stream);
@@ -34,7 +34,7 @@ private:
     static const int MAX_ANGLES = 500;
 
     int currentPosition;    //current switch position
-    LCreal angles[MAX_ANGLES];
+    double angles[MAX_ANGLES];
     int numAngs;
     int startPosition;
     SendData angleSD;       // angle to send to our rotator

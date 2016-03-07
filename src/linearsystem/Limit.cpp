@@ -32,7 +32,7 @@ Limit::Limit()
    STANDARD_CONSTRUCTOR()
 }
 
-Limit::Limit(const LCreal ll, const LCreal uu) : LimitFunc(ll,uu)
+Limit::Limit(const double ll, const double uu) : LimitFunc(ll,uu)
 {
    STANDARD_CONSTRUCTOR()
 }

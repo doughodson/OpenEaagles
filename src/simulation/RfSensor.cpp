@@ -81,7 +81,7 @@ RfSensor::RfSensor() : modes(nullptr), ranges(nullptr), masterModePtr(nullptr), 
     initRngIdx = 1;
     prf = 0.0;
     pulseWidth = 0.0;
-    beamWidth = (static_cast<LCreal>(base::Angle::D2RCC) * 3.5);
+    beamWidth = (static_cast<double>(base::Angle::D2RCC) * 3.5);
     syncXmitWithScan = false;
 
     typeId[0] = '\0';
@@ -236,7 +236,7 @@ bool RfSensor::isTransmitting() const
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void RfSensor::updateData(const LCreal dt)
+void RfSensor::updateData(const double dt)
 {
     // Proper range values
     if (nRanges > 0) {
@@ -253,19 +253,19 @@ void RfSensor::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 
 // Returns the PRF (hertz)
-LCreal RfSensor::getPRF() const
+double RfSensor::getPRF() const
 {
    return prf;
 }
 
 // Returns the pulse width (seconds)
-LCreal RfSensor::getPulseWidth() const
+double RfSensor::getPulseWidth() const
 {
    return pulseWidth;
 }
 
 // Returns the beam width (radians)
-LCreal RfSensor::getBeamWidth() const
+double RfSensor::getBeamWidth() const
 {
    return beamWidth;
 }
@@ -277,13 +277,13 @@ const char* RfSensor::getTypeId() const
 }
 
 // Returns the current range (nm)
-LCreal RfSensor::getRange() const
+double RfSensor::getRange() const
 {
    return rng;
 }
 
 // Returns a maximum of 'max' ranges in 'rngs' and returns actual number of ranges.
-int RfSensor::getRanges(LCreal* const rngs, const int max)
+int RfSensor::getRanges(double* const rngs, const int max)
 {
     // Do we have something to do?
     if (rngs == nullptr || max == 0 || nRanges == 0) return 0;
@@ -343,7 +343,7 @@ base::PairStream* RfSensor::getModes()
 //------------------------------------------------------------------------------
 
 // setRanges() -- set the valid ranges for this sensor
-bool RfSensor::setRanges(const LCreal* const rngs, const int n)
+bool RfSensor::setRanges(const double* const rngs, const int n)
 {
     // Clear old ranges
     if (ranges != nullptr) delete[] ranges;
@@ -353,7 +353,7 @@ bool RfSensor::setRanges(const LCreal* const rngs, const int n)
 
     // Copy new ranges
     if (n > 0 && rngs != nullptr) {
-        LCreal* tmp = new LCreal[n];
+        double* tmp = new double[n];
         for (int i = 0; i < n; i++) {
             tmp[i] = rngs[i];
         }
@@ -367,7 +367,7 @@ bool RfSensor::setRanges(const LCreal* const rngs, const int n)
 }
 
 // Sets PRF (hertz; must be greater than 0)
-bool RfSensor::setPRF(const LCreal v)
+bool RfSensor::setPRF(const double v)
 {
    bool ok = false;
    if (v > 0) {
@@ -378,7 +378,7 @@ bool RfSensor::setPRF(const LCreal v)
 }
 
 // Sets the pulse width (seconds; must be greater than 0)
-bool RfSensor::setPulseWidth(const LCreal v)
+bool RfSensor::setPulseWidth(const double v)
 {
    bool ok = false;
    if (v > 0) {
@@ -389,7 +389,7 @@ bool RfSensor::setPulseWidth(const LCreal v)
 }
 
 // Sets the beam width (radians; must be greater than 0)
-bool RfSensor::setBeamWidth(const LCreal v)
+bool RfSensor::setBeamWidth(const double v)
 {
    bool ok = false;
    if (v > 0) {
@@ -407,7 +407,7 @@ bool RfSensor::setTypeId(const char* const str)
 }
 
 // Sets the current range (nm; must be greater than or equal 0)
-bool RfSensor::setRange(const LCreal v)
+bool RfSensor::setRange(const double v)
 {
    bool ok = false;
    if (v >= 0) {
@@ -456,7 +456,7 @@ bool RfSensor::setSlotRanges(base::List* const list)
 {
     bool ok = false;
     if (list != nullptr) {
-        LCreal rngs[100];
+        double rngs[100];
         int n = list->getNumberList(rngs,100);
         ok = setRanges(rngs, n);
     }
@@ -498,7 +498,7 @@ bool RfSensor::setSlotPrf(const base::Frequency* const msg)
    bool ok = false;
 
    if (msg != nullptr) {
-      const LCreal x = base::Hertz::convertStatic(*msg);
+      const double x = base::Hertz::convertStatic(*msg);
       ok = setPRF( x );
       if (!ok) {
          std::cerr << "RfSensor::setSlotPRF: Error setting PRF!" << std::endl;
@@ -515,7 +515,7 @@ bool RfSensor::setSlotPrf(const base::Number* const msg)
 
    if (msg != nullptr) {
       // Standard base::Number
-      const LCreal x = msg->getReal();
+      const double x = msg->getReal();
       ok = setPRF( x );
       if (!ok) {
          std::cerr << "RfSensor::setSlotPRF: Error setting PRF!" << std::endl;
@@ -535,7 +535,7 @@ bool RfSensor::setSlotPulseWidth(const base::Time* const msg)
    bool ok = false;
 
    if (msg != nullptr) {
-      const LCreal x = base::Seconds::convertStatic( *msg );
+      const double x = base::Seconds::convertStatic( *msg );
       ok = setPulseWidth( x );
       if (!ok) {
          std::cerr << "RfSensor::setPulseWidth: Error setting pulse width!" << std::endl;
@@ -570,7 +570,7 @@ bool RfSensor::setSlotBeamWidth(const base::Angle* const msg)
    bool ok = false;
 
    if (msg != nullptr) {
-      const LCreal x = static_cast<LCreal>(base::Radians::convertStatic( *msg ));
+      const double x = static_cast<double>(base::Radians::convertStatic( *msg ));
       ok = setBeamWidth( x );
       if (!ok) {
          std::cerr << "RfSensor::setBeamWidth: Error setting beam width!" << std::endl;

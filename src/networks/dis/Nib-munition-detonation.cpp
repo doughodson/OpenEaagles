@@ -23,7 +23,7 @@ namespace dis {
 //------------------------------------------------------------------------------
 // munitionDetonationMsgFactory() -- (Output) Munition detonation message factory
 //------------------------------------------------------------------------------
-bool Nib::munitionDetonationMsgFactory(const LCreal)
+bool Nib::munitionDetonationMsgFactory(const double)
 {
    // Dummy weapon?
    const simulation::Weapon* ww = dynamic_cast<const simulation::Weapon*>( getPlayer() );

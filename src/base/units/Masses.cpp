@@ -16,12 +16,12 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Mass, "Mass")
 EMPTY_SLOTTABLE(Mass)
 
 // Conversion constant
-const LCreal Mass::KG2G = 1000.0;                 // KiloGrams => Grams
-const LCreal Mass::G2KG = (1 / Mass::KG2G);     // Grams => KiloGrams
-const LCreal Mass::KG2SL = 0.06852176585f;        // KiloGrams => Slugs
-const LCreal Mass::SL2KG = (1 / Mass::KG2SL);   // Slugs => KiloGrams
-const LCreal Mass::KG2PM = 2.2046f;              // KiloGrams => PoundsMass
-const LCreal Mass::PM2KG = (1 / Mass::KG2PM);   // PoundsMass => KiloGrams
+const double Mass::KG2G = 1000.0;                 // KiloGrams => Grams
+const double Mass::G2KG = (1 / Mass::KG2G);     // Grams => KiloGrams
+const double Mass::KG2SL = 0.06852176585f;        // KiloGrams => Slugs
+const double Mass::SL2KG = (1 / Mass::KG2SL);   // Slugs => KiloGrams
+const double Mass::KG2PM = 2.2046f;              // KiloGrams => PoundsMass
+const double Mass::PM2KG = (1 / Mass::KG2PM);   // PoundsMass => KiloGrams
 
 //------------------------------------------------------------------------------
 // Constructors
@@ -33,7 +33,7 @@ Mass::Mass()
 }
 
 
-Mass::Mass(const LCreal value) : Number(value)
+Mass::Mass(const double value) : Number(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -87,7 +87,7 @@ KiloGrams::KiloGrams() : Mass()
     STANDARD_CONSTRUCTOR()
 }
 
-KiloGrams::KiloGrams(const LCreal value) : Mass(value)
+KiloGrams::KiloGrams(const double value) : Mass(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -112,7 +112,7 @@ Grams::Grams() : Mass()
     STANDARD_CONSTRUCTOR()
 }
 
-Grams::Grams(const LCreal value) : Mass(value)
+Grams::Grams(const double value) : Mass(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -137,7 +137,7 @@ Slugs::Slugs() : Mass()
     STANDARD_CONSTRUCTOR()
 }
 
-Slugs::Slugs(const LCreal value) : Mass(value)
+Slugs::Slugs(const double value) : Mass(value)
 {
     STANDARD_CONSTRUCTOR()
 }

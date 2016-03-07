@@ -58,17 +58,17 @@ class Table : public Object {
 
 public:
    Table();
-   Table(const LCreal* dtbl, const unsigned int dsize);
+   Table(const double* dtbl, const unsigned int dsize);
 
    // Returns a pointer to the dependent variable data table.
-   const LCreal* getDataTable() const                            { return dtable; }
+   const double* getDataTable() const                            { return dtable; }
 
    // Returns the number of entries in the data table
    virtual unsigned int tableSize() const = 0;
    virtual bool setDataTable(const List* const msg);
 
    // Returns the min and max values of the dependent variable data table
-   virtual void findMinMax(LCreal* minValue, LCreal* maxValue) const;
+   virtual void findMinMax(double* minValue, double* maxValue) const;
 
    // Returns true if extrapolation beyond the table's data is enabled.
    bool isExtrapolationEnabled() const                           { return extFlg; }
@@ -104,15 +104,15 @@ public:
 
 
 protected:
-   virtual bool loadData(const List& list, LCreal* const table) = 0;
-   virtual void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const = 0;
-   static bool loadVector(const List& list, LCreal** table, unsigned int* n);
-   static void printVector(std::ostream& sout, const LCreal* table, const unsigned int n);
+   virtual bool loadData(const List& list, double* const table) = 0;
+   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const = 0;
+   static bool loadVector(const List& list, double** table, unsigned int* n);
+   static void printVector(std::ostream& sout, const double* table, const unsigned int n);
 
    bool    valid;     // Table is valid
 
 private:
-   LCreal* dtable;    // Data Table
+   double* dtable;    // Data Table
    unsigned int nd;   // Number of data points
    bool    extFlg;    // Extrapolation enabled flag
 };

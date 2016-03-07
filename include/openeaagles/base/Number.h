@@ -22,15 +22,15 @@ namespace base {
 //
 // Public methods:
 //
-//    Number(const LCreal value)
+//    Number(const double value)
 //       Special constructor that initializes the number to 'value'
 //
-//    LCreal getReal()
+//    double getReal()
 //    double getDouble()
 //    float getFloat()
 //    int getInt()
 //    bool getBoolean()
-//       Return the value of the Number object as a LCreal, double,
+//       Return the value of the Number object as a double, double,
 //       float, integer, or bool, respectively, regardless of the derived
 //       class type of the object.
 //
@@ -43,10 +43,10 @@ public:
    Number(const int value)          { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
    Number(const Integer64 value)    { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
    Number(const bool value)         { val = (value ? 1.0 : 0.0); STANDARD_CONSTRUCTOR() }
-   Number(const LCreal value)       { val = value; STANDARD_CONSTRUCTOR() }
+   Number(const double value)       { val = value; STANDARD_CONSTRUCTOR() }
    Number(const float value)        { val = value; STANDARD_CONSTRUCTOR() }
 
-   LCreal getReal() const           { return static_cast<LCreal>(val); }
+   double getReal() const           { return static_cast<double>(val); }
    double getDouble() const         { return val; }
    float getFloat() const           { return static_cast<float>(val); }
    int getInt() const               { return static_cast<int>(val); }

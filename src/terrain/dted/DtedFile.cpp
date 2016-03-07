@@ -354,8 +354,8 @@ bool DtedFile::readDtedData(std::istream& in)
         }
 
         // Read elevation values for record
-        LCreal minElev0 = 99999.0;
-        LCreal maxElev0 = 0.0;
+        double minElev0 = 99999.0;
+        double maxElev0 = 0.0;
         for(unsigned int lat=0; lat<nptlat; lat++)
         {
             unsigned char values[2];

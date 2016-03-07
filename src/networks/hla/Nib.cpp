@@ -154,7 +154,7 @@ void Nib::clearAllAttributeUpdateEnabledFlags()
 //------------------------------------------------------------------------------
 // isPlayerStateUpdateRequiredForOutput() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
+bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 {
     if (!isRegistered()) return true;
     else return BaseClass::isPlayerStateUpdateRequired(curExecTime);

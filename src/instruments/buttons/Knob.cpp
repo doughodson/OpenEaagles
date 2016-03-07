@@ -217,10 +217,10 @@ void Knob::computeRotation()
            angle = atan2f(static_cast<float>(posMoveY), static_cast<float>(-posMoveX));
         }
 
-        angle *= static_cast<LCreal>(base::Angle::R2DCC);
+        angle *= static_cast<double>(base::Angle::R2DCC);
 
         if (start) {
-            startAngle = static_cast<LCreal>(degsRotation);
+            startAngle = static_cast<double>(degsRotation);
             running = 0;
         }
         start = false;
@@ -230,7 +230,7 @@ void Knob::computeRotation()
 
         // now get our difference
         if (lastAngle != angle) {
-            LCreal temp = 0;
+            double temp = 0;
             if (angle > 0 && lastAngle > 0) {
                 if (angle > lastAngle) {
                     temp = angle - lastAngle;
@@ -254,15 +254,15 @@ void Knob::computeRotation()
         }
 
         if (table != nullptr) {
-            LCreal maxX = table->getMaxX();
-            LCreal minX = table->getMinX();
-            LCreal x = running + startAngle;
+            double maxX = table->getMaxX();
+            double minX = table->getMinX();
+            double x = running + startAngle;
             if (x > maxX) x = maxX;
             if (x < minX) x = minX;
             degsRotation = static_cast<int>(x);
             value = table->lfi(x);
             if (endless) {
-                LCreal minVal = 0, maxVal = 0;
+                double minVal = 0, maxVal = 0;
                 table->findMinMax(&minVal, &maxVal);
                 if (value == maxVal) {
                     value = minVal;
@@ -303,8 +303,8 @@ void Knob::draw()
 {
     // rotate our knob!
     lcSaveMatrix();
-    if (endless) lcRotate(angle * static_cast<LCreal>(base::Angle::D2RCC));
-    else lcRotate(-degsRotation * static_cast<LCreal>(base::Angle::D2RCC));
+    if (endless) lcRotate(angle * static_cast<double>(base::Angle::D2RCC));
+    else lcRotate(-degsRotation * static_cast<double>(base::Angle::D2RCC));
     Graphic::draw();
     lcRestoreMatrix();
 }
@@ -312,7 +312,7 @@ void Knob::draw()
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Knob::updateData(const LCreal dt)
+void Knob::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 

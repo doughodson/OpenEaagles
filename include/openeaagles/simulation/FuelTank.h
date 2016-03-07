@@ -28,13 +28,13 @@ public:
    FuelTank();
 
    // Tank capacity (lb)
-   virtual LCreal getCapacity() const;
-   virtual bool setCapacity(const LCreal cap);
+   virtual double getCapacity() const;
+   virtual bool setCapacity(const double cap);
    virtual bool isCapacityValid() const;
 
    // Fuel weight (lb)
-   virtual LCreal getFuelWt() const;
-   virtual bool setFuelWt(const LCreal wt);
+   virtual double getFuelWt() const;
+   virtual bool setFuelWt(const double wt);
    virtual bool isFuelWtValid() const;
 
    void reset() override;
@@ -44,9 +44,9 @@ protected:
    virtual bool setSlotCapacity(const base::Number* const msg);
 
 private:
-   LCreal capacity;      // Fuel capacity (lb)
-   LCreal fuelWt;        // Fuel contents (lb)
-   LCreal initFuelWt;    // Fuel contents at reset (lb)
+   double capacity;      // Fuel capacity (lb)
+   double fuelWt;        // Fuel contents (lb)
+   double initFuelWt;    // Fuel contents at reset (lb)
 };
 
 } // end simulation namespace

@@ -33,12 +33,12 @@ class RacModel : public simulation::AerodynamicsModel
 public:
     RacModel();
 
-    LCreal getGload() const override;                   // G's (+up, one at level)
-    LCreal getMach() const override;                    // mach number
-    LCreal getAngleOfAttack() const override;           // radians
-    LCreal getSideSlip() const override;                // radians
-    LCreal getFlightPath() const override;              // radians
-    LCreal getCalibratedAirspeed() const override;      // Kts
+    double getGload() const override;                   // G's (+up, one at level)
+    double getMach() const override;                    // mach number
+    double getAngleOfAttack() const override;           // radians
+    double getSideSlip() const override;                // radians
+    double getFlightPath() const override;              // radians
+    double getCalibratedAirspeed() const override;      // Kts
 
     bool isHeadingHoldOn() const override;
     double getCommandedHeadingD() const override;
@@ -52,7 +52,7 @@ public:
     double getCommandedAltitude() const override;
     bool setAltitudeHoldOn(const bool b) override;
     bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
-    void dynamics(const LCreal dt) override;            // One pass model update; called from Player::dynamics()
+    void dynamics(const double dt) override;            // One pass model update; called from Player::dynamics()
 
     void reset() override;
 
@@ -66,12 +66,12 @@ public:
     virtual bool setSlotCmdVelocity(const base::Number* const msg);
 
 private:
-    void updateRAC(const LCreal dt);
+    void updateRAC(const double dt);
 
-    LCreal      vpMin;        // Minimum Velocity              (m/s)
-    LCreal      vpMaxG;       // Velocity for Max G's          (g's)
-    LCreal      gMax;         // Max G's                       (g's)
-    LCreal      maxAccel;     // Max longitudinal acceleration (m/s/s)
+    double      vpMin;        // Minimum Velocity              (m/s)
+    double      vpMaxG;       // Velocity for Max G's          (g's)
+    double      gMax;         // Max G's                       (g's)
+    double      maxAccel;     // Max longitudinal acceleration (m/s/s)
     double      cmdAltitude;  // Commanded Altitude            (meters)
     double      cmdHeading;   // Commanded Heading             (degs)
     double      cmdVelocity;  // Commanded speed               (kts)

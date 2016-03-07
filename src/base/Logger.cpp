@@ -94,7 +94,7 @@ void Logger::deleteData()
 //------------------------------------------------------------------------------
 // updateTC() --
 //------------------------------------------------------------------------------
-void Logger::updateTC(const LCreal dt)
+void Logger::updateTC(const double dt)
 {
     BaseClass::updateTC(dt);
 }
@@ -102,7 +102,7 @@ void Logger::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData() -- Update the log file
 //------------------------------------------------------------------------------
-void Logger::updateData(const LCreal dt)
+void Logger::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 

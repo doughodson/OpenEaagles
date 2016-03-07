@@ -81,14 +81,14 @@ void Adi::draw()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void Adi::updateData(const LCreal dt)
+void Adi::updateData(const double dt)
 {
     // update our base class first
     BaseClass::updateData(dt);
 
     // drive our adi toward the actual pitch, from our current pitch, no faster
     // than our MAX_RATE (this allows for greater fidelity, simulates an analog adi)
-    LCreal delta = 0;
+    double delta = 0;
     delta = alim (lcAepcDeg(pitch - curTheta), maxRate * dt);
     curTheta = lcAepcDeg(curTheta + delta);
 
@@ -108,7 +108,7 @@ void Adi::updateData(const LCreal dt)
 bool Adi::setSlotMaxRate(const base::Angle* const newMR)
 {
     bool ok = false;
-    if (newMR != nullptr) ok = setMaxRate( static_cast<LCreal>(base::Degrees::convertStatic(*newMR)) );
+    if (newMR != nullptr) ok = setMaxRate( static_cast<double>(base::Degrees::convertStatic(*newMR)) );
     return ok;
 }
 //------------------------------------------------------------------------------
@@ -163,15 +163,15 @@ bool Adi::onUpdateMaxRateAdi(const base::Number* const newMR)
 //------------------------------------------------------------------------------
 // setRollDeg() - set our amount of roll in degrees
 //------------------------------------------------------------------------------
-bool Adi::setRollDeg(const LCreal newR)
+bool Adi::setRollDeg(const double newR)
 {
-    roll = newR * static_cast<LCreal>(base::Angle::D2RCC);
+    roll = newR * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 //------------------------------------------------------------------------------
 // setRollRad() - set roll in radians
 //------------------------------------------------------------------------------
-bool Adi::setRollRad(const LCreal newR)
+bool Adi::setRollRad(const double newR)
 {
     roll = newR;
     return true;
@@ -179,7 +179,7 @@ bool Adi::setRollRad(const LCreal newR)
 //------------------------------------------------------------------------------
 // setPitch() - set our pitch value (degrees)
 //------------------------------------------------------------------------------
-bool Adi::setPitch(const LCreal newP)
+bool Adi::setPitch(const double newP)
 {
     pitch = newP;
     return true;
@@ -187,7 +187,7 @@ bool Adi::setPitch(const LCreal newP)
 //------------------------------------------------------------------------------
 // setMaxRate() - set our max rate
 //------------------------------------------------------------------------------
-bool Adi::setMaxRate(const LCreal newMR)
+bool Adi::setMaxRate(const double newMR)
 {
     maxRate = newMR;
     return true;

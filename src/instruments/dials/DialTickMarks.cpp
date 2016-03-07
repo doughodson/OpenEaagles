@@ -64,12 +64,12 @@ void DialTickMarks::drawFunc()
     glGetFloatv(GL_CURRENT_COLOR, currentColor);
 
     // get our data from our baseclass (AnalogDial)
-    LCreal sweepAngle = getSweepAngle();
-    LCreal startAngle = getStartAngle();
-    LCreal tRadius = getRadius();
+    double sweepAngle = getSweepAngle();
+    double startAngle = getStartAngle();
+    double tRadius = getRadius();
 
     // figure our rotation angle per tick mark (deg)
-    LCreal rotation = sweepAngle/quantity;
+    double rotation = sweepAngle/quantity;
 
     glPushMatrix();
         // rotate to our start angle
@@ -138,7 +138,7 @@ bool DialTickMarks::setTickGraphic(const graphics::Graphic* const newGraphic)
 //------------------------------------------------------------------------------
 // setLength() -- sets tick mark length
 //------------------------------------------------------------------------------
-bool DialTickMarks::setLength(const LCreal newLength)
+bool DialTickMarks::setLength(const double newLength)
 {
     length = newLength;
     return true;

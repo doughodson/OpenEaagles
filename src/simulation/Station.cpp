@@ -37,8 +37,8 @@ static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
 // ---
 class TcThread : public base::ThreadPeriodicTask {
    DECLARE_SUBCLASS(TcThread,base::ThreadPeriodicTask)
-   public: TcThread(base::Component* const parent, const LCreal priority, const LCreal rate);
-   private: virtual unsigned long userFunc(const LCreal dt);
+   public: TcThread(base::Component* const parent, const double priority, const double rate);
+   private: virtual unsigned long userFunc(const double dt);
 };
 
 // ---
@@ -46,8 +46,8 @@ class TcThread : public base::ThreadPeriodicTask {
 // ---
 class NetThread : public base::ThreadPeriodicTask {
    DECLARE_SUBCLASS(NetThread,base::ThreadPeriodicTask)
-   public: NetThread(base::Component* const parent, const LCreal priority, const LCreal rate);
-   private: virtual unsigned long userFunc(const LCreal dt);
+   public: NetThread(base::Component* const parent, const double priority, const double rate);
+   private: virtual unsigned long userFunc(const double dt);
 };
 
 // ---
@@ -55,8 +55,8 @@ class NetThread : public base::ThreadPeriodicTask {
 // ---
 class BgThread : public base::ThreadPeriodicTask {
    DECLARE_SUBCLASS(BgThread,base::ThreadPeriodicTask)
-   public: BgThread(base::Component* const parent, const LCreal priority, const LCreal rate);
-   private: virtual unsigned long userFunc(const LCreal dt);
+   public: BgThread(base::Component* const parent, const double priority, const double rate);
+   private: virtual unsigned long userFunc(const double dt);
 };
 
 //=============================================================================
@@ -64,9 +64,9 @@ class BgThread : public base::ThreadPeriodicTask {
 //=============================================================================
 IMPLEMENT_SUBCLASS(Station,"Station")
 
-const LCreal Station::DEFAULT_TC_THREAD_PRI  = 0.8;
-const LCreal Station::DEFAULT_BG_THREAD_PRI  = 0.5;
-const LCreal Station::DEFAULT_NET_THREAD_PRI = 0.5;
+const double Station::DEFAULT_TC_THREAD_PRI  = 0.8;
+const double Station::DEFAULT_BG_THREAD_PRI  = 0.5;
+const double Station::DEFAULT_NET_THREAD_PRI = 0.5;
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -362,7 +362,7 @@ void Station::reset()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Station::updateTC(const LCreal dt)
+void Station::updateTC(const double dt)
 {
    // Update the base::Timers
    if (isUpdateTimersEnabled()) {
@@ -433,7 +433,7 @@ void Station::updateTC(const LCreal dt)
 //   2) updateData() for components of graphical displays are handled by
 //      their display managers (e.g., graphics::GlutDisplay).
 //------------------------------------------------------------------------------
-void Station::updateData(const LCreal dt)
+void Station::updateData(const double dt)
 {
    // Create a background thread (if needed)
    if (getBackgroundRate() > 0 && !doWeHaveTheBgThread()) {
@@ -540,7 +540,7 @@ bool Station::shutdownNotification()
 //------------------------------------------------------------------------------
 // inputDevices() -- Process station inputs outputs
 //------------------------------------------------------------------------------
-void Station::inputDevices(const LCreal dt)
+void Station::inputDevices(const double dt)
 {
    if (ioHandlers != nullptr) {
      base::List::Item* item = ioHandlers ->getFirstItem();
@@ -556,7 +556,7 @@ void Station::inputDevices(const LCreal dt)
 //------------------------------------------------------------------------------
 // outputDevices() -- Process station hardware outputs
 //------------------------------------------------------------------------------
-void Station::outputDevices(const LCreal dt)
+void Station::outputDevices(const double dt)
 {
    if (ioHandlers != nullptr) {
      base::List::Item* item = ioHandlers ->getFirstItem();
@@ -635,7 +635,7 @@ void Station::createBackgroundProcess()
 //------------------------------------------------------------------------------
 // processTimeCriticalTasks() -- Process T/C tasks
 //------------------------------------------------------------------------------
-void Station::processTimeCriticalTasks(const LCreal dt)
+void Station::processTimeCriticalTasks(const double dt)
 {
    for (unsigned int jj = 0; jj < getFastForwardRate(); jj++) {
       tcFrame( dt );
@@ -645,7 +645,7 @@ void Station::processTimeCriticalTasks(const LCreal dt)
 //------------------------------------------------------------------------------
 // processBackgroundTasks() -- Process the background models and interfaces
 //------------------------------------------------------------------------------
-void Station::processBackgroundTasks(const LCreal dt)
+void Station::processBackgroundTasks(const double dt)
 {
    // Note: interoperability networks are handled by
    // processNetworkInputTasks() and processNetworkOutputTasks()
@@ -680,7 +680,7 @@ void Station::processBackgroundTasks(const LCreal dt)
 //------------------------------------------------------------------------------
 // processNetworkInputTasks() -- Process network input tasks
 //------------------------------------------------------------------------------
-void Station::processNetworkInputTasks(const LCreal dt)
+void Station::processNetworkInputTasks(const double dt)
 {
    base::safe_ptr<base::PairStream> networks( getNetworks() );
    if (networks != nullptr) {
@@ -699,7 +699,7 @@ void Station::processNetworkInputTasks(const LCreal dt)
 //------------------------------------------------------------------------------
 // processNetworkOutputTasks() -- Process network output tasks
 //------------------------------------------------------------------------------
-void Station::processNetworkOutputTasks(const LCreal dt)
+void Station::processNetworkOutputTasks(const double dt)
 {
    base::safe_ptr<base::PairStream> networks( getNetworks() );
    if (networks != nullptr) {
@@ -810,13 +810,13 @@ const DataRecorder* Station::getDataRecorder() const
 }
 
 // Time-critical thread rate (Hz)
-LCreal Station::getTimeCriticalRate() const
+double Station::getTimeCriticalRate() const
 {
    return tcRate;
 }
 
 // Time-critical thread priority
-LCreal Station::getTimeCriticalPriority() const
+double Station::getTimeCriticalPriority() const
 {
    return tcPri;
 }
@@ -844,13 +844,13 @@ base::Thread* Station::getTcThread()
 }
 
 // Background thread rate (Hz)
-LCreal Station::getBackgroundRate() const
+double Station::getBackgroundRate() const
 {
    return bgRate;
 }
 
 // Background thread priority
-LCreal Station::getBackgroundPriority() const
+double Station::getBackgroundPriority() const
 {
    return bgPri;
 }
@@ -878,13 +878,13 @@ base::Thread* Station::getBgThread()
 }
 
 // Network thread rate (Hz)
-LCreal Station::getNetworkRate() const
+double Station::getNetworkRate() const
 {
    return netRate;
 }
 
 // Network thread priority
-LCreal Station::getNetworkPriority() const
+double Station::getNetworkPriority() const
 {
    return netPri;
 }
@@ -1247,7 +1247,7 @@ bool Station::setSlotTimeCriticalRate(const base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
-        LCreal rate = num->getReal();
+        double rate = num->getReal();
         if (rate > 0) {
             tcRate = rate;
             ok = true;
@@ -1267,7 +1267,7 @@ bool Station::setSlotTimeCriticalPri(const base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
-        LCreal pri = num->getReal();
+        double pri = num->getReal();
         if (pri >= 0 && pri <= 1.0f) {
             tcPri = pri;
             ok = true;
@@ -1299,7 +1299,7 @@ bool Station::setSlotNetworkRate(const base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
-        LCreal rate = num->getReal();
+        double rate = num->getReal();
         if (rate > 0) {
             netRate = rate;
             ok = true;
@@ -1319,7 +1319,7 @@ bool Station::setSlotNetworkPri(const base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
-        LCreal pri = num->getReal();
+        double pri = num->getReal();
         if (pri >= 0 && pri <= 1.0f) {
             netPri = pri;
             ok = true;
@@ -1351,7 +1351,7 @@ bool Station::setSlotBackgroundRate(const base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
-        LCreal rate = num->getReal();
+        double rate = num->getReal();
         if (rate >= 0 ) {
             bgRate = rate;
             ok = true;
@@ -1371,7 +1371,7 @@ bool Station::setSlotBackgroundPri(const base::Number* const num)
 {
     bool ok = false;
     if (num != nullptr) {
-        LCreal pri = num->getReal();
+        double pri = num->getReal();
         if (pri >= 0 && pri <= 1.0f) {
             bgPri = pri;
             ok = true;
@@ -1560,13 +1560,13 @@ EMPTY_COPYDATA(TcThread)
 EMPTY_DELETEDATA(TcThread)
 EMPTY_SERIALIZER(TcThread)
 
-TcThread::TcThread(base::Component* const parent, const LCreal priority, const LCreal rate)
+TcThread::TcThread(base::Component* const parent, const double priority, const double rate)
       : base::ThreadPeriodicTask(parent, priority, rate)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-unsigned long TcThread::userFunc(const LCreal dt)
+unsigned long TcThread::userFunc(const double dt)
 {
    Station* station = static_cast<Station*>(getParent());
    station->processTimeCriticalTasks(dt);
@@ -1582,13 +1582,13 @@ EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
 EMPTY_SERIALIZER(NetThread)
 
-NetThread::NetThread(base::Component* const parent, const LCreal priority, const LCreal rate)
+NetThread::NetThread(base::Component* const parent, const double priority, const double rate)
       : base::ThreadPeriodicTask(parent, priority, rate)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-unsigned long NetThread::userFunc(const LCreal dt)
+unsigned long NetThread::userFunc(const double dt)
 {
    Station* station = static_cast<Station*>(getParent());
    station->processNetworkInputTasks(dt);
@@ -1605,13 +1605,13 @@ EMPTY_COPYDATA(BgThread)
 EMPTY_DELETEDATA(BgThread)
 EMPTY_SERIALIZER(BgThread)
 
-BgThread::BgThread(base::Component* const parent, const LCreal priority, const LCreal rate)
+BgThread::BgThread(base::Component* const parent, const double priority, const double rate)
       : base::ThreadPeriodicTask(parent, priority, rate)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-unsigned long BgThread::userFunc(const LCreal dt)
+unsigned long BgThread::userFunc(const double dt)
 {
    Station* station = static_cast<Station*>(getParent());
    station->processBackgroundTasks(dt);

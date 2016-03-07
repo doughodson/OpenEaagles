@@ -237,7 +237,7 @@ public:
    int recvData(char* const packet, const int maxSize);
 
    unsigned int timeStamp();                                                  // Gets the current timestamp
-   unsigned int makeTimeStamp(const LCreal ctime, const bool absolute);       // Make a PDU time stamp
+   unsigned int makeTimeStamp(const double ctime, const bool absolute);       // Make a PDU time stamp
 
    bool isVersion(const unsigned char v) const    { return (v == version); }  // True if versions match
    unsigned char getVersion() const               { return version; }         // Returns the current version number
@@ -277,25 +277,25 @@ public:
          const unsigned char  extra = 0
       ) const;
 
-   LCreal getMaxEntityRange(const simulation::Nib* const nib) const override;
-   LCreal getMaxEntityRangeSquared(const simulation::Nib* const nib) const override;
-   LCreal getMaxTimeDR(const simulation::Nib* const nib) const override;
-   LCreal getMaxPositionErr(const simulation::Nib* const nib) const override;
-   LCreal getMaxOrientationErr(const simulation::Nib* const nib) const override;
-   LCreal getMaxAge(const simulation::Nib* const nib) const override;
+   double getMaxEntityRange(const simulation::Nib* const nib) const override;
+   double getMaxEntityRangeSquared(const simulation::Nib* const nib) const override;
+   double getMaxTimeDR(const simulation::Nib* const nib) const override;
+   double getMaxPositionErr(const simulation::Nib* const nib) const override;
+   double getMaxOrientationErr(const simulation::Nib* const nib) const override;
+   double getMaxAge(const simulation::Nib* const nib) const override;
    simulation::Nib* createNewOutputNib(simulation::Player* const player) override;
 
    // DIS v7 additions
-   virtual LCreal getHbtPduEe() const;
-   virtual LCreal getHbtTimeoutMplier() const;
-   virtual LCreal getEeAzThrsh() const;
-   virtual LCreal getEeElThrsh() const;
+   virtual double getHbtPduEe() const;
+   virtual double getHbtTimeoutMplier() const;
+   virtual double getEeAzThrsh() const;
+   virtual double getEeElThrsh() const;
 
-   virtual LCreal getEeErpThrsh() const;
-   virtual LCreal getEeFreqThrsh() const;
-   virtual LCreal getEeFrngThrsh() const;
-   virtual LCreal getEePrfThrsh() const;
-   virtual LCreal getEePwThrsh() const;
+   virtual double getEeErpThrsh() const;
+   virtual double getEeFreqThrsh() const;
+   virtual double getEeFrngThrsh() const;
+   virtual double getEePrfThrsh() const;
+   virtual double getEePwThrsh() const;
 
 protected:
    virtual void processEntityStatePDU(const EntityStatePDU* const pdu);
@@ -346,15 +346,15 @@ protected:
    virtual bool setSlotExerciseID(const base::Number* const num);            // Sets Exercise ID
 
    virtual bool slot2KD(const char* const slotname, unsigned char* const k, unsigned char* const d);
-   virtual bool setMaxTimeDR(const LCreal v, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxTimeDR(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxTimeDR(const base::Time* const p, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxPositionErr(const LCreal v, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxPositionErr(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxPositionErr(const base::Distance* const p, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxOrientationErr(const LCreal v, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxOrientationErr(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxOrientationErr(const base::Angle* const p, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxAge(const LCreal v, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxAge(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxAge(const base::Time* const p, const unsigned char kind, const unsigned char domain);
-   virtual bool setMaxEntityRange(const LCreal v, const unsigned char kind, const unsigned char domain);
+   virtual bool setMaxEntityRange(const double v, const unsigned char kind, const unsigned char domain);
    virtual bool setMaxEntityRange(const base::Distance* const p, const unsigned char kind, const unsigned char domain);
 
    // NetIO Interface (overriding these slots!)
@@ -386,14 +386,14 @@ private:
    unsigned int inputBuffer[MAX_PDUs][MAX_PDU_SIZE/4];  // Input buffer
 
    // Distance filter by entity kind/domain
-   LCreal  maxEntityRange[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Max range from ownship           (meters)
-   LCreal  maxEntityRange2[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];    // Max range squared from ownship   (meters^2)
+   double  maxEntityRange[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Max range from ownship           (meters)
+   double  maxEntityRange2[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];    // Max range squared from ownship   (meters^2)
 
    // Dead Reckoning (DR) parameters by entity kind/domain
-   LCreal  maxTimeDR[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];          // Maximum DR time                  (seconds)
-   LCreal  maxPositionErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Maximum position error           (meters)
-   LCreal  maxOrientationErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];  // Maximum orientation error        (radians)
-   LCreal  maxAge[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];             // Maximum age of networked players (seconds)
+   double  maxTimeDR[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];          // Maximum DR time                  (seconds)
+   double  maxPositionErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Maximum position error           (meters)
+   double  maxOrientationErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];  // Maximum orientation error        (radians)
+   double  maxAge[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];             // Maximum age of networked players (seconds)
 
    static const unsigned int MAX_EMISSION_HANDLERS = 500;            // Max table size
 

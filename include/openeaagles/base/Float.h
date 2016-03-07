@@ -20,7 +20,7 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Float(const LCreal value)
+//      Float(const double value)
 //          Special constructor that initializes the object to 'value'
 //
 //      Conversion operators: float() and double()
@@ -45,25 +45,25 @@ class Float : public Number {
 
 public:
     Float()                                         { STANDARD_CONSTRUCTOR() }
-    Float(const LCreal value) : Number(value)       { STANDARD_CONSTRUCTOR() }
+    Float(const double value) : Number(value)       { STANDARD_CONSTRUCTOR() }
     Float(const float value)  : Number(value)       { STANDARD_CONSTRUCTOR() }
 
     operator float() const;
     operator double() const;
 
-    Float& operator=(const LCreal);
+    Float& operator=(const double);
 
     void operator+=(const Float&);
-    void operator+=(const LCreal);
+    void operator+=(const double);
 
     void operator-=(const Float&);
-    void operator-=(const LCreal);
+    void operator-=(const double);
 
     void operator*=(const Float&);
-    void operator*=(const LCreal);
+    void operator*=(const double);
 
     void operator/=(const Float&);
-    void operator/=(const LCreal);
+    void operator/=(const double);
 };
 
 
@@ -85,7 +85,7 @@ inline Float::operator double() const
 // Assignment operator:  =
 //------------------------------------------------------------------------------
 // Assign value n to val and return pointer
-inline Float& Float::operator=(const LCreal n)
+inline Float& Float::operator=(const double n)
 {
    val = n;
    return *this;
@@ -100,25 +100,25 @@ inline void Float::operator+=(const Float& n)
    val += n.val;
 }
 
-inline void Float::operator+=(const LCreal n)
+inline void Float::operator+=(const double n)
 {
    val += n;
 }
 
 // Add vals of Float instances n1 & n2 and return the sum
-inline LCreal operator+(const Float& n1, const Float& n2)
+inline double operator+(const Float& n1, const Float& n2)
 {
     return n1.getReal() + n2.getReal();
 }
 
 // Add value n1 to val of Float n2 and return the sum
-inline LCreal operator+(const LCreal n1, const Float& n2)
+inline double operator+(const double n1, const Float& n2)
 {
     return n1 + n2.getReal();
 }
 
 // Add value n2 to val of Float n1 and return the sum
-inline LCreal operator+(const Float& n1, const LCreal n2)
+inline double operator+(const Float& n1, const double n2)
 {
     return n1.getReal() + n2;
 }
@@ -132,25 +132,25 @@ inline void Float::operator-=(const Float& n)
    val -= n.val;
 }
 
-inline void Float::operator-=(const LCreal n)
+inline void Float::operator-=(const double n)
 {
    val -= n;
 }
 
 // Subtract the vals of Float instances n1 & n2 and return the difference
-inline LCreal operator-(const Float& n1, const Float& n2)
+inline double operator-(const Float& n1, const Float& n2)
 {
     return n1.getReal() - n2.getReal();
 }
 
 // Subtract value n1 from val of Float n2 and return the difference
-inline LCreal operator-(const LCreal n1, const Float& n2)
+inline double operator-(const double n1, const Float& n2)
 {
     return n1 - n2.getReal();
 }
 
 // Subtract value n2 from val of Float n1 and return the difference
-inline LCreal operator-(const Float& n1, const LCreal n2)
+inline double operator-(const Float& n1, const double n2)
 {
     return n1.getReal() - n2;
 }
@@ -164,25 +164,25 @@ inline void Float::operator*=(const Float& n)
    val *= n.val;
 }
 
-inline void Float::operator*=(const LCreal n)
+inline void Float::operator*=(const double n)
 {
    val *= n;
 }
 
 // Multiply the vals of Float instances n1 & n2 and return the sum
-inline LCreal operator*(const Float& n1, const Float& n2)
+inline double operator*(const Float& n1, const Float& n2)
 {
     return n1.getReal() * n2.getReal();
 }
 
 // Multiply value n1 to val of Float n2 and return the sum
-inline LCreal operator*(const LCreal n1, const Float& n2)
+inline double operator*(const double n1, const Float& n2)
 {
     return n1 * n2.getReal();
 }
 
 // Multiply value n2 to val of Float n1 and return the sum
-inline LCreal operator*(const Float& n1, const LCreal n2)
+inline double operator*(const Float& n1, const double n2)
 {
     return n1.getReal() * n2;
 }
@@ -202,7 +202,7 @@ inline void Float::operator/=(const Float& n)
     }
 }
 
-inline void Float::operator/=(const LCreal n)
+inline void Float::operator/=(const double n)
 {
     if (n != 0.0f) {
         val /= n;
@@ -216,9 +216,9 @@ inline void Float::operator/=(const LCreal n)
 // Divide the val of Float instance n1 by Float instance n2 and return
 // the quotient, unless Float instance n2 is equal to zero, then return
 // a zero and send an error message
-inline LCreal operator/(const Float& n1, const Float& n2)
+inline double operator/(const Float& n1, const Float& n2)
 {
-    LCreal n = n1.getReal();
+    double n = n1.getReal();
     if (n2.getReal() != 0.0f) {
         n /= n2.getReal();
     }
@@ -232,9 +232,9 @@ inline LCreal operator/(const Float& n1, const Float& n2)
 // Divide val n1 by Float instance n2 and return the quotient, unless
 // Float instance n2 is equal to zero, then return a zero and send an
 // error message
-inline LCreal operator/(const LCreal n1, const Float& n2)
+inline double operator/(const double n1, const Float& n2)
 {
-    LCreal n = n1;
+    double n = n1;
     if (n2.getReal() != 0.0f) {
         n /= n2.getReal();
     }
@@ -247,9 +247,9 @@ inline LCreal operator/(const LCreal n1, const Float& n2)
 
 // Divide val of Float instance n1 by val n2 and return the quotient,
 // unless val n2 is equal to zero, then return a zero and send an error message
-inline LCreal operator/(const Float& n1, const LCreal n2)
+inline double operator/(const Float& n1, const double n2)
 {
-    LCreal n = n1.getReal();
+    double n = n1.getReal();
     if (n2 != 0.0f) {
         n /= n2;
     }
@@ -272,12 +272,12 @@ inline bool operator==(const Float& n1, const Float& n2)
 }
 
 // Return a true or a false after comparing value n1 and Float n2.val
-inline bool operator==(const LCreal n1, const Float& n2)
+inline bool operator==(const double n1, const Float& n2)
 {
    return n1 == n2.getReal();
 }
 
-inline bool operator==(const Float& n1, const LCreal n2)
+inline bool operator==(const Float& n1, const double n2)
 {
    return n1.getReal() == n2;
 }
@@ -287,12 +287,12 @@ inline bool operator!=(const Float& n1, const Float& n2)
    return n1.getReal() != n2.getReal();
 }
 
-inline bool operator!=(const LCreal n1, const Float& n2)
+inline bool operator!=(const double n1, const Float& n2)
 {
    return n1 != n2.getReal();
 }
 
-inline bool operator!=(const Float& n1, const LCreal n2)
+inline bool operator!=(const Float& n1, const double n2)
 {
    return n1.getReal() != n2;
 }
@@ -302,12 +302,12 @@ inline bool operator<(const Float& n1, const Float& n2)
    return n1.getReal() < n2.getReal();
 }
 
-inline bool operator<(const LCreal n1, const Float& n2)
+inline bool operator<(const double n1, const Float& n2)
 {
    return n1 < n2.getReal();
 }
 
-inline bool operator<(const Float& n1, const LCreal n2)
+inline bool operator<(const Float& n1, const double n2)
 {
    return n1.getReal() < n2;
 }
@@ -317,12 +317,12 @@ inline bool operator<=(const Float& n1, const Float& n2)
    return n1.getReal() <= n2.getReal();
 }
 
-inline bool operator<=(const LCreal n1, const Float& n2)
+inline bool operator<=(const double n1, const Float& n2)
 {
    return n1 <= n2.getReal();
 }
 
-inline bool operator<=(const Float& n1, const LCreal n2)
+inline bool operator<=(const Float& n1, const double n2)
 {
    return n1.getReal() <= n2;
 }
@@ -332,12 +332,12 @@ inline bool operator>(const Float& n1, const Float& n2)
    return n1.getReal() > n2.getReal();
 }
 
-inline bool operator>(const LCreal n1, const Float& n2)
+inline bool operator>(const double n1, const Float& n2)
 {
    return n1 > n2.getReal();
 }
 
-inline bool operator>(const Float& n1, const LCreal n2)
+inline bool operator>(const Float& n1, const double n2)
 {
    return n1.getReal() > n2;
 }
@@ -347,12 +347,12 @@ inline bool operator>=(const Float& n1, const Float& n2)
    return n1.getReal() >= n2.getReal();
 }
 
-inline bool operator>=(const LCreal n1, const Float& n2)
+inline bool operator>=(const double n1, const Float& n2)
 {
    return n1 >= n2.getReal();
 }
 
-inline bool operator>=(const Float& n1, const LCreal n2)
+inline bool operator>=(const Float& n1, const double n2)
 {
    return n1.getReal() >= n2;
 }
@@ -362,7 +362,7 @@ inline bool operator>=(const Float& n1, const LCreal n2)
 //------------------------------------------------------------------------------
 inline std::istream& operator>>(std::istream& sin, Float& n)
 {
-    LCreal tmp = 0;
+    double tmp = 0;
     sin >> tmp;
     n.setValue(tmp);
     return sin;

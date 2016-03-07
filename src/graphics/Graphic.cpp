@@ -19,7 +19,7 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")
 
-LCreal Graphic::fTimer = 0.0f;
+double Graphic::fTimer = 0.0f;
 GLuint Graphic::autoSelName = 0x00800000;
 
 //------------------------------------------------------------------------------
@@ -330,12 +330,12 @@ base::Pair* Graphic::findBySelectName(const GLuint name)
 //------------------------------------------------------------------------------
 // flashTimer() --
 //------------------------------------------------------------------------------
-LCreal Graphic::flashTimer()
+double Graphic::flashTimer()
 {
     return fTimer;
 }
 
-LCreal Graphic::flashTimer(const LCreal dt)
+double Graphic::flashTimer(const double dt)
 {
     return (fTimer += dt);
 }
@@ -346,8 +346,8 @@ LCreal Graphic::flashTimer(const LCreal dt)
 //------------------------------------------------------------------------------
 bool Graphic::flashOn() const
 {
-   LCreal hc = fRate*2.0f;          // Half cycles per second
-   LCreal count = fTimer*hc;        // Number of half cycles since start
+   double hc = fRate*2.0f;          // Half cycles per second
+   double count = fTimer*hc;        // Number of half cycles since start
    return (static_cast<int>(count) & 0x1) != 0; // Flash is ON during odd half cycles
 }
 
@@ -620,7 +620,7 @@ void Graphic::drawFunc()
 //------------------------------------------------------------------------------
 // Set Functions
 //------------------------------------------------------------------------------
-bool Graphic::setFlashRate(const LCreal r)
+bool Graphic::setFlashRate(const double r)
 {
     if (r >= 0.0) {
         fRate = r;
@@ -647,25 +647,25 @@ bool Graphic::setVisibility(const bool v)
     return true;
 }
 
-bool Graphic::setScissorX(const LCreal newX)
+bool Graphic::setScissorX(const double newX)
 {
     scissorX = newX;
     return true;
 }
 
-bool Graphic::setScissorWidth(const LCreal newWidth)
+bool Graphic::setScissorWidth(const double newWidth)
 {
     scissorWidth = newWidth;
     return true;
 }
 
-bool Graphic::setScissorY(const LCreal newY)
+bool Graphic::setScissorY(const double newY)
 {
     scissorY = newY;
     return true;
 }
 
-bool Graphic::setScissorHeight(const LCreal newHeight)
+bool Graphic::setScissorHeight(const double newHeight)
 {
     scissorHeight = newHeight;
     return true;
@@ -822,15 +822,15 @@ bool Graphic::onSetVisibilityEvent(const base::Number* const msg)
 bool Graphic::clipLine2D(
             osg::Vec2* ep1,      // Line endpoint #1
             osg::Vec2* ep2,      // Line endpoint #2
-            const LCreal minX,   // Clip box min X value
-            const LCreal maxX,   // Clip box max X value
-            const LCreal minY,   // Clip box min Y value
-            const LCreal maxY)   // Clip box max Y value
+            const double minX,   // Clip box min X value
+            const double maxX,   // Clip box max X value
+            const double minY,   // Clip box min Y value
+            const double maxY)   // Clip box max Y value
 {
-   LCreal x1 = ep1->_v[0];
-   LCreal y1 = ep1->_v[1];
-   LCreal x2 = ep2->_v[0];
-   LCreal y2 = ep2->_v[1];
+   double x1 = ep1->_v[0];
+   double y1 = ep1->_v[1];
+   double x2 = ep2->_v[0];
+   double y2 = ep2->_v[1];
 
    bool accept = false;
    bool reject = false;
@@ -873,8 +873,8 @@ bool Graphic::clipLine2D(
             // We're going to clip off end-point #1, and we'll swap the
             // end-points to make sure that #1 is the one being clipped.
             if (!(o1_1 || o1_2 || o1_3 || o1_4)) {
-               LCreal tx = x1;
-               LCreal ty = y1;
+               double tx = x1;
+               double ty = y1;
                x1 = x2;
                y1 = y2;
                x2 = tx;
@@ -1057,7 +1057,7 @@ bool Graphic::setSlotSingleTransform(base::Transform* const sobj)
 bool Graphic::setSlotTranslateLight(base::PairStream* const msg)
 {
     if (msg != nullptr) {
-        LCreal temp[4] = { 0, 0, 1, 0 };
+        double temp[4] = { 0, 0, 1, 0 };
         base::List::Item* item = msg->getFirstItem();
         int count = 0;
         while (item != nullptr && count < 4) {
@@ -1078,7 +1078,7 @@ bool Graphic::setSlotTranslateLight(base::PairStream* const msg)
     return true;
 }
 
-bool Graphic::setLightPosition(const LCreal x, const LCreal y, const LCreal z, const LCreal w)
+bool Graphic::setLightPosition(const double x, const double y, const double z, const double w)
 {
     lightPos.set(x, y, z, w);
     lightMoved = true;

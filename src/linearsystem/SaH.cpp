@@ -101,7 +101,7 @@ bool SaH::isValid() const
 //------------------------------------------------------------------------------
 // g() is one iteration of the difference equation.
 //------------------------------------------------------------------------------
-LCreal SaH::g(const LCreal xn)
+double SaH::g(const double xn)
 {
    if (isValid()) {
 

@@ -100,12 +100,12 @@ SignalGen::Signal SignalGen::getSignalType() const
    return signal;
 }
 
-LCreal SignalGen::getPhase() const
+double SignalGen::getPhase() const
 {
    return phase;
 }
 
-LCreal SignalGen::getFrequency() const
+double SignalGen::getFrequency() const
 {
    return freq;
 }
@@ -129,13 +129,13 @@ bool SignalGen::setSignalType(const Signal s)
    return true;
 }
 
-bool SignalGen::setPhase(const LCreal p)
+bool SignalGen::setPhase(const double p)
 {
    phase = p;
    return true;
 }
 
-bool SignalGen::setFrequency(const LCreal f)
+bool SignalGen::setFrequency(const double f)
 {
    freq = f;
    return true;
@@ -157,9 +157,9 @@ bool SignalGen::setChannel(const unsigned int v)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void SignalGen::processInputs(const LCreal dt, const base::IoDevice* const, base::IoData* const inData)
+void SignalGen::processInputs(const double dt, const base::IoDevice* const, base::IoData* const inData)
 {
-   LCreal value = calc(dt);
+   double value = calc(dt);
 
    // Send the value to the input data buffer
    if (inData != nullptr) {
@@ -170,9 +170,9 @@ void SignalGen::processInputs(const LCreal dt, const base::IoDevice* const, base
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void SignalGen::processOutputs(const LCreal dt, const base::IoData* const, base::IoDevice* const device)
+void SignalGen::processOutputs(const double dt, const base::IoData* const, base::IoDevice* const device)
 {
-   LCreal value = calc(dt);
+   double value = calc(dt);
 
    // Send the value to the AO card
    if (device != nullptr) {
@@ -183,7 +183,7 @@ void SignalGen::processOutputs(const LCreal dt, const base::IoData* const, base:
 //------------------------------------------------------------------------------
 // Generate an input value (e.g., from the I/O device
 //------------------------------------------------------------------------------
-LCreal SignalGen::calc(const LCreal dt)
+double SignalGen::calc(const double dt)
 {
    // Default AI input value
    double value = 0;
@@ -220,7 +220,7 @@ LCreal SignalGen::calc(const LCreal dt)
    if (value > 1.0) value = 1.0;
    else if (value < -1.0) value = -1.0;
 
-   return static_cast<LCreal>(value);
+   return static_cast<double>(value);
 }
 
 //------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ bool SignalGen::setSlotPhase(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      ok = setPhase( static_cast<LCreal>(base::Radians::convertStatic(*msg)) );
+      ok = setPhase( static_cast<double>(base::Radians::convertStatic(*msg)) );
    }
    return ok;
 }

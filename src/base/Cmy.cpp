@@ -30,7 +30,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Cmy::Cmy(const LCreal c, const LCreal m, const LCreal y)
+Cmy::Cmy(const double c, const double m, const double y)
 {
    STANDARD_CONSTRUCTOR()
    cmy[CYAN]    = c;     // set the values
@@ -64,17 +64,17 @@ EMPTY_DELETEDATA(Cmy)
 //------------------------------------------------------------------------------
 // Data access functions
 //------------------------------------------------------------------------------
-LCreal Cmy::cyan() const
+double Cmy::cyan() const
 {
     return cmy[CYAN];
 }
 
-LCreal Cmy::magenta() const
+double Cmy::magenta() const
 {
     return cmy[MAGENTA];
 }
 
-LCreal Cmy::yellow() const
+double Cmy::yellow() const
 {
     return cmy[YELLOW];
 }
@@ -90,7 +90,7 @@ void Cmy::getCMY(osg::Vec3& hhh) const
 bool Cmy::setCyan(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[CYAN] = value; cmy2rgb(color,cmy); }
     else std::cerr << "Cmy::setCyan: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -103,7 +103,7 @@ bool Cmy::setCyan(Number* const msg)
 bool Cmy::setMagenta(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[MAGENTA] = value; cmy2rgb(color,cmy); }
     else std::cerr << "Cmy::setMagenta: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -116,7 +116,7 @@ bool Cmy::setMagenta(Number* const msg)
 bool Cmy::setYellow(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[YELLOW] = value; cmy2rgb(color,cmy); }
     else std::cerr << "Cmy::setYellow: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;

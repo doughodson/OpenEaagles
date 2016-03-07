@@ -73,27 +73,27 @@ IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-static const LCreal HRT_BEAT_MPLIER       = 2.5;                                 //  Multiplier
-static const LCreal HRT_BEAT_TIMER        = 5;                                   //  seconds
-static const LCreal DRA_POS_THRST_DFLT    = 3.0;                                 //  meters
-static const LCreal DRA_ORIENT_THRST_DFLT = static_cast<LCreal>(3.0 * PI/180.0); //  radians
+static const double HRT_BEAT_MPLIER       = 2.5;                                 //  Multiplier
+static const double HRT_BEAT_TIMER        = 5;                                   //  seconds
+static const double DRA_POS_THRST_DFLT    = 3.0;                                 //  meters
+static const double DRA_ORIENT_THRST_DFLT = static_cast<double>(3.0 * PI/180.0); //  radians
 
 // DISv7 default heartbeats
-static const LCreal HBT_PDU_EE          = 10;                           //  seconds
-static const LCreal HBT_PDU_IFF         = 10;                           //  seconds
-static const LCreal HBT_PDU_RECEIVER    = 60;                           //  seconds
-static const LCreal HBT_PDU_TRANSMITTER = 2;                            //  seconds
-static const LCreal HBT_TIMEOUT_MPLIER  = 2.4;                          //  Multiplier
+static const double HBT_PDU_EE          = 10;                           //  seconds
+static const double HBT_PDU_IFF         = 10;                           //  seconds
+static const double HBT_PDU_RECEIVER    = 60;                           //  seconds
+static const double HBT_PDU_TRANSMITTER = 2;                            //  seconds
+static const double HBT_TIMEOUT_MPLIER  = 2.4;                          //  Multiplier
 
 // DISv7 default thresholds
-static const LCreal EE_AZ_THRSH = static_cast<LCreal>(1.0 * PI/180.0);  //  radians
-static const LCreal EE_EL_THRSH = static_cast<LCreal>(1.0 * PI/180.0);  //  radians
+static const double EE_AZ_THRSH = static_cast<double>(1.0 * PI/180.0);  //  radians
+static const double EE_EL_THRSH = static_cast<double>(1.0 * PI/180.0);  //  radians
 
-static const LCreal EE_ERP_THRSH  = static_cast<LCreal>(1.0);           //  dB
-static const LCreal EE_FREQ_THRSH = static_cast<LCreal>(1.0);           //  Hz
-static const LCreal EE_FRNG_THRSH = static_cast<LCreal>(1.0);           //  Hz
-static const LCreal EE_PRF_THRSH  = static_cast<LCreal>(1.0);           //  Hz
-static const LCreal EE_PW_THRSH   = static_cast<LCreal>(1e-6);          //  seconds
+static const double EE_ERP_THRSH  = static_cast<double>(1.0);           //  dB
+static const double EE_FREQ_THRSH = static_cast<double>(1.0);           //  Hz
+static const double EE_FRNG_THRSH = static_cast<double>(1.0);           //  Hz
+static const double EE_PRF_THRSH  = static_cast<double>(1.0);           //  Hz
+static const double EE_PW_THRSH   = static_cast<double>(1e-6);          //  seconds
 //static const unsigned int EE_HIGH_DENSITY_THRSH = 10;               //  no units
 
 
@@ -167,7 +167,7 @@ void NetIO::initData()
    setMaxPositionErr(DRA_POS_THRST_DFLT, 255, 255);          //  (meters)
    setMaxOrientationErr(DRA_ORIENT_THRST_DFLT, 255, 255);    //  (radians)
    setMaxAge(HRT_BEAT_MPLIER*HRT_BEAT_TIMER, 255, 255);      //  (seconds)
-   setMaxEntityRange(static_cast<LCreal>(0), 255, 255);      // no range filtering
+   setMaxEntityRange(static_cast<double>(0), 255, 255);      // no range filtering
 
    // Clear emission PDU handle table
    for (unsigned int i = 0; i < MAX_EMISSION_HANDLERS; i++) {
@@ -707,10 +707,10 @@ unsigned int NetIO::timeStamp()
 {
    unsigned int ts = 0;
    if (getTimeline() == UTC) {
-      ts = makeTimeStamp( static_cast<LCreal>(getSimulation()->getSysTimeOfDay()), true );
+      ts = makeTimeStamp( static_cast<double>(getSimulation()->getSysTimeOfDay()), true );
    }
    else {
-      ts = makeTimeStamp( static_cast<LCreal>(getSimulation()->getExecTimeSec()), false );
+      ts = makeTimeStamp( static_cast<double>(getSimulation()->getExecTimeSec()), false );
    }
    return ts;
 }
@@ -718,11 +718,11 @@ unsigned int NetIO::timeStamp()
 //------------------------------------------------------------------------------
 // makeTimeStamp() -- makes a DIS time stamp
 //------------------------------------------------------------------------------
-unsigned int NetIO::makeTimeStamp(const LCreal ctime, const bool absolute)
+unsigned int NetIO::makeTimeStamp(const double ctime, const bool absolute)
 {
     // compute seconds in this hour
     const int hours = static_cast<int>(ctime / 3600.0);
-    LCreal secondsThisHour = (ctime - static_cast<LCreal>(hours*3600));
+    double secondsThisHour = (ctime - static_cast<double>(hours*3600));
 
     // 31 MSBs are for the 3600 seconds in this hour
     unsigned int ts = static_cast<unsigned int>((secondsThisHour/3600.0) * 0x7fffffff);
@@ -935,9 +935,9 @@ const dis::Ntm* NetIO::findNtmByTypeCodes(
 // Data access (get) routines
 //------------------------------------------------------------------------------
 
-LCreal NetIO::getMaxEntityRange(const simulation::Nib* const nib) const
+double NetIO::getMaxEntityRange(const simulation::Nib* const nib) const
 {
-   LCreal value = 0;
+   double value = 0;
    if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
@@ -952,9 +952,9 @@ LCreal NetIO::getMaxEntityRange(const simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxEntityRangeSquared(const simulation::Nib* const nib) const
+double NetIO::getMaxEntityRangeSquared(const simulation::Nib* const nib) const
 {
-   LCreal value = 0;
+   double value = 0;
    if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
@@ -969,9 +969,9 @@ LCreal NetIO::getMaxEntityRangeSquared(const simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxTimeDR(const simulation::Nib* const nib) const
+double NetIO::getMaxTimeDR(const simulation::Nib* const nib) const
 {
-   LCreal value = 0;
+   double value = 0;
    if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
@@ -986,9 +986,9 @@ LCreal NetIO::getMaxTimeDR(const simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxPositionErr(const simulation::Nib* const nib) const
+double NetIO::getMaxPositionErr(const simulation::Nib* const nib) const
 {
-   LCreal value = 0;
+   double value = 0;
    if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
@@ -1003,9 +1003,9 @@ LCreal NetIO::getMaxPositionErr(const simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxOrientationErr(const simulation::Nib* const nib) const
+double NetIO::getMaxOrientationErr(const simulation::Nib* const nib) const
 {
-   LCreal value = 0;
+   double value = 0;
    if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
@@ -1020,9 +1020,9 @@ LCreal NetIO::getMaxOrientationErr(const simulation::Nib* const nib) const
    return value;
 }
 
-LCreal NetIO::getMaxAge(const simulation::Nib* const nib) const
+double NetIO::getMaxAge(const simulation::Nib* const nib) const
 {
-   LCreal value = 0;
+   double value = 0;
    if (nib != nullptr) {
       const Nib* disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
@@ -1100,7 +1100,7 @@ bool NetIO::setExerciseID(const unsigned char v)
 }
 
 // setMaxEntityRange() -- Sets max entity range (meters)
-bool NetIO::setMaxEntityRange(const LCreal v, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxEntityRange(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
    unsigned char imin = 0;
@@ -1131,7 +1131,7 @@ bool NetIO::setMaxEntityRange(const LCreal v, const unsigned char kind, const un
 }
 
 // setMaxTimeDR() -- Sets max DR Time (seconds)
-bool NetIO::setMaxTimeDR(const LCreal v, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxTimeDR(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
    unsigned char imin = 0;
@@ -1161,7 +1161,7 @@ bool NetIO::setMaxTimeDR(const LCreal v, const unsigned char kind, const unsigne
 }
 
 // setMaxPositionErr() -- Sets max position error (meters)
-bool NetIO::setMaxPositionErr(const LCreal v, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxPositionErr(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
    unsigned char imin = 0;
@@ -1191,7 +1191,7 @@ bool NetIO::setMaxPositionErr(const LCreal v, const unsigned char kind, const un
 }
 
 // setMaxOrientationErr() -- Sets max orientation error (radians)
-bool NetIO::setMaxOrientationErr(const LCreal v, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxOrientationErr(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
    unsigned char imin = 0;
@@ -1221,7 +1221,7 @@ bool NetIO::setMaxOrientationErr(const LCreal v, const unsigned char kind, const
 }
 
 // Sets max age (seconds)
-bool NetIO::setMaxAge(const LCreal v, const unsigned char kind, const unsigned char domain)
+bool NetIO::setMaxAge(const double v, const unsigned char kind, const unsigned char domain)
 {
    // default loop limits (just in case we're doing all)
    unsigned char imin = 0;
@@ -1260,7 +1260,7 @@ bool NetIO::setMaxEntityRange(const base::Distance* const p, const unsigned char
     bool ok = false;
     if (p != nullptr) {
         base::Meters ref;
-        LCreal meters = ref.convert(*p);
+        double meters = ref.convert(*p);
         ok = setMaxEntityRange(meters, kind, domain);
     }
     return ok;
@@ -1272,7 +1272,7 @@ bool NetIO::setMaxTimeDR(const base::Time* const p, const unsigned char kind, co
     bool ok = false;
     if (p != nullptr) {
         base::Seconds ref;
-        LCreal sec = ref.convert(*p);
+        double sec = ref.convert(*p);
         ok = setMaxTimeDR(sec, kind, domain);
     }
     return ok;
@@ -1284,7 +1284,7 @@ bool NetIO::setMaxPositionErr(const base::Distance* const p, const unsigned char
     bool ok = false;
     if (p != nullptr) {
         base::Meters ref;
-        LCreal meters = ref.convert(*p);
+        double meters = ref.convert(*p);
         ok = setMaxPositionErr(meters, kind, domain);
     }
     return ok;
@@ -1296,7 +1296,7 @@ bool NetIO::setMaxOrientationErr(const base::Angle* const p, const unsigned char
     bool ok = false;
     if (p != nullptr) {
         base::Radians ref;
-        LCreal radians = static_cast<LCreal>(ref.convert(*p));
+        double radians = static_cast<double>(ref.convert(*p));
         ok = setMaxOrientationErr(radians, kind, domain);
     }
     return ok;
@@ -1308,23 +1308,23 @@ bool NetIO::setMaxAge(const base::Time* const p, const unsigned char kind, const
     bool ok = false;
     if (p != nullptr) {
         base::Seconds ref;
-        LCreal sec = ref.convert(*p);
+        double sec = ref.convert(*p);
         ok = setMaxAge(sec, kind, domain);
     }
     return ok;
 }
 
 // DISv7 additions
-LCreal NetIO::getHbtPduEe() const         { return HBT_PDU_EE; }
-LCreal NetIO::getHbtTimeoutMplier() const { return HBT_TIMEOUT_MPLIER; }
-LCreal NetIO::getEeAzThrsh() const        { return EE_AZ_THRSH; }
-LCreal NetIO::getEeElThrsh() const        { return EE_EL_THRSH; }
+double NetIO::getHbtPduEe() const         { return HBT_PDU_EE; }
+double NetIO::getHbtTimeoutMplier() const { return HBT_TIMEOUT_MPLIER; }
+double NetIO::getEeAzThrsh() const        { return EE_AZ_THRSH; }
+double NetIO::getEeElThrsh() const        { return EE_EL_THRSH; }
 
-LCreal NetIO::getEeErpThrsh() const       { return EE_ERP_THRSH; }
-LCreal NetIO::getEeFreqThrsh() const      { return EE_FREQ_THRSH; }
-LCreal NetIO::getEeFrngThrsh() const      { return EE_FRNG_THRSH; }
-LCreal NetIO::getEePrfThrsh() const       { return EE_PRF_THRSH; }
-LCreal NetIO::getEePwThrsh() const        { return EE_PW_THRSH; }
+double NetIO::getEeErpThrsh() const       { return EE_ERP_THRSH; }
+double NetIO::getEeFreqThrsh() const      { return EE_FREQ_THRSH; }
+double NetIO::getEeFrngThrsh() const      { return EE_FRNG_THRSH; }
+double NetIO::getEePrfThrsh() const       { return EE_PRF_THRSH; }
+double NetIO::getEePwThrsh() const        { return EE_PW_THRSH; }
 
 //unsigned int NetIO::get_EE_HIGH_DENSITY_THRSH(void) const { return EE_HIGH_DENSITY_THRSH; }
 
@@ -1841,7 +1841,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
    if (n > 0 && root != nullptr && maxTypes > 0) {
       for (unsigned int i = 0; i < n; i++) {
          int r = std::rand();
-         LCreal nr = (static_cast<LCreal>(r) / static_cast<LCreal>(RAND_MAX));
+         double nr = (static_cast<double>(r) / static_cast<double>(RAND_MAX));
          int idx = nint(nr * (maxTypes - 1));
          const Ntm* origNtm = static_cast<const Ntm*>(getInputEntityType(idx));
          std::cout << "i= " << i;
@@ -1902,7 +1902,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
    if (n > 0 && root != nullptr && maxTypes > 0) {
       for (unsigned int i = 0; i < n; i++) {
          int r = std::rand();
-         LCreal nr = static_cast<LCreal>(r) / static_cast<LCreal>(RAND_MAX);
+         double nr = static_cast<double>(r) / static_cast<double>(RAND_MAX);
          int idx = nint(nr * (maxTypes - 1));
          const Ntm* origNtm = static_cast<const Ntm*>(getOutputEntityTypes(idx));
          std::cout << "i= " << i;

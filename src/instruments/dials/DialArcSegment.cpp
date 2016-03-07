@@ -96,7 +96,7 @@ bool DialArcSegment::setIsDynamic(const bool newID)
 //------------------------------------------------------------------------------
 // setOuterRadius() -
 //------------------------------------------------------------------------------
-bool DialArcSegment::setOuterRadius(const LCreal x)
+bool DialArcSegment::setOuterRadius(const double x)
 {
     if (x >= getRadius()) outerRadius = x;
     return true;
@@ -117,14 +117,14 @@ bool DialArcSegment::setFilled(const bool x)
 void DialArcSegment::drawFunc()
 {
     // get our data from our base class
-    LCreal startAngle = getStartAngle();
-    LCreal radius = getRadius();
-    LCreal sweepAngle = getSweepAngle();
+    double startAngle = getStartAngle();
+    double radius = getRadius();
+    double sweepAngle = getSweepAngle();
 
     GLint curSlices = getSlices();
     // our slice amount should go up as we get more of a sweep, if not, it will
     // look funny.  Pretty much one slice per degree sweep
-    LCreal y = lcAbs(static_cast<LCreal>(sweepAngle));
+    double y = lcAbs(static_cast<double>(sweepAngle));
     curSlices = curSlices + static_cast<GLint>(y * 0.05f);
 
     // draw our arc
@@ -145,7 +145,7 @@ bool DialArcSegment::onUpdateRadius(const base::Number* const x)
     bool ok = false;
     if (x != nullptr) {
         // first determine our ratio from inner to outer radius
-        LCreal diff = outerRadius - getRadius();
+        double diff = outerRadius - getRadius();
         ok = setRadius(x->getReal());
         outerRadius = getRadius() + diff;
     }
@@ -155,7 +155,7 @@ bool DialArcSegment::onUpdateRadius(const base::Number* const x)
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void DialArcSegment::updateData(const LCreal dt)
+void DialArcSegment::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 

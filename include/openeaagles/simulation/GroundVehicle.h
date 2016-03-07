@@ -44,13 +44,13 @@ public:
 public:
     GroundVehicle();
 
-    LCreal getGrossWeight() const override;             // wt: lbs
+    double getGrossWeight() const override;             // wt: lbs
 
-    virtual LCreal getFuelWt() const;                   // wt: lbs
-    virtual LCreal getFuelWtMax() const;                // wt: lbs
+    virtual double getFuelWt() const;                   // wt: lbs
+    virtual double getFuelWtMax() const;                // wt: lbs
 
-    virtual LCreal getLauncherPosition() const;         // Launcher elevation angle (rad)
-    virtual LCreal getLauncherRate() const;             // Launcher rate (rad/sec)
+    virtual double getLauncherPosition() const;         // Launcher elevation angle (rad)
+    virtual double getLauncherRate() const;             // Launcher rate (rad/sec)
     virtual LauncherCommand getLauncherCommand() const; // Returns the launcher's command position (UP/DOWN) or NONE if not commanded
 
 
@@ -58,7 +58,7 @@ public:
     virtual bool commandLauncher(const LauncherCommand cmd);
 
     // Sets the launcher elevation angle (rad), and removes the old position command
-    virtual bool setLauncherPosition(const LCreal rad);
+    virtual bool setLauncherPosition(const double rad);
 
     // Slot functions
     virtual bool setSlotCommandedPosition(const base::Identifier* const msg);
@@ -72,17 +72,17 @@ public:
 
 protected:
    // Launcher dynamics -- moves launcher to its commanded position
-   virtual void launcherDynamics(const LCreal dt);
+   virtual void launcherDynamics(const double dt);
 
    // Player class (protected) interface
-   void dynamics(const LCreal  dt = 0.0) override;
+   void dynamics(const double  dt = 0.0) override;
 
 private:
-   LCreal            lnchrAngle;       // Current launcher angle  (rad)
-   LCreal            lnchrRate;        // Rate the launcher is moving (rad/sec)
-   LCreal            lnchrDownAngle;   // Min launcher angle      (rad)
-   LCreal            lnchrUpAngle;     // Max launcher angle      (rad)
-   LCreal            lnchrMoveTime;    // Time to move between min & max angles (sec)
+   double            lnchrAngle;       // Current launcher angle  (rad)
+   double            lnchrRate;        // Rate the launcher is moving (rad/sec)
+   double            lnchrDownAngle;   // Min launcher angle      (rad)
+   double            lnchrUpAngle;     // Max launcher angle      (rad)
+   double            lnchrMoveTime;    // Time to move between min & max angles (sec)
    LauncherCommand   initLnchrPos;     // Initial launcher position
    LauncherCommand   cmdLnchrPos;      // Commanded launcher position
 };

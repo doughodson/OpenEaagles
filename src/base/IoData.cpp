@@ -26,7 +26,7 @@ unsigned int IoData::getNumDiscreteOutputChannels() const  { return 0; }
 // -----------------------------------------------------------------------------
 // getAnalogInput() - default
 // -----------------------------------------------------------------------------
-bool IoData::getAnalogInput(const unsigned int, LCreal* const) const
+bool IoData::getAnalogInput(const unsigned int, double* const) const
 {
    return false;
 }
@@ -34,7 +34,7 @@ bool IoData::getAnalogInput(const unsigned int, LCreal* const) const
 // -----------------------------------------------------------------------------
 // getAnalogOutput() - default
 // -----------------------------------------------------------------------------
-bool IoData::getAnalogOutput(const unsigned int, LCreal* const) const
+bool IoData::getAnalogOutput(const unsigned int, double* const) const
 {
    return false;
 }
@@ -58,7 +58,7 @@ bool IoData::getDiscreteOutput(const unsigned int, bool* const) const
 // -----------------------------------------------------------------------------
 // setAnalogInput() - default
 // -----------------------------------------------------------------------------
-bool IoData::setAnalogInput(const unsigned int, const LCreal)
+bool IoData::setAnalogInput(const unsigned int, const double)
 {
    return false;
 }
@@ -66,7 +66,7 @@ bool IoData::setAnalogInput(const unsigned int, const LCreal)
 // -----------------------------------------------------------------------------
 // setAnalogOutput() - default
 // -----------------------------------------------------------------------------
-bool IoData::setAnalogOutput(const unsigned int, const LCreal)
+bool IoData::setAnalogOutput(const unsigned int, const double)
 {
    return false;
 }

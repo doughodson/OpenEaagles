@@ -22,8 +22,8 @@ EMPTY_SERIALIZER(SamVehicle)
 //------------------------------------------------------------------------------
 // Local parameters
 //------------------------------------------------------------------------------
-static const LCreal DEFAULT_MAX_LAUNCH_RANGE = 40000.0f;     // Default max launch range (meters)
-static const LCreal DEFAULT_MIN_LAUNCH_RANGE =  2000.0f;     // Default min launch range (meters)
+static const double DEFAULT_MAX_LAUNCH_RANGE = 40000.0f;     // Default max launch range (meters)
+static const double DEFAULT_MIN_LAUNCH_RANGE =  2000.0f;     // Default min launch range (meters)
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -72,7 +72,7 @@ void SamVehicle::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- Update background stuff
 //------------------------------------------------------------------------------
-void SamVehicle::updateData(const LCreal dt)
+void SamVehicle::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 
@@ -114,12 +114,12 @@ unsigned int SamVehicle::getNumberOfMissiles() const
    return numMsl;
 }
 
-LCreal SamVehicle::getMaxLaunchRange() const
+double SamVehicle::getMaxLaunchRange() const
 {
    return maxMslRng;
 }
 
-LCreal SamVehicle::getMinLaunchRange() const
+double SamVehicle::getMinLaunchRange() const
 {
    return minMslRng;
 }
@@ -135,14 +135,14 @@ bool SamVehicle::isLauncherReady() const
 //------------------------------------------------------------------------------
 
 // Max Launch Range        (meters)
-bool SamVehicle::setMaxLaunchRange(const LCreal rng)
+bool SamVehicle::setMaxLaunchRange(const double rng)
 {
    maxMslRng = rng;
    return true;
 }
 
 // Min Launch Range        (meters)
-bool SamVehicle::setMinLaunchRange(const LCreal rng)
+bool SamVehicle::setMinLaunchRange(const double rng)
 {
    minMslRng = rng;
    return true;

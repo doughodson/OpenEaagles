@@ -28,18 +28,18 @@ class BearingPointer : public CompassRose
 public:
     BearingPointer();
 
-    LCreal getBearingRad() const { return bearing; } // radians
-    LCreal getBearingDeg() const { return bearing * static_cast<LCreal>(base::Angle::R2DCC); }    // degrees
+    double getBearingRad() const { return bearing; } // radians
+    double getBearingDeg() const { return bearing * static_cast<double>(base::Angle::R2DCC); }    // degrees
     graphics::Graphic* getHeadGraphic() const { return head; }
     graphics::Graphic* getTailGraphic() const { return tail; }
 
-    bool setBearingRad(const LCreal newB);             // radians
-    bool setBearingDeg(const LCreal newB);             // degrees
+    bool setBearingRad(const double newB);             // radians
+    bool setBearingDeg(const double newB);             // degrees
 
     void drawFunc() override;
     void draw() override;
 
-    void updateData(const LCreal dt = 0) override;
+    void updateData(const double dt = 0) override;
     bool event(const int key, base::Object* const obj = nullptr) override;
 
 protected:
@@ -53,9 +53,9 @@ private:
     bool onUpdateRadBearingPointer(const base::Number* const msg);
     bool onUpdateDegBearingPointer(const base::Number* const msg);
 
-    LCreal bearing;     // used for bearing pointer, or if anyone else needs it for calculations (radians)
-    LCreal myRotation;  // how much we are going to rotate the compass
-    LCreal myRadius;    // our radius (comes from dial radius)
+    double bearing;     // used for bearing pointer, or if anyone else needs it for calculations (radians)
+    double myRotation;  // how much we are going to rotate the compass
+    double myRadius;    // our radius (comes from dial radius)
     graphics::Graphic* head;    // our head graphic (if we have one)
     graphics::Graphic* tail;    // our tail graphic (if we have one)
 };

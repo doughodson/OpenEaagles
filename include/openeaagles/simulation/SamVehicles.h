@@ -36,24 +36,24 @@ public:
    // Access functions
    virtual unsigned int getNumberOfMissiles() const;  // Number of missiles
 
-   virtual LCreal getMaxLaunchRange() const;          // Max missile launch range (meters)
-   virtual LCreal getMinLaunchRange() const;          // Min missile launch range (meters)
+   virtual double getMaxLaunchRange() const;          // Max missile launch range (meters)
+   virtual double getMinLaunchRange() const;          // Min missile launch range (meters)
 
    virtual bool isLauncherReady() const;              // Return true if launcher is ready to fire.
 
    // Set functions
-   virtual bool setMaxLaunchRange(const LCreal rng);
-   virtual bool setMinLaunchRange(const LCreal rng);
+   virtual bool setMaxLaunchRange(const double rng);
+   virtual bool setMinLaunchRange(const double rng);
 
    // Slot functions
    virtual bool setSlotMinLaunchRange(const base::Distance* const msg);
    virtual bool setSlotMaxLaunchRange(const base::Distance* const msg);
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 private:
-   LCreal            maxMslRng;        // Max Launch Range        (meters)
-   LCreal            minMslRng;        // Min Launch Range        (meters)
+   double            maxMslRng;        // Max Launch Range        (meters)
+   double            minMslRng;        // Min Launch Range        (meters)
    unsigned int      numMsl;           // Number of missile available
 };
 

@@ -26,7 +26,7 @@ class Limit : public LimitFunc {
 
 public:
    Limit();
-   Limit(const LCreal lower, const LCreal upper);
+   Limit(const double lower, const double upper);
 
    // Set slot functions
    virtual bool setSlotLowerLimit(const base::Number* const msg);

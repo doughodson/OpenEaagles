@@ -523,21 +523,21 @@ public:
    double getAltitudeAglFt() const;                // Altitude AGL (feet)
 
    bool isTerrainElevationValid() const;           // Terrain elevation is valid (or at least was where it was set)
-   LCreal getTerrainElevation() const;             // Terrain elevation at player (meters) default
-   LCreal getTerrainElevationM() const;            // Terrain elevation at player (meters)
-   LCreal getTerrainElevationFt() const;           // Terrain elevation at player (feet)
+   double getTerrainElevation() const;             // Terrain elevation at player (meters) default
+   double getTerrainElevationM() const;            // Terrain elevation at player (meters)
+   double getTerrainElevationFt() const;           // Terrain elevation at player (feet)
 
-   LCreal getTotalVelocity() const;                // Total velocity (meters/second)
-   LCreal getTotalVelocityFPS() const;             // Total velocity (feet/second)
-   LCreal getTotalVelocityKts() const;             // Total velocity (knots)
+   double getTotalVelocity() const;                // Total velocity (meters/second)
+   double getTotalVelocityFPS() const;             // Total velocity (feet/second)
+   double getTotalVelocityKts() const;             // Total velocity (knots)
 
-   LCreal getGroundSpeed() const;                  // Ground speed (meters/second)
-   LCreal getGroundSpeedFPS() const;               // Ground speed (feet/second)
-   LCreal getGroundSpeedKts() const;               // Ground speed (knots)
+   double getGroundSpeed() const;                  // Ground speed (meters/second)
+   double getGroundSpeedFPS() const;               // Ground speed (feet/second)
+   double getGroundSpeedKts() const;               // Ground speed (knots)
 
-   LCreal getGroundTrack() const;                  // Ground track (radians) default
-   LCreal getGroundTrackR() const;                 // Ground track (radians)
-   LCreal getGroundTrackD() const;                 // Ground track (degrees)
+   double getGroundTrack() const;                  // Ground track (radians) default
+   double getGroundTrackR() const;                 // Ground track (radians)
+   double getGroundTrackD() const;                 // Ground track (degrees)
 
    const osg::Vec3d& getVelocity() const;          // Velocity vector; NED (meters/second)
    const osg::Vec3d& getAcceleration() const;      // Acceleration vector; NED ((meters/second)/second)
@@ -548,9 +548,9 @@ public:
    const osg::Vec3d& getVelocityBody() const;      // Body velocity vector: Nose/right/down (meters/second)
    const osg::Vec3d& getAccelerationBody() const;  // Body Acceleration vector: Nose/right/down ((meters/second)/second)
 
-   virtual LCreal getGrossWeight() const;          // Player's gross weight (lbs)
-   virtual LCreal getMach() const;                 // Player's mach number
-   virtual LCreal getCG() const;                   // Player's Center-of-Gravity (%)
+   virtual double getGrossWeight() const;          // Player's gross weight (lbs)
+   virtual double getMach() const;                 // Player's mach number
+   virtual double getCG() const;                   // Player's Center-of-Gravity (%)
 
 
    // ---
@@ -560,9 +560,9 @@ public:
    unsigned int getCamouflageType() const;         // Returns the user defined camouflage type (or zero for none)
 
    virtual bool isDestroyed() const;               // True if player is destroyed
-   LCreal getDamage() const;                       // Returns the player's damage state - no damage(0.0) to destroyed (1.0)
-   LCreal getSmoke() const;                        // Returns the player's smoke state - (0.0) to maximum (1.0)
-   LCreal getFlames() const;                       // Returns the player's flames state - (0.0) to maximum (1.0)
+   double getDamage() const;                       // Returns the player's damage state - no damage(0.0) to destroyed (1.0)
+   double getSmoke() const;                        // Returns the player's smoke state - (0.0) to maximum (1.0)
+   double getFlames() const;                       // Returns the player's flames state - (0.0) to maximum (1.0)
 
    bool isJustKilled() const;                      // True if the player was just killed
    int killedByPlayerID() const;                   // ID of the attacking player that killed us
@@ -576,7 +576,7 @@ public:
    double getInitLatitude() const;                 // Player's initial latitude (degrees)
    double getInitLongitude() const;                // Player's initial longitude (degrees)
    bool isInitLatLonValid() const;
-   LCreal getInitVelocity() const;                 // Player's initial total velocity
+   double getInitVelocity() const;                 // Player's initial total velocity
 
    const osg::Vec2d& getInitPosition() const;      // Initial position vector; north and east of sim reference point (meters)
    bool isInitPositionValid() const;
@@ -598,7 +598,7 @@ public:
    bool isAltitudeSlaved() const;                  // True if altitude is slaved to an external model
    bool isPositionSlaved() const;                  // True if position is slaved to an external model
 
-   LCreal getTerrainOffset() const;                // Ground clamping offset from the terrain to our CG (meters)
+   double getTerrainOffset() const;                // Ground clamping offset from the terrain to our CG (meters)
    bool isDtedTerrainInterpolationEnabled() const; // Interpolate our terrain from DTED if true
 
    bool isTerrainElevationRequired() const;        // True if terrain elevation is required from the OTW system;
@@ -727,9 +727,9 @@ public:
    virtual bool setKillOverride(const bool f);                 // Sets the player's kill override flag
    virtual bool setKillRemoval(const bool f);                  // Sets the player's kill removal flag
    virtual void resetJustKilled();                             // Resets the just killed flag
-   virtual bool setDamage(const LCreal v);                     // Sets the player's damage state
-   virtual bool setSmoke(const LCreal v);                      // Sets the player's smoke state
-   virtual bool setFlames(const LCreal v);                     // Sets the player's flames state
+   virtual bool setDamage(const double v);                     // Sets the player's damage state
+   virtual bool setSmoke(const double v);                      // Sets the player's smoke state
+   virtual bool setFlames(const double v);                     // Sets the player's flames state
    virtual bool setCamouflageType(const unsigned int v);       // Sets the user defined camouflage type (or zero for none)
    virtual bool setPositionFreeze(const bool f);               // Sets the player's freeze flag
    virtual bool setAltitudeFreeze(const bool f);               // Sets the player's altitude freeze flag
@@ -753,8 +753,8 @@ public:
    virtual bool setEnableNetOutput(const bool f);              // Sets the network output enabled flag
    virtual bool setOutgoingNib(Nib* const p, const unsigned int id); // Sets the outgoing NIB for network 'id'
 
-   virtual void setTerrainElevation(const LCreal v);           // Sets the elevation of the terrain at this player's location (meters)
-   virtual bool setTerrainOffset(const LCreal v);              // Sets the ground clamping offset (meters)
+   virtual void setTerrainElevation(const double v);           // Sets the elevation of the terrain at this player's location (meters)
+   virtual bool setTerrainOffset(const double v);              // Sets the ground clamping offset (meters)
    virtual bool setInterpolateTerrain(const bool f);           // sets the DTED terrain interpolation flag
    virtual bool setTerrainElevationRequired(const bool b);     // Sets OTW terrain elevation request flag
 
@@ -849,27 +849,27 @@ public:
    // ---
 
    // Sets local tangent plane velocities (NED); (meters/second)
-   virtual bool setVelocity(const LCreal ue, const LCreal ve, const LCreal we);
+   virtual bool setVelocity(const double ue, const double ve, const double we);
    virtual bool setVelocity(const osg::Vec3& newVel);
 
    // Sets local tangent plane accelerations (NED);
-   virtual bool setAcceleration(const LCreal due, const LCreal dve, const LCreal dwe);
+   virtual bool setAcceleration(const double due, const double dve, const double dwe);
    virtual bool setAcceleration(const osg::Vec3& newAccel);
 
    // Sets body velocities: (meters/second) [ ua -> fwd(+), va -> right(+), wa -> down(+) ]
-   virtual bool setVelocityBody(const LCreal ua, const LCreal va, const LCreal wa);
+   virtual bool setVelocityBody(const double ua, const double va, const double wa);
    virtual bool setVelocityBody(const osg::Vec3& newVelBody);
 
    // Sets body accelerations
-   virtual bool setAccelerationBody(const LCreal dua, const LCreal dva, const LCreal dwa);
+   virtual bool setAccelerationBody(const double dua, const double dva, const double dwa);
    virtual bool setAccelerationBody(const osg::Vec3& newAccelBody);
 
    // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-   virtual bool setGeocVelocity(const LCreal vx, const LCreal vy, const LCreal vz);
+   virtual bool setGeocVelocity(const double vx, const double vy, const double vz);
    virtual bool setGeocVelocity(const osg::Vec3& newVelEcef);
 
    // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
-   virtual bool setGeocAcceleration(const LCreal dvx, const LCreal dvy, const LCreal dvz);
+   virtual bool setGeocAcceleration(const double dvx, const double dvy, const double dvz);
    virtual bool setGeocAcceleration(const osg::Vec3& newAccelEcef);
 
    // ---
@@ -899,14 +899,14 @@ public:
    //      Normalized inputs
    //      roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
    // ---
-   virtual void setControlStickRollInput(const LCreal roll);
+   virtual void setControlStickRollInput(const double roll);
 
    // ---
    // Pitch Control Input
    //      Normalized inputs
    //      pitch:  -1.0 -> max forward (nose down); 0.0 -> center;  1.0 -> max back (nose up)
    // ---
-   virtual void setControlStickPitchInput(const LCreal pitch);
+   virtual void setControlStickPitchInput(const double pitch);
 
    // ---
    // Throttle(s) Control Input
@@ -921,12 +921,12 @@ public:
    //              'num' is the number of throttle positions
    //          returns the actual number of throttle positions
    // ---
-   virtual int setThrottles(const LCreal* const positions, const int num);
+   virtual int setThrottles(const double* const positions, const int num);
 
    // ---
    // Process weapon detonation
    // ---
-   virtual void processDetonation(const LCreal detRange, Weapon* const wpn = 0);
+   virtual void processDetonation(const double detRange, Weapon* const wpn = 0);
 
    // ---
    // Event handler(s)
@@ -1006,19 +1006,19 @@ public:
 
    bool isFrozen() const override;
    void reset() override;
-   void updateTC(const LCreal dt = 0.0) override;
-   void updateData(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
    bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero
-   virtual void dynamics(const LCreal dt = 0.0);
+   virtual void dynamics(const double dt = 0.0);
 
    // Position update (local players only)
-   void positionUpdate(const LCreal dt);
+   void positionUpdate(const double dt);
 
    // Dead-reckoning (networked I-players only)
-   void deadReckonPosition(const LCreal dt);
+   void deadReckonPosition(const double dt);
 
    // Update the player's internal systems pointers
    // (e.g., after new system components have been added)
@@ -1083,9 +1083,9 @@ private:
    osg::Vec3d  accelVecECEF;     // Geocentric acceleration vector   ((meters/second)/second) (ECEF)
    osg::Vec3d  accelVecBody;     // Body axes acceleration vector    ((meters/second)/second) [ dua, dva, dwa ]
 
-   LCreal      vp;               // Total Velocity                   (meters/second)
-   LCreal      gndSpd;           // Ground Speed                     (meters/second)
-   LCreal      gndTrk;           // Ground Track                     (radians)
+   double      vp;               // Total Velocity                   (meters/second)
+   double      gndSpd;           // Ground Speed                     (meters/second)
+   double      gndTrk;           // Ground Track                     (radians)
 
    osg::Vec3d  angles;           // Geodetic (body/NED) Euler angles (radians) [ roll pitch yaw ] AKA [ phi theta psi ]
    osg::Vec2d  scPhi;            // Sin/Cos of roll (phi)
@@ -1112,11 +1112,11 @@ private:
    osg::Matrixd rmW2B;           // Rotational Matrix: world to body directional cosines
                                  //    RM = Rx[gcRoll] * Ry[gcPitch] * Rz[gcYaw]
 
-   LCreal      tElev;            // Terrain Elevation  (meters -- up+)
+   double      tElev;            // Terrain Elevation  (meters -- up+)
    bool        tElevValid;       // Terrain elevation is valid
    bool        tElevReq;         // Height-Of-Terrain is required from the OTW system
    bool        interpTrrn;       // interpolate between terrain elevation posts (local terrain database only)
-   LCreal      tOffset;          // Offset from the terrain to the player's CG for ground clamping
+   double      tOffset;          // Offset from the terrain to the player's CG for ground clamping
    bool        posVecValid;      // Local position vector valid
    bool        altSlaved;        // Player's altitude is slaved to the dynamics software (default: false)
    bool        posSlaved;        // Player's position is slaved to the dynamics software (default: false)
@@ -1134,9 +1134,9 @@ private:
    base::safe_ptr<RfSignature> signature;   // Player's RCS signature
    base::safe_ptr<IrSignature> irSignature; // Player's IR signature
    unsigned int camouflage;                  // Camouflage type (0 is none)
-   LCreal      damage;                       // Damage state from no damage(0.0) to destroyed (1.0)
-   LCreal      smoking;                      // Smoke state from no smoke (0.0) to maximum (1.0)
-   LCreal      flames;                       // Flames state from no flames (0.0) to maximum (1.0)
+   double      damage;                       // Damage state from no damage(0.0) to destroyed (1.0)
+   double      smoking;                      // Smoke state from no smoke (0.0) to maximum (1.0)
+   double      flames;                       // Flames state from no flames (0.0) to maximum (1.0)
    bool        justKilled;                   // Just killed flag
    unsigned short killedBy;                  // Killed by player ID
 
@@ -1154,7 +1154,7 @@ private:
    bool        initLatLonFlg;    // Initial lat/lon valid
 
    double      initAlt;          // Initial altitude (HAE)
-   LCreal      initVp;           // Initial Total Velocity
+   double      initVp;           // Initial Total Velocity
    Mode        initMode;         // Initial mode
    osg::Vec3d  initAngles;       // Initial (Euler) angles (radians)
    osg::Vec3d  testAngRates;     // Test angular rates (radians/sec)
@@ -1163,8 +1163,8 @@ private:
    // ---
    // Data collection timer
    // ---
-   LCreal      dataLogTimer;     // Data log timer (seconds)
-   LCreal      dataLogTime;      // Data log time (seconds)
+   double      dataLogTimer;     // Data log timer (seconds)
+   double      dataLogTime;      // Data log time (seconds)
 
    // ---
    // Incoming IPlayer network support
@@ -1200,7 +1200,7 @@ private:
    // ---
    static const unsigned int MAX_RF_REFLECTIONS = 4;   // Max number of reflected emissions we'll send (let's keep it small)
    base::Component* rfReflect[MAX_RF_REFLECTIONS];    // Objects that are interested in the emissions hitting us
-   LCreal  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
+   double  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
 
    // ---
    // sync state changes

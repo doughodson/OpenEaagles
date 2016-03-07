@@ -211,8 +211,8 @@ public:
    unsigned short getState() const     { return state; }
    unsigned short getSubstate() const  { return substate; }
 
-   void updateData(const LCreal dt = 0.0) override;
-   void updateTC(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
    bool event(const int event, Object* const obj = nullptr) override;
    void reset() override;
 
@@ -231,13 +231,13 @@ protected:
    unsigned short getPreviousState() const   { return pState; }
 
    // One step of this state machine (called from updateTC())
-   virtual void step(const LCreal dt);
+   virtual void step(const double dt);
 
    // User function called just before the state specific function
-   virtual void preStateProc(const LCreal dt);
+   virtual void preStateProc(const double dt);
 
    // User function called just after the state specific function
-   virtual void postStateProc(const LCreal dt);
+   virtual void postStateProc(const double dt);
 
    // ---
    // State table ---
@@ -246,13 +246,13 @@ protected:
    //       END_STATE_TABLE(), STATE_FUNC and STATE_MACH macros.
    //
    //    2) The state specific functions mapped by the STATE_FUNC() macro must
-   //       have a single argument of type LCreal for delta time (see the preStateProc()
+   //       have a single argument of type double for delta time (see the preStateProc()
    //       and postStateProc() functions)
    // ---
    virtual unsigned short stateTable(
          const unsigned short cstate,
          const StateTableCode code,
-         const LCreal dt=0
+         const double dt=0
       ) =0;
 
 

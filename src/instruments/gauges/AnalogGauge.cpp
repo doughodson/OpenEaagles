@@ -134,7 +134,7 @@ bool AnalogGauge::setSlotIsVertical(const base::Number* const newV)
 //------------------------------------------------------------------------------
 // setLeftBoundary() - left side of gauge
 //------------------------------------------------------------------------------
-bool AnalogGauge::setLeftBoundary(const LCreal newLB)
+bool AnalogGauge::setLeftBoundary(const double newLB)
 {
     leftBoundary = newLB;
     return true;
@@ -143,7 +143,7 @@ bool AnalogGauge::setLeftBoundary(const LCreal newLB)
 //------------------------------------------------------------------------------
 // setRightBoundary() - right side of gauge
 //------------------------------------------------------------------------------
-bool AnalogGauge::setRightBoundary(const LCreal newRB)
+bool AnalogGauge::setRightBoundary(const double newRB)
 {
     rightBoundary = newRB;
     return true;

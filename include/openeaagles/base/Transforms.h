@@ -63,7 +63,7 @@ public:
 protected:
     virtual void computeMatrix();
     osg::Matrix m;              // transformation matrix
-    LCreal      v[4];           // values
+    double      v[4];           // values
     int         nv;             // Number of values
 };
 

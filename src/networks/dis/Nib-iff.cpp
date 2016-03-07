@@ -26,7 +26,7 @@ static const unsigned short ALTERNATE_MODE_C     = 0x0004;
 //------------------------------------------------------------------------------
 // IffManager() -- (Output support) IFF manager
 //------------------------------------------------------------------------------
-bool Nib::IffManager(const LCreal curExecTime)
+bool Nib::IffManager(const double curExecTime)
 {
    NetIO* disIO = static_cast<NetIO*>(getNetIO());
    const base::Pair* pair = getPlayer()->getRadioByType(typeid(simulation::Iff));
@@ -98,7 +98,7 @@ bool Nib::IffManager(const LCreal curExecTime)
 //------------------------------------------------------------------------------
 // isIffUpdateRequired() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isIffUpdateRequired(const LCreal curExecTime, const simulation::Iff* const iffSystem)
+bool Nib::isIffUpdateRequired(const double curExecTime, const simulation::Iff* const iffSystem)
 {
 
    // System status Bits
@@ -130,7 +130,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const simulation::Iff* c
    // ---
    // Delta time since last message
    // ---
-   LCreal drTime = curExecTime - iffLastExecTime;
+   double drTime = curExecTime - iffLastExecTime;
 
    // ---
    // 1) First time?
@@ -198,7 +198,7 @@ bool Nib::isIffUpdateRequired(const LCreal curExecTime, const simulation::Iff* c
 
       // Parameter 5 - Mode C
       opData.param5 = 0;
-      LCreal alt100 = static_cast<LCreal>((getPlayer()->getAltitudeFt() + 50.0) / 100.0);
+      double alt100 = static_cast<double>((getPlayer()->getAltitudeFt() + 50.0) / 100.0);
       if (alt100 < 0) { alt100 = -alt100; opData.param5 = MODE_C_ALT_NEG; }
       unsigned short ialt = static_cast<unsigned short>(alt100);
       opData.param5 = (opData.param5 | (ialt << 1));  // alt shifted left one bit

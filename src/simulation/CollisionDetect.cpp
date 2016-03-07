@@ -168,7 +168,7 @@ bool CollisionDetect::setSendCrashEventsEnabled(const bool flg)
 // updateData() -- Filter the simulation's player list to a sub-list of players
 // of interest, as defined by slot parameters.
 //------------------------------------------------------------------------------
-void CollisionDetect::updateData(const LCreal dt)
+void CollisionDetect::updateData(const double dt)
 {
    // Our base class methods
    BaseClass::updateData(dt);
@@ -318,7 +318,7 @@ void CollisionDetect::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // System time critical phase callbacks --
 //------------------------------------------------------------------------------
-void CollisionDetect::process(const LCreal dt)
+void CollisionDetect::process(const double dt)
 {
    Player* const ownship = getOwnship();
 

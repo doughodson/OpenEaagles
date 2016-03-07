@@ -165,7 +165,7 @@ void Track::clear()
 //------------------------------------------------------------------------------
 // ownshipDynamics() -- apply ownship dynamics to predicted track position
 //------------------------------------------------------------------------------
-void Track::ownshipDynamics(const LCreal gtrk, const osg::Vec3 velOS, const osg::Vec3 accelOS, const LCreal)
+void Track::ownshipDynamics(const double gtrk, const osg::Vec3 velOS, const osg::Vec3 accelOS, const double)
 {
    osGndTrk = gtrk;
    osVel = velOS;
@@ -220,7 +220,7 @@ bool Track::setClass(const TrackClass c)
 }
 
 // updateTrackAge() -- Update the age of the track by delta time, dt (seconds)
-bool Track::updateTrackAge(const LCreal dt)
+bool Track::updateTrackAge(const double dt)
 {
    age += dt;
    return true;
@@ -234,7 +234,7 @@ bool Track::resetTrackAge()
 }
 
 // setQuality() -- Sets the normalized track quality value
-bool Track::setQuality(const LCreal v)
+bool Track::setQuality(const double v)
 {
    quality = v;
    return true;
@@ -267,7 +267,7 @@ bool Track::setPosition(const osg::Vec3& p)
    pos = p;
 
    // compute ranges
-   const LCreal gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
+   const double gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
    gndRng = lcSqrt(gndRng2);
    rng = lcSqrt(gndRng2 +  pos.z()*pos.z());
 
@@ -292,14 +292,14 @@ bool Track::setPosition(const osg::Vec4& p)
 }
 
 // setCircularError() -- sets the track's estimated position error, meters,
-bool Track::setCircularError(const LCreal err)
+bool Track::setCircularError(const double err)
 {
    cErr = err;
    return true;
 }
 
 // setVerticalError() -- sets the track's estimated altitude error, meters
-bool Track::setVerticalError(const LCreal err)
+bool Track::setVerticalError(const double err)
 {
    vErr = err;
    return true;
@@ -317,8 +317,8 @@ bool Track::setVelocity(const osg::Vec3 v)
    gndTrk = lcAtan2(totalVel[1], totalVel[0]);
    relGndTrk = lcAepcRad(gndTrk - osGndTrk);
 
-   LCreal tmp1 = pos[1] * totalVel[0] - pos[0] * totalVel[1];
-   LCreal tmp2 = pos[0] * totalVel[0] + pos[1] * totalVel[1];
+   double tmp1 = pos[1] * totalVel[0] - pos[0] * totalVel[1];
+   double tmp2 = pos[0] * totalVel[0] + pos[1] * totalVel[1];
    aa = lcAtan2(-tmp1,tmp2);
 
    return true;
@@ -332,14 +332,14 @@ bool Track::setAcceleration(const osg::Vec3 a)
 }
 
 // setRange() -- sets slant range to track, meters
-bool Track::setRange(const LCreal r)
+bool Track::setRange(const double r)
 {
    rng = r;
    return true;
 }
 
 // setRangeRate() -- sets the rate of change of the slate range to target, m/s
-bool Track::setRangeRate(const LCreal rr)
+bool Track::setRangeRate(const double rr)
 {
    rngRate = rr;
    return true;
@@ -433,7 +433,7 @@ void RfTrack::deleteData()
 //------------------------------------------------------------------------------
 // setSignal() -- set the track's last signal
 //------------------------------------------------------------------------------
-bool RfTrack::setSignal(const LCreal snDbl, const Emission* const em)
+bool RfTrack::setSignal(const double snDbl, const Emission* const em)
 {
     // Save the emission
     setLastEmission(em);
@@ -444,15 +444,15 @@ bool RfTrack::setSignal(const LCreal snDbl, const Emission* const em)
     if (nSig < MAX_SIG) nSig++;
 
     // Compute average signal
-    LCreal sum = 0.0;
-    LCreal avg = 0.0;
-    LCreal maxs = 0.0;
+    double sum = 0.0;
+    double avg = 0.0;
+    double maxs = 0.0;
     if (nSig > 0) {
         for (int i = 0; i < nSig; i++) {
             sum += lastSN[i];
             if (lastSN[i] > maxs) maxs = lastSN[i];
         }
-        avg = sum / static_cast<LCreal>(nSig);
+        avg = sum / static_cast<double>(nSig);
     }
     avgSig = avg;
     maxSig = maxs;
@@ -549,7 +549,7 @@ void IrTrack::deleteData()
 //------------------------------------------------------------------------------
 // setSignal() -- set the track's last signal
 //------------------------------------------------------------------------------
-bool IrTrack::setSignal(const LCreal snDbl, const IrQueryMsg* const q)
+bool IrTrack::setSignal(const double snDbl, const IrQueryMsg* const q)
 {
     // Save the emission
     setLastQuery(q);
@@ -560,15 +560,15 @@ bool IrTrack::setSignal(const LCreal snDbl, const IrQueryMsg* const q)
     if (nSig < MAX_SIG) nSig++;
 
     // Compute average signal
-    LCreal sum = 0.0;
-    LCreal avg = 0.0;
-    LCreal maxs = 0.0;
+    double sum = 0.0;
+    double avg = 0.0;
+    double maxs = 0.0;
     if (nSig > 0) {
         for (int i = 0; i < nSig; i++) {
             sum += lastSN[i];
             if (lastSN[i] > maxs) maxs = lastSN[i];
         }
-        avg = sum / static_cast<LCreal>(nSig);
+        avg = sum / static_cast<double>(nSig);
     }
     avgSig = avg;
     maxSig = maxs;
@@ -583,7 +583,7 @@ bool IrTrack::setPosition(const osg::Vec3& p)
    pos = p;
 
    // compute ranges
-   LCreal gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
+   double gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
    gndRng = lcSqrt(gndRng2);
    rng = lcSqrt(gndRng2 +  pos.z()*pos.z());
 

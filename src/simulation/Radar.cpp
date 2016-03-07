@@ -157,7 +157,7 @@ void Radar::clearTracksAndQueues()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void Radar::updateData(const LCreal dt)
+void Radar::updateData(const double dt)
 {
    ageSweeps();
 
@@ -179,7 +179,7 @@ void Radar::reset()
 //------------------------------------------------------------------------------
 
 // Sets integration gain
-bool Radar::setIGain(const LCreal g)
+bool Radar::setIGain(const double g)
 {
    rfIGain = g;
    return true;
@@ -188,7 +188,7 @@ bool Radar::setIGain(const LCreal g)
 //------------------------------------------------------------------------------
 // transmit() -- send radar emissions
 //------------------------------------------------------------------------------
-void Radar::transmit(const LCreal dt)
+void Radar::transmit(const double dt)
 {
    BaseClass::transmit(dt);
 
@@ -198,12 +198,12 @@ void Radar::transmit(const LCreal dt)
       Emission* em = new Emission();
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());
-      const LCreal prf1 = getPRF();
+      const double prf1 = getPRF();
       em->setPRF(prf1);
       int pulses = static_cast<int>(prf1 * dt + 0.5);
       if (pulses == 0) pulses = 1; // at least one
       em->setPulses(pulses);
-      const LCreal p = getPeakPower();
+      const double p = getPeakPower();
       em->setPower(p);
       em->setMaxRangeNM(getRange());
       em->setPulseWidth(getPulseWidth());
@@ -219,7 +219,7 @@ void Radar::transmit(const LCreal dt)
 //------------------------------------------------------------------------------
 // receive() -- process received emissions
 //------------------------------------------------------------------------------
-void Radar::receive(const LCreal dt)
+void Radar::receive(const double dt)
 {
    BaseClass::receive(dt);
 
@@ -227,7 +227,7 @@ void Radar::receive(const LCreal dt)
    if (getAntenna() == nullptr) return;
 
    // Clear the next sweep
-   csweep = computeSweepIndex( static_cast<LCreal>(base::Angle::R2DCC * getAntenna()->getAzimuth()) );
+   csweep = computeSweepIndex( static_cast<double>(base::Angle::R2DCC * getAntenna()->getAzimuth()) );
    clearSweep(csweep);
 
    // Compute noise level
@@ -235,8 +235,8 @@ void Radar::receive(const LCreal dt)
    // Basically, we're simulation Hannen's S/I equation from page 356 of his notes.
    // Where I is N + J. J is noise from jamming.
    // Receiver Loss affects the total I, so we have to wait until this point to account for it.
-   const LCreal interference = (getRfRecvNoise() + jamSignal) * getRfReceiveLoss();
-   const LCreal noise = getRfRecvNoise() * getRfReceiveLoss();
+   const double interference = (getRfRecvNoise() + jamSignal) * getRfReceiveLoss();
+   const double noise = getRfRecvNoise() * getRfReceiveLoss();
    currentJamSignal = jamSignal * getRfReceiveLoss();
    int countNumJammedEm = 0;
 
@@ -245,7 +245,7 @@ void Radar::receive(const LCreal dt)
    // ---
 
    Emission* em = nullptr;
-   LCreal signal = 0;
+   double signal = 0;
 
    // Get an emission from the queue
    lcLock(packetLock);
@@ -264,23 +264,23 @@ void Radar::receive(const LCreal dt)
          // compute the return trip loss ...
 
          // Compute signal received
-         LCreal rcs = em->getRCS();
+         double rcs = em->getRCS();
 
          // Signal Equation (Equation 2-7)
-         LCreal rl = em->getRangeLoss();
+         double rl = em->getRangeLoss();
          signal *= (rcs * rl);
 
          // Integration gain
          signal *= rfIGain;
 
          // Range attenuation: we don't want the strong signal from short range targets
-         LCreal maxRng = getRange() * base::Distance::NM2M;
-         //LCreal maxRng4 = (maxRng*maxRng*maxRng*maxRng);
-         //LCreal rng = (em->getRange());
+         double maxRng = getRange() * base::Distance::NM2M;
+         //double maxRng4 = (maxRng*maxRng*maxRng*maxRng);
+         //double rng = (em->getRange());
 
-         const LCreal s1 = 1.0;
+         const double s1 = 1.0;
          //if (rng > 0) {
-         //    LCreal rng4 = (rng*rng*rng*rng);
+         //    double rng4 = (rng*rng*rng*rng);
          //    s1 = (rng4/maxRng4);
          //    if (s1 > 1.0f) s1 = 1.0f;
          //}
@@ -289,10 +289,10 @@ void Radar::receive(const LCreal dt)
          if (signal > 0.0) {
 
             // Signal/Noise  (Equation 2-9)
-            const LCreal signalToInterferenceRatio = signal / interference;
-            const LCreal signalToInterferenceRatioDbl = 10.0f * lcLog10(signalToInterferenceRatio);
-            const LCreal signalToNoiseRatio = signal / noise;
-            const LCreal signalToNoiseRatioDbl = 10.0f * lcLog10(signalToNoiseRatio);
+            const double signalToInterferenceRatio = signal / interference;
+            const double signalToInterferenceRatioDbl = 10.0f * lcLog10(signalToInterferenceRatio);
+            const double signalToNoiseRatio = signal / noise;
+            const double signalToNoiseRatioDbl = 10.0f * lcLog10(signalToNoiseRatio);
 
             //std::cout << "Radar::receive(" << em->getTarget() << "): ";
             //std::cout << " pwr=" << em->getPower();
@@ -360,7 +360,7 @@ void Radar::receive(const LCreal dt)
 //------------------------------------------------------------------------------
 // process() -- process the TWS reports
 //------------------------------------------------------------------------------
-void Radar::process(const LCreal dt)
+void Radar::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -409,7 +409,7 @@ void Radar::process(const LCreal dt)
 
       // Get the emission
       Emission* em = rptQueue.get();
-      LCreal snDbl = rptSnQueue.get();
+      double snDbl = rptSnQueue.get();
 
       if (em != nullptr) {
          // ---
@@ -519,10 +519,10 @@ void Radar::clearSweep(const unsigned int n)
 //------------------------------------------------------------------------------
 void Radar::ageSweeps()
 {
-   const LCreal aging = 0.002;
+   const double aging = 0.002;
    for (unsigned int i = 0; i < NUM_SWEEPS; i++) {
       for (unsigned int j = 0; j < PTRS_PER_SWEEP; j++) {
-         LCreal p = sweeps[i][j];
+         double p = sweeps[i][j];
          if (p > 0) {
             p -= aging;
             if (p < 0) p = 0;
@@ -535,11 +535,11 @@ void Radar::ageSweeps()
 //------------------------------------------------------------------------------
 // computeSweepIndex -- compute the sweep index
 //------------------------------------------------------------------------------
-unsigned int Radar::computeSweepIndex(const LCreal az)
+unsigned int Radar::computeSweepIndex(const double az)
 {
-   LCreal s = static_cast<LCreal>(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
+   double s = static_cast<double>(NUM_SWEEPS-1)/60.0;      // sweeps per display scaling
 
-   LCreal az1 = az + 30.0;                                 // Offset from left side (sweep 0)
+   double az1 = az + 30.0;                                 // Offset from left side (sweep 0)
    int n = static_cast<int>(az1*s + 0.5);                  // Compute index
    if (n >= NUM_SWEEPS) n = NUM_SWEEPS - 1;
    if (n < 0) n = 0;
@@ -549,15 +549,15 @@ unsigned int Radar::computeSweepIndex(const LCreal az)
 //------------------------------------------------------------------------------
 // computeRangeIndex -- compute the range index
 //------------------------------------------------------------------------------
-unsigned int Radar::computeRangeIndex(const LCreal rng)
+unsigned int Radar::computeRangeIndex(const double rng)
 {
    // range must be positive, if not, return return an index of 0
    if (rng < 0) return 0;
 
-   //LCreal maxRng = 40000.0;
-   LCreal maxRng = getRange() * base::Distance::NM2M;
-   LCreal rng1 = (rng/ maxRng );
-   unsigned int n = static_cast<unsigned int>(rng1 * static_cast<LCreal>(PTRS_PER_SWEEP) + 0.5);
+   //double maxRng = 40000.0;
+   double maxRng = getRange() * base::Distance::NM2M;
+   double rng1 = (rng/ maxRng );
+   unsigned int n = static_cast<unsigned int>(rng1 * static_cast<double>(PTRS_PER_SWEEP) + 0.5);
    if (n >= PTRS_PER_SWEEP) n = PTRS_PER_SWEEP - 1;
    return n;
 }
@@ -571,7 +571,7 @@ bool Radar::setSlotIGain(base::Number* const v)
 {
    bool ok = false;
    if (v != nullptr) {
-      LCreal g = v->getReal();
+      double g = v->getReal();
       if (g >= 1.0) {
          ok = setIGain(g);
       }

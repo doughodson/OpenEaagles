@@ -169,14 +169,14 @@ bool Terrain::setPathname(const String* const msg)
 }
 
 // Minimum elevation in this database (meters)
-bool Terrain::setMinElevation(const LCreal v)
+bool Terrain::setMinElevation(const double v)
 {
    minElev = v;
    return true;
 }
 
 // Maximum elevation in this database (meters)
-bool Terrain::setMaxElevation(const LCreal v)
+bool Terrain::setMaxElevation(const double v)
 {
    maxElev = v;
    return true;
@@ -233,10 +233,10 @@ bool Terrain::setLongitudeNE(const double v)
 bool Terrain::targetOcculting(
       const double refLat,    // Ref latitude (degs)
       const double refLon,    // Ref longitude (degs)
-      const LCreal refAlt,    // Ref altitude (meters)
+      const double refAlt,    // Ref altitude (meters)
       const double tgtLat,    // Target latitude (degs)
       const double tgtLon,    // Target longitude (degs)
-      const LCreal tgtAlt     // Target altitude (meters)
+      const double tgtAlt     // Target altitude (meters)
    ) const
 {
    // 1200 points gives us 100 meter data up to a distance
@@ -259,7 +259,7 @@ bool Terrain::targetOcculting(
    if (numPts > 1) {
 
       // Arrays for the elevations
-      LCreal elevations[MAX_POINTS];
+      double elevations[MAX_POINTS];
 
       // Valid flags
       bool validFlags[MAX_POINTS];
@@ -267,11 +267,11 @@ bool Terrain::targetOcculting(
 
       // Get the elevations
       unsigned int num = getElevations(elevations, validFlags, numPts, refLat, refLon,
-                                       static_cast<LCreal>(brgDeg), static_cast<LCreal>(dist), false);
+                                       static_cast<double>(brgDeg), static_cast<double>(dist), false);
 
       // And check occulting
       if (num > 0) {
-         occulted = occultCheck(elevations, validFlags, numPts, static_cast<LCreal>(dist),
+         occulted = occultCheck(elevations, validFlags, numPts, static_cast<double>(dist),
                                 refAlt, tgtAlt);
       }
    }
@@ -306,7 +306,7 @@ bool Terrain::targetOcculting2(
    if (numPts > 1) {
 
       // Arrays for the elevations
-      LCreal elevations[MAX_POINTS];
+      double elevations[MAX_POINTS];
 
       // Valid flags
       bool validFlags[MAX_POINTS];
@@ -314,7 +314,7 @@ bool Terrain::targetOcculting2(
 
       // Get the elevations
       unsigned int num = getElevations(elevations, validFlags, numPts, refLat, refLon,
-                                       static_cast<LCreal>(truBrg), static_cast<LCreal>(dist), false);
+                                       static_cast<double>(truBrg), static_cast<double>(dist), false);
 
       // And check occulting
       if (num > 0) {
@@ -331,12 +331,12 @@ bool Terrain::targetOcculting2(
 // reference altitude 'refAlt'.
 //------------------------------------------------------------------------------
 bool Terrain::occultCheck(
-      const LCreal* const elevations,  // The elevation array (meters)
+      const double* const elevations,  // The elevation array (meters)
       const bool* const validFlags,    // Valid elevation flag array (true if elevation was found)
       const unsigned int n,            // Size of the arrays
-      const LCreal range,              // Range (meters)
-      const LCreal refAlt,             // Ref altitude (meters)
-      const LCreal tgtAlt)             // Target altitude (meters)
+      const double range,              // Range (meters)
+      const double refAlt,             // Ref altitude (meters)
+      const double tgtAlt)             // Target altitude (meters)
 {
    bool occulted = false;
 
@@ -349,18 +349,18 @@ bool Terrain::occultCheck(
    // Tangent of the angle to the target point --
    // If the angle to any terrain point is greater than this
    // angle then the target is occulted by the terrain point
-   LCreal tgtTan = (tgtAlt - refAlt) / range;
+   double tgtTan = (tgtAlt - refAlt) / range;
 
    // Loop through all elevation points looking for an angle
    // that's greater than our ref angle
-   LCreal deltaRng = (range / (n - 1));
-   LCreal currentRange = 0;
+   double deltaRng = (range / (n - 1));
+   double currentRange = 0;
    if (validFlags != nullptr) {
       // with valid flags
       for (unsigned int i = 1; i < (n-1) && !occulted; i++) {
          currentRange += deltaRng;
          if (validFlags[i]) {
-            const LCreal tstTan = (elevations[i] - refAlt) / currentRange;
+            const double tstTan = (elevations[i] - refAlt) / currentRange;
             if (tstTan >= tgtTan) {
                occulted = true;
             }
@@ -371,7 +371,7 @@ bool Terrain::occultCheck(
       // without valid flags
       for (unsigned int i = 1; i < (n-1) && !occulted; i++) {
          currentRange += deltaRng;
-         const LCreal tstTan = (elevations[i] - refAlt) / currentRange;
+         const double tstTan = (elevations[i] - refAlt) / currentRange;
          if (tstTan >= tgtTan) {
             occulted = true;
          }
@@ -387,7 +387,7 @@ bool Terrain::occultCheck(
 // greater than the tangent of the 'look' angle, 'tanLookAng'.
 //------------------------------------------------------------------------------
 bool Terrain::occultCheck2(
-      const LCreal* const elevations, // The elevation array (meters)
+      const double* const elevations, // The elevation array (meters)
       const bool* const validFlags, // Valid elevation flag array (true if elevation was found)
       const unsigned int n,         // Size of the arrays
       const double range,           // Range (meters)
@@ -441,13 +441,13 @@ bool Terrain::occultCheck2(
 //------------------------------------------------------------------------------
 bool Terrain::vbwShadowChecker(
       bool* const maskFlags,          // The array of mask flags
-      const LCreal* const elevations, // The elevation array (meters)
+      const double* const elevations, // The elevation array (meters)
       const bool* const validFlags,   // (Optional) Valid elevation flag array (true if elevation was found)
       const unsigned int n,           // Size of the arrays
-      const LCreal range,             // Range (meters)
-      const LCreal refAlt,            // Ref altitude (meters)
-      const LCreal beamAngle,         // Center beam elevation angle (degs)
-      const LCreal beamWidth)         // Total beam width angle (degs)
+      const double range,             // Range (meters)
+      const double refAlt,            // Ref altitude (meters)
+      const double beamAngle,         // Center beam elevation angle (degs)
+      const double beamWidth)         // Total beam width angle (degs)
 {
    // Early out checks
    if (  maskFlags == nullptr ||      // The mask flag array wasn't provided, or
@@ -457,24 +457,24 @@ bool Terrain::vbwShadowChecker(
          ) return false;
 
    // Compute the upper and lower edges of the beam
-   LCreal beamUpper = beamAngle + beamWidth/2.0f;
+   double beamUpper = beamAngle + beamWidth/2.0f;
    if (beamUpper >  89.9999f) beamUpper =  89.9999f;
-   LCreal beamLower = beamAngle - beamWidth/2.0f;
+   double beamLower = beamAngle - beamWidth/2.0f;
    if (beamLower < -89.9999f) beamLower = -89.9999f;
 
    // tangents of the upper and lower edges of the beam
-   LCreal tanUpper = lcTan(beamUpper * static_cast<LCreal>(Angle::D2RCC));
-   LCreal tanLower = lcTan(beamLower * static_cast<LCreal>(Angle::D2RCC));
+   double tanUpper = lcTan(beamUpper * static_cast<double>(Angle::D2RCC));
+   double tanLower = lcTan(beamLower * static_cast<double>(Angle::D2RCC));
 
    // Loop through all other elevation points -- keep track of the current max
    // tangent value and flag as terrain masked all points with tangent
    // values less than the current.
 
-   LCreal deltaRng = (range / (n - 1));
-   LCreal currentRange = 0;
+   double deltaRng = (range / (n - 1));
+   double currentRange = 0;
    if (validFlags != nullptr) {
       // with valid flags
-      LCreal tanLookAngle = 0;
+      double tanLookAngle = 0;
       for (unsigned int i = 0; i < n; i++) {
          if (validFlags[i]) {
             // Valid data -- compute the tangent of the look angle to the point and
@@ -505,7 +505,7 @@ bool Terrain::vbwShadowChecker(
 
    else {
       // without valid flags
-      LCreal tanLookAngle = 0;
+      double tanLookAngle = 0;
       for (unsigned int i = 0; i < n; i++) {
          // Compute the tangent of the look angle to the point and
          // see if it's within the upper and lower tangent boundaries
@@ -536,12 +536,12 @@ bool Terrain::vbwShadowChecker(
 // inwhich the beam hits the terrain.
 //------------------------------------------------------------------------------
 bool Terrain::aac(
-      LCreal* const aacData,        // The array for the aspect angle cosines
-      const LCreal* const elevData, // The elevation array (meters)
+      double* const aacData,        // The array for the aspect angle cosines
+      const double* const elevData, // The elevation array (meters)
       const bool* const maskFlags,  // (Optional) The array of mask flags
       const unsigned int n,         // Size of the arrays
-      const LCreal range,           // Range (meters)
-      const LCreal refAlt           // Ref altitude (meters)
+      const double range,           // Range (meters)
+      const double refAlt           // Ref altitude (meters)
    )
 {
    // Early out checks
@@ -566,9 +566,9 @@ bool Terrain::aac(
    // the terrain.
    // ---
 
-   LCreal deltaRng = (range / (n - 1));
-   LCreal deltaRng2 = deltaRng * 2.0f;
-   LCreal currentRange = deltaRng;
+   double deltaRng = (range / (n - 1));
+   double deltaRng2 = deltaRng * 2.0f;
+   double currentRange = deltaRng;
 
    if (maskFlags != nullptr) {
       // with mask flags
@@ -578,7 +578,7 @@ bool Terrain::aac(
             m1.normalize();
             m2.set((elevData[i+1] - elevData[i-1]),-deltaRng2);
             m2.normalize();
-            LCreal v = m1 * m2;
+            double v = m1 * m2;
             if (v < 0.0) v = 0;
             aacData[i] = v;
          }
@@ -596,7 +596,7 @@ bool Terrain::aac(
          m1.normalize();
          m2.set((elevData[i+1] - elevData[i-1]),-deltaRng2);
          m2.normalize();
-         LCreal v = m1 * m2;
+         double v = m1 * m2;
          if (v < 0.0) v = 0;
          aacData[i] = v;
          currentRange += deltaRng;
@@ -616,11 +616,11 @@ bool Terrain::aac(
 // cLight() -- Computes the columnated lighting effect for each point
 //------------------------------------------------------------------------------
 bool Terrain::cLight(
-      LCreal* const ldata,          // The array for the lighting factors
-      const LCreal* const elevData, // The elevation array (meters)
+      double* const ldata,          // The array for the lighting factors
+      const double* const elevData, // The elevation array (meters)
       const bool* const maskFlags,  // (Optional) The array of mask flags
       const unsigned int n,         // Size of the arrays
-      const LCreal range,           // Range (meters)
+      const double range,           // Range (meters)
       const osg::Vec2& lv           // Columnated lighting vector
    )
 {
@@ -642,8 +642,8 @@ bool Terrain::cLight(
    // the terrain.
    // ---
 
-   LCreal deltaRng = (range / (n - 1));
-   LCreal deltaRng2 = deltaRng * 2.0f;
+   double deltaRng = (range / (n - 1));
+   double deltaRng2 = deltaRng * 2.0f;
 
    if (maskFlags != nullptr) {
       // with mask flags
@@ -651,7 +651,7 @@ bool Terrain::cLight(
          if (!maskFlags[i]) {
             m2.set((elevData[i+1] - elevData[i-1]),-deltaRng2);
             m2.normalize();
-            LCreal v = lv * m2;
+            double v = lv * m2;
             if (v < 0.0) v = 0;
             ldata[i] = v;
          }
@@ -666,7 +666,7 @@ bool Terrain::cLight(
       for (unsigned int i = 1; i < (n-1); i++) {
          m2.set((elevData[i+1] - elevData[i-1]),-deltaRng2);
          m2.normalize();
-         LCreal v = lv * m2;
+         double v = lv * m2;
          if (v < 0.0) v = 0;
          ldata[i] = v;
       }
@@ -685,9 +685,9 @@ bool Terrain::cLight(
 // Converts an elevation to a color (or gray scale)
 //------------------------------------------------------------------------------
 bool Terrain::getElevationColor(
-      const LCreal elevation,          // Elevation
-      const LCreal minz,               // Min elevation
-      const LCreal maxz,               // Max elevation
+      const double elevation,          // Elevation
+      const double minz,               // Min elevation
+      const double maxz,               // Max elevation
       const Hsva** colorTable, // Color table
       const unsigned int numColors,    // Number of colors
       osg::Vec3& rgb)                  // Color
@@ -718,13 +718,13 @@ bool Terrain::getElevationColor(
    else {
 
       // Full range: min to max
-      LCreal elevRange = maxz - minz;
+      double elevRange = maxz - minz;
 
       // elevation steps between colors
-      LCreal elevSteps = elevRange / (numColors-1);
+      double elevSteps = elevRange / (numColors-1);
 
       // delta elevation between min to ref elevations
-      LCreal deltaElev = elevation - minz;
+      double deltaElev = elevation - minz;
 
       // Lower color table index
       unsigned int idx = static_cast<unsigned int>(deltaElev/elevSteps);
@@ -733,8 +733,8 @@ bool Terrain::getElevationColor(
       }
 
       // Lower & upper elevation limits
-      LCreal lowLimit = idx * elevSteps;
-      LCreal highLimit = (idx+1) * elevSteps;
+      double lowLimit = idx * elevSteps;
+      double highLimit = (idx+1) * elevSteps;
 
       // Interpolate between colors
       colorHsv.colorInterpolate(deltaElev, lowLimit, highLimit, *colorTable[idx], *colorTable[(idx+1)]);

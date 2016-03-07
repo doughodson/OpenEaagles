@@ -194,7 +194,7 @@ void Nib::setApplicationID(const unsigned short v)
 //------------------------------------------------------------------------------
 // networkOutputManagers() --  derived networkOutputManagers()
 //------------------------------------------------------------------------------
-bool Nib::networkOutputManagers(const LCreal curExecTime)
+bool Nib::networkOutputManagers(const double curExecTime)
 {
     // Manager IFF updates
     IffManager(curExecTime);
@@ -237,7 +237,7 @@ void Nib::updateTheIPlayer()
       if (disIO->getVersion() >= NetIO::VERSION_7) {
          const double curExecTime = disIO->getSimulation()->getExecTimeSec();
          for (unsigned char i = 0; i < numEmissionSystems; i++) {
-            LCreal drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
+            double drTime = curExecTime - emitterSysHandler[i]->getEmPduExecTime();
             if ( drTime >= (disIO->getHbtPduEe() * disIO->getHbtTimeoutMplier()) ) {
                emitterSysHandler[i]->setTimedOut();
             }
@@ -350,7 +350,7 @@ bool Nib::processElectromagneticEmissionPDU(const ElectromagneticEmissionPDU* co
 // emitterBeamsManager()
 //    -- (Output) Manages the emitter beam for this NIB(Player)
 //------------------------------------------------------------------------------
-bool Nib::emitterBeamsManager(const LCreal curExecTime)
+bool Nib::emitterBeamsManager(const double curExecTime)
 {
    // ---
    // First, find all of our player's RfSensor systems and setup their handlers

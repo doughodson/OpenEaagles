@@ -45,21 +45,21 @@ public:
 
     // set data
     virtual bool setAmbientColor(osg::Vec4 x);
-    virtual bool setAmbientColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
+    virtual bool setAmbientColor(double x, double y, double z, double w = 1.0);
     virtual bool setDiffuseColor(osg::Vec4 x);
-    virtual bool setDiffuseColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
+    virtual bool setDiffuseColor(double x, double y, double z, double w = 1.0);
     virtual bool setEmissiveColor(osg::Vec4 x);
-    virtual bool setEmissiveColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
+    virtual bool setEmissiveColor(double x, double y, double z, double w = 1.0);
     virtual bool setSpecularColor(osg::Vec4 x);
-    virtual bool setSpecularColor(LCreal x, LCreal y, LCreal z, LCreal w = 1.0);
-    virtual bool setShininess(LCreal x);
+    virtual bool setSpecularColor(double x, double y, double z, double w = 1.0);
+    virtual bool setShininess(double x);
 
     // get data
     osg::Vec4& getAmbientColor()        { return ambientColor; }
     osg::Vec4& getDiffuseColor()        { return diffuseColor; }
     osg::Vec4& getEmissiveColor()       { return emissiveColor; }
     osg::Vec4& getSpecularColor()       { return specularColor; }
-    LCreal     getShininess()           { return shininess; }
+    double     getShininess()           { return shininess; }
 
 protected:
     bool setSlotAmbientColor(const base::PairStream* const x);
@@ -77,7 +77,7 @@ private:
     osg::Vec4 diffuseColor;     // diffuse color
     osg::Vec4 emissiveColor;    // emissive color
     osg::Vec4 specularColor;    // specular color
-    LCreal shininess;           // shininess value
+    double shininess;           // shininess value
 };
 
 } // End graphics namespace

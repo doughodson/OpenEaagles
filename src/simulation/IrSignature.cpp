@@ -54,8 +54,8 @@ IrSignature::IrSignature()
    irShapeSignature = nullptr;
 
    // create a default waveband, middle infrared band : 3-5 micron (100 THz - 60 THz)
-   //LCreal xdata[8] = { 4.0f };
-   //LCreal gdata[8] = { 2.0f };
+   //double xdata[8] = { 4.0f };
+   //double gdata[8] = { 2.0f };
    //waveBandTable = new base::Table1(gdata, 1, xdata, 1);
    //numWaveBands=1;
 }
@@ -162,7 +162,7 @@ bool IrSignature::setSlotBaseHeatSignature(base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
-      const LCreal x = num->getReal();
+      const double x = num->getReal();
       ok = setBaseHeatSignature(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -181,7 +181,7 @@ bool IrSignature::setSlotEmissivity(oe::base::Number* const num)
 {
    bool ok = false;
    if (num != nullptr) {
-      const LCreal x = num->getReal();
+      const double x = num->getReal();
       ok = setEmissivity(x);
       if (!ok) {
          if (isMessageEnabled(MSG_ERROR)) {
@@ -198,12 +198,12 @@ bool IrSignature::setSlotEmissivity(oe::base::Number* const num)
 bool IrSignature::setSlotEffectiveArea(oe::base::Number* const num)
 {
    bool ok = false;
-   LCreal value = 0.0;
+   double value = 0.0;
 
    const base::Area* a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
       base::SquareMeters sm;
-      value = static_cast<LCreal>(sm.convert(*a));
+      value = static_cast<double>(sm.convert(*a));
    } else if (num != nullptr) {
       value = num->getReal();
    }
@@ -221,7 +221,7 @@ bool IrSignature::getIrSignature(IrQueryMsg* const msg)
    bool ok = false;
    //IrQueryMsg* msg = dynamic_cast<IrQueryMsg*>( msg0 );     // FAB - do we really need to cast away const?
    if (msg != nullptr) {
-      LCreal projectedAreaInFOV = getSignatureArea(msg);
+      double projectedAreaInFOV = getSignatureArea(msg);
       msg->setProjectedArea(projectedAreaInFOV);
       // if no projectedAreaInFOV, then target was not in FOV
       if (projectedAreaInFOV > 0.0){
@@ -237,16 +237,16 @@ bool IrSignature::getIrSignature(IrQueryMsg* const msg)
 //------------------------------------------------------------------------------
 // getSignatureArea() -- Determine target's surface area in the FOV (all or nothing)
 //------------------------------------------------------------------------------
-LCreal IrSignature::getSignatureArea(IrQueryMsg* msg)
+double IrSignature::getSignatureArea(IrQueryMsg* msg)
 {
    if (irShapeSignature == nullptr) {
-      LCreal angleOffBoresight = msg->getAngleOffBoresight();
-      LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
+      double angleOffBoresight = msg->getAngleOffBoresight();
+      double maxAngle = msg->getSendingSensor()->getIFOVTheta();
       if (angleOffBoresight > maxAngle) return 0;
       return getEffectiveArea();
    }
    else {
-      LCreal reflectorArea = irShapeSignature->getReflectorAreaInFieldOfView(msg);
+      double reflectorArea = irShapeSignature->getReflectorAreaInFieldOfView(msg);
       return reflectorArea;
    }
 }
@@ -254,7 +254,7 @@ LCreal IrSignature::getSignatureArea(IrQueryMsg* msg)
 //------------------------------------------------------------------------------
 // getWaveBandCenters() -- Return center frequency of all wave bands
 //------------------------------------------------------------------------------
-const LCreal* IrSignature::getWaveBandCenters() const
+const double* IrSignature::getWaveBandCenters() const
 {
    return ((waveBandTable != nullptr) ? waveBandTable->getXData() : nullptr);
 }
@@ -262,7 +262,7 @@ const LCreal* IrSignature::getWaveBandCenters() const
 //------------------------------------------------------------------------------
 // getWaveBandWidths() -- Return widths for all wave band frequencies
 //------------------------------------------------------------------------------
-const LCreal* IrSignature::getWaveBandWidths() const
+const double* IrSignature::getWaveBandWidths() const
 {
    return ((waveBandTable != nullptr) ? waveBandTable->getDataTable() : nullptr);
 }

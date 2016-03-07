@@ -25,11 +25,11 @@ class IrShape : public base::Object
 public:
    IrShape();
 
-   virtual LCreal getArea();            // returns the effective area as a number in square meters
-   virtual LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
+   virtual double getArea();            // returns the effective area as a number in square meters
+   virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
    virtual bool setSlotIrShapeArea(const base::Number* const s);
 private:
-   LCreal area;
+   double area;
 };
 
 //------------------------------------------------------------------------------
@@ -47,15 +47,15 @@ public:
 
    IrSphere();
 
-   LCreal getArea() override;
+   double getArea() override;
 
-   LCreal getRadius()              { return radius; }
+   double getRadius()              { return radius; }
 
    virtual bool setSlotIrSphereRadius(const base::Number* const s);
 
 private:
 
-   LCreal radius;
+   double radius;
 };
 
 //------------------------------------------------------------------------------
@@ -75,8 +75,8 @@ public:
 
    IrBox();
 
-   LCreal getArea() override;
-   LCreal getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
+   double getArea() override;
+   double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
 
    virtual bool setSlotIrBoxX(const base::Number* const s);
    virtual bool setSlotIrBoxY(const base::Number* const s);
@@ -84,7 +84,7 @@ public:
 
 private:
 
-   LCreal x,y,z;
+   double x,y,z;
 };
 
 } // End simulation namespace

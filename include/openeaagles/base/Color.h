@@ -24,17 +24,17 @@ class Number;
 //
 // Public methods:
 //
-//      LCreal red()
-//      LCreal green()
-//      LCreal blue()
-//      LCreal alpha()
+//      double red()
+//      double green()
+//      double blue()
+//      double alpha()
 //          Data access routines.  Return the individual color components
 //          as floats with a range of 0.0 to 1.0.
 //
-//      LCreal getDefaultAlpha()
+//      double getDefaultAlpha()
 //          Returns defaultAlpha (the default alpha value).
 //
-//      void setDefaultAlpha(LCreal alpha)
+//      void setDefaultAlpha(double alpha)
 //          Sets defaultAlpha (the default alpha value).
 //
 //      const osg::Vec3*()
@@ -66,25 +66,25 @@ public:
     operator const osg::Vec3*() const;
     operator const osg::Vec4*() const;
 
-    LCreal red() const;
-    LCreal green() const;
-    LCreal blue() const;
-    LCreal alpha() const;
+    double red() const;
+    double green() const;
+    double blue() const;
+    double alpha() const;
 
-    virtual bool setRed(const LCreal r);
-    virtual bool setGreen(const LCreal g);
-    virtual bool setBlue(const LCreal b);
-    virtual bool setAlpha(const LCreal a);
+    virtual bool setRed(const double r);
+    virtual bool setGreen(const double g);
+    virtual bool setBlue(const double b);
+    virtual bool setAlpha(const double a);
 
     const osg::Vec3* getRGB() const;
     const osg::Vec4* getRGBA() const;
 
-    static LCreal getDefaultAlpha();
-    static void setDefaultAlpha(const LCreal alpha);
+    static double getDefaultAlpha();
+    static void setDefaultAlpha(const double alpha);
 
 protected:
     osg::Vec4 color;                // RGBA color vector
-    static LCreal defaultAlpha;
+    static double defaultAlpha;
 };
 
 

@@ -70,20 +70,20 @@ class RfSensor : public RfSystem
 public:
     RfSensor();
 
-    virtual LCreal getPRF() const;                       // Returns the PRF (hertz)
-    virtual bool setPRF(const LCreal v);                 // Sets PRF (hertz; must be greater than 0)
+    virtual double getPRF() const;                       // Returns the PRF (hertz)
+    virtual bool setPRF(const double v);                 // Sets PRF (hertz; must be greater than 0)
 
-    virtual LCreal getPulseWidth() const;                // Returns the pulse width (seconds)
-    virtual bool setPulseWidth(const LCreal v);          // Sets the pulse width (seconds; must be greater than 0)
+    virtual double getPulseWidth() const;                // Returns the pulse width (seconds)
+    virtual bool setPulseWidth(const double v);          // Sets the pulse width (seconds; must be greater than 0)
 
-    virtual LCreal getBeamWidth() const;                 // (Deprecated: moved to Antenna) Returns the beam width (radians; must be greater than 0)
-    virtual bool setBeamWidth(const LCreal v);           // (Deprecated: moved to Antenna) Sets the beam width (radians)
+    virtual double getBeamWidth() const;                 // (Deprecated: moved to Antenna) Returns the beam width (radians; must be greater than 0)
+    virtual bool setBeamWidth(const double v);           // (Deprecated: moved to Antenna) Sets the beam width (radians)
 
     virtual const char* getTypeId() const;               // Returns the type ID
     virtual bool setTypeId(const char* const str);       // Sets the type ID
 
-    virtual LCreal getRange() const;                     // Returns the current range (nm)
-    virtual bool setRange(const LCreal v);               // Sets the current range (nm; must be greater than or equal 0)
+    virtual double getRange() const;                     // Returns the current range (nm)
+    virtual bool setRange(const double v);               // Sets the current range (nm; must be greater than or equal 0)
 
     virtual bool isScanOn() const;                       // Is the Sensor scanning
     virtual int getScanBar() const;                      // Returns the current bar number for a raster scan
@@ -101,8 +101,8 @@ public:
     // Support for a list of sensor ranges
     virtual bool incRange();                                  // Increment range index; returns true if successful
     virtual bool decRange();                                  // Decrement range index; returns true if successful
-    virtual int getRanges(LCreal* const rngs, const int max); // Returns the list of ranges
-    virtual bool setRanges(const LCreal* const rngs, const int n);// Sets the list of ranges
+    virtual int getRanges(double* const rngs, const int max); // Returns the list of ranges
+    virtual bool setRanges(const double* const rngs, const int n);// Sets the list of ranges
     virtual bool setInitRngIdx(const int idx);                // Sets the starting range index; returns true if successful
 
     // Slot functions
@@ -123,7 +123,7 @@ public:
     bool isTransmitting() const override;
 
     bool event(const int event, base::Object* const obj = nullptr) override;
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
     void reset() override;
 
 protected:
@@ -141,9 +141,9 @@ private:
     bool processModes();
 
     base::PairStream*  modes;           // Our Submodes
-    LCreal*        ranges;          // List of ranges (nm)
+    double*        ranges;          // List of ranges (nm)
     int            nRanges;         // Number of ranges
-    LCreal         rng;             // Current range (nm)
+    double         rng;             // Current range (nm)
     int            rngIdx;          // Range index [ 1 .. nRanges ]
     int            initRngIdx;      // Initial range [ 1 .. nRanges ]
     bool           scanning;        // Scanning flag (should be transmitting)
@@ -158,9 +158,9 @@ private:
     char typeId[TYPE_ID_LENGTH];    // R/F system type ID
 
     // Characteristics
-    LCreal prf;                     // Pulse Repetition Frequency   (Hz)
-    LCreal pulseWidth;              // Pulse Width                  (Sec)
-    LCreal beamWidth;               // Beamwidth                    (R)
+    double prf;                     // Pulse Repetition Frequency   (Hz)
+    double pulseWidth;              // Pulse Width                  (Sec)
+    double beamWidth;               // Beamwidth                    (R)
 
 };
 

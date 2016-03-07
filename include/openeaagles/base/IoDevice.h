@@ -64,17 +64,17 @@ public:
 
    // AI functions
    virtual unsigned short getNumAnalogInputs() const;
-   virtual bool getAnalogInput(LCreal* const value, const unsigned int channel) const;
+   virtual bool getAnalogInput(double* const value, const unsigned int channel) const;
 
    // AO functions
    virtual unsigned short getNumAnalogOutputs() const;
-   virtual bool setAnalogOutput(const LCreal value, const unsigned int channel);
+   virtual bool setAnalogOutput(const double value, const unsigned int channel);
 
    // Process device input channels and components
-   virtual void processInputs(const LCreal dt, IoData* const inData);
+   virtual void processInputs(const double dt, IoData* const inData);
 
    // Process device output channels and components
-   virtual void processOutputs(const LCreal dt, const IoData* const outData);
+   virtual void processOutputs(const double dt, const IoData* const outData);
 
    void reset() override;
 

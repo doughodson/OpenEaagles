@@ -46,8 +46,8 @@ AngleOnlyTrackManager::AngleOnlyTrackManager() : queryQueue(MAX_TRKS)
 
     oneMinusAlpha = 0.0;
     oneMinusBeta = 1.0;
-    azimuthBin = static_cast<LCreal>(PI);
-    elevationBin = static_cast<LCreal>(PI);
+    azimuthBin = static_cast<double>(PI);
+    elevationBin = static_cast<double>(PI);
 }
 
 AngleOnlyTrackManager::AngleOnlyTrackManager(const AngleOnlyTrackManager& org) : queryQueue(MAX_TRKS)
@@ -134,7 +134,7 @@ void AngleOnlyTrackManager::clearTracksAndQueues()
 //------------------------------------------------------------------------------
 // newReport() -- Accept a new IR Query Message report
 //------------------------------------------------------------------------------
-void AngleOnlyTrackManager::newReport(IrQueryMsg* q, LCreal sn)
+void AngleOnlyTrackManager::newReport(IrQueryMsg* q, double sn)
 {
     // Queue up IR query messages reports
     if (q != nullptr) {
@@ -149,7 +149,7 @@ void AngleOnlyTrackManager::newReport(IrQueryMsg* q, LCreal sn)
 //------------------------------------------------------------------------------
 // getQuery() -- Get the next 'new' report of the queue
 //------------------------------------------------------------------------------
-IrQueryMsg* AngleOnlyTrackManager::getQuery(LCreal* const sn)
+IrQueryMsg* AngleOnlyTrackManager::getQuery(double* const sn)
 {
     IrQueryMsg* q = nullptr;
 
@@ -186,12 +186,12 @@ bool AngleOnlyTrackManager::addTrack(Track* const t)
 //------------------------------------------------------------------------------
 bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Number* const msg)
 {
-    LCreal value = 0.0;
+    double value = 0.0;
 
     const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
     if (a != nullptr) {
         base::Radians r;
-        value = static_cast<LCreal>(r.convert(*a));
+        value = static_cast<double>(r.convert(*a));
     }
     else if (msg != nullptr) {
         value = msg->getReal();
@@ -207,12 +207,12 @@ bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Number* const msg)
 //------------------------------------------------------------------------------
 bool AngleOnlyTrackManager::setSlotElevationBin(const base::Number* const msg)
 {
-    LCreal value = 0.0;
+    double value = 0.0;
 
     const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
     if (a != nullptr) {
         base::Radians r;
-        value = static_cast<LCreal>(r.convert(*a));
+        value = static_cast<double>(r.convert(*a));
     }
     else if (msg != nullptr) {
         value = msg->getReal();
@@ -326,9 +326,9 @@ void AirAngleOnlyTrkMgr::deleteData()
 //------------------------------------------------------------------------------
 // processTrackList() -- process the track list
 //------------------------------------------------------------------------------
-void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
+void AirAngleOnlyTrkMgr::processTrackList(const double dt)
 {
-    LCreal tmp;
+    double tmp;
 
     // Make sure we have an ownship to work with
     Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
@@ -347,7 +347,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     // ---
     const osg::Vec3 osVel = ownship->getVelocity();
     const osg::Vec3 osAccel = ownship->getAcceleration();
-    const LCreal osGndTrk = ownship->getGroundTrack();
+    const double osGndTrk = ownship->getGroundTrack();
     lcLock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
         tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
@@ -362,9 +362,9 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     // Get each new IR query message report from the queue
     unsigned int nReports = 0;
     IrQueryMsg* queryMessages[MAX_REPORTS];
-    LCreal newSignal[MAX_REPORTS];
-    LCreal newElevation[MAX_REPORTS];
-    LCreal newAzimuth[MAX_REPORTS];
+    double newSignal[MAX_REPORTS];
+    double newElevation[MAX_REPORTS];
+    double newAzimuth[MAX_REPORTS];
     for (IrQueryMsg* q = getQuery(&tmp); q != nullptr && nReports < MAX_REPORTS; q = getQuery(&tmp)) {
         Player* tgt = q->getTarget();
 
@@ -428,9 +428,9 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     // ---
     // 5) Create inputs for current tracks
     // ---
-    LCreal uAzimuth[MAX_TRKS];
-    LCreal uElevation[MAX_TRKS];
-    LCreal age[MAX_TRKS];
+    double uAzimuth[MAX_TRKS];
+    double uElevation[MAX_TRKS];
+    double age[MAX_TRKS];
     bool haveU[MAX_TRKS];
     lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; it++) {
@@ -469,14 +469,14 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
     lcLock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
         // Save X(k)
-        LCreal taz = tracks[i]->getRelAzimuth();
-        LCreal tazRate = tracks[i]->getRelAzimuthRate();
-        LCreal tazAccel = tracks[i]->getRelAzimuthAcceleration();
-        LCreal tel = tracks[i]->getElevation();
-        LCreal telRate = tracks[i]->getElevationRate();
-        LCreal telAccel = tracks[i]->getElevationAcceleration();
+        double taz = tracks[i]->getRelAzimuth();
+        double tazRate = tracks[i]->getRelAzimuthRate();
+        double tazAccel = tracks[i]->getRelAzimuthAcceleration();
+        double tel = tracks[i]->getElevation();
+        double telRate = tracks[i]->getElevationRate();
+        double telAccel = tracks[i]->getElevationAcceleration();
 
-        LCreal ageAtNextTimeStep = dt;
+        double ageAtNextTimeStep = dt;
 
         if (haveU[i]) {
             tracks[i]->setPosition(tracks[i]->getTarget()->getPosition() - ownship->getPosition());
@@ -484,10 +484,10 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
             // If the track is updated set the new azimuth and elevation data based on
             // a weighted average of the updated value and the predicted value from the
             // previous time step
-            const LCreal pTaz = tracks[i]->getPredictedAzimuth();
-            const LCreal pTazRate = tracks[i]->getPredictedAzimuthRate();
-            const LCreal pTel = tracks[i]->getPredictedElevation();
-            const LCreal pTelRate = tracks[i]->getPredictedElevationRate();
+            const double pTaz = tracks[i]->getPredictedAzimuth();
+            const double pTazRate = tracks[i]->getPredictedAzimuthRate();
+            const double pTel = tracks[i]->getPredictedElevation();
+            const double pTelRate = tracks[i]->getPredictedElevationRate();
 
             tracks[i]->setRelAzimuth((pTaz * oneMinusAlpha) + ((taz + uAzimuth[i]) * alpha));
             tracks[i]->setRelAzimuthRate((pTazRate * oneMinusBeta) + ((uAzimuth[i] / age[i]) * beta ));
@@ -524,7 +524,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const LCreal dt)
 
         // Project the values for the next time step
 
-        const LCreal deltaTimeSquaredOverTwo = (ageAtNextTimeStep* ageAtNextTimeStep) / 2.0f;
+        const double deltaTimeSquaredOverTwo = (ageAtNextTimeStep* ageAtNextTimeStep) / 2.0f;
 
         tracks[i]->setPredictedAzimuth(taz + tazRate*ageAtNextTimeStep
             + tazAccel*deltaTimeSquaredOverTwo);
@@ -689,11 +689,11 @@ void AirAngleOnlyTrkMgrPT::copyData(const AirAngleOnlyTrkMgrPT& org, const bool)
 //------------------------------------------------------------------------------
 // Age the tracks by delta time
 //------------------------------------------------------------------------------
-void AirAngleOnlyTrkMgrPT::updateTrackAges(const LCreal dt)
+void AirAngleOnlyTrkMgrPT::updateTrackAges(const double dt)
 {
     const osg::Vec3 osVel = getOwnship()->getVelocity();
     const osg::Vec3 osAccel = getOwnship()->getAcceleration();
-    const LCreal osGndTrk = getOwnship()->getGroundTrack();
+    const double osGndTrk = getOwnship()->getGroundTrack();
     lcLock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
         tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
@@ -751,7 +751,7 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
 //------------------------------------------------------------------------------
 // processTrackList() -- process the track list
 //------------------------------------------------------------------------------
-void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
+void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
 {
     // Make sure we have an ownship to work with
     Player* ownship = getOwnship();
@@ -771,7 +771,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
     // 2) Process new reports
     // ---
     // Get each new IR query message report from the queue
-    LCreal tmp;
+    double tmp;
     for (IrQueryMsg* q = getQuery(&tmp); q != nullptr && nReports < MAX_REPORTS; q = getQuery(&tmp)) {
         Player* tgt = q->getTarget();
 
@@ -817,9 +817,9 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                 trackNumMatches[it] = 0;
                 const IrTrack* const trk = static_cast<const IrTrack*>(tracks[it]);  // we produce only IrTracks
                 for (unsigned int ir = 0; ir < nReports; ir++) {
-                    LCreal azDiff = queryMessages[ir]->getRelativeAzimuth() - trk->getPredictedAzimuth();
+                    double azDiff = queryMessages[ir]->getRelativeAzimuth() - trk->getPredictedAzimuth();
                     if (azDiff < 0.0f) azDiff = 0.0f - azDiff;
-                    LCreal elDiff = queryMessages[ir]->getRelativeElevation() - trk->getPredictedElevation();
+                    double elDiff = queryMessages[ir]->getRelativeElevation() - trk->getPredictedElevation();
                     if (elDiff < 0.0f) elDiff = 0.0f - elDiff;
                     if ((azDiff < azimuthBin) && (elDiff < elevationBin)) {
                         // We have a new report for the same target as this track ...
@@ -897,9 +897,9 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
         for (unsigned int it = 0; it < nTrks; it++) {
             osg::Vec3 uPosition;
             osg::Vec3 uVelocity;
-            LCreal uAzimuth(0.0);
-            LCreal uElevation(0.0);
-            //LCreal age = tracks[it]->getTrackAge();
+            double uAzimuth(0.0);
+            double uElevation(0.0);
+            //double age = tracks[it]->getTrackAge();
             bool haveU = false;
 
             // ---
@@ -950,14 +950,14 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
             //   X(k+1) = B X(k) + (1-B)pX(k) for azrate and elrate
 
             // Save X(k)
-            LCreal taz = tracks[it]->getRelAzimuth();
-            LCreal tazRate = tracks[it]->getRelAzimuthRate();
-            LCreal tazAccel = tracks[it]->getRelAzimuthAcceleration();
-            LCreal tel = tracks[it]->getElevation();
-            LCreal telRate = tracks[it]->getElevationRate();
-            LCreal telAccel = tracks[it]->getElevationAcceleration();
+            double taz = tracks[it]->getRelAzimuth();
+            double tazRate = tracks[it]->getRelAzimuthRate();
+            double tazAccel = tracks[it]->getRelAzimuthAcceleration();
+            double tel = tracks[it]->getElevation();
+            double telRate = tracks[it]->getElevationRate();
+            double telAccel = tracks[it]->getElevationAcceleration();
 
-            LCreal ageAtNextTimeStep = dt;
+            double ageAtNextTimeStep = dt;
 
             if (haveU) {
                 // missiles need pos + vel for guidance; update pos and vel for missile dynamics, using reported/perceived position and velocity
@@ -988,7 +988,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
                 // do not update for ownship dynamics if sim is frozen
                 // assume same los, but use GT rotmat to generate new rel az and rel el
                 const osg::Vec3 los_vec = getOwnship()->getRotMat() * tracks[it]->getLosVec();
-                const LCreal ra = lcSqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
+                const double ra = lcSqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
                 const double az = lcAtan2(los_vec.y(), los_vec.x());
                 const double el = lcAtan2(-los_vec.z(), ra);
                 uAzimuth = az - taz;
@@ -998,10 +998,10 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
 
             if (haveU)
             {
-                const LCreal pTaz = tracks[it]->getPredictedAzimuth();
-                const LCreal pTazRate = tracks[it]->getPredictedAzimuthRate();
-                const LCreal pTel = tracks[it]->getPredictedElevation();
-                const LCreal pTelRate = tracks[it]->getPredictedElevationRate();
+                const double pTaz = tracks[it]->getPredictedAzimuth();
+                const double pTazRate = tracks[it]->getPredictedAzimuthRate();
+                const double pTel = tracks[it]->getPredictedElevation();
+                const double pTelRate = tracks[it]->getPredictedElevationRate();
 
                 // If the track is updated set the new azimuth and elevation data based on
                 // a weighted average of the updated value and the predicted value from the
@@ -1023,7 +1023,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const LCreal dt)
 
             if (ageAtNextTimeStep > 0.0) {
                 // Project the values for the next time step
-                const LCreal deltaTimeSquaredOverTwo = (ageAtNextTimeStep* ageAtNextTimeStep) / 2.0f;
+                const double deltaTimeSquaredOverTwo = (ageAtNextTimeStep* ageAtNextTimeStep) / 2.0f;
 
                 tracks[it]->setPredictedAzimuth(taz + tazRate*ageAtNextTimeStep
                     + tazAccel*deltaTimeSquaredOverTwo);

@@ -28,12 +28,12 @@ class List;
 //
 // Public methods: Base class public methods, plus ...
 //
-//     Cie(const MonitorMetrics* m, const LCreal l, const LCreal x, const LCreal y);
+//     Cie(const MonitorMetrics* m, const double l, const double x, const double y);
 //         Special constructor to initialize the CIE color with the given values.
 //
-//     LCreal luminance()
-//     LCreal x()
-//     LCreal y()
+//     double luminance()
+//     double x()
+//     double y()
 //         Data access routines.  Returns the CIE component.
 //
 //     getCIE(osg::Vec3& cie)
@@ -59,12 +59,12 @@ public:
     enum { LUMINANCE, X, Y };
 
 public:
-    Cie(const MonitorMetrics* m, const LCreal l, const LCreal x, const LCreal y);
+    Cie(const MonitorMetrics* m, const double l, const double x, const double y);
     Cie();
 
-    LCreal luminance() const;
-    LCreal x() const;
-    LCreal y() const;
+    double luminance() const;
+    double x() const;
+    double y() const;
     void getCIE(osg::Vec3& cie) const;
 
     virtual bool setMonitor(MonitorMetrics* const msg);

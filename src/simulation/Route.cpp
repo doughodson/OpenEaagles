@@ -158,7 +158,7 @@ unsigned int Route::getNumberOfSteerpoints() const
 //------------------------------------------------------------------------------
 // updateData() -- update Non-time critical stuff here
 //------------------------------------------------------------------------------
-void Route::updateData(const LCreal dt)
+void Route::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 
@@ -172,7 +172,7 @@ void Route::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // Compute nav steering data for each steerpoint.
 //------------------------------------------------------------------------------
-void Route::computeSteerpointData(const LCreal, const Navigation* const nav)
+void Route::computeSteerpointData(const double, const Navigation* const nav)
 {
    if (nav != nullptr) {
       base::PairStream* steerpoints = getComponents();
@@ -202,7 +202,7 @@ void Route::computeSteerpointData(const LCreal, const Navigation* const nav)
 //------------------------------------------------------------------------------
 // Auto Sequence through Steerpoints
 //------------------------------------------------------------------------------
-void Route::autoSequencer(const LCreal, const Navigation* const nav)
+void Route::autoSequencer(const double, const Navigation* const nav)
 {
    if (isAutoSequence() && to != nullptr && nav != nullptr) {
       Steerpoint* toSP = static_cast<Steerpoint*>(to->object());

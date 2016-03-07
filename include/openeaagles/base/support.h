@@ -13,18 +13,18 @@
 #include "openeaagles/config.h"
 
 // ---
-// Define LCreal as double only
-//    Because of the 64 bit systems, the LCreal will be removed in a future
+// Define double as double only
+//    Because of the 64 bit systems, the double will be removed in a future
 //    release.  For now it's defined only as double; but you can manual
 //    change it to float, if required.
 // ---
 namespace oe {
 
 #define LCREAL_DOUBLE
-typedef double LCreal;
+//typedef double double;
 
-// To avoid warnings, define math functions to use with LCreal.
-// Since LCreal is deprecated and set only to double, we're defining only
+// To avoid warnings, define math functions to use with double.
+// Since double is deprecated and set only to double, we're defining only
 // the double functions.  Manual modify to float functions, if required.
 #define lcSqrt      std::sqrt
 #define lcSin       std::sin
@@ -110,13 +110,13 @@ const double BOLTZMANN = 1.3806503e-23;
 // One "G" to feet per second per second
 //  [This is an estimated average.
 //  [One actual "G" is a function of latitude, longitude, and other exotic parameters.]
-const LCreal ETHG = 32.16;
+const double ETHG = 32.16;
 const double ETHGM = ETHG * 0.3048;    // meters
 
 // Convert Barometric Pressure (Inches Mercury to/from Millibars)
 // This is an estimate.
-const LCreal INCH2MBAR  = (1013.2 / 29.92);     // LDB -  Inches -> Mbars
-const LCreal MBAR2INCH  = (1.0 / INCH2MBAR);     // LDB -  Mbars -> Inches
+const double INCH2MBAR  = (1013.2 / 29.92);     // LDB -  Inches -> Mbars
+const double MBAR2INCH  = (1.0 / INCH2MBAR);     // LDB -  Mbars -> Inches
 
 // Earth gravitational parameter.
 // Units: meters cubed per seconds squared.
@@ -126,33 +126,33 @@ const double MuM3perS2 = 3986004.418E8;
 // ---
 // default initial values for various readouts
 // ---
-const LCreal UNDEFINED_VALUE         = FLT_MIN;
-const LCreal INIT_VALUE              = 0.0;
+const double UNDEFINED_VALUE         = FLT_MIN;
+const double INIT_VALUE              = 0.0;
 const int    INIT_INT_VALUE          = 0;
 const int    INIT_SELECT_VALUE       = 1;
-const LCreal INIT_TIME_VALUE         = 0.0;
-const LCreal INIT_DIRECTION_VALUE    = 0.0;
-const LCreal INIT_LATITUDE_VALUE     = 0.0;
-const LCreal INIT_LONGITUDE_VALUE    = 0.0;
+const double INIT_TIME_VALUE         = 0.0;
+const double INIT_DIRECTION_VALUE    = 0.0;
+const double INIT_LATITUDE_VALUE     = 0.0;
+const double INIT_LONGITUDE_VALUE    = 0.0;
 
 // ---
 // Max/min functions
 // ---
 
 // maximum value of v1 or v2
-inline LCreal lcMax(const LCreal v1, const LCreal v2)
+inline double lcMax(const double v1, const double v2)
 {
     return (v1 >= v2) ? v1 : v2;
 }
 
 // minimum value of v1 or v2
-inline LCreal lcMin(const LCreal v1, const LCreal v2)
+inline double lcMin(const double v1, const double v2)
 {
     return (v1 <= v2) ? v1 : v2;
 }
 
 // nint -- nearest integer
-inline int nint(const LCreal x)
+inline int nint(const double x)
 {
     // int(-0.5f) equals 0 or -1, and int(-1000.5f) equals -1000 or -1001,
     // depending on platform.  So, make a negative valued 'x' positive,
@@ -227,7 +227,7 @@ inline double sgn(const unsigned int i, const unsigned int j)
 // ---
 
 // alim -- limits the value of x to +/-limit.
-inline LCreal alim(const LCreal x, const LCreal limit)
+inline double alim(const double x, const double limit)
 {
     if (x > limit) return limit;
     else if (x < -limit) return (-limit);
@@ -252,7 +252,7 @@ inline double alimd(const double x, const double limit)
 
 
 // lim01 -- limits the value of x between 0.0 and 1.0
-inline LCreal lim01(const LCreal x)
+inline double lim01(const double x)
 {
     if (x > 1.0f) return 1.0f;
     else if (x < 0.0f) return 0.0f;
@@ -260,7 +260,7 @@ inline LCreal lim01(const LCreal x)
 }
 
 // deadband -- clamps to zero the values of x within +/-limit.
-inline LCreal deadband(const LCreal x, const LCreal limit)
+inline double deadband(const double x, const double limit)
 {
     if (x >= -limit && x <= limit) return 0.0f;
     else return x;
@@ -268,7 +268,7 @@ inline LCreal deadband(const LCreal x, const LCreal limit)
 
 
 // inRange -- is a number bounded by lo and hi
-inline bool inRange(const LCreal x, const LCreal lo, const LCreal hi)
+inline bool inRange(const double x, const double lo, const double hi)
 {
     return ((lo <= x) && (x <= hi));
 }
@@ -427,49 +427,49 @@ void postMultVec3Array(
    );
 
 // Returns the sine and cosine of an angle (radians)
-void lcSinCos(const LCreal angleRad, LCreal* const sine, LCreal* const cosine);
+void lcSinCos(const double angleRad, double* const sine, double* const cosine);
 void sinCos(const double angleRad, double* const sine, double* const cosine);
 void sinCos(const float angleRad, float* const sine, float* const cosine);
 
 // Computes the sines of an array of 'n' angles (radians)
-void lcSinArray(const LCreal* const anglesRad, LCreal* const sines, const int n);
+void lcSinArray(const double* const anglesRad, double* const sines, const int n);
 void sinArray(const double* const anglesRad, double* const sines, const unsigned int n);
 void sinArray(const float*  const anglesRad, float*  const sines, const unsigned int n);
 
 // Computes the cosines of an array of 'n' angles (radians)
-void lcCosArray(const LCreal* const anglesRad, LCreal* const cosines, const int n);
+void lcCosArray(const double* const anglesRad, double* const cosines, const int n);
 void cosArray(const double* const anglesRad, double* const cosines, const unsigned int n);
 void cosArray(const float*  const anglesRad, float*  const cosines, const unsigned int n);
 
 // Computes the sines and cosines of an array of 'n' angles (radians)
-void lcSinCosArray(const LCreal* const anglesRad, LCreal* const sines, LCreal* const cosines, const int n);
+void lcSinCosArray(const double* const anglesRad, double* const sines, double* const cosines, const int n);
 void sinCosArray(const double* const anglesRad, double* const sines, double* const cosines, const unsigned int n);
 void sinCosArray(const float*  const anglesRad, float*  const sines, float*  const cosines, const unsigned int n);
 
 // Computes the arc-cosines of an array of 'n' angles (radians)
-void lcAcosArray(const LCreal* const anglesRad, LCreal* const acosines, const int n);
+void lcAcosArray(const double* const anglesRad, double* const acosines, const int n);
 void acosArray(const double* const anglesRad, double* const acosines, const unsigned int n);
 void acosArray(const float*  const anglesRad, float*  const acosines, const unsigned int n);
 
 // Computes the arc-tangents for two, 'n' element arrays (yValues and xValues)
-void lcAtan2Array(const LCreal* const yValues, const LCreal* const xValues, LCreal* const atans, const int n);
+void lcAtan2Array(const double* const yValues, const double* const xValues, double* const atans, const int n);
 void atan2Array(const double* const yValues, const double* const xValues, double* const atans, const unsigned int n);
 void atan2Array(const float*  const yValues, const float*  const xValues, float*  const atans, const unsigned int n);
 
 // Computes the square roots of 'n' real values
-void lcSqrtArray(const LCreal* const src, LCreal* const dst, const int n);
+void lcSqrtArray(const double* const src, double* const dst, const int n);
 void sqrtArray(const double* const src, double* const dst, const unsigned int n);
 void sqrtArray(const float*  const src, float*  const dst, const unsigned int n);
 
 // Raises 10 to the power of 'n' src values and returns the results in 'dst'
-void lcPow10Array(const LCreal* const src, LCreal* const dst, const int n);
+void lcPow10Array(const double* const src, double* const dst, const int n);
 void pow10Array(const double* const src, double* const dst, const unsigned int n);
 void pow10Array(const float*  const src, float*  const dst, const unsigned int n);
 
 // Multiply an array of reals with a constant
-void lcMultArrayConst(const LCreal* const src, const LCreal c, LCreal* const dst, const int n);
+void lcMultArrayConst(const double* const src, const double c, double* const dst, const int n);
 void multArrayConst(const double* const src, const double c, double* const dst, const unsigned int n);
-void multArrayConst(const float* const src, const float c, LCreal* const dst, const unsigned int n);
+void multArrayConst(const float* const src, const float c, double* const dst, const unsigned int n);
 
 
 

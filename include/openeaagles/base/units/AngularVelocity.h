@@ -48,25 +48,25 @@ class Time;
 // AngularVelocity();
 //  Constructor for input parser:
 //
-// AngularVelocity(LCreal newAngularVelocityRadiansPerSec);
+// AngularVelocity(double newAngularVelocityRadiansPerSec);
 //  Constructor with input as radians per second:
 //
 // AngularVelocity(Angle* newAngle, Time* newTime);
 //  Constructor with angle in units desired and time in units desired:
 //
-// LCreal getRadiansPerSecond();
+// double getRadiansPerSecond();
 //  Returns in radians/second:
 //
-// bool setRadiansPerSecond(LCreal newAngularVelocity);
+// bool setRadiansPerSecond(double newAngularVelocity);
 //  Sets in radians/second - returns true if successful:
 //
-// bool setDegrees(LCreal newAngle);
+// bool setDegrees(double newAngle);
 //  Input angle in (degrees)
 //
-// bool setRadians(LCreal newAngle);
+// bool setRadians(double newAngle);
 //  Input angle in (radians)
 //
-// bool setSeconds(LCreal newTime);
+// bool setSeconds(double newTime);
 //  Input time in (seconds)
 //
 // bool setSlotAngle(Angle* angle);
@@ -75,7 +75,7 @@ class Time;
 // bool setSlotTime(Time* time);
 //  Input as type of time (Seconds, MilliSeconds, ...)
 //
-// LCreal convert(Angle* newAngle, Time* newTime);
+// double convert(Angle* newAngle, Time* newTime);
 //  Convert routine - converts angular velocity and outputs in units specified -
 // NOTE: This ignores the value of the input objects - the output will be in the
 //      units that are used as inputs (Input Degrees and MilliSeconds and convert(~)
@@ -95,7 +95,7 @@ public:
     //Constructor for input parser:
     AngularVelocity();
     //Constructor with input as radians per second:
-    AngularVelocity(const LCreal newAngularVelocityRadiansPerSec);
+    AngularVelocity(const double newAngularVelocityRadiansPerSec);
     //Constructor with angle in units desired and time in units desired:
     AngularVelocity(const Angle* const newAngle, const Time* const newTime);
 
@@ -104,31 +104,31 @@ public:
 //------------------------------------------------------------------------------
 
     //Returns in radians/second:
-    LCreal getRadiansPerSecond() const;
+    double getRadiansPerSecond() const;
     //Convert routine - converts angular velocity and outputs in units specified:
-    LCreal convert(Angle* newAngle, Time* newTime);
+    double convert(Angle* newAngle, Time* newTime);
 
 //------------------------------------------------------------------------------
 //Set functions:
 //------------------------------------------------------------------------------
 
     //Sets Value of Object - Be sure input is in (rad/sec)
-    bool setRadiansPerSecond(const LCreal newAngularVelocity);
+    bool setRadiansPerSecond(const double newAngularVelocity);
 
 //------------------------------------------------------------------------------
 //Slot Table functions
 //------------------------------------------------------------------------------
 
-    bool setDegrees(const LCreal newAngle);         //Input angle in (degrees)
-    bool setRadians(const LCreal newAngle);         //Input angle in (radians)
-    bool setSeconds(const LCreal newTime);          //Input time in (seconds)
+    bool setDegrees(const double newAngle);         //Input angle in (degrees)
+    bool setRadians(const double newAngle);         //Input angle in (radians)
+    bool setSeconds(const double newTime);          //Input time in (seconds)
     bool setSlotAngle(const Angle* const msg);      //Input as type of angle (Radians, Degrees, ...)
     bool setSlotTime(const Time* const msg);        //Input as type of time (Seconds, MilliSeconds, ...)
 
 private:
 
-    LCreal        angle;                            // holds our angle (radians)
-    LCreal        time;                             // holds our time (seconds)
+    double        angle;                            // holds our angle (radians)
+    double        time;                             // holds our time (seconds)
 
 };
 

@@ -35,20 +35,20 @@ public:
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this QuadMap
    unsigned int getElevations(
-         LCreal* const elevations,     // The elevation array (meters)
+         double* const elevations,     // The elevation array (meters)
          bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
          const unsigned int n,         // Size of elevation and valdFlags arrays
          const double lat,             // Starting latitude (degs)
          const double lon,             // Starting longitude (degs)
-         const LCreal direction,       // True direction (heading) angle of the data (degs)
-         const LCreal maxRng,          // Range to last elevation point (meters)
+         const double direction,       // True direction (heading) angle of the data (degs)
+         const double maxRng,          // Range to last elevation point (meters)
          const bool   interp = false   // Interpolate between elevation posts (default: false)
       ) const override;
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
    bool getElevation(
-         LCreal* const elev,           // The elevation value (meters)
+         double* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)

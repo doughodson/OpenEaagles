@@ -105,16 +105,16 @@ bool CompassRose::setSlotDisplacement(const base::Number* const newD)
 //------------------------------------------------------------------------------
 // setRotationDeg() - 
 //------------------------------------------------------------------------------
-bool CompassRose::setRotationDeg(const LCreal newR)
+bool CompassRose::setRotationDeg(const double newR)
 {
-    rot = newR * static_cast<LCreal>(base::Angle::D2RCC);
+    rot = newR * static_cast<double>(base::Angle::D2RCC);
     return true;
 }
 
 //------------------------------------------------------------------------------
 // setRotationRad() - 
 //------------------------------------------------------------------------------
-bool CompassRose::setRotationRad(const LCreal newR)
+bool CompassRose::setRotationRad(const double newR)
 {
     rot = newR;
     return true;
@@ -123,7 +123,7 @@ bool CompassRose::setRotationRad(const LCreal newR)
 //------------------------------------------------------------------------------
 // setCenteredRadius() - 
 //------------------------------------------------------------------------------
-bool CompassRose::setCenteredRadius(const LCreal newR)
+bool CompassRose::setCenteredRadius(const double newR)
 {
     cenRadius = newR;
     return true;
@@ -132,7 +132,7 @@ bool CompassRose::setCenteredRadius(const LCreal newR)
 //------------------------------------------------------------------------------
 // seDeCenteredRadius() - 
 //------------------------------------------------------------------------------
-bool CompassRose::setDeCenteredRadius(const LCreal newDR)
+bool CompassRose::setDeCenteredRadius(const double newDR)
 {
     decRadius = newDR;
     return true; 
@@ -141,7 +141,7 @@ bool CompassRose::setDeCenteredRadius(const LCreal newDR)
 //------------------------------------------------------------------------------
 // setDisplacement() - 
 //------------------------------------------------------------------------------
-bool CompassRose::setDisplacement(const LCreal newD)
+bool CompassRose::setDisplacement(const double newD)
 {
     displacement = newD;
     return true; 
@@ -233,12 +233,12 @@ void CompassRose::draw()
 //------------------------------------------------------------------------------
 // updateData() - update our non time-critical stuff here
 //------------------------------------------------------------------------------
-void CompassRose::updateData(const LCreal dt)
+void CompassRose::updateData(const double dt)
 {
     // update baseclass stuff first
     BaseClass::updateData(dt);
 
-    LCreal rad = 0;
+    double rad = 0;
     if (centered) rad = cenRadius;
     else rad = decRadius;
 

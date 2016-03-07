@@ -67,8 +67,8 @@ public:
     double getCurrentTime() const   { return time; }        // Current time (sec)
     TSource getTimeline() const     { return timeline; }    // Timeline (UTC, SIM or EXEC)
 
-    void updateTC(const LCreal dt = 0.0) override;
-    void updateData(const LCreal dt = 0.0) override;
+    void updateTC(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
    virtual bool setTimeline(const TSource ts);                             // Sets the logger's timeline (UTC, SIM or EXEC)
@@ -174,9 +174,9 @@ public:
         osg::Vec3 pos;
         osg::Vec3 vel;
         osg::Vec3 angles;
-        LCreal    alpha;
-        LCreal    beta;
-        LCreal    ias;
+        double    alpha;
+        double    beta;
+        double    ias;
     };
 
     //------------------------------------------------------------------------------
@@ -262,7 +262,7 @@ public:
     class DetonationEvent : public SimLogEvent {
         DECLARE_SUBCLASS(DetonationEvent,SimLogEvent)
     public:
-        DetonationEvent(Player* const player, Player* const wpn, Player* const tgt, const unsigned int detType, const LCreal distance = -1.0f);
+        DetonationEvent(Player* const player, Player* const wpn, Player* const tgt, const unsigned int detType, const double distance = -1.0f);
         const char* getDescription() override;
         void captureData() override;
     private:
@@ -271,7 +271,7 @@ public:
         base::safe_ptr<const Player> theWeapon;
         base::safe_ptr<const Player> theTarget;
         unsigned int detType;
-        LCreal missDist;
+        double missDist;
     };
 
     //------------------------------------------------------------------------------
@@ -297,7 +297,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
     //------------------------------------------------------------------------------
@@ -323,7 +323,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
     //------------------------------------------------------------------------------
@@ -349,7 +349,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
     //------------------------------------------------------------------------------
@@ -375,7 +375,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
     //------------------------------------------------------------------------------
@@ -401,7 +401,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
     //------------------------------------------------------------------------------
@@ -427,7 +427,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
 };

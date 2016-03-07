@@ -44,7 +44,7 @@ namespace graphics {
 //       Computes the plane equation coefficients for this polygon.
 //
 //
-//    LCreal calcZ(const osg::Vec2& p) const
+//    double calcZ(const osg::Vec2& p) const
 //       Computes the Z value for a point, 'p', on this polygon.
 //       The plane equation coefficients must be valid (see arePlaneCoeffValid()).
 //       Calling calcPlaneCoeff() will compute these coefficients for this polygon
@@ -60,7 +60,7 @@ namespace graphics {
 //       Computes the plane equation coefficients for the plane defined by
 //       the three vectices, v.  Returns true if 'coeff' is valid.
 //
-//    LCreal calcZ(const osg::Vec2& p, const osg::Vec4& coeff)
+//    double calcZ(const osg::Vec2& p, const osg::Vec4& coeff)
 //       Computes the Z value for a point, 'p', located on a plane, which
 //       is defined by the plane equation coefficients, 'coeff'.
 //
@@ -87,8 +87,8 @@ public:
    static bool calcPlaneCoeff(osg::Vec4& cc, const osg::Vec3 v[3]);
 
    // Compute the Z value of the polygon
-   LCreal calcZ(const osg::Vec2& point) const;
-   static LCreal calcZ(const osg::Vec2& point, const osg::Vec4& coeff);
+   double calcZ(const osg::Vec2& point) const;
+   static double calcZ(const osg::Vec2& point, const osg::Vec4& coeff);
 
    unsigned int getLayer() const             { return layerValue; }
    void setLayer(const unsigned int newLayer);

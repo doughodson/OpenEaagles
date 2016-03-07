@@ -180,22 +180,22 @@ public:
    bool getWillHang() const;                       // True if the weapon will hang on release
    bool isDummy() const;                           // True if this is a dummy weapon (someone else with fly it out)
 
-   LCreal getTOF() const;                          // Time Of Flight (seconds) since release
-   LCreal getMaxTOF() const;                       // Max TOF (seconds)
-   LCreal getTSG() const;                          // Time-to-Start guidance (seconds since release)
-   LCreal getSOBT() const;                         // Start-Of-Burn time (seconds since release)
-   LCreal getEOBT() const;                         // End-Of-Burn time (seconds since release)
+   double getTOF() const;                          // Time Of Flight (seconds) since release
+   double getMaxTOF() const;                       // Max TOF (seconds)
+   double getTSG() const;                          // Time-to-Start guidance (seconds since release)
+   double getSOBT() const;                         // Start-Of-Burn time (seconds since release)
+   double getEOBT() const;                         // End-Of-Burn time (seconds since release)
    virtual bool isGuidanceEnabled() const;                  // Is weapon guidance enabled?
    virtual bool isEngineBurnEnabled() const;                // Weapon engine (rocket) on
-   LCreal getMaxBurstRng() const;                  // Max burst range (meters) -- most players will be damaged within this range
-   LCreal getLethalRange() const;                  // Lethal range (meters) -- most players will be killed within this range
-   LCreal getMaxGimbalAngle() const;               // Max gimbal angle (radians)
+   double getMaxBurstRng() const;                  // Max burst range (meters) -- most players will be damaged within this range
+   double getLethalRange() const;                  // Lethal range (meters) -- most players will be killed within this range
+   double getMaxGimbalAngle() const;               // Max gimbal angle (radians)
 
    Player* getLaunchVehicle();                     // Pointer to the player that launched us
    const Player* getLaunchVehicle() const;         // Pointer to the player that launched us (const version)
 
    Detonation getDetonationResults() const;        // Detonation result code (see 'Detonation' enum)
-   LCreal getDetonationRange() const;              // Range to target at detonation (meters)
+   double getDetonationRange() const;              // Range to target at detonation (meters)
    const osg::Vec3& getDetonationLocation() const; // Location of detonation in target player's coord (meters)
 
    bool isTargetPositionValid() const;             // True if we have the target position and is it valid
@@ -243,9 +243,9 @@ public:
    virtual bool setLaunchVehicle(Player* const lch);        // Sets the pointer to the player that launched us
    virtual bool setDetonationResults(const Detonation dr);  // Sets the detonation result code (see 'Detonation' enum)
    virtual bool setDetonationLocation(const osg::Vec3&);    // Sets the detonation location in target player's coord (meters)
-   virtual bool setMaxBurstRng(const LCreal v);             // Sets the max burst range (meters)
-   virtual bool setLethalRange(const LCreal v);             // Sets the lethal range (meters)
-   virtual bool setMaxGimbalAngle(const LCreal v);          // Sets the max gimbal angle( radians)
+   virtual bool setMaxBurstRng(const double v);             // Sets the max burst range (meters)
+   virtual bool setLethalRange(const double v);             // Sets the lethal range (meters)
+   virtual bool setMaxGimbalAngle(const double v);          // Sets the max gimbal angle( radians)
    virtual bool setWeaponID(const int n);                   // Sets the weapon's type ID number
    virtual bool setReleaseEventID(const unsigned short n);  // Sets the release event ID
 
@@ -303,22 +303,22 @@ public:
    bool collisionNotification(Player* const p) override;
    bool crashNotification() override;
 
-   void updateTC(const LCreal dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
    bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
 
 protected:
-   virtual void weaponGuidance(const LCreal dt);
-   virtual void weaponDynamics(const LCreal dt);
+   virtual void weaponGuidance(const double dt);
+   virtual void weaponDynamics(const double dt);
    virtual void positionTracking();
 
-   virtual void updateTOF(const LCreal dt);
+   virtual void updateTOF(const double dt);
 
-   virtual void setTOF(const LCreal newTOF);
-   virtual bool setMaxTOF(const LCreal v);      // Sets the max TOF (seconds)
-   virtual bool setTSG(const LCreal v);         // Sets the Time-to-Start guidance (seconds since release)
-   virtual bool setSOBT(const LCreal v);        // Sets the "start of burn" time  (seconds since release)
-   virtual bool setEOBT(const LCreal v);        // Sets the "End-Of-Burn" time (seconds since release)
+   virtual void setTOF(const double newTOF);
+   virtual bool setMaxTOF(const double v);      // Sets the max TOF (seconds)
+   virtual bool setTSG(const double v);         // Sets the Time-to-Start guidance (seconds since release)
+   virtual bool setSOBT(const double v);        // Sets the "start of burn" time  (seconds since release)
+   virtual bool setEOBT(const double v);        // Sets the "End-Of-Burn" time (seconds since release)
 
    virtual bool setReleased(const bool f);      // Sets the weapon released flag
    virtual bool setHung(const bool f);          // Sets the hung weapon flag
@@ -342,15 +342,15 @@ protected:
    // At detonation: compute the location of the detonation relative to the target player
    bool setLocationOfDetonation();
 
-   void dynamics(const LCreal  dt = 0.0) override;
+   void dynamics(const double  dt = 0.0) override;
 
    bool shutdownNotification() override;
 
 private:
     void initData();
 
-    static const LCreal DEFAULT_MAX_TGT_RNG;     // meters
-    static const LCreal DEFAULT_MAX_TGT_LOS_ERR; // radians
+    static const double DEFAULT_MAX_TGT_RNG;     // meters
+    static const double DEFAULT_MAX_TGT_LOS_ERR; // radians
 
     base::safe_ptr<Weapon>  flyoutWpn;     // Initial weapon: points to the cloned flyout weapon
                                             // Cloned flyout: weapon: points to self
@@ -365,9 +365,9 @@ private:
     osg::Vec3d    tgtVel;                   // Target/Track Velocity (m/s) relative to ownship velocity
     base::safe_ptr<Player>  launchVehicle; // Launching/Releasing Player
     bool       posTrkEnb;                   // If true, update tgtPos from the target/track
-    LCreal     maxTgtRng;                   // Max target range for default tgt selection      (meters)
-    LCreal     maxTgtLosErr;                // Max target LOS error for default tgt selection  (radians)
-    LCreal     detonationRange;             // Range to target at time of detonation           (meters)
+    double     maxTgtRng;                   // Max target range for default tgt selection      (meters)
+    double     maxTgtLosErr;                // Max target LOS error for default tgt selection  (radians)
+    double     detonationRange;             // Range to target at time of detonation           (meters)
     osg::Vec3  tgtDetLoc;                   // Detonation location in target player's coord    (meters)
 
     base::safe_ptr<Stores> launcher;   // Launcher
@@ -391,14 +391,14 @@ private:
     // ---
     // Default guidance & dynamics parameters
     // ---
-    LCreal tof;            // Current time of flight   (sec)   (tod)
-    LCreal maxTOF;         // max time of flight       (sec)
-    LCreal tsg;            // time to start guidance   (sec)
-    LCreal maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
-    LCreal lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
-    LCreal sobt;           // start-of-burn time       (sec)
-    LCreal eobt;           // end-of-burn time         (sec)
-    LCreal maxGimbal;      // max gimbal angle         (radians)
+    double tof;            // Current time of flight   (sec)   (tod)
+    double maxTOF;         // max time of flight       (sec)
+    double tsg;            // time to start guidance   (sec)
+    double maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
+    double lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
+    double sobt;           // start-of-burn time       (sec)
+    double eobt;           // end-of-burn time         (sec)
+    double maxGimbal;      // max gimbal angle         (radians)
 };
 
 } // End simulation namespace

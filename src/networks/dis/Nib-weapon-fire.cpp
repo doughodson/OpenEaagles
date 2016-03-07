@@ -22,7 +22,7 @@ namespace dis {
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- (Output support) Weapon fire message factory
 //------------------------------------------------------------------------------
-bool Nib::weaponFireMsgFactory(const LCreal)
+bool Nib::weaponFireMsgFactory(const double)
 {
     bool ok = true;
     //std::cout << "NetIO::weaponFireMsgFactory() HERE!!" << std::endl;

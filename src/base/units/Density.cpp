@@ -26,7 +26,7 @@ END_SLOT_MAP()
 // ---
 // constructors
 // ---
-Density::Density(LCreal value, const Mass* newMass, const Volume* newVolume) : Number()
+Density::Density(double value, const Mass* newMass, const Volume* newVolume) : Number()
 {
     STANDARD_CONSTRUCTOR()
 
@@ -89,7 +89,7 @@ void Density::deleteData()
 //------------------------------------------------------------------------------
 // convert() -- converts from one mass/volume ratio to another
 //------------------------------------------------------------------------------
-LCreal Density::convert(const Density& n) const
+double Density::convert(const Density& n) const
 {
     return myMass->convert(*n.getMass()) / myVolume->convert(*n.getVolume());
 }

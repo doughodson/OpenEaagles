@@ -66,9 +66,9 @@ public:
    virtual void updateTheIPlayer();
 
    // Output support functions
-   virtual void updateBasicEntity(RTI::AttributeHandleValuePairSet* attrs, const LCreal curExecTime);
-   virtual void updatePhysicalEntity(RTI::AttributeHandleValuePairSet* attrs, const LCreal curExecTime);
-   virtual void updatePlatform(RTI::AttributeHandleValuePairSet* attrs, const LCreal curExecTime);
+   virtual void updateBasicEntity(RTI::AttributeHandleValuePairSet* attrs, const double curExecTime);
+   virtual void updatePhysicalEntity(RTI::AttributeHandleValuePairSet* attrs, const double curExecTime);
+   virtual void updatePlatform(RTI::AttributeHandleValuePairSet* attrs, const double curExecTime);
 
    // FOM data structures
    BaseEntity* getBaseEntity()                          { return baseEntity; }
@@ -76,11 +76,11 @@ public:
    virtual void setBaseEntity(BaseEntity* const p);
 
    // Simulation::Nib Interface
-   virtual bool isPlayerStateUpdateRequired(const LCreal curExecTime);
-   virtual bool entityStateManager(const LCreal curExecTime);
-   virtual bool emitterBeamsManager(const LCreal curExecTime);
-   virtual bool weaponFireMsgFactory(const LCreal curExecTime);
-   virtual bool munitionDetonationMsgFactory(const LCreal curExecTime);
+   virtual bool isPlayerStateUpdateRequired(const double curExecTime);
+   virtual bool entityStateManager(const double curExecTime);
+   virtual bool emitterBeamsManager(const double curExecTime);
+   virtual bool weaponFireMsgFactory(const double curExecTime);
+   virtual bool munitionDetonationMsgFactory(const double curExecTime);
 
 private:
    unsigned short siteID;     // Site ID

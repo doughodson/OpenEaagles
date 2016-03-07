@@ -185,7 +185,7 @@ void TacanRadio::initData()
 
         // channels [ 17 .. 59 ]
         while (chan < 59) {
-            setChannelFrequency(chan, (static_cast<LCreal>(chan) * 0.1 + 106.3));
+            setChannelFrequency(chan, (static_cast<double>(chan) * 0.1 + 106.3));
             chan++;
         }
 
@@ -196,7 +196,7 @@ void TacanRadio::initData()
 
         // channels [ 70 .. 126 ]
         while (chan <= 126) {
-            setChannelFrequency(chan, (static_cast<LCreal>(chan) * 0.1 + 107.3) );
+            setChannelFrequency(chan, (static_cast<double>(chan) * 0.1 + 107.3) );
             chan++;
         }
     }
@@ -231,7 +231,7 @@ void TacanRadio::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void TacanRadio::updateData(const LCreal dt)
+void TacanRadio::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 
@@ -327,8 +327,8 @@ bool TacanRadio::computeRangeBearing(bool* rngIsValid, double* range, double* gr
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(IlsRadio, "IlsRadio")
 EMPTY_SERIALIZER(IlsRadio)
 
-const LCreal IlsRadio::GS_DEG_PER_DOT = 0.25;
-const LCreal IlsRadio::LOC_DEG_PER_DOT = 1.25;
+const double IlsRadio::GS_DEG_PER_DOT = 0.25;
+const double IlsRadio::LOC_DEG_PER_DOT = 1.25;
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -390,7 +390,7 @@ void IlsRadio::deleteData()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void IlsRadio::updateData(const LCreal dt)
+void IlsRadio::updateData(const double dt)
 {
    //Must have ownship
     if (getOwnship() == nullptr) return;
@@ -424,22 +424,22 @@ void IlsRadio::updateData(const LCreal dt)
 //------------------------------------------------------------------------------
 // Outside FCNs
 //------------------------------------------------------------------------------
-LCreal IlsRadio::getGlideslopeDifference()
+double IlsRadio::getGlideslopeDifference()
 {
     return deltaGlideSlope;
 }
 
-LCreal IlsRadio::getGlideslopeDifferenceDots()
+double IlsRadio::getGlideslopeDifferenceDots()
 {
     return deltaGlideSlope / GS_DEG_PER_DOT;
 }
 
-LCreal IlsRadio::getLocalizerDifference()
+double IlsRadio::getLocalizerDifference()
 {
     return deltaLocalizerBearing;
 }
 
-LCreal IlsRadio::getLocalizerDifferenceDots()
+double IlsRadio::getLocalizerDifferenceDots()
 {
     return deltaLocalizerBearing / LOC_DEG_PER_DOT;
 }
@@ -447,7 +447,7 @@ LCreal IlsRadio::getLocalizerDifferenceDots()
 //------------------------------------------------------------------------------
 //Find ILS Glideslope By Freq - ALWAYS FIND GLIDESLOPE FIRST THEN LOCALIZER!!!
 //------------------------------------------------------------------------------
-bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
+bool IlsRadio::findILSGlideslopeByFreq(double freq)
 {
    //Reset glideSlopeValid so only the first valid glide slope is returned...
    glideSlopeValid = false;
@@ -488,12 +488,12 @@ bool IlsRadio::findILSGlideslopeByFreq(LCreal freq)
 //------------------------------------------------------------------------------
 //Find Localizer by freq - ALWAYS FIND GLIDESLOPE FIRST THEN FIND LOCALIZER!!!
 //------------------------------------------------------------------------------
-bool IlsRadio::findLocalizerByFreq(LCreal freq)
+bool IlsRadio::findLocalizerByFreq(double freq)
 {
    localizerValid = false;
    ////Temp Variables...Will use to distinguish low and high end of runway...
-   //LCreal magHeading1 = 0;
-   //LCreal magHeading2 = 0;
+   //double magHeading1 = 0;
+   //double magHeading2 = 0;
    //double trueBearing1 = 0;
    //double trueBearing2 = 0;
 
@@ -514,7 +514,7 @@ bool IlsRadio::findLocalizerByFreq(LCreal freq)
                //p->getTrueBearingRange(getLatitude(),getLongitude(),getAltitude(),&bearing,&range,&grdrange);
    //
    //            //Need a test to see if we want the low end or high end here:
-   //            acLocalizerBearing = static_cast<LCreal>(trueBearing1);
+   //            acLocalizerBearing = static_cast<double>(trueBearing1);
    //            //If localizer is from -270 - 90 we know the plane is south and will use low end of RWY
    //            if((acLocalizerBearing>0)&(acLocalizerBearing<=90)|(acLocalizerBearing>270)){
    //               //Use the Low End of RWY

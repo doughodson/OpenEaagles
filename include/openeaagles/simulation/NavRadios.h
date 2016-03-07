@@ -80,7 +80,7 @@ public:
    double getRange() const;       // Range (nautical miles)
    double getBearing() const;     // Bearing (degrees)
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
    // Get Range and Bearing - Input pointers for your outputs
@@ -99,7 +99,7 @@ private:
    double bearing;
    double destLatitude;
    double destLongitude;
-   LCreal currentMagVar;
+   double currentMagVar;
 };
 
 
@@ -114,24 +114,24 @@ class IlsRadio : public NavRadio
 
 public:
    // constants for figuring degrees to dots
-   static const LCreal GS_DEG_PER_DOT;
-   static const LCreal LOC_DEG_PER_DOT;
+   static const double GS_DEG_PER_DOT;
+   static const double LOC_DEG_PER_DOT;
 
 public:
    IlsRadio();
 
    //Outside Access FCNs
-   LCreal getGlideslopeDifference();
-   LCreal getLocalizerDifference();
-   LCreal getGlideslopeDifferenceDots();
-   LCreal getLocalizerDifferenceDots();
+   double getGlideslopeDifference();
+   double getLocalizerDifference();
+   double getGlideslopeDifferenceDots();
+   double getLocalizerDifferenceDots();
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
    //Always find the glideslope first!!!!
-   virtual bool findILSGlideslopeByFreq(LCreal freq);
-   virtual bool findLocalizerByFreq(LCreal freq);
+   virtual bool findILSGlideslopeByFreq(double freq);
+   virtual bool findLocalizerByFreq(double freq);
 
 private:
    int timerCounter;              // For Only doing calc every so often
@@ -142,13 +142,13 @@ private:
    double bearing;                // bearing of the end of the RWY
    double destLatitude;           // lat for end of RWY
    double destLongitude;          // lon for end of RWY
-   LCreal deltaGlideSlope;
-   LCreal deltaLocalizerBearing;
-   LCreal currentMagVar;          // mag var at glideslope emitter
-   LCreal acGlideSlope;
-   LCreal acLocalizerBearing;
-   LCreal ilsGlideSlope;
-   LCreal ilsLocalizerBearing;
+   double deltaGlideSlope;
+   double deltaLocalizerBearing;
+   double currentMagVar;          // mag var at glideslope emitter
+   double acGlideSlope;
+   double acLocalizerBearing;
+   double ilsGlideSlope;
+   double ilsLocalizerBearing;
 };
 
 } // End simulation namespace

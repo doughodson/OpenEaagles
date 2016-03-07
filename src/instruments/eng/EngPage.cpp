@@ -74,7 +74,7 @@ EMPTY_DELETEDATA(EngPage)
 //------------------------------------------------------------------------------
 // setEngN1() -
 //------------------------------------------------------------------------------
-bool EngPage::setEngN1(const int idx, const LCreal newN1)
+bool EngPage::setEngN1(const int idx, const double newN1)
 {
     bool ok = false;
     if (idx > 0 && idx <= NUM_ENG) {
@@ -87,7 +87,7 @@ bool EngPage::setEngN1(const int idx, const LCreal newN1)
 //------------------------------------------------------------------------------
 // setEngN2() -
 //------------------------------------------------------------------------------
-bool EngPage::setEngN2(const int idx, const LCreal newN2)
+bool EngPage::setEngN2(const int idx, const double newN2)
 {
     bool ok = false;
     if (idx > 0 && idx <= NUM_ENG) {
@@ -100,7 +100,7 @@ bool EngPage::setEngN2(const int idx, const LCreal newN2)
 //------------------------------------------------------------------------------
 // setEngTit() -
 //------------------------------------------------------------------------------
-bool EngPage::setEngTit(const int idx, const LCreal newT)
+bool EngPage::setEngTit(const int idx, const double newT)
 {
     bool ok = false;
     if (idx > 0 && idx <= NUM_ENG) {
@@ -113,7 +113,7 @@ bool EngPage::setEngTit(const int idx, const LCreal newT)
 //------------------------------------------------------------------------------
 // setEngFF() -
 //------------------------------------------------------------------------------
-bool EngPage::setEngFF(const int idx, const LCreal newFF)
+bool EngPage::setEngFF(const int idx, const double newFF)
 {
     bool ok = false;
     if (idx > 0 && idx <= NUM_ENG) {
@@ -126,7 +126,7 @@ bool EngPage::setEngFF(const int idx, const LCreal newFF)
 //------------------------------------------------------------------------------
 // updateData() -- update non time-critical threads here
 //------------------------------------------------------------------------------
-void EngPage::updateData(const LCreal dt)
+void EngPage::updateData(const double dt)
 {
     // update our BaseClass
     BaseClass::updateData(dt);
@@ -158,7 +158,7 @@ void EngPage::updateData(const LCreal dt)
     send("eng%1dtitbox", SET_VISIBILITY, titBox, titBoxSD, NUM_ENG);
 
     // send all of our engine 1 fuel flow valuew
-    LCreal ff1K[NUM_ENG];
+    double ff1K[NUM_ENG];
     for (int i = 0; i < NUM_ENG; i++) {
         ff1K[i] = ff[i]/1000.0f;    // convert to Klbs/hrs
     }

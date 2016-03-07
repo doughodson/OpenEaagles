@@ -107,7 +107,7 @@ END_SLOT_MAP()
 // Parameters
 //------------------------------------------------------------------------------
 static const int MAX_BUF_SIZE = 1472;
-static const LCreal LOS_REQ_TIMEOUT = 2.0;     // one second timeout
+static const double LOS_REQ_TIMEOUT = 2.0;     // one second timeout
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -287,7 +287,7 @@ bool OtwCigiCl::setHideOwnshipModel(const bool f)
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void OtwCigiCl::updateData(const LCreal dt)
+void OtwCigiCl::updateData(const double dt)
 {
    // ---
    // Init the static CIGI system (only once for all instances)
@@ -1409,10 +1409,10 @@ bool OtwCigiCl::lineOfSightRequest(
                                    const double lat,          // Source latitude         (deg)
                                    const double lon,          // Source longitude        (deg)
                                    const double alt,          // Source altitude         (m)
-                                   const LCreal hdg,          // Source heading          (deg)
-                                   const LCreal pitch,        // Source pitch            (deg)
-                                   const LCreal minRange,     // Request minimum range   (m)
-                                   const LCreal maxRange      // Request maximum range   (m)
+                                   const double hdg,          // Source heading          (deg)
+                                   const double pitch,        // Source pitch            (deg)
+                                   const double minRange,     // Request minimum range   (m)
+                                   const double maxRange      // Request maximum range   (m)
                                    )
 {
    bool ok = false;
@@ -1441,7 +1441,7 @@ bool OtwCigiCl::getLineOfSightData(
                                    double* const lat,      // Point latitude         (deg)
                                    double* const lon,      // Point longitude        (deg)
                                    double* const alt,      // Point altitude         (m)
-                                   LCreal* const rng,      // Range to point         (m)
+                                   double* const rng,      // Range to point         (m)
                                    int* const material     // Material code
                                    )
 {
@@ -1747,7 +1747,7 @@ bool OtwCigiCl::sendCigiData()
                hotRequest.SetLon(hotLon);
                hotRequest.SetReqType(CigiHatHotReqV3::HOT);
                //osg::Vec3 pos = oldest->getPlayer()->getPosition();
-               //LCreal alt;
+               //double alt;
                //base::Nav::convertPosVec2LL(
                //         getRefLatitude(), getRefLongitude(),
                //         pos,
@@ -1869,7 +1869,7 @@ void OtwCigiCl::losResp(const CigiLosRespV3* const p)
             losRespLat = p->GetLatitude();
             losRespLon = p->GetLongitude();
             losRespAlt = p->GetAltitude();
-            losRespRange = static_cast<LCreal>(p->GetRange());
+            losRespRange = static_cast<double>(p->GetRange());
          }
          else {
             // Don't have a valid point
@@ -1950,7 +1950,7 @@ void OtwCigiCl::hatHotResp(const CigiHatHotRespV3* const p)
          if (model->isHotActive() && model->getPlayer() != nullptr) {
             // When the player and elevation table are still valid, store
             // the terrain elevation (meters)
-            model->getPlayer()->setTerrainElevation(static_cast<LCreal>(p->GetHot()));
+            model->getPlayer()->setTerrainElevation(static_cast<double>(p->GetHot()));
 
             //if (isMessageEnabled(MSG_DEBUG)) {
             //   std::cout << "hotResp: alt = --, pid = " << model->getPlayer()->getID() << std::endl;
@@ -2269,7 +2269,7 @@ void CigiClNetworkSignalProcessing::OnSensorResp(CigiBasePacket* packet)
 
 class NetThread : public base::ThreadSingleTask {
    DECLARE_SUBCLASS(NetThread,base::ThreadSingleTask)
-public: NetThread(base::Component* const parent, const LCreal priority);
+public: NetThread(base::Component* const parent, const double priority);
 private: virtual unsigned long userFunc();
 };
 
@@ -2279,7 +2279,7 @@ EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
 EMPTY_SERIALIZER(NetThread)
 
-NetThread::NetThread(base::Component* const parent, const LCreal priority)
+NetThread::NetThread(base::Component* const parent, const double priority)
 : base::ThreadSingleTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()

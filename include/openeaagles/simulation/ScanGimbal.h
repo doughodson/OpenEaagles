@@ -243,7 +243,7 @@ protected:
 
    bool setBarNumber(const unsigned int n)            { if (n <= numBars) { barNum = n; return true; } else return false; }
 
-   void dynamics(const LCreal dt) override;
+   void dynamics(const double dt) override;
 
 private:
     osg::Vec2d  scanPos;         // Position in scan pattern     (rad)

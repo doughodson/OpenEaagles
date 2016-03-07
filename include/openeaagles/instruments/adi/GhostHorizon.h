@@ -17,12 +17,12 @@ class GhostHorizon : public Adi {
 public:
     GhostHorizon();
 
-    virtual bool setWidth(const LCreal x)           { width = x; return true; }
-    virtual bool setHeight(const LCreal x)          { height = x; return true; }
+    virtual bool setWidth(const double x)           { width = x; return true; }
+    virtual bool setHeight(const double x)          { height = x; return true; }
 
     void drawFunc() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
     bool setSlotSkyColor(const base::Color* const cobj);
@@ -37,8 +37,8 @@ private:
     osg::Vec3 groundColor;  // color of our ground
     base::String* gColorName;   // ground color name
     base::String* sColorName;   // sky color name
-    LCreal width;           // width of our polygon
-    LCreal height;          // height of our polygon
+    double width;           // width of our polygon
+    double height;          // height of our polygon
 };
 
 }; // end instruments namespace

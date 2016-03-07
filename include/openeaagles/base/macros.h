@@ -413,7 +413,7 @@
    unsigned short ThisType::stateTable(                                    \
          const unsigned short _cstate,                                     \
          const StateTableCode _code,                                       \
-         const LCreal _dt)                                                 \
+         const double _dt)                                                 \
     {                                                                      \
         unsigned short _next = INVALID_STATE;                              \
         bool _ok = false;

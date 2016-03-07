@@ -103,7 +103,7 @@ void Stores::reset()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void Stores::process(const LCreal dt)
+void Stores::process(const double dt)
 {
    // check our blocked flags
    updateBlockedFlags();
@@ -114,7 +114,7 @@ void Stores::process(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Stores::updateTC(const LCreal dt)
+void Stores::updateTC(const double dt)
 {
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.
@@ -139,7 +139,7 @@ void Stores::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here
 //------------------------------------------------------------------------------
-void Stores::updateData(const LCreal dt)
+void Stores::updateData(const double dt)
 {
    // Update our non-weapon, external stores, which need to act as
    // active systems attached to our ownship player.

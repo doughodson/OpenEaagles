@@ -40,13 +40,13 @@ EMPTY_DELETEDATA(Jammer)
 //------------------------------------------------------------------------------
 // transmit() -- send jam emissions
 //------------------------------------------------------------------------------
-void Jammer::transmit(const LCreal)
+void Jammer::transmit(const double)
 {
     // Send the emission to the other player
     if ( !areEmissionsDisabled() && isTransmitting() ) {
         Emission* em = new Emission();
         em->setFrequency(getFrequency());
-        LCreal p = getPeakPower();
+        double p = getPeakPower();
         em->setPower(p);
         em->setTransmitLoss(getRfTransmitLoss());
         em->setMaxRangeNM(getRange());

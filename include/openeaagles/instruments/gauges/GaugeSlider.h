@@ -25,7 +25,7 @@ public:
     void draw() override;
 
 private:
-    LCreal sliderPos;       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
+    double sliderPos;       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
 };
 
 }  // end instruments namespace

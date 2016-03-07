@@ -323,14 +323,14 @@ void Nib::entityState2Nib()
    }
 
    setMode(simulation::Player::ACTIVE);    
-   setTimeExec( (LCreal) getNetIO()->getCurrentTime() );
+   setTimeExec( (double) getNetIO()->getCurrentTime() );
 }
 
 //------------------------------------------------------------------------------
 // entityStateManager() --  (Output support)
 //    -- Update the entity object for this NIB(Player)
 //------------------------------------------------------------------------------
-bool Nib::entityStateManager(const LCreal curExecTime)
+bool Nib::entityStateManager(const double curExecTime)
 {
    bool ok = true;
    if (getPlayer()->isMode(simulation::Player::ACTIVE) && isPlayerStateUpdateRequired(curExecTime)) {
@@ -403,7 +403,7 @@ bool Nib::entityStateManager(const LCreal curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateBasicEntity(
          RTI::AttributeHandleValuePairSet* attrs, 
-         const LCreal)
+         const double)
 {
    if (baseEntity != nullptr) {
       // Our handler 
@@ -502,8 +502,8 @@ void Nib::updateBasicEntity(
 
          // Convert to geocentric coordinates
          double geocPos[3] = { 0.0, 0.0, 0.0 };
-         LCreal geocVel[3] = { 0.0, 0.0, 0.0 };
-         LCreal geocAcc[3] = { 0.0, 0.0, 0.0 };
+         double geocVel[3] = { 0.0, 0.0, 0.0 };
+         double geocAcc[3] = { 0.0, 0.0, 0.0 };
          base::Nav::getWorldPosAccVel(simCoord, vel.ptr(), accel.ptr(), geocPos, geocVel, geocAcc);
 
          // Dead reckoning algorithm
@@ -571,7 +571,7 @@ void Nib::updateBasicEntity(
             OrientationStruct* netOrientation = &netSpatialRvw->orientation;
 
             // Convert Euler angles to geocentric angles
-            LCreal geocAngles[3] = { 0.0, 0.0, 0.0 };
+            double geocAngles[3] = { 0.0, 0.0, 0.0 };
             base::Nav::getGeocAngle(simCoord, angles.ptr(), geocAngles);
 
             orientation->phi   = static_cast<RTI::Float>(geocAngles[base::Nav::IPHI]);
@@ -622,7 +622,7 @@ void Nib::updateBasicEntity(
 //------------------------------------------------------------------------------
 void Nib::updatePhysicalEntity(
          RTI::AttributeHandleValuePairSet* attrs, 
-         const LCreal)
+         const double)
 {
    // PhysicalEntity??
    PhysicalEntity* physicalEntity =  dynamic_cast<PhysicalEntity*>(baseEntity);
@@ -679,7 +679,7 @@ void Nib::updatePhysicalEntity(
 //------------------------------------------------------------------------------
 void Nib::updatePlatform(
          RTI::AttributeHandleValuePairSet*,
-         const LCreal)
+         const double)
 {
    // No Platform attributes are published at this time
 }

@@ -104,7 +104,7 @@ void SensorMsg::clear()
 //------------------------------------------------------------------------------
 // Sets the range to the target
 //------------------------------------------------------------------------------
-void SensorMsg::setRange(const LCreal r)
+void SensorMsg::setRange(const double r)
 {
    rng = r;
 }
@@ -113,12 +113,12 @@ void SensorMsg::setRange(const LCreal r)
 // Access functions
 //------------------------------------------------------------------------------
 
-LCreal SensorMsg::getRangeRateFPS() const
+double SensorMsg::getRangeRateFPS() const
 {
    return getRangeRate() * base::Distance::M2FT;
 }
 
-LCreal SensorMsg::getRangeRateKts() const
+double SensorMsg::getRangeRateKts() const
 {
    return getRangeRate() * base::Distance::M2NM * 3600.0f;
 }

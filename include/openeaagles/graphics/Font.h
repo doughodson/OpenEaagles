@@ -63,16 +63,16 @@ namespace graphics {
 //      setTextOrigin(const GLdouble x, const GLdouble y)
 //          Sets the upper left corner.
 //
-//      LCreal getCharacterSpacing()
+//      double getCharacterSpacing()
 //        Returns the character spacing.
 //
-//      setCharacterSpacing(LCreal v)
+//      setCharacterSpacing(double v)
 //        Sets the character spacing to v.
 //
-//      LCreal getLineSpacing()
+//      double getLineSpacing()
 //        Returns the line spacing.
 //
-//      setLineSpacing(LCreal v)
+//      setLineSpacing(double v)
 //        Sets the line spacing to v.
 //
 //      GLdouble getFontWidth()
@@ -150,11 +150,11 @@ public:
 
     virtual void setTextOrigin(const GLdouble x, const GLdouble y);
 
-    LCreal getCharacterSpacing() const                  { return charSpacing; }
-    void setCharacterSpacing(const LCreal v)            { charSpacing = v; }
+    double getCharacterSpacing() const                  { return charSpacing; }
+    void setCharacterSpacing(const double v)            { charSpacing = v; }
 
-    LCreal getLineSpacing() const                       { return lineSpacing; }
-    void setLineSpacing(const LCreal v)                 { lineSpacing = v; }
+    double getLineSpacing() const                       { return lineSpacing; }
+    void setLineSpacing(const double v)                 { lineSpacing = v; }
 
     GLdouble getFontWidth() const                       { return fWidth; }
     void setFontWidth(const GLdouble v)                 { fWidth = v; }
@@ -224,8 +224,8 @@ private:
     char*     fontPath;                 // Path to font directory (FTGL & Bitmap fonts)
     char*     fontFile;                 // Font filename (FTGL)
     bool      loaded;                   // Font has been loaded
-    LCreal charSpacing;                 // holds our character spacing
-    LCreal lineSpacing;                 // holds our line spacing
+    double charSpacing;                 // holds our character spacing
+    double lineSpacing;                 // holds our line spacing
 
 };
 

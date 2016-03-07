@@ -114,7 +114,7 @@ void GMeterDial::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void GMeterDial::updateData(const LCreal dt)
+void GMeterDial::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 

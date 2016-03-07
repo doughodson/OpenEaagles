@@ -110,7 +110,7 @@ public:
 
    // update incoming entity dead reckoning
    bool updateDeadReckoning(
-      const LCreal dt,              // delta time (sec)
+      const double dt,              // delta time (sec)
       osg::Vec3d* const pNewPos,    // New DR position
       osg::Vec3d* const pNewAngles  // New DR orientation
    );
@@ -140,38 +140,38 @@ public:
    virtual void setEntityTypeChecked(const bool f);
 
    // Appearance
-   LCreal getDamage() const                       { return damage; }
-   LCreal getSmoke() const                        { return smoking; }
-   LCreal getFlames() const                       { return flames; }
+   double getDamage() const                       { return damage; }
+   double getSmoke() const                        { return smoking; }
+   double getFlames() const                       { return flames; }
    unsigned int getCamouflageType() const         { return camouflage; }
-   virtual bool setDamage(const LCreal v);
-   virtual bool setSmoke(const LCreal v);
-   virtual bool setFlames(const LCreal v);
+   virtual bool setDamage(const double v);
+   virtual bool setSmoke(const double v);
+   virtual bool setFlames(const double v);
    virtual bool setCamouflageType(const unsigned int v);
 
    // Articulated Part: wing sweep angle change count
    unsigned int getAPartWingSweepCnt() const { return apartWingSweepCnt; }
 
    // Articulated Part: wing sweep (radians)
-   LCreal getAPartWingSweep() const          { return apartWingSweep; }
+   double getAPartWingSweep() const          { return apartWingSweep; }
 
    // Articulated Part: gear position change count
    unsigned int getAPartGearPosCnt() const   { return apartGearPosCnt; }
 
    // Articulated Part: landing gear position (% [0% up; 100% down] )
-   LCreal getAPartPartGearPos() const        { return apartLandingGear; }
+   double getAPartPartGearPos() const        { return apartLandingGear; }
 
    // Articulated Part: bay door position change count
    unsigned int getAPartBayDoorCnt() const   { return apartBayDoorCnt; }
 
    // Articulated Part: bay door position (% [0% closed; 100% open] )
-   LCreal getAPartBayDoorPos() const         { return apartBayDoor; }
+   double getAPartBayDoorPos() const         { return apartBayDoor; }
 
    // Articulated Part: launcher elevation angle change count
    unsigned int getAPartLauncherElevationCnt() const   { return apartLnchrElevCnt; }
 
    // Articulated Part: Launcher elevation angle (radians)
-   LCreal getAPartLauncherElevation() const         { return apartLnchrElev; }
+   double getAPartLauncherElevation() const         { return apartLnchrElev; }
 
    // Articulated Part: Number of attached missiles
    unsigned int getAPartNumberAttachedNumMissiles() const { return apartNumMissiles; }
@@ -195,21 +195,21 @@ public:
    bool isTimeoutEnabled() const                   { return timeoutEnbFlg; }
    void setTimeoutEnabled(const bool flg)          { timeoutEnbFlg = flg; }
 
-   LCreal getTimeExec() const                      { return execTime; }
-   virtual void setTimeExec(const LCreal t);
+   double getTimeExec() const                      { return execTime; }
+   virtual void setTimeExec(const double t);
 
-   LCreal getTimeUtc() const                       { return utcTime; }
-   virtual void setTimeUtc(const LCreal t);
+   double getTimeUtc() const                       { return utcTime; }
+   virtual void setTimeUtc(const double t);
 
    virtual bool setOutputPlayerType(const Player* const p);
-   virtual bool isPlayerStateUpdateRequired(const LCreal curExecTime);
+   virtual bool isPlayerStateUpdateRequired(const double curExecTime);
    virtual void playerState2Nib();
    virtual void nib2PlayerState();
 
-   virtual bool entityStateManager(const LCreal curExecTime);
-   virtual bool weaponFireMsgFactory(const LCreal curExecTime);
-   virtual bool munitionDetonationMsgFactory(const LCreal curExecTime);
-   virtual bool networkOutputManagers(const LCreal curExecTime);
+   virtual bool entityStateManager(const double curExecTime);
+   virtual bool weaponFireMsgFactory(const double curExecTime);
+   virtual bool munitionDetonationMsgFactory(const double curExecTime);
+   virtual bool networkOutputManagers(const double curExecTime);
 
 protected:
    // Max number of attached missiles
@@ -291,15 +291,15 @@ private:
    Player::Side side;                  // Side
    Player::Mode mode;                  // NIB Mode
    bool        timeoutEnbFlg;          // NIB can timeout flag
-   LCreal      damage;                 // Damage state from no damage(0.0) to destroyed (1.0)
-   LCreal      smoking;                // Smoke state from no smoke (0.0) to maximum (1.0)
-   LCreal      flames;                 // Flames state from no flames (0.0) to maximum (1.0)
+   double      damage;                 // Damage state from no damage(0.0) to destroyed (1.0)
+   double      smoking;                // Smoke state from no smoke (0.0) to maximum (1.0)
+   double      flames;                 // Flames state from no flames (0.0) to maximum (1.0)
    unsigned int camouflage;            // Camouflage type (0 is none)
    bool        detMsgSent;             // True if detonation message was sent
 
    // Times
-   LCreal      execTime;               // Exec time of last update (seconds)
-   LCreal      utcTime;                // UTC time of last update (seconds)
+   double      execTime;               // Exec time of last update (seconds)
+   double      utcTime;                // UTC time of last update (seconds)
 
    // Dead Reckoning (DR) data
    unsigned char drNum;                // Dead-Reckoning algorithm (see enum DeadReckoning)
@@ -326,10 +326,10 @@ private:
    unsigned int apartGearPosCnt;       // Articulated Part: gear position change count
    unsigned int apartBayDoorCnt;       // Articulated Part: bay door position change count
    unsigned int apartLnchrElevCnt;     // Articulated Part: launcher elevation angle change count
-   LCreal apartWingSweep;              // Articulated Part: wing sweep angle (radians)
-   LCreal apartLandingGear;            // Articulated Part: landing gear position (% [0% up; 100% down] )
-   LCreal apartBayDoor;                // Articulated Part: bay door position (% [0% closed; 100% open] )
-   LCreal apartLnchrElev;              // Articulated Part: Launcher elevation angle (radians)
+   double apartWingSweep;              // Articulated Part: wing sweep angle (radians)
+   double apartLandingGear;            // Articulated Part: landing gear position (% [0% up; 100% down] )
+   double apartBayDoor;                // Articulated Part: bay door position (% [0% closed; 100% open] )
+   double apartLnchrElev;              // Articulated Part: Launcher elevation angle (radians)
 
    const Missile* apartMsl[MAX_AMSL];  // Articulated Part: Attached missiles
    unsigned int apartMslCnt[MAX_AMSL]; // Articulated Part: Attached missile change counts

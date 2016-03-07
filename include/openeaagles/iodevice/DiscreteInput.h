@@ -48,8 +48,8 @@ public:
    bool setInvertFlag(const bool);
    bool setNumber(const int);
 
-   void processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions

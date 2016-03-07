@@ -1877,7 +1877,7 @@ void TabPrinter::printExecTimeMsg(std::ostream& sout, double execTime)
     double ss = 0;  // Sec
 
     // exec time
-    base::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<double>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1890,10 +1890,10 @@ void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
     char cbuf[16];
     int hh = 0;     // Hours
     int mm = 0;     // Min
-    LCreal ss = 0;  // Sec
+    double ss = 0;  // Sec
 
     // sim time
-    base::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<double>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1906,10 +1906,10 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     char cbuf[16];
     int hh = 0;     // Hours
     int mm = 0;     // Min
-    LCreal ss = 0;  // Sec
+    double ss = 0;  // Sec
 
     // utc time
-    base::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<double>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }

@@ -111,7 +111,7 @@ void IrSystem::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void IrSystem::updateData(const LCreal dt)
+void IrSystem::updateData(const double dt)
 {
    // ---
    // Do we need to find the seeker?

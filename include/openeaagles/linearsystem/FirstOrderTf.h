@@ -27,19 +27,19 @@ class FirstOrderTf : public DiffEquation {
 
 public:
    FirstOrderTf();
-   FirstOrderTf(const unsigned int rate, const LCreal n1, const LCreal n2, const LCreal d1, const LCreal d2);
+   FirstOrderTf(const unsigned int rate, const double n1, const double n2, const double d1, const double d2);
 
    // Get Parameters
-   LCreal getN1() const          { return n1; }
-   LCreal getN2() const          { return n2; }
-   LCreal getD1() const          { return d1; }
-   LCreal getD2() const          { return d2; }
+   double getN1() const          { return n1; }
+   double getN2() const          { return n2; }
+   double getD1() const          { return d1; }
+   double getD2() const          { return d2; }
 
    // Set Parameters
-   virtual bool setN1(const LCreal v);
-   virtual bool setN2(const LCreal v);
-   virtual bool setD1(const LCreal v);
-   virtual bool setD2(const LCreal v);
+   virtual bool setN1(const double v);
+   virtual bool setN2(const double v);
+   virtual bool setD1(const double v);
+   virtual bool setD2(const double v);
 
    bool isValid() const override;
 
@@ -52,10 +52,10 @@ private:
    static const unsigned int ORDER = 2;
 
    // Parameters and initial values
-   LCreal n1;
-   LCreal n2;
-   LCreal d1;
-   LCreal d2;
+   double n1;
+   double n2;
+   double d1;
+   double d2;
 };
 
 } // End linearsystem namespace

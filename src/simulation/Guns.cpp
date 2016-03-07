@@ -24,8 +24,8 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullet,"Bullet")
 EMPTY_SERIALIZER(Bullet)
 
 // Default Parameters
-const LCreal Bullet::DEFAULT_MUZZLE_VEL = 1000.0f;     // Meters / second
-const LCreal Bullet::DEFAULT_MAX_TOF = 3.0f;           // Seconds
+const double Bullet::DEFAULT_MUZZLE_VEL = 1000.0f;     // Meters / second
+const double Bullet::DEFAULT_MAX_TOF = 3.0f;           // Seconds
 
 int Bullet::getCategory() const               { return (GRAVITY); }
 const char* Bullet::getDescription() const    { return "Bullets"; }
@@ -98,7 +98,7 @@ void Bullet::reset()
 //------------------------------------------------------------------------------
 // weaponDynamics() -- Bullet dynamics
 //------------------------------------------------------------------------------
-void Bullet::weaponDynamics(const LCreal dt)
+void Bullet::weaponDynamics(const double dt)
 {
    if (isMode(ACTIVE)) {
       updateBurstTrajectories(dt);
@@ -126,7 +126,7 @@ void Bullet::weaponDynamics(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateTOF -- update time of flight (TOF) and set the missed status
 //------------------------------------------------------------------------------
-void Bullet::updateTOF(const LCreal)
+void Bullet::updateTOF(const double)
 {
    // As long as we're active ...
    if (isMode(ACTIVE)) {
@@ -191,9 +191,9 @@ bool Bullet::burstOfBullets(const osg::Vec3* const pos, const osg::Vec3* const v
 //------------------------------------------------------------------------------
 // updateBurstTrajectories() -- update the bursts trajectories
 //------------------------------------------------------------------------------
-void Bullet::updateBurstTrajectories(const LCreal dt)
+void Bullet::updateBurstTrajectories(const double dt)
 {
-   static const LCreal g = ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // For all active bursts
    for (int i = 0; i < nbt; i++) {
@@ -222,7 +222,7 @@ bool Bullet::checkForTargetHit()
 
             // Check if we're within range of the target
             osg::Vec3 rPos = bursts[i].bPos - osPos;
-            LCreal rng = rPos.length();
+            double rng = rPos.length();
             if (rng < 10.0) {
                // Yes -- it's a hit!
                bursts[i].bStatus = Burst::HIT;
@@ -240,12 +240,12 @@ bool Bullet::checkForTargetHit()
         osg::Vec3 myPos = getPosition();
         osg::Vec3 tgtPos;
         osg::Vec3 vecPos;
-        //LCreal az = 0;
-        //LCreal el = 0;
-        LCreal range = 0;
-        //LCreal diffAz = 0;
-        //LCreal diffEl = 0;
-        LCreal maxRange = 1; // close range of detonation
+        //double az = 0;
+        //double el = 0;
+        double range = 0;
+        //double diffAz = 0;
+        //double diffEl = 0;
+        double maxRange = 1; // close range of detonation
         Simulation* sim = getSimulation();
         if (sim != nullptr) {
             base::PairStream* players = sim->getPlayers();
@@ -340,7 +340,7 @@ Gun::Gun()
    unlimited = false;
 
    burstFrameTimer = 0;
-   burstFrameTime = 1.0f / static_cast<LCreal>(DEFAULT_BURST_RATE);
+   burstFrameTime = 1.0f / static_cast<double>(DEFAULT_BURST_RATE);
    rcount = 0.0;
 
    shortBurstTimer = 0.0;
@@ -430,7 +430,7 @@ void Gun::reload()
 //------------------------------------------------------------------------------
 // Process our time-critical tasks
 //------------------------------------------------------------------------------
-void Gun::process(const LCreal dt)
+void Gun::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -438,8 +438,8 @@ void Gun::process(const LCreal dt)
    // Are we firing?
    // ---
    if (fire && (getRoundsRemaining() > 0 || isUnlimited()) ) {
-      const LCreal rps = computeBulletRatePerSecond();
-      const LCreal bpi = rps * dt;
+      const double rps = computeBulletRatePerSecond();
+      const double bpi = rps * dt;
       rcount += bpi;
    }
 
@@ -467,10 +467,10 @@ void Gun::process(const LCreal dt)
 //------------------------------------------------------------------------------
 // computeBulletRatePerSecond() -- Compute the rate of bullets fired per second
 //------------------------------------------------------------------------------
-LCreal Gun::computeBulletRatePerSecond()
+double Gun::computeBulletRatePerSecond()
 {
-   LCreal spinUp = 1.0;
-   return (static_cast<LCreal>(rpm) / 60.0f) * spinUp;
+   double spinUp = 1.0;
+   return (static_cast<double>(rpm) / 60.0f) * spinUp;
 }
 
 //------------------------------------------------------------------------------
@@ -573,7 +573,7 @@ void Gun::burstFrame()
       if ( !isUnlimited() ) {
          if (ibullets > rounds) {
             ibullets = rounds;
-            rcount = static_cast<LCreal>(ibullets);
+            rcount = static_cast<double>(ibullets);
          }
          rounds -= ibullets;
       }
@@ -658,7 +658,7 @@ osg::Vec3d Gun::computeInitBulletVelocity()
       osg::Matrixd mm = getRotMat() * ownship->getRotMat();
 
       // Get muzzle velocity in gun axis and transform to earth axis
-      LCreal muzzleVel = Bullet::DEFAULT_MUZZLE_VEL;
+      double muzzleVel = Bullet::DEFAULT_MUZZLE_VEL;
       if (getBulletType() != nullptr) muzzleVel = getBulletType()->getMuzzleVelocity();
       osg::Vec3d va(muzzleVel, 0.0, 0.0);
       ve1 = va * mm;  // same as:  ve1 = mm(T) * va
@@ -731,7 +731,7 @@ bool Gun::setSlotBurstRate(const base::Number* const num)
    if (num != nullptr) {
       const int rate = num->getInt();
       if (rate > 0 && rate <= 20) {
-         burstFrameTime = 1.0f / static_cast<LCreal>(rate);
+         burstFrameTime = 1.0f / static_cast<double>(rate);
          ok = true;
       }
       else {
@@ -747,7 +747,7 @@ bool Gun::setSlotBurstRate(const base::Number* const num)
 bool Gun::setSlotPosition(base::List* const numList)
 {
    bool ok = false;
-   LCreal values[3];
+   double values[3];
    const int n = numList->getNumberList(values, 3);
    if (n == 3) {
       setPosition(values[0], values[1], values[2]);

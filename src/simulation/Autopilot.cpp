@@ -245,8 +245,8 @@ void Autopilot::reset()
         // If heading, altitude or velocity hold modes are set and their
         // hold values were not set by a slot function, then use the player's
         // current values.
-        if (hdgHoldOn && !holdHdgSet) cmdHdg = static_cast<LCreal>(pv->getHeadingD());
-        if (altHoldOn && !holdAltSet) cmdAlt = static_cast<LCreal>(pv->getAltitudeFt());
+        if (hdgHoldOn && !holdHdgSet) cmdHdg = static_cast<double>(pv->getHeadingD());
+        if (altHoldOn && !holdAltSet) cmdAlt = static_cast<double>(pv->getAltitudeFt());
         if (spdHoldOn && !holdSpdSet) cmdSpd = pv->getTotalVelocityKts();
     }
 }
@@ -254,7 +254,7 @@ void Autopilot::reset()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void Autopilot::process(const LCreal dt)
+void Autopilot::process(const double dt)
 {
    modeManager();
    headingController();
@@ -318,7 +318,7 @@ bool Autopilot::processModeNavigation()
    if (nav != nullptr) {
       // Do we have valid NAV steering data?
       if (nav->isNavSteeringValid()) {
-         const LCreal a = nav->getTrueBrgDeg();
+         const double a = nav->getTrueBrgDeg();
          setCommandedHeadingD( a );
       }
 
@@ -331,7 +331,7 @@ bool Autopilot::processModeNavigation()
                setCommandedAltitudeFt( sp->getCmdAltitudeFt() );
             }
             {
-               const LCreal spd = sp->getCmdAirspeedKts();
+               const double spd = sp->getCmdAirspeedKts();
                if (spd > 0) {
                   setCommandedVelocityKts( spd );
                }
@@ -970,7 +970,7 @@ bool Autopilot::headingController()
          // why mess with the player?  All it does is send it to the dynamics model anyways!  Skip the middle man!
          if ( isHeadingHoldOn() || isNavModeOn() ) {
             const int ihdg10 = static_cast<int>( getCommandedHeadingD() * 10.0f );
-            const LCreal hdg = static_cast<LCreal>(ihdg10) / 10.0;
+            const double hdg = static_cast<double>(ihdg10) / 10.0;
 
             md->setCommandedHeadingD(hdg, maxTurnRateDps, maxBankAngleDegs);
             md->setHeadingHoldOn( true );
@@ -1107,7 +1107,7 @@ bool Autopilot::setAltitudeHoldMode(const bool flag)
    bool b = flag && isPitchSasOn();
    if (b && !altHoldOn && !holdAltSet && getOwnship() != nullptr) {
       // Altitude hold just came on, sample the vehicles altitude
-      setCommandedAltitudeFt( static_cast<LCreal>(getOwnship()->getAltitudeFt()) );
+      setCommandedAltitudeFt( static_cast<double>(getOwnship()->getAltitudeFt()) );
    }
    altHoldOn = b;
    return true;
@@ -1136,9 +1136,9 @@ bool Autopilot::setNavMode(const bool flag)
    if ( !navModeOn && navModeOn1 ) {
       Player* pv = getOwnship();
       if (pv != nullptr) {
-        const LCreal hdg = static_cast<LCreal>(pv->getHeadingD());
+        const double hdg = static_cast<double>(pv->getHeadingD());
         setCommandedHeadingD(hdg);
-        setCommandedAltitudeFt( static_cast<LCreal>(pv->getAltitudeFt()) );
+        setCommandedAltitudeFt( static_cast<double>(pv->getAltitudeFt()) );
         setCommandedVelocityKts( pv->getTotalVelocityKts() );
       }
    }
@@ -1166,7 +1166,7 @@ bool Autopilot::setLoiterMode(const bool flag)
    if ( !loiterModeOn && loiterModeOn1 ) {
       Player* pv = getOwnship();
       if (pv != nullptr) {
-         const LCreal hdg = static_cast<LCreal>(pv->getHeadingD());
+         const double hdg = static_cast<double>(pv->getHeadingD());
          setCommandedHeadingD(hdg);
       }
    }
@@ -1175,7 +1175,7 @@ bool Autopilot::setLoiterMode(const bool flag)
 }
 
 // Request loiter at given anchor point and (front side) course
-bool Autopilot::requestLoiter(const double anchorLat, const double anchorLon, const LCreal course)
+bool Autopilot::requestLoiter(const double anchorLat, const double anchorLon, const double course)
 {
    bool ok = false;
 
@@ -1273,7 +1273,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 
    if (lead != nullptr) {
       lead->ref();
-      leadHdg = static_cast<LCreal>(lead->getHeadingR());
+      leadHdg = static_cast<double>(lead->getHeadingR());
       // grab our lead name
       if (lead->getName() != nullptr) leadName = lead->getName()->clone();
    }
@@ -1339,7 +1339,7 @@ bool Autopilot::setFollowTheLeadMode(const bool f)
 //------------------------------------------------------------------------------
 // setControlStickRollInput() -- Set stick roll position (degs); left(-), right(+)
 //------------------------------------------------------------------------------
-bool Autopilot::setControlStickRollInput(const LCreal pos)
+bool Autopilot::setControlStickRollInput(const double pos)
 {
    bool ok = false;
    if (pos >= -1.0 && pos <= 1.0) {
@@ -1353,7 +1353,7 @@ bool Autopilot::setControlStickRollInput(const LCreal pos)
 //------------------------------------------------------------------------------
 // setControlStickPitchInput() -- Set stick pitch position (degs); aft(-), fwd(+)
 //------------------------------------------------------------------------------
-bool Autopilot::setControlStickPitchInput(const LCreal pos)
+bool Autopilot::setControlStickPitchInput(const double pos)
 {
    bool ok = false;
    if (pos >= -1.0 && pos <= 1.0) {
@@ -1377,12 +1377,12 @@ bool Autopilot::setControlStickPitchInput(const LCreal pos)
 //              'num' is the number of throttle positions
 //          returns the actual number of throttle positions
 //------------------------------------------------------------------------------
-int Autopilot::setThrottles(const LCreal* const positions, const unsigned int num)
+int Autopilot::setThrottles(const double* const positions, const unsigned int num)
 {
    unsigned int n = 0;
    if (positions != nullptr) {
       for (unsigned int i = 0; i < num && i < MAX_THR; i++) {
-         const LCreal pos = positions[i];
+         const double pos = positions[i];
          if (pos >= -1.0f && pos <= 2.0f) {
             thrPos[n++] = pos;
          }
@@ -1455,7 +1455,7 @@ bool Autopilot::setSlotHoldHeading(const base::Angle* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       ok = setCommandedHeadingD( static_cast<LCreal>(base::Degrees::convertStatic( *msg )) );
+       ok = setCommandedHeadingD( static_cast<double>(base::Degrees::convertStatic( *msg )) );
        holdHdgSet = ok;
     }
     return ok;
@@ -1486,7 +1486,7 @@ bool Autopilot::setSlotLoiterPatternLength(const base::Distance* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
-       const LCreal lenNM = base::NauticalMiles::convertStatic(*msg);
+       const double lenNM = base::NauticalMiles::convertStatic(*msg);
        ok = setLoiterPatternLengthNM( lenNM );
     }
     return ok;
@@ -1530,7 +1530,7 @@ bool Autopilot::setSlotLeadFollowingDistanceTrail(const base::Distance* const ms
 {
     bool ok = false;
     if (msg != nullptr) {
-       LCreal distM = base::Meters::convertStatic(*msg);
+       double distM = base::Meters::convertStatic(*msg);
        ok = setLeadFollowingDistanceTrail( distM );
     }
     return ok;
@@ -1551,7 +1551,7 @@ bool Autopilot::setSlotLeadFollowingDistanceRight(const base::Distance* const ms
 {
     bool ok = false;
     if (msg != nullptr) {
-       const LCreal distM = base::Meters::convertStatic(*msg);
+       const double distM = base::Meters::convertStatic(*msg);
        ok = setLeadFollowingDistanceRight( distM );
     }
     return ok;
@@ -1572,7 +1572,7 @@ bool Autopilot::setSlotLeadFollowingDeltaAltitude(const base::Distance* const ms
 {
     bool ok = false;
     if (msg != nullptr) {
-       const LCreal distM = base::Meters::convertStatic(*msg);
+       const double distM = base::Meters::convertStatic(*msg);
        ok = setLeadFollowingDeltaAltitude( distM );
     }
     return ok;

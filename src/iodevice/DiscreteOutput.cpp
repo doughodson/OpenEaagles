@@ -158,14 +158,14 @@ bool DiscreteOutput::setNumber(const int n)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void DiscreteOutput::processInputs(const LCreal, const base::IoDevice* const, base::IoData* const)
+void DiscreteOutput::processInputs(const double, const base::IoDevice* const, base::IoData* const)
 {
 }
 
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void DiscreteOutput::processOutputs(const LCreal, const base::IoData* const outData, base::IoDevice* const device)
+void DiscreteOutput::processOutputs(const double, const base::IoData* const outData, base::IoDevice* const device)
 {
    if (device != nullptr && devEnb) {
       unsigned int chan = channel;

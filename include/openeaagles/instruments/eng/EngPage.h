@@ -22,41 +22,41 @@ public:
     static const int NUM_ENG = 4;
 
     // set functions: engine index range [ 1 .. NUM_ENG ]
-    virtual bool setEngN1(const int idx, const LCreal newN1);       // %RPM
-    virtual bool setEngN2(const int idx, const LCreal newN2);       // %RPM
-    virtual bool setEngTit(const int idx, const LCreal newT);       // Degs C
-    virtual bool setEngFF(const int idx, const LCreal newFF);       // lbs/hrs
+    virtual bool setEngN1(const int idx, const double newN1);       // %RPM
+    virtual bool setEngN2(const int idx, const double newN2);       // %RPM
+    virtual bool setEngTit(const int idx, const double newT);       // Degs C
+    virtual bool setEngFF(const int idx, const double newFF);       // lbs/hrs
 
     // get functions
-    LCreal getEngN1(const int engNum) const { return n1[engNum]; }
-    LCreal getEngN2(const int engNum) const { return n2[engNum]; }
-    LCreal getEngTit(const int engNum) const { return tit[engNum]; }
-    LCreal getEngFF(const int engNum) const { return ff[engNum]; }
+    double getEngN1(const int engNum) const { return n1[engNum]; }
+    double getEngN2(const int engNum) const { return n2[engNum]; }
+    double getEngTit(const int engNum) const { return tit[engNum]; }
+    double getEngFF(const int engNum) const { return ff[engNum]; }
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 private:
 
     // engine n1
-    LCreal   n1[NUM_ENG];          // %RPM
+    double   n1[NUM_ENG];          // %RPM
     SendData n1SD[NUM_ENG];
     SendData n1ROSD[NUM_ENG];
     SendData n1BoxSD[NUM_ENG];
 
     // engine n2
-    LCreal   n2[NUM_ENG];          // %RPM
+    double   n2[NUM_ENG];          // %RPM
     SendData n2SD[NUM_ENG];
     SendData n2ROSD[NUM_ENG];
     SendData n2BoxSD[NUM_ENG];
 
     // engine tit
-    LCreal   tit[NUM_ENG];         // Degs C
+    double   tit[NUM_ENG];         // Degs C
     SendData titSD[NUM_ENG];
     SendData titROSD[NUM_ENG];
     SendData titBoxSD[NUM_ENG];
 
     // engin1 fuel flow
-    LCreal ff[NUM_ENG];             // lbs/hrs
+    double ff[NUM_ENG];             // lbs/hrs
     SendData ffSD[NUM_ENG];
     SendData ffROSD[NUM_ENG];
 };

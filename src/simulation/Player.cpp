@@ -665,7 +665,7 @@ void Player::reset()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Player::updateTC(const LCreal dt0)
+void Player::updateTC(const double dt0)
 {
    // Make sure we've loaded our system pointers
    if (loadSysPtrs) {
@@ -692,13 +692,13 @@ void Player::updateTC(const LCreal dt0)
       // ---
       // Delta time -- real or frozen?
       // ---
-      LCreal dt = dt0;
+      double dt = dt0;
       if (isFrozen()) dt = 0.0;
 
       // ---
       // Compute delta time for modules running every fourth phase
       // ---
-      LCreal dt4 = dt * 4.0f; // Delta time for items running every fourth phase
+      double dt4 = dt * 4.0f; // Delta time for items running every fourth phase
       switch (getSimulation()->phase()) {
 
          // Phase 0 -- Dynamics
@@ -764,7 +764,7 @@ void Player::updateTC(const LCreal dt0)
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void Player::updateData(const LCreal dt)
+void Player::updateData(const double dt)
 {
    if (mode == ACTIVE || mode == PRE_RELEASE) {
 
@@ -796,33 +796,33 @@ unsigned int Player::getMajorType() const
 }
 
 // Player's gross weight (lbs)
-LCreal Player::getGrossWeight() const
+double Player::getGrossWeight() const
 {
    return 0.0;
 }
 
 // Default: mach number
-LCreal Player::getMach() const
+double Player::getMach() const
 {
    // Really only good up to around 30,000 feet, and
    // using standard air temp of 15 degrees Celsius
 
-   const LCreal G = 1.4;     // density ratio      // number
-   const LCreal R = 287.06;  // gas constant       // mps/degK
-   const LCreal L = 0.0065;  // temp. lapse rate   // degC/meter
+   const double G = 1.4;     // density ratio      // number
+   const double R = 287.06;  // gas constant       // mps/degK
+   const double L = 0.0065;  // temp. lapse rate   // degC/meter
 
-   LCreal altitude   = getAltitude();              // meters
-   LCreal velocPlane = getTotalVelocity();         // meters/sec
-   LCreal Tc         = 15.0 - L * altitude;        // degrees Celsius
-   LCreal Tk         = Tc + 273.15;                // degrees Kelvin
-   LCreal velocSound = std::sqrt(G * R * Tk);      // meters/sec
-   LCreal mach       = velocPlane / velocSound;    // number
+   double altitude   = getAltitude();              // meters
+   double velocPlane = getTotalVelocity();         // meters/sec
+   double Tc         = 15.0 - L * altitude;        // degrees Celsius
+   double Tk         = Tc + 273.15;                // degrees Kelvin
+   double velocSound = std::sqrt(G * R * Tk);      // meters/sec
+   double mach       = velocPlane / velocSound;    // number
 
    return mach;
 }
 
 // Player's Center-of-Gravity (%)
-LCreal Player::getCG() const
+double Player::getCG() const
 {
    return 0.0;
 }
@@ -839,7 +839,7 @@ bool Player::isHeadingHoldOn() const
 // Return commanded heading, default (radians)
 double Player::getCommandedHeading() const
 {
-   return getCommandedHeadingD() * static_cast<LCreal>(base::Angle::D2RCC);
+   return getCommandedHeadingD() * static_cast<double>(base::Angle::D2RCC);
 }
 
 // Return commanded heading (degrees)
@@ -854,7 +854,7 @@ double Player::getCommandedHeadingD() const
 // Return commanded heading (radians)
 double Player::getCommandedHeadingR() const
 {
-   return getCommandedHeadingD() * static_cast<LCreal>(base::Angle::D2RCC);
+   return getCommandedHeadingD() * static_cast<double>(base::Angle::D2RCC);
 }
 
 // Return true if velocity-hold mode is on
@@ -1835,9 +1835,9 @@ void Player::resetJustKilled()
 }
 
 // Sets the damage for this player
-bool Player::setDamage(const LCreal v)
+bool Player::setDamage(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    damage = x;
@@ -1845,9 +1845,9 @@ bool Player::setDamage(const LCreal v)
 }
 
 // Sets the smoke for this player
-bool Player::setSmoke(const LCreal v)
+bool Player::setSmoke(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    smoking = x;
@@ -1855,9 +1855,9 @@ bool Player::setSmoke(const LCreal v)
 }
 
 // Sets the flames for this player
-bool Player::setFlames(const LCreal v)
+bool Player::setFlames(const double v)
 {
-   LCreal x = v;
+   double x = v;
    if (x < 0) x = 0.0;
    if (x > 1) x = 1.0;
    flames = x;
@@ -2008,14 +2008,14 @@ bool Player::setOutgoingNib(Nib* const p, const unsigned int id)
 }
 
 // Sets the elevation of the terrain at this player's location (meters)
-void Player::setTerrainElevation(const LCreal v)
+void Player::setTerrainElevation(const double v)
 {
    tElev = v;
    tElevValid = true;
 }
 
 // Sets the ground clamping offset (meters)
-bool Player::setTerrainOffset(const LCreal v)
+bool Player::setTerrainOffset(const double v)
 {
    tOffset = v;
    return true;
@@ -2358,7 +2358,7 @@ bool Player::setGeocAngularVelocities(const osg::Vec3d& newAngVel)
 
 
 // Sets local NED velocities; (m/s) [ ue -> north(+), ve -> east(+), we -> down(+) ]
-bool Player::setVelocity(const LCreal ue, const LCreal ve, const LCreal we)
+bool Player::setVelocity(const double ue, const double ve, const double we)
 {
    velVecNED.set(ue,ve,we);      // set local NED velocity vectors
    velVecECEF = velVecNED * wm;   // compute geocentric velocity vector
@@ -2380,7 +2380,7 @@ bool Player::setVelocity(const osg::Vec3& newVel)
 }
 
 // Sets local NED acceleration vector; (m/s/s) NED
-bool Player::setAcceleration(const LCreal due, const LCreal dve, const LCreal dwe)
+bool Player::setAcceleration(const double due, const double dve, const double dwe)
 {
    accelVecNED.set(due, dve, dwe);
    accelVecECEF = accelVecNED * wm;
@@ -2395,16 +2395,16 @@ bool Player::setAcceleration(const osg::Vec3& newAccel)
 }
 
 // Sets body velocities: (m/s) [ ua -> fwd(+), va -> right(+), wa -> down(+) ]
-bool Player::setVelocityBody(const LCreal ua, const LCreal va, const LCreal wa)
+bool Player::setVelocityBody(const double ua, const double va, const double wa)
 {
    velVecBody.set(ua,va,wa);
    velVecNED = velVecBody * rm;  // compute local NED velocity vector
    velVecECEF = velVecNED * wm;   // compute geocentric velocity vector
 
    // Compute other velocities
-   const LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
-   const LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
-   const LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
+   const double ue = static_cast<double>(velVecNED[INORTH]);
+   const double ve = static_cast<double>(velVecNED[IEAST]);
+   const double we = static_cast<double>(velVecNED[IDOWN]);
    vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = lcAtan2(ve,ue);            // Ground track
@@ -2419,7 +2419,7 @@ bool Player::setVelocityBody(const osg::Vec3& newVelBody)
 
 
 // Sets body acceleration vector; (meters/second / second) NED
-bool Player::setAccelerationBody(const LCreal dua, const LCreal dva, const LCreal dwa)
+bool Player::setAccelerationBody(const double dua, const double dva, const double dwa)
 {
    accelVecBody.set(dua,dva,dwa);
    accelVecNED = accelVecBody * rm;  // compute local NED acceleration vector
@@ -2434,16 +2434,16 @@ bool Player::setAccelerationBody(const osg::Vec3& newAccelBody)
 }
 
 // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-bool Player::setGeocVelocity(const LCreal vx, const LCreal vy, const LCreal vz)
+bool Player::setGeocVelocity(const double vx, const double vy, const double vz)
 {
    velVecECEF.set(vx,vy,vz);
    velVecNED = wm * velVecECEF;
    velVecBody = rm * velVecNED;
 
    // Compute other velocities
-   const LCreal ue = static_cast<LCreal>(velVecNED[INORTH]);
-   const LCreal ve = static_cast<LCreal>(velVecNED[IEAST]);
-   const LCreal we = static_cast<LCreal>(velVecNED[IDOWN]);
+   const double ue = static_cast<double>(velVecNED[INORTH]);
+   const double ve = static_cast<double>(velVecNED[IEAST]);
+   const double we = static_cast<double>(velVecNED[IDOWN]);
    vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
    gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
    gndTrk = lcAtan2(ve,ue);            // Ground track
@@ -2457,7 +2457,7 @@ bool Player::setGeocVelocity(const osg::Vec3& newVelEcef)
 }
 
 // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
-bool Player::setGeocAcceleration(const LCreal dvx, const LCreal dvy, const LCreal dvz)
+bool Player::setGeocAcceleration(const double dvx, const double dvy, const double dvz)
 {
    accelVecECEF.set(dvx,dvy,dvz);
    accelVecNED = wm * accelVecECEF;
@@ -2529,7 +2529,7 @@ bool Player::setInitAltitude(const double alt)
 // setControlStickRollInput(Roll) --  Control inputs: normalized
 //   roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-void Player::setControlStickRollInput(const LCreal value)
+void Player::setControlStickRollInput(const double value)
 {
    if (getDynamicsModel() != nullptr) {
       getDynamicsModel()->setControlStickRollInput(value);
@@ -2540,7 +2540,7 @@ void Player::setControlStickRollInput(const LCreal value)
 // setControlStickPitchInput(Pitch) --  Control inputs: normalized
 //  pitch:  -1.0 -> max forward (nose down); 0.0 -> center;  1.0 -> max back (nose up)
 //------------------------------------------------------------------------------
-void Player::setControlStickPitchInput(const LCreal value)
+void Player::setControlStickPitchInput(const double value)
 {
    if (getDynamicsModel() != nullptr) {
       getDynamicsModel()->setControlStickPitchInput(value);
@@ -2559,7 +2559,7 @@ void Player::setControlStickPitchInput(const LCreal value)
 //    num -> number of throttle positions to get/set
 //    returns the actual number of throttle positions
 //------------------------------------------------------------------------------
-int Player::setThrottles(const LCreal* const data, const int num)
+int Player::setThrottles(const double* const data, const int num)
 {
    int n = 0;
    if (getDynamicsModel() != nullptr) {
@@ -2571,15 +2571,15 @@ int Player::setThrottles(const LCreal* const data, const int num)
 //------------------------------------------------------------------------------
 // Process weapon detonation
 //------------------------------------------------------------------------------
-void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
+void Player::processDetonation(const double detRange, Weapon* const wpn)
 {
    if (!isKillOverride()) {
 
       // Weapon, launcher & range info
       Player* launcher = nullptr;
-      LCreal rng = detRange;
-      LCreal blastRange  = 500.0;    // burst range (meters)
-      LCreal lethalRange =  50.0;    // lethal range  (meters)
+      double rng = detRange;
+      double blastRange  = 500.0;    // burst range (meters)
+      double lethalRange =  50.0;    // lethal range  (meters)
       if (wpn != nullptr) {
          launcher = wpn->getLaunchVehicle();
          blastRange = wpn->getMaxBurstRng();
@@ -2599,9 +2599,9 @@ void Player::processDetonation(const LCreal detRange, Weapon* const wpn)
       // Near by?
       else if (rng <= blastRange) {
          // use distance to compute amount of damage
-         LCreal damageRng = blastRange - lethalRange;
+         double damageRng = blastRange - lethalRange;
          if (damageRng <= 1.0) damageRng = 1.0;
-         LCreal newDamage = 1.0 - ( (rng - lethalRange) / damageRng );
+         double newDamage = 1.0 - ( (rng - lethalRange) / damageRng );
          setDamage(newDamage + getDamage());
          setFlames( getDamage() - 0.25 );
          setSmoke( getDamage() + 0.25 );
@@ -2860,17 +2860,17 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
    {
       // 3-a) Get the aoi vector values & compute range squared
-      const LCreal xa = aoi.x();
-      const LCreal ya = aoi.y();
-      const LCreal za = -aoi.z();
+      const double xa = aoi.x();
+      const double ya = aoi.y();
+      const double za = -aoi.z();
 
       // 3-b) Compute azimuth: az = atan2(ya, xa)
-      LCreal aazr = lcAtan2(ya, xa);
+      double aazr = lcAtan2(ya, xa);
       em->setAzimuthAoi(aazr);
 
       // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-      LCreal ra = lcSqrt(xa*xa + ya*ya);
-      LCreal aelr = lcAtan2(za,ra);
+      double ra = lcSqrt(xa*xa + ya*ya);
+      double aelr = lcAtan2(za,ra);
       em->setElevationAoi(aelr);
    }
 
@@ -2878,7 +2878,7 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    if (em->isReturnRequested()) {
 
       if (signature != nullptr) {
-         LCreal rcs = signature->getRCS(em);
+         double rcs = signature->getRCS(em);
          em->setRCS(rcs);
       }
       else em->setRCS(0);
@@ -3008,17 +3008,17 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
 
    // 3-a) Get the aoi vector values & compute range squared
-   const LCreal xa = aoi.x();
-   const LCreal ya = aoi.y();
-   const LCreal za = -aoi.z();
+   const double xa = aoi.x();
+   const double ya = aoi.y();
+   const double za = -aoi.z();
 
    // 3-b) Compute azimuth: az = atan2(ya, xa)
-   LCreal aazr = lcAtan2(ya, xa);
+   double aazr = lcAtan2(ya, xa);
    msg->setAzimuthAoi(aazr);
 
    // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-   LCreal ra = lcSqrt(xa*xa + ya*ya);
-   LCreal aelr = lcAtan2(za,ra);
+   double ra = lcSqrt(xa*xa + ya*ya);
+   double aelr = lcAtan2(za,ra);
    msg->setElevationAoi(aelr);
 
    // 4) Compute and return the IR Signature
@@ -3049,7 +3049,7 @@ bool Player::onDeEmissionEvent(base::Object* const)
 //------------------------------------------------------------------------------
 // The player's dynamics
 //------------------------------------------------------------------------------
-void Player::dynamics(const LCreal dt)
+void Player::dynamics(const double dt)
 {
    // ---
    // Local player ...
@@ -3120,7 +3120,7 @@ void Player::dynamics(const LCreal dt)
 // Otherwise we'll integrate and set our position using ECEF coordinates and our
 // ECEF velocity.
 //------------------------------------------------------------------------------
-void Player::positionUpdate(const LCreal dt)
+void Player::positionUpdate(const double dt)
 {
    if ( !isLocalPlayer() ) return;
 
@@ -3374,7 +3374,7 @@ void Player::positionUpdate(const LCreal dt)
 //------------------------------------------------------------------------------
 // Default player dead-reckoning function (networked I-players only)
 //------------------------------------------------------------------------------
-void Player::deadReckonPosition(const LCreal dt)
+void Player::deadReckonPosition(const double dt)
 {
    if ( !isNetworkedPlayer() ) return;
 
@@ -3472,14 +3472,14 @@ void Player::processComponents(
 ////------------------------------------------------------------------------------
 //bool Player::computeEulerRates()
 //{
-//   LCreal pa = angularVel[0];
-//   LCreal qa = angularVel[1];
-//   LCreal ra = angularVel[2];
+//   double pa = angularVel[0];
+//   double qa = angularVel[1];
+//   double ra = angularVel[2];
 //
-//   LCreal dpsi = 0;
+//   double dpsi = 0;
 //   if (ctheta != 0) dpsi = (ra*cphi + qa*sphi)/ctheta;
-//   LCreal dtheta = qa*cphi - ra*sphi;
-//   LCreal dphi = pa + dpsi*stheta;
+//   double dtheta = qa*cphi - ra*sphi;
+//   double dphi = pa + dpsi*stheta;
 //
 //   eulerRates.set(dphi, dtheta, dpsi);
 //   return true;
@@ -3496,7 +3496,7 @@ void Player::updateElevation()
    if (s != nullptr && !isTerrainElevationRequired()) {
       const base::Terrain* terrain = s->getTerrain();
       if (terrain != nullptr) {
-         LCreal el = 0;
+         double el = 0;
          terrain->getElevation(&el, getLatitude(), getLongitude(), isDtedTerrainInterpolationEnabled());
          setTerrainElevation(el);
       }
@@ -3769,7 +3769,7 @@ bool Player::setSlotInitAlt(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const LCreal value = base::Meters::convertStatic(*msg);
+      const double value = base::Meters::convertStatic(*msg);
       setInitAltitude( value );
       ok = true;
    }
@@ -3781,7 +3781,7 @@ bool Player::setSlotInitAlt(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      LCreal value = msg->getReal();
+      double value = msg->getReal();
       setInitAltitude( value );
       ok = true;
    }
@@ -3823,7 +3823,7 @@ bool Player::setSlotInitLat(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double val = static_cast<LCreal>(base::Degrees::convertStatic(*msg));
+      const double val = static_cast<double>(base::Degrees::convertStatic(*msg));
       if (val >= -90.0 && val <= 90.0) {
          ok = setInitLat( val );
       }
@@ -3871,7 +3871,7 @@ bool Player::setSlotInitLon(const base::Angle* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      const double val = static_cast<LCreal>(base::Degrees::convertStatic(*msg));
+      const double val = static_cast<double>(base::Degrees::convertStatic(*msg));
       if (val >= -180.0 && val <= 180.0) {
          ok = setInitLon( val );
       }

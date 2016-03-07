@@ -66,40 +66,40 @@ namespace graphics {
 //      Sets the minFilter value to v and returns true if successful.
 //
 // glPixelTransferf() Attributes
-//   LCreal getRedScale()
+//   double getRedScale()
 //      Returns the redScale value.
 //
-//   LCreal getRedBias()
+//   double getRedBias()
 //      Returns the redBias value.
 //
-//   LCreal getGreenScale()
+//   double getGreenScale()
 //      Returns the greenScale value.
 //
-//   LCreal getGreenBias()
+//   double getGreenBias()
 //      Returns the greenBias value.
 //
-//   LCreal getBlueScale()
+//   double getBlueScale()
 //      Returns the blueScale value.
 //
-//   LCreal getBlueBias()
+//   double getBlueBias()
 //      Returns the blueBias value.
 //
-//   bool setRedScale(LCreal s)
+//   bool setRedScale(double s)
 //      Sets the redScale value to s and returns true if successful.
 //
-//   bool setRedBias(LCreal b)
+//   bool setRedBias(double b)
 //      Sets the redBias value to b and returns true if successful.
 //
-//   bool setGreenScale(LCreal s)
+//   bool setGreenScale(double s)
 //      Sets the greenScale value to s and returns true if successful.
 //
-//   bool setGreenBias(LCreal b)
+//   bool setGreenBias(double b)
 //      Sets the greenBias value to b and returns true if successful.
 //
-//   bool setBlueScale(LCreal s)
+//   bool setBlueScale(double s)
 //      Sets the blueScale value to s and returns true if successful.
 //
-//   bool setBlueBias(LCreal b)
+//   bool setBlueBias(double b)
 //      Sets the blueBias value to b and returns true if successful.
 //
 //------------------------------------------------------------------------------

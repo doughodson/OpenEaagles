@@ -96,13 +96,13 @@ const base::Terrain* QuadMap::getDataFile(const unsigned int i)  const
 // returns the number of points found within this DataFile
 //------------------------------------------------------------------------------
 unsigned int QuadMap::getElevations(
-      LCreal* const elevations,     // The elevation array (meters)
+      double* const elevations,     // The elevation array (meters)
       bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
       const unsigned int n,         // Size of elevation and valdFlags arrays
       const double lat,             // Starting latitude (degs)
       const double lon,             // Starting longitude (degs)
-      const LCreal direction,       // True direction (heading) angle of the data (degs)
-      const LCreal maxRng,          // Range to last elevation point (meters)
+      const double direction,       // True direction (heading) angle of the data (degs)
+      const double maxRng,          // Range to last elevation point (meters)
       const bool interp            // Interpolate between elevation posts (if true)
    ) const
 {
@@ -129,7 +129,7 @@ unsigned int QuadMap::getElevations(
 // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
 //------------------------------------------------------------------------------
 bool QuadMap::getElevation(
-      LCreal* const elev,     // The elevation value (meters)
+      double* const elev,     // The elevation value (meters)
       const double lat,       // Reference latitude (degs)
       const double lon,       // Reference longitude (degs)
       const bool interp       // Interpolate between elevation posts (if true)
@@ -145,7 +145,7 @@ bool QuadMap::getElevation(
         ) return false;
 
 
-   LCreal value = 0.0;              // the elevation (meters)
+   double value = 0.0;              // the elevation (meters)
    bool found = false;
    for (unsigned int i = 0; i < numDataFiles && !found; i++) {
       found = dataFiles[i]->getElevation(&value, lat, lon, interp);
@@ -190,8 +190,8 @@ void QuadMap::findDataFiles()
 
    // Find the max/min elevations and the corner points
    if (numDataFiles > 0) {
-      LCreal elevMin =  999999.0;
-      LCreal elevMax = -999999.0;
+      double elevMin =  999999.0;
+      double elevMax = -999999.0;
       double lowerLat = 90.0;
       double lowerLon = 180.0;
       double upperLat = -90.0;

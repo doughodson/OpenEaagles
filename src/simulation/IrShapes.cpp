@@ -57,11 +57,11 @@ base::Object* IrShape::getSlotByIndex(const int si)
 
 bool IrShape::setSlotIrShapeArea(const oe::base::Number* const num)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    const base::Area* a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
       base::SquareMeters sm;
-      value = static_cast<LCreal>(sm.convert(*a));
+      value = static_cast<double>(sm.convert(*a));
    }
    else if (num != nullptr) {
       value = num->getReal();
@@ -70,16 +70,16 @@ bool IrShape::setSlotIrShapeArea(const oe::base::Number* const num)
    return true;
 }
 
-LCreal IrShape::getArea()
+double IrShape::getArea()
 {
    return area;
 }
 
-LCreal IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
+double IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
-   LCreal angleOffBoresight = msg->getAngleOffBoresight();
+   double angleOffBoresight = msg->getAngleOffBoresight();
 
-   LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   double maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
    if (angleOffBoresight > maxAngle) return 0;
 
@@ -132,12 +132,12 @@ base::Object* IrSphere::getSlotByIndex(const int si)
 
 bool IrSphere::setSlotIrSphereRadius(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
    const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
       value = s->getReal();
@@ -146,11 +146,11 @@ bool IrSphere::setSlotIrSphereRadius(const oe::base::Number* const s)
    return true;
 }
 
-LCreal IrSphere::getArea()
+double IrSphere::getArea()
 {
-   //return (LCreal) (radius * radius * 4.0 * PI);
+   //return (double) (radius * radius * 4.0 * PI);
    //Calculates the projected area of a sphere (projected area is a flat circle)
-   return static_cast<LCreal>(radius * radius * PI);
+   return static_cast<double>(radius * radius * PI);
 }
 
 
@@ -209,12 +209,12 @@ base::Object* IrBox::getSlotByIndex(const int si)
 
 bool IrBox::setSlotIrBoxX(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
    const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
       value = s->getReal();
@@ -225,12 +225,12 @@ bool IrBox::setSlotIrBoxX(const oe::base::Number* const s)
 
 bool IrBox::setSlotIrBoxY(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
    const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
        value = s->getReal();
@@ -241,12 +241,12 @@ bool IrBox::setSlotIrBoxY(const oe::base::Number* const s)
 
 bool IrBox::setSlotIrBoxZ(const oe::base::Number* const s)
 {
-   LCreal value = 0.0;
+   double value = 0.0;
 
    const base::Distance* d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
-      value = static_cast<LCreal>(m.convert(*d));
+      value = static_cast<double>(m.convert(*d));
    }
    else if (s != nullptr) {
        value = s->getReal();
@@ -255,20 +255,20 @@ bool IrBox::setSlotIrBoxZ(const oe::base::Number* const s)
    return true;
 }
 
-LCreal IrBox::getArea()
+double IrBox::getArea()
 {
-   return static_cast<LCreal>((x*y * 2) + (2*x*z) + (2*y*z));
+   return static_cast<double>((x*y * 2) + (2*x*z) + (2*y*z));
 }
 
-LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
+double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 {
-   LCreal area = 0.0;
+   double area = 0.0;
 #if 1
    //retrieve the angle off of the gimbal boresight
-   const LCreal angleOffBoresight = msg->getAngleOffBoresight();
+   const double angleOffBoresight = msg->getAngleOffBoresight();
 
    //retrieve the planar angle of the IFOV of the IR sensor
-   const LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   const double maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
    //If the angle to the target is outside the IFOV, then return an area of 0.
    //This will cause the target to be discarded from further IR signature processing.
@@ -297,9 +297,9 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    return area;
 
 #else
-   LCreal angleOffBoresight = msg->getAngleOffBoresight();
+   double angleOffBoresight = msg->getAngleOffBoresight();
 
-   LCreal maxAngle = msg->getSendingSensor()->getIFOVTheta();
+   double maxAngle = msg->getSendingSensor()->getIFOVTheta();
 
    if (angleOffBoresight > maxAngle)
       return area;
@@ -317,21 +317,21 @@ LCreal IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    normalizedTargetVelocityVector.normalize();
    osg::Vec3 targetXVector;
    targetXVector[0] = normalizedTargetVelocityVector[0]; // x
-   LCreal frontToSensor = targetXVector * normalizedDirectionToSensor;
+   double frontToSensor = targetXVector * normalizedDirectionToSensor;
    if (frontToSensor < 0) frontToSensor = -frontToSensor;
       area += frontToSensor * x * z; // x, z are members of this object corresponding to
                                      // width and height.
 
    osg::Vec3 targetYVector;
    targetYVector[1] = normalizedTargetVelocityVector[1]; // y
-   LCreal sideToSensor = targetYVector * normalizedDirectionToSensor;
+   double sideToSensor = targetYVector * normalizedDirectionToSensor;
    if (sideToSensor < 0) sideToSensor = -sideToSensor;
       area += sideToSensor * y * z; // y,z are members of this object corresponding to
                                     // length and height.
 
    osg::Vec3 targetZVector;
    targetZVector[2] = normalizedTargetVelocityVector[2]; // y
-   LCreal topToSensor = targetZVector * normalizedDirectionToSensor;
+   double topToSensor = targetZVector * normalizedDirectionToSensor;
    if (topToSensor < 0) topToSensor = -topToSensor;
       area += topToSensor * x * y; // x,y is a member of this object corresponding to
                                    // width and length.

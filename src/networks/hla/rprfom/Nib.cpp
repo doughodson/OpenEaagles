@@ -175,7 +175,7 @@ bool Nib::setEntityType(
 //------------------------------------------------------------------------------
 // isPlayerStateUpdateRequiredForOutput() -- check to see if an update is required
 //------------------------------------------------------------------------------
-bool Nib::isPlayerStateUpdateRequired(const LCreal curExecTime)
+bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 {
     // Check the update required flags first ...
     bool required = 

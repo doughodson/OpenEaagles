@@ -111,14 +111,14 @@ bool Polygon::calcPlaneCoeff()
 //------------------------------------------------------------------------------
 // compute the z value at point p using plane coefficients c.
 //------------------------------------------------------------------------------
-LCreal Polygon::calcZ(const osg::Vec2& p, const osg::Vec4& cc)
+double Polygon::calcZ(const osg::Vec2& p, const osg::Vec4& cc)
 {
-   LCreal zz = 0.0;
+   double zz = 0.0;
    zz = (-cc._v[D] - (cc._v[A] * p.x()) - (cc._v[B] * p.y()) )/cc._v[C];
    return zz;
 }
 
-LCreal Polygon::calcZ(const osg::Vec2& p) const
+double Polygon::calcZ(const osg::Vec2& p) const
 {
    return calcZ(p,*getPlaneCoeff());
 }

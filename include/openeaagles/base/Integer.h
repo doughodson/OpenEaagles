@@ -83,7 +83,7 @@ inline Integer::operator int() const
 //------------------------------------------------------------------------------
 inline Integer& Integer::operator=(const int n)
 {
-   val = static_cast<LCreal>( n );
+   val = static_cast<double>( n );
    return *this;
 }
 
@@ -256,7 +256,7 @@ inline void Integer::operator%=(const Integer& n1)
         std::cerr << "Modulus by zero!" << std::endl;
         n = 0;
     }
-    val = static_cast<LCreal>( n );
+    val = static_cast<double>( n );
 }
 
 inline void Integer::operator%=(const int n1)
@@ -269,7 +269,7 @@ inline void Integer::operator%=(const int n1)
         std::cerr << "Modulus by zero!" << std::endl;
         n = 0;
     }
-    val = static_cast<LCreal>( n );
+    val = static_cast<double>( n );
 }
 
 inline int operator%(const Integer& n1, const Integer& n2)
@@ -412,7 +412,7 @@ inline std::istream& operator>>(std::istream& sin, Integer& n)
 {
     int tmp = 0;
     sin >> tmp;
-    n.setValue(static_cast<LCreal>(tmp));
+    n.setValue(static_cast<double>(tmp));
     return sin;
 }
 

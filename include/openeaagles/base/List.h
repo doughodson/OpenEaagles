@@ -149,7 +149,7 @@ public:
 
 public:
    List();
-   List(const LCreal values[], const unsigned int nv);
+   List(const double values[], const unsigned int nv);
    List(const int values[], const unsigned int nv);
 
    bool operator==(const List& list) const;

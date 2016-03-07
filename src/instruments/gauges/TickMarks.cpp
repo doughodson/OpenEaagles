@@ -75,7 +75,7 @@ void TickMarks::drawFunc()
     glGetFloatv(GL_CURRENT_COLOR, currentColor);
 
     // determine our tick mark spacing (make sure our quantity != 0)
-    LCreal spacing = 0;
+    double spacing = 0;
     if (quantity != 1) spacing = gaugeLength/(quantity-1);
     // if we don't have any, return
     else if (quantity == 0) return;
@@ -183,7 +183,7 @@ bool TickMarks::setTickGraphic(const graphics::Graphic* const newGraphic)
 //------------------------------------------------------------------------------
 // setTickMarkLength() -- sets tick mark length
 //------------------------------------------------------------------------------
-bool TickMarks::setTickMarkLength(const LCreal newLength)
+bool TickMarks::setTickMarkLength(const double newLength)
 {
     lengthTM = newLength;
     return true;
@@ -199,7 +199,7 @@ bool TickMarks::setQuantity(const int newQ)
 //------------------------------------------------------------------------------
 // setGaugeLength() -- sets our span to draw tick marks over
 //------------------------------------------------------------------------------
-bool TickMarks::setGaugeLength(const LCreal newL)
+bool TickMarks::setGaugeLength(const double newL)
 {
     gaugeLength = newL;
     return true;

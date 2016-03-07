@@ -28,10 +28,10 @@ class AltitudeDial : public Instrument
 public:
     AltitudeDial();
 
-    void updateData(const LCreal dt = 0) override;
+    void updateData(const double dt = 0) override;
 
 private:
-    bool figureRotation(const LCreal thisAlt);
+    bool figureRotation(const double thisAlt);
 
     SendData dialAltSD;                     // sending our altitude to our dial pointer
     SendData altHundredsSD;                 // our hundreds altitude

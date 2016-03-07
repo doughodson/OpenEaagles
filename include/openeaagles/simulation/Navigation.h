@@ -82,8 +82,8 @@ public:
 
    // Mag Var
    virtual bool areWindsValid() const;                      // Are the winds valid?
-   virtual LCreal getWindDirD() const;                      // Returns the wind 'from' direction (degs)
-   virtual LCreal getWindSpeedKts() const;                  // Returns the wind speed (kts)
+   virtual double getWindDirD() const;                      // Returns the wind 'from' direction (degs)
+   virtual double getWindSpeedKts() const;                  // Returns the wind speed (kts)
 
     // UTC time
    virtual bool isUtcDataValid() const;                     // Is the UTC time valid?
@@ -91,22 +91,22 @@ public:
 
     // Velocity Data
    virtual bool isVelocityDataValid() const;                // Is system velocity valid?
-   virtual LCreal getGroundSpeedKts() const;                // Returns ground speed (kts)
-   virtual LCreal getTrueAirspeedKts() const;               // Returns true airspeed (kts)
-   virtual LCreal getGroundTrackDeg() const;                // Returns true ground track (degs)
+   virtual double getGroundSpeedKts() const;                // Returns ground speed (kts)
+   virtual double getTrueAirspeedKts() const;               // Returns true airspeed (kts)
+   virtual double getGroundTrackDeg() const;                // Returns true ground track (degs)
    virtual const osg::Vec3d& getVelocity() const;           // Returns velocity vector (m/s)
    virtual const osg::Vec3d& getAcceleration() const;       // Returns acceleration vector (m/s/s)
 
     // Steering Data
    virtual bool isNavSteeringValid() const;                 // Is system steering data valid?
-   virtual LCreal getTrueBrgDeg() const;                    // Returns true bearing to dest (degs)
-   virtual LCreal getMagBrgDeg() const;                     // Returns mag bearing to dest (degs)
-   virtual LCreal getDistNM() const;                        // Returns distance to dest (NM)
-   virtual LCreal getTrueCrsDeg() const;                    // Returns true course to dest (degs)
-   virtual LCreal getMagCrsDeg() const;                     // Returns mag course to dest (degs)
-   virtual LCreal getCrossTrackErrorNM() const;             // Returns cross track error (NM)
-   virtual LCreal getTTG() const;                           // Returns Time-To-Go to dest (sec)
-   virtual LCreal getETA() const;                           // Returns Est-Time-of-Arrival at dest (sec)
+   virtual double getTrueBrgDeg() const;                    // Returns true bearing to dest (degs)
+   virtual double getMagBrgDeg() const;                     // Returns mag bearing to dest (degs)
+   virtual double getDistNM() const;                        // Returns distance to dest (NM)
+   virtual double getTrueCrsDeg() const;                    // Returns true course to dest (degs)
+   virtual double getMagCrsDeg() const;                     // Returns mag course to dest (degs)
+   virtual double getCrossTrackErrorNM() const;             // Returns cross track error (NM)
+   virtual double getTTG() const;                           // Returns Time-To-Go to dest (sec)
+   virtual double getETA() const;                           // Returns Est-Time-of-Arrival at dest (sec)
 
     // Ref position
    virtual double getRefLatitude() const;                   // Returns the ref latitude (degs)
@@ -133,7 +133,7 @@ public:
     virtual bool setSlotFeba(const base::PairStream* const msg);
     virtual bool setSlotBullseye(Bullseye* const msg);
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
     void reset() override;
 
 protected:
@@ -150,7 +150,7 @@ protected:
    bool setMagVar(const bool dataValidFlg);
 
    // Winds
-   bool setWinds(const LCreal dirDeg, const LCreal speedKts); // (sets data valid)
+   bool setWinds(const double dirDeg, const double speedKts); // (sets data valid)
    bool setWinds(const bool dataValidFlg);
 
    // UTC time
@@ -158,22 +158,22 @@ protected:
    bool setUTC(const bool dataValidFlg);
 
    // Velocity Data
-   bool setGroundSpeedKts(const LCreal kts);
-   bool setTrueAirspeedKts(const LCreal kts);
-   bool setGroundTrackDeg(const LCreal degs);
+   bool setGroundSpeedKts(const double kts);
+   bool setTrueAirspeedKts(const double kts);
+   bool setGroundTrackDeg(const double degs);
    bool setVelocity(const osg::Vec3d& v);
    bool setAcceleration(const osg::Vec3d& v);
    bool setVelocityDataValid(const bool dataValidFlg);
 
    // Steering Data
-   bool setTrueBrgDeg(const LCreal);
-   bool setMagBrgDeg(const LCreal);
-   bool setDistNM(const LCreal);
-   bool setTrueCrsDeg(const LCreal);
-   bool setMagCrsDeg(const LCreal);
-   bool setCrossTrackErrorNM(const LCreal);
-   bool setTTG(const LCreal);
-   bool setETA(const LCreal);
+   bool setTrueBrgDeg(const double);
+   bool setMagBrgDeg(const double);
+   bool setDistNM(const double);
+   bool setTrueCrsDeg(const double);
+   bool setMagCrsDeg(const double);
+   bool setCrossTrackErrorNM(const double);
+   bool setTTG(const double);
+   bool setETA(const double);
    bool setNavSteeringValid(const bool dataValidFlg);
 
    // Navigation methods
@@ -183,7 +183,7 @@ protected:
    virtual bool updateMagVar();            // Method to compute nav system's mag variation
    virtual bool updateNavSteering();       // Method to compute nav steering
 
-   void process(const LCreal dt) override;
+   void process(const double dt) override;
 
 private:
    void initData();
@@ -212,27 +212,27 @@ private:
 
    // Winds
    bool        windsValid;       // Are the winds valid?
-   LCreal      windDirD;         // Returns the wind 'from' direction (degs)
-   LCreal      windSpdKts;       // Returns the wind speed (kts)
+   double      windDirD;         // Returns the wind 'from' direction (degs)
+   double      windSpdKts;       // Returns the wind speed (kts)
 
    // Velocity Data
    osg::Vec3d  velVec;         // Velocity Vector (earth)      (m/sec)       [ ue, ve, we ] NED
    osg::Vec3d  accelVec;       // Acceleration Vector (earth)  ((m/sec)/sec) [ due, dve, dwe ] NED
-   LCreal      gs;             // Ground speed             (kts)
-   LCreal      tas;            // True Air Speed           (kts)
-   LCreal      tk;             // Ground Track             (degs)
+   double      gs;             // Ground speed             (kts)
+   double      tas;            // True Air Speed           (kts)
+   double      tk;             // Ground Track             (degs)
    bool        velValid;       // Velocity data is valid
 
    // Steering data
    bool        navStrValid;    // Nav steering data is valid
-   LCreal      tbrg;           // True bearing to destination    (deg)
-   LCreal      mbrg;           // Mag bearing to destination     (deg)
-   LCreal      dst;            // Direct distance to destination (nm)
-   LCreal      ttg;            // Time-To-Go to destination      (sec)
-   LCreal      tcrs;           // True course to destination     (degs)
-   LCreal      mcrs;           // Mag course to destination      (degs)
-   LCreal      xte;            // Cross Track Err                (nm)
-   LCreal      eta;            // Est Time of Arrival            (sec-utc)
+   double      tbrg;           // True bearing to destination    (deg)
+   double      mbrg;           // Mag bearing to destination     (deg)
+   double      dst;            // Direct distance to destination (nm)
+   double      ttg;            // Time-To-Go to destination      (sec)
+   double      tcrs;           // True course to destination     (degs)
+   double      mcrs;           // Mag course to destination      (degs)
+   double      xte;            // Cross Track Err                (nm)
+   double      eta;            // Est Time of Arrival            (sec-utc)
 
    // UTC data
    double      utc;            // UTC time                       (sec)

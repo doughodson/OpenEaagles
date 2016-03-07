@@ -60,7 +60,7 @@ class Cursor : public Field
 
 public:
    Cursor();
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 };
 
 
@@ -137,7 +137,7 @@ public:
    bool isInputValueValid() const override;
    char filterInputEvent(const int event, const int tc) override;
    bool event(const int key, base::Object* const obj = nullptr) override;
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
    //event handler macro functions
    virtual bool onUpdateValue(const base::Float* const ouvobj);

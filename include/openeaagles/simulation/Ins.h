@@ -27,35 +27,35 @@ public:
 
     const osg::Vec3& getGyroBias() const    { return gyroBias; }
     const osg::Vec3& getAccelBias() const   { return accelBias; }
-    LCreal getWanderAngle() const           { return wander; }
-    LCreal getDopplerBias() const           { return dBias; }
-    LCreal getDopplerScaleFactor() const    { return dSFact; }
+    double getWanderAngle() const           { return wander; }
+    double getDopplerBias() const           { return dBias; }
+    double getDopplerScaleFactor() const    { return dSFact; }
     AlignMode getAlignmentMode() const      { return alignMode; }
     double getAlignmentTTG() const          { return alignTTG; }
-    LCreal getQuality() const               { return quality; }
+    double getQuality() const               { return quality; }
 
-    virtual void setDopplerBias(const LCreal dBias);
-    virtual void setDopplerScaleFactor(const LCreal dSFact);
+    virtual void setDopplerBias(const double dBias);
+    virtual void setDopplerScaleFactor(const double dSFact);
     virtual void setAlignmentMode(const AlignMode mode);
 
 protected:
     virtual void setGyroBias(const osg::Vec3* const p);
     virtual void setAccelBias(const osg::Vec3* const p);
-    virtual void setWanderAngle(const LCreal v);
+    virtual void setWanderAngle(const double v);
     virtual void setAlignmentTTG(const double v);
-    virtual void setQuality(const LCreal v);
+    virtual void setQuality(const double v);
 
 private:
     osg::Vec3   gyroBias;       // Gyro Bias
     osg::Vec3   accelBias;      // Acceleration Bias
-    LCreal      wander;         // Wander angle (degs)
-    LCreal      dBias;          // Doppler bias
-    LCreal      dSFact;         // Doppler Scale Factor
+    double      wander;         // Wander angle (degs)
+    double      dBias;          // Doppler bias
+    double      dSFact;         // Doppler Scale Factor
 
     // Alignment data
     AlignMode   alignMode;      // Alignment mode
     double      alignTTG;       // Alignment Time to Go (sec)
-    LCreal      quality;        // Quality
+    double      quality;        // Quality
 };
 
 } // End simulation namespace

@@ -32,14 +32,14 @@ class AnalogGauge : public Instrument
 public:
     AnalogGauge();
 
-    virtual bool setLeftBoundary(const LCreal newLB);
-    virtual bool setRightBoundary(const LCreal newRB);
+    virtual bool setLeftBoundary(const double newLB);
+    virtual bool setRightBoundary(const double newRB);
     virtual bool setIsOutlined(const bool newO);
     virtual bool setIsVertical(const bool newV);
     virtual bool setDrawMe(const bool x);
 
-    LCreal getLeftBoundary() const  { return leftBoundary; }
-    LCreal getRightBoundary() const { return rightBoundary; }
+    double getLeftBoundary() const  { return leftBoundary; }
+    double getRightBoundary() const { return rightBoundary; }
     bool isOutlined() const         { return outline; }
     bool isVertical() const         { return vertical; }
     bool isDrawing() const          { return drawMe; }
@@ -54,9 +54,9 @@ protected:
     virtual bool setSlotIsVertical(const base::Number* const newV);
 
 private:
-    LCreal gaugePos;                // direction, in inches, that we want to scale our gauge
-    LCreal leftBoundary;            // our left boundary (in inches)
-    LCreal rightBoundary;           // our right boundary (in inches)
+    double gaugePos;                // direction, in inches, that we want to scale our gauge
+    double leftBoundary;            // our left boundary (in inches)
+    double rightBoundary;           // our right boundary (in inches)
     bool outline;                   // are we an outline or filled?
     bool vertical;                  // are we sliding vertically or horizontally? (True = vertical)
     bool drawMe;                    // this is for derived classes that don't want us to draw

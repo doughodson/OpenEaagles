@@ -38,27 +38,27 @@ unsigned int SpaceVehicle::getMajorType() const
 // Get Vehicle data: num engines, thrust, rpm, pla and fuel flow
 //------------------------------------------------------------------------------
 
-LCreal SpaceVehicle::getFuelWt() const
+double SpaceVehicle::getFuelWt() const
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    if (getDynamicsModel() != nullptr) {
       value = getDynamicsModel()->getFuelWt();
    }
    return value;
 }
 
-LCreal SpaceVehicle::getFuelWtMax() const
+double SpaceVehicle::getFuelWtMax() const
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    if (getDynamicsModel() != nullptr) {
       value = getDynamicsModel()->getFuelWtMax();
    }
    return value;
 }
 
-LCreal SpaceVehicle::getGrossWeight() const
+double SpaceVehicle::getGrossWeight() const
 {
-   LCreal value = 0.0;
+   double value = 0.0;
    if (getDynamicsModel() != nullptr) {
       value = getDynamicsModel()->getGrossWeight();
    }
@@ -69,7 +69,7 @@ LCreal SpaceVehicle::getGrossWeight() const
 // setControlStickYawInput(yaw) -- Yaw inputs: normalized
 //          yaw:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setControlStickYawInput(const LCreal yaw)
+bool SpaceVehicle::setControlStickYawInput(const double yaw)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
@@ -83,7 +83,7 @@ bool SpaceVehicle::setControlStickYawInput(const LCreal yaw)
 // setTranslateXInput(transx) -- Translate X inputs: normalized
 //          transx:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setTranslateXInput(const LCreal transx)
+bool SpaceVehicle::setTranslateXInput(const double transx)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
@@ -97,7 +97,7 @@ bool SpaceVehicle::setTranslateXInput(const LCreal transx)
 // setTranslateYInput(transy) -- Translate Y inputs: normalized
 //          transy:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setTranslateYInput(const LCreal transy)
+bool SpaceVehicle::setTranslateYInput(const double transy)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
@@ -111,7 +111,7 @@ bool SpaceVehicle::setTranslateYInput(const LCreal transy)
 // setTranslateZInput(transz) -- Translate Z inputs: normalized
 //          transz:  -1.0 -> maz left;  0.0 -> center;  1.0 -> maz right
 //------------------------------------------------------------------------------
-bool SpaceVehicle::setTranslateZInput(const LCreal transz)
+bool SpaceVehicle::setTranslateZInput(const double transz)
 {
    bool ok = false;
    SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
@@ -133,7 +133,7 @@ int SpaceVehicle::getNumberOfEngines() const
    return n;
 }
 
-int SpaceVehicle::getEngThrust(LCreal* const data, const int max) const
+int SpaceVehicle::getEngThrust(double* const data, const int max) const
 {
    int  n = 0;
    if (getDynamicsModel() != nullptr) {
@@ -202,7 +202,7 @@ UnmannedSpaceVehicle::UnmannedSpaceVehicle()
     setType(&generic);
 }
 
-void UnmannedSpaceVehicle::dynamics(const LCreal dt)
+void UnmannedSpaceVehicle::dynamics(const double dt)
 {
    BaseClass::dynamics(dt);
    //osg::Vec3d p = getGeocPosition();

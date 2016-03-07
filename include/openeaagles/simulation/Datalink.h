@@ -93,7 +93,7 @@ protected:
    virtual bool setSlotRadioId(const base::Number* const num);
    virtual bool setSlotMaxRange(const base::Distance* const num);
 
-   void dynamics(const LCreal dt) override;
+   void dynamics(const double dt) override;
 
    bool shutdownNotification() override;
 

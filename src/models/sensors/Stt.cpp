@@ -37,7 +37,7 @@ void Stt::deleteData()
 //------------------------------------------------------------------------------
 // dynamics() --  Update dynamics
 //------------------------------------------------------------------------------
-void Stt::dynamics(const LCreal dt)
+void Stt::dynamics(const double dt)
 {
     BaseClass::dynamics(dt);
 

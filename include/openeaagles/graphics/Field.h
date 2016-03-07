@@ -266,7 +266,7 @@ public:
    void drawFunc() override;
    bool event(const int event, Object* const obj = nullptr) override;
 
-   void updateData(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
 
 protected:
    //slot table macro functions

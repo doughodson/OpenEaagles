@@ -21,9 +21,9 @@ namespace base {
 //    xbp     - Pointer to the previous X breakpoint (optional)
 // ---
 
-LCreal lfi_1D(const LCreal x,
-           const LCreal* x_data, const unsigned int nx,
-           const LCreal* a_data,
+double lfi_1D(const double x,
+           const double* x_data, const unsigned int nx,
+           const double* a_data,
            const bool eFlg=false,
            unsigned int* const xbp=nullptr
           );
@@ -37,10 +37,10 @@ LCreal lfi_1D(const LCreal x,
 //       ybp     - Pointer to the previous Y breakpoint (optional)
 // ---
 
-LCreal lfi_2D(const LCreal x, const LCreal y,
-           const LCreal* x_data, const unsigned int nx,
-           const LCreal* y_data, const unsigned int ny,
-           const LCreal* a_data,
+double lfi_2D(const double x, const double y,
+           const double* x_data, const unsigned int nx,
+           const double* y_data, const unsigned int ny,
+           const double* a_data,
            const bool eFlg=false,
            unsigned int* const xbp=nullptr,
            unsigned int* const ybp=nullptr
@@ -55,11 +55,11 @@ LCreal lfi_2D(const LCreal x, const LCreal y,
 //       zbp     - Pointer to the previous Z breakpoint (optional)
 // ---
 
-LCreal lfi_3D(const LCreal x, const LCreal y, const LCreal z,
-           const LCreal* x_data, const unsigned int nx,
-           const LCreal* y_data, const unsigned int ny,
-           const LCreal* z_data, const unsigned int nz,
-           const LCreal* a_data,
+double lfi_3D(const double x, const double y, const double z,
+           const double* x_data, const unsigned int nx,
+           const double* y_data, const unsigned int ny,
+           const double* z_data, const unsigned int nz,
+           const double* a_data,
            const bool eFlg=false,
            unsigned int* const xbp=nullptr,
            unsigned int* const ybp=nullptr,
@@ -75,12 +75,12 @@ LCreal lfi_3D(const LCreal x, const LCreal y, const LCreal z,
 //       wbp     - Pointer to the previous W breakpoint (optional)
 // ---
 
-LCreal lfi_4D(const LCreal x, const LCreal y, const LCreal z, const LCreal w,
-           const LCreal* x_data, const unsigned int nx,
-           const LCreal* y_data, const unsigned int ny,
-           const LCreal* z_data, const unsigned int nz,
-           const LCreal* w_data, const unsigned int nw,
-           const LCreal* a_data,
+double lfi_4D(const double x, const double y, const double z, const double w,
+           const double* x_data, const unsigned int nx,
+           const double* y_data, const unsigned int ny,
+           const double* z_data, const unsigned int nz,
+           const double* w_data, const unsigned int nw,
+           const double* a_data,
            const bool eFlg=false,
            unsigned int* const xbp=nullptr,
            unsigned int* const ybp=nullptr,
@@ -97,13 +97,13 @@ LCreal lfi_4D(const LCreal x, const LCreal y, const LCreal z, const LCreal w,
 //       vbp     - Pointer to the previous V breakpoint (optional)
 // ---
 
-LCreal lfi_5D(const LCreal x, const LCreal y, const LCreal z, const LCreal w, const LCreal v,
-         const LCreal* x_data, const unsigned int nx,
-         const LCreal* y_data, const unsigned int ny,
-         const LCreal* z_data, const unsigned int nz,
-         const LCreal* w_data, const unsigned int nw,
-         const LCreal* v_data, const unsigned int nv,
-         const LCreal* a_data,
+double lfi_5D(const double x, const double y, const double z, const double w, const double v,
+         const double* x_data, const unsigned int nx,
+         const double* y_data, const unsigned int ny,
+         const double* z_data, const unsigned int nz,
+         const double* w_data, const unsigned int nw,
+         const double* v_data, const unsigned int nv,
+         const double* a_data,
          const bool eFlg=false,
          unsigned int* const xbp=nullptr,
          unsigned int* const ybp=nullptr,

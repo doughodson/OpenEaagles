@@ -41,7 +41,7 @@ public:
     DynamicsModel();
 
     virtual void atReleaseInit();
-    virtual void dynamics(const LCreal dt);
+    virtual void dynamics(const double dt);
 
     virtual bool isHeadingHoldOn() const;
     virtual double getCommandedHeadingD() const;
@@ -69,17 +69,17 @@ public:
     //                             rate of change (in meters per second) associated with moving to new altitude (aMps)
     virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0);
 
-    virtual LCreal getFuelWt() const;                   // lbs
-    virtual LCreal getFuelWtMax() const;                // lbs
-    virtual LCreal getGrossWeight() const;              // wt: lbs
+    virtual double getFuelWt() const;                   // lbs
+    virtual double getFuelWtMax() const;                // lbs
+    virtual double getGrossWeight() const;              // wt: lbs
 
     virtual int getNumberOfEngines() const;
-    virtual int getEngThrust(LCreal* const fn, const int max) const;          // Thrust: lbs
+    virtual int getEngThrust(double* const fn, const int max) const;          // Thrust: lbs
 
     // Control Stick Input Positions (not the flight surfaces!)
-    virtual void setControlStickRollInput(const LCreal roll);
-    virtual void setControlStickPitchInput(const LCreal pitch);
-    void setControlStick(const LCreal roll, const LCreal pitch) {
+    virtual void setControlStickRollInput(const double roll);
+    virtual void setControlStickPitchInput(const double pitch);
+    void setControlStick(const double roll, const double pitch) {
         setControlStickRollInput(roll);
         setControlStickPitchInput(pitch);
     }
@@ -93,17 +93,17 @@ public:
     //              2.0    -> A/B
     //    'num '-> number of throttle positions to get/set
     // ---
-    virtual int setThrottles(const LCreal* const positions, const int num);
+    virtual int setThrottles(const double* const positions, const int num);
 
     // ---
     // Sets brake positions (left & right)
     //         No brake force  -> 0.0
     //         Max brake force -> 1.0
     // ---
-    virtual void setBrakes(const LCreal left, const LCreal right);
+    virtual void setBrakes(const double left, const double right);
 
     // Sets the fuel weight
-    virtual bool setFuelWt(const LCreal lbs);
+    virtual bool setFuelWt(const double lbs);
 };
 
 } // End simulation namespace

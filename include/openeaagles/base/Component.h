@@ -59,19 +59,19 @@ class String;
 //
 // Simulation support functions:
 //
-//       updateTC(LCreal dt)
+//       updateTC(double dt)
 //          Time-Critical update -- This routine will be called by our tcFrame()
 //          at a steady rate of 1/dt, where 'dt' is the  delta time in seconds
 //          between calls.  Derived classes will provide updateTC() routines,
 //          as needed.
 //
-//       tcFrame(LCreal dt)
+//       tcFrame(double dt)
 //          Time-Critical Frame -- This routine will be called by our container
 //          at a steady rate of 1/dt, where 'dt' is the  delta time in seconds
 //          between calls.  The component time statistics are computed by this
 //          function (see slots 'enableTimingStats' and 'printTimingStats').
 //
-//       updateData(LCreal dt)
+//       updateData(double dt)
 //          Non-time-critical (i.e., background) update of the component, where
 //          'dt' is the delta time in seconds between calls.  Derived classes
 //          will provide updateData() routines, as needed.
@@ -327,9 +327,9 @@ public:
 
    virtual const Identifier* findNameOfComponent(const Component* const p) const;
 
-   virtual void updateTC(const LCreal dt = 0.0);
-   virtual void updateData(const LCreal dt = 0.0);
-   void tcFrame(const LCreal dt = 0.0);
+   virtual void updateTC(const double dt = 0.0);
+   virtual void updateData(const double dt = 0.0);
+   void tcFrame(const double dt = 0.0);
 
    virtual bool isFrozen() const;
    virtual bool isNotFrozen() const;

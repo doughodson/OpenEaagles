@@ -99,7 +99,7 @@ void StoresMgr::deleteData()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void StoresMgr::process(const LCreal dt)
+void StoresMgr::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -496,7 +496,7 @@ void SimpleStoresMgr::deleteData()
 //------------------------------------------------------------------------------
 // process() -- Process phase
 //------------------------------------------------------------------------------
-void SimpleStoresMgr::process(const LCreal dt)
+void SimpleStoresMgr::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -510,7 +510,7 @@ void SimpleStoresMgr::process(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here
 //------------------------------------------------------------------------------
-void SimpleStoresMgr::updateData(const LCreal dt)
+void SimpleStoresMgr::updateData(const double dt)
 {
    BaseClass::updateData(dt);
 
@@ -923,7 +923,7 @@ Weapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
 //------------------------------------------------------------------------------
 
 // Sets the release timer
-bool SimpleStoresMgr::setWeaponReleaseTimer(const LCreal v)
+bool SimpleStoresMgr::setWeaponReleaseTimer(const double v)
 {
    wpnRelTimer = v;
    return true;

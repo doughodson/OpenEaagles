@@ -66,11 +66,11 @@ public:
 
    // Updates all of the input device handlers
    // (inoperative if the optional thread is active)
-   virtual void inputDevices(const LCreal dt);
+   virtual void inputDevices(const double dt);
 
    // Updates all of the output device handlers
    // (inoperative if the optional thread is active)
-   virtual void outputDevices(const LCreal dt);
+   virtual void outputDevices(const double dt);
 
    IoData* getInputData();                // Input data buffer
    const IoData* getInputData() const;    // Input data buffer (const version)
@@ -81,8 +81,8 @@ public:
    // (Optional) Creates a thread to process the I/O devices; (this
    // overrides the inputDevices() and outputDevices() functions)
    void createDataThread();
-   LCreal getPriority() const;            // Thread priority (0 low to 1 high)
-   LCreal getRate() const;                // Thread rate (hz)
+   double getPriority() const;            // Thread priority (0 low to 1 high)
+   double getRate() const;                // Thread rate (hz)
 
    void reset() override;
 
@@ -105,8 +105,8 @@ private:
    void initData();
 
    // Implementations of the I/O device functions
-   virtual void inputDevicesImp(const LCreal dt);
-   virtual void outputDevicesImp(const LCreal dt);
+   virtual void inputDevicesImp(const double dt);
+   virtual void outputDevicesImp(const double dt);
    friend class IoThread;
 
    // Data I/O handlers
@@ -117,8 +117,8 @@ private:
    bool netInitialized;       // Networks (if any) are initialized
    bool netInitFailed;        // Network init has failed
 
-   LCreal rate;               // Thread Rate (hz)
-   LCreal pri;                // Priority of the thread (0->lowest, 1->highest)
+   double rate;               // Thread Rate (hz)
+   double pri;                // Priority of the thread (0->lowest, 1->highest)
    safe_ptr<base::Thread> thread; // The thread
 };
 

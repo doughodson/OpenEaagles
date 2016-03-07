@@ -108,22 +108,22 @@ unsigned int AnalogInput::getChannel() const
    return channel;
 }
 
-LCreal AnalogInput::getValue() const
+double AnalogInput::getValue() const
 {
    return value;
 }
 
-LCreal AnalogInput::getDeadband() const
+double AnalogInput::getDeadband() const
 {
    return deadband;
 }
 
-LCreal AnalogInput::getOffset() const
+double AnalogInput::getOffset() const
 {
    return offset;
 }
 
-LCreal AnalogInput::getGain() const
+double AnalogInput::getGain() const
 {
    return gain;
 }
@@ -150,25 +150,25 @@ bool AnalogInput::setChannel(const unsigned int v)
    return true;
 }
 
-bool AnalogInput::setValue(const LCreal v)
+bool AnalogInput::setValue(const double v)
 {
    value = v;
    return true;
 }
 
-bool AnalogInput::setDeadband(const LCreal v)
+bool AnalogInput::setDeadband(const double v)
 {
    deadband = v;
    return true;
 }
 
-bool AnalogInput::setOffset(const LCreal v)
+bool AnalogInput::setOffset(const double v)
 {
    offset = v;
    return true;
 }
 
-bool AnalogInput::setGain(const LCreal v)
+bool AnalogInput::setGain(const double v)
 {
    gain = v;
    return true;
@@ -207,10 +207,10 @@ bool AnalogInput::setTable(const base::Table1* const msg)
 //------------------------------------------------------------------------------
 // process inputs
 //------------------------------------------------------------------------------
-void AnalogInput::processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData)
+void AnalogInput::processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData)
 {
    // Default is our initial value
-   LCreal vin = value;
+   double vin = value;
 
 
    // Get data from the AI card
@@ -219,7 +219,7 @@ void AnalogInput::processInputs(const LCreal dt, const base::IoDevice* const dev
    }
 
    // process the input value, as needed
-   LCreal vout = convert(vin,dt);
+   double vout = convert(vin,dt);
 
    // Set the data to the input data handler
    if (inData != nullptr) {
@@ -230,26 +230,26 @@ void AnalogInput::processInputs(const LCreal dt, const base::IoDevice* const dev
 //------------------------------------------------------------------------------
 // process outputs
 //------------------------------------------------------------------------------
-void AnalogInput::processOutputs(const LCreal, const base::IoData* const, base::IoDevice* const)
+void AnalogInput::processOutputs(const double, const base::IoData* const, base::IoDevice* const)
 {
 }
 
 //------------------------------------------------------------------------------
 // convert the value, as needed
 //------------------------------------------------------------------------------
-LCreal AnalogInput::convert(const LCreal vin, const LCreal)
+double AnalogInput::convert(const double vin, const double)
 {
    // Deadband
-   LCreal v1 = vin;
+   double v1 = vin;
    if (deadband != 0 && vin < deadband && vin > -deadband) {
       v1 = 0;
    }
 
    // Offset & Gain
-   LCreal v2 = (v1 - offset) * gain;
+   double v2 = (v1 - offset) * gain;
 
    // Shaping function
-   LCreal v3 = v2;
+   double v3 = v2;
    if (table != nullptr) v3 = table->lfi(v2);
 
    // return final value

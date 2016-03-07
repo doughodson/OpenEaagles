@@ -27,24 +27,24 @@ class AoAIndexer : public Instrument
 public:
     AoAIndexer();
 
-    virtual bool setAoaRedMin(const LCreal a);
-    virtual bool setAoaRedMax(const LCreal b);
-    virtual bool setAoaYellowMin(const LCreal a);
-    virtual bool setAoaYellowMax(const LCreal b);
-    virtual bool setAoaGreenMin(const LCreal a);
-    virtual bool setAoaGreenMax(const LCreal b);
+    virtual bool setAoaRedMin(const double a);
+    virtual bool setAoaRedMax(const double b);
+    virtual bool setAoaYellowMin(const double a);
+    virtual bool setAoaYellowMax(const double b);
+    virtual bool setAoaGreenMin(const double a);
+    virtual bool setAoaGreenMax(const double b);
 
-    LCreal getAoaRedMin() const     { return aoaRedMin; }
-    LCreal getAoaRedMax() const     { return aoaRedMax; }
-    LCreal getAoaYellowMin() const  { return aoaYellowMin; }
-    LCreal getAoaYellowMax() const  { return aoaYellowMax; }
-    LCreal getAoaGreenMin() const   { return aoaGreenMin; }
-    LCreal getAoaGreenMax() const   { return aoaGreenMax; }
+    double getAoaRedMin() const     { return aoaRedMin; }
+    double getAoaRedMax() const     { return aoaRedMax; }
+    double getAoaYellowMin() const  { return aoaYellowMin; }
+    double getAoaYellowMax() const  { return aoaYellowMax; }
+    double getAoaGreenMin() const   { return aoaGreenMin; }
+    double getAoaGreenMax() const   { return aoaGreenMax; }
     int    getState() const         { return aoaState; }
 
     void drawFunc() override;
 
-    void updateData(const LCreal dt = 0) override;
+    void updateData(const double dt = 0) override;
 
 protected:
 
@@ -64,12 +64,12 @@ private:
 //
 //  --  -> aoaMin
 
-    LCreal aoaRedMin;       // min value of where the red portion of our aoa lights up
-    LCreal aoaRedMax;       // max value of where the red portion of our aoa lights up
-    LCreal aoaYellowMin;    // min value of where the yellow portion of our aoa lights up
-    LCreal aoaYellowMax;    // max value of where the yellow portion of our aoa lights up
-    LCreal aoaGreenMin;     // min value of where the green portion of our aoa lights up
-    LCreal aoaGreenMax;     // max value of where the green portion of our aoa lights up
+    double aoaRedMin;       // min value of where the red portion of our aoa lights up
+    double aoaRedMax;       // max value of where the red portion of our aoa lights up
+    double aoaYellowMin;    // min value of where the yellow portion of our aoa lights up
+    double aoaYellowMax;    // max value of where the yellow portion of our aoa lights up
+    double aoaGreenMin;     // min value of where the green portion of our aoa lights up
+    double aoaGreenMax;     // max value of where the green portion of our aoa lights up
 
     GLuint displayList;     // our display list name
     bool isDlist;           // do we have a display list?

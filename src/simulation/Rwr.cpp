@@ -86,7 +86,7 @@ bool Rwr::shutdownNotification()
 //------------------------------------------------------------------------------
 // receive() -- process received emissions
 //------------------------------------------------------------------------------
-void Rwr::receive(const LCreal dt)
+void Rwr::receive(const double dt)
 {
    BaseClass::receive(dt);
 
@@ -95,15 +95,15 @@ void Rwr::receive(const LCreal dt)
 
    // Receiver losses
 #if 0
-   LCreal noise = getRfRecvNoise();
+   double noise = getRfRecvNoise();
 #else
-   LCreal noise = getRfRecvNoise() * getRfReceiveLoss();
+   double noise = getRfRecvNoise() * getRfReceiveLoss();
 #endif
 
    // Process received emissions
    TrackManager* tm = getTrackManager();
    Emission* em = nullptr;
-   LCreal signal = 0;
+   double signal = 0;
 
    // Get an emission from the queue
    lcLock(packetLock);
@@ -133,8 +133,8 @@ void Rwr::receive(const LCreal dt)
       if (signal > 0.0 && dt != 0.0) {
 
          // Signal over noise (equation 3-5)
-         const LCreal sn = signal / noise;
-         const LCreal snDbl = 10.0 * lcLog10(sn);
+         const double sn = signal / noise;
+         const double snDbl = 10.0 * lcLog10(sn);
 
          // Is S/N above receiver threshold  ## dpg -- for now, don't include ECM emissions
          if (snDbl > getRfThreshold() && !em->isECM() && rptQueue.isNotFull()) {
@@ -144,12 +144,12 @@ void Rwr::receive(const LCreal dt)
             }
 
             // Get Angle Of Arrival
-            const LCreal aoa= em->getAzimuthAoi();
+            const double aoa= em->getAzimuthAoi();
 
             // Store received power for real-beam display
-            const LCreal sigDbl = 10.0f * lcLog10(signal);
-            const LCreal signal10 = (sigDbl + 50.0f)/50.f;
-            const int idx = getRayIndex( static_cast<LCreal>(base::Angle::R2DCC * aoa) );
+            const double sigDbl = 10.0f * lcLog10(signal);
+            const double signal10 = (sigDbl + 50.0f)/50.f;
+            const int idx = getRayIndex( static_cast<double>(base::Angle::R2DCC * aoa) );
             rays[0][idx] = lim01(rays[0][idx] + signal10);
             //if (idx == 0 && getOwnship()->getID() == 1011) {
             //   std::cout << "sig = " << signal10 << std::endl;
@@ -184,7 +184,7 @@ void Rwr::receive(const LCreal dt)
 //------------------------------------------------------------------------------
 // process() -- process the reports
 //------------------------------------------------------------------------------
-void Rwr::process(const LCreal dt)
+void Rwr::process(const double dt)
 {
    BaseClass::process(dt);
 
@@ -217,9 +217,9 @@ bool Rwr::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 // getRayIndex() --
 //------------------------------------------------------------------------------
-int Rwr::getRayIndex(const LCreal az) const
+int Rwr::getRayIndex(const double az) const
 {
-    LCreal az1 = lcAepcDeg(az);
+    double az1 = lcAepcDeg(az);
     if (az1 < 0.0) az1 += 360.0;
     int idx = static_cast<int>( (az1/ getDegreesPerRay()) + 0.5 );
     if (idx >= NUM_RAYS || idx < 0) idx = 0;
@@ -229,9 +229,9 @@ int Rwr::getRayIndex(const LCreal az) const
 //------------------------------------------------------------------------------
 // getRayAzimuth() --
 //------------------------------------------------------------------------------
-LCreal Rwr::getRayAzimuth(const int idx) const
+double Rwr::getRayAzimuth(const int idx) const
 {
-    const LCreal az = getDegreesPerRay() * static_cast<LCreal>(idx);
+    const double az = getDegreesPerRay() * static_cast<double>(idx);
     return lcAepcDeg(az);
 }
 

@@ -52,7 +52,7 @@ EMPTY_DELETEDATA(LandingLight)
 //------------------------------------------------------------------------------
 // setLightRadius() - how big is our light?
 //------------------------------------------------------------------------------
-bool LandingLight::setLightRadius(const LCreal newLR)
+bool LandingLight::setLightRadius(const double newLR)
 {
     lRadius = newLR;
     return true;
@@ -82,9 +82,9 @@ void LandingLight::drawFunc()
     glGetFloatv(GL_LINE_WIDTH, &lw);
 
     // all we need is the gear up value, and we can toggle accordingly
-    LCreal gearUpVal = getGearUpValue();
-    LCreal gearDownVal = getGearDownValue();
-    LCreal lastC = gearCurrent;
+    double gearUpVal = getGearUpValue();
+    double gearDownVal = getGearDownValue();
+    double lastC = gearCurrent;
     gearCurrent = getInstValue();
 
     glPushMatrix();
@@ -112,13 +112,13 @@ void LandingLight::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() -
 //------------------------------------------------------------------------------
-void LandingLight::updateData(const LCreal dt)
+void LandingLight::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
-    LCreal gearUpVal = getGearUpValue();
-    LCreal gearDownVal = getGearDownValue();
-    LCreal lastC = gearCurrent;
+    double gearUpVal = getGearUpValue();
+    double gearDownVal = getGearDownValue();
+    double lastC = gearCurrent;
     gearCurrent = getInstValue();
 
     int x = 0;

@@ -94,11 +94,11 @@ void Emission::clear()
 //------------------------------------------------------------------------------
 // Sets the range to the target
 //------------------------------------------------------------------------------
-void Emission::setRange(const LCreal r)
+void Emission::setRange(const double r)
 {
    BaseClass::setRange(r);
 
-   if (r > 1.0) lossRng = static_cast<LCreal>(1.0/(4.0 * PI * r * r));
+   if (r > 1.0) lossRng = static_cast<double>(1.0/(4.0 * PI * r * r));
    else lossRng = 1.0;
 }
 

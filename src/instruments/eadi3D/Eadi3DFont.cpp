@@ -12,8 +12,8 @@ EMPTY_SERIALIZER(Eadi3DFont)
 #define YSCALE (1.0/6.0)
 
 // Default font sizes
-const LCreal defaultFontWidth = static_cast<LCreal>(6.0f * XSCALE);
-const LCreal defaultFontHeight = static_cast<LCreal>(7.0f * YSCALE);
+const double defaultFontWidth = static_cast<double>(6.0f * XSCALE);
+const double defaultFontHeight = static_cast<double>(7.0f * YSCALE);
 
 //------------------------------------------------------------------------------
 // Constructor(s)

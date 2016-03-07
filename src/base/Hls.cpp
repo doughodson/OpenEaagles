@@ -28,7 +28,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Hls::Hls(const LCreal h, const LCreal l, const LCreal s)
+Hls::Hls(const double h, const double l, const double s)
 {
    STANDARD_CONSTRUCTOR()
    hls[HUE]        = h;     // set the values
@@ -62,17 +62,17 @@ EMPTY_DELETEDATA(Hls)
 //------------------------------------------------------------------------------
 // Data access functions
 //------------------------------------------------------------------------------
-LCreal Hls::hue() const
+double Hls::hue() const
 {
     return hls[HUE];
 }
 
-LCreal Hls::saturation() const
+double Hls::saturation() const
 {
     return hls[SATURATION];
 }
 
-LCreal Hls::lightness() const
+double Hls::lightness() const
 {
     return hls[LIGHTNESS];
 }
@@ -88,7 +88,7 @@ void Hls::getHLS(osg::Vec3& hhh) const
 bool Hls::setHue(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 360);
     if (ok) { hls[HUE] = value; hls2rgb(color,hls); }
     else std::cerr << "Hls::setHue: invalid entry(" << value << "), valid range: 0 to 360" << std::endl;
@@ -101,7 +101,7 @@ bool Hls::setHue(Number* const msg)
 bool Hls::setSaturation(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hls[SATURATION] = value; hls2rgb(color,hls); }
     else std::cerr << "Hls::setSaturation: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -114,7 +114,7 @@ bool Hls::setSaturation(Number* const msg)
 bool Hls::setLightness(Number* const msg)
 {
     if (msg == nullptr) return false;
-    LCreal value = msg->getReal();
+    double value = msg->getReal();
     bool ok = (value >= 0 && value <= 1);
     if (ok) { hls[LIGHTNESS] = value; hls2rgb(color,hls); }
     else std::cerr << "Hls::setLightness: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -132,7 +132,7 @@ Object* Hls::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // value() -- utility function used in hls2rgb
 //------------------------------------------------------------------------------
-LCreal Hls::value(LCreal n1, LCreal n2, LCreal hue)
+double Hls::value(double n1, double n2, double hue)
 {
     if (hue > 360.0f) hue -= 360.0f;
     if (hue < 0.0f) hue += 360.0f;
@@ -153,7 +153,7 @@ LCreal Hls::value(LCreal n1, LCreal n2, LCreal hue)
 //------------------------------------------------------------------------------
 void Hls::hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls)
 {
-    LCreal m1, m2;
+    double m1, m2;
 
     if (hls[LIGHTNESS] <= 0.5)
         m2 = hls[LIGHTNESS] * (1.0f + hls[SATURATION]);
@@ -181,8 +181,8 @@ void Hls::hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls)
 //------------------------------------------------------------------------------
 void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
 {
-    LCreal rc, gc, bc;
-    LCreal maxcol, mincol, cdelta;
+    double rc, gc, bc;
+    double maxcol, mincol, cdelta;
 
     maxcol = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]));
     mincol = lcMin( rgb[RED], lcMin(rgb[GREEN],rgb[BLUE]));

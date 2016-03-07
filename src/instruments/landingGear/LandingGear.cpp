@@ -82,7 +82,7 @@ bool LandingGear::setSlotGearUpValue(const base::Number* const newUV)
 //------------------------------------------------------------------------------
 // setGearDownValue() - set the value at which the gear goes down
 //------------------------------------------------------------------------------
-bool LandingGear::setGearDownValue(const LCreal newDV)
+bool LandingGear::setGearDownValue(const double newDV)
 {
     gearDV = newDV;
     return true;
@@ -91,7 +91,7 @@ bool LandingGear::setGearDownValue(const LCreal newDV)
 //------------------------------------------------------------------------------
 // setGearUpValue() -
 //------------------------------------------------------------------------------
-bool LandingGear::setGearUpValue(const LCreal newUV)
+bool LandingGear::setGearUpValue(const double newUV)
 {
     gearUV = newUV;
     return true;
@@ -100,12 +100,12 @@ bool LandingGear::setGearUpValue(const LCreal newUV)
 //------------------------------------------------------------------------------
 // updateData() - update non time-critical stuff here
 //------------------------------------------------------------------------------
-void LandingGear::updateData(const LCreal dt)
+void LandingGear::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
     // this will store our last value, so we know which way we are going
-    LCreal lastPos = gearPos;
+    double lastPos = gearPos;
     gearPos = getInstValue();
 
     if (gearPos == gearUV) {

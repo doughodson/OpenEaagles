@@ -19,7 +19,7 @@ class LaeroModel : public simulation::AerodynamicsModel
 public:
    LaeroModel();
 
-   void dynamics(const LCreal dt) override;  // One pass model update; called from Player::dynamics()
+   void dynamics(const double dt) override;  // One pass model update; called from Player::dynamics()
    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
    bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
@@ -44,7 +44,7 @@ private:
    static const double HALF_PI;
    static const double EPSILON;
    void initData();
-   void update4DofModel(const LCreal dt);
+   void update4DofModel(const double dt);
 
    double dT;
 

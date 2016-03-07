@@ -151,7 +151,7 @@ void SimLogger::copyData(const SimLogger& org, const bool)
 //------------------------------------------------------------------------------
 // updateTC() -- Update the simulation log time
 //------------------------------------------------------------------------------
-void SimLogger::updateTC(const LCreal dt)
+void SimLogger::updateTC(const double dt)
 {
     BaseClass::updateTC(dt);
 
@@ -180,7 +180,7 @@ void SimLogger::updateTC(const LCreal dt)
 // updateData() -- During background we'll build & send the descriptions of the
 //                 simulation events to the log file.
 //------------------------------------------------------------------------------
-void SimLogger::updateData(const LCreal dt)
+void SimLogger::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -441,8 +441,8 @@ std::ostream& SimLogger::SimLogEvent::makeTimeMsg(std::ostream& sout)
     char cbuf[16];
     int hh = 0;     // Hours
     int mm = 0;     // Min
-    LCreal ss = 0;  // Sec
-    base::Time::getHHMMSS(static_cast<LCreal>(time), &hh, &mm, &ss);
+    double ss = 0;  // Sec
+    base::Time::getHHMMSS(static_cast<double>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
     return sout;
@@ -457,10 +457,10 @@ std::ostream& SimLogger::SimLogEvent::makeExecTimeMsg(std::ostream& sout)
     char cbuf[16];
     int hh = 0;     // Hours
     int mm = 0;     // Min
-    LCreal ss = 0;  // Sec
+    double ss = 0;  // Sec
 
     // exec time
-    base::Time::getHHMMSS(static_cast<LCreal>(execTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<double>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
@@ -475,10 +475,10 @@ std::ostream& SimLogger::SimLogEvent::makeUtcTimeMsg(std::ostream& sout)
     char cbuf[16];
     int hh = 0;     // Hours
     int mm = 0;     // Min
-    LCreal ss = 0;  // Sec
+    double ss = 0;  // Sec
 
     // sim time
-    base::Time::getHHMMSS(static_cast<LCreal>(utcTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<double>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
@@ -493,10 +493,10 @@ std::ostream& SimLogger::SimLogEvent::makeSimTimeMsg(std::ostream& sout)
     char cbuf[16];
     int hh = 0;     // Hours
     int mm = 0;     // Min
-    LCreal ss = 0;  // Sec
+    double ss = 0;  // Sec
 
     // utc time
-    base::Time::getHHMMSS(static_cast<LCreal>(simTime), &hh, &mm, &ss);
+    base::Time::getHHMMSS(static_cast<double>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 
@@ -1118,7 +1118,7 @@ SIMLOGEVENT_B(DetonationEvent,"SimLogger::DetonationEvent")
 EMPTY_SERIALIZER(SimLogger::DetonationEvent)
 
 // Constructor
-SimLogger::DetonationEvent::DetonationEvent(Player* const lancher, Player* const wpn, Player* const tgt, const unsigned int t, const LCreal d)
+SimLogger::DetonationEvent::DetonationEvent(Player* const lancher, Player* const wpn, Player* const tgt, const unsigned int t, const double d)
 {
     STANDARD_CONSTRUCTOR()
     thePlayer = lancher;

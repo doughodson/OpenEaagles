@@ -77,8 +77,8 @@ void DiffEquation::allocateMemory(unsigned int n0)
 
       // Allocate the new space
       if (n0 > 0) {
-         pa = new LCreal[n0];
-         pb = new LCreal[n0];
+         pa = new double[n0];
+         pb = new double[n0];
       }
    }
 }
@@ -97,7 +97,7 @@ void DiffEquation::clearMemory()
 //------------------------------------------------------------------------------
 // g() is one iteration of the difference equation.
 //------------------------------------------------------------------------------
-LCreal DiffEquation::g(const LCreal xn)
+double DiffEquation::g(const double xn)
 {
    if (isValid()) {
 

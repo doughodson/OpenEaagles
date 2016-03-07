@@ -243,7 +243,7 @@ void Component::reset()
 //------------------------------------------------------------------------------
 // tcFrame() -- Main time-critical frame
 //------------------------------------------------------------------------------
-void Component::tcFrame(const LCreal dt)
+void Component::tcFrame(const double dt)
 {
    // ---
    // Collect start time
@@ -302,7 +302,7 @@ void Component::printTimingStats()
 //------------------------------------------------------------------------------
 // updateTC() -- Update time critical stuff here
 //------------------------------------------------------------------------------
-void Component::updateTC(const LCreal dt)
+void Component::updateTC(const double dt)
 {
     // Update all my children
     PairStream* subcomponents = getComponents();
@@ -335,7 +335,7 @@ void Component::updateTC(const LCreal dt)
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void Component::updateData(const LCreal dt)
+void Component::updateData(const double dt)
 {
     // Update all my children
     PairStream* subcomponents = getComponents();
@@ -1026,7 +1026,7 @@ bool Component::send(const char* const id, const int event, const int value, Sen
 bool Component::send(const char* const id, const int event, const float value, SendData& sd)
 {
    bool val = false;
-   Object* vv = sd.getValue(static_cast<LCreal>(value));
+   Object* vv = sd.getValue(static_cast<double>(value));
    if (vv != nullptr) {
       Component* g = sd.getObject(this,id);
       if (g != nullptr) val = g->event(event,vv);
@@ -1038,7 +1038,7 @@ bool Component::send(const char* const id, const int event, const float value, S
 bool Component::send(const char* const id, const int event, const double value, SendData& sd)
 {
    bool val = false;
-   Object* vv = sd.getValue(static_cast<LCreal>(value));
+   Object* vv = sd.getValue(static_cast<double>(value));
    if (vv != nullptr) {
       Component* g = sd.getObject(this,id);
       if (g != nullptr) val = g->event(event,vv);
@@ -1410,7 +1410,7 @@ Object* Component::SendData::getValue(const float value)
         past = new Float(value);
         return past;
     }
-    if (*num != static_cast<LCreal>(value)) {
+    if (*num != static_cast<double>(value)) {
         *num = value;
         return num;
     }

@@ -416,8 +416,8 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
                      }
                      else {
                         // Occulting check between two standard player
-                        occulted = terrain->targetOcculting(osLat, osLon, static_cast<LCreal>(osAlt),
-                                                            tgtLat, tgtLon, static_cast<LCreal>(tgtAlt));
+                        occulted = terrain->targetOcculting(osLat, osLon, static_cast<double>(osAlt),
+                                                            tgtLat, tgtLon, static_cast<double>(tgtAlt));
                      }
                   }
 

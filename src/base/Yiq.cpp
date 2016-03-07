@@ -28,7 +28,7 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-Yiq::Yiq(const LCreal y, const LCreal i, const LCreal q)
+Yiq::Yiq(const double y, const double i, const double q)
 {
    STANDARD_CONSTRUCTOR()
    yiq[Y] = y;     // set the values
@@ -62,17 +62,17 @@ EMPTY_DELETEDATA(Yiq)
 //------------------------------------------------------------------------------
 // Data access functions
 //------------------------------------------------------------------------------
-LCreal Yiq::y() const
+double Yiq::y() const
 {
     return yiq[Y];
 }
 
-LCreal Yiq::i() const
+double Yiq::i() const
 {
     return yiq[I];
 }
 
-LCreal Yiq::q() const
+double Yiq::q() const
 {
     return yiq[Q];
 }
@@ -88,7 +88,7 @@ void Yiq::getYIQ(osg::Vec3& hhh) const
 bool Yiq::setY(Number* const msg)
 {
     if (msg == nullptr) return false;
-    const LCreal value = msg->getReal();
+    const double value = msg->getReal();
     const bool ok = (value >= 0 && value <= 1);
     if (ok) { yiq[Y] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
@@ -101,7 +101,7 @@ bool Yiq::setY(Number* const msg)
 bool Yiq::setI(Number* const msg)
 {
     if (msg == nullptr) return false;
-    const LCreal value = msg->getReal();
+    const double value = msg->getReal();
     const bool ok = (value >= -0.6 && value <= 0.6);
     if (ok) { yiq[I] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setI: invalid entry(" << value << "), valid range: -0.6 to 0.6" << std::endl;
@@ -114,7 +114,7 @@ bool Yiq::setI(Number* const msg)
 bool Yiq::setQ(Number* const msg)
 {
     if (msg == nullptr) return false;
-    const LCreal value = msg->getReal();
+    const double value = msg->getReal();
     const bool ok = (value >= -0.52 && value <= 0.52);
     if (ok) { yiq[Q] = value; yiq2rgb(color,yiq); }
     else std::cerr << "Yiq::setQ: invalid entry(" << value << "), valid range: -0.52 to 0.52" << std::endl;

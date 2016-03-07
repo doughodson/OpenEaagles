@@ -54,12 +54,12 @@ public:
    SignalGen();
 
    Signal getSignalType() const;
-   LCreal getFrequency() const;     // Hz
-   LCreal getPhase() const;         // Radians
+   double getFrequency() const;     // Hz
+   double getPhase() const;         // Radians
 
    bool setSignalType(const Signal);
-   bool setFrequency(const LCreal); // Hz
-   bool setPhase(const LCreal);     // Radians
+   bool setFrequency(const double); // Hz
+   bool setPhase(const double);     // Radians
 
    // IoData's AI channel (AI signal generator only)
    unsigned int getLocation() const;
@@ -69,14 +69,14 @@ public:
    unsigned int getChannel() const;
    bool setChannel(const unsigned int);
 
-   void processInputs(const LCreal dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const LCreal dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
    void reset() override;
 
 protected:
    // AnalogOutput interface
-   LCreal calc(const LCreal dt);
+   double calc(const double dt);
 
    // Slot functions
    virtual bool setSlotLocation(const base::Number* const msg);
@@ -92,8 +92,8 @@ private:
    unsigned int channel;   // AO signal gen: Output device channel number
 
    Signal signal;          // Signal type
-   LCreal phase;           // Phase shift (rad)
-   LCreal freq;            // Frequency (rad/sec)
+   double phase;           // Phase shift (rad)
+   double freq;            // Frequency (rad/sec)
    double time;            // Time since last reset
 };
 

@@ -25,12 +25,12 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Cmy(const LCreal c, const LCreal m, const LCreal y)
+//      Cmy(const double c, const double m, const double y)
 //          Special constructor that initializes the object to c, m, and y
 //
-//      LCreal cyan()
-//      LCreal magenta()
-//      LCreal yellow()
+//      double cyan()
+//      double magenta()
+//      double yellow()
 //          Data access routines.  Returns the individual CMY components.
 //
 //      getCMY(osg::Vec3 cmy)
@@ -57,12 +57,12 @@ public:
     enum { CYAN, MAGENTA, YELLOW };
 
 public:
-    Cmy(const LCreal c, const LCreal m, const LCreal y);
+    Cmy(const double c, const double m, const double y);
     Cmy();
 
-    LCreal cyan() const;
-    LCreal magenta() const;
-    LCreal yellow() const;
+    double cyan() const;
+    double magenta() const;
+    double yellow() const;
     void getCMY(osg::Vec3& cmy) const;
 
     virtual bool setCyan(Number* const msg);

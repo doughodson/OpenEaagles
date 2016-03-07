@@ -28,13 +28,13 @@ class Translator : public Graphic
 public:
     Translator();
 
-    LCreal getXPos() const        { return myXPos; }    // Returns the X position (world coord)
-    LCreal getYPos() const        { return myYPos; }    // Returns the Y position (world coord)
-    LCreal getZPos() const        { return myZPos; }    // Returns the Z position (world coord)
+    double getXPos() const        { return myXPos; }    // Returns the X position (world coord)
+    double getYPos() const        { return myYPos; }    // Returns the Y position (world coord)
+    double getZPos() const        { return myZPos; }    // Returns the Z position (world coord)
 
-    bool setXPos(const LCreal xPos);                    // Sets the X position (world coord)
-    bool setYPos(const LCreal yPos);                    // Sets the Y position (world coord)
-    bool setZPos(const LCreal zPos);                    // Sets the Z position (world coord)
+    bool setXPos(const double xPos);                    // Sets the X position (world coord)
+    bool setYPos(const double yPos);                    // Sets the Y position (world coord)
+    bool setZPos(const double zPos);                    // Sets the Z position (world coord)
 
     void draw() override;
 
@@ -46,9 +46,9 @@ private:
     bool onUpdateY(const base::Number* const newY);
     bool onUpdateZ(const base::Number* const newZ);
 
-    LCreal myXPos;
-    LCreal myYPos;
-    LCreal myZPos;
+    double myXPos;
+    double myYPos;
+    double myZPos;
 };
 
 } // End graphics namespace

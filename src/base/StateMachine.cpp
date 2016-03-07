@@ -132,7 +132,7 @@ void StateMachine::reset()
 //------------------------------------------------------------------------------
 // updateData() -- update background data here
 //------------------------------------------------------------------------------
-void StateMachine::updateData(const LCreal dt)
+void StateMachine::updateData(const double dt)
 {
    if (stMach != nullptr) stMach->updateData(dt);
    BaseClass::updateData(dt);
@@ -141,7 +141,7 @@ void StateMachine::updateData(const LCreal dt)
 // -----------------------------------------------------------------
 // updateTC() -- one iteration step of the state machine
 // -----------------------------------------------------------------
-void StateMachine::updateTC(const LCreal dt)
+void StateMachine::updateTC(const double dt)
 {
    // Step state machine
    step(dt);
@@ -153,7 +153,7 @@ void StateMachine::updateTC(const LCreal dt)
 // -----------------------------------------------------------------
 // One iteration step of the state machine
 // -----------------------------------------------------------------
-void StateMachine::step(const LCreal dt)
+void StateMachine::step(const double dt)
 {
    // ---
    // 1) If requested, step into a new state
@@ -399,7 +399,7 @@ bool StateMachine::onReturn(Object* const msg)
 // Default procedure that's called by stepState just before
 // the state specific procedure
 // -----------------------------------------------------------------
-void StateMachine::preStateProc(const LCreal)
+void StateMachine::preStateProc(const double)
 {
 }
 
@@ -407,7 +407,7 @@ void StateMachine::preStateProc(const LCreal)
 // Default procedure that's called by stepState just after
 // the state specific procedure
 // -----------------------------------------------------------------
-void StateMachine::postStateProc(const LCreal)
+void StateMachine::postStateProc(const double)
 {
 }
 

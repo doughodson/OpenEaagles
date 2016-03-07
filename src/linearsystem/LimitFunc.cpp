@@ -21,7 +21,7 @@ LimitFunc::LimitFunc()
    initData();
 }
 
-LimitFunc::LimitFunc(const LCreal ll, const LCreal uu) : ScalerFunc()
+LimitFunc::LimitFunc(const double ll, const double uu) : ScalerFunc()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -87,7 +87,7 @@ bool LimitFunc::isValid() const
 //------------------------------------------------------------------------------
 // g() is one iteration of the difference equation.
 //------------------------------------------------------------------------------
-LCreal LimitFunc::g(const LCreal xn)
+double LimitFunc::g(const double xn)
 {
    if (isValid()) {
 
@@ -95,7 +95,7 @@ LCreal LimitFunc::g(const LCreal xn)
       px[0] = xn;
 
       // LimitFunc the input
-      LCreal tmp = xn;
+      double tmp = xn;
 
       if (tmp > upper) tmp = upper;
       else if (tmp < lower) tmp = lower;
@@ -128,14 +128,14 @@ void LimitFunc::initialize()
 // Set functions
 //------------------------------------------------------------------------------
 
-bool LimitFunc::setLowerLimit(const LCreal v)
+bool LimitFunc::setLowerLimit(const double v)
 {
    lower = v;
    initialize();
    return true;
 }
 
-bool LimitFunc::setUpperLimit(const LCreal v)
+bool LimitFunc::setUpperLimit(const double v)
 {
    upper = v;
    initialize();

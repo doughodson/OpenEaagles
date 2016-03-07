@@ -40,7 +40,7 @@ AngularVelocity::AngularVelocity()
     val = 1;
 }
 
-AngularVelocity::AngularVelocity(const LCreal newAngularVelocityRadiansPerSec)
+AngularVelocity::AngularVelocity(const double newAngularVelocityRadiansPerSec)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -66,14 +66,14 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
     //Check and convert the angle to radians
     if (newAngle != nullptr)
     {
-        LCreal finalAngle = static_cast<LCreal>(Radians::convertStatic(*newAngle));
+        double finalAngle = static_cast<double>(Radians::convertStatic(*newAngle));
         okAngle = setRadians(finalAngle);
     }
 
     //Check and convert the time to seconds
     if (newTime != nullptr)
     {
-        LCreal finaltime = Seconds::convertStatic( *newTime );
+        double finaltime = Seconds::convertStatic( *newTime );
         okTime = setSeconds(finaltime);
     }
 
@@ -90,36 +90,36 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
 //------------------------------------------------------------------------------
 // getAngularVelocity() -- returns Angular Velocity:
 //------------------------------------------------------------------------------
-LCreal AngularVelocity::getRadiansPerSecond() const
+double AngularVelocity::getRadiansPerSecond() const
 {
-    return static_cast<LCreal>(val);
+    return static_cast<double>(val);
 }
 
 //------------------------------------------------------------------------------
 // convert() -- converts from radians/sec to desired angle/time ratio:
 //    NOTE: This ignores values of input - only the object type is used
 //------------------------------------------------------------------------------
-LCreal AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
+double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
 {
 
     //Init a num to -1 as a check:
-    LCreal desiredAngle = -1.0f;
-    LCreal desiredTime = -1.0f;
-    LCreal desiredResult = -1.0f;
+    double desiredAngle = -1.0f;
+    double desiredTime = -1.0f;
+    double desiredResult = -1.0f;
 
     //Set input opject's internal value to 1 as a precaution:
     newAngleUnit->setValue(1);
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Angle to convert angles:
-    Radians* internalRadians = new Radians(static_cast<LCreal>(angle));
+    Radians* internalRadians = new Radians(static_cast<double>(angle));
 
     //Find out what units the angle is in:
     if (dynamic_cast<Degrees*>(newAngleUnit) != nullptr)
     {
         //New angle is in degrees:
         Degrees* degrees = new Degrees;
-        desiredAngle = static_cast<LCreal>(degrees->convert(*internalRadians));
+        desiredAngle = static_cast<double>(degrees->convert(*internalRadians));
         degrees->unref();
     }
     else if (dynamic_cast<Radians*>(newAngleUnit) != nullptr)
@@ -131,7 +131,7 @@ LCreal AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     {
         //New angle is in semicircles:
         Semicircles* semicircles = new Semicircles;
-        desiredAngle = static_cast<LCreal>(semicircles->convert(*internalRadians));
+        desiredAngle = static_cast<double>(semicircles->convert(*internalRadians));
         semicircles->unref();
     }
     else
@@ -182,7 +182,7 @@ LCreal AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
 //------------------------------------------------------------------------------
 // setRadiansPerSecond() -- sets our angularVelocity:
 //------------------------------------------------------------------------------
-bool AngularVelocity::setRadiansPerSecond(const LCreal newAngularVelocity)
+bool AngularVelocity::setRadiansPerSecond(const double newAngularVelocity)
 {
 
     //Set angle and time - units in radians per second -> num = input; den = 1:
@@ -205,7 +205,7 @@ bool AngularVelocity::setSlotAngle(const Angle* const msg)
     //Try to convert Number to an angle:
     if(msg != nullptr)
     {
-        LCreal finalNumber = static_cast<LCreal>(Radians::convertStatic(*msg));
+        double finalNumber = static_cast<double>(Radians::convertStatic(*msg));
         ok = setRadians(finalNumber);
     }
     return ok;
@@ -221,7 +221,7 @@ bool AngularVelocity::setSlotTime(const Time* const msg)
     //Try to convert Number to a time:
     if(msg != nullptr)
     {
-        LCreal finalNumber = Seconds::convertStatic(*msg);
+        double finalNumber = Seconds::convertStatic(*msg);
         ok = setSeconds(finalNumber);
     }
     return ok;
@@ -230,10 +230,10 @@ bool AngularVelocity::setSlotTime(const Time* const msg)
 //------------------------------------------------------------------------------
 // setDegrees() -- sets angle of object in (degrees):
 //------------------------------------------------------------------------------
-bool AngularVelocity::setDegrees(const LCreal newAngle)
+bool AngularVelocity::setDegrees(const double newAngle)
 {
     //Set the angle in radians:
-    bool ok = setRadians( newAngle * static_cast<LCreal>(Angle::D2RCC) );
+    bool ok = setRadians( newAngle * static_cast<double>(Angle::D2RCC) );
 
     return ok;
 }
@@ -241,7 +241,7 @@ bool AngularVelocity::setDegrees(const LCreal newAngle)
 //------------------------------------------------------------------------------
 // setRadians() -- sets angle of object in (radians):
 //------------------------------------------------------------------------------
-bool AngularVelocity::setRadians(const LCreal newAngle)
+bool AngularVelocity::setRadians(const double newAngle)
 {
     angle = newAngle;
     //Update new angular velocity:
@@ -252,7 +252,7 @@ bool AngularVelocity::setRadians(const LCreal newAngle)
 //------------------------------------------------------------------------------
 // setTime() -- sets time of object in (seconds):
 //------------------------------------------------------------------------------
-bool AngularVelocity::setSeconds(const LCreal newTime)
+bool AngularVelocity::setSeconds(const double newTime)
 {
     //Set Time:
     time = newTime;

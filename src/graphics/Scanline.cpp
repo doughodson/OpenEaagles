@@ -101,7 +101,7 @@ void Scanline::setMatrix()
    mat.makeIdentity();
 
    // translate origin from center to lower left corner
-   rr.makeTranslate((static_cast<LCreal>(ix-1)/2.0f), (static_cast<LCreal>(iy-1)/2.0f), 0.0f);
+   rr.makeTranslate((static_cast<double>(ix-1)/2.0f), (static_cast<double>(iy-1)/2.0f), 0.0f);
    mat.preMult(rr);
 
    // rotate
@@ -109,8 +109,8 @@ void Scanline::setMatrix()
    mat.preMult(rr);
 
    // scale world area size to window size
-   LCreal scaleX = static_cast<LCreal>(ix-1)/sx;
-   LCreal scaleY = static_cast<LCreal>(iy-1)/sy;
+   double scaleX = static_cast<double>(ix-1)/sx;
+   double scaleY = static_cast<double>(iy-1)/sy;
    rr.makeScale(scaleX, scaleY, 1.0f);
    mat.preMult(rr);
 
@@ -180,15 +180,15 @@ void Scanline::sortEdges(Edge* tbl[], const int n, const int index)
 // setArea() -- set the world coord area that we are going to clip and scan convert
 //------------------------------------------------------------------------------
 void Scanline::setArea(
-      const LCreal xCenter, const LCreal yCenter,
-      const LCreal xSize, const LCreal ySize,
-      const LCreal zRotDeg)
+      const double xCenter, const double yCenter,
+      const double xSize, const double ySize,
+      const double zRotDeg)
 {
    cx = xCenter;
    cy = yCenter;
    sx = xSize;
    sy = ySize;
-   angle = zRotDeg * static_cast<LCreal>(base::Angle::D2RCC);
+   angle = zRotDeg * static_cast<double>(base::Angle::D2RCC);
    setMatrix();
 }
 
@@ -200,7 +200,7 @@ void Scanline::setSize(const unsigned int x, const unsigned int y)
    ix = x;
    iy = y;
    setMatrix();
-   clipper->setClippingBox(0.0f, static_cast<LCreal>(ix-1), 0.0f, static_cast<LCreal>(iy-1));
+   clipper->setClippingBox(0.0f, static_cast<double>(ix-1), 0.0f, static_cast<double>(iy-1));
 }
 
 //------------------------------------------------------------------------------
@@ -477,7 +477,7 @@ void Scanline::scanline(const int y)
    // reset some values
    curPoly = nullptr;
    curX = 0.0f;
-   curY = static_cast<LCreal>(y);
+   curY = static_cast<double>(y);
    refAET = 0;
    nAPT = 0;
 
@@ -498,8 +498,8 @@ void Scanline::scanline(const int y)
 
    // Update x positions and normals of edges in the AET
    for (unsigned int i = 0; i < nAET; i++) {
-      LCreal dist = curY - aet[i]->lv[1];
-      aet[i]->x = static_cast<LCreal>(aet[i]->lv[0]) + aet[i]->slope*dist;
+      double dist = curY - aet[i]->lv[1];
+      aet[i]->x = static_cast<double>(aet[i]->lv[0]) + aet[i]->slope*dist;
       aet[i]->cn = aet[i]->lvn + aet[i]->nslope * dist;
    }
 
@@ -514,7 +514,7 @@ void Scanline::scanline(const int y)
 const Scanline::PolyData* Scanline::step(const int x)
 {
    curPoly = nullptr;
-   curX = static_cast<LCreal>(x);
+   curX = static_cast<double>(x);
 
    // Hit an edge?  Update the active polygon table.
    while (refAET < nAET && curX >= aet[refAET]->x) {
@@ -533,10 +533,10 @@ const Scanline::PolyData* Scanline::step(const int x)
    else if (nAPT > 1) {
       // when there are several active polygon, we choose the one on top
       osg::Vec2 point(curX,curY);
-      LCreal zmin = apt[0]->polygon->calcZ(point);
+      double zmin = apt[0]->polygon->calcZ(point);
       curPoly = apt[0];
       for (unsigned int i = 1; i < nAPT; i++) {
-         LCreal z = apt[i]->polygon->calcZ(point);
+         double z = apt[i]->polygon->calcZ(point);
          //if (z > (zmin + 0.1f)) {
          if (z > zmin) {
             // when this polygon is higher than the previous
@@ -584,7 +584,7 @@ void Scanline::toggleActivePolygon()
             p->aptEdge2 = false;
             p->n0 = aet[refAET]->cn;
             p->x0 = aet[refAET]->x;
-            LCreal deltaX = (aet[j]->x - p->x0);
+            double deltaX = (aet[j]->x - p->x0);
             if (deltaX > 0.0f) {
                osg::Vec3 deltaNorm = aet[j]->cn - aet[refAET]->cn;
                p->nslope = deltaNorm * (1.0f/deltaX);
@@ -677,9 +677,9 @@ void Scanline::PolyData::deleteData()
 // Functions --
 //------------------------------------------------------------------------------
 
-void Scanline::PolyData::getNorm(osg::Vec3& cnorm, const LCreal x) const
+void Scanline::PolyData::getNorm(osg::Vec3& cnorm, const double x) const
 {
-   LCreal dist = x - x0;
+   double dist = x - x0;
    cnorm = n0 + nslope * dist;
 }
 
@@ -707,9 +707,9 @@ Scanline::Edge::Edge() : polygon(nullptr)
 }
 
 Scanline::Edge::Edge(
-               const LCreal v0[2],
+               const double v0[2],
                const osg::Vec3& vn0,
-               const LCreal v1[2],
+               const double v1[2],
                const osg::Vec3& vn1,
                PolyData* const p
             ) : polygon(nullptr)
@@ -732,7 +732,7 @@ Scanline::Edge::Edge(
    cn = lvn;
 
    if (uv[1] > lv[1]) {
-      LCreal deltaY = (uv[1] - lv[1]);
+      double deltaY = (uv[1] - lv[1]);
       slope = (uv[0] - lv[0]) / deltaY ;
       nslope = (uvn - lvn) * (1.0f/deltaY);
       valid = true;
@@ -753,8 +753,8 @@ Scanline::Edge::Edge(
 }
 
 Scanline::Edge::Edge(
-               const LCreal v0[2],
-               const LCreal v1[2],
+               const double v0[2],
+               const double v1[2],
                PolyData* const p
             ) : polygon(nullptr)
 {

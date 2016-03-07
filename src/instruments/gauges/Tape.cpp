@@ -172,20 +172,20 @@ bool Tape::setSlotConvert(const base::Number* const x)
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Tape::updateData(const LCreal dt)
+void Tape::updateData(const double dt)
 {
    // update our base class
    BaseClass::updateData(dt);
 
     // std::cout << "INSTRUMENT VALUE = " << getInstValue() << std::endl;
-    LCreal x = getInstValue();
+    double x = getInstValue();
 
     // we take our range, add another for the 0, and then add 2 more for fillers
     int perRange = static_cast<int>(range / increment) + 3;
     // based on that we know how many numbers we have
 
     // we are diving by 100, so we need to find the nearest 100!
-    LCreal temp = x / increment;
+    double temp = x / increment;
     int nearest = nint(temp);
 
     //std::cout << "NEAREST = " << nearest << std::endl;
@@ -197,7 +197,7 @@ void Tape::updateData(const LCreal dt)
 
     //std::cout << "PER RANGE = " << perRange << std::endl;
     // this if for the hundreds
-    LCreal tempVal = 0;
+    double tempVal = 0;
     int vis = 0;
     for (int i = 0; i < MAX_NUMBERS; i++) {
         vis = 0;
@@ -230,7 +230,7 @@ void Tape::updateData(const LCreal dt)
 
         // no max and min, we show everything!
         // now determine our thousands values
-        tempVal = (static_cast<LCreal>(val) / 1000);
+        tempVal = (static_cast<double>(val) / 1000);
         //if (tempVal < 1 && !showNegative) numberValsThousVis[i] = 0;
         //else numberValsThousVis[i] = 0;
         numberValsThousVis[i] = vis;
@@ -243,8 +243,8 @@ void Tape::updateData(const LCreal dt)
     send("number%dhunds", SET_VISIBILITY, numberValsHundsVis, numberValsHundsVisSD, MAX_NUMBERS);
     send("number%dthous", SET_VISIBILITY, numberValsThousVis, numberValsThousVisSD, MAX_NUMBERS);
 
-    LCreal unitsOfHeightPerRange = height/range;
-    LCreal newVal = (nearest * increment) - x;
+    double unitsOfHeightPerRange = height/range;
+    double newVal = (nearest * increment) - x;
     newVal *= unitsOfHeightPerRange;
         //std::cout << "NEW VALUE = " << newVal << std::endl;
 

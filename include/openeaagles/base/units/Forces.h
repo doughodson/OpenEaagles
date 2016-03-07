@@ -14,31 +14,31 @@
 //
 // Public methods (Defined in Force, and inherited by all derived classes):
 //
-//     set(const LCreal v)
-//        Sets a Force derived instance with an LCreal.
+//     set(const double v)
+//        Sets a Force derived instance with an double.
 //
 //     set(const Force& n)
 //        Sets, and converts if necessary, a Force derived instance with
 //        another Force derived instance.
 //
-//     LCreal convert(const Force& n)
+//     double convert(const Force& n)
 //        Converts the value of a Force derived instance into
 //        the units of another Force derived instance.
 //
 //
 //     Conversion routines:
-//        static LCreal newtonsToKiloNewtons(const LCreal v)     { return v * 0.001; }
-//        static LCreal newtonsToPoundForces(const LCreal v)     { return v * 0.2248; }
-//        static LCreal newtonsToPoundals(const LCreal v)        { return v * 7.233; }
-//        static LCreal kiloNewtonsToNewtons(const LCreal v)     { return v * 1000; }
-//        static LCreal kiloNetonsToPoundForces(const LCreal v)  { return v * 224.8; }
-//        static LCreal kiloNewtonsToPoundals(const LCreal v)    { return v * 7233; }
-//        static LCreal poundForcesToNewtons(const LCreal v)     { return v * 4.448; }
-//        static LCreal poundForcesToKiloNewtons(const LCreal v) { return v * 0.004448; }
-//        static LCreal poundForcesToPoundals(const LCreal v)    { return v * 32.17; }
-//        static LCreal poundalsToNewtons(const LCreal v)        { return v * 0.1383; }
-//        static LCreal poundalsToKiloNewtons(const LCreal v)    { return v * 0.0001383; }
-//        static LCreal poundalsToPoundForces(const LCreal v)    { return v * 0.03108; }
+//        static double newtonsToKiloNewtons(const double v)     { return v * 0.001; }
+//        static double newtonsToPoundForces(const double v)     { return v * 0.2248; }
+//        static double newtonsToPoundals(const double v)        { return v * 7.233; }
+//        static double kiloNewtonsToNewtons(const double v)     { return v * 1000; }
+//        static double kiloNetonsToPoundForces(const double v)  { return v * 224.8; }
+//        static double kiloNewtonsToPoundals(const double v)    { return v * 7233; }
+//        static double poundForcesToNewtons(const double v)     { return v * 4.448; }
+//        static double poundForcesToKiloNewtons(const double v) { return v * 0.004448; }
+//        static double poundForcesToPoundals(const double v)    { return v * 32.17; }
+//        static double poundalsToNewtons(const double v)        { return v * 0.1383; }
+//        static double poundalsToKiloNewtons(const double v)    { return v * 0.0001383; }
+//        static double poundalsToPoundForces(const double v)    { return v * 0.03108; }
 //
 //     Output stream operator: >>
 //        ostream& operator<<(ostream& sout, const Force& n)
@@ -48,7 +48,7 @@
 //
 // Public methods (For classes:  Newtons, KiloNewtons, PoundForce, Poundals):
 //
-//     LCreal convertStatic(const Force& n)
+//     double convertStatic(const Force& n)
 //        static function to convert the given Force derived
 //        instance into the units of a specific Force derived class.
 //
@@ -88,36 +88,36 @@ class Force : public Number
 
 public:
     Force();
-    Force(const LCreal value);
+    Force(const double value);
 
-    void set(const LCreal v) { val = v; }
+    void set(const double v) { val = v; }
     void set(const Force& n) { val = fromForce(n.toForce()); }
 
-    virtual LCreal toForce() const = 0;
-    virtual LCreal fromForce(const LCreal a) const = 0;
-    LCreal convert(const Force& n){ return fromForce(n.toForce()); }
+    virtual double toForce() const = 0;
+    virtual double fromForce(const double a) const = 0;
+    double convert(const Force& n){ return fromForce(n.toForce()); }
 
     // Conversions between Forces
-    static LCreal newtonsToKiloNewtons(const LCreal v)     { return v * N2KN; }
-    static LCreal newtonsToPoundForces(const LCreal v)     { return v * N2PF; }
-    static LCreal newtonsToPoundals(const LCreal v)        { return v * N2PD; }
-    static LCreal kiloNewtonsToNewtons(const LCreal v)     { return v * KN2N; }
-    static LCreal kiloNewtonsToPoundForces(const LCreal v) { return (v * KN2N) * N2PF; }
-    static LCreal kiloNewtonsToPoundals(const LCreal v)    { return (v * KN2N) * N2PD; }
-    static LCreal poundForcesToNewtons(const LCreal v)     { return v * PF2N; }
-    static LCreal poundForcesToKiloNewtons(const LCreal v) { return (v * PF2N) * N2KN; }
-    static LCreal poundForcesToPoundals(const LCreal v)    { return (v * PF2N) * N2PD; }
-    static LCreal poundalsToNewtons(const LCreal v)        { return v * PD2N; }
-    static LCreal poundalsToKiloNewtons(const LCreal v)    { return (v * PD2N) * N2KN; }
-    static LCreal poundalsToPoundForces(const LCreal v)    { return (v * PD2N) * N2PF; }
+    static double newtonsToKiloNewtons(const double v)     { return v * N2KN; }
+    static double newtonsToPoundForces(const double v)     { return v * N2PF; }
+    static double newtonsToPoundals(const double v)        { return v * N2PD; }
+    static double kiloNewtonsToNewtons(const double v)     { return v * KN2N; }
+    static double kiloNewtonsToPoundForces(const double v) { return (v * KN2N) * N2PF; }
+    static double kiloNewtonsToPoundals(const double v)    { return (v * KN2N) * N2PD; }
+    static double poundForcesToNewtons(const double v)     { return v * PF2N; }
+    static double poundForcesToKiloNewtons(const double v) { return (v * PF2N) * N2KN; }
+    static double poundForcesToPoundals(const double v)    { return (v * PF2N) * N2PD; }
+    static double poundalsToNewtons(const double v)        { return v * PD2N; }
+    static double poundalsToKiloNewtons(const double v)    { return (v * PD2N) * N2KN; }
+    static double poundalsToPoundForces(const double v)    { return (v * PD2N) * N2PF; }
 
     // Conversion constants
-    static const LCreal N2KN;
-    static const LCreal KN2N;
-    static const LCreal N2PF;
-    static const LCreal PF2N;
-    static const LCreal N2PD;
-    static const LCreal PD2N;
+    static const double N2KN;
+    static const double KN2N;
+    static const double N2PF;
+    static const double PF2N;
+    static const double N2PD;
+    static const double PD2N;
 };
 
 
@@ -136,12 +136,12 @@ class Newtons : public Force
 
 public:
     Newtons();
-    Newtons(const LCreal value);
+    Newtons(const double value);
     Newtons(const Force& value);
 
-    static LCreal convertStatic(const Force& n)        { return n.toForce(); }
-    LCreal toForce() const override                    { return static_cast<LCreal>(val); }
-    LCreal fromForce(const LCreal a) const override    { return a; }
+    static double convertStatic(const Force& n)        { return n.toForce(); }
+    double toForce() const override                    { return static_cast<double>(val); }
+    double fromForce(const double a) const override    { return a; }
 };
 
 
@@ -156,12 +156,12 @@ class KiloNewtons : public Force
 
 public:
     KiloNewtons();
-    KiloNewtons(const LCreal value);
+    KiloNewtons(const double value);
     KiloNewtons(const Force& value);
 
-    static LCreal convertStatic(const Force& n)        { return n.toForce() * N2KN; }
-    LCreal toForce() const override                    { return static_cast<LCreal>(val * KN2N); }
-    LCreal fromForce(const LCreal a) const override    { return a * N2KN; }
+    static double convertStatic(const Force& n)        { return n.toForce() * N2KN; }
+    double toForce() const override                    { return static_cast<double>(val * KN2N); }
+    double fromForce(const double a) const override    { return a * N2KN; }
 };
 
 
@@ -176,12 +176,12 @@ class PoundForces : public Force
 
 public:
     PoundForces();
-    PoundForces(const LCreal value);
+    PoundForces(const double value);
     PoundForces(const Force& value);
 
-    static LCreal convertStatic(const Force& n)        { return n.toForce() * N2PF; }
-    LCreal toForce() const override                    { return static_cast<LCreal>(val * PF2N); }
-    LCreal fromForce(const LCreal a) const override    { return a * N2PF; }
+    static double convertStatic(const Force& n)        { return n.toForce() * N2PF; }
+    double toForce() const override                    { return static_cast<double>(val * PF2N); }
+    double fromForce(const double a) const override    { return a * N2PF; }
 };
 
 
@@ -196,12 +196,12 @@ class Poundals : public Force
 
 public:
     Poundals();
-    Poundals(const LCreal value);
+    Poundals(const double value);
     Poundals(const Force& value);
 
-    static LCreal convertStatic(const Force& n)        { return n.toForce() * N2PD; }
-    LCreal toForce() const override                    { return static_cast<LCreal>(val * PD2N); }
-    LCreal fromForce(const LCreal a) const override    { return a * N2PD; }
+    static double convertStatic(const Force& n)        { return n.toForce() * N2PD; }
+    double toForce() const override                    { return static_cast<double>(val * PD2N); }
+    double fromForce(const double a) const override    { return a * N2PD; }
 };
 
 } // End base namespace

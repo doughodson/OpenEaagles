@@ -137,7 +137,7 @@ bool SolenoidSwitch::selectLatch(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setHoldTimer() - sets our hold timer
 //------------------------------------------------------------------------------
-bool SolenoidSwitch::setHoldTimer(const LCreal x)
+bool SolenoidSwitch::setHoldTimer(const double x)
 {
     if (timer != nullptr) timer->alarm(x);
     else {
@@ -241,7 +241,7 @@ void SolenoidSwitch::resetButton()
 //------------------------------------------------------------------------------
 // updateData() - background thread
 //------------------------------------------------------------------------------
-void SolenoidSwitch::updateData(const LCreal dt)
+void SolenoidSwitch::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 
@@ -339,7 +339,7 @@ bool SolenoidButton::onPicked(const base::Number* const x)
     return true;
 }
 
-void SolenoidButton::updateData(LCreal dt)
+void SolenoidButton::updateData(double dt)
 {
     BaseClass::updateData(dt);
     send("push", SELECT, pushed, pushedSD);

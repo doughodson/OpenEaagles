@@ -51,8 +51,8 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    simulation::Simulation* sim = disIO->getSimulation();
 
    // Mark the current time
-   setTimeExec( static_cast<LCreal>(sim->getExecTimeSec()) );
-   setTimeUtc( static_cast<LCreal>(sim->getSysTimeOfDay()) );
+   setTimeExec( static_cast<double>(sim->getExecTimeSec()) );
+   setTimeUtc( static_cast<double>(sim->getSysTimeOfDay()) );
 
    // Player's ID, site and application codes
    setPlayerID( pdu->entityID.ID );
@@ -244,7 +244,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 
             const unsigned int typeClass  = ap->parameterType & 0xffffffe0;
             const unsigned int typeMetric = ap->parameterType & 0x0000001f;
-            const LCreal value = ap->parameterValue.value[0];
+            const double value = ap->parameterValue.value[0];
 
             switch (typeClass) {
 
@@ -380,7 +380,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 // entityStateManager() --  (Output support)
 //    -- Update the entity object for this NIB(Player)
 //------------------------------------------------------------------------------
-bool Nib::entityStateManager(const LCreal curExecTime)
+bool Nib::entityStateManager(const double curExecTime)
 {
    bool ok = false;
 

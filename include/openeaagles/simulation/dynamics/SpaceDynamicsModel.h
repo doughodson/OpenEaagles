@@ -30,12 +30,12 @@ public:
    SpaceDynamicsModel();
 
    // Rotation Stick Input Positions (Roll and Pitch in BaseClass)
-   virtual bool setControlStickYawInput(const LCreal yaw);
+   virtual bool setControlStickYawInput(const double yaw);
 
    // Translate Stick Input Positions
-   virtual bool setTranslateXInput(const LCreal transx);
-   virtual bool setTranslateYInput(const LCreal transy);
-   virtual bool setTranslateZInput(const LCreal transz);
+   virtual bool setTranslateXInput(const double transx);
+   virtual bool setTranslateYInput(const double transy);
+   virtual bool setTranslateZInput(const double transz);
 };
 
 } // End simulation namespace

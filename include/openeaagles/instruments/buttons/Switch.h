@@ -28,7 +28,7 @@ public:
 
     bool onSingleClick() override;
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
 protected:
     bool setSlotNumSelections(const base::Number* const msg);

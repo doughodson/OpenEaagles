@@ -169,15 +169,15 @@ void GhostHorizon::drawFunc()
     // if we are negative translation (pitch up), we show the ground background below us
     // ground
     // get our table to determine our min and max value
-    LCreal maxPitch = 90;
-    LCreal minPitch = -90;
+    double maxPitch = 90;
+    double minPitch = -90;
     const base::Table1* table = getScalingTable();
     if (table != nullptr) {
         maxPitch = table->getMaxX();
         minPitch = table->getMinX();
     }
 
-    LCreal value = getPreScaleInstValue();
+    double value = getPreScaleInstValue();
 
     if (value > maxPitch) {
             glColor3d(groundColor.x(), groundColor.y(), groundColor.z());
@@ -208,20 +208,20 @@ void GhostHorizon::drawFunc()
 //------------------------------------------------------------------------------
 // updateData() -- update non time-critical threads here
 //------------------------------------------------------------------------------
-void GhostHorizon::updateData(const LCreal dt)
+void GhostHorizon::updateData(const double dt)
 {
     // Update our base class
     BaseClass::updateData(dt);
 
     // get our table to determine our min and max value
-    LCreal maxPitch = 90;
-    LCreal minPitch = -90;
+    double maxPitch = 90;
+    double minPitch = -90;
     const base::Table1* table = getScalingTable();
     if (table != nullptr) {
         maxPitch = table->getMaxX();
         minPitch = table->getMinX();
     }
-    LCreal value = getPreScaleInstValue();
+    double value = getPreScaleInstValue();
 
     if (value <= minPitch/* || value >= pitchLim*/) {
         setVisibility(true);

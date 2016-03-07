@@ -51,7 +51,7 @@ public:
    unsigned short getNumDiscreteInputPorts() const override;
    bool getDiscreteInput(bool* const value, const unsigned int channel, const unsigned int port) const override;
    unsigned short getNumAnalogInputs() const override;
-   bool getAnalogInput(LCreal* const value, const unsigned int channel) const override;
+   bool getAnalogInput(double* const value, const unsigned int channel) const override;
 
 protected:
 
@@ -65,7 +65,7 @@ protected:
    // ---
    static const unsigned short MAX_AI = 16;
    unsigned short numAI;   // Number of analog channels
-   LCreal inData[MAX_AI];   // Input analog array
+   double inData[MAX_AI];   // Input analog array
 
    // ---
    // digital bits

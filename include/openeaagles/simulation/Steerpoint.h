@@ -93,36 +93,36 @@ public:
     const osg::Vec3& getPosition() const        { return posVec; }
     double getLatitude() const;
     double getLongitude() const;
-    LCreal getElevation() const                 { return elevation; }
-    LCreal getElevationM() const                { return elevation; }
-    LCreal getElevationFt() const;
-    LCreal getSCA() const                       { return sca; }     // Feet
-    LCreal getPTA() const                       { return pta; }     // Seconds
+    double getElevation() const                 { return elevation; }
+    double getElevationM() const                { return elevation; }
+    double getElevationFt() const;
+    double getSCA() const                       { return sca; }     // Feet
+    double getPTA() const                       { return pta; }     // Seconds
     const char* getDescription() const;
-    LCreal getMagVarDeg() const                 { return magvar; }
-    LCreal getCmdAltitude() const               { return cmdAlt; }
-    LCreal getCmdAltitudeM() const              { return cmdAlt; }
-    LCreal getCmdAltitudeFt() const;
-    LCreal getCmdAirspeedKts() const            { return cmdAirspeed; }
+    double getMagVarDeg() const                 { return magvar; }
+    double getCmdAltitude() const               { return cmdAlt; }
+    double getCmdAltitudeM() const              { return cmdAlt; }
+    double getCmdAltitudeFt() const;
+    double getCmdAirspeedKts() const            { return cmdAirspeed; }
 
     // Nav Steering: 'direct-to' data
-    LCreal getTrueBrgDeg() const                { return tbrg; }
-    LCreal getMagBrgDeg() const                 { return mbrg; }
-    LCreal getDistNM() const                    { return dst; }
-    LCreal getTTG() const                       { return ttg; }
-    LCreal getCrossTrackErrNM() const           { return xte; }
+    double getTrueBrgDeg() const                { return tbrg; }
+    double getMagBrgDeg() const                 { return mbrg; }
+    double getDistNM() const                    { return dst; }
+    double getTTG() const                       { return ttg; }
+    double getCrossTrackErrNM() const           { return xte; }
 
     // Nav Steering: 'leg' data
-    LCreal getTrueCrsDeg() const                { return tcrs; }
-    LCreal getMagCrsDeg() const                 { return mcrs; }
-    LCreal getLegDistNM() const                 { return tld; }
-    LCreal getLegTime() const                   { return tlt; }
+    double getTrueCrsDeg() const                { return tcrs; }
+    double getMagCrsDeg() const                 { return mcrs; }
+    double getLegDistNM() const                 { return tld; }
+    double getLegTime() const                   { return tlt; }
 
     // Nav Steering: 'enroute' data
-    LCreal getDistEnrouteNM() const             { return tde; }
-    LCreal getETE() const                       { return ete; }
-    LCreal getETA() const                       { return eta; }
-    LCreal getELT() const                       { return elt; }
+    double getDistEnrouteNM() const             { return tde; }
+    double getETE() const                       { return ete; }
+    double getETA() const                       { return eta; }
+    double getELT() const                       { return elt; }
 
     // Set the ground elevation at the steerpoint from this terrain database
     // Interpolate between elevation posts if the optional 'interp' flag is true.
@@ -131,31 +131,31 @@ public:
 
     // Set parameters
     virtual void setSteerpointType(const StptType t)    { stptType = t; }
-    virtual void setPosition(const LCreal x, const LCreal y, const LCreal z);
-    virtual void setElevation(const LCreal x);
+    virtual void setPosition(const double x, const double y, const double z);
+    virtual void setElevation(const double x);
     virtual void setPosition(const osg::Vec3& newPos);
     virtual void setLatitude(const double v);
     virtual void setLongitude(const double v);
-    virtual void setPTA(const LCreal v)                 { pta = v; }
-    virtual void setSCA(const LCreal v)                 { sca = v; }
+    virtual void setPTA(const double v)                 { pta = v; }
+    virtual void setSCA(const double v)                 { sca = v; }
     virtual void setDescription(const base::String* const d);
-    virtual void setCmdAltitude(const LCreal v);
-    virtual void setCmdAirspeedKts(const LCreal v);
+    virtual void setCmdAltitude(const double v);
+    virtual void setCmdAirspeedKts(const double v);
 
     // Set nav data
-    virtual void setTrueBrgDeg(const LCreal v)           { tbrg = v; }
-    virtual void setMagBrgDeg(const LCreal v)            { mbrg = v; }
-    virtual void setDistNM(const LCreal v)               { dst = v; }
-    virtual void setTTG(const LCreal v)                  { ttg = v; }
-    virtual void setCrossTrackErrNM(const LCreal v)      { xte = v; }
-    virtual void setTrueCrsDeg(const LCreal v)           { tcrs = v; }
-    virtual void setMagCrsDeg(const LCreal v)            { mcrs = v; }
-    virtual void setLegDistNM(const LCreal v)            { tld = v; }
-    virtual void setLegTime(const LCreal v)              { tlt = v; }
-    virtual void setDistEnrouteNM(const LCreal v)        { tde = v; }
-    virtual void setETE(const LCreal v)                  { ete = v; }
-    virtual void setETA(const LCreal v)                  { eta = v; }
-    virtual void setELT(const LCreal v)                  { elt = v; }
+    virtual void setTrueBrgDeg(const double v)           { tbrg = v; }
+    virtual void setMagBrgDeg(const double v)            { mbrg = v; }
+    virtual void setDistNM(const double v)               { dst = v; }
+    virtual void setTTG(const double v)                  { ttg = v; }
+    virtual void setCrossTrackErrNM(const double v)      { xte = v; }
+    virtual void setTrueCrsDeg(const double v)           { tcrs = v; }
+    virtual void setMagCrsDeg(const double v)            { mcrs = v; }
+    virtual void setLegDistNM(const double v)            { tld = v; }
+    virtual void setLegTime(const double v)              { tlt = v; }
+    virtual void setDistEnrouteNM(const double v)        { tde = v; }
+    virtual void setETE(const double v)                  { ete = v; }
+    virtual void setETA(const double v)                  { eta = v; }
+    virtual void setELT(const double v)                  { elt = v; }
 
     // Sets the initial lat/lon (reset()) values
     virtual void setInitLatitude(const double lat)    { initLatitude = lat; }
@@ -209,18 +209,18 @@ private:
     // Steerpoint parameters
     double      latitude;       // latitude
     double      longitude;      // Longitude
-    LCreal      elevation;      // Elevation                (m)
+    double      elevation;      // Elevation                (m)
     osg::Vec3   posVec;         // Position vector          (m)           [ x, y, z ] NED
     StptType    stptType;       // Steerpoint type
-    LCreal      pta;            // Planned Time of Arrival  (sec)
-    LCreal      sca;            // Safe Clearance Alt       (ft)
-    LCreal      magvar;         // Mag Var                  (degs)
+    double      pta;            // Planned Time of Arrival  (sec)
+    double      sca;            // Safe Clearance Alt       (ft)
+    double      magvar;         // Mag Var                  (degs)
     base::safe_ptr<const base::String> description; // Description
     bool        needPosVec;     // Request calucaltion of 'posVec' from Lat/Lon
     bool        needLL;         // Request calucaltion of Lat/Lon from 'posVec'
-    LCreal      cmdAlt;         // Commanded Altitude       (m)
+    double      cmdAlt;         // Commanded Altitude       (m)
     bool        haveCmdAlt;     // Have commanded altitude
-    LCreal      cmdAirspeed;    // Commanded Airspeed       (kts)
+    double      cmdAirspeed;    // Commanded Airspeed       (kts)
     bool        haveCmdAs;      // Have commanded airspeed
     base::safe_ptr<base::Pair> next;  // "next" Steerpoint pair [ name steerpoint ]
 
@@ -231,36 +231,36 @@ private:
     double      initLatitude;   // latitude
     double      initLongitude;  // Longitude
     osg::Vec3   initPosVec;     // Init Position vector (m)           [ x, y, z ] NED
-    LCreal      initMagVar;     // Mag Var entered for this point  (deg)
+    double      initMagVar;     // Mag Var entered for this point  (deg)
     bool        haveInitLat;    // Have initial latitude
     bool        haveInitLon;    // Have initial longitude
     bool        haveInitPos;    // Have initial pos vector
     bool        haveInitMagVar; // Have initial mag var
-    LCreal      initElev;       // Elevation                  (m)
+    double      initElev;       // Elevation                  (m)
     bool        haveInitElev;   // Have initial elevation
-    LCreal      initCmdAlt;     // Initial commanded altitude (m)
+    double      initCmdAlt;     // Initial commanded altitude (m)
     bool        haveInitCmdAlt; // Have initial cmd altitude
-    LCreal      initCmdAirspeed; // Initial commanded airspeed (kts)
+    double      initCmdAirspeed; // Initial commanded airspeed (kts)
     bool        haveInitCmdAs;   // Have commanded airspeed
     base::safe_ptr<const base::String> initNextStptName; // Name of the inital "next" steerpoint
     int         initNextStptIdx;    // Index of the initial "next" steerpoint
 
     // Computed data
-    LCreal      tbrg;           // True bearing direct-to point    (deg)
-    LCreal      mbrg;           // Mag bearing direct-to point     (deg)
-    LCreal      dst;            // Distance direct-to point (nm)
-    LCreal      ttg;            // Time-To-Go (direct)      (sec)
-    LCreal      xte;            // Cross-Track Error        (nm)
+    double      tbrg;           // True bearing direct-to point    (deg)
+    double      mbrg;           // Mag bearing direct-to point     (deg)
+    double      dst;            // Distance direct-to point (nm)
+    double      ttg;            // Time-To-Go (direct)      (sec)
+    double      xte;            // Cross-Track Error        (nm)
 
-    LCreal      tcrs;           // TRUE Course to point     (degs)
-    LCreal      mcrs;           // Mag Course to point      (degs)
-    LCreal      tlt;            // Total Time this Leg      (sec)
-    LCreal      tld;            // Total Leg Distance       (nm)
+    double      tcrs;           // TRUE Course to point     (degs)
+    double      mcrs;           // Mag Course to point      (degs)
+    double      tlt;            // Total Time this Leg      (sec)
+    double      tld;            // Total Leg Distance       (nm)
 
-    LCreal      tde;            // Total Distance Enroute   (nm)
-    LCreal      ete;            // Est Time Enroute         (sec)
-    LCreal      eta;            // Est Time of Arrival (UTC)(sec)
-    LCreal      elt;            // Early/Late time          (sec)
+    double      tde;            // Total Distance Enroute   (nm)
+    double      ete;            // Est Time Enroute         (sec)
+    double      eta;            // Est Time of Arrival (UTC)(sec)
+    double      elt;            // Early/Late time          (sec)
     bool        scaWarn;        // Safe clearance Alt warning flag
     bool        navDataValid;   // Nav data is valid
 };

@@ -65,9 +65,9 @@ void Clip3D::deleteData()
 // Sets the limits of the clipping box
 //------------------------------------------------------------------------------
 void Clip3D::setClippingBox(
-      const LCreal xmin, const LCreal xmax,
-      const LCreal ymin, const LCreal ymax,
-      const LCreal zmin, const LCreal zmax)
+      const double xmin, const double xmax,
+      const double ymin, const double ymax,
+      const double zmin, const double zmax)
 {
    x0 = xmin;
    x1 = xmax;
@@ -464,7 +464,7 @@ unsigned int Clip3D::polyClip2Halfspace(
    const osg::Vec2* const pt,    // (optional) Input polygon texture coordinates
    const unsigned int n,         // Number of vertices/normals
    const unsigned int index,     // Coordinate index: X -> 0; Y -> 1; and Z -> 2
-   const LCreal k,               // Value of the clipping plane
+   const double k,               // Value of the clipping plane
    const bool clipUpperPlane)    // if clipping against an upper plane,
                                  // else against a lower plane
 {
@@ -474,16 +474,16 @@ unsigned int Clip3D::polyClip2Halfspace(
    if ( p == nullptr || q == nullptr || n < 2 ) return 0;
 
    // Which clipping plane (upper or lower)
-   LCreal sign = -1.0f;
+   double sign = -1.0f;
    if (clipUpperPlane) sign = 1.0f;
 
    // Loop for all vertices; start with v = 0 and u = n-1
    //  (on original polygon (p), 'v' is current vertex and 'u' is previous vertex)
    unsigned int u = n-1;
-   LCreal tu = sign * (p[u][index] - k);
+   double tu = sign * (p[u][index] - k);
    for (unsigned int v = 0; v < n; v++) {
 
-      LCreal tv = sign * (p[v][index] - k);
+      double tv = sign * (p[v][index] - k);
 
       // tu and tv are negative if the vertexes are IN
       bool uf = tu <= 0.0f;
@@ -492,7 +492,7 @@ unsigned int Clip3D::polyClip2Halfspace(
       // Exclusive OR to see if the edge crosses the plane;
       if ( (uf && !vf) || (!uf && vf) ) {
          // yes, compute and add the intersection point to q
-         LCreal t = tu/(tu-tv);
+         double t = tu/(tu-tv);
          q[m]  =  p[u] + (p[v] - p[u]) * t;
          if (pn != nullptr && qn != nullptr) {
             // Interpolate between the normals

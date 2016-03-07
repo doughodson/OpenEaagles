@@ -27,11 +27,11 @@ class LandingLight : public LandingGear
 public:
     LandingLight();
 
-    LCreal getLightRadius() const { return lRadius; }
+    double getLightRadius() const { return lRadius; }
 
-    virtual bool setLightRadius(const LCreal newLR);
+    virtual bool setLightRadius(const double newLR);
 
-    void updateData(const LCreal dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
     void drawFunc() override;
 
@@ -40,8 +40,8 @@ protected:
     bool setSlotLightRadius(const base::Number* const newLR);
 
 private:
-    LCreal lRadius;     // our light radius
-    LCreal gearCurrent; // our gear current value
+    double lRadius;     // our light radius
+    double gearCurrent; // our gear current value
     SendData selSD;     // our selection
 };
 

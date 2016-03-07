@@ -29,13 +29,13 @@ class AngleOnlyTrackManager : public TrackManager
 public:
    AngleOnlyTrackManager();
 
-   virtual void newReport(IrQueryMsg* q, LCreal snDbl);
+   virtual void newReport(IrQueryMsg* q, double snDbl);
 
    void clearTracksAndQueues() override;
    bool addTrack(Track* const t) override;
 
 protected:
-   virtual IrQueryMsg* getQuery(LCreal* const sn);                     // Get the next 'new' report from the queue
+   virtual IrQueryMsg* getQuery(double* const sn);                     // Get the next 'new' report from the queue
 
    virtual bool setSlotAzimuthBin(const base::Number* const num);     // Sets azimuth bin
    virtual bool setSlotElevationBin(const base::Number* const num);   // Sets elevation bin
@@ -46,10 +46,10 @@ protected:
    bool shutdownNotification() override;
 
    // Prediction parameters
-   LCreal              azimuthBin;         // Azimuth Bin
-   LCreal              elevationBin;       // Elevation Bin
-   LCreal              oneMinusAlpha;      // 1 - Alpha parameter
-   LCreal              oneMinusBeta;       // 1 - Beta parameter
+   double              azimuthBin;         // Azimuth Bin
+   double              elevationBin;       // Elevation Bin
+   double              oneMinusAlpha;      // 1 - Alpha parameter
+   double              oneMinusBeta;       // 1 - Beta parameter
 
 private:
    base::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
@@ -72,7 +72,7 @@ public:
     AirAngleOnlyTrkMgr();
 
 protected:
-    void processTrackList(const LCreal dt) override;
+    void processTrackList(const double dt) override;
 };
 
 
@@ -99,9 +99,9 @@ public:
     AirAngleOnlyTrkMgrPT();
 
 protected:
-   void processTrackList(const LCreal dt) override;
+   void processTrackList(const double dt) override;
 
-   virtual void updateTrackAges(const LCreal dt);
+   virtual void updateTrackAges(const double dt);
    virtual void removeAgedTracks();
 private:
    bool usePerceivedPosVel;

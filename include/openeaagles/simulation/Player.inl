@@ -361,57 +361,57 @@ inline double Player::getAltitudeAglFt() const
 }
 
 // Player's total velocity (m/s)
-inline LCreal Player::getTotalVelocity() const
+inline double Player::getTotalVelocity() const
 {
    return vp;
 }
 
 // Player's total velocity (ft/s)
-inline LCreal Player::getTotalVelocityFPS() const
+inline double Player::getTotalVelocityFPS() const
 {
    return getTotalVelocity() * base::Distance::M2FT;
 }
 
 // Player's total velocity (kts)
-inline LCreal Player::getTotalVelocityKts() const
+inline double Player::getTotalVelocityKts() const
 {
    return getTotalVelocity() * base::Distance::M2NM * 3600.0f;
 }
 
 // Player's ground speed (m/s)
-inline LCreal Player::getGroundSpeed() const
+inline double Player::getGroundSpeed() const
 {
    return gndSpd;
 }
 
 // Player's ground speed (ft/s)
-inline LCreal Player::getGroundSpeedFPS() const
+inline double Player::getGroundSpeedFPS() const
 {
    return getGroundSpeed() * base::Distance::M2FT;
 }
 
 // Player's ground speed (kts)
-inline LCreal Player::getGroundSpeedKts() const 
+inline double Player::getGroundSpeedKts() const 
 {
    return getGroundSpeed() * base::Distance::M2NM * 3600.0f;
 }
 
 // Player's ground track (rad)
-inline LCreal Player::getGroundTrack() const
+inline double Player::getGroundTrack() const
 {
    return gndTrk;
 }
 
 // Player's ground track (rad)
-inline LCreal Player::getGroundTrackR() const
+inline double Player::getGroundTrackR() const
 {
    return gndTrk;
 }
 
 // Player's ground track (degs)
-inline LCreal Player::getGroundTrackD() const
+inline double Player::getGroundTrackD() const
 {
-   return static_cast<LCreal>(base::Angle::R2DCC * gndTrk);
+   return static_cast<double>(base::Angle::R2DCC * gndTrk);
 }
 
 // Velocity vector; NED (m/s)
@@ -499,7 +499,7 @@ inline double Player::getInitAltitude() const
 }
 
 // Initial total velocity
-inline LCreal Player::getInitVelocity() const
+inline double Player::getInitVelocity() const
 {
    return initVp;
 }
@@ -517,19 +517,19 @@ inline unsigned int Player::getCamouflageType() const
 }
 
 // Returns the player's damage state
-inline LCreal Player::getDamage() const
+inline double Player::getDamage() const
 {
    return damage;
 }
 
 // Returns the player's smoke state
-inline LCreal Player::getSmoke() const
+inline double Player::getSmoke() const
 {
    return smoking;
 }
 
 // Returns the player's flames state
-inline LCreal Player::getFlames() const
+inline double Player::getFlames() const
 {
    return flames;
 }
@@ -607,25 +607,25 @@ inline bool Player::isTerrainElevationValid() const
 }
 
 // Terrain elevation at player (meters)
-inline LCreal Player::getTerrainElevation() const
+inline double Player::getTerrainElevation() const
 { 
    return tElev;
 }
 
 // Terrain elevation at player (meters)
-inline LCreal Player::getTerrainElevationM() const
+inline double Player::getTerrainElevationM() const
 { 
    return getTerrainElevation();
 }
 
 // Returns terrain elevation (Feet)
-inline LCreal Player::getTerrainElevationFt() const
+inline double Player::getTerrainElevationFt() const
 { 
    return getTerrainElevation() * base::Distance::M2FT;
 }
 
 // Ground clamping offset from the terrain to our CG (meters)
-inline LCreal Player::getTerrainOffset() const
+inline double Player::getTerrainOffset() const
 {
    return tOffset;
 }

@@ -802,7 +802,7 @@ void GlutDisplay::idleCB()
    for (int i = 0; i < numGlutDisplays; i++) {
       if (idList[i] >= 0) {
          glutSetWindow(idList[i]);
-         displayList[i]->updateData( static_cast<LCreal>(dt) );
+         displayList[i]->updateData( static_cast<double>(dt) );
          if (displayList[i]->isMainDisplay()) {
             sleepFor = displayList[i]->getIdleSleepTime();
          }

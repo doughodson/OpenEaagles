@@ -16,17 +16,17 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Frequency, "Frequency")
 EMPTY_SLOTTABLE(Frequency)
 
 // Conversion constants
-const LCreal Frequency::KHz2Hz = 1000.0f;                   // KiloHertz => Hertz
-const LCreal Frequency::Hz2KHz = (1.0f / 1000.0f);          // Hertz => KiloHertz
+const double Frequency::KHz2Hz = 1000.0f;                   // KiloHertz => Hertz
+const double Frequency::Hz2KHz = (1.0f / 1000.0f);          // Hertz => KiloHertz
 
-const LCreal Frequency::MHz2Hz = 1000000.0f;                // MegaHertz => Hertz
-const LCreal Frequency::Hz2MHz = (1.0f / 1000000.0f);       // Hertz => MegaHertz
+const double Frequency::MHz2Hz = 1000000.0f;                // MegaHertz => Hertz
+const double Frequency::Hz2MHz = (1.0f / 1000000.0f);       // Hertz => MegaHertz
 
-const LCreal Frequency::GHz2Hz = 1000000000.0f;             // GigaHertz => Hertz
-const LCreal Frequency::Hz2GHz = (1.0f / 1000000000.0f);    // Hertz => GigaHertz
+const double Frequency::GHz2Hz = 1000000000.0f;             // GigaHertz => Hertz
+const double Frequency::Hz2GHz = (1.0f / 1000000000.0f);    // Hertz => GigaHertz
 
-const LCreal Frequency::THz2Hz = 1000000000000.0f;          // TeraHertz => Hertz
-const LCreal Frequency::Hz2THz = (1.0f / 1000000000000.0f); // Hertz => TeraHertz
+const double Frequency::THz2Hz = 1000000000000.0f;          // TeraHertz => Hertz
+const double Frequency::Hz2THz = (1.0f / 1000000000000.0f); // Hertz => TeraHertz
 
 // ---
 // constructors
@@ -36,7 +36,7 @@ Frequency::Frequency() : Number()
     STANDARD_CONSTRUCTOR()
 }
 
-Frequency::Frequency(const LCreal value) : Number(value)
+Frequency::Frequency(const double value) : Number(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -91,7 +91,7 @@ Hertz::Hertz() : Frequency()
     STANDARD_CONSTRUCTOR()
 }
 
-Hertz::Hertz(const LCreal value) : Frequency(value)
+Hertz::Hertz(const double value) : Frequency(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -117,7 +117,7 @@ KiloHertz::KiloHertz() : Frequency()
     STANDARD_CONSTRUCTOR()
 }
 
-KiloHertz::KiloHertz(const LCreal value) : Frequency(value)
+KiloHertz::KiloHertz(const double value) : Frequency(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -142,7 +142,7 @@ MegaHertz::MegaHertz() : Frequency()
     STANDARD_CONSTRUCTOR()
 }
 
-MegaHertz::MegaHertz(const LCreal value) : Frequency(value)
+MegaHertz::MegaHertz(const double value) : Frequency(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -167,7 +167,7 @@ GigaHertz::GigaHertz() : Frequency()
     STANDARD_CONSTRUCTOR()
 }
 
-GigaHertz::GigaHertz(const LCreal value) : Frequency(value)
+GigaHertz::GigaHertz(const double value) : Frequency(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -192,7 +192,7 @@ TeraHertz::TeraHertz() : Frequency()
     STANDARD_CONSTRUCTOR()
 }
 
-TeraHertz::TeraHertz(const LCreal value) : Frequency(value)
+TeraHertz::TeraHertz(const double value) : Frequency(value)
 {
     STANDARD_CONSTRUCTOR()
 }

@@ -28,20 +28,20 @@ class Table1 : public Table {
 
 public:
    Table1();
-   Table1(const LCreal* dtbl, const unsigned int dsize,
-             const LCreal* xtbl, const unsigned int xsize);
+   Table1(const double* dtbl, const unsigned int dsize,
+             const double* xtbl, const unsigned int xsize);
 
    // Returns the number of x breakpoints
    unsigned int getNumXPoints() const { return nx; }
 
    // Returns a pointer to the breakpoint data for x
-   const LCreal* getXData() const     { return xtable; }
+   const double* getXData() const     { return xtable; }
 
-   LCreal getMinX() const;    // Min value of the X (iv1) breakpoints
-   LCreal getMaxX() const;    // Max value of the X (iv1) breakpoints
+   double getMinX() const;    // Min value of the X (iv1) breakpoints
+   double getMaxX() const;    // Max value of the X (iv1) breakpoints
 
    // 1D Linear Function Interpolator: returns the result of f(x) using linear interpolation
-   virtual LCreal lfi(const LCreal iv1, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, FStorage* const s = nullptr) const;
 
    // Load the X (iv1) breakpoints
    virtual bool setXBreakpoints1(const List* const bkpts);
@@ -51,11 +51,11 @@ public:
    bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, LCreal* const table) override;
-   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
+   bool loadData(const List& list, double* const table) override;
+   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   LCreal* xtable;    // X Breakpoint Table
+   double* xtable;    // X Breakpoint Table
    unsigned int nx;   // Number of x breakpoints
 };
 
@@ -75,36 +75,36 @@ class Table2 : public Table1 {
 
 public:
    Table2();
-   Table2(const LCreal* dtbl, const unsigned int dsize,
-            const LCreal* xtbl, const unsigned int xsize,
-            const LCreal* ytbl, const unsigned int ysize);
+   Table2(const double* dtbl, const unsigned int dsize,
+            const double* xtbl, const unsigned int xsize,
+            const double* ytbl, const unsigned int ysize);
 
    // Returns the number of y breakpoints
    unsigned int getNumYPoints() const { return ny; }
 
    // Returns a pointer to the breakpoint data for y
-   const LCreal* getYData() const     { return ytable; }
+   const double* getYData() const     { return ytable; }
 
-   LCreal getMinY() const;    // Min value of the Y (iv2) breakpoints
-   LCreal getMaxY() const;    // Max value of the Y (iv2) breakpoints
+   double getMinY() const;    // Min value of the Y (iv2) breakpoints
+   double getMaxY() const;    // Max value of the Y (iv2) breakpoints
 
    // 2D Linear Function Interpolator: returns the result of f(x,y) using linear interpolation
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const;
 
    // Load the Y (iv2) breakpoints
    virtual bool setYBreakpoints2(const List* const bkpts);
 
-   LCreal lfi(const LCreal iv1, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, FStorage* const s = nullptr) const override;
    unsigned int tableSize() const override;
 
    bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, LCreal* const table) override;
-   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
+   bool loadData(const List& list, double* const table) override;
+   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   LCreal* ytable;    // Y Breakpoint Table
+   double* ytable;    // Y Breakpoint Table
    unsigned int ny;   // Number of y breakpoints
 };
 
@@ -124,38 +124,38 @@ class Table3 : public Table2 {
 
 public:
    Table3();
-   Table3(const LCreal* dtbl, const unsigned int dsize,
-          const LCreal* xtbl, const unsigned int xsize,
-          const LCreal* ytbl, const unsigned int ysize,
-          const LCreal* ztbl, const unsigned int zsize);
+   Table3(const double* dtbl, const unsigned int dsize,
+          const double* xtbl, const unsigned int xsize,
+          const double* ytbl, const unsigned int ysize,
+          const double* ztbl, const unsigned int zsize);
 
    // Returns the number of z breakpoints.
    unsigned int getNumZPoints() const { return nz; }
 
-   // LCreal* getZData()
-   const LCreal* getZData() const     { return ztable; }
+   // double* getZData()
+   const double* getZData() const     { return ztable; }
 
-   LCreal getMinZ() const;    // Min value of the Z (iv3) breakpoints
-   LCreal getMaxZ() const;    // Max value of the Z (iv3) breakpoints
+   double getMinZ() const;    // Min value of the Z (iv3) breakpoints
+   double getMaxZ() const;    // Max value of the Z (iv3) breakpoints
 
    // 3D Linear Function Interpolator: returns the result of f(x,y,z) using linear interpolation
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const;
 
    // Loads the Z (iv3) breakpoints
    virtual bool setZBreakpoints3(const List* const bkpts);
 
-   LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = nullptr) const override;
-   LCreal lfi(const LCreal iv1, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, FStorage* const s = nullptr) const override;
    unsigned int tableSize() const override;
 
    bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, LCreal* const table) override;
-   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
+   bool loadData(const List& list, double* const table) override;
+   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   LCreal* ztable;    // Z Breakpoint Table
+   double* ztable;    // Z Breakpoint Table
    unsigned int nz;   // Number of z breakpoints
 };
 
@@ -175,40 +175,40 @@ class Table4 : public Table3 {
 
 public:
    Table4();
-   Table4(const LCreal* dtbl, const unsigned int dsize,
-          const LCreal* xtbl, const unsigned int xsize,
-          const LCreal* ytbl, const unsigned int ysize,
-          const LCreal* ztbl, const unsigned int zsize,
-          const LCreal* wtbl, const unsigned int wsize);
+   Table4(const double* dtbl, const unsigned int dsize,
+          const double* xtbl, const unsigned int xsize,
+          const double* ytbl, const unsigned int ysize,
+          const double* ztbl, const unsigned int zsize,
+          const double* wtbl, const unsigned int wsize);
 
    // Returns the number of w breakpoints.
    unsigned int getNumWPoints() const { return nw; }
 
    // Returns a pointer to the breakpoint data for w
-   const LCreal* getWData() const     { return wtable; }
+   const double* getWData() const     { return wtable; }
 
-   LCreal getMinW() const;    // Min value of the W (iv4) breakpoints
-   LCreal getMaxW() const;    // Max value of the W (iv4) breakpoints
+   double getMinW() const;    // Min value of the W (iv4) breakpoints
+   double getMaxW() const;    // Max value of the W (iv4) breakpoints
 
    // 4D Linear Function Interpolator: returns the result of f(x,y,z,w) using linear interpolation
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const;
 
    // Loads the W (iv4) breakpoints
    virtual bool setWBreakpoints4(const List* const bkpts);
 
-   LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = nullptr) const override;
-   LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = nullptr) const override;
-   LCreal lfi(const LCreal iv1, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, FStorage* const s = nullptr) const override;
    unsigned int tableSize() const override;
 
    bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, LCreal* const table) override;
-   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
+   bool loadData(const List& list, double* const table) override;
+   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   LCreal* wtable;    // W Breakpoint Table
+   double* wtable;    // W Breakpoint Table
    unsigned int nw;   // Number of w breakpoints
 };
 
@@ -227,41 +227,41 @@ class Table5 : public Table4 {
 
 public:
    Table5();
-   Table5(const LCreal* dtbl, const unsigned int dsize,
-          const LCreal* xtbl, const unsigned int xsize,
-          const LCreal* ytbl, const unsigned int ysize,
-          const LCreal* ztbl, const unsigned int zsize,
-          const LCreal* wtbl, const unsigned int wsize,
-          const LCreal* vtbl, const unsigned int vsize);
+   Table5(const double* dtbl, const unsigned int dsize,
+          const double* xtbl, const unsigned int xsize,
+          const double* ytbl, const unsigned int ysize,
+          const double* ztbl, const unsigned int zsize,
+          const double* wtbl, const unsigned int wsize,
+          const double* vtbl, const unsigned int vsize);
 
    // Returns the number of v breakpoints
    unsigned int getNumVPoints() const { return nv; }
 
    // Returns a pointer to the breakpoint data for v
-   const LCreal* getVData() const     { return vtable; }
+   const double* getVData() const     { return vtable; }
 
-   LCreal getMinV() const;    // Min value of the V (iv5) breakpoints
-   LCreal getMaxV() const;    // Max value of the V (iv5) breakpoints
+   double getMinV() const;    // Min value of the V (iv5) breakpoints
+   double getMaxV() const;    // Max value of the V (iv5) breakpoints
 
-   virtual LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, const LCreal iv5, FStorage* const s = nullptr) const;
+   virtual double lfi(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = nullptr) const;
 
    // Loads the V (iv5) breakpoints
    virtual bool setVBreakpoints5(const List* const bkpts);
 
-   LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, const LCreal iv4, FStorage* const s = nullptr) const override;
-   LCreal lfi(const LCreal iv1, const LCreal iv2, const LCreal iv3, FStorage* const s = nullptr) const override;
-   LCreal lfi(const LCreal iv1, const LCreal iv2, FStorage* const s = nullptr) const override;
-   LCreal lfi(const LCreal iv1, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
+   double lfi(const double iv1, FStorage* const s = nullptr) const override;
    unsigned int tableSize() const override;
 
    bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, LCreal* const table) override;
-   void printData(std::ostream& sout, const LCreal* table, const unsigned int indent) const override;
+   bool loadData(const List& list, double* const table) override;
+   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   LCreal* vtable;     // V Breakpoint Table
+   double* vtable;     // V Breakpoint Table
    unsigned int nv;    // Number of v breakpoints
 };
 

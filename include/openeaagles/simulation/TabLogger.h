@@ -43,8 +43,8 @@ public:
 
     TabLogger();
 
-    void updateTC(const LCreal dt = 0.0) override;
-    void updateData(const LCreal dt = 0.0) override;
+    void updateTC(const double dt = 0.0) override;
+    void updateData(const double dt = 0.0) override;
 
     //==============================================================================
     // ######### Simulation Log Event Classes #########
@@ -112,11 +112,11 @@ public:
         osg::Vec3 angles;
         double    latitude;
         double    longitude;
-        LCreal    alpha;
-        LCreal    beta;
-        LCreal    ias;
-        LCreal    mach;
-        LCreal    pLoading;
+        double    alpha;
+        double    beta;
+        double    ias;
+        double    mach;
+        double    pLoading;
     };
 
     //------------------------------------------------------------------------------
@@ -150,7 +150,7 @@ public:
         DECLARE_SUBCLASS(LogWeaponActivity,TabLogEvent)
     public:
         LogWeaponActivity(const int theType, const Player* const player, const Player* const wpn,
-                          const Player* const tgt, const unsigned int detType, const LCreal distance = -1.0f);
+                          const Player* const tgt, const unsigned int detType, const double distance = -1.0f);
         const char* getDescription() override;
         void captureData() override;
     private:
@@ -162,7 +162,7 @@ public:
         base::safe_ptr<const Track> theTrack;
         unsigned short eventID;
         unsigned int detType;
-        LCreal missDist;
+        double missDist;
     };
 
 
@@ -191,7 +191,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 
 
@@ -220,7 +220,7 @@ public:
         osg::Vec3 tgtPos;
         osg::Vec3 tgtVel;
         osg::Vec3 tgtAngles;
-        LCreal sn;              // Signal/Noise
+        double sn;              // Signal/Noise
     };
 };
 

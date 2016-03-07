@@ -21,7 +21,7 @@ namespace rprfom {
 //------------------------------------------------------------------------------
 // weaponFireMsgFactory() -- (Output support) Weapon fire message factory
 //------------------------------------------------------------------------------
-bool Nib::weaponFireMsgFactory(const LCreal)
+bool Nib::weaponFireMsgFactory(const double)
 {
    std::cout << "rprfom::Nib::sendWeaponFire() HERE!" << std::endl;
 

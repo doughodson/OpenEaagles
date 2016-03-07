@@ -22,34 +22,34 @@ public:
    SpaceVehicle();
 
    // Vehicle data
-   virtual LCreal getFuelWt() const;                   // wt: lbs
-   virtual LCreal getFuelWtMax() const;                // wt: lbs
+   virtual double getFuelWt() const;                   // wt: lbs
+   virtual double getFuelWtMax() const;                // wt: lbs
 
    // Engine data
    virtual int getNumberOfEngines() const;
-   virtual int getEngThrust(LCreal* const fn, const int max) const; // Thrust: lbs
+   virtual int getEngThrust(double* const fn, const int max) const; // Thrust: lbs
 
-   // setControlStickYawInput(const LCreal yaw)
+   // setControlStickYawInput(const double yaw)
    //    yaw inputs: normalized
    //    yaw:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setControlStickYawInput(const LCreal yaw);
+   virtual bool setControlStickYawInput(const double yaw);
 
-   // setTranslateXInput(const LCreal transx)
+   // setTranslateXInput(const double transx)
    //    transx inputs: normalized
    //    transx:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setTranslateXInput(const LCreal transx);
+   virtual bool setTranslateXInput(const double transx);
 
-   // setTranslateYInput(const LCreal transy)
+   // setTranslateYInput(const double transy)
    //    transy inputs: normalized
    //    transy:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setTranslateYInput(const LCreal transy);
+   virtual bool setTranslateYInput(const double transy);
 
-   // setTranslateZInput(const LCreal transz)
+   // setTranslateZInput(const double transz)
    //    transz inputs: normalized
    //    transz:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual bool setTranslateZInput(const LCreal transz);
+   virtual bool setTranslateZInput(const double transz);
 
-   LCreal getGrossWeight() const override;
+   double getGrossWeight() const override;
    unsigned int getMajorType() const override;
 };
 
@@ -92,7 +92,7 @@ public:
    UnmannedSpaceVehicle();
 
 protected:
-   void dynamics(const LCreal  dt = 0.0) override;
+   void dynamics(const double  dt = 0.0) override;
 };
 
 } // End simulation namespace

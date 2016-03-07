@@ -15,8 +15,8 @@ static const double XSCALE = (1.0/6.0);
 static const double YSCALE = (1.0/6.0);
 
 // Default font sizes
-const LCreal defaultFontWidth = 6.0f * XSCALE;
-const LCreal defaultFontHeight = 9.0f * YSCALE;
+const double defaultFontWidth = 6.0f * XSCALE;
+const double defaultFontHeight = 9.0f * YSCALE;
 
 //------------------------------------------------------------------------------
 // Constructor(s)

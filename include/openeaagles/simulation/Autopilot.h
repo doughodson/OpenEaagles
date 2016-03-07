@@ -128,7 +128,7 @@ public:
    virtual bool setLoiterPatternCounterClockwise(const bool ccw);
 
    // Request loiter at given anchor point and (front side) course
-   virtual bool requestLoiter(const double anchorLat, const double anchorLon, const LCreal course);
+   virtual bool requestLoiter(const double anchorLat, const double anchorLon, const double course);
 
    virtual double getLeadFollowingDistanceTrail() const { return -leadOffset[0]; }
    virtual double getLeadFollowingDistanceRight() const { return  leadOffset[1]; }
@@ -163,18 +163,18 @@ public:
    // Roll Control Input
    //      Normalized inputs
    //      roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual LCreal getControlStickRollInput() const { return stickRollPos; }
+   virtual double getControlStickRollInput() const { return stickRollPos; }
 
    // Sets the stick roll input (see getControlStickRollInput()
-   virtual bool setControlStickRollInput(const LCreal roll);
+   virtual bool setControlStickRollInput(const double roll);
 
    // Pitch Control Input
    //      Normalized inputs
    //      pitch:  -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
-   virtual LCreal getControlStickPitchInput() const { return stickPitchPos; }
+   virtual double getControlStickPitchInput() const { return stickPitchPos; }
 
    // Sets the control stick pitch input (getControlStickPitchInput xxx())
-   virtual bool setControlStickPitchInput(const LCreal pitch);
+   virtual bool setControlStickPitchInput(const double pitch);
 
    // Throttle(s) Control Input
    //      Normalized inputs
@@ -187,7 +187,7 @@ public:
    //                  2.0         -> A/B (as needed)
    //              'num' is the number of throttle positions
    //          returns the actual number of throttle positions
-   virtual int setThrottles(const LCreal* const positions, const unsigned int num);
+   virtual int setThrottles(const double* const positions, const unsigned int num);
 
    //// Compute the mirror waypoint for a orbit holding pattern
    //bool computerOrbitHoldingPatternMirrorWaypoint(
@@ -253,7 +253,7 @@ protected:
    virtual bool processModeFollowTheLead();
 
    // System class Interface -- phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
    // base::Component protected interface
    bool shutdownNotification() override;
@@ -267,12 +267,12 @@ private:
    bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
 
    // Input controls
-   LCreal   stickRollPos;     // Stick roll position:  -1.0 -> max left;    0.0 -> center;  1.0 -> max right
-   LCreal   stickPitchPos;    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
+   double   stickRollPos;     // Stick roll position:  -1.0 -> max left;    0.0 -> center;  1.0 -> max right
+   double   stickPitchPos;    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
 
    // Throttles
    static const unsigned int MAX_THR = 8;
-   LCreal   thrPos[MAX_THR];  // Throttle positions: min(0.0) to full(1.0)
+   double   thrPos[MAX_THR];  // Throttle positions: min(0.0) to full(1.0)
    unsigned int nThrPos;      // Number of throttles
 
    // Commanded values

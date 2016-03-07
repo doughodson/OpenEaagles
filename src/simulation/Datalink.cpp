@@ -283,7 +283,7 @@ void Datalink::reset()
 //------------------------------------------------------------------------------
 // dynamics() -- Age queues
 //------------------------------------------------------------------------------
-void Datalink::dynamics(const LCreal)
+void Datalink::dynamics(const double)
 {
     //age queues
     oe::base::Object* tempInQueue[MAX_MESSAGES];

@@ -26,13 +26,13 @@ Locus::Locus()
 }
 
 Locus::Locus(
-       const LCreal* const newData, // Array of data points
+       const double* const newData, // Array of data points
        const unsigned int n,        // Number of data points
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
-       const LCreal ang,            // True direction (heading) angle of the data (degs)
-       const LCreal mn,             // Range to first data point
-       const LCreal mx              // Range to last data point
+       const double ang,            // True direction (heading) angle of the data (degs)
+       const double mn,             // Range to first data point
+       const double mx              // Range to last data point
        )
 {
    STANDARD_CONSTRUCTOR()
@@ -75,18 +75,18 @@ void Locus::deleteData()
 //------------------------------------------------------------------------------
 // Access (get) functions
 //------------------------------------------------------------------------------
-LCreal Locus::getRange(const unsigned int idx) const
+double Locus::getRange(const unsigned int idx) const
 {
-   LCreal rng = 0;
+   double rng = 0;
    if (idx < np && isDataValid()) {
-      rng = minRng + deltaRng * static_cast<LCreal>(idx);
+      rng = minRng + deltaRng * static_cast<double>(idx);
    }
    return rng;
 }
 
-LCreal Locus::getData(const unsigned int idx) const
+double Locus::getData(const unsigned int idx) const
 {
-   LCreal value = 0;
+   double value = 0;
    if (idx < np && isDataValid()) {
       value = data[idx];
    }
@@ -97,13 +97,13 @@ LCreal Locus::getData(const unsigned int idx) const
 // Sets new array data
 //------------------------------------------------------------------------------
 void Locus::setData(
-       const LCreal* const newData, // Array of data points
+       const double* const newData, // Array of data points
        const unsigned int n,        // Number of data points
        const double lat,            // Reference latitude (degs)
        const double lon,            // Reference longitude (degs)
-       const LCreal ang,            // True direction (heading) angle of the data (degs)
-       const LCreal mn,             // Range to first data point
-       const LCreal mx              // Range to last data point
+       const double ang,            // True direction (heading) angle of the data (degs)
+       const double mn,             // Range to first data point
+       const double mx              // Range to last data point
        )
 {
    // Remove any old data
@@ -116,9 +116,9 @@ void Locus::setData(
    // Copy the new data
    if (n < MAX_SIZE && newData != nullptr) {
       np = n;
-      data = new LCreal[np];
-      LCreal* p = data;
-      const LCreal* q = newData;
+      data = new double[np];
+      double* p = data;
+      const double* q = newData;
       for (unsigned int i = 0; i < np; i++) {
          *p++ = *q++;
       }

@@ -47,7 +47,7 @@ void Arbiter::deleteData()
 //------------------------------------------------------------------------------
 // genAction() - generate an action
 //------------------------------------------------------------------------------
-Action* Arbiter::genAction(const State* const state, const LCreal dt)
+Action* Arbiter::genAction(const State* const state, const double dt)
 {
    // create list for action set
    base::List* actionSet = new base::List();

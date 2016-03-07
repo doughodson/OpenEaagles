@@ -104,7 +104,7 @@ bool Switch::onSingleClick()
 //------------------------------------------------------------------------------
 // updateData()
 //------------------------------------------------------------------------------
-void Switch::updateData(const LCreal dt)
+void Switch::updateData(const double dt)
 {
     BaseClass::updateData(dt);
 

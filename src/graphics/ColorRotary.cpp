@@ -126,7 +126,7 @@ bool ColorRotary::setSlotValues(const base::PairStream* const newStream)
 // determineColors() - take our value, and look for a corresponding color
 // and breakpoint
 //------------------------------------------------------------------------------
-bool ColorRotary::determineColor(const LCreal value)
+bool ColorRotary::determineColor(const double value)
 {
     bool ok = false;
     int breakPoint = 0;

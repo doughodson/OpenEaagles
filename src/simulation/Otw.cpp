@@ -188,7 +188,7 @@ void Otw::clearOtwModelTypes()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Otw::updateTC(const LCreal dt)
+void Otw::updateTC(const double dt)
 {
     // Update base classes stuff
     BaseClass::updateTC(dt);
@@ -411,9 +411,9 @@ void Otw::mapPlayers2ElevTable()
 //------------------------------------------------------------------------------
 // computeRangeToPlayer() -- Calculate range from ownship to player
 //------------------------------------------------------------------------------
-LCreal Otw::computeRangeToPlayer(const Player* const ip) const
+double Otw::computeRangeToPlayer(const Player* const ip) const
 {
-    LCreal rng = maxRange*2.0 + 1.0;  // Default is out-of-range
+    double rng = maxRange*2.0 + 1.0;  // Default is out-of-range
     if (ownship != nullptr) {
         osg::Vec3 diff = ip->getPosition() - ownship->getPosition();
         rng = diff.length();
@@ -508,7 +508,7 @@ void Otw::setPlayerList(base::PairStream* const newPlayerList)
 //------------------------------------------------------------------------------
 // setMaxRange() -- sets the max visual range
 //------------------------------------------------------------------------------
-bool Otw::setMaxRange(const LCreal r)
+bool Otw::setMaxRange(const double r)
 {
     maxRange = lcAbs(r);
     return true;
@@ -776,7 +776,7 @@ bool Otw::setSlotMaxRange(const base::Distance* const msg)
 
     if (msg != nullptr) {
         // We have a distance which we can convert to meters
-        const LCreal rng = base::Meters::convertStatic(*msg);
+        const double rng = base::Meters::convertStatic(*msg);
         ok = setMaxRange( rng );
     }
 

@@ -296,7 +296,7 @@ void Display::deleteData()
 //------------------------------------------------------------------------------
 // updateTC() -- Update time critical stuff here
 //------------------------------------------------------------------------------
-void Display::updateTC(const LCreal dt)
+void Display::updateTC(const double dt)
 {
    BaseClass::updateTC(dt);
 

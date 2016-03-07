@@ -24,7 +24,7 @@ namespace base {
 //
 // Public methods: Base class public methods, plus ...
 //
-//      Rgba(const LCreal r, const LCreal g, const LCreal b, const LCreal a)
+//      Rgba(const double r, const double g, const double b, const double a)
 //          Special constructor what initializes the object to r, g, b and a
 //
 //------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ class Rgba : public Rgb {
     DECLARE_SUBCLASS(Rgba,Rgb)
 
 public:
-    Rgba(const LCreal r, const LCreal g, const LCreal b, const LCreal a);
+    Rgba(const double r, const double g, const double b, const double a);
     Rgba();
 
 };

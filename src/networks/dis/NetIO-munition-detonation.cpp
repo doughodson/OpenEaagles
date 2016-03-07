@@ -131,9 +131,9 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 
          // Munition's target player and the location of detonation relative to target
          mPlayer->setTargetPlayer(tPlayer,false);
-         LCreal x = pdu->locationInEntityCoordinates.component[0];
-         LCreal y = pdu->locationInEntityCoordinates.component[1];
-         LCreal z = pdu->locationInEntityCoordinates.component[2];
+         double x = pdu->locationInEntityCoordinates.component[0];
+         double y = pdu->locationInEntityCoordinates.component[1];
+         double z = pdu->locationInEntityCoordinates.component[2];
          osg::Vec3 loc(x,y,z);
          mPlayer->setDetonationLocation(loc);
 

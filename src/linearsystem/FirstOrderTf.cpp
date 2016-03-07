@@ -22,8 +22,8 @@ FirstOrderTf::FirstOrderTf()
 }
 
 FirstOrderTf::FirstOrderTf(const unsigned int ir,
-         const LCreal in1, const LCreal in2,
-         const LCreal id1, const LCreal id2
+         const double in1, const double in2,
+         const double id1, const double id2
          ) : DiffEquation(ir)
 
 {
@@ -112,7 +112,7 @@ void FirstOrderTf::initialize()
    BaseClass::initialize();
 
    if (isValid()) {
-      const LCreal T = 1.0f / static_cast<LCreal>(rate);
+      const double T = 1.0f / static_cast<double>(rate);
       pa[0] = 0;
       pa[1] = -(T*d2 - 2.0f*d1)/(T*d2 + 2.0f*d1);
       pb[0] =  (T*n2 + 2.0f*n1)/(T*d2 + 2.0f*d1);
@@ -134,28 +134,28 @@ void FirstOrderTf::initialize()
 // Set functions
 //------------------------------------------------------------------------------
 
-bool FirstOrderTf::setN1(const LCreal v)
+bool FirstOrderTf::setN1(const double v)
 {
    n1 = v;
    initialize();
    return true;
 }
 
-bool FirstOrderTf::setN2(const LCreal v)
+bool FirstOrderTf::setN2(const double v)
 {
    n2 = v;
    initialize();
    return true;
 }
 
-bool FirstOrderTf::setD1(const LCreal v)
+bool FirstOrderTf::setD1(const double v)
 {
    d1 = v;
    initialize();
    return true;
 }
 
-bool FirstOrderTf::setD2(const LCreal v)
+bool FirstOrderTf::setD2(const double v)
 {
    d2 = v;
    initialize();

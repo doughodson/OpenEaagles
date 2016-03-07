@@ -157,7 +157,7 @@ bool AnalogDial::setSlotSlices(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setOriginAngle() - start angle
 //------------------------------------------------------------------------------
-bool AnalogDial::setOriginAngle(const LCreal na)
+bool AnalogDial::setOriginAngle(const double na)
 {
     originAngle = na;
     return true;
@@ -166,7 +166,7 @@ bool AnalogDial::setOriginAngle(const LCreal na)
 //------------------------------------------------------------------------------
 // setSweepAngle() - how far to sweep (degrees)
 //------------------------------------------------------------------------------
-bool AnalogDial::setSweepAngle(const LCreal newSA)
+bool AnalogDial::setSweepAngle(const double newSA)
 {
     sweepAngle = newSA;
     return true;
@@ -175,7 +175,7 @@ bool AnalogDial::setSweepAngle(const LCreal newSA)
 //------------------------------------------------------------------------------
 // setRadius() - set the radius of our dial
 //------------------------------------------------------------------------------
-bool AnalogDial::setRadius(const LCreal newR)
+bool AnalogDial::setRadius(const double newR)
 {
     radius = newR;
     return true;

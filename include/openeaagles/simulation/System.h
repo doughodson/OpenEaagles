@@ -35,10 +35,10 @@ class Simulation;
 //       are to be overridden by derived systems, as needed.  Each function is
 //       called one per frame during the corresponding phase.
 //
-//      virtual void dynamics(const LCreal dt);    // Phase 0
-//      virtual void transmit(const LCreal dt);    // Phase 1
-//      virtual void receive(const LCreal dt);     // Phase 2
-//      virtual void process(const LCreal dt);     // Phase 3
+//      virtual void dynamics(const double dt);    // Phase 0
+//      virtual void transmit(const double dt);    // Phase 1
+//      virtual void receive(const double dt);     // Phase 2
+//      virtual void process(const double dt);     // Phase 3
 //
 //    2) Power switch enums --
 //       a) Current switch enums are PWR_OFF, PWR_STBY and PWR_ON.
@@ -85,8 +85,8 @@ public:
    // Event handler(s)
    virtual bool killedNotification(Player* const killedBy = 0); // Killed (KILL_EVENT) event handler
 
-   void updateData(const LCreal dt = 0.0) override;
-   void updateTC(const LCreal dt = 0.0) override;
+   void updateData(const double dt = 0.0) override;
+   void updateTC(const double dt = 0.0) override;
    bool event(const int event, base::Object* const obj = nullptr) override;
    void reset() override;
    bool isFrozen() const override;
@@ -97,10 +97,10 @@ protected:
 
    // Time critical phase callbacks --
    // --- to be used by the derived classes, as needed
-   virtual void dynamics(const LCreal dt);    // Phase 0
-   virtual void transmit(const LCreal dt);    // Phase 1
-   virtual void receive(const LCreal dt);     // Phase 2
-   virtual void process(const LCreal dt);     // Phase 3
+   virtual void dynamics(const double dt);    // Phase 0
+   virtual void transmit(const double dt);    // Phase 1
+   virtual void receive(const double dt);     // Phase 2
+   virtual void process(const double dt);     // Phase 3
 
 private:
    bool findOwnship();

@@ -332,7 +332,7 @@ bool Font::setSlotFontPosition (const base::List* const sfpobj)
 {
     bool ok = true;
     if (sfpobj != nullptr) {
-        LCreal values[2];
+        double values[2];
         int n = sfpobj->getNumberList(values, 2);
         ok = (n == 2);
         if (ok) setTextOrigin(values[0],values[1]);

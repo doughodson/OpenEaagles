@@ -26,7 +26,7 @@ END_SLOT_MAP()
 // ---
 // constructors
 // ---
-FlowRate::FlowRate(LCreal newFlowRate, Volume* volume, Time* time)
+FlowRate::FlowRate(double newFlowRate, Volume* volume, Time* time)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -93,14 +93,14 @@ void FlowRate::deleteData()
 //------------------------------------------------------------------------------
 // convert() -- converts from one volume/time ratio to another
 //------------------------------------------------------------------------------
-LCreal FlowRate::convert(Volume* newVolume, Time* newTime)
+double FlowRate::convert(Volume* newVolume, Time* newTime)
 {
     // holds our converted flowRate
-    LCreal tempFR = 1.0;
+    double tempFR = 1.0;
     // make sure we have a distance and a time to convert to
     if (newVolume != nullptr && newTime != nullptr) {
-        LCreal newVolVal = 1;
-        LCreal newTimeVal = 1;
+        double newVolVal = 1;
+        double newTimeVal = 1;
         // Again, we are only concerned about the type of Volume and Time we have, not the actual value
         newVolume->set(1);
         newTime->set(1);
@@ -122,13 +122,13 @@ LCreal FlowRate::convert(Volume* newVolume, Time* newTime)
 //------------------------------------------------------------------------------
 // set() -- sets our velocity from some other velocity
 //------------------------------------------------------------------------------
-bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
+bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)
 {
     bool ok = false;
     // make sure we have a distance and a time to convert to
     if (newVolume != nullptr && newTime != nullptr) {
-        LCreal newVolVal = 1;
-        LCreal newTimeVal = 1;
+        double newVolVal = 1;
+        double newTimeVal = 1;
         // we also have to set our units to 1 here, for conversion purposes
         newVolume->set(1);
         newTime->set(1);
@@ -138,7 +138,7 @@ bool FlowRate::set(const LCreal newFlowRate, Volume* newVolume, Time* newTime)
         if (newTime->getFactoryName() != myTime->getFactoryName()) newTimeVal = myTime->convert(*newTime);
 
         // find our new velocity from the new velocity value we are given * the conversion constants
-        LCreal tempFR = newFlowRate * newVolVal;
+        double tempFR = newFlowRate * newVolVal;
         tempFR *= newTimeVal;
 
         ok = true;

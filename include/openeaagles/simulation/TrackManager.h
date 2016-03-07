@@ -42,7 +42,7 @@ class TrackManager : public System
 public:
    TrackManager();
 
-   virtual LCreal getMaxTrackAge() const;
+   virtual double getMaxTrackAge() const;
    virtual bool setMaxTrackAge(const double sec);
 
    virtual unsigned int getMaxTracks() const;
@@ -72,7 +72,7 @@ public:
    virtual void clearTracksAndQueues();
 
    // Add a new emission report (RF track managers only)
-   virtual void newReport(Emission* em, LCreal snDbl);
+   virtual void newReport(Emission* em, double snDbl);
 
    bool killedNotification(Player* const killedBy = 0) override;
 
@@ -84,9 +84,9 @@ protected:
 
    unsigned int getNewTrackID()                             { return nextTrkId++; }
 
-   virtual void processTrackList(const LCreal dt) =0;                   // Derived class unique
+   virtual void processTrackList(const double dt) =0;                   // Derived class unique
 
-   virtual Emission* getReport(LCreal* const sn);                       // Get the next 'new' report from the queue
+   virtual Emission* getReport(double* const sn);                       // Get the next 'new' report from the queue
    virtual bool setSlotMaxTracks(const base::Number* const num);       // Sets the maximum number of track files
    virtual bool setSlotMaxTrackAge(const base::Number* const num);     // Sets the maximum age of tracks
    virtual bool setSlotFirstTrackId(const base::Number* const num);    // Sets the first (starting) track id number
@@ -102,22 +102,22 @@ protected:
    mutable long        trkListLock;        // Semaphore to protect the track list
 
    // Prediction parameters
-   void makeMatrixA(const LCreal dt);
-   LCreal              A[3][3];            // A Matrix
+   void makeMatrixA(const double dt);
+   double              A[3][3];            // A Matrix
    bool                haveMatrixA;        // Matrix A has be initialized
-   LCreal              alpha;              // Alpha parameter
-   LCreal              beta;               // Beta parameter
-   LCreal              gamma;              // Gamma parameter
+   double              alpha;              // Alpha parameter
+   double              beta;               // Beta parameter
+   double              gamma;              // Gamma parameter
 
    unsigned int        nextTrkId;          // Next track ID
    unsigned int        firstTrkId;         // First (starting) track ID
 
    base::safe_queue<Emission*>   emQueue; // Emission input queue
-   base::safe_queue<LCreal>      snQueue; // S/N input queue.
+   base::safe_queue<double>      snQueue; // S/N input queue.
    mutable long        queueLock;          // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks
-   void process(const LCreal dt) override;     // Phase 3
+   void process(const double dt) override;     // Phase 3
 
    // base::Component protected interface
    bool shutdownNotification() override;
@@ -125,7 +125,7 @@ protected:
 private:
    void initData();
 
-   LCreal              maxTrackAge;        // Max Track age (sec)
+   double              maxTrackAge;        // Max Track age (sec)
    short               type;               // Track type: the bit-wise OR of various type bits (see enum TypeBits in Track.h)
    bool                logTrackUpdates;    // input slot; if false, updates to tracks are not logged.
 };
@@ -147,12 +147,12 @@ class AirTrkMgr : public TrackManager
 public:
    AirTrkMgr();
 
-   LCreal getPosGate()                             { return posGate;}
-   LCreal getRngGate()                             { return rngGate;}
-   LCreal getVelGate()                             { return velGate;}
+   double getPosGate()                             { return posGate;}
+   double getRngGate()                             { return rngGate;}
+   double getVelGate()                             { return velGate;}
 
 protected:
-   void processTrackList(const LCreal dt) override;
+   void processTrackList(const double dt) override;
 
 private:
    void initData();
@@ -161,9 +161,9 @@ private:
    bool setVelocityGate(const base::Number* const num);
 
    // Prediction parameters
-   LCreal              posGate;            // Position Gate (meters)
-   LCreal              rngGate;            // Range Gate (meters)
-   LCreal              velGate;            // Velocity Gate (m/s)
+   double              posGate;            // Position Gate (meters)
+   double              rngGate;            // Range Gate (meters)
+   double              velGate;            // Velocity Gate (m/s)
 
    // Used by processTrackList()
    bool** report2TrackMatch;                 // Report/Track matched matrix
@@ -184,7 +184,7 @@ class GmtiTrkMgr : public TrackManager
 public:
    GmtiTrkMgr();
 protected:
-   void processTrackList(const LCreal dt) override;
+   void processTrackList(const double dt) override;
 
 private:
    void initData();
@@ -208,7 +208,7 @@ class RwrTrkMgr : public TrackManager
 public:
    RwrTrkMgr();
 protected:
-   void processTrackList(const LCreal dt) override;
+   void processTrackList(const double dt) override;
 
 private:
    void initData();

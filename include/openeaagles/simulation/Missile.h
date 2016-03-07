@@ -38,27 +38,27 @@ public:
     Missile();
 
     // get functions
-    LCreal getVpMin() const         { return vpMin; }
-    LCreal getVpMax() const         { return vpMax; }
-    LCreal getVpMaxG() const        { return vpMaxG; }
-    LCreal getMaxG() const          { return maxG; }
-    LCreal getMaxAccel() const      { return maxAccel; }
-    LCreal getMinAccel() const      { return 0.0; }
+    double getVpMin() const         { return vpMin; }
+    double getVpMax() const         { return vpMax; }
+    double getVpMaxG() const        { return vpMaxG; }
+    double getMaxG() const          { return maxG; }
+    double getMaxAccel() const      { return maxAccel; }
+    double getMinAccel() const      { return 0.0; }
 
     // set functions
-    bool setVpMin(const LCreal v);
-    bool setVpMax(const LCreal v);
-    bool setVpMaxG(const LCreal v);
-    bool setMaxG(const LCreal v);
-    bool setMaxAccel(const LCreal v);
+    bool setVpMin(const double v);
+    bool setVpMax(const double v);
+    bool setVpMaxG(const double v);
+    bool setMaxG(const double v);
+    bool setMaxAccel(const double v);
 
     const char* getDescription() const override;
     const char* getNickname() const override;
     int getCategory() const override;
     void atReleaseInit() override;
 
-    virtual void setCmdPitchD(const LCreal x)  { cmdPitch   = x * static_cast<LCreal>(base::Angle::D2RCC); }
-    virtual void setCmdHdgD(const LCreal x)    { cmdHeading = x * static_cast<LCreal>(base::Angle::D2RCC); }
+    virtual void setCmdPitchD(const double x)  { cmdPitch   = x * static_cast<double>(base::Angle::D2RCC); }
+    virtual void setCmdHdgD(const double x)    { cmdHeading = x * static_cast<double>(base::Angle::D2RCC); }
 
     bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
     bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;
@@ -77,8 +77,8 @@ protected:
    virtual bool setSlotCmdVelocity(const base::Number* const msg);
 
    // Weapon interface
-   void weaponGuidance(const LCreal dt) override;
-   void weaponDynamics(const LCreal dt) override;
+   void weaponGuidance(const double dt) override;
+   void weaponDynamics(const double dt) override;
 
 private:
     virtual bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3* const los, osg::Vec3* const vel, osg::Vec3* const posx) const;
@@ -86,18 +86,18 @@ private:
    // ---
    // Default guidance & dynamics parameters
    // ---
-   LCreal      trng;           // target range             (m)
-   LCreal      trngT;          // target range (truth)     (m)
-   LCreal      trdot;          // target range rate        (m/s)
-   LCreal      trdotT;          // target range rate (truth)(m/s)
-   LCreal      cmdPitch;       // Commanded Pitch          (rad)
-   LCreal      cmdHeading;     // Commanded Heading        (rad)
-   LCreal      cmdVelocity;    // Commanded speed          (m/s)
-   LCreal      vpMin;          // Minimum Velocity         (m/s)
-   LCreal      vpMax;          // Maximum Velocity         (m/s)
-   LCreal      maxAccel;       // Max longitudual acceleration ((f/s)/s)
-   LCreal      maxG;           // Max lateral G's (pitch/yaw)  (gees)
-   LCreal      vpMaxG;         // Velocity for Max G's     (gees)
+   double      trng;           // target range             (m)
+   double      trngT;          // target range (truth)     (m)
+   double      trdot;          // target range rate        (m/s)
+   double      trdotT;          // target range rate (truth)(m/s)
+   double      cmdPitch;       // Commanded Pitch          (rad)
+   double      cmdHeading;     // Commanded Heading        (rad)
+   double      cmdVelocity;    // Commanded speed          (m/s)
+   double      vpMin;          // Minimum Velocity         (m/s)
+   double      vpMax;          // Maximum Velocity         (m/s)
+   double      maxAccel;       // Max longitudual acceleration ((f/s)/s)
+   double      maxG;           // Max lateral G's (pitch/yaw)  (gees)
+   double      vpMaxG;         // Velocity for Max G's     (gees)
 
 };
 

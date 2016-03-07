@@ -17,20 +17,20 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Area, "Area")
 EMPTY_SLOTTABLE(Area)
 
 // Conversion constants
-const LCreal Area::SM2SFT = 10.76391f;                 // Sq. Meters      => Sq. Feet
-const LCreal Area::SFT2SM = (1.0f / Area::SM2SFT);     // Sq. Feet        => Sq. Meters
-const LCreal Area::SM2SYD = 1.19599f;                  // Sq. Meters      => Sq. Yards
-const LCreal Area::SYD2SM = (1.0f / Area::SM2SYD);     // Sq. Yards       => Sq. Meters
-const LCreal Area::SM2SMI = 0.00000038610216f;         // Sq. Meters      => Sq. Miles
-const LCreal Area::SMI2SM = (1.0f / Area::SM2SMI);     // Sq. Miles       => Sq. Meters
-const LCreal Area::SM2SIN = 1550.0030399f;             // Sq. Meters      => Sq. Inches
-const LCreal Area::SIN2SM = (1.0f / Area::SM2SIN);     // Sq. Inches      => Sq. Meters
-const LCreal Area::SM2SCM = 10000.0f;                  // Sq. Meters      => Sq. CentiMeters
-const LCreal Area::SCM2SM = (1.0f / Area::SM2SCM);     // Sq. CentiMeters => Sq. Meters
-const LCreal Area::SM2SMM = 1000000.0f;                // Sq. Meters      => Sq. MilliMeters
-const LCreal Area::SMM2SM = (1.0f / Area::SM2SMM);     // Sq. MilliMeters => Sq. Meters
-const LCreal Area::SM2SKM = 0.000001f;                 // Sq. Meters      => Sq. KiloMeters
-const LCreal Area::SKM2SM = (1.0f / Area::SM2SKM);     // Sq. KiloMeters  => Sq. Meters
+const double Area::SM2SFT = 10.76391f;                 // Sq. Meters      => Sq. Feet
+const double Area::SFT2SM = (1.0f / Area::SM2SFT);     // Sq. Feet        => Sq. Meters
+const double Area::SM2SYD = 1.19599f;                  // Sq. Meters      => Sq. Yards
+const double Area::SYD2SM = (1.0f / Area::SM2SYD);     // Sq. Yards       => Sq. Meters
+const double Area::SM2SMI = 0.00000038610216f;         // Sq. Meters      => Sq. Miles
+const double Area::SMI2SM = (1.0f / Area::SM2SMI);     // Sq. Miles       => Sq. Meters
+const double Area::SM2SIN = 1550.0030399f;             // Sq. Meters      => Sq. Inches
+const double Area::SIN2SM = (1.0f / Area::SM2SIN);     // Sq. Inches      => Sq. Meters
+const double Area::SM2SCM = 10000.0f;                  // Sq. Meters      => Sq. CentiMeters
+const double Area::SCM2SM = (1.0f / Area::SM2SCM);     // Sq. CentiMeters => Sq. Meters
+const double Area::SM2SMM = 1000000.0f;                // Sq. Meters      => Sq. MilliMeters
+const double Area::SMM2SM = (1.0f / Area::SM2SMM);     // Sq. MilliMeters => Sq. Meters
+const double Area::SM2SKM = 0.000001f;                 // Sq. Meters      => Sq. KiloMeters
+const double Area::SKM2SM = (1.0f / Area::SM2SKM);     // Sq. KiloMeters  => Sq. Meters
 
 
 //------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ Area::Area()
    STANDARD_CONSTRUCTOR()
 }
 
-Area::Area(const LCreal value) : Number(value) 
+Area::Area(const double value) : Number(value) 
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -99,7 +99,7 @@ SquareMeters::SquareMeters() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareMeters::SquareMeters(const LCreal value) : Area(value)
+SquareMeters::SquareMeters(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -124,7 +124,7 @@ SquareFeet::SquareFeet() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareFeet::SquareFeet(const LCreal value) : Area(value)
+SquareFeet::SquareFeet(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -149,7 +149,7 @@ SquareInches::SquareInches() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareInches::SquareInches(const LCreal value) : Area(value)
+SquareInches::SquareInches(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -175,7 +175,7 @@ SquareYards::SquareYards() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareYards::SquareYards(const LCreal value) : Area(value)
+SquareYards::SquareYards(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -200,7 +200,7 @@ SquareMiles::SquareMiles() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareMiles::SquareMiles(const LCreal value) : Area(value)
+SquareMiles::SquareMiles(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -226,7 +226,7 @@ SquareCentiMeters::SquareCentiMeters() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareCentiMeters::SquareCentiMeters(const LCreal value) : Area(value)
+SquareCentiMeters::SquareCentiMeters(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -251,7 +251,7 @@ SquareMilliMeters::SquareMilliMeters() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareMilliMeters::SquareMilliMeters(const LCreal value) : Area(value)
+SquareMilliMeters::SquareMilliMeters(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -276,7 +276,7 @@ SquareKiloMeters::SquareKiloMeters() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-SquareKiloMeters::SquareKiloMeters(const LCreal value) : Area(value)
+SquareKiloMeters::SquareKiloMeters(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -301,7 +301,7 @@ DecibelSquareMeters::DecibelSquareMeters() : Area()
     STANDARD_CONSTRUCTOR()
 }
 
-DecibelSquareMeters::DecibelSquareMeters(const LCreal value) : Area(value)
+DecibelSquareMeters::DecibelSquareMeters(const double value) : Area(value)
 {
     STANDARD_CONSTRUCTOR()
 }

@@ -20,14 +20,14 @@
 //
 // Public methods (Defined in Area, and inherited by all derived classes):
 //
-//     set(const LCreal v)
-//        Sets an Area derived instance with an LCreal.
+//     set(const double v)
+//        Sets an Area derived instance with an double.
 //
 //     set(const Area& n)
 //        Sets, and converts if necessary, an Area derived instance with
 //        another Area derived instance.
 //
-//     LCreal convert(const Area& n)
+//     double convert(const Area& n)
 //        Converts the value of an Area derived instance into
 //        the units of another Area derived instance.
 //
@@ -36,28 +36,28 @@
 //          ones will be included here.  (ie.. inches to feet).  All other conversions can be
 //          handled using the set or convert member function of each class type (ie.. CentiMeters to Meters).
 //
-//          LCreal squareFeetToInches(const LCreal v)
-//          LCreal squareFeetToYards(const LCreal v)
-//          LCreal squareFeetToMeters(const LCreal v)
-//          LCreal squareFeetToMiles(const LCreal v)
-//          LCreal squareInchesToFeet(const LCreal v)
-//          LCreal squareInchesToYards(const LCreal v)
-//          LCreal squareInchesToMeters(const LCreal v)
-//          LCreal squareInchesToMiles(const LCreal v)
-//          LCreal squareYardsToFeet(const LCreal v)
-//          LCreal squareYardsToInches(const LCreal v)
-//          LCreal squareYardsToMeters(const LCreal v)
-//          LCreal squareYardsToMiles(const LCreal v)
-//          LCreal squareMilesToFeet(const LCreal v)
-//          LCreal squareMilesToInches(const LCreal v)
-//          LCreal squareMilesToYards(const LCreal v)
-//          LCreal squareMilesToMeters(const LCreal v)
-//          LCreal squareMetersToFeet(const LCreal v)
-//          LCreal squareMetersToInches(const LCreal v)
-//          LCreal squareMetersToYards(const LCreal v)
-//          LCreal squareMetersToMiles(const LCreal v)
-//          LCreal squareMetersToDecibelSquareMeters(const LCreal v)
-//          LCreal decibelSquareMetersToSquareMeters(const LCreal v)
+//          double squareFeetToInches(const double v)
+//          double squareFeetToYards(const double v)
+//          double squareFeetToMeters(const double v)
+//          double squareFeetToMiles(const double v)
+//          double squareInchesToFeet(const double v)
+//          double squareInchesToYards(const double v)
+//          double squareInchesToMeters(const double v)
+//          double squareInchesToMiles(const double v)
+//          double squareYardsToFeet(const double v)
+//          double squareYardsToInches(const double v)
+//          double squareYardsToMeters(const double v)
+//          double squareYardsToMiles(const double v)
+//          double squareMilesToFeet(const double v)
+//          double squareMilesToInches(const double v)
+//          double squareMilesToYards(const double v)
+//          double squareMilesToMeters(const double v)
+//          double squareMetersToFeet(const double v)
+//          double squareMetersToInches(const double v)
+//          double squareMetersToYards(const double v)
+//          double squareMetersToMiles(const double v)
+//          double squareMetersToDecibelSquareMeters(const double v)
+//          double decibelSquareMetersToSquareMeters(const double v)
 //
 //     Output stream operator: >>
 //        ostream& operator<<(ostream& sout, const Area& n)
@@ -68,7 +68,7 @@
 // Public methods (For classes: SquareFeet, SquareYards, SquareMeters, SquareMiles, SquareInches,
 //                  SquareCentiMeters, SquareMilliMeters, SquareKiloMeters, DecibelSquareMeters):
 //
-//     LCreal convertStatic(const Area& n)
+//     double convertStatic(const Area& n)
 //        Static function to convert the given Area derived instance
 //        into the units of a specific Area derived class.
 //
@@ -112,54 +112,54 @@ class Area : public Number
 
 public:
     Area();
-    Area(const LCreal value);
+    Area(const double value);
 
-    void set(const LCreal v) { val = v; }
+    void set(const double v) { val = v; }
     void set(const Area& n)  { val = fromArea(n.toArea()); }
 
-    virtual LCreal toArea() const = 0;
-    virtual LCreal fromArea(const LCreal a) const = 0;
-    LCreal convert(const Area& n) { return fromArea(n.toArea()); }
+    virtual double toArea() const = 0;
+    virtual double fromArea(const double a) const = 0;
+    double convert(const Area& n) { return fromArea(n.toArea()); }
 
     // Conversions between Areas
-    static LCreal squareFeetToInches(const LCreal v)   { return (v * SFT2SM) * SM2SIN; }
-    static LCreal squareFeetToYards(const LCreal v)    { return (v * SFT2SM) * SM2SYD; }
-    static LCreal squareFeetToMeters(const LCreal v)   { return v * SFT2SM; }
-    static LCreal squareFeetToMiles(const LCreal v)    { return (v * SFT2SM) * SM2SMI; }
-    static LCreal squareInchesToFeet(const LCreal v)   { return (v * SIN2SM) * SM2SFT; }
-    static LCreal squareInchesToYards(const LCreal v)  { return (v * SIN2SM) * SM2SYD; }
-    static LCreal squareInchesToMeters(const LCreal v) { return v * SIN2SM; }
-    static LCreal squareInchesToMiles(const LCreal v)  { return (v * SIN2SM) * SM2SMI; }
-    static LCreal squareYardsToFeet(const LCreal v)    { return (v * SYD2SM) * SM2SFT; }
-    static LCreal squareYardsToInches(const LCreal v)  { return (v * SYD2SM) * SM2SIN; }
-    static LCreal squareYardsToMeters(const LCreal v)  { return v * SYD2SM; }
-    static LCreal squareYardsToMiles(const LCreal v)   { return (v * SYD2SM) * SM2SMI; }
-    static LCreal squareMilesToFeet(const LCreal v)    { return (v * SMI2SM) * SM2SFT; }
-    static LCreal squareMilesToInches(const LCreal v)  { return (v * SMI2SM) * SM2SIN; }
-    static LCreal squareMilesToYards(const LCreal v)   { return (v * SMI2SM) * SM2SYD; }
-    static LCreal squareMilesToMeters(const LCreal v)  { return v * SMI2SM; }
-    static LCreal squareMetersToFeet(const LCreal v)   { return v * SM2SFT; }
-    static LCreal squareMetersToInches(const LCreal v) { return v * SM2SIN; }
-    static LCreal squareMetersToYards(const LCreal v)  { return v * SM2SYD; }
-    static LCreal squareMetersToMiles(const LCreal v)  { return v * SM2SMI; }
-    static LCreal squareMetersToDecibelSquareMeters(const LCreal v) { return 10.0f * lcLog10(v); }
-    static LCreal decibelSquareMetersToSquareMeters(const LCreal v) { return lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(v/10.0)); }
+    static double squareFeetToInches(const double v)   { return (v * SFT2SM) * SM2SIN; }
+    static double squareFeetToYards(const double v)    { return (v * SFT2SM) * SM2SYD; }
+    static double squareFeetToMeters(const double v)   { return v * SFT2SM; }
+    static double squareFeetToMiles(const double v)    { return (v * SFT2SM) * SM2SMI; }
+    static double squareInchesToFeet(const double v)   { return (v * SIN2SM) * SM2SFT; }
+    static double squareInchesToYards(const double v)  { return (v * SIN2SM) * SM2SYD; }
+    static double squareInchesToMeters(const double v) { return v * SIN2SM; }
+    static double squareInchesToMiles(const double v)  { return (v * SIN2SM) * SM2SMI; }
+    static double squareYardsToFeet(const double v)    { return (v * SYD2SM) * SM2SFT; }
+    static double squareYardsToInches(const double v)  { return (v * SYD2SM) * SM2SIN; }
+    static double squareYardsToMeters(const double v)  { return v * SYD2SM; }
+    static double squareYardsToMiles(const double v)   { return (v * SYD2SM) * SM2SMI; }
+    static double squareMilesToFeet(const double v)    { return (v * SMI2SM) * SM2SFT; }
+    static double squareMilesToInches(const double v)  { return (v * SMI2SM) * SM2SIN; }
+    static double squareMilesToYards(const double v)   { return (v * SMI2SM) * SM2SYD; }
+    static double squareMilesToMeters(const double v)  { return v * SMI2SM; }
+    static double squareMetersToFeet(const double v)   { return v * SM2SFT; }
+    static double squareMetersToInches(const double v) { return v * SM2SIN; }
+    static double squareMetersToYards(const double v)  { return v * SM2SYD; }
+    static double squareMetersToMiles(const double v)  { return v * SM2SMI; }
+    static double squareMetersToDecibelSquareMeters(const double v) { return 10.0f * lcLog10(v); }
+    static double decibelSquareMetersToSquareMeters(const double v) { return lcPow(static_cast<double>(10.0), static_cast<double>(v/10.0)); }
 
     // Conversion constants
-    static const LCreal SM2SFT;
-    static const LCreal SFT2SM;
-    static const LCreal SM2SYD;
-    static const LCreal SYD2SM;
-    static const LCreal SM2SMI;
-    static const LCreal SMI2SM;
-    static const LCreal SM2SIN;
-    static const LCreal SIN2SM;
-    static const LCreal SM2SCM;
-    static const LCreal SCM2SM;
-    static const LCreal SM2SMM;
-    static const LCreal SMM2SM;
-    static const LCreal SM2SKM;
-    static const LCreal SKM2SM;
+    static const double SM2SFT;
+    static const double SFT2SM;
+    static const double SM2SYD;
+    static const double SYD2SM;
+    static const double SM2SMI;
+    static const double SMI2SM;
+    static const double SM2SIN;
+    static const double SIN2SM;
+    static const double SM2SCM;
+    static const double SCM2SM;
+    static const double SM2SMM;
+    static const double SMM2SM;
+    static const double SM2SKM;
+    static const double SKM2SM;
 };
 
 
@@ -178,12 +178,12 @@ class SquareMeters : public Area
 
 public:
     SquareMeters();
-    SquareMeters(const LCreal value);
+    SquareMeters(const double value);
     SquareMeters(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea(); }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val); }
-    LCreal fromArea(const LCreal a) const override  { return a; }
+    static double convertStatic(const Area& n)      { return n.toArea(); }
+    double toArea() const override                  { return static_cast<double>(val); }
+    double fromArea(const double a) const override  { return a; }
 };
 
 //------------------------------------------------------------------------------
@@ -197,12 +197,12 @@ class SquareFeet : public Area
 
 public:
     SquareFeet();
-    SquareFeet(const LCreal value);
+    SquareFeet(const double value);
     SquareFeet(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SFT; }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val * SFT2SM); }
-    LCreal fromArea(const LCreal a) const override  { return a * SM2SFT; }
+    static double convertStatic(const Area& n)      { return n.toArea() * SM2SFT; }
+    double toArea() const override                  { return static_cast<double>(val * SFT2SM); }
+    double fromArea(const double a) const override  { return a * SM2SFT; }
 };
 
 //------------------------------------------------------------------------------
@@ -216,12 +216,12 @@ class SquareInches : public Area
 
 public:
     SquareInches();
-    SquareInches(const LCreal value);
+    SquareInches(const double value);
     SquareInches(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SIN; }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val * SIN2SM); }
-    LCreal fromArea(const LCreal a) const override  { return a * SM2SIN; }
+    static double convertStatic(const Area& n)      { return n.toArea() * SM2SIN; }
+    double toArea() const override                  { return static_cast<double>(val * SIN2SM); }
+    double fromArea(const double a) const override  { return a * SM2SIN; }
 };
 
 //------------------------------------------------------------------------------
@@ -235,12 +235,12 @@ class SquareYards : public Area
 
 public:
     SquareYards();
-    SquareYards(const LCreal value);
+    SquareYards(const double value);
     SquareYards(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SYD; }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val * SYD2SM); }
-    LCreal fromArea(const LCreal a) const override  { return a * SM2SYD; }
+    static double convertStatic(const Area& n)      { return n.toArea() * SM2SYD; }
+    double toArea() const override                  { return static_cast<double>(val * SYD2SM); }
+    double fromArea(const double a) const override  { return a * SM2SYD; }
 };
 
 //------------------------------------------------------------------------------
@@ -254,12 +254,12 @@ class SquareMiles : public Area
 
 public:
     SquareMiles();
-    SquareMiles(const LCreal value);
+    SquareMiles(const double value);
     SquareMiles(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SMI; }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val * SMI2SM); }
-    LCreal fromArea(const LCreal a) const override  { return a * SM2SMI; }
+    static double convertStatic(const Area& n)      { return n.toArea() * SM2SMI; }
+    double toArea() const override                  { return static_cast<double>(val * SMI2SM); }
+    double fromArea(const double a) const override  { return a * SM2SMI; }
 };
 
 //------------------------------------------------------------------------------
@@ -273,12 +273,12 @@ class SquareCentiMeters : public Area
 
 public:
     SquareCentiMeters();
-    SquareCentiMeters(const LCreal value);
+    SquareCentiMeters(const double value);
     SquareCentiMeters(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SCM; }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val * SCM2SM); }
-    LCreal fromArea(const LCreal a) const override  { return a * SM2SCM; }
+    static double convertStatic(const Area& n)      { return n.toArea() * SM2SCM; }
+    double toArea() const override                  { return static_cast<double>(val * SCM2SM); }
+    double fromArea(const double a) const override  { return a * SM2SCM; }
 };
 
 //------------------------------------------------------------------------------
@@ -292,12 +292,12 @@ class SquareMilliMeters : public Area
 
 public:
     SquareMilliMeters();
-    SquareMilliMeters(const LCreal value);
+    SquareMilliMeters(const double value);
     SquareMilliMeters(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SMM; }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val * SMM2SM); }
-    LCreal fromArea(const LCreal a) const override  { return a * SM2SMM; }
+    static double convertStatic(const Area& n)      { return n.toArea() * SM2SMM; }
+    double toArea() const override                  { return static_cast<double>(val * SMM2SM); }
+    double fromArea(const double a) const override  { return a * SM2SMM; }
 };
 
 //------------------------------------------------------------------------------
@@ -311,12 +311,12 @@ class SquareKiloMeters : public Area
 
 public:
     SquareKiloMeters();
-    SquareKiloMeters(const LCreal value);
+    SquareKiloMeters(const double value);
     SquareKiloMeters(const Area& value);
 
-    static LCreal convertStatic(const Area& n)      { return n.toArea() * SM2SKM; }
-    LCreal toArea() const override                  { return static_cast<LCreal>(val * SKM2SM); }
-    LCreal fromArea(const LCreal a) const override  { return a * SM2SKM; }
+    static double convertStatic(const Area& n)      { return n.toArea() * SM2SKM; }
+    double toArea() const override                  { return static_cast<double>(val * SKM2SM); }
+    double fromArea(const double a) const override  { return a * SM2SKM; }
 };
 
 //------------------------------------------------------------------------------
@@ -330,12 +330,12 @@ class DecibelSquareMeters : public Area
 
 public:
     DecibelSquareMeters();
-    DecibelSquareMeters(const LCreal value);
+    DecibelSquareMeters(const double value);
     DecibelSquareMeters(const Area& value);
 
-    static LCreal convertStatic(const Area& n)     { return 10.0f * lcLog10( n.toArea() ); }
-    LCreal toArea() const override                 { return lcPow(static_cast<LCreal>(10.0), static_cast<LCreal>(val/10.0)); }
-    LCreal fromArea(const LCreal a) const override { return 10.0f * lcLog10(a); }
+    static double convertStatic(const Area& n)     { return 10.0f * lcLog10( n.toArea() ); }
+    double toArea() const override                 { return lcPow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
+    double fromArea(const double a) const override { return 10.0f * lcLog10(a); }
 
 };
 

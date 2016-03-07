@@ -27,15 +27,15 @@ public:
    DiffEquation();
    DiffEquation(const unsigned int rate);
 
-   LCreal g(const LCreal x) override;
+   double g(const double x) override;
 
 protected:
    void allocateMemory(unsigned int n) override;
    void clearMemory() override;
 
    // Difference equation coef arrays
-   LCreal* pa;    // (a[k] * y[k]) terms; for k = 1 .. n
-   LCreal* pb;    // (b[k] * x[k]) terms; for k = 0 .. n
+   double* pa;    // (a[k] * y[k]) terms; for k = 1 .. n
+   double* pb;    // (b[k] * x[k]) terms; for k = 0 .. n
 
 private:
    void initData();  // Initialize our data

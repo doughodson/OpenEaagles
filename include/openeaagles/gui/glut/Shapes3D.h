@@ -63,18 +63,18 @@ public:
     Cylinder();
     void drawFunc() override;
 
-    virtual bool setTopRadius(const LCreal x)   { topRadius = x; return true; }
-    virtual bool setHeight(const LCreal x)      { height = x; return true; }
-    LCreal getTopRadius()                       { return topRadius; }
-    LCreal getHeight()                          { return height; }
+    virtual bool setTopRadius(const double x)   { topRadius = x; return true; }
+    virtual bool setHeight(const double x)      { height = x; return true; }
+    double getTopRadius()                       { return topRadius; }
+    double getHeight()                          { return height; }
 
 protected:
     bool setSlotTopRadius(const base::Number* const x);
     bool setSlotHeight(const base::Number* const x);
 
 private:
-    LCreal topRadius;
-    LCreal height;
+    double topRadius;
+    double height;
 };
 
 //------------------------------------------------------------------------------
@@ -107,14 +107,14 @@ public:
     Cube();
     void drawFunc() override;
 
-    virtual bool setSize(const LCreal x)   { size = x; return true; }
-    LCreal getSize()                       { return size; }
+    virtual bool setSize(const double x)   { size = x; return true; }
+    double getSize()                       { return size; }
 
 protected:
     bool setSlotSize(const base::Number* const srobj);
 
 private:
-    LCreal size;
+    double size;
 };
 
 //------------------------------------------------------------------------------
@@ -133,14 +133,14 @@ public:
     Torus();
     void drawFunc() override;
 
-    virtual bool setOuterRadius(const LCreal x)    { oRadius = x; return true; }
-    LCreal getOuterRadius()                        { return oRadius; }
+    virtual bool setOuterRadius(const double x)    { oRadius = x; return true; }
+    double getOuterRadius()                        { return oRadius; }
 
 protected:
     bool setSlotOuterRadius(const base::Number* const x);
 
 private:
-    LCreal oRadius;
+    double oRadius;
 };
 
 

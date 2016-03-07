@@ -224,13 +224,13 @@ bool AircraftIrSignature::getIrSignature(IrQueryMsg* const msg)
     bool ok = false;
     //IrQueryMsg* msg = dynamic_cast<IrQueryMsg*>( msg0 );
     if (msg != nullptr) {
-        LCreal projectedAreaInFOV = getSignatureArea(msg);
+        double projectedAreaInFOV = getSignatureArea(msg);
         msg->setProjectedArea(projectedAreaInFOV);
 
         // if no projectedAreaInFOV, then target was not in FOV
         if (projectedAreaInFOV > 0.0){
             ok = true;
-            LCreal* heatSignature = getHeatSignature(msg);
+            double* heatSignature = getHeatSignature(msg);
             msg->setSignatureByWaveband(heatSignature);
             // FAB - set simple signature value
             msg->setSignatureAtRange(getCalculatedHeatSignature());
@@ -344,7 +344,7 @@ bool AircraftIrSignature::setSlotHotPartsWavebandFactorTable(const base::Table2*
 //------------------------------------------------------------------------------
 // getAirframeSignature()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getAirframeSignature(LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation)
+double AircraftIrSignature::getAirframeSignature(double velocity, double altitude, double azimuth, double elevation)
 {
     return (airframeSignatureTable->lfi(velocity, altitude, azimuth, elevation));
 }
@@ -352,7 +352,7 @@ LCreal AircraftIrSignature::getAirframeSignature(LCreal velocity, LCreal altitud
 //------------------------------------------------------------------------------
 // getAirframeWavebandFactor()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getAirframeWavebandFactor(LCreal midpoint, LCreal width)
+double AircraftIrSignature::getAirframeWavebandFactor(double midpoint, double width)
 {
     return (airframeWavebandFactorTable->lfi(midpoint, width));
 }
@@ -360,7 +360,7 @@ LCreal AircraftIrSignature::getAirframeWavebandFactor(LCreal midpoint, LCreal wi
 //------------------------------------------------------------------------------
 // getPlumeSignature()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getPlumeSignature(LCreal pla, LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation)
+double AircraftIrSignature::getPlumeSignature(double pla, double velocity, double altitude, double azimuth, double elevation)
 {
     return (plumeSignatureTable->lfi(pla, velocity, altitude, azimuth, elevation));
 }
@@ -368,7 +368,7 @@ LCreal AircraftIrSignature::getPlumeSignature(LCreal pla, LCreal velocity, LCrea
 //------------------------------------------------------------------------------
 // getPlumeWavebandFactor()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getPlumeWavebandFactor(LCreal midpoint, LCreal width)
+double AircraftIrSignature::getPlumeWavebandFactor(double midpoint, double width)
 {
     return (plumeWavebandFactorTable->lfi(midpoint, width));
 }
@@ -376,7 +376,7 @@ LCreal AircraftIrSignature::getPlumeWavebandFactor(LCreal midpoint, LCreal width
 //------------------------------------------------------------------------------
 // getHotPartsSignature()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getHotPartsSignature(LCreal pla, LCreal velocity, LCreal altitude, LCreal azimuth, LCreal elevation)
+double AircraftIrSignature::getHotPartsSignature(double pla, double velocity, double altitude, double azimuth, double elevation)
 {
    return (hotPartsSignatureTable->lfi(pla, velocity, altitude, azimuth, elevation));
 }
@@ -384,7 +384,7 @@ LCreal AircraftIrSignature::getHotPartsSignature(LCreal pla, LCreal velocity, LC
 //------------------------------------------------------------------------------
 // getHotPartsWavebandFactor()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getHotPartsWavebandFactor(LCreal midpoint, LCreal width)
+double AircraftIrSignature::getHotPartsWavebandFactor(double midpoint, double width)
 {
    return (hotPartsWavebandFactorTable->lfi(midpoint, width));
 }
@@ -392,17 +392,17 @@ LCreal AircraftIrSignature::getHotPartsWavebandFactor(LCreal midpoint, LCreal wi
 //------------------------------------------------------------------------------
 // getCalculatedAirframeHeatSignature()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
+double AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
 
-    LCreal irPower = 0;
+    double irPower = 0;
     const AirVehicle* targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const Player*>(msg->getTarget()));
     if(targetAircraft != nullptr) {
         // this will need checks to ensure targetAircraft is , in fact,
         // an airvehicle and not something else.
-        LCreal targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
-        LCreal targetVel = targetAircraft->getMach();
-        LCreal targetAzimuth = msg->getAzimuthAoi();
-        LCreal targetElevation = msg->getElevationAoi();
+        double targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
+        double targetVel = targetAircraft->getMach();
+        double targetAzimuth = msg->getAzimuthAoi();
+        double targetElevation = msg->getElevationAoi();
         if (targetAzimuth < 0) {
             targetAzimuth = -targetAzimuth;
         }
@@ -415,25 +415,25 @@ LCreal AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg*
 //------------------------------------------------------------------------------
 // getAirframeSignatures()
 //------------------------------------------------------------------------------
-void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, const LCreal lowerBound, const LCreal upperBound)
+void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
 {
     if (airframeWavebandFactorTable != nullptr && airframeSignatureTable != nullptr) {
         // find airframe factor.
-        const LCreal* centerWavelengths = airframeWavebandFactorTable->getXData();
-        const LCreal* widths = airframeWavebandFactorTable->getYData();
-        LCreal irPower = getCalculatedAirframeHeatSignature(msg);
+        const double* centerWavelengths = airframeWavebandFactorTable->getXData();
+        const double* widths = airframeWavebandFactorTable->getYData();
+        double irPower = getCalculatedAirframeHeatSignature(msg);
 
         for (unsigned int i = 0; i < static_cast<unsigned int>(airframeWavebandFactorTable->getNumXPoints()); i++) {
-            LCreal centerWavelength = centerWavelengths[i];
-            LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0f);
-            LCreal upperWavelength = lowerWavelength + widths[i];
+            double centerWavelength = centerWavelengths[i];
+            double lowerWavelength = centerWavelength - (widths[i] / 2.0f);
+            double upperWavelength = lowerWavelength + widths[i];
 
             airframeSig[i*3] = lowerWavelength;
             airframeSig[i*3 + 1] = upperWavelength;
 
             if (upperBound >= lowerWavelength && lowerBound <= upperWavelength) {
                 // sensor band overlaps this bin
-                LCreal airframeWaveBandFactor  = airframeWavebandFactorTable->lfi(centerWavelength,widths[i]);
+                double airframeWaveBandFactor  = airframeWavebandFactorTable->lfi(centerWavelength,widths[i]);
                 airframeSig[i*3 + 2] = irPower * airframeWaveBandFactor;
             }
             else{
@@ -446,20 +446,20 @@ void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, con
 //------------------------------------------------------------------------------
 // getPlumeRadiation()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
+double AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
 {
-    LCreal currentPla = 1.0;
-    LCreal irPower = 0;
+    double currentPla = 1.0;
+    double irPower = 0;
     const Player* targetAircraft = msg->getTarget();
     if (targetAircraft != nullptr) {
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
             currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
         }
 
-        LCreal targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
-        LCreal targetVel = targetAircraft->getMach();
-        LCreal targetAzimuth = msg->getAzimuthAoi();
-        LCreal targetElevation = msg->getElevationAoi();
+        double targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
+        double targetVel = targetAircraft->getMach();
+        double targetAzimuth = msg->getAzimuthAoi();
+        double targetElevation = msg->getElevationAoi();
         if (targetAzimuth < 0) {
             targetAzimuth = -targetAzimuth;
         }
@@ -472,21 +472,21 @@ LCreal AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
 //------------------------------------------------------------------------------
 // getPlumeSignatures()
 //------------------------------------------------------------------------------
-void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const LCreal lowerBound, const LCreal upperBound)
+void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
 {
     if (plumeWavebandFactorTable != nullptr) {
-        const LCreal* centerWavelengths = plumeWavebandFactorTable->getXData();
-        const LCreal* widths = plumeWavebandFactorTable->getYData();
-        LCreal irPower = getPlumeRadiation(msg);
+        const double* centerWavelengths = plumeWavebandFactorTable->getXData();
+        const double* widths = plumeWavebandFactorTable->getYData();
+        double irPower = getPlumeRadiation(msg);
         for (unsigned int i = 0; i < static_cast<unsigned int>(plumeWavebandFactorTable->getNumXPoints()); i++) {
-            LCreal centerWavelength = centerWavelengths[i];
-            LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0f);
-            LCreal upperWavelength = lowerWavelength + widths[i];
+            double centerWavelength = centerWavelengths[i];
+            double lowerWavelength = centerWavelength - (widths[i] / 2.0f);
+            double upperWavelength = lowerWavelength + widths[i];
             plumeSigs[i*3] = lowerWavelength;
             plumeSigs[i*3 + 1] = upperWavelength;
             if (upperBound >= lowerWavelength && lowerBound <= upperWavelength) {
                 // sensor band overlaps this bin
-                LCreal plumeFactor = plumeWavebandFactorTable->lfi(centerWavelength,widths[i]);
+                double plumeFactor = plumeWavebandFactorTable->lfi(centerWavelength,widths[i]);
                 // plume has this factor contribution in this bin
                 plumeSigs[i*3 + 2] = irPower * plumeFactor;
                 // this number would represent the contribution if this bin were completely
@@ -498,16 +498,16 @@ void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const 
 
                 // the overlap ratio is calculated to correct this number if the sensor band only
                 // partially covers this bin.
-                //LCreal lowerOverlap = atmos->getLowerEndOfWavelengthOverlap(
+                //double lowerOverlap = atmos->getLowerEndOfWavelengthOverlap(
                 //                                               lowerWavelength,
                 //                                               lowerBound);
-                //LCreal upperOverlap = atmos->getUpperEndOfWavelengthOverlap(
+                //double upperOverlap = atmos->getUpperEndOfWavelengthOverlap(
                 //                                               upperWavelength,
                 //                                               upperBound);
                 //if (upperOverlap < lowerOverlap) upperOverlap = lowerOverlap;
 
                 // how much of this bin is contained in the sensor band?
-                //LCreal overlapRatio = (upperOverlap - lowerOverlap)
+                //double overlapRatio = (upperOverlap - lowerOverlap)
                 //                   (upperWavelength - lowerWavelength);
 
                 //plumeSigs[i*3 + 2] *= overlapRatio
@@ -525,13 +525,13 @@ void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const 
 //    Mil Power, and 2.0 represents after burner
 //------------------------------------------------------------------------------
 
-LCreal AircraftIrSignature::getPLA(const AirVehicle* const airModel) {
+double AircraftIrSignature::getPLA(const AirVehicle* const airModel) {
     // use only for air vehicles.
-    LCreal currentPla = 0.0;
-    LCreal idleValue = 0.0;
-    LCreal milValue = 0.0;
-    LCreal maxValue = 0.0;
-    LCreal currentThrust = 0.0;
+    double currentPla = 0.0;
+    double idleValue = 0.0;
+    double milValue = 0.0;
+    double maxValue = 0.0;
+    double currentThrust = 0.0;
 
     airModel->getEngThrust(&currentThrust, 1);
     airModel->getEngThrustIdle(&idleValue, 1);
@@ -553,25 +553,25 @@ LCreal AircraftIrSignature::getPLA(const AirVehicle* const airModel) {
 //------------------------------------------------------------------------------
 // getHotPartsRadiation()
 //------------------------------------------------------------------------------
-LCreal AircraftIrSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
+double AircraftIrSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
 {
-    LCreal currentPla = 1.0;
-    LCreal targetAlt = 0;
-    LCreal targetVel = 0;
+    double currentPla = 1.0;
+    double targetAlt = 0;
+    double targetVel = 0;
 
     const Player* targetAircraft = msg->getTarget();
     if (targetAircraft != nullptr) {
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
             currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
-            targetAlt = static_cast<LCreal>(targetAircraft->getAltitudeM());
+            targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
             targetVel = targetAircraft->getMach();
         }
     }
 
-    LCreal targetAzimuth = msg->getAzimuthAoi();
-    LCreal targetElevation = msg->getElevationAoi();
+    double targetAzimuth = msg->getAzimuthAoi();
+    double targetElevation = msg->getElevationAoi();
     if (targetAzimuth < 0) targetAzimuth = -targetAzimuth;
-    LCreal irPower = getHotPartsSignature(currentPla, targetVel, targetAlt, targetAzimuth, targetElevation);
+    double irPower = getHotPartsSignature(currentPla, targetVel, targetAlt, targetAzimuth, targetElevation);
 
     return irPower;
 }
@@ -579,21 +579,21 @@ LCreal AircraftIrSignature::getHotPartsRadiation(const IrQueryMsg* const msg)
 //------------------------------------------------------------------------------
 // getHotPartsSignatures()
 //------------------------------------------------------------------------------
-void AircraftIrSignature::getHotPartsSignatures(const IrQueryMsg* const msg, const LCreal lowerBound, const LCreal upperBound)
+void AircraftIrSignature::getHotPartsSignatures(const IrQueryMsg* const msg, const double lowerBound, const double upperBound)
 {
     if (hotPartsWavebandFactorTable != nullptr) {
-        const LCreal* centerWavelengths = hotPartsWavebandFactorTable->getXData();
-        const LCreal* widths = hotPartsWavebandFactorTable->getYData();
-        LCreal irPower = getHotPartsRadiation(msg);
+        const double* centerWavelengths = hotPartsWavebandFactorTable->getXData();
+        const double* widths = hotPartsWavebandFactorTable->getYData();
+        double irPower = getHotPartsRadiation(msg);
         for (unsigned int i = 0; i < static_cast<unsigned int>(hotPartsWavebandFactorTable->getNumXPoints()); i++) {
-            LCreal centerWavelength = centerWavelengths[i];
-            LCreal lowerWavelength = centerWavelength - (widths[i] / 2.0f);
-            LCreal upperWavelength = lowerWavelength + widths[i];
+            double centerWavelength = centerWavelengths[i];
+            double lowerWavelength = centerWavelength - (widths[i] / 2.0f);
+            double upperWavelength = lowerWavelength + widths[i];
             hotPartsSigs[i*3] = lowerWavelength;
             hotPartsSigs[i*3 + 1] = upperWavelength;
             if (upperBound >= lowerWavelength && lowerBound <= upperWavelength) {
                 // sensor band overlaps this bin
-                LCreal hotPartsFactor = hotPartsWavebandFactorTable->lfi(centerWavelength,widths[i]);
+                double hotPartsFactor = hotPartsWavebandFactorTable->lfi(centerWavelength,widths[i]);
                 hotPartsSigs[i*3 + 2] = irPower * hotPartsFactor;
             }
             else{
@@ -606,7 +606,7 @@ void AircraftIrSignature::getHotPartsSignatures(const IrQueryMsg* const msg, con
 //------------------------------------------------------------------------------
 // getHeatSignature() - Get the heat signature
 //------------------------------------------------------------------------------
-LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
+double* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
 {
     Player* target = msg->getTarget();
     if (target != nullptr) {
@@ -616,13 +616,13 @@ LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
             atmos = dynamic_cast<IrAtmosphere*>( sim->getIrAtmosphere() );
 
         unsigned int numBins = getNumWaveBands();
-        if (airframeSig == nullptr)  airframeSig = new LCreal [numBins * 3];
-        if (plumeSigs == nullptr)    plumeSigs = new LCreal [numBins * 3];
-        if (hotPartsSigs == nullptr) hotPartsSigs = new LCreal [numBins * 3];
+        if (airframeSig == nullptr)  airframeSig = new double [numBins * 3];
+        if (plumeSigs == nullptr)    plumeSigs = new double [numBins * 3];
+        if (hotPartsSigs == nullptr) hotPartsSigs = new double [numBins * 3];
 
-        //LCreal reflectivity = 1.0f - getEmissivity();
-        LCreal lowerBound = msg->getLowerWavelength();
-        LCreal upperBound = msg->getUpperWavelength();
+        //double reflectivity = 1.0f - getEmissivity();
+        double lowerBound = msg->getLowerWavelength();
+        double upperBound = msg->getUpperWavelength();
 
         if (atmos != nullptr) {
             if (atmos->getNumWaveBands() != getNumWaveBands()) {
@@ -635,24 +635,24 @@ LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
         getPlumeSignatures(msg, lowerBound, upperBound);
         getHotPartsSignatures(msg, lowerBound, upperBound);
 
-        const LCreal* centerWavelengths = getWaveBandCenters();
-        const LCreal* widths = getWaveBandWidths();
-        //LCreal totalWavelengthRange = ((centerWavelengths[getNumWaveBands() - 1] + (widths[getNumWaveBands() - 1] / 2.0f))-(centerWavelengths[0] - (widths[0] / 2.0f)));
+        const double* centerWavelengths = getWaveBandCenters();
+        const double* widths = getWaveBandWidths();
+        //double totalWavelengthRange = ((centerWavelengths[getNumWaveBands() - 1] + (widths[getNumWaveBands() - 1] / 2.0f))-(centerWavelengths[0] - (widths[0] / 2.0f)));
 
         for (unsigned int i=0; i<getNumWaveBands(); i++) {
             // determine if our sensor band overlap this signature band
-            LCreal lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0f);
-            LCreal upperBandBound = lowerBandBound + widths[i];
+            double lowerBandBound = centerWavelengths[i] - (widths[i] / 2.0f);
+            double upperBandBound = lowerBandBound + widths[i];
             if (upperBound > lowerBandBound && lowerBound < upperBandBound) {
 
                 // calculate how much of this wave band overlaps the sensor limits
-                LCreal lowerOverlap = getLowerEndOfWavelengthOverlap(lowerBandBound, lowerBound);
-                LCreal upperOverlap = getUpperEndOfWavelengthOverlap(upperBandBound, upperBound);
+                double lowerOverlap = getLowerEndOfWavelengthOverlap(lowerBandBound, lowerBound);
+                double upperOverlap = getUpperEndOfWavelengthOverlap(upperBandBound, upperBound);
                 if (upperOverlap < lowerOverlap) upperOverlap = lowerOverlap;
-                LCreal overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
+                double overlapRatio = (upperOverlap - lowerOverlap) / (upperBandBound - lowerBandBound);
 
                 // get our main signature piece - airframe
-                LCreal baseHeatSignatureInBand = airframeSig[i*3 + 2];
+                double baseHeatSignatureInBand = airframeSig[i*3 + 2];
 
                 //if (isMessageEnabled(MSG_INFO)) {
                 //std::cout << "For wavelength " << currentWavelength << " Airframe Heat Signature: " << baseHeatSignatureInBand << std::endl;
@@ -671,7 +671,7 @@ LCreal* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
                 // use of reflectivity here suggests that this is solar radiation reflected from the target
                 // this now done in the atmosphere model, during query return processing
                 //if (atmos != 0)
-                //   baseHeatSignatureInBand += (reflectivity * atmos->getSolarRadiation(centerWavelengths[i], (LCreal) target->getAltitudeM()));
+                //   baseHeatSignatureInBand += (reflectivity * atmos->getSolarRadiation(centerWavelengths[i], (double) target->getAltitudeM()));
 
                 airframeSig[i*3 + 2] = baseHeatSignatureInBand * overlapRatio;
             }
