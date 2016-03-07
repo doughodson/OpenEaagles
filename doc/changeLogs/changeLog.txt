@@ -30,6 +30,8 @@ base
       and "UdpHandler" - instead use "UdpBroadcastHandler", "UdpMulticastHandler"
 	  and "UdpUnicastHandler"
 
+   -- separated MonitorMetrics class definition and implementation away from Cie.h/cpp file.
+
 --------------------------------------------------------------------------------
 dafif
 
