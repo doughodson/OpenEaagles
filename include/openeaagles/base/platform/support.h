@@ -4,8 +4,8 @@
 // Note: The "Lc" prefix stands for "Link class" in honor of Ed Link, who
 //       invented the "Link Blue Box", which was the first flight simulator.
 //------------------------------------------------------------------------------
-#ifndef __oe_support_H__
-#define __oe_support_H__
+#ifndef __oe_platform_support_H__
+#define __oe_platform_support_H__
 
 // ---
 // Framework configuration file
@@ -61,9 +61,9 @@ namespace oe {
 // Include OS/Processor unique stuff
 // ---
 #if defined(WIN32)
-  #include "openeaagles/base/windows/support0.h"
+  #include "openeaagles/base/platform/windows/support0.h"
 #else
-  #include "openeaagles/base/linux/support0.h"
+  #include "openeaagles/base/platform/linux/support0.h"
 #endif
 
 
@@ -78,14 +78,14 @@ namespace oe {
 #if defined(WIN32)
   #if defined(__MINGW32__)
     // MinGW lock
-    #include "openeaagles/base/windows/mingwLock.h"
+    #include "openeaagles/base/platform/windows/mingwLock.h"
   #else
     // Visual Studio lock
-    #include "openeaagles/base/windows/vsLock.h"
+    #include "openeaagles/base/platform/windows/vsLock.h"
   #endif
 #else
   // Linux GCC lock
-  #include "openeaagles/base/linux/lock.h"
+  #include "openeaagles/base/platform/linux/lock.h"
 #endif
 
 // ---

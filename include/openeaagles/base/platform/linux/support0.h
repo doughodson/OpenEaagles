@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Linux GCC unique stuff
 //------------------------------------------------------------------------------
-#ifndef __oe_Linux_Support0_H__
-#define __oe_Linux_Support0_H__
+#ifndef __oe_platform_linux_support0_H__
+#define __oe_platform_linux_support0_H__
 
 #include <values.h>
 #include <sys/socket.h>

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Windows Visual Studio unique stuff
 //------------------------------------------------------------------------------
-#ifndef __oe_Windows_Support0_H__
-#define __oe_Windows_Support0_H__
+#ifndef __oe_platform_windows_support0_H__
+#define __oe_platform_windows_support0_H__
 
 #include <winsock2.h>
 #include <ERRNO.H>

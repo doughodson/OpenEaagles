@@ -2,7 +2,7 @@
 // Support functions
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/support.h"
+#include "openeaagles/base/platform/support.h"
 #include <fstream>
 #include <cstring>
 #include <cctype>

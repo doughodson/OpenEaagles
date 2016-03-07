@@ -12,9 +12,9 @@ namespace base {
 // Window/Linux specific code
 //------------------------------------------------------------------------------
 #if defined(WIN32)
-  #include "windows/Thread.cxx"
+  #include "platform/windows/Thread.cxx"
 #else
-  #include "linux/Thread.cxx"
+  #include "platform/linux/Thread.cxx"
 #endif
 
 //==============================================================================

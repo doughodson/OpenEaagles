@@ -4,7 +4,6 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
 
 OBJS =  \
-	$(LIB)(support.o) \
 	$(LIB)(Boolean.o) \
 	$(LIB)(Cie.o) \
 	$(LIB)(Cmy.o) \
@@ -61,7 +60,7 @@ OBJS =  \
 	$(LIB)(Vectors.o) \
 	$(LIB)(Yiq.o)
 
-SUBDIRS = distributions functors nethandlers osg ubf units util
+SUBDIRS = distributions functors nethandlers osg platform ubf units util
 
 all: subdirs ${OBJS}
 

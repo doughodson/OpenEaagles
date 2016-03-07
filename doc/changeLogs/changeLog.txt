@@ -36,6 +36,8 @@ base
 	  and "UdpUnicastHandler"
 
    -- separated MonitorMetrics class definition and implementation away from Cie.h/cpp file.
+   
+   -- consolidated platform specific functions into the subdirectory 'platform'
 
 --------------------------------------------------------------------------------
 dafif
