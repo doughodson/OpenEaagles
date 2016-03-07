@@ -33,6 +33,7 @@ OBJS =  \
 	$(LIB)(Locus.o) \
 	$(LIB)(Logger.o) \
 	$(LIB)(Matrix.o) \
+	$(LIB)(MonitorMetrics.o) \
 	$(LIB)(Nav.o) \
 	$(LIB)(NavDR.o) \
 	$(LIB)(NetHandler.o) \
