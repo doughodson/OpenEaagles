@@ -5,7 +5,7 @@
 #define __oe_hla_rprfom_Ntm_H__
 
 #include "openeaagles/simulation/Ntm.h"
-#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprfom/NetIO.h"
 
 namespace oe {
 namespace hla {

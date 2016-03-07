@@ -2,10 +2,10 @@
 // Class: NetIO
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/rprFom/NetIO.h"
-#include "openeaagles/networks/hla/rprFom/Nib.h"
-#include "openeaagles/networks/hla/rprFom/Ntm.h"
-#include "openeaagles/networks/hla/rprFom/RprFom.h"
+#include "openeaagles/networks/hla/rprfom/NetIO.h"
+#include "openeaagles/networks/hla/rprfom/Nib.h"
+#include "openeaagles/networks/hla/rprfom/Ntm.h"
+#include "openeaagles/networks/hla/rprfom/RprFom.h"
 #include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/AirVehicle.h"

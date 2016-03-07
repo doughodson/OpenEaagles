@@ -43,7 +43,7 @@ PROJECTS += "gui/glut"
 # Interoperability interfaces
 #
 PROJECTS += networks/dis
-#PROJECTS += networks/hla
+PROJECTS += networks/hla
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface

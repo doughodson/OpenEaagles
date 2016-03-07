@@ -9,11 +9,11 @@ CPPFLAGS += -DRTI_USES_STD_FSTREAM
 
 OBJS =  \
 	$(LIB)(Ambassador.o) \
-	$(LIB)(hlaFF.o) \
+	$(LIB)(factory.o) \
 	$(LIB)(NetIO.o) \
 	$(LIB)(Nib.o)
 
-SUBDIRS = rprFom
+SUBDIRS = rprfom
 
 all: subdirs ${OBJS} 
 

@@ -2,8 +2,8 @@
 // Class: Hla::Ntm
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/rprFom/Ntm.h"
-#include "openeaagles/networks/hla/rprFom/Nib.h"
+#include "openeaagles/networks/hla/rprfom/Ntm.h"
+#include "openeaagles/networks/hla/rprfom/Nib.h"
 
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"

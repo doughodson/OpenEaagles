@@ -1,7 +1,7 @@
 
-#include "openeaagles/networks/hla/rprFom/factory.h"
+#include "openeaagles/networks/hla/rprfom/factory.h"
 
-#include "openeaagles/networks/hla/rprFom/NetIO.h"
+#include "openeaagles/networks/hla/rprfom/NetIO.h"
 
 #include <cstring>
 
