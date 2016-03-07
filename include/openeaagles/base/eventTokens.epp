@@ -21,7 +21,7 @@
 #define  EID_DOWN_ARROW_KEY          31
 #define  EID_SPACE_BAR               32
 #define  EID_DELETE_KEY             127
-#define  EID_BUTTON_HIT             128  /* Button name passed as LcString */
+#define  EID_BUTTON_HIT             128  /* Button name passed as String */
 #define  EID_INPUT_RIGHT_EDGE       129
 #define  EID_INPUT_LEFT_EDGE        130
 #define  EID_ON_SINGLE_CLICK        131
@@ -150,8 +150,8 @@
 // Simulation events
 // ---
 #define  EID_RESET_EVENT            1301  /* Reset component */
-#define  EID_FREEZE_EVENT           1302  /* Passes requested freeze state as LcBoolean */
-#define  EID_FREEZE_EVENT_ALL       1303  /* Passes requested freeze state as LcBoolean */
+#define  EID_FREEZE_EVENT           1302  /* Passes requested freeze state as Boolean */
+#define  EID_FREEZE_EVENT_ALL       1303  /* Passes requested freeze state as Boolean */
 #define  EID_KILL_EVENT             1304  /* Passes 'killed by' player */
 #define  EID_CRASH_EVENT            1305  /* Passes 'collided with' player or zero if terrain */
 #define  EID_JETTISON_EVENT         1306  /* Jettison external store event */
@@ -184,47 +184,47 @@
 #define  EID_TGT_STEP_EVENT         1401  /* Target step (reject) */
 #define  EID_TGT_DESIGNATE          1402  /* Target designate */
 
-#define  EID_WPN_REL_EVENT          1405  /* Passes requested switch state as LcBoolean */
+#define  EID_WPN_REL_EVENT          1405  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
 
-#define  EID_TRIGGER_SW_EVENT       1406  /* Passes requested switch state as LcBoolean */
+#define  EID_TRIGGER_SW_EVENT       1406  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_TMS_FWD_EVENT          1407  /* Passes requested switch state as LcBoolean */
+#define  EID_TMS_FWD_EVENT          1407  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_TMS_AFT_EVENT          1408  /* Passes requested switch state as LcBoolean */
+#define  EID_TMS_AFT_EVENT          1408  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_TMS_LEFT_EVENT         1409  /* Passes requested switch state as LcBoolean */
+#define  EID_TMS_LEFT_EVENT         1409  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_TMS_RIGHT_EVENT        1410  /* Passes requested switch state as LcBoolean */
-                                          /* or no argument for one-shot event */
-
-#define  EID_DMS_FWD_EVENT          1411  /* Passes requested switch state as LcBoolean */
-                                          /* or no argument for one-shot event */
-#define  EID_DMS_AFT_EVENT          1412  /* Passes requested switch state as LcBoolean */
-                                          /* or no argument for one-shot event */
-#define  EID_DMS_LEFT_EVENT         1413  /*  Passes requested switch state as LcBoolean */
-                                          /* or no argument for one-shot event */
-#define  EID_DMS_RIGHT_EVENT        1414  /* Passes requested switch state as LcBoolean */
+#define  EID_TMS_RIGHT_EVENT        1410  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
 
-#define  EID_CMS_FWD_EVENT          1415  /* Passes requested switch state as LcBoolean */
+#define  EID_DMS_FWD_EVENT          1411  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_CMS_AFT_EVENT          1416  /* Passes requested switch state as LcBoolean */
+#define  EID_DMS_AFT_EVENT          1412  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_CMS_LEFT_EVENT         1417  /* Passes requested switch state as LcBoolean */
+#define  EID_DMS_LEFT_EVENT         1413  /*  Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_CMS_RIGHT_EVENT        1418  /* Passes requested switch state as LcBoolean */
-                                          /* or no argument for one-shot event */
-
-#define  EID_PINKY_SW_EVENT         1419  /* Passes requested switch state as LcBoolean */
-                                          /* or no argument for one-shot event */
-#define  EID_NWS_SW_EVENT           1420  /* Passes requested switch state as LcBoolean */
-                                          /* or no argument for one-shot event */
-#define  EID_CURSOR_ZERO_EVENT      1421  /* Passes requested switch state as LcBoolean */
+#define  EID_DMS_RIGHT_EVENT        1414  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
 
-#define  EID_CURSOR_X_EVENT         1422  /* Passes requested position state as LcReal */
-#define  EID_CURSOR_Y_EVENT         1423  /* Passes requested position state as LcReal */
+#define  EID_CMS_FWD_EVENT          1415  /* Passes requested switch state as Boolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CMS_AFT_EVENT          1416  /* Passes requested switch state as Boolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CMS_LEFT_EVENT         1417  /* Passes requested switch state as Boolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CMS_RIGHT_EVENT        1418  /* Passes requested switch state as Boolean */
+                                          /* or no argument for one-shot event */
+
+#define  EID_PINKY_SW_EVENT         1419  /* Passes requested switch state as Boolean */
+                                          /* or no argument for one-shot event */
+#define  EID_NWS_SW_EVENT           1420  /* Passes requested switch state as Boolean */
+                                          /* or no argument for one-shot event */
+#define  EID_CURSOR_ZERO_EVENT      1421  /* Passes requested switch state as Boolean */
+                                          /* or no argument for one-shot event */
+
+#define  EID_CURSOR_X_EVENT         1422  /* Passes requested position state as double */
+#define  EID_CURSOR_Y_EVENT         1423  /* Passes requested position state as double */
 
 
 #define  EID_USER_EVENTS            2000  /* First user defined event */

@@ -56,7 +56,7 @@ void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
    }
 
 //   if (org.signatureByWaveband != 0) {
-//      setSignatureByWaveband((Lcreal*) org.signatureByWaveband->clone());
+//      setSignatureByWaveband((double*) org.signatureByWaveband->clone());
 //   }
 //   else setSignatureByWaveband(0);
 
