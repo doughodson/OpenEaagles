@@ -25,7 +25,8 @@ general
 
 -- LCreal (which has been typed as 'double' for years) has been completely removed and
    replaced with 'double'
-
+-- Closely associated with LCreal is the macro "LCREAL_DOUBLE" which defined whether or not
+   LCreal was defined as a 'double' or 'float' -- this macro has been eliminated.
    
 --------------------------------------------------------------------------------
 base
