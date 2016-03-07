@@ -23,6 +23,9 @@ general
 -- Renamed global framework configuration options to start with 'OE' instead
    of 'EAAGLES'
 
+-- Removed all references to type 'LCreal' which was defined to be 'double' for the past
+   few years.  All LCreal's have been replaced with 'double'
+
 --------------------------------------------------------------------------------
 base
 
