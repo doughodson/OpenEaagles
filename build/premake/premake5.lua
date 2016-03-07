@@ -173,7 +173,7 @@ solution "oe"
       }
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }
-      targetname "Hla"
+      targetname "hla"
 	  
    -- graphical instruments library
    project "instruments"
