@@ -350,5 +350,5 @@ void Quat::slerp( value_type t, const Quat& from, const Quat& to )
 #define QZ  _v[2]
 #define QW  _v[3]
 
-} // End osg namespace
-} // End oe namespace
+}
+}

@@ -11,10 +11,9 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_BOUNDINGSPHERE_OE
-#define OSG_BOUNDINGSPHERE_OE 1
+#ifndef __oe_osg_BoundingSphere_H__
+#define __oe_osg_BoundingSphere_H__
 
-#include "openeaagles/base/support.h"
 #include "./Vec3f"
 #include "./Vec3d"
 
@@ -296,13 +295,9 @@ void BoundingSphereImpl<VT>::expandRadiusBy(const BoundingBoxImpl<VT>& bb)
 typedef BoundingSphereImpl<Vec3f> BoundingSpheref;
 typedef BoundingSphereImpl<Vec3d> BoundingSphered;
 
-#ifdef LCREAL_DOUBLE
-        typedef BoundingSphered BoundingSphere;        
-#else
-        typedef BoundingSpheref BoundingSphere;
-#endif
+typedef BoundingSphered BoundingSphere;        
 
 }
-} // End oe namespace
+}
 
 #endif

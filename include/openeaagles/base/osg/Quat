@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_QUAT_OE
-#define OSG_QUAT_OE 1
+#ifndef __oe_osg_Quat_H__
+#define __oe_osg_Quat_H__
 
 #include "./Vec3f"
 #include "./Vec4f"
@@ -388,7 +388,7 @@ class Quat
     
 };    // end of class prototype
 
-}    // end of namespace
-} // End oe namespace
+}
+}
 
 #endif 

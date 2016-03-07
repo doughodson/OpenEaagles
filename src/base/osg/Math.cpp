@@ -132,4 +132,4 @@ double osg::findAsciiToDouble(const char* str)
    return 0.0;
 }
 
-} // End oe namespace
+}

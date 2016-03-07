@@ -11,23 +11,18 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC2_OE
-#define OSG_VEC2_OE 1
+#ifndef __oe_osg_Vec2_H__
+#define __oe_osg_Vec2_H__
 
-#include "openeaagles/base/support.h"
 #include "./Vec2f"
 #include "./Vec2d"
 
 namespace oe {
 namespace osg {
 
-#ifdef LCREAL_DOUBLE
-    typedef Vec2d Vec2;
-#else
-    typedef Vec2f Vec2;
-#endif
+typedef Vec2d Vec2;
 
 }
-} // End oe namespace
+}
 
 #endif

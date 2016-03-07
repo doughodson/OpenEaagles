@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __OSG_MATH_OE
-#define __OSG_MATH_OE 1
+#ifndef __oe_osg_Math_H__
+#define __oe_osg_Math_H__
 
 #include <math.h>
 
@@ -247,7 +247,7 @@ extern double findAsciiToDouble(const char* str);
 inline float findAsciiToFloat(const char* str) { return static_cast<float>(findAsciiToDouble(str)); }
 
 }
-} // End oe namespace
+}
 
-#endif  // __OSG_MATH
+#endif
 

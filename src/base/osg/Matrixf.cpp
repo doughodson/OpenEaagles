@@ -35,7 +35,7 @@ void osg::Matrixf::set(const osg::Matrixd& rhs)
     set(rhs.ptr());
 }
 
-} // End oe namespace
+}
 
 // now compile up Matrix via Matrix_implementation
 #include "Matrix_implementation.cpp"

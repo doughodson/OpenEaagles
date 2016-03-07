@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC2D_OE
-#define OSG_VEC2D_OE 1
+#ifndef __oe_osg_Vec2d_H__
+#define __oe_osg_Vec2d_H__
 
 #include "./Vec2f"
 
@@ -190,6 +190,7 @@ inline Vec2d componentDivide(const Vec2d& lhs, const Vec2d& rhs)
     return Vec2d(lhs[0]/rhs[0], lhs[1]/rhs[1]);
 }
 
-}    // end of namespace osg
-} // End oe namespace
+}
+}
+
 #endif

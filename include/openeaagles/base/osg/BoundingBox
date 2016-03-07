@@ -11,10 +11,9 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_BOUNDINGBOX_OE
-#define OSG_BOUNDINGBOX_OE 1
+#ifndef __oe_osg_BoundingBox_H__
+#define __oe_osg_BoundingBox_H__
 
-#include "openeaagles/base/support.h"
 #include "./Vec3"
 #include "./Vec3d"
 #include <float.h> 
@@ -232,13 +231,9 @@ class BoundingBoxImpl
 typedef BoundingBoxImpl<Vec3f> BoundingBoxf;
 typedef BoundingBoxImpl<Vec3d> BoundingBoxd;
 
-#ifdef LCREAL_DOUBLE
-   typedef BoundingBoxd BoundingBox;
-#else
-   typedef BoundingBoxf BoundingBox;
-#endif
+typedef BoundingBoxd BoundingBox;
 
 }
-} // End oe namespace
+}
 
 #endif

@@ -20,9 +20,6 @@
 // ---
 namespace oe {
 
-#define LCREAL_DOUBLE
-//typedef double double;
-
 // To avoid warnings, define math functions to use with double.
 // Since double is deprecated and set only to double, we're defining only
 // the double functions.  Manual modify to float functions, if required.

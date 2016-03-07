@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_VEC4B_OE
-#define OSG_VEC4B_OE 1
+#ifndef __oe_osg_Vec4b_H__
+#define __oe_osg_Vec4b_H__
 
 namespace oe {
 namespace osg {
@@ -164,9 +164,7 @@ class Vec4b
 
 };    // end of class Vec4b
 
-
-
-}    // end of namespace osg
-} // End oe namespace
+}
+}
 
 #endif

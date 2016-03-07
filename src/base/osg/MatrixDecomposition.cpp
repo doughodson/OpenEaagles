@@ -688,5 +688,5 @@ void osg::Matrixd::decompose(osg::Vec3d& t,
     so.set(parts.u.x, parts.u.y, parts.u.z, parts.u.w);
 }
 
-} // End osg namespace
-} // End oe namespace
+}
+}

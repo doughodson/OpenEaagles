@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_MATRIXD_OE
-#define OSG_MATRIXD_OE 1
+#ifndef __oe_osg_Matrixd_H__
+#define __oe_osg_Matrixd_H__
 
 #include "./Vec3d"
 #include "./Vec4d"
@@ -859,8 +859,7 @@ inline Matrixd operator * (const double s, const Matrixd& m)
   return (m * s);
 }
 
-
-} // namespace osg
-} // namespace oe
+}
+}
 
 #endif

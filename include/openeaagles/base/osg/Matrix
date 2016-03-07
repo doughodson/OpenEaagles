@@ -11,24 +11,18 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef OSG_MATRIX_OE
-#define OSG_MATRIX_OE 1
+#ifndef __oe_osg_Matrix_H__
+#define __oe_osg_Matrix_H__
 
-#include "openeaagles/base/support.h"
 #include "./Matrixd"
 #include "./Matrixf"
 
 namespace oe {
 namespace osg {
 
-#ifdef LCREAL_DOUBLE
-    typedef Matrixd Matrix;
-#else
-    typedef Matrixf Matrix;
-#endif
+typedef Matrixd Matrix;
 
-} //namespace osg
-} // End oe namespace
-
+}
+}
 
 #endif
