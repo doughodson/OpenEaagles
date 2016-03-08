@@ -23,6 +23,7 @@
 #include <typeinfo>
 #include <iostream>
 #include <sys/types.h>
+#include <cmath>
 #include <cstring> // macros use std::strcmp
 
 // ---

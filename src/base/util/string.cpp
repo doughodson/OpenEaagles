@@ -54,7 +54,7 @@ void lcInteger2Str(const int num, char* const str, int width)
 // destination buffer, 'strDest'.  The destination string is null terminated.
 // The 'strSource' string will be truncated if the 'strDest' string is too small.
 //------------
-bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool lcStrcpy(char* const strDest, const std::size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -81,7 +81,7 @@ bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const st
 // is null terminated.  The 'strSource' string will be truncated if the 'strDest'
 // string is too small.
 //------------
-bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
+bool lcStrncpy(char* const strDest, const std::size_t sizeOfDest, const char* const strSource, const std::size_t count)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -110,7 +110,7 @@ bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const s
 // pointer, or is not null-terminated, or if 'strSource' is a null pointer then false
 // is returned and the destination buffer is unchanged.
 //------------
-bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool lcStrcat(char* const strDest, const std::size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -147,7 +147,7 @@ bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const st
 // If the destination buffer is too small then false is returned and the destination buffer
 // is unchanged.
 //------------
-bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool lcStrcpyFull(char* const strDest, const std::size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -178,7 +178,7 @@ bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* cons
 // terminated.   If the destination buffer is too small then false is returned and the
 // destination buffer is unchanged.
 //------------
-bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
+bool lcStrncpyFull(char* const strDest, const std::size_t sizeOfDest, const char* const strSource, const std::size_t count)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -271,7 +271,7 @@ int lcStrcasecmp(const char* const s1, const char* const s2)
 //------------
 // Compare the first 'n' characters of two strings ignoring case (using lower case characters)
 //------------
-int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n)
+int lcStrncasecmp(const char* const s1, const char* const s2, const std::size_t n)
 {
    if ( (s1 == nullptr && s2 == nullptr) || n == 0) return 0;  // They're the same if they both don't exist
    if (s1 != nullptr && s2 == nullptr) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
