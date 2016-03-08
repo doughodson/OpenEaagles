@@ -24,6 +24,7 @@
 #endif
 
 namespace oe {
+namespace base {
 
 //------------
 // UTC time of day (seconds since midnight) and optional date (day/month/year)
@@ -397,3 +398,5 @@ void multArrayConst(const float* const src, const float c, double* const dst, co
 }
 
 }
+}
+
