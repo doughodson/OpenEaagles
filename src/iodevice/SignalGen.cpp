@@ -192,7 +192,7 @@ double SignalGen::calc(const double dt)
    time += dt;
 
    // Current angle (radians)
-   double alpha = (2.0 * PI * freq * time) + phase;
+   double alpha = (2.0 * base::PI * freq * time) + phase;
 
    // Local cycle (-PI to PI)
    double beta = base::Angle::aepcdRad(alpha);
@@ -207,12 +207,12 @@ double SignalGen::calc(const double dt)
          break;
       }
       case SQUARE : {
-         if (beta > 0 && beta < PI) value = 1.0;
+         if (beta > 0 && beta < base::PI) value = 1.0;
          else value = 0.0;
          break;
       }
       case SAW : {
-         value = (beta/PI) + 1.0;
+         value = (beta/base::PI) + 1.0;
          break;
       }
    }

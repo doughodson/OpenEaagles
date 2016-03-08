@@ -215,7 +215,7 @@ void RacModel::updateRAC(const double dt)
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
-   double g = ETHG * base::Distance::FT2M;
+   double g = base::ETHG * base::Distance::FT2M;
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)
@@ -296,8 +296,8 @@ void RacModel::updateRAC(const double dt)
 
    // Use turn rate integrate heading
    double newPsi = static_cast<double>(pp->getHeading() + (ra + ra1) * dt / 2.0);
-   if(newPsi > 2.0*PI) newPsi -= 2.0*PI;
-   if(newPsi < 0.0) newPsi += 2.0*PI;
+   if(newPsi > 2.0 * base::PI) newPsi -= 2.0 * base::PI;
+   if(newPsi < 0.0) newPsi += 2.0 * base::PI;
 
    // Roll angle is proportional to max turn rate - filtered
    double pa = 0.0;

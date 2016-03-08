@@ -13,6 +13,8 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 
+#include "openeaagles/base/util/string.h"
+
 #include <cmath>
 
 namespace oe {
@@ -43,7 +45,7 @@ void Nib::initData()
    ntm = nullptr;
    entityTypeChecked = false;
 
-   lcStrcpy(pname, PNAME_BUF_SIZE, "OPENEAAGLES");
+   base::lcStrcpy(pname, PNAME_BUF_SIZE, "OPENEAAGLES");
    side = Player::BLUE;
    mode = Player::INACTIVE;
 
@@ -108,7 +110,7 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    playerID = org.playerID;
 
-   lcStrcpy(pname, PNAME_BUF_SIZE, org.pname);
+   base::lcStrcpy(pname, PNAME_BUF_SIZE, org.pname);
    side = org.side;
    mode = org.mode;
 
@@ -229,7 +231,7 @@ bool Nib::setPlayer(Player* const p)
 void Nib::setPlayerName(const char* s)
 {
     if (s != nullptr) {
-        lcStrcpy(pname,PNAME_BUF_SIZE, s);
+        base::lcStrcpy(pname,PNAME_BUF_SIZE, s);
     }
     else {
         pname[0] = ' ';

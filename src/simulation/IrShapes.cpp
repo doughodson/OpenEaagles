@@ -150,7 +150,7 @@ double IrSphere::getArea()
 {
    //return (double) (radius * radius * 4.0 * PI);
    //Calculates the projected area of a sphere (projected area is a flat circle)
-   return static_cast<double>(radius * radius * PI);
+   return static_cast<double>(radius * radius * base::PI);
 }
 
 

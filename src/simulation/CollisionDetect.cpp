@@ -100,7 +100,7 @@ void CollisionDetect::deleteData()
 unsigned int CollisionDetect::getCollisions(Player* list[], double distances[], const unsigned int arraySize)
 {
    unsigned int n = 0;
-   lcLock(poiLock);
+   base::lcLock(poiLock);
    for (unsigned int i = 0; i < maxPlayers && n < arraySize; i++) {
       if (players[i].active &&  players[i].collided) {
          list[n] = players[i].player.getRefPtr();
@@ -108,7 +108,7 @@ unsigned int CollisionDetect::getCollisions(Player* list[], double distances[], 
          n++;
       }
    }
-   lcUnlock(poiLock);
+   base::lcUnlock(poiLock);
    return n;
 }
 
@@ -297,13 +297,13 @@ void CollisionDetect::updateData(const double dt)
    // ---
    // Clear all of the unmatched POIs
    // ---
-   lcLock(poiLock);
+   base::lcLock(poiLock);
    for (unsigned int i = 0; i < maxPlayers; i++) {
       if ( players[i].active && players[i].unmatched ) {
          players[i].clear();
       }
    }
-   lcUnlock(poiLock);
+   base::lcUnlock(poiLock);
 
    //std::cout << "POI: ";
    //for (unsigned int i = 0; i < maxPlayers; i++) {
@@ -346,7 +346,7 @@ void CollisionDetect::process(const double dt)
    // Collision range squared
    const double cr2 = collisionRange * collisionRange;
 
-   lcLock(poiLock);
+   base::lcLock(poiLock);
 
    // ---
    // Check all active POIs to see if we've collided
@@ -439,7 +439,7 @@ void CollisionDetect::process(const double dt)
       }
    }
 
-   lcUnlock(poiLock);
+   base::lcUnlock(poiLock);
 
    //{
    //   static const unsigned int SIZE = 10;
@@ -463,7 +463,7 @@ void CollisionDetect::updatePoiList(Player* const target)
 {
    if (maxPlayers > 0 && target != nullptr) {
 
-      lcLock(poiLock);
+      base::lcLock(poiLock);
 
       // ---
       // First try to match it with an existing POI
@@ -497,7 +497,7 @@ void CollisionDetect::updatePoiList(Player* const target)
          players[idx].active = true;
       }
 
-      lcUnlock(poiLock);
+      base::lcUnlock(poiLock);
 
    }
 }
@@ -513,7 +513,7 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
       // Clear the old list (has its own lcLock())
       clearPoiList();
 
-      lcLock(poiLock);
+      base::lcLock(poiLock);
 
       // Free the old list memory
       if (maxPlayers > 0 && players != nullptr) {
@@ -529,7 +529,7 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
          players = new PlayerOfInterest[maxPlayers];
       }
 
-      lcUnlock(poiLock);
+      base::lcUnlock(poiLock);
    }
    return true;
 }
@@ -540,11 +540,11 @@ bool CollisionDetect::resizePoiList(const unsigned int newSize)
 //------------------------------------------------------------------------------
 void CollisionDetect::clearPoiList()
 {
-   lcLock(poiLock);
+   base::lcLock(poiLock);
    for (unsigned int i = 0; i < maxPlayers; i++) {
       players[i].clear();
    }
-   lcUnlock(poiLock);
+   base::lcUnlock(poiLock);
 }
 
 

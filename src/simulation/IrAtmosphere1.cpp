@@ -141,7 +141,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, doubl
    double viewingAngle = std::atan(tanPhiPrime);
 
    // table limits are 0 to pi; this correction assumes that 0 in the table is straight down, PI is straight up
-   viewingAngle += PI/2.0;
+   viewingAngle += base::PI / 2.0;
 
    *totalSignal = 0.0;
    *totalBackground = 0.0;

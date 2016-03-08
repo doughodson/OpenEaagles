@@ -79,7 +79,7 @@ public:
     SigSphere();
     SigSphere(const double r);
     virtual bool setRadiusFromSlot(base::Number* const num);
-    double computeRcs(const double r)                          { return static_cast<float>(PI * r * r); }
+    double computeRcs(const double r)                          { return static_cast<float>(base::PI * r * r); }
     void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 
     double getRCS(const Emission* const em) override;

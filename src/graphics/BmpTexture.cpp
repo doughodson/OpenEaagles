@@ -4,6 +4,7 @@
 #include "openeaagles/base/Number.h"
 #include "openeaagles/base/Identifier.h"
 #include "openeaagles/base/String.h"
+#include "openeaagles/base/util/string.h"
 
 #include <cstdio>
 
@@ -59,8 +60,8 @@ void BmpTexture::copyData(const BmpTexture& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   lcStrcpy(texPath, sizeof(texPath), org.texPath);
-   lcStrcpy(texFile, sizeof(texFile), org.texFile);
+   base::lcStrcpy(texPath, sizeof(texPath), org.texPath);
+   base::lcStrcpy(texFile, sizeof(texFile), org.texFile);
 }
 
 //------------------------------------------------------------------------------
@@ -69,7 +70,7 @@ void BmpTexture::copyData(const BmpTexture& org, const bool cc)
 bool BmpTexture::setTextureFileName(const char* const fileName)
 {
    if (fileName != nullptr) {
-      oe::lcStrcpy(texFile, sizeof(texFile), fileName);
+      base::lcStrcpy(texFile, sizeof(texFile), fileName);
    }
    else {
       texFile[0] = '\0';
@@ -80,7 +81,7 @@ bool BmpTexture::setTextureFileName(const char* const fileName)
 bool BmpTexture::setTexturePath(const char* const path)
 {
    if (path != nullptr) {
-      oe::lcStrcpy(texPath, sizeof(texPath), path);
+      base::lcStrcpy(texPath, sizeof(texPath), path);
    }
    else {
       texPath[0] = '\0';

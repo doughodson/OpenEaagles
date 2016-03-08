@@ -1,3 +1,4 @@
+
 #include "openeaagles/simulation/NetIO.h"
 #include "openeaagles/simulation/Nib.h"
 #include "openeaagles/simulation/Ntm.h"
@@ -28,6 +29,7 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 #include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/util/string.h"
 
 #include <cstring>
 #include <cmath>
@@ -48,10 +50,10 @@ IMPLEMENT_ABSTRACT_SUBCLASS(NetIO, "NetIO")
 //------------------------------------------------------------------------------
 // Parameters
 //------------------------------------------------------------------------------
-const double NET_TIMEOUT          = 12.5;                //  seconds
-const double NET_UPDATE_RATE      = 5.0;                 //  seconds
-const double NET_THRESHOLD_MTR    = 3.0;                 //  meters
-const double NET_THRESHOLD_RAD    = (3.0 * PI/180.0);    //  radians
+const double NET_TIMEOUT          = 12.5;                    //  seconds
+const double NET_UPDATE_RATE      = 5.0;                     //  seconds
+const double NET_THRESHOLD_MTR    = 3.0;                     //  meters
+const double NET_THRESHOLD_RAD    = (3.0 * base::PI/180.0);  //  radians
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -1557,7 +1559,7 @@ NtmOutputNodeStd::NtmOutputNodeStd(const Player* const p, const char* const name
    if (name != nullptr) {
       const size_t LENGTH = std::strlen(name) + 1;
       nodeFactoryName = new char[LENGTH];
-      lcStrcpy(nodeFactoryName,LENGTH,name);
+      base::lcStrcpy(nodeFactoryName,LENGTH,name);
    }
 
    if (p != nullptr) {
@@ -1587,7 +1589,7 @@ void NtmOutputNodeStd::copyData(const NtmOutputNodeStd& org, const bool cc)
    if (org.nodeFactoryName != nullptr) {
       const size_t LENGTH = std::strlen(org.nodeFactoryName) + 1;
       nodeFactoryName = new char[LENGTH];
-      lcStrcpy(nodeFactoryName,LENGTH,org.nodeFactoryName);
+      base::lcStrcpy(nodeFactoryName,LENGTH,org.nodeFactoryName);
    }
 
    if (tp != nullptr) {

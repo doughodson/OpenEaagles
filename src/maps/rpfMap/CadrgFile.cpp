@@ -6,6 +6,8 @@
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/maps/rpfMap/Support.h"
+#include "openeaagles/base/util/string.h"
+
 #include <cstring>
 
 //#define PRINT_MAP_LOCATIONS
@@ -635,7 +637,7 @@ bool CadrgFile::initialize(const char* dir)
                     #endif
 
                     // 1st part of directory name is passed as our initial parameter "projects/data/maps/gncjncn/RPF/"
-                    lcStrcpy(directory, size, dir);
+                    base::lcStrcpy(directory, size, dir);
 
                     // Read rest of directory name from Toc
                     // Skip 1st 2 chars, because they are the root characters (./), and are ignored since we are creating

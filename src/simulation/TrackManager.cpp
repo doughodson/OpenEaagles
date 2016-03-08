@@ -161,17 +161,17 @@ void TrackManager::clearTracksAndQueues()
    // ---
    // Clear out the queue(s)
    // ---
-   lcLock(queueLock);
+   base::lcLock(queueLock);
    for (Emission* em = emQueue.get(); em != nullptr; em = emQueue.get()) {
       em->unref();    // unref() the emission
       snQueue.get();  // and every emission had a S/N value
    }
-   lcUnlock(queueLock);
+   base::lcUnlock(queueLock);
 
    // ---
    // Clear the track list
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    const int n = nTrks;
    nTrks = 0;
    for (int i = 0; i < n; i++) {
@@ -181,7 +181,7 @@ void TrackManager::clearTracksAndQueues()
          tracks[i] = nullptr;
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 }
 
 //------------------------------------------------------------------------------
@@ -276,11 +276,11 @@ int TrackManager::getTrackList(base::safe_ptr<Track>* const tlist, const unsigne
    int n = 0;
 
    if (tlist != nullptr) {
-      lcLock(trkListLock);
+      base::lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n++] = tracks[i];
       }
-      lcUnlock(trkListLock);
+      base::lcUnlock(trkListLock);
    }
 
    return n;
@@ -295,11 +295,11 @@ int TrackManager::getTrackList(base::safe_ptr<const Track>* const tlist, const u
    int n = 0;
 
    if (tlist != nullptr) {
-      lcLock(trkListLock);
+      base::lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n++] = tracks[i];
       }
-      lcUnlock(trkListLock);
+      base::lcUnlock(trkListLock);
    }
 
    return n;
@@ -313,13 +313,13 @@ int TrackManager::getTrackList(Track* tlist[], const unsigned int max)
    int n = 0;
 
    if (tlist != nullptr) {
-      lcLock(trkListLock);
+      base::lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n] = tracks[i];
          tlist[n]->ref();
          n++;
       }
-      lcUnlock(trkListLock);
+      base::lcUnlock(trkListLock);
    }
 
    return n;
@@ -330,13 +330,13 @@ int TrackManager::getTrackList(const Track* tlist[], const unsigned int max) con
    int n = 0;
 
    if (tlist != nullptr) {
-      lcLock(trkListLock);
+      base::lcLock(trkListLock);
       for (unsigned int i = 0; i < nTrks && i < max; i++) {
          tlist[n] = tracks[i];
          tlist[n]->ref();
          n++;
       }
-      lcUnlock(trkListLock);
+      base::lcUnlock(trkListLock);
    }
 
    return n;
@@ -358,13 +358,13 @@ void TrackManager::newReport(Emission* em, double sn)
 {
    // Queue up emissions reports
    if (em != nullptr) {
-      lcLock(queueLock);
+      base::lcLock(queueLock);
       if (emQueue.isNotFull()) {
       em->ref();
       emQueue.put(em);
       snQueue.put(sn);
       }
-      lcUnlock(queueLock);
+      base::lcUnlock(queueLock);
 
    }
 }
@@ -376,12 +376,12 @@ Emission* TrackManager::getReport(double* const sn)
 {
    Emission* em = nullptr;
 
-   lcLock(queueLock);
+   base::lcLock(queueLock);
    em = emQueue.get();
    if (em != nullptr) {
       *sn = snQueue.get();
    }
-   lcUnlock(queueLock);
+   base::lcUnlock(queueLock);
 
    return em;
 }
@@ -393,13 +393,13 @@ bool TrackManager::addTrack(Track* const t)
 {
    bool ok = false;
 
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    if (nTrks < maxTrks) {
       t->ref();
       tracks[nTrks++] = t;
       ok = true;
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    return ok;
 }
@@ -747,12 +747,12 @@ void AirTrkMgr::processTrackList(const double dt)
    osg::Vec3 osAccel = ownship->getAcceleration();
    double osGndTrk = ownship->getGroundTrack();
 
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
       tracks[i]->updateTrackAge(dt);
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 2) Process new reports
@@ -801,7 +801,7 @@ void AirTrkMgr::processTrackList(const double dt)
    // ---
    // 3) Match current tracks to new reports (observations)
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
       const RfTrack* const trk = static_cast<const RfTrack*>(tracks[it]);  // we produce only RfTracks
@@ -816,7 +816,7 @@ void AirTrkMgr::processTrackList(const double dt)
          else report2TrackMatch[ir][it] = false;
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 4) Apply rules to associate the proper report to track.
@@ -831,7 +831,7 @@ void AirTrkMgr::processTrackList(const double dt)
    double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
 
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       u[it].set(0,0,0);
       haveU[it] = false;
@@ -856,7 +856,7 @@ void AirTrkMgr::processTrackList(const double dt)
          }
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 6) Smooth and predict position for the next frame
@@ -867,7 +867,7 @@ void AirTrkMgr::processTrackList(const double dt)
    //      U(k) is the difference between the observed & predicted positions
    // ---
    double d2 = posGate * posGate;    // position gate squared
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
       osg::Vec3 tpos = tracks[i]->getPosition();
@@ -915,13 +915,13 @@ void AirTrkMgr::processTrackList(const double dt)
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]));
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 7) For tracks with new observation reports, reset their age.
    //    Remove tracks that have aged beyond the limit.
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
       RfTrack* const trk = static_cast<RfTrack*>(tracks[it]);  // we produce only RfTracks
       if (trk->getTrackAge() >= getMaxTrackAge()) {
@@ -956,12 +956,12 @@ void AirTrkMgr::processTrackList(const double dt)
          it++;
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 8) Create new tracks from unmatched reports and free up emissions
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
@@ -993,7 +993,7 @@ void AirTrkMgr::processTrackList(const double dt)
       // Free the emission report
       emissions[i]->unref();
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 }
 
 //------------------------------------------------------------------------------
@@ -1218,12 +1218,12 @@ void GmtiTrkMgr::processTrackList(const double dt)
    const osg::Vec3 osVel = ownship->getVelocity();
    const osg::Vec3 osAccel = ownship->getAcceleration();
    const double osGndTrk = ownship->getGroundTrack();
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
       tracks[i]->updateTrackAge(dt);
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 2) Process new reports
@@ -1261,7 +1261,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    // ---
    // 3) Match current tracks to new reports (observations)
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
       const RfTrack* const trk = static_cast<const RfTrack*>(tracks[it]);  // we produce only RfTracks
@@ -1276,7 +1276,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
          else report2TrackMatch[ir][it] = false;
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 4) Apply rules to associate the proper report to track.
@@ -1290,7 +1290,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    osg::Vec3 u[MAX_TRKS];
    double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       u[it].set(0,0,0);
       haveU[it] = false;
@@ -1316,7 +1316,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
          }
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 6) Smooth and predict position for the next frame
@@ -1326,7 +1326,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    //      X(k) is the state vector [ pos vel accel ]
    //      U(k) is the difference between the observed & predicted positions
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
       const osg::Vec3 tpos = tracks[i]->getPosition();
@@ -1368,13 +1368,13 @@ void GmtiTrkMgr::processTrackList(const double dt)
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]));
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 7) For tracks with new observation reports, reset their age.
    //    Remove tracks that have aged beyond the limit.
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
       if (tracks[it]->getTrackAge() >= getMaxTrackAge()) {
          if (isMessageEnabled(MSG_INFO)) {
@@ -1405,12 +1405,12 @@ void GmtiTrkMgr::processTrackList(const double dt)
          it++;
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 8) Create new tracks from unmatched reports and free up emissions
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
@@ -1443,7 +1443,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
       // Free the emission report
       emissions[i]->unref();
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 }
 
 
@@ -1547,12 +1547,12 @@ void RwrTrkMgr::processTrackList(const double dt)
    osg::Vec3 osVel = ownship->getVelocity();
    osg::Vec3 osAccel = ownship->getAcceleration();
    double osGndTrk = ownship->getGroundTrack();
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
       tracks[i]->updateTrackAge(dt);
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 2) Process new reports
@@ -1585,7 +1585,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    // ---
    // 3) Match current tracks to new reports (observations)
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       trackNumMatches[it] = 0;
       const RfTrack* const trk = static_cast<const RfTrack*>(tracks[it]);        // we produce only RfTracks
@@ -1600,7 +1600,7 @@ void RwrTrkMgr::processTrackList(const double dt)
          else report2TrackMatch[ir][it] = false;
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 4) Apply rules to associate the proper report to track.
@@ -1615,7 +1615,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    osg::Vec3 u[MAX_TRKS];
    //double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; it++) {
       u[it].set(0,0,0);
       haveU[it] = false;
@@ -1641,7 +1641,7 @@ void RwrTrkMgr::processTrackList(const double dt)
          }
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 6) Smooth and predict position for the next frame
@@ -1651,7 +1651,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    //      X(k) is the state vector [ pos vel accel ]
    //      U(k) is the difference between the observed & predicted positions
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
       osg::Vec3 tpos = tracks[i]->getPosition();
@@ -1690,13 +1690,13 @@ void RwrTrkMgr::processTrackList(const double dt)
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]));
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 7) For tracks with new observation reports, reset their age.
    //    Remove tracks that have aged beyond the limit.
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
       if (tracks[it]->getTrackAge() >= getMaxTrackAge()) {
          if (isMessageEnabled(MSG_INFO)) {
@@ -1726,12 +1726,12 @@ void RwrTrkMgr::processTrackList(const double dt)
          it++;
       }
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 
    // ---
    // 8) Create new tracks from unmatched reports and free up emissions
    // ---
-   lcLock(trkListLock);
+   base::lcLock(trkListLock);
    for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
@@ -1763,8 +1763,8 @@ void RwrTrkMgr::processTrackList(const double dt)
       // Free the emission report
       emissions[i]->unref();
    }
-   lcUnlock(trkListLock);
+   base::lcUnlock(trkListLock);
 }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}

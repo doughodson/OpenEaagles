@@ -174,24 +174,24 @@ void Antenna::process(const double dt)
 
       for (unsigned int i = 0; i < n; i++) {
 
-         lcLock(inUseEmLock);
+         base::lcLock(inUseEmLock);
          Emission* em = inUseEmQueue.get();
-         lcUnlock(inUseEmLock);
+         base::lcUnlock(inUseEmLock);
 
          if (em != nullptr && em->getRefCount() > 1) {
             // Others are still referencing the emission, put back on in-use queue
-            lcLock(inUseEmLock);
+            base::lcLock(inUseEmLock);
             inUseEmQueue.put(em);
-            lcUnlock(inUseEmLock);
+            base::lcUnlock(inUseEmLock);
          }
 
          else if (em != nullptr && em->getRefCount() <= 1) {
             // No one else is referencing the emission, push to the free stack
             em->clear();
-            lcLock(freeEmLock);
+            base::lcLock(freeEmLock);
             if (freeEmStack.isNotFull()) freeEmStack.push(em);
             else em->unref();
-            lcUnlock(freeEmLock);
+            base::lcUnlock(freeEmLock);
          }
       }
    }
@@ -215,21 +215,21 @@ bool Antenna::setSystem(RfSystem* const s)
 //------------------------------------------------------------------------------
 void Antenna::clearQueues()
 {
-   lcLock(freeEmLock);
+   base::lcLock(freeEmLock);
    Emission* em = freeEmStack.pop();
    while (em != nullptr) {
       em->unref();
       em = freeEmStack.pop();
    }
-   lcUnlock(freeEmLock);
+   base::lcUnlock(freeEmLock);
 
-   lcLock(inUseEmLock);
+   base::lcLock(inUseEmLock);
    em = inUseEmQueue.get();
    while (em != nullptr) {
       em->unref();
       em = inUseEmQueue.get();
    }
-   lcUnlock(inUseEmLock);
+   base::lcUnlock(inUseEmLock);
 }
 
 //------------------------------------------------------------------------------
@@ -468,7 +468,7 @@ void Antenna::rfTransmit(Emission* const xmit)
                   gainTgt0[i1] = gainFunc2->f( aazr[i1], aelr[i1] )/10.0f;
                }
             }
-            pow10Array(gainTgt0, gainTgt, ntgts);
+            base::pow10Array(gainTgt0, gainTgt, ntgts);
             haveGainTgt = true;
          }
          else if (gainFunc1 != nullptr) {
@@ -491,7 +491,7 @@ void Antenna::rfTransmit(Emission* const xmit)
                   gainTgt0[i2] = gainFunc1->f( aar[i2] )/10.0f;
                }
             }
-            pow10Array(gainTgt0, gainTgt, ntgts);
+            base::pow10Array(gainTgt0, gainTgt, ntgts);
             haveGainTgt = true;
          }
       }
@@ -506,11 +506,11 @@ void Antenna::rfTransmit(Emission* const xmit)
 
       // Compute antenna effective gain
       double aeGain[MAX_PLAYERS];
-      multArrayConst(gainTgt, getGain(), aeGain, ntgts);
+      base::multArrayConst(gainTgt, getGain(), aeGain, ntgts);
 
       // Compute Effective Radiated Power (watts) (Equation 2-1)
       double erp[MAX_PLAYERS];
-      multArrayConst(aeGain, xmit->getPower(), erp, ntgts);
+      base::multArrayConst(aeGain, xmit->getPower(), erp, ntgts);
 
       // Fetch the required data arrays from the TargetDataBlock
       const double* ranges = tdb->getTargetRanges();
@@ -530,9 +530,9 @@ void Antenna::rfTransmit(Emission* const xmit)
             // Get a free emission packet
             Emission* em(nullptr);
             if (recycle) {
-               lcLock(freeEmLock);
+               base::lcLock(freeEmLock);
                em = freeEmStack.pop();
-               lcUnlock(freeEmLock);
+               base::lcUnlock(freeEmLock);
             }
 
             bool cloned = false;
@@ -571,13 +571,13 @@ void Antenna::rfTransmit(Emission* const xmit)
                // d) Recycle the emission
                bool recycled = false;
                if (recycle) {
-                  lcLock(inUseEmLock);
+                  base::lcLock(inUseEmLock);
                   if (inUseEmQueue.isNotFull()) {
                      // Store for future reference
                      inUseEmQueue.put(em);
                      recycled = true;
                   }
-                  lcUnlock(inUseEmLock);
+                  base::lcUnlock(inUseEmLock);
                }
 
                // or just forget it

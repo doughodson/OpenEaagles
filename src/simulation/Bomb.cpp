@@ -297,7 +297,7 @@ void Bomb::weaponGuidance(const double)
 void Bomb::weaponDynamics(const double dt)
 {
    // Useful constant
-   static const double g = ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)
@@ -381,7 +381,7 @@ bool Bomb::weaponImpactPrediction(
    )
 {
    // Useful constant
-   static const double g = ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // Make sure we have all of our pointers
    if (initPos == nullptr || initVel == nullptr || finalPos == nullptr || tof == nullptr) return false;

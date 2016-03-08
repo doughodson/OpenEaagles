@@ -3352,8 +3352,8 @@ void Player::positionUpdate(const double dt)
       newAngles[0] = base::Angle::aepcdRad(oldAngles[0] + (pe * dt));
       newAngles[1] = base::Angle::aepcdRad(oldAngles[1] + (qe * dt));
       newAngles[2] = base::Angle::aepcdRad(oldAngles[2] + (re * dt));
-      if (newAngles[1] >  PI/2) newAngles[1] -= PI;
-      if (newAngles[1] < -PI/2) newAngles[1] += PI;
+      if (newAngles[1] >  base::PI/2) newAngles[1] -= base::PI;
+      if (newAngles[1] < -base::PI/2) newAngles[1] += base::PI;
       setEulerAngles(newAngles);
 
       // Reset the rates
@@ -3918,7 +3918,7 @@ bool Player::setSlotInitRoll(const base::Angle* const msg)
    bool ok = false;
    if (msg != nullptr) {
       const double value = base::Radians::convertStatic(*msg);
-      if ( value >= -PI && value <= PI ) {
+      if ( value >= -base::PI && value <= base::PI ) {
          initAngles[IROLL] = value;
          ok = true;
       }
@@ -3936,7 +3936,7 @@ bool Player::setSlotInitRoll(const base::Number* const msg)
    bool ok = false;
    if (msg != nullptr) {
       const double value = msg->getDouble();
-      if ( value >= -(2.0*PI) && value <= (2.0*PI) ) {
+      if ( value >= -(2.0*base::PI) && value <= (2.0*base::PI) ) {
          initAngles[IROLL] = value;
          ok = true;
       }
@@ -3954,7 +3954,7 @@ bool Player::setSlotInitPitch(const base::Angle* const msg)
    bool ok = false;
    if (msg != nullptr) {
       const double value = base::Radians::convertStatic(*msg);
-      if ( value >= -(PI/2.0) && value <= (PI/2.0) ) {
+      if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
       }
@@ -3972,7 +3972,7 @@ bool Player::setSlotInitPitch(const base::Number* const msg)
    bool ok = false;
    if (msg != nullptr) {
       const double value = msg->getDouble();
-      if ( value >= -(PI/2.0) && value <= (PI/2.0) ) {
+      if ( value >= -(base::PI/2.0) && value <= (base::PI/2.0) ) {
          initAngles[IPITCH] = value;
          ok = true;
       }
@@ -3990,8 +3990,8 @@ bool Player::setSlotInitHeading(const base::Angle* const msg)
    bool ok = false;
    if (msg != nullptr) {
       double value = base::Radians::convertStatic(*msg);
-      if ( value >= -PI && value <= (2.0*PI+0.001) ) {
-         if (value >= 2.0*PI) value -= 2.0*PI;
+      if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
+         if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
          ok = true;
       }
@@ -4009,8 +4009,8 @@ bool Player::setSlotInitHeading(const base::Number* const msg)
    bool ok = false;
    if (msg != nullptr) {
       double value = msg->getDouble();
-      if ( value >= -PI && value <= (2.0*PI+0.001) ) {
-         if (value >= 2.0*PI) value -= 2.0*PI;
+      if ( value >= -base::PI && value <= (2.0*base::PI+0.001) ) {
+         if (value >= 2.0*base::PI) value -= 2.0*base::PI;
          initAngles[IYAW] = value;
          ok = true;
       }
@@ -4029,9 +4029,9 @@ bool Player::setSlotInitEulerAngles(const base::List* const numList)
    double values[3];
    const int n = numList->getNumberList(values, 3);
    if (n == 3) {
-      if ( ( values[0] >= -(2.0f*PI) && values[0] <= (2.0f*PI) ) &&
-         ( values[1] >= -PI && values[1] <= PI ) &&
-         ( values[2] >= -(2.0f*PI) && values[2] <= (2.0f*PI) ) ) {
+      if ( ( values[0] >= -(2.0f*base::PI) && values[0] <= (2.0f*base::PI) ) &&
+         ( values[1] >= -base::PI && values[1] <= base::PI ) &&
+         ( values[2] >= -(2.0f*base::PI) && values[2] <= (2.0f*base::PI) ) ) {
 
             initAngles.set(values[0], values[1], values[2]);
             ok = true;

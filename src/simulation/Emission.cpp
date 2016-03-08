@@ -98,7 +98,7 @@ void Emission::setRange(const double r)
 {
    BaseClass::setRange(r);
 
-   if (r > 1.0) lossRng = static_cast<double>(1.0/(4.0 * PI * r * r));
+   if (r > 1.0) lossRng = static_cast<double>(1.0/(4.0 * base::PI * r * r));
    else lossRng = 1.0;
 }
 

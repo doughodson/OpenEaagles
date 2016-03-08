@@ -46,8 +46,8 @@ AngleOnlyTrackManager::AngleOnlyTrackManager() : queryQueue(MAX_TRKS)
 
     oneMinusAlpha = 0.0;
     oneMinusBeta = 1.0;
-    azimuthBin = static_cast<double>(PI);
-    elevationBin = static_cast<double>(PI);
+    azimuthBin = static_cast<double>(base::PI);
+    elevationBin = static_cast<double>(base::PI);
 }
 
 AngleOnlyTrackManager::AngleOnlyTrackManager(const AngleOnlyTrackManager& org) : queryQueue(MAX_TRKS)
@@ -110,17 +110,17 @@ void AngleOnlyTrackManager::clearTracksAndQueues()
     // ---
     // Clear out the queue(s)
     // ---
-    lcLock(queueLock);
+    base::lcLock(queueLock);
     for (IrQueryMsg* q = queryQueue.get(); q != nullptr; q = queryQueue.get()) {
         q->unref();     // unref() the IR query message
         snQueue.get();  // and every IR query message had a S/N value
     }
-    lcUnlock(queueLock);
+    base::lcUnlock(queueLock);
 
     // ---
     // Clear the track list
     // ---
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     unsigned int n = nTrks;
     nTrks = 0;
     for (unsigned int i = 0; i < n; i++) {
@@ -128,7 +128,7 @@ void AngleOnlyTrackManager::clearTracksAndQueues()
         tracks[i]->unref();
         tracks[i] = nullptr;
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 }
 
 //------------------------------------------------------------------------------
@@ -139,10 +139,10 @@ void AngleOnlyTrackManager::newReport(IrQueryMsg* q, double sn)
     // Queue up IR query messages reports
     if (q != nullptr) {
         q->ref();
-        lcLock(queueLock);
+        base::lcLock(queueLock);
         queryQueue.put(q);
         snQueue.put(sn);
-        lcUnlock(queueLock);
+        base::lcUnlock(queueLock);
     }
 }
 
@@ -153,12 +153,12 @@ IrQueryMsg* AngleOnlyTrackManager::getQuery(double* const sn)
 {
     IrQueryMsg* q = nullptr;
 
-    lcLock(queueLock);
+    base::lcLock(queueLock);
     q = queryQueue.get();
     if (q != nullptr) {
         *sn = snQueue.get();
     }
-    lcUnlock(queueLock);
+    base::lcUnlock(queueLock);
 
     return q;
 }
@@ -170,13 +170,13 @@ bool AngleOnlyTrackManager::addTrack(Track* const t)
 {
     bool ok = false;
 
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     if (nTrks < maxTrks) {
         t->ref();
         tracks[nTrks++] = t;
         ok = true;
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 
     return ok;
 }
@@ -348,12 +348,12 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
     const osg::Vec3 osVel = ownship->getVelocity();
     const osg::Vec3 osAccel = ownship->getAcceleration();
     const double osGndTrk = ownship->getGroundTrack();
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
         tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
         tracks[i]->updateTrackAge(dt);
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 
     // ---
     // 2) Process new reports
@@ -401,7 +401,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
     // ---
     // 3) Match current tracks to new reports (observations)
     // ---
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; it++) {
         trackNumMatches[it] = 0;
         const IrTrack* const trk = static_cast<const IrTrack*>(tracks[it]);  // we produce only IrTracks
@@ -417,7 +417,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
             else report2TrackMatch[ir][it] = 0;
         }
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 
     // ---
     // 4) Apply rules to associate the proper report to track.
@@ -432,7 +432,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
     double uElevation[MAX_TRKS];
     double age[MAX_TRKS];
     bool haveU[MAX_TRKS];
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; it++) {
         haveU[it] = false;
         age[it] = tracks[it]->getTrackAge();
@@ -456,7 +456,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
             }
         }
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 
     // ---
     // 6) Smooth and predict position for the next frame
@@ -466,7 +466,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
     //      X(k) is the state vector [ pos vel accel ]
     //      U(k) is the difference between the observed & predicted positions
     // ---
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
         // Save X(k)
         double taz = tracks[i]->getRelAzimuth();
@@ -534,13 +534,13 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
         tracks[i]->setPredictedElevationRate(telRate + telAccel*ageAtNextTimeStep);
 
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 
     // ---
     // 7) For tracks with new observation reports, reset their age.
     //    Remove tracks that have age beyond the limit.
     // ---
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
         IrTrack* const trk = static_cast<IrTrack*>(tracks[it]);  // we produce only IrTracks
         if (trk->getTrackAge() >= getMaxTrackAge()) {
@@ -580,12 +580,12 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
             it++;
         }
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 
     // ---
     // 8) Create new tracks from unmatched reports and free up IR query messages
     // ---
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int i = 0; i < nReports; i++) {
         if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
             // This is a new report, so create a new track for it
@@ -621,7 +621,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
         // Free the IR query message report
         queryMessages[i]->unref();
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 
 }
 
@@ -694,12 +694,12 @@ void AirAngleOnlyTrkMgrPT::updateTrackAges(const double dt)
     const osg::Vec3 osVel = getOwnship()->getVelocity();
     const osg::Vec3 osAccel = getOwnship()->getAcceleration();
     const double osGndTrk = getOwnship()->getGroundTrack();
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
         tracks[i]->ownshipDynamics(osGndTrk, osVel, osAccel, dt);
         tracks[i]->updateTrackAge(dt);
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 }
 
 //------------------------------------------------------------------------------
@@ -707,7 +707,7 @@ void AirAngleOnlyTrkMgrPT::updateTrackAges(const double dt)
 //------------------------------------------------------------------------------
 void AirAngleOnlyTrkMgrPT::removeAgedTracks()
 {
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int it = 0; it < nTrks; /* update 'it' below */ ) {
         IrTrack* const trk = static_cast<IrTrack*>(tracks[it]);  // we produce only IrTracks
         if (trk->getTrackAge() >= getMaxTrackAge()) {
@@ -745,7 +745,7 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
             it++;
         }
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 }
 
 //------------------------------------------------------------------------------
@@ -812,7 +812,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
             // ---
             // 3) Match new reports (observations) to all potential track matches
             // ---
-            lcLock(trkListLock);
+            base::lcLock(trkListLock);
             for (unsigned int it = 0; it < nTrks; it++) {
                 trackNumMatches[it] = 0;
                 const IrTrack* const trk = static_cast<const IrTrack*>(tracks[it]);  // we produce only IrTracks
@@ -831,7 +831,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
                         report2TrackMatch[ir][it] = 0;
                 }
             }
-            lcUnlock(trkListLock);
+            base::lcUnlock(trkListLock);
 
 
             // ---
@@ -844,7 +844,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
             // algorithm does not otherwise prevent multiple reports to one track
             // and note that 5) below only uses the last of multiple reports matched to a track
 
-            lcLock(trkListLock);
+            base::lcLock(trkListLock);
 
             // using two passes so that we prioritize assigning reports to later tracks for both situations
             // avoid assigning multiple reports to one track
@@ -884,7 +884,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
                     }
                 }
             }
-            lcUnlock(trkListLock);
+            base::lcUnlock(trkListLock);
 
         } // endif nReports > 0
 
@@ -893,7 +893,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
         //
         // note that 5) and 6) are now processed together in one loop on track[]
         // ---
-        lcLock(trkListLock);
+        base::lcLock(trkListLock);
         for (unsigned int it = 0; it < nTrks; it++) {
             osg::Vec3 uPosition;
             osg::Vec3 uVelocity;
@@ -1033,7 +1033,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
                 tracks[it]->setPredictedElevationRate(telRate + telAccel*ageAtNextTimeStep);
             }
         } // end for (unsigned int it = 0; it < nTrks; it++) {
-        lcUnlock(trkListLock);
+        base::lcUnlock(trkListLock);
 
 
         // ---
@@ -1047,7 +1047,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
     // ---
     // 8) Create new tracks from unmatched reports and free up IR query messages
     // ---
-    lcLock(trkListLock);
+    base::lcLock(trkListLock);
     for (unsigned int i = 0; i < nReports; i++) {
         if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
             // This is a new report, so create a new track for it
@@ -1093,8 +1093,8 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
         // Free the IR query message report
         queryMessages[i]->unref();
     }
-    lcUnlock(trkListLock);
+    base::lcUnlock(trkListLock);
 }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}

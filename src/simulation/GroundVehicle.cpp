@@ -18,9 +18,9 @@ namespace simulation {
 IMPLEMENT_SUBCLASS(GroundVehicle,"GroundVehicle")
 EMPTY_SERIALIZER(GroundVehicle)
 
-static const double DEFAULT_LAUNCHER_UP_ANGLE = static_cast<double>(PI/2.0); // Default max launcher angle (rad)
-static const double DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                       // Default min launcher angle (rad)
-static const double DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;                     // Default max launcher movement time (sec)
+static const double DEFAULT_LAUNCHER_UP_ANGLE = static_cast<double>(base::PI/2.0);  // Default max launcher angle (rad)
+static const double DEFAULT_LAUNCHER_DOWN_ANGLE = 0.0;                              // Default min launcher angle (rad)
+static const double DEFAULT_LAUNCHER_MOVE_TIME  = 10.0f;                            // Default max launcher movement time (sec)
 
 //------------------------------------------------------------------------------
 // Slot table

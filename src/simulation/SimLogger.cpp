@@ -30,6 +30,7 @@
 
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/util/string.h"
 
 #include <string>
 #include <sstream>
@@ -420,7 +421,7 @@ void SimLogger::SimLogEvent::copyData(const SimLogEvent& org, const bool cc)
     if (org.msg != nullptr) {
         size_t len = std::strlen(org.msg);
         msg = new char[len+1];
-        lcStrcpy(msg,(len+1),org.msg);
+        base::lcStrcpy(msg,(len+1),org.msg);
     }
 }
 
@@ -687,7 +688,7 @@ const char* SimLogger::NewPlayer::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -775,7 +776,7 @@ const char* SimLogger::LogPlayerData::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -864,7 +865,7 @@ const char* SimLogger::RemovePlayer::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -951,7 +952,7 @@ const char* SimLogger::WeaponRelease::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1019,7 +1020,7 @@ const char* SimLogger::GunFired::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1101,7 +1102,7 @@ const char* SimLogger::KillEvent::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1192,7 +1193,7 @@ const char* SimLogger::DetonationEvent::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1309,7 +1310,7 @@ const char* SimLogger::NewTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1442,7 +1443,7 @@ const char* SimLogger::UpdateTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1574,7 +1575,7 @@ const char* SimLogger::RemovedTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1704,7 +1705,7 @@ const char* SimLogger::NewRwrTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1839,7 +1840,7 @@ const char* SimLogger::UpdateRwrTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1974,7 +1975,7 @@ const char* SimLogger::RemovedRwrTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }

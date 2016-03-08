@@ -9,6 +9,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/Terrain.h"
 #include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/util/osg.h"
 
 #include <cmath>
 
@@ -544,7 +545,7 @@ unsigned int Tdb::computeBoresightData()
       // 2) Transform the ownship to target LOS vector into gimbal coordinate system
       //       losG = mm * losO2T;
       // ---
-      postMultVec3Array(losO2T,mm,losG,numTgts);
+      base::postMultVec3Array(losO2T,mm,losG,numTgts);
    }
 
    // ---
@@ -560,22 +561,22 @@ unsigned int Tdb::computeBoresightData()
    // ---
    // Compute range along antenna x-y plane
    // ---
-   sqrtArray(ra2,ra,numTgts);
+   base::sqrtArray(ra2,ra,numTgts);
 
    // ---
    // Compute angle off antenna boresight
    // ---
-   acosArray(xa, aar, numTgts);
+   base::acosArray(xa, aar, numTgts);
 
    // ---
    // Compute azimuth off boresight
    // ---
-   atan2Array(ya,xa,aazr,numTgts);
+   base::atan2Array(ya,xa,aazr,numTgts);
 
    // ---
    // Compute elevation off boresight
    // ---
-   atan2Array(za,ra,aelr,numTgts);
+   base::atan2Array(za,ra,aelr,numTgts);
 
    return numTgts;
 }

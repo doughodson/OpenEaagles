@@ -364,9 +364,9 @@ void ScanGimbal::spiralScanController(const double dt)
     fullAngleRadians = (fullAngleRadians + getConAngle()) * base::Angle::D2RCC;
 
     // azimuth
-    const double newX = getScanRadius() * (fullAngleRadians / (2.0 * PI)) * std::sin(fullAngleRadians);
+    const double newX = getScanRadius() * (fullAngleRadians / (2.0 * base::PI)) * std::sin(fullAngleRadians);
     // elevation
-    const double newY = getScanRadius() * (fullAngleRadians / (2.0 * PI)) * std::cos(fullAngleRadians);
+    const double newY = getScanRadius() * (fullAngleRadians / (2.0 * base::PI)) * std::cos(fullAngleRadians);
     setScanPos(newX, newY);
 
     // command our new position

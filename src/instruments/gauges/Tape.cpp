@@ -186,7 +186,7 @@ void Tape::updateData(const double dt)
 
     // we are diving by 100, so we need to find the nearest 100!
     double temp = x / increment;
-    int nearest = nint(temp);
+    int nearest = base::nint(temp);
 
     //std::cout << "NEAREST = " << nearest << std::endl;
     // we know we have 11 total number vals, and we start at the low side

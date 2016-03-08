@@ -1,7 +1,9 @@
+
 #include "openeaagles/graphics/Font.h"
 #include "openeaagles/base/Number.h"
 #include "openeaagles/base/List.h"
 #include "openeaagles/base/String.h"
+#include "openeaagles/base/util/string.h"
 
 #include <cstring>
 
@@ -134,12 +136,12 @@ void Font::copyData(const Font& org, const bool cc)
    if (org.fontPath != nullptr) {
       size_t len = std::strlen(org.fontPath);
       fontPath = new char[len+1];
-      lcStrcpy(fontPath,len+1,org.fontPath);
+      base::lcStrcpy(fontPath,len+1,org.fontPath);
    }
    if (org.fontFile != nullptr) {
       size_t len = std::strlen(org.fontFile);
       fontFile = new char[len+1];
-      lcStrcpy(fontFile,len+1,org.fontFile);
+      base::lcStrcpy(fontFile,len+1,org.fontFile);
    }
    loaded = org.loaded;
 
@@ -207,7 +209,7 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
       }
    }
    else {
-      lcStrncpy(outp,BUF_SIZE,inp,n);
+      base::lcStrncpy(outp,BUF_SIZE,inp,n);
    }
    outp[n] = '\0';
    return static_cast<int>(std::strlen(outp));

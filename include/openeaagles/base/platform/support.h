@@ -23,7 +23,6 @@
 #include <typeinfo>
 #include <iostream>
 #include <sys/types.h>
-#include <cmath>
 #include <cstring> // macros use std::strcmp
 
 // ---
@@ -35,8 +34,8 @@
   #include "openeaagles/base/platform/linux/support0.h"
 #endif
 
-
 namespace oe {
+namespace base {
 
 // ---
 // Simple semaphore spinlock and unlock functions:
@@ -302,96 +301,6 @@ bool convertNtp2Sec(
 // doesFileExist -- returns true if file exists
 bool doesFileExist(const char* const fullname);
 
-// Pre-multiply an array of 4D vectors with a 4x4 matrix
-
-void lcPreMultVec4Array(
-      const osg::Vec4 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec4 result[],
-      const int n
-   );
-
-void preMultVec4Array(
-      const osg::Vec4d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec4d result[],
-      const unsigned int n
-   );
-
-void preMultVec4Array(
-      const osg::Vec4f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec4f result[],
-      const unsigned int n
-   );
-
-// Pre-multiply an array of 3D vectors with a 4x4 matrix
-
-void lcPreMultVec3Array(
-      const osg::Vec3 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec3 result[],
-      const int n
-   );
-
-void preMultVec3Array(
-      const osg::Vec3d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec3d result[],
-      const unsigned int n
-   );
-
-void preMultVec3Array(
-      const osg::Vec3f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec3f result[],
-      const unsigned int n
-   );
-
-// Post-multiply an array of 4D vectors with a 4x4 matrix
-void lcPostMultVec4Array(
-      const osg::Vec4 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec4 result[],
-      const int n
-   );
-
-void postMultVec4Array(
-      const osg::Vec4d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec4d result[],
-      const unsigned int n
-   );
-
-void postMultVec4Array(
-      const osg::Vec4f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec4f result[],
-      const unsigned int n
-   );
-
-// Post-multiply an array of 3D vectors with a 4x4 matrix
-void lcPostMultVec3Array(
-      const osg::Vec3 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec3 result[],
-      const int n
-   );
-
-void postMultVec3Array(
-      const osg::Vec3d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec3d result[],
-      const unsigned int n
-   );
-
-void postMultVec3Array(
-      const osg::Vec3f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec3f result[],
-      const unsigned int n
-   );
-
 // Returns the sine and cosine of an angle (radians)
 void lcSinCos(const double angleRad, double* const sine, double* const cosine);
 void sinCos(const double angleRad, double* const sine, double* const cosine);
@@ -437,67 +346,8 @@ void lcMultArrayConst(const double* const src, const double c, double* const dst
 void multArrayConst(const double* const src, const double c, double* const dst, const unsigned int n);
 void multArrayConst(const float* const src, const float c, double* const dst, const unsigned int n);
 
-
-
-// Converts the integer number, 'num', to a 'width' character ascii string
-// (this size of 'str' must be at least width+1 bytes to include the null termination)
-void lcInteger2Str(const int num, char* const str, int width);
-
-// String copy function: Copies a string from the source, 'strSource', to the
-// destination buffer, 'strDest'.  The destination string is null terminated.
-// The 'strSource' string will be truncated if the 'strDest' string is too small.
-bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource);
-
-// String N copy function: Copies up to 'count' characters from the source string,
-// 'strSource', to the destination buffer, 'strDest'.  The new destination string
-// is null terminated.  The 'strSource' string will be truncated if the 'strDest'
-// string is too small.
-bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count);
-
-// String cat function: Appends the 'strSource' string to the end of the 'strDest'
-// string.  The new destination string is null terminated.  The 'strSource' string
-// will be truncated if the 'strDest' string is too small.  If 'strDest' is a null
-// pointer, or is not null-terminated, or if 'strSource' is a null pointer then false
-// is returned and the destination buffer is unchanged.
-bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource);
-
-// Full string copy function: Copies a string from the source, 'strSource', to the
-// destination buffer, 'strDest'.  The new destination string is null terminated.
-// If the destination buffer is too small then false is returned and the destination buffer
-// is unchanged.
-bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource);
-
-// Full string N copy function: Copies up to 'count' characters from the source string,
-// 'strSource', to the destination buffer, 'strDest'.  The new destination string is null
-// terminated.   If the destination buffer is too small then false is returned and the
-// destination buffer is unchanged.
-bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count);
-
-// Full string cat function: Appends the source string, 'strSource', to the end of the
-// destination string, 'strDest'.  The new destination string is null terminated.  If
-// the destination buffer is too small, or if 'strDest' is a null pointer, or is not
-// null-terminated, or if 'strSource' is a null pointer then false is returned and the
-// destination buffer is unchanged.
-bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* const strSource);
-
-// Compare two strings ignoring case --
-// Returns an integer less than, equal to or greater than zero if 's1' is less
-// than, equal to or greater than 's2', respectively.
-// (using lower case characters)
-int lcStrcasecmp(const char* const s1, const char* const s2);
-
-// Compare the first 'n' characters of two strings ignoring case --
-// Returns an integer less than, equal to or greater than zero if 's1' is less
-// than, equal to or greater than 's2', respectively.
-// (using lower case characters)
-int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n);
-
-// returns number of digits in the whole number part (i.e. left of decimal)
-// of a floating point number
-unsigned int getDigits(const double x);
-
-} // End oe namespace
-
+}
+}
 
 #endif
 

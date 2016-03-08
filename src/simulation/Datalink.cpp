@@ -293,7 +293,7 @@ void Datalink::dynamics(const double)
         oe::base::Object* tempObj = inQueue->get();
         msg = dynamic_cast<oe::simulation::Message*>(tempObj);
         if(msg != nullptr) {
-            if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
+            if(base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
                 msg->unref();
             }
@@ -318,7 +318,7 @@ void Datalink::dynamics(const double)
         oe::base::Object* tempObj = outQueue->get();
         msg = dynamic_cast<oe::simulation::Message*>(tempObj);
         if(msg != nullptr) {
-            if(getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
+            if(base::getComputerTime() - msg->getTimeStamp() > msg->getLifeSpan()) {
                 //remove message by not adding to list to be put back into queue
                 msg->unref();
             }

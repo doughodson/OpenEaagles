@@ -498,7 +498,7 @@ void Missile::weaponGuidance(const double dt)
 //------------------------------------------------------------------------------
 void Missile::weaponDynamics(const double dt)
 {
-   static const double g = ETHG;              // Acceleration of Gravity
+   static const double g = base::ETHG;              // Acceleration of Gravity
 
    // ---
    // Max turning G (Missiles: Use Gmax)
@@ -543,8 +543,8 @@ void Missile::weaponDynamics(const double dt)
 
    // Use turn rate integrate heading
    double newPsi = static_cast<double>(getHeading() + (ra + ra1) * dt / 2.0);
-   if(newPsi > 2.0f*PI) newPsi -= static_cast<double>(2.0*PI);
-   if(newPsi < 0.0f) newPsi += static_cast<double>(2.0*PI);
+   if(newPsi > 2.0f*base::PI) newPsi -= static_cast<double>(2.0*base::PI);
+   if(newPsi < 0.0f) newPsi += static_cast<double>(2.0*base::PI);
 
    // Roll angle proportional to max turn rate - filtered
    double pa = 0.0;

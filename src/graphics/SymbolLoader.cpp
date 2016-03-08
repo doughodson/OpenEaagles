@@ -1,3 +1,4 @@
+
 #include "openeaagles/graphics/SymbolLoader.h"
 #include "openeaagles/graphics/Readouts.h"
 #include "openeaagles/graphics/Polygon.h"
@@ -6,6 +7,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/util/string.h"
 
 #include <cstring>
 
@@ -1102,7 +1104,7 @@ void SlSymbol::copyData(const SlSymbol& org, const bool cc)
    scrnFlg = org.scrnFlg;
 
    type = org.type;
-   lcStrcpy(id, sizeof(id), org.id);
+   base::lcStrcpy(id, sizeof(id), org.id);
 
    xPos = org.xPos;
    yPos = org.yPos;

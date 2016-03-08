@@ -255,13 +255,13 @@ void Radio::receive(const double dt)
    double signal = 0;
 
    // Get an emission from the queue
-   lcLock(packetLock);
+   base::lcLock(packetLock);
    if (np > 0) {
       np--; // Decrement 'np', now the array index
       em = packets[np];
       signal = signals[np];
    }
-   lcUnlock(packetLock);
+   base::lcUnlock(packetLock);
 
    while (em != nullptr) {
 
@@ -280,13 +280,13 @@ void Radio::receive(const double dt)
       em = nullptr;
 
       // Get another emission from the queue
-      lcLock(packetLock);
+      base::lcLock(packetLock);
       if (np > 0) {
          np--;
          em = packets[np];
          signal = signals[np];
       }
-      lcUnlock(packetLock);
+      base::lcUnlock(packetLock);
    }
 }
 

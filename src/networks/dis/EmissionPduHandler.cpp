@@ -456,7 +456,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
          rfSys->setPulseWidth( bd->parameterData.pulseWidth / 1000000.0f );
 
          if ( bd->beamData.beamAzimuthCenter == 0 &&
-            (bd->beamData.beamAzimuthSweep == 0 || bd->beamData.beamAzimuthSweep >= PI)
+            (bd->beamData.beamAzimuthSweep == 0 || bd->beamData.beamAzimuthSweep >= base::PI)
             ) {
                // circular scan
                antenna->setRefAzimuth( 0 );

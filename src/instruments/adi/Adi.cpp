@@ -91,11 +91,11 @@ void Adi::updateData(const double dt)
     // drive our adi toward the actual pitch, from our current pitch, no faster
     // than our MAX_RATE (this allows for greater fidelity, simulates an analog adi)
     double delta = 0;
-    delta = alim (base::Angle::aepcdDeg(pitch - curTheta), maxRate * dt);
+    delta = base::alim (base::Angle::aepcdDeg(pitch - curTheta), maxRate * dt);
     curTheta = base::Angle::aepcdDeg(curTheta + delta);
 
     // now do the same thing for roll
-    delta = alim (base::Angle::aepcdRad(roll - curPhi), maxRate * dt);
+    delta = base::alim (base::Angle::aepcdRad(roll - curPhi), maxRate * dt);
     curPhi = base::Angle::aepcdRad(curPhi + delta);
 
     // get our table, and do the linear interpolation ourself

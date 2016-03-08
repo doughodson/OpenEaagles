@@ -135,7 +135,7 @@ void IrSeeker::process(const double dt)
    // ---
    // Update IR query queues: from 'in-use' to 'free'
    // ---
-   lcLock(inUseQueryLock);
+   base::lcLock(inUseQueryLock);
    int n = inUseQueryQueue.entries();
    for (int i = 0; i < n; i++) {
       IrQueryMsg* query = inUseQueryQueue.get();
@@ -143,14 +143,14 @@ void IrSeeker::process(const double dt)
          if (query->getRefCount() <= 1) {
             // No one else is referencing the query, push on free stack
             query->clear();
-            lcLock(freeQueryLock);
+            base::lcLock(freeQueryLock);
             if (freeQueryStack.isNotFull()) {
                freeQueryStack.push(query);
             }
             else {
                query->unref();
             }
-            lcUnlock(freeQueryLock);
+            base::lcUnlock(freeQueryLock);
          }
          else {
             // Others are still referencing the query, put back on in-use queue
@@ -158,7 +158,7 @@ void IrSeeker::process(const double dt)
          }
       }
    }
-   lcUnlock(inUseQueryLock);
+   base::lcUnlock(inUseQueryLock);
 }
 
 
@@ -167,21 +167,21 @@ void IrSeeker::process(const double dt)
 //------------------------------------------------------------------------------
 void IrSeeker::clearQueues()
 {
-   lcLock(freeQueryLock);
+   base::lcLock(freeQueryLock);
    IrQueryMsg* query = freeQueryStack.pop();
    while (query != nullptr) {
       query->unref();
       query = freeQueryStack.pop();
    }
-   lcUnlock(freeQueryLock);
+   base::lcUnlock(freeQueryLock);
 
-   lcLock(inUseQueryLock);
+   base::lcLock(inUseQueryLock);
    query = inUseQueryQueue.get();
    while (query != nullptr) {
       query->unref();
       query = inUseQueryQueue.get();
    }
-   lcUnlock(inUseQueryLock);
+   base::lcUnlock(inUseQueryLock);
 }
 
 //------------------------------------------------------------------------------
@@ -237,9 +237,9 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
             continue;
 
          // Get a free query packet
-         lcLock(freeQueryLock);
+         base::lcLock(freeQueryLock);
          IrQueryMsg* query = freeQueryStack.pop();
-         lcUnlock(freeQueryLock);
+         base::lcUnlock(freeQueryLock);
 
          if (query == nullptr) {
             query = new IrQueryMsg();
@@ -281,18 +281,18 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
             if (query->getRefCount() <= 1) {
                // Recycle the query packet
                query->clear();
-               lcLock(freeQueryLock);
+               base::lcLock(freeQueryLock);
                if (freeQueryStack.isNotFull()) {
                   freeQueryStack.push(query);
                }
                else {
                   query->unref();
                }
-               lcUnlock(freeQueryLock);
+               base::lcUnlock(freeQueryLock);
             }
             else {
                // Store for future reference
-               lcLock(inUseQueryLock);
+               base::lcLock(inUseQueryLock);
                if (inUseQueryQueue.isNotFull()) {
                   inUseQueryQueue.put(query);
                }
@@ -300,7 +300,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
                   // Just forget it
                   query->unref();
                }
-               lcUnlock(inUseQueryLock);
+               base::lcUnlock(inUseQueryLock);
             }
          }
          else {

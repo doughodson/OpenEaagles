@@ -278,14 +278,14 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, double raG
          }
 
          // Save packet and signal for receive()
-         lcLock(packetLock);
+         base::lcLock(packetLock);
          if (np < MAX_EMISSIONS) {
             em->ref();
             packets[np] = em;
             signals[np] = signal;
             np++;
          }
-         lcUnlock(packetLock);
+         base::lcUnlock(packetLock);
 
       }
    }
@@ -603,7 +603,7 @@ bool RfSystem::setAntenna(Antenna* const p)
 // Compute receiver thermal noise (equation 2-8)
 bool RfSystem::computeReceiverNoise()
 {
-   return setReceiverNoise(rfNoiseFigure * static_cast<float>(BOLTZMANN) * rfSysTemp * getBandwidthNoise());
+   return setReceiverNoise(rfNoiseFigure * static_cast<float>(base::BOLTZMANN) * rfSysTemp * getBandwidthNoise());
 }
 
 //------------------------------------------------------------------------------

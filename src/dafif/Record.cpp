@@ -2,6 +2,7 @@
 #include "openeaagles/dafif/Record.h"
 #include "openeaagles/base/Nav.h"
 #include "openeaagles/base/String.h"
+#include "openeaagles/base/util/string.h"
 
 #include <iostream>
 #include <cstring>
@@ -319,7 +320,7 @@ double Record::dsAtofn(const char* const s, const int n)
    const size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
-   lcStrncpy(buf, BUF_LENGTH, s, n);
+   base::lcStrncpy(buf, BUF_LENGTH, s, n);
    buf[n] = '\0';
 
    return atof(buf);
@@ -337,7 +338,7 @@ long Record::dsAtoln(const char* const s, const int n)
    const size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
-   lcStrncpy(buf, BUF_LENGTH, s, n);
+   base::lcStrncpy(buf, BUF_LENGTH, s, n);
    buf[n] = '\0';
 
    return std::atol(buf);

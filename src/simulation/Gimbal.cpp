@@ -140,7 +140,7 @@ END_EVENT_HANDLER()
 //------------------------------------------------------------------------------
 // Static variables
 //------------------------------------------------------------------------------
-const double Gimbal::defaultTolerance = 0.1 * (PI/180.0);
+const double Gimbal::defaultTolerance = 0.1 * (base::PI/180.0);
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -395,13 +395,13 @@ void Gimbal::servoController(const double dt)
       //     (unlimited if the limit is greater than 180 deg)
       // ---
       bool azLimit = false;
-      if (highLimits[AZ_IDX] >= -PI && highLimits[AZ_IDX] <= PI) {
+      if (highLimits[AZ_IDX] >= -base::PI && highLimits[AZ_IDX] <= base::PI) {
          if ( base::Angle::aepcdRad(highLimits[AZ_IDX] - newPos[AZ_IDX]) <= 0.0f ) {
             newPos[AZ_IDX] = highLimits[AZ_IDX];
             azLimit = true;
          }
       }
-      if (lowLimits[AZ_IDX] >= -PI && lowLimits[AZ_IDX] <= PI) {
+      if (lowLimits[AZ_IDX] >= -base::PI && lowLimits[AZ_IDX] <= base::PI) {
          if ( base::Angle::aepcdRad(lowLimits[AZ_IDX] - newPos[AZ_IDX]) >= 0.0f) {
             newPos[AZ_IDX] = lowLimits[AZ_IDX];
             azLimit = true;
@@ -416,13 +416,13 @@ void Gimbal::servoController(const double dt)
       //     (unlimited if the limit is greater than 180 deg)
       // ---
       bool elLimit = false;
-      if (highLimits[ELEV_IDX] >= -PI && highLimits[ELEV_IDX] <= PI) {
+      if (highLimits[ELEV_IDX] >= -base::PI && highLimits[ELEV_IDX] <= base::PI) {
          if ( base::Angle::aepcdRad(highLimits[ELEV_IDX] - newPos[ELEV_IDX]) <= 0.0f ) {
             newPos[ELEV_IDX] = highLimits[ELEV_IDX];
             elLimit = true;
          }
       }
-      if (lowLimits[ELEV_IDX] >= -PI && lowLimits[ELEV_IDX] <= PI) {
+      if (lowLimits[ELEV_IDX] >= -base::PI && lowLimits[ELEV_IDX] <= base::PI) {
          if ( base::Angle::aepcdRad(lowLimits[ELEV_IDX] - newPos[ELEV_IDX]) >= 0.0f) {
             newPos[ELEV_IDX] = lowLimits[ELEV_IDX];
             elLimit = true;
@@ -437,13 +437,13 @@ void Gimbal::servoController(const double dt)
       //     (unlimited if the limit is greater than 180 deg)
       // ---
       bool rollLimit = false;
-      if (highLimits[ROLL_IDX] >= -PI && highLimits[ROLL_IDX] <= PI) {
+      if (highLimits[ROLL_IDX] >= -base::PI && highLimits[ROLL_IDX] <= base::PI) {
          if ( base::Angle::aepcdRad(highLimits[ROLL_IDX] - newPos[ROLL_IDX]) <= 0.0f ) {
             newPos[ROLL_IDX] = highLimits[ROLL_IDX];
             rollLimit = true;
          }
       }
-      if (lowLimits[ROLL_IDX] >= -PI && lowLimits[ROLL_IDX] <= PI) {
+      if (lowLimits[ROLL_IDX] >= -base::PI && lowLimits[ROLL_IDX] <= base::PI) {
          if ( base::Angle::aepcdRad(lowLimits[ROLL_IDX] - newPos[ROLL_IDX]) >= 0.0f) {
             newPos[ROLL_IDX] = lowLimits[ROLL_IDX];
             rollLimit = true;
@@ -704,12 +704,12 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    //  2) highLimits[AZ_IDX] is the right limit
    //     (unlimited if the limit is greater than 180 deg)
    // ---
-   if (highLimits[AZ_IDX] >= -PI && highLimits[AZ_IDX] <= PI) {
+   if (highLimits[AZ_IDX] >= -base::PI && highLimits[AZ_IDX] <= base::PI) {
       if ( base::Angle::aepcdRad(highLimits[AZ_IDX] - newPos[AZ_IDX]) <= 0.0f ) {
          newPos[AZ_IDX] = highLimits[AZ_IDX];
       }
    }
-   if (lowLimits[AZ_IDX] >= -PI && lowLimits[AZ_IDX] <= PI) {
+   if (lowLimits[AZ_IDX] >= -base::PI && lowLimits[AZ_IDX] <= base::PI) {
       if ( base::Angle::aepcdRad(lowLimits[AZ_IDX] - newPos[AZ_IDX]) >= 0.0f) {
          newPos[AZ_IDX] = lowLimits[AZ_IDX];
       }
@@ -722,12 +722,12 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    //  2) highLimits[ELEV_IDX] is the upper limit
    //     (unlimited if the limit is greater than 180 deg)
    // ---
-   if (highLimits[ELEV_IDX] >= -PI && highLimits[ELEV_IDX] <= PI) {
+   if (highLimits[ELEV_IDX] >= -base::PI && highLimits[ELEV_IDX] <= base::PI) {
       if ( base::Angle::aepcdRad(highLimits[ELEV_IDX] - newPos[ELEV_IDX]) <= 0.0f ) {
          newPos[ELEV_IDX] = highLimits[ELEV_IDX];
       }
    }
-   if (lowLimits[ELEV_IDX] >= -PI && lowLimits[ELEV_IDX] <= PI) {
+   if (lowLimits[ELEV_IDX] >= -base::PI && lowLimits[ELEV_IDX] <= base::PI) {
       if ( base::Angle::aepcdRad(lowLimits[ELEV_IDX] - newPos[ELEV_IDX]) >= 0.0f) {
          newPos[ELEV_IDX] = lowLimits[ELEV_IDX];
       }
@@ -740,12 +740,12 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    //  2) highLimits[ROLL_IDX] is the clockwise limit
    //     (unlimited if the limit is greater than 180 deg)
    // ---
-   if (highLimits[ROLL_IDX] >= -PI && highLimits[ROLL_IDX] <= PI) {
+   if (highLimits[ROLL_IDX] >= -base::PI && highLimits[ROLL_IDX] <= base::PI) {
       if ( base::Angle::aepcdRad(highLimits[ROLL_IDX] - newPos[ROLL_IDX]) <= 0.0f ) {
          newPos[ROLL_IDX] = highLimits[ROLL_IDX];
       }
    }
-   if (lowLimits[ROLL_IDX] >= -PI && lowLimits[ROLL_IDX] <= PI) {
+   if (lowLimits[ROLL_IDX] >= -base::PI && lowLimits[ROLL_IDX] <= base::PI) {
       if ( base::Angle::aepcdRad(lowLimits[ROLL_IDX] - newPos[ROLL_IDX]) >= 0.0f) {
          newPos[ROLL_IDX] = lowLimits[ROLL_IDX];
       }

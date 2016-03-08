@@ -589,7 +589,7 @@ void Simulation::reset()
 
    // Start with the current computer system date and time as seconds
    // since midnight, January 1, 1970 (UTC)
-   getTime(&pcTvSec, &pcTvUSec);
+   base::getTime(&pcTvSec, &pcTvUSec);
 
    // Decompose into year, month, etc
    unsigned int cYear = 0;
@@ -598,7 +598,7 @@ void Simulation::reset()
    unsigned int cHour = 0;
    unsigned int cMin = 0;
    unsigned int cSec = 0;
-   convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
+   base::convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
       //std::printf("RESET PC Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
       //std::printf("RESET PC sec = %d, uSec=%d\n", pcTvSec, pcTvUSec);
 
@@ -632,7 +632,7 @@ void Simulation::reset()
       }
 
       // Recompute simulated whole seconds since midnight, January 1, 1970
-      convertYmdhms2Sec(cYear, cMonth, cDay, cHour, cMin, cSec, &simTvSec);
+      base::convertYmdhms2Sec(cYear, cMonth, cDay, cHour, cMin, cSec, &simTvSec);
       //std::printf("RESET sim Times: y=%d; m=%d; d=%d; h=%d; m=%d; s=%d\n", cYear, cMonth, cDay, cHour, cMin, cSec);
       //std::printf("RESET SIM sec = %d, uSec=%d\n", simTvSec, simTvUSec);
 
@@ -762,7 +762,7 @@ void Simulation::updateTC(const double dt)
       unsigned int cHour = 0;
       unsigned int cMin = 0;
       unsigned int cSec = 0;
-      convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
+      base::convertSec2Ymdhms(pcTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
 
       // Computer time of day (seconds since midnight)
       pcTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + static_cast<double>(pcTvUSec) / 1000000.0 );
@@ -804,7 +804,7 @@ void Simulation::updateTC(const double dt)
       unsigned int cHour = 0;
       unsigned int cMin = 0;
       unsigned int cSec = 0;
-      convertSec2Ymdhms(simTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
+      base::convertSec2Ymdhms(simTvSec, &cYear, &cMonth, &cDay, &cHour, &cMin, &cSec);
 
       // Computer time of day (seconds since midnight)
       simTime = ( cHour * 3600.0 + cMin * 60.0 + cSec + static_cast<double>(simTvUSec) / 1000000.0 );

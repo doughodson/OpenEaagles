@@ -402,7 +402,7 @@ bool Autopilot::flyLoiterEntry()
 
       // Player only data
       const double velMps    = pPlr->getTotalVelocity();
-      const double rocMtr    = velMps * velMps / oe::ETHGM / std::tan(MAX_BANK_RAD);
+      const double rocMtr    = velMps * velMps / base::ETHGM / std::tan(MAX_BANK_RAD);
       const double rocNM     = rocMtr * base::Distance::M2NM;
       const double obCrsDeg  = base::Angle::aepcdDeg(loiterInboundCourse + 180.0);
 
@@ -609,11 +609,11 @@ bool Autopilot::calcMirrorLatLon()
       // get current data
       //----------------------------------------------------
       const double velMps = pPlr->getTotalVelocity();
-      double phiCmdRad = std::atan2(velMps * SRT_RPS, oe::ETHGM);
+      double phiCmdRad = std::atan2(velMps * SRT_RPS, base::ETHGM);
       if (phiCmdRad > MAX_BANK_RAD) { phiCmdRad = MAX_BANK_RAD; }
 
       // radius of the center (nautical miles)
-      const double rocMtr    = velMps * velMps / (oe::ETHGM * std::tan(phiCmdRad));
+      const double rocMtr    = velMps * velMps / (base::ETHGM * std::tan(phiCmdRad));
       const double rocNM     = rocMtr * base::Distance::M2NM;
       const double xtDistNM  = 2.0 * rocNM;
 
@@ -682,7 +682,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
       const double posErrDeg = base::Angle::aepcdDeg(brgDeg - crsDeg);
       const double posErrRad = posErrDeg * base::Angle::D2RCC;
 
-      const double rocMtr    = velMps * velMps / oe::ETHGM / std::tan(MAX_BANK_RAD);
+      const double rocMtr    = velMps * velMps / base::ETHGM / std::tan(MAX_BANK_RAD);
       //double rocNM     = rocMtr * base::Distance::M2NM;
 
       const double xtRngNM   = std::fabs(distNM * std::sin(posErrRad));
@@ -691,7 +691,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
 
       double hdgCmdDeg = hdgDeg;
       if (xtRngRoc >= 1.2) {
-         hdgCmdDeg = sign(posErrDeg) * 90.0 + crsDeg;
+         hdgCmdDeg = base::sign(posErrDeg) * 90.0 + crsDeg;
       }
       else {
          double x = 1.0 - xtRngRoc;
@@ -702,7 +702,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
          const double y = (rocMtr - OFFSET_MTR) / rocMtr;
          const double betaDeg = std::acos(y) * base::Angle::R2DCC;
 
-         const double gamaDeg = sign(posErrDeg) * (alfaDeg - betaDeg);
+         const double gamaDeg = base::sign(posErrDeg) * (alfaDeg - betaDeg);
          hdgCmdDeg = base::Angle::aepcdDeg(gamaDeg + crsDeg);
       }
 
@@ -739,8 +739,8 @@ bool Autopilot::flySRT()
       // get current data
       //----------------------------------------------------
       const double velMps    = pPlr->getTotalVelocity();
-      double phiCmdRad = std::atan2(velMps*SRT_RPS, oe::ETHGM);
-      double psiDotCmdRps = oe::ETHGM * std::tan(phiCmdRad) / velMps;
+      double phiCmdRad = std::atan2(velMps*SRT_RPS, base::ETHGM);
+      double psiDotCmdRps = base::ETHGM * std::tan(phiCmdRad) / velMps;
 
       // turn left
       if (loiterCcwFlag) {
@@ -788,8 +788,8 @@ bool Autopilot::processModeFollowTheLead()
 
          // ... first check for angle wrap around.
          double newHdg = base::Angle::aepcdRad( lead->getHeading() );
-         if ( (leadHdg - newHdg) >  PI) newHdg += (2.0 * PI);
-         if ( (leadHdg - newHdg) < -PI) newHdg -= (2.0 * PI);
+         if ( (leadHdg - newHdg) >  base::PI) newHdg += (2.0 * base::PI);
+         if ( (leadHdg - newHdg) < -base::PI) newHdg -= (2.0 * base::PI);
 
          // ... then filter it
          const double leadHdg0 = 0.98 * leadHdg + 0.02 * newHdg;

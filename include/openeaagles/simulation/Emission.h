@@ -43,7 +43,7 @@ public:
    void setFrequency(const double f) {
       if (f > 0.0) {
          freq = f;
-         lambda = static_cast<float>(LIGHTSPEED)/f;
+         lambda = static_cast<float>(base::LIGHTSPEED)/f;
       }
    }
 
@@ -51,7 +51,7 @@ public:
    void setWavelength(const double l) {
       if (l > 0.0) {
          lambda = l;
-         freq = static_cast<float>(LIGHTSPEED)/l;
+         freq = static_cast<float>(base::LIGHTSPEED)/l;
       }
    }
 

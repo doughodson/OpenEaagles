@@ -20,6 +20,7 @@
 #include "openeaagles/base/NetHandler.h"
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/util/string.h"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -66,7 +67,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
             nib->setPlayerID(playerId);
             if (pdu->entityMarking.characterSet == 1) {
                char name[12];
-               lcStrcpy(name, 12, reinterpret_cast<const char*>(pdu->entityMarking.marking));
+               base::lcStrcpy(name, 12, reinterpret_cast<const char*>(pdu->entityMarking.marking));
                nib->setPlayerName(name);
             }
             else

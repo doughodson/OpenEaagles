@@ -2,6 +2,8 @@
 #include "openeaagles/recorder/PrintHandler.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Number.h"
+#include "openeaagles/base/util/string.h"
+
 #include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,
@@ -178,8 +180,8 @@ bool PrintHandler::openFile()
    // Create the (initial) full file name
    //---
    if (pathname != nullptr && pathname->len() > 0) {
-      lcStrcat(fullname, nameLength ,*pathname);
-      lcStrcat(fullname, nameLength, "/");
+      base::lcStrcat(fullname, nameLength ,*pathname);
+      base::lcStrcat(fullname, nameLength, "/");
    }
    lcStrcat(fullname,nameLength,*filename);
 
@@ -187,17 +189,17 @@ bool PrintHandler::openFile()
    //---
    // Make sure that it doesn't already exist (we don't want to over write good data).
    //---
-   bool validName = !doesFileExist(fullname);
+   bool validName = !base::doesFileExist(fullname);
    if ( !validName ) {
       // If the file already exists, try appending a version number "v99" ..
 
       char* origname = new char[nameLength];
-      lcStrcpy(origname, nameLength, fullname);
+      base::lcStrcpy(origname, nameLength, fullname);
 
       validName = false;
       for (unsigned int i = 1; i <= 99 && !validName; i++) {
          std::sprintf(fullname, "%s_v%02d", origname, i);
-         validName = !doesFileExist(fullname);
+         validName = !base::doesFileExist(fullname);
       }
 
       if ( !validName ) {
@@ -281,7 +283,7 @@ void PrintHandler::setFullFilename(const char* const name)
    if (name != nullptr) {
       size_t n = std::strlen(name) + 1;
       fullFilename = new char[n];
-      lcStrcpy(fullFilename, n, name);
+      base::lcStrcpy(fullFilename, n, name);
    }
 }
 

@@ -529,7 +529,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_FLOAT) {
                   double num = static_cast<double>(reflection->GetFloat(root, fieldDescriptor));
-                  if ( ((condition == EQ) && equal(num, getCompareToDbl())) ||
+                  if ( ((condition == EQ) && base::equal(num, getCompareToDbl())) ||
                      ((condition == GT) && (num > getCompareToDbl())) ||
                      ((condition == LT) && (num < getCompareToDbl()))) {
                       // Found it!
@@ -538,7 +538,7 @@ void PrintSelected::processMessage(const google::protobuf::Message* const msg)
                }
                else if (cppType == google::protobuf::FieldDescriptor::CPPTYPE_DOUBLE) {
                   double num = reflection->GetDouble(root, fieldDescriptor);
-                  if ( ((condition == EQ) && equal(num, getCompareToDbl())) ||
+                  if ( ((condition == EQ) && base::equal(num, getCompareToDbl())) ||
                      ((condition == GT) && (num > getCompareToDbl())) ||
                      ((condition == LT) && (num < getCompareToDbl()))) {
                       // Found it!

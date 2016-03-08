@@ -788,7 +788,7 @@ int GlutDisplay::findRegisteredWinId(const GlutDisplay* dp)
 void GlutDisplay::idleCB()
 {
    int id = glutGetWindow();
-   double time = getComputerTime();
+   double time = base::getComputerTime();
 
    // N-1 Time
    static double time0 = time;
@@ -812,7 +812,7 @@ void GlutDisplay::idleCB()
    glutSetWindow(id);
 
    // Sleep to let other's use the CPU
-   lcSleep(sleepFor);
+   base::lcSleep(sleepFor);
 }
 
 

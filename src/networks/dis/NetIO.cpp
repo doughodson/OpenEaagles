@@ -18,6 +18,7 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 #include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/util/string.h"
 
 #include <cstdlib>
 #include <cstring>
@@ -76,7 +77,7 @@ IMPLEMENT_SUBCLASS(NetIO,"DisNetIO")
 static const double HRT_BEAT_MPLIER       = 2.5;                                 //  Multiplier
 static const double HRT_BEAT_TIMER        = 5;                                   //  seconds
 static const double DRA_POS_THRST_DFLT    = 3.0;                                 //  meters
-static const double DRA_ORIENT_THRST_DFLT = static_cast<double>(3.0 * PI/180.0); //  radians
+static const double DRA_ORIENT_THRST_DFLT = static_cast<double>(3.0 * base::PI/180.0); //  radians
 
 // DISv7 default heartbeats
 static const double HBT_PDU_EE          = 10;                           //  seconds
@@ -86,8 +87,8 @@ static const double HBT_PDU_TRANSMITTER = 2;                            //  seco
 static const double HBT_TIMEOUT_MPLIER  = 2.4;                          //  Multiplier
 
 // DISv7 default thresholds
-static const double EE_AZ_THRSH = static_cast<double>(1.0 * PI/180.0);  //  radians
-static const double EE_EL_THRSH = static_cast<double>(1.0 * PI/180.0);  //  radians
+static const double EE_AZ_THRSH = static_cast<double>(1.0 * base::PI/180.0);  //  radians
+static const double EE_EL_THRSH = static_cast<double>(1.0 * base::PI/180.0);  //  radians
 
 static const double EE_ERP_THRSH  = static_cast<double>(1.0);           //  dB
 static const double EE_FREQ_THRSH = static_cast<double>(1.0);           //  Hz
@@ -779,7 +780,7 @@ bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const 
       cbuff[idx++] = 0;
 
       if (idx <= len) {
-         lcStrcpy(fedName,len,cbuff);
+         base::lcStrcpy(fedName,len,cbuff);
          ok = true;
       }
    }
@@ -867,7 +868,7 @@ bool NetIO::makeFederationName(char* const fedName, const unsigned int len, cons
       cbuff[idx++] = 0;
 
       if (idx <= len) {
-         lcStrcpy(fedName,len,cbuff);
+         base::lcStrcpy(fedName,len,cbuff);
          ok = true;
       }
    }
@@ -1842,7 +1843,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
       for (unsigned int i = 0; i < n; i++) {
          int r = std::rand();
          double nr = (static_cast<double>(r) / static_cast<double>(RAND_MAX));
-         int idx = nint(nr * (maxTypes - 1));
+         int idx = base::nint(nr * (maxTypes - 1));
          const Ntm* origNtm = static_cast<const Ntm*>(getInputEntityType(idx));
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
@@ -1903,7 +1904,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
       for (unsigned int i = 0; i < n; i++) {
          int r = std::rand();
          double nr = static_cast<double>(r) / static_cast<double>(RAND_MAX);
-         int idx = nint(nr * (maxTypes - 1));
+         int idx = base::nint(nr * (maxTypes - 1));
          const Ntm* origNtm = static_cast<const Ntm*>(getOutputEntityTypes(idx));
          std::cout << "i= " << i;
          std::cout << "; idx= " << idx;
@@ -1918,7 +1919,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
             if (origType != nullptr) {
 
                char cbuff[64];
-               lcStrcpy(cbuff, 64, origType->getString());
+               base::lcStrcpy(cbuff, 64, origType->getString());
 
 #if 0 /* optionally increment the last character to look for generic matches */
                size_t ll = std::strlen(cbuff);

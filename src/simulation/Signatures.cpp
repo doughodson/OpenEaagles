@@ -297,7 +297,7 @@ double SigPlate::getRCS(const Emission* const em)
         double area = a * b;
         if (lambda > 0.0 && area > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
-            rcs = (4.0 * PI * area * area) / (lambda * lambda);
+            rcs = (4.0 * base::PI * area * area) / (lambda * lambda);
         }
     }
     return static_cast<double>(rcs);
@@ -407,7 +407,7 @@ double SigDihedralCR::getRCS(const Emission* const em)
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
             const double a = getA();
-            rcs = (8.0 * PI * a*a*a*a) / (lambda*lambda);
+            rcs = (8.0 * base::PI * a*a*a*a) / (lambda*lambda);
         }
     }
     return static_cast<double>(rcs);
@@ -459,7 +459,7 @@ double SigTrihedralCR::getRCS(const Emission* const em)
         if (lambda > 0.0) {
             // If we have lambda and the area of the plate, compute the RCS
             const double a = getA();
-            rcs = (12.0 * PI * a*a*a*a) / (lambda*lambda);
+            rcs = (12.0 * base::PI * a*a*a*a) / (lambda*lambda);
         }
     }
     return static_cast<double>(rcs);

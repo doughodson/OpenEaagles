@@ -22,6 +22,8 @@
 
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/util/string.h"
+
 #include <string>
 #include <sstream>
 
@@ -695,7 +697,7 @@ const char* TabLogger::LogPlayerData::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -802,7 +804,7 @@ const char* TabLogger::LogGunActivity::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -942,7 +944,7 @@ const char* TabLogger::LogWeaponActivity::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1098,7 +1100,7 @@ const char* TabLogger::LogActiveTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }
@@ -1266,7 +1268,7 @@ const char* TabLogger::LogPassiveTrack::getDescription()
         // Complete the description
         const int len = static_cast<int>(sout.str().size());
         msg = new char[len+1];
-        lcStrncpy(msg, (len+1), sout.str().c_str(), len);
+        base::lcStrncpy(msg, (len+1), sout.str().c_str(), len);
     }
     return msg;
 }

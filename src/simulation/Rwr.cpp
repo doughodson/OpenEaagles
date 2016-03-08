@@ -97,9 +97,9 @@ void Rwr::receive(const double dt)
 
    // Receiver losses
 #if 0
-   double noise = getRfRecvNoise();
+   const double noise = getRfRecvNoise();
 #else
-   double noise = getRfRecvNoise() * getRfReceiveLoss();
+   const double noise = getRfRecvNoise() * getRfReceiveLoss();
 #endif
 
    // Process received emissions
@@ -108,13 +108,13 @@ void Rwr::receive(const double dt)
    double signal = 0;
 
    // Get an emission from the queue
-   lcLock(packetLock);
+   base::lcLock(packetLock);
    if (np > 0) {
       np--; // Decrement 'np', now the array index
       em = packets[np];
       signal = signals[np];
    }
-   lcUnlock(packetLock);
+   base::lcUnlock(packetLock);
 
    while (em != nullptr) {
 
@@ -152,7 +152,7 @@ void Rwr::receive(const double dt)
             const double sigDbl = 10.0f * std::log10(signal);
             const double signal10 = (sigDbl + 50.0f)/50.f;
             const int idx = getRayIndex( static_cast<double>(base::Angle::R2DCC * aoa) );
-            rays[0][idx] = lim01(rays[0][idx] + signal10);
+            rays[0][idx] = base::lim01(rays[0][idx] + signal10);
             //if (idx == 0 && getOwnship()->getID() == 1011) {
             //   std::cout << "sig = " << signal10 << std::endl;
             //}
@@ -169,13 +169,13 @@ void Rwr::receive(const double dt)
 
 
       // Get another emission from the queue
-      lcLock(packetLock);
+      base::lcLock(packetLock);
       if (np > 0) {
          np--;
          em = packets[np];
          signal = signals[np];
       }
-      lcUnlock(packetLock);
+      base::lcUnlock(packetLock);
 
    }
 

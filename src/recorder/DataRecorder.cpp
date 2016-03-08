@@ -228,8 +228,8 @@ bool DataRecorder::recordMarker(const base::Object* objs[4], const double values
 
    // new Marker message
    pb::MarkerMsg* markerMsg = msg->mutable_marker_msg();
-   markerMsg->set_id( static_cast<unsigned int>(oe::nintd(values[0])) );
-   markerMsg->set_source_id( static_cast<unsigned int>(oe::nintd(values[1])) );
+   markerMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
+   markerMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
 
    // Send the message for processing
    sendDataRecord(msg);
@@ -253,8 +253,8 @@ bool DataRecorder::recordAI(const base::Object* objs[4], const double values[4])
 
    // new Input Device message
    pb::InputDeviceMsg* aiMsg = msg->mutable_input_device_msg();
-   aiMsg->set_id( static_cast<unsigned int>(oe::nintd(values[0])) );
-   aiMsg->set_source_id( static_cast<unsigned int>(oe::nintd(values[1])) );
+   aiMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
+   aiMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
    aiMsg->set_value( static_cast<float>(values[2]) );
 
    // Send the message for processing
@@ -280,8 +280,8 @@ bool DataRecorder::recordDI(const base::Object* objs[4], const double values[4])
 
    // new Input Device message
    pb::InputDeviceMsg* diMsg = msg->mutable_input_device_msg();
-   diMsg->set_id( static_cast<unsigned int>(oe::nintd(values[0])) );
-   diMsg->set_source_id( static_cast<unsigned int>(oe::nintd(values[1])) );
+   diMsg->set_id( static_cast<unsigned int>(base::nintd(values[0])) );
+   diMsg->set_source_id( static_cast<unsigned int>(base::nintd(values[1])) );
    diMsg->set_value( static_cast<float>(values[2]) );
 
    // Send the message for processing

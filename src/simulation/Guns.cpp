@@ -193,7 +193,7 @@ bool Bullet::burstOfBullets(const osg::Vec3* const pos, const osg::Vec3* const v
 //------------------------------------------------------------------------------
 void Bullet::updateBurstTrajectories(const double dt)
 {
-   static const double g = ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // For all active bursts
    for (int i = 0; i < nbt; i++) {
@@ -771,7 +771,7 @@ bool Gun::setSlotRoll(const base::Number* const num)
       value = num->getDouble();
    }
 
-   if (value >= -PI && value <= PI) {
+   if (value >= -base::PI && value <= base::PI) {
       setAngles( value, getPitch(), getYaw() );
       ok = true;
    }
@@ -798,7 +798,7 @@ bool Gun::setSlotPitch(const base::Number* const num)
       value = num->getDouble();
    }
 
-   if (value >= -PI && value <= PI) {
+   if (value >= -base::PI && value <= base::PI) {
       setAngles( getRoll(), value, getYaw() );
       ok = true;
    }
@@ -825,7 +825,7 @@ bool Gun::setSlotYaw(const base::Number* const num)
       value = num->getDouble();
    }
 
-   if (value >= -PI && value <= 2.0f*PI) {
+   if (value >= -base::PI && value <= 2.0f*base::PI) {
       setAngles( getRoll(), getPitch(), value );
       ok = true;
    }

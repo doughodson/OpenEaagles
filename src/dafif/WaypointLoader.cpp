@@ -1,5 +1,8 @@
+
 #include "openeaagles/dafif/WaypointLoader.h"
 #include "openeaagles/base/FileReader.h"
+#include "openeaagles/base/util/string.h"
+
 #include <cstring>
 #include <cstdlib>
 
@@ -277,12 +280,12 @@ WaypointLoader::WaypointKey::WaypointKey(const char* id, const char* ccode) : Ke
    key[0] = '\0';
 
    if (id != nullptr)
-      lcStrcpy(ident,WP_IDENT_LEN+1,id);
+      base::lcStrcpy(ident,WP_IDENT_LEN+1,id);
    else
       ident[0] = '\0';
 
    if (ccode != nullptr)
-      lcStrcpy(countryCode,WP_CCODE_LEN+1,ccode);
+      base::lcStrcpy(countryCode,WP_CCODE_LEN+1,ccode);
    else
       countryCode[0] = '\0';
 }

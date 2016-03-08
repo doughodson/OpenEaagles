@@ -169,7 +169,7 @@ void IrSensor::reset()
    // ---
    // Do we need to find the track manager?
    // ---
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the track manager, but not the track manager itself
       const char* name = *getTrackManagerName();
@@ -188,7 +188,7 @@ void IrSensor::reset()
          setTrackManagerName(nullptr);
       }
    }
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 }
 
 //------------------------------------------------------------------------------
@@ -411,7 +411,7 @@ void IrSensor::process(const double dt)
    if (numRecords > 0) {
       AngleOnlyTrackManager* tm = static_cast<AngleOnlyTrackManager*>(getTrackManager());
       if (tm != nullptr) {
-         lcLock(storedMessagesLock);
+         base::lcLock(storedMessagesLock);
          numRecords = storedMessagesQueue.entries();
 
          // Send on all messages EXCEPT those with signal below threshold and those merged
@@ -425,7 +425,7 @@ void IrSensor::process(const double dt)
             }
             msg->unref();
          }
-         lcUnlock(storedMessagesLock);
+         base::lcUnlock(storedMessagesLock);
       }
    }
 }
@@ -490,7 +490,7 @@ bool IrSensor::setIFOV(const double i)
    if (i >= 0) {
       ifov = i;
       //calculate planar angle and set it as well.
-      ifovTheta =  static_cast<double>(std::acos ((1 - (ifov / (2.0 * PI)))));
+      ifovTheta =  static_cast<double>(std::acos ((1 - (ifov / (2.0 * base::PI)))));
       ok = true;
    }
    return ok;
@@ -787,9 +787,9 @@ IrQueryMsg* IrSensor::getStoredMessage()
 {
    IrQueryMsg* msg = nullptr;
 
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    msg = storedMessagesQueue.get();
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 
    return msg;
 }
@@ -801,9 +801,9 @@ IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 {
    IrQueryMsg* msg = nullptr;
 
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    msg = storedMessagesQueue.peek0(i);
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 
    return msg;
 }
@@ -814,9 +814,9 @@ void IrSensor::addStoredMessage(IrQueryMsg* msg)
 {
    // Queue up emissions reports
    if (msg != nullptr) {
-      lcLock(storedMessagesLock);
+      base::lcLock(storedMessagesLock);
       storedMessagesQueue.put(msg);
-      lcUnlock(storedMessagesLock);
+      base::lcUnlock(storedMessagesLock);
    }
 }
 //------------------------------------------------------------------------------
@@ -827,11 +827,11 @@ void IrSensor::clearTracksAndQueues()
    // ---
    // Clear out the queues
    // ---
-   lcLock(storedMessagesLock);
+   base::lcLock(storedMessagesLock);
    for (IrQueryMsg* msg = storedMessagesQueue.get(); msg != nullptr; msg = storedMessagesQueue.get())  {
       msg->unref();
    }
-   lcUnlock(storedMessagesLock);
+   base::lcUnlock(storedMessagesLock);
 }
 
 }

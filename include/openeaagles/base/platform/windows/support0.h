@@ -42,9 +42,7 @@ namespace oe {
 typedef LONGLONG  Integer64;
 typedef ULONGLONG LCuint64;
 
-
-
-} // End oe namespace
+}
 
 #endif
 

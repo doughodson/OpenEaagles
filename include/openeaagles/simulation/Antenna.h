@@ -89,7 +89,7 @@ public:
 
    // Antenna effective area (m^2)
    static double getEffectiveArea(const double gain, const double lambda) {
-      return (gain * lambda * lambda)/(4.0 * PI);
+      return (gain * lambda * lambda)/(4.0 * base::PI);
    }
 
    // Recycle emissions flag (reuse old emission structure instead of creating new ones)

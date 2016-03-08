@@ -1,6 +1,7 @@
 
 #include "openeaagles/dafif/AirportLoader.h"
 #include "openeaagles/base/FileReader.h"
+#include "openeaagles/base/util/string.h"
 
 #include <cstring>
 #include <cstdlib>
@@ -135,7 +136,7 @@ bool AirportLoader::load(const char* country)
 
       // Have the first record of a runway!
       char rwbuf[RUNWAY_RECORD_LEN];
-      lcStrncpy(rwbuf, RUNWAY_RECORD_LEN, r, AIRPORT_RECORD_LEN);
+      base::lcStrncpy(rwbuf, RUNWAY_RECORD_LEN, r, AIRPORT_RECORD_LEN);
       int idx = db->getRecordNumber();
 
       // Look for the second record
@@ -151,7 +152,7 @@ bool AirportLoader::load(const char* country)
       }
 
       // Have the second record!
-      lcStrncpy( &rwbuf[AIRPORT_RECORD_LEN], AIRPORT_RECORD_LEN, r, AIRPORT_RECORD_LEN);
+      base::lcStrncpy( &rwbuf[AIRPORT_RECORD_LEN], AIRPORT_RECORD_LEN, r, AIRPORT_RECORD_LEN);
       runway.setRecord(rwbuf);
 
       // Find this runway's airport key
@@ -200,7 +201,7 @@ bool AirportLoader::load(const char* country)
 
       // Have the first record of a ils!
       char ilsbuf[ILS_RECORD_LEN];
-      lcStrncpy(ilsbuf, ILS_RECORD_LEN, r, AIRPORT_RECORD_LEN);
+      base::lcStrncpy(ilsbuf, ILS_RECORD_LEN, r, AIRPORT_RECORD_LEN);
       int idx = db->getRecordNumber();
 
       // Look for the second record
@@ -216,7 +217,7 @@ bool AirportLoader::load(const char* country)
       }
 
       // Have the second record!
-      lcStrncpy( &ilsbuf[AIRPORT_RECORD_LEN], AIRPORT_RECORD_LEN, r, AIRPORT_RECORD_LEN);
+      base::lcStrncpy( &ilsbuf[AIRPORT_RECORD_LEN], AIRPORT_RECORD_LEN, r, AIRPORT_RECORD_LEN);
       ils.setRecord(ilsbuf);
 
       // Find this ils's runway ident
@@ -575,7 +576,7 @@ int AirportLoader::queryByIdent(const char* id)
 int AirportLoader::queryByKey(const char* subkey)
 {
    char apKey[AP_KEY_LEN+1];
-   lcStrncpy(apKey,AP_KEY_LEN+1,subkey,AP_KEY_LEN);
+   base::lcStrncpy(apKey,AP_KEY_LEN+1,subkey,AP_KEY_LEN);
    apKey[AP_KEY_LEN] = '\0';
 
    AirportKey key(apKey);
@@ -775,12 +776,12 @@ int AirportLoader::queryRunwayByIdent(const char* id)
    if (apk != nullptr) {
 
       char rwId[RW_XE_IDENT_LEN+1];
-      lcStrncpy(rwId,RW_XE_IDENT_LEN+1,&id[AP_KEY_LEN],RW_XE_IDENT_LEN);
+      base::lcStrncpy(rwId,RW_XE_IDENT_LEN+1,&id[AP_KEY_LEN],RW_XE_IDENT_LEN);
       rwId[RW_XE_IDENT_LEN] = '\0';
       fillSpaces(rwId,RW_XE_IDENT_LEN);
 
       char rwId2[RW_XE_IDENT_LEN+1];
-      lcStrncpy(rwId2,RW_XE_IDENT_LEN+1,&id[AP_KEY_LEN],RW_XE_IDENT_LEN);
+      base::lcStrncpy(rwId2,RW_XE_IDENT_LEN+1,&id[AP_KEY_LEN],RW_XE_IDENT_LEN);
       rwId2[RW_XE_IDENT_LEN] = '\0';
       stripSpaces(rwId2,RW_XE_IDENT_LEN);
 
@@ -807,7 +808,7 @@ int AirportLoader::queryRunwayBySubkey(const char* subkey)
 {
    // truncate to length of runway key
    char rwKey[RW_KEY_LEN+1];
-   lcStrncpy(rwKey,RW_KEY_LEN+1,subkey,RW_KEY_LEN);
+   base::lcStrncpy(rwKey,RW_KEY_LEN+1,subkey,RW_KEY_LEN);
    rwKey[RW_KEY_LEN] = '\0';
    stripSpaces(rwKey,RW_KEY_LEN);
 
@@ -1170,7 +1171,7 @@ AirportLoader::findGlideSlope(const RunwayKey* rwk, const IlsKey* lk)
    // get the runway key without component type
    int locKeyLen = ILS_KEY_LEN - 1;
    char locKey[ILS_KEY_LEN];
-   lcStrncpy(locKey,ILS_KEY_LEN,lk->key,locKeyLen);
+   base::lcStrncpy(locKey,ILS_KEY_LEN,lk->key,locKeyLen);
    locKey[locKeyLen] = '\0';
    stripSpaces(locKey,locKeyLen);
 
