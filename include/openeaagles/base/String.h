@@ -5,7 +5,7 @@
 #define __oe_base_String_H__
 
 #include "openeaagles/base/Object.h"
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <cstdlib>
 #include <cctype>

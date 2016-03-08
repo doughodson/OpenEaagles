@@ -14,7 +14,7 @@
 #include "openeaagles/base/Nav.h"
 #include "openeaagles/base/NetHandler.h"
 
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <iostream>
 #include <cstring>

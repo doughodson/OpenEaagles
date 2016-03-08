@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Matrix.h"
 #include "openeaagles/base/Vectors.h"
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <iostream>
 #include <iomanip>

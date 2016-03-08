@@ -6,7 +6,7 @@
 #include "openeaagles/base/Integer.h"
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/Pair.h"
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include "Reformat.h"
 

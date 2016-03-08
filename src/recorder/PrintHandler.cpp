@@ -2,7 +2,7 @@
 #include "openeaagles/recorder/PrintHandler.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Number.h"
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <cstring>
 

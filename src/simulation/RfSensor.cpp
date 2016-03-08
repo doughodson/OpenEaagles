@@ -18,7 +18,7 @@
 #include "openeaagles/base/units/Frequencies.h"
 #include "openeaagles/base/units/Powers.h"
 #include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/string_utils.h"
 
 namespace oe {
 namespace simulation {

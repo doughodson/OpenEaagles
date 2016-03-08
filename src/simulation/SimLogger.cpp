@@ -30,7 +30,7 @@
 
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/string_utils.h"
 
 #include <string>
 #include <sstream>
