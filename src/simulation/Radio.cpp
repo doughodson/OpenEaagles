@@ -14,6 +14,8 @@
 #include "openeaagles/base/units/Frequencies.h"
 #include "openeaagles/base/units/Powers.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -266,7 +268,7 @@ void Radio::receive(const double dt)
 
       // Signal/Noise  (Equation 2-9)
       double sn = signal / noise;
-      double snDbl = 10.0 * lcLog10(sn);
+      double snDbl = 10.0 * std::log10(sn);
 
       // Is S/N above receiver threshold?
       if ( snDbl >= getRfThreshold() ) {

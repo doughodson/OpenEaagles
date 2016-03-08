@@ -12,6 +12,8 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/graphics/Texture.h"
 
+#include <cmath>
+
 namespace oe {
 namespace maps {
 namespace rpf {
@@ -386,8 +388,8 @@ void MapDrawer::drawMap(const int zone, const int idx)
             if (!nu) {
                 const GLfloat hdg = static_cast<GLfloat>(getHeadingDeg());
                 glRotatef(hdg, 0.0f, 0.0f, 1.0f);
-                sinAng = static_cast<double>(lcSin(hdg * static_cast<double>(base::Angle::D2RCC)));
-                cosAng = static_cast<double>(lcCos(hdg * static_cast<double>(base::Angle::D2RCC)));
+                sinAng = static_cast<double>(std::sin(hdg * static_cast<double>(base::Angle::D2RCC)));
+                cosAng = static_cast<double>(std::cos(hdg * static_cast<double>(base::Angle::D2RCC)));
             }
 
             // Translate down the pixels first

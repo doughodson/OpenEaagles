@@ -201,7 +201,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
             // the distance and the tangent of the angle to the horizon
             hDist = std::sqrt(dh2);
             hTanAng = ( hDist / er ); // positive angles are below level (down)
-            viewAngleToHorizon = lcAtan(hTanAng);
+            viewAngleToHorizon = std::atan(hTanAng);
         }
 
         // determine ratio of earth and sky in the FOV

@@ -1,4 +1,6 @@
+
 #include "openeaagles/instruments/adi/Adi.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace instruments {
@@ -89,12 +91,12 @@ void Adi::updateData(const double dt)
     // drive our adi toward the actual pitch, from our current pitch, no faster
     // than our MAX_RATE (this allows for greater fidelity, simulates an analog adi)
     double delta = 0;
-    delta = alim (lcAepcDeg(pitch - curTheta), maxRate * dt);
-    curTheta = lcAepcDeg(curTheta + delta);
+    delta = alim (base::Angle::aepcdDeg(pitch - curTheta), maxRate * dt);
+    curTheta = base::Angle::aepcdDeg(curTheta + delta);
 
     // now do the same thing for roll
-    delta = alim (lcAepcRad(roll - curPhi), maxRate * dt);
-    curPhi = lcAepcRad(curPhi + delta);
+    delta = alim (base::Angle::aepcdRad(roll - curPhi), maxRate * dt);
+    curPhi = base::Angle::aepcdRad(curPhi + delta);
 
     // get our table, and do the linear interpolation ourself
     setInstVal(curTheta);

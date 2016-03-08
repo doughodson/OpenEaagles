@@ -15,6 +15,8 @@
 #include "openeaagles/base/Nav.h"
 #include "openeaagles/base/units/Distances.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -136,7 +138,7 @@ bool IrAtmosphere1::calculateAtmosphereContribution(IrQueryMsg* const msg, doubl
    const double tanPhiPrime = tanPhi - ( range2D / 12756776.0f ); // Twice earth radius
 
    // appears that negative angles are down in this calculation
-   double viewingAngle = lcAtan(tanPhiPrime);
+   double viewingAngle = std::atan(tanPhiPrime);
 
    // table limits are 0 to pi; this correction assumes that 0 in the table is straight down, PI is straight up
    viewingAngle += PI/2.0;

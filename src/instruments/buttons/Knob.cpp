@@ -1,8 +1,11 @@
+
 #include "openeaagles/instruments/buttons/Knob.h"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/graphics/Display.h"
 #include "openeaagles/base/functors/Tables.h"
+
 #include <GL/glu.h>
+#include <cmath>
 
 namespace oe {
 namespace instruments {
@@ -243,11 +246,11 @@ void Knob::computeRotation()
            }
             else if (angle < 0 && lastAngle < 0) {
                 if (angle < lastAngle) {
-                    temp =  lcAbs(angle - lastAngle);
+                    temp =  std::fabs(angle - lastAngle);
                     running += temp;
                 }
                 else {
-                    temp = lcAbs(lastAngle - angle);
+                    temp = std::fabs(lastAngle - angle);
                     running -= temp;
                 }
             }

@@ -4,6 +4,9 @@
 #include "openeaagles/simulation/IrQueryMsg.h"
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/SensorMsg.h"
+#include "openeaagles/base/units/Angles.h"
+
+#include <cmath>
 
 namespace oe {
 namespace simulation {
@@ -268,13 +271,13 @@ bool Track::setPosition(const osg::Vec3& p)
 
    // compute ranges
    const double gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
-   gndRng = lcSqrt(gndRng2);
-   rng = lcSqrt(gndRng2 +  pos.z()*pos.z());
+   gndRng = std::sqrt(gndRng2);
+   rng = std::sqrt(gndRng2 +  pos.z()*pos.z());
 
    // compute angles
-   taz = lcAtan2(pos.y(),pos.x());
-   raz[0] = lcAepcRad(taz - osGndTrk);
-   rel[0] = lcAtan2(-pos.z(), gndRng);
+   taz = std::atan2(pos.y(),pos.x());
+   raz[0] = base::Angle::aepcdRad(taz - osGndTrk);
+   rel[0] = std::atan2(-pos.z(), gndRng);
 
    // Set LOS unit vector
    if (rng > 0) los.set( pos.x()/rng, pos.y()/rng, pos.z()/rng );
@@ -313,13 +316,13 @@ bool Track::setVelocity(const osg::Vec3 v)
    // Total velocity (NED) (m/s)
    osg::Vec3 totalVel = vel + osVel;
 
-   gndSpd = lcSqrt(totalVel[0]*totalVel[0] + totalVel[1]*totalVel[1]);
-   gndTrk = lcAtan2(totalVel[1], totalVel[0]);
-   relGndTrk = lcAepcRad(gndTrk - osGndTrk);
+   gndSpd = std::sqrt(totalVel[0]*totalVel[0] + totalVel[1]*totalVel[1]);
+   gndTrk = std::atan2(totalVel[1], totalVel[0]);
+   relGndTrk = base::Angle::aepcdRad(gndTrk - osGndTrk);
 
    double tmp1 = pos[1] * totalVel[0] - pos[0] * totalVel[1];
    double tmp2 = pos[0] * totalVel[0] + pos[1] * totalVel[1];
-   aa = lcAtan2(-tmp1,tmp2);
+   aa = std::atan2(-tmp1,tmp2);
 
    return true;
 }
@@ -584,11 +587,11 @@ bool IrTrack::setPosition(const osg::Vec3& p)
 
    // compute ranges
    double gndRng2 = pos.x()*pos.x() + pos.y()*pos.y();
-   gndRng = lcSqrt(gndRng2);
-   rng = lcSqrt(gndRng2 +  pos.z()*pos.z());
+   gndRng = std::sqrt(gndRng2);
+   rng = std::sqrt(gndRng2 +  pos.z()*pos.z());
 
    // compute angles
-   taz = lcAtan2(pos.y(),pos.x());
+   taz = std::atan2(pos.y(),pos.x());
 
    // Set LOS unit vector
    if (rng > 0) los.set( pos.x()/rng, pos.y()/rng, pos.z()/rng );

@@ -13,35 +13,6 @@
 #include "openeaagles/config.h"
 
 // ---
-// Define double as double only
-//    Because of the 64 bit systems, the double will be removed in a future
-//    release.  For now it's defined only as double; but you can manual
-//    change it to float, if required.
-// ---
-namespace oe {
-
-// To avoid warnings, define math functions to use with double.
-// Since double is deprecated and set only to double, we're defining only
-// the double functions.  Manual modify to float functions, if required.
-#define lcSqrt      std::sqrt
-#define lcSin       std::sin
-#define lcCos       std::cos
-#define lcTan       std::tan
-#define lcAtan      std::atan
-#define lcAtan2     std::atan2
-#define lcAcos      std::acos
-#define lcAbs       std::fabs
-#define lcFmod      std::fmod
-#define lcPow       std::pow
-#define lcExp       std::exp
-#define lcLog       std::log
-#define lcLog10     std::log10
-#define lcAepcDeg   base::Angle::aepcdDeg   // needs base/units/Angles.h
-#define lcAepcRad   base::Angle::aepcdRad   // needs base/units/Angles.h
-
-}
-
-// ---
 // Common header files
 // ---
 #include "openeaagles/base/osg/Math"
@@ -54,8 +25,6 @@ namespace oe {
 #include <sys/types.h>
 #include <cmath>
 #include <cstring> // macros use std::strcmp
-//#include <cstdio>
-//#include <cstdlib>
 
 // ---
 // Include OS/Processor unique stuff

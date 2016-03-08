@@ -27,7 +27,9 @@ general
    replaced with 'double'
 -- Closely associated with LCreal is the macro "LCREAL_DOUBLE" which defined whether or not
    LCreal was defined as a 'double' or 'float' -- this macro has been eliminated.
-   
+
+-- Replaced fundamental lc math macros (e.g., lcSin) with std equivalents (e.g. std::sin)
+
 --------------------------------------------------------------------------------
 base
 

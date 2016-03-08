@@ -12,7 +12,9 @@
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/units/Distances.h"
+
 #include <cstring>
+#include <cmath>
 
 namespace oe {
 namespace simulation {
@@ -510,7 +512,7 @@ void Otw::setPlayerList(base::PairStream* const newPlayerList)
 //------------------------------------------------------------------------------
 bool Otw::setMaxRange(const double r)
 {
-    maxRange = lcAbs(r);
+    maxRange = std::fabs(r);
     return true;
 }
 

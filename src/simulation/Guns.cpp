@@ -259,7 +259,7 @@ bool Bullet::checkForTargetHit()
                             // ok, calculate our position from this guy
                             tgtPos = player->getPosition();
                             vecPos = tgtPos - myPos;
-                            //az = lcAtan2(vecPos.y(), vecPos.x());
+                            //az = std::atan2(vecPos.y(), vecPos.x());
                             range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
                             range = std::sqrt(range);
                             if (range < maxRange) {

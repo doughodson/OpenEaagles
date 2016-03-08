@@ -8,6 +8,8 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -150,8 +152,8 @@ void Effects::weaponDynamics(const double dt)
    // ---
    // Sent angular values
    // ---
-   double newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
-   double newTheta = lcAtan2( -ve1[IDOWN], vg );
+   const double newPsi   = std::atan2(ve1[IEAST],ve1[INORTH]);
+   const double newTheta = std::atan2( -ve1[IDOWN], vg );
    setEulerAngles(0.0, newTheta, newPsi);
    setAngularVelocities(0.0, 0.0, 0.0);
 

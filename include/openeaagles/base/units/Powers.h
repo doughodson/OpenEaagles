@@ -63,6 +63,8 @@
 
 #include "openeaagles/base/Number.h"
 
+#include <cmath>
+
 namespace oe {
 namespace base {
 
@@ -226,9 +228,9 @@ public:
     DecibelWatts(const double value);
     DecibelWatts(const Power& org);
 
-    static double convertStatic(const Power &n)      { return static_cast<double>(10.0 * lcLog10(n.toPower())); }
-    double toPower() const override                  { return  lcPow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
-    double fromPower(const double a) const override  { return 10.0f * lcLog10(a) ; }
+    static double convertStatic(const Power &n)      { return static_cast<double>(10.0 * std::log10(n.toPower())); }
+    double toPower() const override                  { return  std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
+    double fromPower(const double a) const override  { return 10.0f * std::log10(a) ; }
 
 };
 
@@ -246,13 +248,13 @@ public:
     DecibelMilliWatts(const double value);
     DecibelMilliWatts(const Power& org);
 
-    static double convertStatic(const Power &n)      { return static_cast<double>(10.0 * lcLog10(n.toPower() * W2MW)); }
-    double toPower() const override                  { return  MW2W * lcPow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
-    double fromPower(const double a) const override  { return (10.0f * lcLog10(a * W2MW)); }
+    static double convertStatic(const Power &n)      { return static_cast<double>(10.0 * std::log10(n.toPower() * W2MW)); }
+    double toPower() const override                  { return  MW2W * std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
+    double fromPower(const double a) const override  { return (10.0f * std::log10(a * W2MW)); }
 
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

@@ -6,6 +6,7 @@
 #include <fstream>
 #include <cstring>
 #include <cctype>
+#include <cmath>
 
 //------------------------------------------------------------------------------
 // Window/Linux specific code
@@ -71,7 +72,7 @@ bool convertSec2Ntp(
 
    // Microseconds to fractional second
    if (ntpSecF != nullptr) {
-      double fsec = static_cast<double>(uSec) / 1000000.0;
+      const double fsec = static_cast<double>(uSec) / 1000000.0;
       *ntpSecF = static_cast<unsigned long>((fsec * P32) + 0.5);
    }
    return true;
@@ -95,7 +96,7 @@ bool convertNtp2Sec(
 
    // fractional second to microseconds
    if (uSec != nullptr) {
-      double fsec = static_cast<double>(ntpSecF) / P32;
+      const double fsec = static_cast<double>(ntpSecF) / P32;
       *uSec = static_cast<unsigned long>((fsec * 1000000.0) + 0.5);
    }
    return true;
@@ -284,8 +285,8 @@ void postMultVec3Array(
 void lcSinCos(const double src, double* const dst1, double* const dst2)
 {
    if (dst1 != nullptr && dst2 != nullptr) {
-      *dst1 = lcSin(src);
-      *dst2 = lcCos(src);
+      *dst1 = std::sin(src);
+      *dst2 = std::cos(src);
    }
 }
 
@@ -313,7 +314,7 @@ void lcSinArray(const double* const src, double* const dst, const int n)
    const double* ps = src;
    double* pd = dst;
    for (int i = 0; i < n; i++) {
-      *pd++ = lcSin(*ps++);
+      *pd++ = std::sin(*ps++);
    }
 }
 
@@ -343,7 +344,7 @@ void lcCosArray(const double* const src, double* const dst, const int n)
    const double* ps = src;
    double* pd = dst;
    for (int i = 0; i < n; i++) {
-      *pd++ = lcCos(*ps++);
+      *pd++ = std::cos(*ps++);
    }
 }
 
@@ -374,8 +375,8 @@ void lcSinCosArray(const double* const src, double* const dst1, double* const ds
    double* pd1 = dst1;
    double* pd2 = dst2;
    for (int i = 0; i < n; i++) {
-      *pd1++ = lcSin(*ps);
-      *pd2++ = lcCos(*ps++);
+      *pd1++ = std::sin(*ps);
+      *pd2++ = std::cos(*ps++);
    }
 }
 
@@ -409,7 +410,7 @@ void lcAcosArray(const double* const src, double* const dst, const int n)
    double* pd = dst;
    const double* ps = src;
    for (int i = 0; i < n; i++) {
-      *pd++ = lcAcos(*ps++);
+      *pd++ = std::acos(*ps++);
    }
 }
 
@@ -440,7 +441,7 @@ void lcAtan2Array(const double* const yValues, const double* const xValues, doub
    const double* ps1 = yValues;
    const double* ps2 = xValues;
    for (int i = 0; i < n; i++) {
-      *pd++ = lcAtan2(*ps1++,*ps2++);
+      *pd++ = std::atan2(*ps1++,*ps2++);
    }
 }
 
@@ -502,7 +503,7 @@ void lcPow10Array(const double* const src, double* const dst, const int n)
    double* pd = dst;
    const double* ps = src;
    for (int i = 0; i < n; i++) {
-      *pd++ = lcPow( static_cast<double>(10.0), *ps++);
+      *pd++ = std::pow(static_cast<double>(10.0), *ps++);
    }
 }
 
@@ -853,4 +854,4 @@ unsigned int getDigits(const double x)
    return digits;
 }
 
-} // End oe namespace
+}

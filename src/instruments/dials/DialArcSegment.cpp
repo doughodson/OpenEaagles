@@ -1,6 +1,8 @@
 #include "openeaagles/instruments/dials/DialArcSegment.h"
 #include "openeaagles/base/Number.h"
+
 #include <GL/glu.h>
+#include <cmath>
 
 namespace oe {
 namespace instruments {
@@ -124,7 +126,7 @@ void DialArcSegment::drawFunc()
     GLint curSlices = getSlices();
     // our slice amount should go up as we get more of a sweep, if not, it will
     // look funny.  Pretty much one slice per degree sweep
-    double y = lcAbs(static_cast<double>(sweepAngle));
+    double y = std::fabs(static_cast<double>(sweepAngle));
     curSlices = curSlices + static_cast<GLint>(y * 0.05f);
 
     // draw our arc

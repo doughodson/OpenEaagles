@@ -11,6 +11,8 @@
 #include "openeaagles/base/units/Areas.h"
 #include "openeaagles/base/units/Distances.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -637,7 +639,7 @@ double SigAzEl::getRCS(const Emission* const em)
 
       // If the dependent data is in decibels ...
       if (isDecibel()) {
-         rcs = lcPow(static_cast<double>(10.0), static_cast<double>(rcs / 10.0));
+         rcs = std::pow(static_cast<double>(10.0), static_cast<double>(rcs / 10.0));
       }
    }
    return rcs;

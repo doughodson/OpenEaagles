@@ -3,6 +3,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Decibel.h"
 
+#include <cmath>
+
 namespace oe {
 namespace base {
 
@@ -41,13 +43,13 @@ EMPTY_DELETEDATA(Decibel)
 void Decibel::setValueDB(const double v)
 {
    db = v;
-   val = lcPow( static_cast<double>(10.0), static_cast<double>(db/10.0) );
+   val = std::pow( static_cast<double>(10.0), static_cast<double>(db/10.0) );
 }
 
 void Decibel::setValue(const double v)
 {
    BaseClass::setValue(v);
-   db = lcLog10(static_cast<double>(v)) * 10.0f;
+   db = std::log10(static_cast<double>(v)) * 10.0f;
 }
 
 //------------------------------------------------------------------------------
@@ -72,5 +74,5 @@ std::ostream& Decibel::serialize(std::ostream& sout, const int, const bool) cons
    return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}

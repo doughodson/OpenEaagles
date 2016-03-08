@@ -7,6 +7,8 @@
 #include "openeaagles/simulation/RfSensor.h"
 #include "openeaagles/base/safe_queue.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -51,7 +53,7 @@ public:
    // For debugging purposes
    // returns the amount of jamming signal to be considered, 0 if no jamming
    double getRecvJamSignal() const                 { return currentJamSignal; }
-   double getRecvJamSignalDb() const               { return 10.0f * lcLog10(currentJamSignal); }
+   double getRecvJamSignalDb() const               { return 10.0f * std::log10(currentJamSignal); }
 
    // Returns integration gain
    double getIGain() const                         { return rfIGain; }

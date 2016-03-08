@@ -499,13 +499,13 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
             osg::Vec3 errAngles = drAngles - playerState.getGeocEulerAngles();
 
             // Check if any angle error is greater than the max error
-            errAngles[0] = lcAbs( lcAepcDeg(errAngles[0]) );
+            errAngles[0] = std::fabs( base::Angle::aepcdDeg(errAngles[0]) );
             if (errAngles[0] >= maxAngleErr) result = YES;
 
-            errAngles[1] = lcAbs( lcAepcDeg(errAngles[1]) );
+            errAngles[1] = std::fabs( base::Angle::aepcdDeg(errAngles[1]) );
             if (errAngles[1] >= maxAngleErr) result = YES;
 
-            errAngles[2] = lcAbs( lcAepcDeg(errAngles[2]) );
+            errAngles[2] = std::fabs( base::Angle::aepcdDeg(errAngles[2]) );
             if (errAngles[2] >= maxAngleErr) result = YES;
          }
       }

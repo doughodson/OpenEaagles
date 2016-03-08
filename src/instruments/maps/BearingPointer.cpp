@@ -1,4 +1,6 @@
+
 #include "openeaagles/instruments/maps/BearingPointer.h"
+#include "openeaagles/base/units/Angles.h"
 
 namespace oe {
 namespace instruments {
@@ -207,8 +209,8 @@ void BearingPointer::updateData(const double dt)
     double hdg = getRotationRad();
 
     // stay between +- 3.14 radians
-    bearing = lcAepcRad(bearing - hdg);
-    double dbrg = lcAepcRad(myRotation - bearing);
+    bearing = base::Angle::aepcdRad(bearing - hdg);
+    double dbrg = base::Angle::aepcdRad(myRotation - bearing);
 
     // if we are over the max, rotate the other way
     double dd0 = dbrg * dt;

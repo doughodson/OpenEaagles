@@ -17,6 +17,8 @@
 #include "openeaagles/base/units/Distances.h"
 #include "openeaagles/base/units/Angles.h"
 
+#include <cmath>
+
 // Requirements:
 // An irSeeker can have multiple irSensors - so an irSeeker is not
 // associated with any single irSensor; each irQueryMsg will contain ptr to the irSensor
@@ -439,13 +441,13 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
          // FAB - this calc for gimbal ownHeadingOnly true
          // compute ranges
          double gndRng2 = losVector.x()*losVector.x() + losVector.y()*losVector.y();
-         ra = lcSqrt(gndRng2);
+         ra = std::sqrt(gndRng2);
 
          // compute angles
-         double los_az = lcAtan2(losVector.y(),losVector.x());
+         double los_az = std::atan2(losVector.y(),losVector.x());
          double hdng = ownship->getHeadingR();
-         aazr = lcAepcRad(los_az - static_cast<float>(hdng));
-         aelr = lcAtan2(-losVector.z(), ra);
+         aazr = base::Angle::aepcdRad(los_az - static_cast<float>(hdng));
+         aelr = std::atan2(-losVector.z(), ra);
       }
       else {
          // FAB - this calc for gimbal ownHeadingOnly false
@@ -459,11 +461,11 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
          double ya = aoi.y();
          double za = -aoi.z();
 
-         ra = lcSqrt(xa*xa + ya*ya);
+         ra = std::sqrt(xa*xa + ya*ya);
          // 3-b) Compute azimuth: az = atan2(ya, xa)
-         aazr = lcAtan2(ya, xa);
+         aazr = std::atan2(ya, xa);
          // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-         aelr = lcAtan2(za,ra);
+         aelr = std::atan2(za,ra);
       }
 
          double absoluteAzimuth = aazr;
@@ -533,14 +535,14 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
    //LET .FIRST.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .FIRST.NODE.POSITION(3), 1.0) )
 
-   double distance1 = lcSqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position1.z()) );
+   double distance1 = std::sqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position1.z()) );
    if (distance1 < 1.0f) distance1 = 1.0f;
 
 
    //      LET .SECOND.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .SECOND.NODE.POSITION(3), 1.0) )
 
-   double distance2 = lcSqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position2.z()) );
+   double distance2 = std::sqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position2.z()) );
    if (distance2 < 1.0f) distance2 = 1.0f;
 
    //LET .RELATIVE.POSITION(*)
@@ -552,7 +554,7 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
 
    osg::Vec3 groundVec = position1 - position2;
 
-   double gndRng = lcSqrt ((groundVec.x() * groundVec.x())
+   double gndRng = std::sqrt ((groundVec.x() * groundVec.x())
                      + (groundVec.y() * groundVec.y()));
 
    //IF .GROUND.TRACK.RANGE < .FIRST.NODE.DISTANCE.TO.HORIZON

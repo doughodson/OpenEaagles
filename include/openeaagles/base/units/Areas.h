@@ -78,6 +78,8 @@
 
 #include "openeaagles/base/Number.h"
 
+#include <cmath>
+
 namespace oe {
 namespace base {
 
@@ -142,8 +144,8 @@ public:
     static double squareMetersToInches(const double v) { return v * SM2SIN; }
     static double squareMetersToYards(const double v)  { return v * SM2SYD; }
     static double squareMetersToMiles(const double v)  { return v * SM2SMI; }
-    static double squareMetersToDecibelSquareMeters(const double v) { return 10.0f * lcLog10(v); }
-    static double decibelSquareMetersToSquareMeters(const double v) { return lcPow(static_cast<double>(10.0), static_cast<double>(v/10.0)); }
+    static double squareMetersToDecibelSquareMeters(const double v) { return 10.0f * std::log10(v); }
+    static double decibelSquareMetersToSquareMeters(const double v) { return std::pow(static_cast<double>(10.0), static_cast<double>(v/10.0)); }
 
     // Conversion constants
     static const double SM2SFT;
@@ -333,13 +335,13 @@ public:
     DecibelSquareMeters(const double value);
     DecibelSquareMeters(const Area& value);
 
-    static double convertStatic(const Area& n)     { return 10.0f * lcLog10( n.toArea() ); }
-    double toArea() const override                 { return lcPow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
-    double fromArea(const double a) const override { return 10.0f * lcLog10(a); }
+    static double convertStatic(const Area& n)     { return 10.0f * std::log10( n.toArea() ); }
+    double toArea() const override                 { return std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
+    double fromArea(const double a) const override { return 10.0f * std::log10(a); }
 
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

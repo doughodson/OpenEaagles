@@ -19,6 +19,8 @@
 #include "openeaagles/base/units/Distances.h"
 #include "openeaagles/base/units/Times.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -724,7 +726,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
 
             setTrueBrgDeg( static_cast<double>(toBrg) );
             setDistNM( static_cast<double>(toDist) );
-            setMagBrgDeg( lcAepcDeg( getTrueBrgDeg() - getMagVarDeg() ) );
+            setMagBrgDeg( base::Angle::aepcdDeg( getTrueBrgDeg() - getMagVarDeg() ) );
 
             if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
                 toTTG = (toDist/nav->getGroundSpeedKts()) * base::Time::H2S;
@@ -741,7 +743,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
                 // When we have a 'from' steerpoint, we can compute this leg's data
                 base::Nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
                 setTrueCrsDeg( static_cast<double>(toBrg) );
-                setMagCrsDeg( lcAepcDeg( getTrueCrsDeg() - getMagVarDeg() ) );
+                setMagCrsDeg( base::Angle::aepcdDeg( getTrueCrsDeg() - getMagVarDeg() ) );
                 setLegDistNM( static_cast<double>(toDist) );
                 if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
                     toTTG = (toDist/nav->getGroundSpeedKts()) * base::Time::H2S;
@@ -772,8 +774,8 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // Compute Cross-track error (NM); negative values are when the desired track
             //  to this point is left of our navigation position
             // ---
-            double aa = lcAepcDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<double>(base::Angle::D2RCC);
-            setCrossTrackErrNM( getDistNM() * lcSin(aa) );
+            double aa = base::Angle::aepcdDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<double>(base::Angle::D2RCC);
+            setCrossTrackErrNM( getDistNM() * std::sin(aa) );
 
             // ---
             // Update our component steerpoint list (from NAV data, or 'direct-to' only)

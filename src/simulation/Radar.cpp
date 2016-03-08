@@ -15,6 +15,8 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -290,9 +292,9 @@ void Radar::receive(const double dt)
 
             // Signal/Noise  (Equation 2-9)
             const double signalToInterferenceRatio = signal / interference;
-            const double signalToInterferenceRatioDbl = 10.0f * lcLog10(signalToInterferenceRatio);
+            const double signalToInterferenceRatioDbl = 10.0f * std::log10(signalToInterferenceRatio);
             const double signalToNoiseRatio = signal / noise;
-            const double signalToNoiseRatioDbl = 10.0f * lcLog10(signalToNoiseRatio);
+            const double signalToNoiseRatioDbl = 10.0f * std::log10(signalToNoiseRatio);
 
             //std::cout << "Radar::receive(" << em->getTarget() << "): ";
             //std::cout << " pwr=" << em->getPower();

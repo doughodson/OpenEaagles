@@ -9,6 +9,8 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/simulation/Player.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -134,7 +136,7 @@ void Rwr::receive(const double dt)
 
          // Signal over noise (equation 3-5)
          const double sn = signal / noise;
-         const double snDbl = 10.0 * lcLog10(sn);
+         const double snDbl = 10.0 * std::log10(sn);
 
          // Is S/N above receiver threshold  ## dpg -- for now, don't include ECM emissions
          if (snDbl > getRfThreshold() && !em->isECM() && rptQueue.isNotFull()) {
@@ -147,7 +149,7 @@ void Rwr::receive(const double dt)
             const double aoa= em->getAzimuthAoi();
 
             // Store received power for real-beam display
-            const double sigDbl = 10.0f * lcLog10(signal);
+            const double sigDbl = 10.0f * std::log10(signal);
             const double signal10 = (sigDbl + 50.0f)/50.f;
             const int idx = getRayIndex( static_cast<double>(base::Angle::R2DCC * aoa) );
             rays[0][idx] = lim01(rays[0][idx] + signal10);
@@ -219,7 +221,7 @@ bool Rwr::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 int Rwr::getRayIndex(const double az) const
 {
-    double az1 = lcAepcDeg(az);
+    double az1 = base::Angle::aepcdDeg(az);
     if (az1 < 0.0) az1 += 360.0;
     int idx = static_cast<int>( (az1/ getDegreesPerRay()) + 0.5 );
     if (idx >= NUM_RAYS || idx < 0) idx = 0;
@@ -232,7 +234,7 @@ int Rwr::getRayIndex(const double az) const
 double Rwr::getRayAzimuth(const int idx) const
 {
     const double az = getDegreesPerRay() * static_cast<double>(idx);
-    return lcAepcDeg(az);
+    return base::Angle::aepcdDeg(az);
 }
 
 //------------------------------------------------------------------------------

@@ -144,8 +144,8 @@ bool LifeForm::setVelocity(const double ue, const double ve, const double we)
 {
     bool ok = BaseClass::setVelocity(ue, ve, we);
     // based on our velocity, we will run or walk, or stand still
-    const double tempX = lcAbs(ue);
-    const double tempY = lcAbs(ve);
+    const double tempX = std::fabs(ue);
+    const double tempY = std::fabs(ve);
 
     // we only change our appearance bit if we are parachuting
     if (actionState != PARACHUTING) {
@@ -167,14 +167,14 @@ void LifeForm::move(const double fwd, const double sdws)
         double tempFwd = fwd, tempSdws = sdws;
 
         // our deadband (if we are barely moving, just stop)
-        if (lcAbs(tempFwd) < 0.9f) tempFwd = 0;
-        if (lcAbs(tempSdws) < 0.9f) tempSdws = 0;
-        const double xVel = tempFwd * (lcCos(hdg));
-        const double yVel = tempFwd * (lcSin(hdg));
+        if (std::fabs(tempFwd) < 0.9f) tempFwd = 0;
+        if (std::fabs(tempSdws) < 0.9f) tempSdws = 0;
+        const double xVel = tempFwd * (std::cos(hdg));
+        const double yVel = tempFwd * (std::sin(hdg));
 
         // now calculate our sideways velocity
-        const double xxVel = tempSdws * (lcCos((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
-        const double yyVel = tempSdws * (lcSin((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
+        const double xxVel = tempSdws * (std::cos((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
+        const double yyVel = tempSdws * (std::sin((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
 
         // now add the vectors
         const double newXVel = xVel + xxVel;
@@ -197,10 +197,10 @@ void LifeForm::look(const double up, const double sdws)
             double ptc = lookAngle;
             double tempSdws = sdws;
             double tempUp = up;
-            if (lcAbs(tempSdws) < 0.00005) tempSdws = 0;
-            if (lcAbs(tempUp) < 0.05) tempUp = 0;
+            if (std::fabs(tempSdws) < 0.00005) tempSdws = 0;
+            if (std::fabs(tempUp) < 0.05) tempUp = 0;
             hdg += tempSdws;
-            hdg = lcAepcRad(hdg);
+            hdg = base::Angle::aepcdRad(hdg);
             // we don't change our pitch when we look up and down, we only change our look angle, so we have to keep
             // that separate.  WE do, however, change our heading based on where we are looking, so that is correct
             ptc += tempUp;
@@ -235,13 +235,13 @@ void LifeForm::look(const double up, const double sdws)
                                 // ok, calculate our position from this guy
                                 tgtPos = player->getPosition();
                                 vecPos = tgtPos - myPos;
-                                az = lcAtan2(vecPos.y(), vecPos.x());
+                                az = std::atan2(vecPos.y(), vecPos.x());
                                 range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
                                 range = std::sqrt(range);
                                 // now get our elevation
-                                el = lcAtan2(-vecPos.z(), range);
-                                diffAz = lcAbs(lcAepcRad(az - static_cast<double>(getHeadingR())));
-                                diffEl = lcAbs(lcAepcRad(la - el));
+                                el = std::atan2(-vecPos.z(), range);
+                                diffAz = std::fabs(base::Angle::aepcdRad(az - static_cast<double>(getHeadingR())));
+                                diffEl = std::fabs(base::Angle::aepcdRad(la - el));
                                 if ((diffAz <= maxAz) && (diffEl <= maxEl)) {
                                     lockMode = TGT_IN_SIGHT;
                                     tgtAquired = true;
@@ -265,11 +265,11 @@ void LifeForm::look(const double up, const double sdws)
             if (tgtPlayer == nullptr) lockMode = SEARCHING;
             else {
                 const osg::Vec3 vecPos = tgtPlayer->getPosition() - getPosition();
-                const double az = lcAtan2(vecPos.y(), vecPos.x());
+                const double az = std::atan2(vecPos.y(), vecPos.x());
                 double range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
                 range = std::sqrt(range);
                 // now get our elevation
-                const double el = lcAtan2(-vecPos.z(), range);
+                const double el = std::atan2(-vecPos.z(), range);
                 // now force that on us
                 setLookAngle(el * static_cast<double>(base::Angle::R2DCC));
                 setEulerAngles(0, 0, az);

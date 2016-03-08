@@ -12,6 +12,8 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -353,7 +355,7 @@ void Missile::weaponGuidance(const double dt)
          const double vtnlos2 = tgtVp*tgtVp - vtplos*vtplos;
 
          // and compute missile velocity parallex to LOS.
-         const double vmplos = lcSqrt( v*v - vtnlos2 );
+         const double vmplos = std::sqrt( v*v - vtnlos2 );
 
          // Now, use both velocities parallel to LOS to compute
          //  closure rate.
@@ -367,11 +369,11 @@ void Missile::weaponGuidance(const double dt)
          osg::Vec3 p1 = (los + (vel * dt1));
 
          // Compute missile commanded heading and
-         cmdHeading = lcAtan2(p1.y(),p1.x());
+         cmdHeading = std::atan2(p1.y(),p1.x());
 
          // commanded pitch.
-         const double grng = lcSqrt(p1.x()*p1.x() + p1.y()*p1.y());
-         cmdPitch = -lcAtan2(p1.z(),grng);
+         const double grng = std::sqrt(p1.x()*p1.x() + p1.y()*p1.y());
+         cmdPitch = -std::atan2(p1.z(),grng);
 
       }
    }
@@ -527,7 +529,7 @@ void Missile::weaponDynamics(const double dt)
    // ---
    // Find pitch rate and update pitch
    // ---
-   double qa = lcAepcRad(cmdPitch - static_cast<double>(getPitchR()));
+   double qa = base::Angle::aepcdRad(cmdPitch - static_cast<double>(getPitchR()));
    if(qa > qa_max) qa = qa_max;
    if(qa < qa_min) qa = qa_min;
 
@@ -535,7 +537,7 @@ void Missile::weaponDynamics(const double dt)
    const double newTheta = static_cast<double>(getPitch() + (qa + qa1) * dt / 2.0);
 
    // Find turn rate
-   double ra = lcAepcRad(cmdHeading - static_cast<double>(getHeadingR()));
+   double ra = base::Angle::aepcdRad(cmdHeading - static_cast<double>(getHeadingR()));
    if(ra > ra_max) ra = ra_max;
    if(ra < -ra_max) ra = -ra_max;
 

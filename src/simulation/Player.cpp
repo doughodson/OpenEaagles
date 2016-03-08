@@ -39,6 +39,8 @@
 
 #include "openeaagles/simulation/SynchronizedState.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -2356,7 +2358,6 @@ bool Player::setGeocAngularVelocities(const osg::Vec3d& newAngVel)
    return true;
 }
 
-
 // Sets local NED velocities; (m/s) [ ue -> north(+), ve -> east(+), we -> down(+) ]
 bool Player::setVelocity(const double ue, const double ve, const double we)
 {
@@ -2365,9 +2366,9 @@ bool Player::setVelocity(const double ue, const double ve, const double we)
    velVecBody = rm * velVecNED;  // compute body velocity vector
 
    // Compute other velocities
-   vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
-   gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
-   gndTrk = lcAtan2(ve,ue);            // Ground track
+   vp = std::sqrt(ue*ue + ve*ve + we*we); // Total
+   gndSpd = std::sqrt(ue*ue + ve*ve);     // Ground speed
+   gndTrk = std::atan2(ve,ue);            // Ground track
 
    return true;
 }
@@ -2405,9 +2406,9 @@ bool Player::setVelocityBody(const double ua, const double va, const double wa)
    const double ue = static_cast<double>(velVecNED[INORTH]);
    const double ve = static_cast<double>(velVecNED[IEAST]);
    const double we = static_cast<double>(velVecNED[IDOWN]);
-   vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
-   gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
-   gndTrk = lcAtan2(ve,ue);            // Ground track
+   vp = std::sqrt(ue*ue + ve*ve + we*we); // Total
+   gndSpd = std::sqrt(ue*ue + ve*ve);     // Ground speed
+   gndTrk = std::atan2(ve,ue);            // Ground track
    return true;
 }
 
@@ -2444,9 +2445,9 @@ bool Player::setGeocVelocity(const double vx, const double vy, const double vz)
    const double ue = static_cast<double>(velVecNED[INORTH]);
    const double ve = static_cast<double>(velVecNED[IEAST]);
    const double we = static_cast<double>(velVecNED[IDOWN]);
-   vp = lcSqrt(ue*ue + ve*ve + we*we); // Total
-   gndSpd = lcSqrt(ue*ue + ve*ve);     // Ground speed
-   gndTrk = lcAtan2(ve,ue);            // Ground track
+   vp = std::sqrt(ue*ue + ve*ve + we*we); // Total
+   gndSpd = std::sqrt(ue*ue + ve*ve);     // Ground speed
+   gndTrk = std::atan2(ve,ue);            // Ground track
    return true;
 }
 
@@ -2865,12 +2866,12 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
       const double za = -aoi.z();
 
       // 3-b) Compute azimuth: az = atan2(ya, xa)
-      double aazr = lcAtan2(ya, xa);
+      double aazr = std::atan2(ya, xa);
       em->setAzimuthAoi(aazr);
 
       // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-      double ra = lcSqrt(xa*xa + ya*ya);
-      double aelr = lcAtan2(za,ra);
+      double ra = std::sqrt(xa*xa + ya*ya);
+      double aelr = std::atan2(za,ra);
       em->setElevationAoi(aelr);
    }
 
@@ -3013,12 +3014,12 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
    const double za = -aoi.z();
 
    // 3-b) Compute azimuth: az = atan2(ya, xa)
-   double aazr = lcAtan2(ya, xa);
+   double aazr = std::atan2(ya, xa);
    msg->setAzimuthAoi(aazr);
 
    // 3-c) Compute elevation: el = atan2(za, ra), where 'ra' is sqrt of xa*xa & ya*ya
-   double ra = lcSqrt(xa*xa + ya*ya);
-   double aelr = lcAtan2(za,ra);
+   double ra = std::sqrt(xa*xa + ya*ya);
+   double aelr = std::atan2(za,ra);
    msg->setElevationAoi(aelr);
 
    // 4) Compute and return the IR Signature

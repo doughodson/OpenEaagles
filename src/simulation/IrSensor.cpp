@@ -353,9 +353,9 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
             // This is for non-ownHdgOnly-stabilized gimbal angles
             osg::Vec4 los0( los.x(), los.y(), los.z(), 0.0 );
             osg::Vec4 los_vec = ownship->getRotMat() * los0;
-            double ra = lcSqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
-            double az = lcAtan2(los_vec.y(), los_vec.x());
-            double el = lcAtan2(-los_vec.z(), ra);
+            double ra = std::sqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
+            double az = std::atan2(los_vec.y(), los_vec.x());
+            double el = std::atan2(-los_vec.z(), ra);
             outMsg->setRelativeAzimuth(az);
             outMsg->setRelativeElevation(el);
          }
@@ -376,7 +376,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
                                  outMsg->getPosVec().y() *
                                  outMsg->getVelocityVec().y();
 
-         outMsg->setAngleAspect(lcAtan2(-angleAspect1,angleAspect2));
+         outMsg->setAngleAspect(std::atan2(-angleAspect1,angleAspect2));
 
          outMsg->setSignalToNoiseRatio(signalToNoiseRatio);
          outMsg->setBackgroundNoiseRatio(backgroundNoiseRatio);

@@ -211,7 +211,7 @@ void Bomb::weaponGuidance(const double)
       const osg::Vec3 vel = getVelocity();
 
       // weapon velocities (relative)
-      double velG = lcSqrt (vel[0]*vel[0] + vel[1]*vel[1]);
+      double velG = std::sqrt (vel[0]*vel[0] + vel[1]*vel[1]);
       if (velG < 1.0f) velG = 1.0f;
 
       // Earth to platform sin/cos
@@ -267,12 +267,12 @@ void Bomb::weaponGuidance(const double)
       // Azimuth & elevation steering
       static const double LIMITS = 1.0f;
       static const double GAIN = 5.0f;
-      double caz = lcAtan2( missDistRef.y(), tsrng ) * GAIN;
+      double caz = std::atan2( missDistRef.y(), tsrng ) * GAIN;
       if (caz >  LIMITS) caz =  LIMITS;
       if (caz < -LIMITS) caz = -LIMITS;
       cmdStrAz = caz;
 
-      double cel = lcAtan2( missDistRef.x(), tsrng ) * GAIN;
+      double cel = std::atan2( missDistRef.x(), tsrng ) * GAIN;
       if (cel >  LIMITS) cel =  LIMITS;
       if (cel < -LIMITS) cel = -LIMITS;
       cmdStrEl = cel;
@@ -337,8 +337,8 @@ void Bomb::weaponDynamics(const double dt)
    // Compute Euler angles
    // ---
    const double vg = std::sqrt(ve1[INORTH]*ve1[INORTH] + ve1[IEAST]*ve1[IEAST]);
-   const double newPsi   = lcAtan2(ve1[IEAST],ve1[INORTH]);
-   const double newTheta = lcAtan2( -ve1[IDOWN], vg );
+   const double newPsi   = std::atan2(ve1[IEAST],ve1[INORTH]);
+   const double newTheta = std::atan2( -ve1[IDOWN], vg );
 
 
    // ---

@@ -988,9 +988,9 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
                 // do not update for ownship dynamics if sim is frozen
                 // assume same los, but use GT rotmat to generate new rel az and rel el
                 const osg::Vec3 los_vec = getOwnship()->getRotMat() * tracks[it]->getLosVec();
-                const double ra = lcSqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
-                const double az = lcAtan2(los_vec.y(), los_vec.x());
-                const double el = lcAtan2(-los_vec.z(), ra);
+                const double ra = std::sqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
+                const double az = std::atan2(los_vec.y(), los_vec.x());
+                const double el = std::atan2(-los_vec.z(), ra);
                 uAzimuth = az - taz;
                 uElevation = el - tel;
                 haveU = true;

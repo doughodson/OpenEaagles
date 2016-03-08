@@ -14,6 +14,8 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 
+#include <cmath>
+
 namespace oe {
 namespace base {
 
@@ -463,8 +465,8 @@ bool Terrain::vbwShadowChecker(
    if (beamLower < -89.9999f) beamLower = -89.9999f;
 
    // tangents of the upper and lower edges of the beam
-   double tanUpper = lcTan(beamUpper * static_cast<double>(Angle::D2RCC));
-   double tanLower = lcTan(beamLower * static_cast<double>(Angle::D2RCC));
+   double tanUpper = std::tan(beamUpper * static_cast<double>(Angle::D2RCC));
+   double tanLower = std::tan(beamLower * static_cast<double>(Angle::D2RCC));
 
    // Loop through all other elevation points -- keep track of the current max
    // tangent value and flag as terrain masked all points with tangent

@@ -12,6 +12,8 @@
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
 
+#include <cmath>
+
 namespace oe {
 namespace simulation {
 
@@ -323,12 +325,12 @@ void Sar::xyz2AzEl(const double x, const double y, const double z, double* const
 {
    // Compute azimuth (degs)
    if (az != nullptr) {
-      *az = lcAtan2(y, x) * static_cast<double>(base::Angle::R2DCC);
+      *az = std::atan2(y, x) * static_cast<double>(base::Angle::R2DCC);
    }
 
    if (el != nullptr) {
-      const double r = lcSqrt(x * x + y * y);
-      *el = lcAtan2(-z, r) * static_cast<double>(base::Angle::R2DCC);
+      const double r = std::sqrt(x * x + y * y);
+      *el = std::atan2(-z, r) * static_cast<double>(base::Angle::R2DCC);
    }
 }
 
