@@ -9,7 +9,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/Terrain.h"
 #include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/util/osg.h"
+#include "openeaagles/base/util/osg_utils.h"
 
 #include <cmath>
 

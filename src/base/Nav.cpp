@@ -2,7 +2,7 @@
 // Class: Nav
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Nav.h"
-#include "openeaagles/base/util/osg.h"
+#include "openeaagles/base/util/osg_utils.h"
 
 #include <cmath>
 

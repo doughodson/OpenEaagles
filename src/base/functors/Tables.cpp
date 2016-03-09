@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 #include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/util/lfi.h"
+#include "openeaagles/base/util/lfi_utils.h"
 #include "openeaagles/base/Integer.h"
 #include "openeaagles/base/Float.h"
 #include "openeaagles/base/List.h"

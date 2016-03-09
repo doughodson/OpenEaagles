@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/util/lfi.h"
+#include "openeaagles/base/util/lfi_utils.h"
 
 namespace oe {
 namespace base {

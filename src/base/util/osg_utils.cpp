@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/util/osg.h"
+#include "openeaagles/base/util/osg_utils.h"
 
 namespace oe {
 namespace base {
