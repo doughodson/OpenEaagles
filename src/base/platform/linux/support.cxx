@@ -6,6 +6,7 @@
 #include <ctime>
 
 namespace oe {
+namespace base {
 
 //------------
 // Sleep for 'msec' milliseconds
@@ -102,5 +103,7 @@ bool convertYmdhms2Sec(
    return ok;
 }
 
-} // End oe namespace
+}
+}
+
 

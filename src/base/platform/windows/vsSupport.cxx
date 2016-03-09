@@ -12,6 +12,7 @@
 #endif
 
 namespace oe {
+namespace base {
 
 //------------
 // lcSleep() - Sleep for 'msec' milliseconds
@@ -103,4 +104,6 @@ bool convertYmdhms2Sec(
    return ok;
 }
 
-} // End oe namespace
+}
+}
+
