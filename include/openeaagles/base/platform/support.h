@@ -303,47 +303,38 @@ bool convertNtp2Sec(
 bool doesFileExist(const char* const fullname);
 
 // Returns the sine and cosine of an angle (radians)
-void lcSinCos(const double angleRad, double* const sine, double* const cosine);
 void sinCos(const double angleRad, double* const sine, double* const cosine);
 void sinCos(const float angleRad, float* const sine, float* const cosine);
 
 // Computes the sines of an array of 'n' angles (radians)
-void lcSinArray(const double* const anglesRad, double* const sines, const int n);
 void sinArray(const double* const anglesRad, double* const sines, const unsigned int n);
 void sinArray(const float*  const anglesRad, float*  const sines, const unsigned int n);
 
 // Computes the cosines of an array of 'n' angles (radians)
-void lcCosArray(const double* const anglesRad, double* const cosines, const int n);
 void cosArray(const double* const anglesRad, double* const cosines, const unsigned int n);
 void cosArray(const float*  const anglesRad, float*  const cosines, const unsigned int n);
 
 // Computes the sines and cosines of an array of 'n' angles (radians)
-void lcSinCosArray(const double* const anglesRad, double* const sines, double* const cosines, const int n);
 void sinCosArray(const double* const anglesRad, double* const sines, double* const cosines, const unsigned int n);
 void sinCosArray(const float*  const anglesRad, float*  const sines, float*  const cosines, const unsigned int n);
 
 // Computes the arc-cosines of an array of 'n' angles (radians)
-void lcAcosArray(const double* const anglesRad, double* const acosines, const int n);
 void acosArray(const double* const anglesRad, double* const acosines, const unsigned int n);
 void acosArray(const float*  const anglesRad, float*  const acosines, const unsigned int n);
 
 // Computes the arc-tangents for two, 'n' element arrays (yValues and xValues)
-void lcAtan2Array(const double* const yValues, const double* const xValues, double* const atans, const int n);
 void atan2Array(const double* const yValues, const double* const xValues, double* const atans, const unsigned int n);
 void atan2Array(const float*  const yValues, const float*  const xValues, float*  const atans, const unsigned int n);
 
 // Computes the square roots of 'n' real values
-void lcSqrtArray(const double* const src, double* const dst, const int n);
 void sqrtArray(const double* const src, double* const dst, const unsigned int n);
 void sqrtArray(const float*  const src, float*  const dst, const unsigned int n);
 
 // Raises 10 to the power of 'n' src values and returns the results in 'dst'
-void lcPow10Array(const double* const src, double* const dst, const int n);
 void pow10Array(const double* const src, double* const dst, const unsigned int n);
 void pow10Array(const float*  const src, float*  const dst, const unsigned int n);
 
 // Multiply an array of reals with a constant
-void lcMultArrayConst(const double* const src, const double c, double* const dst, const int n);
 void multArrayConst(const double* const src, const double c, double* const dst, const unsigned int n);
 void multArrayConst(const float* const src, const float c, double* const dst, const unsigned int n);
 

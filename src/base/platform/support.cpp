@@ -151,15 +151,6 @@ void sinCos(const float src, float* const dst1, float* const dst2)
 //------------
 // Computes the sines of an array of 'n' angles (radians)
 //------------
-void lcSinArray(const double* const src, double* const dst, const int n)
-{
-   const double* ps = src;
-   double* pd = dst;
-   for (int i = 0; i < n; i++) {
-      *pd++ = std::sin(*ps++);
-   }
-}
-
 void sinArray(const double* const src, double* const dst, const unsigned int n)
 {
    const double* ps = src;
@@ -181,15 +172,6 @@ void sinArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Computes the cosines of an array of 'n' angles (radians)
 //------------
-void lcCosArray(const double* const src, double* const dst, const int n)
-{
-   const double* ps = src;
-   double* pd = dst;
-   for (int i = 0; i < n; i++) {
-      *pd++ = std::cos(*ps++);
-   }
-}
-
 void cosArray(const double* const src, double* const dst, const unsigned int n)
 {
    const double* ps = src;
@@ -211,17 +193,6 @@ void cosArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Computes the sines and cosines of an array of 'n' angles (radians)
 //------------
-void lcSinCosArray(const double* const src, double* const dst1, double* const dst2, const int n)
-{
-   const double* ps = src;
-   double* pd1 = dst1;
-   double* pd2 = dst2;
-   for (int i = 0; i < n; i++) {
-      *pd1++ = std::sin(*ps);
-      *pd2++ = std::cos(*ps++);
-   }
-}
-
 void sinCosArray(const double* const src, double* const dst1, double* const dst2, const unsigned int n)
 {
    const double* ps = src;
@@ -247,15 +218,6 @@ void sinCosArray(const float* const src, float* const dst1, float* const dst2, c
 //------------
 // Computes the arc-cosines of an array of 'n' angles (radians)
 //------------
-void lcAcosArray(const double* const src, double* const dst, const int n)
-{
-   double* pd = dst;
-   const double* ps = src;
-   for (int i = 0; i < n; i++) {
-      *pd++ = std::acos(*ps++);
-   }
-}
-
 void acosArray(const double* const src, double* const dst, const unsigned int n)
 {
    double* pd = dst;
@@ -277,16 +239,6 @@ void acosArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Computes the arc-tangants for two, 'n' element arrays (yValues and xValues)
 //------------
-void lcAtan2Array(const double* const yValues, const double* const xValues, double* const dst, const int n)
-{
-   double* pd = dst;
-   const double* ps1 = yValues;
-   const double* ps2 = xValues;
-   for (int i = 0; i < n; i++) {
-      *pd++ = std::atan2(*ps1++,*ps2++);
-   }
-}
-
 void atan2Array(const double* const yValues, const double* const xValues, double* const dst, const unsigned int n)
 {
    double* pd = dst;
@@ -310,15 +262,6 @@ void atan2Array(const float* const yValues, const float* const xValues, float* c
 //------------
 // Computes the square roots of 'n' real values
 //------------
-void lcSqrtArray(const double* const src, double* const dst, const int n)
-{
-   const double* ps = src;
-   double* pd = dst;
-   for (int i = 0; i < n; i++) {
-      *pd++ = std::sqrt(*ps++);
-   }
-}
-
 void sqrtArray(const double* const src, double* const dst, const unsigned int n)
 {
    const double* ps = src;
@@ -340,15 +283,6 @@ void sqrtArray(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Raises 10 to the power of 'n' src values and returns the results in 'dst'
 //------------
-void lcPow10Array(const double* const src, double* const dst, const int n)
-{
-   double* pd = dst;
-   const double* ps = src;
-   for (int i = 0; i < n; i++) {
-      *pd++ = std::pow(static_cast<double>(10.0), *ps++);
-   }
-}
-
 void pow10Array(const double* const src, double* const dst, const unsigned int n)
 {
    double* pd = dst;
@@ -370,15 +304,6 @@ void pow10Array(const float* const src, float* const dst, const unsigned int n)
 //------------
 // Multiply an array of reals with a constant
 //------------
-void lcMultArrayConst(const double* const src, const double c, double* const dst, const int n)
-{
-   double* pd = dst;
-   const double* ps = src;
-   for (int i = 0; i < n; i++) {
-      *pd++ = *ps++ * c;
-   }
-}
-
 void multArrayConst(const double* const src, const double c, double* const dst, const unsigned int n)
 {
    double* pd = dst;
