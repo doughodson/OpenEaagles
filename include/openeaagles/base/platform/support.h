@@ -37,6 +37,9 @@ namespace base {
 // ---
 // Make sure PI is defined  (see <math.h>)
 // ---
+#ifdef PI
+#undef PI
+#endif
 const double PI = 3.1415926535897932384626433832795;
 const double TWO_PI = PI + PI;
 
