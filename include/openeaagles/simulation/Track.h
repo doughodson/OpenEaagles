@@ -10,6 +10,8 @@
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
 
 namespace oe {
 namespace simulation {

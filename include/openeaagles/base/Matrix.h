@@ -11,6 +11,7 @@
 #define __oe_base_Matrix_H__
 
 #include "openeaagles/base/Object.h"
+#include "openeaagles/base/osg/Matrix"
 
 #include <cmath>
 

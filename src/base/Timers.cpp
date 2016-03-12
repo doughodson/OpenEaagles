@@ -1,6 +1,8 @@
+
 #include "openeaagles/base/Timers.h"
 #include "openeaagles/base/Number.h"
 #include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/util/atomic_utils.h"
 
 namespace oe {
 namespace base {
@@ -39,25 +41,21 @@ END_SLOT_MAP()
 // -----------------------------------------------------------------------------
 // Constructor(s)
 // -----------------------------------------------------------------------------
-
 Timer::Timer()
 {
-    STANDARD_CONSTRUCTOR()
-
+   STANDARD_CONSTRUCTOR()
    initData();
 }
 
-
 void Timer::initData()
 {
-    active = false;
-    timerValue = 0.0f;
-    ctime  = 0.0f;
-    alarmTime = 0.0f;
-    dir = DOWN;
-    addToTimerList(this);
+   active = false;
+   timerValue = 0.0f;
+   ctime  = 0.0f;
+   alarmTime = 0.0f;
+   dir = DOWN;
+   addToTimerList(this);
 }
-
 
 Timer::Timer(const Type direction, const double rtime)
 {
@@ -130,11 +128,11 @@ bool Timer::alarm() const
 void Timer::updateTimers(const double dt)
 {
     if (!frz) {
-      lcLock( semaphore );
+      lock( semaphore );
       for (unsigned int i = 0; i < nTimers; i++) {
          timers[i]->update(dt);
       }
-      lcUnlock( semaphore );
+      unlock( semaphore );
     }
 }
 
@@ -145,12 +143,12 @@ void Timer::updateTimers(const double dt)
 void Timer::addToTimerList(Timer* timer)
 {
    bool ok = false;
-   lcLock( semaphore );
+   lock( semaphore );
    if (nTimers < MAX_TIMERS) {
       timers[nTimers++] = timer;
       ok = true;
    }
-   lcUnlock( semaphore );
+   unlock( semaphore );
 
    if (!ok) {
       std::cerr << "Timer::addToTimerList() ERROR failed to add a new timer to static timer list" << std::endl;
@@ -163,7 +161,7 @@ void Timer::addToTimerList(Timer* timer)
 // -----------------------------------------------------------------
 void Timer::removeFromTimerList(Timer* timer)
 {
-   lcLock( semaphore );
+   lock( semaphore );
 
    // Find this timer in the list
    unsigned int found = MAX_TIMERS;
@@ -180,7 +178,7 @@ void Timer::removeFromTimerList(Timer* timer)
     }
 }
 
-   lcUnlock( semaphore );
+   unlock( semaphore );
 }
 
 // -----------------------------------------------------------------

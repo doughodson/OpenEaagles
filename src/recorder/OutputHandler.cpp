@@ -39,9 +39,9 @@ void OutputHandler::copyData(const OutputHandler& org, const bool cc)
    if (cc) initData();
 
    // Don't copy the queue
-   base::lcLock(semaphore);
+   base::lock(semaphore);
    queue.clear();
-   base::lcUnlock(semaphore);
+   base::unlock(semaphore);
 }
 
 //------------------------------------------------------------------------------
@@ -50,9 +50,9 @@ void OutputHandler::copyData(const OutputHandler& org, const bool cc)
 void OutputHandler::deleteData()
 {
    // clear the queue
-   base::lcLock(semaphore);
+   base::lock(semaphore);
    queue.clear();
-   base::lcUnlock(semaphore);
+   base::unlock(semaphore);
 }
 
 
@@ -114,10 +114,10 @@ void OutputHandler::processRecord(const DataRecordHandle* const dataRecord)
 void OutputHandler::addToQueue(const DataRecordHandle* const dataRecord)
 {
    if (dataRecord != nullptr) {
-      base::lcLock( semaphore );
+      base::lock( semaphore );
       // const cast away to put into the queue
       queue.put( const_cast<DataRecordHandle*>(static_cast<const DataRecordHandle*>(dataRecord)) );
-      base::lcUnlock( semaphore );
+      base::unlock( semaphore );
    }
 }
 
@@ -128,9 +128,9 @@ void OutputHandler::addToQueue(const DataRecordHandle* const dataRecord)
 void OutputHandler::processQueue()
 {
    // Get the first record from the queue
-   base::lcLock( semaphore );
+   base::lock( semaphore );
    const DataRecordHandle* dataRecord = static_cast<const DataRecordHandle*>(queue.get());
-   base::lcUnlock( semaphore );
+   base::unlock( semaphore );
 
    // While we have records ...
    while (dataRecord != nullptr) {
@@ -139,9 +139,9 @@ void OutputHandler::processQueue()
       dataRecord->unref();
 
       // and get the next one from the queue
-      base::lcLock( semaphore );
+      base::lock( semaphore );
       dataRecord = static_cast<const DataRecordHandle*>(queue.get());
-      base::lcUnlock( semaphore );
+      base::unlock( semaphore );
    }
 }
 

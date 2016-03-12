@@ -3,11 +3,9 @@
 // OSG utility functions
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_util_osg_H__
-#define __oe_base_util_osg_H__
+#ifndef __oe_base_util_osg_utils_H__
+#define __oe_base_util_osg_utils_H__
 
-#include "openeaagles/base/osg/Math"
-#include "openeaagles/base/osg/Vec2"
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Matrix"

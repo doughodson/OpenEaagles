@@ -6,6 +6,7 @@
 
 #include "openeaagles/base/Component.h"
 #include "openeaagles/base/safe_queue.h"
+#include "openeaagles/base/osg/Matrix"
 
 namespace oe {
    namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }

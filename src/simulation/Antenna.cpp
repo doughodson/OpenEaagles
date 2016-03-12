@@ -174,24 +174,24 @@ void Antenna::process(const double dt)
 
       for (unsigned int i = 0; i < n; i++) {
 
-         base::lcLock(inUseEmLock);
+         base::lock(inUseEmLock);
          Emission* em = inUseEmQueue.get();
-         base::lcUnlock(inUseEmLock);
+         base::unlock(inUseEmLock);
 
          if (em != nullptr && em->getRefCount() > 1) {
             // Others are still referencing the emission, put back on in-use queue
-            base::lcLock(inUseEmLock);
+            base::lock(inUseEmLock);
             inUseEmQueue.put(em);
-            base::lcUnlock(inUseEmLock);
+            base::unlock(inUseEmLock);
          }
 
          else if (em != nullptr && em->getRefCount() <= 1) {
             // No one else is referencing the emission, push to the free stack
             em->clear();
-            base::lcLock(freeEmLock);
+            base::lock(freeEmLock);
             if (freeEmStack.isNotFull()) freeEmStack.push(em);
             else em->unref();
-            base::lcUnlock(freeEmLock);
+            base::unlock(freeEmLock);
          }
       }
    }
@@ -215,21 +215,21 @@ bool Antenna::setSystem(RfSystem* const s)
 //------------------------------------------------------------------------------
 void Antenna::clearQueues()
 {
-   base::lcLock(freeEmLock);
+   base::lock(freeEmLock);
    Emission* em = freeEmStack.pop();
    while (em != nullptr) {
       em->unref();
       em = freeEmStack.pop();
    }
-   base::lcUnlock(freeEmLock);
+   base::unlock(freeEmLock);
 
-   base::lcLock(inUseEmLock);
+   base::lock(inUseEmLock);
    em = inUseEmQueue.get();
    while (em != nullptr) {
       em->unref();
       em = inUseEmQueue.get();
    }
-   base::lcUnlock(inUseEmLock);
+   base::unlock(inUseEmLock);
 }
 
 //------------------------------------------------------------------------------
@@ -530,9 +530,9 @@ void Antenna::rfTransmit(Emission* const xmit)
             // Get a free emission packet
             Emission* em(nullptr);
             if (recycle) {
-               base::lcLock(freeEmLock);
+               base::lock(freeEmLock);
                em = freeEmStack.pop();
-               base::lcUnlock(freeEmLock);
+               base::unlock(freeEmLock);
             }
 
             bool cloned = false;
@@ -571,13 +571,13 @@ void Antenna::rfTransmit(Emission* const xmit)
                // d) Recycle the emission
                bool recycled = false;
                if (recycle) {
-                  base::lcLock(inUseEmLock);
+                  base::lock(inUseEmLock);
                   if (inUseEmQueue.isNotFull()) {
                      // Store for future reference
                      inUseEmQueue.put(em);
                      recycled = true;
                   }
-                  base::lcUnlock(inUseEmLock);
+                  base::unlock(inUseEmLock);
                }
 
                // or just forget it

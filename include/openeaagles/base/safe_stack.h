@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/util/atomic_utils.h"
 
 #ifndef __oe_base_safe_stack_H__
 #define __oe_base_safe_stack_H__
@@ -38,30 +38,30 @@ public:
 
    // Pushes an item on to the stack
    bool push(T item) {
-      lcLock( semaphore );
+      lock( semaphore );
       bool ok = false;
       if (sp > 0) {
          stack[--sp] = item;
          ok = true;
       }
-      lcUnlock( semaphore );
+      unlock( semaphore );
       return ok;
    }
 
    // Pops an item from the top of the stack
    T pop() {
-      lcLock( semaphore );
+      lock( semaphore );
       T ii = 0;
       if (sp < SIZE) ii = stack[sp++];
-      lcUnlock( semaphore );
+      unlock( semaphore );
       return ii;
    }
 
    // Clears the stack
    void clear() {
-      lcLock( semaphore );
+      lock( semaphore );
       sp = SIZE;
-      lcUnlock( semaphore );
+      unlock( semaphore );
    }
 
 private:

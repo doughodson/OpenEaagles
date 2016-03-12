@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_lfi_H__
-#define __oe_base_util_lfi_H__
+#ifndef __oe_base_util_lfi_utils_H__
+#define __oe_base_util_lfi_utils_H__
 
 #include "openeaagles/base/platform/support.h"
 

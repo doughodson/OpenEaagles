@@ -95,7 +95,7 @@ void MergingIrSensor::mergeIrReturns()
          //   deleteArray[i] = 0;
          //}
 
-         base::lcLock(storedMessagesLock);
+         base::lock(storedMessagesLock);
          // Traverse the stored message queue using peek (). Examine every
          // message. Compare every stored message against every OTHER stored
          // message. If the two are too close together, merge the two signals
@@ -245,7 +245,7 @@ void MergingIrSensor::mergeIrReturns()
                x=x+1;
             }
          } // end for i = 0;
-         base::lcUnlock(storedMessagesLock);
+         base::unlock(storedMessagesLock);
          //delete[] deleteArray;
       //} // newArray is not null.
    } // numRecords > 0

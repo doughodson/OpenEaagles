@@ -1,6 +1,7 @@
 
 #include "openeaagles/base/ThreadPool.h"
 #include "openeaagles/base/Thread.h"
+#include "openeaagles/base/util/atomic_utils.h"
 
 namespace oe {
 namespace base {
@@ -305,7 +306,7 @@ void ThreadPool::execute(Object* cur)
 ThreadPoolThread* ThreadPool::getAvailableThread()
 {
    ThreadPoolThread* availableThread = nullptr;
-   lcLock(availableThreadsLock);
+   lock(availableThreadsLock);
    for (int i = actualThreads - 1 ; i >= 0 ; i--)
    {
       if (availableThreads[i] != nullptr)
@@ -315,13 +316,13 @@ ThreadPoolThread* ThreadPool::getAvailableThread()
          break;
       }
    }
-   lcUnlock(availableThreadsLock);
+   unlock(availableThreadsLock);
    return availableThread;
 }
 
 void ThreadPool::threadAvailable(ThreadPoolThread* availableThread)
 {
-   lcLock(availableThreadsLock);
+   lock(availableThreadsLock);
    for (unsigned int i = 0 ; i < actualThreads ; i++)
    {
       if (availableThreads[i] == nullptr)
@@ -330,7 +331,7 @@ void ThreadPool::threadAvailable(ThreadPoolThread* availableThread)
          break;
       }
    }
-   lcUnlock(availableThreadsLock);
+   unlock(availableThreadsLock);
 }
 
 void ThreadPool::destroy()
@@ -341,11 +342,11 @@ void ThreadPool::destroy()
       allThreads[i]->unref();
       allThreads[i] = nullptr;
    }
-   lcLock(availableThreadsLock);
+   lock(availableThreadsLock);
    for (unsigned int i = 0; i < actualThreads; i++) {
       availableThreads[i] = nullptr;
    }
-   lcUnlock(availableThreadsLock);
+   unlock(availableThreadsLock);
    actualThreads = 0;
 
    //Destroy the unthreaded object

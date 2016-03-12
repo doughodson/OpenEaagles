@@ -5,6 +5,7 @@
 #define __oe_simulation_Tdb_H__
 
 #include "openeaagles/simulation/System.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
 namespace simulation {

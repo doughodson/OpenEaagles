@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/util/atomic_utils.h"
 
 #ifndef __oe_base_safe_queue_H__
 #define __oe_base_safe_queue_H__
@@ -38,7 +38,7 @@ public:
 
    // Puts an item at the back of the queue.
    bool put(T item) {
-      lcLock( semaphore );
+      lock( semaphore );
       bool ok = false;
       if (n < SIZE) {
          // Put item in the queue
@@ -47,13 +47,13 @@ public:
          if (in >= SIZE) in = 0;
          ok = true;
       }
-      lcUnlock( semaphore );
+      unlock( semaphore );
       return ok;
    }
 
    // Gets an item from the front of the queue
    T get() {
-      lcLock( semaphore );
+      lock( semaphore );
       T p = 0;
       if (!isEmpty()) {
          // Get item out of the queue
@@ -65,7 +65,7 @@ public:
          }
          n--;
       }
-      lcUnlock( semaphore );
+      unlock( semaphore );
       return p;
    }
 
@@ -73,7 +73,7 @@ public:
    // The optional 'idx' is zero based starting at the front of
    // the queue (i.e. at the next get()).
    T peek0(unsigned int idx = 0) {
-      lcLock( semaphore );
+      lock( semaphore );
       T p = 0;
       if (idx < n) {
          unsigned int j = n - idx;
@@ -85,16 +85,16 @@ public:
             p = queue[SIZE + in - j];
          }
       }
-      lcUnlock( semaphore );
+      unlock( semaphore );
       return p;
    }
 
    // Clears the queue
    void clear() {
-      lcLock( semaphore );
+      lock( semaphore );
       in = 0;
       n = 0;
-      lcUnlock( semaphore );
+      unlock( semaphore );
    }
 
 private:

@@ -15,11 +15,7 @@
 // ---
 // Common header files
 // ---
-#include "openeaagles/base/osg/Math"
-#include "openeaagles/base/osg/Vec2"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
-#include "openeaagles/base/osg/Matrix"
+
 #include <typeinfo>
 #include <iostream>
 #include <sys/types.h>
@@ -37,25 +33,6 @@
 
 namespace oe {
 namespace base {
-
-// ---
-// Simple semaphore spinlock and unlock functions:
-//    lcLock(long& s)   -- locks the semaphore w/spinlock wait
-//    lcUnlock(long& s) -- frees the semaphore
-// where 's' is the semaphore that must be initialized to zero.
-// ---
-#if defined(WIN32)
-  #if defined(__MINGW32__)
-    // MinGW lock
-    #include "openeaagles/base/platform/windows/mingwLock.h"
-  #else
-    // Visual Studio lock
-    #include "openeaagles/base/platform/windows/vsLock.h"
-  #endif
-#else
-  // Linux GCC lock
-  #include "openeaagles/base/platform/linux/lock.h"
-#endif
 
 // ---
 // Make sure PI is defined  (see <math.h>)

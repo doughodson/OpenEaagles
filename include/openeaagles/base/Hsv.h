@@ -5,6 +5,7 @@
 #define __oe_base_Hsv_H__
 
 #include "openeaagles/base/Color.h"
+#include "openeaagles/base/osg/Vec4"
 
 namespace oe {
 namespace base {
@@ -118,7 +119,7 @@ protected:
     osg::Vec4 hsv;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

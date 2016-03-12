@@ -6,6 +6,7 @@
 
 #include "openeaagles/simulation/System.h"
 #include "openeaagles/base/osg/Vec2"
+#include "openeaagles/base/osg/Matrix"
 
 namespace oe {
 

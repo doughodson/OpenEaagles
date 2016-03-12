@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/util/atomic_utils.h"
 
 #ifndef __oe_base_safe_ptr_H__
 #define __oe_base_safe_ptr_H__
@@ -37,7 +37,7 @@ namespace base {
 //
 // Example #3
 //
-//    base::safe_ptr<Object> sp1();   // 'sp1' is null
+//    base::safe_ptr<Object> sp1();    // 'sp1' is null
 //    sp1.set( new Object(), false );  // new object; ref cnt stays at one
 //
 //------------------------------------------------------------------------------
@@ -105,11 +105,11 @@ public:
 
 private:
    void lock() const {
-      lcLock( semaphore );
+      base::lock( semaphore );
    }
 
    void unlock() const {
-      lcUnlock( semaphore );
+      base::unlock( semaphore );
    }
 
    T*  p;                   // the pointer being managed

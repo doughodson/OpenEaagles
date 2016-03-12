@@ -5,6 +5,9 @@
 #define __oe_base_terrain_H__
 
 #include "openeaagles/base/Component.h"
+#include "openeaagles/base/osg/Vec2"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
 
 namespace oe {
 

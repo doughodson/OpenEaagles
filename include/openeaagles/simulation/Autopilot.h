@@ -5,6 +5,7 @@
 #define __oe_simulation_Autopilot_H__
 
 #include "openeaagles/simulation/Pilot.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
    namespace base { class Angle; class Distance; class Identifier; class Number; class Time; }

@@ -5,6 +5,7 @@
 #define __oe_simulation_Sar_H__
 
 #include "openeaagles/simulation/Radar.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
    namespace base {

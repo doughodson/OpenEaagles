@@ -5,6 +5,9 @@
 #define __oe_base_NavDR_H__
 
 #include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Matrix"
 
 namespace oe {
 namespace base {

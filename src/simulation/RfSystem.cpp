@@ -278,14 +278,14 @@ void RfSystem::rfReceivedEmission(Emission* const em, Antenna* const, double raG
          }
 
          // Save packet and signal for receive()
-         base::lcLock(packetLock);
+         base::lock(packetLock);
          if (np < MAX_EMISSIONS) {
             em->ref();
             packets[np] = em;
             signals[np] = signal;
             np++;
          }
-         base::lcUnlock(packetLock);
+         base::unlock(packetLock);
 
       }
    }

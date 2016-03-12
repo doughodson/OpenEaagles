@@ -88,7 +88,7 @@ protected:
 };
 
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

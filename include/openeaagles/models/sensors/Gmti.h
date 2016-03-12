@@ -6,6 +6,7 @@
 #define __oe_models_Gmti_H__
 
 #include "openeaagles/simulation/Radar.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
 

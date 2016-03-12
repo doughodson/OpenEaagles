@@ -169,7 +169,7 @@ void IrSensor::reset()
    // ---
    // Do we need to find the track manager?
    // ---
-   base::lcLock(storedMessagesLock);
+   base::lock(storedMessagesLock);
    if (getTrackManager() == nullptr && getTrackManagerName() != nullptr && getOwnship() != nullptr) {
       // We have a name of the track manager, but not the track manager itself
       const char* name = *getTrackManagerName();
@@ -188,7 +188,7 @@ void IrSensor::reset()
          setTrackManagerName(nullptr);
       }
    }
-   base::lcUnlock(storedMessagesLock);
+   base::unlock(storedMessagesLock);
 }
 
 //------------------------------------------------------------------------------
@@ -411,7 +411,7 @@ void IrSensor::process(const double dt)
    if (numRecords > 0) {
       AngleOnlyTrackManager* tm = static_cast<AngleOnlyTrackManager*>(getTrackManager());
       if (tm != nullptr) {
-         base::lcLock(storedMessagesLock);
+         base::lock(storedMessagesLock);
          numRecords = storedMessagesQueue.entries();
 
          // Send on all messages EXCEPT those with signal below threshold and those merged
@@ -425,7 +425,7 @@ void IrSensor::process(const double dt)
             }
             msg->unref();
          }
-         base::lcUnlock(storedMessagesLock);
+         base::unlock(storedMessagesLock);
       }
    }
 }
@@ -787,9 +787,9 @@ IrQueryMsg* IrSensor::getStoredMessage()
 {
    IrQueryMsg* msg = nullptr;
 
-   base::lcLock(storedMessagesLock);
+   base::lock(storedMessagesLock);
    msg = storedMessagesQueue.get();
-   base::lcUnlock(storedMessagesLock);
+   base::unlock(storedMessagesLock);
 
    return msg;
 }
@@ -801,9 +801,9 @@ IrQueryMsg* IrSensor::peekStoredMessage(unsigned int i)
 {
    IrQueryMsg* msg = nullptr;
 
-   base::lcLock(storedMessagesLock);
+   base::lock(storedMessagesLock);
    msg = storedMessagesQueue.peek0(i);
-   base::lcUnlock(storedMessagesLock);
+   base::unlock(storedMessagesLock);
 
    return msg;
 }
@@ -814,9 +814,9 @@ void IrSensor::addStoredMessage(IrQueryMsg* msg)
 {
    // Queue up emissions reports
    if (msg != nullptr) {
-      base::lcLock(storedMessagesLock);
+      base::lock(storedMessagesLock);
       storedMessagesQueue.put(msg);
-      base::lcUnlock(storedMessagesLock);
+      base::unlock(storedMessagesLock);
    }
 }
 //------------------------------------------------------------------------------
@@ -827,11 +827,11 @@ void IrSensor::clearTracksAndQueues()
    // ---
    // Clear out the queues
    // ---
-   base::lcLock(storedMessagesLock);
+   base::lock(storedMessagesLock);
    for (IrQueryMsg* msg = storedMessagesQueue.get(); msg != nullptr; msg = storedMessagesQueue.get())  {
       msg->unref();
    }
-   base::lcUnlock(storedMessagesLock);
+   base::unlock(storedMessagesLock);
 }
 
 }

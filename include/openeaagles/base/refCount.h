@@ -29,9 +29,9 @@
    // ---
    void ref() const
    {
-      lcLock(semaphore);
+      lock(semaphore);
       if (++(refCount) <= 1) throw new ExpInvalidRefCount();
-      else lcUnlock(semaphore);
+      else unlock(semaphore);
 
       #ifdef MAX_REF_COUNT_ERROR
       static int maxRefCount = MAX_REF_COUNT_ERROR;
@@ -48,9 +48,9 @@
    // ---
    void unref() const
    {
-      lcLock(semaphore);
+      lock(semaphore);
       if (--refCount == 0) delete this;
-      else lcUnlock(semaphore);
+      else unlock(semaphore);
    }
 
 #endif

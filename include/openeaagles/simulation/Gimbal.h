@@ -5,6 +5,8 @@
 #define __oe_simulation_Gimbal_H__
 
 #include "openeaagles/simulation/System.h"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Matrix"
 
 namespace oe {
    namespace base {

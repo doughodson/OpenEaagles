@@ -3,6 +3,8 @@
 #define __oe_base_Object_H__
 
 #include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/util/atomic_utils.h"
+
 #include "openeaagles/base/macros.h"
 #include "openeaagles/base/SlotTable.h"
 #include "openeaagles/base/safe_ptr.h"

@@ -137,7 +137,7 @@ bool Radar::shutdownNotification()
 void Radar::clearTracksAndQueues()
 {
    // Clear reports
-   base::lcLock(myLock);
+   base::lock(myLock);
    for (unsigned int i = 0; i < numReports && i < MAX_REPORTS; i++) {
       if (reports[i] != nullptr) {
          reports[i]->unref();
@@ -145,15 +145,15 @@ void Radar::clearTracksAndQueues()
       }
    }
    numReports = 0;
-   base::lcUnlock(myLock);
+   base::unlock(myLock);
 
    // ---
    // Clear out the queues
    // ---
-   base::lcLock(myLock);
+   base::lock(myLock);
    for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) { em->unref(); }
    while (rptSnQueue.isNotEmpty()) { rptSnQueue.get(); }
-   base::lcUnlock(myLock);
+   base::unlock(myLock);
 }
 
 //------------------------------------------------------------------------------
@@ -250,13 +250,13 @@ void Radar::receive(const double dt)
    double signal = 0;
 
    // Get an emission from the queue
-   base::lcLock(packetLock);
+   base::lock(packetLock);
    if (np > 0) {
       np--; // Decrement 'np', now the array index
       em = packets[np];
       signal = signals[np];
    }
-   base::lcUnlock(packetLock);
+   base::unlock(packetLock);
 
    while (em != nullptr) {
 
@@ -311,7 +311,7 @@ void Radar::receive(const double dt)
             // Is S/N above receiver threshold and within 125% of max range?
             // CGB, if "signal <= 0.0", then "signalToInterferenceRatioDbl" is probably invalid
             // we should probably do something smart with "signalToInterferenceRatioDbl" above as well.
-            base::lcLock(myLock);
+            base::lock(myLock);
             if (signalToInterferenceRatioDbl >= getRfThreshold() && em->getRange() <= (maxRng*1.25) && rptQueue.isNotFull()) {
 
                // send the report to the track manager
@@ -330,7 +330,7 @@ void Radar::receive(const double dt)
             } else if (signalToInterferenceRatioDbl < getRfThreshold() && signalToNoiseRatioDbl >= getRfThreshold()) {
                countNumJammedEm++;
             }
-            base::lcUnlock(myLock);
+            base::unlock(myLock);
          }
       }
 
@@ -343,13 +343,13 @@ void Radar::receive(const double dt)
       //}
 
       // Get another emission from the queue
-      base::lcLock(packetLock);
+      base::lock(packetLock);
       if (np > 0) {
          np--;
          em = packets[np];
          signal = signals[np];
       }
-      base::lcUnlock(packetLock);
+      base::unlock(packetLock);
    }
    //std::cout << std::endl;
 
@@ -370,12 +370,12 @@ void Radar::process(const double dt)
    TrackManager* tm = getTrackManager();
    if (tm == nullptr) {
       // No track manager! Then just flush the input queue.
-      base::lcLock(myLock);
+      base::lock(myLock);
       for (Emission* em = rptQueue.get(); em != nullptr; em = rptQueue.get()) {
          em->unref();
          rptSnQueue.get();
       }
-      base::lcUnlock(myLock);
+      base::unlock(myLock);
    }
 
    // ---
@@ -385,7 +385,7 @@ void Radar::process(const double dt)
 
       endOfScanFlg = false;
 
-      base::lcLock(myLock);
+      base::lock(myLock);
       for (unsigned int i = 0; i < numReports && i < MAX_REPORTS; i++) {
          if (tm != nullptr) {
             tm->newReport(reports[i], rptMaxSn[i]);
@@ -395,7 +395,7 @@ void Radar::process(const double dt)
          rptMaxSn[i] = 0;
       }
       numReports = 0;
-      base::lcUnlock(myLock);
+      base::unlock(myLock);
    }
 
 
@@ -406,7 +406,7 @@ void Radar::process(const double dt)
    //      is greater than the report, use the new emission
    //   3) Create new reports for unmatched emissions
    // ---
-   base::lcLock(myLock);
+   base::lock(myLock);
    while (rptQueue.isNotEmpty()) {
 
       // Get the emission
@@ -455,7 +455,7 @@ void Radar::process(const double dt)
          em->unref();
       }
    }
-   base::lcUnlock(myLock);
+   base::unlock(myLock);
 }
 
 
@@ -466,14 +466,14 @@ unsigned int Radar::getReports(const Emission** list, const unsigned int max) co
 {
    unsigned int num = 0;
    if (list != nullptr && max > 0 && numReports > 0) {
-      base::lcLock(myLock);
+      base::lock(myLock);
       num = numReports;
       if (num > max) num = max;
       for (unsigned int i = 0; i < num; i++) {
          reports[i]->ref();
          list[i] = reports[i];
       }
-      base::lcUnlock(myLock);
+      base::unlock(myLock);
    }
    return num;
 }

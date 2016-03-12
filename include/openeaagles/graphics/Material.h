@@ -5,6 +5,7 @@
 #define __oe_graphics_Material_H__
 
 #include "openeaagles/base/Component.h"
+#include "openeaagles/base/osg/Vec4"
 #include <GL/glu.h>
 
 namespace oe {

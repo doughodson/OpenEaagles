@@ -14,6 +14,11 @@
 
 #include "openeaagles/base/Matrix.h"
 
+#include "openeaagles/base/osg/Vec2"
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Matrix"
+
 namespace oe {
 namespace base {
 

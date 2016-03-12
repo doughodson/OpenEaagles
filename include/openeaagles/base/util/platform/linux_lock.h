@@ -1,14 +1,14 @@
 // ---
 // Simple semaphore spinlock and unlock functions: 
-//    lcLock(long int& s)      -- gets the semaphore w/spinlock wait
-//    lcUnlock(long int& s)    -- frees the semaphore
+//    lock(long int& s)      -- gets the semaphore w/spinlock wait
+//    unlock(long int& s)    -- frees the semaphore
 //
 //    where 's' is the semaphore that must be initialized to zero.
 //
 // Linux version
 // ---
 
-inline void lcLock(long int& semaphore)
+inline void lock(long int& semaphore)
 {
 
 #if 1
@@ -41,7 +41,7 @@ inline void lcLock(long int& semaphore)
 
 }
 
-inline void lcUnlock(long int& semaphore)
+inline void unlock(long int& semaphore)
 {
 #if 1
 
@@ -63,5 +63,4 @@ inline void lcUnlock(long int& semaphore)
 #endif
 
 }
-
 

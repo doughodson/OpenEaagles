@@ -21,6 +21,7 @@
 
 #include "openeaagles/base/Logger.h"
 #include "openeaagles/base/safe_queue.h"
+#include "openeaagles/base/osg/Vec3"
 
 namespace oe {
    namespace base {

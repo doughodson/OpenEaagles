@@ -108,13 +108,13 @@ void Rwr::receive(const double dt)
    double signal = 0;
 
    // Get an emission from the queue
-   base::lcLock(packetLock);
+   base::lock(packetLock);
    if (np > 0) {
       np--; // Decrement 'np', now the array index
       em = packets[np];
       signal = signals[np];
    }
-   base::lcUnlock(packetLock);
+   base::unlock(packetLock);
 
    while (em != nullptr) {
 
@@ -169,13 +169,13 @@ void Rwr::receive(const double dt)
 
 
       // Get another emission from the queue
-      base::lcLock(packetLock);
+      base::lock(packetLock);
       if (np > 0) {
          np--;
          em = packets[np];
          signal = signals[np];
       }
-      base::lcUnlock(packetLock);
+      base::unlock(packetLock);
 
    }
 

@@ -783,7 +783,7 @@ public:
 // inline functions
 #include "openeaagles/base/Nav.inl"
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
