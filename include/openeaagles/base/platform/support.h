@@ -104,7 +104,7 @@ inline int nint(const double x)
     // depending on platform.  So, make a negative valued 'x' positive,
     // add 0.5f, then negate the truncated int() cast.
     if (x < 0.0) return (-(static_cast<int>((-x) + 0.5f)));
-    else return int(x + 0.5f);
+    else return static_cast<int>(x + 0.5f);
 }
 
 // nint -- nearest integer
