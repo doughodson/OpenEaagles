@@ -34,17 +34,6 @@ void preMultVec4Array(
 //------------
 // Pre-multiply an array of 3D vectors with a 4x4 matrix
 //------------
-void lcPreMultVec3Array(
-      const osg::Vec3 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec3 result[],
-      const int n
-   )
-{
-   for (int i = 0; i < n; i++) {
-      result[i] = matrix.preMult(orig[i]);
-   }
-}
 
 void preMultVec3Array(
       const osg::Vec3d orig[],

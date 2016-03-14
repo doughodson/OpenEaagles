@@ -77,13 +77,6 @@ void postMultVec4Array(
 
 // Post-multiply an array of 3D vectors with a 4x4 matrix
 
-void lcPostMultVec3Array(
-      const osg::Vec3 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec3 result[],
-      const int n
-   );
-
 void postMultVec3Array(
       const osg::Vec3d orig[],
       const osg::Matrixd& matrix,
