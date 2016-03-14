@@ -3,7 +3,6 @@
 //------------------------------------------------------------------------------
 
 #include <signal.h>
-#include "openeaagles/base/util/math_utils.h"
 
 // max number of processors we'll allow
 static const unsigned int MAX_CPUS = 32;
