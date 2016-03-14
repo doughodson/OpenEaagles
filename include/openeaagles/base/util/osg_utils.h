@@ -15,13 +15,6 @@ namespace base {
 
 // Pre-multiply an array of 4D vectors with a 4x4 matrix
 
-void lcPreMultVec4Array(
-      const osg::Vec4 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec4 result[],
-      const int n
-   );
-
 void preMultVec4Array(
       const osg::Vec4d orig[],
       const osg::Matrixd& matrix,
