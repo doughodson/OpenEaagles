@@ -10,6 +10,7 @@
 #include "openeaagles/base/osg/Matrix"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/util/math_utils.h"
 
 namespace oe {
 namespace base {

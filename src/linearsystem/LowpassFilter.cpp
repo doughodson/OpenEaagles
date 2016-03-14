@@ -2,6 +2,7 @@
 #include "openeaagles/linearsystem/LowpassFilter.h"
 #include "openeaagles/base/Number.h"
 #include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/base/util/constants.h"
 
 namespace oe {
 namespace linearsystem {

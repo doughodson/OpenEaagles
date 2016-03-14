@@ -54,6 +54,7 @@
 #define __oe_base_Times_H__
 
 #include "openeaagles/base/Number.h"
+#include "openeaagles/base/util/math_utils.h"
 
 namespace oe {
 namespace base {

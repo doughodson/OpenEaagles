@@ -7,6 +7,7 @@
 #include "openeaagles/simulation/ScanGimbal.h"
 #include "openeaagles/base/safe_queue.h"
 #include "openeaagles/base/safe_stack.h"
+#include "openeaagles/base/util/constants.h"
 
 namespace oe {
    namespace base {

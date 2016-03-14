@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Hls.h"
 #include "openeaagles/base/Float.h"
+#include "openeaagles/base/util/math_utils.h"
 
 namespace oe {
 namespace base {

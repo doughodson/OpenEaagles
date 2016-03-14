@@ -48,6 +48,7 @@
 #define __oe_base_Angles_H__
 
 #include "openeaagles/base/Number.h"
+#include "openeaagles/base/util/constants.h"
 
 #include <cmath>
 

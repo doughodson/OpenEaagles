@@ -16,6 +16,7 @@
 #define __oe_simulation_Signature_H__
 
 #include "openeaagles/base/Component.h"
+#include "openeaagles/base/util/constants.h"
 
 namespace oe {
    namespace base {

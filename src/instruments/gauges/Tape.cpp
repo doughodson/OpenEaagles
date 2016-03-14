@@ -1,5 +1,7 @@
+
 #include "openeaagles/instruments/gauges/Tape.h"
 #include "openeaagles/base/Number.h"
+#include "openeaagles/base/util/math_utils.h"
 
 namespace oe {
 namespace instruments {

@@ -17,6 +17,7 @@
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/Simulation.h"
 #include "openeaagles/base/String.h"
+#include "openeaagles/base/util/math_utils.h"
 
 #include <cstdio>
 

@@ -7,6 +7,7 @@
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/constants.h"
 
 #include "Reformat.h"
 

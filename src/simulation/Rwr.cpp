@@ -8,6 +8,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/simulation/Player.h"
+#include "openeaagles/base/util/math_utils.h"
 
 #include <cmath>
 

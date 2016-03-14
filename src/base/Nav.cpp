@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Nav.h"
 #include "openeaagles/base/util/osg_utils.h"
+#include "openeaagles/base/util/math_utils.h"
 
 #include <cmath>
 

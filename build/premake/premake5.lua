@@ -32,7 +32,7 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 --
 --HLA_ROOT = "../../../portico-2.0.1"
 --HLAIncPath = HLA_ROOT.."/include/hla13"
-HLA_ROOT = "../../../OpenRTI-0.7.1"
+HLA_ROOT = "../../../openrti"
 HLAIncPath = HLA_ROOT.."/include/RTI13"
 if (_ACTION == "vs2010") then
   HLALibPath = HLA_ROOT.."/lib/vc10"
