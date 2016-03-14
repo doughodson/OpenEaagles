@@ -7,7 +7,8 @@ OBJS =  \
 	$(LIB)(lfi_utils.o) \
 	$(LIB)(math_utils.o) \
 	$(LIB)(osg_utils.o) \
-	$(LIB)(string_utils.o)
+	$(LIB)(string_utils.o) \
+	$(LIB)(system_utils.o)
 
 all: ${OBJS}
 
