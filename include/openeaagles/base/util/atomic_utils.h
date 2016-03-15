@@ -14,14 +14,14 @@ namespace base {
 #if defined(WIN32)
   #if defined(__MINGW32__)
     // MinGW lock
-    #include "openeaagles/base/util/platform/mingw_lock.h"
+    #include "openeaagles/base/util/platform/lock_mingw.h"
   #else
     // Visual Studio lock
-    #include "openeaagles/base/util/platform/msvc_lock.h"
+    #include "openeaagles/base/util/platform/lock_msvc.h"
   #endif
 #else
   // Linux GCC lock
-  #include "openeaagles/base/util/platform/linux_lock.h"
+  #include "openeaagles/base/util/platform/lock_linux.h"
 #endif
 
 }

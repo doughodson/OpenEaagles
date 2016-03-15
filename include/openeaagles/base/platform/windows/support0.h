@@ -5,7 +5,7 @@
 #define __oe_platform_windows_support0_H__
 
 #include <winsock2.h>
-#include <ERRNO.H>
+//#include <ERRNO.H>
 
 #if(_MSC_VER>=1600)   // VC10+
    #include <stdint.h>
@@ -28,6 +28,7 @@
 // VS2012 has a bug with some intrinsics
 // For now, we will not use a few of them
 #if(_MSC_VER>=1700)   // VC11+
+#include <cmath>
 #pragma function(sqrt)
 #endif
 
@@ -40,7 +41,6 @@
 namespace oe {
 
 typedef LONGLONG  Integer64;
-typedef ULONGLONG LCuint64;
 
 }
 

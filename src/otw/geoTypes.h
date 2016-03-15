@@ -18,6 +18,7 @@
 #ifndef GEOTYPES_H
 #define GEOTYPES_H
 
+#include "math.h"
 #include <memory.h>
 
 #ifdef  __cplusplus

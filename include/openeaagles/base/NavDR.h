@@ -8,6 +8,7 @@
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Matrix"
+#include <cmath>
 
 namespace oe {
 namespace base {

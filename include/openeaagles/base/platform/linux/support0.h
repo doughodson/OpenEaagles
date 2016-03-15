@@ -14,7 +14,6 @@
 namespace oe {
 
 typedef long long int Integer64;
-typedef unsigned long long int LCuint64;
 
 }
 

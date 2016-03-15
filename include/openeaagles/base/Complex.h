@@ -5,6 +5,7 @@
 #define __oe_base_Complex_H__
 
 #include "openeaagles/base/Number.h"
+#include <cmath>
 
 namespace oe {
 namespace base {

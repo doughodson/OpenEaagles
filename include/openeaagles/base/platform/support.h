@@ -16,11 +16,11 @@
 // Common header files
 // ---
 
-#include <typeinfo>
-#include <iostream>
-#include <sys/types.h>
-#include <cmath>
-#include <cstring> // macros use std::strcmp
+#include <typeinfo>   // macros use typeid()
+//#include <iostream>
+//#include <sys/types.h>
+//#include <cmath>
+#include <cstring>    // macros use std::strcmp
 
 // ---
 // Include OS/Processor unique stuff
