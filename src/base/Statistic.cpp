@@ -3,6 +3,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Statistic.h"
 
+#include <cfloat>
+
 namespace oe {
 namespace base {
 
@@ -55,5 +57,6 @@ void Statistic::clear()
   value1 = 0.0;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
+

@@ -3,6 +3,7 @@
 #include "openeaagles/base/FileReader.h"
 #include <cstring>
 #include <cstdlib>
+#include <cfloat>
 
 namespace oe {
 namespace dafif {

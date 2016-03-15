@@ -18,6 +18,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/graphics/Clip3D.h"
 
+#include <cfloat>
+
 namespace oe {
 namespace graphics {
 

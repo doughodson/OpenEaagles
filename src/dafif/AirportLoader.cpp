@@ -6,6 +6,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
+#include <cfloat>
 
 namespace oe {
 namespace dafif {

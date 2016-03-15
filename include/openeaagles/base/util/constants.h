@@ -2,6 +2,8 @@
 #ifndef __oe_base_util_constants_H__
 #define __oe_base_util_constants_H__
 
+#include <cfloat>
+
 namespace oe {
 namespace base {
 

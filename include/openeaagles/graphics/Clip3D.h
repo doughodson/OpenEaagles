@@ -6,6 +6,7 @@
 
 #include "openeaagles/base/Object.h"
 #include "Polygon.h"
+#include <cfloat>
 
 namespace oe {
 namespace graphics {
@@ -18,7 +19,8 @@ namespace graphics {
 // Description: 3D polygon clipping
 //
 //------------------------------------------------------------------------------
-class Clip3D : public base::Object {
+class Clip3D : public base::Object
+{
     DECLARE_SUBCLASS(Clip3D,base::Object)
 
 public:
@@ -82,8 +84,8 @@ private:
    double z0, z1;     // near and far
 };
 
-} // End graphics namespace
-} // End oe namespace
-
+}
+}
 
 #endif
+

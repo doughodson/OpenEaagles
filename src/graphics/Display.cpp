@@ -18,6 +18,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cctype>
+#include <cfloat>
 
 #include <GL/glu.h>
 
