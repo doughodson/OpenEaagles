@@ -29,7 +29,7 @@
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/Statistic.h"
 #include "openeaagles/base/Terrain.h"
-#include "openeaagles/base/util/system_utils.h"
+#include "openeaagles/base/util/system.h"
 
 #include <cstring>
 #include <cmath>

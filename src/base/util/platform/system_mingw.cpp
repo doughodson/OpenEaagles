@@ -10,9 +10,9 @@ namespace oe {
 namespace base {
 
 //------------
-// lcSleep() - Sleep for 'msec' milliseconds
+// sleep for 'msec' milliseconds
 //------------
-void lcSleep(const unsigned int msec)
+void msleep(const unsigned int msec)
 {
    Sleep(msec);
 }

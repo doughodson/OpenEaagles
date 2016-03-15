@@ -5,7 +5,7 @@
 #include "openeaagles/base/Thread.h"
 #include "openeaagles/base/Component.h"
 #include "openeaagles/base/util/math_utils.h"
-#include "openeaagles/base/util/system_utils.h"
+#include "openeaagles/base/util/system.h"
 
 namespace oe {
 namespace base {

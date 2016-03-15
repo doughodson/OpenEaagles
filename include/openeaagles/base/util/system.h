@@ -5,8 +5,8 @@
 namespace oe {
 namespace base {
 
-// Sleep for 'msec' milliseconds
-void lcSleep(const unsigned int msec);
+// sleep for 'msec' milliseconds
+void msleep(const unsigned int msec);
 
 // Computer time (seconds)
 double getComputerTime();

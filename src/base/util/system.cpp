@@ -2,7 +2,7 @@
 #include <cstring>
 #include <fstream>
 
-#include "openeaagles/base/util/system_utils.h"
+#include "openeaagles/base/util/system.h"
 
 namespace oe {
 namespace base {

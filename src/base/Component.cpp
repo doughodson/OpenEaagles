@@ -13,7 +13,7 @@
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/Statistic.h"
 #include "openeaagles/base/String.h"
-#include "openeaagles/base/util/system_utils.h"
+#include "openeaagles/base/util/system.h"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...

@@ -4,7 +4,7 @@
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/util/string_utils.h"
-#include "openeaagles/base/util/system_utils.h"
+#include "openeaagles/base/util/system.h"
 
 #include <fstream>
 #include <cstdlib>

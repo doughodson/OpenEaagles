@@ -9,7 +9,7 @@
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/util/system_utils.h"
+#include "openeaagles/base/util/system.h"
 
 #include <cstdlib>
 
@@ -812,8 +812,8 @@ void GlutDisplay::idleCB()
    }
    glutSetWindow(id);
 
-   // Sleep to let other's use the CPU
-   base::lcSleep(sleepFor);
+   // sleep to let other's use the CPU
+   base::msleep(sleepFor);
 }
 
 

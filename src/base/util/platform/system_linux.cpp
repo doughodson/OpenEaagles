@@ -1,26 +1,20 @@
 //------------------------------------------------------------------------------
-// Support functions (Visual Studio unique)
+// More Linux unique stuff
 //------------------------------------------------------------------------------
 
-#include <sys/timeb.h>
+#include <sys/time.h>
 #include <ctime>
-#include <winsock2.h>
-
-// disable all deprecation warnings for now, until we fix
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
+#include <unistd.h>
 
 namespace oe {
 namespace base {
 
 //------------
-// lcSleep() - Sleep for 'msec' milliseconds
+// sleep for 'msec' milliseconds
 //------------
-void lcSleep(const unsigned int msec)
+void msleep(const unsigned int msec)
 {
-   Sleep(msec);
+  usleep(msec*1000);
 }
 
 //------------
@@ -28,21 +22,24 @@ void lcSleep(const unsigned int msec)
 //------------
 double getComputerTime()
 {
-   return static_cast<double>(timeGetTime())/1000.0;
+   timeval tv;
+   gettimeofday(&tv,nullptr);
+   return static_cast<double>(tv.tv_sec) + static_cast<double>(tv.tv_usec)/1000000.0;
 }
 
 //------------
-// Get UTC time since midnight (00:00:00), January 1, 1970
+// Get time since midnight (00:00:00), January 1, 1970
 //------------
 void getTime(
       unsigned long* const sec,  // (OUT) whole seconds
       unsigned long* const uSec  // (OUT) microseconds seconds
    )
 {
-   struct __timeb32 timebuffer;
-   _ftime32( &timebuffer );
-   if (sec != nullptr) *sec = timebuffer.time;
-   if (uSec != nullptr) *uSec = timebuffer.millitm * 1000;
+   timeval tv;
+   gettimeofday(&tv, nullptr);
+
+   if (sec != nullptr) *sec = tv.tv_sec;
+   if (uSec != nullptr) *uSec = tv.tv_usec;
 }
 
 //------------
@@ -58,17 +55,17 @@ bool convertSec2Ymdhms(
       unsigned int* const sec       // (OUT) seconds after the minute [ 0 .. 59 ]
    )
 {
-   __time32_t time = seconds;
+   time_t tt = seconds;
+   struct tm* tmx = gmtime( &tt );
 
-   struct tm tmx;
-   _gmtime32_s( &tmx, &time );
-
-   if (year != nullptr)  *year = tmx.tm_year + 1900;
-   if (month != nullptr) *month = tmx.tm_mon + 1;
-   if (day != nullptr)   *day = tmx.tm_mday;
-   if (hour != nullptr)  *hour = tmx.tm_hour;
-   if (min != nullptr)   *min = tmx.tm_min;
-   if (sec != nullptr)   *sec = tmx.tm_sec;
+   if (year != nullptr)  *year = tmx->tm_year + 1900;
+   if (month != nullptr) *month = tmx->tm_mon + 1;
+   if (day != nullptr)   *day = tmx->tm_mday;
+   if (hour != nullptr)  *hour = tmx->tm_hour;
+   if (min != nullptr)   *min = tmx->tm_min;
+   if (sec != nullptr)   *sec = tmx->tm_sec;
+   //std::printf("s2ymd = seconds = %d\n", seconds);
+   //std::printf("s2ymd = y=%d, m=%d, d=%d, h=%d, m=%d, s=%d\n", *year, *month, *day, *hour, *min, *sec);
 
    return true;
 }
@@ -96,10 +93,12 @@ bool convertYmdhms2Sec(
       tmx.tm_min  = min;
       tmx.tm_sec  = sec;
       tmx.tm_isdst = 0;
-      tmx.tm_wday = -1;
-      tmx.tm_yday = -1;
+      tmx.tm_wday = 0;
+      tmx.tm_yday = 0;
 
-      *seconds = _mkgmtime32(&tmx);
+      *seconds = timegm(&tmx);
+   //std::printf("ymd2s = y=%d, m=%d, d=%d, h=%d, m=%d, s=%d\n", year, month, day, hour, min, sec);
+   //std::printf("ymd2s = seconds = %d\n", *seconds);
       ok = true;
    }
    return ok;
@@ -107,4 +106,5 @@ bool convertYmdhms2Sec(
 
 }
 }
+
 
