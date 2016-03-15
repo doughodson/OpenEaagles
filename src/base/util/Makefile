@@ -9,7 +9,7 @@ OBJS =  \
 	$(LIB)(osg_utils.o) \
 	$(LIB)(string_utils.o) \
 	$(LIB)(system_utils.o) \
-	$(LIB)(platform\system_utils_linux.o)
+	$(LIB)(platform/system_utils_linux.o)
 
 all: ${OBJS}
 

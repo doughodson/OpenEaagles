@@ -45,7 +45,7 @@ FREETYPE2_INC_DIR = /usr/include/freetype2
 # HLA RTI
 # ---
 #HLA_INC_DIR = /usr/local/include/hla13
-HLA_INC_DIR = /home/me/oe/OpenRTI-0.7.1/include/RTI13
+HLA_INC_DIR = /home/me/oe/openrti/include/RTI13
 
 # ---
 # deviceIO device options

@@ -14,6 +14,7 @@
 
 #include "UsbJoystickImp.h"
 #include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/system_utils.h"
 
 namespace oe {
 namespace iodevice {
