@@ -4,12 +4,12 @@
 #ifndef __oe_platform_linux_support0_H__
 #define __oe_platform_linux_support0_H__
 
-#include <values.h>
-#include <sys/socket.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <string.h>
-#include <stdint.h>
+#include <values.h>       // FLT_MIN
+//#include <sys/socket.h>
+//#include <netinet/in.h>
+//#include <unistd.h>
+//#include <string.h>
+//#include <stdint.h>
 
 namespace oe {
 
