@@ -123,6 +123,9 @@
 // macros work.  Although a glorious endeavor, experience as proven that it's best
 // to treat these macros, at least initially, as 'black boxes'.
 
+#include <typeinfo>   // need typeid()
+#include <cstring>    // need std::strcmp
+
 #define DECLARE_SUBCLASS(ThisType,BaseType)                                                           \
     typedef BaseType BaseClass;                                                                       \
     public: ThisType(const ThisType& org);                                                            \

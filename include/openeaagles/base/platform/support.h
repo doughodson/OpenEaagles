@@ -1,23 +1,13 @@
-//------------------------------------------------------------------------------
-// Common support data and functions
-//
-// Note: The "Lc" prefix stands for "Link class" in honor of Ed Link, who
-//       invented the "Link Blue Box", which was the first flight simulator.
-//------------------------------------------------------------------------------
+
 #ifndef __oe_platform_support_H__
 #define __oe_platform_support_H__
 
-// ---
-// Framework configuration file
-// ---
+//------------------------------------------------------------------------------
+// Common support data and functions
+//------------------------------------------------------------------------------
+
+// framework configuration file
 #include "openeaagles/config.h"
-
-// ---
-// Common header files
-// ---
-
-#include <typeinfo>   // macros use typeid()
-#include <cstring>    // macros use std::strcmp
 
 // ---
 // Include OS/Processor unique stuff

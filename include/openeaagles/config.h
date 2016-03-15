@@ -7,12 +7,12 @@
 // Important: only define C pre-processor directives in this file
 //
 // =============================================================================
-#ifndef __oe_Config_H__
-#define __oe_Config_H__
+#ifndef __oe_config_H__
+#define __oe_config_H__
 
-// OpenEaagles release version number (14.09)
+// OpenEaagles release version number (16.03)
 #ifndef OE_VERSION
-#define OE_VERSION                              1409
+#define OE_VERSION                         1603
 #endif
 
 // Max number of 'registered' classes (see Object.h)
