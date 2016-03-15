@@ -10,6 +10,8 @@
 #include "openeaagles/base/Number.h"
 #include "openeaagles/base/Pair.h"
 
+#include "openeaagles/base/util/system.h"
+
 #include <cstring>
 
 #ifndef WIN32
@@ -501,7 +503,7 @@ bool NetIO::sendInteraction(const RTI::InteractionClassHandle handle, RTI::Param
 {
     bool ok = true;
     try {
-        getRTIambassador()->sendInteraction( handle, *pParams, theTag);
+        getRTIambassador()->sendInteraction(handle, *pParams, theTag);
     }
     catch (RTI::Exception& e) {
         std::cerr << &e << std::endl;
@@ -576,11 +578,7 @@ bool NetIO::createAndJoinFederation()
        try {
            rtiAmb->createFederationExecution(*federation, getFedFileName());
            std::cout << "*** Federation Created" << std::endl;
-           #ifdef WIN32
-               Sleep(1000);
-           #else
-               sleep(2); 
-           #endif
+           base::msleep(1000);   // DDH: this was set to 2000 for linux?
        }
        catch (RTI::FederationExecutionAlreadyExists& e) {
            std::cout << &e << std::endl;
