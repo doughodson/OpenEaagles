@@ -41,6 +41,10 @@ base
    
    -- consolidated platform specific functions into the subdirectory 'platform'
 
+   Number class
+     -- replaced constructor to handle defined 64-bit 'Integer64' datatype to standard
+        'int64_t'
+
 --------------------------------------------------------------------------------
 dafif
 

@@ -5,7 +5,6 @@
 #define __oe_platform_windows_support0_H__
 
 #include <winsock2.h>
-//#include <ERRNO.H>
 
 #if(_MSC_VER>=1600)   // VC10+
    #include <stdint.h>

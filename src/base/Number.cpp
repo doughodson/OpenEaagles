@@ -58,5 +58,5 @@ bool Number::setSlotValue(const Number* const svobj)
    return ok;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
