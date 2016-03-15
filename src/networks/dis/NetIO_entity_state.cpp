@@ -20,7 +20,7 @@
 #include "openeaagles/base/NetHandler.h"
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...

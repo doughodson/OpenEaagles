@@ -3,8 +3,8 @@
 // Utility functions to manipulate strings
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_util_string_utils_H__
-#define __oe_base_util_string_utils_H__
+#ifndef __oe_base_util_str_utils_H__
+#define __oe_base_util_str_utils_H__
 
 #include <cstddef>
 

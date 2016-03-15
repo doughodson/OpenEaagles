@@ -1,7 +1,7 @@
 
 #include "openeaagles/terrain/ded/DedFile.h"
 #include "openeaagles/base/NetHandler.h"   // for byte-swapping only
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <fstream>
 #include <string>

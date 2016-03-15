@@ -1,7 +1,7 @@
 
 #include "openeaagles/dafif/WaypointLoader.h"
 #include "openeaagles/base/FileReader.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <cstring>
 #include <cstdlib>

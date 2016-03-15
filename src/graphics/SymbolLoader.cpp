@@ -7,7 +7,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <cstring>
 

@@ -3,7 +3,7 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.h"
 #include "openeaagles/base/String.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/util/system.h"
 
 #include <fstream>

@@ -14,7 +14,7 @@
 #include "openeaagles/base/Nav.h"
 #include "openeaagles/base/NetHandler.h"
 
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 namespace oe {
 namespace hla {

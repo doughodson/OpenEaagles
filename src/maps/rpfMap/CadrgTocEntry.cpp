@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <cstdio>
 #include <cstring>

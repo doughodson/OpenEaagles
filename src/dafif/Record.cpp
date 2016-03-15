@@ -2,7 +2,7 @@
 #include "openeaagles/dafif/Record.h"
 #include "openeaagles/base/Nav.h"
 #include "openeaagles/base/String.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <iostream>
 #include <cstring>

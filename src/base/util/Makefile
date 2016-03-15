@@ -7,7 +7,7 @@ OBJS =  \
 	$(LIB)(lfi.o) \
 	$(LIB)(math_utils.o) \
 	$(LIB)(osg_utils.o) \
-	$(LIB)(string_utils.o) \
+	$(LIB)(str_utils.o) \
 	$(LIB)(system.o) \
 	$(LIB)(platform/system_linux.o)
 
