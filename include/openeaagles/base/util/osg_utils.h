@@ -1,19 +1,22 @@
 
-//------------------------------------------------------------------------------
-// OSG utility functions
-//------------------------------------------------------------------------------
-
 #ifndef __oe_base_util_osg_utils_H__
 #define __oe_base_util_osg_utils_H__
 
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
-#include "openeaagles/base/osg/Matrix"
+//------------------------------------------------------------------------------
+// General purpose functions for OSG classes
+//------------------------------------------------------------------------------
 
 namespace oe {
+
+namespace osg {
+   class Vec3d; class Vec3f;
+   class Vec4d; class Vec4f;
+   class Matrixd; class Matrixf;
+}
+
 namespace base {
 
-// Pre-multiply an array of 4D vectors with a 4x4 matrix
+// pre-multiply an array of 4D vectors with a 4x4 matrix
 
 void preMultVec4Array(
       const osg::Vec4d orig[],
@@ -29,14 +32,7 @@ void preMultVec4Array(
       const unsigned int n
    );
 
-// Pre-multiply an array of 3D vectors with a 4x4 matrix
-
-void lcPreMultVec3Array(
-      const osg::Vec3 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec3 result[],
-      const int n
-   );
+// pre-multiply an array of 3D vectors with a 4x4 matrix
 
 void preMultVec3Array(
       const osg::Vec3d orig[],
@@ -52,14 +48,7 @@ void preMultVec3Array(
       const unsigned int n
    );
 
-// Post-multiply an array of 4D vectors with a 4x4 matrix
-
-void lcPostMultVec4Array(
-      const osg::Vec4 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec4 result[],
-      const int n
-   );
+// post-multiply an array of 4D vectors with a 4x4 matrix
 
 void postMultVec4Array(
       const osg::Vec4d orig[],
@@ -75,7 +64,7 @@ void postMultVec4Array(
       const unsigned int n
    );
 
-// Post-multiply an array of 3D vectors with a 4x4 matrix
+// post-multiply an array of 3D vectors with a 4x4 matrix
 
 void postMultVec3Array(
       const osg::Vec3d orig[],

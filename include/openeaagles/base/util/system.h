@@ -2,6 +2,10 @@
 #ifndef __oe_base_util_system_utils_H__
 #define __oe_base_util_system_utils_H__
 
+//------------------------------------------------------------------------------
+// General purpose OS system functions
+//------------------------------------------------------------------------------
+
 namespace oe {
 namespace base {
 

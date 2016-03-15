@@ -2,6 +2,10 @@
 #ifndef __oe_base_util_math_utils_H__
 #define __oe_base_util_math_utils_H__
 
+//------------------------------------------------------------------------------
+// General purpose math functions
+//------------------------------------------------------------------------------
+
 #include <cmath>
 
 namespace oe {

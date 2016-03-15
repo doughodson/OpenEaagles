@@ -1,6 +1,10 @@
 
 #include "openeaagles/base/util/osg_utils.h"
 
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Matrix"
+
 namespace oe {
 namespace base {
 
@@ -62,17 +66,6 @@ void preMultVec3Array(
 //------------
 // Post-multiply an array of 4D vectors with a 4x4 matrix
 //------------
-void lcPostMultVec4Array(
-      const osg::Vec4 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec4 result[],
-      const int n
-   )
-{
-   for (int i = 0; i < n; i++) {
-      result[i] = matrix.postMult(orig[i]);
-   }
-}
 
 void postMultVec4Array(
       const osg::Vec4d orig[],
@@ -101,17 +94,6 @@ void postMultVec4Array(
 //------------
 // Post-multiply an array of 3D vectors with a 4x4 matrix
 //------------
-void lcPostMultVec3Array(
-      const osg::Vec3 orig[],
-      const osg::Matrix& matrix,
-      osg::Vec3 result[],
-      const int n
-   )
-{
-   for (int i = 0; i < n; i++) {
-      result[i] = matrix.postMult(orig[i]);
-   }
-}
 
 void postMultVec3Array(
       const osg::Vec3d orig[],
