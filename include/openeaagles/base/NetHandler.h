@@ -5,6 +5,7 @@
 #define __oe_base_NetHandler_H__
 
 #include "openeaagles/base/Component.h"
+#include <cstdint>
 
 namespace oe {
 namespace base {
@@ -260,8 +261,8 @@ inline void NetHandler::fromNetOrder(double* const vout, const double vin)
     return toNetOrder(vout,vin);
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 
