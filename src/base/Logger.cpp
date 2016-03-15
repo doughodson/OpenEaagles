@@ -3,6 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Logger.h"
 #include "openeaagles/base/String.h"
+#include "openeaagles/base/util/system_utils.h"
 
 namespace oe {
 namespace base {

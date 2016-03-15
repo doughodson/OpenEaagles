@@ -60,7 +60,7 @@ OBJS =  \
 	$(LIB)(Vectors.o) \
 	$(LIB)(Yiq.o)
 
-SUBDIRS = distributions functors nethandlers osg platform ubf units util
+SUBDIRS = distributions functors nethandlers osg ubf units util
 
 all: subdirs ${OBJS}
 

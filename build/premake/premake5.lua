@@ -127,7 +127,9 @@ solution "oe"
       }
       excludes {
          "../../src/base/osg/Matrix_implementation.cpp",
-         "../../src/base/linux/**.*"
+         "../../src/base/platform/linux/**.*",
+         "../../src/base/util/platform/system_utils_linux.cpp",
+         "../../src/base/util/platform/system_utils_mingw.cpp"
       }
       targetname "base"
 

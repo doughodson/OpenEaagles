@@ -4,6 +4,7 @@
 
 #include <sys/timeb.h>
 #include <ctime>
+#include <winsock2.h>
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...

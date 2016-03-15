@@ -9,6 +9,7 @@
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/util/system_utils.h"
 
 #include <cstdlib>
 
