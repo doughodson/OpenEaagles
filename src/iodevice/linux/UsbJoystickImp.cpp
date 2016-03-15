@@ -13,7 +13,7 @@
 #include <linux/joystick.h>
 
 #include "UsbJoystickImp.h"
-#include "openeaagles/base/util/string_utils.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/util/system.h"
 
 namespace oe {
