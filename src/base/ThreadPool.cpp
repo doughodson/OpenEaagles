@@ -1,7 +1,7 @@
 
 #include "openeaagles/base/ThreadPool.h"
 #include "openeaagles/base/Thread.h"
-#include "openeaagles/base/util/atomic_utils.h"
+#include "openeaagles/base/util/atomics.h"
 
 namespace oe {
 namespace base {

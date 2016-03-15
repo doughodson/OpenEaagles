@@ -1,3 +1,7 @@
+
+#ifndef __oe_base_util_atomics_msvc_H__
+#define __oe_base_util_atomics_msvc_H__
+
 // ---
 // Simple semaphore spinlock and unlock functions: 
 //    lock(long int& s)      -- locks the semaphore w/spinlock wait
@@ -7,6 +11,9 @@
 //
 // Visual Studio version
 // ---
+
+namespace oe {
+namespace base {
 
 inline void lock(long int& semaphore)
 {
@@ -54,3 +61,9 @@ inline void unlock(long int& semaphore)
    }
 #endif
 }
+
+}
+}
+
+#endif
+

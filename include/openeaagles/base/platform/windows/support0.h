@@ -38,11 +38,7 @@
   #include <cfloat>
 #endif
 
-namespace oe {
 
-typedef LONGLONG  Integer64;
-
-}
 
 #endif
 

@@ -5,6 +5,7 @@
 #define __oe_base_Number_H__
 
 #include "openeaagles/base/Object.h"
+#include "openeaagles/base/util/datatypes.h"
 
 namespace oe {
 namespace base {

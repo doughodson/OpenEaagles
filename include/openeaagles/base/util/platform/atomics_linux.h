@@ -1,3 +1,7 @@
+
+#ifndef __oe_base_util_atomics_linux_H__
+#define __oe_base_util_atomics_linux_H__
+
 // ---
 // Simple semaphore spinlock and unlock functions: 
 //    lock(long int& s)      -- gets the semaphore w/spinlock wait
@@ -5,13 +9,16 @@
 //
 //    where 's' is the semaphore that must be initialized to zero.
 //
-// MinGW version
+// Linux version
 // ---
+
+namespace oe {
+namespace base {
 
 inline void lock(long int& semaphore)
 {
 
-#if 0
+#if 1
 
    long int* sem = static_cast<long int*>(&semaphore);
    while (__sync_lock_test_and_set(sem, 1));
@@ -43,7 +50,7 @@ inline void lock(long int& semaphore)
 
 inline void unlock(long int& semaphore)
 {
-#if 0
+#if 1
 
    long int* sem = static_cast<long int*>(&semaphore);
    __sync_lock_release(sem);
@@ -59,7 +66,11 @@ inline void unlock(long int& semaphore)
        :
        : "memory", "%eax"
    );
-
 #endif
 
 }
+
+}
+}
+
+#endif

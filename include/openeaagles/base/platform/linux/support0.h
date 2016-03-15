@@ -11,10 +11,5 @@
 //#include <string.h>
 //#include <stdint.h>
 
-namespace oe {
-
-typedef long long int Integer64;
-
-}
 
 #endif

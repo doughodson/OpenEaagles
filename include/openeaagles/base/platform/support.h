@@ -17,9 +17,6 @@
 // ---
 
 #include <typeinfo>   // macros use typeid()
-//#include <iostream>
-//#include <sys/types.h>
-//#include <cmath>
 #include <cstring>    // macros use std::strcmp
 
 // ---
@@ -30,7 +27,6 @@
 #else
   #include "openeaagles/base/platform/linux/support0.h"
 #endif
-
 
 #endif
 

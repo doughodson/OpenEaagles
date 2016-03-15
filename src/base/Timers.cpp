@@ -2,7 +2,7 @@
 #include "openeaagles/base/Timers.h"
 #include "openeaagles/base/Number.h"
 #include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/atomic_utils.h"
+#include "openeaagles/base/util/atomics.h"
 
 namespace oe {
 namespace base {

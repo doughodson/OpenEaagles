@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/util/atomic_utils.h"
+#include "openeaagles/base/util/atomics.h"
 
 #ifndef __oe_base_safe_stack_H__
 #define __oe_base_safe_stack_H__
