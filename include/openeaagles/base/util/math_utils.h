@@ -2,6 +2,8 @@
 #ifndef __oe_base_util_math_utils_H__
 #define __oe_base_util_math_utils_H__
 
+#include <cmath>
+
 namespace oe {
 namespace base {
 
