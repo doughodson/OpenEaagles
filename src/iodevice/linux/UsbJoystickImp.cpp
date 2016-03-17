@@ -68,12 +68,12 @@ void UsbJoystickImp::reset()
          // search for device at "/dev/jsX" first
          std::sprintf(cbuff, "/dev/js%d", getDeviceIndex());
          if (base::doesFileExist(cbuff)) {
-           base::lcStrcpy(deviceName, sizeof(deviceName), cbuff);
+           base::utStrcpy(deviceName, sizeof(deviceName), cbuff);
          } else {
             // search for device at "/dev/input/jsX" next
             std::sprintf(cbuff, "/dev/input/js%d", getDeviceIndex());
             if (base::doesFileExist(cbuff)) {
-               base::lcStrcpy(deviceName, sizeof(deviceName), cbuff);
+               base::utStrcpy(deviceName, sizeof(deviceName), cbuff);
             }
          }
       }
