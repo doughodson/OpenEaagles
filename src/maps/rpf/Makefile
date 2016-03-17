@@ -1,4 +1,4 @@
-# Maps Rpf directory makefile
+
 include ../../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboemaps.a
@@ -13,7 +13,7 @@ OBJS = \
 	$(LIB)(MapDrawer.o) \
 	$(LIB)(TexturePager.o) \
 	$(LIB)(TextureTable.o) \
-	$(LIB)(Support.o) 
+	$(LIB)(support.o) 
 
 all: ${OBJS}
 

@@ -5,7 +5,7 @@
 #include "openeaagles/maps/rpf/CadrgFile.h"
 #include "openeaagles/maps/rpf/CadrgTocEntry.h"
 #include "openeaagles/base/String.h"
-#include "openeaagles/maps/rpf/Support.h"
+#include "openeaagles/maps/rpf/support.h"
 #include "openeaagles/base/util/str_utils.h"
 
 #include <cstring>

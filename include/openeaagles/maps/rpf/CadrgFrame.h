@@ -15,7 +15,7 @@
 #define __oe_maps_rpf_CadrgFrame_H__
 
 #include "openeaagles/base/Object.h"
-#include "openeaagles/maps/rpf/Support.h"
+#include "openeaagles/maps/rpf/support.h"
 
 namespace oe {
 namespace maps {

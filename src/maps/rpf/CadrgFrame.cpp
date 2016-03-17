@@ -3,8 +3,8 @@
 //------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/CadrgFrame.h"
-#include "openeaagles/base/String.h"
 #include "openeaagles/maps/rpf/CadrgFrameEntry.h"
+#include "openeaagles/base/String.h"
 
 #include <cstring>
 
