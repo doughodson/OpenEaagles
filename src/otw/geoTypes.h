@@ -18,6 +18,8 @@
 #ifndef GEOTYPES_H
 #define GEOTYPES_H
 
+#include "openeaagles/base/util/platform_api.h"
+
 #include "math.h"
 #include <memory.h>
 
@@ -37,7 +39,7 @@ typedef float                float_4;
 typedef double               float_8;
 
 #if defined(WIN32)
-  #include <Wtypes.h>
+//  #include <Wtypes.h>
     typedef ULONGLONG        uin_8;
     typedef LONGLONG         int_8;
 #else

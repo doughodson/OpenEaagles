@@ -93,7 +93,7 @@ namespace graphics {
 //------------------------------------------------------------------------------
 class Page : public Graphic
 {
-   DECLARE_SUBCLASS(Page,Graphic)
+   DECLARE_SUBCLASS(Page, Graphic)
 
 public:
    Page();

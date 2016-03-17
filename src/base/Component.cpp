@@ -14,6 +14,7 @@
 #include "openeaagles/base/Statistic.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/util/system.h"
+#include "openeaagles/base/util/platform_api.h"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...

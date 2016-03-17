@@ -13,7 +13,6 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Texture
-// Base class: Object > Texture
 //
 // Description: Top level texture class for general (simple) 2D textures.
 //
@@ -103,8 +102,9 @@ namespace graphics {
 //      Sets the blueBias value to b and returns true if successful.
 //
 //------------------------------------------------------------------------------
-class Texture : public Image {
-    DECLARE_SUBCLASS(Texture,Image)
+class Texture : public Image
+{
+    DECLARE_SUBCLASS(Texture, Image)
 
 public:
    Texture();
@@ -193,7 +193,7 @@ inline GLfloat Texture::getGreenBias() const       { return greenBias; }
 inline GLfloat Texture::getBlueScale() const       { return blueScale; }
 inline GLfloat Texture::getBlueBias() const        { return blueBias; }
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

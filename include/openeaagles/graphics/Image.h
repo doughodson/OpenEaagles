@@ -5,6 +5,8 @@
 #define __oe_graphics_Image_H__
 
 #include "openeaagles/base/Object.h"
+
+#include "openeaagles/base/util/platform_api.h"
 #include <GL/gl.h>
 
 namespace oe {

@@ -16,6 +16,7 @@
 //==============================================================================
 
 #include "UsbJoystickImp.h"
+#include "openeaagles/base/util/platform_api.h"
 
 namespace oe {
 namespace iodevice {

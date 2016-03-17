@@ -4,9 +4,7 @@
 
 // framework configuration file
 #include "openeaagles/config.h"
-// include things like 'winsock2', etc...
-#include "openeaagles/base/util/platform_api.h"
-// lock/unlock, etc
+// lock/unlock, etc - reference system needs it
 #include "openeaagles/base/util/atomics.h"
 
 #include "openeaagles/base/macros.h"

@@ -6,6 +6,8 @@
 
 #include "openeaagles/base/Component.h"
 #include "openeaagles/base/osg/Vec4"
+
+#include "openeaagles/base/util/platform_api.h"
 #include <GL/glu.h>
 
 namespace oe {
@@ -38,7 +40,8 @@ namespace graphics {
 //                                 (default: (0,0,0,1))
 //    shininess      <Number>      ! How shiny our material is (0 = dull, 128 = really shiny) (default: 0)
 //------------------------------------------------------------------------------
-class Material : public base::Component {
+class Material : public base::Component
+{
     DECLARE_SUBCLASS(Material,base::Component)
 
 public:
@@ -81,7 +84,7 @@ private:
     double shininess;           // shininess value
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif
