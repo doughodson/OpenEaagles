@@ -6,7 +6,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboemaps.a
 OBJS =  \
 	$(LIB)(factory.o)
 
-SUBDIRS = rpfMap
+SUBDIRS = rpf
 
 all: subdirs ${OBJS}
 

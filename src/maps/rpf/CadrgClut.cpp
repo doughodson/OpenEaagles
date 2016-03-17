@@ -2,10 +2,10 @@
 // Class: CadrgClut
 //------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpfMap/CadrgClut.h"
-#include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
+#include "openeaagles/maps/rpf/CadrgClut.h"
+#include "openeaagles/maps/rpf/CadrgFrameEntry.h"
+#include "openeaagles/maps/rpf/Support.h"
 #include "openeaagles/base/String.h"
-#include "openeaagles/maps/rpfMap/Support.h"
 
 #include <cstring>
 

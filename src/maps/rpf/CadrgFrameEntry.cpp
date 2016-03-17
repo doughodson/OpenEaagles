@@ -2,8 +2,8 @@
 // Class: CadrgFrameEntry
 //------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpfMap/CadrgFrameEntry.h"
-#include "openeaagles/maps/rpfMap/CadrgFrame.h"
+#include "openeaagles/maps/rpf/CadrgFrameEntry.h"
+#include "openeaagles/maps/rpf/CadrgFrame.h"
 #include <cstring>
 
 namespace oe {

@@ -32,7 +32,7 @@ namespace maps {
 namespace rpf {
 
 // Swap bytes.
-void swap(unsigned char *ptr, int count);
+void swap(unsigned char* ptr, int count);
 // Change string to lower case
 char* stringToLowercase(char* str, int flag);
 
@@ -146,8 +146,8 @@ struct Image {
 void parseLocations(std::ifstream& fin, Location* locs, int count);
 
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
+}
 
 #endif

@@ -2,7 +2,7 @@
 // Class: TextureTable
 // ------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpfMap/TextureTable.h"
+#include "openeaagles/maps/rpf/TextureTable.h"
 #include "openeaagles/graphics/Texture.h"
 
 namespace oe {

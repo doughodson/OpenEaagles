@@ -20,7 +20,7 @@
 #ifndef __oe_maps_rpf_CadrgFrameEntry_H__
 #define __oe_maps_rpf_CadrgFrameEntry_H__
 
-#include "openeaagles/maps/rpfMap/CadrgClut.h"
+#include "openeaagles/maps/rpf/CadrgClut.h"
 #include "openeaagles/base/Object.h"
 
 namespace oe {

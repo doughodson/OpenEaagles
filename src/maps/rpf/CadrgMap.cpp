@@ -2,12 +2,12 @@
 // Class: CadrgMap
 // ---------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpfMap/CadrgMap.h"
-#include "openeaagles/maps/rpfMap/CadrgFile.h"
-#include "openeaagles/maps/rpfMap/CadrgFrame.h"
-#include "openeaagles/maps/rpfMap/CadrgTocEntry.h"
-#include "openeaagles/maps/rpfMap/TexturePager.h"
-#include "openeaagles/maps/rpfMap/MapDrawer.h"
+#include "openeaagles/maps/rpf/CadrgMap.h"
+#include "openeaagles/maps/rpf/CadrgFile.h"
+#include "openeaagles/maps/rpf/CadrgFrame.h"
+#include "openeaagles/maps/rpf/CadrgTocEntry.h"
+#include "openeaagles/maps/rpf/TexturePager.h"
+#include "openeaagles/maps/rpf/MapDrawer.h"
 #include "openeaagles/graphics/Texture.h"
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"

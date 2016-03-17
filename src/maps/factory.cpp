@@ -3,8 +3,8 @@
 
 #include "openeaagles/base/Object.h"
 
-#include "openeaagles/maps/rpfMap/MapDrawer.h"
-#include "openeaagles/maps/rpfMap/CadrgMap.h"
+#include "openeaagles/maps/rpf/MapDrawer.h"
+#include "openeaagles/maps/rpf/CadrgMap.h"
 
 #include <cstring>
 
