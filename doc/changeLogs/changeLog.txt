@@ -76,6 +76,11 @@ base library
      -- replaced constructor to handle defined 64-bit 'Integer64' datatype to standard
         64-bit integer 'int64_t'
 
+   'lc' functions
+     -- removed lcMax and lcMin, use std::fmax and std::fmin from <cmath> instead
+     -- when C++14 is better supported, should use std::max and std::min templates
+        from <algorithm> library
+
 --------------------------------------------------------------------------------
 dafif library
 

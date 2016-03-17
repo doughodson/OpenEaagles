@@ -4,6 +4,7 @@
 #include "openeaagles/base/Hls.h"
 #include "openeaagles/base/Float.h"
 #include "openeaagles/base/util/math_utils.h"
+#include <cmath>
 
 namespace oe {
 namespace base {
@@ -185,8 +186,8 @@ void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
     double rc, gc, bc;
     double maxcol, mincol, cdelta;
 
-    maxcol = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]));
-    mincol = lcMin( rgb[RED], lcMin(rgb[GREEN],rgb[BLUE]));
+    maxcol = std::fmax( rgb[RED], std::fmax( rgb[GREEN], rgb[BLUE] ) );
+    mincol = std::fmin( rgb[RED], std::fmin( rgb[GREEN], rgb[BLUE] ) );
     hls[LIGHTNESS] = (mincol + maxcol) / 2.0f;
 
     if (maxcol == mincol) {

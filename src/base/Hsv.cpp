@@ -5,6 +5,7 @@
 #include "openeaagles/base/Float.h"
 #include "openeaagles/base/units/Angles.h"
 #include "openeaagles/base/util/math_utils.h"
+#include <cmath>
 
 namespace oe {
 namespace base {
@@ -271,8 +272,8 @@ void Hsv::hsv2rgb(osg::Vec4& rgb, const osg::Vec4& hsv)
 //------------------------------------------------------------------------------
 void Hsv::rgb2hsv(osg::Vec3& hsv, const osg::Vec3& rgb)
 {
-   double cmax = lcMax( rgb[RED], lcMax(rgb[GREEN],rgb[BLUE]) );
-   double cmin = lcMin( rgb[RED], lcMin(rgb[GREEN],rgb[BLUE]) );
+   double cmax = std::fmax( rgb[RED], std::fmax(rgb[GREEN],rgb[BLUE]) );
+   double cmin = std::fmin( rgb[RED], std::fmin(rgb[GREEN],rgb[BLUE]) );
    double cdelta = cmax - cmin;
    double h = 0;
    double s = 0;

@@ -11,22 +11,6 @@
 namespace oe {
 namespace base {
 
-// ---
-// Max/min functions
-// ---
-
-// maximum value of v1 or v2
-inline double lcMax(const double v1, const double v2)
-{
-   return (v1 >= v2) ? v1 : v2;
-}
-
-// minimum value of v1 or v2
-inline double lcMin(const double v1, const double v2)
-{
-   return (v1 <= v2) ? v1 : v2;
-}
-
 // nint -- nearest integer
 inline int nint(const double x)
 {
