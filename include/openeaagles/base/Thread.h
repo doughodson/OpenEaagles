@@ -28,7 +28,8 @@
 
 namespace oe {
 namespace base {
-   class Component;
+
+class Component;
 
 //------------------------------------------------------------------------------
 // Class:  Thread
@@ -89,8 +90,9 @@ namespace base {
 //              0.0           THREAD_PRIORITY_IDLE(-15)
 //
 //------------------------------------------------------------------------------
-class Thread : public Object {
-   DECLARE_SUBCLASS(Thread,Object)
+class Thread : public Object
+{
+   DECLARE_SUBCLASS(Thread, Object)
 
 public:
    Thread(Component* const parent, const double priority);
@@ -154,8 +156,9 @@ private: // Data
 //    User's will need to derive a class from this class and define the
 //    work function, userFunc(), which is only called once.
 //------------------------------------------------------------------------------
-class ThreadSingleTask : public Thread {
-   DECLARE_SUBCLASS(ThreadSingleTask,Thread)
+class ThreadSingleTask : public Thread
+{
+   DECLARE_SUBCLASS(ThreadSingleTask, Thread)
 
 public:
    ThreadSingleTask(Component* const parent, const double priority);
@@ -181,8 +184,9 @@ private:
 //    until the parent component is shutdown.  A value of 1.0/rate is passed
 //    to userFunc() as the delta time parameter.
 //------------------------------------------------------------------------------
-class ThreadPeriodicTask : public Thread {
-   DECLARE_SUBCLASS(ThreadPeriodicTask,Thread)
+class ThreadPeriodicTask : public Thread
+{
+   DECLARE_SUBCLASS(ThreadPeriodicTask, Thread)
 
 public:
    ThreadPeriodicTask(Component* const parent, const double priority, const double rate);
@@ -229,8 +233,9 @@ private:
 //    wait for several sync task threads.  Loop will end with the shutdown of
 //    the parent.
 //------------------------------------------------------------------------------
-class ThreadSyncTask : public Thread {
-   DECLARE_SUBCLASS(ThreadSyncTask,Thread)
+class ThreadSyncTask : public Thread
+{
+   DECLARE_SUBCLASS(ThreadSyncTask, Thread)
 
 public:
    ThreadSyncTask(Component* const parent, const double priority);
@@ -266,8 +271,8 @@ private:
    void* completedSig;  // completed signal
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

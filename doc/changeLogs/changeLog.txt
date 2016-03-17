@@ -85,6 +85,13 @@ base library
         such as 'strcpy', etc.  The prefix was changed to better indicate the nature
         of function (i.e., it's a utility)
 
+   Thread classes
+     -- platform specific code associated with the thread classes has been restructured
+        to properly include files correctly.  Before, the Thread.cpp file was including
+        platform specific class methods into the oe::base namespace.  But this included
+        file was (for linux) including other includes - <signal.h> was being imported into
+        the oe::base namespace. Surprisingly, no apparent errors resulted. Nevertheless
+        the code was restructured properly include appropriate system headers.
 
 --------------------------------------------------------------------------------
 dafif library
