@@ -3,7 +3,6 @@
 
 #include <cstring>
 #include <cctype>
-#include <cmath>
 #include <cstddef>
 
 namespace oe {
@@ -12,7 +11,7 @@ namespace base {
 //------------
 // Converts the integer number, 'num', to an ascii string.
 //------------
-void lcInteger2Str(const int num, char* const str, int width)
+void utInteger2Str(const int num, char* const str, int width)
 {
    const int MAX_CHARS = 32;
 
@@ -55,7 +54,7 @@ void lcInteger2Str(const int num, char* const str, int width)
 // destination buffer, 'strDest'.  The destination string is null terminated.
 // The 'strSource' string will be truncated if the 'strDest' string is too small.
 //------------
-bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcpy(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -82,7 +81,7 @@ bool lcStrcpy(char* const strDest, const size_t sizeOfDest, const char* const st
 // is null terminated.  The 'strSource' string will be truncated if the 'strDest'
 // string is too small.
 //------------
-bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
+bool utStrncpy(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -111,7 +110,7 @@ bool lcStrncpy(char* const strDest, const size_t sizeOfDest, const char* const s
 // pointer, or is not null-terminated, or if 'strSource' is a null pointer then false
 // is returned and the destination buffer is unchanged.
 //------------
-bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcat(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -148,7 +147,7 @@ bool lcStrcat(char* const strDest, const size_t sizeOfDest, const char* const st
 // If the destination buffer is too small then false is returned and the destination buffer
 // is unchanged.
 //------------
-bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -179,7 +178,7 @@ bool lcStrcpyFull(char* const strDest, const size_t sizeOfDest, const char* cons
 // terminated.   If the destination buffer is too small then false is returned and the
 // destination buffer is unchanged.
 //------------
-bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
+bool utStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* const strSource, const size_t count)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -211,7 +210,7 @@ bool lcStrncpyFull(char* const strDest, const size_t sizeOfDest, const char* con
 // null-terminated, or if 'strSource' is a null pointer then false is returned and the
 // destination buffer is unchanged.
 //------------
-bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
+bool utStrcatFull(char* const strDest, const size_t sizeOfDest, const char* const strSource)
 {
    if ((strDest == nullptr) || (strSource == nullptr) || sizeOfDest == 0) { // NULL ptr's or zero dest size
       return false;
@@ -249,7 +248,7 @@ bool lcStrcatFull(char* const strDest, const size_t sizeOfDest, const char* cons
 //------------
 // Compare two strings ignoring case (using lower case characters)
 //------------
-int lcStrcasecmp(const char* const s1, const char* const s2)
+int utStrcasecmp(const char* const s1, const char* const s2)
 {
    if (s1 == nullptr && s2 == nullptr) return  0;   // They're the same if they both don't exist
    if (s1 != nullptr && s2 == nullptr) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
@@ -272,7 +271,7 @@ int lcStrcasecmp(const char* const s1, const char* const s2)
 //------------
 // Compare the first 'n' characters of two strings ignoring case (using lower case characters)
 //------------
-int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n)
+int utStrncasecmp(const char* const s1, const char* const s2, const size_t n)
 {
    if ( (s1 == nullptr && s2 == nullptr) || n == 0) return 0;  // They're the same if they both don't exist
    if (s1 != nullptr && s2 == nullptr) return  1;  // S1 is greater than S2 if S2 doesn't exist and S1 does
@@ -292,22 +291,6 @@ int lcStrncasecmp(const char* const s1, const char* const s2, const size_t n)
    if (icnt < n && *p2 != '\0') return - 1;
    return 0;
 }
-
-//------------
-// returns number of digits in the whole number part (i.e. left of decimal)
-// of a floating point number
-//------------
-unsigned int getDigits(const double x)
-{
-   unsigned int digits = 2;
-   double z = std::fabs(x);
-   while (z >= 10.0) {
-      digits++;
-      z /= 10.0;
-   }
-   return digits;
-}
-
 
 }
 }

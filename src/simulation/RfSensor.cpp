@@ -403,7 +403,7 @@ bool RfSensor::setBeamWidth(const double v)
 // Sets the type ID
 bool RfSensor::setTypeId(const char* const str)
 {
-   base::lcStrcpy(typeId, TYPE_ID_LENGTH, str);
+   base::utStrcpy(typeId, TYPE_ID_LENGTH, str);
    return true;
 }
 

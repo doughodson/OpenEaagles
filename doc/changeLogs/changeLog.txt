@@ -66,11 +66,11 @@ base library
       needed.
       
    -- almost all 'support.h' functions are now defined in scope of 'base' namespace - no
-      longer are they global (i.e., scoped) to all of 'oe'.  The combination of grouping
+      longer are they scoped in the broader 'oe' namespace.  The combination of grouping
       functionality into individual related utility files and more explicity including
-      them (e.g., #include "openeaagles/base/util/system.h") in combination with more
-      explict references to them (e.g., base::msleep) makes it more obvious as to where
-      they are defined and only defined where needed.
+      them (e.g., #include "openeaagles/base/util/system.h") where needed, results in
+      more explicit explict references to them (e.g., base::msleep).  This makes it more
+      obvious as to where they are defined, and ensure they are defined only where needed.
 
    Number class
      -- replaced constructor to handle defined 64-bit 'Integer64' datatype to standard
@@ -78,8 +78,13 @@ base library
 
    'lc' functions
      -- removed lcMax and lcMin, use std::fmax and std::fmin from <cmath> instead
-     -- when C++14 is better supported, should use std::max and std::min templates
+        when C++14 is better supported, should use std::max and std::min templates
         from <algorithm> library
+     -- renamed the 'lc' prefix on all char-based string functions and replaced with
+        'ut' to indicate utility and clearly avoid any ambiquity with legacy C functions
+        such as 'strcpy', etc.  The prefix was changed to better indicate the nature
+        of function (i.e., it's a utility)
+
 
 --------------------------------------------------------------------------------
 dafif library

@@ -780,7 +780,7 @@ bool NetIO::makeFederateName(char* const fedName, const unsigned int len, const 
       cbuff[idx++] = 0;
 
       if (idx <= len) {
-         base::lcStrcpy(fedName,len,cbuff);
+         base::utStrcpy(fedName,len,cbuff);
          ok = true;
       }
    }
@@ -868,7 +868,7 @@ bool NetIO::makeFederationName(char* const fedName, const unsigned int len, cons
       cbuff[idx++] = 0;
 
       if (idx <= len) {
-         base::lcStrcpy(fedName,len,cbuff);
+         base::utStrcpy(fedName,len,cbuff);
          ok = true;
       }
    }
@@ -1919,7 +1919,7 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
             if (origType != nullptr) {
 
                char cbuff[64];
-               base::lcStrcpy(cbuff, 64, origType->getString());
+               base::utStrcpy(cbuff, 64, origType->getString());
 
 #if 0 /* optionally increment the last character to look for generic matches */
                size_t ll = std::strlen(cbuff);

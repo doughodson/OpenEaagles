@@ -529,11 +529,11 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    const size_t FONTPATHNAME_LENGTH = 256;
    char fontPathname[FONTPATHNAME_LENGTH];
    if (fontDirectory() != nullptr)
-      base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+      base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
    else
-      base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+      base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
 
-   base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
+   base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, fontMap[index]);
 
    // Open the font file
    FILE* fp = nullptr;

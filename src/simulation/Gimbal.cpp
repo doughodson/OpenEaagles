@@ -1165,25 +1165,25 @@ bool Gimbal::setSlotPlayerTypes(const base::PairStream* const msg)
          const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
          const base::String* type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
-            if ( lcStrcasecmp(*type,"air") == 0 ) {
+            if ( utStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
             }
-            else if ( lcStrcasecmp(*type,"ground") == 0 ) {
+            else if ( utStrcasecmp(*type,"ground") == 0 ) {
                mask = (mask | Player::GROUND_VEHICLE);
             }
-            else if ( lcStrcasecmp(*type,"weapon") == 0 ) {
+            else if ( utStrcasecmp(*type,"weapon") == 0 ) {
                mask = (mask | Player::WEAPON);
             }
-            else if ( lcStrcasecmp(*type,"ship") == 0 ) {
+            else if ( utStrcasecmp(*type,"ship") == 0 ) {
                mask = (mask | Player::SHIP);
             }
-            else if ( lcStrcasecmp(*type,"building") == 0 ) {
+            else if ( utStrcasecmp(*type,"building") == 0 ) {
                mask = (mask | Player::BUILDING);
             }
-            else if ( lcStrcasecmp(*type,"lifeform") == 0 ) {
+            else if ( utStrcasecmp(*type,"lifeform") == 0 ) {
                mask = (mask | Player::LIFE_FORM);
             }
-            else if ( lcStrcasecmp(*type,"space") == 0 ) {
+            else if ( utStrcasecmp(*type,"space") == 0 ) {
                mask = (mask | Player::SPACE_VEHICLE);
             }
          }

@@ -30,6 +30,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/Number.h"
+#include "openeaagles/base/util/str_utils.h"
 
 #include <cstdio>
 #include <cstring>
@@ -117,7 +118,7 @@ void PosixHandler::copyData(const PosixHandler& org, const bool cc)
     if (org.localIpAddr != nullptr) {
         size_t len = std::strlen(org.localIpAddr);
         localIpAddr = new char[len+1];
-        lcStrcpy(localIpAddr,(len+1),org.localIpAddr);
+        utStrcpy(localIpAddr,(len+1),org.localIpAddr);
     }
 }
 

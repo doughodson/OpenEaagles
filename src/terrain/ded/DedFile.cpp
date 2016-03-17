@@ -256,7 +256,7 @@ bool DedFile::getFileHeaders( std::istream& in )
       // Check ID of input file
       if ( std::strncmp(stdhdr->id,SS_STDID,4) != 0 ) {
          char id[5];
-         base::lcStrncpy(id,5,stdhdr->id,4);
+         base::utStrncpy(id,5,stdhdr->id,4);
          id[4] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DedFile::getFileHeaders: invalid id:";
@@ -270,7 +270,7 @@ bool DedFile::getFileHeaders( std::istream& in )
       // Check Part# of input file
       if ( std::strncmp(stdhdr->part,PARTNO,8) != 0 ) {
          char part[10];
-         base::lcStrncpy(part,10,stdhdr->part,8);
+         base::utStrncpy(part,10,stdhdr->part,8);
          part[8] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DedFile::getFileHeaders: invalid part number:";
@@ -283,7 +283,7 @@ bool DedFile::getFileHeaders( std::istream& in )
 
       if ( std::strncmp(stdhdr->rev,REVNO,8) != 0 ) {    // Check Rev of input file
          char rev[10];
-         base::lcStrncpy(rev,10,stdhdr->rev,8);
+         base::utStrncpy(rev,10,stdhdr->rev,8);
          rev[8] = '\0';
          if (isMessageEnabled(MSG_ERROR)) {
          std::cerr << "DedFile::getFileHeaders: invalid revision number:";

@@ -75,7 +75,7 @@ void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool cc
     if (org.networkMask != nullptr) {
         size_t len = std::strlen(org.networkMask);
         networkMask = new char[len+1];
-        lcStrcpy(networkMask,(len+1),org.networkMask);
+        utStrcpy(networkMask,(len+1),org.networkMask);
     }
 }
 

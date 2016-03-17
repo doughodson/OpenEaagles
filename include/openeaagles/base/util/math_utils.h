@@ -131,6 +131,10 @@ inline bool inRange(const double x, const double lo, const double hi)
     return ((lo <= x) && (x <= hi));
 }
 
+// returns number of digits in the whole number part (i.e. left of decimal)
+// of a floating point number
+unsigned int getDigits(const double x);
+
 // Returns the sine and cosine of an angle (radians)
 void sinCos(const double angleRad, double* const sine, double* const cosine);
 void sinCos(const float angleRad, float* const sine, float* const cosine);

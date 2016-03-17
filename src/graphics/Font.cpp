@@ -136,12 +136,12 @@ void Font::copyData(const Font& org, const bool cc)
    if (org.fontPath != nullptr) {
       size_t len = std::strlen(org.fontPath);
       fontPath = new char[len+1];
-      base::lcStrcpy(fontPath,len+1,org.fontPath);
+      base::utStrcpy(fontPath,len+1,org.fontPath);
    }
    if (org.fontFile != nullptr) {
       size_t len = std::strlen(org.fontFile);
       fontFile = new char[len+1];
-      base::lcStrcpy(fontFile,len+1,org.fontFile);
+      base::utStrcpy(fontFile,len+1,org.fontFile);
    }
    loaded = org.loaded;
 
@@ -209,7 +209,7 @@ int Font::xferChars(char* const outp, const size_t BUF_SIZE, const char* const i
       }
    }
    else {
-      base::lcStrncpy(outp,BUF_SIZE,inp,n);
+      base::utStrncpy(outp,BUF_SIZE,inp,n);
    }
    outp[n] = '\0';
    return static_cast<int>(std::strlen(outp));
@@ -376,7 +376,7 @@ bool Font::setSlotFontPath(const base::String* const sfpobj)
         size_t j = sfpobj->len();
         if (j > 0) {
             fontPath = new char[j+1];
-            lcStrcpy(fontPath,j+1,*sfpobj);
+            utStrcpy(fontPath,j+1,*sfpobj);
         }
         else {
               if (isMessageEnabled(MSG_ERROR)) {
@@ -398,7 +398,7 @@ bool Font::setSlotFTGLFontFileName(const base::String* const sgffnobj)
         size_t j = sgffnobj->len();
         if (j > 0) {
             fontFile = new char[j+1];
-            lcStrcpy(fontFile,j+1,*sgffnobj);
+            utStrcpy(fontFile,j+1,*sgffnobj);
         }
         else {
            if (isMessageEnabled(MSG_ERROR)) {

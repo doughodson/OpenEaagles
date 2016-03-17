@@ -72,7 +72,7 @@ void TcpClient::copyData(const TcpClient& org, const bool cc)
     if (org.ipAddr != nullptr) {
         size_t len = std::strlen(org.ipAddr);
         ipAddr = new char[len+1];
-        lcStrcpy(ipAddr,(len+1),org.ipAddr);
+        utStrcpy(ipAddr,(len+1),org.ipAddr);
     }
 }
 

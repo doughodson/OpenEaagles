@@ -223,7 +223,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
             // Get the object's name
             RTI::ULong n = RTIObjectIdStruct::ID_SIZE;
             if (n > length) n = length;
-            base::lcStrncpy(reinterpret_cast<char*>(&firingObjectIdentifier.id[0]), sizeof(firingObjectIdentifier.id), netBuffer, n);
+            base::utStrncpy(reinterpret_cast<char*>(&firingObjectIdentifier.id[0]), sizeof(firingObjectIdentifier.id), netBuffer, n);
             firingObjectIdentifier.id[n-1] = '\0';   
         }
         break;
@@ -232,7 +232,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
             // Get the object's name
             RTI::ULong n = RTIObjectIdStruct::ID_SIZE;
             if (n > length) n = length;
-            base::lcStrncpy(reinterpret_cast<char*>(&munitionObjectIdentifier.id[0]), sizeof(munitionObjectIdentifier.id), netBuffer, n);
+            base::utStrncpy(reinterpret_cast<char*>(&munitionObjectIdentifier.id[0]), sizeof(munitionObjectIdentifier.id), netBuffer, n);
             munitionObjectIdentifier.id[n-1] = '\0';   
         }
         break;
@@ -241,7 +241,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
             // Get the object's name
             RTI::ULong n = RTIObjectIdStruct::ID_SIZE;
             if (n > length) n = length;
-            base::lcStrncpy(reinterpret_cast<char*>(&targetObjectIdentifier.id[0]), sizeof(targetObjectIdentifier.id), netBuffer, n);
+            base::utStrncpy(reinterpret_cast<char*>(&targetObjectIdentifier.id[0]), sizeof(targetObjectIdentifier.id), netBuffer, n);
             targetObjectIdentifier.id[n-1] = '\0';   
         }
         break;

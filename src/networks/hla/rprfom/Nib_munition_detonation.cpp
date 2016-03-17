@@ -47,7 +47,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    unsigned short fireEvent = getWeaponFireEvent();
    EventIdentifierStruct eventIdentifier;
    base::NetHandler::toNetOrder(&eventIdentifier.eventCount, fireEvent);
-   base::lcStrncpy(
+   base::utStrncpy(
       reinterpret_cast<char*>(&eventIdentifier.issuingObjectIdentifier.id[0]),
       sizeof(eventIdentifier.issuingObjectIdentifier.id),
       getObjectName(),
@@ -91,7 +91,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    {
       RTIObjectIdStruct munitionObjectIdentifier;
-      base::lcStrncpy(
+      base::utStrncpy(
          reinterpret_cast<char*>(&munitionObjectIdentifier.id[0]),
          sizeof(munitionObjectIdentifier.id),
          getObjectName(),
@@ -123,7 +123,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
 
       if (fNib != nullptr) {
          RTIObjectIdStruct firingObjectIdentifier;
-         base::lcStrncpy(
+         base::utStrncpy(
             reinterpret_cast<char*>(&firingObjectIdentifier.id[0]),
             sizeof(firingObjectIdentifier.id),
             fNib->getObjectName(),
@@ -153,7 +153,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
 
       if (tNib != nullptr) {
          RTIObjectIdStruct targetObjectIdentifier;
-         base::lcStrncpy(
+         base::utStrncpy(
             reinterpret_cast<char*>(&targetObjectIdentifier.id[0]),
             sizeof(targetObjectIdentifier.id),
             tNib->getObjectName(),

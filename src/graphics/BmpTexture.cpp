@@ -60,8 +60,8 @@ void BmpTexture::copyData(const BmpTexture& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   base::lcStrcpy(texPath, sizeof(texPath), org.texPath);
-   base::lcStrcpy(texFile, sizeof(texFile), org.texFile);
+   base::utStrcpy(texPath, sizeof(texPath), org.texPath);
+   base::utStrcpy(texFile, sizeof(texFile), org.texFile);
 }
 
 //------------------------------------------------------------------------------
@@ -70,7 +70,7 @@ void BmpTexture::copyData(const BmpTexture& org, const bool cc)
 bool BmpTexture::setTextureFileName(const char* const fileName)
 {
    if (fileName != nullptr) {
-      base::lcStrcpy(texFile, sizeof(texFile), fileName);
+      base::utStrcpy(texFile, sizeof(texFile), fileName);
    }
    else {
       texFile[0] = '\0';
@@ -81,7 +81,7 @@ bool BmpTexture::setTextureFileName(const char* const fileName)
 bool BmpTexture::setTexturePath(const char* const path)
 {
    if (path != nullptr) {
-      base::lcStrcpy(texPath, sizeof(texPath), path);
+      base::utStrcpy(texPath, sizeof(texPath), path);
    }
    else {
       texPath[0] = '\0';

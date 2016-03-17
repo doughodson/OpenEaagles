@@ -1104,7 +1104,7 @@ void SlSymbol::copyData(const SlSymbol& org, const bool cc)
    scrnFlg = org.scrnFlg;
 
    type = org.type;
-   base::lcStrcpy(id, sizeof(id), org.id);
+   base::utStrcpy(id, sizeof(id), org.id);
 
    xPos = org.xPos;
    yPos = org.yPos;

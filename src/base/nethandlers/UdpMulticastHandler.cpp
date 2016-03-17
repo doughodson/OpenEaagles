@@ -84,7 +84,7 @@ void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
     if (org.multicastGroup != nullptr) {
         size_t len = std::strlen(org.multicastGroup);
         multicastGroup = new char[len+1];
-        lcStrcpy(multicastGroup,(len+1),org.multicastGroup);
+        utStrcpy(multicastGroup,(len+1),org.multicastGroup);
     }
     setTTL(org.getTTL());
     setLoopback(org.getLoopback());

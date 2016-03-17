@@ -171,7 +171,7 @@ bool String::getSubString(String& subStr, const unsigned int startIndex, const s
       maxChars = numChars;
 
    char* subString = new char[maxChars + 1];
-   lcStrncpy(subString, (maxChars + 1), &str[startIndex], maxChars);
+   utStrncpy(subString, (maxChars + 1), &str[startIndex], maxChars);
    subString[maxChars] = '\0';
    subStr.setStr(subString);
    delete[] subString;
@@ -193,7 +193,7 @@ void String::setStr(const char* string)
          nn = (l+1);
          str = new char[nn];
       }
-      lcStrcpy(str,nn,string);
+      utStrcpy(str,nn,string);
       n = l;
    }
    else {
@@ -223,10 +223,10 @@ void String::catStr(const char* s)
       char* t = str;
       nn = (l+1);
       str = new char[nn];
-      lcStrcpy(str,nn,t);
+      utStrcpy(str,nn,t);
       delete[] t;
    }
-   lcStrcat(str,nn,s);
+   utStrcat(str,nn,s);
    n = l;
 }
 

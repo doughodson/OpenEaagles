@@ -5,6 +5,21 @@ namespace oe {
 namespace base {
 
 //------------
+// returns number of digits in the whole number part (i.e. left of decimal)
+// of a floating point number
+//------------
+unsigned int getDigits(const double x)
+{
+   unsigned int digits = 2;
+   double z = std::fabs(x);
+   while (z >= 10.0) {
+      digits++;
+      z /= 10.0;
+   }
+   return digits;
+}
+
+//------------
 // Returns the sine and cosine of an angle (radians)
 //------------
 

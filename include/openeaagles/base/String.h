@@ -165,7 +165,7 @@ inline char* String::getCopyString() const
     size_t l = len();
     if (l > 0) {
         p = new char[l+1];
-        lcStrcpy(p,(l+1),str);
+        utStrcpy(p,(l+1),str);
     }
     return p;
 }

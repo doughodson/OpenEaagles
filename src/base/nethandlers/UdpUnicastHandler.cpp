@@ -75,7 +75,7 @@ void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool cc)
     if (org.ipAddr != nullptr) {
         size_t len = std::strlen(org.ipAddr);
         ipAddr = new char[len+1];
-        lcStrcpy(ipAddr,(len+1),org.ipAddr);
+        utStrcpy(ipAddr,(len+1), org.ipAddr);
     }
 }
 
@@ -240,6 +240,6 @@ std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, cons
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

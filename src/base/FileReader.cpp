@@ -11,6 +11,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/Number.h"
+#include "openeaagles/base/util/str_utils.h"
 
 namespace oe {
 namespace base {
@@ -70,8 +71,8 @@ void FileReader::copyData(const FileReader& org, const bool cc)
    // Close the old file (we'll need to open() the new one)
    if (dbf != nullptr) dbf->close();
 
-   lcStrcpy(pathname, PATHNAME_LENGTH, org.pathname);
-   lcStrcpy(filename, FILENAME_LENGTH, org.filename);
+   utStrcpy(pathname, PATHNAME_LENGTH, org.pathname);
+   utStrcpy(filename, FILENAME_LENGTH, org.filename);
 
    rnum = org.rnum;
    crnum = org.crnum;
@@ -120,7 +121,7 @@ bool FileReader::setPathname(const char* const path)
 {
    bool ok = false;
    if (path != nullptr) {
-      lcStrncpy(pathname, (PATHNAME_LENGTH-1), path, (PATHNAME_LENGTH-1));
+      utStrncpy(pathname, (PATHNAME_LENGTH-1), path, (PATHNAME_LENGTH-1));
       pathname[PATHNAME_LENGTH-1] = '\0';
       ok = true;
    }
@@ -132,7 +133,7 @@ bool FileReader::setFilename(const char* const file)
 {
    bool ok = false;
    if (file != nullptr) {
-      lcStrncpy(filename, (FILENAME_LENGTH-1), file, (FILENAME_LENGTH-1));
+      utStrncpy(filename, (FILENAME_LENGTH-1), file, (FILENAME_LENGTH-1));
       filename[FILENAME_LENGTH-1] = '\0';
       ok = true;
    }
@@ -192,9 +193,9 @@ bool FileReader::open()
    // Create the full file name
    const size_t FILE_LENGTH = 512; // Max length of file
    char file[FILE_LENGTH];
-   lcStrcpy(file, FILE_LENGTH, pathname);
-   lcStrcat(file, FILE_LENGTH, "/");
-   lcStrcat(file, FILE_LENGTH, filename);
+   utStrcpy(file, FILE_LENGTH, pathname);
+   utStrcat(file, FILE_LENGTH, "/");
+   utStrcat(file, FILE_LENGTH, filename);
 
    // Open the file ...
    if (dbf != nullptr) {

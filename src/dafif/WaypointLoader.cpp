@@ -281,12 +281,12 @@ WaypointLoader::WaypointKey::WaypointKey(const char* id, const char* ccode) : Ke
    key[0] = '\0';
 
    if (id != nullptr)
-      base::lcStrcpy(ident,WP_IDENT_LEN+1,id);
+      base::utStrcpy(ident,WP_IDENT_LEN+1,id);
    else
       ident[0] = '\0';
 
    if (ccode != nullptr)
-      base::lcStrcpy(countryCode,WP_CCODE_LEN+1,ccode);
+      base::utStrcpy(countryCode,WP_CCODE_LEN+1,ccode);
    else
       countryCode[0] = '\0';
 }

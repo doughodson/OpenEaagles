@@ -320,7 +320,7 @@ double Record::dsAtofn(const char* const s, const int n)
    const size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
-   base::lcStrncpy(buf, BUF_LENGTH, s, n);
+   base::utStrncpy(buf, BUF_LENGTH, s, n);
    buf[n] = '\0';
 
    return atof(buf);
@@ -338,7 +338,7 @@ long Record::dsAtoln(const char* const s, const int n)
    const size_t BUF_LENGTH = 256;
    char buf[BUF_LENGTH];
 
-   base::lcStrncpy(buf, BUF_LENGTH, s, n);
+   base::utStrncpy(buf, BUF_LENGTH, s, n);
    buf[n] = '\0';
 
    return std::atol(buf);

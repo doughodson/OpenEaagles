@@ -249,7 +249,7 @@ NumericReadout::NumericReadout()
    maxNum = base::UNDEFINED_VALUE;
    cbuf[0]   = '\0';
    format[0] = '\0';
-   base::lcStrcpy(format,FORMAT_LENGTH,"%.0f");
+   base::utStrcpy(format,FORMAT_LENGTH,"%.0f");
    justification(base::String::RIGHT);
    plusChar = '\0';
    minusChar = '\0';
@@ -267,8 +267,8 @@ void NumericReadout::copyData(const NumericReadout& org, const bool)
    BaseClass::copyData(org);
 
    // copy the display buffer, example format, and the sprintf format
-   base::lcStrcpy(cbuf,CBUF_LENGTH,org.cbuf);
-   base::lcStrcpy(format,FORMAT_LENGTH,org.format);
+   base::utStrcpy(cbuf,CBUF_LENGTH,org.cbuf);
+   base::utStrcpy(format,FORMAT_LENGTH,org.format);
 
    // copy other member variables
    plusChar  = org.plusChar;
@@ -287,7 +287,7 @@ void NumericReadout::copyData(const NumericReadout& org, const bool)
 void NumericReadout::deleteData()
 {
    cbuf[0]   = '\0';
-   base::lcStrcpy(format,FORMAT_LENGTH,"%.0f");
+   base::utStrcpy(format,FORMAT_LENGTH,"%.0f");
    plusChar  = '\0';
    minusChar = '\0';
    dpChar    = '\0';
@@ -358,7 +358,7 @@ double NumericReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -488,7 +488,7 @@ void NumericReadout::reformat(const char* const example)
 {
    if (reformatter->convertNumber(example) != Reformat::invalid) {
       setExample(example);
-      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
       redisplay();
    }
@@ -847,7 +847,7 @@ EMPTY_SERIALIZER(HexReadout)
 HexReadout::HexReadout()
 {
    STANDARD_CONSTRUCTOR()
-   base::lcStrcpy(format,FORMAT_LENGTH,"%X");
+   base::utStrcpy(format,FORMAT_LENGTH,"%X");
 }
 
 //------------------------------------------------------------------------------
@@ -879,7 +879,7 @@ double HexReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -902,7 +902,7 @@ void HexReadout::reformat(const char* const example)
 {
    if (reformatter->convertHex(example) != Reformat::invalid) {
       setExample(example);
-      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
       redisplay();
    }
@@ -923,7 +923,7 @@ EMPTY_SERIALIZER(OctalReadout)
 OctalReadout::OctalReadout()
 {
    STANDARD_CONSTRUCTOR()
-   base::lcStrcpy(format,FORMAT_LENGTH,"%o");
+   base::utStrcpy(format,FORMAT_LENGTH,"%o");
 }
 
 //------------------------------------------------------------------------------
@@ -955,7 +955,7 @@ double OctalReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -978,7 +978,7 @@ void OctalReadout::reformat(const char* const example)
 {
    if (reformatter->convertOctal(example) != Reformat::invalid) {
       setExample(example);
-      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
       redisplay();
    }
@@ -999,7 +999,7 @@ TimeReadout::TimeReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   base::lcStrcpy(format,FORMAT_LENGTH,"%02d:%02d:%04.1f");
+   base::utStrcpy(format,FORMAT_LENGTH,"%02d:%02d:%04.1f");
    tmode = hhmmss;
 }
 
@@ -1039,7 +1039,7 @@ double TimeReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -1211,7 +1211,7 @@ void TimeReadout::reformat(const char* const example)
    TimeMode results = reformatter->convertTime(example);
    if (results != invalid) {
       setExample(example);
-      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       tmode = results;
       postSign = reformatter->isPostSign();
       redisplay();
@@ -1233,7 +1233,7 @@ DirectionReadout::DirectionReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   base::lcStrcpy(format,FORMAT_LENGTH,"%+07.2f");
+   base::utStrcpy(format,FORMAT_LENGTH,"%+07.2f");
    tmode = dd;
 }
 
@@ -1285,7 +1285,7 @@ double DirectionReadout::getInputValue() const
    const size_t CBUFLOCAL_LEN = 100;
    char cbuf[CBUFLOCAL_LEN];
    const char* p = *this;
-   base::lcStrcpy(cbuf,CBUFLOCAL_LEN,p);
+   base::utStrcpy(cbuf,CBUFLOCAL_LEN,p);
    if (cbuf[0] == plusChar)  cbuf[0] = '+';
    if (cbuf[0] == minusChar) cbuf[0] = '-';
 
@@ -1376,7 +1376,7 @@ void DirectionReadout::reformat(const char* const example)
    DirMode results = reformatter->convertDirection(example);
    if (results != invalid) {
       setExample(example);
-      base::lcStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       tmode = results;
       postSign = reformatter->isPostSign();
       redisplay();
@@ -1399,7 +1399,7 @@ LatitudeReadout::LatitudeReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   base::lcStrcpy(format,FORMAT_LENGTH,"%+03d@%04.1f");
+   base::utStrcpy(format,FORMAT_LENGTH,"%+03d@%04.1f");
    tmode = ddmm;
    plusChar = 'N';
    minusChar = 'S';
@@ -1442,7 +1442,7 @@ LongitudeReadout::LongitudeReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   base::lcStrcpy(format,FORMAT_LENGTH,"%+04d@%04.1f");
+   base::utStrcpy(format,FORMAT_LENGTH,"%+04d@%04.1f");
    tmode = ddmm;
    plusChar = 'E';
    minusChar = 'W';

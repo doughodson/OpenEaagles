@@ -144,7 +144,7 @@ void CadrgTocEntry::generateItems(void)
 // -----------------------------------------------------------------------------------------
 void CadrgTocEntry::setType(const char* x, const int size)
 {
-    base::lcStrcpy(type, size, x);
+    base::utStrcpy(type, size, x);
     type[size] = 0;
 }
 

@@ -637,7 +637,7 @@ bool CadrgFile::initialize(const char* dir)
                     #endif
 
                     // 1st part of directory name is passed as our initial parameter "projects/data/maps/gncjncn/RPF/"
-                    base::lcStrcpy(directory, size, dir);
+                    base::utStrcpy(directory, size, dir);
 
                     // Read rest of directory name from Toc
                     // Skip 1st 2 chars, because they are the root characters (./), and are ignored since we are creating

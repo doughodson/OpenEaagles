@@ -257,14 +257,14 @@ bool Image::readFileBMP(const char* const filename, const char* const path)
    // append path name
    const char* p1 = path;
    if (p1 != nullptr && std::strlen(p1) > 0) {
-      base::lcStrcat(bitmapFile, sizeof(bitmapFile), p1);
-      base::lcStrcat(bitmapFile, sizeof(bitmapFile), "/");
+      base::utStrcat(bitmapFile, sizeof(bitmapFile), p1);
+      base::utStrcat(bitmapFile, sizeof(bitmapFile), "/");
    }
 
    // append file name
    const char* p2 = filename;
    if (p2 != nullptr && std::strlen(p2) > 0) {
-      base::lcStrcat(bitmapFile, sizeof(bitmapFile), p2);
+      base::utStrcat(bitmapFile, sizeof(bitmapFile), p2);
    }
 
    // Do we have a full path name?
@@ -404,14 +404,14 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    // append path name
    const char* p1 = path;
    if (p1 != nullptr && std::strlen(path) > 0) {
-      base::lcStrcat(bitmapFile, sizeof(bitmapFile), p1);
-      base::lcStrcat(bitmapFile, sizeof(bitmapFile), "/");
+      base::utStrcat(bitmapFile, sizeof(bitmapFile), p1);
+      base::utStrcat(bitmapFile, sizeof(bitmapFile), "/");
    }
 
    // append file name
    const char* p2 = filename;
    if (p2 != nullptr && std::strlen(p2) > 0) {
-      base::lcStrcat(bitmapFile, sizeof(bitmapFile), p2);
+      base::utStrcat(bitmapFile, sizeof(bitmapFile), p2);
    }
 
    // Do we have a full path name?

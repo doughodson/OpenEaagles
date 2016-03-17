@@ -384,9 +384,9 @@ void FtglBitmapFont::loadFont()
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != nullptr) base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
+    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
     FTGLBitmapFont* ftglFont = new FTGLBitmapFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
@@ -518,9 +518,9 @@ void FtglExtrdFont::loadFont()
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != nullptr) base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
+    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
     FTGLExtrdFont* ftglFont = new FTGLExtrdFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
@@ -655,9 +655,9 @@ void FtglOutlineFont::loadFont()
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != nullptr) base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
+    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
     FTGLOutlineFont* ftglFont = new FTGLOutlineFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
@@ -782,9 +782,9 @@ void FtglPixmapFont::loadFont()
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != nullptr) base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
+    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
     FTGLPixmapFont* ftglFont = new FTGLPixmapFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
@@ -918,9 +918,9 @@ void FtglPolygonFont::loadFont()
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != nullptr) base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
+    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
     FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
@@ -1141,9 +1141,9 @@ void FtglHaloFont::loadFont()
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != nullptr) base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
+    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
     FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
@@ -1293,9 +1293,9 @@ void FtglTextureFont::loadFont()
     // Generate filename
     const size_t FONTPATHNAME_LENGTH = 256;
     char fontPathname[FONTPATHNAME_LENGTH];
-    if (fontDirectory() != nullptr) base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
-    else base::lcStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
-    base::lcStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
+    if (fontDirectory() != nullptr) base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, fontDirectory());
+    else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
+    base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
     FTGLTextureFont* ftglFont = new FTGLTextureFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {

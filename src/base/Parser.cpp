@@ -140,22 +140,22 @@ static oe::base::Object* gufParse(const char* formname, oe::base::PairStream* ar
                oe::base::Pair* p = static_cast<oe::base::Pair*>(item->getValue());
                bool ok = form->setSlotByName(*p->slot(), p->object());
                if (!ok) {
-                  oe::base::lcStrcpy(emsg,sizeof(emsg),"error while setting slot name: ");
-                  oe::base::lcStrcat(emsg,sizeof(emsg),*p->slot());
+                  oe::base::utStrcpy(emsg,sizeof(emsg),"error while setting slot name: ");
+                  oe::base::utStrcat(emsg,sizeof(emsg),*p->slot());
                   yyerror(emsg);
                }
                item = item->getNext();
           }
           bool ok = form->isValid();
           if (!ok) {
-             oe::base::lcStrcpy(emsg,sizeof(emsg),"error: invalid form: ");
-             oe::base::lcStrcat(emsg,sizeof(emsg),formname);
+             oe::base::utStrcpy(emsg,sizeof(emsg),"error: invalid form: ");
+             oe::base::utStrcat(emsg,sizeof(emsg),formname);
              yyerror(emsg);
           }
        }
        else if (form == 0) {
-          oe::base::lcStrcpy(emsg,sizeof(emsg),"undefined form name: ");
-          oe::base::lcStrcat(emsg,sizeof(emsg),formname);
+          oe::base::utStrcpy(emsg,sizeof(emsg),"undefined form name: ");
+          oe::base::utStrcat(emsg,sizeof(emsg),formname);
           yyerror(emsg);
        }
 

@@ -148,10 +148,10 @@ bool Logger::openFile()
         // Create the (initial) full file name
         //---
         if (pathname->len() > 0) {
-            lcStrcat(fullname,NAME_LENGTH,*pathname);
-            lcStrcat(fullname,NAME_LENGTH,"/");
+            utStrcat(fullname,NAME_LENGTH,*pathname);
+            utStrcat(fullname,NAME_LENGTH,"/");
         }
-        lcStrcat(fullname,NAME_LENGTH,*filename);
+        utStrcat(fullname,NAME_LENGTH,*filename);
 
         //---
         // Make sure that it doesn't already exist (we don't want to over write good data).
@@ -161,7 +161,7 @@ bool Logger::openFile()
             // If the file already exists, try appending a version number "v99" ..
 
             char* origname = new char[NAME_LENGTH];
-            lcStrcpy(origname, NAME_LENGTH, fullname);
+            utStrcpy(origname, NAME_LENGTH, fullname);
 
             validName = false;
             for (unsigned int i = 1; i <= 99 && !validName; i++) {

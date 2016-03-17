@@ -414,12 +414,12 @@ NavaidLoader::NavaidKey::NavaidKey(const char* id, const char* ccode) : Key(0)
 {
    size = NAVAID_RECORD_LEN;
    if (id != nullptr)
-      base::lcStrcpy(ident,NA_IDENT_LEN+1,id);
+      base::utStrcpy(ident,NA_IDENT_LEN+1,id);
    else
       ident[0] = '\0';
 
    if (ccode != nullptr)
-      base::lcStrcpy(countryCode,NA_CCODE_LEN+1,ccode);
+      base::utStrcpy(countryCode,NA_CCODE_LEN+1,ccode);
    else
       countryCode[0] = '\0';
 
