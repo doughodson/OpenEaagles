@@ -16,7 +16,6 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-#include "openeaagles/base/support.h"
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Identifier.h"
@@ -26,6 +25,7 @@ using namespace std;
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/List.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "Lexical.h"
 #include "Parser.hpp"
 

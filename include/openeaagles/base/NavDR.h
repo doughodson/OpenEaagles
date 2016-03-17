@@ -4,7 +4,6 @@
 #ifndef __oe_base_NavDR_H__
 #define __oe_base_NavDR_H__
 
-#include "openeaagles/base/platform/support.h"
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Matrix"
@@ -130,7 +129,7 @@ public:
          osg::Matrixd* const pRwb
       );
 
-}; // End class NavDR
+};
 
 
 //--------------------------------------------------------------------------
@@ -138,8 +137,8 @@ public:
 //--------------------------------------------------------------------------
 #include "openeaagles/base/NavDR.inl"
 
-}  // end namespace base
-}  // end namespace oe
+}
+}
 
 #endif
 

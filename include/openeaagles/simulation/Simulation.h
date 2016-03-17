@@ -194,8 +194,7 @@ namespace simulation {
 //       'month' and 'year' to override the computer system's time and/or
 //       date with your own simulated time and/or date.
 //
-//    4) See "openeaagles/base/platform/support.h" for additional time related
-//       functions.
+//    4) See "openeaagles/base/util/system.h" for additional time related functions.
 //
 //
 // Environments:

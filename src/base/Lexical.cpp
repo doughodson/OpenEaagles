@@ -2013,7 +2013,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #include <iostream>
 #include <cstring>
 using namespace std;
-#include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Identifier.h"

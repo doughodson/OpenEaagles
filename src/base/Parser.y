@@ -33,8 +33,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "openeaagles/base/Parser.h"
-//#include "openeaagles/base/support.h"
-#include "openeaagles/base/util/string.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Identifier.h"

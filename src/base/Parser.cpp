@@ -82,7 +82,7 @@
 #include <cstdlib>
 #include <cstring>
 #include "openeaagles/base/Parser.h"
-#include "openeaagles/base/platform/support.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Identifier.h"
@@ -94,10 +94,10 @@
 #include "openeaagles/base/List.h"
 #include "Lexical.h"
 
-static oe::base::Object*  result;       // Result of all our work
-static oe::base::Lexical* lex;          // Lex generator
-static oe::base::ParserFormFunc formFunc; // Form fuction 
-static int errCount;            // Error count
+static oe::base::Object*  result;           // Result of all our work
+static oe::base::Lexical* lex;              // Lex generator
+static oe::base::ParserFormFunc formFunc;   // Form fuction 
+static int errCount;                        // Error count
 
 //------------------------------------------------------------------------------
 // yylex() -- user defined; used by the parser to call the lexical generator
