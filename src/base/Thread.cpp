@@ -7,17 +7,17 @@
 #include "openeaagles/base/util/math_utils.h"
 #include "openeaagles/base/util/system.h"
 
-namespace oe {
-namespace base {
-
 //------------------------------------------------------------------------------
 // Window/Linux specific code
 //------------------------------------------------------------------------------
 #if defined(WIN32)
-  #include "platform/windows/Thread.cxx"
+  #include "platform/Thread_msvc.cpp"
 #else
-  #include "platform/linux/Thread.cxx"
+  #include "platform/Thread_linux.cpp"
 #endif
+
+namespace oe {
+namespace base {
 
 //==============================================================================
 // class Thread

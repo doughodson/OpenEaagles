@@ -1,6 +1,8 @@
-//------------------------------------------------------------------------------
-// Thread classes -- Windows version
-//------------------------------------------------------------------------------
+
+#include "openeaagles/base/Thread.h"
+#include "openeaagles/base/Component.h"
+#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/util/system.h"
 
 /* ----------------------------------------------------------------- */
 /* Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'  */
@@ -8,12 +10,15 @@
 /* ----------------------------------------------------------------- */
 //#define USE_REALTIME_PRI_CLASS
 
-// max number of processors we'll allow
-static const unsigned int MAX_CPUS = 32;
-
 //==============================================================================
 // class Thread
 //==============================================================================
+
+namespace oe {
+namespace base {
+
+// max number of processors we'll allow
+static const unsigned int MAX_CPUS = 32;
 
 //-----------------------------------------------------------------------------
 // Static thread function
@@ -37,7 +42,6 @@ DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 
    return rtn;
 }
-
 
 //-----------------------------------------------------------------------------
 // Static function returns the number of processors assigned to this process
@@ -203,7 +207,6 @@ bool Thread::terminate()
    return killed;
 }
 
-
 //==============================================================================
 // class ThreadPeriodicTask
 //==============================================================================
@@ -279,7 +282,6 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
 
    return rtn;
 }
-
 
 //==============================================================================
 // class ThreadSyncTask
@@ -391,4 +393,7 @@ int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned
       }
    }
    return -1;
+}
+
+}
 }

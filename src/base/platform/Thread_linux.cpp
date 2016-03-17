@@ -1,6 +1,8 @@
-//------------------------------------------------------------------------------
-// Thread classes -- Linux version
-//------------------------------------------------------------------------------
+
+#include "openeaagles/base/Thread.h"
+#include "openeaagles/base/Component.h"
+#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/util/system.h"
 
 #include <signal.h>
 
@@ -10,6 +12,9 @@ static const unsigned int MAX_CPUS = 32;
 //==============================================================================
 // class Thread
 //==============================================================================
+
+namespace oe {
+namespace base {
 
 //-----------------------------------------------------------------------------
 // Static thread function
@@ -350,5 +355,8 @@ int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned
       }
    }
    return -1;
+}
+
+}
 }
 
