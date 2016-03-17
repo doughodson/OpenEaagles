@@ -4,6 +4,8 @@
 
 // framework configuration file
 #include "openeaagles/config.h"
+// keep this include to correct a bug in vs2012 compiler intrinsics
+#include "openeaagles/base/util/platform_api.h"
 // lock/unlock, etc - reference system needs it
 #include "openeaagles/base/util/atomics.h"
 

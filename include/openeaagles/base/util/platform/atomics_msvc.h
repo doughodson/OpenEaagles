@@ -2,29 +2,24 @@
 #ifndef __oe_base_util_atomics_msvc_H__
 #define __oe_base_util_atomics_msvc_H__
 
-// ---
-// Simple semaphore spinlock and unlock functions: 
-//    lock(long int& s)      -- locks the semaphore w/spinlock wait
-//    unlock(long int& s)    -- frees the semaphore
-//
-//    where 's' is the semaphore that must be initialized to zero.
-//
-// Visual Studio version
-// ---
+//------------------------------------------------------------------------------
+// Visual Studio
+//------------------------------------------------------------------------------
 
-// intrinsics (defines _InterlockedCompareExchange, etc)
+//
+// The header file <intrin.h> declares prototypes for the common intrinsic functions.
+// Manufacturer-specific intrinsics are available in the <immintrin.h> and <ammintrin.h>
+// header files. Additionally, certain Windows headers declare functions that map onto a
+// compiler intrinsic.
+//
 #include <intrin.h>
-
-// visual studio 2012 has a bug with some intrinsics
-// For now, we will not use a few of them
-#if(_MSC_VER>=1700)   // VC11+
-#include <cmath>
-#pragma function(sqrt)
-#endif
 
 namespace oe {
 namespace base {
 
+//
+// lock(long int& s) -- locks the semaphore w/spinlock wait
+//
 inline void lock(long int& semaphore)
 {
    // Try to lock the semaphore (i.e., set it to one), but make
@@ -54,6 +49,9 @@ inline void lock(long int& semaphore)
 #endif
 }
 
+//
+// unlock(long int& s) -- frees the semaphore
+//
 inline void unlock(long int& semaphore)
 {
    // free the semaphore (i.e., just set it to zero)
