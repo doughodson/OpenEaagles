@@ -5,6 +5,7 @@
 #define __oe_base_NetHandler_H__
 
 #include "openeaagles/base/Component.h"
+#include "openeaagles/base/util/platform_api.h"
 #include <cstdint>
 
 namespace oe {

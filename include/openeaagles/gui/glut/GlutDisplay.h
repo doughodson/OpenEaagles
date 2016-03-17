@@ -47,7 +47,8 @@ namespace glut {
 //    ESC_KEY     -- calls onEscKey() event handler; see note #2.
 //
 //------------------------------------------------------------------------------
-class GlutDisplay : public graphics::Display {
+class GlutDisplay : public graphics::Display
+{
    DECLARE_SUBCLASS(GlutDisplay, graphics::Display)
 
 public:

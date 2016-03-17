@@ -2,8 +2,6 @@
 #ifndef __oe_base_util_atomics_msvc_H__
 #define __oe_base_util_atomics_msvc_H__
 
-#include "openeaagles/base/util/platform/platform_api_msvc.h"
-
 // ---
 // Simple semaphore spinlock and unlock functions: 
 //    lock(long int& s)      -- locks the semaphore w/spinlock wait
@@ -13,6 +11,16 @@
 //
 // Visual Studio version
 // ---
+
+// intrinsics (defines _InterlockedCompareExchange, etc)
+#include <intrin.h>
+
+// visual studio 2012 has a bug with some intrinsics
+// For now, we will not use a few of them
+#if(_MSC_VER>=1700)   // VC11+
+#include <cmath>
+#pragma function(sqrt)
+#endif
 
 namespace oe {
 namespace base {

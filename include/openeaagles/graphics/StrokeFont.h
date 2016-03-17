@@ -11,9 +11,8 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class:  StrokeFont
-// Base class:  Object -> Font -> StrokeFont
 //
-// Description:  (SGI's) Stroke font
+// Description:  Stroke font
 // Factory name: StrokeFont
 //
 //
@@ -24,7 +23,8 @@ namespace graphics {
 //          Produces the stroke font map.
 //
 //------------------------------------------------------------------------------
-class StrokeFont : public Font {
+class StrokeFont : public Font
+{
     DECLARE_SUBCLASS(StrokeFont,Font)
 
 public:
@@ -38,7 +38,7 @@ public:
 };
 
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

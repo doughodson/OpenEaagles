@@ -3,6 +3,8 @@
 #include "openeaagles/base/units/Angles.h"
 
 #include <cmath>
+
+#include "openeaagles/base/util/platform_api.h"
 #include <GL/gl.h>
 
 #define MR2IN 0.026785714      // font was scaled by this

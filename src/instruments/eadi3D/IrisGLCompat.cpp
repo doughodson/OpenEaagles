@@ -1,6 +1,10 @@
+
 #include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
 #include "openeaagles/base/units/Angles.h"
+
+#include "openeaagles/base/util/platform_api.h"
 #include <GL/gl.h>
+
 #include <cmath>
 
 #define MAX_POINTS 64
@@ -8,7 +12,7 @@
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat,"IrisGLCompat")
+IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat, "IrisGLCompat")
 EMPTY_SLOTTABLE(IrisGLCompat)
 EMPTY_SERIALIZER(IrisGLCompat)
 

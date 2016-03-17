@@ -604,11 +604,7 @@ bool NetIO::createAndJoinFederation()
                    break;
                }
                catch (RTI::FederationExecutionDoesNotExist) {
-                   #ifdef WIN32
-                   Sleep(1000);
-                   #else
-                   sleep(2);
-                   #endif
+                   base::msleep(1000);   // linux might want 2000
                }
                catch (RTI::Exception& e) {
                    std::cout << &e << std::endl;

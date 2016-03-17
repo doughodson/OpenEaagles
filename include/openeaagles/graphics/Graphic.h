@@ -7,15 +7,17 @@
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Matrix"
+
+#include "openeaagles/base/util/platform_api.h"
 #include <GL/gl.h>
 
 namespace oe {
 
-   namespace base {
-      class Color;
-      class Identifier;
-      class Transform;
-   }
+namespace base {
+   class Color;
+   class Identifier;
+   class Transform;
+}
 
 namespace graphics {
 

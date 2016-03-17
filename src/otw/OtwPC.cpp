@@ -1,7 +1,8 @@
 
 #include "openeaagles/otw/OtwPC.h"
 
-#include "dsFlightModelData.hxx"
+#include "dsFlightModelData.h"
+
 #include "openeaagles/simulation/Player.h"
 #include "openeaagles/simulation/AirVehicle.h"
 #include "openeaagles/simulation/GroundVehicle.h"

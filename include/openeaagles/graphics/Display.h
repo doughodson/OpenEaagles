@@ -6,14 +6,15 @@
 
 namespace oe {
 
-   namespace base {
-      class Color;
-      class PairStream;
-      class Identifier;
-      class String;
-   }
+namespace base {
+   class Color;
+   class PairStream;
+   class Identifier;
+   class String;
+}
 
 namespace graphics {
+
 class Font;
 class Image;
 class Texture;

@@ -23,16 +23,16 @@ namespace oe {
 namespace instruments {
 
 class Instrument : public graphics::Graphic {
-    DECLARE_SUBCLASS(Instrument,graphics::Graphic)
+    DECLARE_SUBCLASS(Instrument, graphics::Graphic)
 
 public:
     Instrument();
 
     // get functions
     const base::Table1* getScalingTable() const    { return myTable; }
-    double  getInstValue() const                    { return instVal; }
-    double  getPreScaleInstValue() const            { return preScaleInstVal; }
-    bool isPassingAllowed() const                   { return allowPassing; }
+    double  getInstValue() const                   { return instVal; }
+    double  getPreScaleInstValue() const           { return preScaleInstVal; }
+    bool isPassingAllowed() const                  { return allowPassing; }
 
     // set functions
     virtual bool setAllowValPass(const bool newVP);
@@ -52,13 +52,13 @@ protected:
 
 private:
     // member variables
-    const base::Table1* myTable; // holds our scaling data
+    const base::Table1* myTable;    // holds our scaling data
     double instVal;                 // our instrument value
     double preScaleInstVal;         // our pre-scaled instrument value (before linear interpolation)
     bool allowPassing;              // do we pass our instrument value down to our components?
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

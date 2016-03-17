@@ -24,6 +24,7 @@
 
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/Statistic.h"
+#include "openeaagles/base/util/platform_api.h"
 
 namespace oe {
 namespace base {
