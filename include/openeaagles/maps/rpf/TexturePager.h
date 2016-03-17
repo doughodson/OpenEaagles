@@ -46,8 +46,9 @@
 #include "TextureTable.h"
 
 namespace oe {
+
 namespace base { class List; }
-namespace maps {
+
 namespace rpf {
 
 class CadrgMap;
@@ -91,9 +92,8 @@ private:
     CadrgTocEntry* toc;
 };
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 
 #endif
 

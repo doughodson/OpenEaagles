@@ -6,7 +6,6 @@
 #include "openeaagles/graphics/Texture.h"
 
 namespace oe {
-namespace maps  {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")
@@ -173,7 +172,6 @@ graphics::Texture* TextureTable::getTexture(int row, int col)
     return texes[row + centerTablePos][col + centerTablePos];
 }
 
-} // End rpf namespace
-} // End Maps namespace
-} // End oe namespace
+}
+}
 

@@ -10,7 +10,6 @@
 #include <cstring>
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
@@ -360,7 +359,6 @@ const CadrgClut::Rgb& CadrgClut::getColor(unsigned int index) const {
     }
 }
 
-} // end rpf namespace
-} // end maps namespace
-} // end oe namespace
+}
+}
 

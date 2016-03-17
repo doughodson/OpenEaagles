@@ -1,27 +1,26 @@
 
-#include "openeaagles/maps/factory.h"
-
 #include "openeaagles/base/Object.h"
 
+#include "openeaagles/maps/rpf/factory.h"
 #include "openeaagles/maps/rpf/MapDrawer.h"
 #include "openeaagles/maps/rpf/CadrgMap.h"
 
 #include <cstring>
 
 namespace oe {
-namespace maps  {
+namespace rpf  {
 
 base::Object* factory(const char* name)
 {
     base::Object* obj = nullptr;
 
     // Map Drawer
-    if ( std::strcmp(name, rpf::MapDrawer::getFactoryName()) == 0 ) {
-        obj = new rpf::MapDrawer();
+    if ( std::strcmp(name, MapDrawer::getFactoryName()) == 0 ) {
+        obj = new MapDrawer();
     }
     // CadrgMap
-    else if ( std::strcmp(name, rpf::CadrgMap::getFactoryName()) == 0 ) {
-        obj = new rpf::CadrgMap();
+    else if ( std::strcmp(name, CadrgMap::getFactoryName()) == 0 ) {
+        obj = new CadrgMap();
     }
 
     return obj;

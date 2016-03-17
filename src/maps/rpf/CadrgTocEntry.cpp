@@ -9,7 +9,6 @@
 #include <cstring>
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
@@ -175,7 +174,6 @@ bool CadrgTocEntry::isInZone(double lat, double lon)
     return ok;
 }
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 

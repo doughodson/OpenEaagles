@@ -46,7 +46,6 @@
 
 namespace oe {
 namespace base { class String; }
-namespace maps {
 namespace rpf {
 
 class CadrgTocEntry;
@@ -88,8 +87,7 @@ private:
     base::String* originalDir;                 // directory of the file we are associated with
 };
 
-}  // End rpf namespace
-}  // End maps namespace
-}  // End oe namespace
+}
+}
 
 #endif

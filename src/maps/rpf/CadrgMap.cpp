@@ -15,7 +15,6 @@
 #include <cstring>
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(CadrgMap, "CadrgMap")
@@ -754,7 +753,6 @@ base::Object* CadrgMap::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 

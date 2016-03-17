@@ -1,7 +1,7 @@
 
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboemaps.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboerpf.a
 
 OBJS = \
 	$(LIB)(CadrgClut.o) \

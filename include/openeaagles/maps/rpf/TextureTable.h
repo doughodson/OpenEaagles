@@ -33,8 +33,9 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
+
 namespace graphics { class Texture; }
-namespace maps {
+
 namespace rpf {
 
 class TextureTable : public base::Object
@@ -74,8 +75,7 @@ private:
     graphics::Texture* texes[MAX_TABLE_SIZE][MAX_TABLE_SIZE];    // Holds our textures.
 };
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 
 #endif

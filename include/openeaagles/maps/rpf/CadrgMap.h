@@ -118,9 +118,11 @@
 #include "openeaagles/graphics/MapPage.h"
 
 namespace oe {
+
 namespace base { class List; }
+
 namespace graphics { class Texture; }
-namespace maps {
+
 namespace rpf {
 
 class CadrgFile;
@@ -205,9 +207,8 @@ private:
     bool initLevelLoaded;                       // Has our initial map level been loaded?
 };
 
-}  // End rpf namespace
-}  // End maps namespace
-}  // End oe namespace
+}
+}
 
 #endif
 

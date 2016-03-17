@@ -9,7 +9,6 @@
 #include <cstring>
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
@@ -395,7 +394,6 @@ int CadrgFrame::decompressSubframe(int x, int y, Subframe& subFrame)
     return 1;
 }
 
-}  // End rpf namespace
-}  // End maps namespace
-}  // End oe namespace
+}
+}
 

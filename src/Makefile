@@ -13,9 +13,9 @@ include makedefs
 # models       : JSBSim
 # networks/dis : -
 # networks/hla : HLA RTI
-# maps         : -
 # otw          : CIGICL 3.x
 # recorder     : Google protocol buffers
+# rpf          : -
 # simulation   : -
 # terrain      : -
 #
@@ -25,7 +25,6 @@ PROJECTS += iodevice
 PROJECTS += linearsystem 
 PROJECTS += simulation terrain
 PROJECTS += models
-PROJECTS += maps
 PROJECTS += recorder
 
 #
@@ -49,6 +48,11 @@ PROJECTS += networks/hla
 # - CIGI Class Library 3.x interface
 # - download and install cigicl
 PROJECTS += otw
+
+#
+# Map format reader libraries
+#
+PROJECTS += maps/rpf
 
 #
 # Rules

@@ -15,7 +15,6 @@
 #include <cmath>
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(MapDrawer,"MapDrawer")
@@ -505,7 +504,6 @@ base::Object* MapDrawer::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 

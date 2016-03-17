@@ -7,7 +7,6 @@
 #include <cstring>
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 // Disable all deprecation warnings for now.  Until we fix them,
@@ -113,6 +112,5 @@ void CadrgFrameEntry::setFrame(CadrgFrame* newFrame)
     }
 }
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}

@@ -18,7 +18,6 @@
 #include "openeaagles/maps/rpf/support.h"
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 class CadrgFrameEntry;
@@ -44,9 +43,8 @@ private:
     unsigned char lookupTable[4096][4][4];          // Lookup table
 };
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 
 #endif
 

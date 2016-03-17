@@ -24,7 +24,6 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 class CadrgFrame;
@@ -59,9 +58,8 @@ private:
     bool cib;           // Are we a CIB or not?
 };
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 
 #endif
 

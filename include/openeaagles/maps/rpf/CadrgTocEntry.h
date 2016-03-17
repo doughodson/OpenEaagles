@@ -32,7 +32,6 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 class CadrgTocEntry : public base::Object
@@ -117,9 +116,8 @@ private:
     CadrgFrameEntry** frames;   // Our array of frames that make up this entry.
 };
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 
 #endif
 

@@ -10,7 +10,6 @@
 #include "openeaagles/base/List.h"
 
 namespace oe {
-namespace maps  {
 namespace rpf {
 
 IMPLEMENT_SUBCLASS(TexturePager, "TexturePager")
@@ -303,7 +302,6 @@ void TexturePager::flushTextures()
     }
 }
 
-} // End rpf namespace
-} // End Maps namespace
-} // End oe namespace
+}
+}
 

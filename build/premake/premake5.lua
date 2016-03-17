@@ -207,14 +207,6 @@ solution "oe"
       }
       targetname "linearsystem"
 
-   -- maps library
-   project "maps"
-      files {
-         "../../include/openeaagles/maps/**.h",
-         "../../src/maps/**.cpp"
-      }
-      targetname "maps"
-
    -- models library
    project "models"
       files {
@@ -247,6 +239,14 @@ solution "oe"
       }
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "recorder"
+
+   -- raster product format maps library
+   project "rpf"
+      files {
+         "../../include/openeaagles/maps/rpf/**.h",
+         "../../src/maps/rpf/**.cpp"
+      }
+      targetname "rpf"
 
    -- simulation library
    project "simulation"

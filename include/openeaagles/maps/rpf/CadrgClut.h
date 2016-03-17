@@ -16,7 +16,6 @@
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 class CadrgFrameEntry;
@@ -55,8 +54,7 @@ private:
     Rgb colorTable[255];                    // Holds our individual colors
 };
 
-} // end rpf namespace
-} // end maps namespace
-} // end oe namespace
+}
+}
 
 #endif

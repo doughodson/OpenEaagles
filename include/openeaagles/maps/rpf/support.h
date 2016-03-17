@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Support functions for the map library.
+// Support functions for the rpf map library.
 //
 // This contains a lot of enumerated types that allow the CadrgFile to seek to 
 // the right portion of the .Toc and other files, all which contain RPF data.
@@ -28,7 +28,6 @@ typedef unsigned int uint;
 typedef unsigned char uchar;
 
 namespace oe {
-namespace maps {
 namespace rpf {
 
 // Swap bytes.
@@ -145,8 +144,6 @@ struct Image {
 // parseLocations() - Reads the proper locations in for the CADRG files.
 void parseLocations(std::ifstream& fin, Location* locs, int count);
 
-
-}
 }
 }
 

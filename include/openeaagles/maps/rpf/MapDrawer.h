@@ -52,8 +52,9 @@
 #include "openeaagles/graphics/MapPage.h"
 
 namespace oe {
+
 namespace base { class String; }
-namespace maps {
+
 namespace rpf {
 
 class TexturePager;
@@ -125,9 +126,8 @@ private:
     float originCol[MAX_PAGERS];        // Pixel + texture col of the textures to draw
 };
 
-} // End rpf namespace
-} // End maps namespace
-} // End oe namespace
+}
+}
 
 #endif
 

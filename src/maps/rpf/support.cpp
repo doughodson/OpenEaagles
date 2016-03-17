@@ -8,7 +8,6 @@
 #include <cstring>
 
 namespace oe {
-namespace maps  {
 namespace rpf {
 
 // -----------------------------------------------------------
@@ -111,7 +110,6 @@ void parseLocations(std::ifstream& fin, Location* locs, int count)
     }
 }
 
-} // End rpf namespace
-} // End Maps namespace
-} // End oe namespace
+}
+}
 
