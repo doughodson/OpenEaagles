@@ -129,6 +129,6 @@ std::ostream& SlotTable::serialize(std::ostream& sout, const int, const bool) co
    return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

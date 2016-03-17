@@ -54,8 +54,8 @@ private:
    unsigned int nslots1;   // Number of slots in table
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 
