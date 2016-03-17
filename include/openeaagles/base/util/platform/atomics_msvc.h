@@ -2,6 +2,8 @@
 #ifndef __oe_base_util_atomics_msvc_H__
 #define __oe_base_util_atomics_msvc_H__
 
+#include "openeaagles/base/util/platform/platform_api_msvc.h"
+
 // ---
 // Simple semaphore spinlock and unlock functions: 
 //    lock(long int& s)      -- locks the semaphore w/spinlock wait

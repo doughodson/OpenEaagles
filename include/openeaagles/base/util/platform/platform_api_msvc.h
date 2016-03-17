@@ -2,9 +2,14 @@
 #ifndef __oe_base_util_platform_api_msvc_H__
 #define __oe_base_util_platform_api_msvc_H__
 
+//----------------------------------------------------
+// Visual Studio
+//----------------------------------------------------
+
 #include <winsock2.h>
 
-// visual studio intrinsics
+// intrinsics
+// needed for atomics (e.g., lock/unlock)
 #include <intrin.h>
 
 // visual studio 2012 has a bug with some intrinsics

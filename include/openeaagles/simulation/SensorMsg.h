@@ -7,6 +7,7 @@
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 namespace simulation {

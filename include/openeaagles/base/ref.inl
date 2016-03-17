@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // ref(), unref() and getRefCount() functions
 //------------------------------------------------------------------------------
-#ifndef __oe_base_RefCount_H__
-#define __oe_base_RefCount_H__
+#ifndef __oe_base_ref_H__
+#define __oe_base_ref_H__
 
    // ---
    // If the following is defined then ref() will print a message to standard

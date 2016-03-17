@@ -2,12 +2,15 @@
 #ifndef __oe_base_Object_H__
 #define __oe_base_Object_H__
 
-#include "openeaagles/base/platform/support.h"
+// framework configuration file
+#include "openeaagles/config.h"
+// include things like 'winsock2', etc...
+#include "openeaagles/base/util/platform_api.h"
+// lock/unlock, etc
 #include "openeaagles/base/util/atomics.h"
 
 #include "openeaagles/base/macros.h"
 #include "openeaagles/base/SlotTable.h"
-#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 namespace base {
@@ -369,7 +372,7 @@ public:
    bool disableMessageTypes(const unsigned short msgTypeBits);
 
    // ref(), unref() and getRefCount()
-   #include "openeaagles/base/refCount.h"
+   #include "openeaagles/base/ref.inl"
 
    // Output the list of known oe classes
    static void writeClassList(std::ostream& sout);
@@ -427,8 +430,8 @@ private:
    static unsigned int numClasses;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

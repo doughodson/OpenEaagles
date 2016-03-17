@@ -5,6 +5,7 @@
 #define __oe_simulation_Action_H__
 
 #include "openeaagles/base/ubf/Action.h"
+#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 

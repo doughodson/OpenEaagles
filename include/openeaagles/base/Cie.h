@@ -4,6 +4,7 @@
 
 #include "openeaagles/base/Color.h"
 #include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 namespace base {

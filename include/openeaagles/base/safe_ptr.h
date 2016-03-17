@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/util/atomics.h"
-
 #ifndef __oe_base_safe_ptr_H__
 #define __oe_base_safe_ptr_H__
+
+#include "openeaagles/base/util/atomics.h"
 
 namespace oe {
 namespace base {

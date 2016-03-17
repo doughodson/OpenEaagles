@@ -5,6 +5,7 @@
 #define __oe_base_Component_H__
 
 #include "openeaagles/base/Object.h"
+#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 namespace base {
@@ -440,8 +441,7 @@ private:
    bool shutdown;                   // True if this component is being (or has been) shutdown
 };
 
-} // End base namespace
-} // End oe namespace
-
+}
+}
 
 #endif

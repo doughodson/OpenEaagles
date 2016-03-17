@@ -3,6 +3,7 @@
 #define __oe_base_Function_H__
 
 #include "openeaagles/base/Object.h"
+#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 namespace base {

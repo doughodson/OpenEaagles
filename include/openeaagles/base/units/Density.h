@@ -5,6 +5,7 @@
 #define __oe_base_Density_H__
 
 #include "openeaagles/base/Number.h"
+#include "openeaagles/base/safe_ptr.h"
 #include "Masses.h"
 #include "Volumes.h"
 

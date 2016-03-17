@@ -8,6 +8,7 @@
 #include "openeaagles/base/osg/Vec2"
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/safe_ptr.h"
 
 namespace oe {
 namespace graphics {
