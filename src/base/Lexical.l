@@ -73,7 +73,7 @@ LN          line
             *i1 = '\0';
             *i2 = '\0';
             line = atoi(j1+1) - 1;
-            lcStrcpy(fname,FNAME_SIZE,i1+1);
+            utStrcpy(fname,FNAME_SIZE,i1+1);
             break;
         }
 
@@ -124,7 +124,7 @@ FALSE   { // Boolean Constants; false
 0[xX]{H}+{IS}? { // Decode hex into integer; 0Xnnn
             bool nflg = false;
             char cbuf[64];
-            lcStrcpy(cbuf, sizeof(cbuf), yytext);
+            utStrcpy(cbuf, sizeof(cbuf), yytext);
             if (std::strlen(cbuf) == 10) {
                if (cbuf[2] == '8') { cbuf[2] = '0'; nflg = true; }
                if (cbuf[2] == '9') { cbuf[2] = '1'; nflg = true; }
@@ -144,7 +144,7 @@ FALSE   { // Boolean Constants; false
 0{D}+{IS}?  { // Decode octal into integer; 0nnn
            bool nflg = false;
            char cbuf[64];
-           lcStrcpy(cbuf, sizeof(cbuf), yytext);
+           utStrcpy(cbuf, sizeof(cbuf), yytext);
            if (std::strlen(cbuf) == 12) {
               if (cbuf[1] == '2') { cbuf[1] = '0'; nflg = true; }
               if (cbuf[1] == '3') { cbuf[1] = '1'; nflg = true; }
@@ -184,7 +184,7 @@ FALSE   { // Boolean Constants; false
             /* return STRING without quotes */
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
-            lcStrcpy(yylval.cvalp,slen,yytext+1);
+            utStrcpy(yylval.cvalp,slen,yytext+1);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
             return STRING_LITERAL;
         }
@@ -193,7 +193,7 @@ FALSE   { // Boolean Constants; false
             /* return STRING without quotes */
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
-            lcStrcpy(yylval.cvalp,slen,yytext+1);
+            utStrcpy(yylval.cvalp,slen,yytext+1);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
             return STRING_LITERAL;
         }
@@ -202,7 +202,7 @@ FALSE   { // Boolean Constants; false
 {L}+[:] { // slot-id is one or more legal characters followed by a ':'
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
-            lcStrcpy(yylval.cvalp,slen,yytext);
+            utStrcpy(yylval.cvalp,slen,yytext);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0; // remove the :
             return SLOT_ID;
         }
@@ -211,7 +211,7 @@ FALSE   { // Boolean Constants; false
 {L}+    { // ident: one or more legal characters
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
-            lcStrcpy(yylval.cvalp,slen,yytext);
+            utStrcpy(yylval.cvalp,slen,yytext);
             return IDENT;
         }
 
