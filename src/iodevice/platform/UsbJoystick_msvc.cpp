@@ -1,5 +1,6 @@
+
 //==============================================================================
-// UsbJoystickImp -- MS Windows implementation
+// UsbJoystick -- MS Windows implementation
 //
 // Standard MS Windows joystick has 8 channels ...
 //
@@ -15,20 +16,20 @@
 //
 //==============================================================================
 
-#include "UsbJoystickImp.h"
+#include "UsbJoystick_msvc.h"
 #include "openeaagles/base/util/platform_api.h"
 
 namespace oe {
 namespace iodevice {
 
-IMPLEMENT_SUBCLASS(UsbJoystickImp,"UsbJoystick")
-EMPTY_SLOTTABLE(UsbJoystickImp)
-EMPTY_SERIALIZER(UsbJoystickImp)
+IMPLEMENT_SUBCLASS(UsbJoystick,"UsbJoystick")
+EMPTY_SLOTTABLE(UsbJoystick)
+EMPTY_SERIALIZER(UsbJoystick)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-UsbJoystickImp::UsbJoystickImp()
+UsbJoystick::UsbJoystick()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -38,7 +39,7 @@ UsbJoystickImp::UsbJoystickImp()
 //------------------------------------------------------------------------------
 // Init our data
 //------------------------------------------------------------------------------
-void UsbJoystickImp::initData()
+void UsbJoystick::initData()
 {
    for (unsigned int i = 0; i < MAX_AI; i++) {
       cmin[i] = 0;
@@ -49,7 +50,7 @@ void UsbJoystickImp::initData()
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void UsbJoystickImp::copyData(const UsbJoystickImp& org, const bool)
+void UsbJoystick::copyData(const UsbJoystick& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -65,14 +66,14 @@ void UsbJoystickImp::copyData(const UsbJoystickImp& org, const bool)
 //------------------------------------------------------------------------------
 //deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void UsbJoystickImp::deleteData()
+void UsbJoystick::deleteData()
 {
 }
 
 //------------------------------------------------------------------------------
-// reset() -- Reset (open) device
+// reset() -- reset (open) device
 //------------------------------------------------------------------------------
-void UsbJoystickImp::reset()
+void UsbJoystick::reset()
 {
    BaseClass::reset();
 
@@ -112,7 +113,7 @@ void UsbJoystickImp::reset()
 //------------------------------------------------------------------------------
 // Go get our AIs and DIs here
 //------------------------------------------------------------------------------
-void UsbJoystickImp::processInputs(double dt, base::IoData* const pInData)
+void UsbJoystick::processInputs(double dt, base::IoData* const pInData)
 {
    JOYINFOEX js;
    js.dwFlags = JOY_RETURNALL;   // return all joystick information
@@ -176,7 +177,7 @@ void UsbJoystickImp::processInputs(double dt, base::IoData* const pInData)
 //------------------------------------------------------------------------------
 
 // Set an analog input channels min/max values
-bool UsbJoystickImp::setMaxMin(unsigned int channel, double max, double min)
+bool UsbJoystick::setMaxMin(unsigned int channel, double max, double min)
 {
    bool ok = false;
    if (channel < numAI) {
@@ -188,7 +189,7 @@ bool UsbJoystickImp::setMaxMin(unsigned int channel, double max, double min)
 }
 
 // Set an analog input channel values using a raw input and the max/min values
-bool UsbJoystickImp::setInputScaled(unsigned int cn, double raw)
+bool UsbJoystick::setInputScaled(unsigned int cn, double raw)
 {
    bool ok = false;
    if (cn < numAI) {
@@ -202,3 +203,5 @@ bool UsbJoystickImp::setInputScaled(unsigned int cn, double raw)
 
 }
 }
+
+

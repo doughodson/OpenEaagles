@@ -1,6 +1,6 @@
 
-#ifndef __oe_iodevice_UsbJoystick_H__
-#define __oe_iodevice_UsbJoystick_H__
+#ifndef __oe_iodevice_Controller_H__
+#define __oe_iodevice_Controller_H__
 
 #include "openeaagles/base/IoDevice.h"
 
@@ -11,7 +11,7 @@ namespace base { class Number; }
 namespace iodevice {
 
 //------------------------------------------------------------------------------
-// Class:  UsbJoystick
+// Class:  Controller
 //
 // Description:  Communicates with a standard USB Joystick device.
 //
@@ -37,12 +37,12 @@ namespace iodevice {
 //    deviceIndex <Number>    Unit index
 //
 //------------------------------------------------------------------------------
-class UsbJoystick : public base::IoDevice
+class Controller : public base::IoDevice
 {
-    DECLARE_SUBCLASS(UsbJoystick, base::IoDevice)
+    DECLARE_SUBCLASS(Controller, base::IoDevice)
 
 public:
-   UsbJoystick();
+   Controller();
 
    virtual unsigned int getDeviceIndex() const;
    virtual bool setDeviceIndex(const int value);
@@ -78,7 +78,8 @@ private:
    void initData();
 };
 
-} // end iodevice
-} // end oe namespace
+}
+}
 
 #endif
+

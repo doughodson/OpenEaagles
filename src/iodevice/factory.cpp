@@ -14,9 +14,9 @@
 #include <cstring>
 
 #if defined(WIN32)
-   #include "./windows/UsbJoystickImp.h"
+   #include "./platform/UsbJoystick_msvc.h"
 #else
-   #include "./linux/UsbJoystickImp.h"
+   #include "./platform/UsbJoystick_linux.h"
 #endif
 
 namespace oe {
@@ -56,8 +56,8 @@ base::Object* factory(const char* name)
     // ---
     // Device handler implementations (Linux and/or Windows)
     // ---
-    else if ( std::strcmp(name, UsbJoystickImp::getFactoryName()) == 0 ) {
-        obj = new UsbJoystickImp();
+    else if ( std::strcmp(name, UsbJoystick::getFactoryName()) == 0 ) {
+        obj = new UsbJoystick();
     }
 
     return obj;

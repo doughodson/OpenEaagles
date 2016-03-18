@@ -192,11 +192,7 @@ solution "oe"
          "../../include/openeaagles/iodevice/**.h",
          "../../src/iodevice/**.cpp"
       }
-      if (os.is("linux")) then
-         excludes { "../../src/iodevice/windows/*" }
-      else
-         excludes { "../../src/iodevice/linux/*"   }
-      end
+      excludes { "../../src/iodevice/platform/UsbJoystick_linux.*"   }
       targetname "iodevice"
 
    -- linear systems library

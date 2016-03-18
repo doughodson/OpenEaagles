@@ -1,19 +1,14 @@
-//------------------------------------------------------------------------------
-// Class: UsbJoystickImp -- MS Windows implementation
-//------------------------------------------------------------------------------
-#ifndef __oe_iodevice_windows_UsbJoystickImp_H__
-#define __oe_iodevice_windows_UsbJoystickImp_H__
 
-#include "openeaagles/iodevice/UsbJoystick.h"
+#ifndef __oe_iodevice_windows_UsbJoystick_msvc_H__
+#define __oe_iodevice_windows_UsbJoystick_msvc_H__
+
+#include "openeaagles/iodevice/Controller.h"
 
 namespace oe {
 namespace iodevice {
 
 //------------------------------------------------------------------------------
-// Class:  UsbJoystickImp
-//
-// Description:  MS Windows version of the USB Joystick device.
-//               (See IoDevice::UsbJoystick)
+// Class: UsbJoystick
 //
 // Notes:
 //    1) Standard MS Windows joysticks have 8 channels, which are mapped ...
@@ -28,14 +23,13 @@ namespace iodevice {
 //             7         POV: right(1.0); left(-1.0); center(0.0)
 //
 // Factory name: UsbJoystick
-//
 //------------------------------------------------------------------------------
-class UsbJoystickImp : public UsbJoystick
+class UsbJoystick : public Controller
 {
-    DECLARE_SUBCLASS(UsbJoystickImp,UsbJoystick)
+    DECLARE_SUBCLASS(UsbJoystick, Controller)
 
 public:
-   UsbJoystickImp();
+   UsbJoystick();
 
    // base::IoDevice functions
    void processInputs(const double dt, base::IoData* const inData) override;
@@ -60,3 +54,5 @@ private:
 }
 
 #endif
+
+

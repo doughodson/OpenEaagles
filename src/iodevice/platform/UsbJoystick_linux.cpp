@@ -1,5 +1,5 @@
 //==============================================================================
-// UsbJoystickImp -- Linux implementation
+// UsbJoystick -- Linux implementation
 //==============================================================================
 #include <errno.h>
 
@@ -12,22 +12,22 @@
 
 #include <linux/joystick.h>
 
-#include "UsbJoystickImp.h"
+#include "UsbJoystick_linux.h"
 #include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/util/system.h"
 
 namespace oe {
 namespace iodevice {
 
-IMPLEMENT_SUBCLASS(UsbJoystickImp, "UsbJoystick")
-EMPTY_SLOTTABLE(UsbJoystickImp)
-EMPTY_SERIALIZER(UsbJoystickImp)
-EMPTY_DELETEDATA(UsbJoystickImp)
+IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")
+EMPTY_SLOTTABLE(UsbJoystick)
+EMPTY_SERIALIZER(UsbJoystick)
+EMPTY_DELETEDATA(UsbJoystick)
 
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-UsbJoystickImp::UsbJoystickImp()
+UsbJoystick::UsbJoystick()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -37,7 +37,7 @@ UsbJoystickImp::UsbJoystickImp()
 //------------------------------------------------------------------------------
 // Init our data
 //------------------------------------------------------------------------------
-void UsbJoystickImp::initData()
+void UsbJoystick::initData()
 {
    stream = 0;
    deviceName[0] = '\0';
@@ -46,7 +46,7 @@ void UsbJoystickImp::initData()
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void UsbJoystickImp::copyData(const UsbJoystickImp& org, const bool)
+void UsbJoystick::copyData(const UsbJoystick& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -54,9 +54,9 @@ void UsbJoystickImp::copyData(const UsbJoystickImp& org, const bool)
 }
 
 //------------------------------------------------------------------------------
-// reset() -- Reset (open) device
+// reset() -- reset (open) device
 //------------------------------------------------------------------------------
-void UsbJoystickImp::reset()
+void UsbJoystick::reset()
 {
    BaseClass::reset();
 
@@ -138,7 +138,7 @@ void UsbJoystickImp::reset()
 //------------------------------------------------------------------------------
 // Go get our AIs and DIs here
 //------------------------------------------------------------------------------
-void UsbJoystickImp::processInputs(const double dt, base::IoData* const pInData)
+void UsbJoystick::processInputs(const double dt, base::IoData* const pInData)
 {
    js_event js; // joystick event structure
 

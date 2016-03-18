@@ -1,8 +1,5 @@
-//==============================================================================
-// UsbJoystick
-//==============================================================================
 
-#include "openeaagles/iodevice/UsbJoystick.h"
+#include "openeaagles/iodevice/Controller.h"
 
 #include "openeaagles/base/Number.h"
 
@@ -10,22 +7,22 @@ namespace oe {
 namespace iodevice {
 
 /* both the linux and windows version use the 'UsbJoystick' form name */
-IMPLEMENT_SUBCLASS(UsbJoystick,"CommonUsbJoystick")
+IMPLEMENT_SUBCLASS(Controller, "Controller")
 
 // slot table for this class type
-BEGIN_SLOTTABLE(UsbJoystick)
+BEGIN_SLOTTABLE(Controller)
     "deviceIndex",   // 1) Device Index (default: 0)
-END_SLOTTABLE(UsbJoystick)
+END_SLOTTABLE(Controller)
 
 //  Map slot table to handles
-BEGIN_SLOT_MAP(UsbJoystick)
+BEGIN_SLOT_MAP(Controller)
     ON_SLOT( 1, setSlotDeviceIndex,  oe::base::Number)
 END_SLOT_MAP()
 
 //------------------------------------------------------------------------------
 // Constructor(s)
 //------------------------------------------------------------------------------
-UsbJoystick::UsbJoystick()
+Controller::Controller()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -35,7 +32,7 @@ UsbJoystick::UsbJoystick()
 //------------------------------------------------------------------------------
 // Init our data
 //------------------------------------------------------------------------------
-void UsbJoystick::initData()
+void Controller::initData()
 {
    deviceIndex = 0;
 
@@ -53,7 +50,7 @@ void UsbJoystick::initData()
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void UsbJoystick::copyData(const UsbJoystick& org, const bool)
+void Controller::copyData(const Controller& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -76,7 +73,7 @@ void UsbJoystick::copyData(const UsbJoystick& org, const bool)
 //------------------------------------------------------------------------------
 //deleteData() -- delete member data
 //------------------------------------------------------------------------------
-void UsbJoystick::deleteData()
+void Controller::deleteData()
 {
    numAI = 0;
    numDI = 0;
@@ -86,17 +83,17 @@ void UsbJoystick::deleteData()
 // Access Functions
 //------------------------------------------------------------------------------
 
-unsigned short UsbJoystick::getNumDiscreteInputChannels() const
+unsigned short Controller::getNumDiscreteInputChannels() const
 {
    return numDI;
 }
 
-unsigned short UsbJoystick::getNumDiscreteInputPorts() const
+unsigned short Controller::getNumDiscreteInputPorts() const
 {
    return 1;
 }
 
-bool UsbJoystick::getDiscreteInput(bool* const value, const unsigned int bit, const unsigned int) const
+bool Controller::getDiscreteInput(bool* const value, const unsigned int bit, const unsigned int) const
 {
    bool ok = false;
    if (value != nullptr && bit < numDI) {
@@ -106,12 +103,12 @@ bool UsbJoystick::getDiscreteInput(bool* const value, const unsigned int bit, co
    return ok;
 }
 
-unsigned short UsbJoystick::getNumAnalogInputs() const
+unsigned short Controller::getNumAnalogInputs() const
 {
    return numAI;
 }
 
-bool UsbJoystick::getAnalogInput(double* const value, const unsigned int channel) const
+bool Controller::getAnalogInput(double* const value, const unsigned int channel) const
 {
    bool ok = false;
    if (value != nullptr && channel < numAI) {
@@ -121,7 +118,7 @@ bool UsbJoystick::getAnalogInput(double* const value, const unsigned int channel
    return ok;
 }
 
-unsigned int UsbJoystick::getDeviceIndex() const
+unsigned int Controller::getDeviceIndex() const
 {
    return deviceIndex;
 }
@@ -132,7 +129,7 @@ unsigned int UsbJoystick::getDeviceIndex() const
 //------------------------------------------------------------------------------
 
 // Device number
-bool UsbJoystick::setDeviceIndex(const int v)
+bool Controller::setDeviceIndex(const int v)
 {
    bool ok = false;
    if (v >= 0 && v <= 31) {
@@ -148,7 +145,7 @@ bool UsbJoystick::setDeviceIndex(const int v)
 //------------------------------------------------------------------------------
 
 // deviceIndex: device index
-bool UsbJoystick::setSlotDeviceIndex(const oe::base::Number* const msg)
+bool Controller::setSlotDeviceIndex(const oe::base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -160,7 +157,7 @@ bool UsbJoystick::setSlotDeviceIndex(const oe::base::Number* const msg)
 //------------------------------------------------------------------------------
 // getSlotByIndex() for Component
 //------------------------------------------------------------------------------
-oe::base::Object* UsbJoystick::getSlotByIndex(const int si)
+base::Object* Controller::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
@@ -168,7 +165,7 @@ oe::base::Object* UsbJoystick::getSlotByIndex(const int si)
 //------------------------------------------------------------------------------
 // serialize
 //------------------------------------------------------------------------------
-std::ostream& UsbJoystick::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& Controller::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
    if ( !slotsOnly ) {
@@ -189,6 +186,7 @@ std::ostream& UsbJoystick::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // iodevice namespace
-} // end oe namespace
+}
+}
+
 
