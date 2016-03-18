@@ -70,10 +70,7 @@ subdirs:
 	  (cd $$subdir && $(MAKE)) || exit 1; \
 	done
 
-#$(LIB)(Lexical.o): Lexical.cpp Parser.cpp Parser.hpp
-
-#
-#
+#----------------------------------------------------------------------------------------
 # To build parser and scanner:
 #
 # dos2unix Parser.y
@@ -81,9 +78,8 @@ subdirs:
 # bison -d Parser.y -o Parser.cpp    // creates Parser.cpp and Parser.hpp
 # flex -f -oLexical.cpp Lexical.l    // creates Lexical.cpp (Lexical.h already exists)
 #
-# search for "FlexLexer.h" in the generated file Lexical.cpp and fix includ path
-#
-#
+# search for "FlexLexer.h" in Lexical.cpp - and fix include path to point to locale dir
+#----------------------------------------------------------------------------------------
 
 clean:
 	-rm -f *.o
