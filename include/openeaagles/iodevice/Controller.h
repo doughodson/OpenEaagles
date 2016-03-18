@@ -11,27 +11,12 @@ namespace base { class Number; }
 namespace iodevice {
 
 //------------------------------------------------------------------------------
-// Class:  Controller
+// Class: Controller
 //
-// Description:  Communicates with a standard USB Joystick device.
+// Description: Physically packages a set of analog and digital data reading
+//              together to represent a controller interface (game, hotas, etc)
 //
-// Notes:
-//    1) Standard MS Windows joysticks have 8 channels, which are mapped ...
-//          channel     Axis
-//             0         X
-//             1         Y
-//             2         Z
-//             3         R
-//             4         U
-//             5         V
-//             6         POV: back(1.0); forward(-1.0); center(0.0)
-//             7         POV: right(1.0); left(-1.0); center(0.0)
-//
-//    2) Standard Linux just maps one for one (axis to channel)
-//
-//
-//
-// Factory name: UsbJoystick
+// Factory name: Controller
 //
 // Slots:
 //    deviceIndex <Number>    Unit index
@@ -64,7 +49,7 @@ protected:
    // analog
    // ---
    static const unsigned short MAX_AI = 16;
-   unsigned short numAI;   // Number of analog channels
+   unsigned short numAI;    // Number of analog channels
    double inData[MAX_AI];   // Input analog array
 
    // ---

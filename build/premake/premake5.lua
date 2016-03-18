@@ -190,7 +190,7 @@ solution "oe"
    project "iodevice"
       files {
          "../../include/openeaagles/iodevice/**.h",
-         "../../src/iodevice/**.cpp"
+         "../../src/iodevice/**.*"
       }
       excludes { "../../src/iodevice/platform/UsbJoystick_linux.*"   }
       targetname "iodevice"
