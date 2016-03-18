@@ -70,15 +70,16 @@ subdirs:
 	  (cd $$subdir && $(MAKE)) || exit 1; \
 	done
 
-$(LIB)(Lexical.o): Lexical.cpp Parser.cpp Parser.hpp
+#$(LIB)(Lexical.o): Lexical.cpp Parser.cpp Parser.hpp
 
-#Parser.cpp:  Parser.y
-#	dos2unix Parser.y
-#	bison -t Parser.y -o Parser.cpp
-
-#Lexical.cpp: Lexical.l
-#	dos2unix Lexical.l
-#	flex -f -oLexical.cpp Lexical.l
+#
+# To build parser and scanner:
+#
+# dos2unix Parser.y
+# dos2unix Lexical.l
+# bison -d Parser.y -o Parser.cpp    // creates Parser.cpp and Parser.hpp
+# flex -f -oLexical.cpp Lexical.l    // creates Lexical.cpp (Lexical.h already exists)
+#
 
 clean:
 	-rm -f *.o
