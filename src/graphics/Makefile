@@ -35,9 +35,14 @@ CPPFLAGS += -I$(FREETYPE2_INC_DIR)
 
 all: ${OBJS}
 
-#Reformat.cpp: Reformat.l
-#	dos2unix Reformat.l
-#	flex -f -oReformat.cpp Reformat.l
+#----------------------------------------------------------------------------------------
+# To build scanner:
+#
+# dos2unix reformat.l
+# flex -f -oReformat.cpp reformat.l   // creates Reformat.cpp (Reformat.h already exists)
+#
+# search for "FlexLexer.h" in Reformat.cpp - fix include path
+#----------------------------------------------------------------------------------------
 
 clean:
 	-rm -f *.o

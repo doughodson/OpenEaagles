@@ -319,7 +319,7 @@ typedef char YY_CHAR;
 
 #define yytext_ptr yytext
 
-#include "../base/FlexLexer.h"
+#include "../base/platform/FlexLexer.h"
 
 int yyFlexLexer::yywrap() { return 1; }
 int yyFlexLexer::yylex()
@@ -1715,8 +1715,8 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "Reformat.l"
-#line 2 "Reformat.l"
+#line 1 "reformat.l"
+#line 2 "reformat.l"
 //
 // Lexical generator for the format specifiers
 //
@@ -1727,10 +1727,10 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 # pragma warning(disable: 4996)
 #endif
 
-#line 16 "Reformat.l"
+#line 16 "reformat.l"
 #include <iostream>
-#include <string.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdio>
 #include "Reformat.h"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
@@ -1847,7 +1847,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 42 "Reformat.l"
+#line 42 "reformat.l"
 
 
 #line 1854 "Reformat.cpp"
@@ -1923,21 +1923,21 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 44 "Reformat.l"
+#line 44 "reformat.l"
 {  // "+0#"	Integer w/sign and leading zeros
 			   return oe::graphics::Reformat::processInteger(yytext, yyleng);
 			}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 48 "Reformat.l"
+#line 48 "reformat.l"
 {  // "+0#.#"	Floating w/sign and leading zeros
 			   return oe::graphics::Reformat::processFloat(yytext, yyleng);
 			}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 52 "Reformat.l"
+#line 52 "reformat.l"
 {  // HH:MM:SS  Hours, minutes and seconds
 			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmmss,
 								yytext, yyleng);
@@ -1945,42 +1945,42 @@ YY_RULE_SETUP
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 57 "Reformat.l"
+#line 57 "reformat.l"
 {  // HH:MM		Hours and minutes
 			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmm, yytext, yyleng);
 			}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 61 "Reformat.l"
+#line 61 "reformat.l"
 {  // HH		Hours
 			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hh, yytext, yyleng);
 			}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 65 "Reformat.l"
+#line 65 "reformat.l"
 {  // MM:SS		Minutes and seconds
 			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mmss, yytext, yyleng);
 			}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 69 "Reformat.l"
+#line 69 "reformat.l"
 {  // MM		Minutes
 			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mm, yytext, yyleng);
 			}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 73 "Reformat.l"
+#line 73 "reformat.l"
 {  // SS		Seconds
 			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::ss, yytext, yyleng);
 			}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 77 "Reformat.l"
+#line 77 "reformat.l"
 {
 			   // +DDMMSS	Degrees, minutes and seconds
 			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmmss,
@@ -1989,7 +1989,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 83 "Reformat.l"
+#line 83 "reformat.l"
 {
 			   // +DDMM		Degrees and minutes
 			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmm,
@@ -1998,7 +1998,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 89 "Reformat.l"
+#line 89 "reformat.l"
 {
 			   // +DD		Degrees
 			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
@@ -2007,7 +2007,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 95 "Reformat.l"
+#line 95 "reformat.l"
 {
 			   // +DD		Degrees
 			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
@@ -2016,7 +2016,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 101 "Reformat.l"
+#line 101 "reformat.l"
 ECHO;
 	YY_BREAK
 #line 2023 "Reformat.cpp"
@@ -2914,7 +2914,7 @@ void rffree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 101 "Reformat.l"
+#line 101 "reformat.l"
 
 
 
@@ -3271,7 +3271,7 @@ int Reformat::processTime(const TimeReadout::TimeMode tm,
 
    format[j] = '\0';
 
-   return int(tm);
+   return static_cast<int>(tm);
 }
 
 
@@ -3442,7 +3442,7 @@ int Reformat::processDirection(const DirectionReadout::DirMode dm,
 
    format[j] = '\0';
 
-   return int(dm);
+   return static_cast<int>(dm);
 
 }
 
@@ -3530,8 +3530,8 @@ DirectionReadout::DirMode Reformat::convertDirection(const char* s)
    return DirectionReadout::DirMode(yylex(dir));
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 
 

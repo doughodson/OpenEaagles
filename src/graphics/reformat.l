@@ -14,8 +14,8 @@
 
 %{
 #include <iostream>
-#include <string.h>
-#include <stdio.h>
+#include <cstring>
+#include <cstdio>
 #include "Reformat.h"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
@@ -712,7 +712,7 @@ DirectionReadout::DirMode Reformat::convertDirection(const char* s)
    return DirectionReadout::DirMode(yylex(dir));
 }
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 

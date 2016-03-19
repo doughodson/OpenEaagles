@@ -1,5 +1,5 @@
 //
-// Lexical generator for the Readout reformatter
+// Scanner for the Readout reformatter
 //
 
 #ifndef __oe_graphics_Reformat_H__
@@ -8,7 +8,7 @@
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
 #define yyFlexLexer rfFlexLexer
-#include "../base/FlexLexer.h"
+#include "../base/platform/FlexLexer.h"
 #endif
 
 #include "openeaagles/graphics/Readouts.h"
@@ -56,8 +56,8 @@ private:
    bool  postSign;
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif
 
