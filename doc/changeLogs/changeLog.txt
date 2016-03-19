@@ -86,6 +86,9 @@ base library
         'ut' to indicate utility and clearly avoid any ambiquity with legacy C functions
         such as 'strcpy', etc.  The prefix was changed to better indicate the nature
         of function (i.e., it's a utility)
+     -- renamed 'lcParser' to 'edlParser' to indicate file format being parsed. Include
+        header file changed from 'Parser.h' to 'edl_parser.h' as this is a function, not
+		a class declaration
 
    Thread classes
      -- platform specific code associated with the thread classes has been restructured
