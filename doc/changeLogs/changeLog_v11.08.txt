@@ -54,7 +54,7 @@ basic:
 basicGL:
 
    Display class
-      -- general cleanup of the *.cpp and *.h files --
+      -- general clean-up of the *.cpp and *.h files --
 
       1) Added the configure() function to configure the GL context
          (previously configureIt() in GlutDisplay)
@@ -201,4 +201,4 @@ simulation:
       5) Changed the size of the new player queue from 100 to 1000.
 
    TrackManager class
-      1) newReport() -- now checking the queue before ref'n the emission.
+      1) newReport() -- now checking the queue before ref'ing the emission.

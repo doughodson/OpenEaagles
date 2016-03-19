@@ -42,7 +42,7 @@ General framework-wide changes and improvements
    -- Renamed global framework configuration options to start with 'OE' instead
       of 'EAAGLES'
 
-   -- LCreal (which has been hardcoded and typed as 'double' for years) has been completely
+   -- LCreal (which has been hard-coded and typed as 'double' for years) has been completely
       removed and replaced with 'double'
 
    -- Closely associated with LCreal is the macro "LCREAL_DOUBLE" which defined whether or not
@@ -61,17 +61,17 @@ base library
       and "UdpUnicastHandler" factor names.
 
    -- separated MonitorMetrics class definition and implementation away from Cie.h/cpp file.
-   
+
    -- broke out everything defined by 'support.h/cpp' into groups and placed functionality
       into files located in subdirectory 'util' (i.e., 'utilities').  Object no longer
       imports everything that was defined in 'support.h', classes now include only what is
       needed.
-      
+
    -- almost all 'support.h' functions are now defined in scope of 'base' namespace - no
       longer are they scoped in the broader 'oe' namespace.  The combination of grouping
-      functionality into individual related utility files and more explicity including
+      functionality into individual related utility files and more explicitly including
       them (e.g., #include "openeaagles/base/util/system.h") where needed, results in
-      more explicit explict references to them (e.g., base::msleep).  This makes it more
+      more explicit references to them (e.g., base::msleep).  This makes it more
       obvious as to where they are defined, and ensure they are defined only where needed.
 
    Number class
@@ -83,7 +83,7 @@ base library
         When C++14 becomes better supported, should use std::max and std::min templates
         from <algorithm> library
      -- renamed the 'lc' prefix on all char-based string functions and replaced with
-        'ut' to indicate utility and clearly avoid any ambiquity with legacy C functions
+        'ut' to indicate utility and clearly avoid any ambiguity with legacy C functions
         such as 'strcpy', etc.  The prefix was changed to better indicate the nature
         of function (i.e., it's a utility)
      -- renamed 'lcParser' to 'edlParser' to indicate file format being parsed. Include

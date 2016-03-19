@@ -107,7 +107,7 @@ gui-glut
 --------------------------------------------------------------------------------
 maps
 
-   # general cleanup of classes and code (removal of tabs, docs, etc)
+   # general clean up of classes and code (removal of tabs, docs, etc)
 
    # deleted vector product map code as it was not mature enough to warrant
      inclusion into framework

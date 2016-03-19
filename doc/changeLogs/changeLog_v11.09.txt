@@ -64,5 +64,5 @@ simulation:
            autopilot's loiter pattern.  
 
     NetIO class
-        1) Removed less than 0 checks for unsigned ints in four functions:
+        1) Removed less than 0 checks for unsigned int's in four functions:
            getInputNib(x2) and getOutputNib(x2).

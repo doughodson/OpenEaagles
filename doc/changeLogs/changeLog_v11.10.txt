@@ -91,14 +91,14 @@ simulation:
 
    StoresMgr class
       1) Added const versions of the get current and get next weapon functions
-         (e.g., getNextBomb(), getNextFlare(), getCurrentWeapon(), etc)
+         (e.g., getNextBomb(), getNextFlare(), getCurrentWeapon(), etc.)
 
    TabLogger class
       1) makePlayerLatLonMsg() -- now prints the latitude and/or longitude regardless
          of their values.
 
    TargetData class
-      -- General cleanup and upgrade
+      -- General clean-up and upgrade
 
 --------------------------------------------------------------------------------
 

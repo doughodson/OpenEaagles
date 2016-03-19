@@ -36,7 +36,7 @@ dis
       ## changed all signed and unsigned char types to int8_t and uint8_t
       ## changed all objects from 'class' to 'struct'
 
-      1) general cleanup and modifications to support IEEE P1278.1 Draft 15.
+      1) general clean-up and modifications to support IEEE P1278.1 Draft 15.
       2) PDUHeader struct -- added 'status' field
       3) EntityMarking struct -- changed 'marking' from signed char to uint8_t
       4) BurstDescriptor -- changed 'munision' field to 'munition'
@@ -49,7 +49,7 @@ dis
       ## changed all signed and unsigned char types to int8_t and uint8_t
       ## changed all objects from 'class' to 'struct'
 
-      1) general cleanup and modifications to support IEEE P1278.1 Draft 15.
+      1) general clean-up and modifications to support IEEE P1278.1 Draft 15.
 
       2) Start, Stop, Acknowledge, Action Request, Data Query, Data,
          Comment, Action Request-R and Action Response-R PDUs
@@ -93,6 +93,6 @@ ioDevice
 simulation
 
    Missile class
-       1) fuzing logic is reset if missile's target changes mid-flight
+       1) fusing logic is reset if missile's target changes mid-flight
        
 

@@ -83,7 +83,7 @@ simulation
       1) reset() now calls updateMatrix()
 
    Message class
-      1) General cleanup of the code
+      1) General clean-up of the code
          -- added 'const', as needed
          -- getSenderName() and getDestNames() now return 'const' pointers
 

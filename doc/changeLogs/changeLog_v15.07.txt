@@ -25,9 +25,9 @@ general
   renamed to 'safe_ptr<>'.
 
   This was done for several reasons:
-     1) Declutter the Object class
+     1) De-clutter the Object class
      2) Renamed to more clearly indicate the functionality provided by this
-        implementation of a shared pointer - namely, it intellegently manages ref-based
+        implementation of a shared pointer - namely, it intelligently manages ref-based
         Objects AND is also thread-safe (meaning, multiple threads can access the
         same shared pointer object).
 

@@ -29,7 +29,7 @@ basicGL
 
    BitmapFont class
       1) Added the degree symbol character (0XB0)
-      2) Misc cleanup
+      2) Misc clean-up
 
    DirectionReadout class
       1) makeText() - now changes '@' to the degree character (0xB0)

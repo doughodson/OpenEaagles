@@ -456,16 +456,16 @@ simulation:
       4) reset() -- now sets the launcher vehicle pointer for weapons that are
          not flyout weapons.  (bug fix)
       5) dynamics() -- in PRE_RELEASE mode only -- now using initial conditions
-         angles to compute the weapon's current euler angles (bug fix)
+         angles to compute the weapon's current Euler angles (bug fix)
       6) Added a target player name (for testing only); new slot 'testTgtName'
 
 --------------------------------------------------------------------------------
 vehicles:
 
    JSBSimModel
-      1) dynamics() -- modified how the velocity vector, acceleration vector and euler
+      1) dynamics() -- modified how the velocity vector, acceleration vector and Euler
          are passed to the base Player class (see Player class changes)
 
    RacModel
-      1) updateRAC() -- modified how the velocity vector, acceleration vector and euler
+      1) updateRAC() -- modified how the velocity vector, acceleration vector and Euler
          are passed to the base Player class (see Player class changes)
