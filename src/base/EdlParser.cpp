@@ -75,7 +75,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include "openeaagles/base/edl_parser.h"
+#include "openeaagles/base/parser.h"
 #include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"

@@ -87,7 +87,7 @@ base library
         such as 'strcpy', etc.  The prefix was changed to better indicate the nature
         of function (i.e., it's a utility)
      -- renamed 'lcParser' to 'edlParser' to indicate file format being parsed. Include
-        header file changed from 'Parser.h' to 'edl_parser.h' as this is a function, not
+        header file changed from 'Parser.h' to 'parser.h' as this is a function, not
         a class declaration
 
    Lexical/Parser classes
@@ -116,6 +116,10 @@ glut library
 graphics library
 
    -- previously named the 'basicGL' library
+
+   Reformat class
+     -- Reformat.l renamed to reformat.l
+     -- updated flex code, regenerated scanner
 
 --------------------------------------------------------------------------------
 hla library
