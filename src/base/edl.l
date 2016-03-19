@@ -67,9 +67,9 @@ LN          line
         // for examples:  # 21 "test.cf"
         //                #line 21 "test.cf"
 [#]{LN}?[ ]+{D}+[ ]+\"(\\.|[^\\"])*\".*$    {
-            char* i1 = strchr(yytext,'\"');
-            char* i2 = strrchr(yytext,'\"');
-            char* j1 = strchr(yytext,' ');
+            char* i1 = std::strchr(yytext,'\"');
+            char* i2 = std::strrchr(yytext,'\"');
+            char* j1 = std::strchr(yytext,' ');
             *i1 = '\0';
             *i2 = '\0';
             line = std::atoi(j1+1) - 1;
@@ -135,7 +135,7 @@ FALSE   { // Boolean Constants; false
                if (cbuf[2] == 'e' || cbuf[2] == 'E') { cbuf[2] = '6'; nflg = true; }
                if (cbuf[2] == 'f' || cbuf[2] == 'F') { cbuf[2] = '7'; nflg = true; }
             }
-            long ii = strtol(cbuf, 0, 16);
+            long ii = std::strtol(cbuf, 0, 16);
             if (nflg) ii = (ii | 0x80000000);
             yylval.lval = ii;
             return INTEGERconstant;
@@ -149,7 +149,7 @@ FALSE   { // Boolean Constants; false
               if (cbuf[1] == '2') { cbuf[1] = '0'; nflg = true; }
               if (cbuf[1] == '3') { cbuf[1] = '1'; nflg = true; }
            }
-           long ii = strtol(cbuf, 0, 8);
+           long ii = std::strtol(cbuf, 0, 8);
            if (nflg) ii = (ii | 0x80000000);
            yylval.lval = ii;
            return INTEGERconstant;
@@ -157,25 +157,25 @@ FALSE   { // Boolean Constants; false
 
 
 [+-]?{D}+{IS}? { // Standard integer
-            yylval.lval = atoi(yytext);
+            yylval.lval = std::atoi(yytext);
             return INTEGERconstant;
         }
 
 
 [+-]?{D}+{E}{FS}? { // floating point format
-            yylval.dval = atof(yytext);
+            yylval.dval = std::atof(yytext);
             return FLOATINGconstant;
         }
 
 
 [+-]?{D}*"."{D}+({E})?{FS}? { // floating point format
-            yylval.dval = atof(yytext);
+            yylval.dval = std::atof(yytext);
             return FLOATINGconstant;
         }
 
 
 [+-]?{D}+"."{D}*({E})?{FS}? { // floating point format
-            yylval.dval = atof(yytext);
+            yylval.dval = std::atof(yytext);
             return FLOATINGconstant;
         }
 
