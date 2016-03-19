@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_edl_parser_H__
-#define __oe_base_edl_parser_H__
+#ifndef __oe_base_parser_H__
+#define __oe_base_parser_H__
 
 namespace oe {
 
