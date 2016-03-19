@@ -1,10 +1,8 @@
-//------------------------------------------------------------------------------
-// Class:  Lexical
-//------------------------------------------------------------------------------
+
 #include <fstream>
 
-#ifndef _oe_base_Lexical_H_
-#define _oe_base_Lexical_H_
+#ifndef _oe_base_EdlScanner_H_
+#define _oe_base_EdlScanner_H_
 
 #ifndef __FLEX_LEXER_H
 #define yyFlexLexer baseFlexLexer
@@ -16,15 +14,15 @@ namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Lexical
-// Base class:  FlexLexer -> baseFlexLexer -> Lexical
+// Class: EdlScanner
+// Base class:  FlexLexer -> baseFlexLexer -> EdlScanner
 //
-// Description:  Lexical generator for the input files.
+// Description: Scanner for the input files.
 //
 //------------------------------------------------------------------------------
-class Lexical : public baseFlexLexer {
+class EdlScanner : public baseFlexLexer {
 public:
-    Lexical(std::fstream* f) : baseFlexLexer(f) {
+    EdlScanner(std::fstream* f) : baseFlexLexer(f) {
         fname[0] = 0;
         line = 1;
     }

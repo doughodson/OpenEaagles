@@ -86,19 +86,19 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/List.h"
-#include "Lexical.h"
+#include "EdlScanner.h"
 
-static oe::base::Object* result;               // Result of all our work
-static oe::base::Lexical* lex;                 // Lex generator
-static oe::base::FactoryFunc factoryFunc;      // Factory function 
-static int errCount;                           // Error count
+static oe::base::Object* result;               // result of all our work
+static oe::base::EdlScanner* scanner;          // edl scanner
+static oe::base::FactoryFunc factoryFunc;      // factory function 
+static int errCount;                           // error count
 
 //------------------------------------------------------------------------------
 // yylex() -- user defined; used by the parser to call the lexical generator
 //------------------------------------------------------------------------------
 inline int yylex()
 {
-   return lex->yylex();
+   return scanner->yylex();
 }
 
 //------------------------------------------------------------------------------
@@ -106,8 +106,8 @@ inline int yylex()
 //------------------------------------------------------------------------------
 inline void yyerror(const char* s)
 {
-   std::cerr << lex->getFilename() << ", line ";
-   std::cerr << lex->getLineNumber() << ": ";
+   std::cerr << scanner->getFilename() << ", line ";
+   std::cerr << scanner->getLineNumber() << ": ";
    std::cerr << s << std::endl;
    errCount++;
 }
@@ -1701,14 +1701,14 @@ Object* edlParser(const char* filename, FactoryFunc factory, int* numErrors)
     // Open the file (someone else passed it through the preprocessor)
     std::fstream fin;
     fin.open(filename,std::ios::in);
-    lex = new Lexical(&fin);
+    scanner = new EdlScanner(&fin);
 
     //yydebug = 1;
     Object* q = 0;
     if (yyparse() == 0) q = result;
 
     fin.close();
-    delete lex;
+    delete scanner;
 
     if (numErrors != 0) *numErrors = errCount;
     return q;

@@ -12,6 +12,7 @@ OBJS =  \
 	$(LIB)(Component.o) \
 	$(LIB)(Decibel.o) \
 	$(LIB)(EarthModel.o) \
+	$(LIB)(EdlScanner.o) \
 	$(LIB)(factory.o) \
 	$(LIB)(FileReader.o) \
 	$(LIB)(Float.o) \
@@ -27,7 +28,6 @@ OBJS =  \
 	$(LIB)(IoDevice.o) \
 	$(LIB)(IoHandler.o) \
 	$(LIB)(LatLon.o) \
-	$(LIB)(Lexical.o) \
 	$(LIB)(List.o) \
 	$(LIB)(Locus.o) \
 	$(LIB)(Logger.o) \
@@ -75,10 +75,10 @@ subdirs:
 #
 # dos2unix edl.y
 # dos2unix edl.l
-# bison -d edl.y -o Parser.cpp    // creates Parser.cpp and Parser.hpp
-# flex -f -oLexical.cpp edl.l     // creates Lexical.cpp (Lexical.h already exists)
+# bison -d edl.y -o Parser.cpp     // creates Parser.cpp and Parser.hpp
+# flex -f -oEdlScanner.cpp edl.l   // creates EdlScanner.cpp (EdlScanner.h already exists)
 #
-# search for "FlexLexer.h" in Lexical.cpp - and fix include path to point to locale dir
+# search for "FlexLexer.h" in EdlScanner.cpp - fix include path
 #----------------------------------------------------------------------------------------
 
 clean:

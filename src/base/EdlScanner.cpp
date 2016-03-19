@@ -1,6 +1,6 @@
-#line 2 "Lexical.cpp"
+#line 2 "EdlScanner.cpp"
 
-#line 4 "Lexical.cpp"
+#line 4 "EdlScanner.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -328,7 +328,7 @@ int yyFlexLexer::yylex()
 	return 0;
 	}
 
-#define YY_DECL int oe::base::Lexical::yylex()
+#define YY_DECL int oe::base::EdlScanner::yylex()
 static yyconst flex_int16_t yy_nxt[][128] =
     {
     {
@@ -2000,7 +2000,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #line 1 "edl.l"
 #line 2 "edl.l"
 //
-// Lexical generator for reading OpenEaagles configuration files.
+// Scanner for reading EDL files
 //
 
 // disable all deprecation warnings for now, until we fix
@@ -2023,7 +2023,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/List.h"
 #include "openeaagles/base/util/str_utils.h"
-#include "Lexical.h"
+#include "EdlScanner.h"
 #include "Parser.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
@@ -2034,8 +2034,8 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 /* no calls to yywrap */
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "baseFlexLexer" */
-/* derived 'oe::base::Lexical' is a subclass of yyFlexLexer */
-#line 2039 "Lexical.cpp"
+/* derived 'oe::base::EdlScanner' is a subclass of yyFlexLexer */
+#line 2039 "EdlScanner.cpp"
 
 #define INITIAL 0
 
@@ -2146,7 +2146,7 @@ YY_DECL
         // cpp commands that change line number and file name
         // for examples:  # 21 "test.cf"
         //                #line 21 "test.cf"
-#line 2150 "Lexical.cpp"
+#line 2150 "EdlScanner.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -2441,7 +2441,7 @@ YY_RULE_SETUP
 #line 223 "edl.l"
 ECHO;
 	YY_BREAK
-#line 2445 "Lexical.cpp"
+#line 2445 "EdlScanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 

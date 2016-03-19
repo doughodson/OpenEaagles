@@ -1,6 +1,6 @@
 %{
 //
-// Lexical generator for reading OpenEaagles configuration files.
+// Scanner for reading EDL files
 //
 
 // disable all deprecation warnings for now, until we fix
@@ -26,7 +26,7 @@
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/List.h"
 #include "openeaagles/base/util/str_utils.h"
-#include "Lexical.h"
+#include "EdlScanner.h"
 #include "Parser.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
@@ -47,8 +47,8 @@
 /* change the name of the scanner class - results in "baseFlexLexer" */
 %option prefix="base"
 
-/* derived 'oe::base::Lexical' is a subclass of yyFlexLexer */
-%option yyclass="oe::base::Lexical"
+/* derived 'oe::base::EdlScanner' is a subclass of yyFlexLexer */
+%option yyclass="oe::base::EdlScanner"
 
 
 
