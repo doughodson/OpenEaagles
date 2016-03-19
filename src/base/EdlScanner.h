@@ -5,8 +5,8 @@
 #define _oe_base_EdlScanner_H_
 
 #ifndef __FLEX_LEXER_H
-#define yyFlexLexer baseFlexLexer
-#include "../base/FlexLexer.h"
+#define yyFlexLexer edlFlexLexer
+#include "./platform/FlexLexer.h"
 #undef yyFlexLexer
 #endif
 
@@ -15,14 +15,14 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: EdlScanner
-// Base class:  FlexLexer -> baseFlexLexer -> EdlScanner
+// Base class:  FlexLexer -> edlFlexLexer -> EdlScanner
 //
 // Description: Scanner for the input files.
 //
 //------------------------------------------------------------------------------
-class EdlScanner : public baseFlexLexer {
+class EdlScanner : public edlFlexLexer {
 public:
-    EdlScanner(std::fstream* f) : baseFlexLexer(f) {
+    EdlScanner(std::fstream* f) : edlFlexLexer(f) {
         fname[0] = 0;
         line = 1;
     }

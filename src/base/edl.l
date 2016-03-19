@@ -27,7 +27,7 @@
 #include "openeaagles/base/List.h"
 #include "openeaagles/base/util/str_utils.h"
 #include "EdlScanner.h"
-#include "Parser.hpp"
+#include "EdlParser.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
 
@@ -44,8 +44,8 @@
 /* no calls to yywrap */
 %option nounistd
 
-/* change the name of the scanner class - results in "baseFlexLexer" */
-%option prefix="base"
+/* change the name of the scanner class - results in "edlFlexLexer" */
+%option prefix="edl"
 
 /* derived 'oe::base::EdlScanner' is a subclass of yyFlexLexer */
 %option yyclass="oe::base::EdlScanner"

@@ -88,7 +88,12 @@ base library
         of function (i.e., it's a utility)
      -- renamed 'lcParser' to 'edlParser' to indicate file format being parsed. Include
         header file changed from 'Parser.h' to 'edl_parser.h' as this is a function, not
-		a class declaration
+        a class declaration
+
+   Lexical/Parser classes
+     -- renamed to EdlScanner and EdlParser (they scan and parse EDL files)
+     -- Lexical.l renamed to edl.l
+     -- Parser.y renamed to edl.y
 
    Thread classes
      -- platform specific code associated with the thread classes has been restructured

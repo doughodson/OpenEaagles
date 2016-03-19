@@ -12,6 +12,7 @@ OBJS =  \
 	$(LIB)(Component.o) \
 	$(LIB)(Decibel.o) \
 	$(LIB)(EarthModel.o) \
+	$(LIB)(EdlParser.o) \
 	$(LIB)(EdlScanner.o) \
 	$(LIB)(factory.o) \
 	$(LIB)(FileReader.o) \
@@ -41,7 +42,6 @@ OBJS =  \
 	$(LIB)(Operators.o) \
 	$(LIB)(Pair.o) \
 	$(LIB)(PairStream.o) \
-	$(LIB)(Parser.o) \
 	$(LIB)(Rgba.o) \
 	$(LIB)(Rgb.o) \
 	$(LIB)(Rng.o) \
@@ -75,7 +75,7 @@ subdirs:
 #
 # dos2unix edl.y
 # dos2unix edl.l
-# bison -d edl.y -o Parser.cpp     // creates Parser.cpp and Parser.hpp
+# bison -d edl.y -o EdlParser.cpp  // creates EdlParser.cpp and EdlParser.hpp
 # flex -f -oEdlScanner.cpp edl.l   // creates EdlScanner.cpp (EdlScanner.h already exists)
 #
 # search for "FlexLexer.h" in EdlScanner.cpp - fix include path

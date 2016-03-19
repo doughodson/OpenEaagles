@@ -20,7 +20,7 @@
      * We will address this in a future release of flex, or omit the C++ scanner
      * altogether.
      */
-    #define yyFlexLexer baseFlexLexer
+    #define yyFlexLexer edlFlexLexer
 
 /* First, we deal with  platform-specific or compiler-specific issues. */
 
@@ -284,9 +284,9 @@ struct yy_buffer_state
  */
 #define YY_CURRENT_BUFFER_LVALUE (yy_buffer_stack)[(yy_buffer_stack_top)]
 
-void *basealloc (yy_size_t  );
-void *baserealloc (void *,yy_size_t  );
-void basefree (void *  );
+void *edlalloc (yy_size_t  );
+void *edlrealloc (void *,yy_size_t  );
+void edlfree (void *  );
 
 #define yy_new_buffer yy_create_buffer
 
@@ -319,7 +319,7 @@ typedef char YY_CHAR;
 
 #define yytext_ptr yytext
 
-#include "FlexLexer.h"
+#include "./platform/FlexLexer.h"
 
 int yyFlexLexer::yywrap() { return 1; }
 int yyFlexLexer::yylex()
@@ -2024,7 +2024,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #include "openeaagles/base/List.h"
 #include "openeaagles/base/util/str_utils.h"
 #include "EdlScanner.h"
-#include "Parser.hpp"
+#include "EdlParser.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
 
@@ -2033,7 +2033,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 /* no calls to yywrap */
 /* no calls to yywrap */
 #define YY_NO_UNISTD_H 1
-/* change the name of the scanner class - results in "baseFlexLexer" */
+/* change the name of the scanner class - results in "edlFlexLexer" */
 /* derived 'oe::base::EdlScanner' is a subclass of yyFlexLexer */
 #line 2039 "EdlScanner.cpp"
 
@@ -2609,9 +2609,9 @@ yyFlexLexer::yyFlexLexer( std::istream* arg_yyin, std::ostream* arg_yyout )
 yyFlexLexer::~yyFlexLexer()
 {
 	delete [] yy_state_buf;
-	basefree(yy_start_stack  );
+	edlfree(yy_start_stack  );
 	yy_delete_buffer( YY_CURRENT_BUFFER );
-	basefree(yy_buffer_stack  );
+	edlfree(yy_buffer_stack  );
 }
 
 /* The contents of this function are C++ specific, so the () macro is not used.
@@ -2739,7 +2739,7 @@ int yyFlexLexer::yy_get_next_buffer()
 
 				b->yy_ch_buf = (char *)
 					/* Include room in for 2 EOB chars. */
-					baserealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2  );
+					edlrealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2  );
 				}
 			else
 				/* Can't grow it, we don't own it. */
@@ -2788,7 +2788,7 @@ int yyFlexLexer::yy_get_next_buffer()
 	if ((yy_size_t) ((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
 		yy_size_t new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
-		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) baserealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size  );
+		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) edlrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in yy_get_next_buffer()" );
 	}
@@ -3029,7 +3029,7 @@ int yyFlexLexer::yy_get_next_buffer()
 {
 	YY_BUFFER_STATE b;
     
-	b = (YY_BUFFER_STATE) basealloc(sizeof( struct yy_buffer_state )  );
+	b = (YY_BUFFER_STATE) edlalloc(sizeof( struct yy_buffer_state )  );
 	if ( ! b )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3038,7 +3038,7 @@ int yyFlexLexer::yy_get_next_buffer()
 	/* yy_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
 	 */
-	b->yy_ch_buf = (char *) basealloc(b->yy_buf_size + 2  );
+	b->yy_ch_buf = (char *) edlalloc(b->yy_buf_size + 2  );
 	if ( ! b->yy_ch_buf )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3063,9 +3063,9 @@ int yyFlexLexer::yy_get_next_buffer()
 		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
 
 	if ( b->yy_is_our_buffer )
-		basefree((void *) b->yy_ch_buf  );
+		edlfree((void *) b->yy_ch_buf  );
 
-	basefree((void *) b  );
+	edlfree((void *) b  );
 }
 
 extern "C" int isatty (int );
@@ -3190,7 +3190,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		 * immediate realloc on the next call.
          */
 		num_to_alloc = 1;
-		(yy_buffer_stack) = (struct yy_buffer_state**)basealloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)edlalloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
 		if ( ! (yy_buffer_stack) )
@@ -3209,7 +3209,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		int grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (yy_buffer_stack_max) + grow_size;
-		(yy_buffer_stack) = (struct yy_buffer_state**)baserealloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)edlrealloc
 								((yy_buffer_stack),
 								num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
@@ -3232,10 +3232,10 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		new_size = (yy_start_stack_depth) * sizeof( int );
 
 		if ( ! (yy_start_stack) )
-			(yy_start_stack) = (int *) basealloc(new_size  );
+			(yy_start_stack) = (int *) edlalloc(new_size  );
 
 		else
-			(yy_start_stack) = (int *) baserealloc((void *) (yy_start_stack),new_size  );
+			(yy_start_stack) = (int *) edlrealloc((void *) (yy_start_stack),new_size  );
 
 		if ( ! (yy_start_stack) )
 			YY_FATAL_ERROR( "out of memory expanding start-condition stack" );
@@ -3312,12 +3312,12 @@ static int yy_flex_strlen (yyconst char * s )
 }
 #endif
 
-void *basealloc (yy_size_t  size )
+void *edlalloc (yy_size_t  size )
 {
 	return (void *) malloc( size );
 }
 
-void *baserealloc  (void * ptr, yy_size_t  size )
+void *edlrealloc  (void * ptr, yy_size_t  size )
 {
 	/* The cast to (char *) in the following accommodates both
 	 * implementations that use char* generic pointers, and those
@@ -3329,9 +3329,9 @@ void *baserealloc  (void * ptr, yy_size_t  size )
 	return (void *) realloc( (char *) ptr, size );
 }
 
-void basefree (void * ptr )
+void edlfree (void * ptr )
 {
-	free( (char *) ptr );	/* see baserealloc() for (char *) cast */
+	free( (char *) ptr );	/* see edlrealloc() for (char *) cast */
 }
 
 #define YYTABLES_NAME "yytables"
