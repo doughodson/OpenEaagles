@@ -284,9 +284,9 @@ struct yy_buffer_state
  */
 #define YY_CURRENT_BUFFER_LVALUE (yy_buffer_stack)[(yy_buffer_stack_top)]
 
-void *basicalloc (yy_size_t  );
-void *basicrealloc (void *,yy_size_t  );
-void basicfree (void *  );
+void *basealloc (yy_size_t  );
+void *baserealloc (void *,yy_size_t  );
+void basefree (void *  );
 
 #define yy_new_buffer yy_create_buffer
 
@@ -1997,23 +1997,23 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "Lexical.l"
-#line 2 "Lexical.l"
+#line 1 "edl.l"
+#line 2 "edl.l"
 //
-// Lexical generator for reading Openoe configuration files.
+// Lexical generator for reading OpenEaagles configuration files.
 //
 
-// Disable all deprecation warnings for now.  Until we fix them,
+// disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
 # pragma warning(disable: 4996)
 #endif
 
-#line 16 "Lexical.l"
+#line 16 "edl.l"
 #include <iostream>
 #include <cstring>
-using namespace std;
-#include "openeaagles/base/util/str_utils.h"
+#include <cstdlib>
+//using namespace std;
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Identifier.h"
@@ -2023,6 +2023,7 @@ using namespace std;
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/List.h"
+#include "openeaagles/base/util/str_utils.h"
 #include "Lexical.h"
 #include "Parser.hpp"
 
@@ -2035,7 +2036,7 @@ using namespace std;
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "baseFlexLexer" */
 /* derived 'oe::base::Lexical' is a subclass of yyFlexLexer */
-#line 2039 "Lexical.cpp"
+#line 2040 "Lexical.cpp"
 
 #define INITIAL 0
 
@@ -2140,13 +2141,13 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 64 "Lexical.l"
+#line 65 "edl.l"
 
 
         // cpp commands that change line number and file name
         // for examples:  # 21 "test.cf"
         //                #line 21 "test.cf"
-#line 2150 "Lexical.cpp"
+#line 2151 "Lexical.cpp"
 
 	if ( !(yy_init) )
 		{
@@ -2223,14 +2224,14 @@ case 1:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 69 "Lexical.l"
+#line 70 "edl.l"
 {
             char* i1 = strchr(yytext,'\"');
             char* i2 = strrchr(yytext,'\"');
             char* j1 = strchr(yytext,' ');
             *i1 = '\0';
             *i2 = '\0';
-            line = atoi(j1+1) - 1;
+            line = std::atoi(j1+1) - 1;
             utStrcpy(fname,FNAME_SIZE,i1+1);
             break;
         }
@@ -2240,7 +2241,7 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 81 "Lexical.l"
+#line 82 "edl.l"
 { // ignore C++ like comments
             line++;
             break;
@@ -2249,7 +2250,7 @@ YY_RULE_SETUP
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 86 "Lexical.l"
+#line 87 "edl.l"
 { // ignore backslashes at end of lines
             line++;
             break;
@@ -2258,7 +2259,7 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 91 "Lexical.l"
+#line 92 "edl.l"
 { // count line numbers
             line++;
             break;
@@ -2266,21 +2267,21 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 96 "Lexical.l"
+#line 97 "edl.l"
 { // ignore white characters
         break;
     }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 100 "Lexical.l"
+#line 101 "edl.l"
 { // Special characters
             return *yytext;
         }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 104 "Lexical.l"
+#line 105 "edl.l"
 { // Boolean Constants; true
             yylval.bval = true;
             return BOOLconstant;
@@ -2288,7 +2289,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 109 "Lexical.l"
+#line 110 "edl.l"
 { // Boolean Constants; true
             yylval.bval = true;
             return BOOLconstant;
@@ -2296,7 +2297,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 114 "Lexical.l"
+#line 115 "edl.l"
 { // Boolean Constants; false
             yylval.bval = false;
             return BOOLconstant;
@@ -2304,7 +2305,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 119 "Lexical.l"
+#line 120 "edl.l"
 { // Boolean Constants; false
             yylval.bval = false;
             return BOOLconstant;
@@ -2312,12 +2313,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 124 "Lexical.l"
+#line 125 "edl.l"
 { // Decode hex into integer; 0Xnnn
             bool nflg = false;
             char cbuf[64];
             utStrcpy(cbuf, sizeof(cbuf), yytext);
-            if (strlen(cbuf) == 10) {
+            if (std::strlen(cbuf) == 10) {
                if (cbuf[2] == '8') { cbuf[2] = '0'; nflg = true; }
                if (cbuf[2] == '9') { cbuf[2] = '1'; nflg = true; }
                if (cbuf[2] == 'a' || cbuf[2] == 'A') { cbuf[2] = '2'; nflg = true; }
@@ -2335,12 +2336,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 144 "Lexical.l"
+#line 145 "edl.l"
 { // Decode octal into integer; 0nnn
            bool nflg = false;
            char cbuf[64];
            utStrcpy(cbuf, sizeof(cbuf), yytext);
-           if (strlen(cbuf) == 12) {
+           if (std::strlen(cbuf) == 12) {
               if (cbuf[1] == '2') { cbuf[1] = '0'; nflg = true; }
               if (cbuf[1] == '3') { cbuf[1] = '1'; nflg = true; }
            }
@@ -2352,7 +2353,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 159 "Lexical.l"
+#line 160 "edl.l"
 { // Standard integer
             yylval.lval = atoi(yytext);
             return INTEGERconstant;
@@ -2360,7 +2361,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 165 "Lexical.l"
+#line 166 "edl.l"
 { // floating point format
             yylval.dval = atof(yytext);
             return FLOATINGconstant;
@@ -2368,7 +2369,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 171 "Lexical.l"
+#line 172 "edl.l"
 { // floating point format
             yylval.dval = atof(yytext);
             return FLOATINGconstant;
@@ -2376,7 +2377,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 177 "Lexical.l"
+#line 178 "edl.l"
 { // floating point format
             yylval.dval = atof(yytext);
             return FLOATINGconstant;
@@ -2385,10 +2386,10 @@ YY_RULE_SETUP
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 183 "Lexical.l"
+#line 184 "edl.l"
 { // Literal string (i.e., in double quotes); "hi there"
             /* return STRING without quotes */
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             utStrcpy(yylval.cvalp,slen,yytext+1);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
@@ -2398,10 +2399,10 @@ YY_RULE_SETUP
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 192 "Lexical.l"
+#line 193 "edl.l"
 { // Literal string (i.e., in brackets); <hi there>
             /* return STRING without quotes */
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             utStrcpy(yylval.cvalp,slen,yytext+1);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
@@ -2410,9 +2411,9 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 202 "Lexical.l"
+#line 203 "edl.l"
 { // slot-id is one or more legal characters followed by a ':'
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             utStrcpy(yylval.cvalp,slen,yytext);
             yylval.cvalp[strlen(yylval.cvalp)-1] = 0; // remove the :
@@ -2421,9 +2422,9 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 211 "Lexical.l"
+#line 212 "edl.l"
 { // ident: one or more legal characters
-            size_t slen = strlen(yytext)+1;
+            size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
             utStrcpy(yylval.cvalp,slen,yytext);
             return IDENT;
@@ -2431,17 +2432,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 219 "Lexical.l"
+#line 220 "edl.l"
 { // ignore all other characters
             break;
         }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 223 "Lexical.l"
+#line 224 "edl.l"
 ECHO;
 	YY_BREAK
-#line 2445 "Lexical.cpp"
+#line 2446 "Lexical.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2609,9 +2610,9 @@ yyFlexLexer::yyFlexLexer( std::istream* arg_yyin, std::ostream* arg_yyout )
 yyFlexLexer::~yyFlexLexer()
 {
 	delete [] yy_state_buf;
-	basicfree(yy_start_stack  );
+	basefree(yy_start_stack  );
 	yy_delete_buffer( YY_CURRENT_BUFFER );
-	basicfree(yy_buffer_stack  );
+	basefree(yy_buffer_stack  );
 }
 
 /* The contents of this function are C++ specific, so the () macro is not used.
@@ -2739,7 +2740,7 @@ int yyFlexLexer::yy_get_next_buffer()
 
 				b->yy_ch_buf = (char *)
 					/* Include room in for 2 EOB chars. */
-					basicrealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2  );
+					baserealloc((void *) b->yy_ch_buf,b->yy_buf_size + 2  );
 				}
 			else
 				/* Can't grow it, we don't own it. */
@@ -2788,7 +2789,7 @@ int yyFlexLexer::yy_get_next_buffer()
 	if ((yy_size_t) ((yy_n_chars) + number_to_move) > YY_CURRENT_BUFFER_LVALUE->yy_buf_size) {
 		/* Extend the array by 50%, plus the number we really need. */
 		yy_size_t new_size = (yy_n_chars) + number_to_move + ((yy_n_chars) >> 1);
-		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) basicrealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size  );
+		YY_CURRENT_BUFFER_LVALUE->yy_ch_buf = (char *) baserealloc((void *) YY_CURRENT_BUFFER_LVALUE->yy_ch_buf,new_size  );
 		if ( ! YY_CURRENT_BUFFER_LVALUE->yy_ch_buf )
 			YY_FATAL_ERROR( "out of dynamic memory in yy_get_next_buffer()" );
 	}
@@ -3029,7 +3030,7 @@ int yyFlexLexer::yy_get_next_buffer()
 {
 	YY_BUFFER_STATE b;
     
-	b = (YY_BUFFER_STATE) basicalloc(sizeof( struct yy_buffer_state )  );
+	b = (YY_BUFFER_STATE) basealloc(sizeof( struct yy_buffer_state )  );
 	if ( ! b )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3038,7 +3039,7 @@ int yyFlexLexer::yy_get_next_buffer()
 	/* yy_ch_buf has to be 2 characters longer than the size given because
 	 * we need to put in 2 end-of-buffer characters.
 	 */
-	b->yy_ch_buf = (char *) basicalloc(b->yy_buf_size + 2  );
+	b->yy_ch_buf = (char *) basealloc(b->yy_buf_size + 2  );
 	if ( ! b->yy_ch_buf )
 		YY_FATAL_ERROR( "out of dynamic memory in yy_create_buffer()" );
 
@@ -3063,9 +3064,9 @@ int yyFlexLexer::yy_get_next_buffer()
 		YY_CURRENT_BUFFER_LVALUE = (YY_BUFFER_STATE) 0;
 
 	if ( b->yy_is_our_buffer )
-		basicfree((void *) b->yy_ch_buf  );
+		basefree((void *) b->yy_ch_buf  );
 
-	basicfree((void *) b  );
+	basefree((void *) b  );
 }
 
 extern "C" int isatty (int );
@@ -3190,7 +3191,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		 * immediate realloc on the next call.
          */
 		num_to_alloc = 1;
-		(yy_buffer_stack) = (struct yy_buffer_state**)basicalloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)basealloc
 								(num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
 		if ( ! (yy_buffer_stack) )
@@ -3209,7 +3210,7 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		int grow_size = 8 /* arbitrary grow size */;
 
 		num_to_alloc = (yy_buffer_stack_max) + grow_size;
-		(yy_buffer_stack) = (struct yy_buffer_state**)basicrealloc
+		(yy_buffer_stack) = (struct yy_buffer_state**)baserealloc
 								((yy_buffer_stack),
 								num_to_alloc * sizeof(struct yy_buffer_state*)
 								);
@@ -3232,10 +3233,10 @@ void yyFlexLexer::yyensure_buffer_stack(void)
 		new_size = (yy_start_stack_depth) * sizeof( int );
 
 		if ( ! (yy_start_stack) )
-			(yy_start_stack) = (int *) basicalloc(new_size  );
+			(yy_start_stack) = (int *) basealloc(new_size  );
 
 		else
-			(yy_start_stack) = (int *) basicrealloc((void *) (yy_start_stack),new_size  );
+			(yy_start_stack) = (int *) baserealloc((void *) (yy_start_stack),new_size  );
 
 		if ( ! (yy_start_stack) )
 			YY_FATAL_ERROR( "out of memory expanding start-condition stack" );
@@ -3312,12 +3313,12 @@ static int yy_flex_strlen (yyconst char * s )
 }
 #endif
 
-void *basicalloc (yy_size_t  size )
+void *basealloc (yy_size_t  size )
 {
 	return (void *) malloc( size );
 }
 
-void *basicrealloc  (void * ptr, yy_size_t  size )
+void *baserealloc  (void * ptr, yy_size_t  size )
 {
 	/* The cast to (char *) in the following accommodates both
 	 * implementations that use char* generic pointers, and those
@@ -3329,14 +3330,14 @@ void *basicrealloc  (void * ptr, yy_size_t  size )
 	return (void *) realloc( (char *) ptr, size );
 }
 
-void basicfree (void * ptr )
+void basefree (void * ptr )
 {
-	free( (char *) ptr );	/* see basicrealloc() for (char *) cast */
+	free( (char *) ptr );	/* see baserealloc() for (char *) cast */
 }
 
 #define YYTABLES_NAME "yytables"
 
-#line 223 "Lexical.l"
+#line 224 "edl.l"
 
 
 

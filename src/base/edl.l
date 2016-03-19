@@ -15,7 +15,7 @@
 %{
 #include <iostream>
 #include <cstring>
-using namespace std;
+#include <cstdlib>
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
 #include "openeaagles/base/Identifier.h"
@@ -72,7 +72,7 @@ LN          line
             char* j1 = strchr(yytext,' ');
             *i1 = '\0';
             *i2 = '\0';
-            line = atoi(j1+1) - 1;
+            line = std::atoi(j1+1) - 1;
             utStrcpy(fname,FNAME_SIZE,i1+1);
             break;
         }

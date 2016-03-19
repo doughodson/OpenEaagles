@@ -73,10 +73,10 @@ subdirs:
 #----------------------------------------------------------------------------------------
 # To build parser and scanner:
 #
-# dos2unix Parser.y
-# dos2unix Lexical.l
-# bison -d Parser.y -o Parser.cpp    // creates Parser.cpp and Parser.hpp
-# flex -f -oLexical.cpp Lexical.l    // creates Lexical.cpp (Lexical.h already exists)
+# dos2unix edl.y
+# dos2unix edl.l
+# bison -d edl.y -o Parser.cpp    // creates Parser.cpp and Parser.hpp
+# flex -f -oLexical.cpp edl.l     // creates Lexical.cpp (Lexical.h already exists)
 #
 # search for "FlexLexer.h" in Lexical.cpp - and fix include path to point to locale dir
 #----------------------------------------------------------------------------------------

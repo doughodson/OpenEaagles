@@ -1,19 +1,16 @@
 //------------------------------------------------------------------------------
-// Class: Parser
-//
-// Description: Parser for the description files.
+// Description: Parser for EDL files
 //
 // Factory function:
 //
-//    Object* (*ParserFormFunc)(const char* formname)
+//    Object* (*FactoryFunc)(const char* name)
 //
 //       This is a user supplied function, via our constructor, that is
-//       used by the parser to create objects using their 'form' names
-//       (see Object.h).  The object's form name, formname, is passed to
+//       used by the parser to create objects using their 'factory' names
+//       (see Object.h).  The object's factory name is passed to
 //       the function.  The function will construct a default object and
-//       return a pointer to the new object.  If the form name is not
+//       return a pointer to the new object.  If the name is not
 //       recognized then no object is created and null(0) is returned.
-//
 //--------------------------------------------------------------------------
 
 %token	IDENT SLOT_ID
@@ -31,7 +28,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include "openeaagles/base/Parser.h"
+#include "openeaagles/base/edl_parser.h"
 #include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/Object.h"
 #include "openeaagles/base/String.h"
@@ -44,10 +41,10 @@
 #include "openeaagles/base/List.h"
 #include "Lexical.h"
 
-static oe::base::Object* result;            // Result of all our work
-static oe::base::Lexical* lex;              // Lex generator
-static oe::base::ParserFormFunc formFunc;   // Factory function 
-static int errCount;                        // Error count
+static oe::base::Object* result;               // Result of all our work
+static oe::base::Lexical* lex;                 // Lex generator
+static oe::base::FactoryFunc factoryFunc;      // Factory function 
+static int errCount;                           // Error count
 
 //------------------------------------------------------------------------------
 // yylex() -- user defined; used by the parser to call the lexical generator
@@ -69,26 +66,26 @@ inline void yyerror(const char* s)
 }
 
 //------------------------------------------------------------------------------
-// gufParse() -- Returns an object of type 'formname' with its slots set to
-//                values in 'argList'.
+// gufParse() -- returns an object with factory 'name' with its slots set to
+//               values in 'argList'
 //------------------------------------------------------------------------------
-static oe::base::Object* gufParse(const char* formname, oe::base::PairStream* argList)
+static oe::base::Object* gufParse(const char* name, oe::base::PairStream* argList)
 {
     char emsg[256];
-    oe::base::Object* form = 0;
+    oe::base::Object* obj = nullptr;
 
-    if (formFunc != 0) {
+    if (factoryFunc != nullptr) {
 
-        // when we have a form name, use formFunc() to construct an
-        // object of the form's class type.
-        form = formFunc(formname);
+        // when we have a factory name, use factoryFunc() to construct an
+        // object of the object's class type.
+        obj = factoryFunc(name);
 
        // set slots in our new object
-       if (form != 0 && argList != 0) {
+       if (obj != nullptr && argList != nullptr) {
           oe::base::List::Item* item = argList->getFirstItem();
-          while (item != 0) {
+          while (item != nullptr) {
                oe::base::Pair* p = static_cast<oe::base::Pair*>(item->getValue());
-               bool ok = form->setSlotByName(*p->slot(), p->object());
+               bool ok = obj->setSlotByName(*p->slot(), p->object());
                if (!ok) {
                   oe::base::utStrcpy(emsg, sizeof(emsg), "error while setting slot name: ");
                   oe::base::utStrcat(emsg, sizeof(emsg), *p->slot());
@@ -96,25 +93,24 @@ static oe::base::Object* gufParse(const char* formname, oe::base::PairStream* ar
                }
                item = item->getNext();
           }
-          bool ok = form->isValid();
+          bool ok = obj->isValid();
           if (!ok) {
-             oe::base::utStrcpy(emsg, sizeof(emsg), "error: invalid form: ");
-             oe::base::utStrcat(emsg, sizeof(emsg), formname);
+             oe::base::utStrcpy(emsg, sizeof(emsg), "error: invalid object: ");
+             oe::base::utStrcat(emsg, sizeof(emsg), name);
              yyerror(emsg);
           }
        }
-       else if (form == 0) {
-          oe::base::utStrcpy(emsg, sizeof(emsg), "undefined form name: ");
-          oe::base::utStrcat(emsg, sizeof(emsg), formname);
+       else if (obj == nullptr) {
+          oe::base::utStrcpy(emsg, sizeof(emsg), "undefined factory name: ");
+          oe::base::utStrcat(emsg, sizeof(emsg), name);
           yyerror(emsg);
        }
 
     }
-    return form;
+    return obj;
 }
 
 %}
-
 
 // Defines types that our values can be, yylval.
 %union {
@@ -207,19 +203,16 @@ number  : INTEGERconstant       { $$ = new oe::base::Integer($1); }
         ;
 %%
 
-
 namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// parse() -- Returns an Object that was constructed from
-//      parsing the input file.  Func is the name of the form
-//      constructor function.  
+// Returns an Object* that was constructed from parsing an EDL file.
+// factory is the name of the Object creation function  
 //------------------------------------------------------------------------------
-
-Object* lcParser(const char* filename, ParserFormFunc func, int* numErrors)
+Object* edlParser(const char* filename, FactoryFunc factory, int* numErrors)
 {
-    formFunc = func;
+    factoryFunc = factory;
     result = 0;
     errCount = 0;
 
