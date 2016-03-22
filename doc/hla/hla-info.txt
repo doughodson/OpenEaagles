@@ -1,0 +1,72 @@
+
+##################################################################################################################
+
+RPR (pronounced 'reaper') FOM – Real-time Platform-level Reference Federation Object Model
+--------------------------------------------------------------------
+
+While the HLA Standards dictate how federates exchange data, it is a FOM (Federation Object Model)
+that dictates what data is being exchanged in a particular federation. HLA does not mandate the
+use of any particular FOM, however, several "reference FOMs" have been developed to promote a-priori
+interoperability. That is, in order to communicate, a set of federates must agree on a common
+FOM (among other things), and reference FOMs provide ready-made FOMs that are supported by a wide
+variety of tools and federates. Reference FOMs can be used as-is, or can be extended to add new
+simulation concepts that are specific to a particular federation or simulation domain.
+
+The RPR FOM (Real-time Platform-level Reference FOM) is a reference FOM that defines HLA classes,
+attributes and parameters that are appropriate for real-time, platform-level simulations. Applications
+that have previously used DIS (or would have considered using DIS), often use the RPR FOM
+(or a derivative of it) when they play in an HLA world. The RPR FOM was developed by a Simulation
+Interoperability Standards Organization (SISO) Product Development Group (PDG). Its goal was not to
+just implement the DIS PDU structures within HLA object and interaction classes, but rather to provide
+an intelligent translation of the concepts used in DIS to an HLA environment.
+
+RPR FOM 1.0 became a SISO Standard in 1999, under the name SISO-STD-001.1-1999. A companion document,
+known as the GRIM (Guidance, Rationale, and Interoperability Mappings) provides documentation for
+the RPR FOM. This document is known as SISO-STD-001-1999.
+
+RPR FOM 1.0 is based on the IEEE 1278.1-1995 version of the DIS Standard. RPR FOM 2.0, based on
+the IEEE 1278.1a-1998 addendum is nearing approval as a SISO Standard.
+
+Source: VT MAK website (http://www.mak.com/support/resources/industry-standards/378-rpr-fom-real-time-platform-level-reference-federation-object-model)
+
+##################################################################################################################
+
+Common HLA terminology
+----------------------
+
+Federate: an HLA compliant simulation entity.
+
+Federation: multiple simulation entities connected via the RTI using a common OMT.
+
+Object: a collection of related data sent between simulations.
+
+Attribute: data field of an object.
+
+Interaction: event sent between simulation entities.
+
+Parameter: data field of an interaction
+
+Source: Wikipedia
+
+##################################################################################################################
+
+File Formats
+------------
+
+BOM : Base Object Model
+
+OMT : Object Model Template - provides the common framework for object interaction documentation and interoperability
+
+FOM : Federation Object Model - described in several different files at different levels of detail
+  FED : Federation Execution Data - subset of FOM
+  OMD :
+  OMT : Object Model Template - specifies what information is communicated between simulations
+
+MOM: Management Object Model
+
+Source: Modeling, Design and Evaluation of Networking Systems and Protocols through Simulation
+        Dissertation by Daniel J. Lacks, Fall 2007
+
+
+
+
