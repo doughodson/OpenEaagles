@@ -17,8 +17,6 @@ OBJS =  \
 	$(LIB)(factory.o) \
 	$(LIB)(FileReader.o) \
 	$(LIB)(Float.o) \
-	$(LIB)(Function.o) \
-	$(LIB)(Functions.o) \
 	$(LIB)(Hls.o) \
 	$(LIB)(Hsva.o) \
 	$(LIB)(Hsv.o) \
@@ -50,8 +48,6 @@ OBJS =  \
 	$(LIB)(Statistic.o) \
 	$(LIB)(StateMachine.o) \
 	$(LIB)(String.o) \
-	$(LIB)(Table.o) \
-	$(LIB)(Tables.o) \
 	$(LIB)(Terrain.o) \
 	$(LIB)(Thread.o) \
 	$(LIB)(ThreadPool.o) \
