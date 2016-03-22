@@ -10,6 +10,11 @@ codeblocks/
 codelite/
 
 #
+# kde plasma 5 files
+#
+.directory
+
+#
 # visual studio generated files
 #
 *.idb
