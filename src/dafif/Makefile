@@ -4,19 +4,24 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboedafif.a
 
 OBJS =  \
-	$(LIB)(Airport.o) \
-	$(LIB)(AirportLoader.o) \
-	$(LIB)(Record.o) \
-	$(LIB)(Database.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(Ils.o) \
-	$(LIB)(Navaid.o) \
-	$(LIB)(NavaidLoader.o) \
-	$(LIB)(Runway.o) \
-	$(LIB)(Waypoint.o) \
-	$(LIB)(WaypointLoader.o)
+	Airport.o \
+	AirportLoader.o \
+	Record.o \
+	Database.o \
+	factory.o \
+	Ils.o \
+	Navaid.o \
+	NavaidLoader.o \
+	Runway.o \
+	Waypoint.o \
+	WaypointLoader.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

@@ -4,10 +4,15 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeinstruments.a
 
 OBJS =  \
-	$(LIB)(Adi.o) \
-	$(LIB)(GhostHorizon.o)
+	Adi.o \
+	GhostHorizon.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

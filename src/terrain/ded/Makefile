@@ -3,9 +3,15 @@ include ../../makedefs
 
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeterrain.a
 
-OBJS =  $(LIB)(DedFile.o) 
+OBJS =  \
+	DedFile.o
 
-all: ${OBJS} 
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

@@ -8,19 +8,24 @@ CPPFLAGS += -DRTI_USES_STD_FSTREAM
 #CPPFLAGS += -DEAAGLES_WITH_HLA -DRTI_USES_STD_FSTREAM -I$(RTI_HOME)/$(RTI_BUILD_TYPE)/include
 
 OBJS =  \
-	$(LIB)(factory.o) \
-	$(LIB)(NetIO.o) \
-	$(LIB)(NetIO_entity_state.o) \
-	$(LIB)(NetIO_munition_detonation.o) \
-	$(LIB)(NetIO_weapon_fire.o) \
-	$(LIB)(Nib.o) \
-	$(LIB)(Nib_entity_state.o) \
-	$(LIB)(Nib_munition_detonation.o) \
-	$(LIB)(Nib_weapon_fire.o) \
-	$(LIB)(Ntm.o) \
-	$(LIB)(RprFom.o)
+	factory.o \
+	NetIO.o \
+	NetIO_entity_state.o \
+	NetIO_munition_detonation.o \
+	NetIO_weapon_fire.o \
+	Nib.o \
+	Nib_entity_state.o \
+	Nib_munition_detonation.o \
+	Nib_weapon_fire.o \
+	Ntm.o \
+	RprFom.o
 
-all: ${OBJS} 
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

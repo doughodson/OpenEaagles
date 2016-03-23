@@ -4,20 +4,25 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboedis.a
 
 OBJS =  \
-	$(LIB)(EmissionPduHandler.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(NetIO.o) \
-	$(LIB)(NetIO_entity_state.o) \
-	$(LIB)(NetIO_munition_detonation.o) \
-	$(LIB)(NetIO_weapon_fire.o) \
-	$(LIB)(Nib.o) \
-	$(LIB)(Nib_entity_state.o) \
-	$(LIB)(Nib_iff.o) \
-	$(LIB)(Nib_munition_detonation.o) \
-	$(LIB)(Nib_weapon_fire.o) \
-	$(LIB)(Ntm.o)
+	EmissionPduHandler.o \
+	factory.o \
+	NetIO.o \
+	NetIO_entity_state.o \
+	NetIO_munition_detonation.o \
+	NetIO_weapon_fire.o \
+	Nib.o \
+	Nib_entity_state.o \
+	Nib_iff.o \
+	Nib_munition_detonation.o \
+	Nib_weapon_fire.o \
+	Ntm.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

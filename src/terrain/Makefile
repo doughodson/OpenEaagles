@@ -4,13 +4,18 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeterrain.a
 
 OBJS =  \
-	$(LIB)(DataFile.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(QuadMap.o)
+	DataFile.o \
+	factory.o \
+	QuadMap.o
 
 SUBDIRS = ded dted srtm
 
-all: subdirs ${OBJS}
+.PHONY: all clean subdirs
+
+all: subdirs $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 subdirs:
 	for subdir in $(SUBDIRS); do \

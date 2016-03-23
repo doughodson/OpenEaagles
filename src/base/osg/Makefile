@@ -4,13 +4,18 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
 
 OBJS =  \
-	$(LIB)(Math.o) \
-	$(LIB)(Matrixd.o) \
-	$(LIB)(MatrixDecomposition.o) \
-	$(LIB)(Matrixf.o) \
-	$(LIB)(Quat.o)
+	Math.o \
+	Matrixd.o \
+	MatrixDecomposition.o \
+	Matrixf.o \
+	Quat.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

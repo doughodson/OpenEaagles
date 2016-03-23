@@ -6,9 +6,14 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboemodels.a
 SUBDIRS = dynamics sensors
 
 OBJS =  \
-	$(LIB)(factory.o)
+	factory.o
 
-all: subdirs ${OBJS}
+.PHONY: all clean subdirs
+
+all: subdirs $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 subdirs:
 	for subdir in $(SUBDIRS); do \

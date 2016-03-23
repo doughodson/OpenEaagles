@@ -8,11 +8,16 @@ CPPFLAGS += -I$(JSBSIM_INC_DIR)
 SUBDIRS = 
 
 OBJS =  \
-	$(LIB)(JSBSimModel.o) \
-	$(LIB)(LaeroModel.o)  \
-	$(LIB)(RacModel.o)
+	JSBSimModel.o \
+	LaeroModel.o  \
+	RacModel.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

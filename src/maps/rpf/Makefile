@@ -4,18 +4,23 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboerpf.a
 
 OBJS = \
-	$(LIB)(CadrgClut.o) \
-	$(LIB)(CadrgFile.o) \
-	$(LIB)(CadrgFrame.o) \
-	$(LIB)(CadrgFrameEntry.o) \
-	$(LIB)(CadrgMap.o) \
-	$(LIB)(CadrgTocEntry.o) \
-	$(LIB)(MapDrawer.o) \
-	$(LIB)(TexturePager.o) \
-	$(LIB)(TextureTable.o) \
-	$(LIB)(support.o) 
+	CadrgClut.o \
+	CadrgFile.o \
+	CadrgFrame.o \
+	CadrgFrameEntry.o \
+	CadrgMap.o \
+	CadrgTocEntry.o \
+	MapDrawer.o \
+	TexturePager.o \
+	TextureTable.o \
+	support.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

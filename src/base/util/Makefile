@@ -4,14 +4,19 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
 
 OBJS =  \
-	$(LIB)(lfi.o) \
-	$(LIB)(math_utils.o) \
-	$(LIB)(osg_utils.o) \
-	$(LIB)(str_utils.o) \
-	$(LIB)(system.o) \
-	$(LIB)(platform/system_linux.o)
+	lfi.o \
+	math_utils.o \
+	osg_utils.o \
+	str_utils.o \
+	system.o \
+	platform/system_linux.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

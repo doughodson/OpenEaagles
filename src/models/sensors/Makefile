@@ -4,11 +4,16 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboemodels.a
 
 OBJS =  \
-	$(LIB)(Gmti.o) \
-	$(LIB)(Stt.o) \
-	$(LIB)(Tws.o)
+	Gmti.o \
+	Stt.o \
+	Tws.o
 
-all: ${OBJS} 
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

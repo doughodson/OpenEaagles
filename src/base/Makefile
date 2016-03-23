@@ -1,70 +1,3 @@
-#
-include ../makedefs
-
-LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
-
-OBJS =  \
-	$(LIB)(Boolean.o) \
-	$(LIB)(Cie.o) \
-	$(LIB)(Cmy.o) \
-	$(LIB)(Color.o) \
-	$(LIB)(Complex.o) \
-	$(LIB)(Component.o) \
-	$(LIB)(Decibel.o) \
-	$(LIB)(EarthModel.o) \
-	$(LIB)(EdlParser.o) \
-	$(LIB)(EdlScanner.o) \
-	$(LIB)(factory.o) \
-	$(LIB)(FileReader.o) \
-	$(LIB)(Float.o) \
-	$(LIB)(Hls.o) \
-	$(LIB)(Hsva.o) \
-	$(LIB)(Hsv.o) \
-	$(LIB)(Identifier.o) \
-	$(LIB)(Integer.o) \
-	$(LIB)(IoAdapter.o) \
-	$(LIB)(IoData.o) \
-	$(LIB)(IoDevice.o) \
-	$(LIB)(IoHandler.o) \
-	$(LIB)(LatLon.o) \
-	$(LIB)(List.o) \
-	$(LIB)(Locus.o) \
-	$(LIB)(Logger.o) \
-	$(LIB)(Matrix.o) \
-	$(LIB)(MonitorMetrics.o) \
-	$(LIB)(Nav.o) \
-	$(LIB)(NavDR.o) \
-	$(LIB)(NetHandler.o) \
-	$(LIB)(Number.o) \
-	$(LIB)(Object.o) \
-	$(LIB)(Operators.o) \
-	$(LIB)(Pair.o) \
-	$(LIB)(PairStream.o) \
-	$(LIB)(Rgba.o) \
-	$(LIB)(Rgb.o) \
-	$(LIB)(Rng.o) \
-	$(LIB)(SlotTable.o) \
-	$(LIB)(Stack.o) \
-	$(LIB)(Statistic.o) \
-	$(LIB)(StateMachine.o) \
-	$(LIB)(String.o) \
-	$(LIB)(Terrain.o) \
-	$(LIB)(Thread.o) \
-	$(LIB)(ThreadPool.o) \
-	$(LIB)(Timers.o) \
-	$(LIB)(Transforms.o) \
-	$(LIB)(Vectors.o) \
-	$(LIB)(Yiq.o)
-
-SUBDIRS = distributions functors nethandlers osg platform ubf units util
-
-all: subdirs ${OBJS}
-
-subdirs:
-	for subdir in $(SUBDIRS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
 
 #----------------------------------------------------------------------------------------
 # To build parser and scanner:
@@ -76,6 +9,78 @@ subdirs:
 #
 # search for "FlexLexer.h" in EdlScanner.cpp - fix include path
 #----------------------------------------------------------------------------------------
+
+include ../makedefs
+
+LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
+
+OBJS =  \
+	Boolean.o \
+	Cie.o \
+	Cmy.o \
+	Color.o \
+	Complex.o \
+	Component.o \
+	Decibel.o \
+	EarthModel.o \
+	EdlParser.o \
+	EdlScanner.o \
+	factory.o \
+	FileReader.o \
+	Float.o \
+	Hls.o \
+	Hsva.o \
+	Hsv.o \
+	Identifier.o \
+	Integer.o \
+	IoAdapter.o \
+	IoData.o \
+	IoDevice.o \
+	IoHandler.o \
+	LatLon.o \
+	List.o \
+	Locus.o \
+	Logger.o \
+	Matrix.o \
+	MonitorMetrics.o \
+	Nav.o \
+	NavDR.o \
+	NetHandler.o \
+	Number.o \
+	Object.o \
+	Operators.o \
+	Pair.o \
+	PairStream.o \
+	Rgba.o \
+	Rgb.o \
+	Rng.o \
+	SlotTable.o \
+	Stack.o \
+	Statistic.o \
+	StateMachine.o \
+	String.o \
+	Terrain.o \
+	Thread.o \
+	ThreadPool.o \
+	Timers.o \
+	Transforms.o \
+	Vectors.o \
+	Yiq.o
+
+SUBDIRS = distributions functors nethandlers osg platform ubf units util
+
+.PHONY: all clean subdirs
+
+all: subdirs $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
+
+subdirs:
+	for subdir in $(SUBDIRS); do \
+	  echo making $@ in $$subdir; \
+	  (cd $$subdir && $(MAKE)) || exit 1; \
+	done
 
 clean:
 	-rm -f *.o

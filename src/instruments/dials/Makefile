@@ -4,14 +4,19 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeinstruments.a
 
 OBJS =  \
-	$(LIB)(AltitudeDial.o) \
-	$(LIB)(AnalogDial.o) \
-	$(LIB)(DialArcSegment.o) \
-	$(LIB)(DialPointer.o) \
-	$(LIB)(DialTickMarks.o) \
-	$(LIB)(GMeterDial.o)
+	AltitudeDial.o \
+	AnalogDial.o \
+	DialArcSegment.o \
+	DialPointer.o \
+	DialTickMarks.o \
+	GMeterDial.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o

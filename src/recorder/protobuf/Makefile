@@ -4,9 +4,14 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboerecorder.a
 
 OBJS =  \
-	$(LIB)(DataRecord.pb.o)
+	DataRecord.pb.o
 
-all: ${OBJS}
+.PHONY: all clean
+
+all: $(LIB)
+
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o
