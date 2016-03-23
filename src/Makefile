@@ -56,14 +56,12 @@ PROJECTS += otw
 #
 PROJECTS += maps/rpf
 
-.PHONY: all clean projects $(PROJECTS)
+.PHONY: all clean $(PROJECTS)
 
 #
 # Rules
 #
-all: projects
-
-projects: $(PROJECTS)
+all: $(PROJECTS)
 
 $(PROJECTS):
 	$(MAKE) -C $@
