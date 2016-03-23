@@ -1,23 +1,24 @@
 
 include makedefs
 
-# Library      : Requires
+# Library         : Requires
 # ------------------------------------------------------------------------
-# base         : -
-# graphics     : freeglut, FTGL, freetype
-# dafif        : -
-# gui          :
-# instruments  : -
-# iodevice     : -
-# linearsystem : -
-# models       : JSBSim
-# networks/dis : -
-# networks/hla : HLA RTI
-# otw          : CIGICL 3.x
-# recorder     : Google protocol buffers
-# rpf          : -
-# simulation   : -
-# terrain      : -
+# base            : -
+# graphics        : freeglut, FTGL, freetype
+# dafif           : -
+# gui             :
+# instruments     : -
+# iodevice        : -
+# linearsystem    : -
+# models          : JSBSim
+# networks/dis    : -
+# networks/hla    : HLA RTI
+# networks/rprfom : HLA RTI
+# otw             : CIGICL 3.x
+# recorder        : Google protocol buffers
+# rpf             : -
+# simulation      : -
+# terrain         : -
 #
 PROJECTS = base
 PROJECTS += dafif
@@ -43,6 +44,7 @@ PROJECTS += "gui/glut"
 #
 PROJECTS += networks/dis
 PROJECTS += networks/hla
+PROJECTS += networks/rprfom
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface

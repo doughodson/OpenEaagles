@@ -1,17 +1,24 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboehla.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboerprfom.a
 
 CPPFLAGS += -I$(HLA_INC_DIR)
 CPPFLAGS += -DRTI_USES_STD_FSTREAM
 #CPPFLAGS += -DEAAGLES_WITH_HLA -DRTI_USES_STD_FSTREAM -I$(RTI_HOME)/$(RTI_BUILD_TYPE)/include
 
 OBJS =  \
-	Ambassador.o \
 	factory.o \
 	NetIO.o \
-	Nib.o
+	NetIO_entity_state.o \
+	NetIO_munition_detonation.o \
+	NetIO_weapon_fire.o \
+	Nib.o \
+	Nib_entity_state.o \
+	Nib_munition_detonation.o \
+	Nib_weapon_fire.o \
+	Ntm.o \
+	RprFom.o \
 
 .PHONY: all clean
 
