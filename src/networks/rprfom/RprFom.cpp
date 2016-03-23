@@ -1,8 +1,7 @@
 
-#include "openeaagles/networks/hla/rprfom/RprFom.h"
+#include "openeaagles/networks/rprfom/RprFom.h"
  
 namespace oe {
-namespace hla {
 namespace rprfom {
 
 //==============================================================================
@@ -242,6 +241,5 @@ SurfaceVessel::SurfaceVessel() :  Platform() {}
 EMPTY_COPYDATA(SurfaceVessel)
 EMPTY_DELETEDATA(SurfaceVessel)
 
-}
 }
 }

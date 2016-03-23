@@ -1,21 +1,18 @@
-//------------------------------------------------------------------------------
-// Class: hla::rprfom::Ntm
-//------------------------------------------------------------------------------
-#ifndef __oe_hla_rprfom_Ntm_H__
-#define __oe_hla_rprfom_Ntm_H__
+
+#ifndef __oe_rprfom_Ntm_H__
+#define __oe_rprfom_Ntm_H__
 
 #include "openeaagles/simulation/Ntm.h"
-#include "openeaagles/networks/hla/rprfom/NetIO.h"
+#include "openeaagles/networks/rprfom/NetIO.h"
 
 namespace oe {
-namespace hla {
 namespace rprfom {
 
 //------------------------------------------------------------------------------
-// Class: hla::rprfom::Ntm
+// Class: Ntm
 // Description: HLA Network Type Mapper
 //
-//    This class, which is derived from the Simulation::Ntm, maps Eaagles
+//    This class, which is derived from the simulation::Ntm, maps OpenEaagles
 //    player types to/from RPR FOM entity type codes.
 //
 // Factory name: HlaNtm
@@ -68,7 +65,6 @@ private:
     unsigned char  extra;
 };
 
-}
 }
 }
 

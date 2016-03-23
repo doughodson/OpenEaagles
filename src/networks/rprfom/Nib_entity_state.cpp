@@ -1,11 +1,7 @@
-//------------------------------------------------------------------------------
-// Class: Nib
-// Description: Portions of class defined to support entity state
-//------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/rprfom/NetIO.h"
-#include "openeaagles/networks/hla/rprfom/RprFom.h"
-#include "openeaagles/networks/hla/rprfom/Nib.h"
+#include "openeaagles/networks/rprfom/NetIO.h"
+#include "openeaagles/networks/rprfom/RprFom.h"
+#include "openeaagles/networks/rprfom/Nib.h"
 #include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/Player.h"
@@ -14,8 +10,12 @@
 #include "openeaagles/base/NetHandler.h"
 
 namespace oe {
-namespace hla {
 namespace rprfom {
+
+//------------------------------------------------------------------------------
+// Class: Nib
+// Description: Portions of class defined to support entity state
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // reflectAttributeValues() -- (Input support)
@@ -685,6 +685,5 @@ void Nib::updatePlatform(
 }
 
 
-}
 }
 }

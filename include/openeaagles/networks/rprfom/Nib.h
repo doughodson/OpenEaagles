@@ -1,11 +1,6 @@
-//------------------------------------------------------------------------------
-// Class: hla::rprfom::Nib
-//
-// Real-time Platform Reference FOM (RPR-FOM) Data Structures
-// RPR-FOM Version: 2.0 Draft 17
-//------------------------------------------------------------------------------
-#ifndef __oe_hla_rprfom_Nib_H__
-#define __oe_hla_rprfom_Nib_H__
+
+#ifndef __oe_rprfom_Nib_H__
+#define __oe_rprfom_Nib_H__
 
 #include "openeaagles/networks/hla/Nib.h"
 
@@ -13,14 +8,16 @@ namespace oe {
 
 namespace simulation { class Player; }
 
-namespace hla {
 namespace rprfom {
 
 class BaseEntity;
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Nib
-//==============================================================================
+//
+// Real-time Platform Reference FOM (RPR-FOM) Data Structures
+// RPR-FOM Version: 2.0 Draft 17
+//------------------------------------------------------------------------------
 class Nib : public hla::Nib
 {
    DECLARE_SUBCLASS(Nib, hla::Nib)
@@ -106,7 +103,6 @@ private:
    bool haveOrientationFlg;
 };
 
-}
 }
 }
 

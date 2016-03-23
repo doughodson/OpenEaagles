@@ -1,11 +1,7 @@
-//------------------------------------------------------------------------------
-// Class: NetIO
-// Description: Portions of class defined to support munition detonation
-//------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/rprfom/NetIO.h"
-#include "openeaagles/networks/hla/rprfom/RprFom.h"
-#include "openeaagles/networks/hla/rprfom/Nib.h"
+#include "openeaagles/networks/rprfom/NetIO.h"
+#include "openeaagles/networks/rprfom/RprFom.h"
+#include "openeaagles/networks/rprfom/Nib.h"
 #include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/Player.h"
@@ -20,8 +16,12 @@
 #include <cstring>
 
 namespace oe {
-namespace hla {
 namespace rprfom {
+
+//------------------------------------------------------------------------------
+// Class: NetIO
+// Description: Portions of class defined to support munition detonation
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // publishAndSubscribe()
@@ -305,6 +305,5 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     return true;
 }
 
-}
 }
 }

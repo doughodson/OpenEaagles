@@ -1,11 +1,8 @@
-//------------------------------------------------------------------------------
-// Class: RprFom::Nib
-//------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/rprfom/Nib.h"
+#include "openeaagles/networks/rprfom/Nib.h"
 
-#include "openeaagles/networks/hla/rprfom/NetIO.h"
-#include "openeaagles/networks/hla/rprfom/RprFom.h"
+#include "openeaagles/networks/rprfom/NetIO.h"
+#include "openeaagles/networks/rprfom/RprFom.h"
 #include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/networks/dis/Ntm.h"
@@ -24,10 +21,9 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace hla {
 namespace rprfom {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Nib,"Nib")
+IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
@@ -221,6 +217,5 @@ void Nib::updateTheIPlayer()
    }
 }
 
-}
 }
 }

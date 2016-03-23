@@ -1,11 +1,8 @@
-//------------------------------------------------------------------------------
-// Class: NetIO
-//------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/rprfom/NetIO.h"
-#include "openeaagles/networks/hla/rprfom/Nib.h"
-#include "openeaagles/networks/hla/rprfom/Ntm.h"
-#include "openeaagles/networks/hla/rprfom/RprFom.h"
+#include "openeaagles/networks/rprfom/NetIO.h"
+#include "openeaagles/networks/rprfom/Nib.h"
+#include "openeaagles/networks/rprfom/Ntm.h"
+#include "openeaagles/networks/rprfom/RprFom.h"
 #include "openeaagles/networks/hla/Ambassador.h"
 
 #include "openeaagles/simulation/AirVehicle.h"
@@ -25,11 +22,10 @@
 #include "openeaagles/base/Number.h"
 
 namespace oe {
-namespace hla {
 namespace rprfom {
 
 //==============================================================================
-// Class: Hla::RprFom::NtmInputNode
+// Class: rprfom::NtmInputNode
 // Description: RPR FOM incoming NTM class
 //==============================================================================
 
@@ -67,7 +63,7 @@ private:
 
 
 //==============================================================================
-// Class: Hla::RprFom::NetIO
+// Class: rprfom::NetIO
 //==============================================================================
 
 IMPLEMENT_SUBCLASS(NetIO, "RprFomNetIO")
@@ -318,9 +314,9 @@ const Ntm* NetIO::findNtmByTypeCodes(
          const unsigned char  extra
       ) const
 {
-   const hla::rprfom::Ntm* result = nullptr;
+   const rprfom::Ntm* result = nullptr;
 
-   const hla::rprfom::NtmInputNode* root = dynamic_cast<const hla::rprfom::NtmInputNode*>( getRootNtmInputNode() );
+   const rprfom::NtmInputNode* root = dynamic_cast<const rprfom::NtmInputNode*>( getRootNtmInputNode() );
    if (root != nullptr) {
       result = root->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
    }
@@ -341,7 +337,7 @@ EMPTY_SERIALIZER(NtmInputNode)
 //------------------------------------------------------------------------------
 simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
-   return new hla::rprfom::NtmInputNode(hla::rprfom::NtmInputNode::ROOT_LVL, 0); // root level
+   return new rprfom::NtmInputNode(rprfom::NtmInputNode::ROOT_LVL, 0); // root level
 }
 
 //------------------------------------------------------------------------------
@@ -408,7 +404,7 @@ const simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const simulation::Nib
 {
    const simulation::Ntm* result = nullptr;
 
-   const hla::rprfom::Nib* rprFomNib = dynamic_cast<const hla::rprfom::Nib*>( nib );
+   const rprfom::Nib* rprFomNib = dynamic_cast<const rprfom::Nib*>( nib );
    if (rprFomNib != nullptr) {
       result = findNtmByTypeCodes(
             rprFomNib->getEntityKind(),
@@ -489,7 +485,7 @@ bool NtmInputNode::add2OurLists(simulation::Ntm* const ntm)
    bool ok = false;
 
    // Make sure we have the correct kind of NTM ...
-   hla::rprfom::Ntm* disNtm = dynamic_cast<hla::rprfom::Ntm*>( ntm );
+   rprfom::Ntm* disNtm = dynamic_cast<rprfom::Ntm*>( ntm );
    if (disNtm != nullptr) {
 
       // Make sure that the NTM's code for this level matches our code
@@ -667,6 +663,5 @@ void NtmInputNode::print(std::ostream& sout, const int icnt) const
    sout << ")" << std::endl;
 }
 
-}
 }
 }

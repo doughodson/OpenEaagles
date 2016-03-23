@@ -1,25 +1,25 @@
-//------------------------------------------------------------------------------
-// Class: Hla::Ntm
-//------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/rprfom/Ntm.h"
-#include "openeaagles/networks/hla/rprfom/Nib.h"
+#include "openeaagles/networks/rprfom/Ntm.h"
+#include "openeaagles/networks/rprfom/Nib.h"
 
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
 
 namespace oe {
-namespace hla {
 namespace rprfom {
 
-IMPLEMENT_SUBCLASS(Ntm,"HlaNtm")
+//------------------------------------------------------------------------------
+// Class: Ntm
+//------------------------------------------------------------------------------
+
+IMPLEMENT_SUBCLASS(Ntm, "HlaNtm")
 EMPTY_DELETEDATA(Ntm)
 
 //------------------------------------------------------------------------------
 // slot table for this class type
 //------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Ntm)
-    "entityType", // 1) Entity type (Basic::List -- number vector)  [ kind domain country category ... ]
+    "entityType", // 1) Entity type (base::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
 
 // Map slot table to handles
@@ -235,6 +235,5 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-}
 }
 }

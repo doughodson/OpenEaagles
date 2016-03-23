@@ -1,16 +1,17 @@
-//------------------------------------------------------------------------------
-// Real-time Platform Reference FOM (RPR-FOM) Data Structures
-// RPR-FOM Version: 2.0 Draft 17
-//------------------------------------------------------------------------------
-#ifndef __oe_hla_rprfom_H__
-#define __oe_hla_rprfom_H__
+
+#ifndef __oe_rprfom_H__
+#define __oe_rprfom_H__
 
 #include <RTI.hh>
 #include "openeaagles/base/Object.h"
 
 namespace oe {
-namespace hla {
 namespace rprfom {
+
+//------------------------------------------------------------------------------
+// Real-time Platform Reference FOM (RPR-FOM) Data Structures
+// RPR-FOM Version: 2.0 Draft 17
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 // RPR-ROM: Enumerated Data
@@ -1107,7 +1108,6 @@ struct MunitionDetonation {
    WarheadTypeEnum16 warheadType;               // The type of warhead on the munition.
 };
 
-}
 }
 }
 

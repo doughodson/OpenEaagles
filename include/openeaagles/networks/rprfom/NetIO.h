@@ -1,13 +1,6 @@
-//------------------------------------------------------------------------------
-// Class: hla::rprfom::NetIO
-//
-// Factory name: RprFomNetIO
-//
-// Real-time Platform Reference FOM (RPR-FOM) Data Structures
-// RPR-FOM Version: 2.0 Draft 17
-//------------------------------------------------------------------------------
-#ifndef __oe_hla_rprfom_NetIO_H__
-#define __oe_hla_rprfom_NetIO_H__
+
+#ifndef __oe_rprfom_NetIO_H__
+#define __oe_rprfom_NetIO_H__
 
 #include "openeaagles/networks/hla/NetIO.h"
 
@@ -15,9 +8,7 @@ namespace oe {
 
 namespace simulation { class Player; }
 
-namespace hla {
-
-class Ambassador;
+namespace hla { class Ambassador; }
 
 namespace rprfom {
 
@@ -26,10 +17,14 @@ class EmitterBeam;
 class Nib;
 class Ntm;
 
-//==============================================================================
-// Class: Hla::RprFom::NetIO
-// Form Name: RprFomNetIO
-//==============================================================================
+//------------------------------------------------------------------------------
+// Class: NetIO
+//
+// Factory name: RprFomNetIO
+//
+// Real-time Platform Reference FOM (RPR-FOM) Data Structures
+// RPR-FOM Version: 2.0 Draft 17
+//------------------------------------------------------------------------------
 class NetIO : public hla::NetIO
 {
     DECLARE_SUBCLASS(NetIO, hla::NetIO)
@@ -222,10 +217,9 @@ protected:
 
     // Simulation::NetIO Interface (Callbacks)
     virtual void processInputList();    // Update players/systems from the Input-list
-    virtual simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType);   // Create a new RprFom::Nib
+    virtual simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType);   // Create a new rprfom::Nib
 };
 
-}
 }
 }
 
