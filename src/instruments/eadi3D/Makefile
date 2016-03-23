@@ -8,8 +8,12 @@ OBJS =  \
 	Eadi3DPage.o \
 	IrisGLCompat.o
 
+.PHONY: all clean
+
 all: $(LIB)
 
+$(LIB) : $(OBJS)
+	ar r $(LIB) $(OBJS)
 
 clean:
 	-rm -f *.o
