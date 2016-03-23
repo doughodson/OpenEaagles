@@ -1,16 +1,9 @@
 
-# Libraries
-LIBS = src
+.PHONY: all clean
 
 all:
-	for subdir in $(LIBS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+	$(MAKE) -C src all
 
 clean:
-	for subdir in $(LIBS); do \
-	    echo $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
+	$(MAKE) -C src clean
 

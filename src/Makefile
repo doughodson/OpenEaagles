@@ -75,9 +75,5 @@ uninstall:
 	-rm -rf /usr/local/lib/openeaagles
 
 clean:
-	-rm -f *.o
-	for subdir in $(PROJECTS); do \
-	    echo $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
+	-for d in $(PROJECTS); do (cd $$d; $(MAKE) clean ); done
 
