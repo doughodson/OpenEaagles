@@ -9,7 +9,6 @@ CPPFLAGS += -DRTI_USES_STD_FSTREAM
 
 OBJS =  \
 	Ambassador.o \
-	factory.o \
 	NetIO.o \
 	Nib.o
 
