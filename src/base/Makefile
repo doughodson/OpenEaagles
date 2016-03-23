@@ -15,6 +15,53 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
 
 OBJS =  \
+	distributions/Exponential.o \
+	distributions/Lognormal.o \
+	distributions/Pareto.o \
+	distributions/Uniform.o \
+	functors/Function.o \
+	functors/Functions.o \
+	functors/Table.o \
+	functors/Tables.o \
+	nethandlers/PosixHandler.o \
+	nethandlers/TcpClient.o \
+	nethandlers/TcpHandler.o \
+	nethandlers/TcpServerMultiple.o \
+	nethandlers/TcpServerSingle.o \
+	nethandlers/UdpBroadcastHandler.o \
+	nethandlers/UdpMulticastHandler.o \
+	nethandlers/UdpUnicastHandler.o \
+	osg/Math.o \
+	osg/Matrixd.o \
+	osg/MatrixDecomposition.o \
+	osg/Matrixf.o \
+	osg/Quat.o \
+	platform/Thread_linux.o \
+	ubf/Action.o \
+	ubf/Agent.o \
+	ubf/Arbiter.o \
+	ubf/Behavior.o \
+	ubf/State.o \
+	units/Angles.o \
+	units/AngularVelocity.o \
+	units/Areas.o \
+	units/Density.o \
+	units/Distances.o \
+	units/Energies.o \
+	units/FlowRate.o \
+	units/Forces.o \
+	units/Frequencies.o \
+	units/LinearVelocity.o \
+	units/Masses.o \
+	units/Powers.o \
+	units/Times.o \
+	units/Volumes.o \
+	util/platform/system_linux.o \
+	util/lfi.o \
+	util/math_utils.o \
+	util/osg_utils.o \
+	util/str_utils.o \
+	util/system.o \
 	Boolean.o \
 	Cie.o \
 	Cmy.o \
@@ -67,27 +114,24 @@ OBJS =  \
 	Vectors.o \
 	Yiq.o
 
-SUBDIRS = distributions functors nethandlers osg platform ubf units util
+.PHONY: all clean
 
-.PHONY: all clean subdirs $(SUBDIRS)
-
-.NOTPARALLEL:
-
-all: subdirs $(LIB)
+all: $(LIB)
 
 $(LIB) : $(OBJS)
 	ar r $(LIB) $(OBJS)
 
-subdirs: $(SUBDIRS)
-
-$(SUBDIRS):
-	$(MAKE) -C $@
-
 clean:
+	-rm -f distributions/*.o
+	-rm -f functors/*.o
+	-rm -f nethandlers/*.o
+	-rm -f osg/*.o
+	-rm -f platform/*.o
+	-rm -f ubf/*.o
+	-rm -f units/*.o
+	-rm -f util/platform/*.o
+	-rm -f util/*.o
 	-rm -f *.o
-	for subdir in $(SUBDIRS); do \
-	    echo making $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
 	-rm -f $(LIB)
+
 
