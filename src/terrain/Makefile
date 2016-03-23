@@ -10,19 +10,22 @@ OBJS =  \
 
 SUBDIRS = ded dted srtm
 
-.PHONY: all clean subdirs
+.PHONY: all clean subdirs $(SUBDIRS)
 
-all: subdirs $(LIB)
+all: $(LIB)
 
-$(LIB) : $(OBJS)
+$(LIB) : subdirs $(OBJS)
 	ar r $(LIB) $(OBJS)
 
-subdirs:
-	for subdir in $(SUBDIRS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+subdirs: $(SUBDIRS)
+
+$(SUBDIRS):
+	$(MAKE) -C $@
 
 clean:
 	-rm -f *.o
+	for subdir in $(SUBDIRS); do \
+	    echo making $@ in $$subdir; \
+	    (cd $$subdir && $(MAKE) $@) || exit 1; \
+	done
 	-rm -f $(LIB)

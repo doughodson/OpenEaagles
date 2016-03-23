@@ -54,15 +54,17 @@ PROJECTS += otw
 #
 PROJECTS += maps/rpf
 
+.PHONY: all clean projects $(PROJECTS)
+
 #
 # Rules
 #
-all:
-	@echo ${OE_ROOT}
-	for subdir in $(PROJECTS); do \
-	  echo making $@ in $$subdir; \
-	  (cd $$subdir && $(MAKE)) || exit 1; \
-	done
+all: projects
+
+projects: $(PROJECTS)
+
+$(PROJECTS):
+	$(MAKE) -C $@
 
 install: uninstall
 	-cp -r ../include/openeaagles /usr/local/include/openeaagles
