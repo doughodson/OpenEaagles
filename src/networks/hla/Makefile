@@ -17,6 +17,8 @@ SUBDIRS = rprfom
 
 .PHONY: all clean subdirs
 
+.NOTPARALLEL:
+
 all: subdirs $(LIB)
 
 $(LIB) : $(OBJS)

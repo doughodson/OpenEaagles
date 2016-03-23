@@ -11,9 +11,11 @@ SUBDIRS = adi buttons dials eadi3D eng gauges landingGear maps
 
 .PHONY: all clean subdirs $(SUBDIRS)
 
-all: $(LIB)
+.NOTPARALLEL:
 
-$(LIB): subdirs $(OBJS)
+all: subdirs $(LIB)
+
+$(LIB): $(OBJS)
 	ar r $(LIB) $(OBJS)
 
 subdirs: $(SUBDIRS)

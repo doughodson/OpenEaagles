@@ -10,9 +10,11 @@ OBJS =  \
 
 .PHONY: all clean subdirs $(SUBDIRS)
 
-all: $(LIB)
+.NOTPARALLEL:
 
-$(LIB) : subdirs $(OBJS)
+all: subdirs $(LIB)
+
+$(LIB) : $(OBJS)
 	ar r $(LIB) $(OBJS)
 
 subdirs: $(SUBDIRS)

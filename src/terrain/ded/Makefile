@@ -10,7 +10,7 @@ OBJS =  \
 
 all: $(LIB)
 
-$(LIB) : $(OBJS)
+$(LIB): $(OBJS)
 	ar r $(LIB) $(OBJS)
 
 clean:

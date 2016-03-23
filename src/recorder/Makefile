@@ -22,9 +22,11 @@ SUBDIRS = protobuf
 
 .PHONY: all clean subdirs $(SUBDIRS)
 
-all: $(LIB)
+.NOTPARALLEL:
 
-$(LIB) : subdirs $(OBJS)
+all: subdirs $(LIB)
+
+$(LIB) : $(OBJS)
 	ar r $(LIB) $(OBJS)
 
 subdirs: $(SUBDIRS)
@@ -34,5 +36,9 @@ $(SUBDIRS):
 
 clean:
 	-rm -f *.o
+	for subdir in $(SUBDIRS); do \
+	    echo making $@ in $$subdir; \
+	    (cd $$subdir && $(MAKE) $@) || exit 1; \
+	done
 	-rm -f $(LIB)
 
