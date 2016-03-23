@@ -51,6 +51,10 @@ General framework-wide changes and improvements
    -- Replaced fundamental lc prefixed math macros (e.g., lcSin) with 'std::' equivalents
       (e.g. std::sin) to reduce unnecessary code and improve clarity.
 
+   -- Revised Makefiles throughout both framework and examples so that parallel builds
+      can be run. This greatly reduces compile time, as much of the code is independent and
+      can be compiled and linked in parallel.
+
 --------------------------------------------------------------------------------
 base library
 
