@@ -167,7 +167,7 @@ solution "oe"
       }
       targetname "dis"
 
-   -- IEEE HLA interface library
+   -- IEEE HLA interface library (abstract support)
    project "hla"
       files {
          "../../include/openeaagles/networks/hla/**.h",
@@ -243,6 +243,16 @@ solution "oe"
          "../../src/maps/rpf/**.cpp"
       }
       targetname "rpf"
+
+   -- IEEE HLA interface library for RPR FOM
+   project "rprfom"
+      files {
+         "../../include/openeaagles/networks/rprfom/**.h",
+         "../../src/networks/rprfom/**.cpp"
+      }
+      includedirs { HLAIncPath }
+      defines { "RTI_USES_STD_FSTREAM" }
+      targetname "rprfom"
 
    -- simulation library
    project "simulation"
