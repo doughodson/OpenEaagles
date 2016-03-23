@@ -133,6 +133,9 @@ hla library
 --------------------------------------------------------------------------------
 instruments library
 
+   -- renamed subdirectories 'eadi3D' to 'eadi3d' and 'landingGear' to landinggear'
+      to stay consistent with lowercase directory names.
+
 --------------------------------------------------------------------------------
 iodevice library
 

@@ -4,6 +4,8 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboesimulation.a
 
 OBJS =  \
+	dynamics/AerodynamicsModel.o \
+	dynamics/SpaceDynamicsModel.o \
 	Aam.o \
 	Actions.o \
 	Agm.o \
@@ -87,26 +89,16 @@ OBJS =  \
 	TrackManager.o \
 	Weapon.o
 
-SUBDIRS = dynamics
+.PHONY: all clean
 
-.PHONY: all clean subdirs $(SUBDIRS)
-
-.NOTPARALLEL:
-
-all: subdirs $(LIB)
+all: $(LIB)
 
 $(LIB) : $(OBJS)
 	ar r $(LIB) $(OBJS)
 
-subdirs: $(SUBDIRS)
-
-$(SUBDIRS):
-	$(MAKE) -C $@
-
 clean:
+	-rm -f dynamics/*.o
 	-rm -f *.o
-	for subdir in $(SUBDIRS); do \
-	    echo making $@ in $$subdir; \
-	    (cd $$subdir && $(MAKE) $@) || exit 1; \
-	done
 	-rm -f $(LIB)
+
+
