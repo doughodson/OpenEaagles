@@ -1,8 +1,8 @@
-
+﻿
 ##################################################################################################################
 
 RPR (pronounced 'reaper') FOM – Real-time Platform-level Reference Federation Object Model
---------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------
 
 While the HLA Standards dictate how federates exchange data, it is a FOM (Federation Object Model)
 that dictates what data is being exchanged in a particular federation. HLA does not mandate the
