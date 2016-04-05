@@ -24,9 +24,8 @@ endif
 all: $(LIB)
 
 $(LIB) : $(OBJS)
-	ar r $(LIB) $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
 	-rm -f *.o
 	-rm -f $(LIB)
-

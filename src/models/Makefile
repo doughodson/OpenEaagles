@@ -19,11 +19,10 @@ OBJS =  \
 all: $(LIB)
 
 $(LIB) : $(OBJS)
-	ar r $(LIB) $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
 	-rm -f dynamics/*.o
 	-rm -f sensors/*.o
 	-rm -f *.o
 	-rm -f $(LIB)
-

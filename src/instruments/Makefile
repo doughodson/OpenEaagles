@@ -39,7 +39,7 @@ OBJS =  \
 all: $(LIB)
 
 $(LIB): $(OBJS)
-	ar r $(LIB) $(OBJS)
+	ar rs $@ $(OBJS)
 
 clean:
 	-rm -f adi/*.o
@@ -52,4 +52,3 @@ clean:
 	-rm -f maps/*.o
 	-rm -f *.o
 	-rm -f $(LIB)
-
