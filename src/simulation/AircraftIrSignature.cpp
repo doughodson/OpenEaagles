@@ -448,14 +448,13 @@ void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, con
 //------------------------------------------------------------------------------
 double AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
 {
-    double currentPla = 1.0;
     double irPower = 0;
     const Player* targetAircraft = msg->getTarget();
     if (targetAircraft != nullptr) {
+      double currentPla = 1.0;
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
             currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
         }
-
         double targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
         double targetVel = targetAircraft->getMach();
         double targetAzimuth = msg->getAzimuthAoi();
@@ -683,4 +682,3 @@ double* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
 
 } // End simulation namespace
 } // End oe namespace
-

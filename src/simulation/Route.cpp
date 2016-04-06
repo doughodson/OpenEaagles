@@ -534,7 +534,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
     char numString[10];
 
     // this tells us the number of the next steerpoint to be created in the slot list
-    std::sprintf(numString,"%i",(num+1));
+    std::sprintf(numString,"%i", static_cast<int>(num+1));
 
     // now we have the slot name, which is the next number in the steerpoint list
     // now create a new pair, and if we have a component list, add it to it, if

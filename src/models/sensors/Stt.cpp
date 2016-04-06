@@ -47,9 +47,6 @@ void Stt::dynamics(const double dt)
     simulation::TrackManager* tm = getTrackManager();
     if (getAntenna() != nullptr && getOwnship() != nullptr && tm != nullptr) {
 
-        double az = 0.0;
-        double el = 0.0;
-
         base::safe_ptr<simulation::Track> trackList[2];
         int n = tm->getTrackList(trackList,2);
 
@@ -70,12 +67,12 @@ void Stt::dynamics(const double dt)
 
             // Compute az & el to track
             double grng = std::sqrt(x*x + y*y);
-            az = std::atan2(y,x);
-            el = std::atan2(-z,grng);
+            double az = std::atan2(y,x);
+            double el = std::atan2(-z,grng);
 
             // Get current antenna limits
-            double leftLim, rightLim;
-            double lowerLim, upperLim;
+            double leftLim(0.0), rightLim(0.0);
+            double lowerLim(0.0), upperLim(0.0);
             getAntenna()->getAzimuthLimits(&leftLim, &rightLim);
             getAntenna()->getElevationLimits(&lowerLim, &upperLim);
 

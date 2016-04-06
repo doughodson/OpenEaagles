@@ -131,7 +131,7 @@ unsigned int NetIO::getNumberOfInteractionParameters() const
 simulation::Nib* NetIO::createNewOutputNib(simulation::Player* const player)
 {
     // ---
-    // Check if we are enabled to register this class of objects and 
+    // Check if we are enabled to register this class of objects and
     // create the proper FOM class structure
     // ---
     unsigned int idx = 0;
@@ -290,11 +290,11 @@ void NetIO::receiveInteraction(
 {
     // Select the proper method to handle this interaction
     switch( findInteractionClassIndex(theInteraction) ) {
-    
+
         case WEAPON_FIRE_INTERACTION :
             receiveWeaponFire(theParameters);
             break;
-            
+
         case MUNITION_DETONATION_INTERACTION :
             receiveMunitionDetonation(theParameters);
             break;
