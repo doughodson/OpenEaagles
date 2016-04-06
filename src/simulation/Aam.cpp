@@ -23,8 +23,8 @@ const char* Aam::getNickname() const       { return "GenericAam"; }
 //------------------------------------------------------------------------------
 Aam::Aam()
 {
-    STANDARD_CONSTRUCTOR()
-        
+   STANDARD_CONSTRUCTOR()
+
    static base::String gaam(getDescription());
    setType(&gaam);
 

@@ -1,5 +1,4 @@
 
-
 #include "openeaagles/simulation/AngleOnlyTrackManager.h"
 #include "openeaagles/simulation/IrQueryMsg.h"
 #include "openeaagles/simulation/Player.h"

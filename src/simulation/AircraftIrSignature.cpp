@@ -224,7 +224,7 @@ bool AircraftIrSignature::getIrSignature(IrQueryMsg* const msg)
     bool ok = false;
     //IrQueryMsg* msg = dynamic_cast<IrQueryMsg*>( msg0 );
     if (msg != nullptr) {
-        double projectedAreaInFOV = getSignatureArea(msg);
+        const double projectedAreaInFOV = getSignatureArea(msg);
         msg->setProjectedArea(projectedAreaInFOV);
 
         // if no projectedAreaInFOV, then target was not in FOV
@@ -399,10 +399,10 @@ double AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg*
     if(targetAircraft != nullptr) {
         // this will need checks to ensure targetAircraft is , in fact,
         // an airvehicle and not something else.
-        double targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
-        double targetVel = targetAircraft->getMach();
+        const double targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
+        const double targetVel = targetAircraft->getMach();
         double targetAzimuth = msg->getAzimuthAoi();
-        double targetElevation = msg->getElevationAoi();
+        const double targetElevation = msg->getElevationAoi();
         if (targetAzimuth < 0) {
             targetAzimuth = -targetAzimuth;
         }
@@ -424,16 +424,16 @@ void AircraftIrSignature::getAirframeSignatures(const IrQueryMsg* const msg, con
         double irPower = getCalculatedAirframeHeatSignature(msg);
 
         for (unsigned int i = 0; i < static_cast<unsigned int>(airframeWavebandFactorTable->getNumXPoints()); i++) {
-            double centerWavelength = centerWavelengths[i];
-            double lowerWavelength = centerWavelength - (widths[i] / 2.0f);
-            double upperWavelength = lowerWavelength + widths[i];
+            const double centerWavelength = centerWavelengths[i];
+            const double lowerWavelength = centerWavelength - (widths[i] / 2.0f);
+            const double upperWavelength = lowerWavelength + widths[i];
 
             airframeSig[i*3] = lowerWavelength;
             airframeSig[i*3 + 1] = upperWavelength;
 
             if (upperBound >= lowerWavelength && lowerBound <= upperWavelength) {
                 // sensor band overlaps this bin
-                double airframeWaveBandFactor  = airframeWavebandFactorTable->lfi(centerWavelength,widths[i]);
+                const double airframeWaveBandFactor  = airframeWavebandFactorTable->lfi(centerWavelength,widths[i]);
                 airframeSig[i*3 + 2] = irPower * airframeWaveBandFactor;
             }
             else{
@@ -451,14 +451,14 @@ double AircraftIrSignature::getPlumeRadiation(const IrQueryMsg* const msg)
     double irPower = 0;
     const Player* targetAircraft = msg->getTarget();
     if (targetAircraft != nullptr) {
-      double currentPla = 1.0;
+        double currentPla = 1.0;
         if (targetAircraft->isClassType(typeid(AirVehicle))) {
             currentPla = getPLA(static_cast<const AirVehicle*>(targetAircraft));
         }
-        double targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
-        double targetVel = targetAircraft->getMach();
+        const double targetAlt = static_cast<double>(targetAircraft->getAltitudeM());
+        const double targetVel = targetAircraft->getMach();
         double targetAzimuth = msg->getAzimuthAoi();
-        double targetElevation = msg->getElevationAoi();
+        const double targetElevation = msg->getElevationAoi();
         if (targetAzimuth < 0) {
             targetAzimuth = -targetAzimuth;
         }
@@ -478,9 +478,9 @@ void AircraftIrSignature::getPlumeSignatures(const IrQueryMsg* const msg, const 
         const double* widths = plumeWavebandFactorTable->getYData();
         double irPower = getPlumeRadiation(msg);
         for (unsigned int i = 0; i < static_cast<unsigned int>(plumeWavebandFactorTable->getNumXPoints()); i++) {
-            double centerWavelength = centerWavelengths[i];
-            double lowerWavelength = centerWavelength - (widths[i] / 2.0f);
-            double upperWavelength = lowerWavelength + widths[i];
+            const double centerWavelength = centerWavelengths[i];
+            const double lowerWavelength = centerWavelength - (widths[i] / 2.0f);
+            const double upperWavelength = lowerWavelength + widths[i];
             plumeSigs[i*3] = lowerWavelength;
             plumeSigs[i*3 + 1] = upperWavelength;
             if (upperBound >= lowerWavelength && lowerBound <= upperWavelength) {
