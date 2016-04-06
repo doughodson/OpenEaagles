@@ -183,21 +183,18 @@ void Hls::hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls)
 //------------------------------------------------------------------------------
 void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
 {
-    double rc, gc, bc;
-    double maxcol, mincol, cdelta;
-
-    maxcol = std::fmax( rgb[RED], std::fmax( rgb[GREEN], rgb[BLUE] ) );
-    mincol = std::fmin( rgb[RED], std::fmin( rgb[GREEN], rgb[BLUE] ) );
+    const double maxcol = std::fmax( rgb[RED], std::fmax( rgb[GREEN], rgb[BLUE] ) );
+    const double mincol = std::fmin( rgb[RED], std::fmin( rgb[GREEN], rgb[BLUE] ) );
     hls[LIGHTNESS] = (mincol + maxcol) / 2.0f;
 
     if (maxcol == mincol) {
         hls[SATURATION] = 0.0f;
         hls[HUE] = 0.0f;
     } else {
-        cdelta = maxcol - mincol;
-        rc = ( maxcol - rgb[RED] ) / cdelta;
-        gc = ( maxcol - rgb[GREEN] ) / cdelta;
-        bc = ( maxcol - rgb[BLUE] ) / cdelta;
+        const double cdelta = maxcol - mincol;
+        const double rc = ( maxcol - rgb[RED] ) / cdelta;
+        const double gc = ( maxcol - rgb[GREEN] ) / cdelta;
+        const double bc = ( maxcol - rgb[BLUE] ) / cdelta;
 
         if (hls[LIGHTNESS] <= 0.5)
             hls[SATURATION] = cdelta / (maxcol + mincol);
