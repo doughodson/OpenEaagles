@@ -1089,8 +1089,6 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
    CVector* pZ = new CVector(N);          // current eigenvector estimate
    pZ->fillWith(1.0);                     // all 1's in initial estimate
 
-   double Wmag = 0.0;                     // largest magnitude element of W
-
    //-------------------------------------------------------
    // iterate solutions to desired accuracy or iteration limit
    //-------------------------------------------------------
@@ -1101,7 +1099,7 @@ bool Matrix::getEigenPower(const double maxErr, const int maxIter,
          // get estimate of eigenvector
          //----------------------------------------------------
          CVector* pW = base::multiply(*pA, *pZ);   // get new estimate (W) based on old estimate (Z)
-         Wmag = pW->getMaxMag();           // max mag value from elements of vector W
+         const double Wmag = pW->getMaxMag();      // max mag value from elements of vector W
          if (Wmag == 0.0) {
             // mag value is zero; cleanup and leave
             pW->unref();

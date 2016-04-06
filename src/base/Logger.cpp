@@ -165,7 +165,7 @@ bool Logger::openFile()
 
             validName = false;
             for (unsigned int i = 1; i <= 99 && !validName; i++) {
-                std::sprintf(fullname, "%s_v%02d", origname, i);
+                std::sprintf(fullname, "%s_v%02d", origname, static_cast<int>(i));
                 validName = !doesFileExist(fullname);
             }
 
