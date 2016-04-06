@@ -555,10 +555,9 @@ bool EmissionPduHandler::updateOutgoing(const double curExecTime, Nib* const nib
             pdu->header.length = result + pdu->header.length;
             p += result;
             es = reinterpret_cast<EmissionSystem*>(p);
-
             //pdu->dumpData();
 
-            int length = pdu->header.length;
+            const int length = pdu->header.length;
             if (base::NetHandler::isNotNetworkByteOrder()) pdu->swapBytes();
             pduSent = disIO->sendData(reinterpret_cast<char*>(pdu), length);
 

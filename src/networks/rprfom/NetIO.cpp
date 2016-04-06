@@ -580,7 +580,7 @@ bool NtmInputNode::add2OurLists(simulation::Ntm* const ntm)
             bool alreadyExists = false;
             const base::List::Item* item = subnodeList->getFirstItem();
             while (item != nullptr && !alreadyExists) {
-               NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               const NtmInputNode* subnode = static_cast<const NtmInputNode*>(item->getValue());
                alreadyExists = (nextLevelCode == subnode->code);
                item = item->getNext();
             }
@@ -610,7 +610,7 @@ bool NtmInputNode::add2OurLists(simulation::Ntm* const ntm)
          if (!ok && !err && level < SPECIFIC_LVL) {
             const base::List::Item* item = subnodeList->getFirstItem();
             while (item != nullptr && !ok) {
-               NtmInputNode* subnode = (NtmInputNode*) item->getValue();
+               NtmInputNode* subnode = const_cast<NtmInputNode*>(static_cast<const NtmInputNode*>(item->getValue()));
                if (nextLevelCode == subnode->code) {
                   ok = subnode->add2OurLists(disNtm);
                }
