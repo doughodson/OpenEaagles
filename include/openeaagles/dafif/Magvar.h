@@ -26,9 +26,7 @@
 //
 //------------------------------------------------------------------------------
 
-#include <stdlib.h>
-#include <float.h>
-#include <cmath>
+#include <ctime>
 //#include "openeaagles/dafifc.h"
 
 class DsMagvar {

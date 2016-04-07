@@ -110,6 +110,10 @@ base library
 --------------------------------------------------------------------------------
 dafif library
 
+   Magvar.h
+     -- removed header file includes for <stdlib.h>, <float.h> and <cmath>
+     -- this header isn't included by any framework code, so there is no impact
+
 --------------------------------------------------------------------------------
 dis library
 
