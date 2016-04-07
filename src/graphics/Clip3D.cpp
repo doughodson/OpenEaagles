@@ -18,7 +18,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/graphics/Clip3D.h"
 
-#include <cfloat>
+#include <limits>
 
 namespace oe {
 namespace graphics {
@@ -34,7 +34,9 @@ Clip3D::Clip3D()
 {
    STANDARD_CONSTRUCTOR()
 
-   setClippingBox(-FLT_MAX, FLT_MAX, -FLT_MAX, FLT_MAX, -FLT_MAX, FLT_MAX);
+   setClippingBox(-std::numeric_limits<float>::max(), std::numeric_limits<float>::max(),
+                  -std::numeric_limits<float>::max(), std::numeric_limits<float>::max(),
+                  -std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
 }
 
 
@@ -59,7 +61,9 @@ void Clip3D::copyData(const Clip3D& org, const bool)
 //------------------------------------------------------------------------------
 void Clip3D::deleteData()
 {
-    setClippingBox(-FLT_MAX, FLT_MAX, -FLT_MAX, FLT_MAX, -FLT_MAX, FLT_MAX);
+   setClippingBox(-std::numeric_limits<float>::max(), std::numeric_limits<float>::max(),
+                  -std::numeric_limits<float>::max(), std::numeric_limits<float>::max(),
+                  -std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
 }
 
 

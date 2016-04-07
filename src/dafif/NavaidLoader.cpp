@@ -3,7 +3,7 @@
 #include "openeaagles/base/FileReader.h"
 #include <cstring>
 #include <cstdlib>
-#include <cfloat>
+#include <limits>
 
 namespace oe {
 namespace dafif {
@@ -20,7 +20,7 @@ NavaidLoader::NavaidLoader() : Database()
    STANDARD_CONSTRUCTOR()
 
    // default file
-   db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
+   db->setPathname("/data/dafif/fullall/");
    db->setFilename("file2");
 
    fl = 0;
@@ -56,7 +56,7 @@ void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
+      db->setPathname("/data/dafif/fullall/");
       db->setFilename("file2");
       fl = 0;
       nfl = 0;
@@ -257,7 +257,7 @@ int NavaidLoader::queryByChannel(const long chan, const char band)
 //------------------------------------------------------------------------------
 int NavaidLoader::queryByType(const Navaid::NavaidType t)
 {
-   double mr2(FLT_MAX);
+   double mr2(std::numeric_limits<float>::max());   // DDH?
    if (mrng > 0.0f) mr2 = mrng*mrng;
 
    // compute range**2 to ref point and select all that have range less

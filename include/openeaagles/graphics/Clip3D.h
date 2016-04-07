@@ -6,7 +6,7 @@
 
 #include "openeaagles/base/Object.h"
 #include "Polygon.h"
-#include <cfloat>
+#include <limits>
 
 namespace oe {
 namespace graphics {
@@ -32,7 +32,8 @@ public:
    void setClippingBox(
          const double xmin, const double xmax,
          const double ymin, const double ymax,
-         const double zmin = -FLT_MAX, const double zmax = FLT_MAX
+         const double zmin = -std::numeric_limits<float>::max(),
+         const double zmax = std::numeric_limits<float>::max()
       );
 
    //------------------------------------------------------------------------------

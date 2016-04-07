@@ -18,7 +18,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cctype>
-#include <cfloat>
+#include <limits>
 
 #include <GL/glu.h>
 
@@ -635,7 +635,7 @@ void Display::reshapeIt(int w, int h)
    vpWidth = w;
    vpHeight = h;
 
-   if (oLeft == DBL_MAX) {
+   if (oLeft == std::numeric_limits<double>::max()) {
       // DEFAULT values
       GLdouble a = static_cast<GLdouble>(vpHeight) / static_cast<GLdouble>(vpWidth);
       oLeft   = -1.0;

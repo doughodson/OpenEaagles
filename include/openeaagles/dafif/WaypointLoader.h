@@ -40,7 +40,7 @@ public:
    WaypointLoader();
    WaypointLoader( const char* country,
       const char* file = "file3",
-      const char* path = "/eaagles3rdParty/dafif/fullall/"
+      const char* path = "/data/dafif/fullall/"
    );
 
    virtual Waypoint* waypoint(const int n);

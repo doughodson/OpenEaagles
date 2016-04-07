@@ -6,7 +6,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <cmath>
-#include <cfloat>
+#include <limits>
 
 namespace oe {
 namespace dafif {
@@ -22,7 +22,7 @@ AirportLoader::AirportLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
    // default file
-   db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
+   db->setPathname("/data/dafif/fullall/");
    db->setFilename("file0");
    firstAirport = nullptr;
 }
@@ -49,7 +49,7 @@ void AirportLoader::copyData(const AirportLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
+      db->setPathname("/data/dafif/fullall/");
       db->setFilename("file0");
       firstAirport = nullptr;
    }
@@ -611,7 +611,7 @@ int AirportLoader::queryByType(const Airport::AirportType type)
 //------------------------------------------------------------------------------
 int AirportLoader::queryByFreq(const float freq)
 {
-   double mr2(FLT_MAX);
+   double mr2(std::numeric_limits<float>::max());   // DDH? why float?
    if (mrng > 0.0f) mr2 = mrng*mrng;
 
    // compute range**2 to ref point and select all that have range less
@@ -643,7 +643,7 @@ int AirportLoader::queryByFreq(const float freq)
 //------------------------------------------------------------------------------
 int AirportLoader::queryByChannel(const int chan)
 {
-   double mr2(FLT_MAX);
+   double mr2(std::numeric_limits<float>::max());   // DDH?
    if (mrng > 0.0f) mr2 = mrng*mrng;
 
    // compute range**2 to ref point and select all that have range less
@@ -675,7 +675,7 @@ int AirportLoader::queryByChannel(const int chan)
 //------------------------------------------------------------------------------
 int AirportLoader::queryAirport(const Airport::AirportType type, const float minRwLen)
 {
-   double mr2(FLT_MAX);
+   double mr2(std::numeric_limits<float>::max());  // DDH?
    if (mrng > 0.0f) mr2 = mrng*mrng;
 
    // compute range**2 to ref point and select all that have range less
@@ -881,7 +881,7 @@ int AirportLoader::queryRunwayByLength(const float minRwLen)
 //------------------------------------------------------------------------------
 int AirportLoader::queryRunwayByFreq(const float freq)
 {
-   double mr2(FLT_MAX);
+   double mr2(std::numeric_limits<float>::max());   // DDH?
    if (mrng > 0.0f) mr2 = mrng*mrng;
 
    // compute range**2 to ref point and select all that have range less
@@ -915,7 +915,7 @@ int AirportLoader::queryRunwayByFreq(const float freq)
 //------------------------------------------------------------------------------
 int AirportLoader::queryRunwayByChannel(const int chan)
 {
-   double mr2(FLT_MAX);
+   double mr2(std::numeric_limits<float>::max());   // DDH?
    if (mrng > 0.0f) mr2 = mrng*mrng;
 
    // compute range**2 to ref point and select all that have range less

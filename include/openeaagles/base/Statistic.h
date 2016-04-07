@@ -54,10 +54,10 @@ namespace base {
 //       Returns the Root-Mean-Squared of the data points (or zero)
 //
 //    double maxValue() const
-//       Returns the max data point (or -DBL_MAX if there were no data points)
+//       Returns the max data point (or the negative of max value for double if there were no data points)
 //
 //    double minValue() const
-//       Returns the min data point (or DBL_MAX if there were no data points)
+//       Returns the min data point (or max value for double if there were no data points)
 //
 //    double ci() const
 //       Returns the confidence interval for the statistic given Z

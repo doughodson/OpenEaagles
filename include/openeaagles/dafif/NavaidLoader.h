@@ -58,7 +58,7 @@ public:
    NavaidLoader();
    NavaidLoader( const char* country,
       const char* file = "file2",
-      const char* path = "/eaagles3rdParty/dafif/fullall/"
+      const char* path = "/data/dafif/fullall/"
    );
 
    virtual Navaid* navaid(const int n);

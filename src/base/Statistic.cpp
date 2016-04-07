@@ -3,7 +3,7 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Statistic.h"
 
-#include <cfloat>
+#include <limits>
 
 namespace oe {
 namespace base {
@@ -49,8 +49,8 @@ void Statistic::deleteData()
 void Statistic::clear()
 {
   n = 0;
-  maximum = -DBL_MAX;
-  minimum =  DBL_MAX; 
+  maximum = -std::numeric_limits<double>::max();
+  minimum =  std::numeric_limits<double>::max(); // DDH? why is both max, flip min/max?
   sum = 0.0;
   absSum = 0.0;
   sumSq  = 0.0;

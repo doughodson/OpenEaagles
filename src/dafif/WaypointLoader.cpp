@@ -5,7 +5,7 @@
 
 #include <cstring>
 #include <cstdlib>
-#include <cfloat>
+#include <limits>
 
 namespace oe {
 namespace dafif {
@@ -21,7 +21,7 @@ WaypointLoader::WaypointLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
    // default file
-   db->setPathname("/eaagles3rdParty/data/dafif/fullall/");
+   db->setPathname("/data/dafif/fullall/");
    db->setFilename("file3");
 }
 
@@ -161,7 +161,7 @@ Waypoint* WaypointLoader::getWaypoint(const int n)
 //------------------------------------------------------------------------------
 int WaypointLoader::queryByRange()
 {
-   double mr2(FLT_MAX);
+   double mr2(std::numeric_limits<float>::max());
    if (mrng > 0.0f) mr2 = mrng*mrng;
 
    // compute range**2 to ref point and select all that have range less

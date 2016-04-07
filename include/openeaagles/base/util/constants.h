@@ -2,7 +2,7 @@
 #ifndef __oe_base_util_constants_H__
 #define __oe_base_util_constants_H__
 
-#include <cfloat>
+#include <limits>
 
 namespace oe {
 namespace base {
@@ -45,7 +45,7 @@ const double MuM3perS2 = 3986004.418E8;
 // ---
 // default initial values for various readouts
 // ---
-const double UNDEFINED_VALUE = FLT_MIN;
+const double UNDEFINED_VALUE = std::numeric_limits<float>::min();
 const double INIT_VALUE = 0.0;
 const int    INIT_INT_VALUE = 0;
 const int    INIT_SELECT_VALUE = 1;
