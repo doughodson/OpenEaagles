@@ -55,9 +55,14 @@ General framework-wide changes and improvements
       can be run. This greatly reduces compile time, as much of the code is independent and
       can be compiled and linked in parallel.
 
-   -- Started using <limits> templates to infer limits for things like <double>, etc.  This
-      updates the codebase to use more c++ oriented features as opposed to including
-      <float.h> or <cfloat> -- no effect on existing codebase or API
+   -- Now using <limits> templates to infer things like min/max for <double>, <float>, etc.
+      This updates the codebase to use more c++11 features as opposed to including
+      <float.h> or <cfloat>. There is no effect or impacton existing codebase or API.
+      General rules/examples to illustrate change is as follows:
+          C         : const double lowest_double = -DBL_MAX;
+          C++pre-11 : const double lowest_double = -std::numeric_limits<double>::max();
+                      (The above works because floating point numbers are symmetrical)
+          C++11     : const double lowest_double = std::numeric_limits<double>::lowest();
 
 --------------------------------------------------------------------------------
 base library
