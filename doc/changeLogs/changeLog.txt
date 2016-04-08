@@ -57,11 +57,11 @@ General framework-wide changes and improvements
 
    -- Now using <limits> templates to infer things like min/max for <double>, <float>, etc.
       This updates the codebase to use more c++11 features as opposed to including
-      <float.h> or <cfloat>. There is no effect or impacton existing codebase or API.
+      <float.h> or <cfloat>. There is no effect or impact on existing codebase or API.
       General rules/examples to illustrate change is as follows:
           C         : const double lowest_double = -DBL_MAX;
           C++pre-11 : const double lowest_double = -std::numeric_limits<double>::max();
-                      (The above works because floating point numbers are symmetrical)
+                      (The above code works because floating point limits are symmetrical.)
           C++11     : const double lowest_double = std::numeric_limits<double>::lowest();
 
 --------------------------------------------------------------------------------
