@@ -7,6 +7,11 @@
 //------------------------------------------------------------------------------
 
 //
+// make sure Windows header files don't define min and max macros
+//
+#define NOMINMAX
+
+//
 // The Winsock2.h header file internally includes core elements from the Windows.h
 // header file, so there is not usually an #include line for the Windows.h header
 // file in Winsock applications. If an #include line is needed for the Windows.h
