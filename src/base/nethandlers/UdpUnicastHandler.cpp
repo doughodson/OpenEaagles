@@ -10,6 +10,7 @@
 // and make the code that much more enjoyable to read!
 //
 #if defined(WIN32)
+    #define _WINSOCK_DEPRECATED_NO_WARNINGS
     #include <sys/types.h>
     #include <winsock2.h>
     #define bzero(a,b)    ZeroMemory( a, b )
