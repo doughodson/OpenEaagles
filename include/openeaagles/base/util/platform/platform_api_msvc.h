@@ -24,21 +24,22 @@
 // by the various functions and subsystems.
 //
 
-// exclude rarely used header files
+// exclude rarely used header files in windows.h
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN 1
 #endif
 
-// and don't define min and max macros
+// prevent the min and max macros from being defined
 #ifndef NOMINMAX
 #define NOMINMAX
 #endif
 
+// winsock2.h will most likely include windows.h, hence the need for WIN32_LEAN_AND_MEAN
 #include <winsock2.h>
 
 //
-// defines multimedia functions - needed for usb joystick functions such as
-// JOYCAPS and joyGetDevCaps() used by UsbJoystick
+// because WIN32_LEAN_AND_MEAN is defined, Mmsystem.h needs to be added
+// Mmsystem.h - defines multimedia functions - needed for usb joystick functions used by UsbJoystick
 //
 #include <Mmsystem.h>
 
