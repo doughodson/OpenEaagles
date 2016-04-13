@@ -10,6 +10,7 @@ OBJS = \
 	CadrgFrameEntry.o \
 	CadrgMap.o \
 	CadrgTocEntry.o \
+	factory.o \
 	MapDrawer.o \
 	TexturePager.o \
 	TextureTable.o \
