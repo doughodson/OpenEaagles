@@ -49,121 +49,121 @@
 // Eadi3D
 #include "openeaagles/instruments/eadi3D/Eadi3DPage.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace instruments {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = 0;
 
     // Instrument
-    if ( std::strcmp(name, Instrument::getFactoryName()) == 0 ) {
+    if ( name == Instrument::getFactoryName() ) {
         obj = new Instrument;
     }
     // Analog Dial
-    else if ( std::strcmp(name, AnalogDial::getFactoryName()) == 0 ) {
+    else if ( name == AnalogDial::getFactoryName() ) {
         obj = new AnalogDial;
     }
     // Tick Marks for the analog dial
-    else if ( std::strcmp(name, DialTickMarks::getFactoryName()) == 0 ) {
+    else if ( name == DialTickMarks::getFactoryName() ) {
         obj = new DialTickMarks;
     }
     // Arc Segments for the analog dial
-    else if ( std::strcmp(name, DialArcSegment::getFactoryName()) == 0 ) {
+    else if ( name == DialArcSegment::getFactoryName() ) {
         obj = new DialArcSegment;
     }
     // Dial Pointer
-    else if ( std::strcmp(name, DialPointer::getFactoryName()) == 0 ) {
+    else if ( name == DialPointer::getFactoryName() ) {
         obj = new DialPointer;
     }
     // CompassRose
-    else if ( std::strcmp(name, CompassRose::getFactoryName()) == 0 ) {
+    else if ( name == CompassRose::getFactoryName() ) {
         obj = new CompassRose;
     }
     // Bearing Pointer
-    else if ( std::strcmp(name, BearingPointer::getFactoryName()) == 0 ) {
+    else if ( name == BearingPointer::getFactoryName() ) {
         obj = new BearingPointer;
     }
     // AltitudeDial
-    else if ( std::strcmp(name, AltitudeDial::getFactoryName()) == 0 ) {
+    else if ( name == AltitudeDial::getFactoryName() ) {
         obj = new AltitudeDial;
     }
     // GMeterDial
-    else if ( std::strcmp(name, GMeterDial::getFactoryName()) == 0 ) {
+    else if ( name == GMeterDial::getFactoryName() ) {
         obj = new GMeterDial;
     }    
     // Here is the analog gauge and its pieces
     // AnalogGauge
-    else if ( std::strcmp(name, AnalogGauge::getFactoryName()) == 0 ) {
+    else if ( name == AnalogGauge::getFactoryName() ) {
         obj = new AnalogGauge;
     }
-    else if ( std::strcmp(name, GaugeSlider::getFactoryName()) == 0 ) {
+    else if ( name == GaugeSlider::getFactoryName() ) {
         obj = new GaugeSlider;
     }
     // Tape
-    else if ( std::strcmp(name, Tape::getFactoryName()) == 0 ) {
+    else if ( name == Tape::getFactoryName() ) {
         obj = new Tape;
     }
     // digital AOA gauge
-    else if ( std::strcmp(name, AoAIndexer::getFactoryName()) == 0 ) {
+    else if ( name == AoAIndexer::getFactoryName() ) {
         obj = new AoAIndexer;
     }
     // Tick Marks (horizontal and vertical)
-    else if ( std::strcmp(name, TickMarks::getFactoryName()) == 0 ) {
+    else if ( name == TickMarks::getFactoryName() ) {
         obj = new TickMarks;
     }
     // Landing Gear
-    else if ( std::strcmp(name, LandingGear::getFactoryName()) == 0 ) {
+    else if ( name == LandingGear::getFactoryName() ) {
         obj = new LandingGear;
     }
     // Landing Lights
-    else if ( std::strcmp(name, LandingLight::getFactoryName()) == 0 ) {
+    else if ( name == LandingLight::getFactoryName() ) {
         obj = new LandingLight;
     }
     // EngPage
-    else if ( std::strcmp(name, EngPage::getFactoryName()) == 0 ) {
+    else if ( name == EngPage::getFactoryName() ) {
         obj = new EngPage;
     }
     // Button
-    else if (std::strcmp(name, Button::getFactoryName()) == 0 ) {
+    else if (name == Button::getFactoryName() ) {
         obj = new Button;
     }
     // Push Button
-    else if (std::strcmp(name, PushButton::getFactoryName()) == 0 ) {
+    else if (name == PushButton::getFactoryName() ) {
         obj = new PushButton;
     }
     // Rotary Switch
-    else if (std::strcmp(name, RotarySwitch::getFactoryName()) == 0 ) {
+    else if (name == RotarySwitch::getFactoryName() ) {
         obj = new RotarySwitch;
     }
     // Knob
-    else if (std::strcmp(name, Knob::getFactoryName()) == 0 ) {
+    else if (name == Knob::getFactoryName() ) {
         obj = new Knob;
     }
     // Switch
-    else if (std::strcmp(name, Switch::getFactoryName()) == 0 ) {
+    else if (name == Switch::getFactoryName() ) {
         obj = new Switch;
     }
     // Hold Switch
-    else if (std::strcmp(name, SolenoidSwitch::getFactoryName()) == 0 ) {
+    else if (name == SolenoidSwitch::getFactoryName() ) {
         obj = new SolenoidSwitch;
     }
     // Hold Button
-    else if (std::strcmp(name, SolenoidButton::getFactoryName()) == 0 ) {
+    else if (name == SolenoidButton::getFactoryName() ) {
         obj = new SolenoidButton;
     }
     // Adi
-    else if (std::strcmp(name, Adi::getFactoryName()) == 0 ) {
+    else if (name == Adi::getFactoryName() ) {
         obj = new Adi;
     }
     // Ghost Horizon
-    else if (std::strcmp(name, GhostHorizon::getFactoryName()) == 0 ) {
+    else if (name == GhostHorizon::getFactoryName() ) {
         obj = new GhostHorizon;
     }
     // Eadi3D
-    else if (std::strcmp(name, Eadi3DPage::getFactoryName()) == 0 ) {
+    else if (name == Eadi3DPage::getFactoryName() ) {
         obj = new Eadi3DPage;
     }
 

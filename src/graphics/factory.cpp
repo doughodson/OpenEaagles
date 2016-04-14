@@ -23,157 +23,157 @@
 #include "openeaagles/graphics/MapPage.h"
 #include "openeaagles/graphics/SymbolLoader.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace graphics {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
     // General graphics support
-    if ( std::strcmp(name, Graphic::getFactoryName()) == 0 ) {
+    if ( name == Graphic::getFactoryName() ) {
         obj = new Graphic();
     }
-    else if ( std::strcmp(name, Page::getFactoryName()) == 0 ) {
+    else if ( name == Page::getFactoryName() ) {
         obj = new Page();
     }
-    else if ( std::strcmp(name, Display::getFactoryName()) == 0 ) {
+    else if ( name == Display::getFactoryName() ) {
         obj = new Display();
     }
-    else if ( std::strcmp(name, Translator::getFactoryName()) == 0 ) {
+    else if ( name == Translator::getFactoryName() ) {
         obj = new Translator();
     }
-    else if ( std::strcmp(name, Rotators::getFactoryName()) == 0 ) {
+    else if ( name == Rotators::getFactoryName() ) {
         obj = new Rotators();
     }
-    else if ( std::strcmp(name, ColorRotary::getFactoryName()) == 0 ) {
+    else if ( name == ColorRotary::getFactoryName() ) {
         obj = new ColorRotary();
     }
-    else if ( std::strcmp(name, ColorGradient::getFactoryName()) == 0 ) {
+    else if ( name == ColorGradient::getFactoryName() ) {
         obj = new ColorGradient();
     }
 
     // Shapes
-    else if ( std::strcmp(name, Circle::getFactoryName()) == 0 ) {
+    else if ( name == Circle::getFactoryName() ) {
         obj = new Circle();
     }
-    else if ( std::strcmp(name, Point::getFactoryName()) == 0 ) {
+    else if ( name == Point::getFactoryName() ) {
         obj = new Point();
     }
-    else if ( std::strcmp(name, Polygon::getFactoryName()) == 0 ) {
+    else if ( name == Polygon::getFactoryName() ) {
         obj = new Polygon();
     }
-    else if ( std::strcmp(name, LineLoop::getFactoryName()) == 0 ) {
+    else if ( name == LineLoop::getFactoryName() ) {
         obj = new LineLoop();
     }
-    else if ( std::strcmp(name, Line::getFactoryName()) == 0 ) {
+    else if ( name == Line::getFactoryName() ) {
         obj = new Line();
     }
-    else if ( std::strcmp(name, Arc::getFactoryName()) == 0 ) {
+    else if ( name == Arc::getFactoryName() ) {
         obj = new Arc();
     }
-    else if ( std::strcmp(name, OcclusionCircle::getFactoryName()) == 0 ) {
+    else if ( name == OcclusionCircle::getFactoryName() ) {
         obj = new OcclusionCircle();
     }
-    else if ( std::strcmp(name, OcclusionArc::getFactoryName()) == 0 ) {
+    else if ( name == OcclusionArc::getFactoryName() ) {
         obj = new OcclusionArc();
     }
-    else if ( std::strcmp(name, Quad::getFactoryName()) == 0 ) {
+    else if ( name == Quad::getFactoryName() ) {
         obj = new Quad();
     }
-    else if ( std::strcmp(name, Triangle::getFactoryName()) == 0 ) {
+    else if ( name == Triangle::getFactoryName() ) {
         obj = new Triangle();
     }
 
     // Test Fields
-    else if ( std::strcmp(name, AsciiText::getFactoryName()) == 0 ) {
+    else if ( name == AsciiText::getFactoryName() ) {
         obj = new AsciiText();
     }
-    else if ( std::strcmp(name, Cursor::getFactoryName()) == 0 ) {
+    else if ( name == Cursor::getFactoryName() ) {
         obj = new Cursor();
     }
 
     // Readouts
-    else if ( std::strcmp(name, NumericReadout::getFactoryName()) == 0 ) {
+    else if ( name == NumericReadout::getFactoryName() ) {
         obj = new NumericReadout();
     }
-    else if ( std::strcmp(name, HexReadout::getFactoryName()) == 0 ) {
+    else if ( name == HexReadout::getFactoryName() ) {
         obj = new HexReadout();
     }
-    else if ( std::strcmp(name, OctalReadout::getFactoryName()) == 0 ) {
+    else if ( name == OctalReadout::getFactoryName() ) {
         obj = new OctalReadout();
     }
-    else if ( std::strcmp(name, TimeReadout::getFactoryName()) == 0 ) {
+    else if ( name == TimeReadout::getFactoryName() ) {
         obj = new TimeReadout();
     }
-    else if ( std::strcmp(name, DirectionReadout::getFactoryName()) == 0 ) {
+    else if ( name == DirectionReadout::getFactoryName() ) {
         obj = new DirectionReadout();
     }
-    else if ( std::strcmp(name, LatitudeReadout::getFactoryName()) == 0 ) {
+    else if ( name == LatitudeReadout::getFactoryName() ) {
         obj = new LatitudeReadout();
     }
-    else if ( std::strcmp(name, LongitudeReadout::getFactoryName()) == 0 ) {
+    else if ( name == LongitudeReadout::getFactoryName() ) {
         obj = new LongitudeReadout();
     }
-    else if ( std::strcmp(name, Rotary::getFactoryName()) == 0 ) {
+    else if ( name == Rotary::getFactoryName() ) {
         obj = new Rotary();
     }
-    else if ( std::strcmp(name, Rotary2::getFactoryName()) == 0 ) {
+    else if ( name == Rotary2::getFactoryName() ) {
         obj = new Rotary2();
     }
 
     // Stroke Font
-    else if ( std::strcmp(name, StrokeFont::getFactoryName()) == 0 ) {
+    else if ( name == StrokeFont::getFactoryName() ) {
         obj = new StrokeFont();
     }
 
     // Bitmap Font
-    else if ( std::strcmp(name, BitmapFont::getFactoryName()) == 0 ) {
+    else if ( name == BitmapFont::getFactoryName() ) {
         obj = new BitmapFont();
     }
 
     // FTGL Fonts
-    else if ( std::strcmp(name, FtglBitmapFont::getFactoryName()) == 0 ) {
+    else if ( name == FtglBitmapFont::getFactoryName() ) {
         obj = new FtglBitmapFont();
     }
-    else if ( std::strcmp(name, FtglOutlineFont::getFactoryName()) == 0 ) {
+    else if ( name == FtglOutlineFont::getFactoryName() ) {
         obj = new FtglOutlineFont();
     }
-    else if ( std::strcmp(name, FtglExtrdFont::getFactoryName()) == 0 ) {
+    else if ( name == FtglExtrdFont::getFactoryName() ) {
         obj = new FtglExtrdFont();
     }
-    else if ( std::strcmp(name, FtglPixmapFont::getFactoryName()) == 0 ) {
+    else if ( name == FtglPixmapFont::getFactoryName() ) {
         obj = new FtglPixmapFont();
     }
-    else if ( std::strcmp(name, FtglPolygonFont::getFactoryName()) == 0 ) {
+    else if ( name == FtglPolygonFont::getFactoryName() ) {
         obj = new FtglPolygonFont();
     }
-    else if ( std::strcmp(name, FtglHaloFont::getFactoryName()) == 0 ) {
+    else if ( name == FtglHaloFont::getFactoryName() ) {
         obj = new FtglHaloFont();
     }
-    else if ( std::strcmp(name, FtglTextureFont::getFactoryName()) == 0 ) {
+    else if ( name == FtglTextureFont::getFactoryName() ) {
         obj = new FtglTextureFont();
     }
 
     // Bitmap Textures
-    else if ( std::strcmp(name, BmpTexture::getFactoryName()) == 0 ) {
+    else if ( name == BmpTexture::getFactoryName() ) {
         obj = new BmpTexture();
     }
     // Material
-    else if ( std::strcmp(name, Material::getFactoryName()) == 0 ) {
+    else if ( name == Material::getFactoryName() ) {
         obj = new Material();
     }
     // pages
-    else if ( std::strcmp(name, MfdPage::getFactoryName()) == 0 ) {
+    else if ( name == MfdPage::getFactoryName() ) {
         obj = new MfdPage();
     }
-    else if ( std::strcmp(name, MapPage::getFactoryName()) == 0 ) {
+    else if ( name == MapPage::getFactoryName() ) {
         obj = new MapPage();
     }
     // Symbol loader
-    else if ( std::strcmp(name, SymbolLoader::getFactoryName()) == 0 ) {
+    else if ( name == SymbolLoader::getFactoryName() ) {
         obj = new SymbolLoader();
     }
 

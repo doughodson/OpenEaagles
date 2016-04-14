@@ -13,34 +13,34 @@
 #include "openeaagles/models/sensors/Tws.h"
 #include "openeaagles/models/sensors/Stt.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace models {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
    base::Object* obj = nullptr;
 
    // dynamics models
-   if (std::strcmp(name, RacModel::getFactoryName()) == 0) {              // RAC
+   if ( name == RacModel::getFactoryName() ) {              // RAC
       obj = new RacModel();
    }
-   else if (std::strcmp(name, JSBSimModel::getFactoryName()) == 0) {      // JSBSim
+   else if ( name == JSBSimModel::getFactoryName() ) {      // JSBSim
       obj = new JSBSimModel();
    }
-   else if (std::strcmp(name, LaeroModel::getFactoryName()) == 0) {       // Laero
+   else if ( name == LaeroModel::getFactoryName() ) {       // Laero
       obj = new LaeroModel();
    }
 
    // sensor models
-   if (std::strcmp(name, Gmti::getFactoryName()) == 0) {
+   if ( name == Gmti::getFactoryName() ) {
       obj = new Gmti();
    }
-   else if (std::strcmp(name, Stt::getFactoryName()) == 0) {
+   else if ( name == Stt::getFactoryName() ) {
       obj = new Stt();
    }
-   else if (std::strcmp(name, Tws::getFactoryName()) == 0) {
+   else if ( name == Tws::getFactoryName() ) {
       obj = new Tws();
    }
 

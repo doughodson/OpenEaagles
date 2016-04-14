@@ -13,40 +13,40 @@
 #include "openeaagles/recorder/PrintPlayer.h"
 #include "openeaagles/recorder/PrintSelected.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace recorder {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
-    if ( std::strcmp(name, FileWriter::getFactoryName()) == 0 ) {
+    if ( name == FileWriter::getFactoryName() ) {
         obj = new FileWriter();
     }
-    else if ( std::strcmp(name, FileReader::getFactoryName()) == 0 ) {
+    else if ( name == FileReader::getFactoryName() ) {
         obj = new FileReader();
     }
-    else if ( std::strcmp(name, NetInput::getFactoryName()) == 0 ) {
+    else if ( name == NetInput::getFactoryName() ) {
         obj = new NetInput();
     }
-    else if ( std::strcmp(name, NetOutput::getFactoryName()) == 0 ) {
+    else if ( name == NetOutput::getFactoryName() ) {
         obj = new NetOutput();
     }
-    else if ( std::strcmp(name, OutputHandler::getFactoryName()) == 0 ) {
+    else if ( name == OutputHandler::getFactoryName() ) {
         obj = new OutputHandler();
     }
-    else if ( std::strcmp(name, TabPrinter::getFactoryName()) == 0 ) {
+    else if ( name == TabPrinter::getFactoryName() ) {
         obj = new TabPrinter();
     }
-    else if ( std::strcmp(name, PrintPlayer::getFactoryName()) == 0 ) {
+    else if ( name == PrintPlayer::getFactoryName() ) {
         obj = new PrintPlayer();
     }
-    else if (std::strcmp(name, DataRecorder::getFactoryName()) == 0) {
+    else if ( name == DataRecorder::getFactoryName()) {
         obj = new DataRecorder();
     }
-    else if ( std::strcmp(name, PrintSelected::getFactoryName()) == 0 ) {
+    else if ( name == PrintSelected::getFactoryName() ) {
         obj = new PrintSelected();
     }
 

@@ -172,7 +172,7 @@
         else return ThisType::BaseClass::isClassType(type);                            \
     }                                                                                  \
     ThisType::~ThisType() {                                                            \
-      STANDARD_DESTRUCTOR()                                                            \
+        STANDARD_DESTRUCTOR()                                                          \
     }                                                                                  \
     ThisType* ThisType::clone() const                                                  \
     {                                                                                  \

@@ -28,6 +28,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <string>
+
 #include "openeaagles/base/parser.h"
 #include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/Object.h"
@@ -69,7 +71,7 @@ inline void yyerror(const char* s)
 // gufParse() -- returns an object with factory 'name' with its slots set to
 //               values in 'argList'
 //------------------------------------------------------------------------------
-static oe::base::Object* gufParse(const char* name, oe::base::PairStream* argList)
+static oe::base::Object* gufParse(const std::string& name, oe::base::PairStream* argList)
 {
     char emsg[256];
     oe::base::Object* obj = nullptr;
@@ -80,32 +82,31 @@ static oe::base::Object* gufParse(const char* name, oe::base::PairStream* argLis
         // object of the object's class type.
         obj = factoryFunc(name);
 
-       // set slots in our new object
-       if (obj != nullptr && argList != nullptr) {
-          oe::base::List::Item* item = argList->getFirstItem();
-          while (item != nullptr) {
-               oe::base::Pair* p = static_cast<oe::base::Pair*>(item->getValue());
-               bool ok = obj->setSlotByName(*p->slot(), p->object());
-               if (!ok) {
-                  oe::base::utStrcpy(emsg, sizeof(emsg), "error while setting slot name: ");
-                  oe::base::utStrcat(emsg, sizeof(emsg), *p->slot());
-                  yyerror(emsg);
-               }
-               item = item->getNext();
-          }
-          bool ok = obj->isValid();
-          if (!ok) {
-             oe::base::utStrcpy(emsg, sizeof(emsg), "error: invalid object: ");
-             oe::base::utStrcat(emsg, sizeof(emsg), name);
-             yyerror(emsg);
-          }
-       }
-       else if (obj == nullptr) {
-          oe::base::utStrcpy(emsg, sizeof(emsg), "undefined factory name: ");
-          oe::base::utStrcat(emsg, sizeof(emsg), name);
-          yyerror(emsg);
-       }
-
+        // set slots in our new object
+        if (obj != nullptr && argList != nullptr) {
+            oe::base::List::Item* item = argList->getFirstItem();
+            while (item != nullptr) {
+                oe::base::Pair* p = static_cast<oe::base::Pair*>(item->getValue());
+                bool ok = obj->setSlotByName(*p->slot(), p->object());
+                if (!ok) {
+                    oe::base::utStrcpy(emsg, sizeof(emsg), "error while setting slot name: ");
+                    oe::base::utStrcat(emsg, sizeof(emsg), *p->slot());
+                    yyerror(emsg);
+                }
+                item = item->getNext();
+            }
+            bool ok = obj->isValid();
+            if (!ok) {
+                oe::base::utStrcpy(emsg, sizeof(emsg), "error: invalid object: ");
+                oe::base::utStrcat(emsg, sizeof(emsg), name.c_str());
+                yyerror(emsg);
+            }
+        }
+        else if (obj == nullptr) {
+            oe::base::utStrcpy(emsg, sizeof(emsg), "undefined factory name: ");
+            oe::base::utStrcat(emsg, sizeof(emsg), name.c_str());
+            yyerror(emsg);
+        }
     }
     return obj;
 }
@@ -210,7 +211,7 @@ namespace base {
 // Returns an Object* that was constructed from parsing an EDL file.
 // factory is the name of the Object creation function  
 //------------------------------------------------------------------------------
-Object* edlParser(const char* filename, FactoryFunc factory, int* numErrors)
+Object* edlParser(const std::string& filename, FactoryFunc factory, int* numErrors)
 {
     factoryFunc = factory;
     result = 0;
@@ -218,7 +219,7 @@ Object* edlParser(const char* filename, FactoryFunc factory, int* numErrors)
 
     // Open the file (someone else passed it through the preprocessor)
     std::fstream fin;
-    fin.open(filename,std::ios::in);
+    fin.open(filename, std::ios::in);
     scanner = new EdlScanner(&fin);
 
     //yydebug = 1;
