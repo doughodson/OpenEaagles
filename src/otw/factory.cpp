@@ -6,26 +6,26 @@
 #include "openeaagles/otw/OtwCigiCl.h"
 #include "openeaagles/otw/OtwPC.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 
 namespace otw {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
     // Common Image Generation Interface (CIGI)
-    if ( std::strcmp(name, OtwCigiCl::getFactoryName()) == 0 ) {
+    if ( name == OtwCigiCl::getFactoryName() ) {
         obj = new OtwCigiCl();
     }
-    else if ( std::strcmp(name, CigiClNetwork::getFactoryName()) == 0 ) {
+    else if ( name == CigiClNetwork::getFactoryName() ) {
         obj = new CigiClNetwork();
     }
 
     // PC Visual Driver
-    else if ( std::strcmp(name, OtwPC::getFactoryName()) == 0 ) {
+    else if ( name == OtwPC::getFactoryName() ) {
         obj = new OtwPC();
     }
 

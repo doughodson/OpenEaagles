@@ -6,48 +6,48 @@
 #include "openeaagles/gui/glut/GlutDisplay.h"
 #include "openeaagles/gui/glut/Shapes3D.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace glut {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
     // General graphics support
-    if ( std::strcmp(name, GlutDisplay::getFactoryName()) == 0 ) {
+    if ( name == GlutDisplay::getFactoryName() ) {
       obj = new GlutDisplay();
     }
     // glut shapes support
-    else if ( std::strcmp(name, Sphere::getFactoryName()) == 0 ) {
+    else if ( name == Sphere::getFactoryName() ) {
       obj = new Sphere();
     }
-    else if ( std::strcmp(name, Cylinder::getFactoryName()) == 0 ) {
+    else if ( name == Cylinder::getFactoryName() ) {
       obj = new Cylinder();
     }
-    else if ( std::strcmp(name, Cone::getFactoryName()) == 0 ) {
+    else if ( name == Cone::getFactoryName() ) {
       obj = new Cone();
     }
-    else if ( std::strcmp(name, Cube::getFactoryName()) == 0 ) {
+    else if ( name == Cube::getFactoryName() ) {
       obj = new Cube();
     }
-    else if ( std::strcmp(name, Torus::getFactoryName()) == 0 ) {
+    else if ( name == Torus::getFactoryName() ) {
       obj = new Torus();
     }
-    else if ( std::strcmp(name, Dodecahedron::getFactoryName()) == 0 ) {
+    else if ( name == Dodecahedron::getFactoryName() ) {
       obj = new Dodecahedron();
     }
-    else if ( std::strcmp(name, Tetrahedron::getFactoryName()) == 0 ) {
+    else if ( name == Tetrahedron::getFactoryName() ) {
       obj = new Tetrahedron();
     }
-    else if ( std::strcmp(name, Icosahedron::getFactoryName()) == 0 ) {
+    else if ( name == Icosahedron::getFactoryName() ) {
       obj = new Icosahedron();
     }
-    else if ( std::strcmp(name, Octahedron::getFactoryName()) == 0 ) {
+    else if ( name == Octahedron::getFactoryName() ) {
       obj = new Octahedron();
     }
-    else if ( std::strcmp(name, Teapot::getFactoryName()) == 0 ) {
+    else if ( name == Teapot::getFactoryName() ) {
       obj = new Teapot();
     }
 

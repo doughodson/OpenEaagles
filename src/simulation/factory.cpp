@@ -71,352 +71,352 @@
 #include "openeaagles/simulation/TrackManager.h"
 #include "openeaagles/simulation/Weapon.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace simulation {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
     // Simulation
-    if ( std::strcmp(name, Simulation::getFactoryName()) == 0 ) {
+    if ( name == Simulation::getFactoryName() ) {
         obj = new Simulation();
     }
-    else if ( std::strcmp(name, Station::getFactoryName()) == 0 ) {
+    else if ( name == Station::getFactoryName() ) {
         obj = new Station();
     }
 
     // Players
-    else if ( std::strcmp(name, Player::getFactoryName()) == 0 ) {
+    else if ( name == Player::getFactoryName() ) {
         obj = new Player();
     }
-    else if ( std::strcmp(name, AirVehicle::getFactoryName()) == 0 ) {
+    else if ( name == AirVehicle::getFactoryName() ) {
         obj = new AirVehicle();
     }
-    else if ( std::strcmp(name, Building::getFactoryName()) == 0 ) {
+    else if ( name == Building::getFactoryName() ) {
         obj = new Building();
     }
-    else if ( std::strcmp(name, GroundVehicle::getFactoryName()) == 0 ) {
+    else if ( name == GroundVehicle::getFactoryName() ) {
         obj = new GroundVehicle();
     }
-    else if ( std::strcmp(name, LifeForm::getFactoryName()) == 0 ) {
+    else if ( name == LifeForm::getFactoryName() ) {
         obj = new LifeForm();
     }
-    else if ( std::strcmp(name, Ship::getFactoryName()) == 0 ) {
+    else if ( name == Ship::getFactoryName() ) {
         obj = new Ship();
     }
-    else if ( std::strcmp(name, SpaceVehicle::getFactoryName()) == 0 ) {
+    else if ( name == SpaceVehicle::getFactoryName() ) {
         obj = new SpaceVehicle();
     }
 
     // Air Vehicles
-    else if ( std::strcmp(name, Aircraft::getFactoryName()) == 0 ) {
+    else if ( name == Aircraft::getFactoryName() ) {
         obj = new Aircraft();
     }
-    else if ( std::strcmp(name, Helicopter::getFactoryName()) == 0 ) {
+    else if ( name == Helicopter::getFactoryName() ) {
         obj = new Helicopter();
     }
-    else if ( std::strcmp(name, UnmannedAirVehicle::getFactoryName()) == 0 ) {
+    else if ( name == UnmannedAirVehicle::getFactoryName() ) {
         obj = new UnmannedAirVehicle();
     }
 
     // Ground Vehicles
-    else if ( std::strcmp(name, Tank::getFactoryName()) == 0 ) {
+    else if ( name == Tank::getFactoryName() ) {
         obj = new Tank();
     }
-    else if ( std::strcmp(name, ArmoredVehicle::getFactoryName()) == 0 ) {
+    else if ( name == ArmoredVehicle::getFactoryName() ) {
         obj = new ArmoredVehicle();
     }
-    else if ( std::strcmp(name, WheeledVehicle::getFactoryName()) == 0 ) {
+    else if ( name == WheeledVehicle::getFactoryName() ) {
         obj = new WheeledVehicle();
     }
-    else if ( std::strcmp(name, Artillery::getFactoryName()) == 0 ) {
+    else if ( name == Artillery::getFactoryName() ) {
         obj = new Artillery();
     }
-    else if ( std::strcmp(name, SamVehicle::getFactoryName()) == 0 ) {
+    else if ( name == SamVehicle::getFactoryName() ) {
         obj = new SamVehicle();
     }
-    else if ( std::strcmp(name, GroundStation::getFactoryName()) == 0 ) {
+    else if ( name == GroundStation::getFactoryName() ) {
         obj = new GroundStation();
     }
-    else if ( std::strcmp(name, GroundStationRadar::getFactoryName()) == 0 ) {
+    else if ( name == GroundStationRadar::getFactoryName() ) {
         obj = new GroundStationRadar();
     }
-    else if ( std::strcmp(name, GroundStationUav::getFactoryName()) == 0 ) {
+    else if ( name == GroundStationUav::getFactoryName() ) {
         obj = new GroundStationUav();
     }
 
     // Space Vehicles
-    else if ( std::strcmp(name, MannedSpaceVehicle::getFactoryName()) == 0 ) {
+    else if ( name == MannedSpaceVehicle::getFactoryName() ) {
         obj = new MannedSpaceVehicle();
     }
-    else if ( std::strcmp(name, UnmannedSpaceVehicle::getFactoryName()) == 0 ) {
+    else if ( name == UnmannedSpaceVehicle::getFactoryName() ) {
         obj = new UnmannedSpaceVehicle();
     }
-    else if ( std::strcmp(name, BoosterSpaceVehicle::getFactoryName()) == 0 ) {
+    else if ( name == BoosterSpaceVehicle::getFactoryName() ) {
         obj = new BoosterSpaceVehicle();
     }
 
     // System
-    else if ( std::strcmp(name, System::getFactoryName()) == 0 ) {
+    else if ( name == System::getFactoryName() ) {
         obj = new System();
     }
-    else if ( std::strcmp(name, AvionicsPod::getFactoryName()) == 0 ) {
+    else if ( name == AvionicsPod::getFactoryName() ) {
         obj = new AvionicsPod();
     }
 
     // Basic Pilot types
-    else if ( std::strcmp(name, Pilot::getFactoryName()) == 0 ) {
+    else if ( name == Pilot::getFactoryName() ) {
         obj = new Pilot();
     }
-    else if ( std::strcmp(name, Autopilot::getFactoryName()) == 0 ) {
+    else if ( name == Autopilot::getFactoryName() ) {
         obj = new Autopilot();
     }
 
     // Navigation types
-    else if ( std::strcmp(name, Navigation::getFactoryName()) == 0 ) {
+    else if ( name == Navigation::getFactoryName() ) {
         obj = new Navigation();
     }
-    else if ( std::strcmp(name, Ins::getFactoryName()) == 0 ) {
+    else if ( name == Ins::getFactoryName() ) {
         obj = new Ins();
     }
-    else if ( std::strcmp(name, Gps::getFactoryName()) == 0 ) {
+    else if ( name == Gps::getFactoryName() ) {
         obj = new Gps();
     }
-    else if ( std::strcmp(name, Route::getFactoryName()) == 0 ) {
+    else if ( name == Route::getFactoryName() ) {
         obj = new Route();
     }
-    else if ( std::strcmp(name, Steerpoint::getFactoryName()) == 0 ) {
+    else if ( name == Steerpoint::getFactoryName() ) {
         obj = new Steerpoint();
     }
 
     // Target Data
-    else if ( std::strcmp(name, TargetData::getFactoryName()) == 0 ) {
+    else if ( name == TargetData::getFactoryName() ) {
         obj = new TargetData();
     }
 
     // Bullseye
-    else if ( std::strcmp(name, Bullseye::getFactoryName()) == 0 ) {
+    else if ( name == Bullseye::getFactoryName() ) {
         obj = new Bullseye();
     }
 
     // Actions
-    else if ( std::strcmp(name, ActionImagingSar::getFactoryName()) == 0 ) {
+    else if ( name == ActionImagingSar::getFactoryName() ) {
         obj = new ActionImagingSar();
     }
-    else if ( std::strcmp(name, ActionWeaponRelease::getFactoryName()) == 0 ) {
+    else if ( name == ActionWeaponRelease::getFactoryName() ) {
         obj = new ActionWeaponRelease();
     }
-    else if ( std::strcmp(name, ActionDecoyRelease::getFactoryName()) == 0 ) {
+    else if ( name == ActionDecoyRelease::getFactoryName() ) {
         obj = new ActionDecoyRelease();
     }
-    else if ( std::strcmp(name, ActionCamouflageType::getFactoryName()) == 0 ) {
+    else if ( name == ActionCamouflageType::getFactoryName() ) {
         obj = new ActionCamouflageType();
     }
 
     // Bombs and Missiles
-    else if ( std::strcmp(name, Bomb::getFactoryName()) == 0 ) {
+    else if ( name == Bomb::getFactoryName() ) {
         obj = new Bomb();
     }
-    else if ( std::strcmp(name, Missile::getFactoryName()) == 0 ) {
+    else if ( name == Missile::getFactoryName() ) {
         obj = new Missile();
     }
-    else if ( std::strcmp(name, Aam::getFactoryName()) == 0 ) {
+    else if ( name == Aam::getFactoryName() ) {
         obj = new Aam();
     }
-    else if ( std::strcmp(name, Agm::getFactoryName()) == 0 ) {
+    else if ( name == Agm::getFactoryName() ) {
         obj = new Agm();
     }
-    else if ( std::strcmp(name, Sam::getFactoryName()) == 0 ) {
+    else if ( name == Sam::getFactoryName() ) {
         obj = new Sam();
     }
 
     // Effects
-    else if ( std::strcmp(name, Chaff::getFactoryName()) == 0 ) {
+    else if ( name == Chaff::getFactoryName() ) {
         obj = new Chaff();
     }
-    else if ( std::strcmp(name, Decoy::getFactoryName()) == 0 ) {
+    else if ( name == Decoy::getFactoryName() ) {
         obj = new Decoy();
     }
-    else if ( std::strcmp(name, Flare::getFactoryName()) == 0 ) {
+    else if ( name == Flare::getFactoryName() ) {
         obj = new Flare();
     }
 
     // Stores, stores manager and external stores (FuelTank, Gun & Bullets (used by the Gun))
-    else if ( std::strcmp(name, Stores::getFactoryName()) == 0 ) {
+    else if ( name == Stores::getFactoryName() ) {
         obj = new Stores();
     }
-    else if ( std::strcmp(name, SimpleStoresMgr::getFactoryName()) == 0 ) {
+    else if ( name == SimpleStoresMgr::getFactoryName() ) {
         obj = new SimpleStoresMgr();
     }
-    else if ( std::strcmp(name, FuelTank::getFactoryName()) == 0 ) {
+    else if ( name == FuelTank::getFactoryName() ) {
         obj = new FuelTank();
     }
-    else if ( std::strcmp(name, Gun::getFactoryName()) == 0 ) {
+    else if ( name == Gun::getFactoryName() ) {
         obj = new Gun();
     }
-    else if ( std::strcmp(name, Bullet::getFactoryName()) == 0 ) {
+    else if ( name == Bullet::getFactoryName() ) {
         obj = new Bullet();
     }
 
     // Data links
-    else if ( std::strcmp(name, Datalink::getFactoryName()) == 0 ) {
+    else if ( name == Datalink::getFactoryName() ) {
         obj = new Datalink();
     }
 
     // Gimbals, Antennas and Optics
-    else if ( std::strcmp(name, Gimbal::getFactoryName()) == 0 ) {
+    else if ( name == Gimbal::getFactoryName() ) {
         obj = new Gimbal();
     }
-    else if ( std::strcmp(name, ScanGimbal::getFactoryName()) == 0 ) {
+    else if ( name == ScanGimbal::getFactoryName() ) {
         obj = new ScanGimbal();
     }
-    else if ( std::strcmp(name, StabilizingGimbal::getFactoryName()) == 0 ) {
+    else if ( name == StabilizingGimbal::getFactoryName() ) {
         obj = new StabilizingGimbal();
     }
-    else if ( std::strcmp(name, Antenna::getFactoryName()) == 0 ) {
+    else if ( name == Antenna::getFactoryName() ) {
         obj = new Antenna();
     }
-    else if ( std::strcmp(name, IrSeeker::getFactoryName()) == 0 ) {
+    else if ( name == IrSeeker::getFactoryName() ) {
         obj = new IrSeeker();
     }
 
     // IR Atmospheres
-    else if ( std::strcmp(name, IrAtmosphere::getFactoryName()) == 0 ) {
+    else if ( name == IrAtmosphere::getFactoryName() ) {
         obj = new IrAtmosphere;
     }
-    else if ( std::strcmp(name, IrAtmosphere1::getFactoryName()) == 0 ) {
+    else if ( name == IrAtmosphere1::getFactoryName() ) {
         obj = new IrAtmosphere1;
     }
 
     // R/F Signatures
-    else if ( std::strcmp(name, SigConstant::getFactoryName()) == 0 ) {
+    else if ( name == SigConstant::getFactoryName() ) {
         obj = new SigConstant();
     }
-    else if ( std::strcmp(name, SigSphere::getFactoryName()) == 0 ) {
+    else if ( name == SigSphere::getFactoryName() ) {
         obj = new SigSphere();
     }
-    else if ( std::strcmp(name, SigPlate::getFactoryName()) == 0 ) {
+    else if ( name == SigPlate::getFactoryName() ) {
         obj = new SigPlate();
     }
-    else if ( std::strcmp(name, SigDihedralCR::getFactoryName()) == 0 ) {
+    else if ( name == SigDihedralCR::getFactoryName() ) {
         obj = new SigDihedralCR();
     }
-    else if ( std::strcmp(name, SigTrihedralCR::getFactoryName()) == 0 ) {
+    else if ( name == SigTrihedralCR::getFactoryName() ) {
         obj = new SigTrihedralCR();
     }
-    else if ( std::strcmp(name, SigSwitch::getFactoryName()) == 0 ) {
+    else if ( name == SigSwitch::getFactoryName() ) {
         obj = new SigSwitch();
     }
-    else if ( std::strcmp(name, SigAzEl::getFactoryName()) == 0 ) {
+    else if ( name == SigAzEl::getFactoryName() ) {
         obj = new SigAzEl();
     }
     // IR Signatures
-    else if ( std::strcmp(name, IrSignature::getFactoryName()) == 0 ) {
+    else if ( name == IrSignature::getFactoryName() ) {
         obj = new IrSignature();
     }
-    else if ( std::strcmp(name, AircraftIrSignature::getFactoryName()) == 0 ) {
+    else if ( name == AircraftIrSignature::getFactoryName() ) {
         obj = new AircraftIrSignature;
     }
-    else if ( std::strcmp(name, IrShape::getFactoryName()) == 0 ) {
+    else if ( name == IrShape::getFactoryName() ) {
         obj = new IrShape();
     }
-    else if ( std::strcmp(name, IrSphere::getFactoryName()) == 0 ) {
+    else if ( name == IrSphere::getFactoryName() ) {
         obj = new IrSphere();
     }
-    else if ( std::strcmp(name, IrBox::getFactoryName()) == 0 ) {
+    else if ( name == IrBox::getFactoryName() ) {
         obj = new IrBox();
     }
 
     // Onboard Computers
-    else if ( std::strcmp(name, OnboardComputer::getFactoryName()) == 0 ) {
+    else if ( name == OnboardComputer::getFactoryName() ) {
         obj = new OnboardComputer();
     }
 
     // Radios
-    else if ( std::strcmp(name, Radio::getFactoryName()) == 0 ) {
+    else if ( name == Radio::getFactoryName() ) {
         obj = new Radio();
     }
-    else if ( std::strcmp(name, CommRadio::getFactoryName()) == 0 ) {
+    else if ( name == CommRadio::getFactoryName() ) {
         obj = new CommRadio();
     }
-    else if ( std::strcmp(name, NavRadio::getFactoryName()) == 0 ) {
+    else if ( name == NavRadio::getFactoryName() ) {
         obj = new NavRadio();
     }
-    else if ( std::strcmp(name, TacanRadio::getFactoryName()) == 0 ) {
+    else if ( name == TacanRadio::getFactoryName() ) {
         obj = new TacanRadio();
     }
-    else if ( std::strcmp(name, IlsRadio::getFactoryName()) == 0 ) {
+    else if ( name == IlsRadio::getFactoryName() ) {
         obj = new IlsRadio();
     }
-    else if ( std::strcmp(name, Iff::getFactoryName()) == 0 ) {
+    else if ( name == Iff::getFactoryName() ) {
         obj = new Iff();
     }
 
     // Sensors
-    else if ( std::strcmp(name, RfSensor::getFactoryName()) == 0 ) {
+    else if ( name == RfSensor::getFactoryName() ) {
         obj = new RfSensor();
     }
-    else if ( std::strcmp(name, SensorMgr::getFactoryName()) == 0 ) {
+    else if ( name == SensorMgr::getFactoryName() ) {
         obj = new SensorMgr();
     }
-    else if ( std::strcmp(name, Radar::getFactoryName()) == 0 ) {
+    else if ( name == Radar::getFactoryName() ) {
         obj = new Radar();
     }
-    else if ( std::strcmp(name, Rwr::getFactoryName()) == 0 ) {
+    else if ( name == Rwr::getFactoryName() ) {
         obj = new Rwr();
     }
-    else if ( std::strcmp(name, Sar::getFactoryName()) == 0 ) {
+    else if ( name == Sar::getFactoryName() ) {
         obj = new Sar();
     }
-    else if ( std::strcmp(name, Jammer::getFactoryName()) == 0 ) {
+    else if ( name == Jammer::getFactoryName() ) {
         obj = new Jammer();
     }
-    else if ( std::strcmp(name, IrSensor::getFactoryName()) == 0 ) {
+    else if ( name == IrSensor::getFactoryName() ) {
         obj = new IrSensor();
     }
-    else if ( std::strcmp(name, MergingIrSensor::getFactoryName()) == 0 ) {
+    else if ( name == MergingIrSensor::getFactoryName() ) {
         obj = new MergingIrSensor();
     }
 
     // Tracks
-    else if ( std::strcmp(name, Track::getFactoryName()) == 0 ) {
+    else if ( name == Track::getFactoryName() ) {
         obj = new Track();
     }
 
     // Track Managers
-    else if ( std::strcmp(name, GmtiTrkMgr::getFactoryName()) == 0 ) {
+    else if ( name == GmtiTrkMgr::getFactoryName() ) {
         obj = new GmtiTrkMgr();
     }
-    else if ( std::strcmp(name, AirTrkMgr::getFactoryName()) == 0 ) {
+    else if ( name == AirTrkMgr::getFactoryName() ) {
         obj = new AirTrkMgr();
     }
-    else if ( std::strcmp(name, RwrTrkMgr::getFactoryName()) == 0 ) {
+    else if ( name == RwrTrkMgr::getFactoryName() ) {
         obj = new RwrTrkMgr();
     }
-    else if ( std::strcmp(name, AirAngleOnlyTrkMgr::getFactoryName()) == 0 ) {
+    else if ( name == AirAngleOnlyTrkMgr::getFactoryName() ) {
         obj = new AirAngleOnlyTrkMgr();
     }
 
     // UBF Agents
-    else if ( std::strcmp(name, SimAgent::getFactoryName()) == 0 ) {
+    else if ( name == SimAgent::getFactoryName() ) {
         obj = new SimAgent();
     }
-    else if ( std::strcmp(name, MultiActorAgent::getFactoryName()) == 0 ) {
+    else if ( name == MultiActorAgent::getFactoryName() ) {
         obj = new MultiActorAgent();
     }
 
     // Collision detection component
-    else if ( std::strcmp(name, CollisionDetect::getFactoryName()) == 0 ) {
+    else if ( name == CollisionDetect::getFactoryName() ) {
         obj = new CollisionDetect();
     }
 
-    else if ( std::strcmp(name, TabLogger::getFactoryName()) == 0 ) {
+    else if ( name == TabLogger::getFactoryName() ) {
         obj = new TabLogger();
     }
-    else if ( std::strcmp(name, Otm::getFactoryName()) == 0 ) {
+    else if ( name == Otm::getFactoryName() ) {
         obj = new Otm();
     }
 

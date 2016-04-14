@@ -7,22 +7,22 @@
 #include "openeaagles/dafif/NavaidLoader.h"
 #include "openeaagles/dafif/WaypointLoader.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace dafif {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
-    if ( std::strcmp(name, AirportLoader::getFactoryName()) == 0 ) {
+    if ( name == AirportLoader::getFactoryName() ) {
         obj = new AirportLoader();
     }
-    else if ( std::strcmp(name, NavaidLoader::getFactoryName()) == 0 ) {
+    else if ( name == NavaidLoader::getFactoryName() ) {
         obj = new NavaidLoader();
     }
-    else if ( std::strcmp(name, WaypointLoader::getFactoryName()) == 0 ) {
+    else if ( name == WaypointLoader::getFactoryName() ) {
         obj = new WaypointLoader();
     }
 

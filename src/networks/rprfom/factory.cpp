@@ -2,16 +2,16 @@
 #include "openeaagles/networks/rprfom/factory.h"
 #include "openeaagles/networks/rprfom/NetIO.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace rprfom {
 
-base::Object* formFunc(const char* const name)
+base::Object* formFunc(const std::string& name)
 {
     base::Object* obj = nullptr;
 
-    if ( std::strcmp(name, NetIO::getFactoryName()) == 0 ) {
+    if ( name == NetIO::getFactoryName() ) {
         obj = new NetIO();
     }
 

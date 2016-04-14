@@ -7,23 +7,23 @@
 #include "openeaagles/networks/dis/Ntm.h"
 #include "openeaagles/networks/dis/EmissionPduHandler.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 
 namespace dis {
 
-base::Object* factory(const char* name)
+base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
-    if ( std::strcmp(name, dis::NetIO::getFactoryName()) == 0 ) {
-        obj = new dis::NetIO();
+    if ( name == NetIO::getFactoryName() ) {
+        obj = new NetIO();
     }
-    else if ( std::strcmp(name, Ntm::getFactoryName()) == 0 ) {
+    else if ( name == Ntm::getFactoryName() ) {
         obj = new Ntm();
     }
-    else if ( std::strcmp(name, EmissionPduHandler::getFactoryName()) == 0 ) {
+    else if ( name == EmissionPduHandler::getFactoryName() ) {
         obj = new EmissionPduHandler();
     }
 

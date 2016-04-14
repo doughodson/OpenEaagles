@@ -71,383 +71,383 @@
 #include "openeaagles/base/ubf/Agent.h"
 #include "openeaagles/base/ubf/Arbiter.h"
 
-#include <cstring>
+#include <string>
 
 namespace oe {
 namespace base {
 
-Object* factory(const char* name)
+Object* factory(const std::string& name)
 {
     Object* obj = nullptr;
 
     // Numbers
-    if ( std::strcmp(name, Number::getFactoryName()) == 0 ) {
+    if ( name == Number::getFactoryName() ) {
         obj = new Number();
     }
-    else if ( std::strcmp(name, Complex::getFactoryName()) == 0 ) {
+    else if ( name == Complex::getFactoryName() ) {
         obj = new Complex();
     }
-    else if ( std::strcmp(name, Integer::getFactoryName()) == 0 ) {
+    else if ( name == Integer::getFactoryName() ) {
         obj = new Integer();
     }
-    else if ( std::strcmp(name, Float::getFactoryName()) == 0 ) {
+    else if ( name == Float::getFactoryName() ) {
         obj = new Float();
     }
-    else if ( std::strcmp(name, Boolean::getFactoryName()) == 0 ) {
+    else if ( name == Boolean::getFactoryName() ) {
         obj = new Boolean();
     }
-    else if ( std::strcmp(name, Decibel::getFactoryName()) == 0 ) {
+    else if ( name == Decibel::getFactoryName() ) {
         obj = new Decibel();
     }
-    else if ( std::strcmp(name, LatLon::getFactoryName()) == 0 ) {
+    else if ( name == LatLon::getFactoryName() ) {
         obj = new LatLon();
     }
-    else if ( std::strcmp(name, Add::getFactoryName()) == 0 ) {
+    else if ( name == Add::getFactoryName() ) {
         obj = new Add();
     }
-    else if ( std::strcmp(name, Subtract::getFactoryName()) == 0 ) {
+    else if ( name == Subtract::getFactoryName() ) {
         obj = new Subtract();
     }
-    else if ( std::strcmp(name, Multiply::getFactoryName()) == 0 ) {
+    else if ( name == Multiply::getFactoryName() ) {
         obj = new Multiply();
     }
-    else if ( std::strcmp(name, Divide::getFactoryName()) == 0 ) {
+    else if ( name == Divide::getFactoryName() ) {
         obj = new Divide();
     }
 
     // Components
-    else if ( std::strcmp(name, FileReader::getFactoryName()) == 0 ) {
+    else if ( name == FileReader::getFactoryName() ) {
         obj = new FileReader();
     }
-    else if ( std::strcmp(name, Logger::getFactoryName()) == 0 ) {
+    else if ( name == Logger::getFactoryName() ) {
         obj = new Logger();
     }
-    else if ( std::strcmp(name, Statistic::getFactoryName()) == 0 ) {
+    else if ( name == Statistic::getFactoryName() ) {
         obj = new Statistic();
     }
 
     // Transformations
-    else if ( std::strcmp(name, Translation::getFactoryName()) == 0 ) {
+    else if ( name == Translation::getFactoryName() ) {
         obj = new Translation();
     }
-    else if ( std::strcmp(name, Rotation::getFactoryName()) == 0 ) {
+    else if ( name == Rotation::getFactoryName() ) {
         obj = new Rotation();
     }
-    else if ( std::strcmp(name, Scale::getFactoryName()) == 0 ) {
+    else if ( name == Scale::getFactoryName() ) {
         obj = new Scale();
     }
 
     // Functors
-    else if ( std::strcmp(name, Func1::getFactoryName()) == 0 ) {
+    else if ( name == Func1::getFactoryName() ) {
         obj = new Func1();
     }
-    else if ( std::strcmp(name, Func2::getFactoryName()) == 0 ) {
+    else if ( name == Func2::getFactoryName() ) {
         obj = new Func2();
     }
-    else if ( std::strcmp(name, Func3::getFactoryName()) == 0 ) {
+    else if ( name == Func3::getFactoryName() ) {
         obj = new Func3();
     }
-    else if ( std::strcmp(name, Func4::getFactoryName()) == 0 ) {
+    else if ( name == Func4::getFactoryName() ) {
         obj = new Func4();
     }
-    else if ( std::strcmp(name, Func5::getFactoryName()) == 0 ) {
+    else if ( name == Func5::getFactoryName() ) {
         obj = new Func5();
     }
-    else if ( std::strcmp(name, Polynomial::getFactoryName()) == 0 ) {
+    else if ( name == Polynomial::getFactoryName() ) {
         obj = new Polynomial();
     }
-    else if ( std::strcmp(name, Table1::getFactoryName()) == 0 ) {
+    else if ( name == Table1::getFactoryName() ) {
         obj = new Table1();
     }
-    else if ( std::strcmp(name, Table2::getFactoryName()) == 0 ) {
+    else if ( name == Table2::getFactoryName() ) {
         obj = new Table2();
     }
-    else if ( std::strcmp(name, Table3::getFactoryName()) == 0 ) {
+    else if ( name == Table3::getFactoryName() ) {
         obj = new Table3();
     }
-    else if ( std::strcmp(name, Table4::getFactoryName()) == 0 ) {
+    else if ( name == Table4::getFactoryName() ) {
         obj = new Table4();
     }
-    else if ( std::strcmp(name, Table5::getFactoryName()) == 0 ) {
+    else if ( name == Table5::getFactoryName() ) {
         obj = new Table5();
     }
 
     // Timers
-    else if ( std::strcmp(name, UpTimer::getFactoryName()) == 0 ) {
+    else if ( name == UpTimer::getFactoryName() ) {
         obj = new UpTimer();
     }
-    else if ( std::strcmp(name, DownTimer::getFactoryName()) == 0 ) {
+    else if ( name == DownTimer::getFactoryName() ) {
         obj = new DownTimer();
     }
 
     // Units: Angles
-    else if ( std::strcmp(name, Degrees::getFactoryName()) == 0 ) {
+    else if ( name == Degrees::getFactoryName() ) {
         obj = new Degrees();
     }
-    else if ( std::strcmp(name, Radians::getFactoryName()) == 0 ) {
+    else if ( name == Radians::getFactoryName() ) {
         obj = new Radians();
     }
-    else if ( std::strcmp(name, Semicircles::getFactoryName()) == 0 ) {
+    else if ( name == Semicircles::getFactoryName() ) {
         obj = new Semicircles();
     }
 
     // Units: Areas
-    else if ( std::strcmp(name, SquareMeters::getFactoryName()) == 0 ) {
+    else if ( name == SquareMeters::getFactoryName() ) {
         obj = new SquareMeters();
     }
-    else if ( std::strcmp(name, SquareFeet::getFactoryName()) == 0 ) {
+    else if ( name == SquareFeet::getFactoryName() ) {
         obj = new SquareFeet();
     }
-    else if ( std::strcmp(name, SquareInches::getFactoryName()) == 0 ) {
+    else if ( name == SquareInches::getFactoryName() ) {
         obj = new SquareInches();
     }
-    else if ( std::strcmp(name, SquareYards::getFactoryName()) == 0 ) {
+    else if ( name == SquareYards::getFactoryName() ) {
         obj = new SquareYards();
     }
-    else if ( std::strcmp(name, SquareMiles::getFactoryName()) == 0 ) {
+    else if ( name == SquareMiles::getFactoryName() ) {
         obj = new SquareMiles();
     }
-    else if ( std::strcmp(name, SquareCentiMeters::getFactoryName()) == 0 ) {
+    else if ( name == SquareCentiMeters::getFactoryName() ) {
         obj = new SquareCentiMeters();
     }
-    else if ( std::strcmp(name, SquareMilliMeters::getFactoryName()) == 0 ) {
+    else if ( name == SquareMilliMeters::getFactoryName() ) {
         obj = new SquareMilliMeters();
     }
-    else if ( std::strcmp(name, SquareKiloMeters::getFactoryName()) == 0 ) {
+    else if ( name == SquareKiloMeters::getFactoryName() ) {
         obj = new SquareKiloMeters();
     }
-    else if ( std::strcmp(name, DecibelSquareMeters::getFactoryName()) == 0 ) {
+    else if ( name == DecibelSquareMeters::getFactoryName() ) {
         obj = new DecibelSquareMeters();
     }
 
     // Units: Distances
-    else if ( std::strcmp(name, Meters::getFactoryName()) == 0 ) {
+    else if ( name == Meters::getFactoryName() ) {
         obj = new Meters();
     }
-    else if ( std::strcmp(name, CentiMeters::getFactoryName()) == 0 ) {
+    else if ( name == CentiMeters::getFactoryName() ) {
         obj = new CentiMeters();
     }
-    else if ( std::strcmp(name, MicroMeters::getFactoryName()) == 0 ) {
+    else if ( name == MicroMeters::getFactoryName() ) {
         obj = new MicroMeters();
     }
-    else if ( std::strcmp(name, Microns::getFactoryName()) == 0 ) {
+    else if ( name == Microns::getFactoryName() ) {
         obj = new Microns();
     }
-    else if ( std::strcmp(name, KiloMeters::getFactoryName()) == 0 ) {
+    else if ( name == KiloMeters::getFactoryName() ) {
         obj = new KiloMeters();
     }
-    else if ( std::strcmp(name, Inches::getFactoryName()) == 0 ) {
+    else if ( name == Inches::getFactoryName() ) {
         obj = new Inches();
     }
-    else if ( std::strcmp(name, Feet::getFactoryName()) == 0 ) {
+    else if ( name == Feet::getFactoryName() ) {
         obj = new Feet();
     }
-    else if ( std::strcmp(name, NauticalMiles::getFactoryName()) == 0 ) {
+    else if ( name == NauticalMiles::getFactoryName() ) {
         obj = new NauticalMiles();
     }
-    else if ( std::strcmp(name, StatuteMiles::getFactoryName()) == 0 ) {
+    else if ( name == StatuteMiles::getFactoryName() ) {
         obj = new StatuteMiles();
     }
 
     // Units: Energies
-    else if ( std::strcmp(name, KiloWattHours::getFactoryName()) == 0 ) {
+    else if ( name == KiloWattHours::getFactoryName() ) {
         obj = new KiloWattHours();
     }
-    else if ( std::strcmp(name, BTUs::getFactoryName()) == 0 ) {
+    else if ( name == BTUs::getFactoryName() ) {
         obj = new BTUs();
     }
-    else if ( std::strcmp(name, Calories::getFactoryName()) == 0 ) {
+    else if ( name == Calories::getFactoryName() ) {
         obj = new Calories();
     }
-    else if ( std::strcmp(name, FootPounds::getFactoryName()) == 0 ) {
+    else if ( name == FootPounds::getFactoryName() ) {
         obj = new FootPounds();
     }
-    else if ( std::strcmp(name, Joules::getFactoryName()) == 0 ) {
+    else if ( name == Joules::getFactoryName() ) {
         obj = new Joules();
     }
 
     // Units: Forces
-    else if ( std::strcmp(name, Newtons::getFactoryName()) == 0 ) {
+    else if ( name == Newtons::getFactoryName() ) {
         obj = new Newtons();
     }
-    else if ( std::strcmp(name, KiloNewtons::getFactoryName()) == 0 ) {
+    else if ( name == KiloNewtons::getFactoryName() ) {
         obj = new KiloNewtons();
     }
-    else if ( std::strcmp(name, Poundals::getFactoryName()) == 0 ) {
+    else if ( name == Poundals::getFactoryName() ) {
         obj = new Poundals();
     }
-    else if ( std::strcmp(name, PoundForces::getFactoryName()) == 0 ) {
+    else if ( name == PoundForces::getFactoryName() ) {
         obj = new PoundForces();
     }
 
     // Units: Frequencies
-    else if ( std::strcmp(name, Hertz::getFactoryName()) == 0 ) {
+    else if ( name == Hertz::getFactoryName() ) {
         obj = new Hertz();
     }
-    else if ( std::strcmp(name, KiloHertz::getFactoryName()) == 0 ) {
+    else if ( name == KiloHertz::getFactoryName() ) {
         obj = new KiloHertz();
     }
-    else if ( std::strcmp(name, MegaHertz::getFactoryName()) == 0 ) {
+    else if ( name == MegaHertz::getFactoryName() ) {
         obj = new MegaHertz();
     }
-    else if ( std::strcmp(name, GigaHertz::getFactoryName()) == 0 ) {
+    else if ( name == GigaHertz::getFactoryName() ) {
         obj = new GigaHertz();
     }
-    else if ( std::strcmp(name, TeraHertz::getFactoryName()) == 0 ) {
+    else if ( name == TeraHertz::getFactoryName() ) {
         obj = new TeraHertz();
     }
 
     // Units: Masses
-    else if ( std::strcmp(name, Grams::getFactoryName()) == 0 ) {
+    else if ( name == Grams::getFactoryName() ) {
         obj = new Grams();
     }
-    else if ( std::strcmp(name, KiloGrams::getFactoryName()) == 0 ) {
+    else if ( name == KiloGrams::getFactoryName() ) {
         obj = new KiloGrams();
     }
-    else if ( std::strcmp(name, Slugs::getFactoryName()) == 0 ) {
+    else if ( name == Slugs::getFactoryName() ) {
         obj = new Slugs();
     }
 
     // Units: Powers
-    else if ( std::strcmp(name, KiloWatts::getFactoryName()) == 0 ) {
+    else if ( name == KiloWatts::getFactoryName() ) {
         obj = new KiloWatts();
     }
-    else if ( std::strcmp(name, Watts::getFactoryName()) == 0 ) {
+    else if ( name == Watts::getFactoryName() ) {
         obj = new Watts();
     }
-    else if ( std::strcmp(name, MilliWatts::getFactoryName()) == 0 ) {
+    else if ( name == MilliWatts::getFactoryName() ) {
         obj = new MilliWatts();
     }
-    else if ( std::strcmp(name, Horsepower::getFactoryName()) == 0 ) {
+    else if ( name == Horsepower::getFactoryName() ) {
         obj = new Horsepower();
     }
-    else if ( std::strcmp(name, DecibelWatts::getFactoryName()) == 0 ) {
+    else if ( name == DecibelWatts::getFactoryName() ) {
         obj = new DecibelWatts();
     }
-    else if ( std::strcmp(name, DecibelMilliWatts::getFactoryName()) == 0 ) {
+    else if ( name == DecibelMilliWatts::getFactoryName() ) {
         obj = new DecibelMilliWatts();
     }
 
     // Units: Time
-    else if ( std::strcmp(name, Seconds::getFactoryName()) == 0 ) {
+    else if ( name == Seconds::getFactoryName() ) {
         obj = new Seconds();
     }
-    else if ( std::strcmp(name, MilliSeconds::getFactoryName()) == 0 ) {
+    else if ( name == MilliSeconds::getFactoryName() ) {
         obj = new MilliSeconds();
     }
-    else if ( std::strcmp(name, MicroSeconds::getFactoryName()) == 0 ) {
+    else if ( name == MicroSeconds::getFactoryName() ) {
         obj = new MicroSeconds();
     }
-    else if ( std::strcmp(name, NanoSeconds::getFactoryName()) == 0 ) {
+    else if ( name == NanoSeconds::getFactoryName() ) {
         obj = new NanoSeconds();
     }
-    else if ( std::strcmp(name, Minutes::getFactoryName()) == 0 ) {
+    else if ( name == Minutes::getFactoryName() ) {
         obj = new Minutes();
     }
-    else if ( std::strcmp(name, Hours::getFactoryName()) == 0 ) {
+    else if ( name == Hours::getFactoryName() ) {
         obj = new Hours();
     }
-    else if ( std::strcmp(name, Days::getFactoryName()) == 0 ) {
+    else if ( name == Days::getFactoryName() ) {
         obj = new Days();
     }
 
     // Units: Velocities
-    else if ( std::strcmp(name, AngularVelocity::getFactoryName()) == 0 ) {
+    else if ( name == AngularVelocity::getFactoryName() ) {
         obj = new AngularVelocity();
     }
-    else if ( std::strcmp(name, LinearVelocity::getFactoryName()) == 0 ) {
+    else if ( name == LinearVelocity::getFactoryName() ) {
         obj = new LinearVelocity();
     }
 
     // Colors
-    else if ( std::strcmp(name, Color::getFactoryName()) == 0 ) {
+    else if ( name == Color::getFactoryName() ) {
         obj = new Color();
     }
-    else if ( std::strcmp(name, Cie::getFactoryName()) == 0 ) {
+    else if ( name == Cie::getFactoryName() ) {
         obj = new Cie();
     }
-    else if ( std::strcmp(name, Cmy::getFactoryName()) == 0 ) {
+    else if ( name == Cmy::getFactoryName() ) {
         obj = new Cmy();
     }
-    else if ( std::strcmp(name, Hls::getFactoryName()) == 0 ) {
+    else if ( name == Hls::getFactoryName() ) {
         obj = new Hls();
     }
-    else if ( std::strcmp(name, Hsv::getFactoryName()) == 0 ) {
+    else if ( name == Hsv::getFactoryName() ) {
         obj = new Hsv();
     }
-    else if ( std::strcmp(name, Hsva::getFactoryName()) == 0 ) {
+    else if ( name == Hsva::getFactoryName() ) {
         obj = new Hsva();
     }
-    else if ( std::strcmp(name, Rgb::getFactoryName()) == 0 ) {
+    else if ( name == Rgb::getFactoryName() ) {
         obj = new Rgb();
     }
-    else if ( std::strcmp(name, Rgba::getFactoryName()) == 0 ) {
+    else if ( name == Rgba::getFactoryName() ) {
         obj = new Rgba();
     }
-    else if ( std::strcmp(name, Yiq::getFactoryName()) == 0 ) {
+    else if ( name == Yiq::getFactoryName() ) {
         obj = new Yiq();
     }
 
     // Network handlers
-    else if ( std::strcmp(name, TcpClient::getFactoryName()) == 0 ) {
+    else if ( name == TcpClient::getFactoryName() ) {
         obj = new TcpClient();
     }
-    else if ( std::strcmp(name, TcpServerSingle::getFactoryName()) == 0 ) {
+    else if ( name == TcpServerSingle::getFactoryName() ) {
         obj = new TcpServerSingle();
     }
-    else if ( std::strcmp(name, TcpServerMultiple::getFactoryName()) == 0 ) {
+    else if ( name == TcpServerMultiple::getFactoryName() ) {
         obj = new TcpServerMultiple();
     }
-    else if ( std::strcmp(name, UdpBroadcastHandler::getFactoryName()) == 0 ) {
+    else if ( name == UdpBroadcastHandler::getFactoryName() ) {
         obj = new UdpBroadcastHandler();
     }
-    else if ( std::strcmp(name, UdpMulticastHandler::getFactoryName()) == 0 ) {
+    else if ( name == UdpMulticastHandler::getFactoryName() ) {
         obj = new UdpMulticastHandler();
     }
-    else if ( std::strcmp(name, UdpUnicastHandler::getFactoryName()) == 0 ) {
+    else if ( name == UdpUnicastHandler::getFactoryName() ) {
         obj = new UdpUnicastHandler();
     }
 
     // Random number generator and distributions
-    else if ( std::strcmp(name, Rng::getFactoryName()) == 0 ) {
+    else if ( name == Rng::getFactoryName() ) {
         obj = new Rng();
     }
-    else if ( std::strcmp(name, Exponential::getFactoryName()) == 0 ) {
+    else if ( name == Exponential::getFactoryName() ) {
         obj = new Exponential();
     }
-    else if ( std::strcmp(name, Lognormal::getFactoryName()) == 0 ) {
+    else if ( name == Lognormal::getFactoryName() ) {
         obj = new Lognormal();
     }
-    else if ( std::strcmp(name, Pareto::getFactoryName()) == 0 ) {
+    else if ( name == Pareto::getFactoryName() ) {
         obj = new Pareto();
     }
-    else if ( std::strcmp(name, Uniform::getFactoryName()) == 0 ) {
+    else if ( name == Uniform::getFactoryName() ) {
         obj = new Uniform();
     }
 
     // General I/O Devices
-    else if ( std::strcmp(name, IoHandler::getFactoryName()) == 0 ) {
+    else if ( name == IoHandler::getFactoryName() ) {
         obj = new IoHandler();
     }
-    else if ( std::strcmp(name, IoData::getFactoryName()) == 0 ) {
+    else if ( name == IoData::getFactoryName() ) {
         obj = new IoData();
     }
 
     // Earth models
-    else if ( std::strcmp(name, EarthModel::getFactoryName()) == 0 ) {
+    else if ( name == EarthModel::getFactoryName() ) {
         obj = new EarthModel();
     }
 
     // Thread pool
-    else if ( std::strcmp(name, ThreadPool::getFactoryName()) == 0 ) {
+    else if ( name == ThreadPool::getFactoryName() ) {
        obj = new ThreadPool();
     }
 
     // Ubf
-    else if ( std::strcmp(name, ubf::Agent::getFactoryName()) == 0 ) {
+    else if ( name == ubf::Agent::getFactoryName() ) {
         obj = new ubf::Agent();
     }
-    else if ( std::strcmp(name, ubf::Arbiter::getFactoryName()) == 0 ) {
+    else if ( name == ubf::Arbiter::getFactoryName() ) {
         obj = new ubf::Arbiter();
     }
 
