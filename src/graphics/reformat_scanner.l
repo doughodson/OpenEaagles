@@ -1,6 +1,6 @@
 %{
 //------------------------------------------------------------------------------
-// Description: Scans format specifications embedded EDL files and builds
+// Description: Scans format specifications embedded in EDL files and builds
 //              a sprintf-style format string (i.e., it reformats one specification
 //              into another)
 //------------------------------------------------------------------------------
