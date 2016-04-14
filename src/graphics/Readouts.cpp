@@ -9,7 +9,7 @@
 #include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/util/constants.h"
 
-#include "Reformat.h"
+#include "ReformatScanner.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -198,7 +198,7 @@ void Cursor::updateData(const double dt)
 //==============================================================================
 IMPLEMENT_SUBCLASS(NumericReadout,"NumericReadout")
 
-Reformat* NumericReadout::reformatter = new Reformat();
+ReformatScanner* NumericReadout::reformatter = new ReformatScanner();
 
 // Slot table
 BEGIN_SLOTTABLE(NumericReadout)
@@ -486,7 +486,7 @@ void NumericReadout::makeText()
 //------------------------------------------------------------------------------
 void NumericReadout::reformat(const char* const example)
 {
-   if (reformatter->convertNumber(example) != Reformat::invalid) {
+   if (reformatter->convertNumber(example) != ReformatScanner::DataType::invalid) {
       setExample(example);
       base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
@@ -900,7 +900,7 @@ void HexReadout::makeText()
 //------------------------------------------------------------------------------
 void HexReadout::reformat(const char* const example)
 {
-   if (reformatter->convertHex(example) != Reformat::invalid) {
+   if (reformatter->convertHex(example) != ReformatScanner::DataType::invalid) {
       setExample(example);
       base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();
@@ -976,7 +976,7 @@ void OctalReadout::makeText()
 //------------------------------------------------------------------------------
 void OctalReadout::reformat(const char* const example)
 {
-   if (reformatter->convertOctal(example) != Reformat::invalid) {
+   if (reformatter->convertOctal(example) != ReformatScanner::DataType::invalid) {
       setExample(example);
       base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
       postSign = reformatter->isPostSign();

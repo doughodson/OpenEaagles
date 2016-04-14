@@ -2,12 +2,15 @@
 #----------------------------------------------------------------------------------------
 # To build parser and scanner:
 #
-# dos2unix edl.y
-# dos2unix edl.l
-# bison -d edl.y -o EdlParser.cpp  // creates EdlParser.cpp and EdlParser.hpp
-# flex -f -oEdlScanner.cpp edl.l   // creates EdlScanner.cpp (EdlScanner.h already exists)
+# dos2unix edl_parser.y
+# dos2unix edl_scanner.l
+# bison -d edl_parser.y -o EdlParser.cpp  // creates EdlParser.cpp and EdlParser.hpp
+# flex -f -oEdlScanner.cpp edl_scanner.l  // creates EdlScanner.cpp (EdlScanner.h already exists)
 #
-# search for "FlexLexer.h" in EdlScanner.cpp - fix include path
+# search for "FlexLexer.h" in EdlScanner.cpp - replace:
+#   #include <FlexLexer.h>
+# with
+#   #include "./platform/FlexLexer.h"
 #----------------------------------------------------------------------------------------
 
 include ../makedefs

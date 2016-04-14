@@ -2,10 +2,14 @@
 #----------------------------------------------------------------------------------------
 # To build scanner:
 #
-# dos2unix reformat.l
-# flex -f -oReformat.cpp reformat.l   // creates Reformat.cpp (Reformat.h already exists)
+# dos2unix reformat_scanner.l
+# flex -f -oReformatScanner.cpp reformat_scanner.l   // creates ReformatScanner.cpp
+#   (ReformatScanner.h already exists)
 #
-# search for "FlexLexer.h" in Reformat.cpp - fix include path
+# search for "FlexLexer.h" in ReformatScanner.cpp - replace:
+#   #include <FlexLexer.h>
+# with
+#   #include "../base/platform/FlexLexer.h"
 #----------------------------------------------------------------------------------------
 
 include ../makedefs
@@ -29,7 +33,7 @@ OBJS =  \
 	Page.o \
 	Polygon.o \
 	Readouts.o \
-	Reformat.o \
+	ReformatScanner.o \
 	Rotators.o \
 	Scanline.o \
 	Shapes.o \

@@ -2,8 +2,8 @@
 // Scanner for the Readout reformatter
 //
 
-#ifndef __oe_graphics_Reformat_H__
-#define __oe_graphics_Reformat_H__
+#ifndef __oe_graphics_ReformatScanner_H__
+#define __oe_graphics_ReformatScanner_H__
 
 #ifndef __FLEX_LEXER_H
 #undef yyFlexLexer
@@ -20,21 +20,21 @@ namespace graphics {
 // Reformat converts example strings into C/C++ format specifiers for
 // sprintf, printf, etc.  These examples will be later used as templates
 // for data entry.
-class Reformat : public rfFlexLexer
+class ReformatScanner : public rfFlexLexer
 {
 public:
    enum DataType { invalid, number, octal, hex, time, dir };
 
-   Reformat() : rfFlexLexer(), dataType(invalid), postSign(false) { }
-   virtual ~Reformat() { }
+   ReformatScanner() : rfFlexLexer(), dataType(invalid), postSign(false) { }
+   virtual ~ReformatScanner() { }
 
    const char* getFormat() const { return dataType != invalid ? format : nullptr; }
 
-   Reformat::DataType convertNumber(const char* s);
-   Reformat::DataType convertOctal(const char* s);
-   Reformat::DataType convertHex(const char* s);
-   TimeReadout::TimeMode   convertTime(const char* s);
-   DirectionReadout::DirMode     convertDirection(const char* s);
+   DataType convertNumber(const char* s);
+   DataType convertOctal(const char* s);
+   DataType convertHex(const char* s);
+   TimeReadout::TimeMode convertTime(const char* s);
+   DirectionReadout::DirMode convertDirection(const char* s);
 
    bool isPostSign() { return postSign; }
 

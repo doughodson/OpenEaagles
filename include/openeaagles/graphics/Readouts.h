@@ -11,9 +11,12 @@
 #include "openeaagles/base/Integer.h"
 
 namespace oe {
-   namespace base { class Float; class Integer; }
-namespace graphics {
-   class Reformat;
+namespace base { class Float; class Integer; }
+
+namespace graphics
+{
+
+class ReformatScanner;
 
 //------------------------------------------------------------------------------
 // Class: AsciiText
@@ -34,7 +37,8 @@ namespace graphics {
 //      Returns true if the text list was set to stlobj.
 //
 //------------------------------------------------------------------------------
-class AsciiText : public Field {
+class AsciiText : public Field
+{
     DECLARE_SUBCLASS(AsciiText, Field)
 
 public:
@@ -119,7 +123,7 @@ public:
 //------------------------------------------------------------------------------
 class NumericReadout : public Field
 {
-   DECLARE_SUBCLASS(NumericReadout,Field)
+   DECLARE_SUBCLASS(NumericReadout, Field)
 
 public:
    NumericReadout();
@@ -176,7 +180,7 @@ protected:
    char overflowChar;            // Overflow character
    bool postSign;                // If true, sign char is at end of string
 
-   static Reformat* reformatter; // Generates format statements by example
+   static ReformatScanner* reformatter; // Generates format statements by example
 
 private:
    double   num;            // Value as double
@@ -198,8 +202,9 @@ private:
 //    00000#    // Hex number w/leading zeros
 //
 //------------------------------------------------------------------------------
-class HexReadout : public NumericReadout {
-   DECLARE_SUBCLASS(HexReadout,NumericReadout)
+class HexReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(HexReadout, NumericReadout)
 
 public:
    HexReadout();
@@ -224,8 +229,9 @@ protected:
 //    00000#    // Octal number w/leading zeros
 //
 //------------------------------------------------------------------------------
-class OctalReadout : public NumericReadout {
-   DECLARE_SUBCLASS(OctalReadout,NumericReadout)
+class OctalReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(OctalReadout, NumericReadout)
 
 public:
    OctalReadout();
@@ -258,8 +264,9 @@ protected:
 // number requires a zero, '0', to have leading zeros.
 //
 //------------------------------------------------------------------------------
-class TimeReadout : public NumericReadout {
-   DECLARE_SUBCLASS(TimeReadout,NumericReadout)
+class TimeReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(TimeReadout, NumericReadout)
 
 public:
    enum TimeMode { invalid, hhmmss, hhmm, hh, mmss, mm, ss };
@@ -310,8 +317,9 @@ protected:
 //    0DD@MM'SS.S+   //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class DirectionReadout : public NumericReadout {
-   DECLARE_SUBCLASS(DirectionReadout,NumericReadout)
+class DirectionReadout : public NumericReadout
+{
+   DECLARE_SUBCLASS(DirectionReadout, NumericReadout)
 
 public:
    enum DirMode { invalid, ddmmss, ddmm, dd };
@@ -349,8 +357,10 @@ protected:
 //    0D@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class LatitudeReadout : public DirectionReadout {
-    DECLARE_SUBCLASS(LatitudeReadout,DirectionReadout)
+class LatitudeReadout : public DirectionReadout
+{
+    DECLARE_SUBCLASS(LatitudeReadout, DirectionReadout)
+
 public:
     LatitudeReadout();
     char filterInputEvent(const int event, const int tc) override;
@@ -384,8 +394,9 @@ protected:
 //    0DD@MM'SS.S+    //  ... and with the '+' or '-' character as a suffix
 //
 //------------------------------------------------------------------------------
-class LongitudeReadout : public DirectionReadout {
-    DECLARE_SUBCLASS(LongitudeReadout,DirectionReadout)
+class LongitudeReadout : public DirectionReadout
+{
+    DECLARE_SUBCLASS(LongitudeReadout, DirectionReadout)
 public:
     LongitudeReadout();
     char filterInputEvent(const int event, const int tc) override;
@@ -403,8 +414,9 @@ protected:
 // Factory name: Rotary
 //
 //------------------------------------------------------------------------------
-class Rotary : public Field {
-    DECLARE_SUBCLASS(Rotary,Field)
+class Rotary : public Field
+{
+    DECLARE_SUBCLASS(Rotary, Field)
 
 public:
    Rotary();
@@ -425,8 +437,9 @@ private:
 // Factory name: Rotary2
 //
 //------------------------------------------------------------------------------
-class Rotary2 : public Rotary {
-    DECLARE_SUBCLASS(Rotary2,Rotary)
+class Rotary2 : public Rotary
+{
+    DECLARE_SUBCLASS(Rotary2, Rotary)
 
 public:
    Rotary2();
@@ -435,7 +448,8 @@ public:
    virtual bool onSelect(const base::Number* const osobj);
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif
+

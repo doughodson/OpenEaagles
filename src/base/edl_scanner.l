@@ -1,12 +1,13 @@
 %{
-//
-// Scanner for reading EDL files
-//
+//------------------------------------------------------------------------------
+// Description: Scans EDL syntax and generates tokens for parser
+//------------------------------------------------------------------------------
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
+#pragma warning(disable: 4996)
+#pragma warning(disable: 4005)
 #endif
 
 %}
@@ -47,7 +48,7 @@
 /* change the name of the scanner class - results in "edlFlexLexer" */
 %option prefix="edl"
 
-/* derived 'oe::base::EdlScanner' is a subclass of yyFlexLexer */
+/* derived 'oe::base::EdlScanner' is a subclass of edlFlexLexer */
 %option yyclass="oe::base::EdlScanner"
 
 
@@ -73,7 +74,7 @@ LN          line
             *i1 = '\0';
             *i2 = '\0';
             line = std::atoi(j1+1) - 1;
-            utStrcpy(fname,FNAME_SIZE,i1+1);
+            utStrcpy(fname, FNAME_SIZE, i1+1);
             break;
         }
 
@@ -97,31 +98,31 @@ LN          line
         break;
     }
 
-[(){}\[\]]  { // Special characters
+[(){}\[\]]  { // special characters
             return *yytext;
         }
 
-true    { // Boolean Constants; true
+true    { // Boolean constant: true
             yylval.bval = true;
             return BOOLconstant;
         }
 
-TRUE    { // Boolean Constants; true
+TRUE    { // Boolean constant: true
             yylval.bval = true;
             return BOOLconstant;
         }
 
-false   { // Boolean Constants; false
+false   { // Boolean constant: false
             yylval.bval = false;
             return BOOLconstant;
         }
 
-FALSE   { // Boolean Constants; false
+FALSE   { // Boolean constant: false
             yylval.bval = false;
             return BOOLconstant;
         }
 
-0[xX]{H}+{IS}? { // Decode hex into integer; 0Xnnn
+0[xX]{H}+{IS}? { // decode hex into integer: 0Xnnn
             bool nflg = false;
             char cbuf[64];
             utStrcpy(cbuf, sizeof(cbuf), yytext);
@@ -141,7 +142,7 @@ FALSE   { // Boolean Constants; false
             return INTEGERconstant;
         }
 
-0{D}+{IS}?  { // Decode octal into integer; 0nnn
+0{D}+{IS}?  { // decode octal into integer: 0nnn
            bool nflg = false;
            char cbuf[64];
            utStrcpy(cbuf, sizeof(cbuf), yytext);
@@ -156,7 +157,7 @@ FALSE   { // Boolean Constants; false
         }
 
 
-[+-]?{D}+{IS}? { // Standard integer
+[+-]?{D}+{IS}? { // standard integer
             yylval.lval = std::atoi(yytext);
             return INTEGERconstant;
         }
@@ -180,7 +181,7 @@ FALSE   { // Boolean Constants; false
         }
 
 
-\"(\\.|[^\\"])*\"   { // Literal string (i.e., in double quotes); "hi there"
+\"(\\.|[^\\"])*\"   { // literal string (i.e., in double quotes): "hi there"
             /* return STRING without quotes */
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
@@ -189,7 +190,7 @@ FALSE   { // Boolean Constants; false
             return STRING_LITERAL;
         }
 
-\<(\\.|[^\\"])*\>   { // Literal string (i.e., in brackets); <hi there>
+\<(\\.|[^\\"])*\>   { // literal string (i.e., in brackets): <hi there>
             /* return STRING without quotes */
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];

@@ -1,12 +1,15 @@
 %{
-//
-// Lexical generator for the format specifiers
-//
+//------------------------------------------------------------------------------
+// Description: Scans format specifications embedded EDL files and builds
+//              a sprintf-style format string (i.e., it reformats one specification
+//              into another)
+//------------------------------------------------------------------------------
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
+#pragma warning(disable: 4996)
+#pragma warning(disable: 4005)
 #endif
 
 %}
@@ -16,7 +19,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdio>
-#include "Reformat.h"
+#include "ReformatScanner.h"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
 
@@ -36,67 +39,58 @@
 /* change the name of the scanner class - results in "rfFlexLexer" */
 %option prefix="rf" 
 
-/* derived 'oe::graphics::Reformat' is a subclass of yyFlexLexer */
-%option yyclass="oe::graphics::Reformat"
+/* derived 'oe::graphics::ReformatScanner' is a subclass of rfFlexLexer */
+%option yyclass="oe::graphics::ReformatScanner"
 
 %%
 
-\+?0*#+\+?		{  // "+0#"	Integer w/sign and leading zeros
-			   return oe::graphics::Reformat::processInteger(yytext, yyleng);
+\+?0*#+\+?              {   // "+0#" (Integer w/sign and leading zeros)
+                            return oe::graphics::ReformatScanner::processInteger(yytext, yyleng);
+                        }
+
+\+?0*#+\.#+\+?          {   // "+0#.#" (Floating w/sign and leading zeros)
+                            return oe::graphics::ReformatScanner::processFloat(yytext, yyleng);
+                        }
+
+\+?(0|H)H+:?MM:?SS(\.S+)?\+?  {   // HH:MM:SS (Hours, minutes and seconds)
+                                  return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::hhmmss, yytext, yyleng);
+                              }
+
+\+?(0|H)H+:?MM(\.M+)?\+?      {   // HH:MM (Hours and minutes)
+                                  return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::hhmm, yytext, yyleng);
+                              }
+
+\+?(0|H)H+(\.H+)?\+?    {   // HH (Hours)
+                            return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::hh, yytext, yyleng);
 			}
 
-\+?0*#+\.#+\+?		{  // "+0#.#"	Floating w/sign and leading zeros
-			   return oe::graphics::Reformat::processFloat(yytext, yyleng);
-			}
+\+?(0|M)M+:?SS(\.S+)?\+?      {   // MM:SS (Minutes and seconds)
+                                  return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::mmss, yytext, yyleng);
+                              }
 
-\+?(0|H)H+:?MM:?SS(\.S+)?\+?	{  // HH:MM:SS  Hours, minutes and seconds
-			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmmss,
-								yytext, yyleng);
-			}
+\+?(0|M)M+(\.M+)?\+?    {   // MM (Minutes)
+                            return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::mm, yytext, yyleng);
+                        }
 
-\+?(0|H)H+:?MM(\.M+)?\+?	{  // HH:MM		Hours and minutes
-			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hhmm, yytext, yyleng);
-			}
+\+?(0|S)S+(\.S+)?\+?    {  // SS (Seconds)
+                           return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::ss, yytext, yyleng);
+                        }
 
-\+?(0|H)H+(\.H+)?\+?	{  // HH		Hours
-			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::hh, yytext, yyleng);
-			}
+\+?(0|D)D{1,2}@?MM\'?SS(\.S+)?\"?\+?    {   // +DDMMSS (Degrees, minutes and seconds)
+                                            return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::ddmmss, yytext, yyleng);
+                                        }
 
-\+?(0|M)M+:?SS(\.S+)?\+?	{  // MM:SS		Minutes and seconds
-			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mmss, yytext, yyleng);
-			}
+\+?(0|D)D{1,2}@?MM(\.M+)?\'?\+?    {   // +DDMM (Degrees and minutes)
+                                       return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::ddmm, yytext, yyleng);
+                                   }
 
-\+?(0|M)M+(\.M+)?\+?	{  // MM		Minutes
-			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::mm, yytext, yyleng);
-			}
+\+?(0|D)D{1,2}(\.D+)?@?\+?    {   // +DD (Degrees)
+                                  return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::dd, yytext, yyleng);
+                              }
 
-\+?(0|S)S+(\.S+)?\+?	{  // SS		Seconds
-			   return oe::graphics::Reformat::processTime(oe::graphics::TimeReadout::ss, yytext, yyleng);
-			}
-
-\+?(0|D)D{1,2}@?MM\'?SS(\.S+)?\"?\+?	{
-			   // +DDMMSS	Degrees, minutes and seconds
-			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmmss,
-								yytext, yyleng);
-			}
-
-\+?(0|D)D{1,2}@?MM(\.M+)?\'?\+?	{
-			   // +DDMM		Degrees and minutes
-			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::ddmm,
-								yytext, yyleng);
-			}
-
-\+?(0|D)D{1,2}(\.D+)?@?\+?	{
-			   // +DD		Degrees
-			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
-								yytext, yyleng);
-			}
-
-\+?D(\.D+)?@?\+?	{
-			   // +DD		Degrees
-			   return oe::graphics::Reformat::processDirection(oe::graphics::DirectionReadout::dd,
-								yytext, yyleng);
-			}
+\+?D(\.D+)?@?\+?              {   // +DD (Degrees)
+                                  return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::dd, yytext, yyleng);
+                              }
 
 %%
 
@@ -107,7 +101,7 @@ namespace graphics {
 //------------------------------------------------------------------------------
 // yylex()
 //------------------------------------------------------------------------------
-int Reformat::yylex(const DataType dt)
+int ReformatScanner::yylex(const DataType dt)
 {
    postSign = false;
    dataType = dt;
@@ -118,7 +112,7 @@ int Reformat::yylex(const DataType dt)
 // processInteger() -- process a integer number string
 //    Take in a format such as "+0##" and return "%+04d".
 //------------------------------------------------------------------------------
-int Reformat::processInteger(const char* text, const int len)
+int ReformatScanner::processInteger(const char* text, const int len)
 {
    switch (dataType) {
    case number:			// We're looking for a number, 
@@ -128,7 +122,6 @@ int Reformat::processInteger(const char* text, const int len)
    default:			// No, we didn't want any of these
       return formatError(text);
    }
-
 
 // ---
 // Scan the example string
@@ -204,7 +197,7 @@ int Reformat::processInteger(const char* text, const int len)
 // processFloat() -- process a floating point number string
 //    Take in a format such as "+0###.###" and return "%+09.3f".
 //------------------------------------------------------------------------------
-int Reformat::processFloat(const char* text, const int len)
+int ReformatScanner::processFloat(const char* text, const int len)
 {
    // Check valid type
    if (dataType != number)
@@ -289,8 +282,7 @@ int Reformat::processFloat(const char* text, const int len)
 // processTime() -- process a time format string
 //    Take in a format such as "0MSS.S" and return "%02d%04.1f".
 //------------------------------------------------------------------------------
-int Reformat::processTime(const TimeReadout::TimeMode tm,
-				const char* text, const int len)
+int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* text, const int len)
 {
    // If not a time data type, exit with an error
    if (dataType != time)
@@ -371,12 +363,10 @@ int Reformat::processTime(const TimeReadout::TimeMode tm,
       i++;
    }
 
-   int sd = 0;
    int sr = 0;
 
    // A decimal point is optional with seconds 
    if (text[i] == '.') {
-      sd = 1;
       i++;
 
       while (text[i] == 'S' && i < len) {
@@ -462,8 +452,7 @@ int Reformat::processTime(const TimeReadout::TimeMode tm,
 //    Take in a format such as "+120@23'43.2"" and return
 //    "+%03d@%02d'%4.1f""
 //------------------------------------------------------------------------------
-int Reformat::processDirection(const DirectionReadout::DirMode dm,
-					const char* text, const int len)
+int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const char* text, const int len)
 {
    // If not a directional type, return error
    if (dataType != dir)
@@ -539,11 +528,9 @@ int Reformat::processDirection(const DirectionReadout::DirMode dm,
    }
 
    char sc = '\0';
-   int  sd = 0;
    int  sr = 0;
 
    if (text[i] == '.' && i < len) {
-      sd = 1;
       i++;
 
       while (text[i] == 'S' && i < len) {
@@ -633,7 +620,7 @@ int Reformat::processDirection(const DirectionReadout::DirMode dm,
 // formatError() -- process an error
 //    Display the error to wherever lex wants it and return invalid (0).
 //------------------------------------------------------------------------------
-int Reformat::formatError(const char* text) const
+int ReformatScanner::formatError(const char* text) const
 {
    switch (dataType) {
    case hex:
@@ -649,6 +636,9 @@ int Reformat::formatError(const char* text) const
    case dir:
       *yyout << "error: " << text << " is an invalid degree format." << std::endl;
       break;
+   default:
+      *yyout << "error in formatError" << std::endl;
+      break;
    }
 
    return 0;
@@ -658,41 +648,41 @@ int Reformat::formatError(const char* text) const
 // Explicitly convert an integer or floating point number.  This
 // expects a format such as "#.###" as input.  And returns "%5.3f"
 // as output.
-Reformat::DataType Reformat::convertNumber(const char* s)
+ReformatScanner::DataType ReformatScanner::convertNumber(const char* s)
 {
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return Reformat::DataType(yylex(number));
+   return DataType(yylex(number));
 }
 
 
 // Explicitly convert an octal integer.  This expects a format
 // such as "0##" as input.  And returns "%03o" as output.
-Reformat::DataType Reformat::convertOctal(const char* s)
+ReformatScanner::DataType ReformatScanner::convertOctal(const char* s)
 {
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return Reformat::DataType(yylex(octal));
+   return DataType(yylex(octal));
 }
 
 
 // Explicitly convert a hexadecimal integer.  This expects a format
 // such as "###" as input.  And returns "%3X" as output.
-Reformat::DataType Reformat::convertHex(const char* s)
+ReformatScanner::DataType ReformatScanner::convertHex(const char* s)
 {
    std::istringstream str(s);
    yyin = &str;
    yyrestart(yyin);
-   return Reformat::DataType(yylex(hex));
+   return DataType(yylex(hex));
 }
 
 
 // Explicitly convert a time value.  This expects a format such
 // as "0H:MM:SS.S" as input.  And returns "%02d:%02d:%04.1f" as
 // output.
-TimeReadout::TimeMode Reformat::convertTime(const char* s)
+TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
 {
    std::istringstream str(s);
    yyin = &str;
@@ -704,7 +694,7 @@ TimeReadout::TimeMode Reformat::convertTime(const char* s)
 // Explicitly convert a directional value. This expects a format
 // such as "+DDD@MM.M" as input.  And returns "+%03d@%04.1f" as
 // output.
-DirectionReadout::DirMode Reformat::convertDirection(const char* s)
+DirectionReadout::DirMode ReformatScanner::convertDirection(const char* s)
 {
    std::istringstream str(s);
    yyin = &str;

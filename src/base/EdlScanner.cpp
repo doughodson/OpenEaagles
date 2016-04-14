@@ -1999,19 +1999,20 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #define yymore() yymore_used_but_not_detected
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
-#line 1 "edl.l"
-#line 2 "edl.l"
-//
-// Scanner for reading EDL files
-//
+#line 1 "edl_scanner.l"
+#line 2 "edl_scanner.l"
+//------------------------------------------------------------------------------
+// Description: Scans EDL syntax and generates tokens for parser
+//------------------------------------------------------------------------------
 
 // disable all deprecation warnings for now, until we fix
 // they are quite annoying to see over and over again...
 #if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
+#pragma warning(disable: 4996)
+#pragma warning(disable: 4005)
 #endif
 
-#line 16 "edl.l"
+#line 17 "edl_scanner.l"
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -2037,7 +2038,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "edlFlexLexer" */
 /* derived 'oe::base::EdlScanner' is a subclass of yyFlexLexer */
-#line 2041 "EdlScanner.cpp"
+#line 2042 "EdlScanner.cpp"
 
 #define INITIAL 0
 
@@ -2169,13 +2170,13 @@ YY_DECL
 		}
 
 	{
-#line 64 "edl.l"
+#line 65 "edl_scanner.l"
 
 
         // cpp commands that change line number and file name
         // for examples:  # 21 "test.cf"
         //                #line 21 "test.cf"
-#line 2179 "EdlScanner.cpp"
+#line 2180 "EdlScanner.cpp"
 
 	while ( 1 )		/* loops until end-of-file is reached */
 		{
@@ -2227,7 +2228,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 69 "edl.l"
+#line 70 "edl_scanner.l"
 {
             char* i1 = std::strchr(yytext,'\"');
             char* i2 = std::strrchr(yytext,'\"');
@@ -2235,7 +2236,7 @@ YY_RULE_SETUP
             *i1 = '\0';
             *i2 = '\0';
             line = std::atoi(j1+1) - 1;
-            utStrcpy(fname,FNAME_SIZE,i1+1);
+            utStrcpy(fname, FNAME_SIZE, i1+1);
             break;
         }
 	YY_BREAK
@@ -2244,7 +2245,7 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 81 "edl.l"
+#line 82 "edl_scanner.l"
 { // ignore C++ like comments
             line++;
             break;
@@ -2253,7 +2254,7 @@ YY_RULE_SETUP
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 86 "edl.l"
+#line 87 "edl_scanner.l"
 { // ignore backslashes at end of lines
             line++;
             break;
@@ -2262,7 +2263,7 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 91 "edl.l"
+#line 92 "edl_scanner.l"
 { // count line numbers
             line++;
             break;
@@ -2270,54 +2271,54 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 96 "edl.l"
+#line 97 "edl_scanner.l"
 { // ignore white characters
         break;
     }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 100 "edl.l"
-{ // Special characters
+#line 101 "edl_scanner.l"
+{ // special characters
             return *yytext;
         }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 104 "edl.l"
-{ // Boolean Constants; true
+#line 105 "edl_scanner.l"
+{ // Boolean constant: true
             yylval.bval = true;
             return BOOLconstant;
         }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 109 "edl.l"
-{ // Boolean Constants; true
+#line 110 "edl_scanner.l"
+{ // Boolean constant: true
             yylval.bval = true;
             return BOOLconstant;
         }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 114 "edl.l"
-{ // Boolean Constants; false
+#line 115 "edl_scanner.l"
+{ // Boolean constant: false
             yylval.bval = false;
             return BOOLconstant;
         }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 119 "edl.l"
-{ // Boolean Constants; false
+#line 120 "edl_scanner.l"
+{ // Boolean constant: false
             yylval.bval = false;
             return BOOLconstant;
         }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 124 "edl.l"
-{ // Decode hex into integer; 0Xnnn
+#line 125 "edl_scanner.l"
+{ // decode hex into integer: 0Xnnn
             bool nflg = false;
             char cbuf[64];
             utStrcpy(cbuf, sizeof(cbuf), yytext);
@@ -2339,8 +2340,8 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 144 "edl.l"
-{ // Decode octal into integer; 0nnn
+#line 145 "edl_scanner.l"
+{ // decode octal into integer: 0nnn
            bool nflg = false;
            char cbuf[64];
            utStrcpy(cbuf, sizeof(cbuf), yytext);
@@ -2356,15 +2357,15 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 159 "edl.l"
-{ // Standard integer
+#line 160 "edl_scanner.l"
+{ // standard integer
             yylval.lval = std::atoi(yytext);
             return INTEGERconstant;
         }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 165 "edl.l"
+#line 166 "edl_scanner.l"
 { // floating point format
             yylval.dval = std::atof(yytext);
             return FLOATINGconstant;
@@ -2372,7 +2373,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 171 "edl.l"
+#line 172 "edl_scanner.l"
 { // floating point format
             yylval.dval = std::atof(yytext);
             return FLOATINGconstant;
@@ -2380,7 +2381,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 177 "edl.l"
+#line 178 "edl_scanner.l"
 { // floating point format
             yylval.dval = std::atof(yytext);
             return FLOATINGconstant;
@@ -2389,8 +2390,8 @@ YY_RULE_SETUP
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 183 "edl.l"
-{ // Literal string (i.e., in double quotes); "hi there"
+#line 184 "edl_scanner.l"
+{ // literal string (i.e., in double quotes): "hi there"
             /* return STRING without quotes */
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
@@ -2402,8 +2403,8 @@ YY_RULE_SETUP
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 192 "edl.l"
-{ // Literal string (i.e., in brackets); <hi there>
+#line 193 "edl_scanner.l"
+{ // literal string (i.e., in brackets): <hi there>
             /* return STRING without quotes */
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
@@ -2414,7 +2415,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 202 "edl.l"
+#line 203 "edl_scanner.l"
 { // slot-id is one or more legal characters followed by a ':'
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
@@ -2425,7 +2426,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 211 "edl.l"
+#line 212 "edl_scanner.l"
 { // ident: one or more legal characters
             size_t slen = std::strlen(yytext)+1;
             yylval.cvalp = new char[slen];
@@ -2435,17 +2436,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 219 "edl.l"
+#line 220 "edl_scanner.l"
 { // ignore all other characters
             break;
         }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 223 "edl.l"
+#line 224 "edl_scanner.l"
 ECHO;
 	YY_BREAK
-#line 2449 "EdlScanner.cpp"
+#line 2450 "EdlScanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -3339,7 +3340,7 @@ void edlfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 222 "edl.l"
+#line 223 "edl_scanner.l"
 
 
 

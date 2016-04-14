@@ -33,8 +33,8 @@ public:
 
 private:
     static const unsigned int FNAME_SIZE = 256;
-    char fname[FNAME_SIZE];   // Current file name
-    int  line;                // Current line number
+    char fname[FNAME_SIZE];   // current file name
+    int line;                 // current line number
 
 };
 

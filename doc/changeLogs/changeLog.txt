@@ -33,12 +33,6 @@ General framework-wide changes and improvements
 
    -- Removed legacy support for 'formnames' in all Object-based classes
 
-   -- form functions and Factory classes in libraries have been replaced with 'factory'
-      functions.  This is a bit of a reversal from Factory objects that defined a
-      single static method for object creation as is common in the Java world. But then
-      again, Java is a pure OO programming language, C++ is a multi-paradigm programming
-      language - standalone functions can be defined, so take advantage of it.
-
    -- Renamed global framework configuration options to start with 'OE' instead
       of 'EAAGLES'
 
@@ -63,6 +57,25 @@ General framework-wide changes and improvements
           C++pre-11 : const double lowest_double = -std::numeric_limits<double>::max();
                       (The above code works because floating point limits are symmetrical.)
           C++11     : const double lowest_double = std::numeric_limits<double>::lowest();
+
+   -- parser changes (important!)
+      -- form functions and Factory classes in libraries have been replaced with 'factory'
+         functions.  This is a bit of a reversal from Factory objects that defined a
+         single static method for object creation as is common in the Java world. Java does
+         this because you cannot create standalone functions, it only supports OO programming
+         paradigm - C++ is a multi-paradigm programming language that is much richer
+      -- include the EDL parser using "edl_parser.h", not "Parser.h" - edl_parser() is a
+         function that returns an object tree - it is not a class
+      -- 'lcParser()' has been renamed to 'edl_parser' to clearly indicate what format is
+         being parsed - it is called like this:
+           -- oe::base::edl_parser(filename, factory, &num_errors);
+           -- filename is name of text file containing EDL configuration
+           -- factory function has a signature of oe::base::Object* factory(const std::string& name)
+           -- num_errors is a pointer to an unsigned int which will contain the number of
+           -- parse errors after return
+      -- see examples for proper use - almost every example uses the parser
+      -- these change significantly reduces the clutter associated with the factory functions,
+         string comparisons to locate objects are simplier
 
 --------------------------------------------------------------------------------
 base library
