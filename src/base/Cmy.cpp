@@ -17,7 +17,7 @@ IMPLEMENT_SUBCLASS(Cmy,"cmy")
 BEGIN_SLOTTABLE(Cmy)
     "cyan",     // 1: ... Cyan component, range(0.0 to 1.0)
     "magenta",  // 2: ... Magenta component, range(0.0 to 1.0)
-    "yellow",   // 3: ... Yellow component, range(0.0 to 1.0)
+    "yellow"    // 3: ... Yellow component, range(0.0 to 1.0)
 END_SLOTTABLE(Cmy)
 
 // Map slot table to handles 

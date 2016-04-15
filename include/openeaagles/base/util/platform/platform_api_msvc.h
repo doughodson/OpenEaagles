@@ -43,6 +43,14 @@
 //
 #include <Mmsystem.h>
 
+// Visual Studio version numbers
+//
+// MSVC++ 14.0 _MSC_VER == 1900 (Visual Studio 2015)
+// MSVC++ 12.0 _MSC_VER == 1800 (Visual Studio 2013)
+// MSVC++ 11.0 _MSC_VER == 1700 (Visual Studio 2012)
+// MSVC++ 10.0 _MSC_VER == 1600 (Visual Studio 2010)
+//
+
 //
 // visual studio 2012 has a bug with some intrinsics
 // we disable the one of concern
@@ -52,4 +60,27 @@
 #pragma function(sqrt)
 #endif
 
+//
+// visual studio 2010 and 2012 are missing std::fmin and std::fmax (C99 std)
+//
+#if(_MSC_VER<=1700)
+namespace std {
+
+// max
+template <typename T>
+inline T const& fmax (T const& a, T const& b) {
+return a < b ? b : a ;
+}
+
+// min
+template <typename T>
+inline T const& fmin (T const& a, T const& b) {
+return a < b ? a : b ;
+}
+
+}
 #endif
+
+#endif
+
+

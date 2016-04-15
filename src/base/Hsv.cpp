@@ -7,6 +7,8 @@
 #include "openeaagles/base/util/math_utils.h"
 #include <cmath>
 
+#include "openeaagles/base/util/platform_api.h"  // for std::fmax / fmin pre-VS2013
+
 namespace oe {
 namespace base {
 
@@ -18,7 +20,7 @@ IMPLEMENT_SUBCLASS(Hsv,"hsv")
 BEGIN_SLOTTABLE(Hsv)
     "hue",          // 1: hue component,        range(0.0 to 360.0)
     "saturation",   // 2: saturation component, range(0.0 to 1.0)
-    "value",        // 3: value component,      range(0.0 to 1.0)
+    "value"         // 3: value component,      range(0.0 to 1.0)
 END_SLOTTABLE(Hsv)
 
 // Map slot table to handles

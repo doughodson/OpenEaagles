@@ -6,6 +6,8 @@
 #include "openeaagles/base/util/math_utils.h"
 #include <cmath>
 
+#include "openeaagles/base/util/platform_api.h"  // for std::fmax / fmin pre-VS2013
+
 namespace oe {
 namespace base {
 
@@ -17,7 +19,7 @@ IMPLEMENT_SUBCLASS(Hls,"hls")
 BEGIN_SLOTTABLE(Hls)
     "hue",         // 1: ... Hue component, range(0.0 to 360.0)
     "lightness",   // 2: ... Lightness component, range(0.0 to 1.0)
-    "saturation",  // 3: ... Saturation component, range(0.0 to 1.0)
+    "saturation"   // 3: ... Saturation component, range(0.0 to 1.0)
 END_SLOTTABLE(Hls)
 
 // Map slot table to handles
@@ -90,8 +92,8 @@ void Hls::getHLS(osg::Vec3& hhh) const
 bool Hls::setHue(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 360);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 360);
     if (ok) { hls[HUE] = value; hls2rgb(color,hls); }
     else std::cerr << "Hls::setHue: invalid entry(" << value << "), valid range: 0 to 360" << std::endl;
     return ok;
@@ -103,8 +105,8 @@ bool Hls::setHue(Number* const msg)
 bool Hls::setSaturation(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { hls[SATURATION] = value; hls2rgb(color,hls); }
     else std::cerr << "Hls::setSaturation: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -116,8 +118,8 @@ bool Hls::setSaturation(Number* const msg)
 bool Hls::setLightness(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { hls[LIGHTNESS] = value; hls2rgb(color,hls); }
     else std::cerr << "Hls::setLightness: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;

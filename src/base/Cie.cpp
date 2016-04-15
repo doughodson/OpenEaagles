@@ -21,7 +21,7 @@ BEGIN_SLOTTABLE(Cie)
     "luminance", // 1: ... Luminance component, range(0.0 to 1.0)
     "x",         // 2: ... X component, range(0.0 to 1.0)
     "y",         // 3: ... Y component, range(0.0 to 1.0)
-    "monitor",   // 4: ... Characteristics of intended display
+    "monitor"    // 4: ... Characteristics of intended display
 END_SLOTTABLE(Cie)
 
 // Map slot table to handles
