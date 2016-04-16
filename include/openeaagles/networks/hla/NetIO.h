@@ -170,8 +170,8 @@ public:
     void setConstrained(const RTI::Boolean flag)            { cFlag = flag; }
 
     // simulation::NetIO Interface
-    virtual void destroyInputNib(simulation::Nib* const nib);
-    virtual void destroyOutputNib(simulation::Nib* const nib);
+    void destroyInputNib(simulation::Nib* const nib) override;
+    void destroyOutputNib(simulation::Nib* const nib) override;
 
 protected:
     virtual void clearAllObjectClassHandles();
@@ -188,8 +188,8 @@ protected:
     virtual Ambassador* createFederateAmbassador();
 
     // Simulation::NetIO Interface (Callbacks)
-    virtual bool initNetwork();              // Initialize the network
-    virtual void netInputHander();           // Network input handler
+    bool initNetwork() override;             // Initialize the network
+    void netInputHander() override;          // Network input handler
 
     // Federation Support
     virtual bool createAndJoinFederation();
@@ -236,8 +236,8 @@ private:
    unsigned int nInObjects;         // Number of input objects in both tables
 
    // output tables
-   Nib*  outNameTbl[MAX_OBJECTS];   // Table of output objects in name order
-   Nib*  outHandleTbl[MAX_OBJECTS]; // Table of output objects in handle order
+   Nib* outNameTbl[MAX_OBJECTS];    // Table of output objects in name order
+   Nib* outHandleTbl[MAX_OBJECTS];  // Table of output objects in handle order
    unsigned int nOutObjects;        // Number of output objects in both tables
 
    // Support functions

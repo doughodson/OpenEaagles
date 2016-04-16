@@ -19,7 +19,7 @@ namespace base {
 class IoThread : public ThreadPeriodicTask {
    DECLARE_SUBCLASS(IoThread,ThreadPeriodicTask)
    public: IoThread(Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt);
+   private: unsigned long userFunc(const double dt) override;
 };
 
 //==============================================================================

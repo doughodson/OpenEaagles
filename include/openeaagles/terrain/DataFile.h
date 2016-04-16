@@ -62,7 +62,7 @@ public:
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this DataFile
-   virtual unsigned int getElevations(
+   unsigned int getElevations(
          double* const elevations,     // The elevation array (meters)
          bool* const validFlags,       // Valid elevation flag array (true if elevation was found)
          const unsigned int n,         // Size of elevation and valdFlags arrays
@@ -71,16 +71,16 @@ public:
          const double direction,       // True direction (heading) angle of the data (degs)
          const double maxRng,          // Range to last elevation point (meters)
          const bool   interp = false   // Interpolate between elevation posts (default: false)
-      ) const;
+      ) const override;
 
    // Locates an elevation value (meters) for a given reference point and returns
    // it in 'elev'.  Function returns true if successful, otherwise 'elev' is unchanged.
-   virtual bool getElevation(
+   bool getElevation(
          double* const elev,           // The elevation value (meters)
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)
-      ) const;
+      ) const override;
 
 protected:
    short**  columns;                // Array of data columns (values in meters)

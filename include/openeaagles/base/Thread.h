@@ -171,7 +171,7 @@ protected:
 
 private:
    // Thread class function
-   virtual unsigned long mainThreadFunc();
+   unsigned long mainThreadFunc() override;
 };
 
 //------------------------------------------------------------------------------

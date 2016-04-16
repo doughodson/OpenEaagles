@@ -202,7 +202,7 @@ public:
     // set functions
     virtual bool setInterval(const double x) { interval = x; return true; }
     virtual bool setNumToLaunch(const int x) { numToLaunch = x; return true; }
-    virtual void process(const double dt);
+    void process(const double dt) override;
 
     bool trigger(OnboardComputer* const mgr) override;
 

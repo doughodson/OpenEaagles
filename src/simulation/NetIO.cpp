@@ -1520,9 +1520,9 @@ public:
    NtmOutputNodeStd(const Player* const p, const char* const formName);
 
    // NetIO::NtmOutputNode class functions
-   virtual const Ntm* findNetworkTypeMapper(const Player* const p) const;
-   virtual bool add2OurLists(Ntm* const ntm);
-   virtual void print(std::ostream& sout, const int icnt) const;
+   const Ntm* findNetworkTypeMapper(const Player* const p) const override;
+   bool add2OurLists(Ntm* const ntm) override;
+   void print(std::ostream& sout, const int icnt) const override;
 
 private:
    bool checkAndAddNtm(Ntm* const ntm);

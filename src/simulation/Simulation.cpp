@@ -56,7 +56,7 @@ public:
 
 private:
    // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc();
+   unsigned long userFunc() override;
 
 private:
    base::PairStream* pl0;
@@ -80,7 +80,7 @@ public:
 
 private:
    // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc();
+   unsigned long userFunc() override;
 
 private:
    base::PairStream* pl0;

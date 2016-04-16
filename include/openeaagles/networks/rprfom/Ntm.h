@@ -52,7 +52,7 @@ public:
    virtual bool setSlotEntityType(const base::List* const msg);         // Sets entity type enumerations
 
    // Simulation::Ntm class functions
-   virtual bool copyEntityType(simulation::Nib* const targetNib) const;
+   bool copyEntityType(simulation::Nib* const targetNib) const override;
 
 private:
     // Standard type codes

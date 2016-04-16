@@ -188,21 +188,21 @@ public:
       ) const;
 
     // NetIO interface
-    virtual unsigned int getNumberOfObjectClasses() const;
-    virtual unsigned int getNumberOfObjectAttributes() const;
-    virtual unsigned int getNumberOfOInteractionClasses() const;
-    virtual unsigned int getNumberOfInteractionParameters() const;
-    virtual void discoverObjectInstance(
+    unsigned int getNumberOfObjectClasses() const override;
+    unsigned int getNumberOfObjectAttributes() const override;
+    unsigned int getNumberOfOInteractionClasses() const override;
+    unsigned int getNumberOfInteractionParameters() const override;
+    void discoverObjectInstance(
         const RTI::ObjectHandle theObject, const RTI::ObjectClassHandle theObjectClass, const char* theObjectName
-    );
-    virtual void receiveInteraction(
+    ) override;
+    void receiveInteraction(
         const RTI::InteractionClassHandle theInteraction,
         const RTI::ParameterHandleValuePairSet& theParameters
-    );
+    ) override;
 
     // Simulation::NetIO interface
-    virtual simulation::Nib* createNewOutputNib(simulation::Player* const player);
-    virtual simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const;
+    simulation::Nib* createNewOutputNib(simulation::Player* const player) override;
+    simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
 
 protected:
     virtual bool receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParameters);
@@ -213,11 +213,13 @@ protected:
     virtual bool publishAndSubscribeMunitionDetonation();
 
     // NetIO interface (callbacks)
-    virtual bool publishAndSubscribe();
+    bool publishAndSubscribe() override;
 
     // Simulation::NetIO Interface (Callbacks)
-    virtual void processInputList();    // Update players/systems from the Input-list
-    virtual simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType);   // Create a new rprfom::Nib
+    // Update players/systems from the Input-list
+    void processInputList() override;
+    // Create a new rprfom::Nib
+    simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType) override;
 };
 
 }

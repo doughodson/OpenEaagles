@@ -43,7 +43,8 @@ namespace base {
 //      Input/Output stream operators: >>  <<
 //          Are C++ equivalents.  Values are in decibels.
 //------------------------------------------------------------------------------
-class Decibel : public Number {
+class Decibel : public Number
+{
     DECLARE_SUBCLASS(Decibel,Number)
 
 public:
@@ -61,8 +62,8 @@ public:
     void operator-=(const Decibel&);
     void operator-=(const double);
 
-    virtual void setValue(const double nv);
-    virtual bool setSlotValue(const Number* const svobj);
+    void setValue(const double nv) override;
+    bool setSlotValue(const Number* const svobj) override;
 
 private:
     double db;    // value in dBs

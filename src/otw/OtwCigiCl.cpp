@@ -2270,7 +2270,7 @@ void CigiClNetworkSignalProcessing::OnSensorResp(CigiBasePacket* packet)
 class NetThread : public base::ThreadSingleTask {
    DECLARE_SUBCLASS(NetThread,base::ThreadSingleTask)
 public: NetThread(base::Component* const parent, const double priority);
-private: virtual unsigned long userFunc();
+private: unsigned long userFunc() override;
 };
 
 IMPLEMENT_SUBCLASS(NetThread,"NetThread")

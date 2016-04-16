@@ -69,7 +69,7 @@ public:
       { return (attribIndex >= 1 && attribIndex <= NetIO::MAX_ATTRIBUTES) ? updateRequired[attribIndex-1] : 0; }
 
    // Simulation::Nib Interface
-   virtual bool isPlayerStateUpdateRequired(const double curExecTime);
+   bool isPlayerStateUpdateRequired(const double curExecTime) override;
 
 protected:
     virtual void clearAllAttributeUpdateEnabledFlags();

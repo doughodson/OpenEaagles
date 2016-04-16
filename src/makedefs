@@ -78,6 +78,6 @@ CPPFLAGS += -std=c++11
 # ---
 # GCC or Clang compiler selection
 # ---
-CXX = g++
-#CXX = clang++
+#CXX = g++
+CXX = clang++
 

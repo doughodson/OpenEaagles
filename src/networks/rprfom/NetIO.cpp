@@ -50,9 +50,9 @@ public:
       ) const;
 
    // NetIO::NtmOutputNode class functions
-   virtual const simulation::Ntm* findNetworkTypeMapper(const simulation::Nib* const nib) const;
-   virtual bool add2OurLists(simulation::Ntm* const ntm);
-   virtual void print(std::ostream& sout, const int icnt) const;
+   const simulation::Ntm* findNetworkTypeMapper(const simulation::Nib* const nib) const override;
+   bool add2OurLists(simulation::Ntm* const ntm) override;
+   void print(std::ostream& sout, const int icnt) const override;
 
 private:
    unsigned int level;        // Level
