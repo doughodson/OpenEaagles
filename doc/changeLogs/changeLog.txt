@@ -80,6 +80,10 @@ base library
 
    -- previously named the 'basic' library
 
+   macros.h
+      added 'override' context keyword to DECLARE_SUBCLASS macro to eliminate clang
+      warning - no impact on API
+      
    -- removed legacy support for factory names "BroadcastHandler", "MulticastHandler",
       and "UdpHandler" - instead use more explicit "UdpBroadcastHandler", "UdpMulticastHandler"
       and "UdpUnicastHandler" factor names.

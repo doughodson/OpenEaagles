@@ -75,3 +75,9 @@ CPPFLAGS += -std=c++11
 # warn of old c-style casts, so they can be replaced
 #CPPFLAGS += -Wold-style-cast
 
+# ---
+# GCC or Clang compiler selection
+# ---
+CXX = g++
+#CXX = clang++
+
