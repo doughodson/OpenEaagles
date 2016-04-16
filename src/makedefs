@@ -14,7 +14,7 @@
 # OpenEaagles 3rd party root 
 #   Use the environment variable OE_3RD_PARTY_ROOT to locate the include and
 #   lib directories for the OpenEaagles 3rd party software(e.g., cigi, JSBSim)
-#   -- Default path is "/usr/local
+#   -- Default path is /usr/local
 #   -- see $(OE_ROOT)/setenv
 # ---
 ifndef OE_3RD_PARTY_ROOT
@@ -78,6 +78,6 @@ CPPFLAGS += -std=c++11
 # ---
 # GCC or Clang compiler selection
 # ---
-#CXX = g++
-CXX = clang++
+CXX = g++
+#CXX = clang++
 
