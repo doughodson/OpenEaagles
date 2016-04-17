@@ -77,6 +77,9 @@ CPPFLAGS += -std=c++11
 
 # ---
 # GCC or Clang compiler selection
+#
+# If you want to use clang, make sure to compile 3rd party libs
+# with clang - especially, Google Protocol Buffers
 # ---
 CXX = g++
 #CXX = clang++
