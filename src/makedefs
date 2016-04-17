@@ -76,11 +76,12 @@ CPPFLAGS += -std=c++11
 #CPPFLAGS += -Wold-style-cast
 
 # ---
-# GCC or Clang compiler selection
+# GCC or Clang compiler selection - by default, use system
+# default compiler
 #
 # If you want to use clang, make sure to compile 3rd party libs
 # with clang - especially, Google Protocol Buffers
 # ---
-CXX = g++
+#CXX = g++
 #CXX = clang++
 
