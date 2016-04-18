@@ -4,22 +4,19 @@
 # -----------------------------------------------------------------------------
 
 # ---
-# OpenEaagles home directory
+# OpenEaagles root directory
 #   Use the environment variable OE_ROOT to locate OpenEaagles
-#   -- No Default 
+#   -- No default
 #   -- see $(OE_ROOT)/setenv
 # ---
 
 # ---
-# OpenEaagles 3rd party root 
+# OpenEaagles 3rd party root directory
 #   Use the environment variable OE_3RD_PARTY_ROOT to locate the include and
 #   lib directories for the OpenEaagles 3rd party software(e.g., cigi, JSBSim)
-#   -- Default path is /usr/local
+#   -- No default
 #   -- see $(OE_ROOT)/setenv
 # ---
-ifndef OE_3RD_PARTY_ROOT
-   OE_3RD_PARTY_ROOT = /usr/local
-endif
 
 # ---
 # library directories
@@ -67,7 +64,6 @@ CPPFLAGS += -g -O2
 # ---
 CPPFLAGS += -fPIC
 CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include
-#CPPFLAGS += -isystem$(OE_ROOT)/include -isystem$(OE_3RD_PARTY_ROOT)/include
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
 #CPPFLAGS += -Wextra
