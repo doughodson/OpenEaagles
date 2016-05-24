@@ -76,7 +76,7 @@ public:
 
 protected:
 
-   void processRecordImp(const DataRecordHandle* const handle) override;
+   virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
    // Recursive function to look at each embedded message
    void processMessage(const google::protobuf::Message* const msg);
@@ -88,6 +88,7 @@ protected:
    std::string getEventMsgName(const google::protobuf::Message* const msg);
 
    std::string printTimeMsg(double time);
+
 private:
    void initData();
 
@@ -109,7 +110,6 @@ private:
 
 };
 
-// inline
 inline unsigned int PrintSelected::getMsgToken() const { return msgToken; }
 inline std::string PrintSelected::getFieldName() const { return fieldNameStr; }
 inline std::string PrintSelected::getCompareToStr() const { return compareStr; }
@@ -121,7 +121,7 @@ inline bool PrintSelected::getCompareToBool() const
    else return true;
 }
 
-} // End recorder namespace
-} // End oe namespace
+}
+}
 
 #endif

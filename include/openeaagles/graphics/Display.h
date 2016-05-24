@@ -415,10 +415,6 @@ private:
     bool okToSwap;                     // just in case we don't want to swap buffers every time, we can wait.
 };
 
-//------------------------------------------------------------------------------
-// inline functions
-//------------------------------------------------------------------------------
-
 inline const char* Display::getName() const                 { return *name; }
 inline bool Display::isMainDisplay() const                  { return !subdisplayFlg; }
 inline bool Display::isSubdisplay() const                   { return subdisplayFlg; }

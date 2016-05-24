@@ -13,13 +13,13 @@ namespace models {
 
 class Stt : public simulation::Radar
 {
-    DECLARE_SUBCLASS(Stt,simulation::Radar)
+    DECLARE_SUBCLASS(Stt, simulation::Radar)
 
 public:
     Stt();
 
 protected:
-    void dynamics(const double dt) override;
+   virtual void dynamics(const double dt) override;
 };
 
 }

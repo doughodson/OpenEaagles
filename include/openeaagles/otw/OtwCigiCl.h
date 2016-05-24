@@ -142,8 +142,8 @@ public:
    virtual bool setSlotGroundExplosionModel(const base::Number* const msg);
    virtual bool setSlotShipWakeModel(const base::Number* const msg);
 
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    enum LIFE_FORM_STATE { DEAD = 0, STANDING = 1, WALK = 2, RUN = 3 };
@@ -203,12 +203,12 @@ protected:
    virtual bool setViewDefinitionPacket(CigiViewDefV3* const p);
    virtual bool setSensorControlPacket(CigiSensorCtrlV3* const p);
 
-   void sendOwnshipAndModels() override;    // Send state data for ownship and models
-   void sendElevationRequests() override;   // Sends terrain height requests
-   void recvElevations() override;          // Receives terrain height data
-   void frameSync() override;               // Send frame sync (if any)
-   simulation::OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
-   simulation::OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
+   virtual void sendOwnshipAndModels() override;    // Send state data for ownship and models
+   virtual void sendElevationRequests() override;   // Sends terrain height requests
+   virtual void recvElevations() override;          // Receives terrain height data
+   virtual void frameSync() override;               // Send frame sync (if any)
+   virtual simulation::OtwModel* modelFactory() override;       // Create OtwModel objects unique to interface
+   virtual simulation::OtwModel* hotFactory() override;         // Create OtwHot objects unique to interface
 
    virtual bool setAirVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::AirVehicle* const p);
    virtual bool setBuildingData(OtwModelCigiCl* const m, const unsigned short entity, const simulation::Building* const p);
@@ -370,21 +370,21 @@ public:
    // CIGI's (sync-mode) main network loop
    virtual void mainLoop();
 
-   bool initialize(OtwCigiCl* const p) override;
-   bool isInitialized() override;
-   void startMessage() override;
-   void endMessage() override;
-   int  getOutgoingBufferSize() override;
+   virtual bool initialize(OtwCigiCl* const p) override;
+   virtual bool isInitialized() override;
+   virtual void startMessage() override;
+   virtual void endMessage() override;
+   virtual int  getOutgoingBufferSize() override;
 
-   void addPacketIGCtrl(CigiIGCtrlV3* const p) override;
-   void addPacketViewCtrl(CigiViewCtrlV3* const p) override;
-   void addPacketSensorCtrl(CigiSensorCtrlV3* const p) override;
-   void addPacketViewDef(CigiViewDefV3* const p) override;
-   void addPacketEntityCtrl(CigiEntityCtrlV3* const p) override;
-   void addPacketComponentCtrl(CigiCompCtrlV3* const p) override;
-   void addPacketArtPartCtrl(CigiArtPartCtrlV3* const p) override;
-   void addPacketHatHotReq(CigiHatHotReqV3* const p) override;
-   void addPacketLosRangeReq(CigiLosVectReqV3* const p) override;
+   virtual void addPacketIGCtrl(CigiIGCtrlV3* const p) override;
+   virtual void addPacketViewCtrl(CigiViewCtrlV3* const p) override;
+   virtual void addPacketSensorCtrl(CigiSensorCtrlV3* const p) override;
+   virtual void addPacketViewDef(CigiViewDefV3* const p) override;
+   virtual void addPacketEntityCtrl(CigiEntityCtrlV3* const p) override;
+   virtual void addPacketComponentCtrl(CigiCompCtrlV3* const p) override;
+   virtual void addPacketArtPartCtrl(CigiArtPartCtrlV3* const p) override;
+   virtual void addPacketHatHotReq(CigiHatHotReqV3* const p) override;
+   virtual void addPacketLosRangeReq(CigiLosVectReqV3* const p) override;
 
 protected:
    bool createCigiProcess();        // Create the CIGI network thread
@@ -414,7 +414,7 @@ class OtwModelCigiCl : public simulation::OtwModel
 public:
    OtwModelCigiCl();
 
-   void clear() override;
+   virtual void clear() override;
 
    virtual void initialize(simulation::Player* const p);
 
@@ -450,7 +450,7 @@ private:
    unsigned short id;
 };
 
-} // End otw namespace
-} // End oe namespace
+}
+}
 
 #endif

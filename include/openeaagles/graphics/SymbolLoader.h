@@ -74,7 +74,8 @@ class SlSymbol;
 //     showOnlyInRange   <Number>       ! only show symbols within range (default: true)
 //
 //------------------------------------------------------------------------------
-class SymbolLoader : public MapPage {
+class SymbolLoader : public MapPage
+{
    DECLARE_SUBCLASS(SymbolLoader,MapPage)
 
 public:
@@ -194,7 +195,8 @@ private:
 // Class: SlSymbol
 // Description: General symbol used by SymbolLoader
 //------------------------------------------------------------------------------
-class SlSymbol : public base::Object {
+class SlSymbol : public base::Object
+{
     DECLARE_SUBCLASS(SlSymbol,base::Object)
 
 public:
@@ -269,10 +271,6 @@ private:
    Graphic* phdg;          // Object named 'hdg' to handle heading rotation
    base::Degrees* hdgAng;  // Value sent to the heading 'hdg' object
 };
-
-// -------------------------------------------------------------------------------
-// Inline functions for SymbolLoader and SlSymbol
-// -------------------------------------------------------------------------------
 
 inline int SymbolLoader::getMaxSymbols() const { return MAX_SYMBOLS; }
 inline bool SymbolLoader::setInterconnect(const bool flg) { interconnect = flg; return true; }

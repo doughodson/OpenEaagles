@@ -41,10 +41,10 @@ public:
    virtual bool setD1(const double v);
    virtual bool setD2(const double v);
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 protected:
-   void initialize() override;
+   virtual void initialize() override;
 
 private:
    void initData();  // Initialize our data
@@ -58,7 +58,7 @@ private:
    double d2;
 };
 
-} // End linearsystem namespace
-} // End oe namespace
+}
+}
 
 #endif

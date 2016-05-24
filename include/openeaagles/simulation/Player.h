@@ -1211,12 +1211,9 @@ private:
    SynchronizedState    syncState2;
 };
 
-// -----------------------------------------------------------------------------
-// Inline functions
-// -----------------------------------------------------------------------------
 #include "openeaagles/simulation/Player.inl"
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

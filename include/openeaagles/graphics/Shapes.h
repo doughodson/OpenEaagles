@@ -184,7 +184,7 @@ private:
 // Factory name: Point
 //
 // Public member functions:
-//   void drawFunc() override
+//   virtual void drawFunc() override
 //   Draws a point for each vertex
 //
 //------------------------------------------------------------------------------
@@ -203,7 +203,7 @@ public:
 // Factory name: LineLoop
 //
 // Public member functions:
-//    void drawFunc() override
+//    virtual void drawFunc() override
 //    Draws a line based on a set of vertices
 //
 //------------------------------------------------------------------------------
@@ -221,7 +221,6 @@ public:
 // Factory name: Line
 // Slots:
 //  segment   <Number>    ! True if line segments (default: false)
-//
 //
 // Public member functions:
 //
@@ -267,7 +266,7 @@ public:
 
     bool isStrip()                  { return strip; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
 protected:
     bool setSlotStrip(const base::Number* const x);
@@ -292,7 +291,7 @@ public:
 
     bool isFan()                  { return fan; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
 protected:
     bool setSlotFan(const base::Number* const x);

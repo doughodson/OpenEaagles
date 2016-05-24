@@ -71,7 +71,7 @@ public:
    virtual bool setSlotX0(const base::Number* const msg);
    virtual bool setSlotY0(const base::Number* const msg);
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 protected:
    // Allocate memory arrays -- removes old arrays, if any
@@ -96,7 +96,7 @@ private:
    void initData();  // Initialize our data
 };
 
-} // End linearsystem namespace
-} // End oe namespace
+}
+}
 
 #endif

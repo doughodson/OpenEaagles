@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Player
-// inline functions
+// Description: inline functions
 //------------------------------------------------------------------------------
 #ifndef __oe_simulation_Player_Inline__
 #define __oe_simulation_Player_Inline__

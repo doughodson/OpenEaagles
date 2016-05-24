@@ -116,9 +116,9 @@ public:
    // Trigger the 'to' steerpoint action; auto sequencing only
    virtual void triggerAction();
 
-   void updateData(const double dt = 0.0) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
 
 protected:
     // Compute nav steering data for each steerpoint.
@@ -135,7 +135,7 @@ protected:
     bool setSlotAutoSeqDistance(const base::Number* const msg);
     bool setSlotWrap(const base::Number* const msg);
 
-    void processComponents(
+    virtual void processComponents(
          base::PairStream* const list,        // Source list of components
          const std::type_info& filter,         // Type filter
          base::Pair* const add = 0,           // Optional pair to add
@@ -156,10 +156,6 @@ private:
    bool                      autoSeq;                   // Auto sequence of steerpoint
    bool                      wrap;                      // Wrap around route when inc or dec 'to' steerpoint
 };
-
-//------------------------------------------------------------------------------
-// Inline functions
-//------------------------------------------------------------------------------
 
 inline Steerpoint* Route::getSteerpoint()
 {
@@ -221,7 +217,7 @@ inline const base::Pair* Route::findSteerpoint(const unsigned int idx) const
    return findSteerpointImp(idx);
 }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

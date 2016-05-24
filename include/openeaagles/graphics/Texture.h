@@ -177,10 +177,6 @@ private:
    GLfloat      blueBias;
 };
 
-//------------------------------------------------------------------------------
-// Inline functions
-//------------------------------------------------------------------------------
-
 inline GLuint Texture::getTexture() const          { return texture; }
 inline int Texture::getWrapS() const               { return wrapS; }
 inline int Texture::getWrapT() const               { return wrapT; }

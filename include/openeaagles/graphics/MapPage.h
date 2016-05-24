@@ -191,10 +191,6 @@ private:
    bool   isCentered;          // flag for centering our map page
 };
 
-// -------------------------------------------------------------------------------
-// Inline functions
-// -------------------------------------------------------------------------------
-
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }
 inline double MapPage::getReferenceLonDeg() const  { return referenceLon; }
 inline double MapPage::getReferenceLatRad() const  { return referenceLat * base::Angle::D2RCC; }

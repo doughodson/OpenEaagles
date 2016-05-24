@@ -136,9 +136,6 @@ private:
    unsigned int maxPlayers;   // Max number of players of interest
 };
 
-//------------------------------------------------------------------------------
-// inline functions
-//------------------------------------------------------------------------------
 inline double CollisionDetect::getCollisionRange() const       { return collisionRange; }
 inline double CollisionDetect::getMaxRange2Players() const     { return maxRange2Players; }
 inline double CollisionDetect::getMaxAngle2Players() const     { return maxAngle2Players; }
@@ -148,7 +145,7 @@ inline bool CollisionDetect::isUsingWorldCoordinates() const   { return useWorld
 inline bool CollisionDetect::isLocalOnly() const               { return localOnly; }
 inline bool CollisionDetect::isSendCrashEventsEnabled() const  { return sendCrashEvents; }
 
-} // End simulation namespace
-} // End oe namespace
+}
+}
 
 #endif

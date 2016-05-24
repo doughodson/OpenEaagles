@@ -77,7 +77,7 @@ class SolenoidButton : public Button
 public:
     SolenoidButton();
 
-    bool onSingleClick() override;
+    virtual bool onSingleClick() override;
 
     // The left mouse button has been depressed
     virtual bool onMouseDown();

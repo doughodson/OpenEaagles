@@ -44,11 +44,11 @@ public:
    virtual bool setSlotSampleRate(const base::Frequency* const msg);
    virtual bool setSlotSampleRate(const base::Number* const msg);
 
-   double g(const double x) override;
-   bool isValid() const override;
+   virtual double g(const double x) override;
+   virtual bool isValid() const override;
 
 protected:
-   void initialize() override;
+   virtual void initialize() override;
 
 private:
    void initData();
@@ -60,7 +60,7 @@ private:
    unsigned int sampleRate; // Sample rate (hz)
 };
 
-} // End linearsystem namespace
-} // End oe namespace
+}
+}
 
 #endif

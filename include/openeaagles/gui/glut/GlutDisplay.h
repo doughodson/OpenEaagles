@@ -183,10 +183,6 @@ private:
    Graphic* picked;                                    // our "picked graphic"
 };
 
-//------------------------------------------------------------------------------
-// inline functions
-//------------------------------------------------------------------------------
-
 inline int GlutDisplay::getWindowId() const                         { return winId;           }
 inline bool GlutDisplay::isWindowId(const int id) const             { return id == winId;     }
 inline bool GlutDisplay::isFullScreen() const                       { return fullScreenFlg;   }

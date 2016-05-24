@@ -98,11 +98,6 @@ private:
    static bool netByteOrder;       // True if this machine is in 'network byte order'
 };
 
-//------------------------------------------------------------------------------
-// Inline functions
-//------------------------------------------------------------------------------
-
-
 // ---
 // Convert to network byte order
 // ---

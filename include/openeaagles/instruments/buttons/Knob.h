@@ -29,7 +29,7 @@ public:
 
     double const getValue() { return value; }
 
-    bool onSingleClick() override;
+    virtual bool onSingleClick() override;
 
     virtual bool setEndless(const bool x)           { endless = x; return true; }
     virtual bool setEndlessStart(const double x)    { endlessStart = x; return true; }

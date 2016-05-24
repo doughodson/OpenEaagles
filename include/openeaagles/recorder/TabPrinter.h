@@ -102,7 +102,7 @@ protected:
    void printSimTimeMsg(std::ostream& sout, double simTime);
    void printUtcTimeMsg(std::ostream& sout, double utcTime);
 
-   void processRecordImp(const DataRecordHandle* const handle) override;
+   virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
    virtual void setMsgHeaders(const bool f);
 private:
@@ -141,11 +141,9 @@ private:
    const char* divider;      // divider between message fields
 };
 
-
-// inline functions
 inline bool TabPrinter::isSimReset() const { return simReset; }
 
-} // End recorder namespace
-} // End oe namespace
+}
+}
 
 #endif

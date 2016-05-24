@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: NavDR
-// inline functions
+// Description: inline functions
 //------------------------------------------------------------------------------
 #ifndef __oe_base_NavDR_Inline__
 #define __oe_base_NavDR_Inline__

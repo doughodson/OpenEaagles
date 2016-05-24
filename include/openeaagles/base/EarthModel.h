@@ -89,15 +89,12 @@ private:
    double e2;  // Eccentricity Squared
 };
 
-//------------------------------------------------------------------------------
-// Inline functions
-//------------------------------------------------------------------------------
 inline double EarthModel::getA() const  { return a; }
 inline double EarthModel::getB() const  { return b; }
 inline double EarthModel::getF() const  { return f; }
 inline double EarthModel::getE2() const { return e2; }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

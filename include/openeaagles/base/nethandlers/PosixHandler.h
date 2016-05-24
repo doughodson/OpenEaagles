@@ -142,10 +142,6 @@ private:
    unsigned int recvBuffSizeKb;    // Receive buffer size in KBs
 };
 
-//------------------------------------------------------------------------------
-// Inline functions
-//------------------------------------------------------------------------------
-
 // Port#
 inline uint16_t PosixHandler::getPort() const
 {

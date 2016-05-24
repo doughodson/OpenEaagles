@@ -58,7 +58,7 @@ public:
 protected:
    void setFullFilename(const char* const name);
 
-   void processRecordImp(const DataRecordHandle* const handle) override;
+   virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    void initData();
@@ -75,7 +75,7 @@ private:
    bool fileEmpty;                  // Is the file opened and empty?
 };
 
-} // End recorder namespace
-} // End oe namespace
+}
+}
 
 #endif

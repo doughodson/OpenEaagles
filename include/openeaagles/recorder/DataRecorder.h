@@ -70,8 +70,8 @@ public:
    unsigned int getMonth() const          { return month; }
    unsigned int getYear() const           { return year; }
 
-   void processRecords() override;
-   void reset() override;
+   virtual void processRecords() override;
+   virtual void reset() override;
 
 protected:
    // Get functions
@@ -122,15 +122,15 @@ protected:
    virtual bool recordTrackData(const base::Object* objs[4], const double values[4]);
 
    // simulation::DataRecorder class protected interface functions
-   bool recordDataImp(
+   virtual bool recordDataImp(
       const unsigned int id,              // Recorder event Id
-      const base::Object* pObjects[4],   // Sample objects
+      const base::Object* pObjects[4],    // Sample objects
       const double values[4]              // Sample values
    ) override;
    bool processUnhandledId(const unsigned int id) override;
 
    // base::Component protected interface
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();
@@ -151,7 +151,7 @@ private:
 
 #include "openeaagles/recorder/DataRecorder.inl"
 
-} // End recorder namespace
-} // End oe namespace
+}
+}
 
 #endif

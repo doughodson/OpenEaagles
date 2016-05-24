@@ -27,11 +27,11 @@ public:
    DiffEquation();
    DiffEquation(const unsigned int rate);
 
-   double g(const double x) override;
+   virtual double g(const double x) override;
 
 protected:
-   void allocateMemory(unsigned int n) override;
-   void clearMemory() override;
+   virtual void allocateMemory(unsigned int n) override;
+   virtual void clearMemory() override;
 
    // Difference equation coef arrays
    double* pa;    // (a[k] * y[k]) terms; for k = 1 .. n
@@ -41,7 +41,7 @@ private:
    void initData();  // Initialize our data
 };
 
-} // End linearsystem namespace
-} // End oe namespace
+}
+}
 
 #endif

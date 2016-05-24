@@ -46,7 +46,7 @@ public:
    virtual bool setPathName(const base::String* const msg);
 
 protected:
-   const DataRecordHandle* readRecordImp() override;
+   virtual const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();
@@ -61,7 +61,7 @@ private:
    bool firstPassFlg;               // First pass flag
 };
 
-} // End recorder namespace
-} // End oe namespace
+}
+}
 
 #endif

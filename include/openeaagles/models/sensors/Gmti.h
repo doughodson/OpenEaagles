@@ -16,7 +16,7 @@ namespace models {
 
 class Gmti : public simulation::Radar
 {
-    DECLARE_SUBCLASS(Gmti,simulation::Radar)
+    DECLARE_SUBCLASS(Gmti, simulation::Radar)
 
 public:
     Gmti();
@@ -28,7 +28,7 @@ public:
 protected:
     bool setSlotPoi(base::List* const numList);                // Set Point of Interest
 
-    void dynamics(const double dt) override;
+    virtual void dynamics(const double dt) override;
 
 private:
     osg::Vec3 poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED

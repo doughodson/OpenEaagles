@@ -780,9 +780,8 @@ public:
       const EarthModel* const pEM=0 // IN:  Pointer to an optional earth model (default: WGS-84)
    );
 
-}; // End class Nav
+};
 
-// inline functions
 #include "openeaagles/base/Nav.inl"
 
 }

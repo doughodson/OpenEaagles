@@ -5,7 +5,6 @@
 #ifndef __oe_simulation_DataRecorder_Inline__
 #define __oe_simulation_DataRecorder_Inline__
 
-
 //==============================================================================
 // Recorder Macros
 //

@@ -197,10 +197,6 @@ private:
    double           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
 };
 
-
-//------------------------------------------------------------------------------
-// Inline functions
-//------------------------------------------------------------------------------
 inline unsigned char EmissionPduHandler::getEmitterIdNumber() const  { return emitterIdNumber; }
 inline unsigned short EmissionPduHandler::getEmitterName() const     { return emitterName; }
 inline unsigned char EmissionPduHandler::getEmitterFunction() const  { return emitterFunction; }

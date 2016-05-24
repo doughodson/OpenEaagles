@@ -38,7 +38,7 @@ public:
 
     virtual void draw() override;
 
-    bool event(const int event, Object* const obj = nullptr) override;
+    virtual bool event(const int event, Object* const obj = nullptr) override;
 
 private:
     // event functions

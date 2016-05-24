@@ -33,28 +33,28 @@ class RacModel : public simulation::AerodynamicsModel
 public:
     RacModel();
 
-    double getGload() const override;                   // G's (+up, one at level)
-    double getMach() const override;                    // mach number
-    double getAngleOfAttack() const override;           // radians
-    double getSideSlip() const override;                // radians
-    double getFlightPath() const override;              // radians
-    double getCalibratedAirspeed() const override;      // Kts
+    virtual double getGload() const override;                   // G's (+up, one at level)
+    virtual double getMach() const override;                    // mach number
+    virtual double getAngleOfAttack() const override;           // radians
+    virtual double getSideSlip() const override;                // radians
+    virtual double getFlightPath() const override;              // radians
+    virtual double getCalibratedAirspeed() const override;      // Kts
 
-    bool isHeadingHoldOn() const override;
-    double getCommandedHeadingD() const override;
-    bool setHeadingHoldOn(const bool b) override;
-    bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
-    bool isVelocityHoldOn() const override;
-    double getCommandedVelocityKts() const override;
-    bool setVelocityHoldOn(const bool b) override;
-    bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
-    bool isAltitudeHoldOn() const override;
-    double getCommandedAltitude() const override;
-    bool setAltitudeHoldOn(const bool b) override;
-    bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
-    void dynamics(const double dt) override;            // One pass model update; called from Player::dynamics()
+    virtual bool isHeadingHoldOn() const override;
+    virtual double getCommandedHeadingD() const override;
+    virtual bool setHeadingHoldOn(const bool b) override;
+    virtual bool setCommandedHeadingD(const double h, const double hDps = 0, const double maxBank = 0) override;
+    virtual bool isVelocityHoldOn() const override;
+    virtual double getCommandedVelocityKts() const override;
+    virtual bool setVelocityHoldOn(const bool b) override;
+    virtual bool setCommandedVelocityKts(const double v, const double vNps = 0) override;
+    virtual bool isAltitudeHoldOn() const override;
+    virtual double getCommandedAltitude() const override;
+    virtual bool setAltitudeHoldOn(const bool b) override;
+    virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
+    virtual void dynamics(const double dt) override;            // One pass model update; called from Player::dynamics()
 
-    void reset() override;
+    virtual void reset() override;
 
     // Slot methods
     virtual bool setSlotMinSpeed(const base::Number* const msg);

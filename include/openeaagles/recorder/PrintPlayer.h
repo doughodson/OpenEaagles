@@ -41,7 +41,7 @@ protected:
 
    virtual bool setName(const base::String* const msg);
 
-   void processRecordImp(const DataRecordHandle* const handle) override;
+   virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
    void initData();
@@ -49,7 +49,7 @@ private:
    const base::String* name;    // Player name
 };
 
-} // End recorder namespace
-} // End oe namespace
+}
+}
 
 #endif

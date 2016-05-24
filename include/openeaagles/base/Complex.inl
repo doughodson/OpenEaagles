@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Complex
-// inline functions
+// Description: inline functions
 //------------------------------------------------------------------------------
 #ifndef __oe_base_Complex_Inline__
 #define __oe_base_Complex_Inline__

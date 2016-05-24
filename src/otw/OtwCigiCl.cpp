@@ -2267,10 +2267,11 @@ void CigiClNetworkSignalProcessing::OnSensorResp(CigiBasePacket* packet)
 // CigiClNetwork main loop thread
 //==============================================================================
 
-class NetThread : public base::ThreadSingleTask {
-   DECLARE_SUBCLASS(NetThread,base::ThreadSingleTask)
-public: NetThread(base::Component* const parent, const double priority);
-private: unsigned long userFunc() override;
+class NetThread : public base::ThreadSingleTask
+{
+   DECLARE_SUBCLASS(NetThread, base::ThreadSingleTask)
+   public: NetThread(base::Component* const parent, const double priority);
+   private: virtual unsigned long userFunc() override;
 };
 
 IMPLEMENT_SUBCLASS(NetThread,"NetThread")
@@ -2279,8 +2280,7 @@ EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
 EMPTY_SERIALIZER(NetThread)
 
-NetThread::NetThread(base::Component* const parent, const double priority)
-: base::ThreadSingleTask(parent, priority)
+NetThread::NetThread(base::Component* const parent, const double priority): base::ThreadSingleTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
 }

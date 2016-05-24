@@ -62,9 +62,9 @@ public:
 protected:
    void setFullFilename(const char* const name);
 
-   void processRecordImp(const DataRecordHandle* const handle) override;
+   virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();
@@ -80,7 +80,7 @@ private:
    bool eodFlag;                    // REID_END_OF_DATA message has been written
 };
 
-} // End recorder namespace
-} // End oe namespace
+}
+}
 
 #endif

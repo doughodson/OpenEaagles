@@ -72,7 +72,7 @@ public:
    virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
    virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    // AnalogOutput interface

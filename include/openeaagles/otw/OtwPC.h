@@ -15,35 +15,35 @@ namespace otw {
 
 class OtwPC : public simulation::Otw
 {
-    DECLARE_SUBCLASS(OtwPC, simulation::Otw)
+   DECLARE_SUBCLASS(OtwPC, simulation::Otw)
 
 public:
-    OtwPC();
+   OtwPC();
 
-    void reset() override;                          // Send frame sync (if any)
+   virtual void reset() override;                          // Send frame sync (if any)
 
 protected:
-    void sendOwnshipAndModels() override;           // Send state data for ownship and models
-    void sendElevationRequests() override;          // Sends terrain height requests
-    void recvElevations() override;                 // Receives terrain height data
-    void frameSync() override;                      // Send frame sync (if any)
-    simulation::OtwModel* modelFactory() override;  // Create OtwModel objects unique to interface
-    simulation::OtwModel* hotFactory() override;    // Create OtwHot objects unique to interface
+   virtual void sendOwnshipAndModels() override;           // Send state data for ownship and models
+   virtual void sendElevationRequests() override;          // Sends terrain height requests
+   virtual void recvElevations() override;                 // Receives terrain height data
+   virtual void frameSync() override;                      // Send frame sync (if any)
+   virtual simulation::OtwModel* modelFactory() override;  // Create OtwModel objects unique to interface
+   virtual simulation::OtwModel* hotFactory() override;    // Create OtwHot objects unique to interface
 
-    bool isNetworkInitialized() const       { return netInit; }
-    bool didInitializationFail() const      { return netInitFail; }
+   bool isNetworkInitialized() const       { return netInit; }
+   bool didInitializationFail() const      { return netInitFail; }
 
 private:
-    void sendPcData();                      // Send PC data block
-    bool initNetwork();                     // Initialize the network
+   void sendPcData();                      // Send PC data block
+   bool initNetwork();                     // Initialize the network
 
-    // Set Slot functions
-    bool setSlotNetOutput(base::NetHandler* const msg);
+   // Set Slot functions
+   bool setSlotNetOutput(base::NetHandler* const msg);
 
-    base::safe_ptr<base::NetHandler> netOutput;  // Output network handler
-    bool netInit;                                // Network has been initialized
-    bool netInitFail;                            // Initialization attempt failed
-    int scnt;                                    // Send timer
+   base::safe_ptr<base::NetHandler> netOutput;  // Output network handler
+   bool netInit;                                // Network has been initialized
+   bool netInitFail;                            // Initialization attempt failed
+   int scnt;                                    // Send timer
 };
 
 }

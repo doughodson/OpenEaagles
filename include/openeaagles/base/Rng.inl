@@ -1,6 +1,6 @@
 //------------------------------------------------------------------------------
 // Class: Rng
-// inline functions
+// Description: inline functions
 //------------------------------------------------------------------------------
 #ifndef __oe_base_Rng_Inline__
 #define __oe_base_Rng_Inline__
