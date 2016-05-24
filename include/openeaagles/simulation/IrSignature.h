@@ -143,7 +143,7 @@ private:
    double effectiveArea;                 // The effective area for heat calculations  (m^2)
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -335,5 +335,5 @@ std::ostream& AnalogOutput::serialize(std::ostream& sout, const int i, const boo
    return sout;
 }
 
-} // end iodevice
+}
 }

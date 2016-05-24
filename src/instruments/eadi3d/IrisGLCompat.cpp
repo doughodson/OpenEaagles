@@ -185,6 +185,6 @@ void IrisGLCompat::rdr2(float x, float y)
     glVertex2f(vertexX, vertexY);
 }
 
-} // End Instruments namespace
+}
 }
 

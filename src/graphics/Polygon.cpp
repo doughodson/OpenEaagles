@@ -185,6 +185,6 @@ void Polygon::drawFunc()
     END_DLIST
 }
 
-} // End graphics namespace
+}
 }
 

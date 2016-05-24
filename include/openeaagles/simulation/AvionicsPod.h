@@ -23,7 +23,7 @@ public:
    AvionicsPod();
 };
 
-} // end simulation namespace
+}
 }
 
 #endif

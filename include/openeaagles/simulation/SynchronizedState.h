@@ -53,7 +53,7 @@ private:
    bool        valid;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

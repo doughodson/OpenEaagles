@@ -31,7 +31,7 @@ private:
     base::PairStream* myColors;
 };
 
-} // End graphics namespace
+}
 }
 
 #endif

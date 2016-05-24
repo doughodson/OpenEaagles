@@ -106,5 +106,5 @@ std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOn
    return sout;
 }
 
-} // End simulation namespace
+}
 }

@@ -66,7 +66,7 @@ private:
 };
 
 
-} // End terrain namespace
+}
 }
 
 #endif

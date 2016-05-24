@@ -64,7 +64,7 @@ private:
    double rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

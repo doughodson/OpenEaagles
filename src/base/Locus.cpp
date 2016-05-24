@@ -147,5 +147,5 @@ void Locus::clearData()
    setData(nullptr, 0, 0, 0, 0, 0, 0);
 }
 
-} // End base namespace}
+}
 }

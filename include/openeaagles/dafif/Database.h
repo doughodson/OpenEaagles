@@ -230,7 +230,7 @@ protected:
    bool dbLoaded;    // Database has been loader
 };
 
-} // End dafif namespace
+}
 }
 
 #endif

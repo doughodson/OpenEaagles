@@ -175,7 +175,7 @@ private:
    base::safe_ptr<Datalink> datalink;   // Our companion datalink system
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

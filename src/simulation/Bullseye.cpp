@@ -32,5 +32,5 @@ void Bullseye::deleteData()
 {
 }
 
-} // End simulation namespace
+}
 }

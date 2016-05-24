@@ -145,5 +145,5 @@ base::Object* BmpTexture::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End graphics namespace
+}
 }

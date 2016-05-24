@@ -485,5 +485,5 @@ NavaidLoader::NavaidKey::~NavaidKey()
 {
 }
 
-} // End dafif namespace
+}
 }

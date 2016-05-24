@@ -151,5 +151,5 @@ Slugs::Slugs(const Mass& value) : Mass()
 EMPTY_COPYDATA(Slugs)
 EMPTY_DELETEDATA(Slugs)
 
-} // End base namespace
+}
 }

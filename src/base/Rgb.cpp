@@ -132,5 +132,5 @@ std::ostream& Rgb::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End base namespace
+}
 }

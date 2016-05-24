@@ -70,7 +70,7 @@ private:
    bool loadData() override;
 };
 
-} // End terrain namespace
+}
 }
 
 #endif

@@ -80,5 +80,5 @@ bool Agm::calculateVectors(const Player* const tgt, const Track* const trk, osg:
    return true;
 }
 
-} // End simulation namespace
+}
 }

@@ -177,5 +177,5 @@ void OutputHandler::processComponents(
    BaseClass::processComponents(list,typeid(OutputHandler),add,remove);
 }
 
-} // End recorder namespace
+}
 }

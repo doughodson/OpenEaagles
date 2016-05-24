@@ -358,5 +358,5 @@ void Logger::LogEvent::deleteData()
 {
 }
 
-} // End base namespace
+}
 }

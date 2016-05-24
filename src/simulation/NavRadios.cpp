@@ -539,5 +539,5 @@ bool IlsRadio::findLocalizerByFreq(double freq)
    return localizerValid;
 }
 
-} // End simulation namespace
+}
 }

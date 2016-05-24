@@ -363,7 +363,7 @@ private:
     unsigned int typeId;                                 // OTW entity type ID number
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

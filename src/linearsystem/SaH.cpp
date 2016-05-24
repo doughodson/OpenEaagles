@@ -219,5 +219,5 @@ std::ostream& SaH::serialize(std::ostream& sout, const int i, const bool slotsOn
     return sout;
 }
 
-} // End linearsystem namespace
+}
 }

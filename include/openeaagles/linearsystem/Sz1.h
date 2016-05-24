@@ -49,7 +49,7 @@ public:
    virtual bool setSlotD2(const base::Number* const msg);
 };
 
-} // End linearsystem namespace
+}
 }
 
 #endif

@@ -59,5 +59,5 @@ void Jammer::transmit(const double)
     }
 }
 
-} // End simulation namespace
+}
 }

@@ -33,7 +33,7 @@ public:
    virtual bool setSlotUpperLimit(const base::Number* const msg);
 };
 
-} // End linearsystem namespace
+}
 }
 
 #endif

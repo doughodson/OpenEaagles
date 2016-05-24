@@ -1998,5 +1998,5 @@ void SimLogger::RemovedRwrTrack::captureData()
     }
 }
 
-} // End simulation namespace
+}
 }

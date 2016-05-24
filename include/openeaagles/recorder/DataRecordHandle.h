@@ -44,7 +44,7 @@ private:
 
 inline const pb::DataRecord* DataRecordHandle::getRecord() const { return record; }
 
-} // End recorder namespace
+}
 }
 
 #endif

@@ -54,7 +54,7 @@ private:
    char* ibuf;    // Input buffer
 };
 
-} // End recorder namespace
+}
 }
 
 #endif

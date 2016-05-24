@@ -87,5 +87,5 @@ base::Object* graphics::ColorGradient::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End graphics namespace
+}
 }

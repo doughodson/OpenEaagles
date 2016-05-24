@@ -247,5 +247,5 @@ bool LatLon::setSeconds(const Number* const ssobj)
    return ok;
 }
 
-} // End base namespace
+}
 }

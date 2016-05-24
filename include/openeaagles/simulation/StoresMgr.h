@@ -233,7 +233,7 @@ private:
    int    nCurWpn;         // Number of weapons of the current type
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -188,5 +188,5 @@ oe::base::Object* NetInput::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End recorder namespace
+}
 }

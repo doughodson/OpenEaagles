@@ -98,5 +98,5 @@ std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) c
     return sout;
 }
 
-} // End base namespace
+}
 }

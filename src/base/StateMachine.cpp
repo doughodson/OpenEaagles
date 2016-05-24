@@ -570,6 +570,6 @@ std::ostream& StateMachine::serialize(std::ostream& sout, const int i, const boo
     return sout;
 }
 
-} // End base namespace
+}
 }
 

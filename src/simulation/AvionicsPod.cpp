@@ -16,6 +16,6 @@ EMPTY_DELETEDATA(AvionicsPod)
 EMPTY_SERIALIZER(AvionicsPod)
 
 
-} // end simulation namespace
+}
 }
 

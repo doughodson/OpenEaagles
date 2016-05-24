@@ -231,5 +231,5 @@ DecibelMilliWatts::DecibelMilliWatts(const Power& org) : Power()
 EMPTY_COPYDATA(DecibelMilliWatts)
 EMPTY_DELETEDATA(DecibelMilliWatts)
 
-} // End base namespace
+}
 }

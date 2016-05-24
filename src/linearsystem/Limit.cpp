@@ -100,5 +100,5 @@ std::ostream& Limit::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-} // End linearsystem namespace
+}
 }

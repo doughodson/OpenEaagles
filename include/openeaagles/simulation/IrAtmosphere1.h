@@ -167,7 +167,7 @@ private:
    const base::Table4* transmissivityTable;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

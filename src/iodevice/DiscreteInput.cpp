@@ -308,5 +308,5 @@ std::ostream& DiscreteInput::serialize(std::ostream& sout, const int i, const bo
    return sout;
 }
 
-} // end iodevice
+}
 }

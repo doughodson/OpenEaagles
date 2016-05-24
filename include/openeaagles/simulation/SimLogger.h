@@ -433,7 +433,7 @@ public:
 
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

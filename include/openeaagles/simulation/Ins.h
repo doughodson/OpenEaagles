@@ -59,7 +59,7 @@ private:
     double      quality;        // Quality
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

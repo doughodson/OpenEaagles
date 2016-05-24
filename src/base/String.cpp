@@ -272,5 +272,5 @@ std::ostream& String::serialize(std::ostream& sout, const int, const bool) const
    return sout;
 }
 
-} // End base namespace
+}
 }

@@ -613,5 +613,5 @@ std::ostream& Page::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-} // End graphics namespace
+}
 }

@@ -50,7 +50,7 @@ private:
    double tau;    // filter time constant (seconds)
 };
 
-} // End linearsystem namespace
+}
 }
 
 #endif

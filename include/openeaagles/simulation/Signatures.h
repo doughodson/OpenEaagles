@@ -236,7 +236,7 @@ protected:
    bool dbFlg;                      // dependent data in decibels
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

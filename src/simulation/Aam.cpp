@@ -43,5 +43,5 @@ Aam::Aam()
     setMaxAccel(50.0);
 }
 
-} // End simulation namespace
+}
 }

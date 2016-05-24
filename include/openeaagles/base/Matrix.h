@@ -398,7 +398,7 @@ inline double getTrace(const Matrix& A)
    return trace;
 }
 
-} // End namespace
-} // End namespace
+}
+}
 
 #endif

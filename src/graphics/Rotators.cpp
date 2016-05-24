@@ -221,7 +221,7 @@ void Rotators::draw()
     lcRestoreMatrix();
 }
 
-} // End graphics namespace
+}
 }
 
 

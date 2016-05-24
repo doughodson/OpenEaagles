@@ -829,5 +829,5 @@ std::ostream& Route::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-} // End simulation namespace
+}
 }

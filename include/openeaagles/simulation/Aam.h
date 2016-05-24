@@ -30,7 +30,7 @@ public:
     int getCategory() const override;             // Returns MISSILE or GUIDED
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

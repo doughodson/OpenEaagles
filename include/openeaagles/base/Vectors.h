@@ -512,7 +512,7 @@ inline CVector* getDiag(const Matrix& A)
    return p;
 }
 
-} // End namespace
-} // End namespace
+}
+}
 
 #endif

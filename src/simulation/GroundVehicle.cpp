@@ -473,5 +473,5 @@ void GroundStationUav::deleteData()
 {
 }
 
-} // End simulation namespace
+}
 }

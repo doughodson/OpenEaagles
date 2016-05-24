@@ -87,7 +87,7 @@ private:
    double x,y,z;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

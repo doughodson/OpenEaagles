@@ -109,7 +109,7 @@ private:
    unsigned int pwrSw;   // System's master power switch
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

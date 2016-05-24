@@ -143,7 +143,7 @@ private:
 };
 
 
-} // End simulation namespace
+}
 }
 
 #endif

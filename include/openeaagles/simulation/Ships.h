@@ -25,7 +25,7 @@ public:
     unsigned int getMajorType() const override;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

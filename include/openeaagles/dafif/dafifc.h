@@ -199,7 +199,7 @@ const int WP_LONGITUDE  = 71;
 const int WP_ELEVATION  = 0;
 const int WP_MAGVAR     = 106;
 
-} // End dafif namespace
+}
 }
 
 #endif

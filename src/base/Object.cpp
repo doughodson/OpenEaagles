@@ -357,6 +357,6 @@ const Object::_Static* Object::getStatic()
     return &_static;
 }
 
-} // End base namespace
+}
 }
 

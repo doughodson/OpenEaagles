@@ -29,5 +29,5 @@ Sam::Sam()
    setType(&gsam);
 }
 
-} // End simulation namespace
+}
 }

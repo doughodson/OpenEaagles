@@ -212,6 +212,6 @@ FootPounds::FootPounds(const Energy& value) : Energy()
 EMPTY_COPYDATA(FootPounds)
 EMPTY_DELETEDATA(FootPounds)
 
-} // End base namespace
+}
 }
 

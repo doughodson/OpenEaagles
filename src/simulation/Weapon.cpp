@@ -1649,5 +1649,5 @@ std::ostream& Weapon::serialize(std::ostream& sout, const int i, const bool slot
     return sout;
 }
 
-} // End simulation namespace
+}
 }

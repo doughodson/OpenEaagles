@@ -746,5 +746,5 @@ std::ostream& Stores::serialize(std::ostream& sout, const int i, const bool slot
    return sout;
 }
 
-} // end simulation namespace
+}
 }

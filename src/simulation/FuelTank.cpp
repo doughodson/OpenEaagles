@@ -119,6 +119,6 @@ std::ostream& FuelTank::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // end simulation namespace
+}
 }
 

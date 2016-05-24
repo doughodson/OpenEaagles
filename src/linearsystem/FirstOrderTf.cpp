@@ -162,5 +162,5 @@ bool FirstOrderTf::setD2(const double v)
    return true;
 }
 
-} // End linearsystem namespace
+}
 }

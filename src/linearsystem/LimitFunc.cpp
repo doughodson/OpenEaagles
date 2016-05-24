@@ -142,5 +142,5 @@ bool LimitFunc::setUpperLimit(const double v)
    return true;
 }
 
-} // End linearsystem namespace
+}
 }

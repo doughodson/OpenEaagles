@@ -182,6 +182,6 @@ EMPTY_COPYDATA(Poundals)
 EMPTY_DELETEDATA(Poundals)
 
 
-} // End base namespace
+}
 }
 

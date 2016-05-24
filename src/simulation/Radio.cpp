@@ -558,5 +558,5 @@ void CommRadio::receivedEmissionReport(Emission* const em)
    }
 }
 
-} // End simulation namespace
+}
 }

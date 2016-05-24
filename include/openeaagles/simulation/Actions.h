@@ -245,7 +245,7 @@ private:
    unsigned int camouflage;    // Camouflage type (0 is none)
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

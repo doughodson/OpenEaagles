@@ -184,5 +184,5 @@ std::ostream& ExternalStore::serialize(std::ostream& sout, const int i, const bo
 }
 
 
-} // end simulation namespace
+}
 }

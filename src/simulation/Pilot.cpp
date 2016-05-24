@@ -12,5 +12,5 @@ EMPTY_COPYDATA(Pilot)
 EMPTY_DELETEDATA(Pilot)
 EMPTY_SERIALIZER(Pilot)
 
-} // End simulation namespace
+}
 }

@@ -223,5 +223,5 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
     return sout;
 }
 
-} // End base namespace
+}
 }

@@ -324,5 +324,5 @@ StatuteMiles::StatuteMiles(const Distance& value) : Distance()
 EMPTY_COPYDATA(StatuteMiles)
 EMPTY_DELETEDATA(StatuteMiles)
 
-} // End base namespace
+}
 }

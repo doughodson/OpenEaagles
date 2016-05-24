@@ -230,7 +230,7 @@ protected:
    const Ptbl* ptbl;    // Position table; one for each instance
 };
 
-} // End dafif namespace
+}
 }
 
 #endif

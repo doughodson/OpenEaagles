@@ -337,7 +337,7 @@ private:
    unsigned int apartNumMissiles;      // Articulated Part: Number of attached missiles
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

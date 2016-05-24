@@ -46,7 +46,7 @@ private:
    bool loadData() override;   // Load the data file
 };
 
-} // End terrain namespace
+}
 }
 
 #endif

@@ -1130,5 +1130,5 @@ bool SimpleStoresMgr::onTriggerSwEvent(const base::Boolean* const sw)
 }
 
 
-} // End simulation namespace
+}
 }

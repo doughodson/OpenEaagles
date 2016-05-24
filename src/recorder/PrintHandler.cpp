@@ -346,5 +346,5 @@ void PrintHandler::processRecordImp(const DataRecordHandle* const handle)
    // baseclass
 }
 
-} // End recorder namespace
+}
 }

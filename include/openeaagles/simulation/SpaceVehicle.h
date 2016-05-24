@@ -95,7 +95,7 @@ protected:
    void dynamics(const double  dt = 0.0) override;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

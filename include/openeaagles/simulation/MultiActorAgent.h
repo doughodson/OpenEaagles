@@ -78,7 +78,7 @@ private:
 
 inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }
 
-} // End simulation namespace
+}
 }
 
 

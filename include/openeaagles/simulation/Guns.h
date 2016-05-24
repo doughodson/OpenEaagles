@@ -201,7 +201,7 @@ private:
    Burst bursts[MBT];         // Bursts
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

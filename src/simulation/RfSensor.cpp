@@ -859,5 +859,5 @@ void SensorMgr::deleteData()
 {
 }
 
-} // End simulation namespace
+}
 }

@@ -22,5 +22,5 @@ Limit11::Limit11() : LimitFunc(1,1)
 EMPTY_COPYDATA(Limit11)
 EMPTY_DELETEDATA(Limit11)
 
-} // End linearsystem namespace
+}
 }

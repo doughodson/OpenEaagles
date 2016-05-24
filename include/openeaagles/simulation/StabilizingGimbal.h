@@ -55,7 +55,7 @@ private:
    MountPosition    mountPosition;   // Gimbal Mount position
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

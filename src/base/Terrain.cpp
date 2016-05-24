@@ -791,5 +791,5 @@ std::ostream& Terrain::serialize(std::ostream& sout, const int i, const bool slo
     return sout;
 }
 
-} // End base namespace
+}
 }

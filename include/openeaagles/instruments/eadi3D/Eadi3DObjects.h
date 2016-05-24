@@ -155,7 +155,7 @@ private:
     bool made;
 };
 
-} // End Instruments namespace
+}
 }
 
 #endif

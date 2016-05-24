@@ -567,6 +567,6 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
 }
 #endif
 
-} // End simulation namespace
+}
 }
 

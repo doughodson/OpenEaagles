@@ -415,5 +415,5 @@ std::ostream& TargetData::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-} // End simulation namespace
+}
 }

@@ -187,7 +187,7 @@ private:
    double   rfLossSignalProcess; // Signal Processing loss (default: 1.0)    (no units)
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

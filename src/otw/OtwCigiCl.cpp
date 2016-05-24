@@ -2779,5 +2779,5 @@ void OtwModelCigiCl::clear()
    BaseClass::clear();
 }
 
-} // End otw namespace
+}
 }

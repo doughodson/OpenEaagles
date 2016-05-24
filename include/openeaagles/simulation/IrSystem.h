@@ -74,7 +74,7 @@ private:
    bool disableQueries;             // Disable sending queries flag
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

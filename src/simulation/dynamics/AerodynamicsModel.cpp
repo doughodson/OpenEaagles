@@ -256,5 +256,5 @@ int AerodynamicsModel::getEngThrustAb(double* const, const int) const
     return 0;
 }
 
-} // End simulation namespace
+}
 }

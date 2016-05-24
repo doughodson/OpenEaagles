@@ -136,6 +136,6 @@ void IrQueryMsg::clear()
    BaseClass::clear();
 }
 
-} // End simulation namespace
+}
 }
 

@@ -267,5 +267,5 @@ const double* IrSignature::getWaveBandWidths() const
    return ((waveBandTable != nullptr) ? waveBandTable->getDataTable() : nullptr);
 }
 
-} // End simulation namespace
+}
 }

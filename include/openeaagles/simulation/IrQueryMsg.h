@@ -169,7 +169,7 @@ private:
    MergedQueryStatus mergedQueryStatus;      // Flags status of query merging   // FAB
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

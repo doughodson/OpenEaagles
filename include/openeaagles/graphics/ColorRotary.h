@@ -72,7 +72,7 @@ private:
     unsigned int numVals;                    // number of values
 };
 
-} // End graphics namespace
+}
 }
 
 #endif

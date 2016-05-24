@@ -220,5 +220,5 @@ std::ostream& StabilizingGimbal::serialize(std::ostream& sout, const int i, cons
     return sout;
 }
 
-} // End simulation namespace
+}
 }

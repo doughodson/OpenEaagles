@@ -95,7 +95,7 @@ private:
    double   cryptoKeys[2][MAX_CRYPTO_KEYS]; // Crypto Variables
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

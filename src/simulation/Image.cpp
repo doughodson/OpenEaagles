@@ -166,5 +166,5 @@ bool Image::testImage(const unsigned w0, const unsigned h0)
     return ok;
 }
 
-} // End simulation namespace
+}
 }

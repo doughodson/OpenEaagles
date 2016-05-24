@@ -265,7 +265,7 @@ private:
     bool        navDataValid;   // Nav data is valid
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

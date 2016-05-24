@@ -638,5 +638,5 @@ void IrTrack::clear()
    BaseClass::clear();
 }
 
-} // End simulation namespace
+}
 }

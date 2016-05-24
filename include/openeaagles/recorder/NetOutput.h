@@ -47,7 +47,7 @@ private:
     bool   noWaitFlag;                             // No wait (unblocked) I/O flag
 };
 
-} // End recorder namespace
+}
 }
 
 #endif

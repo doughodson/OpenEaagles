@@ -267,6 +267,6 @@ bool CVector::setFldWidth(const unsigned int FW)
 }
 
 
-} // End base namespace
+}
 }
 

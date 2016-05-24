@@ -76,7 +76,7 @@ private:
     bool            origCompressed; // Original image is compressed
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

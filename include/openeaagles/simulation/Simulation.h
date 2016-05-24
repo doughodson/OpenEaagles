@@ -442,7 +442,7 @@ private:
    bool bgThreadsFailed;                   // Failed to create threads.
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

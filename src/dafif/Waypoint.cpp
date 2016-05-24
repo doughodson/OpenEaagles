@@ -79,5 +79,5 @@ void Waypoint::printRecord(std::ostream& sout) const
    sout.precision(old);
 }
 
-} // End dafif namespace
+}
 }

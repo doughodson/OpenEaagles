@@ -94,7 +94,7 @@ protected:
    void clearData() override;
 };
 
-} // End terrain namespace
+}
 }
 
 #endif

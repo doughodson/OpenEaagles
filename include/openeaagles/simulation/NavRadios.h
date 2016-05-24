@@ -151,7 +151,7 @@ private:
    double ilsLocalizerBearing;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -151,6 +151,6 @@ bool NetHandler::checkByteOrder()
     return (n1 == n2);               // No difference? Then we already in network order!
 }
 
-} // End base namespace
+}
 }
 

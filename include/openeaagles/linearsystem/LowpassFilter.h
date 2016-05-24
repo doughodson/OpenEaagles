@@ -46,7 +46,7 @@ private:
    double wc;    // Cutoff frequency (rad/sec)
 };
 
-} // End linearsystem namespace
+}
 }
 
 #endif

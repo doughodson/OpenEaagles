@@ -740,6 +740,6 @@ GLenum Eadi3DFont::createEadi3DFont(GLuint fontBase)
     return GL_TRUE;
 }
 
-} // End Instruments namespace
+}
 }
 

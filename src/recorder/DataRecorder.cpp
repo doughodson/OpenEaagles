@@ -1218,5 +1218,5 @@ base::Object* DataRecorder::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End recorder namespace
+}
 }

@@ -107,7 +107,7 @@ private:
    bool usePerceivedPosVel;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

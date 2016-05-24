@@ -67,7 +67,7 @@ private:
    bool        jettisoned;      // Weapon has been jettisoned.
 };
 
-} // end simulation namespace
+}
 }
 
 #endif

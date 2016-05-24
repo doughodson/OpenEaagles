@@ -175,6 +175,6 @@ Liters::Liters(const Volume& value) : Volume()
 EMPTY_COPYDATA(Liters)
 EMPTY_DELETEDATA(Liters)
 
-} // End base namespace
+}
 }
 

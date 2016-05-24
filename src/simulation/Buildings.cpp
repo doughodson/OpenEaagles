@@ -43,5 +43,5 @@ unsigned int Building::getMajorType() const
     return BUILDING;
 }
 
-} // End simulation namespace
+}
 }

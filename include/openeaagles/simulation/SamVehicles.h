@@ -57,7 +57,7 @@ private:
    unsigned int      numMsl;           // Number of missile available
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -49,7 +49,7 @@ private:
    double initFuelWt;    // Fuel contents at reset (lb)
 };
 
-} // end simulation namespace
+}
 }
 
 #endif

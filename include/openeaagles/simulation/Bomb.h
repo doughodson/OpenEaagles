@@ -122,7 +122,7 @@ private:
    double fuzeTime;        // Fuze Arming Time
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

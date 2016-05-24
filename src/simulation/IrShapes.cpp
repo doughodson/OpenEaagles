@@ -342,5 +342,5 @@ double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 
 } // end of method
 
-} // End simulation namespace
+}
 }

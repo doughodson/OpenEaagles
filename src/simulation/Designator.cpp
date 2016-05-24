@@ -26,5 +26,5 @@ void Designator::deleteData()
 {
 }
 
-} // End simulation namespace
+}
 }

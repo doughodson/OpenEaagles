@@ -106,5 +106,5 @@ bool Translator::setZPos(const double zPos)
     return true;
 }
 
-} // End graphics namespace
+}
 }

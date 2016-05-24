@@ -77,7 +77,7 @@ private:
    Track*         nextToShoot;      // Next to shoot track
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

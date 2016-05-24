@@ -60,7 +60,6 @@ private:
    AckCodes ack;                 // ack code
 };
 
-//
 inline const base::String* Message::getSenderName() const              { return senderName;    }
 inline const base::List* Message::getDestNames() const                 { return destNames;     }
 inline double Message::getTimeStamp() const                             { return timeStamp;     }
@@ -71,7 +70,7 @@ inline void Message::setTimeStamp(const double ts)                      { timeSt
 inline void Message::setLifeSpan(const double ls)                       { lifeSpan = ls;        }
 inline void Message::setAckCode(const AckCodes a)                       { ack = a;              }
 
-} // End simulation
+}
 }
 
 #endif

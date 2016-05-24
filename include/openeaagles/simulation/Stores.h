@@ -226,7 +226,7 @@ private:
    }
 };
 
-} // end simulation namespace
+}
 }
 
 #endif

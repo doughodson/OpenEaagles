@@ -44,5 +44,5 @@ void DataRecordHandle::deleteData()
    if (record != nullptr) { delete record;  record = nullptr; }
 }
 
-} // End recorder namespace
+}
 }

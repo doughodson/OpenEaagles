@@ -156,5 +156,5 @@ void SensorMsg::setDataMessage(base::Object* const msg)
    dataMsg = msg;
 }
 
-} // End simulation namespace
+}
 }

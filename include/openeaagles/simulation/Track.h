@@ -340,7 +340,7 @@ protected:
 
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

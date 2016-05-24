@@ -1618,5 +1618,5 @@ unsigned long BgThread::userFunc(const double dt)
    return 0;
 }
 
-} // End simulation namespace
+}
 }

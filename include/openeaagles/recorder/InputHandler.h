@@ -30,7 +30,7 @@ protected:
    virtual const DataRecordHandle* readRecordImp() =0;
 };
 
-} // End recorder namespace
+}
 }
 
 #endif

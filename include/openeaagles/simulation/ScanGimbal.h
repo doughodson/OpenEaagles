@@ -271,7 +271,7 @@ private:
     double     maxNumRevs;       // Spiral Scan - maximum number of revolutions
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

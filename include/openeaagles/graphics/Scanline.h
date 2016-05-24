@@ -137,7 +137,7 @@ private:
 };
 
 
-} // End graphics namespace
+}
 }
 
 #endif

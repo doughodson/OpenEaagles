@@ -24,7 +24,7 @@ public:
     Bullseye();
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

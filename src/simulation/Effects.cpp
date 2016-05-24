@@ -285,5 +285,5 @@ void Decoy::deleteData()
 {
 }
 
-} // End simulation namespace
+}
 }

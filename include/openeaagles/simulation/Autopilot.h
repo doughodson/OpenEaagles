@@ -345,7 +345,7 @@ inline double Autopilot::getMaxClimbRate() const            { return maxClimbRat
 inline double Autopilot::getMaxPitchAngle() const           { return maxPitchAngleDegs; }
 inline double Autopilot::getMaxVelAcc() const               { return maxVelAccNps; }
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -166,5 +166,5 @@ base::Object* graphics::ColorRotary::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End graphics namespace
+}
 }

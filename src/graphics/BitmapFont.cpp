@@ -583,5 +583,5 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    return bitmap;
 }
 
-} // End graphics namespace
+}
 }

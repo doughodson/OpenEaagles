@@ -380,5 +380,5 @@ std::ostream& AnalogInput::serialize(std::ostream& sout, const int i, const bool
    return sout;
 }
 
-} // end iodevice
+}
 }

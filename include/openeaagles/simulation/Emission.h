@@ -163,7 +163,7 @@ private:
    unsigned int    ecmFlag;        // ECM enumeration
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -860,6 +860,6 @@ void Scanline::Edge::incEdgeStart()
 }
 
 
-} // End graphics namespace
+}
 }
 

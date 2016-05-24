@@ -131,5 +131,5 @@ void Ils::printGlideSlopeData(std::ostream& sout, const double aclat, const doub
    sout << "  ILS glide slope " << ilsGlideSlope << "  aircraft_glide_slope " << acGlideSlope << " delta_angle " << deltaGlideSlope;
 }
 
-} // End dafif namespace
+}
 }

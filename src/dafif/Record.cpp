@@ -539,5 +539,5 @@ void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const
    sout << "  range " << range << "  grdrange " << grdrange << " true_bearing " << bearing;
 }
 
-} // End dafif namespace
+}
 }

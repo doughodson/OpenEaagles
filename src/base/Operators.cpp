@@ -202,5 +202,5 @@ bool Add::setSecondNumber(const Number* const ssnobj)
     return true;
 }
 
-} // End base namespace
+}
 }

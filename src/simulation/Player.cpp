@@ -4591,5 +4591,5 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    return sout;
 }
 
-} // End simulation namespace
+}
 }

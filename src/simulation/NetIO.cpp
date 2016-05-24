@@ -1887,5 +1887,5 @@ void NtmOutputNodeStd::print(std::ostream& sout, const int icnt) const
    sout << ")" << std::endl;
 }
 
-} // End simulation namespace
+}
 }

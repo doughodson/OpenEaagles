@@ -392,7 +392,7 @@ private:
    base::safe_ptr<Tdb> tdb;  // Current Target Data Block
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -830,5 +830,5 @@ std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 
-} // End graphics namespace
+}
 }

@@ -439,5 +439,5 @@ base::Object* Torus::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End glut namespace
+}
 }

@@ -308,6 +308,6 @@ base::Object* Material::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End graphics namespace
+}
 }
 

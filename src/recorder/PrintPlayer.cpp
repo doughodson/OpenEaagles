@@ -264,5 +264,5 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
 }
 
 
-} // End recorder namespace
+}
 }

@@ -1914,5 +1914,5 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     sout << cbuf;
 }
 
-} // End recorder namespace
+}
 }

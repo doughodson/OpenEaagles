@@ -168,5 +168,5 @@ bool SecondOrderTf::setD3(const double v)
    return true;
 }
 
-} // End linearsystem namespace
+}
 }

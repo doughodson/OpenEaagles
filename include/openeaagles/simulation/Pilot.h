@@ -28,7 +28,7 @@ public:
     Pilot();
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

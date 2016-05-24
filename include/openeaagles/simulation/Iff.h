@@ -119,7 +119,7 @@ private:
    bool icWhichMode4;         // Initial Mode 4 mode
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

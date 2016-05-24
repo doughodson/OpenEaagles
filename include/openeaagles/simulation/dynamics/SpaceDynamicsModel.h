@@ -38,7 +38,7 @@ public:
    virtual bool setTranslateZInput(const double transz);
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

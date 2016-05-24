@@ -48,5 +48,5 @@ const DataRecordHandle* InputHandler::readRecord()
    return p;
 }
 
-} // End recorder namespace
+}
 }

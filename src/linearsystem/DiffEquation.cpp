@@ -129,5 +129,5 @@ double DiffEquation::g(const double xn)
    }
 }
 
-} // End linearsystem namespace
+}
 }

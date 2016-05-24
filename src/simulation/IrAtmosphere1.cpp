@@ -367,5 +367,5 @@ base::Object* IrAtmosphere1::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End simulation namespace
+}
 }

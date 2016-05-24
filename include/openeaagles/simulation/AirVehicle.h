@@ -199,7 +199,7 @@ public:
     UnmannedAirVehicle();
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

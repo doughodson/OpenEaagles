@@ -480,5 +480,5 @@ base::Object* Texture::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End graphics namespace
+}
 }

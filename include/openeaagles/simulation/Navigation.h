@@ -249,7 +249,7 @@ private:
    double  refLon;             // Ref longitude (deg)
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

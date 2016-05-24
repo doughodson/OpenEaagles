@@ -78,5 +78,5 @@ std::ostream& Rgba::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-} // End base namespace
+}
 }

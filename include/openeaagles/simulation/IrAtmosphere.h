@@ -150,7 +150,7 @@ private:
    double earthRadiance;    // Simple background radiance for targets on ground
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

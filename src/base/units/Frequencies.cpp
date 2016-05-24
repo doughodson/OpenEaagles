@@ -206,5 +206,5 @@ TeraHertz::TeraHertz(const Frequency& value) : Frequency()
 EMPTY_COPYDATA(TeraHertz)
 EMPTY_DELETEDATA(TeraHertz)
 
-} // End base namespace
+}
 }

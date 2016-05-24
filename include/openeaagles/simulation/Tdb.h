@@ -167,7 +167,7 @@ protected:
    double* ra;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

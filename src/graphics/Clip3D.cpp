@@ -532,5 +532,5 @@ unsigned int Clip3D::polyClip2Halfspace(
 }
 
 
-} // End graphics namespace
+}
 }

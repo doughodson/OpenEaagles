@@ -2043,5 +2043,5 @@ void Eadi3DObjects::makeFont(void) {
     makeFTZ(base+FONT_Z);
 }
 
-} // End Instruments namespace
+}
 }

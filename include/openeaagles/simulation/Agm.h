@@ -34,7 +34,7 @@ private:
           osg::Vec3* const vel, osg::Vec3* const posx) const override;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -101,7 +101,7 @@ public:
     int getCategory() const override;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

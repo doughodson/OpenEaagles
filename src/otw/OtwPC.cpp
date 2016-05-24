@@ -257,6 +257,6 @@ void OtwPC::sendPcData()
     }
 }
 
-} // End otw namespace
+}
 }
 

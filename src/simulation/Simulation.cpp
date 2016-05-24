@@ -2161,6 +2161,6 @@ unsigned long SimBgThread::userFunc()
    return 0;
 }
 
-} // End simulation namespace
+}
 }
 

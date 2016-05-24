@@ -119,7 +119,7 @@ private:
    const base::String* tmName;       // Track manager name
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

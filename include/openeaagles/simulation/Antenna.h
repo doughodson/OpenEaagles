@@ -162,7 +162,7 @@ private:
    bool        recycle;            // Recycle emissions flag
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

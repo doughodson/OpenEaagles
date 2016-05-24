@@ -300,5 +300,5 @@ base::Object* Iff::getSlotByIndex(const int si)
     return BaseClass::getSlotByIndex(si);
 }
 
-} // End simulation namespace
+}
 }

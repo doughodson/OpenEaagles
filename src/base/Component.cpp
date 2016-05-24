@@ -1483,6 +1483,6 @@ Object* Component::SendData::getValue(const bool value)
     else return nullptr;
 }
 
-} // End base namespace
+}
 }
 

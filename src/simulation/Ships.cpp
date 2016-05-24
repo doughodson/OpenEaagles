@@ -43,5 +43,5 @@ unsigned int Ship::getMajorType() const
     return SHIP;
 }
 
-} // End simulation namespace
+}
 }

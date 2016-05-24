@@ -21,7 +21,7 @@ public:
    Limit01();
 };
 
-} // End linearsystem namespace
+}
 }
 
 #endif

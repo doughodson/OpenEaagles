@@ -150,5 +150,5 @@ void Color::setDefaultAlpha(const double alpha)
     defaultAlpha = alpha;
 }
 
-} // End base namespace
+}
 }

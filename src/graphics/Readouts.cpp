@@ -1562,5 +1562,5 @@ bool Rotary2::onSelect(const base::Number* const osobj)
    return true;
 }
 
-} // End graphics namespace
+}
 }

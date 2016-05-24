@@ -80,7 +80,7 @@ private:
    base::safe_ptr<const Player>  tPlayer; // Template player
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

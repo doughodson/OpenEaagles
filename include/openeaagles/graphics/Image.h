@@ -93,7 +93,7 @@ inline const GLubyte* Image::getPixels() const        { return pixels; }
 inline unsigned int Image::getXResolutionPPM() const  { return xPixPerMeter; }
 inline unsigned int Image::getYResolutionPPM() const  { return yPixPerMeter; }
 
-} // End graphics namespace
+}
 }
 
 #endif

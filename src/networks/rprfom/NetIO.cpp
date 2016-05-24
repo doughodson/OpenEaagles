@@ -29,7 +29,8 @@ namespace rprfom {
 // Description: RPR FOM incoming NTM class
 //==============================================================================
 
-class NtmInputNode : public simulation::NetIO::NtmInputNode {
+class NtmInputNode : public simulation::NetIO::NtmInputNode
+{
    DECLARE_SUBCLASS(NtmInputNode, simulation::NetIO::NtmInputNode)
 
 public:

@@ -401,7 +401,7 @@ private:
     double maxGimbal;      // max gimbal angle         (radians)
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

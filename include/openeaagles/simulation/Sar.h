@@ -107,7 +107,7 @@ private:
     unsigned int   height;          // Image height (pixels)
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

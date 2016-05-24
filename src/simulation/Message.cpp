@@ -125,6 +125,6 @@ void Message::clearDestNames()
    }
 }
 
-} //End simulation Namespace
-} //End oe Namespace
+}
+}
 

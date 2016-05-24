@@ -174,7 +174,7 @@ private:
 
 #include "openeaagles/simulation/DataRecorder.inl"
 
-} // End simulation namespace
+}
 }
 
 #endif

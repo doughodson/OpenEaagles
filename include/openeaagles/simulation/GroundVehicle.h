@@ -173,7 +173,7 @@ public:
     GroundStationUav();
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

@@ -117,6 +117,6 @@ std::ostream& Pair::serialize(std::ostream& sout, const int indent, const bool) 
    return sout;
 }
 
-} // End base namespace
+}
 }
 

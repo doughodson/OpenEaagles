@@ -903,5 +903,5 @@ std::ostream& Steerpoint::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-} // End simulation namespace
+}
 }

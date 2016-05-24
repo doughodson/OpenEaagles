@@ -1468,5 +1468,5 @@ bool Matrix::getTriDiagonal(Matrix* const pA) const
 }
 
 
-} // End base namespace
+}
 }

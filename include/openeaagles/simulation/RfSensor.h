@@ -178,7 +178,7 @@ public:
     SensorMgr();
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

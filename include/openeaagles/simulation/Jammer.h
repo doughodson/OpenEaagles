@@ -26,7 +26,7 @@ protected:
     void transmit(const double dt) override;
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

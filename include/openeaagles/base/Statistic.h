@@ -205,8 +205,7 @@ inline double Statistic::ci(const double Z) const
   return 0.0;
 }
 
-
-} // End namespace
-} // End namespace
+}
+}
 
 #endif

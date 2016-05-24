@@ -317,5 +317,5 @@ void WaypointLoader::WaypointKey::serialize(std::ostream& sout) const
    sout << std::endl;
 }
 
-} // End dafif namespace
+}
 }

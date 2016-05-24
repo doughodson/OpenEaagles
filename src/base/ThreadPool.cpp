@@ -425,5 +425,5 @@ Object* ThreadPool::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End base namespace
+}
 }

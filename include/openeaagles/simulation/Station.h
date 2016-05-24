@@ -313,7 +313,7 @@ private:
    const base::Time* startupResetTimer0;  // Init value of the startup RESET timer
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

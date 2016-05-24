@@ -1238,5 +1238,5 @@ bool Nib::drComputeMatrixR2(
    return true;
 }
 
-} // End simulation namespace
+}
 }

@@ -696,5 +696,5 @@ std::ostream& CollisionDetect::serialize(std::ostream& sout, const int i, const 
     return sout;
 }
 
-} // End simulation namespace
+}
 }

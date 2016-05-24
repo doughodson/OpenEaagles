@@ -200,5 +200,5 @@ bool DynamicsModel::setFuelWt(const double)
    return false;
 }
 
-} // End simulation namespace
+}
 }

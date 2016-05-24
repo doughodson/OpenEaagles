@@ -214,5 +214,5 @@ void UnmannedSpaceVehicle::dynamics(const double dt)
    //std::cout << std::endl;
 }
 
-} // End simulation namespace
+}
 }

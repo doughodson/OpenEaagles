@@ -59,7 +59,7 @@ public:
    virtual bool setSlotD3(const base::Number* const msg);
 };
 
-} // End linearsystem namespace
+}
 }
 
 #endif

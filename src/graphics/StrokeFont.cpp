@@ -1285,6 +1285,6 @@ GLenum StrokeFont::createStrokeFont(GLuint fontBase)
    return GL_TRUE;
 }
 
-} // End graphics namespace
+}
 }
 

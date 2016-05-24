@@ -219,7 +219,7 @@ private:
    unsigned int* trackNumMatches;            // Number of matcher for each track
 };
 
-} // End simulation namespace
+}
 }
 
 #endif

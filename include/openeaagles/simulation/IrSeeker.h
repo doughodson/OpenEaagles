@@ -96,7 +96,7 @@ protected:
 };
 #endif
 
-} // End simulation namespace
+}
 }
 
 #endif
