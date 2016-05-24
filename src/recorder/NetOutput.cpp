@@ -178,4 +178,4 @@ oe::base::Object* NetOutput::getSlotByIndex(const int si)
 }
 
 } // End recorder namespace
-} // End oe namespace
+}

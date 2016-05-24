@@ -57,9 +57,9 @@ private:
 
 inline base::List* Arbiter::getBehaviors()                 { return behaviors; }
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 
 #endif
 

@@ -674,4 +674,4 @@ bool Image::writeFileTGA(const char* const filename)
 #endif
 
 } // End graphics namespace
-} // End oe namespace
+}

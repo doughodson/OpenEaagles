@@ -99,4 +99,4 @@ std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) c
 }
 
 } // End base namespace
-} // End oe namespace
+}

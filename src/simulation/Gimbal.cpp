@@ -1483,4 +1483,4 @@ std::ostream& Gimbal::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

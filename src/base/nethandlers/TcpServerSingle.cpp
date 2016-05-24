@@ -186,6 +186,6 @@ bool TcpServerSingle::acceptConnection()
    return true;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

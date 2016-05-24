@@ -204,6 +204,6 @@ unsigned int TcpHandler::recvData(char* const packet, const int maxSize)
    return n;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

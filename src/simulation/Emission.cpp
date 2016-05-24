@@ -117,4 +117,4 @@ void Emission::setTransmitter(RfSystem* const t)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

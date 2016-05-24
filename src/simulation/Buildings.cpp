@@ -44,4 +44,4 @@ unsigned int Building::getMajorType() const
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

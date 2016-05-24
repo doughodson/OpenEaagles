@@ -24,4 +24,4 @@ std::ostream& Boolean::serialize(std::ostream& sout, const int, const bool) cons
 }
 
 } // End base namespace
-} // End oe namespace
+}

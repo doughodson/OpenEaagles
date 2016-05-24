@@ -183,4 +183,4 @@ std::ostream& Yiq::serialize(std::ostream& sout, const int i, const bool slotsOn
 }
 
 } // End base namespace
-} // End oe namespace
+}

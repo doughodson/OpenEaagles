@@ -407,5 +407,5 @@ const TrackManager* OnboardComputer::getTrackManagerByName(const char* const nam
 }
 
 } // End simulation namespace
-} // End oe namespace
+}
 

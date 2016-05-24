@@ -222,6 +222,6 @@ void Rotators::draw()
 }
 
 } // End graphics namespace
-} // End oe namespace
+}
 
 

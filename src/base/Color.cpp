@@ -151,4 +151,4 @@ void Color::setDefaultAlpha(const double alpha)
 }
 
 } // End base namespace
-} // End oe namespace
+}

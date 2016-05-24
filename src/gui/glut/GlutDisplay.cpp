@@ -1095,4 +1095,4 @@ std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool
 }
 
 } // End glut namespace
-} // End oe namespace
+}

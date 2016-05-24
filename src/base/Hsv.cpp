@@ -359,4 +359,4 @@ std::ostream& Hsv::serialize(std::ostream& sout, const int i, const bool slotsOn
 }
 
 } // End base namespace
-} // End oe namespace
+}

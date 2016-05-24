@@ -2162,5 +2162,5 @@ unsigned long SimBgThread::userFunc()
 }
 
 } // End simulation namespace
-} // End oe namespace
+}
 

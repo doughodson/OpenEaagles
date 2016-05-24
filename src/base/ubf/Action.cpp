@@ -25,7 +25,7 @@ void Action::copyData(const Action& org, const bool cc)
    vote = org.vote;
 }
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 

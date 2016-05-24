@@ -29,9 +29,9 @@ public:
    virtual const State* getUbfStateByType(const std::type_info& type) const;
 };
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 
 #endif
 

@@ -346,6 +346,6 @@ inline double Autopilot::getMaxPitchAngle() const           { return maxPitchAng
 inline double Autopilot::getMaxVelAcc() const               { return maxVelAccNps; }
 
 } // End simulation namespace
-} // End oe namespace
+}
 
 #endif

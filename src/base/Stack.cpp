@@ -23,4 +23,4 @@ std::ostream& Stack::serialize(std::ostream& sout, const int, const bool) const
 }
 
 } // End base namespace
-} // End oe namespace
+}

@@ -82,7 +82,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Density& n)
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

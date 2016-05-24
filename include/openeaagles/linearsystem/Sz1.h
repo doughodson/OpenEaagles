@@ -50,6 +50,6 @@ public:
 };
 
 } // End linearsystem namespace
-} // End oe namespace
+}
 
 #endif

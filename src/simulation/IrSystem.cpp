@@ -265,5 +265,5 @@ base::Object* IrSystem::getSlotByIndex(const int si)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}
 

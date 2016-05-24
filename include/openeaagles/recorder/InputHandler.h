@@ -31,6 +31,6 @@ protected:
 };
 
 } // End recorder namespace
-} // End oe namespace
+}
 
 #endif

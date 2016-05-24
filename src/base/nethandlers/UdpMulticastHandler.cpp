@@ -342,6 +342,6 @@ std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, co
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

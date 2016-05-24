@@ -457,4 +457,4 @@ bool Font::setSlotLineSpacing(const base::Number* const newLineSpacing)
 }
 
 } // End graphics namespace
-} // End oe namespace
+}

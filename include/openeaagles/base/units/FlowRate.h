@@ -65,7 +65,7 @@ private:
     double    flowRate;       // holds our velocity
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

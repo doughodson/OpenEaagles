@@ -88,8 +88,7 @@ const State* State::getUbfStateByType(const std::type_info& type) const
    return p;
 }
 
-
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 

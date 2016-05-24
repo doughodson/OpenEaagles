@@ -232,4 +232,4 @@ EMPTY_COPYDATA(DecibelMilliWatts)
 EMPTY_DELETEDATA(DecibelMilliWatts)
 
 } // End base namespace
-} // End oe namespace
+}

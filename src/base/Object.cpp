@@ -358,5 +358,5 @@ const Object::_Static* Object::getStatic()
 }
 
 } // End base namespace
-} // End oe namespace
+}
 

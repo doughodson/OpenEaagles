@@ -38,6 +38,6 @@ private:
 };
 
 } // End Instruments namespace
-} // End oe namespace
+}
 
 #endif

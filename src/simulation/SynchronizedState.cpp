@@ -104,5 +104,5 @@ bool SynchronizedState::setAngularVelocities(const osg::Vec3d& newAngVel)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}
 

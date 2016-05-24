@@ -44,7 +44,7 @@ public:
     virtual bool setSlotAlpha(Number* const msg);
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

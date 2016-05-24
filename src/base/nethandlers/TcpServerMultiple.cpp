@@ -221,6 +221,6 @@ std::ostream& TcpServerMultiple::serialize(std::ostream& sout, const int i, cons
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

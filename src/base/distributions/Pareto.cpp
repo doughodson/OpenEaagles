@@ -106,7 +106,7 @@ std::ostream& Pareto::serialize(std::ostream& sout, const int i, const bool slot
   return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 

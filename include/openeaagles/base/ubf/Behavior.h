@@ -46,9 +46,8 @@ private:
 inline void Behavior::setVote(const unsigned int x)    { vote = x; }
 inline unsigned int Behavior::getVote() const          { return vote; }
 
-
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 
 #endif

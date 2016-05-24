@@ -186,5 +186,5 @@ void Polygon::drawFunc()
 }
 
 } // End graphics namespace
-} // End oe namespace
+}
 

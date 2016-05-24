@@ -359,4 +359,4 @@ void Logger::LogEvent::deleteData()
 }
 
 } // End base namespace
-} // End oe namespace
+}

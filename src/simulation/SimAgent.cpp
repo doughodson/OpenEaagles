@@ -150,6 +150,6 @@ base::Object* SimAgent::getSlotByIndex(const int si)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}
 
 

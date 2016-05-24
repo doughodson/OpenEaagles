@@ -42,9 +42,9 @@ private:
 inline void Action::setVote(const unsigned int x)      { vote = x; return; }
 inline unsigned int Action::getVote() const            { return vote; }
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 
 #endif
 

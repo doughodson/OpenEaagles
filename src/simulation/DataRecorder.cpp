@@ -354,5 +354,5 @@ std::ostream& RecorderComponent::serialize(std::ostream& sout, const int i, cons
 }
 
 } // End simulation namespace
-} // End oe namespace
+}
 

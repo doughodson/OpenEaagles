@@ -157,4 +157,4 @@ void SensorMsg::setDataMessage(base::Object* const msg)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

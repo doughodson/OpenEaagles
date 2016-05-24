@@ -1365,5 +1365,5 @@ void Table5::printData(std::ostream& sout, const double* tbl, const unsigned int
     sout << "}" << std::endl;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}

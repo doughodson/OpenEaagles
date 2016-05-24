@@ -861,5 +861,5 @@ void Scanline::Edge::incEdgeStart()
 
 
 } // End graphics namespace
-} // End oe namespace
+}
 

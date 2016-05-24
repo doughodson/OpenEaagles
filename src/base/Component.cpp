@@ -1484,5 +1484,5 @@ Object* Component::SendData::getValue(const bool value)
 }
 
 } // End base namespace
-} // End oe namespace
+}
 

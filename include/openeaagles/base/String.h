@@ -455,7 +455,7 @@ inline std::istream& operator>>(std::istream& sin, String& s)
     return sin;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

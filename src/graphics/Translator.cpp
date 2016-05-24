@@ -107,4 +107,4 @@ bool Translator::setZPos(const double zPos)
 }
 
 } // End graphics namespace
-} // End oe namespace
+}

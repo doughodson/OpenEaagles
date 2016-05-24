@@ -149,7 +149,7 @@ public:
     DownTimer(const double rtime = 0.0);
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

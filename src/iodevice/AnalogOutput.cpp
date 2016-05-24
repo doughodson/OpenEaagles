@@ -336,4 +336,4 @@ std::ostream& AnalogOutput::serialize(std::ostream& sout, const int i, const boo
 }
 
 } // end iodevice
-} // end oe namespace
+}

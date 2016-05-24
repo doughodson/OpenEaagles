@@ -200,6 +200,6 @@ const int WP_ELEVATION  = 0;
 const int WP_MAGVAR     = 106;
 
 } // End dafif namespace
-} // End oe namespace
+}
 
 #endif

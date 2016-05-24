@@ -12,6 +12,7 @@ namespace base {
 //------------------------------------------------------------------------------
 IMPLEMENT_SUBCLASS(AngularVelocity, "AngularVelocity")
 EMPTY_SERIALIZER(AngularVelocity)
+EMPTY_DELETEDATA(AngularVelocity)
 
 //------------------------------------------------------------------------------
 // Slot Table:
@@ -280,12 +281,5 @@ void AngularVelocity::copyData(const AngularVelocity& org, const bool)
     time = org.time;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data:
-//------------------------------------------------------------------------------
-void AngularVelocity::deleteData()
-{
 }
-
-} // End base namespace
-} // End oe namespace
+}

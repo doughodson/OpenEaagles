@@ -17,5 +17,5 @@ EMPTY_SERIALIZER(AvionicsPod)
 
 
 } // end simulation namespace
-} // end oe namespace
+}
 

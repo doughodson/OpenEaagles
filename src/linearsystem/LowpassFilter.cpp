@@ -136,4 +136,4 @@ std::ostream& LowpassFilter::serialize(std::ostream& sout, const int i, const bo
 }
 
 } // End linearsystem namespace
-} // End oe namespace
+}

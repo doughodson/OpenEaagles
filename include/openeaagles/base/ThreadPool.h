@@ -145,8 +145,8 @@ private:
    Object* unthreadedObj;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

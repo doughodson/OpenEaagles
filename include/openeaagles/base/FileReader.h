@@ -173,7 +173,7 @@ inline const char* FileReader::getFirstRecord()
    return getRecord();
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

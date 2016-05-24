@@ -72,6 +72,6 @@ inline void Message::setLifeSpan(const double ls)                       { lifeSp
 inline void Message::setAckCode(const AckCodes a)                       { ack = a;              }
 
 } // End simulation
-} // End oe Namespace
+}
 
 #endif

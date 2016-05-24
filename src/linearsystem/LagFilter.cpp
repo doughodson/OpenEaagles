@@ -143,4 +143,4 @@ std::ostream& LagFilter::serialize(std::ostream& sout, const int i, const bool s
 }
 
 } // End linearsystem namespace
-} // End oe namespace
+}

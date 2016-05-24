@@ -227,6 +227,6 @@ private:
 };
 
 } // end simulation namespace
-} // end oe namespace
+}
 
 #endif

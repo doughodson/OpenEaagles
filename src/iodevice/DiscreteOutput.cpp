@@ -310,4 +310,4 @@ std::ostream& DiscreteOutput::serialize(std::ostream& sout, const int i, const b
 }
 
 } // end iodevice
-} // end oe namespace
+}

@@ -58,6 +58,6 @@ private:
 };
 
 } // End simulation namespace
-} // End oe namespace
+}
 
 #endif

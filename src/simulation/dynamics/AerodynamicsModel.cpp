@@ -257,4 +257,4 @@ int AerodynamicsModel::getEngThrustAb(double* const, const int) const
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

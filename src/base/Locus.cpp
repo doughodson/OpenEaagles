@@ -148,4 +148,4 @@ void Locus::clearData()
 }
 
 } // End base namespace}
-} // end oe namespace
+}

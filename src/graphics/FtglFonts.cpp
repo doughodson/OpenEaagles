@@ -1315,5 +1315,5 @@ void FtglTextureFont::loadFont()
 }
 
 } // End graphics namespace
-} // End oe namespace
+}
 

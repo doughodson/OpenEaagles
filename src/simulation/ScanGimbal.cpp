@@ -1144,4 +1144,4 @@ std::ostream& ScanGimbal::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

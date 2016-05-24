@@ -425,7 +425,7 @@ inline std::ostream& operator<<(std::ostream& sout, const Integer& n)
    return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

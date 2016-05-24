@@ -186,5 +186,5 @@ void IrisGLCompat::rdr2(float x, float y)
 }
 
 } // End Instruments namespace
-} // End oe namespace
+}
 

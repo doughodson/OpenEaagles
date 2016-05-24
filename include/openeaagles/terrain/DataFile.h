@@ -95,6 +95,6 @@ protected:
 };
 
 } // End terrain namespace
-} // End oe namespace
+}
 
 #endif

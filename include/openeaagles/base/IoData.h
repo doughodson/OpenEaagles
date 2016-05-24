@@ -99,7 +99,7 @@ public:
    virtual void clear();
 };
 
-} // End base namespace
-} // end oe namespace
+}
+}
 
 #endif

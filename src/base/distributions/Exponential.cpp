@@ -111,8 +111,7 @@ std::ostream& Exponential::serialize(std::ostream& sout, const int i, const bool
   return sout;
 }
 
-
-} // End base namespace
-} // End oe namespace
+}
+}
 
 

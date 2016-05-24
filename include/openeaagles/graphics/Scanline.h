@@ -138,6 +138,6 @@ private:
 
 
 } // End graphics namespace
-} // End oe namespace
+}
 
 #endif

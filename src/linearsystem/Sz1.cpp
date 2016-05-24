@@ -134,4 +134,4 @@ std::ostream& Sz1::serialize(std::ostream& sout, const int i, const bool slotsOn
 }
 
 } // End linearsystem namespace
-} // End oe namespace
+}

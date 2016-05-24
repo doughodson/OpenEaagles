@@ -826,4 +826,4 @@ std::ostream& Antenna::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

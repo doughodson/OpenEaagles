@@ -2145,4 +2145,4 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 } // End graphics namespace
-} // End oe namespace
+}

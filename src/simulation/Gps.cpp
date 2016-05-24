@@ -120,4 +120,4 @@ void Gps::setCryptoKeys(double ck[], const int week, const int num)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

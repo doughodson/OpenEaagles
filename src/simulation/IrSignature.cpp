@@ -268,4 +268,4 @@ const double* IrSignature::getWaveBandWidths() const
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

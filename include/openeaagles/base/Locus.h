@@ -74,8 +74,7 @@ private:
     unsigned int np;    // Number of data points
 };
 
-
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

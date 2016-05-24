@@ -63,7 +63,7 @@ base::Object* Behavior::getSlotByIndex(const int si)
    return BaseClass::getSlotByIndex(si);
 }
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 

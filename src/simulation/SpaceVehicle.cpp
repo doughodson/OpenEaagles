@@ -215,4 +215,4 @@ void UnmannedSpaceVehicle::dynamics(const double dt)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

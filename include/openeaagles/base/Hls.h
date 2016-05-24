@@ -79,7 +79,7 @@ protected:
     osg::Vec3 hls;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

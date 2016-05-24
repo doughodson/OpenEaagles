@@ -318,4 +318,4 @@ void WaypointLoader::WaypointKey::serialize(std::ostream& sout) const
 }
 
 } // End dafif namespace
-} // End oe namespace
+}

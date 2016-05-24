@@ -315,5 +315,5 @@ DecibelSquareMeters::DecibelSquareMeters(const Area& value) : Area()
 EMPTY_COPYDATA(DecibelSquareMeters)
 EMPTY_DELETEDATA(DecibelSquareMeters)
 
-} // End base namespace
-} // End oe namespace
+}
+}

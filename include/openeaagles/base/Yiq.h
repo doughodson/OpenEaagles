@@ -80,8 +80,7 @@ protected:
     osg::Vec3 yiq;
 };
 
-
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

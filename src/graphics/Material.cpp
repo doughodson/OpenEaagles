@@ -309,5 +309,5 @@ base::Object* Material::getSlotByIndex(const int si)
 }
 
 } // End graphics namespace
-} // End oe namespace
+}
 

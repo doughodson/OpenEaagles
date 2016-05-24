@@ -46,6 +46,6 @@ private:
 
 
 } // End terrain namespace
-} // End oe namespace
+}
 
 #endif

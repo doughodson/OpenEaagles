@@ -248,4 +248,4 @@ std::ostream& Ai2DiSwitch::serialize(std::ostream& sout, const int i, const bool
 }
 
 } // end iodevice
-} // end oe namespace
+}

@@ -468,4 +468,4 @@ std::ostream& IoData::serialize(std::ostream& sout, const int i, const bool slot
 }
 
 } // end iodevice
-} // end oe namespace
+}

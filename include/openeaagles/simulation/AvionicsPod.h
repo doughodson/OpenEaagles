@@ -24,6 +24,6 @@ public:
 };
 
 } // end simulation namespace
-} // end oe namespace
+}
 
 #endif

@@ -278,5 +278,5 @@ void Table::printVector(std::ostream& sout, const double* table, const unsigned 
     sout << " ]";
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}

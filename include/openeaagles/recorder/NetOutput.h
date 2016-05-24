@@ -48,6 +48,6 @@ private:
 };
 
 } // End recorder namespace
-} // End oe namespace
+}
 
 #endif

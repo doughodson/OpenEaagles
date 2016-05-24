@@ -600,4 +600,4 @@ void Tdb::setGimbal(const Gimbal* const newGimbal)
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

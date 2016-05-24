@@ -27,4 +27,4 @@ void Designator::deleteData()
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

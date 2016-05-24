@@ -152,5 +152,5 @@ bool NetHandler::checkByteOrder()
 }
 
 } // End base namespace
-} // End oe namespace
+}
 

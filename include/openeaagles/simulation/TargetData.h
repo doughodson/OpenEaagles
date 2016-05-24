@@ -147,6 +147,6 @@ inline double TargetData::getAzimuth() const                 { return azimuth; }
 inline double TargetData::getVelocity() const                { return velocity; }
 
 } // End simulation namespace
-} // End oe namespace
+}
 
 #endif

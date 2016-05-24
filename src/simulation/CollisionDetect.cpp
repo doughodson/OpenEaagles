@@ -697,4 +697,4 @@ std::ostream& CollisionDetect::serialize(std::ostream& sout, const int i, const 
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

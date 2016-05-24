@@ -181,5 +181,5 @@ std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slo
 }
 
 } // End base namespace
-} // End oe namespace
+}
 

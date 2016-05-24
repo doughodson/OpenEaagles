@@ -77,7 +77,7 @@ private:
 //) // Station
 
 } // End simulation namespace
-} // End oe namespace
+}
 
 #endif
 

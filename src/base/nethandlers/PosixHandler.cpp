@@ -668,6 +668,6 @@ std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const boo
     return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 

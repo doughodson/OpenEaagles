@@ -129,8 +129,5 @@ std::ostream& Lognormal::serialize(std::ostream& sout, const int i, const bool s
   return sout;
 }
 
-
-} // End base namespace
-} // End oe namespace
-
-
+}
+}

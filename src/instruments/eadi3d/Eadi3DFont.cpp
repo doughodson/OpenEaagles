@@ -741,5 +741,5 @@ GLenum Eadi3DFont::createEadi3DFont(GLuint fontBase)
 }
 
 } // End Instruments namespace
-} // End oe namespace
+}
 

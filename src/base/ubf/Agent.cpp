@@ -230,7 +230,7 @@ void AgentTC::updateData(const double dt)
 {
 }
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 

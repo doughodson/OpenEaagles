@@ -117,5 +117,5 @@ std::ostream& Function::serialize(std::ostream& sout, const int i, const bool sl
    return sout;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}

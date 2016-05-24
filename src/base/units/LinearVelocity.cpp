@@ -311,4 +311,4 @@ bool LinearVelocity::setSeconds(const double newTime)
 
 
 } // End base namespace
-} // End oe namespace
+}

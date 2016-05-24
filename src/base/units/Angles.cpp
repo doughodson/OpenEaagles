@@ -154,5 +154,5 @@ Semicircles::Semicircles(const Angle& value) : Angle()
 EMPTY_COPYDATA(Semicircles)
 EMPTY_DELETEDATA(Semicircles)
 
-} // End base namespace
-} // End oe namespace
+}
+}

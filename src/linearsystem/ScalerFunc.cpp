@@ -270,4 +270,4 @@ std::ostream& ScalerFunc::serialize(std::ostream& sout, const int i, const bool 
 }
 
 } // End linearsystem namespace
-} // End oe namespace
+}

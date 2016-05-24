@@ -109,7 +109,7 @@ private:
     double  sec;                // seconds
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

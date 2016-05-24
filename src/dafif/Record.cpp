@@ -540,4 +540,4 @@ void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const
 }
 
 } // End dafif namespace
-} // End oe namespace
+}

@@ -382,4 +382,4 @@ std::ostream& IoDevice::serialize(std::ostream& sout, const int i, const bool sl
 }
 
 } // end iodevice
-} // end oe namespace
+}

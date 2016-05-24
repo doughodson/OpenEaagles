@@ -1023,4 +1023,4 @@ std::ostream& ActionCamouflageType::serialize(std::ostream& sout, const int i, c
 }
 
 } // End simulation namespace
-} // End oe namespace
+}

@@ -213,5 +213,5 @@ EMPTY_COPYDATA(FootPounds)
 EMPTY_DELETEDATA(FootPounds)
 
 } // End base namespace
-} // End oe namespace
+}
 

@@ -681,4 +681,4 @@ double* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
 
 
 } // End simulation namespace
-} // End oe namespace
+}
