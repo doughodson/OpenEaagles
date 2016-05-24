@@ -116,9 +116,9 @@ public:
     Hertz(const double value);
     Hertz(const Frequency& value);
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency(); }
-    double toFrequency() const override                  { return static_cast<double>(val); }
-    double fromFrequency(const double a) const override  { return a; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency(); }
+    virtual double toFrequency() const override                  { return static_cast<double>(val); }
+    virtual double fromFrequency(const double a) const override  { return a; }
 };
 
 //------------------------------------------------------------------------------
@@ -136,9 +136,9 @@ public:
     KiloHertz(const Frequency& value);
 
 private:
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2KHz; }
-    double toFrequency() const override                  { return static_cast<double>(val * KHz2Hz); }
-    double fromFrequency(const double a) const override  { return a * Hz2KHz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2KHz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * KHz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * Hz2KHz; }
 };
 
 
@@ -156,9 +156,9 @@ public:
     MegaHertz(const double value);
     MegaHertz(const Frequency& value);
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2MHz; }
-    double toFrequency() const override                  { return static_cast<double>(val * MHz2Hz); }
-    double fromFrequency(const double a) const override  { return a * Hz2MHz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2MHz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * MHz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * Hz2MHz; }
 };
 
 
@@ -176,9 +176,9 @@ public:
     GigaHertz(const double value);
     GigaHertz(const Frequency& value);
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2GHz; }
-    double toFrequency() const override                  { return static_cast<double>(val * GHz2Hz); }
-    double fromFrequency(const double a) const override  { return a * Hz2GHz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2GHz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * GHz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * Hz2GHz; }
 };
 
 
@@ -196,12 +196,12 @@ public:
     TeraHertz(const double value);
     TeraHertz(const Frequency& value);
 
-    static double convertStatic(const Frequency &n)      { return n.toFrequency() * Hz2THz; }
-    double toFrequency() const override                  { return static_cast<double>(val * THz2Hz); }
-    double fromFrequency(const double a) const override  { return a * Hz2THz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2THz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * THz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * Hz2THz; }
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

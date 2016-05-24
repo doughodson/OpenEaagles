@@ -44,9 +44,9 @@ class AsciiText : public Field
 public:
    AsciiText();
 
-   char filterInputEvent(const int event, const int tc) override;
-   bool isValidInputPosition(const int tc) override;
-   bool event(const int key, base::Object* const obj = nullptr) override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual bool isValidInputPosition(const int tc) override;
+   virtual bool event(const int key, base::Object* const obj = nullptr) override;
 
    virtual bool setTextString(const base::String* const stsobj);
    virtual bool setTextList(const base::List* const stlobj);
@@ -64,7 +64,7 @@ class Cursor : public Field
 
 public:
    Cursor();
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 };
 
 
@@ -137,11 +137,11 @@ public:
    void setMaxValue(const int v)    { maxNum = static_cast<double>(v); redisplay(); }
    void setMaxValue(const double v) { maxNum = v; redisplay(); }
 
-   double getInputValue() const override;
-   bool isInputValueValid() const override;
-   char filterInputEvent(const int event, const int tc) override;
-   bool event(const int key, base::Object* const obj = nullptr) override;
-   void updateData(const double dt = 0.0) override;
+   virtual double getInputValue() const override;
+   virtual bool isInputValueValid() const override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual bool event(const int key, base::Object* const obj = nullptr) override;
+   virtual void updateData(const double dt = 0.0) override;
 
    //event handler macro functions
    virtual bool onUpdateValue(const base::Float* const ouvobj);
@@ -209,12 +209,12 @@ class HexReadout : public NumericReadout
 public:
    HexReadout();
 
-   void makeText() override;
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual void makeText() override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-   void reformat(const char* const example) override;
+   virtual void reformat(const char* const example) override;
 };
 
 
@@ -235,12 +235,12 @@ class OctalReadout : public NumericReadout
 
 public:
    OctalReadout();
-   void makeText() override;
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual void makeText() override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-    void reformat(const char* const example) override;
+   virtual void reformat(const char* const example) override;
 };
 
 
@@ -271,12 +271,12 @@ class TimeReadout : public NumericReadout
 public:
    enum TimeMode { invalid, hhmmss, hhmm, hh, mmss, mm, ss };
    TimeReadout();
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-   void makeText() override;
-   void reformat(const char* const example) override;
+   virtual void makeText() override;
+   virtual void reformat(const char* const example) override;
    TimeMode tmode;
 };
 
@@ -324,12 +324,12 @@ class DirectionReadout : public NumericReadout
 public:
    enum DirMode { invalid, ddmmss, ddmm, dd };
    DirectionReadout();
-   char filterInputEvent(const int event, const int tc) override;
-   double getInputValue() const override;
+   virtual char filterInputEvent(const int event, const int tc) override;
+   virtual double getInputValue() const override;
 
 protected:
-   void makeText() override;
-   void reformat(const char* const example) override;
+   virtual void makeText() override;
+   virtual void reformat(const char* const example) override;
    DirMode tmode;
 };
 
@@ -363,7 +363,7 @@ class LatitudeReadout : public DirectionReadout
 
 public:
     LatitudeReadout();
-    char filterInputEvent(const int event, const int tc) override;
+    virtual char filterInputEvent(const int event, const int tc) override;
 protected:
    //virtual void makeText();
 };
@@ -399,7 +399,7 @@ class LongitudeReadout : public DirectionReadout
     DECLARE_SUBCLASS(LongitudeReadout, DirectionReadout)
 public:
     LongitudeReadout();
-    char filterInputEvent(const int event, const int tc) override;
+    virtual char filterInputEvent(const int event, const int tc) override;
 protected:
    //virtual void makeText();
 };
@@ -420,7 +420,7 @@ class Rotary : public Field
 
 public:
    Rotary();
-   void draw() override;
+   virtual void draw() override;
 
 private:
     // this flag tells us our components need to be pre-drawn (to avoid flicker)
@@ -443,7 +443,7 @@ class Rotary2 : public Rotary
 
 public:
    Rotary2();
-   bool event(const int key, base::Object* const obj = nullptr) override;
+   virtual bool event(const int key, base::Object* const obj = nullptr) override;
    //macro function for event handler
    virtual bool onSelect(const base::Number* const osobj);
 };

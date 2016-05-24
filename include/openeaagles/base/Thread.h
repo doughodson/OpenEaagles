@@ -171,7 +171,7 @@ protected:
 
 private:
    // Thread class function
-   unsigned long mainThreadFunc() override;
+   virtual unsigned long mainThreadFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -212,7 +212,7 @@ protected:
    ThreadPeriodicTask();
 
 private:
-   unsigned long mainThreadFunc() override;
+   virtual unsigned long mainThreadFunc() override;
 
    double rate;         // Loop rate (hz); until our parent shuts down
    Statistic bfStats;   // Busted (overrun) frame statistics (windows only)
@@ -247,7 +247,7 @@ public:
    //Returns the index of the first thread that is completed, or -1 if an error
    static int waitForAnyCompleted(ThreadSyncTask** threads, const unsigned int num);
 
-   bool terminate() override;
+   virtual bool terminate() override;
 
    // User defined work function
    private:  virtual unsigned long userFunc() =0;
@@ -258,13 +258,13 @@ protected:
    void waitForStart();
    void signalCompleted();
 
-   bool configThread() override;
+   virtual bool configThread() override;
 
 private:
    bool createSignals();
    void closeSignals();
 
-   unsigned long mainThreadFunc() override;
+   virtual unsigned long mainThreadFunc() override;
 
    // Implementation dependent
    void* startSig;      // Start signal

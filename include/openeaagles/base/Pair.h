@@ -40,14 +40,14 @@ public:
    Object* object()                 { return obj; }      // The object
    const Object* object() const     { return obj; }      // The object (const version)
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 private:
    Identifier* slotname;   // Slot name
    Object* obj;            // Object
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

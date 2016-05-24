@@ -39,9 +39,9 @@ class Agent : public base::Component
 public:
    Agent();
 
-   void updateTC(const double dt = 0.0) override;
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    // generic controller
@@ -88,13 +88,13 @@ public:
    AgentTC();
 
    // Component interface
-   void updateTC(const double dt = 0.0) override;
-   void updateData(const double dt = 0.0) override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 };
 
-} // End ubf namespace
-} // End base namespace
-} // End oe namespace
+}
+}
+}
 
 #endif
 

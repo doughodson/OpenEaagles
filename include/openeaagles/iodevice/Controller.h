@@ -32,11 +32,11 @@ public:
    virtual unsigned int getDeviceIndex() const;
    virtual bool setDeviceIndex(const int value);
 
-   unsigned short getNumDiscreteInputChannels() const override;
-   unsigned short getNumDiscreteInputPorts() const override;
-   bool getDiscreteInput(bool* const value, const unsigned int channel, const unsigned int port) const override;
-   unsigned short getNumAnalogInputs() const override;
-   bool getAnalogInput(double* const value, const unsigned int channel) const override;
+   virtual unsigned short getNumDiscreteInputChannels() const override;
+   virtual unsigned short getNumDiscreteInputPorts() const override;
+   virtual bool getDiscreteInput(bool* const value, const unsigned int channel, const unsigned int port) const override;
+   virtual unsigned short getNumAnalogInputs() const override;
+   virtual bool getAnalogInput(double* const value, const unsigned int channel) const override;
 
 protected:
 

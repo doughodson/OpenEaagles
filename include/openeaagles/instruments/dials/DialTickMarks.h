@@ -36,7 +36,7 @@ public:
     virtual bool setQuantity(const int newQ);
     virtual bool setTickGraphic(const graphics::Graphic* const newGraphic);
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
 protected:
     // slot functions
@@ -49,7 +49,7 @@ private:
     graphics::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

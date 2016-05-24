@@ -36,11 +36,11 @@ public:
     bool setBearingRad(const double newB);             // radians
     bool setBearingDeg(const double newB);             // degrees
 
-    void drawFunc() override;
-    void draw() override;
+    virtual void drawFunc() override;
+    virtual void draw() override;
 
-    void updateData(const double dt = 0) override;
-    bool event(const int key, base::Object* const obj = nullptr) override;
+    virtual void updateData(const double dt = 0) override;
+    virtual bool event(const int key, base::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
@@ -60,7 +60,7 @@ private:
     graphics::Graphic* tail;    // our tail graphic (if we have one)
 };
 
-}  // end of Instruments namespace
-}  // end of oe namespace
+}
+}
 
 #endif

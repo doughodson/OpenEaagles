@@ -44,15 +44,15 @@ public:
     virtual bool setSlotNetworkMask(const String* const msg);
 
 protected:
-    bool init() override;
-    bool bindSocket() override;
+    virtual bool init() override;
+    virtual bool bindSocket() override;
 
 private:
     char* networkMask;           // Network Mask
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

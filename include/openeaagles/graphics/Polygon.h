@@ -93,7 +93,7 @@ public:
    unsigned int getLayer() const             { return layerValue; }
    void setLayer(const unsigned int newLayer);
 
-   void drawFunc() override;
+   virtual void drawFunc() override;
 
 private:
    osg::Vec4      coeff;      // Coefficients of the plane equation
@@ -102,7 +102,7 @@ private:
    unsigned int   layerValue; // Layer value
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

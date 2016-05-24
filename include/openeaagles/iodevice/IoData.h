@@ -40,19 +40,19 @@ public:
    bool setNumDI(const unsigned int num);
    bool setNumDO(const unsigned int num);
 
-   unsigned int getNumAnalogInputChannels() const override;
-   unsigned int getNumAnalogOutputChannels() const override;
-   unsigned int getNumDiscreteInputChannels() const override;
-   unsigned int getNumDiscreteOutputChannels() const override;
-   bool getAnalogInput(const unsigned int channel, double* const value) const override;
-   bool getAnalogOutput(const unsigned int channel, double* const value) const override;
-   bool getDiscreteInput(const unsigned int channel, bool* const value) const override;
-   bool getDiscreteOutput(const unsigned int channel, bool* const value) const override;
-   bool setAnalogInput(const unsigned int channel, const double value) override;
-   bool setAnalogOutput(const unsigned int channel, const double value) override;
-   bool setDiscreteInput(const unsigned int channel, const bool value) override;
-   bool setDiscreteOutput(const unsigned int channel, const bool value) override;
-   void clear() override;
+   virtual unsigned int getNumAnalogInputChannels() const override;
+   virtual unsigned int getNumAnalogOutputChannels() const override;
+   virtual unsigned int getNumDiscreteInputChannels() const override;
+   virtual unsigned int getNumDiscreteOutputChannels() const override;
+   virtual bool getAnalogInput(const unsigned int channel, double* const value) const override;
+   virtual bool getAnalogOutput(const unsigned int channel, double* const value) const override;
+   virtual bool getDiscreteInput(const unsigned int channel, bool* const value) const override;
+   virtual bool getDiscreteOutput(const unsigned int channel, bool* const value) const override;
+   virtual bool setAnalogInput(const unsigned int channel, const double value) override;
+   virtual bool setAnalogOutput(const unsigned int channel, const double value) override;
+   virtual bool setDiscreteInput(const unsigned int channel, const bool value) override;
+   virtual bool setDiscreteOutput(const unsigned int channel, const bool value) override;
+   virtual void clear() override;
 
 protected:
    bool setSlotNumAI(const base::Number* const msg);
@@ -76,7 +76,7 @@ private:
    bool*    doTable;    // DOs
 };
 
-} // end iodevice
-} // end oe namespace
+}
+}
 
 #endif

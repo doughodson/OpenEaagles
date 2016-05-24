@@ -80,26 +80,26 @@ public:
    // Data storage factory (pre-ref()'d)
    virtual FStorage* storageFactory() const;
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 public:
     // Exceptions
     class ExpInvalidTable : public Object::Exception {
         public:
             ExpInvalidTable() : Exception() {}
-            const char* getDescription() const override          { return "table is invalid"; }
+            virtual const char* getDescription() const override          { return "table is invalid"; }
     };
 
     class ExpInvalidVector : public Object::Exception {
         public:
             ExpInvalidVector() : Exception() {}
-            const char* getDescription() const override          { return "table vector is invalid"; }
+            virtual const char* getDescription() const override          { return "table vector is invalid"; }
     };
 
     class ExpInvalidFStorage : public Object::Exception {
         public:
             ExpInvalidFStorage() : Exception() {}
-            const char* getDescription() const override          { return "Incorrect type of FStorage"; }
+            virtual const char* getDescription() const override          { return "Incorrect type of FStorage"; }
     };
 
 
@@ -128,7 +128,7 @@ public:
 };
 
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

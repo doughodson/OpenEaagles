@@ -50,16 +50,15 @@ public:
    virtual AirportType airportType() const;
    virtual int isAirportType(const AirportType type) const;
 
-   void ident(char id[]) const override;
+   virtual void ident(char id[]) const override;
 
-   void printRecord(std::ostream& sout) const override;
+   virtual void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;
 };
 
-
-} // End dafif namespace
-} // End oe namespace
+}
+}
 
 #endif

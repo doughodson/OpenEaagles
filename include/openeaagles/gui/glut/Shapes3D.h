@@ -29,13 +29,14 @@ namespace glut {
 // Note - all sphere and derived classes are automatically normalized at
 // rendering (GLU does it)
 //------------------------------------------------------------------------------
-class Sphere : public graphics::Circle {
+class Sphere : public graphics::Circle
+{
     DECLARE_SUBCLASS(Sphere, graphics::Circle)
 
 public:
     Sphere();
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
     virtual bool setStacks(const int x)       { stacks = x; return true; }
     int getStacks()                           { return stacks; }
@@ -57,11 +58,12 @@ private:
 //    height     <Number>  ! Height of the cylinder (default: 1)
 //
 //------------------------------------------------------------------------------
-class Cylinder : public Sphere {
+class Cylinder : public Sphere
+{
     DECLARE_SUBCLASS(Cylinder, Sphere)
 public:
     Cylinder();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
     virtual bool setTopRadius(const double x)   { topRadius = x; return true; }
     virtual bool setHeight(const double x)      { height = x; return true; }
@@ -84,11 +86,12 @@ private:
 // Factory name: Cone
 //
 //------------------------------------------------------------------------------
-class Cone : public Cylinder {
+class Cone : public Cylinder
+{
     DECLARE_SUBCLASS(Cone, Cylinder)
 public:
     Cone();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -101,11 +104,12 @@ public:
 //    size    <Number>    ! Size you want the cube to be (default: 1)
 //
 //------------------------------------------------------------------------------
-class Cube : public graphics::Circle {
+class Cube : public graphics::Circle
+{
     DECLARE_SUBCLASS(Cube, graphics::Circle)
 public:
     Cube();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
     virtual bool setSize(const double x)   { size = x; return true; }
     double getSize()                       { return size; }
@@ -127,11 +131,12 @@ private:
 //   outerRadius    <Number>          ! Radius of the outer ring (default: 2)
 //
 //------------------------------------------------------------------------------
-class Torus : public Sphere {
+class Torus : public Sphere
+{
     DECLARE_SUBCLASS(Torus, Sphere)
 public:
     Torus();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
     virtual bool setOuterRadius(const double x)    { oRadius = x; return true; }
     double getOuterRadius()                        { return oRadius; }
@@ -151,11 +156,12 @@ private:
 // Factory name: Dodecahedron
 //
 //------------------------------------------------------------------------------
-class Dodecahedron : public graphics::Circle {
+class Dodecahedron : public graphics::Circle
+{
     DECLARE_SUBCLASS(Dodecahedron, graphics::Circle)
 public:
     Dodecahedron();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -165,11 +171,12 @@ public:
 // Factory name: Tetrahedron
 //
 //------------------------------------------------------------------------------
-class Tetrahedron : public graphics::Circle {
+class Tetrahedron : public graphics::Circle
+{
     DECLARE_SUBCLASS(Tetrahedron, graphics::Circle)
 public:
     Tetrahedron();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -179,11 +186,12 @@ public:
 // Factory name: Icosahedron
 //
 //------------------------------------------------------------------------------
-class Icosahedron : public graphics::Circle {
+class Icosahedron : public graphics::Circle
+{
     DECLARE_SUBCLASS(Icosahedron, graphics::Circle)
 public:
     Icosahedron();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -193,11 +201,12 @@ public:
 // Factory name: Octahedron
 //
 //------------------------------------------------------------------------------
-class Octahedron : public graphics::Circle {
+class Octahedron : public graphics::Circle
+{
     DECLARE_SUBCLASS(Octahedron, graphics::Circle)
 public:
     Octahedron();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -207,14 +216,15 @@ public:
 // Factory name: Teapot
 //
 //------------------------------------------------------------------------------
-class Teapot : public Cube {
+class Teapot : public Cube
+{
     DECLARE_SUBCLASS(Teapot, Cube)
 public:
     Teapot();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
-} // End glut namespace
-} // End oe namespace
+}
+}
 
 #endif

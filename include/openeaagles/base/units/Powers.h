@@ -152,9 +152,9 @@ public:
     Watts(const double value);
     Watts(const Power& org);
 
-    static double convertStatic(const Power &n)      { return n.toPower(); }
-    double toPower() const override                  { return static_cast<double>(val); }
-    double fromPower(const double a) const override  { return a; }
+    static double convertStatic(const Power &n)              { return n.toPower(); }
+    virtual double toPower() const override                  { return static_cast<double>(val); }
+    virtual double fromPower(const double a) const override  { return a; }
 };
 
 //----------------------------------------------------------------------------
@@ -171,9 +171,9 @@ public:
     MilliWatts(const double value);
     MilliWatts(const Power& org);
 
-    static double convertStatic(const Power &n)      { return n.toPower() * W2MW; }
-    double toPower() const override                  { return static_cast<double>(val * MW2W); }
-    double fromPower(const double a) const override  { return a * W2MW; }
+    static double convertStatic(const Power &n)              { return n.toPower() * W2MW; }
+    virtual double toPower() const override                  { return static_cast<double>(val * MW2W); }
+    virtual double fromPower(const double a) const override  { return a * W2MW; }
 };
 
 //----------------------------------------------------------------------------
@@ -190,9 +190,9 @@ public:
     KiloWatts(const double value);
     KiloWatts(const Power& org);
 
-    static double convertStatic(const Power &n)      { return n.toPower() * W2KW; }
-    double toPower() const override                  { return static_cast<double>(val * KW2W); }
-    double fromPower(const double a) const override  { return a * W2KW; }
+    static double convertStatic(const Power &n)              { return n.toPower() * W2KW; }
+    virtual double toPower() const override                  { return static_cast<double>(val * KW2W); }
+    virtual double fromPower(const double a) const override  { return a * W2KW; }
 };
 
 //----------------------------------------------------------------------------
@@ -209,9 +209,9 @@ public:
     Horsepower(const double value);
     Horsepower(const Power& org);
 
-    static double convertStatic(const Power &n)      { return n.toPower() * W2HP; }
-    double toPower() const override                  { return static_cast<double>(val * HP2W); }
-    double fromPower(const double a) const override  { return a * W2HP; }
+    static double convertStatic(const Power &n)              { return n.toPower() * W2HP; }
+    virtual double toPower() const override                  { return static_cast<double>(val * HP2W); }
+    virtual double fromPower(const double a) const override  { return a * W2HP; }
 };
 
 //----------------------------------------------------------------------------
@@ -228,9 +228,9 @@ public:
     DecibelWatts(const double value);
     DecibelWatts(const Power& org);
 
-    static double convertStatic(const Power &n)      { return static_cast<double>(10.0 * std::log10(n.toPower())); }
-    double toPower() const override                  { return  std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
-    double fromPower(const double a) const override  { return 10.0f * std::log10(a) ; }
+    static double convertStatic(const Power &n)              { return static_cast<double>(10.0 * std::log10(n.toPower())); }
+    virtual double toPower() const override                  { return  std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
+    virtual double fromPower(const double a) const override  { return 10.0f * std::log10(a) ; }
 
 };
 
@@ -248,9 +248,9 @@ public:
     DecibelMilliWatts(const double value);
     DecibelMilliWatts(const Power& org);
 
-    static double convertStatic(const Power &n)      { return static_cast<double>(10.0 * std::log10(n.toPower() * W2MW)); }
-    double toPower() const override                  { return  MW2W * std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
-    double fromPower(const double a) const override  { return (10.0f * std::log10(a * W2MW)); }
+    static double convertStatic(const Power &n)              { return static_cast<double>(10.0 * std::log10(n.toPower() * W2MW)); }
+    virtual double toPower() const override                  { return  MW2W * std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
+    virtual double fromPower(const double a) const override  { return (10.0f * std::log10(a * W2MW)); }
 
 };
 

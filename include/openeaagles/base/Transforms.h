@@ -89,7 +89,7 @@ class Translation : public Transform {
 public:
     Translation();
 protected:
-    void computeMatrix() override;
+   virtual void computeMatrix() override;
 };
 
 //------------------------------------------------------------------------------
@@ -114,7 +114,7 @@ class Rotation : public Transform {
 public:
     Rotation();
 protected:
-    void computeMatrix() override;
+   virtual void computeMatrix() override;
 };
 
 //------------------------------------------------------------------------------
@@ -139,10 +139,10 @@ class Scale : public Transform {
 public:
     Scale();
 protected:
-    void computeMatrix() override;
+   virtual void computeMatrix() override;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

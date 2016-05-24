@@ -44,8 +44,8 @@ public:
     int getSwitchPosition()   { return currButtonId; }
     base::UpTimer* getTimer() { return timer; }
 
-    void updateData(const double dt = 0.0) override;
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void updateData(const double dt = 0.0) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // event function
@@ -83,8 +83,8 @@ public:
     virtual bool onMouseDown();
     virtual bool onPicked(const base::Number* const x);
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
-    void updateData(const double dt = 0.0) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 private:
     bool noTimer;    // this flag tells this button that we don't time, we simply switch
@@ -93,8 +93,7 @@ private:
 
 };
 
-
-} // end instruments namespace
-} // end oe namespace
+}
+}
 
 #endif

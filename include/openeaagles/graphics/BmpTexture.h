@@ -43,7 +43,7 @@ public:
    // Write the BMP file
    bool writeFile();
 
-   void loadTexture() override;
+   virtual void loadTexture() override;
 
 protected:
    bool setSlotTexturePath(base::String* const s);
@@ -62,7 +62,7 @@ private:
 inline const char* BmpTexture::getTexturePath() const       { return texPath; }
 inline const char* BmpTexture::getTextureFileName() const   { return texFile; }
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

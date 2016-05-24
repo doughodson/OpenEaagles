@@ -32,14 +32,14 @@ public:
    Waypoint();
    Waypoint(const char* const s);
 
-   void printRecord(std::ostream& sout) const override;
+   virtual void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;
 
 };
 
-} // End dafif namespace
-} // End oe namespace
+}
+}
 
 #endif

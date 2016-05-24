@@ -28,7 +28,7 @@ public:
 
    virtual double f(const double iv1, FStorage* const s = nullptr) const;
 
-   bool setSlotLfiTable(const Table* const msg) override;
+   virtual bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
@@ -43,7 +43,7 @@ public:
 
    virtual double f(const double iv1, const double iv2, FStorage* const s = nullptr) const;
 
-   bool setSlotLfiTable(const Table* const msg) override;
+   virtual bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
@@ -58,7 +58,7 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const;
 
-   bool setSlotLfiTable(const Table* const msg) override;
+   virtual bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
@@ -73,7 +73,7 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const;
 
-   bool setSlotLfiTable(const Table* const msg) override;
+   virtual bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
@@ -88,7 +88,7 @@ public:
 
    virtual double f(const double iv1, const double iv2, const double iv3, const double iv4, const double iv5, FStorage* const s = nullptr) const;
 
-   bool setSlotLfiTable(const Table* const msg) override;
+   virtual bool setSlotLfiTable(const Table* const msg) override;
 };
 
 //==============================================================================
@@ -127,7 +127,7 @@ public:
    int getDegree() const                  { return (m-1); }
    const double* getCoefficients() const  { return a; }
 
-   double f(const double x, FStorage* const s = nullptr) const override;
+   virtual double f(const double x, FStorage* const s = nullptr) const override;
 
 protected:
    virtual bool setSlotCoefficients(const List* const msg);
@@ -141,7 +141,7 @@ private:
    unsigned short m;       // Number of coefficients (degree + 1)
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

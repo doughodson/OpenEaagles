@@ -56,7 +56,7 @@ public:
    // Slot functions
    virtual bool setSlotDisEntityType(const base::List* const);         // Sets DIS entity type enumerations
 
-   bool copyEntityType(simulation::Nib* const targetNib) const override;
+   virtual bool copyEntityType(simulation::Nib* const targetNib) const override;
 
 private:
     // Standard (DIS based) type codes

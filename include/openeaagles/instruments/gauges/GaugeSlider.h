@@ -22,13 +22,13 @@ class GaugeSlider : public AnalogGauge
 public:
     GaugeSlider();
 
-    void draw() override;
+    virtual void draw() override;
 
 private:
     double sliderPos;       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

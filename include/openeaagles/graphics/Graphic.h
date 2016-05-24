@@ -386,14 +386,14 @@ public:
    static void lcTexCoord4v(const double* v)    { glTexCoord4dv(v); }
 
 
-   bool event(const int event, Object* const obj = nullptr) override;
+   virtual bool event(const int event, Object* const obj = nullptr) override;
 
 public:
    // Exceptions
    class ExpInvalidDisplayPtr : public Object::Exception {
       public:
          ExpInvalidDisplayPtr() : Exception() {}
-         const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }
+         virtual const char* getDescription() const override    { return "display(): display/screen pointer is not set"; }
    };
 
 protected:
@@ -427,11 +427,11 @@ protected:
    virtual bool setSlotVisibility(const base::Number* const msg);
    virtual bool setSlotTranslateLight(base::PairStream* const msg);
 
-   void processComponents(            // Process our subcomponent list (which should be other Graphics)
-        base::PairStream* const list,        // Source list of components
+   virtual void processComponents(            // Process our subcomponent list (which should be other Graphics)
+        base::PairStream* const list,         // Source list of components
         const std::type_info& filter,         // Type filter
-        base::Pair* const add = 0,           // Optional pair to add
-        base::Component* const remove = 0    // Optional subcomponent to remove
+        base::Pair* const add = 0,            // Optional pair to add
+        base::Component* const remove = 0     // Optional subcomponent to remove
    ) override;
 
 private:
@@ -555,7 +555,7 @@ inline void Graphic::lcTranslate(const double x, const double y, const double z)
    haveMatrix = true;
 }
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

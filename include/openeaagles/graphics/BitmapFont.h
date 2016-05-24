@@ -45,9 +45,9 @@ class BitmapFont : public Font {
 public:
     BitmapFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 
     virtual bool setReverse(const base::Number* const rnumber);
 
@@ -66,7 +66,7 @@ private:
     static const unsigned int defaultNumFonts;
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

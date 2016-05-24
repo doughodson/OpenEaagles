@@ -32,17 +32,17 @@ class TcpServerSingle : public TcpHandler
 public:
    TcpServerSingle();
 
-   bool initNetwork(const bool noWaitFlag) override;
+   virtual bool initNetwork(const bool noWaitFlag) override;
 
 protected:
-   bool bindSocket() override;
+   virtual bool bindSocket() override;
 
    virtual bool listenForConnections();
    virtual bool acceptConnection();
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

@@ -20,11 +20,11 @@ public:
    RotarySwitch();
 
    // Get current switch position
-   int getCurrentPosition() const { return currentPosition; };
+   int getCurrentPosition() const         { return currentPosition; };
 
-   bool onSingleClick() override;
+   virtual bool onSingleClick() override;
 
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 
 protected:
     bool setSlotAngles(const base::PairStream* const stream);
@@ -40,7 +40,7 @@ private:
     SendData angleSD;       // angle to send to our rotator
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

@@ -77,18 +77,12 @@ public:
 
    WhichEnd whichEnd(const char rwEndId[]) const;
 
-   void printRecord(std::ostream& sout) const override;
+   virtual void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;
 
 };
-
-
-//------------------------------------------------------------------------------
-// inline member functions
-//------------------------------------------------------------------------------
-
 
 // ident: returns the runway identifier field
 inline void Runway::ident(char ident[], const WhichEnd whichEnd) const
@@ -188,7 +182,7 @@ inline Runway::WhichEnd Runway::whichEnd(const char rwEndId[]) const
    return we;
 }
 
-} // End dafif namespace
-} // End oe namespace
+}
+}
 
 #endif

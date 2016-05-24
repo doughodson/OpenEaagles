@@ -25,10 +25,10 @@ public:
 
    bool hasBeenTerminated()          { return connectionTerminated; }
 
-   bool sendData(const char* const packet, const int size) override;
-   unsigned int recvData(char* const packet, const int maxSize) override;
-   bool isConnected() const override;
-   bool closeConnection() override;
+   virtual bool sendData(const char* const packet, const int size) override;
+   virtual unsigned int recvData(char* const packet, const int maxSize) override;
+   virtual bool isConnected() const override;
+   virtual bool closeConnection() override;
 
    // "Socket Only" constructor that will be used by one of our derived classes;
    // The socket should be an AF_INET, SOCK_STREAM type socket that has been
@@ -36,7 +36,7 @@ public:
    TcpHandler(const LcSocket socketNum);
 
 protected:
-   bool init() override;
+   virtual bool init() override;
 
    bool connected;              // true if we are connected
    bool connectionTerminated;   // true if we had a connection, then lost it (or terminated it ourselves)
@@ -44,8 +44,8 @@ protected:
    bool  noWait;                // TCP's no wait I/O flag
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

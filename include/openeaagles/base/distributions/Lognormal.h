@@ -25,7 +25,7 @@ public:
 
   Lognormal();
 
-  double draw() override;
+  virtual double draw() override;
 
   bool setSigma(const double x)                       { sigma = x; return true; }
   double getSigma() const                             { return sigma; }
@@ -47,8 +47,8 @@ protected:
 
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

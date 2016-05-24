@@ -43,17 +43,17 @@ class Circle : public Graphic
 public:
     Circle();
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
     virtual bool setRadius(const double x)   { radius = x; return true; }
-    virtual bool setFilled(const bool x)    { filled = x; return true; }
-    virtual bool setSlices(const int x)     { slices = x; return true; }
+    virtual bool setFilled(const bool x)     { filled = x; return true; }
+    virtual bool setSlices(const int x)      { slices = x; return true; }
 
     double getRadius()       { return radius; }
-    bool isFilled()         { return filled; }
-    int getSlices()         { return slices; }
+    bool isFilled()          { return filled; }
+    int getSlices()          { return slices; }
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     bool setSlotRadius(const base::Number* const x);
@@ -80,16 +80,16 @@ private:
 //------------------------------------------------------------------------------
 class OcclusionCircle : public Circle
 {
-    DECLARE_SUBCLASS(OcclusionCircle,Circle)
+    DECLARE_SUBCLASS(OcclusionCircle, Circle)
 
 public:
     OcclusionCircle();
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    virtual bool setOuterRadius(const double x)  { outerRadius = x; return true; }
+    virtual bool setOuterRadius(const double x)     { outerRadius = x; return true; }
 
-    double getOuterRadius()     { return outerRadius; }
+    double getOuterRadius()                         { return outerRadius; }
 
 protected:
     bool setSlotOuterRadius(const base::Number* const x);
@@ -123,11 +123,11 @@ private:
 //------------------------------------------------------------------------------
 class Arc : public Circle
 {
-    DECLARE_SUBCLASS(Arc,Circle)
+    DECLARE_SUBCLASS(Arc, Circle)
 public:
     Arc();
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
     virtual bool setStartAngle(const double x)  { startAngle = x; return true; }
     virtual bool setArcLength(const double x)   { arcLength = x; return true; }
@@ -164,7 +164,7 @@ class OcclusionArc : public Arc
 public:
     OcclusionArc();
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
     bool setOuterRadius(const double x)  { outerRadius = x; return true; }
 
@@ -190,7 +190,7 @@ private:
 //------------------------------------------------------------------------------
 class Point : public Graphic
 {
-    DECLARE_SUBCLASS(Point,Graphic)
+    DECLARE_SUBCLASS(Point, Graphic)
 public:
     Point();
     void drawFunc() override;
@@ -209,10 +209,10 @@ public:
 //------------------------------------------------------------------------------
 class LineLoop : public Graphic
 {
-    DECLARE_SUBCLASS(LineLoop,Graphic)
+    DECLARE_SUBCLASS(LineLoop, Graphic)
 public:
     LineLoop();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
 //------------------------------------------------------------------------------
@@ -233,15 +233,15 @@ public:
 //------------------------------------------------------------------------------
 class Line : public Graphic
 {
-    DECLARE_SUBCLASS(Line,Graphic)
+    DECLARE_SUBCLASS(Line, Graphic)
 public:
     Line();
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    bool setSegments(const bool x)  { segment = x; return true; }
+    bool setSegments(const bool x)       { segment = x; return true; }
 
-    bool isSegmented() { return segment; }
+    bool isSegmented()                   { return segment; }
 
 protected:
     bool setSlotSegments(const base::Number* const x);
@@ -259,7 +259,7 @@ private:
 //------------------------------------------------------------------------------
 class Quad : public Graphic
 {
-    DECLARE_SUBCLASS(Quad,Graphic)
+    DECLARE_SUBCLASS(Quad, Graphic)
 public:
     Quad();
 
@@ -301,7 +301,7 @@ private:
     bool fan;       // are we a triangle fan?
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

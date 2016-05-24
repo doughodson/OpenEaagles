@@ -20,10 +20,10 @@ class DialPointer : public AnalogDial {
 public:
     DialPointer();
 
-    void draw() override;
+    virtual void draw() override;
 };
 
-}  // end of Instruments namespace
-}  // end of oe namespace
+}
+}
 
 #endif

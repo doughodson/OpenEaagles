@@ -35,11 +35,11 @@ public:
     virtual bool setEndlessStart(const double x)    { endlessStart = x; return true; }
     virtual bool setEndlessLimit(const double x)    { endlessLimit = x; return true; }
 
-    void drawFunc() override;
-    void draw() override;
+    virtual void drawFunc() override;
+    virtual void draw() override;
 
-    void updateData(const double dt = 0.0) override;
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void updateData(const double dt = 0.0) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // Sets the Event ID to newEvent
@@ -69,7 +69,7 @@ private:
     double endlessLimit;        // end value of the endless knob (default to 360)
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

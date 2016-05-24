@@ -35,9 +35,9 @@ public:
     double getGearPos() const       { return gearPos; }
     bool getHaveRotary() const      { return haveRotary; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    void updateData(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 protected:
     // slot functions
@@ -55,7 +55,7 @@ private:
     bool haveRotary;    // do we have a rotary now that is our components (we won't draw if we do)
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

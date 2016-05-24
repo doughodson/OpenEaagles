@@ -30,11 +30,11 @@ public:
    // The left mouse button has been depressed
    virtual bool onMouseDown();
 
-   bool onSingleClick() override;
-   bool onCancel() override;
+   virtual bool onSingleClick() override;
+   virtual bool onCancel() override;
 
-   void updateData(const double dt = 0.0) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // sets the pushbutton type to momentary = false or maintained = true
@@ -49,7 +49,7 @@ private:
    bool initState;          // initial state
 };
 
-} // end instruments namespace
-} // end oe namespace
+}
+}
 
 #endif

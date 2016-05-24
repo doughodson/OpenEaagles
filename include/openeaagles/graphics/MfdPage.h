@@ -27,7 +27,7 @@ class MfdPage : public graphics::Page
 public:
     MfdPage();
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // ---

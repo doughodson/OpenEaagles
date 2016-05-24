@@ -21,10 +21,10 @@ class GMeterDial : public AnalogDial {
 public:
     GMeterDial();
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    void updateData(const double dt = 0.0) override;
-    void reset() override;
+    virtual void updateData(const double dt = 0.0) override;
+    virtual void reset() override;
 
 private:
     double rotation;    // our rotation angle (of the gauge arrow)
@@ -36,7 +36,7 @@ private:
     SendData maxGSD;    // max gs
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

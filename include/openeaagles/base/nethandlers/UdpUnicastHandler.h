@@ -68,15 +68,15 @@ public:
    virtual bool setSlotIpAddress(const String* const msg);
 
 protected:
-   bool init() override;
-   bool bindSocket() override;
+   virtual bool init() override;
+   virtual bool bindSocket() override;
 
 private:
    char* ipAddr;   // Host's name or IP Address
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

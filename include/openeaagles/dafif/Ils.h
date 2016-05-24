@@ -74,7 +74,7 @@ public:
    void  getGlideSlopeData(const double aclat, const double aclon, const double acelev, float* ilsGlideSlope, float* acGlideSlope, float* deltaGlideSlope) const;
    void  printGlideSlopeData(std::ostream& sout, const double aclat, const double aclon, const double acelev) const;
 
-   void printRecord(std::ostream& sout) const override;
+   virtual void printRecord(std::ostream& sout) const override;
 
 private:
    static const Ptbl ptable;
@@ -124,7 +124,7 @@ inline void Ils::runwayEndIdent(char rwEndKey[]) const
    dsGetString( rwEndKey, makePointer(ILS_RW_ID_POS+AP_KEY_LEN), RW_XE_IDENT_LEN );
 }
 
-} // End dafif namespace
-} // End oe namespace
+}
+}
 
 #endif

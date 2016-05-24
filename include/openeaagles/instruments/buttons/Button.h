@@ -30,7 +30,7 @@ public:
     // Cancel
     virtual bool onCancel();
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // Sets the Event ID to newEvent
@@ -40,7 +40,7 @@ private:
     int eventId;        // holds our event number
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

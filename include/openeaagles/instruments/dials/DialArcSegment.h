@@ -25,16 +25,16 @@ public:
     virtual bool setOuterRadius(const double x);
     virtual bool setFilled(const bool x);
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    void updateData(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 protected:
     bool setSlotIsDynamic(const base::Number* const newD);
     bool setSlotOuterRadius(const base::Number* const x);
     bool setSlotFilled(const base::Number* const x);
 
-    bool onUpdateRadius(const base::Number* const x) override;
+    virtual bool onUpdateRadius(const base::Number* const x) override;
 
 private:
     bool isDynamic;     // are we setting sweep angle based on value?
@@ -42,7 +42,7 @@ private:
     bool filled;
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

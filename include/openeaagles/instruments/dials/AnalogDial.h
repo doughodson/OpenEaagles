@@ -38,9 +38,9 @@ public:
     double getRadius() const        { return radius; }
     int getSlices() const           { return slices; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
     // slot functions
@@ -61,7 +61,7 @@ private:
     int slices;                     // number of slices to use while drawing
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

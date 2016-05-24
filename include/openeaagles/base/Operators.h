@@ -67,7 +67,7 @@ class Subtract : public Add {
 
 public:
     Subtract();
-    void operation() override;
+    virtual void operation() override;
 };
 
 //------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ class Multiply : public Add {
 
 public:
     Multiply();
-    void operation() override;
+    virtual void operation() override;
 };
 
 //------------------------------------------------------------------------------
@@ -113,10 +113,10 @@ class Divide : public Add {
 public:
     Divide();
 
-    void operation() override;
+    virtual void operation() override;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

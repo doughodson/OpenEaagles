@@ -17,7 +17,7 @@ public:
 
   Uniform();
 
-  double draw() override;
+  virtual double draw() override;
 
   bool setMin(const double x)                           { min = x; return true; }
   double getMin() const                                 { return min; }
@@ -35,7 +35,7 @@ protected:
 
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

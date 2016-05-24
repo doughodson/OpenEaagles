@@ -183,9 +183,9 @@ public:
     SquareMeters(const double value);
     SquareMeters(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea(); }
-    double toArea() const override                  { return static_cast<double>(val); }
-    double fromArea(const double a) const override  { return a; }
+    static double convertStatic(const Area& n)              { return n.toArea(); }
+    virtual double toArea() const override                  { return static_cast<double>(val); }
+    virtual double fromArea(const double a) const override  { return a; }
 };
 
 //------------------------------------------------------------------------------
@@ -202,9 +202,9 @@ public:
     SquareFeet(const double value);
     SquareFeet(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea() * SM2SFT; }
-    double toArea() const override                  { return static_cast<double>(val * SFT2SM); }
-    double fromArea(const double a) const override  { return a * SM2SFT; }
+    static double convertStatic(const Area& n)              { return n.toArea() * SM2SFT; }
+    virtual double toArea() const override                  { return static_cast<double>(val * SFT2SM); }
+    virtual double fromArea(const double a) const override  { return a * SM2SFT; }
 };
 
 //------------------------------------------------------------------------------
@@ -221,9 +221,9 @@ public:
     SquareInches(const double value);
     SquareInches(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea() * SM2SIN; }
-    double toArea() const override                  { return static_cast<double>(val * SIN2SM); }
-    double fromArea(const double a) const override  { return a * SM2SIN; }
+    static double convertStatic(const Area& n)              { return n.toArea() * SM2SIN; }
+    virtual double toArea() const override                  { return static_cast<double>(val * SIN2SM); }
+    virtual double fromArea(const double a) const override  { return a * SM2SIN; }
 };
 
 //------------------------------------------------------------------------------
@@ -240,9 +240,9 @@ public:
     SquareYards(const double value);
     SquareYards(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea() * SM2SYD; }
-    double toArea() const override                  { return static_cast<double>(val * SYD2SM); }
-    double fromArea(const double a) const override  { return a * SM2SYD; }
+    static double convertStatic(const Area& n)              { return n.toArea() * SM2SYD; }
+    virtual double toArea() const override                  { return static_cast<double>(val * SYD2SM); }
+    virtual double fromArea(const double a) const override  { return a * SM2SYD; }
 };
 
 //------------------------------------------------------------------------------
@@ -259,9 +259,9 @@ public:
     SquareMiles(const double value);
     SquareMiles(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea() * SM2SMI; }
-    double toArea() const override                  { return static_cast<double>(val * SMI2SM); }
-    double fromArea(const double a) const override  { return a * SM2SMI; }
+    static double convertStatic(const Area& n)              { return n.toArea() * SM2SMI; }
+    virtual double toArea() const override                  { return static_cast<double>(val * SMI2SM); }
+    virtual double fromArea(const double a) const override  { return a * SM2SMI; }
 };
 
 //------------------------------------------------------------------------------
@@ -278,9 +278,9 @@ public:
     SquareCentiMeters(const double value);
     SquareCentiMeters(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea() * SM2SCM; }
-    double toArea() const override                  { return static_cast<double>(val * SCM2SM); }
-    double fromArea(const double a) const override  { return a * SM2SCM; }
+    static double convertStatic(const Area& n)              { return n.toArea() * SM2SCM; }
+    virtual double toArea() const override                  { return static_cast<double>(val * SCM2SM); }
+    virtual double fromArea(const double a) const override  { return a * SM2SCM; }
 };
 
 //------------------------------------------------------------------------------
@@ -297,9 +297,9 @@ public:
     SquareMilliMeters(const double value);
     SquareMilliMeters(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea() * SM2SMM; }
-    double toArea() const override                  { return static_cast<double>(val * SMM2SM); }
-    double fromArea(const double a) const override  { return a * SM2SMM; }
+    static double convertStatic(const Area& n)              { return n.toArea() * SM2SMM; }
+    virtual double toArea() const override                  { return static_cast<double>(val * SMM2SM); }
+    virtual double fromArea(const double a) const override  { return a * SM2SMM; }
 };
 
 //------------------------------------------------------------------------------
@@ -316,9 +316,9 @@ public:
     SquareKiloMeters(const double value);
     SquareKiloMeters(const Area& value);
 
-    static double convertStatic(const Area& n)      { return n.toArea() * SM2SKM; }
-    double toArea() const override                  { return static_cast<double>(val * SKM2SM); }
-    double fromArea(const double a) const override  { return a * SM2SKM; }
+    static double convertStatic(const Area& n)              { return n.toArea() * SM2SKM; }
+    virtual double toArea() const override                  { return static_cast<double>(val * SKM2SM); }
+    virtual double fromArea(const double a) const override  { return a * SM2SKM; }
 };
 
 //------------------------------------------------------------------------------
@@ -335,9 +335,9 @@ public:
     DecibelSquareMeters(const double value);
     DecibelSquareMeters(const Area& value);
 
-    static double convertStatic(const Area& n)     { return 10.0f * std::log10( n.toArea() ); }
-    double toArea() const override                 { return std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
-    double fromArea(const double a) const override { return 10.0f * std::log10(a); }
+    static double convertStatic(const Area& n)             { return 10.0f * std::log10( n.toArea() ); }
+    virtual double toArea() const override                 { return std::pow(static_cast<double>(10.0), static_cast<double>(val/10.0)); }
+    virtual double fromArea(const double a) const override { return 10.0f * std::log10(a); }
 
 };
 

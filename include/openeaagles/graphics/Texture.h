@@ -139,8 +139,8 @@ public:
 
    virtual void loadTexture();
 
-   bool setWidth(const unsigned int w) override;
-   bool setHeight(const unsigned int h) override;
+   virtual bool setWidth(const unsigned int w) override;
+   virtual bool setHeight(const unsigned int h) override;
 
 protected:
    // Slot functions

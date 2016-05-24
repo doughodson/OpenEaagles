@@ -72,8 +72,8 @@ public:
    bool setGain(const double);
    bool setTable(const base::Table1* const);
 
-   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    virtual double convert(const double vin, const double dt);
@@ -89,17 +89,17 @@ protected:
 private:
    void initData();
 
-   bool devEnb;            // Device enabled
-   unsigned int location;  // IoData analog input channel number
-   unsigned int channel;   // Analog channel number
-   double value;            // Initial value
-   double deadband;         // Deadband value
-   double offset;           // Offset
-   double gain;             // Gain
+   bool devEnb;               // Device enabled
+   unsigned int location;     // IoData analog input channel number
+   unsigned int channel;      // Analog channel number
+   double value;              // Initial value
+   double deadband;           // Deadband value
+   double offset;             // Offset
+   double gain;               // Gain
    const base::Table1* table; // Shaping table
 };
 
-} // end iodevice
-} // end oe namespace
+}
+}
 
 #endif

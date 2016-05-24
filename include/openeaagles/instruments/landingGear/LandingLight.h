@@ -31,9 +31,9 @@ public:
 
     virtual bool setLightRadius(const double newLR);
 
-    void updateData(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
 protected:
     // slot functions
@@ -45,7 +45,7 @@ private:
     SendData selSD;     // our selection
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

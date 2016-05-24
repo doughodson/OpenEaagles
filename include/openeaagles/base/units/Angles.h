@@ -194,9 +194,9 @@ public:
     Degrees(const double value);
     Degrees(const Angle& value);
 
-    static double convertStatic(const Angle& n)      { return n.toAngle() * SC2D; }
-    double toAngle() const override                  { return static_cast<double>(val * D2SC); }
-    double fromAngle(const double a) const override  { return a * SC2D; }
+    static double convertStatic(const Angle& n)              { return n.toAngle() * SC2D; }
+    virtual double toAngle() const override                  { return static_cast<double>(val * D2SC); }
+    virtual double fromAngle(const double a) const override  { return a * SC2D; }
 };
 
 
@@ -214,9 +214,9 @@ public:
     Radians(const double value);
     Radians(const Angle& value);
 
-    static double convertStatic(const Angle& n)      { return n.toAngle() * SC2R; }
-    double toAngle() const override                  { return static_cast<double>(val * R2SC); }
-    double fromAngle(const double a) const override  { return a * SC2R; }
+    static double convertStatic(const Angle& n)              { return n.toAngle() * SC2R; }
+    virtual double toAngle() const override                  { return static_cast<double>(val * R2SC); }
+    virtual double fromAngle(const double a) const override  { return a * SC2R; }
 };
 
 
@@ -235,13 +235,13 @@ public:
     Semicircles(const double value);
     Semicircles(const Angle& value);
 
-    static double convertStatic(const Angle& n)      { return n.toAngle(); }
-    double toAngle() const override                  { return static_cast<double>(val); }
-    double fromAngle(const double a) const override  { return a; }
+    static double convertStatic(const Angle& n)              { return n.toAngle(); }
+    virtual double toAngle() const override                  { return static_cast<double>(val); }
+    virtual double fromAngle(const double a) const override  { return a; }
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

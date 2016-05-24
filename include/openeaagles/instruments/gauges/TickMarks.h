@@ -32,7 +32,7 @@ public:
     double getTickMarkLength() const { return lengthTM; }
     int  getQuantity() const         { return quantity; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
 protected:
     // slot functions
@@ -49,7 +49,7 @@ private:
     graphics::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
 };
 
-}  // end of Instruments namespace
-}  // end of oe namespace
+}
+}
 
 #endif

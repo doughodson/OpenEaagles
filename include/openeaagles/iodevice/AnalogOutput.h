@@ -57,8 +57,8 @@ public:
    bool setGain(const double);
    bool setTable(const base::Table1* const);
 
-   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
@@ -80,7 +80,7 @@ private:
    const base::Table1* table; // Shaping table
 };
 
-} // end iodevice
-} // end oe namespace
+}
+}
 
 #endif

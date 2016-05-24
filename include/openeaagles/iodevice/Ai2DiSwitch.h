@@ -55,8 +55,8 @@ public:
    bool setLevel(const double);
    bool setInvertFlag(const bool);
 
-   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
@@ -68,14 +68,14 @@ protected:
 private:
    void initData();
 
-   bool devEnb;            // Device enabled
-   unsigned int location;     // IoData input bit location
-   unsigned int channel;      // Port's channel (bit) number
-   double        level;       // Switching level
-   bool         invert;       // Inverted bit flag
+   bool devEnb;             // Device enabled
+   unsigned int location;   // IoData input bit location
+   unsigned int channel;    // Port's channel (bit) number
+   double level;            // Switching level
+   bool invert;             // Inverted bit flag
 };
 
-} // end iodevice namespace
-} // end oe namespace
+}
+}
 
 #endif

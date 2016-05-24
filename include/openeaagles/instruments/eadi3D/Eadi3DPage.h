@@ -39,9 +39,9 @@ public:
     void setGlideslopeValid(const bool gsValid);        // T = valid
     void setLocalizerValid(const bool locValid);        // T = valid
 
-    void draw() override;
+    virtual void draw() override;
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     // event functions
@@ -98,7 +98,7 @@ private:
     bool   localizerDevValid;
 };
 
-}; // end of Instruments namespace
-}; // end of oe namespace
+}
+}
 
 #endif

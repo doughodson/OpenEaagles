@@ -126,28 +126,27 @@
 #include <typeinfo>   // need typeid()
 #include <cstring>    // need std::strcmp
 
-#define DECLARE_SUBCLASS(ThisType,BaseType)                                                              \
-    typedef BaseType BaseClass;                                                                          \
-    public: ThisType(const ThisType& org);                                                               \
-    public: virtual ~ThisType();                                                                         \
-    public: ThisType* clone() const override;                                                            \
-    public: ThisType& operator=(const ThisType& org);                                                    \
-    protected: void copyData(const ThisType& org, const bool cc = false);                                \
-    protected: void deleteData();                                                                        \
-    public: bool isClassType(const std::type_info& type) const override;                                 \
-    private: static struct _Static _static;                                                              \
-    private: static const unsigned int classIndex;                                                       \
-    protected: static const _Static* getStatic();                                                        \
-    public: static const char* getFactoryName();                                                         \
-    public: bool isFactoryName(const char name[]) const override;                                        \
-    protected: bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;         \
-    protected: ::oe::base::Object* getSlotByIndex(const int slotindex) override;                         \
-    public: static const ::oe::base::SlotTable& getSlotTable();                                          \
-    protected: static const ::oe::base::SlotTable slottable;                                             \
-    private: static const char* slotnames[];                                                             \
-    private: static const int nslots;                                                                    \
-    public: std::ostream&                                                                                \
-    serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const override;         \
+#define DECLARE_SUBCLASS(ThisType,BaseType)                                                                                     \
+    typedef BaseType BaseClass;                                                                                                 \
+    public: ThisType(const ThisType& org);                                                                                      \
+    public: virtual ~ThisType();                                                                                                \
+    public: virtual ThisType* clone() const override;                                                                           \
+    public: ThisType& operator=(const ThisType& org);                                                                           \
+    protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
+    protected: void deleteData();                                                                                               \
+    public: virtual bool isClassType(const std::type_info& type) const override;                                                \
+    private: static struct _Static _static;                                                                                     \
+    private: static const unsigned int classIndex;                                                                              \
+    protected: static const _Static* getStatic();                                                                               \
+    public: static const char* getFactoryName();                                                                                \
+    public: virtual bool isFactoryName(const char name[]) const override;                                                       \
+    protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
+    protected: virtual ::oe::base::Object* getSlotByIndex(const int slotindex) override;                                        \
+    public: static const ::oe::base::SlotTable& getSlotTable();                                                                 \
+    protected: static const ::oe::base::SlotTable slottable;                                                                    \
+    private: static const char* slotnames[];                                                                                    \
+    private: static const int nslots;                                                                                           \
+    public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const override;  \
     private:
 
 

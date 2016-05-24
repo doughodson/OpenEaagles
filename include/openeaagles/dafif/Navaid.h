@@ -50,8 +50,8 @@ public:
    float range() const;             // Range field.
    float slaveVariance() const;     // Slave Variance field.
 
-   void printRecord(std::ostream& sout) const override;
-   void printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const override;
+   virtual void printRecord(std::ostream& sout) const override;
+   virtual void printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev) const override;
 
 private:
    static const Ptbl ptable;
@@ -125,7 +125,7 @@ inline void Navaid::radioClass(char rc[]) const
    dsGetString( rc, makePointer(NA_RADIO_CLASS_POS), NA_RADIO_CLASS_LEN );
 }
 
-} // End dafif namespace
-} // End oe namespace
+}
+}
 
 #endif

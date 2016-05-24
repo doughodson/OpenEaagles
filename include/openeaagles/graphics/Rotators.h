@@ -56,8 +56,8 @@ public:
     bool setRotations(const double x, const double y = 0, const double z = 0);
     bool setRotationsDeg(const double x, const double y = 0, const double z = 0);
 
-    void draw() override;
-    bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void draw() override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 private:
     // Event callbacks
@@ -76,7 +76,7 @@ private:
     double zRot;  // z axis rotation
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

@@ -69,16 +69,16 @@ public:
       const unsigned char  extra = 0
    );
 
-    bool entityStateManager(const double curExecTime) override;
-    bool weaponFireMsgFactory(const double curExecTime) override;
-    bool munitionDetonationMsgFactory(const double curExecTime) override;
-    bool networkOutputManagers(const double curExecTime) override;
+   virtual bool entityStateManager(const double curExecTime) override;
+   virtual bool weaponFireMsgFactory(const double curExecTime) override;
+   virtual bool munitionDetonationMsgFactory(const double curExecTime) override;
+   virtual bool networkOutputManagers(const double curExecTime) override;
 
 protected:
    unsigned char manageArticulationParameters(EntityStatePDU* const pdu);
    void processArticulationParameters(const EntityStatePDU* const pdu);
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
    // Electromagnetic Emitter handlers (protected for now)
    unsigned char    numEmissionSystems;                           // Number of emission systems

@@ -189,7 +189,7 @@ public:
    bool insert(Item* newItem, Item* refItem);
    Object* remove(Item* oldItem);
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 private:
    const Object* getPosition1(const unsigned int n) const;
@@ -201,8 +201,8 @@ private:
 
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

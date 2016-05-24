@@ -179,7 +179,7 @@ public:
       const unsigned int numColors,     // Number of colors
       osg::Vec3& rgb);                  // Color
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    virtual void clearData();                       // Clear the data arrays
@@ -203,7 +203,7 @@ private:
 };
 
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

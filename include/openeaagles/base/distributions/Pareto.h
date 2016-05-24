@@ -24,7 +24,7 @@ public:
 
   Pareto();
 
-  double draw() override;
+  virtual double draw() override;
 
   bool setAlpha(const double x)                      { alpha = x; return true; }
   double getAlpha() const                            { return alpha; }
@@ -41,8 +41,8 @@ protected:
 
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

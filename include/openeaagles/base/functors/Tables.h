@@ -46,13 +46,13 @@ public:
    // Load the X (iv1) breakpoints
    virtual bool setXBreakpoints1(const List* const bkpts);
 
-   unsigned int tableSize() const override;
+   virtual unsigned int tableSize() const override;
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, double* const table) override;
-   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
+   virtual bool loadData(const List& list, double* const table) override;
+   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* xtable;    // X Breakpoint Table
@@ -94,14 +94,14 @@ public:
    // Load the Y (iv2) breakpoints
    virtual bool setYBreakpoints2(const List* const bkpts);
 
-   double lfi(const double iv1, FStorage* const s = nullptr) const override;
-   unsigned int tableSize() const override;
+   virtual double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   virtual unsigned int tableSize() const override;
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, double* const table) override;
-   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
+   virtual bool loadData(const List& list, double* const table) override;
+   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* ytable;    // Y Breakpoint Table
@@ -144,15 +144,15 @@ public:
    // Loads the Z (iv3) breakpoints
    virtual bool setZBreakpoints3(const List* const bkpts);
 
-   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, FStorage* const s = nullptr) const override;
-   unsigned int tableSize() const override;
+   virtual double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
+   virtual double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   virtual unsigned int tableSize() const override;
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, double* const table) override;
-   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
+   virtual bool loadData(const List& list, double* const table) override;
+   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* ztable;    // Z Breakpoint Table
@@ -196,16 +196,16 @@ public:
    // Loads the W (iv4) breakpoints
    virtual bool setWBreakpoints4(const List* const bkpts);
 
-   double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, FStorage* const s = nullptr) const override;
-   unsigned int tableSize() const override;
+   virtual double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const override;
+   virtual double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
+   virtual double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   virtual unsigned int tableSize() const override;
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, double* const table) override;
-   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
+   virtual bool loadData(const List& list, double* const table) override;
+   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* wtable;    // W Breakpoint Table
@@ -248,24 +248,24 @@ public:
    // Loads the V (iv5) breakpoints
    virtual bool setVBreakpoints5(const List* const bkpts);
 
-   double lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
-   double lfi(const double iv1, FStorage* const s = nullptr) const override;
-   unsigned int tableSize() const override;
+   virtual double lfi(const double iv1, const double iv2, const double iv3, const double iv4, FStorage* const s = nullptr) const override;
+   virtual double lfi(const double iv1, const double iv2, const double iv3, FStorage* const s = nullptr) const override;
+   virtual double lfi(const double iv1, const double iv2, FStorage* const s = nullptr) const override;
+   virtual double lfi(const double iv1, FStorage* const s = nullptr) const override;
+   virtual unsigned int tableSize() const override;
 
-   bool isValid() const override;
+   virtual bool isValid() const override;
 
 protected:
-   bool loadData(const List& list, double* const table) override;
-   void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
+   virtual bool loadData(const List& list, double* const table) override;
+   virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
    double* vtable;     // V Breakpoint Table
    unsigned int nv;    // Number of v breakpoints
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

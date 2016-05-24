@@ -277,13 +277,13 @@ public:
          const unsigned char  extra = 0
       ) const;
 
-   double getMaxEntityRange(const simulation::Nib* const nib) const override;
-   double getMaxEntityRangeSquared(const simulation::Nib* const nib) const override;
-   double getMaxTimeDR(const simulation::Nib* const nib) const override;
-   double getMaxPositionErr(const simulation::Nib* const nib) const override;
-   double getMaxOrientationErr(const simulation::Nib* const nib) const override;
-   double getMaxAge(const simulation::Nib* const nib) const override;
-   simulation::Nib* createNewOutputNib(simulation::Player* const player) override;
+   virtual double getMaxEntityRange(const simulation::Nib* const nib) const override;
+   virtual double getMaxEntityRangeSquared(const simulation::Nib* const nib) const override;
+   virtual double getMaxTimeDR(const simulation::Nib* const nib) const override;
+   virtual double getMaxPositionErr(const simulation::Nib* const nib) const override;
+   virtual double getMaxOrientationErr(const simulation::Nib* const nib) const override;
+   virtual double getMaxAge(const simulation::Nib* const nib) const override;
+   virtual simulation::Nib* createNewOutputNib(simulation::Player* const player) override;
 
    // DIS v7 additions
    virtual double getHbtPduEe() const;
@@ -327,23 +327,23 @@ protected:
    virtual bool setApplicationID(const unsigned short v);   // Sets the network's application ID
    virtual bool setExerciseID(const unsigned char v);       // Sets the network's exercise ID
 
-   virtual bool setSlotNetInput(base::NetHandler* const msg);                // Network input handler
-   virtual bool setSlotNetOutput(base::NetHandler* const msg);               // Network output handler
-   virtual bool setSlotVersion(const base::Number* const num);               // DIS version
-   virtual bool setSlotMaxTimeDR(const base::PairStream* const msg);         // Sets the max DR time(s) for selected entity types
-   bool setSlotMaxTimeDR(const base::Time* const msg) override;              // Sets the max DR time(s) for all entity types
-   virtual bool setSlotMaxPositionErr(const base::PairStream* const msg);    // Sets the max positional error(s) for selected entity types
-   bool setSlotMaxPositionErr(const base::Distance* const msg) override;     // Sets the max positional error(s) for all entity types
-   virtual bool setSlotMaxOrientationErr(const base::PairStream* const msg); // Sets the max orientation error(s) for selected entity types
-   bool setSlotMaxOrientationErr(const base::Angle* const msg) override;     // Sets the max orientation error(s) for all entity types
-   virtual bool setSlotMaxAge(const base::PairStream* const msg);            // Sets the max age(s) for selected entity types
-   bool setSlotMaxAge(const base::Time* const msg) override;                 // Sets the max age(s) for all entity types
-   virtual bool setSlotMaxEntityRange(const base::PairStream* const msg);    // Sets the max entity range(s) for selected entity types
-   bool setSlotMaxEntityRange(const base::Distance* const msg) override;     // Sets the max entity range(s) for all entity types
-   virtual bool setSlotEmissionPduHandlers(base::PairStream* const msg);     // Sets the list of Electromagnetic Emission PDU handlers
-   virtual bool setSlotSiteID(const base::Number* const num);                // Sets Site ID
-   virtual bool setSlotApplicationID(const base::Number* const num);         // Sets Application ID
-   virtual bool setSlotExerciseID(const base::Number* const num);            // Sets Exercise ID
+   virtual bool setSlotNetInput(base::NetHandler* const msg);                     // Network input handler
+   virtual bool setSlotNetOutput(base::NetHandler* const msg);                    // Network output handler
+   virtual bool setSlotVersion(const base::Number* const num);                    // DIS version
+   virtual bool setSlotMaxTimeDR(const base::PairStream* const msg);              // Sets the max DR time(s) for selected entity types
+   virtual bool setSlotMaxTimeDR(const base::Time* const msg) override;           // Sets the max DR time(s) for all entity types
+   virtual bool setSlotMaxPositionErr(const base::PairStream* const msg);         // Sets the max positional error(s) for selected entity types
+   virtual bool setSlotMaxPositionErr(const base::Distance* const msg) override;  // Sets the max positional error(s) for all entity types
+   virtual bool setSlotMaxOrientationErr(const base::PairStream* const msg);      // Sets the max orientation error(s) for selected entity types
+   virtual bool setSlotMaxOrientationErr(const base::Angle* const msg) override;  // Sets the max orientation error(s) for all entity types
+   virtual bool setSlotMaxAge(const base::PairStream* const msg);                 // Sets the max age(s) for selected entity types
+   virtual bool setSlotMaxAge(const base::Time* const msg) override;              // Sets the max age(s) for all entity types
+   virtual bool setSlotMaxEntityRange(const base::PairStream* const msg);         // Sets the max entity range(s) for selected entity types
+   virtual bool setSlotMaxEntityRange(const base::Distance* const msg) override;  // Sets the max entity range(s) for all entity types
+   virtual bool setSlotEmissionPduHandlers(base::PairStream* const msg);          // Sets the list of Electromagnetic Emission PDU handlers
+   virtual bool setSlotSiteID(const base::Number* const num);                     // Sets Site ID
+   virtual bool setSlotApplicationID(const base::Number* const num);              // Sets Application ID
+   virtual bool setSlotExerciseID(const base::Number* const num);                 // Sets Exercise ID
 
    virtual bool slot2KD(const char* const slotname, unsigned char* const k, unsigned char* const d);
    virtual bool setMaxTimeDR(const double v, const unsigned char kind, const unsigned char domain);
@@ -358,17 +358,17 @@ protected:
    virtual bool setMaxEntityRange(const base::Distance* const p, const unsigned char kind, const unsigned char domain);
 
    // NetIO Interface (overriding these slots!)
-   bool setSlotFederateName(const base::String* const msg) override;         // Sets our federate name
-   bool setSlotFederationName(const base::String* const msg) override;       // Sets our federation name
+   virtual bool setSlotFederateName(const base::String* const msg) override;         // Sets our federate name
+   virtual bool setSlotFederationName(const base::String* const msg) override;       // Sets our federation name
 
    // NetIO Interface
-   bool initNetwork() override;                                                   // Initialize the network
-   void netInputHander() override;                                                // Network input handler
-   void processInputList() override;                                              // Update players/systems from the Input-list
-   simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType) override;  // Create a new Nib
-   simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
-   void testOutputEntityTypes(const unsigned int) override;                       // Test quick lookup of outgoing entity types
-   void testInputEntityTypes(const unsigned int) override;                        // Test quick lookup of incoming entity types
+   virtual bool initNetwork() override;                                                   // Initialize the network
+   virtual void netInputHander() override;                                                // Network input handler
+   virtual void processInputList() override;                                              // Update players/systems from the Input-list
+   virtual simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType) override;  // Create a new Nib
+   virtual simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
+   virtual void testOutputEntityTypes(const unsigned int) override;                       // Test quick lookup of outgoing entity types
+   virtual void testInputEntityTypes(const unsigned int) override;                        // Test quick lookup of incoming entity types
 
 private:
     void initData();
@@ -378,9 +378,9 @@ private:
     unsigned char             version;                // Version number [ 0 .. 6 ]
 
    // Network Model IDs
-   unsigned short    siteID;                     // Site ID
-   unsigned short    appID;                      // Application ID
-   unsigned char     exerciseID;                 // Exercise ID
+   unsigned short siteID;                     // Site ID
+   unsigned short appID;                      // Application ID
+   unsigned char  exerciseID;                 // Exercise ID
 
    static const unsigned int MAX_PDUs = 500;            // Max PDUs in input buffer
    unsigned int inputBuffer[MAX_PDUs][MAX_PDU_SIZE/4];  // Input buffer
@@ -403,7 +403,6 @@ private:
    // Number of emission PDU handlers in the table, 'emissionHandlers'
    unsigned int   nEmissionHandlers;
 };
-
 
 }
 }

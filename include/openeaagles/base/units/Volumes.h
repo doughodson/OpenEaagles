@@ -124,11 +124,10 @@ public:
     CubicMeters(const double value);
     CubicMeters(const Volume& value);
 
-    static double convertStatic(const Volume &n)      { return n.toVolume(); }
-    double toVolume() const override                  { return static_cast<double>(val); }
-    double fromVolume(const double a) const override  { return a; }
+    static double convertStatic(const Volume &n)              { return n.toVolume(); }
+    virtual double toVolume() const override                  { return static_cast<double>(val); }
+    virtual double fromVolume(const double a) const override  { return a; }
 };
-
 
 //------------------------------------------------------------------------------
 // Class: CubicFeet
@@ -144,9 +143,9 @@ public:
     CubicFeet(const double value);
     CubicFeet(const Volume& value);
 
-    static double convertStatic(const Volume &n)     { return n.toVolume() * CM2CFT; }
-    double toVolume() const override                 { return static_cast<double>(val * CFT2CM); }
-    double fromVolume(const double a) const override { return a * CM2CFT; }
+    static double convertStatic(const Volume &n)             { return n.toVolume() * CM2CFT; }
+    virtual double toVolume() const override                 { return static_cast<double>(val * CFT2CM); }
+    virtual double fromVolume(const double a) const override { return a * CM2CFT; }
 };
 
 
@@ -164,9 +163,9 @@ public:
     CubicInches(const double value);
     CubicInches(const Volume& value);
 
-    static double convertStatic(const Volume &n)     { return n.toVolume() * CM2CIN; }
-    double toVolume() const override                 { return static_cast<double>(val * CIN2CM); }
-    double fromVolume(const double a) const override { return a * CM2CIN; }
+    static double convertStatic(const Volume &n)             { return n.toVolume() * CM2CIN; }
+    virtual double toVolume() const override                 { return static_cast<double>(val * CIN2CM); }
+    virtual double fromVolume(const double a) const override { return a * CM2CIN; }
 };
 
 
@@ -184,12 +183,12 @@ public:
     Liters(const double value);
     Liters(const Volume& value);
 
-    static double convertStatic(const Volume &n)     { return n.toVolume() * CM2L; }
-    double toVolume() const override                 { return static_cast<double>(val * L2CM); }
-    double fromVolume(const double a) const override { return a * CM2L; }
+    static double convertStatic(const Volume &n)             { return n.toVolume() * CM2L; }
+    virtual double toVolume() const override                 { return static_cast<double>(val * L2CM); }
+    virtual double fromVolume(const double a) const override { return a * CM2L; }
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

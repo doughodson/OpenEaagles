@@ -190,7 +190,7 @@ public:
     class ExpInvalidFont : public base::Object::Exception {
         public:
             ExpInvalidFont() : Exception() {}
-            const char* getDescription() const override     { return "font is invalid"; }
+            virtual const char* getDescription() const override     { return "font is invalid"; }
     };
 
 protected:
@@ -231,7 +231,7 @@ private:
 
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

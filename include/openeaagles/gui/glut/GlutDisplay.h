@@ -102,15 +102,15 @@ public:
    bool setSlotAccumBuff(const base::Number* const msg);
    bool setSlotStencilBuff(const base::Number* const msg);
 
-   void select() override;                       // Selects this display.
-   void hide() override;
-   void show() override;
-   void swapBuffers() override;
-   void reshapeIt(int w, int h) override;
-   void mouseEvent(const int button, const int state, const int x, const int y) override;
+   virtual void select() override;                       // Selects this display.
+   virtual void hide() override;
+   virtual void show() override;
+   virtual void swapBuffers() override;
+   virtual void reshapeIt(int w, int h) override;
+   virtual void mouseEvent(const int button, const int state, const int x, const int y) override;
 
-   void reset() override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // Creates a subwindow and returns the window ID (or -1 if failed)
@@ -198,7 +198,7 @@ inline unsigned int GlutDisplay::getIdleSleepTime() const           { return idl
 inline const osg::Vec2d& GlutDisplay::getSubwindowPosition() const  { return swPosition;      }
 inline const osg::Vec2d& GlutDisplay::getSubwindowSize() const      { return swSize;          }
 
-} // End glut namespace
-} // End oe namespace
+}
+}
 
 #endif

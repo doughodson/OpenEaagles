@@ -80,15 +80,15 @@ public:
     virtual bool setSlotTTL(const Number* const msg);
     virtual bool setSlotLoopback(const Number* const msg);
 
-    bool initNetwork(const bool noWaitFlag) override;
-    bool isConnected() const override;
-    bool closeConnection() override;
+    virtual bool initNetwork(const bool noWaitFlag) override;
+    virtual bool isConnected() const override;
+    virtual bool closeConnection() override;
 
 protected:
     virtual bool joinTheGroup();
 
-    bool init() override;
-    bool bindSocket() override;
+    virtual bool init() override;
+    virtual bool bindSocket() override;
 
 private:
     char* multicastGroup;           // Multicast Group Name
@@ -97,8 +97,8 @@ private:
     bool  initialized;              // handler has been initialized
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

@@ -39,10 +39,10 @@ public:
     virtual bool setPitch(const double newP);
     virtual bool setMaxRate(const double newMR);
 
-    void draw() override;
+    virtual void draw() override;
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
-    void updateData(const double dt = 0) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void updateData(const double dt = 0) override;
 
 protected:
     // slot functions
@@ -64,7 +64,7 @@ private:
     double maxRate;     // maximum mechanical rate at which the adi can move pitch or roll
 };
 
-}; // end instruments namespace
-}; // end oe namespace
+}
+}
 
 #endif

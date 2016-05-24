@@ -42,9 +42,9 @@ public:
     double getAoaGreenMax() const   { return aoaGreenMax; }
     int    getState() const         { return aoaState; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    void updateData(const double dt = 0) override;
+    virtual void updateData(const double dt = 0) override;
 
 protected:
 
@@ -77,7 +77,7 @@ private:
     SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

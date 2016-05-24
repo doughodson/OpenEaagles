@@ -95,9 +95,9 @@ class FtglBitmapFont : public FtglFonts
 public:
     FtglBitmapFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -129,9 +129,9 @@ class FtglExtrdFont : public FtglFonts
 public:
     FtglExtrdFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 
     // slot table functions
     bool setDepth(const base::Number* const newDepth);
@@ -166,9 +166,9 @@ class FtglOutlineFont : public FtglFonts
 public:
     FtglOutlineFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -196,9 +196,9 @@ class FtglPixmapFont : public FtglFonts
 public:
     FtglPixmapFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -226,9 +226,9 @@ class FtglPolygonFont : public FtglFonts
 public:
     FtglPolygonFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 };
 
 //------------------------------------------------------------------------------
@@ -259,11 +259,11 @@ class FtglHaloFont : public FtglFonts
 public:
     FtglHaloFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 
-    base::Color* getHaloColor()    { return haloColor; }
+    base::Color* getHaloColor()     { return haloColor; }
     float getHaloLineWidth()        { return linewidth; }
     FTGLOutlineFont* getOutline()   { return outline; }
 
@@ -302,12 +302,12 @@ class FtglTextureFont : public FtglFonts
 public:
     FtglTextureFont();
 
-    void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
-    void loadFont() override;
+    virtual void outputText(const double x, const double y, const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void outputText(const char* txt, const int n, const bool vf = false, const bool rf = false) override;
+    virtual void loadFont() override;
 };
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

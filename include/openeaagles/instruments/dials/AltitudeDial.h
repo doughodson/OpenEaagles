@@ -28,7 +28,7 @@ class AltitudeDial : public Instrument
 public:
     AltitudeDial();
 
-    void updateData(const double dt = 0) override;
+    virtual void updateData(const double dt = 0) override;
 
 private:
     bool figureRotation(const double thisAlt);
@@ -39,7 +39,7 @@ private:
     SendData altTenThousandsSD;             // our ten thousands altitude
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

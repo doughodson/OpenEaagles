@@ -139,9 +139,9 @@ public:
     Newtons(const double value);
     Newtons(const Force& value);
 
-    static double convertStatic(const Force& n)        { return n.toForce(); }
-    double toForce() const override                    { return static_cast<double>(val); }
-    double fromForce(const double a) const override    { return a; }
+    static double convertStatic(const Force& n)                { return n.toForce(); }
+    virtual double toForce() const override                    { return static_cast<double>(val); }
+    virtual double fromForce(const double a) const override    { return a; }
 };
 
 
@@ -159,9 +159,9 @@ public:
     KiloNewtons(const double value);
     KiloNewtons(const Force& value);
 
-    static double convertStatic(const Force& n)        { return n.toForce() * N2KN; }
-    double toForce() const override                    { return static_cast<double>(val * KN2N); }
-    double fromForce(const double a) const override    { return a * N2KN; }
+    static double convertStatic(const Force& n)                { return n.toForce() * N2KN; }
+    virtual double toForce() const override                    { return static_cast<double>(val * KN2N); }
+    virtual double fromForce(const double a) const override    { return a * N2KN; }
 };
 
 
@@ -179,9 +179,9 @@ public:
     PoundForces(const double value);
     PoundForces(const Force& value);
 
-    static double convertStatic(const Force& n)        { return n.toForce() * N2PF; }
-    double toForce() const override                    { return static_cast<double>(val * PF2N); }
-    double fromForce(const double a) const override    { return a * N2PF; }
+    static double convertStatic(const Force& n)                { return n.toForce() * N2PF; }
+    virtual double toForce() const override                    { return static_cast<double>(val * PF2N); }
+    virtual double fromForce(const double a) const override    { return a * N2PF; }
 };
 
 
@@ -199,12 +199,12 @@ public:
     Poundals(const double value);
     Poundals(const Force& value);
 
-    static double convertStatic(const Force& n)        { return n.toForce() * N2PD; }
-    double toForce() const override                    { return static_cast<double>(val * PD2N); }
-    double fromForce(const double a) const override    { return a * N2PD; }
+    static double convertStatic(const Force& n)                { return n.toForce() * N2PD; }
+    virtual double toForce() const override                    { return static_cast<double>(val * PD2N); }
+    virtual double fromForce(const double a) const override    { return a * N2PD; }
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

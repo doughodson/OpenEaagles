@@ -20,9 +20,9 @@ public:
     virtual bool setWidth(const double x)           { width = x; return true; }
     virtual bool setHeight(const double x)          { height = x; return true; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
-    void updateData(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 protected:
     bool setSlotSkyColor(const base::Color* const cobj);
@@ -41,7 +41,7 @@ private:
     double height;          // height of our polygon
 };
 
-}; // end instruments namespace
-}; // end oe namespace
+}
+}
 
 #endif

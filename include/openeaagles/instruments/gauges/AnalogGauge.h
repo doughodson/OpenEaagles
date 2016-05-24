@@ -44,7 +44,7 @@ public:
     bool isVertical() const         { return vertical; }
     bool isDrawing() const          { return drawMe; }
 
-    void drawFunc() override;
+    virtual void drawFunc() override;
 
 protected:
     // slot functions
@@ -62,7 +62,7 @@ private:
     bool drawMe;                    // this is for derived classes that don't want us to draw
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

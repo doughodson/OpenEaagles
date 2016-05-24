@@ -75,13 +75,13 @@ public:
    bool getSharedFlag() const;                  // Is the socket address shared?
    void setSharedFlag(const bool b);
 
-   bool initNetwork(const bool noWaitFlag) override;
-   bool isConnected() const override;
-   bool closeConnection() override;
-   bool sendData(const char* const packet, const int size) override;
-   unsigned int recvData(char* const packet, const int maxSize) override;
-   bool setBlocked() override;
-   bool setNoWait() override;
+   virtual bool initNetwork(const bool noWaitFlag) override;
+   virtual bool isConnected() const override;
+   virtual bool closeConnection() override;
+   virtual bool sendData(const char* const packet, const int size) override;
+   virtual unsigned int recvData(char* const packet, const int maxSize) override;
+   virtual bool setBlocked() override;
+   virtual bool setNoWait() override;
 
    // Last recvData() origin IP and port
    uint32_t getLastFromAddr() const;     // IP address of last valid recvData()
@@ -97,7 +97,7 @@ public:
    virtual bool setSlotIgnoreSourcePort(const Number* const msg);
 
 protected:
-   bool init() override;
+   virtual bool init() override;
 
    virtual bool bindSocket();          // Bind socket to address
 
@@ -192,8 +192,8 @@ inline uint16_t PosixHandler::getLastFromPort() const
    return fromPort1;
 }
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

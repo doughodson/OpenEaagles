@@ -41,22 +41,22 @@ public:
     // Slot functions
     virtual bool setSlotIpAddress(const String* const msg);
 
-    bool initNetwork(const bool noWaitFlag) override;
+    virtual bool initNetwork(const bool noWaitFlag) override;
 
 protected:
     const char* getIpAddress()  { return ipAddr; }
     bool connectToServer();      // Connect to the server
 
-    bool init() override;
+    virtual bool init() override;
 
-    bool bindSocket() override;
+    virtual bool bindSocket() override;
 
 private:
     char* ipAddr;                // IP Address
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

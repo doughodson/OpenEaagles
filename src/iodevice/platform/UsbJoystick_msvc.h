@@ -32,10 +32,10 @@ public:
    UsbJoystick();
 
    // base::IoDevice functions
-   void processInputs(const double dt, base::IoData* const inData) override;
+   virtual void processInputs(const double dt, base::IoData* const inData) override;
 
    // base::Component functions
-   void reset() override;
+   virtual void reset() override;
 
 private:
    void initData();

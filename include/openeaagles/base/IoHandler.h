@@ -84,7 +84,7 @@ public:
    double getPriority() const;            // Thread priority (0 low to 1 high)
    double getRate() const;                // Thread rate (hz)
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    bool areNetworksEnabled() const        { return netInitialized; }
@@ -99,7 +99,7 @@ protected:
    virtual bool setSlotRate(const Frequency* const num);
    virtual bool setSlotPriority(const Number* const num);
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();

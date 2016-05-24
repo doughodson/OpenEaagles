@@ -33,7 +33,7 @@ public:
     double getEngTit(const int engNum) const { return tit[engNum]; }
     double getEngFF(const int engNum) const { return ff[engNum]; }
 
-    void updateData(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 private:
 
@@ -61,7 +61,7 @@ private:
     SendData ffROSD[NUM_ENG];
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

@@ -47,10 +47,10 @@ public:
    // Slot functions
    virtual bool setSlotBacklog(const Number* const msg);
 
-   bool initNetwork(const bool noWaitFlag) override;
+   virtual bool initNetwork(const bool noWaitFlag) override;
 
 protected:
-   bool bindSocket() override;
+   virtual bool bindSocket() override;
 
    virtual bool setBacklog(const unsigned int value);
    virtual bool listenForConnections();
@@ -59,8 +59,8 @@ private:
    unsigned int backlog;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif
 

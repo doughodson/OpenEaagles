@@ -48,8 +48,8 @@ public:
    bool setInvertFlag(const bool);
    bool setNumber(const int);
 
-   void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
-   void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
+   virtual void processInputs(const double dt, const base::IoDevice* const device, base::IoData* const inData) override;
+   virtual void processOutputs(const double dt, const base::IoData* const outData, base::IoDevice* const device) override;
 
 protected:
    // Slot functions
@@ -72,7 +72,7 @@ private:
    int num;                // Number of DIs (neg for reverse order)
 };
 
-} // end iodevice
-} // end oe namespace
+}
+}
 
 #endif

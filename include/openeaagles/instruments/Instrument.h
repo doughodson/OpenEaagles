@@ -38,8 +38,8 @@ public:
     virtual bool setAllowValPass(const bool newVP);
     virtual bool setInstVal(const double newPos);
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
-    void updateData(const double dt = 0.0) override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 protected:
     // slot functions

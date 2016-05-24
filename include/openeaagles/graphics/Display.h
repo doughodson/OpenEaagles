@@ -83,7 +83,7 @@ class Material;
 //
 // Exceptions:
 //      ExpInvalidDisplayPtr
-//          Thrown by display() when displayPtr == null(0)
+//          Thrown by display() when displayPtr == nullptr
 //          (the display screen pointer is not set).
 //
 //----------------------------------------------------------------------------
@@ -355,8 +355,8 @@ public:
    virtual bool isOkToSwap() const;
    virtual void setOkToSwap(const bool x);
 
-   void updateTC(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    // Configures the display's GL modes
@@ -394,23 +394,23 @@ private:
     Orientation orientation;           // Display orientation
 
     GLclampd  clearDepth;              // Display clear depth
-    base::PairStream* colorTable;     // Color table
+    base::PairStream* colorTable;      // Color table
     osg::Vec4 color;                   // Current Color
     osg::Vec4 clearColor;              // Clear (background) color
-    base::Identifier* colorName;      // Current color name
-    const base::Color* normColor;     // Color of a normal text field
-    const base::Color* hiColor;       // Color of a high lighted text field.
+    base::Identifier* colorName;       // Current color name
+    const base::Color* normColor;      // Color of a normal text field
+    const base::Color* hiColor;        // Color of a high lighted text field.
 
-    base::PairStream* fontList;       // List of fonts
+    base::PairStream* fontList;        // List of fonts
     Font* currentFont;                 // Current font
     Font* normalFont;                  // Normal font
-    base::Identifier* normalFontName; // Normal font name
+    base::Identifier* normalFontName;  // Normal font name
     bool    reversedFlg;               // Current font setting
     bool    underlinedFlg;             // Current font setting
 
-    bool    rvBrackets;                 // Reverse video brackets flag
-    char    leftBracketChar;            // Left bracket character
-    char    rightBracketChar;           // right bracket character
+    bool    rvBrackets;                // Reverse video brackets flag
+    char    leftBracketChar;           // Left bracket character
+    char    rightBracketChar;          // right bracket character
 
     bool okToSwap;                     // just in case we don't want to swap buffers every time, we can wait.
 };
@@ -458,7 +458,7 @@ inline void Display::setSubdisplayFlag(const bool flg)      { subdisplayFlg = fl
 inline bool Display::isOkToSwap() const                     { return okToSwap; }
 inline void Display::setOkToSwap(const bool x)              { okToSwap = x; }
 
-} // End graphics namespace
-} // End oe namespace
+}
+}
 
 #endif

@@ -26,9 +26,9 @@ public:
     virtual bool setNumSelections(const int x);
     virtual bool setCurrentState(const int x);
 
-    bool onSingleClick() override;
+    virtual bool onSingleClick() override;
 
-    void updateData(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 protected:
     bool setSlotNumSelections(const base::Number* const msg);
@@ -40,7 +40,7 @@ private:
     SendData currentStateSD;
 };
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 
 #endif

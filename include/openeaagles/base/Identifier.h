@@ -27,11 +27,11 @@ public:
     Identifier(const char* string);
     Identifier();
 
-    void setStr(const char* string) override;
-    void catStr(const char* string) override;
+    virtual void setStr(const char* string) override;
+    virtual void catStr(const char* string) override;
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

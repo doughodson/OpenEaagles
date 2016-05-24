@@ -24,7 +24,7 @@ protected:
    void setCurrentObj(Object* const obj);
 
 private:
-   unsigned long userFunc() override;
+   virtual unsigned long userFunc() override;
 
 private:
    ThreadPool* threadPool;

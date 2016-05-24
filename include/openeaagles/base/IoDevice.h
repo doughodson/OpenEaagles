@@ -76,7 +76,7 @@ public:
    // Process device output channels and components
    virtual void processOutputs(const double dt, const IoData* const outData);
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    PairStream* getDeviceList();
@@ -87,7 +87,7 @@ protected:
    virtual bool setSlotDevices(PairStream* const list);
 
    // base::Component protected functions
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();
@@ -96,7 +96,7 @@ private:
    safe_ptr<PairStream>  devices;    // Device list
 };
 
-} // end iodevice namespace
-} // end oe namespace
+}
+}
 
 #endif

@@ -72,8 +72,8 @@ public:
     virtual void log(const char* const msg);
     virtual void log(LogEvent* const event);
 
-    void updateTC(const double dt = 0.0) override;
-    void updateData(const double dt = 0.0) override;
+    virtual void updateTC(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 protected:
     virtual bool openFile();
@@ -91,7 +91,7 @@ private:
     bool           failed;       // Open or write failed
 };
 
-} // End base namespace
-} // End oe namespace
+}
+}
 
 #endif

@@ -170,8 +170,8 @@ public:
     void setConstrained(const RTI::Boolean flag)            { cFlag = flag; }
 
     // simulation::NetIO Interface
-    void destroyInputNib(simulation::Nib* const nib) override;
-    void destroyOutputNib(simulation::Nib* const nib) override;
+    virtual void destroyInputNib(simulation::Nib* const nib) override;
+    virtual void destroyOutputNib(simulation::Nib* const nib) override;
 
 protected:
     virtual void clearAllObjectClassHandles();
@@ -188,8 +188,8 @@ protected:
     virtual Ambassador* createFederateAmbassador();
 
     // Simulation::NetIO Interface (Callbacks)
-    bool initNetwork() override;             // Initialize the network
-    void netInputHander() override;          // Network input handler
+    virtual bool initNetwork() override;             // Initialize the network
+    virtual void netInputHander() override;          // Network input handler
 
     // Federation Support
     virtual bool createAndJoinFederation();
