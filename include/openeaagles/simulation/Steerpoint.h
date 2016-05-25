@@ -170,7 +170,7 @@ public:
    virtual bool compute(const Navigation* const nav, const Steerpoint* const from = 0);
    virtual void clearNavData();
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
 
@@ -198,9 +198,9 @@ protected:
     virtual bool setSlotNext(const base::Identifier* const num);
     virtual bool setSlotNext(const base::Number* const num);
 
-    void processComponents(   // Process our subcomponent list (which should be other steerpoints)
+    virtual void processComponents(           // Process our subcomponent list (which should be other steerpoints)
          base::PairStream* const list,        // Source list of components
-         const std::type_info& filter,           // Type filter
+         const std::type_info& filter,        // Type filter
          base::Pair* const add = 0,           // Optional pair to add
          base::Component* const remove = 0    // Optional subcomponent to remove
        ) override;

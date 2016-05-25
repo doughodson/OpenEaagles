@@ -58,7 +58,7 @@ public:
    int getRefId() const    { return refId; }          // Message Ref ID
    virtual void setRefId(const int id);               // Sets the message ref ID
 
-   bool execute(base::Component* actor) override;
+   virtual bool execute(base::Component* actor) override;
 
 protected:
    OnboardComputer* getManager()   { return manager; } // Our manager
@@ -115,15 +115,15 @@ public:
    virtual bool setSlotResolution(const base::Distance* const msg);
    virtual bool setSlotImageSize(const base::Number* const msg);
 
-   bool trigger(OnboardComputer* const mgr) override;
-   bool cancel() override;
-   void process(const double dt) override;
+   virtual bool trigger(OnboardComputer* const mgr) override;
+   virtual bool cancel() override;
+   virtual void process(const double dt) override;
 
 protected:
    Sar* getSarSystem()        { return sar; }
    virtual void setSarSystem(Sar* const p);
 
-   void setCompleted(const bool flg) override;
+   virtual void setCompleted(const bool flg) override;
 
 private:
    double sarLatitude;        // Latitude (deg)
@@ -167,7 +167,7 @@ public:
    // Set planned station number
    virtual bool setStation(const unsigned int num);
 
-   bool trigger(OnboardComputer* const mgr) override;
+   virtual bool trigger(OnboardComputer* const mgr) override;
 
 protected:
    bool setSlotTargetLat(const base::LatLon* newLat);
@@ -202,9 +202,9 @@ public:
     // set functions
     virtual bool setInterval(const double x) { interval = x; return true; }
     virtual bool setNumToLaunch(const int x) { numToLaunch = x; return true; }
-    void process(const double dt) override;
+    virtual void process(const double dt) override;
 
-    bool trigger(OnboardComputer* const mgr) override;
+    virtual bool trigger(OnboardComputer* const mgr) override;
 
 protected:
     bool setSlotInterval(const base::Number* x);

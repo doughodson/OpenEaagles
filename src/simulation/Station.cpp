@@ -35,28 +35,31 @@ static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
 // ---
 // Time-critical thread
 // ---
-class TcThread : public base::ThreadPeriodicTask {
+class TcThread : public base::ThreadPeriodicTask
+{
    DECLARE_SUBCLASS(TcThread,base::ThreadPeriodicTask)
    public: TcThread(base::Component* const parent, const double priority, const double rate);
-   private: unsigned long userFunc(const double dt) override;
+   private: virtual unsigned long userFunc(const double dt) override;
 };
 
 // ---
 // Interoperability Networks thread
 // ---
-class NetThread : public base::ThreadPeriodicTask {
+class NetThread : public base::ThreadPeriodicTask
+{
    DECLARE_SUBCLASS(NetThread,base::ThreadPeriodicTask)
    public: NetThread(base::Component* const parent, const double priority, const double rate);
-   private: unsigned long userFunc(const double dt) override;
+   private: virtual unsigned long userFunc(const double dt) override;
 };
 
 // ---
 // Background thread
 // ---
-class BgThread : public base::ThreadPeriodicTask {
+class BgThread : public base::ThreadPeriodicTask
+{
    DECLARE_SUBCLASS(BgThread,base::ThreadPeriodicTask)
    public: BgThread(base::Component* const parent, const double priority, const double rate);
-   private: unsigned long userFunc(const double dt) override;
+   private: virtual unsigned long userFunc(const double dt) override;
 };
 
 //=============================================================================

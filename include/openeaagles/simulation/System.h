@@ -85,11 +85,11 @@ public:
    // Event handler(s)
    virtual bool killedNotification(Player* const killedBy = 0); // Killed (KILL_EVENT) event handler
 
-   void updateData(const double dt = 0.0) override;
-   void updateTC(const double dt = 0.0) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
-   bool isFrozen() const override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
+   virtual bool isFrozen() const override;
 
 protected:
    // Slot function(s)

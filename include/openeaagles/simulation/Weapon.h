@@ -299,13 +299,13 @@ public:
    virtual bool setSlotJettisonable(const base::Number* const p);
    virtual bool setSlotTestTgtName(const base::String* const p);
 
-   unsigned int getMajorType() const override;
-   bool collisionNotification(Player* const p) override;
-   bool crashNotification() override;
+   virtual unsigned int getMajorType() const override;
+   virtual bool collisionNotification(Player* const p) override;
+   virtual bool crashNotification() override;
 
-   void updateTC(const double dt = 0.0) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
 
 protected:
    virtual void weaponGuidance(const double dt);
@@ -342,9 +342,9 @@ protected:
    // At detonation: compute the location of the detonation relative to the target player
    bool setLocationOfDetonation();
 
-   void dynamics(const double  dt = 0.0) override;
+   virtual void dynamics(const double  dt = 0.0) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
     void initData();

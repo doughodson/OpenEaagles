@@ -77,7 +77,7 @@ public:
    virtual bool setLocalOnly(const bool flg);
    virtual bool setSendCrashEventsEnabled(const bool flg);
 
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 
 protected:
    virtual bool resizePoiList(const unsigned int newSize);
@@ -96,7 +96,7 @@ protected:
    virtual bool setSlotLocalOnly(const base::Number* const msg);
    virtual bool setSlotSendCrashEvents(const base::Number* const msg);
 
-   void process(const double dt) override;     // Phase 3
+   virtual void process(const double dt) override;     // Phase 3
 
 protected:
    struct PlayerOfInterest {

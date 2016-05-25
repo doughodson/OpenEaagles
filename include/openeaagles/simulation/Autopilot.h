@@ -213,7 +213,7 @@ public:
    // maximum velocity acceleration
    virtual bool setMaxVelAccNps(const double x);
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    // Slot functions
@@ -254,10 +254,10 @@ protected:
    virtual bool processModeFollowTheLead();
 
    // System class Interface -- phase() callbacks
-   void process(const double dt) override;     // Phase 3
+   virtual void process(const double dt) override;     // Phase 3
 
    // base::Component protected interface
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    bool flySRT();                   // flies a standard rate of turn

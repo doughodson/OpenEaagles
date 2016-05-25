@@ -1513,16 +1513,17 @@ NetIO::NtmOutputNode* NetIO::NtmOutputNode::clone() const
 // Description: Standard outgoing NTM node
 //==============================================================================
 
-class NtmOutputNodeStd : public NetIO::NtmOutputNode {
+class NtmOutputNodeStd : public NetIO::NtmOutputNode
+{
    DECLARE_SUBCLASS(NtmOutputNodeStd,NetIO::NtmOutputNode)
 
 public:
    NtmOutputNodeStd(const Player* const p, const char* const formName);
 
    // NetIO::NtmOutputNode class functions
-   const Ntm* findNetworkTypeMapper(const Player* const p) const override;
-   bool add2OurLists(Ntm* const ntm) override;
-   void print(std::ostream& sout, const int icnt) const override;
+   virtual const Ntm* findNetworkTypeMapper(const Player* const p) const override;
+   virtual bool add2OurLists(Ntm* const ntm) override;
+   virtual void print(std::ostream& sout, const int icnt) const override;
 
 private:
    bool checkAndAddNtm(Ntm* const ntm);

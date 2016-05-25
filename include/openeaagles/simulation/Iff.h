@@ -86,7 +86,7 @@ public:
    virtual bool setSlotEnableMode4(const base::Number* const msg);
    virtual bool setSlotEnableModeC(const base::Number* const msg);
 
-   void reset() override;
+   virtual void reset() override;
 
 private:
 

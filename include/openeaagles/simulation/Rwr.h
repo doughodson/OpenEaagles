@@ -38,16 +38,16 @@ public:
        }
     }
 
-    bool killedNotification(Player* const killedBy = 0) override;
+    virtual bool killedNotification(Player* const killedBy = 0) override;
 
 protected:
    static const int MAX_EMISSIONS = 1000;
    static const int NUM_RAYS = 360;
 
-   void receive(const double dt) override;
-   void process(const double dt) override;
+   virtual void receive(const double dt) override;
+   virtual void process(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
    void xferRays()
    {

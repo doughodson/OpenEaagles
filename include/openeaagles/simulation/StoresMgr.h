@@ -127,14 +127,14 @@ public:
    virtual bool onTriggerSwEvent(const base::Boolean* const sw = 0);
    virtual bool onWpnReload();
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
-   bool setSlotStores(const base::PairStream* const msg) override;
+   virtual bool setSlotStores(const base::PairStream* const msg) override;
 
-   void process(const double dt) override;
+   virtual void process(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();
@@ -143,11 +143,11 @@ private:
    base::safe_ptr<base::PairStream> weaponsList;  // Weapon list; set by setSlotStores()
    base::safe_ptr<base::PairStream> externalList; // External equipment list; set by setSlotStores()
    base::safe_ptr<base::PairStream> fuelList;     // External fuel tank list; set by setSlotStores()
-   base::safe_ptr<Gun> gunPtr;                     // Gun model; set by setSlotStores()
+   base::safe_ptr<Gun> gunPtr;                    // Gun model; set by setSlotStores()
 
-   bool   gunFlg;          // Gun has been selected
-   unsigned int   mode;               // Weapon delivery mode
-   unsigned int masterArm;         // Master arming mode
+   bool   gunFlg;                // Gun has been selected
+   unsigned int   mode;          // Weapon delivery mode
+   unsigned int masterArm;       // Master arming mode
 };
 
 //------------------------------------------------------------------------------
@@ -188,35 +188,35 @@ public:
 
    virtual bool setWeaponReleaseTimer(const double v);   // Sets the release timer
 
-   bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
-   bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
+   virtual bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
+   virtual bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
 
-   Weapon* getCurrentWeapon() override;
-   const Weapon* getCurrentWeapon() const override;
-   bool isWeaponReleased() const override;
-   Missile* getNextMissile() override;
-   const Missile* getNextMissile() const override;
-   Sam* getNextSam() override;
-   const Sam* getNextSam() const override;
-   Bomb* getNextBomb() override;
-   const Bomb* getNextBomb() const override;
-   Chaff* getNextChaff() override;
-   const Chaff* getNextChaff() const override;
-   Flare* getNextFlare() override;
-   const Flare* getNextFlare() const override;
-   Decoy* getNextDecoy() override;
-   const Decoy* getNextDecoy() const override;
-   Missile* releaseOneMissile() override;
-   Sam* releaseOneSam() override;
-   Bomb* releaseOneBomb() override;
-   Chaff* releaseOneChaff() override;
-   Flare* releaseOneFlare() override;
-   Decoy* releaseOneDecoy() override;
+   virtual Weapon* getCurrentWeapon() override;
+   virtual const Weapon* getCurrentWeapon() const override;
+   virtual bool isWeaponReleased() const override;
+   virtual Missile* getNextMissile() override;
+   virtual const Missile* getNextMissile() const override;
+   virtual Sam* getNextSam() override;
+   virtual const Sam* getNextSam() const override;
+   virtual Bomb* getNextBomb() override;
+   virtual const Bomb* getNextBomb() const override;
+   virtual Chaff* getNextChaff() override;
+   virtual const Chaff* getNextChaff() const override;
+   virtual Flare* getNextFlare() override;
+   virtual const Flare* getNextFlare() const override;
+   virtual Decoy* getNextDecoy() override;
+   virtual const Decoy* getNextDecoy() const override;
+   virtual Missile* releaseOneMissile() override;
+   virtual Sam* releaseOneSam() override;
+   virtual Bomb* releaseOneBomb() override;
+   virtual Chaff* releaseOneChaff() override;
+   virtual Flare* releaseOneFlare() override;
+   virtual Decoy* releaseOneDecoy() override;
 
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 
 protected:
-   void process(const double dt) override;
+   virtual void process(const double dt) override;
 
 private:
    void initData();

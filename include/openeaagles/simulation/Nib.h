@@ -225,7 +225,7 @@ protected:
    // Update our DR time and return the new time
    double updateDrTime(const double dt)               { return (drTime += dt); }
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    // compute the rotational matrix R0

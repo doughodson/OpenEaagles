@@ -136,8 +136,8 @@ public:
    virtual bool setSlotRfSignalProcessLoss(base::Number* const msg);
    virtual bool setSlotDisableEmissions(base::Number* const msg);
 
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    // Max size of emission queues (per frame)
@@ -158,10 +158,10 @@ protected:
    virtual void processPlayersOfInterest();
 
    // Callbacks by phase -- to be used by the derived classes, as needed
-   void process(const double dt) override;     // Phase 3
+   virtual void process(const double dt) override;     // Phase 3
 
    // base::Component protected interface
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();

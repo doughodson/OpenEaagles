@@ -40,7 +40,7 @@ protected:
    virtual bool setSlotNetwork(base::NetHandler* const msg);
    virtual bool setSlotNoWait(base::Number* const msg);
 
-   const DataRecordHandle* readRecordImp() override;
+   virtual const DataRecordHandle* readRecordImp() override;
 
 private:
    void initData();

@@ -76,9 +76,9 @@ public:
       double* const tof                // TOF (sec)
     );
 
-    const char* getDescription() const override;
-    const char* getNickname() const override;
-    int getCategory() const override;
+    virtual const char* getDescription() const override;
+    virtual const char* getNickname() const override;
+    virtual int getCategory() const override;
 
 protected:
     virtual bool setNoseFuze(const bool f);
@@ -98,8 +98,8 @@ protected:
     bool setSlotFuzeAltitude(base::Number* const p);
     bool setSlotFuzeTime(base::Number* const p);
 
-    void weaponGuidance(const double dt) override;
-    void weaponDynamics(const double dt) override;
+    virtual void weaponGuidance(const double dt) override;
+    virtual void weaponDynamics(const double dt) override;
 
 private:
     void initData();

@@ -31,19 +31,19 @@ public:
 
    virtual void newReport(IrQueryMsg* q, double snDbl);
 
-   void clearTracksAndQueues() override;
-   bool addTrack(Track* const t) override;
+   virtual void clearTracksAndQueues() override;
+   virtual bool addTrack(Track* const t) override;
 
 protected:
    virtual IrQueryMsg* getQuery(double* const sn);                     // Get the next 'new' report from the queue
 
-   virtual bool setSlotAzimuthBin(const base::Number* const num);     // Sets azimuth bin
-   virtual bool setSlotElevationBin(const base::Number* const num);   // Sets elevation bin
+   virtual bool setSlotAzimuthBin(const base::Number* const num);      // Sets azimuth bin
+   virtual bool setSlotElevationBin(const base::Number* const num);    // Sets elevation bin
 
-   bool setSlotAlpha(const base::Number* const num) override;
-   bool setSlotBeta(const base::Number* const num) override;
+   virtual bool setSlotAlpha(const base::Number* const num) override;
+   virtual bool setSlotBeta(const base::Number* const num) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
    // Prediction parameters
    double              azimuthBin;         // Azimuth Bin
@@ -53,7 +53,7 @@ protected:
 
 private:
    base::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
-                                               //   TrackManager::queueLock semaphore)
+                                              //   TrackManager::queueLock semaphore)
 
 };
 
@@ -67,12 +67,12 @@ private:
 //==============================================================================
 class AirAngleOnlyTrkMgr : public AngleOnlyTrackManager
 {
-    DECLARE_SUBCLASS(AirAngleOnlyTrkMgr,AngleOnlyTrackManager)
+   DECLARE_SUBCLASS(AirAngleOnlyTrkMgr,AngleOnlyTrackManager)
 public:
-    AirAngleOnlyTrkMgr();
+   AirAngleOnlyTrkMgr();
 
 protected:
-    void processTrackList(const double dt) override;
+   virtual void processTrackList(const double dt) override;
 };
 
 
@@ -94,12 +94,12 @@ protected:
 //==============================================================================
 class AirAngleOnlyTrkMgrPT : public AirAngleOnlyTrkMgr
 {
-    DECLARE_SUBCLASS(AirAngleOnlyTrkMgrPT, AirAngleOnlyTrkMgr)
+   DECLARE_SUBCLASS(AirAngleOnlyTrkMgrPT, AirAngleOnlyTrkMgr)
 public:
-    AirAngleOnlyTrkMgrPT();
+   AirAngleOnlyTrkMgrPT();
 
 protected:
-   void processTrackList(const double dt) override;
+   virtual void processTrackList(const double dt) override;
 
    virtual void updateTrackAges(const double dt);
    virtual void removeAgedTracks();

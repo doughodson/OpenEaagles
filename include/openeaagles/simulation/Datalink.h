@@ -81,8 +81,8 @@ public:
    // Event handler(s)
    virtual bool onDatalinkMessageEvent(base::Object* const);
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
 
 protected:
    virtual bool queueIncomingMessage(base::Object* const msg);  // Queue up an incoming message
@@ -93,9 +93,9 @@ protected:
    virtual bool setSlotRadioId(const base::Number* const num);
    virtual bool setSlotMaxRange(const base::Distance* const num);
 
-   void dynamics(const double dt) override;
+   virtual void dynamics(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();

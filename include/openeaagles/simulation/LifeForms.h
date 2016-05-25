@@ -29,26 +29,26 @@ public:
            WADING = 13, SURRENDER = 14, DETAINED = 15 };
 
 
-    unsigned int getMajorType() const override;
+    virtual unsigned int getMajorType() const override;
 
     // sets our actions (right now we can stand, walk, or run)
     virtual bool setActionState(const int x);
 
-    int getActionState() const { return actionState; }
+    int getActionState() const                             { return actionState; }
 
     // move our player (vector him according to strafe)
     virtual void move(const double fwd, const double sdws);
 
     // have our player look
     virtual void look(const double up, const double sdws);
-    virtual bool setLookAngle(const double x) { lookAngle = x; return true; }
+    virtual bool setLookAngle(const double x)              { lookAngle = x; return true; }
 
-    bool setVelocity(const double ue, const double ve, const double we) override;
+    virtual bool setVelocity(const double ue, const double ve, const double we) override;
 
-    double getLookAngle() const { return lookAngle; }
-    bool isTargetAquired() const { return tgtAquired; }
-    int getLockMode() const { return lockMode; }
-    virtual void setLockedMode(const int x) { lockMode = x; }
+    double getLookAngle() const                            { return lookAngle; }
+    bool isTargetAquired() const                           { return tgtAquired; }
+    int getLockMode() const                                { return lockMode; }
+    virtual void setLockedMode(const int x)                { lockMode = x; }
 
     // get our "aim" and fire
     virtual void fire();
@@ -59,10 +59,10 @@ public:
     virtual void setWeapon(const int x) { weaponSel = x; }
     int getWeaponSelMode() const { return weaponSel; }
 
-    void reset() override;
+    virtual void reset() override;
 
 protected:
-   bool shutdownNotification() override;
+    virtual bool shutdownNotification() override;
 
 private:
     int actionState;    // the action we are doing (for DIS enumerations)

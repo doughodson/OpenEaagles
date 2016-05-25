@@ -49,8 +49,8 @@ public:
    //    transz:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
    virtual bool setTranslateZInput(const double transz);
 
-   double getGrossWeight() const override;
-   unsigned int getMajorType() const override;
+   virtual double getGrossWeight() const override;
+   virtual unsigned int getMajorType() const override;
 };
 
 

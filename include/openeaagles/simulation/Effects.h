@@ -33,18 +33,18 @@ public:
     double getDragIndex() const                    { return dragIndex; }
     void setDragIndex(const double v)              { dragIndex = v; }
 
-    const char* getDescription() const override;
-    const char* getNickname() const override;
-    int getCategory() const override;
+    virtual const char* getDescription() const override;
+    virtual const char* getNickname() const override;
+    virtual int getCategory() const override;
 
-    bool collisionNotification(Player* const p) override;
-    bool crashNotification() override;
+    virtual bool collisionNotification(Player* const p) override;
+    virtual bool crashNotification() override;
 
 protected:
-   bool setSlotDragIndex(base::Number* const p);
+    bool setSlotDragIndex(base::Number* const p);
 
-   void weaponDynamics(const double dt) override;
-   void updateTOF(const double dt) override;
+    virtual void weaponDynamics(const double dt) override;
+    virtual void updateTOF(const double dt) override;
 
 private:
     double dragIndex;             // Drag Index
@@ -62,9 +62,9 @@ class Chaff : public Effects
 public:
     Chaff();
 
-    const char* getDescription() const override;
-    const char* getNickname() const override;
-    int getCategory() const override;
+    virtual const char* getDescription() const override;
+    virtual const char* getNickname() const override;
+    virtual int getCategory() const override;
 };
 
 //------------------------------------------------------------------------------
@@ -79,9 +79,9 @@ class Flare : public Effects
 public:
     Flare();
 
-    const char* getDescription() const override;
-    const char* getNickname() const override;
-    int getCategory() const override;
+    virtual const char* getDescription() const override;
+    virtual const char* getNickname() const override;
+    virtual int getCategory() const override;
 };
 
 //------------------------------------------------------------------------------
@@ -96,9 +96,9 @@ class Decoy : public Effects
 public:
     Decoy();
 
-    const char* getDescription() const override;
-    const char* getNickname() const override;
-    int getCategory() const override;
+    virtual const char* getDescription() const override;
+    virtual const char* getNickname() const override;
+    virtual int getCategory() const override;
 };
 
 }

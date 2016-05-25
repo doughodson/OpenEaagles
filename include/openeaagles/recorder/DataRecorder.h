@@ -127,7 +127,8 @@ protected:
       const base::Object* pObjects[4],    // Sample objects
       const double values[4]              // Sample values
    ) override;
-   bool processUnhandledId(const unsigned int id) override;
+
+   virtual bool processUnhandledId(const unsigned int id) override;
 
    // base::Component protected interface
    virtual bool shutdownNotification() override;

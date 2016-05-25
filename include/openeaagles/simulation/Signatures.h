@@ -60,7 +60,7 @@ public:
 
     virtual bool setRCS(const base::Number* const num);
 
-    double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const em) override;
 private:
     double rcs;         // Constant RCS value
 };
@@ -83,7 +83,7 @@ public:
     double computeRcs(const double r)                          { return static_cast<float>(base::PI * r * r); }
     void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 
-    double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const em) override;
 private:
     double radius;      // Sphere radius
     double rcs;         // RCS of sphere
@@ -112,7 +112,7 @@ public:
     virtual bool setA(base::Number* const num);
     virtual bool setB(base::Number* const num);
 
-    double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const em) override;
 private:
     double a;       // Length dimension
     double b;       // Width dimension
@@ -131,7 +131,7 @@ public:
     SigDihedralCR();
     SigDihedralCR(const double a);
 
-    double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const em) override;
 private:
     double length;      // Length dimension
 };
@@ -150,7 +150,7 @@ public:
     SigTrihedralCR();
     SigTrihedralCR(const double a);
 
-    double getRCS(const Emission* const em) override;
+    virtual double getRCS(const Emission* const em) override;
 };
 
 
@@ -167,7 +167,7 @@ class SigSwitch : public RfSignature
 public:
    SigSwitch();
 
-   double getRCS(const Emission* const em) override;
+   virtual double getRCS(const Emission* const em) override;
 };
 
 
@@ -228,7 +228,7 @@ public:
    virtual bool setSlotInDegrees(const base::Number* const msg);
    virtual bool setSlotDecibel(const base::Number* const msg);
 
-   double getRCS(const Emission* const em) override;
+   virtual double getRCS(const Emission* const em) override;
 protected:
    const base::Table2* tbl;      // The table
    bool swapOrderFlg;               // Swap independent data order from az/el to el/az

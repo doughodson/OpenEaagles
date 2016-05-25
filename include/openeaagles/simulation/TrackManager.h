@@ -74,9 +74,9 @@ public:
    // Add a new emission report (RF track managers only)
    virtual void newReport(Emission* em, double snDbl);
 
-   bool killedNotification(Player* const killedBy = 0) override;
+   virtual bool killedNotification(Player* const killedBy = 0) override;
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    static const unsigned int MAX_TRKS = OE_CONFIG_MAX_TRACKS;         // Max tracks
@@ -117,10 +117,10 @@ protected:
    mutable long        queueLock;          // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks
-   void process(const double dt) override;     // Phase 3
+   virtual void process(const double dt) override;     // Phase 3
 
    // base::Component protected interface
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();
@@ -152,7 +152,7 @@ public:
    double getVelGate()                             { return velGate;}
 
 protected:
-   void processTrackList(const double dt) override;
+   virtual void processTrackList(const double dt) override;
 
 private:
    void initData();
@@ -184,7 +184,7 @@ class GmtiTrkMgr : public TrackManager
 public:
    GmtiTrkMgr();
 protected:
-   void processTrackList(const double dt) override;
+   virtual void processTrackList(const double dt) override;
 
 private:
    void initData();
@@ -208,7 +208,7 @@ class RwrTrkMgr : public TrackManager
 public:
    RwrTrkMgr();
 protected:
-   void processTrackList(const double dt) override;
+   virtual void processTrackList(const double dt) override;
 
 private:
    void initData();

@@ -23,7 +23,7 @@ public:
     Jammer();
 
 protected:
-    void transmit(const double dt) override;
+   virtual void transmit(const double dt) override;
 };
 
 }

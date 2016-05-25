@@ -37,7 +37,7 @@ public:
    virtual bool setFuelWt(const double wt);
    virtual bool isFuelWtValid() const;
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    virtual bool setSlotFuelWt(const base::Number* const msg);

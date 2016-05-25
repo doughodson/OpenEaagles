@@ -62,7 +62,7 @@ private:
     bool readSrtmData(std::istream& in);
     bool determineSrtmInfo(const std::string& srtmFilename, std::streamoff size);
 
-    bool loadData() override;
+    virtual bool loadData() override;
 };
 
 

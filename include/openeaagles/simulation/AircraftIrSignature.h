@@ -48,7 +48,7 @@ class AircraftIrSignature : public IrSignature
 public:
    AircraftIrSignature();
 
-   bool getIrSignature(IrQueryMsg* const em) override;
+   virtual bool getIrSignature(IrQueryMsg* const em) override;
 
    // slot operations
    virtual bool setSlotAirframeSignatureTable(const base::Table4* const tbl);

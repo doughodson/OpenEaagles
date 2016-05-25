@@ -49,15 +49,15 @@ public:
    virtual unsigned int processPlayersOfInterest(base::PairStream* const poi);
 #endif
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
 
 protected:
    void clearQueues();
 
-   void process(const double dt) override;
+   virtual void process(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
    base::safe_stack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
    mutable long freeQueryLock;                     // Semaphore to protect 'freeQueryStack'

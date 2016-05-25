@@ -25,12 +25,12 @@ class Agm : public Missile
 public:
     Agm();
 
-    const char* getDescription() const override;  // returns "AGM"
-    const char* getNickname() const override;     // returns "GenericAgm"
-    int getCategory() const override;             // returns MISSILE | GUIDED
+    virtual const char* getDescription() const override;  // returns "AGM"
+    virtual const char* getNickname() const override;     // returns "GenericAgm"
+    virtual int getCategory() const override;             // returns MISSILE | GUIDED
 
 private:
-    bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3* const los,
+   virtual bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3* const los,
           osg::Vec3* const vel, osg::Vec3* const posx) const override;
 };
 

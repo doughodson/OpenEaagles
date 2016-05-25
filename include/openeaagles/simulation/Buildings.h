@@ -22,7 +22,7 @@ class Building : public Player
 public:
     Building();
 
-    unsigned int getMajorType() const override;
+    virtual unsigned int getMajorType() const override;
 };
 
 }

@@ -206,8 +206,8 @@ public:
     virtual bool setSlotMaxRevs(const base::Number* const newMaxRevs);
 
     // Component Interface
-    bool event(const int event, base::Object* const obj = nullptr) override;
-    void reset() override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void reset() override;
 
 protected:
    virtual void scanController(const double dt);
@@ -243,7 +243,7 @@ protected:
 
    bool setBarNumber(const unsigned int n)            { if (n <= numBars) { barNum = n; return true; } else return false; }
 
-   void dynamics(const double dt) override;
+   virtual void dynamics(const double dt) override;
 
 private:
     osg::Vec2d  scanPos;         // Position in scan pattern     (rad)

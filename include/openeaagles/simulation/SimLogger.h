@@ -63,13 +63,13 @@ public:
 public:
     SimLogger();
 
-    void log(LogEvent* const event) override;               // Log a simulation event
+    virtual void log(LogEvent* const event) override;       // Log a simulation event
 
     double getCurrentTime() const   { return time; }        // Current time (sec)
     TSource getTimeline() const     { return timeline; }    // Timeline (UTC, SIM or EXEC)
 
-    void updateTC(const double dt = 0.0) override;
-    void updateData(const double dt = 0.0) override;
+    virtual void updateTC(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
 protected:
    virtual bool setTimeline(const TSource ts);                             // Sets the logger's timeline (UTC, SIM or EXEC)
@@ -148,8 +148,8 @@ public:
         DECLARE_SUBCLASS(NewPlayer,SimLogEvent)
     public:
         NewPlayer(Player* const p);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const Player> thePlayer;
@@ -167,8 +167,8 @@ public:
         DECLARE_SUBCLASS(LogPlayerData,SimLogEvent)
     public:
         LogPlayerData(Player* const p);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const Player> thePlayer;
@@ -189,8 +189,8 @@ public:
         DECLARE_SUBCLASS(RemovePlayer,SimLogEvent)
     public:
         RemovePlayer(Player* const p);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const Player> thePlayer;
@@ -209,8 +209,8 @@ public:
         DECLARE_SUBCLASS(WeaponRelease,SimLogEvent)
     public:
         WeaponRelease(Player* const player, Player* const wpn, Player* const tgt);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const Player> thePlayer;
@@ -227,8 +227,8 @@ public:
         DECLARE_SUBCLASS(GunFired,SimLogEvent)
     public:
         GunFired(Player* const player, const int n);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const Player> thePlayer;
@@ -245,8 +245,8 @@ public:
         DECLARE_SUBCLASS(KillEvent,SimLogEvent)
     public:
         KillEvent(Player* const player, Player* const wpn, Player* const tgt);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const Player> thePlayer;
@@ -264,8 +264,8 @@ public:
         DECLARE_SUBCLASS(DetonationEvent,SimLogEvent)
     public:
         DetonationEvent(Player* const player, Player* const wpn, Player* const tgt, const unsigned int detType, const double distance = -1.0f);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const Player> thePlayer;
@@ -284,8 +284,8 @@ public:
         DECLARE_SUBCLASS(NewTrack,SimLogEvent)
     public:
         NewTrack(TrackManager* const mgr, Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const TrackManager> theManager;
@@ -310,8 +310,8 @@ public:
         DECLARE_SUBCLASS(UpdateTrack,SimLogEvent)
     public:
         UpdateTrack(TrackManager* const mgr, Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const TrackManager> theManager;
@@ -336,8 +336,8 @@ public:
         DECLARE_SUBCLASS(RemovedTrack,SimLogEvent)
     public:
         RemovedTrack(TrackManager* const mgr, Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const TrackManager> theManager;
@@ -362,8 +362,8 @@ public:
         DECLARE_SUBCLASS(NewRwrTrack,SimLogEvent)
     public:
         NewRwrTrack(TrackManager* const mgr, Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const TrackManager> theManager;
@@ -388,8 +388,8 @@ public:
         DECLARE_SUBCLASS(UpdateRwrTrack,SimLogEvent)
     public:
         UpdateRwrTrack(TrackManager* const mgr, Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const TrackManager> theManager;
@@ -414,8 +414,8 @@ public:
         DECLARE_SUBCLASS(RemovedRwrTrack,SimLogEvent)
     public:
         RemovedRwrTrack(TrackManager* const mgr, Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         base::safe_ptr<const TrackManager> theManager;

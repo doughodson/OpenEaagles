@@ -158,14 +158,14 @@ public:
 
    virtual bool calculateIrQueryReturn(IrQueryMsg* const irQuery);
 
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
-   void transmit(const double dt) override;
-   void process(const double dt) override;
+   virtual void transmit(const double dt) override;
+   virtual void process(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
    virtual IrQueryMsg* getStoredMessage();
    virtual IrQueryMsg* peekStoredMessage(unsigned int i);

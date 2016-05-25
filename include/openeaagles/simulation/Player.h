@@ -1004,11 +1004,11 @@ public:
    virtual bool setSlotTestYawRate(const base::Angle* const msg);
    virtual bool setSlotTestBodyAxis(const base::Number* const msg);
 
-   bool isFrozen() const override;
-   void reset() override;
-   void updateTC(const double dt = 0.0) override;
-   void updateData(const double dt = 0.0) override;
-   bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual bool isFrozen() const override;
+   virtual void reset() override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
 
 protected:
    // Vehicle Dynamics -- called by updateTC() during phase zero
@@ -1027,8 +1027,8 @@ protected:
    // Update terrain elevation at our location
    virtual void updateElevation();
 
-   bool shutdownNotification() override;
-   void printTimingStats() override;
+   virtual bool shutdownNotification() override;
+   virtual void printTimingStats() override;
 
    // These systems, from our subcomponent list, can only be set by reset()
    virtual bool setDynamicsModel(base::Pair* const sys); // Sets our dynamics model
@@ -1042,11 +1042,11 @@ protected:
    virtual bool setIrSystem(base::Pair* const n);        // Sets our IR sensors models
    virtual bool setStoresMgr(base::Pair* const s);       // Sets our stores management model
 
-   void processComponents(                  // Process our subcomponent list (which should be other steer points)
-      base::PairStream* const list,        // Source list of components
+   virtual void processComponents(          // Process our subcomponent list (which should be other steer points)
+      base::PairStream* const list,         // Source list of components
       const std::type_info& filter,         // Type filter
-      base::Pair* const add = 0,           // Optional pair to add
-      base::Component* const remove = 0    // Optional subcomponent to remove
+      base::Pair* const add = 0,            // Optional pair to add
+      base::Component* const remove = 0     // Optional subcomponent to remove
       ) override;
 
 private:

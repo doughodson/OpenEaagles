@@ -134,8 +134,8 @@ public:
     virtual bool setSlotFeba(const base::PairStream* const msg);
     virtual bool setSlotBullseye(Bullseye* const msg);
 
-    void updateData(const double dt = 0.0) override;
-    void reset() override;
+    virtual void updateData(const double dt = 0.0) override;
+    virtual void reset() override;
 
 protected:
    // Set positional data
@@ -184,7 +184,7 @@ protected:
    virtual bool updateMagVar();            // Method to compute nav system's mag variation
    virtual bool updateNavSteering();       // Method to compute nav steering
 
-   void process(const double dt) override;
+   virtual void process(const double dt) override;
 
 private:
    void initData();

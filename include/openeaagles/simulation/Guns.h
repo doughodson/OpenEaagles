@@ -93,7 +93,7 @@ public:
    virtual bool setSlotPitch(const base::Number* const num);      // Gun pitch angle to ownship
    virtual bool setSlotYaw(const base::Number* const num);        // Gun heading angle to ownship
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    virtual double computeBulletRatePerSecond();
@@ -103,9 +103,9 @@ protected:
    virtual osg::Vec3d computeInitBulletPosition();
    virtual osg::Vec3d computeInitBulletVelocity();
 
-   void process(const double dt) override;
+   virtual void process(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    Bullet*  bullet;           // Type of bullet
@@ -158,11 +158,11 @@ public:
       const int re                    // Release event id
    );
 
-   const char* getDescription() const override;
-   const char* getNickname() const override;
-   int getCategory() const override;
+   virtual const char* getDescription() const override;
+   virtual const char* getNickname() const override;
+   virtual int getCategory() const override;
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    virtual void resetBurstTrajectories();
@@ -173,10 +173,10 @@ protected:
    const Player* getHitPlayer() const     { return hitPlayer; }
    void setHitPlayer(Player* p);
 
-   void weaponDynamics(const double dt) override;
-   void updateTOF(const double dt) override;
+   virtual void weaponDynamics(const double dt) override;
+   virtual void updateTOF(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
    struct Burst {
       enum Status { ACTIVE, HIT, MISS };

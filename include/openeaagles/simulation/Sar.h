@@ -87,7 +87,7 @@ public:
 protected:
     virtual bool setResolution(const double res);   // SAR resolution (meters)
 
-    void process(const double dt) override;
+    virtual void process(const double dt) override;
 
     double timer;                   // SAR timer
 

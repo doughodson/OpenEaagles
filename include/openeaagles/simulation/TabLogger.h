@@ -43,8 +43,8 @@ public:
 
     TabLogger();
 
-    void updateTC(const double dt = 0.0) override;
-    void updateData(const double dt = 0.0) override;
+    virtual void updateTC(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
 
     //==============================================================================
     // ######### Simulation Log Event Classes #########
@@ -100,8 +100,8 @@ public:
     public:
         LogPlayerData(int theType, const Player* const thePlayer);
         LogPlayerData(int theType, const Player* const thePlayer, const Player* const theSource);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         int theType;
@@ -129,8 +129,8 @@ public:
         DECLARE_SUBCLASS(LogGunActivity,TabLogEvent)
     public:
         LogGunActivity(int theType, const Player* const player, const int n);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         int theType;
@@ -151,8 +151,8 @@ public:
     public:
         LogWeaponActivity(const int theType, const Player* const player, const Player* const wpn,
                           const Player* const tgt, const unsigned int detType, const double distance = -1.0f);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         int theType;
@@ -176,8 +176,8 @@ public:
         DECLARE_SUBCLASS(LogActiveTrack,TabLogEvent)
     public:
         LogActiveTrack(int theType, const TrackManager* const mgr, const Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         int theType;
@@ -205,8 +205,8 @@ public:
         DECLARE_SUBCLASS(LogPassiveTrack,TabLogEvent)
     public:
         LogPassiveTrack(int theType, const TrackManager* const mgr, const Track* const trk);
-        const char* getDescription() override;
-        void captureData() override;
+        virtual const char* getDescription() override;
+        virtual void captureData() override;
     private:
         void initData();
         int theType;

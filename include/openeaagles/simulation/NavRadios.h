@@ -36,7 +36,7 @@ protected:
    // Slave our position to our ownship
    virtual bool setPosition();
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();
@@ -80,7 +80,7 @@ public:
    double getRange() const;       // Range (nautical miles)
    double getBearing() const;     // Bearing (degrees)
 
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 
 protected:
    // Get Range and Bearing - Input pointers for your outputs
@@ -126,7 +126,7 @@ public:
    double getGlideslopeDifferenceDots();
    double getLocalizerDifferenceDots();
 
-   void updateData(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
 
 protected:
    //Always find the glideslope first!!!!

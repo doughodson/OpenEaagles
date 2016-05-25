@@ -193,7 +193,7 @@ class Point : public Graphic
     DECLARE_SUBCLASS(Point, Graphic)
 public:
     Point();
-    void drawFunc() override;
+    virtual void drawFunc() override;
 };
 
 

@@ -142,8 +142,8 @@ public:
    // Sets the ECM emission flag
    virtual void setECM(const unsigned int b) { ecmFlag = b; }
 
-   void setRange(const double r) override;   // Sets the range to the target (meters) (which we use to set the range loss)
-   void clear() override;                    // Clear this emission's data
+   virtual void setRange(const double r) override;   // Sets the range to the target (meters) (which we use to set the range loss)
+   virtual void clear() override;                    // Clear this emission's data
 
 private:
    double          freq;           // Frequency                        (Hz)

@@ -334,8 +334,8 @@ public:  // Public section
    static void limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul);
    static void limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& ul);
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
 
 protected:
    virtual void servoController(const double dt = 0.0);
@@ -349,10 +349,10 @@ protected:
    bool setCurrentTdb(Tdb* const newTdb);
 
    // System Interface -- Callbacks by phase
-   void dynamics(const double dt) override;    // Phase 0
+   virtual void dynamics(const double dt) override;    // Phase 0
 
    // base::Component protected interface
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();

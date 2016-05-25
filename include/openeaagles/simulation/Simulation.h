@@ -305,9 +305,9 @@ public:
     virtual bool setNavaids(dafif::NavaidLoader* const p);     // Sets the NAVAID loader
     virtual bool setWaypoints(dafif::WaypointLoader* const p); // Sets the waypoint loader
 
-    void updateTC(const double dt = 0.0) override;
-    void updateData(const double dt = 0.0) override;
-    void reset() override;
+    virtual void updateTC(const double dt = 0.0) override;
+    virtual void updateData(const double dt = 0.0) override;
+    virtual void reset() override;
 
 public:
     void updateTcPlayerList(
@@ -345,8 +345,8 @@ protected:
     virtual void setEventID(unsigned short id);       // Sets the simulation event ID counter
     virtual void setWeaponEventID(unsigned short id); // Sets the weapon ID event counter
 
-    void printTimingStats() override;
-    bool shutdownNotification() override;
+    virtual void printTimingStats() override;
+    virtual bool shutdownNotification() override;
 
 private:
    void initData();

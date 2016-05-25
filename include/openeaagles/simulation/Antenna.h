@@ -119,26 +119,26 @@ public:
    // Event handler(s)
    virtual bool onRfEmissionReturnEventAntenna(Emission* const);
 
-   bool onStartScanEvent(base::Integer* const bar) override;
-   bool onEndScanEvent(base::Integer* const bar) override;
+   virtual bool onStartScanEvent(base::Integer* const bar) override;
+   virtual bool onEndScanEvent(base::Integer* const bar) override;
 
-   bool onRfEmissionEvent(Emission* const) override;
+   virtual bool onRfEmissionEvent(Emission* const) override;
 
-   bool event(const int event, base::Object* const obj = nullptr) override;
-   void reset() override;
+   virtual bool event(const int event, base::Object* const obj = nullptr) override;
+   virtual void reset() override;
 
 protected:
    void clearQueues();
 
-   void process(const double dt) override;     // Phase 3
+   virtual void process(const double dt) override;     // Phase 3
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
    base::safe_stack<Emission*> freeEmStack;  // Free emission stack
-   mutable long      freeEmLock;              // Semaphore to protect 'freeEmStack'
+   mutable long freeEmLock;                  // Semaphore to protect 'freeEmStack'
 
    base::safe_queue<Emission*> inUseEmQueue; // In use emission queue
-   mutable long      inUseEmLock;             // Semaphore to protect 'inUseEmQueue'
+   mutable long inUseEmLock;                 // Semaphore to protect 'inUseEmQueue'
 
 private:
    void initData();
@@ -150,7 +150,7 @@ private:
    // Antenna parameters
    Polarization polar;             // Polarization                 (enum)
    double      gain;               // Gain                         (no units)
-   base::Function* gainPattern;   // Gain pattern                 (Function)
+   base::Function* gainPattern;    // Gain pattern                 (Function)
 
    double      threshold;          // Antenna threshold; don't send emission if
                                    // power is below this threshold (watts)

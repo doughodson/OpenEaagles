@@ -120,11 +120,11 @@ public:
     virtual bool setSlotTypeId(const base::String* const msg);     // Sets the type ID
     virtual bool setSlotSyncXmitWithScan(const base::Number* const msg); // Sets sync transmitter with antenna scan flag
 
-    bool isTransmitting() const override;
+    virtual bool isTransmitting() const override;
 
-    bool event(const int event, base::Object* const obj = nullptr) override;
-    void updateData(const double dt = 0.0) override;
-    void reset() override;
+    virtual bool event(const int event, base::Object* const obj = nullptr) override;
+    virtual void updateData(const double dt = 0.0) override;
+    virtual void reset() override;
 
 protected:
     virtual base::PairStream* getModes();                              // Returns the list of submodes
@@ -135,7 +135,7 @@ protected:
     virtual bool onTgtDesignateEvent();                        // Target Designate (SCAN_START) event handler
     virtual bool onReturnToSearchEvent();                      // Return to search (SCAN_END) event handler
 
-    bool shutdownNotification() override;
+    virtual bool shutdownNotification() override;
 
 private:
     bool processModes();

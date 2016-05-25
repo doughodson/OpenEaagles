@@ -232,7 +232,7 @@ public:
    // IPlayer factory: creates a networked player based on NIB data
    virtual Player* createIPlayer(Nib* const nib);
 
-   void reset() override;
+   virtual void reset() override;
 
 protected:
    // Derived class callbacks
@@ -270,7 +270,7 @@ protected:
    virtual bool setSlotMaxAge(const base::Time* const msg);                   // Sets the max age(s)
    virtual bool setSlotMaxEntityRange(const base::Distance* const msg);       // Sets the max entity range(s)
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 //------------------------------------------------------------------------------
 // Network Interface Block (NIB) maintenance sections

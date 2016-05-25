@@ -47,7 +47,7 @@ public:
 
    IrSphere();
 
-   double getArea() override;
+   virtual double getArea() override;
 
    double getRadius()              { return radius; }
 
@@ -75,8 +75,8 @@ public:
 
    IrBox();
 
-   double getArea() override;
-   double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
+   virtual double getArea() override;
+   virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg) override;
 
    virtual bool setSlotIrBoxX(const base::Number* const s);
    virtual bool setSlotIrBoxY(const base::Number* const s);

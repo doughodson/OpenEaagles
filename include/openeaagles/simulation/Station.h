@@ -258,9 +258,9 @@ public:
    virtual bool setSlotFastForwardRate(const base::Number* const);
    virtual bool setSlotEnableUpdateTimers(const base::Number* const);
 
-   void updateTC(const double dt = 0.0) override;
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateTC(const double dt = 0.0) override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    virtual void inputDevices(const double dt);    // Handle device inputs
@@ -276,7 +276,7 @@ protected:
    void setBgThread(base::Thread* h);
 
    // base::Component protected functions
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 private:
    void initData();

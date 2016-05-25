@@ -130,7 +130,7 @@ protected:
    virtual bool setSlotMaxDetectRange(base::Number* const num);
    virtual bool setSlotRadioId(base::Number* const num);
 
-   void receive(const double dt) override;
+   virtual void receive(const double dt) override;
 
 private:
    void initData();
@@ -167,7 +167,7 @@ public:
    virtual bool transmitDataMessage(base::Object* const msg);
 
 protected:
-   void receivedEmissionReport(Emission* const em) override;
+   virtual void receivedEmissionReport(Emission* const em) override;
 
 private:
    void initData();

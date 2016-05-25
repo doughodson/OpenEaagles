@@ -67,19 +67,19 @@ public:
    // Slot functions
    virtual bool setSlotIGain(base::Number* const msg);
 
-   bool killedNotification(Player* const killedBy = 0) override;
+   virtual bool killedNotification(Player* const killedBy = 0) override;
 
-   void updateData(const double dt = 0.0) override;
-   void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
-   bool onEndScanEvent(const base::Integer* const bar) override;
+   virtual bool onEndScanEvent(const base::Integer* const bar) override;
 
-   void transmit(const double dt) override;
-   void receive(const double dt) override;
-   void process(const double dt) override;
+   virtual void transmit(const double dt) override;
+   virtual void receive(const double dt) override;
+   virtual void process(const double dt) override;
 
-   bool shutdownNotification() override;
+   virtual bool shutdownNotification() override;
 
 protected: // (#temporary#) allow subclasses to access and use report queue
 

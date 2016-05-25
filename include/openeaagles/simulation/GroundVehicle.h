@@ -44,7 +44,7 @@ public:
 public:
     GroundVehicle();
 
-    double getGrossWeight() const override;             // wt: lbs
+    virtual double getGrossWeight() const override;     // wt: lbs
 
     virtual double getFuelWt() const;                   // wt: lbs
     virtual double getFuelWtMax() const;                // wt: lbs
@@ -66,16 +66,16 @@ public:
     virtual bool setSlotLauncherUpAngle(const base::Angle* const msg);
     virtual bool setSlotLauncherMoveTime(const base::Time* const msg);
 
-    unsigned int getMajorType() const override;
+    virtual unsigned int getMajorType() const override;
 
-    void reset() override;
+    virtual void reset() override;
 
 protected:
    // Launcher dynamics -- moves launcher to its commanded position
    virtual void launcherDynamics(const double dt);
 
    // Player class (protected) interface
-   void dynamics(const double  dt = 0.0) override;
+   virtual void dynamics(const double  dt = 0.0) override;
 
 private:
    double            lnchrAngle;       // Current launcher angle  (rad)
