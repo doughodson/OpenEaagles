@@ -1,6 +1,4 @@
-#
-# visual studio directories
-#
+# vs directories
 vs2008/
 vs2010/
 vs2012/
@@ -9,16 +7,20 @@ vs2015/
 codeblocks/
 codelite/
 
-#
+# vs runtime libs
+concrt*.dll
+msvcp*.dll
+vcamp*.dll
+vccorlib*.dll
+vcomp*.dll
+vcruntime*.dll
+
 # kde plasma 5 files
-#
 .directory
 
 *.gch
 
-#
-# visual studio generated files
-#
+# vs compiler generated files
 *.idb
 *.ilk
 *.pdb
