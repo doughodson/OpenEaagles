@@ -5,8 +5,6 @@
 -- Targets of interest:
 --     vs2013     (Visual Studio 2013)
 --     vs2015     (Visual Studio 2015)
---     codeblocks (Code::Blocks)
---     codelite   (CodeLite)
 --
 if (_ACTION == nil) then
     return
@@ -32,19 +30,25 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 --HLAIncPath = HLA_ROOT.."/include/hla13"
 HLA_ROOT = "../../../openrti"
 HLAIncPath = HLA_ROOT.."/include/RTI13"
-if (_ACTION == "vs2010") then
-  HLALibPath = HLA_ROOT.."/lib/vc10"
-end
 if (_ACTION == "vs2012") then
   HLALibPath = HLA_ROOT.."/lib/vc11"
 end
+if (_ACTION == "vs2013") then
+  HLALibPath = HLA_ROOT.."/lib/vc12"
+end
+if (_ACTION == "vs2015") then
+  HLALibPath = HLA_ROOT.."/lib/vc14"
+end
+print ("HLA Paths:")
+print ("  Include   : "..HLALibPath)
+--print ("  Libraries : "..OELibPath)
 
 --
 -- determine target directories for project/solution files and 
 -- compiled libraries
 --
 locationPath  = "../" .. _ACTION
-if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
+if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
   targetDirPath = "../../lib/".._ACTION
 end
 if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
@@ -55,7 +59,7 @@ if (os.is("linux")) then
 end
 print ("Target directory path: "..targetDirPath)
 
-solution "oe"
+workspace "oe"
 
    -- destination directory for generated solution/project files
    location (locationPath)
@@ -88,7 +92,7 @@ solution "oe"
    -- common release configuration flags and symbols
    configuration { "Release" }
       flags { "Optimize" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
+      if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics and favour speed over size
          buildoptions { "/Oi", "/Ot" }
          defines { "WIN32", "_LIB", "NDEBUG" }
@@ -101,7 +105,7 @@ solution "oe"
    configuration { "Debug" }
       targetsuffix "_d"
       flags { "Symbols" }
-      if (_ACTION == "vs2010") or (_ACTION == "vs2012") or (_ACTION == "vs2013") or (_ACTION == "vs2015") then
+      if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
          -- enable compiler intrinsics
          buildoptions { "/Oi" }
          defines { "WIN32", "_LIB", "_DEBUG" }
@@ -268,5 +272,3 @@ solution "oe"
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"
-
-
