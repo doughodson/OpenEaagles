@@ -30,45 +30,45 @@ public:
     Eadi3DObjects(float radius = 1.625);
 
     enum EadiObj {
-        FONT_0 = 0,    // Desc: Character '0' 
-        FONT_1 = 1,    // Desc: Character '1' 
-        FONT_2 = 2,    // Desc: Character '2' 
-        FONT_3 = 3,    // Desc: Character '3' 
-        FONT_4 = 4,    // Desc: Character '4' 
-        FONT_5 = 5,    // Desc: Character '5' 
-        FONT_6 = 6,    // Desc: Character '6' 
-        FONT_7 = 7,    // Desc: Character '7' 
-        FONT_8 = 8,    // Desc: Character '8' 
-        FONT_9 = 9,    // Desc: Character '9' 
-        PUNC05 = 45,    // Desc: Character '-' 
-        PUNC06 = 46,    // Desc: Character '.' 
-        PUNC07 = 47,    // Desc: Character '/' 
-        FONT_A = 65,    // Desc: Character 'A' 
-        FONT_B = 66,    // Desc: Character 'B' 
-        FONT_C = 67,    // Desc: Character 'C' 
-        FONT_D = 68,    // Desc: Character 'D' 
-        FONT_E = 69,    // Desc: Character 'E' 
-        FONT_F = 70,    // Desc: Character 'F' 
-        FONT_G = 71,    // Desc: Character 'G' 
-        FONT_H = 72,    // Desc: Character 'H' 
-        FONT_I = 73,    // Desc: Character 'I' 
-        FONT_J = 74,    // Desc: Character 'J' 
-        FONT_K = 75,    // Desc: Character 'K' 
-        FONT_L = 76,    // Desc: Character 'L' 
-        FONT_M = 77,    // Desc: Character 'M' 
-        FONT_N = 78,    // Desc: Character 'N' 
-        FONT_O = 79,    // Desc: Character 'O' 
-        FONT_P = 80,    // Desc: Character 'P' 
-        FONT_Q = 81,    // Desc: Character 'Q' 
-        FONT_R = 82,    // Desc: Character 'R' 
-        FONT_S = 83,    // Desc: Character 'S' 
-        FONT_T = 84,    // Desc: Character 'T' 
-        FONT_U = 85,    // Desc: Character 'U' 
-        FONT_V = 86,    // Desc: Character 'V' 
-        FONT_W = 87,    // Desc: Character 'W' 
-        FONT_X = 88,    // Desc: Character 'X' 
-        FONT_Y = 89,    // Desc: Character 'Y' 
-        FONT_Z = 90,    // Desc: Character 'Z' 
+        FONT_0 = 0,    // Desc: Character '0'
+        FONT_1 = 1,    // Desc: Character '1'
+        FONT_2 = 2,    // Desc: Character '2'
+        FONT_3 = 3,    // Desc: Character '3'
+        FONT_4 = 4,    // Desc: Character '4'
+        FONT_5 = 5,    // Desc: Character '5'
+        FONT_6 = 6,    // Desc: Character '6'
+        FONT_7 = 7,    // Desc: Character '7'
+        FONT_8 = 8,    // Desc: Character '8'
+        FONT_9 = 9,    // Desc: Character '9'
+        PUNC05 = 45,    // Desc: Character '-'
+        PUNC06 = 46,    // Desc: Character '.'
+        PUNC07 = 47,    // Desc: Character '/'
+        FONT_A = 65,    // Desc: Character 'A'
+        FONT_B = 66,    // Desc: Character 'B'
+        FONT_C = 67,    // Desc: Character 'C'
+        FONT_D = 68,    // Desc: Character 'D'
+        FONT_E = 69,    // Desc: Character 'E'
+        FONT_F = 70,    // Desc: Character 'F'
+        FONT_G = 71,    // Desc: Character 'G'
+        FONT_H = 72,    // Desc: Character 'H'
+        FONT_I = 73,    // Desc: Character 'I'
+        FONT_J = 74,    // Desc: Character 'J'
+        FONT_K = 75,    // Desc: Character 'K'
+        FONT_L = 76,    // Desc: Character 'L'
+        FONT_M = 77,    // Desc: Character 'M'
+        FONT_N = 78,    // Desc: Character 'N'
+        FONT_O = 79,    // Desc: Character 'O'
+        FONT_P = 80,    // Desc: Character 'P'
+        FONT_Q = 81,    // Desc: Character 'Q'
+        FONT_R = 82,    // Desc: Character 'R'
+        FONT_S = 83,    // Desc: Character 'S'
+        FONT_T = 84,    // Desc: Character 'T'
+        FONT_U = 85,    // Desc: Character 'U'
+        FONT_V = 86,    // Desc: Character 'V'
+        FONT_W = 87,    // Desc: Character 'W'
+        FONT_X = 88,    // Desc: Character 'X'
+        FONT_Y = 89,    // Desc: Character 'Y'
+        FONT_Z = 90,    // Desc: Character 'Z'
         UP_ARROW = 100,
         DOWN_ARROW,
         GROUND_POINTER,
@@ -99,7 +99,7 @@ public:
         __MAX_EADI_OBJECTS__
     };
 
-    void makeObjects(void);
+    void makeObjects();
     void drawObj(EadiObj obj);
     IrisGLCompat irisgl;
 
@@ -145,8 +145,8 @@ public:
     void makeFTZ(unsigned int obj);
 
 private:
-    void makeFont(void);
-    void makeGlobe(void);
+    void makeFont();
+    void makeGlobe();
     void drawArrow(float bAngle, float s, float c);
     void drawArrow2(float bAngle, float s, float c);
 

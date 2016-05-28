@@ -1327,7 +1327,7 @@ double NetIO::getEeFrngThrsh() const      { return EE_FRNG_THRSH; }
 double NetIO::getEePrfThrsh() const       { return EE_PRF_THRSH; }
 double NetIO::getEePwThrsh() const        { return EE_PW_THRSH; }
 
-//unsigned int NetIO::get_EE_HIGH_DENSITY_THRSH(void) const { return EE_HIGH_DENSITY_THRSH; }
+//unsigned int NetIO::get_EE_HIGH_DENSITY_THRSH() const { return EE_HIGH_DENSITY_THRSH; }
 
 
 // Adds an item to the emission PDU handler table

@@ -418,7 +418,7 @@ void GlutDisplay::reshapeSubWindow()
 
          setViewport(newX, newY, newWidth, newHeight);
 
-         //std::cout << "reshapeSubWindow(void) winID = " << winId;
+         //std::cout << "reshapeSubWindow() winID = " << winId;
          //std::cout << "; mainWinID = " << mainWinId;
          //std::cout << "; pos(" << newX << ", " << newY << ")";
          //std::cout << "; size(" << newWidth << ", " << newHeight << ")";

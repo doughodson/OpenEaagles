@@ -286,7 +286,7 @@ public:
    CigiCl();
 
    // ID number of this CIGI session
-   CigiHostSession* getSession(void) const  { return session; }
+   CigiHostSession* getSession() const  { return session; }
 
    // Init this CIGI handler
    virtual bool initialize(OtwCigiCl* const p);

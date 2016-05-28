@@ -2225,8 +2225,7 @@ void make_FT_SQ(unsigned int obj)
     glEndList();
 }
 
-int
-main(void)
+int main()
 {
     make_FT_MIN('-');
     make_FT_PER('.');

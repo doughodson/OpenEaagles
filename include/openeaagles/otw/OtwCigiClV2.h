@@ -289,7 +289,7 @@ public:
    CigiClV2();
 
    // ID number of this CIGI session
-   CigiHostSession* getSession(void) const  { return session; }
+   CigiHostSession* getSession() const  { return session; }
 
    // Init this CIGI handler
    virtual bool initialize(OtwCigiClV2* const p);

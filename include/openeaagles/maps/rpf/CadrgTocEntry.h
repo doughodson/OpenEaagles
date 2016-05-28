@@ -10,16 +10,16 @@
 //      CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
 //
 // generateItems() - Simply generate the name of the file we are using for our image.
-//      void CadrgTocEntry::generateItems(void)
+//      void CadrgTocEntry::generateItems()
 //
 // setType() - Sets our entry type (ie... "CADRG")
-//      void CadrgTocEntry::setType(const char* x, const int size) 
+//      void CadrgTocEntry::setType(const char* x, const int size)
 //
 // setZone() - Sets the zone this entry lies in
-//      void CadrgTocEntry::setZone(const char* x, const int size) 
+//      void CadrgTocEntry::setZone(const char* x, const int size)
 //
 // setScale() - Sets the scale of this entry (ie... "1:500K")
-//      void CadrgTocEntry::setScale(const char* x, const int size) 
+//      void CadrgTocEntry::setScale(const char* x, const int size)
 //
 // isInZone() - Takes in a lat lon and returns true if that point falls in our entry
 //      bool CadrgTocEntry::isInZone(double lat, double lon)
@@ -82,8 +82,8 @@ public:
     virtual void setVertResolution(const double x) { vertResolution = x; }
     virtual void setHorizResolution(const double x) { horizResolution = x; }
     virtual void setType(const char* x, const int size);
-    virtual void setZone(const char* x, const int size); 
-    virtual void setScale(const char* x, const int size); 
+    virtual void setZone(const char* x, const int size);
+    virtual void setScale(const char* x, const int size);
     virtual void setEntries(CadrgFrameEntry** x) { frames = x; }
     virtual void setMapIndex(const int x)   { mapIndex = x; }
 
@@ -95,7 +95,7 @@ private:
 
     char type[5];               // Type of map entry we are (ie.. CADRG)
     char  scale[12];            // Scale of this entry (1:500K, etc.)
-    char  zone[1];              // Zone this entry falls in 
+    char  zone[1];              // Zone this entry falls in
     double nwLat;               // Northwest latitude of entry
     double nwLon;               // Northwest longitude of entry
     double seLat;               // Southeast latitude of entry
@@ -112,7 +112,7 @@ private:
     int vertFrames;             // Number of vertical frames (cols)
     char title[100];            // Full name of file we represent
     int   mapImage;             // are we a map image?
-    int mapIndex;               // index to keep track of which map file we belong to   
+    int mapIndex;               // index to keep track of which map file we belong to
     CadrgFrameEntry** frames;   // Our array of frames that make up this entry.
 };
 
@@ -120,4 +120,3 @@ private:
 }
 
 #endif
-

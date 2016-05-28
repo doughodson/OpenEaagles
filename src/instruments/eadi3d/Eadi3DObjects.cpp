@@ -55,7 +55,7 @@ void Eadi3DObjects::drawObj(EadiObj obj)
 //------------------------------------------------------------------------------
 // makeObjects() - make our drawing objects
 //------------------------------------------------------------------------------
-void Eadi3DObjects::makeObjects(void)
+void Eadi3DObjects::makeObjects()
 {
     if (made) return;
     base = glGenLists(__MAX_EADI_OBJECTS__);
@@ -538,7 +538,7 @@ void Eadi3DObjects::drawArrow2(float bAngle, float s, float c)
 //------------------------------------------------------------------------------
 // makeGlobe() - make our 3d globe
 //------------------------------------------------------------------------------
-void Eadi3DObjects::makeGlobe(void)
+void Eadi3DObjects::makeGlobe()
 {
     float h = static_cast<float>(std::sin(5.0 * base::Angle::D2RCC) * radius);
     globeArrowV1[1] = h + h;
@@ -2001,7 +2001,7 @@ void Eadi3DObjects::makeFTSLH(unsigned int obj)
 //------------------------------------------------------------------------------
 // makeFont() - make all of the above font letters
 //------------------------------------------------------------------------------
-void Eadi3DObjects::makeFont(void) {
+void Eadi3DObjects::makeFont() {
     makeFTZRO(base+FONT_0);
     makeFT1(base+FONT_1);
     makeFT2(base+FONT_2);

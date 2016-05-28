@@ -111,7 +111,7 @@ CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
 // -----------------------------------------------------------------------------------------
 // generateItems() - Simply generate the name of the file we are using for our image.
 // -----------------------------------------------------------------------------------------
-void CadrgTocEntry::generateItems(void)
+void CadrgTocEntry::generateItems()
 {
     char* tempTitle = new char[100];
 
@@ -176,4 +176,3 @@ bool CadrgTocEntry::isInZone(double lat, double lon)
 
 }
 }
-
