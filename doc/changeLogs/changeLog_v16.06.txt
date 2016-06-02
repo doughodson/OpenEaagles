@@ -1,0 +1,211 @@
+================================================================================
+Changes since v15.07
+================================================================================
+
+--------------------------------------------------------------------------------
+General framework-wide changes and improvements
+
+   -- Renamed 'Eaagles' namespace to 'oe' to align with project name
+
+   -- Renamed all camelcase-style namespaces to lowercase names - this aligns with
+      common C++ conventions and avoids confusion with class names
+
+   -- Renamed 'basic' library to 'base' - 'base' and 'core' are very common names used
+      by frameworks to define a base set of functionality provided on top of C++.
+      This adjustment is designed to make the framework feel more familiar in that regard.
+
+   -- Renamed 'basicGL' library to 'graphics' - conveys purpose of library better, OpenGL
+      is a means, displaying graphics is the intent.
+
+   -- Renamed 'ioDevice' library to 'iodevice' - aligns better with all lowercase
+      library names (typically used in Linux universe)
+
+   -- Renamed 'linearSys' library to 'linearsystem' - slightly more clear
+
+   -- Created 'models' libraries, it now includes what used to be in 'dynamics' and
+      'sensors' libraries. This is the start of a fundamental effort to separate models
+      from simulation infrastructure.
+
+   -- Moved 'dis' directory into 'networks' to group different interoperability
+      interfaces into the same logical place.
+
+   -- Added an hla interoperability library to 'networks' directory.
+
+   -- Removed legacy support for 'formnames' in all Object-based classes
+
+   -- Renamed global framework configuration options to start with 'OE' instead
+      of 'EAAGLES'
+
+   -- LCreal (which has been hard-coded and typed as 'double' for years) has been completely
+      removed and replaced with 'double'
+
+   -- Closely associated with LCreal is the macro "LCREAL_DOUBLE" which defined whether or not
+      LCreal was defined as a 'double' or 'float' -- this macro has been eliminated.
+
+   -- Replaced fundamental lc prefixed math macros (e.g., lcSin) with 'std::' equivalents
+      (e.g. std::sin) to reduce unnecessary code and improve clarity.
+
+   -- Revised Makefiles throughout both framework and examples so that parallel builds
+      can be run. This greatly reduces compile time, as much of the code is independent and
+      can be compiled and linked in parallel.
+
+   -- Now using <limits> templates to infer things like min/max for <double>, <float>, etc.
+      This updates the codebase to use more c++11 features as opposed to including
+      <float.h> or <cfloat>. There is no effect or impact on existing codebase or API.
+      General rules/examples to illustrate change is as follows:
+          C         : const double lowest_double = -DBL_MAX;
+          C++pre-11 : const double lowest_double = -std::numeric_limits<double>::max();
+                      (The above code works because floating point limits are symmetrical.)
+          C++11     : const double lowest_double = std::numeric_limits<double>::lowest();
+
+   -- parser changes (important!)
+      -- form functions and Factory classes in libraries have been replaced with 'factory'
+         functions.  This is a bit of a reversal from Factory objects that defined a
+         single static method for object creation as is common in the Java world. Java does
+         this because you cannot create standalone functions, it only supports OO programming
+         paradigm. C++ is a multi-paradigm programming language that allows this.
+      -- include the EDL parser using "edl_parser.h", not "Parser.h" - edl_parser() is a
+         function that returns an object tree - it is not a class or object
+      -- 'lcParser()' has been renamed to 'edl_parser' to clearly indicate the format it
+         parses - it is called like this: edl_parser(filename, factory, &num_errors);
+           -- filename is name of text file containing EDL configuration
+           -- factory function has a signature of Object* factory(const std::string& name)
+           -- num_errors is a pointer to an unsigned int which will contain the number of
+           -- parse errors (if any) after it returns
+      -- see examples for proper use - almost every example uses the parser
+      -- these changes significantly reduce the clutter associated with the factory functions
+
+--------------------------------------------------------------------------------
+base library
+
+   -- previously named the 'basic' library
+
+   macros.h
+      added 'override' context keyword to DECLARE_SUBCLASS macro to eliminate clang
+      warning - no impact on API
+      
+   -- removed legacy support for factory names "BroadcastHandler", "MulticastHandler",
+      and "UdpHandler" - instead use more explicit "UdpBroadcastHandler", "UdpMulticastHandler"
+      and "UdpUnicastHandler" factor names.
+
+   -- separated MonitorMetrics class definition and implementation away from Cie.h/cpp file.
+
+   -- broke out everything defined by 'support.h/cpp' into groups and placed functionality
+      into files located in subdirectory 'util' (i.e., 'utilities').  Object no longer
+      imports everything that was defined in 'support.h', classes now include only what is
+      needed.
+
+   -- almost all 'support.h' functions are now defined in scope of 'base' namespace - no
+      longer are they scoped in the broader 'oe' namespace.  The combination of grouping
+      functionality into individual related utility files and more explicitly including
+      them (e.g., #include "openeaagles/base/util/system.h") where needed, results in
+      more explicit references to them (e.g., base::msleep).  This makes it more
+      obvious as to where they are defined, and ensure they are defined only where needed.
+
+   Number class
+     -- replaced constructor to handle defined 64-bit 'Integer64' datatype to standard
+        64-bit integer 'int64_t'. 'Integer64' was dropped in favor of using 'int64_t'.
+
+   'lc' functions
+     -- removed lcMax and lcMin, use std::fmax and std::fmin from <cmath> instead.
+        When C++14 becomes better supported, should use std::max and std::min templates
+        from <algorithm> library
+     -- renamed the 'lc' prefix on all char-based string functions and replaced with
+        'ut' to indicate utility and clearly avoid any ambiguity with legacy C functions
+        such as 'strcpy', etc.  The prefix was changed to better indicate the nature
+        of function (i.e., it's a utility)
+     -- renamed 'lcParser' to 'edlParser' to indicate file format being parsed. Include
+        header file changed from 'Parser.h' to 'parser.h' as this is a function, not
+        a class declaration
+
+   Lexical/Parser classes
+     -- renamed to EdlScanner and EdlParser (they scan and parse EDL files)
+     -- Lexical.l renamed to edl.l
+     -- Parser.y renamed to edl.y
+
+   Thread classes
+     -- platform specific code associated with the thread classes has been restructured
+        to properly include files correctly.  Before, the Thread.cpp file was including
+        platform specific class methods into the oe::base namespace.  But the included
+        file for linux was including other includes, such as, <signal.h>. So declarations
+        were being imported into the oe::base namespace. Surprisingly, no apparent errors
+        resulted. Nevertheless the code has been restructured more properly.
+
+--------------------------------------------------------------------------------
+dafif library
+
+   Magvar.h
+     -- removed header file includes for <stdlib.h>, <float.h> and <cmath>
+     -- this header isn't included by any framework code, so there is no impact
+
+--------------------------------------------------------------------------------
+dis library
+
+--------------------------------------------------------------------------------
+glut library
+
+--------------------------------------------------------------------------------
+graphics library
+
+   -- previously named the 'basicGL' library
+
+   Reformat class
+     -- Reformat.l renamed to reformat.l
+     -- updated flex code, regenerated scanner
+
+--------------------------------------------------------------------------------
+hla library
+
+   -- new library - code to support HLA interoperability interface
+
+--------------------------------------------------------------------------------
+instruments library
+
+   -- renamed subdirectories 'eadi3D' to 'eadi3d' and 'landingGear' to landinggear'
+      to stay consistent with lowercase directory names.
+
+--------------------------------------------------------------------------------
+iodevice library
+
+   -- previously named the 'ioDevice' library
+
+--------------------------------------------------------------------------------
+linearsystem library
+
+   -- previously named the 'linearSys' library
+
+--------------------------------------------------------------------------------
+models library
+
+   JSBSimModel class
+      -- Added new slot parameter ('debugLevel') to set the debug level for JSBSim
+         model instance. This controls the verbosity (i.e., output printed to console)
+         of the model itself.  Slot parameter accepts an integer value.
+
+--------------------------------------------------------------------------------
+otw library
+
+--------------------------------------------------------------------------------
+recorder library
+
+--------------------------------------------------------------------------------
+rpf library
+
+   -- new library - actually is all the code that was in the 'maps' library. But akin
+      to how 'dis' and 'hla' are organized relative to 'networks' directory, this
+      is now organized the same way.
+
+   -- rpf = Raster Product Format (RPF) library, it supports the reading of data in
+      this format.
+
+--------------------------------------------------------------------------------
+simulation library
+
+   Autopilot class
+      -- Fixed spelling error with 'velocityContoller' to 'velocityController'
+
+--------------------------------------------------------------------------------
+terrain library
+ 
+--------------------------------------------------------------------------------
+

@@ -10,9 +10,9 @@
 #ifndef __oe_config_H__
 #define __oe_config_H__
 
-// OpenEaagles release version number (16.06)
+// OpenEaagles release version number (16.0X)
 #ifndef OE_VERSION
-#define OE_VERSION                         1606
+#define OE_VERSION                         160X
 #endif
 
 // Max number of 'registered' classes (see Object.h)
