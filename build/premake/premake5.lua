@@ -132,7 +132,7 @@ workspace "oe"
       targetname "graphics"
 
    -- OpenGL GLUT interface library
-   project "glut"
+   project "gui-glut"
       files {
          "../../include/openeaagles/gui/glut/**.h",
          "../../src/gui/glut/**.cpp"
@@ -148,7 +148,7 @@ workspace "oe"
       targetname "dafif"
 
    -- IEEE DIS interface library
-   project "dis"
+   project "networks-dis"
       files {
          "../../include/openeaagles/networks/dis/**.h",
          "../../src/networks/dis/**.cpp"
@@ -156,7 +156,7 @@ workspace "oe"
       targetname "dis"
 
    -- IEEE HLA interface library (abstract support)
---   project "hla"
+--   project "networks-hla"
 --      files {
 --         "../../include/openeaagles/networks/hla/**.h",
 --         "../../src/networks/hla/**.cpp"
@@ -225,7 +225,7 @@ workspace "oe"
       targetname "recorder"
 
    -- raster product format maps library
-   project "rpf"
+   project "maps-rpf"
       files {
          "../../include/openeaagles/maps/rpf/**.h",
          "../../src/maps/rpf/**.cpp"
@@ -258,3 +258,6 @@ workspace "oe"
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"
+
+   -- ubf libs
+   dofile "ubf.lua"
