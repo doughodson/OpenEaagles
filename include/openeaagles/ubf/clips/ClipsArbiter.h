@@ -14,7 +14,7 @@
  * @copyright   Copyright (c) 2014
  *
  */
- 
+
 #ifndef __oe_clips_ClipsArbiter_H__
 #define __oe_clips_ClipsArbiter_H__
 
@@ -41,25 +41,26 @@
 namespace oe {
 namespace clips {
 
-/** @class ClipsArbiter
- *  @brief A meta-behavior that generates a "complex action" using CLIPS Expert System.
- *    Object -> Component -> Behavior -> Arbiter -> ClipsArbiter
- * 
- * Factory name: ClipsArbiter
- * Slots:
- *    clipsFileName <String>        Name of the .CLP file
- */
+//------------------------------------------------------------------------------
+// Class: ClipsArbiter
+// Description: A meta-behavior that generates a "complex action" using CLIPS
+//              expert system
+//
+// Factory name: ClipsArbiter
+// Slots:
+//    clipsFileName <String>   !     Name of the .CLP file
+//------------------------------------------------------------------------------
 class ClipsArbiter : public oe::base::ubf::Arbiter
 {
     DECLARE_SUBCLASS( ClipsArbiter, oe::base::ubf::Arbiter )
 
 public:
     ClipsArbiter();
-    
-    virtual base::ubf::Action * genAction( const base::ubf::State* const state, const double dt );
+
+    virtual base::ubf::Action* genAction( const base::ubf::State* const state, const double dt );
 
 protected:
-    const base::String  * getClipsFileName()    { return clipsFileName; };
+    const base::String* getClipsFileName()    { return clipsFileName; };
     
     /** Evaluates a list of actions and return an optional "complex action"
      * (default: returns the action with the highest vote value) 
@@ -70,9 +71,9 @@ protected:
     void clearBehaviors();
     
     // slot functions
-    bool setSlotClipsFileName( base::String * const );
+    bool setSlotClipsFileName( base::String* const );
 
-    void assertFacts( const base::ubf::State * state );
+    void assertFacts( const base::ubf::State* state );
     void getFacts();
 
 private:
@@ -94,4 +95,3 @@ private:
 }
 
 #endif
-
