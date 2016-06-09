@@ -1,14 +1,12 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboebehaviors.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboesoar.a
 
 OBJS += \
 	factory.o \
-	PlaneAction.o \
-	PlaneBehaviors.o \
-	PriorityArbiter.o \
-	PlaneState.o
+	SoarArbiter.o \
+	SoarState.o
 
 .PHONY: all clean
 

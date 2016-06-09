@@ -1,14 +1,13 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboebehaviors.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboelua.a
 
 OBJS += \
 	factory.o \
-	PlaneAction.o \
-	PlaneBehaviors.o \
-	PriorityArbiter.o \
-	PlaneState.o
+	LuaAction.o \
+	LuaBehavior.o \
+	LuaState.o
 
 .PHONY: all clean
 

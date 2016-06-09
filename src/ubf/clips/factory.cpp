@@ -1,7 +1,7 @@
 
 #include "openeaagles/ubf/clips/factory.h"
 
-#include "ClipsArbiter.h"
+#include "openeaagles/ubf/clips/ClipsArbiter.h"
 
 #include "openeaagles/base/Object.h"
 

@@ -250,65 +250,62 @@ void ClipsArbiter::assertFacts( const base::ubf::State * state )
 
     sprintf_s( l_str, "(assert (roll-is %f))",                  l_state -> getRoll() );
     clipsCppEnv -> Eval( l_str );
-    
+
     sprintf_s( l_str, "(assert (pitch-is %f))",                 l_state -> getPitch() );
     clipsCppEnv -> Eval( l_str );
-    
+
     sprintf_s( l_str, "(assert (heading-is %f))",               l_state -> getHeading() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (roll-rate-is %f))",             l_state -> getRollRate() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (pitch-rate-is %f))",            l_state -> getPitchRate() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (yaw-rate-is %f))",              l_state -> getYawRate() );
     clipsCppEnv -> Eval( l_str );
-    
+
     sprintf_s( l_str, "(assert (altitude-is %f))",              l_state -> getAltitude() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (throttle-is %f))",              l_state -> getThrottle() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (speed-is %f))",                 l_state -> getSpeed() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (pitch-trim-is %f))",            l_state -> getPitchTrim() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (num-tracks-is %d))",            l_state -> getNumTracks() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (is-tracking %s))",              ( l_state -> isTracking() == true )           ? ( "yes" ) : ( "no" ) );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (is-missile-fired %s))",         ( l_state -> isMissileFired() == true )       ? ( "yes" ) : ( "no" ) );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (target-track-is %d))",          l_state -> getTargetTrack() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (num-engines-is %d))",           l_state -> getNumEngines() );
     clipsCppEnv -> Eval( l_str );
-     
+
     sprintf_s( l_str, "(assert (is-incoming-missile %s))",      ( l_state -> isIncomingMissile() == true )    ? ( "yes" ) : ( "no" ) );
     clipsCppEnv -> Eval( l_str );
-    
-    if( l_state -> isTracking() && l_state -> getTargetTrack() < l_state -> getNumTracks() )
-    {
+
+    if ( l_state -> isTracking() && l_state -> getTargetTrack() < l_state -> getNumTracks() ) {
         sprintf_s( l_str, "(assert (pitch-to-tracked-is %f))",      l_state -> getPitchToTracked( l_state -> getTargetTrack() ) );
         clipsCppEnv -> Eval( l_str );
-         
+
         sprintf_s( l_str, "(assert (heading-to-tracked-is %f))",    l_state -> getHeadingToTracked( l_state -> getTargetTrack() ) );
         clipsCppEnv -> Eval( l_str );
-        
+
         sprintf_s( l_str, "(assert (distance-to-tracked-is %f))",   l_state -> getDistanceToTracked( l_state -> getTargetTrack() ) );
         clipsCppEnv -> Eval( l_str );
-    }
-    else
-    {
+    } else {
         sprintf_s( l_str, "(assert (pitch-to-tracked-is %f))",      0 );
         clipsCppEnv -> Eval( l_str );
          
@@ -335,25 +332,20 @@ void ClipsArbiter::getFacts()
 
     base::Object* l_bhv = 0;
 
-    if( GetFactListChanged() )
-    {
+    if ( GetFactListChanged() ) {
         GetFactList( &returnValue, NULL );
 
-        if ( GetType( returnValue ) == MULTIFIELD )
-        {
+        if ( GetType( returnValue ) == MULTIFIELD ) {
             end = GetDOEnd( returnValue );
 
             multifieldPtr = GetValue( returnValue );
 
-            for ( int i = GetDOBegin( returnValue ); i <= end; i++ )
-            {
+            for ( int i = GetDOBegin( returnValue ); i <= end; i++ ) {
                 field = GetMFValue( multifieldPtr, i );
                 l_fact = (struct fact *) field;
 
-                if( l_fact -> whichDeftemplate -> header . name -> bucket == m_behaviorBucket )
-                {
-                    if( l_fact -> whichDeftemplate -> implied == 0 )
-                    {
+                if ( l_fact -> whichDeftemplate -> header . name -> bucket == m_behaviorBucket ) {
+                    if ( l_fact -> whichDeftemplate -> implied == 0 ) {
                         struct field *sublist;
                         struct deftemplate *theDeftemplate;
                         struct templateSlot *slotPtr;
@@ -363,8 +355,7 @@ void ClipsArbiter::getFacts()
 
                         slotPtr = theDeftemplate->slotList;
 
-                        for( int k = 0; k < theDeftemplate -> numberOfSlots; k++ )
-                        {
+                        for ( int k = 0; k < theDeftemplate -> numberOfSlots; k++ ) {
                             base::Object* l_param = 0;
                             // Behavior
                             if( slotPtr -> slotName -> bucket == m_behaviorNameBucket )

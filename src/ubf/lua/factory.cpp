@@ -3,7 +3,8 @@
 
 #include "openeaagles/base/Object.h"
 
-#include "LuaBehavior.h"
+#include "openeaagles/ubf/lua/LuaBehavior.h"
+#include "openeaagles/ubf/lua/LuaState.h"
 
 namespace oe {
 namespace lua {

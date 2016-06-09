@@ -19,6 +19,10 @@ include makedefs
 # rpf             : -
 # simulation      : -
 # terrain         : -
+# ubf/behaviors   : -
+# ubf/clips       : -
+# ubf/lua         : -
+# ubf/soar        : - SOAR
 #
 PROJECTS = base
 PROJECTS += dafif
@@ -55,6 +59,14 @@ PROJECTS += otw
 # Map format reader libraries
 #
 PROJECTS += maps/rpf
+
+#
+# ubf libraries
+#
+PROJECTS += ubf/behaviors
+#PROJECTS += ubf/clips
+#PROJECTS += ubf/lua
+PROJECTS += ubf/soar
 
 .PHONY: all clean $(PROJECTS)
 
