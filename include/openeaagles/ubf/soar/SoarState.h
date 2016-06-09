@@ -1,122 +1,112 @@
-/**
- * @file        SoarState.h
- * @brief       Declaration of class SoarState.
- * @details     It is used to expose its parent PlaneState to Soar.
- *
- * @author      Marsil de Athayde Costa e Silva,
- * @author      Instituto Tecnologico de Aeronautica - ITA
- * @author      Laboratorio de Comando e Controle - ITA LAB C2
- * 
- * @date        13/06/2014
- * @version     1.0
- * @pre         
- * @bug         
- * @copyright   Copyright (c) 2014
- *
- */
  
-#ifndef _SOAR_STATE_H_
-#define _SOAR_STATE_H_
-
-#include "soar/sml_Client.h"
+#ifndef __oe_ubf_soar_SoarState_H__
+#define __oe_ubf_soar_SoarState_H__
 
 #include "openeaagles/ubf/behaviors/PlaneState.h"
 
-namespace oe {
+namespace sml {
+   class Agent;
+   class FloatElement;
+   class IntElement;
+}
 
+namespace oe {
 namespace soar {
 
-using namespace sml;
-/** @class SoarState
- *  @brief This class is used to expose PlaneState to Soar.
- */
+//------------------------------------------------------------------------------
+// Class: SoarState
+// Description: Exposes PlaneState to Soar
+//
+// Factory name: SoarState
+//------------------------------------------------------------------------------
 class SoarState : public oe::behaviors::PlaneState
 {
     DECLARE_SUBCLASS(SoarState, oe::behaviors::PlaneState)
+
 public:
     SoarState();
-    SoarState( sml::Agent * agent );
+    SoarState(sml::Agent*);
+
+    void setAgent(sml::Agent* agent)            { ourAgent = agent; }
+    sml::Agent* getAgent()                      { return ourAgent; }
+
+    sml::FloatElement* getRoll()                { return wmeRoll; };
+    sml::FloatElement* getPitch()               { return wmePitch; };
+    sml::FloatElement* getHeading()             { return wmeHeading; };
+    sml::FloatElement* getRollRate()            { return wmeRollRate; };
+    sml::FloatElement* getPitchRate()           { return wmePitchRate; };
+    sml::FloatElement* getYawRate()             { return wmeYawRate; };
+    sml::FloatElement* getAltitude()            { return wmeAltitude; };
+    sml::FloatElement* getThrottle()            { return wmeThrottle; };
+    sml::FloatElement* getSpeed()               { return wmeSpeed; };
+    sml::FloatElement* getPitchTrim()           { return wmePitchTrim; };
     
-    void setAgent( sml::Agent * agent ){ ourAgent = agent; };
-    sml::Agent * getAgent(){ return ourAgent; };
+    sml::FloatElement* getPitchToTracked()      { return wmePitchToTracked; };
+    sml::FloatElement* getHeadingToTracked()    { return wmeHeadingToTracked; };
+    sml::FloatElement* getDistanceToTracked()   { return wmeDistanceToTracked; };
+
+    sml::IntElement* getNumTracks()             { return wmeNumTracks; };
+    sml::IntElement* getTargetTrack()           { return wmeTargetTrack; };
+    sml::IntElement* getNumEngines()            { return wmeNumEngines; };
+
+    sml::IntElement* getAlive()                 { return wmeAlive; };
+    sml::IntElement* getTracking()              { return wmeTracking; };
+    sml::IntElement* getMissileFired()          { return wmeMissileFired; };
+    sml::IntElement* getIncomingMissile()       { return wmeIncomingMissile; };
     
-    // float
-    FloatElement * getRoll()          { return wmeRoll; };
-    FloatElement * getPitch()         { return wmePitch; };
-    FloatElement * getHeading()       { return wmeHeading; };
-    FloatElement * getRollRate()      { return wmeRollRate; };
-    FloatElement * getPitchRate()     { return wmePitchRate; };
-    FloatElement * getYawRate()       { return wmeYawRate; };
-    FloatElement * getAltitude()      { return wmeAltitude; };
-    FloatElement * getThrottle()      { return wmeThrottle; };
-    FloatElement * getSpeed()         { return wmeSpeed; };
-    FloatElement * getPitchTrim()     { return wmePitchTrim; };
+    void setRoll(sml::FloatElement* Roll)                           { wmeRoll = Roll; };
+    void setPitch(sml::FloatElement* Pitch)                         { wmePitch = Pitch; };
+    void setHeading(sml::FloatElement* Heading)                     { wmeHeading = Heading; };
+    void setRollRate(sml::FloatElement* RollRate)                   { wmeRollRate = RollRate; };
+    void setPitchRate(sml::FloatElement* PitchRate)                 { wmePitchRate = PitchRate; };
+    void setYawRate(sml::FloatElement* YawRate)                     { wmeYawRate = YawRate; };
+    void setAltitude(sml::FloatElement* Altitude)                   { wmeAltitude = Altitude; };
+    void setThrottle(sml::FloatElement* Throttle)                   { wmeThrottle = Throttle; };
+    void setSpeed(sml::FloatElement* Speed)                         { wmeSpeed = Speed; };
+    void setPitchTrim(sml::FloatElement* PitchTrim)                 { wmePitchTrim = PitchTrim; };
     
-    FloatElement * getPitchToTracked()      { return wmePitchToTracked; };
-    FloatElement * getHeadingToTracked()    { return wmeHeadingToTracked; };
-    FloatElement * getDistanceToTracked()   { return wmeDistanceToTracked; };
-    // int
-    IntElement * getNumTracks()       { return wmeNumTracks; };
-    IntElement * getTargetTrack()     { return wmeTargetTrack; };
-    IntElement * getNumEngines()      { return wmeNumEngines; };
-    // bool
-    IntElement * getAlive()           { return wmeAlive; };
-    IntElement * getTracking()        { return wmeTracking; };
-    IntElement * getMissileFired()    { return wmeMissileFired; };
-    IntElement * getIncomingMissile() { return wmeIncomingMissile; };
-    
-    void setRoll( FloatElement * Roll )                         { wmeRoll = Roll; };
-    void setPitch( FloatElement * Pitch )                       { wmePitch = Pitch; };
-    void setHeading( FloatElement * Heading )                   { wmeHeading = Heading; };
-    void setRollRate( FloatElement * RollRate )                 { wmeRollRate = RollRate; };
-    void setPitchRate( FloatElement * PitchRate )               { wmePitchRate = PitchRate; };
-    void setYawRate( FloatElement * YawRate )                   { wmeYawRate = YawRate; };
-    void setAltitude( FloatElement * Altitude )                 { wmeAltitude = Altitude; };
-    void setThrottle( FloatElement * Throttle )                 { wmeThrottle = Throttle; };
-    void setSpeed( FloatElement * Speed )                       { wmeSpeed = Speed; };
-    void setPitchTrim( FloatElement * PitchTrim )               { wmePitchTrim = PitchTrim; };
-    
-    void setPitchToTracked( FloatElement * PitchToTracked )       { wmePitchToTracked = PitchToTracked; };
-    void setHeadingToTracked( FloatElement * HeadingToTracked )   { wmeHeadingToTracked = HeadingToTracked; };
-    void setDistanceToTracked( FloatElement * DistanceToTracked ) { wmeDistanceToTracked = DistanceToTracked; };
-    // int
-    void setNumTracks( IntElement * NumTracks )                 { wmeNumTracks = NumTracks; };
-    void setTargetTrack( IntElement * TargetTrack )             { wmeTargetTrack = TargetTrack; };
-    void setNumEngines( IntElement * NumEngines )               { wmeNumEngines = NumEngines; };
-    // bool 
-    void setAlive( IntElement * Alive )                         { wmeAlive = Alive; };
-    void setTracking( IntElement * Tracking )                   { wmeTracking = Tracking; };
-    void setMissileFired( IntElement * MissileFired )           { wmeMissileFired = MissileFired; };
-    void setIncomingMissile( IntElement * IncomingMissile )     { wmeIncomingMissile = IncomingMissile; };
+    void setPitchToTracked(sml::FloatElement* PitchToTracked)       { wmePitchToTracked = PitchToTracked; };
+    void setHeadingToTracked(sml::FloatElement* HeadingToTracked)   { wmeHeadingToTracked = HeadingToTracked; };
+    void setDistanceToTracked(sml::FloatElement* DistanceToTracked) { wmeDistanceToTracked = DistanceToTracked; };
+
+    void setNumTracks(sml::IntElement* NumTracks)                   { wmeNumTracks = NumTracks; };
+    void setTargetTrack(sml::IntElement* TargetTrack)               { wmeTargetTrack = TargetTrack; };
+    void setNumEngines(sml::IntElement* NumEngines)                 { wmeNumEngines = NumEngines; };
+
+    void setAlive(sml::IntElement* Alive)                           { wmeAlive = Alive; };
+    void setTracking(sml::IntElement* Tracking)                     { wmeTracking = Tracking; };
+    void setMissileFired(sml::IntElement* MissileFired)             { wmeMissileFired = MissileFired; };
+    void setIncomingMissile(sml::IntElement* IncomingMissile)       { wmeIncomingMissile = IncomingMissile; };
     
 private:
+
     // This is our agent who will control us.
     // It is used to set the states from the class PlaneState.
-    sml::Agent * ourAgent;
-    // float
-    FloatElement * wmeRoll;
-    FloatElement * wmePitch;
-    FloatElement * wmeHeading;
-    FloatElement * wmeRollRate;
-    FloatElement * wmePitchRate;
-    FloatElement * wmeYawRate;
-    FloatElement * wmeAltitude;
-    FloatElement * wmeThrottle;
-    FloatElement * wmeSpeed;
-    FloatElement * wmePitchTrim;
+    sml::Agent* ourAgent;
+
+    sml::FloatElement* wmeRoll;
+    sml::FloatElement* wmePitch;
+    sml::FloatElement* wmeHeading;
+    sml::FloatElement* wmeRollRate;
+    sml::FloatElement* wmePitchRate;
+    sml::FloatElement* wmeYawRate;
+    sml::FloatElement* wmeAltitude;
+    sml::FloatElement* wmeThrottle;
+    sml::FloatElement* wmeSpeed;
+    sml::FloatElement* wmePitchTrim;
     
-    FloatElement * wmePitchToTracked;
-    FloatElement * wmeHeadingToTracked;
-    FloatElement * wmeDistanceToTracked;
-    // int
-    IntElement * wmeNumTracks;
-    IntElement * wmeTargetTrack;
-    IntElement * wmeNumEngines;
-    // bool
-    IntElement * wmeAlive;
-    IntElement * wmeTracking;
-    IntElement * wmeMissileFired;
-    IntElement * wmeIncomingMissile;
+    sml::FloatElement* wmePitchToTracked;
+    sml::FloatElement* wmeHeadingToTracked;
+    sml::FloatElement* wmeDistanceToTracked;
+
+    sml::IntElement* wmeNumTracks;
+    sml::IntElement* wmeTargetTrack;
+    sml::IntElement* wmeNumEngines;
+
+    sml::IntElement* wmeAlive;
+    sml::IntElement* wmeTracking;
+    sml::IntElement* wmeMissileFired;
+    sml::IntElement* wmeIncomingMissile;
 };
 
 }

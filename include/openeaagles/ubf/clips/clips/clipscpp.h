@@ -1,3 +1,7 @@
+
+#ifndef __oe_ubf_clips_clipscpp_H__
+#define __oe_ubf_clips_clipscpp_H__
+
 #include <string>
 #include <iostream>
 #include <vector>
@@ -273,3 +277,5 @@ inline DataObject DataObject::InstanceAddress(void *theEnv,void *theInstance)
 
 }
 }
+
+#endif
