@@ -27,8 +27,8 @@ public:
     SoarState();
     SoarState(sml::Agent*);
 
-    void setAgent(sml::Agent* agent)            { ourAgent = agent; }
-    sml::Agent* getAgent()                      { return ourAgent; }
+    void setAgent(sml::Agent* x)                { agent = x; }
+    sml::Agent* getAgent()                      { return agent; }
 
     sml::FloatElement* getRoll()                { return wmeRoll; };
     sml::FloatElement* getPitch()               { return wmePitch; };
@@ -82,7 +82,7 @@ private:
 
     // This is our agent who will control us.
     // It is used to set the states from the class PlaneState.
-    sml::Agent* ourAgent;
+    sml::Agent* agent;
 
     sml::FloatElement* wmeRoll;
     sml::FloatElement* wmePitch;

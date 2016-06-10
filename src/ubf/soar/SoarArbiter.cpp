@@ -38,20 +38,20 @@ END_SLOT_MAP()
 SoarArbiter::SoarArbiter()
 {
     STANDARD_CONSTRUCTOR()
-    soarFileName = new base::String();
+    fileName = new base::String();
 }
 
 void SoarArbiter::deleteData()
 {
-    if (soarFileName != nullptr)   { soarFileName->unref(); soarFileName = nullptr; }
-    m_Kernel->Shutdown();
-    delete m_Kernel;
+    if (fileName != nullptr)   { fileName->unref(); fileName = nullptr; }
+    kernel->Shutdown();
+    delete kernel;
 }
 
 bool SoarArbiter::setSlotSoarFileName(base::String* const x)
 {
-    if (soarFileName != nullptr)  { soarFileName->unref();  soarFileName = nullptr; }
-    if (x != nullptr)             { soarFileName = x->clone(); }
+    if (fileName != nullptr)  { fileName->unref();  fileName = nullptr; }
+    if (x != nullptr)         { fileName = x->clone(); }
     initSoar();
     return true;
 }
@@ -153,101 +153,101 @@ void SoarArbiter::trimChangeValidation(base::ubf::Action* const complexAction)
 
 void SoarArbiter::initSoar()
 {
-    m_Kernel = sml::Kernel::CreateKernelInNewThread();
-    if (m_Kernel->HadError()) {
-        std::cout << m_Kernel->GetLastErrorDescription() << std::endl;
+    kernel = sml::Kernel::CreateKernelInNewThread();
+    if (kernel->HadError()) {
+        std::cout << kernel->GetLastErrorDescription() << std::endl;
     }
 
-    m_smlAgent = m_Kernel->CreateAgent(getFactoryName());
-    if (m_Kernel->HadError()) {
-        std::cout << m_Kernel->GetLastErrorDescription() << std::endl;
+    agent = kernel->CreateAgent(getFactoryName());
+    if (kernel->HadError()) {
+        std::cout << kernel->GetLastErrorDescription() << std::endl;
     }
 
-    m_smlAgent->LoadProductions(getSoarFileName()->getCopyString());
-    if (m_smlAgent->HadError()) {
-        std::cout << m_smlAgent->GetLastErrorDescription() << std::endl;
+    agent->LoadProductions(getSoarFileName()->getCopyString());
+    if (agent->HadError()) {
+        std::cout << agent->GetLastErrorDescription() << std::endl;
     }
 
-    m_soarState = new SoarState(m_smlAgent);
-    m_inputLink = m_smlAgent->GetInputLink();
-    m_ID        = m_smlAgent->CreateIdWME(m_inputLink, SoarState::getFactoryName());
+    soarState = new SoarState(agent);
+    inputLink = agent->GetInputLink();
+    id        = agent->CreateIdWME(inputLink, SoarState::getFactoryName());
 
-    m_soarState->setRoll              (m_smlAgent->CreateFloatWME(m_ID, "roll-is",        0));
-    m_soarState->setPitch             (m_smlAgent->CreateFloatWME(m_ID, "pitch-is",       0));
-    m_soarState->setHeading           (m_smlAgent->CreateFloatWME(m_ID, "heading-is",     0));
-    m_soarState->setRollRate          (m_smlAgent->CreateFloatWME(m_ID, "roll-rate-is",   0));
-    m_soarState->setPitchRate         (m_smlAgent->CreateFloatWME(m_ID, "pitch-rate-is",  0));
-    m_soarState->setYawRate           (m_smlAgent->CreateFloatWME(m_ID, "yaw-rate-is",    0));
-    m_soarState->setAltitude          (m_smlAgent->CreateFloatWME(m_ID, "altitude-is",    0));
-    m_soarState->setThrottle          (m_smlAgent->CreateFloatWME(m_ID, "throttle-is",    0));
-    m_soarState->setSpeed             (m_smlAgent->CreateFloatWME(m_ID, "speed-is",       0));
-    m_soarState->setPitchTrim         (m_smlAgent->CreateFloatWME(m_ID, "pitch-trim-is",  0));
+    soarState->setRoll              (agent->CreateFloatWME(id, "roll-is",        0));
+    soarState->setPitch             (agent->CreateFloatWME(id, "pitch-is",       0));
+    soarState->setHeading           (agent->CreateFloatWME(id, "heading-is",     0));
+    soarState->setRollRate          (agent->CreateFloatWME(id, "roll-rate-is",   0));
+    soarState->setPitchRate         (agent->CreateFloatWME(id, "pitch-rate-is",  0));
+    soarState->setYawRate           (agent->CreateFloatWME(id, "yaw-rate-is",    0));
+    soarState->setAltitude          (agent->CreateFloatWME(id, "altitude-is",    0));
+    soarState->setThrottle          (agent->CreateFloatWME(id, "throttle-is",    0));
+    soarState->setSpeed             (agent->CreateFloatWME(id, "speed-is",       0));
+    soarState->setPitchTrim         (agent->CreateFloatWME(id, "pitch-trim-is",  0));
 
-    m_soarState->setNumTracks         (m_smlAgent->CreateIntWME(m_ID, "num-tracks-is",        0));
-    m_soarState->setTargetTrack       (m_smlAgent->CreateIntWME(m_ID, "target-track-is",      0));
-    m_soarState->setNumEngines        (m_smlAgent->CreateIntWME(m_ID, "num-engines-is",       0));
+    soarState->setNumTracks         (agent->CreateIntWME(id, "num-tracks-is",        0));
+    soarState->setTargetTrack       (agent->CreateIntWME(id, "target-track-is",      0));
+    soarState->setNumEngines        (agent->CreateIntWME(id, "num-engines-is",       0));
     
-    m_soarState->setAlive             (m_smlAgent->CreateIntWME(m_ID, "is-alive",             0));
-    m_soarState->setTracking          (m_smlAgent->CreateIntWME(m_ID, "is-tracking",          0));
-    m_soarState->setMissileFired      (m_smlAgent->CreateIntWME(m_ID, "is-missile-fired",     0));
-    m_soarState->setIncomingMissile   (m_smlAgent->CreateIntWME(m_ID, "is-incoming-missile",  0));
+    soarState->setAlive             (agent->CreateIntWME(id, "is-alive",             0));
+    soarState->setTracking          (agent->CreateIntWME(id, "is-tracking",          0));
+    soarState->setMissileFired      (agent->CreateIntWME(id, "is-missile-fired",     0));
+    soarState->setIncomingMissile   (agent->CreateIntWME(id, "is-incoming-missile",  0));
     
-    m_soarState->setPitchToTracked    (m_smlAgent->CreateFloatWME(m_ID, "pitch-to-tracked-is",    0));
-    m_soarState->setHeadingToTracked  (m_smlAgent->CreateFloatWME(m_ID, "heading-to-tracked-is",  0));
-    m_soarState->setDistanceToTracked (m_smlAgent->CreateFloatWME(m_ID, "distance-to-tracked-is", 0));
+    soarState->setPitchToTracked    (agent->CreateFloatWME(id, "pitch-to-tracked-is", 0));
+    soarState->setHeadingToTracked  (agent->CreateFloatWME(id, "heading-to-tracked-is", 0));
+    soarState->setDistanceToTracked (agent->CreateFloatWME(id, "distance-to-tracked-is", 0));
 }
 
 // commit the states of the aircraft.
 void SoarArbiter::Commit(const base::ubf::State* const state)
 {
     const oe::behaviors::PlaneState* l_state = dynamic_cast<const oe::behaviors::PlaneState*>(state);
-    m_smlAgent->Update(m_soarState->getRoll(),         l_state->getRoll());
-    m_smlAgent->Update(m_soarState->getPitch(),        l_state->getPitch());
-    m_smlAgent->Update(m_soarState->getHeading(),      l_state->getHeading());
-    m_smlAgent->Update(m_soarState->getRollRate(),     l_state->getRollRate());
-    m_smlAgent->Update(m_soarState->getPitchRate(),    l_state->getPitchRate());
-    m_smlAgent->Update(m_soarState->getYawRate(),      l_state->getYawRate());
-    m_smlAgent->Update(m_soarState->getAltitude(),     l_state->getAltitude());
-    m_smlAgent->Update(m_soarState->getThrottle(),     l_state->getThrottle());
-    m_smlAgent->Update(m_soarState->getSpeed(),        l_state->getSpeed());
-    m_smlAgent->Update(m_soarState->getPitchTrim(),    l_state->getPitchTrim());
+    agent->Update(soarState->getRoll(),         l_state->getRoll());
+    agent->Update(soarState->getPitch(),        l_state->getPitch());
+    agent->Update(soarState->getHeading(),      l_state->getHeading());
+    agent->Update(soarState->getRollRate(),     l_state->getRollRate());
+    agent->Update(soarState->getPitchRate(),    l_state->getPitchRate());
+    agent->Update(soarState->getYawRate(),      l_state->getYawRate());
+    agent->Update(soarState->getAltitude(),     l_state->getAltitude());
+    agent->Update(soarState->getThrottle(),     l_state->getThrottle());
+    agent->Update(soarState->getSpeed(),        l_state->getSpeed());
+    agent->Update(soarState->getPitchTrim(),    l_state->getPitchTrim());
 
-    m_smlAgent->Update(m_soarState->getNumTracks(),    l_state->getNumTracks());
-    m_smlAgent->Update(m_soarState->getTargetTrack(),  l_state->getTargetTrack());
-    m_smlAgent->Update(m_soarState->getNumEngines(),   l_state->getNumEngines());
+    agent->Update(soarState->getNumTracks(),    l_state->getNumTracks());
+    agent->Update(soarState->getTargetTrack(),  l_state->getTargetTrack());
+    agent->Update(soarState->getNumEngines(),   l_state->getNumEngines());
     
-    m_smlAgent->Update(m_soarState->getAlive(),            (l_state->isAlive()            == true ) ? ( 1 ) : ( 0 ) );
-    m_smlAgent->Update(m_soarState->getTracking(),         (l_state->isTracking()         == true ) ? ( 1 ) : ( 0 ) );
-    m_smlAgent->Update(m_soarState->getMissileFired(),     (l_state->isMissileFired()     == true ) ? ( 1 ) : ( 0 ) );
-    m_smlAgent->Update(m_soarState->getIncomingMissile(),  (l_state->isIncomingMissile()  == true ) ? ( 1 ) : ( 0 ) );
+    agent->Update(soarState->getAlive(),            (l_state->isAlive()            == true ) ? ( 1 ) : ( 0 ) );
+    agent->Update(soarState->getTracking(),         (l_state->isTracking()         == true ) ? ( 1 ) : ( 0 ) );
+    agent->Update(soarState->getMissileFired(),     (l_state->isMissileFired()     == true ) ? ( 1 ) : ( 0 ) );
+    agent->Update(soarState->getIncomingMissile(),  (l_state->isIncomingMissile()  == true ) ? ( 1 ) : ( 0 ) );
     
     if (l_state->isTracking() && l_state->getTargetTrack() < l_state->getNumTracks()) {
-        m_smlAgent->Update(m_soarState->getPitchToTracked(), l_state->getPitchToTracked(l_state->getTargetTrack()));
-        m_smlAgent->Update(m_soarState->getHeadingToTracked(), l_state->getHeadingToTracked(l_state->getTargetTrack()));
-        m_smlAgent->Update(m_soarState->getDistanceToTracked(), l_state->getDistanceToTracked(l_state->getTargetTrack()));
+        agent->Update(soarState->getPitchToTracked(), l_state->getPitchToTracked(l_state->getTargetTrack()));
+        agent->Update(soarState->getHeadingToTracked(), l_state->getHeadingToTracked(l_state->getTargetTrack()));
+        agent->Update(soarState->getDistanceToTracked(), l_state->getDistanceToTracked(l_state->getTargetTrack()));
     } else {
-        m_smlAgent->Update(m_soarState->getPitchToTracked(), 0);
-        m_smlAgent->Update(m_soarState->getHeadingToTracked(), 0);
-        m_smlAgent->Update(m_soarState->getDistanceToTracked(), 0);
+        agent->Update(soarState->getPitchToTracked(), 0);
+        agent->Update(soarState->getHeadingToTracked(), 0);
+        agent->Update(soarState->getDistanceToTracked(), 0);
     }
     // Send the changes to working memory to Soar
     // With 8.6.2 this call is optional as changes are sent automatically.
-    m_smlAgent->Commit();
+    agent->Commit();
 }
 
 // run Soar
 void SoarArbiter::Run()
 {
-    m_smlAgent->RunSelfTilOutput();
+    agent->RunSelfTilOutput();
 }
 
 // retrieve information from Soar environment
 void SoarArbiter::Retrieve()
 {
-    sml::Identifier* l_OutputLink = m_smlAgent->GetOutputLink();
-    int numberCommands = m_smlAgent->GetNumberCommands();
+    sml::Identifier* l_OutputLink = agent->GetOutputLink();
+    int numberCommands = agent->GetNumberCommands();
     for (int i = 0 ; i < numberCommands; i++) {
-        sml::Identifier* pCommand = m_smlAgent->GetCommand(i);
+        sml::Identifier* pCommand = agent->GetCommand(i);
         const std::string l_cmdName = pCommand->GetCommandName();
         //const char * c_name_s   = pCommand->GetValueAsString();
         
@@ -256,10 +256,10 @@ void SoarArbiter::Retrieve()
             if (l_behaviorName != "init") {
                 base::Object* l_bhv = nullptr;
                 if (l_bhv == nullptr) {
-                    l_bhv = behaviors::factory(l_behaviorName.c_str());
+                    l_bhv = behaviors::factory(l_behaviorName);
                 }
                 if (l_bhv == nullptr) {
-                    l_bhv = lua::factory(l_behaviorName.c_str());
+                    l_bhv = lua::factory(l_behaviorName);
                 }
 
                 int j = 1;

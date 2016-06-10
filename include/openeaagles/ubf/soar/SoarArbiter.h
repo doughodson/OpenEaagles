@@ -48,20 +48,19 @@ public:
 
 protected:
     void initSoar();
-
-    const base::String* getSoarFileName()    { return soarFileName; };
-
     bool setSlotSoarFileName(base::String* const);
 
 private:
-    sml::Kernel* m_Kernel;
-    sml::Agent* m_smlAgent;
-    SoarState* m_soarState;
-    
-    sml::Identifier* m_inputLink;
-    sml::Identifier* m_ID;
+    const base::String* getSoarFileName()    { return fileName; };
 
-    const base::String* soarFileName;
+    sml::Kernel* kernel;
+    sml::Agent* agent;
+    SoarState* soarState;
+
+    sml::Identifier* inputLink;
+    sml::Identifier* id;
+
+    const base::String* fileName;
 };
 
 }

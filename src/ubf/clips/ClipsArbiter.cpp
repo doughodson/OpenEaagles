@@ -13,7 +13,6 @@
 #include "openeaagles/ubf/behaviors/PlaneState.h"
 #include "openeaagles/ubf/behaviors/PlaneAction.h"
 
-#include "openeaagles/base/factory.h"
 #include "openeaagles/ubf/lua/factory.h"
 #include "openeaagles/ubf/behaviors/factory.h"
 
