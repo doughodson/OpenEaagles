@@ -4,7 +4,7 @@
 
 #include "openeaagles/ubf/behaviors/PlaneBehaviors.h"
 
-#include "openeaagles/ubf/lua/lua-5.2.3/luna.h"
+#include "openeaagles/ubf/lua/lua-5.3.3/luna.h"
 
 #include <vector>
 

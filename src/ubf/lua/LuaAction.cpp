@@ -13,7 +13,7 @@ EMPTY_DELETEDATA(LuaAction)
 const char * oe::lua::LuaAction::className = "LuaAction";                 
 const Luna<oe::lua::LuaAction>::FunctionType oe::lua::LuaAction::methods[] =      
 {
-    {NULL, NULL}
+    {0, 0}
 };
 
 const Luna<oe::lua::LuaAction>::PropertyType oe::lua::LuaAction::properties[] =   

@@ -24,7 +24,7 @@ project "ubf-lua"
    }
    includedirs { 
       "../../include/openeaagles/ubf/lua",
-      "../../include/openeaagles/ubf/lua/lua-5.2.3"
+      "../../include/openeaagles/ubf/lua/lua-5.3.3"
    }
    targetname "lua"
     

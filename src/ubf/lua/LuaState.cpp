@@ -17,7 +17,7 @@ const Luna<oe::lua::LuaState>::FunctionType oe::lua::LuaState::methods[] =
     { "getPitchToTracked",      &getPitchToTracked      },
     { "getHeadingToTracked",    &getHeadingToTracked    },
     { "getDistanceToTracked",   &getDistanceToTracked   },
-    {NULL, NULL}
+    {0, 0}
 };                                                      
                                                         
 const Luna<oe::lua::LuaState>::PropertyType oe::lua::LuaState::properties[] =   
@@ -41,7 +41,7 @@ const Luna<oe::lua::LuaState>::PropertyType oe::lua::LuaState::properties[] =
     { "isTracking",         &isTracking,        NULL },
     { "isMissileFired",     &isMissileFired,    NULL },
     
-    { NULL, NULL, NULL }
+    { 0, 0, 0 }
 };
 
 LuaState::LuaState(lua_State*)

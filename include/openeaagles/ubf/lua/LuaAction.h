@@ -2,7 +2,7 @@
 #ifndef __oe_ubf_lua_LuaAction_H__
 #define __oe_ubf_lua_LuaAction_H__
 
-#include "openeaagles/ubf/lua/lua-5.2.3/luna.h"
+#include "openeaagles/ubf/lua/lua-5.3.3/luna.h"
 
 #include "openeaagles/ubf/behaviors/PlaneAction.h"
 
