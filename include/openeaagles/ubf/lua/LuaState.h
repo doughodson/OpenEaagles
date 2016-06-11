@@ -20,20 +20,15 @@ class LuaState : public oe::behaviors::PlaneState
     DECLARE_SUBCLASS(LuaState, oe::behaviors::PlaneState)
 public:
 
-    // name used by Luna template class
-    static const char* className;
-
-    // list of methods to expose to Lua
+    // Luna C++ wrapper template declarations
+    static const char className[];
+    static const Luna<oe::lua::LuaState>::PropertyType properties[];
     static const Luna<oe::lua::LuaState>::FunctionType methods[];
 
-    // list of properties to expose to Lua (setters and getters)
-    static const Luna<oe::lua::LuaState>::PropertyType properties[];
-    
     LuaState()                 {};
     LuaState(lua_State*);
     LuaState(const PlaneState*);
 
-    // properties
     int getRoll(lua_State*);
     int getPitch(lua_State*);
     int getHeading(lua_State*);
@@ -52,8 +47,7 @@ public:
     int isTracking(lua_State*);
     int isMissileFired(lua_State*);
     int isIncomingMissile(lua_State*);
-    
-    // methods
+
     int getPitchToTracked(lua_State*);
     int getHeadingToTracked(lua_State*);
     int getDistanceToTracked(lua_State*);

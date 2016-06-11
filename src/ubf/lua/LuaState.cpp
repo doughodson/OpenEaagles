@@ -3,50 +3,55 @@
 
 namespace oe {
 namespace lua {
-    
+
 IMPLEMENT_ABSTRACT_SUBCLASS(LuaState, "LuaState")
 EMPTY_COPYDATA(LuaState)
 EMPTY_SERIALIZER(LuaState)
 EMPTY_SLOTTABLE(LuaState)
 EMPTY_DELETEDATA(LuaState)
 
-const char * oe::lua::LuaState::className = "LuaState";                 
-const Luna<oe::lua::LuaState>::FunctionType oe::lua::LuaState::methods[] =      
-{
-    { "getPitchToTracked",      &getPitchToTracked      },
-    { "getPitchToTracked",      &getPitchToTracked      },
-    { "getHeadingToTracked",    &getHeadingToTracked    },
-    { "getDistanceToTracked",   &getDistanceToTracked   },
-    {0, 0}
-};                                                      
-                                                        
-const Luna<oe::lua::LuaState>::PropertyType oe::lua::LuaState::properties[] =   
-{
-    { "roll",               &getRoll,           NULL },
-    { "pitch",              &getPitch,          NULL },
-    { "heading",            &getHeading,        NULL },
-    { "rollrate",           &getRollRate,       NULL },
-    { "pitchrate",          &getPitchRate,      NULL },
-    { "yawrate",            &getYawRate,        NULL },
-    { "altitude",           &getAltitude,       NULL },
-    { "throttle",           &getThrottle,       NULL },
-    { "speed",              &getSpeed,          NULL },
-    { "pitchtrim",          &getPitchTrim,      NULL },
-    { "numtracks",          &getNumTracks,      NULL },
-    { "targettrack",        &getTargetTrack,    NULL },
-    { "numengines",         &getNumEngines,     NULL },
+// Luna implementation
+#define method(class, name)  {#name, &class::name}
 
-    { "isAlive",            &isAlive,           NULL },
-    { "isIncomingMissile",  &isIncomingMissile, NULL },
-    { "isTracking",         &isTracking,        NULL },
-    { "isMissileFired",     &isMissileFired,    NULL },
-    
-    { 0, 0, 0 }
+// name to use to address class in Lua
+const char oe::lua::LuaState::className[] = "LuaState";
+
+// list of class properties that one can set/get from Lua
+const Luna<oe::lua::LuaState>::PropertyType oe::lua::LuaState::properties[] =
+{
+    {0, 0}
+};
+
+// list of class methods to make available in Lua
+const Luna<oe::lua::LuaState>::FunctionType oe::lua::LuaState::methods[] =
+{
+    method(oe::lua::LuaState, getRoll),
+    method(oe::lua::LuaState, getPitch),
+    method(oe::lua::LuaState, getHeading),
+    method(oe::lua::LuaState, getRollRate),
+    method(oe::lua::LuaState, getPitchRate),
+    method(oe::lua::LuaState, getYawRate),
+    method(oe::lua::LuaState, getAltitude),
+    method(oe::lua::LuaState, getThrottle),
+    method(oe::lua::LuaState, getSpeed),
+    method(oe::lua::LuaState, getPitchTrim),
+    method(oe::lua::LuaState, getNumTracks),
+    method(oe::lua::LuaState, getTargetTrack),
+    method(oe::lua::LuaState, getNumEngines),
+
+    method(oe::lua::LuaState, isAlive),
+    method(oe::lua::LuaState, isTracking),
+    method(oe::lua::LuaState, isMissileFired),
+    method(oe::lua::LuaState, isIncomingMissile),
+
+    method(oe::lua::LuaState, getPitchToTracked),
+    method(oe::lua::LuaState, getHeadingToTracked),
+    method(oe::lua::LuaState, getDistanceToTracked),
+    {0,0}
 };
 
 LuaState::LuaState(lua_State*)
-{
-}
+{}
 
 LuaState::LuaState(const PlaneState* pState)
 {
