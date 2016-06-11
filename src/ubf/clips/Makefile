@@ -4,6 +4,8 @@ include ../../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboeclips.a
 
 CPPFLAGS += -I../../../include/openeaagles/ubf/clips/clips
+CPPFLAGS += -DSTATIC_LINKED
+CPPFLAGS += -DALLOW_ENVIRONMENT_GLOBALS
 
 OBJS += \
 	clips/agenda.o \

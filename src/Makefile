@@ -64,9 +64,9 @@ PROJECTS += maps/rpf
 # ubf libraries
 #
 PROJECTS += ubf/behaviors
-#PROJECTS += ubf/clips
-#PROJECTS += ubf/lua
-PROJECTS += ubf/soar
+PROJECTS += ubf/clips
+PROJECTS += ubf/lua
+#PROJECTS += ubf/soar
 
 .PHONY: all clean $(PROJECTS)
 
