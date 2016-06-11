@@ -20,19 +20,14 @@ class LuaAction : public oe::behaviors::PlaneAction
     DECLARE_SUBCLASS(LuaAction, oe::behaviors::PlaneAction)
 
 public:
-    // name used by Luna template class.
-    static const char* className;
-
-    // list of methods to expose to Lua
+    // Luna C++ wrapper template declarations
+    static const char className[];
+    static const Luna<oe::lua::LuaAction>::PropertyType properties[];
     static const Luna<oe::lua::LuaAction>::FunctionType methods[];
 
-    // list of properties to expose to Lua (setters and getters)
-    static const Luna<oe::lua::LuaAction>::PropertyType properties[];
-    
     LuaAction();
     LuaAction(lua_State*);
 
-    // properties
     int setRoll(lua_State*);
     int getRoll(lua_State*);
     

@@ -1,22 +1,30 @@
-#ifndef _LUNA_H_
-#define _LUNA_H_
+
+#ifndef __oe_ubf_lua_LUNA_H__
+#define __oe_ubf_lua_LUNA_H__
+
+//-----------------------------------------------------------
+// Description: Luna Five
+// Downloaded from here: http://lua-users.org/wiki/LunaFive
+// Date: 10 June 2016
+//-----------------------------------------------------------
 
 #include "lua.hpp"
 #include <string.h> // For strlen
 
-template < class T > class Luna {
-  public:
+template < class T > class Luna
+{
+public:
 
-    struct PropertyType {
-	const char     *name;
-	int             (T::*getter) (lua_State *);
-	int             (T::*setter) (lua_State *);
-    };
+   struct PropertyType {
+      const char* name;
+      int (T::*getter) (lua_State *);
+      int (T::*setter) (lua_State *);
+   };
 
-    struct FunctionType {
-	const char     *name;
-	int             (T::*func) (lua_State *);
-    };
+   struct FunctionType {
+      const char* name;
+      int (T::*func) (lua_State *);
+   };
 
 /*
   @ check
@@ -28,13 +36,12 @@ template < class T > class Luna {
     Retrieves a wrapped class from the arguments passed to the func, specified by narg (position).
     This func will raise an exception if the argument is not of the correct type.
 */
-    static T* check(lua_State * L, int narg)
-	{
-		T** obj = static_cast <T **>(luaL_checkudata(L, narg, T::className));
-		if ( !obj )
-			return nullptr; // lightcheck returns nullptr if not found.
-		return *obj;		// pointer to T object
-	}
+   static T* check(lua_State * L, int narg) {
+      T** obj = static_cast <T **>(luaL_checkudata(L, narg, T::className));
+      if ( !obj )
+         return nullptr; // lightcheck returns nullptr if not found.
+      return *obj;		 // pointer to T object
+   }
 
 /*
   @ lightcheck
@@ -47,12 +54,12 @@ template < class T > class Luna {
     This func will return nullptr if the argument is not of the correct type.  Useful for supporting
     multiple types of arguments passed to the func
 */ 
-	static T* lightcheck(lua_State * L, int narg) {
-		T** obj = static_cast <T **>(luaL_testudata(L, narg, T::className));
-		if ( !obj )
-			return nullptr; // lightcheck returns nullptr if not found.
-		return *obj;		// pointer to T object
-    }
+   static T* lightcheck(lua_State * L, int narg) {
+	   T** obj = static_cast <T **>(luaL_testudata(L, narg, T::className));
+      if ( !obj )
+		   return nullptr; // lightcheck returns nullptr if not found.
+      return *obj;		// pointer to T object
+   }
 
 /*
   @ Register
@@ -64,7 +71,7 @@ template < class T > class Luna {
     Registers your class with Lua.  Leave namespac "" if you want to load it into the global space.
 */
     // REGISTER CLASS AS A GLOBAL TABLE 
-    static void Register(lua_State * L, const char *namespac = NULL ) {
+    static void Register(lua_State * L, const char* namespac = NULL ) {
 
 		if ( namespac && strlen(namespac) )
 		{
@@ -106,14 +113,14 @@ template < class T > class Luna {
 		lua_pushcfunction(L, &Luna < T >::property_setter);
 		lua_settable(L, metatable);
 		
-		for (int i = 0; T::properties[i].name; i++) { 				// Register some properties in it
-			lua_pushstring(L, T::properties[i].name);				// Having some string associated with them
+		for (int i = 0; T::properties[i].name; i++) { 		// Register some properties in it
+			lua_pushstring(L, T::properties[i].name);			// Having some string associated with them
 			lua_pushnumber(L, i); 									// And a number indexing which property it is
 			lua_settable(L, metatable);
 		}
 		
 		for (int i = 0; T::methods[i].name; i++) {
-			lua_pushstring(L, T::methods[i].name); 					// Register some functions in it
+			lua_pushstring(L, T::methods[i].name); 				// Register some functions in it
 			lua_pushnumber(L, i | ( 1 << 8 ) );						// Add a number indexing which func it is
 			lua_settable(L, metatable);								//
 		}
@@ -219,7 +226,7 @@ template < class T > class Luna {
 			if( _index >> 8 ) // Try to set a func
 			{
 				char c[128];
-				sprintf_s( c , "Trying to set the method [%s] of class [%s]" , (*obj)->T::methods[_index ^ ( 1 << 8 ) ].name , T::className );
+				sprintf( c , "Trying to set the method [%s] of class [%s]" , (*obj)->T::methods[_index ^ ( 1 << 8 ) ].name , T::className );
 				luaL_error( L , c );
 				return 0;
 			}
@@ -289,4 +296,5 @@ template < class T > class Luna {
 	}
 };
 
-#endif // _LUNA_H_
+#endif
+
