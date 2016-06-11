@@ -32,17 +32,17 @@ class ClipsArbiter : public oe::base::ubf::Arbiter
 public:
     ClipsArbiter();
 
-    virtual base::ubf::Action* genAction(const base::ubf::State* const state, const double dt);
+    virtual base::ubf::Action* genAction(const base::ubf::State* const state, const double dt) override;
 
 protected:
     const base::String* getClipsFileName()    { return clipsFileName; };
-    
+
     // evaluates a list of actions and return an optional "complex action"
-    // (default: returns the action with the highest vote value) 
-    virtual base::ubf::Action* genComplexAction(base::List* const actionSet);
+    // (default: returns the action with the highest vote value)
+    virtual base::ubf::Action* genComplexAction(base::List* const actionSet) override;
 
     void clearBehaviors();
-    
+
     bool setSlotClipsFileName(base::String* const);
 
     void assertFacts(const base::ubf::State* state);
@@ -53,11 +53,11 @@ private:
 
     const base::String* clipsFileName;
 
-    unsigned int m_behaviorBucket;
-    unsigned int m_behaviorNameBucket;
-    unsigned int m_removeBucket;
-    unsigned int m_optParamsBucket;
-    unsigned int m_optPairStreamBucket;
+    unsigned int behaviorBucket;
+    unsigned int behaviorNameBucket;
+    unsigned int removeBucket;
+    unsigned int optParamsBucket;
+    unsigned int optPairStreamBucket;
 
     void trimChangeValidation(base::ubf::Action* const complexAction);
 };

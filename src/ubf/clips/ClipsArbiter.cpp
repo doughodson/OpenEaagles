@@ -19,6 +19,8 @@
 #include "openeaagles/ubf/clips/clips/clips.h"
 #include "openeaagles/ubf/clips/clips/clipscpp.h"
 
+#include <cstdio>
+
 namespace oe {
 namespace clips {
 
@@ -39,6 +41,12 @@ ClipsArbiter::ClipsArbiter()
     STANDARD_CONSTRUCTOR()
     clipsCppEnv   = new CLIPSCPPEnv();
     clipsFileName = new base::String();
+
+    behaviorBucket = 0;
+    behaviorNameBucket = 0;
+    removeBucket = 0;
+    optParamsBucket = 0;
+    optPairStreamBucket = 0;
 }
 
 void ClipsArbiter::deleteData()
@@ -52,7 +60,7 @@ base::ubf::Action* ClipsArbiter::genAction(const base::ubf::State* const state, 
     static double l_timer = 1.0;
     l_timer += dt;
     // create list for action set
-    base::List* actionSet = new base::List();
+    //base::List* actionSet = new base::List();
 
     // fill out list of recommended actions by behaviors
     if (l_timer >= 1.0) {
@@ -115,7 +123,7 @@ base::ubf::Action* ClipsArbiter::genComplexAction(base::List* const actionSet)
         // next action
         item = item->getNext();
     }
-    
+
     trimChangeValidation(complexAction);
     return complexAction;
 }
@@ -125,14 +133,14 @@ void ClipsArbiter::clearBehaviors()
     while( getBehaviors()->removeHead() != nullptr )   {}
 }
 
-bool ClipsArbiter::setSlotClipsFileName( base::String* const x )
+bool ClipsArbiter::setSlotClipsFileName(base::String* const x)
 {
     if (clipsFileName != nullptr) {
-       clipsFileName -> unref();
+       clipsFileName->unref();
        clipsFileName = nullptr;
     }
 
-    if (x != nullptr) { clipsFileName = x -> clone(); }
+    if (x != nullptr) { clipsFileName = x->clone(); }
 
     if (clipsCppEnv->Load(getClipsFileName()->getCopyString())) {
         clipsCppEnv->Reset();
@@ -141,20 +149,20 @@ bool ClipsArbiter::setSlotClipsFileName( base::String* const x )
 
         l_deftemplate = static_cast<deftemplate*>(FindDeftemplate("behavior"));
         if (l_deftemplate != nullptr) {
-            m_behaviorBucket            = l_deftemplate->header.name->bucket;
-            m_behaviorNameBucket        = l_deftemplate->slotList->slotName->bucket;
+            behaviorBucket            = l_deftemplate->header.name->bucket;
+            behaviorNameBucket        = l_deftemplate->slotList->slotName->bucket;
             //m_vote                    = l_deftemplate->slotList->next->slotName->bucket;
             //m_voteOnIncomingMissile   = l_deftemplate->slotList->next->next->slotName->bucket;
             //m_voteOnCriticalAltitude  = l_deftemplate->slotList->next->next->next->slotName->bucket;
             //m_criticalAltitude        = l_deftemplate->slotList->next->next->next->next->slotName->bucket;
-            m_optParamsBucket           = l_deftemplate->slotList->next->next->next->next->next->slotName->bucket;
-            m_optPairStreamBucket       = l_deftemplate->slotList->next->next->next->next->next->next->slotName->bucket;
+            optParamsBucket           = l_deftemplate->slotList->next->next->next->next->next->slotName->bucket;
+            optPairStreamBucket       = l_deftemplate->slotList->next->next->next->next->next->next->slotName->bucket;
             l_deftemplate = nullptr;
         }
 
         l_deftemplate = static_cast<deftemplate*>(FindDeftemplate("remover"));
         if (l_deftemplate != nullptr) {
-            m_removeBucket = l_deftemplate->header.name->bucket;
+            removeBucket = l_deftemplate->header.name->bucket;
             l_deftemplate = nullptr;
         }
     }
@@ -197,77 +205,77 @@ void ClipsArbiter::trimChangeValidation(base::ubf::Action* const complexAction)
 //
 void ClipsArbiter::assertFacts( const base::ubf::State* state )
 {
-    char l_str[ 1024 ] = {0};
+    char l_str[1024] = {0};
     const oe::behaviors::PlaneState* l_state = dynamic_cast<const oe::behaviors::PlaneState*>(state);
 
-    sprintf_s(l_str, "(assert (is-alive %s))",                 ( l_state->isAlive() == true )              ? ( "yes" ) : ( "no" ) );
+    std::sprintf(l_str, "(assert (is-alive %s))", ( l_state->isAlive() == true ) ? ( "yes" ) : ( "no" ) );
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (roll-is %f))",                  l_state->getRoll());
+    std::sprintf(l_str, "(assert (roll-is %f))", l_state->getRoll());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (pitch-is %f))",                 l_state->getPitch());
+    std::sprintf(l_str, "(assert (pitch-is %f))", l_state->getPitch());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (heading-is %f))",               l_state->getHeading());
+    std::sprintf(l_str, "(assert (heading-is %f))", l_state->getHeading());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (roll-rate-is %f))",             l_state->getRollRate());
+    std::sprintf(l_str, "(assert (roll-rate-is %f))", l_state->getRollRate());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (pitch-rate-is %f))",            l_state->getPitchRate());
+    std::sprintf(l_str, "(assert (pitch-rate-is %f))", l_state->getPitchRate());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (yaw-rate-is %f))",              l_state->getYawRate());
+    std::sprintf(l_str, "(assert (yaw-rate-is %f))", l_state->getYawRate());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (altitude-is %f))",              l_state->getAltitude());
+    std::sprintf(l_str, "(assert (altitude-is %f))", l_state->getAltitude());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (throttle-is %f))",              l_state->getThrottle());
+    std::sprintf(l_str, "(assert (throttle-is %f))", l_state->getThrottle());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (speed-is %f))",                 l_state->getSpeed());
+    std::sprintf(l_str, "(assert (speed-is %f))", l_state->getSpeed());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (pitch-trim-is %f))",            l_state->getPitchTrim());
+    std::sprintf(l_str, "(assert (pitch-trim-is %f))", l_state->getPitchTrim());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (num-tracks-is %d))",            l_state->getNumTracks());
+    std::sprintf(l_str, "(assert (num-tracks-is %d))", l_state->getNumTracks());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (is-tracking %s))",              ( l_state->isTracking() == true )           ? ( "yes" ) : ( "no" ) );
+    std::sprintf(l_str, "(assert (is-tracking %s))", ( l_state->isTracking() == true )           ? ( "yes" ) : ( "no" ) );
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (is-missile-fired %s))",         ( l_state->isMissileFired() == true )       ? ( "yes" ) : ( "no" ) );
+    std::sprintf(l_str, "(assert (is-missile-fired %s))", ( l_state->isMissileFired() == true )       ? ( "yes" ) : ( "no" ) );
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (target-track-is %d))",          l_state->getTargetTrack());
+    std::sprintf(l_str, "(assert (target-track-is %d))", l_state->getTargetTrack());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (num-engines-is %d))",           l_state->getNumEngines());
+    std::sprintf(l_str, "(assert (num-engines-is %d))", l_state->getNumEngines());
     clipsCppEnv->Eval(l_str);
 
-    sprintf_s(l_str, "(assert (is-incoming-missile %s))",      ( l_state->isIncomingMissile() == true )    ? ( "yes" ) : ( "no" ) );
+    std::sprintf(l_str, "(assert (is-incoming-missile %s))", ( l_state->isIncomingMissile() == true )    ? ( "yes" ) : ( "no" ) );
     clipsCppEnv->Eval(l_str);
 
-    if ( l_state -> isTracking() && l_state -> getTargetTrack() < l_state->getNumTracks()) {
-        sprintf_s(l_str, "(assert (pitch-to-tracked-is %f))",      l_state->getPitchToTracked( l_state->getTargetTrack()));
+    if (l_state->isTracking() && l_state -> getTargetTrack() < l_state->getNumTracks()) {
+        std::sprintf(l_str, "(assert (pitch-to-tracked-is %f))", l_state->getPitchToTracked( l_state->getTargetTrack()));
         clipsCppEnv->Eval(l_str);
 
-        sprintf_s(l_str, "(assert (heading-to-tracked-is %f))",    l_state->getHeadingToTracked( l_state->getTargetTrack()));
+        std::sprintf(l_str, "(assert (heading-to-tracked-is %f))", l_state->getHeadingToTracked( l_state->getTargetTrack()));
         clipsCppEnv->Eval(l_str);
 
-        sprintf_s(l_str, "(assert (distance-to-tracked-is %f))",   l_state->getDistanceToTracked( l_state->getTargetTrack()));
+        std::sprintf(l_str, "(assert (distance-to-tracked-is %f))", l_state->getDistanceToTracked( l_state->getTargetTrack()));
         clipsCppEnv->Eval(l_str);
     } else {
-        sprintf_s(l_str, "(assert (pitch-to-tracked-is %f))",      0);
+        std::sprintf(l_str, "(assert (pitch-to-tracked-is %f))", 0.0);
         clipsCppEnv->Eval(l_str);
 
-        sprintf_s(l_str, "(assert (heading-to-tracked-is %f))",    0);
+        std::sprintf(l_str, "(assert (heading-to-tracked-is %f))", 0.0);
         clipsCppEnv->Eval(l_str);
 
-        sprintf_s(l_str, "(assert (distance-to-tracked-is %f))",   0);
+        std::sprintf(l_str, "(assert (distance-to-tracked-is %f))", 0.0);
         clipsCppEnv->Eval(l_str);
     }
 }
@@ -298,7 +306,7 @@ void ClipsArbiter::getFacts()
                 field = GetMFValue(multifieldPtr, i);
                 l_fact = static_cast<struct fact*>(field);
 
-                if (l_fact->whichDeftemplate->header.name->bucket == m_behaviorBucket) {
+                if (l_fact->whichDeftemplate->header.name->bucket == behaviorBucket) {
                     if (l_fact->whichDeftemplate->implied == 0) {
                         struct field* sublist = nullptr;
                         struct deftemplate* theDeftemplate = nullptr;
@@ -312,7 +320,7 @@ void ClipsArbiter::getFacts()
                         for (int k = 0; k < theDeftemplate->numberOfSlots; k++) {
                             base::Object* l_param = nullptr;
                             // Behavior
-                            if (slotPtr->slotName->bucket == m_behaviorNameBucket) {
+                            if (slotPtr->slotName->bucket == behaviorNameBucket) {
                                 l_bhv = nullptr;
                                 if (l_bhv == nullptr) {
                                     l_bhv =  behaviors::factory(ValueToString(sublist[k].value));
@@ -370,11 +378,11 @@ void ClipsArbiter::getFacts()
                                                         break;
                                                     }
                                                 }
-                                                    
-                                                if (slotPtr->slotName->bucket == m_optParamsBucket) {
+
+                                                if (slotPtr->slotName->bucket == optParamsBucket) {
                                                     l_bhv->setSlotByName(ValueToString(l_multifield->theFields[l].value), l_pairobj);
                                                     l_param = nullptr;
-                                                } else if (slotPtr->slotName->bucket == m_optPairStreamBucket ) {
+                                                } else if (slotPtr->slotName->bucket == optPairStreamBucket ) {
                                                     l_pair = new base::Pair( ValueToString(l_multifield->theFields[l].value ), l_pairobj);
                                                     static_cast<base::PairStream*>(l_param)->addTail(l_pair);
                                                 }
@@ -391,12 +399,12 @@ void ClipsArbiter::getFacts()
                                 if (l_param != nullptr) {
                                     l_bhv->setSlotByName(slotPtr->slotName->contents, l_param);
                                 }
-                            } 
+                            }
                             slotPtr = slotPtr->next;
                         }
                         addBehavior(static_cast<base::ubf::Behavior*>(l_bhv));
                     }
-                } else if (l_fact->whichDeftemplate->header.name->bucket == m_removeBucket) {
+                } else if (l_fact->whichDeftemplate->header.name->bucket == removeBucket) {
                     clearBehaviors();
                 }
                 Retract(l_fact);
@@ -407,4 +415,3 @@ void ClipsArbiter::getFacts()
 
 }
 }
-

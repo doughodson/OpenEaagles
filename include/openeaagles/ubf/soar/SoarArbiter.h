@@ -37,9 +37,9 @@ class SoarArbiter : public oe::base::ubf::Arbiter
 
 public:
     SoarArbiter();
-    
-    base::ubf::Action* genAction(const base::ubf::State* const state, const double dt);
-    base::ubf::Action* genComplexAction(base::List* const actionSet);
+
+    base::ubf::Action* genAction(const base::ubf::State* const state, const double dt) override;
+    base::ubf::Action* genComplexAction(base::List* const actionSet) override;
     void trimChangeValidation(base::ubf::Action* const complexAction);
 
     void Commit(const base::ubf::State* const state);
