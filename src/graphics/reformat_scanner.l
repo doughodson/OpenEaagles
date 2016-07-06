@@ -37,7 +37,7 @@
 %option nounistd
 
 /* change the name of the scanner class - results in "rfFlexLexer" */
-%option prefix="rf" 
+%option prefix="rf"
 
 /* derived 'oe::graphics::ReformatScanner' is a subclass of rfFlexLexer */
 %option yyclass="oe::graphics::ReformatScanner"
@@ -115,8 +115,8 @@ int ReformatScanner::yylex(const DataType dt)
 int ReformatScanner::processInteger(const char* text, const int len)
 {
    switch (dataType) {
-   case number:			// We're looking for a number, 
-   case hex:			//   a Hexadecimal number, or 
+   case number:			// We're looking for a number,
+   case hex:			//   a Hexadecimal number, or
    case octal:			//   an Octal number.
       break;
    default:			// No, we didn't want any of these
@@ -158,7 +158,7 @@ int ReformatScanner::processInteger(const char* text, const int len)
    }
 
 
-// ---   
+// ---
 // Build the format statement
 // ---
 
@@ -248,7 +248,7 @@ int ReformatScanner::processFloat(const char* text, const int len)
    }
 
 
-// ---   
+// ---
 // Build the format statement
 // ---
 
@@ -365,7 +365,7 @@ int ReformatScanner::processTime(const TimeReadout::TimeMode tm, const char* tex
 
    int sr = 0;
 
-   // A decimal point is optional with seconds 
+   // A decimal point is optional with seconds
    if (text[i] == '.') {
       i++;
 
@@ -620,24 +620,24 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
 // formatError() -- process an error
 //    Display the error to wherever lex wants it and return invalid (0).
 //------------------------------------------------------------------------------
-int ReformatScanner::formatError(const char* text) const
+int ReformatScanner::formatError(const char* text)
 {
    switch (dataType) {
    case hex:
    case octal:
-      *yyout << "error: " << text << " is an invalid integer format." << std::endl;
+      yyout << "error: " << text << " is an invalid integer format." << std::endl;
       break;
    case number:
-      *yyout << "error: " << text << " is an invalid number format." << std::endl;
+      yyout << "error: " << text << " is an invalid number format." << std::endl;
       break;
    case time:
-      *yyout << "error: " << text << " is an invalid time format." << std::endl;
+      yyout << "error: " << text << " is an invalid time format." << std::endl;
       break;
    case dir:
-      *yyout << "error: " << text << " is an invalid degree format." << std::endl;
+      yyout << "error: " << text << " is an invalid degree format." << std::endl;
       break;
    default:
-      *yyout << "error in formatError" << std::endl;
+      yyout << "error in formatError" << std::endl;
       break;
    }
 
@@ -651,7 +651,7 @@ int ReformatScanner::formatError(const char* text) const
 ReformatScanner::DataType ReformatScanner::convertNumber(const char* s)
 {
    std::istringstream str(s);
-   yyin = &str;
+   yyin.rdbuf(str.rdbuf());
    yyrestart(yyin);
    return DataType(yylex(number));
 }
@@ -662,7 +662,7 @@ ReformatScanner::DataType ReformatScanner::convertNumber(const char* s)
 ReformatScanner::DataType ReformatScanner::convertOctal(const char* s)
 {
    std::istringstream str(s);
-   yyin = &str;
+   yyin.rdbuf(str.rdbuf());
    yyrestart(yyin);
    return DataType(yylex(octal));
 }
@@ -673,7 +673,7 @@ ReformatScanner::DataType ReformatScanner::convertOctal(const char* s)
 ReformatScanner::DataType ReformatScanner::convertHex(const char* s)
 {
    std::istringstream str(s);
-   yyin = &str;
+   yyin.rdbuf(str.rdbuf());
    yyrestart(yyin);
    return DataType(yylex(hex));
 }
@@ -685,7 +685,7 @@ ReformatScanner::DataType ReformatScanner::convertHex(const char* s)
 TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
 {
    std::istringstream str(s);
-   yyin = &str;
+   yyin.rdbuf(str.rdbuf());
    yyrestart(yyin);
    return TimeReadout::TimeMode(yylex(time));
 }
@@ -697,12 +697,10 @@ TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
 DirectionReadout::DirMode ReformatScanner::convertDirection(const char* s)
 {
    std::istringstream str(s);
-   yyin = &str;
+   yyin.rdbuf(str.rdbuf());
    yyrestart(yyin);
    return DirectionReadout::DirMode(yylex(dir));
 }
 
 }
 }
-
-
