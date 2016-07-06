@@ -51,8 +51,6 @@
 /* derived 'oe::base::EdlScanner' is a subclass of edlFlexLexer */
 %option yyclass="oe::base::EdlScanner"
 
-
-
 D           [0-9]
 L           [a-zA-Z0-9~!@#$%^&*\-_+=<>?/]
 H           [a-fA-F0-9]
@@ -64,85 +62,126 @@ LN          line
 
 %%
 
-        // cpp commands that change line number and file name
-        // for examples:  # 21 "test.cf"
-        //                #line 21 "test.cf"
-[#]{LN}?[ ]+{D}+[ ]+\"(\\.|[^\\"])*\".*$    {
-            char* i1 = std::strchr(yytext,'\"');
-            char* i2 = std::strrchr(yytext,'\"');
-            char* j1 = std::strchr(yytext,' ');
-            *i1 = '\0';
-            *i2 = '\0';
-            line = std::atoi(j1+1) - 1;
-            utStrcpy(fname, FNAME_SIZE, i1+1);
-            break;
+[#]{LN}?[ ]+{D}+[ ]+\"(\\.|[^\\"])*\".*$ {
+           //-----------------------------------------------------------------------------
+           // Use C preprocessor inserted text to cue filename and line number information
+           // # linenum filename flags
+           // after filename, there comes zero or more flags '1', '2', '3' or '4'
+           // Meaning of flags:
+           //      '1' = indicates the start of new file
+           //      '2' = indicates the returning to a file (after having included another file)
+           //      '3' = indicates the following text comes from a system header file
+           //      '4' = indicates the following text should be treated as being wrapped
+           //            in an inplicit extern "C" block
+           //
+           // For examples  # 21 "test.cf"    -- means line 21 of test.cf
+           //-----------------------------------------------------------------------------
+           char* i1 = std::strchr(yytext,'\"');     // looking for first quote (")
+           char* i2 = std::strrchr(yytext,'\"');    // looking for last quote (")
+           char* j1 = std::strchr(yytext,' ');      // looking for first space
+           *i1 = '\0';                              // replace both quotes with 0
+           *i2 = '\0';
+           line = std::atoi(j1+1) - 1;              // determine line number
+           utStrcpy(fname, FNAME_SIZE, i1+1);
+           break;
         }
 
-
-[/][/].*$   { // ignore C++ like comments
-            line++;
-            break;
+[/][/].*$  {
+           //-----------------------------------------------------------------------------
+           // ignore C++ like comments
+           //-----------------------------------------------------------------------------
+           break;
         }
 
-\\\n    { // ignore backslashes at end of lines
-            line++;
-            break;
+\\\n    {
+           //-----------------------------------------------------------------------------
+           // ignore backslashes at end of lines
+           //-----------------------------------------------------------------------------
+           line++;
+           break;
         }
 
-\n      { // count line numbers
-            line++;
-            break;
+\n      {
+           //-----------------------------------------------------------------------------
+           // count line numbers
+           //-----------------------------------------------------------------------------
+           line++;
+           break;
         }
 
-[ ,\t\v\f]  { // ignore white characters
-        break;
-    }
-
-[(){}\[\]]  { // special characters
-            return *yytext;
+[ ,\t\v\f]  {
+           //-----------------------------------------------------------------------------
+           // ignore white characters
+           //-----------------------------------------------------------------------------
+           break;
         }
 
-true    { // Boolean constant: true
-            yylval.bval = true;
-            return BOOLconstant;
+[(){}\[\]]  {
+           //-----------------------------------------------------------------------------
+           // special characters
+           //-----------------------------------------------------------------------------
+           return *yytext;
         }
 
-TRUE    { // Boolean constant: true
-            yylval.bval = true;
-            return BOOLconstant;
+true    {
+           //-----------------------------------------------------------------------------
+           // Boolean constant: true
+           //-----------------------------------------------------------------------------
+           yylval.bval = true;
+           return BOOLconstant;
         }
 
-false   { // Boolean constant: false
-            yylval.bval = false;
-            return BOOLconstant;
+TRUE    {
+           //-----------------------------------------------------------------------------
+           // Boolean constant: true
+           //-----------------------------------------------------------------------------
+           yylval.bval = true;
+           return BOOLconstant;
         }
 
-FALSE   { // Boolean constant: false
-            yylval.bval = false;
-            return BOOLconstant;
+false   {
+           //-----------------------------------------------------------------------------
+           // Boolean constant: false
+           //-----------------------------------------------------------------------------
+           yylval.bval = false;
+           return BOOLconstant;
         }
 
-0[xX]{H}+{IS}? { // decode hex into integer: 0Xnnn
-            bool nflg = false;
-            char cbuf[64];
-            utStrcpy(cbuf, sizeof(cbuf), yytext);
-            if (std::strlen(cbuf) == 10) {
-               if (cbuf[2] == '8') { cbuf[2] = '0'; nflg = true; }
-               if (cbuf[2] == '9') { cbuf[2] = '1'; nflg = true; }
-               if (cbuf[2] == 'a' || cbuf[2] == 'A') { cbuf[2] = '2'; nflg = true; }
-               if (cbuf[2] == 'b' || cbuf[2] == 'B') { cbuf[2] = '3'; nflg = true; }
-               if (cbuf[2] == 'c' || cbuf[2] == 'C') { cbuf[2] = '4'; nflg = true; }
-               if (cbuf[2] == 'd' || cbuf[2] == 'D') { cbuf[2] = '5'; nflg = true; }
-               if (cbuf[2] == 'e' || cbuf[2] == 'E') { cbuf[2] = '6'; nflg = true; }
-               if (cbuf[2] == 'f' || cbuf[2] == 'F') { cbuf[2] = '7'; nflg = true; }
-            }
-            long ii = std::strtol(cbuf, 0, 16);
-            if (nflg) ii = (ii | 0x80000000);
-            yylval.lval = ii;
-            return INTEGERconstant;
+FALSE   {
+           //-----------------------------------------------------------------------------
+           // Boolean constant: false
+           //-----------------------------------------------------------------------------
+           yylval.bval = false;
+           return BOOLconstant;
         }
 
-0{D}+{IS}?  { // decode octal into integer: 0nnn
+0[xX]{H}+{IS}? {
+           //-----------------------------------------------------------------------------
+           // decode hex into integer: 0Xnnn
+           //-----------------------------------------------------------------------------
+           bool nflg = false;
+           char cbuf[64];
+           utStrcpy(cbuf, sizeof(cbuf), yytext);
+           if (std::strlen(cbuf) == 10) {
+              if (cbuf[2] == '8') { cbuf[2] = '0'; nflg = true; }
+              if (cbuf[2] == '9') { cbuf[2] = '1'; nflg = true; }
+              if (cbuf[2] == 'a' || cbuf[2] == 'A') { cbuf[2] = '2'; nflg = true; }
+              if (cbuf[2] == 'b' || cbuf[2] == 'B') { cbuf[2] = '3'; nflg = true; }
+              if (cbuf[2] == 'c' || cbuf[2] == 'C') { cbuf[2] = '4'; nflg = true; }
+              if (cbuf[2] == 'd' || cbuf[2] == 'D') { cbuf[2] = '5'; nflg = true; }
+              if (cbuf[2] == 'e' || cbuf[2] == 'E') { cbuf[2] = '6'; nflg = true; }
+              if (cbuf[2] == 'f' || cbuf[2] == 'F') { cbuf[2] = '7'; nflg = true; }
+           }
+           long ii = std::strtol(cbuf, 0, 16);
+           if (nflg) ii = (ii | 0x80000000);
+           yylval.lval = ii;
+           return INTEGERconstant;
+        }
+
+0{D}+{IS}?  {
+           //-----------------------------------------------------------------------------
+           // decode octal into integer: 0nnn
+           //-----------------------------------------------------------------------------
            bool nflg = false;
            char cbuf[64];
            utStrcpy(cbuf, sizeof(cbuf), yytext);
@@ -156,69 +195,88 @@ FALSE   { // Boolean constant: false
            return INTEGERconstant;
         }
 
-
-[+-]?{D}+{IS}? { // standard integer
-            yylval.lval = std::atoi(yytext);
-            return INTEGERconstant;
+[+-]?{D}+{IS}? {
+           //-----------------------------------------------------------------------------
+           // standard integer
+           //-----------------------------------------------------------------------------
+           yylval.lval = std::atoi(yytext);
+           return INTEGERconstant;
         }
 
-
-[+-]?{D}+{E}{FS}? { // floating point format
-            yylval.dval = std::atof(yytext);
-            return FLOATINGconstant;
+[+-]?{D}+{E}{FS}? {
+           //-----------------------------------------------------------------------------
+           // floating point format
+           //-----------------------------------------------------------------------------
+           yylval.dval = std::atof(yytext);
+           return FLOATINGconstant;
         }
 
-
-[+-]?{D}*"."{D}+({E})?{FS}? { // floating point format
-            yylval.dval = std::atof(yytext);
-            return FLOATINGconstant;
+[+-]?{D}*"."{D}+({E})?{FS}? {
+           //-----------------------------------------------------------------------------
+           // floating point format
+           //---------------------------------------------------------------------------*/
+           yylval.dval = std::atof(yytext);
+           return FLOATINGconstant;
         }
 
-
-[+-]?{D}+"."{D}*({E})?{FS}? { // floating point format
-            yylval.dval = std::atof(yytext);
-            return FLOATINGconstant;
+[+-]?{D}+"."{D}*({E})?{FS}? {
+           //-----------------------------------------------------------------------------
+           // floating point format
+           //---------------------------------------------------------------------------*/
+           yylval.dval = std::atof(yytext);
+           return FLOATINGconstant;
         }
 
-
-\"(\\.|[^\\"])*\"   { // literal string (i.e., in double quotes): "hi there"
-            /* return STRING without quotes */
-            size_t slen = std::strlen(yytext)+1;
-            yylval.cvalp = new char[slen];
-            utStrcpy(yylval.cvalp,slen,yytext+1);
-            yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
-            return STRING_LITERAL;
+\"(\\.|[^\\"])*\"   {
+           //-----------------------------------------------------------------------------
+           // literal string (i.e., in double quotes): "hi there"
+           // return STRING without quotes
+           //-----------------------------------------------------------------------------
+           size_t slen = std::strlen(yytext)+1;
+           yylval.cvalp = new char[slen];
+           utStrcpy(yylval.cvalp,slen,yytext+1);
+           yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
+           return STRING_LITERAL;
         }
 
-\<(\\.|[^\\"])*\>   { // literal string (i.e., in brackets): <hi there>
-            /* return STRING without quotes */
-            size_t slen = std::strlen(yytext)+1;
-            yylval.cvalp = new char[slen];
-            utStrcpy(yylval.cvalp,slen,yytext+1);
-            yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
-            return STRING_LITERAL;
+\<(\\.|[^\\"])*\>   {
+           //-----------------------------------------------------------------------------
+           // literal string (i.e., in brackets): <hi there>
+           // return STRING without quotes
+           //-----------------------------------------------------------------------------
+           size_t slen = std::strlen(yytext)+1;
+           yylval.cvalp = new char[slen];
+           utStrcpy(yylval.cvalp,slen,yytext+1);
+           yylval.cvalp[strlen(yylval.cvalp)-1] = 0;
+           return STRING_LITERAL;
         }
 
-
-{L}+[:] { // slot-id is one or more legal characters followed by a ':'
-            size_t slen = std::strlen(yytext)+1;
-            yylval.cvalp = new char[slen];
-            utStrcpy(yylval.cvalp,slen,yytext);
-            yylval.cvalp[strlen(yylval.cvalp)-1] = 0; // remove the :
-            return SLOT_ID;
+{L}+[:] {
+           //-----------------------------------------------------------------------------
+           // slot-id is one or more legal characters followed by a ':'
+           //-----------------------------------------------------------------------------
+           size_t slen = std::strlen(yytext)+1;
+           yylval.cvalp = new char[slen];
+           utStrcpy(yylval.cvalp,slen,yytext);
+           yylval.cvalp[strlen(yylval.cvalp)-1] = 0; // remove the :
+           return SLOT_ID;
         }
 
-
-{L}+    { // ident: one or more legal characters
-            size_t slen = std::strlen(yytext)+1;
-            yylval.cvalp = new char[slen];
-            utStrcpy(yylval.cvalp,slen,yytext);
-            return IDENT;
+{L}+    {
+           //-----------------------------------------------------------------------------
+           // ident: one or more legal characters
+           //-----------------------------------------------------------------------------
+           size_t slen = std::strlen(yytext)+1;
+           yylval.cvalp = new char[slen];
+           utStrcpy(yylval.cvalp,slen,yytext);
+           return IDENT;
         }
 
-
-.       { // ignore all other characters
-            break;
+.       {
+           //-----------------------------------------------------------------------------
+           // ignore all other characters
+           //-----------------------------------------------------------------------------
+           break;
         }
 
 %%

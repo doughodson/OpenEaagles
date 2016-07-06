@@ -9,6 +9,14 @@ General framework-wide changes and improvements
 --------------------------------------------------------------------------------
 base library
 
+   edl_scanner.l
+      -- fixed minor bug in scanner that double counted lines with C++
+         comments.
+
+   edl_parser.y
+      -- improved error message displayed then the scanner does not have a known
+         input filename.  The scanner determines filenames using c-preprocessor
+         symbols included in output files (e.g., # 21 "test.cf")
 
 --------------------------------------------------------------------------------
 dafif library
