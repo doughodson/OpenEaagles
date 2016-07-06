@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.2.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.2"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -104,7 +104,12 @@ inline int yylex()
 //------------------------------------------------------------------------------
 inline void yyerror(const char* s)
 {
-   std::cerr << scanner->getFilename() << ", line ";
+   std::string filename(scanner->getFilename());
+   if (filename.empty()) {
+      std::cerr << "At line ";
+   } else {
+      std::cerr << "In " << filename << ", line ";
+   }
    std::cerr << scanner->getLineNumber() << ": ";
    std::cerr << s << std::endl;
    err_count++;
@@ -150,7 +155,7 @@ static oe::base::Object* parse(const std::string& name, oe::base::PairStream* ar
 }
 
 
-#line 154 "EdlParser.cpp" /* yacc.c:339  */
+#line 159 "EdlParser.cpp" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -196,10 +201,10 @@ extern int yydebug;
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
-#line 108 "edl_parser.y" /* yacc.c:355  */
+#line 113 "edl_parser.y" /* yacc.c:355  */
 
    double                     dval;
    long                       lval;
@@ -211,8 +216,10 @@ union YYSTYPE
    oe::base::List*            lvalp;
    oe::base::Number*          nvalp;
 
-#line 215 "EdlParser.cpp" /* yacc.c:355  */
+#line 220 "EdlParser.cpp" /* yacc.c:355  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -226,7 +233,7 @@ int yyparse (void);
 
 /* Copy the second part of user declarations.  */
 
-#line 230 "EdlParser.cpp" /* yacc.c:358  */
+#line 237 "EdlParser.cpp" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -524,9 +531,9 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   139,   139,   140,   143,   145,   157,   168,   172,   174,
-     178,   179,   182,   183,   184,   185,   186,   189,   190,   193,
-     194
+       0,   144,   144,   145,   148,   150,   162,   173,   177,   179,
+     183,   184,   187,   188,   189,   190,   191,   194,   195,   198,
+     199
 };
 #endif
 
@@ -1313,25 +1320,25 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 139 "edl_parser.y" /* yacc.c:1646  */
+#line 144 "edl_parser.y" /* yacc.c:1646  */
     { result = (yyvsp[0].ovalp); }
-#line 1319 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1326 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 140 "edl_parser.y" /* yacc.c:1646  */
+#line 145 "edl_parser.y" /* yacc.c:1646  */
     { if ((yyvsp[0].ovalp) != 0) { result = new oe::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); } }
-#line 1325 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1332 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 143 "edl_parser.y" /* yacc.c:1646  */
+#line 148 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.svalp) = new oe::base::PairStream(); }
-#line 1331 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1338 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 145 "edl_parser.y" /* yacc.c:1646  */
+#line 150 "edl_parser.y" /* yacc.c:1646  */
     { if ((yyvsp[0].ovalp) != 0) {
                                         int i = (yyvsp[-1].svalp)->entries();
                                         char cbuf[20];
@@ -1343,11 +1350,11 @@ yyreduce:
                                         (yyval.svalp) = (yyvsp[-1].svalp);
                                       }
                                     }
-#line 1347 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1354 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 157 "edl_parser.y" /* yacc.c:1646  */
+#line 162 "edl_parser.y" /* yacc.c:1646  */
     {
                                     int i = (yyvsp[-1].svalp)->entries();
                                     char cbuf[20];
@@ -1358,95 +1365,95 @@ yyreduce:
                                     p->unref();
                                     (yyval.svalp) = (yyvsp[-1].svalp);
                                     }
-#line 1362 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1369 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 168 "edl_parser.y" /* yacc.c:1646  */
+#line 173 "edl_parser.y" /* yacc.c:1646  */
     { (yyvsp[-1].svalp)->put((yyvsp[0].pvalp)); (yyvsp[0].pvalp)->unref(); (yyval.svalp) = (yyvsp[-1].svalp); }
-#line 1368 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1375 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 172 "edl_parser.y" /* yacc.c:1646  */
+#line 177 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.ovalp) = parse((yyvsp[-2].cvalp), (yyvsp[-1].svalp)); delete[] (yyvsp[-2].cvalp); (yyvsp[-1].svalp)->unref(); }
-#line 1374 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1381 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 174 "edl_parser.y" /* yacc.c:1646  */
+#line 179 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.ovalp) = (oe::base::Object*) (yyvsp[-1].svalp); }
-#line 1380 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1387 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 178 "edl_parser.y" /* yacc.c:1646  */
+#line 183 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.pvalp) = new oe::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
-#line 1386 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1393 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 179 "edl_parser.y" /* yacc.c:1646  */
+#line 184 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.pvalp) = new oe::base::Pair((yyvsp[-1].cvalp), (yyvsp[0].ovalp)); delete[] (yyvsp[-1].cvalp); (yyvsp[0].ovalp)->unref(); }
-#line 1392 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1399 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 182 "edl_parser.y" /* yacc.c:1646  */
+#line 187 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.ovalp) = new oe::base::String((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
-#line 1398 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1405 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 183 "edl_parser.y" /* yacc.c:1646  */
+#line 188 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.ovalp) = new oe::base::Identifier((yyvsp[0].cvalp)); delete[] (yyvsp[0].cvalp); }
-#line 1404 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1411 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 184 "edl_parser.y" /* yacc.c:1646  */
+#line 189 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.ovalp) = new oe::base::Boolean((yyvsp[0].bval)); }
-#line 1410 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1417 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 185 "edl_parser.y" /* yacc.c:1646  */
+#line 190 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.ovalp) = (yyvsp[-1].lvalp); }
-#line 1416 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1423 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 186 "edl_parser.y" /* yacc.c:1646  */
+#line 191 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.ovalp) = (yyvsp[0].nvalp); }
-#line 1422 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1429 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 189 "edl_parser.y" /* yacc.c:1646  */
+#line 194 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.lvalp) = new oe::base::List(); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
-#line 1428 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1435 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 190 "edl_parser.y" /* yacc.c:1646  */
+#line 195 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.lvalp) = (yyvsp[-1].lvalp); (yyval.lvalp)->put((yyvsp[0].nvalp)); (yyvsp[0].nvalp)->unref(); }
-#line 1434 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1441 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 193 "edl_parser.y" /* yacc.c:1646  */
+#line 198 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.nvalp) = new oe::base::Integer((yyvsp[0].lval)); }
-#line 1440 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1447 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 194 "edl_parser.y" /* yacc.c:1646  */
+#line 199 "edl_parser.y" /* yacc.c:1646  */
     { (yyval.nvalp) = new oe::base::Float((yyvsp[0].dval)); }
-#line 1446 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1453 "EdlParser.cpp" /* yacc.c:1646  */
     break;
 
 
-#line 1450 "EdlParser.cpp" /* yacc.c:1646  */
+#line 1457 "EdlParser.cpp" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1674,7 +1681,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 196 "edl_parser.y" /* yacc.c:1906  */
+#line 201 "edl_parser.y" /* yacc.c:1906  */
 
 
 namespace oe {

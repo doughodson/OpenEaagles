@@ -57,7 +57,12 @@ inline int yylex()
 //------------------------------------------------------------------------------
 inline void yyerror(const char* s)
 {
-   std::cerr << scanner->getFilename() << ", line ";
+   std::string filename(scanner->getFilename());
+   if (filename.empty()) {
+      std::cerr << "At line ";
+   } else {
+      std::cerr << "In " << filename << ", line ";
+   }
    std::cerr << scanner->getLineNumber() << ": ";
    std::cerr << s << std::endl;
    err_count++;
