@@ -72,7 +72,7 @@ public:
 	virtual struct yy_buffer_state*
 		yy_create_buffer( FLEX_STD istream& s, int size ) = 0;
 	virtual void yy_delete_buffer( struct yy_buffer_state* b ) = 0;
-	virtual void yyrestart( FLEX_STD istream* s ) = 0;	
+	virtual void yyrestart( FLEX_STD istream* s ) = 0;
 	virtual void yyrestart( FLEX_STD istream& s ) = 0;
 
 	virtual int yylex() = 0;
@@ -83,7 +83,7 @@ public:
 		switch_streams( new_in, new_out );
 		return yylex();
 	}
-	
+
 	int yylex( FLEX_STD istream* new_in, FLEX_STD ostream* new_out = 0)
 	{
 		switch_streams( new_in, new_out );
@@ -134,7 +134,7 @@ public:
 	virtual ~yyFlexLexer();
 
 	void yy_switch_to_buffer( struct yy_buffer_state* new_buffer );
-	struct yy_buffer_state* yy_create_buffer( FLEX_STD istream* s, int size );	
+	struct yy_buffer_state* yy_create_buffer( FLEX_STD istream* s, int size );
 	struct yy_buffer_state* yy_create_buffer( FLEX_STD istream& s, int size );
 	void yy_delete_buffer( struct yy_buffer_state* b );
 	void yyrestart( FLEX_STD istream* s );
@@ -222,4 +222,3 @@ protected:
 }
 
 #endif // yyFlexLexer || ! yyFlexLexerOnce
-

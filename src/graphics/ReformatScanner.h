@@ -47,7 +47,7 @@ protected:
    int processTime(const TimeReadout::TimeMode tm, const char* text, const int len);
    int processDirection(const DirectionReadout::DirMode dm, const char* text, const int len);
 
-   int formatError(const char* text) const;
+   int formatError(const char* text);
 
 private:
    DataType dataType;
@@ -60,4 +60,3 @@ private:
 }
 
 #endif
-
