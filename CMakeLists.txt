@@ -17,7 +17,7 @@ set (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 # TODO: Provide warning switch guards to silence excessive warnings
 if (UNIX)
-  set (CMAKE_CXX_FLAGS "-g -O2 -fPIC -pthread -Wno-long-long")
+  set (CMAKE_CXX_FLAGS "-std=c++11 -g -O2 -fPIC -pthread -Wno-long-long")
 endif ()
 
 
