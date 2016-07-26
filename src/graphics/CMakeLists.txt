@@ -1,8 +1,8 @@
 
 # Find third-party dependencies
 #include (UseGLUT)
-#include (UseFreetype)
-#include (UseFTGL)
+include (UseFreetype)
+include (UseFTGL)
 
 file(GLOB sources
   "*.cpp"
