@@ -16,8 +16,11 @@ set (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/bin)
 set (LIBRARY_OUTPUT_PATH ${PROJECT_BINARY_DIR}/lib)
 
 # TODO: Provide warning switch guards to silence excessive warnings
-#set (CMAKE_CXX_FLAGS "-g -O2 -fPIC -pthread -Wno-long-long")
- 
+if (UNIX)
+  set (CMAKE_CXX_FLAGS "-g -O2 -fPIC -pthread -Wno-long-long")
+endif ()
+
+
 include_directories (${OE_INCLUDE_DIR})
 link_directories (${LIBRARY_OUTPUT_PATH}) 
 
