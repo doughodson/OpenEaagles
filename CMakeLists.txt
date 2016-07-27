@@ -15,7 +15,7 @@ if (WIN32)
   set (OE_3RD_PARTY_ROOT c:/oe/OpenEaagles3rdParty
     CACHE PATH "OpenEaagles 3rd Party directory")
 else()
-  set (OE_3RD_PARTY_ROOT /home/me/oe/oe_3rdparty
+  set (OE_3RD_PARTY_ROOT /home/me/oe/oe_3rdparty /usr/include
     CACHE PATH "OpenEaagles 3rd Party directory")
 endif()
 
