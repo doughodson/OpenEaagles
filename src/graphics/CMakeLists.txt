@@ -4,7 +4,11 @@
 #include (UseFreetype)
 #include (UseFTGL)
 
-include_directories (${OE_3RD_PARTY_INCLUDE} ${OE_3RD_PARTY_INCLUDE}/freetype2)
+if (WIN32)
+  include_directories (${OE_3RD_PARTY_INCLUDE} ${OE_3RD_PARTY_INCLUDE}/freetype2)
+else ()
+  include_directories (${OE_3RD_PARTY_INCLUDE} ${OE_3RD_PARTY_INCLUDE} /usr/include/freetype2 /usr/include)
+endif()
 
 file(GLOB_RECURSE sources "*.cpp")
 file(GLOB_RECURSE headers "../../include/openeaagles/graphics/*.h")
