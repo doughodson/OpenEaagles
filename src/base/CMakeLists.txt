@@ -24,4 +24,5 @@ endif ()
 file(GLOB_RECURSE headers "../../include/openeaagles/base/*.h")
 
 add_library (base ${sources} ${headers})
-
+set_target_properties(base PROPERTIES PREFIX "oe")
+set_target_properties (base PROPERTIES DEBUG_POSTFIX _d)
