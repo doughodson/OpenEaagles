@@ -15,7 +15,7 @@ if (WIN32)
   set (OE_3RD_PARTY_ROOT c:/oe/OpenEaagles3rdParty
     CACHE PATH "OpenEaagles 3rd Party directory")
 else()
-  set (OE_3RD_PARTY_ROOT ${CMAKE_SOURCE_DIR}/../oe_3rdparty
+  set (OE_3RD_PARTY_ROOT /home/me/oe/oe_3rdparty
     CACHE PATH "OpenEaagles 3rd Party directory")
 endif()
 
@@ -47,6 +47,16 @@ add_subdirectory (src/base)
 add_subdirectory (src/dafif)
 add_subdirectory (src/graphics)
 add_subdirectory (src/gui/glut)
+add_subdirectory (src/instruments)
+add_subdirectory (src/iodevice)
+add_subdirectory (src/linearsystem)
+add_subdirectory (src/maps/rpf)
+add_subdirectory (src/models)
+add_subdirectory (src/networks/dis)
+add_subdirectory (src/otw)
+add_subdirectory (src/recorder)
+add_subdirectory (src/simulation)
+add_subdirectory (src/terrain)
 
 
 message (STATUS "CMAKE_BINARY_DIR:         " ${CMAKE_BINARY_DIR})

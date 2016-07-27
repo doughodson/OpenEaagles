@@ -1,10 +1,7 @@
 
 include_directories (${OE_3RD_PARTY_INCLUDE})
 
-file(GLOB sources
-  "*.cpp"
-)
-
+file(GLOB_RECURSE sources "*.cpp")
 file(GLOB_RECURSE headers "../../../include/openeaagles/gui/glut/*.h")
 
 add_library (glut ${sources} ${headers})

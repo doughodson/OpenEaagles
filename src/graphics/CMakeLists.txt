@@ -6,10 +6,7 @@
 
 include_directories (${OE_3RD_PARTY_INCLUDE} ${OE_3RD_PARTY_INCLUDE}/freetype2)
 
-file(GLOB sources
-  "*.cpp"
-)
-
+file(GLOB_RECURSE sources "*.cpp")
 file(GLOB_RECURSE headers "../../include/openeaagles/graphics/*.h")
 
 add_library (graphics ${sources} ${headers})
