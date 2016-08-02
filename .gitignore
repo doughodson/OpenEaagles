@@ -7,6 +7,9 @@ vs2015/
 codeblocks/
 codelite/
 
+# lib directory
+lib/
+
 # vs runtime libs
 concrt*.dll
 msvcp*.dll
