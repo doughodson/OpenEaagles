@@ -47,7 +47,7 @@ print ("  Include   : "..HLALibPath)
 --
 locationPath  = "../" .. _ACTION
 if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
-  targetDirPath = "../../lib/".._ACTION
+  targetDirPath = "../../lib/"
 end
 print ("Target directory path: "..targetDirPath)
 
