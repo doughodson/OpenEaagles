@@ -18,7 +18,7 @@ namespace graphics {
 //------------------------------------------------------------------------------
 // Class: Field
 //
-// Description: Abstract Field class (not in the formFunc())
+// Description: Abstract Field class
 //
 // Factory name: Field
 // Slots:
@@ -172,7 +172,8 @@ namespace graphics {
 //
 //Comment section last modified: 2004.10.13 by MJK
 //------------------------------------------------------------------------------
-class Field : public Graphic {
+class Field : public Graphic
+{
    DECLARE_SUBCLASS(Field,Graphic)
 
 public:

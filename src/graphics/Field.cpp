@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: Field
-//------------------------------------------------------------------------------
+
 #include "openeaagles/graphics/Field.h"
 #include "openeaagles/graphics/Display.h"
 #include "openeaagles/graphics/Page.h"
@@ -14,7 +12,7 @@
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(Field,"Field")
+IMPLEMENT_SUBCLASS(Field, "Field")
 
 //------------------------------------------------------------------------------
 // Slot table
@@ -82,9 +80,6 @@ BEGIN_EVENT_HANDLER(Field)
     ON_EVENT_OBJ(SET_JUSTIFICATION,setSlotJustification,base::String)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Field::Field() : origStr(), inputExample(), str()
 {
     STANDARD_CONSTRUCTOR()
@@ -103,9 +98,6 @@ Field::Field() : origStr(), inputExample(), str()
     startCP = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Field::copyData(const Field& org, const bool)
 {
     BaseClass::copyData(org);
@@ -127,9 +119,6 @@ void Field::copyData(const Field& org, const bool)
     setSlotFont(org.fontName);
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Field::deleteData()
 {
     origStr.empty();
@@ -204,7 +193,6 @@ int Field::column() const
     return cp;
 }
 
-
 //------------------------------------------------------------------------------
 // withinField() -- Return True/False if cp,ln is in the field space
 //------------------------------------------------------------------------------
@@ -214,7 +202,6 @@ bool Field::withinField(const int l, const int c) const
     if ( (l == ln) && (c >= cp) && (c <= (cp + static_cast<int>(w) - 1)) ) stat = true;
     return stat;
 }
-
 
 //------------------------------------------------------------------------------
 // setText() -- set the field's text string
@@ -226,7 +213,6 @@ void Field::setText(const char newString[])
         adjust();
     }
 }
-
 
 //------------------------------------------------------------------------------
 // justification() --
@@ -242,7 +228,6 @@ base::String::Justify Field::justification(const base::String::Justify t)
     if (mode == display) adjust();
     return jmode;
 }
-
 
 //------------------------------------------------------------------------------
 // setMode() -- set the mode of the field (display, input)
@@ -281,8 +266,6 @@ Field::Mode Field::setMode(const Field::Mode nmode)
 
         }
     }
-
-
     return omode;
 }
 
@@ -297,7 +280,6 @@ bool Field::isValidInputPosition(const int tc)
     return (tc == '+' || tc == '0' || tc == '#' ||
             tc == 'D' || tc == 'H' || tc == 'M' || tc == 'S');
 }
-
 
 // filterInputEvent() -- Filter input events using a template character (tc)
 char Field::filterInputEvent(const int event, const int tc)
@@ -415,7 +397,6 @@ bool Field::onBackSpace()
     return true;
 }
 
-
 //------------------------------------------------------------------------------
 // cursor() -- Returns true if text cursor should be seen within this
 //             object and the position of the cursor.
@@ -433,7 +414,6 @@ bool Field::cursor(int* l, int* c) const
         return false;
     }
 }
-
 
 //------------------------------------------------------------------------------
 // drawFunc -- draw this text field
@@ -526,17 +506,10 @@ void Field::drawFunc()
 
 }
 
-
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Field
-//------------------------------------------------------------------------------
 base::Object* Field::getSlotByIndex(const int si)
 {
     return BaseClass::getSlotByIndex(si);
 }
-
 
 //------------------------------------------------------------------------------
 // setPosition() -- set position: [ Line Column ]
@@ -560,7 +533,6 @@ bool Field::setPosition(const base::List* const spobj)
     }
     return ok;
 }
-
 
 //------------------------------------------------------------------------------
 // setLine() --
@@ -697,7 +669,6 @@ bool Field::setSlotReversed(const base::Number* const srobj)
     return true;
 }
 
-
 //------------------------------------------------------------------------------
 // setSlotVertical() --
 //------------------------------------------------------------------------------
@@ -716,7 +687,6 @@ bool Field::setSlotVertical(const base::Number* const ssobj)
     }
     return true;
 }
-
 
 //------------------------------------------------------------------------------
 // setSlotBrackets() --
