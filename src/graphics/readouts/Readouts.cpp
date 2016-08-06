@@ -9,7 +9,7 @@
 #include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/util/constants.h"
 
-#include "ReformatScanner.h"
+#include "../ReformatScanner.h"
 
 #include <cstdio>
 #include <cstdlib>

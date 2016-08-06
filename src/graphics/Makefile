@@ -17,6 +17,7 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboegraphics.a
 
 OBJS =  \
+	readouts/Readouts.o \
 	BmpTexture.o \
 	BitmapFont.o \
 	Clip3D.o \
@@ -32,7 +33,6 @@ OBJS =  \
 	Material.o \
 	Page.o \
 	Polygon.o \
-	Readouts.o \
 	ReformatScanner.o \
 	Rotators.o \
 	Scanline.o \
