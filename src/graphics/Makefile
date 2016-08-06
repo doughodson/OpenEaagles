@@ -18,6 +18,7 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboegraphics.a
 
 OBJS =  \
 	readouts/Readouts.o \
+	readouts/ReformatScanner.o \
 	BmpTexture.o \
 	BitmapFont.o \
 	Clip3D.o \
@@ -33,7 +34,6 @@ OBJS =  \
 	Material.o \
 	Page.o \
 	Polygon.o \
-	ReformatScanner.o \
 	Rotators.o \
 	Scanline.o \
 	Shapes.o \
@@ -54,5 +54,6 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f readouts/*.o
 	-rm -f *.o
 	-rm -f $(LIB)
