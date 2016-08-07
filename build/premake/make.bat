@@ -12,9 +12,7 @@ rmdir /S /Q ..\vs2015
 rem
 rem delete old compiled libraries
 rem
-rmdir /S /Q ..\..\lib\mingw
-rmdir /S /Q ..\..\lib\vs2013
-rmdir /S /Q ..\..\lib\vs2015
+del ..\..\lib\*.lib
 rem
 rem create new solution/workspace files
 rem
