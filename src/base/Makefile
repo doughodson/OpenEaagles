@@ -5,6 +5,7 @@
 # dos2unix edl_parser.y
 # dos2unix edl_scanner.l
 # bison -d edl_parser.y -o EdlParser.cpp  // creates EdlParser.cpp and EdlParser.hpp
+# copy EdlParser.hpp to 'include/openeaagles/base'
 # flex -f -oEdlScanner.cpp edl_scanner.l  // creates EdlScanner.cpp (EdlScanner.h already exists)
 #
 # search for "FlexLexer.h" in EdlScanner.cpp - replace:

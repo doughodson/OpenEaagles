@@ -37,7 +37,7 @@
 #include "openeaagles/base/Pair.h"
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/List.h"
-#include "EdlScanner.h"
+#include "openeaagles/base/EdlScanner.h"
 
 static oe::base::Object* result;               // result of all our work (i.e., an Object)
 static oe::base::EdlScanner* scanner;          // edl scanner
