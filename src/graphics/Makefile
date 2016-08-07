@@ -9,7 +9,7 @@
 # search for "FlexLexer.h" in ReformatScanner.cpp - replace:
 #   #include <FlexLexer.h>
 # with
-#   #include "../base/platform/FlexLexer.h"
+#   #include "openeaagles/base/util/FlexLexer.h"
 #----------------------------------------------------------------------------------------
 
 include ../makedefs

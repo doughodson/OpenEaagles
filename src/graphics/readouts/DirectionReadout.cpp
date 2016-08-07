@@ -1,7 +1,7 @@
 
 #include "openeaagles/graphics/readouts/DirectionReadout.h"
 
-#include "ReformatScanner.h"
+#include "openeaagles/graphics/readouts/ReformatScanner.h"
 
 #include <cstdio>
 #include <cstdlib>

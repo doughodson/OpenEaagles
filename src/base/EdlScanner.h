@@ -6,7 +6,7 @@
 
 #ifndef __FLEX_LEXER_H
 #define yyFlexLexer edlFlexLexer
-#include "./platform/FlexLexer.h"
+#include "openeaagles/base/util/FlexLexer.h"
 #undef yyFlexLexer
 #endif
 

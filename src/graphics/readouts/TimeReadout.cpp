@@ -3,7 +3,7 @@
 
 #include "openeaagles/base/util/str_utils.h"
 
-#include "ReformatScanner.h"
+#include "openeaagles/graphics/readouts/ReformatScanner.h"
 
 #include <cstdio>
 #include <cstdlib>

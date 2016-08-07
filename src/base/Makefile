@@ -10,7 +10,7 @@
 # search for "FlexLexer.h" in EdlScanner.cpp - replace:
 #   #include <FlexLexer.h>
 # with
-#   #include "./platform/FlexLexer.h"
+#   #include "openeaagles/base/util/FlexLexer.h"
 #----------------------------------------------------------------------------------------
 
 include ../makedefs

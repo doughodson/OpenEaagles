@@ -19,7 +19,7 @@
 #include <iostream>
 #include <cstring>
 #include <cstdio>
-#include "ReformatScanner.h"
+#include "openeaagles/graphics/readouts/ReformatScanner.h"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
 

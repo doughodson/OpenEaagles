@@ -2,8 +2,7 @@
 #include "openeaagles/graphics/readouts/LongitudeReadout.h"
 
 #include "openeaagles/base/util/str_utils.h"
-
-#include "ReformatScanner.h"
+#include "openeaagles/graphics/readouts/ReformatScanner.h"
 
 namespace oe {
 namespace graphics {
