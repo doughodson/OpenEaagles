@@ -19,9 +19,16 @@ LIB = $(OPENEAAGLES_LIB_DIR)/liboegraphics.a
 OBJS =  \
 	readouts/AsciiText.o \
 	readouts/Cursor.o \
+	readouts/DirectionReadout.o \
+	readouts/HexReadout.o \
+	readouts/LatitudeReadout.o \
+	readouts/LongitudeReadout.o \
 	readouts/NumericReadout.o \
-	readouts/Readouts.o \
+	readouts/OctalReadout.o \
 	readouts/ReformatScanner.o \
+	readouts/Rotary.o \
+	readouts/Rotary2.o \
+	readouts/TimeReadout.o \
 	BmpTexture.o \
 	BitmapFont.o \
 	Clip3D.o \
