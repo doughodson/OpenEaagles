@@ -17,6 +17,9 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboegraphics.a
 
 OBJS =  \
+	readouts/AsciiText.o \
+	readouts/Cursor.o \
+	readouts/NumericReadout.o \
 	readouts/Readouts.o \
 	readouts/ReformatScanner.o \
 	BmpTexture.o \
