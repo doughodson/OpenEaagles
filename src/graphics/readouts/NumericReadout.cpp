@@ -1,12 +1,11 @@
 
 #include "openeaagles/graphics/readouts/NumericReadout.h"
 
-
-#include "openeaagles/graphics/Display.h"
 #include "openeaagles/base/Float.h"
+#include "openeaagles/base/Number.h"
+#include "openeaagles/base/String.h"
 #include "openeaagles/base/Integer.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
+
 #include "openeaagles/base/util/str_utils.h"
 #include "openeaagles/base/util/constants.h"
 
@@ -18,9 +17,9 @@
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
-//#if(_MSC_VER>=1400)   // VC8+
-//# pragma warning(disable: 4996)
-//#endif
+#if(_MSC_VER>=1400)   // VC8+
+# pragma warning(disable: 4996)
+#endif
 
 namespace oe {
 namespace graphics {
@@ -45,19 +44,19 @@ BEGIN_SLOTTABLE(NumericReadout)
 END_SLOTTABLE(NumericReadout)
 
 BEGIN_SLOT_MAP(NumericReadout)
-   ON_SLOT(1,setSlotFloatToBeDisplayed,base::Float)
-   ON_SLOT(1,setSlotNumberToBeDisplayed,base::Number)
-   ON_SLOT(2,setSlotFloatMaxValue,base::Float)
-   ON_SLOT(2,setSlotNumberMaxValue,base::Number)
-   ON_SLOT(3,setSlotExampleFormatText,base::String)
-   ON_SLOT(4,setSlotPlusChar,base::String)
-   ON_SLOT(5,setSlotMinusChar,base::String)
-   ON_SLOT(6,setSlotDecimalPointChar,base::String)
-   ON_SLOT(7,setSlotUndefinedChar,base::String)
-   ON_SLOT(8,setSlotOverflowChar,base::String)
-   ON_SLOT(9,setSlotMaxValid,base::Number)
-   ON_SLOT(10,setSlotMinValid,base::Number)
-   ON_SLOT(11,setSlotBlankZero,base::Number)
+   ON_SLOT(1, setSlotFloatToBeDisplayed, base::Float)
+   ON_SLOT(1, setSlotNumberToBeDisplayed, base::Number)
+   ON_SLOT(2, setSlotFloatMaxValue, base::Float)
+   ON_SLOT(2, setSlotNumberMaxValue, base::Number)
+   ON_SLOT(3, setSlotExampleFormatText, base::String)
+   ON_SLOT(4, setSlotPlusChar, base::String)
+   ON_SLOT(5, setSlotMinusChar, base::String)
+   ON_SLOT(6, setSlotDecimalPointChar, base::String)
+   ON_SLOT(7, setSlotUndefinedChar, base::String)
+   ON_SLOT(8, setSlotOverflowChar, base::String)
+   ON_SLOT(9, setSlotMaxValid, base::Number)
+   ON_SLOT(10, setSlotMinValid, base::Number)
+   ON_SLOT(11, setSlotBlankZero, base::Number)
 END_SLOT_MAP()
 
 // Event handlers for NumericReadout events

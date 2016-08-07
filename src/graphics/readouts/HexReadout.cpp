@@ -1,15 +1,6 @@
 
 #include "openeaagles/graphics/readouts/HexReadout.h"
 
-
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/util/str_utils.h"
-#include "openeaagles/base/util/constants.h"
-
 #include "ReformatScanner.h"
 
 #include <cstdio>
@@ -18,9 +9,9 @@
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
-//#if(_MSC_VER>=1400)   // VC8+
-//# pragma warning(disable: 4996)
-//#endif
+#if(_MSC_VER>=1400)   // VC8+
+# pragma warning(disable: 4996)
+#endif
 
 namespace oe {
 namespace graphics {
@@ -33,7 +24,7 @@ EMPTY_SERIALIZER(HexReadout)
 HexReadout::HexReadout()
 {
    STANDARD_CONSTRUCTOR()
-   base::utStrcpy(format,FORMAT_LENGTH,"%X");
+   base::utStrcpy(format, FORMAT_LENGTH, "%X");
 }
 
 //------------------------------------------------------------------------------

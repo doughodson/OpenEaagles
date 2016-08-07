@@ -8,11 +8,7 @@
 #include "openeaagles/base/String.h"
 
 namespace oe {
-
-   namespace base {
-      class List;
-   }
-
+namespace base { class List; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -174,7 +170,7 @@ namespace graphics {
 //------------------------------------------------------------------------------
 class Field : public Graphic
 {
-   DECLARE_SUBCLASS(Field,Graphic)
+   DECLARE_SUBCLASS(Field, Graphic)
 
 public:
    enum Mode { display, input };

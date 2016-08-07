@@ -1,30 +1,13 @@
 
 #include "openeaagles/graphics/readouts/AsciiText.h"
 
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/util/str_utils.h"
-#include "openeaagles/base/util/constants.h"
-
-//#include "ReformatScanner.h"
-
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-//#if(_MSC_VER>=1400)   // VC8+
-//# pragma warning(disable: 4996)
-//#endif
+#include "openeaagles/base/List.h"
+#include "openeaagles/base/String.h"
 
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(AsciiText,"AsciiText")
+IMPLEMENT_SUBCLASS(AsciiText, "AsciiText")
 EMPTY_COPYDATA(AsciiText)
 EMPTY_DELETEDATA(AsciiText)
 
@@ -40,7 +23,7 @@ END_SLOT_MAP()
 
 // Event handlers for AsciiText events
 BEGIN_EVENT_HANDLER(AsciiText)
-   ON_EVENT_OBJ(UPDATE_VALUE,setTextString,base::String)
+   ON_EVENT_OBJ(UPDATE_VALUE, setTextString, base::String)
 END_EVENT_HANDLER()
 
 AsciiText::AsciiText()
