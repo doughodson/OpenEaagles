@@ -5,7 +5,6 @@
 # dos2unix edl_parser.y
 # dos2unix edl_scanner.l
 # bison -d edl_parser.y -o EdlParser.cpp  // creates EdlParser.cpp and EdlParser.hpp
-# copy EdlParser.hpp to 'include/openeaagles/base'
 # flex -f -oEdlScanner.cpp edl_scanner.l  // creates EdlScanner.cpp (EdlScanner.h already exists)
 #
 # search for "FlexLexer.h" in EdlScanner.cpp - replace:
@@ -23,6 +22,8 @@ OBJS =  \
 	distributions/Lognormal.o \
 	distributions/Pareto.o \
 	distributions/Uniform.o \
+	edl_parser/EdlParser.o \
+	edl_parser/EdlScanner.o \
 	functors/Function.o \
 	functors/Functions.o \
 	functors/Table.o \
@@ -74,8 +75,6 @@ OBJS =  \
 	Component.o \
 	Decibel.o \
 	EarthModel.o \
-	EdlParser.o \
-	EdlScanner.o \
 	factory.o \
 	FileReader.o \
 	Float.o \
@@ -127,6 +126,7 @@ $(LIB) : $(OBJS)
 
 clean:
 	-rm -f distributions/*.o
+	-rm -f edl_parser/*.o
 	-rm -f functors/*.o
 	-rm -f nethandlers/*.o
 	-rm -f osg/*.o
