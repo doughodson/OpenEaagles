@@ -111,7 +111,9 @@ workspace "oe"
          "../../include/openeaagles/base/**.inl",
          "../../include/openeaagles/base/**.epp",
          "../../include/openeaagles/base/osg/*",
-         "../../src/base/**.cpp"
+         "../../src/base/**.cpp",
+         "../../src/base/**.y",
+         "../../src/base/**.l"
       }
       excludes {
          "../../src/base/osg/Matrix_implementation.cpp",
@@ -125,7 +127,8 @@ workspace "oe"
    project "graphics"
       files {
          "../../include/openeaagles/graphics/**.h",
-         "../../src/graphics/**.cpp"
+         "../../src/graphics/**.cpp",
+         "../../src/graphics/**.l"
       }
       includedirs { OE3rdPartyIncPath.."/freetype2" }
       defines { "FTGL_LIBRARY_STATIC" }
