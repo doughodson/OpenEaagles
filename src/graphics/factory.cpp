@@ -9,7 +9,6 @@
 #include "openeaagles/graphics/Polygon.h"
 #include "openeaagles/graphics/ColorRotary.h"
 #include "openeaagles/graphics/ColorGradient.h"
-#include "openeaagles/graphics/Readouts.h"
 #include "openeaagles/graphics/FtglFonts.h"
 #include "openeaagles/graphics/BitmapFont.h"
 #include "openeaagles/graphics/StrokeFont.h"
@@ -18,10 +17,25 @@
 #include "openeaagles/graphics/Translator.h"
 #include "openeaagles/graphics/Material.h"
 
+// fields and readouts
+#include "openeaagles/graphics/readouts/AsciiText.h"
+#include "openeaagles/graphics/readouts/Cursor.h"
+#include "openeaagles/graphics/readouts/Rotary.h"
+#include "openeaagles/graphics/readouts/Rotary2.h"
+#include "openeaagles/graphics/readouts/DirectionReadout.h"
+#include "openeaagles/graphics/readouts/HexReadout.h"
+#include "openeaagles/graphics/readouts/LatitudeReadout.h"
+#include "openeaagles/graphics/readouts/LongitudeReadout.h"
+#include "openeaagles/graphics/readouts/NumericReadout.h"
+#include "openeaagles/graphics/readouts/OctalReadout.h"
+#include "openeaagles/graphics/readouts/TimeReadout.h"
+
 // pages and maps
 #include "openeaagles/graphics/MfdPage.h"
 #include "openeaagles/graphics/MapPage.h"
 #include "openeaagles/graphics/SymbolLoader.h"
+
+
 
 #include <string>
 
@@ -87,7 +101,7 @@ base::Object* factory(const std::string& name)
         obj = new Triangle();
     }
 
-    // Test Fields
+    // Fields
     else if ( name == AsciiText::getFactoryName() ) {
         obj = new AsciiText();
     }

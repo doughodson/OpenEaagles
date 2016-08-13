@@ -11,7 +11,8 @@
 #include "openeaagles/base/util/FlexLexer.h"
 #endif
 
-#include "openeaagles/graphics/Readouts.h"
+#include "openeaagles/graphics/readouts/TimeReadout.h"
+#include "openeaagles/graphics/readouts/DirectionReadout.h"
 #include <sstream>
 
 namespace oe {
