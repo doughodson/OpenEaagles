@@ -625,19 +625,19 @@ int ReformatScanner::formatError(const char* text)
    switch (dataType) {
    case hex:
    case octal:
-      yyout << "error: " << text << " is an invalid integer format." << std::endl;
+      *yyout << "error: " << text << " is an invalid integer format." << std::endl;
       break;
    case number:
-      yyout << "error: " << text << " is an invalid number format." << std::endl;
+      *yyout << "error: " << text << " is an invalid number format." << std::endl;
       break;
    case time:
-      yyout << "error: " << text << " is an invalid time format." << std::endl;
+      *yyout << "error: " << text << " is an invalid time format." << std::endl;
       break;
    case dir:
-      yyout << "error: " << text << " is an invalid degree format." << std::endl;
+      *yyout << "error: " << text << " is an invalid degree format." << std::endl;
       break;
    default:
-      yyout << "error in formatError" << std::endl;
+      *yyout << "error in formatError" << std::endl;
       break;
    }
 
@@ -650,10 +650,16 @@ int ReformatScanner::formatError(const char* text)
 // as output.
 ReformatScanner::DataType ReformatScanner::convertNumber(const char* s)
 {
-   std::istringstream iss(s);
-   yyin.rdbuf(iss.rdbuf());
+   std::istringstream str(s);
+   yyin = &str;
    yyrestart(yyin);
    return DataType(yylex(number));
+
+// for flex 2.6.0
+// std::istringstream iss(s);
+// yyin.rdbuf(iss.rdbuf());
+// yyrestart(yyin);
+// return DataType(yylex(number));
 }
 
 
@@ -661,10 +667,16 @@ ReformatScanner::DataType ReformatScanner::convertNumber(const char* s)
 // such as "0##" as input.  And returns "%03o" as output.
 ReformatScanner::DataType ReformatScanner::convertOctal(const char* s)
 {
-   std::istringstream iss(s);
-   yyin.rdbuf(iss.rdbuf());
+   std::istringstream str(s);
+   yyin = &str;
    yyrestart(yyin);
    return DataType(yylex(octal));
+
+// for flex 2.6.0
+// std::istringstream iss(s);
+// yyin.rdbuf(iss.rdbuf());
+// yyrestart(yyin);
+// return DataType(yylex(octal));
 }
 
 
@@ -672,10 +684,16 @@ ReformatScanner::DataType ReformatScanner::convertOctal(const char* s)
 // such as "###" as input.  And returns "%3X" as output.
 ReformatScanner::DataType ReformatScanner::convertHex(const char* s)
 {
-   std::istringstream iss(s);
-   yyin.rdbuf(iss.rdbuf());
+   std::istringstream str(s);
+   yyin = &str;
    yyrestart(yyin);
    return DataType(yylex(hex));
+
+// for flex 2.6.0
+// std::istringstream iss(s);
+// yyin.rdbuf(iss.rdbuf());
+// yyrestart(yyin);
+// return DataType(yylex(hex));
 }
 
 
@@ -684,18 +702,18 @@ ReformatScanner::DataType ReformatScanner::convertHex(const char* s)
 // output.
 TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
 {
-   std::string str(s);
-   std::cout << "convertTime str: " << str << std::endl;
-
-   std::istringstream iss(s);
-   yyin.rdbuf(iss.rdbuf());
+   std::istringstream str(s);
+   yyin = &str;
    yyrestart(yyin);
-//   return TimeReadout::TimeMode(yylex(time));
+   return TimeReadout::TimeMode(yylex(time));
 
-//   std::istringstream str(s);
-//   yyin = &str;
-//   yyrestart(yyin);
-//   return TimeReadout::TimeMode(yylex(time));
+// for flex 2.6.0
+// std::string str(s);
+// std::cout << "convertTime str: " << str << std::endl;
+// std::istringstream iss(s);
+// yyin.rdbuf(iss.rdbuf());
+// yyrestart(yyin);
+// return TimeReadout::TimeMode(yylex(time));
 }
 
 
@@ -704,18 +722,18 @@ TimeReadout::TimeMode ReformatScanner::convertTime(const char* s)
 // output.
 DirectionReadout::DirMode ReformatScanner::convertDirection(const char* s)
 {
-   std::string str(s);
-   std::cout << "convertDirection str: " << str << std::endl;
-
-   std::istringstream iss(s);
-   yyin.rdbuf(iss.rdbuf());
+   std::istringstream str(s);
+   yyin = &str;
    yyrestart(yyin);
-//   return DirectionReadout::DirMode(yylex(dir));
+   return DirectionReadout::DirMode(yylex(dir));
 
-//   std::istringstream str(s);
-//   yyin = &str;
-//   yyrestart(yyin);
-//   return DirectionReadout::DirMode(yylex(dir));
+// for flex 2.6.0
+// std::string str(s);
+// std::cout << "convertDirection str: " << str << std::endl;
+// std::istringstream iss(s);
+// yyin.rdbuf(iss.rdbuf());
+// yyrestart(yyin);
+// return DirectionReadout::DirMode(yylex(dir));
 }
 
 }

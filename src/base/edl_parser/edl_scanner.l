@@ -27,8 +27,8 @@
 #include "openeaagles/base/PairStream.h"
 #include "openeaagles/base/List.h"
 #include "openeaagles/base/util/str_utils.h"
-#include "openeaagles/base/EdlScanner.h"
-#include "openeaagles/base/EdlParser.hpp"
+#include "EdlScanner.h"
+#include "EdlParser.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
 
