@@ -24,7 +24,7 @@ DirectionReadout::DirectionReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   base::utStrcpy(format,FORMAT_LENGTH,"%+07.2f");
+   base::utStrcpy(format, FORMAT_LENGTH, "%+07.2f");
    tmode = dd;
 }
 
@@ -167,7 +167,7 @@ void DirectionReadout::reformat(const char* const example)
    DirMode results = reformatter->convertDirection(example);
    if (results != invalid) {
       setExample(example);
-      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format, FORMAT_LENGTH, reformatter->getFormat());
       tmode = results;
       postSign = reformatter->isPostSign();
       redisplay();

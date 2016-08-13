@@ -79,7 +79,7 @@ void HexReadout::reformat(const char* const example)
 {
    if (reformatter->convertHex(example) != ReformatScanner::DataType::invalid) {
       setExample(example);
-      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format, FORMAT_LENGTH, reformatter->getFormat());
       postSign = reformatter->isPostSign();
       redisplay();
    }

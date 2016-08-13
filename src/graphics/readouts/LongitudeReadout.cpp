@@ -40,7 +40,7 @@ char LongitudeReadout::filterInputEvent(const int event, const int tc)
          return '\0';
    }
    else {
-      return BaseClass::filterInputEvent(event,tc);
+      return BaseClass::filterInputEvent(event, tc);
    }
 }
 

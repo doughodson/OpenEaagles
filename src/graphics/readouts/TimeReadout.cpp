@@ -238,7 +238,7 @@ void TimeReadout::reformat(const char* const example)
    TimeMode results = reformatter->convertTime(example);
    if (results != invalid) {
       setExample(example);
-      base::utStrcpy(format,FORMAT_LENGTH,reformatter->getFormat());
+      base::utStrcpy(format, FORMAT_LENGTH, reformatter->getFormat());
       tmode = results;
       postSign = reformatter->isPostSign();
       redisplay();
