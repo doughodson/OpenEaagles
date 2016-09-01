@@ -5,8 +5,6 @@ rem
 rem
 rem delete old solution/workspace files
 rem
-rmdir /S /Q ..\codeblocks
-rmdir /S /Q ..\codelite
 rmdir /S /Q ..\vs2013
 rmdir /S /Q ..\vs2015
 rem
@@ -16,6 +14,6 @@ del ..\..\lib\*.lib
 rem
 rem create new solution/workspace files
 rem
-%Premake% vs2013
-%Premake% vs2015
+%Premake% --os=windows --file=premake5.lua vs2013
+%Premake% --os=windows --file=premake5.lua vs2015
 

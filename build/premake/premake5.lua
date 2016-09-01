@@ -41,23 +41,13 @@ print ("HLA Paths:")
 print ("  Include   : "..HLALibPath)
 --print ("  Libraries : "..OELibPath)
 
---
--- determine target directories for project/solution files and 
--- compiled libraries
---
-locationPath  = "../" .. _ACTION
-if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
-  targetDirPath = "../../lib/"
-end
-print ("Target directory path: "..targetDirPath)
-
 workspace "oe"
 
    -- destination directory for generated solution/project files
-   location (locationPath)
+   location ("../" .. _ACTION)
 
    -- destination directory for compiled binary target
-   targetdir (targetDirPath)
+   targetdir ("../../lib/")
 
    -- creating static libraries
    kind "StaticLib"
@@ -70,9 +60,6 @@ workspace "oe"
 
    -- target suffix (all configurations/all projects)
    targetprefix "oe"
-   if (_ACTION == "codelite") or (_ACTION == "codeblocks") then
-      targetprefix "liboe"
-   end
 
    --
    -- Build (solution) configuration options:
@@ -84,21 +71,17 @@ workspace "oe"
    -- common release configuration flags and symbols
    filter { "Release32" }
       flags { "Optimize" }
-      if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
-         -- enable compiler intrinsics and favour speed over size
-         buildoptions { "/Oi", "/Ot" }
-         defines { "WIN32", "_LIB", "NDEBUG" }
-      end
+      -- enable compiler intrinsics and favour speed over size
+      buildoptions { "/Oi", "/Ot" }
+      defines { "WIN32", "_LIB", "NDEBUG" }
 
    -- common debug configuration flags and symbols
    filter { "Debug32" }
       targetsuffix "_d"
       flags { "Symbols" }
-      if (_ACTION == "vs2013") or (_ACTION == "vs2015") then
-         -- enable compiler intrinsics
-         buildoptions { "/Oi" }
-         defines { "WIN32", "_LIB", "_DEBUG" }
-      end
+      -- enable compiler intrinsics
+      buildoptions { "/Oi" }
+      defines { "WIN32", "_LIB", "_DEBUG" }
 
    --
    -- libraries
