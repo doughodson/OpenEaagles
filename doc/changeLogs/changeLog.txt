@@ -11,6 +11,13 @@ General framework-wide changes and improvements
    are simply placed in 'lib'.  This aligns with what is more typically found
    with other packages.
 
+-- All include file extensions have been changed from .h to .hpp to make explicit
+   the nature of file contents -- namely, C++ declarations and/or template code.
+   The practice of clearly differentiating C from C++ is not always done, but
+   is considered good practice, as it promotes clarity of file purpose.  It will
+   also help avoid potential confusion later as new anticipated features are added
+   to framework.
+
 --------------------------------------------------------------------------------
 base library
 

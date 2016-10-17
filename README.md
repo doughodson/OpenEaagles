@@ -12,11 +12,11 @@ Directories
 
 * doc: changeLogs, uml diagrams and doxygen configuration files
 
-* include: standard include path for all headers
+* include: standard include path for all headers (.hpp)
 
 * lib: contains libraries after compilation
 
-* src: source code (.h/.cpp) files
+* src: source code (.cpp) files
 
 To Build
 ---------
