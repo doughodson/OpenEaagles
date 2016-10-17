@@ -1,9 +1,9 @@
 
-#include "openeaagles/graphics/MapPage.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/graphics/MapPage.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace graphics {

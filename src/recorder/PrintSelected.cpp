@@ -1,12 +1,12 @@
 
-#include "openeaagles/recorder/PrintSelected.h"
+#include "openeaagles/recorder/PrintSelected.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
-#include "openeaagles/recorder/DataRecordHandle.h"
+#include "openeaagles/recorder/DataRecordHandle.hpp"
 
-#include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/Integer.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"

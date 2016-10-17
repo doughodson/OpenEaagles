@@ -55,8 +55,8 @@
 //
 //==============================================================================
 
-#include "openeaagles/terrain/srtm/SrtmHgtFile.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/terrain/srtm/SrtmHgtFile.hpp"
+#include "openeaagles/base/Number.hpp"
 
 #include <string>
 #include <fstream>

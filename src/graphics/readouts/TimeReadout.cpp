@@ -1,9 +1,9 @@
 
-#include "openeaagles/graphics/readouts/TimeReadout.h"
+#include "openeaagles/graphics/readouts/TimeReadout.hpp"
 
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/base/util/str_utils.hpp"
 
-#include "ReformatScanner.h"
+#include "ReformatScanner.hpp"
 
 #include <cstdio>
 #include <cstdlib>

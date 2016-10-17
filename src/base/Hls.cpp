@@ -1,12 +1,12 @@
 //------------------------------------------------------------------------------
 // Hls
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Hls.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/Hls.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
 #include <cmath>
 
-#include "openeaagles/base/util/platform_api.h"  // for std::fmax / fmin pre-VS2013
+#include "openeaagles/base/util/platform_api.hpp"
 
 namespace oe {
 namespace base {

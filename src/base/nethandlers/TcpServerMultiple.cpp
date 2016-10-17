@@ -26,12 +26,12 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/base/nethandlers/TcpServerMultiple.h"
+#include "openeaagles/base/nethandlers/TcpServerMultiple.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/String.hpp"
 
 #include <cstdio>
 

@@ -5,15 +5,15 @@
 #include <iomanip>
 #include <cmath>
 
-#include "openeaagles/terrain/DataFile.h"
-#include "openeaagles/base/NetHandler.h"   // for byte-swapping only
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/terrain/DataFile.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 namespace oe {
 namespace terrain {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(DataFile,"DataFile")
+IMPLEMENT_ABSTRACT_SUBCLASS(DataFile, "DataFile")
 EMPTY_SLOTTABLE(DataFile)
 EMPTY_SERIALIZER(DataFile)
 

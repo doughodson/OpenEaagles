@@ -2,17 +2,17 @@
 // Class: IrAtmosphere
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/IrAtmosphere.h"
-#include "openeaagles/simulation/IrQueryMsg.h"
-#include "openeaagles/simulation/IrSensor.h"
-#include "openeaagles/simulation/Gimbal.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/simulation/IrAtmosphere.hpp"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
+#include "openeaagles/simulation/IrSensor.hpp"
+#include "openeaagles/simulation/Gimbal.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

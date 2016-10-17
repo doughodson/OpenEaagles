@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>
 #include <cctype>

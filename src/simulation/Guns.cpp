@@ -1,16 +1,16 @@
 
-#include "openeaagles/simulation/Guns.h"
+#include "openeaagles/simulation/Guns.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/DataRecorder.h"
-#include "openeaagles/simulation/TabLogger.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/TabLogger.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 #include <cmath>
 

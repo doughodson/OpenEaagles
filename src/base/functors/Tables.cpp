@@ -2,12 +2,12 @@
 // Table1, Table2, Table3, Table4, Table5
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/util/lfi.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/util/lfi.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Pair.hpp"
 
 namespace oe {
 namespace base {

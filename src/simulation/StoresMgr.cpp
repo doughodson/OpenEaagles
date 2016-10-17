@@ -1,23 +1,23 @@
 //------------------------------------------------------------------------------
 // classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
-#include "openeaagles/simulation/StoresMgr.h"
+#include "openeaagles/simulation/StoresMgr.hpp"
 
-#include "openeaagles/simulation/Bomb.h"
-#include "openeaagles/simulation/Effects.h"
-#include "openeaagles/simulation/ExternalStore.h"
-#include "openeaagles/simulation/FuelTank.h"
-#include "openeaagles/simulation/Guns.h"
-#include "openeaagles/simulation/Missile.h"
-#include "openeaagles/simulation/OnboardComputer.h"
-#include "openeaagles/simulation/RfSensor.h"
-#include "openeaagles/simulation/Sam.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/TrackManager.h"
+#include "openeaagles/simulation/Bomb.hpp"
+#include "openeaagles/simulation/Effects.hpp"
+#include "openeaagles/simulation/ExternalStore.hpp"
+#include "openeaagles/simulation/FuelTank.hpp"
+#include "openeaagles/simulation/Guns.hpp"
+#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/simulation/OnboardComputer.hpp"
+#include "openeaagles/simulation/RfSensor.hpp"
+#include "openeaagles/simulation/Sam.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
 
-#include "openeaagles/base/Boolean.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Boolean.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 #include <cstring>
 
 // Disable all deprecation warnings for now.  Until we fix them,

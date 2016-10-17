@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // LatLon
 //------------------------------------------------------------------------------
-#include "openeaagles/base/LatLon.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/LatLon.hpp"
+#include "openeaagles/base/String.hpp"
 
 #include <cmath>
 

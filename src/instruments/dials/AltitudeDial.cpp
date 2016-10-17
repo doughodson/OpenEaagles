@@ -1,4 +1,4 @@
-#include "openeaagles/instruments/dials/AltitudeDial.h"
+#include "openeaagles/instruments/dials/AltitudeDial.hpp"
 
 namespace oe {
 namespace instruments {

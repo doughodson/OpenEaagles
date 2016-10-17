@@ -2,7 +2,7 @@
 // Support functions for the map library.
 //------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/support.h"
+#include "openeaagles/maps/rpf/support.hpp"
 #include <ctype.h>
 #include <cctype>
 #include <cstring>

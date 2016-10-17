@@ -1,10 +1,12 @@
 
-#include "openeaagles/instruments/eadi3D/Eadi3DObjects.h"
-#include "openeaagles/base/units/Angles.h"
+
+#include "openeaagles/instruments/eadi3d/Eadi3DObjects.hpp"
+
+#include "openeaagles/base/units/Angles.hpp"
 
 #include <cmath>
 
-#include "openeaagles/base/util/platform_api.h"
+#include "openeaagles/base/util/platform_api.hpp"
 #include <GL/gl.h>
 
 #define MR2IN 0.026785714      // font was scaled by this
@@ -20,16 +22,10 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Eadi3DObjects, "Eadi3DObjects")
 EMPTY_SLOTTABLE(Eadi3DObjects)
 EMPTY_SERIALIZER(Eadi3DObjects)
 
-//------------------------------------------------------------------------------
-// Constructor() -
-//------------------------------------------------------------------------------
 Eadi3DObjects::Eadi3DObjects(float radius) : base(0), radius(radius), made(false)
 {
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Eadi3DObjects::copyData(const Eadi3DObjects& org, const bool)
 {
     BaseClass::copyData(org);

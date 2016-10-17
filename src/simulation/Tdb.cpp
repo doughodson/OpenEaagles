@@ -1,15 +1,15 @@
-#include "openeaagles/simulation/Tdb.h"
+#include "openeaagles/simulation/Tdb.hpp"
 
-#include "openeaagles/simulation/Gimbal.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Terrain.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/util/osg_utils.h"
+#include "openeaagles/simulation/Gimbal.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Terrain.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/util/osg_utils.hpp"
 
 #include <cmath>
 

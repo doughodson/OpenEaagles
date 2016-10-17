@@ -1,6 +1,6 @@
 
-#include "openeaagles/instruments/maps/BearingPointer.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/instruments/maps/BearingPointer.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace instruments {

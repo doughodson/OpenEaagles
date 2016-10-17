@@ -2,11 +2,11 @@
 // Class: dis::Ntm
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/dis/Ntm.h"
-#include "openeaagles/networks/dis/Nib.h"
+#include "openeaagles/networks/dis/Ntm.hpp"
+#include "openeaagles/networks/dis/Nib.hpp"
 
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 

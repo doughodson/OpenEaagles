@@ -1,10 +1,10 @@
-#include "openeaagles/simulation/Track.h"
+#include "openeaagles/simulation/Track.hpp"
 
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/IrQueryMsg.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/SensorMsg.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/SensorMsg.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 #include <cmath>
 

@@ -1,6 +1,6 @@
 
-#include "openeaagles/simulation/Agm.h"
-#include "openeaagles/simulation/Track.h"
+#include "openeaagles/simulation/Agm.hpp"
+#include "openeaagles/simulation/Track.hpp"
 
 namespace oe {
 namespace simulation {

@@ -2,21 +2,18 @@
 // Scanline --
 //==============================================================================
 
-#include "openeaagles/graphics/Scanline.h"
-#include "openeaagles/graphics/Clip3D.h"
-#include "openeaagles/graphics/Polygon.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/graphics/Scanline.hpp"
+#include "openeaagles/graphics/Clip3D.hpp"
+#include "openeaagles/graphics/Polygon.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(Scanline,"Scanline")
+IMPLEMENT_SUBCLASS(Scanline, "Scanline")
 EMPTY_SLOTTABLE(Scanline)
 EMPTY_SERIALIZER(Scanline)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Scanline::Scanline()
 {
    STANDARD_CONSTRUCTOR()

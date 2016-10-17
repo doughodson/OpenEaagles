@@ -2,10 +2,10 @@
 // Thread classes
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/Thread.h"
-#include "openeaagles/base/Component.h"
-#include "openeaagles/base/util/math_utils.h"
-#include "openeaagles/base/util/system.h"
+#include "openeaagles/base/Thread.hpp"
+#include "openeaagles/base/Component.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
+#include "openeaagles/base/util/system.hpp"
 
 namespace oe {
 namespace base {

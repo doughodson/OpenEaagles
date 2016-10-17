@@ -1,6 +1,6 @@
 
-#include "openeaagles/linearsystem/Sz2.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/linearsystem/Sz2.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace linearsystem {

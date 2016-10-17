@@ -1,11 +1,11 @@
 
-#include "openeaagles/models/dynamics/RacModel.h"
+#include "openeaagles/models/dynamics/RacModel.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/osg/Matrix"
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Quat"
@@ -17,9 +17,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(RacModel, "RacModel")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(RacModel)
     "minSpeed",    // 1 Minimum Velocity        (kts)
     "speedMaxG",   // 2 Velocity we reach max G (kts)
@@ -30,9 +27,6 @@ BEGIN_SLOTTABLE(RacModel)
     "cmdSpeed",    // 7 Command speed
 END_SLOTTABLE(RacModel)
 
-//------------------------------------------------------------------------------
-// Slot Map
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(RacModel)
     ON_SLOT( 1, setSlotMinSpeed, base::Number)
     ON_SLOT( 2, setSlotSpeedMaxG, base::Number)
@@ -43,9 +37,6 @@ BEGIN_SLOT_MAP(RacModel)
     ON_SLOT( 7, setSlotCmdVelocity, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 RacModel::RacModel()
 {
    STANDARD_CONSTRUCTOR()
@@ -60,9 +51,6 @@ RacModel::RacModel()
    cmdVelocity = -9999.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void RacModel::copyData(const RacModel& org, const bool)
 {
    BaseClass::copyData(org);
@@ -79,9 +67,6 @@ void RacModel::copyData(const RacModel& org, const bool)
 
 EMPTY_DELETEDATA(RacModel)
 
-//------------------------------------------------------------------------------
-// reset() --
-//------------------------------------------------------------------------------
 void RacModel::reset()
 {
    BaseClass::reset();

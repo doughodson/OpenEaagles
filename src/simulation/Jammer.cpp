@@ -1,14 +1,14 @@
-#include "openeaagles/simulation/Jammer.h"
+#include "openeaagles/simulation/Jammer.hpp"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Frequencies.h"
-#include "openeaagles/base/units/Powers.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Frequencies.hpp"
+#include "openeaagles/base/units/Powers.hpp"
 
 namespace oe {
 namespace simulation {

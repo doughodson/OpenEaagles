@@ -4,12 +4,12 @@
 //    RecorderComponent -- Base class for all data recorder components
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/DataRecorder.h"
+#include "openeaagles/simulation/DataRecorder.hpp"
 
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Station.h"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Station.hpp"
 
-#include "openeaagles/base/List.h"
+#include "openeaagles/base/List.hpp"
 
 namespace oe {
 namespace simulation {

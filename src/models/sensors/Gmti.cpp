@@ -1,18 +1,18 @@
 
-#include "openeaagles/models/sensors/Gmti.h"
+#include "openeaagles/models/sensors/Gmti.hpp"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Powers.h"
-#include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Powers.hpp"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/Frequencies.hpp"
 
 #include <cmath>
 
@@ -31,31 +31,18 @@ BEGIN_SLOT_MAP(Gmti)
     ON_SLOT(1,setSlotPoi,base::List)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator & clone()
-//------------------------------------------------------------------------------
+EMPTY_DELETEDATA(Gmti)
+
 Gmti::Gmti() : poiVec(0,0,0)
 {
     STANDARD_CONSTRUCTOR()
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Gmti::copyData(const Gmti& org, const bool)
 {
     BaseClass::copyData(org);
     poiVec = org.poiVec;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Gmti::deleteData()
-{
-}
-
 
 //------------------------------------------------------------------------------
 // dynamics() --  Update dynamics

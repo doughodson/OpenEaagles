@@ -1,5 +1,6 @@
-#include "openeaagles/instruments/landingGear/LandingLight.h"
-#include "openeaagles/base/Number.h"
+
+#include "openeaagles/instruments/landinggear/LandingLight.hpp"
+#include "openeaagles/base/Number.hpp"
 #include <GL/glu.h>
 
 namespace oe {

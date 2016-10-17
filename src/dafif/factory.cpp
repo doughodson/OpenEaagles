@@ -1,11 +1,11 @@
 
-#include "openeaagles/dafif/factory.h"
+#include "openeaagles/dafif/factory.hpp"
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/dafif/AirportLoader.h"
-#include "openeaagles/dafif/NavaidLoader.h"
-#include "openeaagles/dafif/WaypointLoader.h"
+#include "openeaagles/dafif/AirportLoader.hpp"
+#include "openeaagles/dafif/NavaidLoader.hpp"
+#include "openeaagles/dafif/WaypointLoader.hpp"
 
 #include <string>
 

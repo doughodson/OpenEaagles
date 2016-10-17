@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // Display
 //------------------------------------------------------------------------------
-#include "openeaagles/graphics/Display.h"
+#include "openeaagles/graphics/Display.hpp"
 
-#include "openeaagles/graphics/Font.h"
-#include "openeaagles/graphics/Image.h"
-#include "openeaagles/graphics/Texture.h"
-#include "openeaagles/graphics/Material.h"
-#include "openeaagles/base/Color.h"
-#include "openeaagles/base/Rgba.h"
-#include "openeaagles/base/Hsva.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/graphics/Font.hpp"
+#include "openeaagles/graphics/Image.hpp"
+#include "openeaagles/graphics/Texture.hpp"
+#include "openeaagles/graphics/Material.hpp"
+#include "openeaagles/base/Color.hpp"
+#include "openeaagles/base/Rgba.hpp"
+#include "openeaagles/base/Hsva.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 #include <cstdio>
 #include <cstring>

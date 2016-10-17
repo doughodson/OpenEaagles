@@ -1,13 +1,13 @@
 //==============================================================================
 // Class: System
 //==============================================================================
-#include "openeaagles/simulation/System.h"
+#include "openeaagles/simulation/System.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 namespace simulation {

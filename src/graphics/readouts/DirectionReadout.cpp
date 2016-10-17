@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/readouts/DirectionReadout.h"
+#include "openeaagles/graphics/readouts/DirectionReadout.hpp"
 
-#include "ReformatScanner.h"
+#include "ReformatScanner.hpp"
 
 #include <cstdio>
 #include <cstdlib>
@@ -16,7 +16,7 @@
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DirectionReadout,"DirectionReadout")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DirectionReadout, "DirectionReadout")
 EMPTY_DELETEDATA(DirectionReadout)
 EMPTY_SERIALIZER(DirectionReadout)
 

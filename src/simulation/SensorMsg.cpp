@@ -1,8 +1,8 @@
-#include "openeaagles/simulation/SensorMsg.h"
+#include "openeaagles/simulation/SensorMsg.hpp"
 
-#include "openeaagles/simulation/Gimbal.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/simulation/Gimbal.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 namespace oe {
 namespace simulation {

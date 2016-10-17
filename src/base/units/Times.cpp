@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Time, Seconds, MilliSeconds, Minutes, Hours, Days
 //------------------------------------------------------------------------------
-#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/units/Times.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

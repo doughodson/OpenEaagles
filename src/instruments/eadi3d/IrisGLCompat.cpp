@@ -1,8 +1,8 @@
 
-#include "openeaagles/instruments/eadi3D/IrisGLCompat.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/instruments/eadi3d/IrisGLCompat.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
-#include "openeaagles/base/util/platform_api.h"
+#include "openeaagles/base/util/platform_api.hpp"
 #include <GL/gl.h>
 
 #include <cmath>

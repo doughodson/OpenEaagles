@@ -1,8 +1,8 @@
-#include "openeaagles/base/List.h"
+#include "openeaagles/base/List.hpp"
 
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Pair.hpp"
 
 #include <cstdlib>
 

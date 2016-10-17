@@ -1,15 +1,15 @@
 
-#include "openeaagles/iodevice/factory.h"
+#include "openeaagles/iodevice/factory.hpp"
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/iodevice/Ai2DiSwitch.h"
-#include "openeaagles/iodevice/AnalogInput.h"
-#include "openeaagles/iodevice/AnalogOutput.h"
-#include "openeaagles/iodevice/DiscreteInput.h"
-#include "openeaagles/iodevice/DiscreteOutput.h"
-#include "openeaagles/iodevice/IoData.h"
-#include "openeaagles/iodevice/SignalGen.h"
+#include "openeaagles/iodevice/Ai2DiSwitch.hpp"
+#include "openeaagles/iodevice/AnalogInput.hpp"
+#include "openeaagles/iodevice/AnalogOutput.hpp"
+#include "openeaagles/iodevice/DiscreteInput.hpp"
+#include "openeaagles/iodevice/DiscreteOutput.hpp"
+#include "openeaagles/iodevice/IoData.hpp"
+#include "openeaagles/iodevice/SignalGen.hpp"
 
 #include <string>
 

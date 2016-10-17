@@ -6,6 +6,7 @@ vs2013/
 vs2015/
 codeblocks/
 codelite/
+.vscode/
 
 # lib directory
 lib/

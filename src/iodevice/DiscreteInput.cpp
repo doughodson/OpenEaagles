@@ -1,11 +1,11 @@
 // Class: DiscreteInput
 
-#include "openeaagles/iodevice/DiscreteInput.h"
+#include "openeaagles/iodevice/DiscreteInput.hpp"
 
-#include "openeaagles/base/IoData.h"
-#include "openeaagles/base/IoDevice.h"
-#include "openeaagles/base/IoHandler.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/IoData.hpp"
+#include "openeaagles/base/IoDevice.hpp"
+#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace iodevice {

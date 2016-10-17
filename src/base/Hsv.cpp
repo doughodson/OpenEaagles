@@ -1,13 +1,13 @@
 //------------------------------------------------------------------------------
 // Hsv
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Hsv.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/Hsv.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
 #include <cmath>
 
-#include "openeaagles/base/util/platform_api.h"  // for std::fmax / fmin pre-VS2013
+#include "openeaagles/base/util/platform_api.hpp"
 
 namespace oe {
 namespace base {

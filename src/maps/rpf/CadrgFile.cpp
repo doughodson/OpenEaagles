@@ -2,11 +2,11 @@
 // Class: CadrgFile
 //------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/CadrgFile.h"
-#include "openeaagles/maps/rpf/CadrgTocEntry.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/maps/rpf/support.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/maps/rpf/CadrgFile.hpp"
+#include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/maps/rpf/support.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>
 

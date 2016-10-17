@@ -1,4 +1,4 @@
-#include "openeaagles/simulation/Designator.h"
+#include "openeaagles/simulation/Designator.hpp"
 
 namespace oe {
 namespace simulation {

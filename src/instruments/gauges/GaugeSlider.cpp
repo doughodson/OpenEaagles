@@ -1,4 +1,4 @@
-#include "openeaagles/instruments/gauges/GaugeSlider.h"
+#include "openeaagles/instruments/gauges/GaugeSlider.hpp"
 
 namespace oe {
 namespace instruments {

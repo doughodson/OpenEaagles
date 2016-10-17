@@ -3,9 +3,9 @@
 // DecibelMeters, Feet
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "openeaagles/base/units/Areas.h"
+#include "openeaagles/base/units/Areas.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"  
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

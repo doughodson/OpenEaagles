@@ -2,9 +2,9 @@
 // Forces, Newtons, KiloNewtons, PoundForces, Poundals
 //////////////////////////////////////////////////////////////////////
 
-#include "openeaagles/base/units/Forces.h"
+#include "openeaagles/base/units/Forces.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

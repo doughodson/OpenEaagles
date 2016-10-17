@@ -2,12 +2,12 @@
 // Class: TexturePager
 // ------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/TexturePager.h"
-#include "openeaagles/maps/rpf/CadrgTocEntry.h"
-#include "openeaagles/graphics/Texture.h"
-#include "openeaagles/maps/rpf/CadrgMap.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/List.h"
+#include "openeaagles/maps/rpf/TexturePager.hpp"
+#include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
+#include "openeaagles/graphics/Texture.hpp"
+#include "openeaagles/maps/rpf/CadrgMap.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/List.hpp"
 
 namespace oe {
 namespace rpf {

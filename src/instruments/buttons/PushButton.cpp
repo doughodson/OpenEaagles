@@ -1,5 +1,5 @@
-#include "openeaagles/instruments/buttons/PushButton.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/instruments/buttons/PushButton.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {

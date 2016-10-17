@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Class: Nav
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/util/osg_utils.h"
-#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/util/osg_utils.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
 
 #include <cmath>
 

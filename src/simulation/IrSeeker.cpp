@@ -2,20 +2,20 @@
 // Classes: IrSeeker, TdbIr
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/IrQueryMsg.h"
-#include "openeaagles/simulation/IrSensor.h"
-#include "openeaagles/simulation/IrSeeker.h"
-#include "openeaagles/simulation/IrAtmosphere.h"
-#include "openeaagles/simulation/OnboardComputer.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
+#include "openeaagles/simulation/IrSensor.hpp"
+#include "openeaagles/simulation/IrSeeker.hpp"
+#include "openeaagles/simulation/IrAtmosphere.hpp"
+#include "openeaagles/simulation/OnboardComputer.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 #include <cmath>
 

@@ -1,23 +1,20 @@
-//==============================================================================
-// Class DataRecorder
-//==============================================================================
 
-#include "openeaagles/recorder/DataRecorder.h"
+#include "openeaagles/recorder/DataRecorder.hpp"
 
-#include "openeaagles/recorder/OutputHandler.h"
-#include "openeaagles/recorder/DataRecordHandle.h"
+#include "openeaagles/recorder/OutputHandler.hpp"
+#include "openeaagles/recorder/DataRecordHandle.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/Nib.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
 
 #include <cstdio>
 

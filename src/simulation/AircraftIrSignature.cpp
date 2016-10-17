@@ -2,16 +2,16 @@
 // Classes: AircraftIrSignature
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/AircraftIrSignature.h"
-#include "openeaagles/simulation/IrShapes.h"
-#include "openeaagles/simulation/IrQueryMsg.h"
-#include "openeaagles/simulation/IrAtmosphere.h"
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Areas.h"
+#include "openeaagles/simulation/AircraftIrSignature.hpp"
+#include "openeaagles/simulation/IrShapes.hpp"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
+#include "openeaagles/simulation/IrAtmosphere.hpp"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Areas.hpp"
 
 namespace oe {
 namespace simulation {

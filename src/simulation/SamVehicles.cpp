@@ -1,14 +1,14 @@
-#include "openeaagles/simulation/SamVehicles.h"
+#include "openeaagles/simulation/SamVehicles.hpp"
 
-#include "openeaagles/simulation/Sam.h"
-#include "openeaagles/simulation/StoresMgr.h"
+#include "openeaagles/simulation/Sam.hpp"
+#include "openeaagles/simulation/StoresMgr.hpp"
 
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Times.hpp"
 
 namespace oe {
 namespace simulation {
@@ -16,7 +16,7 @@ namespace simulation {
 //==============================================================================
 // class SamVehicle
 //==============================================================================
-IMPLEMENT_SUBCLASS(SamVehicle,"SamVehicle")
+IMPLEMENT_SUBCLASS(SamVehicle, "SamVehicle")
 EMPTY_SERIALIZER(SamVehicle)
 
 //------------------------------------------------------------------------------

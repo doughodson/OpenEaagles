@@ -1,4 +1,4 @@
-#include "openeaagles/base/Stack.h"
+#include "openeaagles/base/Stack.hpp"
 #include <stdlib.h>
 
 namespace oe {

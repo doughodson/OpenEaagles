@@ -1,7 +1,7 @@
-#include "openeaagles/instruments/adi/GhostHorizon.h"
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/Rgba.h"
-#include "openeaagles/graphics/Display.h"
+#include "openeaagles/instruments/adi/GhostHorizon.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/Rgba.hpp"
+#include "openeaagles/graphics/Display.hpp"
 
 namespace oe {
 namespace instruments {

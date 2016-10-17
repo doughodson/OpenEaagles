@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Float
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Float.h"
+#include "openeaagles/base/Float.hpp"
 
 namespace oe {
 namespace base {

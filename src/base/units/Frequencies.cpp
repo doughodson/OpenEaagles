@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Frequencies, Hertz
 //------------------------------------------------------------------------------
-#include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/base/units/Frequencies.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

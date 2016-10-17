@@ -1,17 +1,17 @@
 
-#include "openeaagles/simulation/Actions.h"
+#include "openeaagles/simulation/Actions.hpp"
 
-#include "openeaagles/simulation/Bomb.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/OnboardComputer.h"
-#include "openeaagles/simulation/Sar.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Steerpoint.h"
-#include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/LatLon.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/simulation/Bomb.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/OnboardComputer.hpp"
+#include "openeaagles/simulation/Sar.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Steerpoint.hpp"
+#include "openeaagles/simulation/StoresMgr.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/LatLon.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 namespace oe {
 namespace simulation {

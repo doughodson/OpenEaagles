@@ -1,9 +1,9 @@
 
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Boolean.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/Boolean.hpp"
+#include "openeaagles/base/String.hpp"
 
 namespace oe {
 namespace base {

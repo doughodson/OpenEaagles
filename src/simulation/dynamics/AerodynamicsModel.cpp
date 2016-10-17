@@ -1,6 +1,6 @@
 
-#include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/simulation/dynamics/AerodynamicsModel.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace simulation {

@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/NavDR.h"
-#include "openeaagles/base/Nav.h"
+#include "openeaagles/base/NavDR.hpp"
+#include "openeaagles/base/Nav.hpp"
 
 namespace oe {
 namespace base {

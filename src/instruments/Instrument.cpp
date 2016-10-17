@@ -1,9 +1,9 @@
-#include "openeaagles/instruments/Instrument.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/graphics/ColorRotary.h"
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
+#include "openeaagles/instruments/Instrument.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/graphics/ColorRotary.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
 
 namespace oe {
 namespace instruments {

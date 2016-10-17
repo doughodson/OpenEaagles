@@ -2,13 +2,13 @@
 // Agent
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/ubf/Agent.h"
-#include "openeaagles/base/ubf/Action.h"
-#include "openeaagles/base/ubf/Behavior.h"
-#include "openeaagles/base/ubf/State.h"
+#include "openeaagles/base/ubf/Agent.hpp"
+#include "openeaagles/base/ubf/Action.hpp"
+#include "openeaagles/base/ubf/Behavior.hpp"
+#include "openeaagles/base/ubf/State.hpp"
 
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/String.hpp"
 
 namespace oe {
 namespace base {

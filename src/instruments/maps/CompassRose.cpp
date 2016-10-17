@@ -1,4 +1,4 @@
-#include "openeaagles/instruments/maps/CompassRose.h"
+#include "openeaagles/instruments/maps/CompassRose.hpp"
 
 namespace oe {
 namespace instruments {

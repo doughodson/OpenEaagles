@@ -1,8 +1,8 @@
 
 #include <iostream>
 
-#include "openeaagles/base/distributions/Lognormal.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/distributions/Lognormal.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace base {

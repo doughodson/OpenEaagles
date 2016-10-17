@@ -1,12 +1,12 @@
-#include "openeaagles/simulation/OnboardComputer.h"
+#include "openeaagles/simulation/OnboardComputer.hpp"
 
-#include "openeaagles/simulation/Actions.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/TrackManager.h"
+#include "openeaagles/simulation/Actions.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
 
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
 
 namespace oe {
 namespace simulation {

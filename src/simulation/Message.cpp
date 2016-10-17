@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/Message.h"
+#include "openeaagles/simulation/Message.hpp"
 
 namespace oe {
 namespace simulation {

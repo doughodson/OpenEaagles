@@ -1,19 +1,19 @@
-#include "openeaagles/simulation/Nib.h"
-#include "openeaagles/simulation/Ntm.h"
+#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/simulation/Ntm.hpp"
 
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/GroundVehicle.h"
-#include "openeaagles/simulation/Missile.h"
-#include "openeaagles/simulation/SamVehicles.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/GroundVehicle.hpp"
+#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/simulation/SamVehicles.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/StoresMgr.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <cmath>
 

@@ -2,17 +2,17 @@
 // Class: dis::Nib
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/dis/Nib.h"
-#include "openeaagles/networks/dis/Ntm.h"
-#include "openeaagles/networks/dis/EmissionPduHandler.h"
-#include "openeaagles/networks/dis/pdu.h"
+#include "openeaagles/networks/dis/Nib.hpp"
+#include "openeaagles/networks/dis/Ntm.hpp"
+#include "openeaagles/networks/dis/EmissionPduHandler.hpp"
+#include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/Jammer.h"
-#include "openeaagles/simulation/Radar.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/Jammer.hpp"
+#include "openeaagles/simulation/Radar.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 

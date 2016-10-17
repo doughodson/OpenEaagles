@@ -1,7 +1,8 @@
-#include "openeaagles/instruments/buttons/RotarySwitch.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Number.h"
+
+#include "openeaagles/instruments/buttons/RotarySwitch.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {

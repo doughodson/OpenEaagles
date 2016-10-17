@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Classes: Logger, Logger::LogEvent
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Logger.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/util/system.h"
+#include "openeaagles/base/Logger.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/util/system.hpp"
 
 namespace oe {
 namespace base {

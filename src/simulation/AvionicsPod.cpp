@@ -1,6 +1,6 @@
-#include "openeaagles/simulation/AvionicsPod.h"
+#include "openeaagles/simulation/AvionicsPod.hpp"
 
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace simulation {

@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Angle, Degrees, Radians, Semicircles
 //------------------------------------------------------------------------------
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

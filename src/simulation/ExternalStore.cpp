@@ -1,8 +1,8 @@
 
-#include "openeaagles/simulation/ExternalStore.h"
+#include "openeaagles/simulation/ExternalStore.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/String.hpp"
 
 namespace oe {
 namespace simulation {

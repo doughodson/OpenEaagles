@@ -1,9 +1,9 @@
 
-#include "openeaagles/base/StateMachine.h"
+#include "openeaagles/base/StateMachine.hpp"
 
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 namespace base {

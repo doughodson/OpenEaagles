@@ -1,8 +1,8 @@
-#include "openeaagles/simulation/Emission.h"
+#include "openeaagles/simulation/Emission.hpp"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/RfSystem.h"
-#include "openeaagles/simulation/Player.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/RfSystem.hpp"
+#include "openeaagles/simulation/Player.hpp"
 
 #include <cmath>
 

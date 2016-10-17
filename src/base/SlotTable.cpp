@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 #include <cstring>
 
 namespace oe {

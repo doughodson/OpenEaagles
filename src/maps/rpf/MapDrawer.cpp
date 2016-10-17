@@ -2,15 +2,15 @@
 // Class: MapDrawer
 // -------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/MapDrawer.h"
-#include "openeaagles/maps/rpf/CadrgMap.h"
-#include "openeaagles/maps/rpf/TexturePager.h"
-#include "openeaagles/maps/rpf/CadrgTocEntry.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/graphics/Texture.h"
+#include "openeaagles/maps/rpf/MapDrawer.hpp"
+#include "openeaagles/maps/rpf/CadrgMap.hpp"
+#include "openeaagles/maps/rpf/TexturePager.hpp"
+#include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/graphics/Texture.hpp"
 
 #include <cmath>
 

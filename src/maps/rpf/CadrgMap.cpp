@@ -2,15 +2,15 @@
 // Class: CadrgMap
 // ---------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/CadrgMap.h"
-#include "openeaagles/maps/rpf/CadrgFile.h"
-#include "openeaagles/maps/rpf/CadrgFrame.h"
-#include "openeaagles/maps/rpf/CadrgTocEntry.h"
-#include "openeaagles/maps/rpf/TexturePager.h"
-#include "openeaagles/maps/rpf/MapDrawer.h"
-#include "openeaagles/graphics/Texture.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/maps/rpf/CadrgMap.hpp"
+#include "openeaagles/maps/rpf/CadrgFile.hpp"
+#include "openeaagles/maps/rpf/CadrgFrame.hpp"
+#include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
+#include "openeaagles/maps/rpf/TexturePager.hpp"
+#include "openeaagles/maps/rpf/MapDrawer.hpp"
+#include "openeaagles/graphics/Texture.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 #include <cstring>
 

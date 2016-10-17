@@ -1,10 +1,7 @@
-//------------------------------------------------------------------------------
-// Class: Ambassador
-//------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/Ambassador.h"
-#include "openeaagles/networks/hla/NetIO.h"
-#include "openeaagles/networks/hla/Nib.h"
+#include "openeaagles/networks/hla/Ambassador.hpp"
+#include "openeaagles/networks/hla/NetIO.hpp"
+#include "openeaagles/networks/hla/Nib.hpp"
 
 #include <iostream>
 
@@ -14,24 +11,15 @@
 namespace oe {
 namespace hla {
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Ambassador::Ambassador(NetIO* n)
 {
    hlaIo = n;
 }
 
-//------------------------------------------------------------------------------
-// Destructor
-//------------------------------------------------------------------------------
 Ambassador::~Ambassador() throw(RTI::FederateInternalError)
 {
 }
 
-//------------------------------------------------------------------------------
-// startRegistrationForObjectClass
-//------------------------------------------------------------------------------
 void Ambassador::startRegistrationForObjectClass (
    RTI::ObjectClassHandle   theClass)
 throw (
@@ -50,9 +38,6 @@ throw (
    //std::cout << std::endl;
 }
 
-//------------------------------------------------------------------------------
-// stopRegistrationForObjectClass
-//------------------------------------------------------------------------------
 void Ambassador::stopRegistrationForObjectClass (
    RTI::ObjectClassHandle   theClass)
 throw (
@@ -69,9 +54,6 @@ throw (
    //std::cout << std::endl;
 }
 
-//------------------------------------------------------------------------------
-// turnUpdatesOnForObjectInstance
-//------------------------------------------------------------------------------
 void Ambassador::turnUpdatesOnForObjectInstance (
         RTI::ObjectHandle        theObject,
   const RTI::AttributeHandleSet& theAttributes)
@@ -91,9 +73,6 @@ throw (
    //std::cout << std::endl;
 }
 
-//------------------------------------------------------------------------------
-// turnUpdatesOffForObjectInstance
-//------------------------------------------------------------------------------
 void Ambassador::turnUpdatesOffForObjectInstance (
         RTI::ObjectHandle        theObject,
   const RTI::AttributeHandleSet& theAttributes)
@@ -112,9 +91,6 @@ throw (
    //std::cout << std::endl;
 }
 
-//------------------------------------------------------------------------------
-// provideAttributeValueUpdate
-//------------------------------------------------------------------------------
 void Ambassador::provideAttributeValueUpdate (
         RTI::ObjectHandle        theObject,
   const RTI::AttributeHandleSet& theAttrs)
@@ -133,9 +109,6 @@ throw (
    //std::cout << std::endl;
 }
 
-//------------------------------------------------------------------------------
-// discoverObjectInstance
-//------------------------------------------------------------------------------
 void Ambassador::discoverObjectInstance (
    RTI::ObjectHandle          theObject,
    RTI::ObjectClassHandle     theObjectClass,
@@ -156,9 +129,6 @@ throw (
    }
 }
 
-//------------------------------------------------------------------------------
-// removeObjectInstance
-//------------------------------------------------------------------------------
 void Ambassador::removeObjectInstance (
         RTI::ObjectHandle          theObject,
   const RTI::FedTime&              theTime,
@@ -190,9 +160,6 @@ throw (
    }
 }
 
-//------------------------------------------------------------------------------
-// reflectAttributeValues
-//------------------------------------------------------------------------------
 void Ambassador::reflectAttributeValues (
         RTI::ObjectHandle                 theObject,
   const RTI::AttributeHandleValuePairSet& theAttrs,
@@ -226,9 +193,6 @@ throw (
    if (nib != nullptr) nib->reflectAttributeValues(theAttrs);
 }
 
-//------------------------------------------------------------------------------
-// turnInteractionsOn
-//------------------------------------------------------------------------------
 void Ambassador::turnInteractionsOn (
      RTI::InteractionClassHandle theInteraction)
    throw (
@@ -247,9 +211,6 @@ void Ambassador::turnInteractionsOn (
    std::cout << std::endl;
 }
 
-//------------------------------------------------------------------------------
-// turnInteractionsOff
-//------------------------------------------------------------------------------
 void Ambassador::turnInteractionsOff (
      RTI::InteractionClassHandle theInteraction)
    throw (
@@ -266,10 +227,6 @@ void Ambassador::turnInteractionsOff (
    std::cout << std::endl;
 }
 
-
-//------------------------------------------------------------------------------
-// receiveInteraction
-//------------------------------------------------------------------------------
 void Ambassador::receiveInteraction (
         RTI::InteractionClassHandle       theInteraction,
   const RTI::ParameterHandleValuePairSet& theParameters,

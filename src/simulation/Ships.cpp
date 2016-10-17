@@ -1,8 +1,8 @@
-#include "openeaagles/simulation/Ships.h"
+#include "openeaagles/simulation/Ships.hpp"
 
-#include "openeaagles/base/List.h"
+#include "openeaagles/base/List.hpp"
 #include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace simulation {

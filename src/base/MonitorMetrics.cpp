@@ -1,10 +1,10 @@
 
-#include "openeaagles/base/MonitorMetrics.h"
+#include "openeaagles/base/MonitorMetrics.hpp"
 
-#include "openeaagles/base/Cie.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/Cie.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
 #include <cstdio>
 
 namespace oe {

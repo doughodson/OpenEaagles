@@ -1,9 +1,9 @@
 // Shapes
 
-#include "openeaagles/graphics/Shapes.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/graphics/ColorGradient.h"
+#include "openeaagles/graphics/Shapes.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/graphics/ColorGradient.hpp"
 #include <GL/glu.h>
 
 namespace oe {

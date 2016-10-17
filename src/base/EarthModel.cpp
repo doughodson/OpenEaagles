@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/EarthModel.h"
+#include "openeaagles/base/EarthModel.hpp"
 
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cstring>
 

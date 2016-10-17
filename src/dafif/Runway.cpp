@@ -1,5 +1,5 @@
-#include "openeaagles/dafif/Runway.h"
-#include "openeaagles/base/Nav.h"
+#include "openeaagles/dafif/Runway.hpp"
+#include "openeaagles/base/Nav.hpp"
 #include <iostream>
 
 namespace oe {

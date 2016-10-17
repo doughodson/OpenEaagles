@@ -1728,7 +1728,7 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 #include <iostream>
 #include <cstring>
 #include <cstdio>
-#include "ReformatScanner.h"
+#include "ReformatScanner.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
 

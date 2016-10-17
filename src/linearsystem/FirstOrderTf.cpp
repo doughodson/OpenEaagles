@@ -1,5 +1,5 @@
 
-#include "openeaagles/linearsystem/FirstOrderTf.h"
+#include "openeaagles/linearsystem/FirstOrderTf.hpp"
 
 namespace oe {
 namespace linearsystem {

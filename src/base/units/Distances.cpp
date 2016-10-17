@@ -2,9 +2,9 @@
 // Distance, Meters, CentiMeters, KiloMeters, Inches, Feet, NauticalMiles,
 // StatuteMiles 
 //------------------------------------------------------------------------------
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

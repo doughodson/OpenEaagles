@@ -2,7 +2,7 @@
 // Object class
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
 #include <cctype>
 #include <cstdlib>

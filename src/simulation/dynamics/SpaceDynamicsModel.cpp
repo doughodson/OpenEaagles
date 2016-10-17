@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/dynamics/SpaceDynamicsModel.h"
+#include "openeaagles/simulation/dynamics/SpaceDynamicsModel.hpp"
 
 namespace oe {
 namespace simulation {

@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Shapes3D - shapes in 3D (mostly GLU shapes)
 //------------------------------------------------------------------------------
-#include "openeaagles/gui/glut/Shapes3D.h"
+#include "openeaagles/gui/glut/Shapes3D.hpp"
 
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Number.hpp"
 
 #include <GL/glut.h>
 #include <GL/glu.h>

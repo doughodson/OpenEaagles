@@ -1,6 +1,6 @@
-#include "openeaagles/dafif/Navaid.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/dafif/Navaid.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 #include <iostream>
 
 namespace oe {

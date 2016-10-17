@@ -3,14 +3,14 @@
 // Description: Portions of class defined to support IFF/ATC.Navaids PDUs
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/dis/NetIO.h"
-#include "openeaagles/networks/dis/Nib.h"
-#include "openeaagles/networks/dis/pdu.h"
+#include "openeaagles/networks/dis/NetIO.hpp"
+#include "openeaagles/networks/dis/Nib.hpp"
+#include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/Iff.h"
-#include "openeaagles/base/NetHandler.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/simulation/Iff.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 

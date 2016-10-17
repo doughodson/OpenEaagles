@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Statistic
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Statistic.h"
+#include "openeaagles/base/Statistic.hpp"
 
 #include <limits>
 

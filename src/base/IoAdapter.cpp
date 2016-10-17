@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/IoAdapter.h"
+#include "openeaagles/base/IoAdapter.hpp"
 
 namespace oe {
 namespace base {

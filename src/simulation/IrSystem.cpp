@@ -2,16 +2,16 @@
 // Class: IrSystem
 //==============================================================================
 
-#include "openeaagles/simulation/IrSystem.h"
+#include "openeaagles/simulation/IrSystem.hpp"
 
-#include "openeaagles/simulation/IrSeeker.h"
-#include "openeaagles/simulation/OnboardComputer.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Tdb.h"
+#include "openeaagles/simulation/IrSeeker.hpp"
+#include "openeaagles/simulation/OnboardComputer.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Tdb.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 namespace simulation {

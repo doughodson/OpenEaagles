@@ -2,9 +2,9 @@
 // Grams, KiloGrams, Slugs
 //////////////////////////////////////////////////////////////////////
 
-#include "openeaagles/base/units/Masses.h"
+#include "openeaagles/base/units/Masses.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

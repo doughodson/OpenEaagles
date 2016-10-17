@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/Image.h"
+#include "openeaagles/simulation/Image.hpp"
 
 
 namespace oe {

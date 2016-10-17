@@ -1,18 +1,15 @@
-//------------------------------------------------------------------------------
-// Class: LaeroModel
-//------------------------------------------------------------------------------
 
-#include "openeaagles/models/dynamics/LaeroModel.h"
+#include "openeaagles/models/dynamics/LaeroModel.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/AirVehicle.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/AirVehicle.hpp"
 
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Times.hpp"
 #include "openeaagles/base/osg/Matrix"
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Quat"

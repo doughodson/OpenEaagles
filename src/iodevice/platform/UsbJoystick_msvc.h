@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_windows_UsbJoystick_msvc_H__
 #define __oe_iodevice_windows_UsbJoystick_msvc_H__
 
-#include "openeaagles/iodevice/Controller.h"
+#include "openeaagles/iodevice/Controller.hpp"
 
 namespace oe {
 namespace iodevice {

@@ -1,7 +1,7 @@
 
-#include "openeaagles/linearsystem/SaH.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/linearsystem/SaH.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Frequencies.hpp"
 
 namespace oe {
 namespace linearsystem {

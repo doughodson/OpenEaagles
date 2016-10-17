@@ -2,7 +2,7 @@
 // class: Ins
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/Ins.h"
+#include "openeaagles/simulation/Ins.hpp"
 
 namespace oe {
 namespace simulation {

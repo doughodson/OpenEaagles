@@ -2,19 +2,19 @@
 // Component
 //******************************************************************************
 
-#include "openeaagles/base/Component.h"
+#include "openeaagles/base/Component.hpp"
 
-#include "openeaagles/base/Boolean.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Logger.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Statistic.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/util/system.h"
-#include "openeaagles/base/util/platform_api.h"
+#include "openeaagles/base/Boolean.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Logger.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Statistic.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/platform_api.hpp"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...

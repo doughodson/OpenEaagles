@@ -1,21 +1,16 @@
-#include "openeaagles/simulation/Buildings.h"
+#include "openeaagles/simulation/Buildings.hpp"
 
-#include "openeaagles/base/List.h"
+#include "openeaagles/base/List.hpp"
 #include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace simulation {
 
-//==============================================================================
-// class Building
-//==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Building,"Building")
 EMPTY_SERIALIZER(Building)
+EMPTY_DELETEDATA(Building)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Building::Building()
 {
     STANDARD_CONSTRUCTOR()
@@ -23,16 +18,9 @@ Building::Building()
     setType(&generic);
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Building::copyData(const Building& org, const bool)
 {
     BaseClass::copyData(org);
-}
-
-void Building::deleteData()
-{
 }
 
 //-----------------------------------------------------------------------------

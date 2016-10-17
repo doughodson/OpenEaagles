@@ -1,8 +1,8 @@
 // Class: IoData
 
-#include "openeaagles/iodevice/IoData.h"
+#include "openeaagles/iodevice/IoData.hpp"
 
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace iodevice {

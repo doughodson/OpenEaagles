@@ -2,15 +2,15 @@
 // Class: NetIO
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/hla/NetIO.h"
-#include "openeaagles/networks/hla/Nib.h"
-#include "openeaagles/networks/hla/Ambassador.h"
+#include "openeaagles/networks/hla/NetIO.hpp"
+#include "openeaagles/networks/hla/Nib.hpp"
+#include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
 
-#include "openeaagles/base/util/system.h"
+#include "openeaagles/base/util/system.hpp"
 
 #include <cstring>
 

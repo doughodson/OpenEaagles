@@ -2,21 +2,21 @@
 // Electromagnetic Emission PDU (Portions of NetIO and Nib)
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/dis/EmissionPduHandler.h"
-#include "openeaagles/networks/dis/Nib.h"
-#include "openeaagles/networks/dis/pdu.h"
+#include "openeaagles/networks/dis/EmissionPduHandler.hpp"
+#include "openeaagles/networks/dis/Nib.hpp"
+#include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/simulation/Jammer.h"
-#include "openeaagles/simulation/Radar.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/functors/Functions.h"
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/Decibel.h"
-#include "openeaagles/base/NetHandler.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
+#include "openeaagles/simulation/Jammer.hpp"
+#include "openeaagles/simulation/Radar.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/functors/Functions.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/Decibel.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/Number.hpp"
 
 #include <cmath>
 #include <cstring>

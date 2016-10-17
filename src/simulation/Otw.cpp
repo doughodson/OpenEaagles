@@ -1,17 +1,17 @@
-#include "openeaagles/simulation/Otw.h"
+#include "openeaagles/simulation/Otw.hpp"
 
-#include "openeaagles/simulation/NetIO.h"
-#include "openeaagles/simulation/Nib.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Weapon.h"
+#include "openeaagles/simulation/NetIO.hpp"
+#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
 
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cstring>
 #include <cmath>

@@ -1,18 +1,18 @@
 //------------------------------------------------------------------------------
 // Class: Graphic
 //------------------------------------------------------------------------------
-#include "openeaagles/graphics/Graphic.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/graphics/ColorRotary.h"
-#include "openeaagles/graphics/Material.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Transforms.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Rgb.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Float.h"
+#include "openeaagles/graphics/Graphic.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/graphics/ColorRotary.hpp"
+#include "openeaagles/graphics/Material.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Transforms.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Rgb.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Float.hpp"
 
 namespace oe {
 namespace graphics {

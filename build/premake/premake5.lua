@@ -90,7 +90,7 @@ workspace "oe"
    -- base library
    project "base"
       files {
-         "../../include/openeaagles/base/**.h",
+         "../../include/openeaagles/base/**.h*",
          "../../include/openeaagles/base/**.inl",
          "../../include/openeaagles/base/**.epp",
          "../../include/openeaagles/base/osg/*",
@@ -109,7 +109,7 @@ workspace "oe"
    -- OpenGL-based graphics library
    project "graphics"
       files {
-         "../../include/openeaagles/graphics/**.h",
+         "../../include/openeaagles/graphics/**.h*",
          "../../src/graphics/**.cpp",
          "../../src/graphics/**.l"
       }
@@ -120,7 +120,7 @@ workspace "oe"
    -- OpenGL GLUT interface library
    project "glut"
       files {
-         "../../include/openeaagles/gui/glut/**.h",
+         "../../include/openeaagles/gui/glut/**.h*",
          "../../src/gui/glut/**.cpp"
       }
       targetname "glut"
@@ -128,7 +128,7 @@ workspace "oe"
    -- DAFIF airport loader library
    project "dafif"
       files {
-         "../../include/openeaagles/dafif/**.h",
+         "../../include/openeaagles/dafif/**.h*",
          "../../src/dafif/**.cpp"
       }
       targetname "dafif"
@@ -136,7 +136,7 @@ workspace "oe"
    -- IEEE DIS interface library
    project "dis"
       files {
-         "../../include/openeaagles/networks/dis/**.h",
+         "../../include/openeaagles/networks/dis/**.h*",
          "../../src/networks/dis/**.cpp"
       }
       targetname "dis"
@@ -144,7 +144,7 @@ workspace "oe"
    -- IEEE HLA interface library (abstract support)
 --   project "hla"
 --      files {
---         "../../include/openeaagles/networks/hla/**.h",
+--         "../../include/openeaagles/networks/hla/**.h*",
 --         "../../src/networks/hla/**.cpp"
 --      }
 --      includedirs { HLAIncPath }
@@ -154,7 +154,7 @@ workspace "oe"
    -- graphical instruments library
    project "instruments"
       files {
-         "../../include/openeaagles/instruments/**.h",
+         "../../include/openeaagles/instruments/**.h*",
          "../../include/openeaagles/instruments/**.epp",
          "../../src/instruments/**.cpp"
       }
@@ -163,7 +163,7 @@ workspace "oe"
    -- i/o device library
    project "iodevice"
       files {
-         "../../include/openeaagles/iodevice/**.h",
+         "../../include/openeaagles/iodevice/**.h*",
          "../../src/iodevice/**.*"
       }
       excludes { "../../src/iodevice/platform/UsbJoystick_linux.*"   }
@@ -172,7 +172,7 @@ workspace "oe"
    -- linear systems library
    project "linearsystem"
       files {
-         "../../include/openeaagles/linearsystem/**.h",
+         "../../include/openeaagles/linearsystem/**.h*",
          "../../src/linearsystem/**.cpp"
       }
       targetname "linearsystem"
@@ -180,7 +180,7 @@ workspace "oe"
    -- models library
    project "models"
       files {
-         "../../include/openeaagles/models/**.h",
+         "../../include/openeaagles/models/**.h*",
          "../../src/models/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/JSBSim" }
@@ -189,7 +189,7 @@ workspace "oe"
    -- otw library
    project "otw"
       files {
-         "../../include/openeaagles/otw/**.h",
+         "../../include/openeaagles/otw/**.h*",
          "../../src/otw/**.h",
          "../../src/otw/**.cpp"
       }
@@ -201,7 +201,7 @@ workspace "oe"
 
    project "recorder"
       files {
-         "../../include/openeaagles/recorder/**.h",
+         "../../include/openeaagles/recorder/**.h*",
          "../../include/openeaagles/recorder/*.inl",
          "../../include/openeaagles/recorder/**.proto",
          "../../src/recorder/**.cpp",
@@ -213,7 +213,7 @@ workspace "oe"
    -- raster product format maps library
    project "rpf"
       files {
-         "../../include/openeaagles/maps/rpf/**.h",
+         "../../include/openeaagles/maps/rpf/**.h*",
          "../../src/maps/rpf/**.cpp"
       }
       targetname "rpf"
@@ -221,7 +221,7 @@ workspace "oe"
    -- IEEE HLA interface library for RPR FOM
 --   project "rprfom"
 --      files {
---         "../../include/openeaagles/networks/rprfom/**.h",
+--         "../../include/openeaagles/networks/rprfom/**.h*",
 --         "../../src/networks/rprfom/**.cpp"
 --      }
 --      includedirs { HLAIncPath }
@@ -231,7 +231,7 @@ workspace "oe"
    -- simulation library
    project "simulation"
       files {
-         "../../include/openeaagles/simulation/**.h",
+         "../../include/openeaagles/simulation/**.h*",
          "../../include/openeaagles/simulation/*.inl",
          "../../src/simulation/**.cpp"
       }
@@ -240,7 +240,7 @@ workspace "oe"
    -- terrain library
    project "terrain"
       files {
-         "../../include/openeaagles/terrain/**.h",
+         "../../include/openeaagles/terrain/**.h*",
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"

@@ -1,6 +1,6 @@
 // Class: IoData
 
-#include "openeaagles/base/IoData.h"
+#include "openeaagles/base/IoData.hpp"
 
 namespace oe {
 namespace base {

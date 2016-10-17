@@ -1,19 +1,19 @@
 
-#include "openeaagles/simulation/Datalink.h"
+#include "openeaagles/simulation/Datalink.hpp"
 
-#include "openeaagles/simulation/Message.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Radio.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/simulation/OnboardComputer.h"
+#include "openeaagles/simulation/Message.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Radio.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
+#include "openeaagles/simulation/OnboardComputer.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/util/system.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/util/system.hpp"
 
 namespace oe {
 namespace simulation {

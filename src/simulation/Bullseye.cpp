@@ -1,6 +1,6 @@
 // Bullseye
 
-#include "openeaagles/simulation/Bullseye.h"
+#include "openeaagles/simulation/Bullseye.hpp"
 
 namespace oe {
 namespace simulation {

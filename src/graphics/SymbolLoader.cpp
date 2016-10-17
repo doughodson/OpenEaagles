@@ -1,13 +1,13 @@
 
-#include "openeaagles/graphics/SymbolLoader.h"
-#include "openeaagles/graphics/Readouts.h"
-#include "openeaagles/graphics/Polygon.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/graphics/SymbolLoader.hpp"
+#include "openeaagles/graphics/Readouts.hpp"
+#include "openeaagles/graphics/Polygon.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>
 

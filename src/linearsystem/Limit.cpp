@@ -1,6 +1,6 @@
 
-#include "openeaagles/linearsystem/Limit.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/linearsystem/Limit.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace linearsystem {

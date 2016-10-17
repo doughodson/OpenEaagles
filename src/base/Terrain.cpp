@@ -2,17 +2,17 @@
 // class Terrain --
 //==============================================================================
 
-#include "openeaagles/base/Terrain.h"
+#include "openeaagles/base/Terrain.hpp"
 
-#include "openeaagles/base/Color.h"
-#include "openeaagles/base/Hsva.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Rgba.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/Color.hpp"
+#include "openeaagles/base/Hsva.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Rgba.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include "openeaagles/base/osg/Vec2"
 #include "openeaagles/base/osg/Vec3"
@@ -23,7 +23,7 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Terrain,"TerrainDatabase")
+IMPLEMENT_ABSTRACT_SUBCLASS(Terrain, "TerrainDatabase")
 
 // slot table
 BEGIN_SLOTTABLE(Terrain)

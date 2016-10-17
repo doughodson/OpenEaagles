@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/readouts/HexReadout.h"
+#include "openeaagles/graphics/readouts/HexReadout.hpp"
 
-#include "ReformatScanner.h"
+#include "ReformatScanner.hpp"
 
 #include <cstdio>
 #include <cstdlib>

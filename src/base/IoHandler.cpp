@@ -1,13 +1,13 @@
 
-#include "openeaagles/base/IoHandler.h"
-#include "openeaagles/base/IoData.h"
-#include "openeaagles/base/IoDevice.h"
+#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/IoData.hpp"
+#include "openeaagles/base/IoDevice.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Thread.h"
-#include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Thread.hpp"
+#include "openeaagles/base/units/Frequencies.hpp"
 
 namespace oe {
 namespace base {

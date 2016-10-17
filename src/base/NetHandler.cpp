@@ -25,7 +25,7 @@
 //    static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/base/NetHandler.hpp"
 
 namespace oe {
 namespace base {

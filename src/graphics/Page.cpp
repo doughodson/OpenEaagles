@@ -1,11 +1,11 @@
 //
 // Class: Page
 
-#include "openeaagles/graphics/Page.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
+#include "openeaagles/graphics/Page.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
 
 namespace oe {
 namespace graphics {

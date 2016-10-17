@@ -1,6 +1,6 @@
 
-#include "openeaagles/base/Rng.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Rng.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace base {

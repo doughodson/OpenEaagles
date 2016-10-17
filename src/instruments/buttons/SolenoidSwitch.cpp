@@ -1,15 +1,16 @@
-#include "openeaagles/instruments/buttons/SolenoidSwitch.h"
 
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Timers.h"
+#include "openeaagles/instruments/buttons/SolenoidSwitch.hpp"
+
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Timers.hpp"
 
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(SolenoidSwitch,"SolenoidSwitch")
+IMPLEMENT_SUBCLASS(SolenoidSwitch, "SolenoidSwitch")
 EMPTY_SERIALIZER(SolenoidSwitch)
 
 //------------------------------------------------------------------------------

@@ -1,10 +1,10 @@
 
-#include "openeaagles/otw/factory.h"
+#include "openeaagles/otw/factory.hpp"
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/otw/OtwCigiCl.h"
-#include "openeaagles/otw/OtwPC.h"
+#include "openeaagles/otw/OtwCigiCl.hpp"
+#include "openeaagles/otw/OtwPC.hpp"
 
 #include <string>
 

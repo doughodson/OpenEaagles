@@ -1,4 +1,4 @@
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/String.hpp"
 
 #include <cstdlib>
 #include <cstring>

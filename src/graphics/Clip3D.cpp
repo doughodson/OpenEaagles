@@ -16,7 +16,7 @@
 //   */
 //
 //------------------------------------------------------------------------------
-#include "openeaagles/graphics/Clip3D.h"
+#include "openeaagles/graphics/Clip3D.hpp"
 
 #include <limits>
 

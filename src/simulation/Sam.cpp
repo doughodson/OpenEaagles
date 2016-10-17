@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/Sam.h"
+#include "openeaagles/simulation/Sam.hpp"
 
 namespace oe {
 namespace simulation {

@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/units/AngularVelocity.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/units/AngularVelocity.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

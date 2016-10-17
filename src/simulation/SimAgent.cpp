@@ -1,16 +1,16 @@
 
-#include "openeaagles/simulation/SimAgent.h"
+#include "openeaagles/simulation/SimAgent.hpp"
 
-#include "openeaagles/base/ubf/Action.h"
-#include "openeaagles/base/ubf/Behavior.h"
-#include "openeaagles/base/ubf/State.h"
+#include "openeaagles/base/ubf/Action.hpp"
+#include "openeaagles/base/ubf/Behavior.hpp"
+#include "openeaagles/base/ubf/State.hpp"
 
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/String.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Station.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Station.hpp"
 
 namespace oe {
 namespace simulation {

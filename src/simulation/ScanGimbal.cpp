@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Class: ScanGimbal
 //------------------------------------------------------------------------------
-#include "openeaagles/simulation/ScanGimbal.h"
-#include "openeaagles/simulation/Emission.h"
+#include "openeaagles/simulation/ScanGimbal.hpp"
+#include "openeaagles/simulation/Emission.hpp"
 
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 #include <cmath>
 

@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/ubf/State.h"
+#include "openeaagles/base/ubf/State.hpp"
 
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 namespace base {

@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/ColorGradient.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
+#include "openeaagles/graphics/ColorGradient.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
 
 namespace oe {
 namespace graphics {

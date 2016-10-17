@@ -1,17 +1,17 @@
 
-#include "openeaagles/terrain/QuadMap.h"
+#include "openeaagles/terrain/QuadMap.hpp"
 
-#include "openeaagles/base/Terrain.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/NetHandler.h"   // for byte-swapping only
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/Terrain.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 namespace oe {
 namespace terrain {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(QuadMap,"QuadMap")
+IMPLEMENT_ABSTRACT_SUBCLASS(QuadMap, "QuadMap")
 EMPTY_SLOTTABLE(QuadMap)
 EMPTY_SERIALIZER(QuadMap)
 

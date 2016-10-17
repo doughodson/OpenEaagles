@@ -1,6 +1,6 @@
 // Class: Pilot
 
-#include "openeaagles/simulation/Pilot.h"
+#include "openeaagles/simulation/Pilot.hpp"
 
 namespace oe {
 namespace simulation {

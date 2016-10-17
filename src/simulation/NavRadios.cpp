@@ -1,13 +1,13 @@
 
-#include "openeaagles/simulation/NavRadios.h"
+#include "openeaagles/simulation/NavRadios.hpp"
 
-#include "openeaagles/dafif/AirportLoader.h"
-#include "openeaagles/dafif/NavaidLoader.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/dafif/AirportLoader.hpp"
+#include "openeaagles/dafif/NavaidLoader.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 namespace oe {
 namespace simulation {

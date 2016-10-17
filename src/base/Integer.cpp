@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Class: Integer
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Integer.hpp"
 
 namespace oe {
 namespace base {

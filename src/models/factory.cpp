@@ -1,17 +1,17 @@
 
-#include "openeaagles/models/factory.h"
+#include "openeaagles/models/factory.hpp"
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
 // dynamics models
-#include "openeaagles/models/dynamics/JSBSimModel.h"
-#include "openeaagles/models/dynamics/RacModel.h"
-#include "openeaagles/models/dynamics/LaeroModel.h"
+#include "openeaagles/models/dynamics/JSBSimModel.hpp"
+#include "openeaagles/models/dynamics/RacModel.hpp"
+#include "openeaagles/models/dynamics/LaeroModel.hpp"
 
 // sensor models
-#include "openeaagles/models/sensors/Gmti.h"
-#include "openeaagles/models/sensors/Tws.h"
-#include "openeaagles/models/sensors/Stt.h"
+#include "openeaagles/models/sensors/Gmti.hpp"
+#include "openeaagles/models/sensors/Tws.hpp"
+#include "openeaagles/models/sensors/Stt.hpp"
 
 #include <string>
 

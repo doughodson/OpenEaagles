@@ -1,19 +1,19 @@
 
-#include "openeaagles/simulation/Gimbal.h"
+#include "openeaagles/simulation/Gimbal.hpp"
 
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Tdb.h"
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/Terrain.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Tdb.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/Terrain.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

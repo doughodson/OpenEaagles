@@ -7,34 +7,34 @@
 # pragma warning(disable: 4996)
 #endif
 
-#include "openeaagles/otw/OtwCigiClV2.h"
+#include "openeaagles/otw/OtwCigiClV2.hpp"
 
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/Bomb.h"
-#include "openeaagles/simulation/Buildings.h"
-#include "openeaagles/simulation/Effects.h"
-#include "openeaagles/simulation/GroundVehicle.h"
-#include "openeaagles/simulation/LifeForms.h"
-#include "openeaagles/simulation/Missile.h"
-#include "openeaagles/simulation/Navigation.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/SamVehicles.h"
-#include "openeaagles/simulation/Ships.h"
-#include "openeaagles/simulation/SpaceVehicle.h"
-#include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/simulation/Weapon.h"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/Bomb.hpp"
+#include "openeaagles/simulation/Buildings.hpp"
+#include "openeaagles/simulation/Effects.hpp"
+#include "openeaagles/simulation/GroundVehicle.hpp"
+#include "openeaagles/simulation/LifeForms.hpp"
+#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/simulation/Navigation.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/SamVehicles.hpp"
+#include "openeaagles/simulation/Ships.hpp"
+#include "openeaagles/simulation/SpaceVehicle.hpp"
+#include "openeaagles/simulation/StoresMgr.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
 
-#include "openeaagles/base/SlotTable.h"
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/NetHandler.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/SlotTable.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 #include "cigicl/CigiEntityCtrlV2.h"
 #include "cigicl/CigiCompCtrlV2.h"
@@ -101,7 +101,7 @@ END_SLOT_MAP()
 // Parameters
 //------------------------------------------------------------------------------
 static const int MAX_BUF_SIZE = 1472;
-static const LCreal LOS_REQ_TIMEOUT = 2.0f;     // one second timeout
+static const double LOS_REQ_TIMEOUT = 2.0f;     // one second timeout
 
 //------------------------------------------------------------------------------
 // Constructor(s)
@@ -282,7 +282,7 @@ bool OtwCigiClV2::setHideOwnshipModel(const bool f)
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
-void OtwCigiClV2::updateData(const LCreal dt)
+void OtwCigiClV2::updateData(const double dt)
 {
    // ---
    // Init the static CIGI system (only once for all instances)
@@ -541,7 +541,7 @@ bool OtwCigiClV2::setCommonModelData(CigiEntityCtrlV2* const ec, const unsigned 
         // Set angles
         ec->SetRoll(p->getRollD());
         ec->SetPitch(p->getPitchD());
-        LCreal hdg = p->getHeadingD();
+        double hdg = p->getHeadingD();
         if (hdg < 0.0) {
             hdg += 360.0;
         }
@@ -881,7 +881,7 @@ bool OtwCigiClV2::setGndVehicleData(OtwModelCigiClV2* const m, const unsigned sh
        launcherAPC->SetEntityID(entity);
        launcherAPC->SetArtPartID(1);       // for MAZ-543; 1 is the launcher
        launcherAPC->SetPitchEn(true);      // Pitch enabled
-       launcherAPC->SetPitch(p->getLauncherPosition() * (LCreal) base::Angle::R2DCC);
+       launcherAPC->SetPitch(p->getLauncherPosition() * (double) base::Angle::R2DCC);
        m->launcherApcActive = true;
 
        // Attached missile
@@ -1418,10 +1418,10 @@ bool OtwCigiClV2::lineOfSightRequest(
             const double lat,          // Source latitude         (deg)
             const double lon,          // Source longitude        (deg)
             const double alt,          // Source altitude         (m)
-            const LCreal hdg,          // Source heading          (deg)
-            const LCreal pitch,        // Source pitch            (deg)
-            const LCreal minRange,     // Request minimum range   (m)
-            const LCreal maxRange      // Request maximum range   (m)
+            const double hdg,          // Source heading          (deg)
+            const double pitch,        // Source pitch            (deg)
+            const double minRange,     // Request minimum range   (m)
+            const double maxRange      // Request maximum range   (m)
          )
 {
    bool ok = false;
@@ -1450,7 +1450,7 @@ bool OtwCigiClV2::getLineOfSightData(
             double* const lat,      // Point latitude         (deg)
             double* const lon,      // Point longitude        (deg)
             double* const alt,      // Point altitude         (m)
-            LCreal* const rng,      // Range to point         (m)
+            double* const rng,      // Range to point         (m)
             int* const material     // Material code
          )
 {
@@ -1756,7 +1756,7 @@ bool OtwCigiClV2::sendCigiData()
                   hotRequest.SetLat(hotLat);
                   hotRequest.SetLon(hotLon);
                   //osg::Vec3 pos = oldest->getPlayer()->getPosition();
-                  //LCreal alt;
+                  //double alt;
                   //base::Nav::convertPosVec2LL(
                   //         getRefLatitude(), getRefLongitude(),
                   //         pos,
@@ -1959,7 +1959,7 @@ void OtwCigiClV2::hotResp(const CigiHotRespV2* const p)
             if (model->isHotActive() && model->getPlayer() != nullptr) {
                // When the player and elevation table are still valid, store
                // the terrain elevation (meters)
-               model->getPlayer()->setTerrainElevation((LCreal)p->GetHot());
+               model->getPlayer()->setTerrainElevation((double)p->GetHot());
                //std::cout << "hotResp: alt = " << p->alt << ", pid = " << model->getPlayer()->getID() << std::endl;
             }
         }

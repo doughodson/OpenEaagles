@@ -1,10 +1,10 @@
 //==============================================================================
 //==============================================================================
 
-#include "openeaagles/base/Transforms.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/Transforms.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace base {

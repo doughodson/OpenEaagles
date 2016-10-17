@@ -1,6 +1,6 @@
-#include "openeaagles/instruments/dials/GMeterDial.h"
+#include "openeaagles/instruments/dials/GMeterDial.hpp"
 
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 namespace instruments {

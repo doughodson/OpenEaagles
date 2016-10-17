@@ -1,13 +1,11 @@
-//------------------------------------------------------------------------------
-// DataRecorder macros
-//------------------------------------------------------------------------------
+
 #ifndef __oe_recorder_DataRecorder_Inline__
 #define __oe_recorder_DataRecorder_Inline__
 
 inline OutputHandler* DataRecorder::getOutputHandler()                { return outputHandler; }
 inline const OutputHandler* DataRecorder::getOutputHandler() const    { return outputHandler; }
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // DataRecorder Macros
 //
 //    BEGIN_RECORDER_HANDLER_TABLE(ThisType) and END_RECORDER_HANDLER_TABLE() 
@@ -17,7 +15,7 @@ inline const OutputHandler* DataRecorder::getOutputHandler() const    { return o
 //       If 'id' matches the recorder event ID pass to the recordDataImp()
 //       then the function 'func' is called.
 //
-//==============================================================================
+//------------------------------------------------------------------------------
 
 #define BEGIN_RECORDER_HANDLER_TABLE(ThisType)                 \
 bool ThisType::recordDataImp(                                  \

@@ -1,5 +1,5 @@
-#include "openeaagles/instruments/dials/DialPointer.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/instruments/dials/DialPointer.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace instruments {

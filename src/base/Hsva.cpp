@@ -1,9 +1,9 @@
 //------------------------------------------------------------------------------
 // Hsva
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Hsva.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/Hsva.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace base {

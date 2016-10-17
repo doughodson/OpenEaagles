@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/util/osg_utils.h"
+#include "openeaagles/base/util/osg_utils.hpp"
 
 #include "openeaagles/base/osg/Vec3"
 #include "openeaagles/base/osg/Vec4"

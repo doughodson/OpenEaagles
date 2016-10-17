@@ -1,10 +1,10 @@
 
-#include "openeaagles/gui/glut/factory.h"
+#include "openeaagles/gui/glut/factory.hpp"
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/gui/glut/GlutDisplay.h"
-#include "openeaagles/gui/glut/Shapes3D.h"
+#include "openeaagles/gui/glut/GlutDisplay.hpp"
+#include "openeaagles/gui/glut/Shapes3D.hpp"
 
 #include <string>
 

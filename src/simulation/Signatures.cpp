@@ -1,15 +1,15 @@
-#include "openeaagles/simulation/Signatures.h"
+#include "openeaagles/simulation/Signatures.hpp"
 
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/Player.h"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/Player.hpp"
 
-#include "openeaagles/base/Decibel.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Areas.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/Decibel.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Areas.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

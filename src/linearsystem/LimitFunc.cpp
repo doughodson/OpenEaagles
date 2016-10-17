@@ -1,5 +1,5 @@
 
-#include "openeaagles/linearsystem/LimitFunc.h"
+#include "openeaagles/linearsystem/LimitFunc.hpp"
 
 namespace oe {
 namespace linearsystem {

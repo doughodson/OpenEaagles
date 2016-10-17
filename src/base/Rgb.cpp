@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Rgb
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Rgb.h"
-#include "openeaagles/base/Float.h"
+#include "openeaagles/base/Rgb.hpp"
+#include "openeaagles/base/Float.hpp"
 
 namespace oe {
 namespace base {

@@ -1,14 +1,14 @@
-#include "openeaagles/simulation/Rwr.h"
+#include "openeaagles/simulation/Rwr.hpp"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/TrackManager.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
 
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
 
 #include <cmath>
 

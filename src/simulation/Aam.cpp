@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/Aam.h"
+#include "openeaagles/simulation/Aam.hpp"
 
 namespace oe {
 namespace simulation {

@@ -1,8 +1,8 @@
 //------------------------------------------------------------------------------
 // Class: Translator
 //------------------------------------------------------------------------------
-#include "openeaagles/graphics/Translator.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/graphics/Translator.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace graphics {

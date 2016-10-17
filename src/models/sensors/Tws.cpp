@@ -1,37 +1,22 @@
 
-#include "openeaagles/models/sensors/Tws.h"
+#include "openeaagles/models/sensors/Tws.hpp"
 
 namespace oe {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws,"Tws")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Tws, "Tws")
+EMPTY_DELETEDATA(Tws)
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator & clone()
-//------------------------------------------------------------------------------
 Tws::Tws()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Tws::copyData(const Tws& org, const bool)
 {
     BaseClass::copyData(org);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Tws::deleteData()
-{
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Tws::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

@@ -1,7 +1,7 @@
 
-#include "openeaagles/iodevice/Controller.h"
+#include "openeaagles/iodevice/Controller.hpp"
 
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace iodevice {

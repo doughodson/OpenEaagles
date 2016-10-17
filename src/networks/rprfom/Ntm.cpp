@@ -1,9 +1,9 @@
 
-#include "openeaagles/networks/rprfom/Ntm.h"
-#include "openeaagles/networks/rprfom/Nib.h"
+#include "openeaagles/networks/rprfom/Ntm.hpp"
+#include "openeaagles/networks/rprfom/Nib.hpp"
 
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 namespace rprfom {

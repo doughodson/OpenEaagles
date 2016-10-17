@@ -1,8 +1,8 @@
 
-#include "openeaagles/instruments/eadi3D/Eadi3DPage.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/instruments/eadi3d/Eadi3DPage.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/base/Number.hpp"
 
 // setup local variables and static variables
 #define RADIUS_180      1.625                   /* 180 in view */

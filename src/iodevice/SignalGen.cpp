@@ -1,12 +1,12 @@
 // Class: SignalGen
 
-#include "openeaagles/iodevice/SignalGen.h"
+#include "openeaagles/iodevice/SignalGen.hpp"
 
-#include "openeaagles/base/IoData.h"
-#include "openeaagles/base/IoDevice.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Frequencies.h"
+#include "openeaagles/base/IoData.hpp"
+#include "openeaagles/base/IoDevice.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Frequencies.hpp"
 
 #include <cmath>
 

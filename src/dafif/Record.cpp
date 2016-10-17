@@ -1,8 +1,8 @@
 
-#include "openeaagles/dafif/Record.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/dafif/Record.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <iostream>
 #include <cstring>

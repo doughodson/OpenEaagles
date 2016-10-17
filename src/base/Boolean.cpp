@@ -2,7 +2,7 @@
 // Boolean
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/Boolean.h"
+#include "openeaagles/base/Boolean.hpp"
 
 namespace oe {
 namespace base {

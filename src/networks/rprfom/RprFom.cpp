@@ -1,5 +1,5 @@
 
-#include "openeaagles/networks/rprfom/RprFom.h"
+#include "openeaagles/networks/rprfom/RprFom.hpp"
  
 namespace oe {
 namespace rprfom {

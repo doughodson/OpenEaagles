@@ -2,7 +2,7 @@
 // Class: StrokeFont
 // Description: Modified version of SGI's stroke font
 //------------------------------------------------------------------------------
-#include "openeaagles/graphics/StrokeFont.h"
+#include "openeaagles/graphics/StrokeFont.hpp"
 
 namespace oe {
 namespace graphics {

@@ -1,12 +1,12 @@
 // Class: AnalogInput
 
-#include "openeaagles/iodevice/AnalogInput.h"
+#include "openeaagles/iodevice/AnalogInput.hpp"
 
-#include "openeaagles/base/IoData.h"
-#include "openeaagles/base/IoDevice.h"
-#include "openeaagles/base/IoHandler.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/IoData.hpp"
+#include "openeaagles/base/IoDevice.hpp"
+#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
 
 namespace oe {
 namespace iodevice {

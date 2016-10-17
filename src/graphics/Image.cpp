@@ -1,6 +1,6 @@
 
-#include "openeaagles/graphics/Image.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/graphics/Image.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <fstream>
 #include <cstring>

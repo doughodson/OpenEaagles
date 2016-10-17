@@ -1,37 +1,25 @@
 
-#include "openeaagles/models/sensors/Stt.h"
+#include "openeaagles/models/sensors/Stt.hpp"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/TrackManager.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
 
 namespace oe {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stt,"Stt")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stt, "Stt")
+EMPTY_DELETEDATA(Stt)
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator & clone()
-//------------------------------------------------------------------------------
 Stt::Stt()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Stt::copyData(const Stt& org, const bool)
 {
     BaseClass::copyData(org);
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Stt::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

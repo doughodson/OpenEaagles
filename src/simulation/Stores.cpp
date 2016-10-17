@@ -1,13 +1,13 @@
 // Class Stores
 
-#include "openeaagles/simulation/Stores.h"
-#include "openeaagles/simulation/Weapon.h"
+#include "openeaagles/simulation/Stores.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
 namespace simulation {

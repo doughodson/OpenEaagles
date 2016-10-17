@@ -1,7 +1,7 @@
 
-#include "openeaagles/linearsystem/LagFilter.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Times.h"
+#include "openeaagles/linearsystem/LagFilter.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Times.hpp"
 
 namespace oe {
 namespace linearsystem {

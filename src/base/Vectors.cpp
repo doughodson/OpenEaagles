@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // CVector and RVector
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Vectors.h"
+#include "openeaagles/base/Vectors.hpp"
 #include <iostream>
 #include <iomanip>
 

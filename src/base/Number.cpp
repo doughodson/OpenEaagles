@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Number
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace base {

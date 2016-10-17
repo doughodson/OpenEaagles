@@ -17,20 +17,20 @@
 //      SimLogger::DetonationEvent  -- Weapon Detonated
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/SimLogger.h"
+#include "openeaagles/simulation/SimLogger.hpp"
 
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/NetIO.h"
-#include "openeaagles/simulation/Nib.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/TrackManager.h"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/NetIO.hpp"
+#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
 
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <string>
 #include <sstream>

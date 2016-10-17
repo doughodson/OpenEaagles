@@ -1,16 +1,16 @@
 
-#include "openeaagles/simulation/Missile.h"
+#include "openeaagles/simulation/Missile.hpp"
 
-#include "openeaagles/simulation/DataRecorder.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/TrackManager.h"
-#include "openeaagles/simulation/TabLogger.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/TrackManager.hpp"
+#include "openeaagles/simulation/TabLogger.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

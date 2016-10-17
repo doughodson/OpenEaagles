@@ -12,17 +12,17 @@
 // afterwards, it will complete its process after the sensor, and will accept inputs
 // in the same frame in which they were generated.
 
-#include "openeaagles/simulation/IrAtmosphere.h"
-#include "openeaagles/simulation/IrSeeker.h"
-#include "openeaagles/simulation/AngleOnlyTrackManager.h"
-#include "openeaagles/simulation/IrQueryMsg.h"
-#include "openeaagles/simulation/IrSensor.h"
-#include "openeaagles/simulation/OnboardComputer.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/simulation/IrAtmosphere.hpp"
+#include "openeaagles/simulation/IrSeeker.hpp"
+#include "openeaagles/simulation/AngleOnlyTrackManager.hpp"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
+#include "openeaagles/simulation/IrSensor.hpp"
+#include "openeaagles/simulation/OnboardComputer.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 #include <cmath>
 

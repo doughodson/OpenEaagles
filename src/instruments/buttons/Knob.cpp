@@ -1,8 +1,8 @@
 
-#include "openeaagles/instruments/buttons/Knob.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/graphics/Display.h"
-#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/instruments/buttons/Knob.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/graphics/Display.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
 
 #include <GL/glu.h>
 #include <cmath>

@@ -2,7 +2,7 @@
 // class: Gps
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/Gps.h"
+#include "openeaagles/simulation/Gps.hpp"
 
 namespace oe {
 namespace simulation {

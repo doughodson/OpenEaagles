@@ -1,18 +1,18 @@
 
-#include "openeaagles/simulation/AngleOnlyTrackManager.h"
-#include "openeaagles/simulation/IrQueryMsg.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/TabLogger.h"
-#include "openeaagles/simulation/Track.h"
-#include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/units/Times.h"
+#include "openeaagles/simulation/AngleOnlyTrackManager.hpp"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/TabLogger.hpp"
+#include "openeaagles/simulation/Track.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/units/Times.hpp"
 
-#include "openeaagles/simulation/DataRecorder.h"
-#include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
 #include <cmath>
 

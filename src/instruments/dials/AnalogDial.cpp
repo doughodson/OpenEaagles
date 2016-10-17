@@ -1,5 +1,5 @@
-#include "openeaagles/instruments/dials/AnalogDial.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/instruments/dials/AnalogDial.hpp"
+#include "openeaagles/base/Number.hpp"
 #include <GL/glu.h>
 
 namespace oe {

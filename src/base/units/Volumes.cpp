@@ -2,9 +2,9 @@
 // Liters, Cubic - Meters, Feet, Inches
 ///////////////////////////////////////////////////////////////////////////////
 
-#include "openeaagles/base/units/Volumes.h"
+#include "openeaagles/base/units/Volumes.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

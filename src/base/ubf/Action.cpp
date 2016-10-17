@@ -2,7 +2,7 @@
 // Class: Action
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/ubf/Action.h"
+#include "openeaagles/base/ubf/Action.hpp"
 
 namespace oe {
 namespace base {

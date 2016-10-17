@@ -2,23 +2,23 @@
 // Classes: dis::NetIO and dis::NtmInputNode
 //==============================================================================
 
-#include "openeaagles/networks/dis/NetIO.h"
-#include "openeaagles/networks/dis/Nib.h"
-#include "openeaagles/networks/dis/Ntm.h"
-#include "openeaagles/networks/dis/EmissionPduHandler.h"
-#include "openeaagles/networks/dis/pdu.h"
+#include "openeaagles/networks/dis/NetIO.hpp"
+#include "openeaagles/networks/dis/Nib.hpp"
+#include "openeaagles/networks/dis/Ntm.hpp"
+#include "openeaagles/networks/dis/EmissionPduHandler.hpp"
+#include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/Radar.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/NetHandler.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/simulation/Radar.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstdlib>
 #include <cstring>

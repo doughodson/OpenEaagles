@@ -1,4 +1,4 @@
-#include "openeaagles/simulation/Ntm.h"
+#include "openeaagles/simulation/Ntm.hpp"
 
 namespace oe {
 namespace simulation {

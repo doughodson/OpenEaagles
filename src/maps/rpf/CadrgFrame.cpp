@@ -2,9 +2,9 @@
 // Class: CadrgFrame
 //------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/CadrgFrame.h"
-#include "openeaagles/maps/rpf/CadrgFrameEntry.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/maps/rpf/CadrgFrame.hpp"
+#include "openeaagles/maps/rpf/CadrgFrameEntry.hpp"
+#include "openeaagles/base/String.hpp"
 
 #include <cstring>
 

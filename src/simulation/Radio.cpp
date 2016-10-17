@@ -1,18 +1,18 @@
-#include "openeaagles/simulation/Radio.h"
+#include "openeaagles/simulation/Radio.hpp"
 
-#include "openeaagles/simulation/Antenna.h"
-#include "openeaagles/simulation/Datalink.h"
-#include "openeaagles/simulation/Emission.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/simulation/Antenna.hpp"
+#include "openeaagles/simulation/Datalink.hpp"
+#include "openeaagles/simulation/Emission.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Decibel.h"
-#include "openeaagles/base/units/Frequencies.h"
-#include "openeaagles/base/units/Powers.h"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Decibel.hpp"
+#include "openeaagles/base/units/Frequencies.hpp"
+#include "openeaagles/base/units/Powers.hpp"
 
 #include <cmath>
 

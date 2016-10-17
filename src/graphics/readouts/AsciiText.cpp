@@ -1,8 +1,8 @@
 
-#include "openeaagles/graphics/readouts/AsciiText.h"
+#include "openeaagles/graphics/readouts/AsciiText.hpp"
 
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/String.hpp"
 
 namespace oe {
 namespace graphics {

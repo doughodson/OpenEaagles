@@ -1,11 +1,11 @@
 
-#include "openeaagles/dafif/Database.h"
-#include "openeaagles/dafif/Record.h"
-#include "openeaagles/base/FileReader.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/dafif/Database.hpp"
+#include "openeaagles/dafif/Record.hpp"
+#include "openeaagles/base/FileReader.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cstring>
 #include <cmath>

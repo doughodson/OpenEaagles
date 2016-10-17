@@ -1,7 +1,7 @@
 
-#include "openeaagles/terrain/ded/DedFile.h"
-#include "openeaagles/base/NetHandler.h"   // for byte-swapping only
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/terrain/ded/DedFile.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <fstream>
 #include <string>
@@ -12,7 +12,7 @@
 namespace oe {
 namespace terrain {
 
-IMPLEMENT_SUBCLASS(DedFile,"DedFile")
+IMPLEMENT_SUBCLASS(DedFile, "DedFile")
 EMPTY_SLOTTABLE(DedFile)
 EMPTY_SERIALIZER(DedFile)
 

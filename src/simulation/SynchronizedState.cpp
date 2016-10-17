@@ -2,7 +2,7 @@
 // Class: SynchronizedState
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/SynchronizedState.h"
+#include "openeaagles/simulation/SynchronizedState.hpp"
 
 namespace oe {
 namespace simulation {

@@ -2,22 +2,22 @@
 // Class:  Station
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/Station.h"
+#include "openeaagles/simulation/Station.hpp"
 
-#include "openeaagles/simulation/DataRecorder.h"
-#include "openeaagles/simulation/NetIO.h"
-#include "openeaagles/simulation/Otw.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/NetIO.hpp"
+#include "openeaagles/simulation/Otw.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
-#include "openeaagles/base/Color.h"
-#include "openeaagles/base/IoHandler.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Thread.h"
-#include "openeaagles/base/Timers.h"
-#include "openeaagles/base/units/Times.h"
+#include "openeaagles/base/Color.hpp"
+#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Thread.hpp"
+#include "openeaagles/base/Timers.hpp"
+#include "openeaagles/base/units/Times.hpp"
 
 #include <ctime>
 

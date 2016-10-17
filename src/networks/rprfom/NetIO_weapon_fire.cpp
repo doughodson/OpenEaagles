@@ -1,14 +1,14 @@
 
-#include "openeaagles/networks/rprfom/NetIO.h"
-#include "openeaagles/networks/rprfom/RprFom.h"
-#include "openeaagles/networks/rprfom/Nib.h"
-#include "openeaagles/networks/hla/Ambassador.h"
+#include "openeaagles/networks/rprfom/NetIO.hpp"
+#include "openeaagles/networks/rprfom/RprFom.hpp"
+#include "openeaagles/networks/rprfom/Nib.hpp"
+#include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/NetHandler.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/NetHandler.hpp"
 
 namespace oe {
 namespace rprfom {

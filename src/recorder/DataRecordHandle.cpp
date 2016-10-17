@@ -1,5 +1,5 @@
 
-#include "openeaagles/recorder/DataRecordHandle.h"
+#include "openeaagles/recorder/DataRecordHandle.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
 namespace oe {

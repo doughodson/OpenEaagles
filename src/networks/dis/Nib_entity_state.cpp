@@ -3,23 +3,23 @@
 // Description: Portions of class defined to support entity state PDUs
 //------------------------------------------------------------------------------
 
-#include "openeaagles/networks/dis/NetIO.h"
-#include "openeaagles/networks/dis/Nib.h"
-#include "openeaagles/networks/dis/Ntm.h"
-#include "openeaagles/networks/dis/pdu.h"
+#include "openeaagles/networks/dis/NetIO.hpp"
+#include "openeaagles/networks/dis/Nib.hpp"
+#include "openeaagles/networks/dis/Ntm.hpp"
+#include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/GroundVehicle.h"
-#include "openeaagles/simulation/LifeForms.h"
-#include "openeaagles/simulation/Missile.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Station.h"
-#include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/NetHandler.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/GroundVehicle.hpp"
+#include "openeaagles/simulation/LifeForms.hpp"
+#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Station.hpp"
+#include "openeaagles/simulation/StoresMgr.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
 
 #include <cstdio>
 #include <cmath>

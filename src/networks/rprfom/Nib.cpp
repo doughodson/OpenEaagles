@@ -1,24 +1,24 @@
 
-#include "openeaagles/networks/rprfom/Nib.h"
+#include "openeaagles/networks/rprfom/Nib.hpp"
 
-#include "openeaagles/networks/rprfom/NetIO.h"
-#include "openeaagles/networks/rprfom/RprFom.h"
-#include "openeaagles/networks/hla/Ambassador.h"
+#include "openeaagles/networks/rprfom/NetIO.hpp"
+#include "openeaagles/networks/rprfom/RprFom.hpp"
+#include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/networks/dis/Ntm.h"
+#include "openeaagles/networks/dis/Ntm.hpp"
 
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/Missile.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Signatures.h"
-#include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Nav.h"
-#include "openeaagles/base/NetHandler.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Signatures.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace rprfom {

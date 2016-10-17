@@ -2,9 +2,9 @@
 // Class: Behavior
 //------------------------------------------------------------------------------
 
-#include "openeaagles/base/ubf/Behavior.h"
+#include "openeaagles/base/ubf/Behavior.hpp"
 
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace base {

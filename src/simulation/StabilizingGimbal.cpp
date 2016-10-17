@@ -4,19 +4,19 @@
 //        the left or right wing.
 //------------------------------------------------------------------------------
 
-#include "openeaagles/simulation/StabilizingGimbal.h"
+#include "openeaagles/simulation/StabilizingGimbal.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Simulation.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/functors/Tables.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Decibel.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Powers.h"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Decibel.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Powers.hpp"
 #include "openeaagles/base/osg/Vec3"
 
 namespace oe {

@@ -1,8 +1,8 @@
 
-#include "openeaagles/simulation/Bomb.h"
+#include "openeaagles/simulation/Bomb.hpp"
 
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

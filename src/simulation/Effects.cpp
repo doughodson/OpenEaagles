@@ -1,12 +1,12 @@
 
-#include "openeaagles/simulation/Effects.h"
+#include "openeaagles/simulation/Effects.hpp"
 
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/Identifier.h"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/osg/Vec2"
 #include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

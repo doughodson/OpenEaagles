@@ -1,8 +1,8 @@
 
 #include <iostream>
 
-#include "openeaagles/base/distributions/Uniform.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/distributions/Uniform.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace base {

@@ -26,11 +26,11 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/base/nethandlers/UdpBroadcastHandler.h"
+#include "openeaagles/base/nethandlers/UdpBroadcastHandler.hpp"
 
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/String.h"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/String.hpp"
 
 #include <cstdio>
 #include <cstring>

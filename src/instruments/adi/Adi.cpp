@@ -1,7 +1,7 @@
 
-#include "openeaagles/instruments/adi/Adi.h"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/instruments/adi/Adi.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
 
 namespace oe {
 namespace instruments {

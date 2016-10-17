@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/Locus.h"
+#include "openeaagles/base/Locus.hpp"
 
 namespace oe {
 namespace base {

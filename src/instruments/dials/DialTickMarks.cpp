@@ -1,5 +1,5 @@
-#include "openeaagles/instruments/dials/DialTickMarks.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/instruments/dials/DialTickMarks.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {

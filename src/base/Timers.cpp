@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/Timers.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Times.h"
-#include "openeaagles/base/util/atomics.h"
+#include "openeaagles/base/Timers.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/util/atomics.hpp"
 
 namespace oe {
 namespace base {

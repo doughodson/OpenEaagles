@@ -2008,16 +2008,16 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
-#include "openeaagles/base/Object.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Integer.h"
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Boolean.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/base/Object.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Integer.hpp"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/Boolean.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 #include "EdlScanner.h"
 #include "EdlParser.hpp"
 

@@ -1,5 +1,6 @@
-#include "openeaagles/instruments/buttons/Switch.h"
-#include "openeaagles/base/Number.h"
+
+#include "openeaagles/instruments/buttons/Switch.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {

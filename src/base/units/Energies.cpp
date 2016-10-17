@@ -2,9 +2,9 @@
 // Energy, KiloWattHours, BTUs, Joules, FootPounds
 //////////////////////////////////////////////////////////////////////
 
-#include "openeaagles/base/units/Energies.h"
+#include "openeaagles/base/units/Energies.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.h"
+#include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {

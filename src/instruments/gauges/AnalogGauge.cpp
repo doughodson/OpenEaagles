@@ -1,5 +1,5 @@
-#include "openeaagles/instruments/gauges/AnalogGauge.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/instruments/gauges/AnalogGauge.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {

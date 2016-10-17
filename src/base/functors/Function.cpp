@@ -1,8 +1,8 @@
 
-#include "openeaagles/base/functors/Function.h"
+#include "openeaagles/base/functors/Function.hpp"
 
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/functors/Tables.h"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
 
 namespace oe {
 namespace base {

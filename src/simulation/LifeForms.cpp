@@ -1,14 +1,14 @@
-#include "openeaagles/simulation/LifeForms.h"
+#include "openeaagles/simulation/LifeForms.hpp"
 
-#include "openeaagles/simulation/StoresMgr.h"
-#include "openeaagles/simulation/Simulation.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/Missile.h"
-#include "openeaagles/simulation/Guns.h"
-#include "openeaagles/base/List.h"
-#include "openeaagles/base/PairStream.h"
+#include "openeaagles/simulation/StoresMgr.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/simulation/Guns.hpp"
+#include "openeaagles/base/List.hpp"
+#include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Angles.hpp"
 
 #include <cmath>
 

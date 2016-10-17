@@ -1,33 +1,30 @@
 
-#include "openeaagles/otw/OtwPC.h"
+#include "openeaagles/otw/OtwPC.hpp"
 
-#include "dsFlightModelData.h"
+#include "dsFlightModelData.hpp"
 
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/simulation/AirVehicle.h"
-#include "openeaagles/simulation/GroundVehicle.h"
-#include "openeaagles/simulation/Missile.h"
-#include "openeaagles/simulation/Weapon.h"
-#include "openeaagles/base/NetHandler.h"
-#include "openeaagles/base/SlotTable.h"
-#include "openeaagles/base/Identifier.h"
-#include "openeaagles/base/Pair.h"
-#include "openeaagles/base/PairStream.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/GroundVehicle.hpp"
+#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/simulation/Weapon.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/SlotTable.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/osg/Vec4"
 #include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/units/Distances.h"
-#include "openeaagles/base/units/Angles.h"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace otw {
 
-IMPLEMENT_SUBCLASS(OtwPC,"OtwPC")
+IMPLEMENT_SUBCLASS(OtwPC, "OtwPC")
 EMPTY_SERIALIZER(OtwPC)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(OtwPC)
     "netOutput",        // 1) Network output handler
 END_SLOTTABLE(OtwPC)
@@ -37,9 +34,6 @@ BEGIN_SLOT_MAP(OtwPC)
     ON_SLOT(1,setSlotNetOutput,base::NetHandler)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 OtwPC::OtwPC() : netOutput(nullptr)
 {
     STANDARD_CONSTRUCTOR()
@@ -51,9 +45,6 @@ OtwPC::OtwPC() : netOutput(nullptr)
     scnt = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void OtwPC::copyData(const OtwPC& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -70,9 +61,6 @@ void OtwPC::copyData(const OtwPC& org, const bool cc)
     scnt = 0;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void OtwPC::deleteData()
 {
     netOutput = nullptr;

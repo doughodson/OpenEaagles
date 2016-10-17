@@ -1,19 +1,13 @@
 
-#include "openeaagles/linearsystem/DiffEquation.h"
+#include "openeaagles/linearsystem/DiffEquation.hpp"
 
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class DiffEquation
-//==============================================================================
 IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation,"DiffEquation")
 EMPTY_SLOTTABLE(DiffEquation)
 EMPTY_SERIALIZER(DiffEquation)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 DiffEquation::DiffEquation()
 {
    STANDARD_CONSTRUCTOR()
@@ -28,18 +22,12 @@ DiffEquation::DiffEquation(const unsigned int r) : ScalerFunc(r)
    initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
 void DiffEquation::initData()
 {
    pa = nullptr;
    pb = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void DiffEquation::copyData(const DiffEquation& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -54,9 +42,6 @@ void DiffEquation::copyData(const DiffEquation& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void DiffEquation::deleteData()
 {
 }

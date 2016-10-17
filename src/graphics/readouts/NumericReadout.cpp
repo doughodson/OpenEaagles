@@ -1,15 +1,15 @@
 
-#include "openeaagles/graphics/readouts/NumericReadout.h"
+#include "openeaagles/graphics/readouts/NumericReadout.hpp"
 
-#include "openeaagles/base/Float.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/String.h"
-#include "openeaagles/base/Integer.h"
+#include "openeaagles/base/Float.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Integer.hpp"
 
-#include "openeaagles/base/util/str_utils.h"
-#include "openeaagles/base/util/constants.h"
+#include "openeaagles/base/util/str_utils.hpp"
+#include "openeaagles/base/util/constants.hpp"
 
-#include "ReformatScanner.h"
+#include "ReformatScanner.hpp"
 
 #include <cstdio>
 #include <cstdlib>

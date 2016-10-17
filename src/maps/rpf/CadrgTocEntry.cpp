@@ -2,8 +2,8 @@
 // Class: CadrgTocEntry
 //------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/CadrgTocEntry.h"
-#include "openeaagles/base/util/str_utils.h"
+#include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cstring>

@@ -1,15 +1,15 @@
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
-#include "openeaagles/simulation/IrShapes.h"
-#include "openeaagles/simulation/IrSignature.h"
-#include "openeaagles/simulation/IrQueryMsg.h"
-#include "openeaagles/simulation/IrSensor.h"
-#include "openeaagles/simulation/Player.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/simulation/IrShapes.hpp"
+#include "openeaagles/simulation/IrSignature.hpp"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
+#include "openeaagles/simulation/IrSensor.hpp"
+#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/units/Areas.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Areas.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

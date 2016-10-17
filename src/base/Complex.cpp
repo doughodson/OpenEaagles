@@ -2,8 +2,8 @@
 // Complex
 //==============================================================================
 
-#include "openeaagles/base/Complex.h"
-#include "openeaagles/base/Number.h"
+#include "openeaagles/base/Complex.hpp"
+#include "openeaagles/base/Number.hpp"
 
 #include <iostream>
 #include <iomanip>

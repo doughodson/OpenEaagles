@@ -1,10 +1,10 @@
-#include "openeaagles/simulation/AirVehicle.h"
+#include "openeaagles/simulation/AirVehicle.hpp"
 
-#include "openeaagles/simulation/dynamics/AerodynamicsModel.h"
-#include "openeaagles/base/List.h"
+#include "openeaagles/simulation/dynamics/AerodynamicsModel.hpp"
+#include "openeaagles/base/List.hpp"
 #include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/units/Angles.h"
-#include "openeaagles/base/units/Distances.h"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 namespace oe {
 namespace simulation {

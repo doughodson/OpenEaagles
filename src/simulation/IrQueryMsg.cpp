@@ -1,8 +1,8 @@
-#include "openeaagles/simulation/IrQueryMsg.h"
+#include "openeaagles/simulation/IrQueryMsg.hpp"
 
-#include "openeaagles/simulation/IrSensor.h"
+#include "openeaagles/simulation/IrSensor.hpp"
 
-#include "openeaagles/base/List.h"
+#include "openeaagles/base/List.hpp"
 
 namespace oe {
 namespace simulation {

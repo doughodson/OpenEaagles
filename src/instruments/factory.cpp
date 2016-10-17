@@ -1,53 +1,53 @@
 
-#include "openeaagles/instruments/factory.h"
+#include "openeaagles/instruments/factory.hpp"
 
-#include "openeaagles/base/Object.h"
+#include "openeaagles/base/Object.hpp"
 
 // Top Level objects
-#include "openeaagles/instruments/Instrument.h"
+#include "openeaagles/instruments/Instrument.hpp"
 
 // Analog Dial components
-#include "openeaagles/instruments/dials/AnalogDial.h"
-#include "openeaagles/instruments/dials/DialArcSegment.h"
-#include "openeaagles/instruments/dials/DialTickMarks.h"
-#include "openeaagles/instruments/dials/DialPointer.h"
-#include "openeaagles/instruments/dials/AltitudeDial.h"
-#include "openeaagles/instruments/dials/GMeterDial.h"
+#include "openeaagles/instruments/dials/AnalogDial.hpp"
+#include "openeaagles/instruments/dials/DialArcSegment.hpp"
+#include "openeaagles/instruments/dials/DialTickMarks.hpp"
+#include "openeaagles/instruments/dials/DialPointer.hpp"
+#include "openeaagles/instruments/dials/AltitudeDial.hpp"
+#include "openeaagles/instruments/dials/GMeterDial.hpp"
 
 // Analog Gauge components
-#include "openeaagles/instruments/gauges/AnalogGauge.h"
-#include "openeaagles/instruments/gauges/GaugeSlider.h"
-#include "openeaagles/instruments/gauges/AoaIndexer.h"
-#include "openeaagles/instruments/gauges/TickMarks.h"
-#include "openeaagles/instruments/gauges/Tape.h"
+#include "openeaagles/instruments/gauges/AnalogGauge.hpp"
+#include "openeaagles/instruments/gauges/GaugeSlider.hpp"
+#include "openeaagles/instruments/gauges/AoaIndexer.hpp"
+#include "openeaagles/instruments/gauges/TickMarks.hpp"
+#include "openeaagles/instruments/gauges/Tape.hpp"
 
 // Generic compass rose and bearing pointer, and dynamic maps
-#include "openeaagles/instruments/maps/CompassRose.h"
-#include "openeaagles/instruments/maps/BearingPointer.h"
+#include "openeaagles/instruments/maps/CompassRose.hpp"
+#include "openeaagles/instruments/maps/BearingPointer.hpp"
 
 // Generic Landing gear
-#include "openeaagles/instruments/landingGear/LandingGear.h"
-#include "openeaagles/instruments/landingGear/LandingLight.h"
+#include "openeaagles/instruments/landinggear/LandingGear.hpp"
+#include "openeaagles/instruments/landinggear/LandingLight.hpp"
 
 // Generic engine page
-#include "openeaagles/instruments/eng/EngPage.h"
+#include "openeaagles/instruments/engines/EngPage.hpp"
 
 // Buttons
-#include "openeaagles/instruments/buttons/Button.h"
-#include "openeaagles/instruments/buttons/PushButton.h"
-#include "openeaagles/instruments/buttons/RotarySwitch.h" 
-#include "openeaagles/instruments/buttons/Knob.h" 
-#include "openeaagles/instruments/buttons/Switch.h"
-#include "openeaagles/instruments/buttons/SolenoidSwitch.h"
+#include "openeaagles/instruments/buttons/Button.hpp"
+#include "openeaagles/instruments/buttons/PushButton.hpp"
+#include "openeaagles/instruments/buttons/RotarySwitch.hpp"
+#include "openeaagles/instruments/buttons/Knob.hpp"
+#include "openeaagles/instruments/buttons/Switch.hpp"
+#include "openeaagles/instruments/buttons/SolenoidSwitch.hpp"
 
 // Adi
-#include "openeaagles/instruments/adi/Adi.h"
+#include "openeaagles/instruments/adi/Adi.hpp"
  
 // Ghost Horizon
-#include "openeaagles/instruments/adi/GhostHorizon.h"
+#include "openeaagles/instruments/adi/GhostHorizon.hpp"
 
 // Eadi3D
-#include "openeaagles/instruments/eadi3D/Eadi3DPage.h"
+#include "openeaagles/instruments/eadi3d/Eadi3DPage.hpp"
 
 #include <string>
 

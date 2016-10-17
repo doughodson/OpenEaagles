@@ -1,6 +1,6 @@
 
-#include "openeaagles/networks/rprfom/factory.h"
-#include "openeaagles/networks/rprfom/NetIO.h"
+#include "openeaagles/networks/rprfom/factory.hpp"
+#include "openeaagles/networks/rprfom/NetIO.hpp"
 
 #include <string>
 

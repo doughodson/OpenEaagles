@@ -1,7 +1,7 @@
 
-#include "openeaagles/graphics/readouts/Cursor.h"
+#include "openeaagles/graphics/readouts/Cursor.hpp"
 
-#include "openeaagles/graphics/Display.h"
+#include "openeaagles/graphics/Display.hpp"
 
 namespace oe {
 namespace graphics {

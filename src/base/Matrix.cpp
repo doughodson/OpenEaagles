@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // Matrix
 //------------------------------------------------------------------------------
-#include "openeaagles/base/Matrix.h"
-#include "openeaagles/base/Vectors.h"
-#include "openeaagles/base/util/str_utils.h"
-#include "openeaagles/base/util/math_utils.h"
+#include "openeaagles/base/Matrix.hpp"
+#include "openeaagles/base/Vectors.hpp"
+#include "openeaagles/base/util/str_utils.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
 
 #include <iostream>
 #include <iomanip>

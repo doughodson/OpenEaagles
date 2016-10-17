@@ -1,8 +1,8 @@
 
-#include "openeaagles/linearsystem/LowpassFilter.h"
-#include "openeaagles/base/Number.h"
-#include "openeaagles/base/units/Frequencies.h"
-#include "openeaagles/base/util/constants.h"
+#include "openeaagles/linearsystem/LowpassFilter.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Frequencies.hpp"
+#include "openeaagles/base/util/constants.hpp"
 
 namespace oe {
 namespace linearsystem {

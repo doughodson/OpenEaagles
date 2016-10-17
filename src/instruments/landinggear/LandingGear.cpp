@@ -1,10 +1,11 @@
-#include "openeaagles/instruments/landingGear/LandingGear.h"
-#include "openeaagles/base/Number.h"
+
+#include "openeaagles/instruments/landinggear/LandingGear.hpp"
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(LandingGear,"LandingGear")
+IMPLEMENT_SUBCLASS(LandingGear, "LandingGear")
 EMPTY_SERIALIZER(LandingGear)
 
 BEGIN_SLOTTABLE(LandingGear)

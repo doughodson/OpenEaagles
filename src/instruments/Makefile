@@ -18,10 +18,11 @@ OBJS =  \
 	dials/DialPointer.o \
 	dials/DialTickMarks.o \
 	dials/GMeterDial.o \
+	eadi3d/Eadi3DFont.o \
 	eadi3d/Eadi3DObjects.o \
 	eadi3d/Eadi3DPage.o \
 	eadi3d/IrisGLCompat.o \
-	eng/EngPage.o \
+	engines/EngPage.o \
 	gauges/AnalogGauge.o \
 	gauges/AoaIndexer.o \
 	gauges/GaugeSlider.o \
