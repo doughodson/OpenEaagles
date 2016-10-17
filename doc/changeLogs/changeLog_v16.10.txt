@@ -1,14 +1,38 @@
 ================================================================================
-Changes since v16.10
+Changes since v16.06
 ================================================================================
 
 --------------------------------------------------------------------------------
 General framework-wide changes and improvements
 
+-- Minor adjustment concerning the destination of compiled library files.
+   Instead of placing compiled libraries from GCC into a 'linux' subdirectory,
+   or visual studio into a 'vs20XX' subdirectory, all library files
+   are simply placed in 'lib'.  This aligns with what is more typically found
+   with other packages.
+
+-- All include file extensions have been changed from .h to .hpp to make explicit
+   the nature of file contents -- namely, C++ declarations and/or template code.
+   The practice of clearly differentiating C from C++ is not always done, but
+   is considered good practice, as it promotes clarity of file purpose.  It will
+   also help avoid potential confusion later as new anticipated features are added
+   to framework.
 
 --------------------------------------------------------------------------------
 base library
 
+   -- Organized code for edl scanner and parser functionality into a subdirectory
+      of base (i.e., 'edl_parser') -- this keeps several highly related files together
+      as a logical unit.
+
+   edl_scanner.l
+      -- fixed minor bug in scanner that double counted lines with C++
+         comments.
+
+   edl_parser.y
+      -- improved error message displayed then the scanner does not have a known
+         input filename.  The scanner determines filenames using c-preprocessor
+         symbols included in output files (e.g., # 21 "test.cf")
 
 --------------------------------------------------------------------------------
 dafif library
@@ -22,6 +46,10 @@ glut library
 
 --------------------------------------------------------------------------------
 graphics library
+
+   -- Broke out and organized all readout classes (e.g., numeric, hex, time, etc.) into
+      individual files located into a new subdirectory called 'readouts' in graphics
+      library.
 
 
 --------------------------------------------------------------------------------
