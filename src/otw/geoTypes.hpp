@@ -165,9 +165,9 @@ typedef struct
 } EDGE;
 
 
-#ifndef isnan
-  #define isnan(x) ((x) != (x))
-#endif
+//#ifndef isnan
+//  #define isnan(x) ((x) != (x))
+//#endif
 
 extern const int_2 NULL_S;
 extern const int_4 NULL_I;
