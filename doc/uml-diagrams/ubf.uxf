@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="13.0">
+<diagram program="umlet" version="14.2">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>70</x>
-      <y>70</y>
+      <y>60</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -18,7 +18,7 @@
     <id>UMLClass</id>
     <coordinates>
       <x>70</x>
-      <y>160</y>
+      <y>150</y>
       <w>160</w>
       <h>90</h>
     </coordinates>
@@ -33,19 +33,19 @@ setVote()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>90</y>
-      <w>50</w>
-      <h>90</h>
+      <x>140</x>
+      <y>100</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;70</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>70</x>
-      <y>300</y>
+      <y>290</y>
       <w>160</w>
       <h>100</h>
     </coordinates>
@@ -60,19 +60,19 @@ getBehaviors()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>220</y>
-      <w>50</w>
-      <h>100</h>
+      <x>140</x>
+      <y>230</y>
+      <w>30</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;80</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>310</x>
-      <y>160</y>
+      <y>150</y>
       <w>160</w>
       <h>100</h>
     </coordinates>
@@ -88,7 +88,7 @@ execute()
     <id>UMLClass</id>
     <coordinates>
       <x>310</x>
-      <y>70</y>
+      <y>60</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -100,19 +100,19 @@ execute()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>90</y>
-      <w>50</w>
-      <h>90</h>
+      <x>380</x>
+      <y>100</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;70</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>70</x>
-      <y>530</y>
+      <y>520</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -124,19 +124,19 @@ execute()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>120</x>
-      <y>460</y>
-      <w>50</w>
-      <h>90</h>
+      <x>140</x>
+      <y>470</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;70</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>70</x>
-      <y>440</y>
+      <y>430</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -149,7 +149,7 @@ execute()
     <id>UMLClass</id>
     <coordinates>
       <x>310</x>
-      <y>300</y>
+      <y>290</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -162,7 +162,7 @@ execute()
     <id>UMLClass</id>
     <coordinates>
       <x>310</x>
-      <y>390</y>
+      <y>380</y>
       <w>160</w>
       <h>120</h>
     </coordinates>
@@ -179,19 +179,19 @@ getState()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>360</x>
-      <y>320</y>
-      <w>50</w>
-      <h>90</h>
+      <x>380</x>
+      <y>330</y>
+      <w>30</w>
+      <h>70</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;70</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>550</x>
-      <y>460</y>
+      <y>450</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -204,7 +204,7 @@ getState()
     <id>UMLClass</id>
     <coordinates>
       <x>550</x>
-      <y>390</y>
+      <y>380</y>
       <w>160</w>
       <h>50</h>
     </coordinates>
@@ -216,23 +216,86 @@ getState()
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>390</y>
-      <w>130</w>
-      <h>50</h>
+      <x>460</x>
+      <y>400</y>
+      <w>110</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>110;30;30;30</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>440</x>
-      <y>460</y>
-      <w>130</w>
-      <h>50</h>
+      <x>460</x>
+      <y>470</y>
+      <w>110</w>
+      <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;-</panel_attributes>
-    <additional_attributes>110;30;30;30</additional_attributes>
+    <additional_attributes>90.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>90</y>
+      <w>120</w>
+      <h>50</h>
+    </coordinates>
+    <panel_attributes>Object
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>180</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>ubf::Action
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>130</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>770</x>
+      <y>280</y>
+      <w>120</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>Action
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>230</y>
+      <w>30</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
   </element>
 </diagram>
