@@ -11,7 +11,7 @@ namespace base {
 class List;
 class Number;
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Table
 //
 // Description: Abstract table class ---
@@ -52,8 +52,9 @@ class Number;
 //      ExpInvalidFStorage
 //          Thrown by Table's storage class when the data in FStorage in incorrect.
 //
-//==============================================================================
-class Table : public Object {
+//------------------------------------------------------------------------------
+class Table : public Object
+{
     DECLARE_SUBCLASS(Table, Object)
 
 public:
@@ -117,16 +118,15 @@ private:
    bool    extFlg;    // Extrapolation enabled flag
 };
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class TableStorage
-//==============================================================================
+//------------------------------------------------------------------------------
 class TableStorage : public FStorage {
    DECLARE_SUBCLASS(TableStorage, FStorage)
 public:
    TableStorage();
    unsigned int xbp, ybp, zbp, wbp, vbp;
 };
-
 
 }
 }

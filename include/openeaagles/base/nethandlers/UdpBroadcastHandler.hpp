@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: UdpBroadcastHandler
-//------------------------------------------------------------------------------
+
 #ifndef __oe_base_UdpBroadcastHandler_H__
 #define __oe_base_UdpBroadcastHandler_H__
 

@@ -7,12 +7,12 @@
 namespace oe {
 namespace base {
 
-//
+//------------------------------------------------------------------------------
 // Pareto
 // Input parameters:
 //     alpha = order, this controls how sharp the drop-off is
 //     beta = min value
-//
+//------------------------------------------------------------------------------
 
 class Number;
 

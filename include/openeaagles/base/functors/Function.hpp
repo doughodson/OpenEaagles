@@ -12,7 +12,7 @@ class FStorage;
 class List;
 class Table;
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Function
 //
 // Description: Base for the derived, multi-dimensional function classes.
@@ -29,8 +29,9 @@ class Table;
 // Slots:
 //    table    <Table>     ! Optional LFI table
 //
-//==============================================================================
-class Function : public Object {
+//------------------------------------------------------------------------------
+class Function : public Object
+{
     DECLARE_SUBCLASS(Function, Object)
 
 public:
@@ -46,12 +47,12 @@ private:
    safe_ptr<const Table> table;   // Optional LFI Table
 };
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // class FStorage
 // Description: Generic storage class for past values of function calls.
 //              Use Function::storageFactory() to generate pre-ref()'d
 //              FStorage objects.
-//==============================================================================
+//------------------------------------------------------------------------------
 class FStorage : public Object {
    DECLARE_SUBCLASS(FStorage, Object)
 public:

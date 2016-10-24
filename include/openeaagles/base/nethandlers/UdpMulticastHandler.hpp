@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: UdpMulticastHandler
-//------------------------------------------------------------------------------
+
 #ifndef __oe_base_UdpMulticastHandler_H__
 #define __oe_base_UdpMulticastHandler_H__
 

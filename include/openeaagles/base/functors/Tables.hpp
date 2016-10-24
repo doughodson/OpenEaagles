@@ -14,7 +14,7 @@ namespace base {
 class List;
 class Number;
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Table1
 //
 // Description: 1D LFI data table
@@ -22,8 +22,9 @@ class Number;
 // Factory name: Table1
 // Slots:
 //    x    <List>  Independent variable #1 (iv1) points
-//==============================================================================
-class Table1 : public Table {
+//------------------------------------------------------------------------------
+class Table1 : public Table
+{
     DECLARE_SUBCLASS(Table1, Table)
 
 public:
@@ -59,8 +60,7 @@ private:
    unsigned int nx;   // Number of x breakpoints
 };
 
-
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Table2
 //
 // Description: 2D LFI data table
@@ -69,8 +69,9 @@ private:
 // Slots:
 //    y    <List>  Independent variable #2 (iv2) points
 //
-//==============================================================================
-class Table2 : public Table1 {
+//------------------------------------------------------------------------------
+class Table2 : public Table1
+{
     DECLARE_SUBCLASS(Table2, Table1)
 
 public:
@@ -108,8 +109,7 @@ private:
    unsigned int ny;   // Number of y breakpoints
 };
 
-
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Table3
 //
 // Description: 3D LFI data table
@@ -118,8 +118,9 @@ private:
 // Slots:
 //    z    <List>  Independent variable #3 (iv3) points
 //
-//==============================================================================
-class Table3 : public Table2 {
+//------------------------------------------------------------------------------
+class Table3 : public Table2
+{
    DECLARE_SUBCLASS(Table3, Table2)
 
 public:
@@ -159,8 +160,7 @@ private:
    unsigned int nz;   // Number of z breakpoints
 };
 
-
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Table4
 //
 // Description: 4D LFI data table
@@ -169,8 +169,9 @@ private:
 // Slots:
 //    w    <List>  Independent variable #4 (iv4) points
 //
-//==============================================================================
-class Table4 : public Table3 {
+//------------------------------------------------------------------------------
+class Table4 : public Table3
+{
    DECLARE_SUBCLASS(Table4, Table3)
 
 public:
@@ -212,7 +213,7 @@ private:
    unsigned int nw;   // Number of w breakpoints
 };
 
-//==============================================================================
+//------------------------------------------------------------------------------
 // Class: Table5
 //
 // Description: 5D LFI data table
@@ -221,8 +222,9 @@ private:
 // Slots:
 //    v    <List>  Independent variable #5 (iv5) points
 //
-//==============================================================================
-class Table5 : public Table4 {
+//------------------------------------------------------------------------------
+class Table5 : public Table4
+{
    DECLARE_SUBCLASS(Table5, Table4)
 
 public:

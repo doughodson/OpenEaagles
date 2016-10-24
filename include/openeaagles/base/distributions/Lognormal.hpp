@@ -4,13 +4,13 @@
 
 #include "../Rng.hpp"
 
-//
+//------------------------------------------------------------------------------
 // Lognormal - this class returns a random variate from the lognormal distribution.
 // Input parameters:
 //     sigma : continuous parameter
 //     mu    : continuous parameter
 //     gamma : continuous location parameter (gamma = 0 for 2 parameter lognormal)
-//
+//------------------------------------------------------------------------------
 
 namespace oe {
 namespace base {
