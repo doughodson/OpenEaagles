@@ -1,534 +1,512 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<diagram program="umlet" version="14.1.1">
-  <help_text>// Uncomment the following line to change the fontsize:
-// fontsize=14
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////
-// Welcome to UMLet!
-//
-// Double-click on UML elements to add them to the diagram, or to copy them
-// Edit elements by modifying the text in this panel
-// Hold Ctrl to select multiple elements
-// Use Ctrl+mouse to select via lasso
-//
-// Use ± or Ctrl+mouse wheel to zoom
-// Drag a whole relation at its central square icon
-//
-// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
-// Edit the files in the "palettes" directory to create your own element palettes
-//
-// Select "Custom Elements &gt; New..." to create new element types
-//////////////////////////////////////////////////////////////////////////////////////////////
-
-
-// This text will be stored with each diagram;  use it for notes.</help_text>
-  <zoom_level>9</zoom_level>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
   <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>486</x>
-      <y>441</y>
-      <w>44</w>
-      <h>98</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.</panel_attributes>
-    <additional_attributes>27;81;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>81</x>
-      <y>396</y>
-      <w>855</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-base
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>756</x>
-      <y>315</y>
-      <w>180</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-graphics
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>81</x>
-      <y>315</y>
-      <w>288</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-simulation
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>81</x>
-      <y>216</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-dis
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>180</x>
-      <y>216</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-hla
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>657</x>
-      <y>315</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-terrain
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
+    <id>Relation</id>
     <coordinates>
       <x>540</x>
-      <y>315</y>
-      <w>90</w>
-      <h>54</h>
+      <y>480</y>
+      <w>30</w>
+      <h>90</h>
     </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-otw
+    <panel_attributes>lt=&lt;.</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>70</x>
+      <y>410</y>
+      <w>950</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+base
 bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>846</x>
-      <y>216</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-instruments
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>738</x>
-      <y>216</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-rpf
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>414</x>
-      <y>315</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-dafif
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>612</x>
-      <y>216</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-iodevice
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>486</x>
-      <y>216</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-linearsystem
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>279</x>
-      <y>216</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-models
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>198</x>
-      <y>342</y>
-      <w>44</w>
-      <h>71</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;54;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>432</x>
-      <y>342</y>
-      <w>44</w>
-      <h>89</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;72;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>549</x>
-      <y>342</y>
-      <w>44</w>
-      <h>89</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;72;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>675</x>
-      <y>342</y>
-      <w>44</w>
-      <h>89</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;72;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>810</x>
-      <y>342</y>
-      <w>44</w>
-      <h>89</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;72;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>855</x>
-      <y>243</y>
-      <w>44</w>
-      <h>107</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;90;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>297</x>
-      <y>243</y>
-      <w>44</w>
-      <h>107</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;90;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>99</x>
-      <y>243</y>
-      <w>44</w>
-      <h>89</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;72;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>207</x>
-      <y>243</y>
-      <w>44</w>
-      <h>107</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;90;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>495</x>
-      <y>243</y>
-      <w>44</w>
-      <h>188</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;171;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>612</x>
-      <y>243</y>
-      <w>44</w>
-      <h>188</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;171;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Relation</type>
-    <coordinates>
-      <x>765</x>
-      <y>243</y>
-      <w>44</w>
-      <h>89</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;.
-</panel_attributes>
-    <additional_attributes>27;72;27;27</additional_attributes>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>63</x>
-      <y>99</y>
-      <w>891</w>
-      <h>369</h>
-    </coordinates>
-    <panel_attributes>OpenEaagles
-bg=yellow</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>189</x>
-      <y>540</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-freetype
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>297</x>
-      <y>540</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-FTGL
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>81</x>
-      <y>540</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-OpenGL
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>513</x>
-      <y>540</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-CIGI
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>405</x>
-      <y>540</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-Glut
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>621</x>
-      <y>540</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-poRTIco
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>720</x>
-      <y>540</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-JSBSim
-bg=cyan
-</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>63</x>
-      <y>504</y>
-      <w>891</w>
-      <h>117</h>
-    </coordinates>
-    <panel_attributes>3rd Party (Open Source)
-bg=yellow</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <type>com.baselet.element.old.element.Package</type>
-    <coordinates>
-      <x>180</x>
-      <y>135</y>
-      <w>90</w>
-      <h>54</h>
-    </coordinates>
-    <panel_attributes>--
-&lt;&lt;library&gt;&gt;
-rprfom
-bg=cyan
-
 layer=1</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <type>com.baselet.element.old.element.Relation</type>
+    <id>UMLPackage</id>
     <coordinates>
-      <x>207</x>
-      <y>162</y>
-      <w>44</w>
-      <h>89</h>
+      <x>820</x>
+      <y>320</y>
+      <w>200</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+graphics
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>70</x>
+      <y>320</y>
+      <w>320</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+simulation
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>70</x>
+      <y>210</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+dis
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>180</x>
+      <y>210</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+hla
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>710</x>
+      <y>320</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+terrain
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>580</x>
+      <y>320</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+otw
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>920</x>
+      <y>210</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+instruments
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>800</x>
+      <y>210</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+rpf
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>440</x>
+      <y>320</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+dafif
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>660</x>
+      <y>210</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+iodevice
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>520</x>
+      <y>210</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+linearsystem
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>290</x>
+      <y>210</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+models
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>220</x>
+      <y>370</y>
+      <w>30</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=&lt;.
 </panel_attributes>
-    <additional_attributes>27;72;27;27</additional_attributes>
+    <additional_attributes>10.0;40.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>480</x>
+      <y>370</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>610</x>
+      <y>370</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>750</x>
+      <y>370</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>370</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>950</x>
+      <y>260</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>330</x>
+      <y>260</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>110</x>
+      <y>260</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>260</y>
+      <w>30</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;80.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>550</x>
+      <y>260</y>
+      <w>30</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>680</x>
+      <y>260</y>
+      <w>30</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>850</x>
+      <y>260</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>50</x>
+      <y>80</y>
+      <w>990</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>OpenEaagles
+bg=yellow
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>190</x>
+      <y>570</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+freetype
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>310</x>
+      <y>570</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+FTGL
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>70</x>
+      <y>570</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+OpenGL
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>550</x>
+      <y>570</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+CIGI
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>430</x>
+      <y>570</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+Glut
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>670</x>
+      <y>570</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+poRTIco
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>780</x>
+      <y>570</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+JSBSim
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>50</x>
+      <y>530</y>
+      <w>990</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>3rd Party (Open Source)
+bg=yellow
+layer=-1</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>230</x>
+      <y>170</y>
+      <w>30</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;.
+</panel_attributes>
+    <additional_attributes>10.0;60.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>180</x>
+      <y>120</y>
+      <w>100</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>
+--
+rprfom
+bg=cyan
+layer=1</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
