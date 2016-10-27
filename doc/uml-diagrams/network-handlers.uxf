@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <diagram program="umlet" version="14.2">
-  <zoom_level>10</zoom_level>
+  <zoom_level>8</zoom_level>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>260</x>
-      <y>200</y>
-      <w>580</w>
-      <h>340</h>
+      <x>208</x>
+      <y>192</y>
+      <w>464</w>
+      <h>272</h>
     </coordinates>
     <panel_attributes>PosixHandler
 --
@@ -39,10 +39,10 @@ ignoreSourcePort:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>570</y>
-      <w>460</w>
-      <h>90</h>
+      <x>304</x>
+      <y>488</y>
+      <w>368</w>
+      <h>72</h>
     </coordinates>
     <panel_attributes>UdpUnicastHandler
 --
@@ -55,10 +55,10 @@ ipAddress:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>340</x>
-      <y>530</y>
-      <w>60</w>
-      <h>100</h>
+      <x>272</x>
+      <y>456</y>
+      <w>48</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0;40.0;80.0</additional_attributes>
@@ -66,10 +66,10 @@ ipAddress:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>1010</y>
-      <w>110</w>
-      <h>260</h>
+      <x>304</x>
+      <y>840</y>
+      <w>88</w>
+      <h>208</h>
     </coordinates>
     <panel_attributes>TcpHandler
 --
@@ -79,10 +79,10 @@ ipAddress:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>1030</y>
-      <w>300</w>
-      <h>80</h>
+      <x>432</x>
+      <y>856</y>
+      <w>240</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>TcpClient
 --
@@ -95,10 +95,10 @@ ipAddress:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>270</x>
-      <y>530</y>
-      <w>130</w>
-      <h>560</h>
+      <x>216</x>
+      <y>456</y>
+      <w>104</w>
+      <h>448</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;540.0;110.0;540.0</additional_attributes>
@@ -106,10 +106,10 @@ ipAddress:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>1060</y>
-      <w>80</w>
-      <h>30</h>
+      <x>384</x>
+      <y>880</y>
+      <w>64</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -117,10 +117,10 @@ ipAddress:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>1210</y>
-      <w>300</w>
-      <h>60</h>
+      <x>432</x>
+      <y>1000</y>
+      <w>240</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>TcpServerMulti
 --
@@ -130,10 +130,10 @@ ipAddress:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>540</x>
-      <y>1130</y>
-      <w>300</w>
-      <h>60</h>
+      <x>432</x>
+      <y>936</y>
+      <w>240</w>
+      <h>48</h>
     </coordinates>
     <panel_attributes>TcpServerSingle
 --
@@ -143,10 +143,10 @@ ipAddress:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>680</y>
-      <w>460</w>
-      <h>80</h>
+      <x>304</x>
+      <y>576</y>
+      <w>368</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>UdpBroadcastHandler
 --
@@ -158,10 +158,10 @@ networkMask:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>320</x>
-      <y>530</y>
-      <w>80</w>
-      <h>200</h>
+      <x>256</x>
+      <y>456</y>
+      <w>64</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;180.0;60.0;180.0</additional_attributes>
@@ -169,10 +169,10 @@ networkMask:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>380</x>
-      <y>780</y>
-      <w>460</w>
-      <h>200</h>
+      <x>304</x>
+      <y>656</y>
+      <w>368</w>
+      <h>160</h>
     </coordinates>
     <panel_attributes>UdpMulticastHandler
 --
@@ -191,23 +191,23 @@ loopback:
     <additional_attributes/>
   </element>
   <element>
-    <type>com.baselet.element.old.element.Relation</type>
+    <id>Relation</id>
     <coordinates>
-      <x>280</x>
-      <y>510</y>
-      <w>120</w>
-      <h>320</h>
+      <x>240</x>
+      <y>456</y>
+      <w>80</w>
+      <h>240</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>30;30;30;300;100;300</additional_attributes>
+    <additional_attributes>10.0;10.0;10.0;280.0;80.0;280.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>510</x>
-      <y>70</y>
-      <w>600</w>
-      <h>80</h>
+      <x>408</x>
+      <y>88</y>
+      <w>480</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>NetHandler
 --
@@ -217,10 +217,10 @@ loopback:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
-      <y>140</y>
-      <w>30</w>
-      <h>80</h>
+      <x>480</x>
+      <y>144</y>
+      <w>24</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -228,10 +228,10 @@ loopback:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>1150</y>
-      <w>80</w>
-      <h>30</h>
+      <x>384</x>
+      <y>952</y>
+      <w>64</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -239,10 +239,10 @@ loopback:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>480</x>
-      <y>1230</y>
-      <w>80</w>
-      <h>30</h>
+      <x>384</x>
+      <y>1016</y>
+      <w>64</w>
+      <h>24</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
@@ -250,10 +250,10 @@ loopback:
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>880</x>
-      <y>200</y>
-      <w>500</w>
-      <h>470</h>
+      <x>704</x>
+      <y>192</y>
+      <w>400</w>
+      <h>376</h>
     </coordinates>
     <panel_attributes>ZeroMQHandler
 --
@@ -294,10 +294,10 @@ recvBufSizeKb:
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1000</x>
-      <y>140</y>
-      <w>30</w>
-      <h>80</h>
+      <x>800</x>
+      <y>144</y>
+      <w>24</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
@@ -305,10 +305,10 @@ recvBufSizeKb:
   <element>
     <id>Text</id>
     <coordinates>
-      <x>980</x>
-      <y>690</y>
-      <w>320</w>
-      <h>100</h>
+      <x>784</x>
+      <y>584</y>
+      <w>256</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>ZeroMQ handler is experimental at the moment
 and can be found as a shared library with
@@ -318,10 +318,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>220</x>
-      <y>1630</y>
-      <w>470</w>
-      <h>80</h>
+      <x>176</x>
+      <y>1336</y>
+      <w>376</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>PosixHandler
 --
@@ -331,10 +331,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>300</x>
-      <y>1790</y>
-      <w>210</w>
-      <h>80</h>
+      <x>240</x>
+      <y>1464</y>
+      <w>168</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>UdpUnicastHandler
 --
@@ -345,10 +345,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>400</x>
-      <y>1700</y>
-      <w>30</w>
-      <h>110</h>
+      <x>320</x>
+      <y>1392</y>
+      <w>24</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
@@ -356,10 +356,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>70</x>
-      <y>1790</y>
-      <w>210</w>
-      <h>80</h>
+      <x>56</x>
+      <y>1464</y>
+      <w>168</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>TcpHandler
 --
@@ -369,10 +369,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>210</x>
-      <y>1950</y>
-      <w>140</w>
-      <h>80</h>
+      <x>168</x>
+      <y>1592</y>
+      <w>112</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>TcpClient
 --
@@ -382,10 +382,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>170</x>
-      <y>1700</y>
-      <w>140</w>
-      <h>110</h>
+      <x>136</x>
+      <y>1392</y>
+      <w>112</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>120.0;10.0;10.0;90.0</additional_attributes>
@@ -393,10 +393,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>220</x>
-      <y>1860</y>
-      <w>80</w>
-      <h>110</h>
+      <x>176</x>
+      <y>1520</y>
+      <w>64</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;60.0;90.0</additional_attributes>
@@ -404,10 +404,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>100</x>
-      <y>2090</y>
-      <w>150</w>
-      <h>80</h>
+      <x>80</x>
+      <y>1704</y>
+      <w>120</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>TcpServerMulti
 --
@@ -418,9 +418,9 @@ examples.</panel_attributes>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>1950</y>
-      <w>150</w>
-      <h>80</h>
+      <y>1592</y>
+      <w>120</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>TcpServerSingle
 --
@@ -430,10 +430,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>1950</y>
-      <w>210</w>
-      <h>80</h>
+      <x>344</x>
+      <y>1592</y>
+      <w>168</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>UdpBroadcastHandler
 --
@@ -444,10 +444,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>520</x>
-      <y>1700</y>
-      <w>30</w>
-      <h>270</h>
+      <x>416</x>
+      <y>1392</y>
+      <w>24</w>
+      <h>216</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;250.0</additional_attributes>
@@ -455,10 +455,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>550</x>
-      <y>1790</y>
-      <w>210</w>
-      <h>80</h>
+      <x>440</x>
+      <y>1464</y>
+      <w>168</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>UdpMulticastHandler
 --
@@ -468,10 +468,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>640</x>
-      <y>1700</y>
-      <w>30</w>
-      <h>110</h>
+      <x>512</x>
+      <y>1392</y>
+      <w>24</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
@@ -479,10 +479,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>530</x>
-      <y>1480</y>
-      <w>350</w>
-      <h>80</h>
+      <x>424</x>
+      <y>1216</y>
+      <w>280</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>NetHandler
 --
@@ -492,10 +492,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>630</x>
-      <y>1550</y>
-      <w>30</w>
-      <h>100</h>
+      <x>504</x>
+      <y>1272</y>
+      <w>24</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
@@ -503,10 +503,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>60</x>
-      <y>1860</y>
-      <w>70</w>
-      <h>110</h>
+      <x>48</x>
+      <y>1520</y>
+      <w>56</w>
+      <h>88</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>50.0;10.0;10.0;90.0</additional_attributes>
@@ -514,10 +514,10 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>160</x>
-      <y>1860</y>
-      <w>30</w>
-      <h>250</h>
+      <x>128</x>
+      <y>1520</y>
+      <w>24</w>
+      <h>200</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;230.0</additional_attributes>
@@ -525,10 +525,10 @@ examples.</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>740</x>
-      <y>1630</y>
-      <w>330</w>
-      <h>80</h>
+      <x>592</x>
+      <y>1336</y>
+      <w>264</w>
+      <h>64</h>
     </coordinates>
     <panel_attributes>ZeroMQHandler
 --
@@ -538,10 +538,470 @@ examples.</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>770</x>
-      <y>1550</y>
-      <w>30</w>
-      <h>100</h>
+      <x>616</x>
+      <y>1272</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1544</x>
+      <y>280</y>
+      <w>288</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>PosixHandler
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1672</x>
+      <y>400</y>
+      <w>176</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>UdpUnicastHandler
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1608</x>
+      <y>352</y>
+      <w>80</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;100.0;80.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1584</x>
+      <y>616</y>
+      <w>80</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>TcpHandler
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1704</x>
+      <y>640</y>
+      <w>136</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TcpClient
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1552</x>
+      <y>352</y>
+      <w>48</w>
+      <h>328</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;390.0;40.0;390.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1656</x>
+      <y>656</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1704</x>
+      <y>776</y>
+      <w>136</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TcpServerMulti
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1704</x>
+      <y>712</y>
+      <w>136</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>TcpServerSingle
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1672</x>
+      <y>464</y>
+      <w>176</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>UdpBroadcastHandler
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1592</x>
+      <y>352</y>
+      <w>96</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;100.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1672</x>
+      <y>536</y>
+      <w>176</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>UdpMulticastHandler
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1576</x>
+      <y>352</y>
+      <w>112</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;260.0;120.0;260.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1616</x>
+      <y>176</y>
+      <w>480</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>NetHandler
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1688</x>
+      <y>232</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1656</x>
+      <y>728</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1656</x>
+      <y>792</y>
+      <w>64</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1896</x>
+      <y>280</y>
+      <w>296</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>ZeroMQHandler
+--
+bg=cyan</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>2008</x>
+      <y>232</y>
+      <w>24</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;60.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1384</x>
+      <y>1424</y>
+      <w>376</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>PosixHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1448</x>
+      <y>1552</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>UdpUnicastHandler
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1528</x>
+      <y>1480</y>
+      <w>24</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1264</x>
+      <y>1552</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1376</x>
+      <y>1680</y>
+      <w>112</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpClient
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1344</x>
+      <y>1480</y>
+      <w>112</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>120.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1384</x>
+      <y>1608</y>
+      <w>64</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1288</x>
+      <y>1792</y>
+      <w>120</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpServerMulti
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1208</x>
+      <y>1680</y>
+      <w>120</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>TcpServerSingle
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1552</x>
+      <y>1680</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>UdpBroadcastHandler
+--
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1624</x>
+      <y>1480</y>
+      <w>24</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;250.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1648</x>
+      <y>1552</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>UdpMulticastHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1720</x>
+      <y>1480</y>
+      <w>24</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1632</x>
+      <y>1304</y>
+      <w>280</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>NetHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1712</x>
+      <y>1360</y>
+      <w>24</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1256</x>
+      <y>1608</y>
+      <w>56</w>
+      <h>88</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1336</x>
+      <y>1608</y>
+      <w>24</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1800</x>
+      <y>1424</y>
+      <w>264</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>ZeroMQHandler
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1824</x>
+      <y>1360</y>
+      <w>24</w>
+      <h>80</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
     <additional_attributes>10.0;10.0;10.0;80.0</additional_attributes>
