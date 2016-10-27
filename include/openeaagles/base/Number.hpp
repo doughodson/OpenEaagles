@@ -46,7 +46,7 @@ public:
    Number(const double value)       { val = value; STANDARD_CONSTRUCTOR() }
    Number(const float value)        { val = value; STANDARD_CONSTRUCTOR() }
 
-   double getReal() const           { return static_cast<double>(val); }
+   double getReal() const           { return val; }
    double getDouble() const         { return val; }
    float getFloat() const           { return static_cast<float>(val); }
    int getInt() const               { return static_cast<int>(val); }
