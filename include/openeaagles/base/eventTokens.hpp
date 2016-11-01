@@ -8,11 +8,11 @@
 //
 //    'Key' events (values 0 to MAX_KEY_EVENT) are passed up the container tree if not used (see Component::event()).
 //       Key values   0 to 127 are keyboard (ASCII) events
-//       Key values 128 to (USER_KEY_EVENT-1) reserved for the Openoe toolkit
+//       Key values 128 to (USER_KEY_EVENT-1) reserved for the framework
 //       Key values USER_KEY_EVENT to MAX_KEY_EVENT available for user events
 //
 //    Non-key events --
-//       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for the Openoe toolkit
+//       Event values (MAX_KEY_EVENT+1) to (USER_EVENTS-1) reserved for framework
 //       Event values above USER_EVENT are available for user events
 //------------------------------------------------------------------------------
 #ifndef __oe_base_Event_Tokens_H__
