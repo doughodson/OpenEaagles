@@ -1,13 +1,9 @@
-// Class: IoData
 
 #include "openeaagles/base/IoData.hpp"
 
 namespace oe {
 namespace base {
 
-//==============================================================================
-// IoData
-//==============================================================================
 IMPLEMENT_SUBCLASS(IoData,"GenericIoData")
 EMPTY_SLOTTABLE(IoData)
 EMPTY_CONSTRUCTOR(IoData)

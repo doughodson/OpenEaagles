@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: Nav
-//------------------------------------------------------------------------------
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/util/osg_utils.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
@@ -293,7 +291,7 @@ bool Nav::gll2bd(
    const double eemE2 = pModel->getE2();
 
    // Early out: check for source and destination at same point.
-   if( (dlat == slat) && ( dlon == slon )) {
+   if ( (dlat == slat) && ( dlon == slon )) {
       *dist = 0.0;
       *brg  = 0.0;
       return true;
@@ -340,7 +338,7 @@ bool Nav::gll2bd(
    z = alimd(z, 1.0);
 
    *dist = grad * std::fabs(std::acos(z));
-   if(*dist == 0.0) {
+   if (*dist == 0.0) {
       *brg = 0.0;
       return true;
    }
@@ -476,7 +474,7 @@ bool Nav::glla2bdS(
    const double deltaAlt = (dalt - salt) * Distance::M2NM;
 
    // Early out: check for source and destination at same point.
-   if( (dlat == slat) && ( dlon == slon ) ) {
+   if ( (dlat == slat) && ( dlon == slon ) ) {
       *slantRng = deltaAlt;
       *dist = 0.0;
       *brg  = 0.0;
@@ -723,25 +721,25 @@ bool Nav::vll2bd(
       cosLambda  = std::cos(lambda);
       p          = cosU2 * sinLambda;
       q          = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda;
-      sinSigma   = std::sqrt(p*p + q*q);                                // Eq. 14
+      sinSigma   = std::sqrt(p*p + q*q);                                      // Eq. 14
       cosSigma   = sinU1 * sinU2 + cosU1 * cosU2 * cosLambda;                 // Eq. 15
-      sigma      = std::atan2(sinSigma, cosSigma);                      // Eq. 16
+      sigma      = std::atan2(sinSigma, cosSigma);                            // Eq. 16
       sinAlfa    = cosU1 * cosU2 * sinLambda / sinSigma;                      // Eq. 17
       cosSqrAlfa = 1.0 - sinAlfa * sinAlfa;
 
       if (cosSqrAlfa != 0.0)
-         cos2SigmaM = cosSigma - 2.0 * sinU1 * sinU2 / cosSqrAlfa;           // Eq. 18
+         cos2SigmaM = cosSigma - 2.0 * sinU1 * sinU2 / cosSqrAlfa;            // Eq. 18
       else
          cos2SigmaM = 0.0;
 
       cosSqr2SigmaM = cos2SigmaM * cos2SigmaM;
       p = (4.0 + eemF * (4.0 - 3.0 * cosSqrAlfa));
-      c = (eemF/16.0) * cosSqrAlfa * p;                                 // Eq. 10
+      c = (eemF/16.0) * cosSqrAlfa * p;                                       // Eq. 10
 
       oldLambda = lambda;
       p = (cos2SigmaM + c * cosSigma * (-1.0 + 2.0 * cosSqr2SigmaM));
       q = eemF * sinAlfa * (sigma + c * sinSigma * p);
-      lambda = l + (1.0 - c) * q;                                       // Eq. 11
+      lambda = l + (1.0 - c) * q;                                             // Eq. 11
 
    } while (std::fabs(lambda - oldLambda) > 1.0e-10);
 
@@ -762,7 +760,7 @@ bool Nav::vll2bd(
    if (brng2 != nullptr) {
       p =  cosU1 * sinLambda;
       q = -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda;
-      const double Alfa2 = std::atan2(p, q);                                 // Eq. 21
+      const double Alfa2 = std::atan2(p, q);                                  // Eq. 21
       *brng2 = Angle::aepcdDeg(180.0 + Angle::R2DCC * Alfa2);
    }
 
@@ -1207,40 +1205,25 @@ bool Nav::getGeodCoords(
 
    double lat = 0;
    double lon = 0;
-   if( xp != 0 )
-   {
-      /* normal (non-zero divide) case */
+   if ( xp != 0 ) {
+      // normal (non-zero divide) case
       lon = std::atan2( yp, xp );
-   }
-   else
-   {
-      /* xp is zero */
-      if( yp > 0 )
-      {
+   } else {
+      // xp is zero
+      if ( yp > 0 ) {
          lon = PIOVER2;
-      }
-      else
-      {
-         if( yp < 0 )
-         {
+      } else {
+         if( yp < 0 ) {
             lon = -PIOVER2;
-         }
-         else
-         {
-            /* xp and yp are both zero, special_case2 */
+         } else {
+            // xp and yp are both zero, special_case2
             special_case2 = 1;
-            if( zp > 0.0 )
-            {
+            if ( zp > 0.0 ) {
                lat = PIOVER2;
-            }
-            else
-            {
-               if( zp < 0.0 )
-               {
+            } else {
+               if ( zp < 0.0 ) {
                   lat = -PIOVER2;
-               }
-               else
-               {
+               } else {
                   // lat and h are undefined when X = Y = Z = 0
                   return false;
                }
@@ -1281,8 +1264,7 @@ bool Nav::getGeodCoords(
 
    int index = 0;
 
-   do
-   {
+   do {
       h_previous = h;
 
       const double temp1 = ellipseA + (2.0 * m) / ellipseA;
@@ -1316,29 +1298,22 @@ bool Nav::getGeodCoords(
    const double w_sq = w * w;
    double alt = h;
 
-   if( (wp_sq + zp_sq) < (w_sq + z * z) )
-
-   {
+   if( (wp_sq + zp_sq) < (w_sq + z * z) ) {
       alt = -(alt);
    }
 
    /* calculate for latitude */
 
-   if( special_case2 == 0 )
-   {
+   if( special_case2 == 0 ) {
       double tanphi = 0;
       //if( wp != w )     /* if denominator not 0 */
-      if( (wp - w) > 1.0 )     /* if denominator not 0 */
-      {
+      if ( (wp - w) > 1.0 ) {     /* if denominator not 0 */
          tanphi = (zp - z) / (wp - w);
-      }
-      else              /* denominator is 0 */
-      {
+      } else {              /* denominator is 0 */
          tanphi = (ellipseAsqOverB * std::sqrt( std::fabs(1.0 - w_sq / ellipseAsq))) / w;
       }
       lat = atan( tanphi );
-      if( zp < 0  && lat > 0)
-      {
+      if ( zp < 0  && lat > 0) {
          lat = -(lat);
       }
    }

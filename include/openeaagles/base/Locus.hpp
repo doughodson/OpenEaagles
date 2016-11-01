@@ -9,7 +9,6 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class: Locus
-// Base class: Object -> Locus
 // Factory name: Locus
 //
 // Description: A line of evenly spaced data points in a specific direction and

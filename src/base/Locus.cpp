@@ -8,9 +8,6 @@ IMPLEMENT_SUBCLASS(Locus,"Locus")
 EMPTY_SLOTTABLE(Locus)
 EMPTY_SERIALIZER(Locus)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Locus::Locus()
 {
    STANDARD_CONSTRUCTOR()

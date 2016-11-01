@@ -8,7 +8,7 @@ namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Hls
+// Class: Hls
 //
 // Description:  Defines a color by Hue, Saturation and Lightness.
 //

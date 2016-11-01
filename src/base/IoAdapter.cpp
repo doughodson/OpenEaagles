@@ -4,10 +4,6 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// IoAdapter
-//==============================================================================
-
 IMPLEMENT_ABSTRACT_SUBCLASS(IoAdapter,"AbstractIoAdapter")
 EMPTY_SLOTTABLE(IoAdapter)
 EMPTY_CONSTRUCTOR(IoAdapter)

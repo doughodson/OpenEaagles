@@ -8,7 +8,7 @@ namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  Hsva
+// Class: Hsva
 //
 // Description:  Defines a color by Hue, Saturation, Value and Alpha
 //

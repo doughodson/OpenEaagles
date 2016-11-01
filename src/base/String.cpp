@@ -1,3 +1,4 @@
+
 #include "openeaagles/base/String.hpp"
 
 #include <cstdlib>
@@ -9,9 +10,6 @@ namespace base {
 IMPLEMENT_SUBCLASS(String, "String")
 EMPTY_SLOTTABLE(String)
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 String::String()
 {
    STANDARD_CONSTRUCTOR()

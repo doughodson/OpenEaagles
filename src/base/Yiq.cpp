@@ -1,13 +1,11 @@
-//------------------------------------------------------------------------------
-// Yiq
-//------------------------------------------------------------------------------
+
 #include "openeaagles/base/Yiq.hpp"
 #include "openeaagles/base/Float.hpp"
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Yiq,"yiq")
+IMPLEMENT_SUBCLASS(Yiq, "yiq")
 
 //------------------------------------------------------------------------------
 // slot table for this class type

@@ -1,6 +1,3 @@
-//==============================================================================
-// class Terrain --
-//==============================================================================
 
 #include "openeaagles/base/Terrain.hpp"
 
@@ -37,9 +34,6 @@ BEGIN_SLOT_MAP(Terrain)
    ON_SLOT(2, setPathname, String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Terrain::Terrain()
 {
    STANDARD_CONSTRUCTOR()
@@ -55,9 +49,6 @@ Terrain::Terrain()
    maxElev = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Terrain::copyData(const Terrain& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -71,15 +62,13 @@ void Terrain::copyData(const Terrain& org, const bool cc)
 
    if (org.path != nullptr) {
       setPathname( static_cast<String*>(org.path->clone()) );
-   }
-   else {
+   } else {
       setPathname( nullptr );
    }
 
    if (org.file != nullptr) {
       setFilename( static_cast<String*>(org.file->clone()) );
-   }
-   else {
+   } else {
       setFilename( nullptr );
    }
 
@@ -143,8 +132,7 @@ const char* Terrain::getPathname() const
    if (path != nullptr) {
       // Our path
       p = *path;
-   }
-   else {
+   } else {
       // See if we have a contain "Terrain" object that has a path set
       const Terrain* q = static_cast<const Terrain*>(findContainerByType(typeid(Terrain)));
       if (q != nullptr) p = q->getPathname();
@@ -423,8 +411,7 @@ bool Terrain::occultCheck2(
             }
          }
       }
-   }
-   else {
+   } else {
       // without valid flags
       for (unsigned int i = 1; i < (n-1) && !occulted; i++) {
          currentRange += deltaRng;
@@ -487,29 +474,24 @@ bool Terrain::vbwShadowChecker(
             // see if it's within the upper and lower tangent boundaries
             if (currentRange > 0) {
                tanLookAngle = (elevations[i] - refAlt) / currentRange;
-            }
-            else {
+            } else {
                tanLookAngle = (elevations[i] - refAlt) / 1.0f;
             }
             if (tanLookAngle >= tanLower && tanLookAngle <= tanUpper) {
                // In beam and not in shadow
                maskFlags[i] = false;
                tanLower = tanLookAngle;
-            }
-            else {
+            } else {
                // Out of beam or in shadow
                maskFlags[i] = true;
             }
-         }
-         else {
+         } else {
             // Set the mask flag for all invalid data
             maskFlags[i] = true;
          }
          currentRange += deltaRng;
       }
-   }
-
-   else {
+   } else {
       // without valid flags
       double tanLookAngle = 0;
       for (unsigned int i = 0; i < n; i++) {
@@ -517,16 +499,14 @@ bool Terrain::vbwShadowChecker(
          // see if it's within the upper and lower tangent boundaries
          if (currentRange > 0) {
             tanLookAngle = (elevations[i] - refAlt) / currentRange;
-         }
-         else {
+         } else {
             tanLookAngle = (elevations[i] - refAlt) / 1.0f;
          }
          if (tanLookAngle >= tanLower && tanLookAngle <= tanUpper) {
             // In beam and not in shadow
             maskFlags[i] = false;
             tanLower = tanLookAngle;
-         }
-         else {
+         } else {
             // Out of beam or in shadow
             maskFlags[i] = true;
          }
@@ -587,8 +567,7 @@ bool Terrain::aac(
             double v = m1 * m2;
             if (v < 0.0) v = 0;
             aacData[i] = v;
-         }
-         else {
+         } else {
             aacData[i] = 0.0f;
          }
          currentRange += deltaRng;
@@ -660,8 +639,7 @@ bool Terrain::cLight(
             double v = lv * m2;
             if (v < 0.0) v = 0;
             ldata[i] = v;
-         }
-         else {
+         } else {
             ldata[i] = 0.0f;
          }
       }
@@ -710,18 +688,13 @@ bool Terrain::getElevationColor(
    if ( elevation < minz ) {
       // too low is the first color
       colorHsv = *colorTable[0];
-   }
-
-   else if ( elevation >= maxz ) {
+   } else if ( elevation >= maxz ) {
       // too high is the last color
       colorHsv = *colorTable[numColors-1];
-   }
-
-   else if (numColors == 2) {
+   } else if (numColors == 2) {
       // Only two, that's easy
       colorHsv.colorInterpolate(elevation, minz, maxz, *colorTable[0], *colorTable[1]);
-   }
-   else {
+   } else {
 
       // Full range: min to max
       double elevRange = maxz - minz;

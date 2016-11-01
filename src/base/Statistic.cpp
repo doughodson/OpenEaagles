@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Statistic
-//------------------------------------------------------------------------------
+
 #include "openeaagles/base/Statistic.hpp"
 
 #include <limits>
@@ -10,19 +8,14 @@ namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Statistic,"Statistic")
 EMPTY_SERIALIZER(Statistic)
+EMPTY_DELETEDATA(Statistic)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Statistic::Statistic()
 {
    STANDARD_CONSTRUCTOR()
    clear();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Statistic::copyData(const Statistic& org, const bool)
 {
    BaseClass::copyData(org);
@@ -34,13 +27,6 @@ void Statistic::copyData(const Statistic& org, const bool)
    absSum = org.absSum;
    sumSq  = org.sumSq ; 
    value1 = org.value1;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Statistic::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

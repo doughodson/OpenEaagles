@@ -10,7 +10,7 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class:  Yiq
 //
-// Description:  Defines a YIQ color as used in NTSC.
+// Description:  Defines a YIQ color as used in NTSC
 //
 // Y defines the luminance, for a black-and-white image.
 // I and Q determine the color.

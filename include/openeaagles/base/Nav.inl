@@ -40,9 +40,9 @@ inline bool Nav::fbd2llE(
    double dN = cosBrng * dist;
    double dE = sinBrng * dist;
 
-   if (dlat != 0) *dlat = slat + Angle::R2DCC * (dN / rm);
+   if (dlat != nullptr) *dlat = slat + Angle::R2DCC * (dN / rm);
 
-   if (dlon != 0) {
+   if (dlon != nullptr) {
       if (cosSlat != 0)
          *dlon = Angle::aepcdDeg( slon + Angle::R2DCC * (dE / rn) / cosSlat );
       else
@@ -96,7 +96,6 @@ inline bool Nav::fll2bdE(
       *brng = Angle::R2DCC * std::atan2(dE, dN);
       *dist = std::sqrt(dN*dN + dE*dE);
    }
-
 
    return true;
 }
@@ -206,7 +205,7 @@ inline bool Nav::aer2xyz(
 {
    bool ok = false;
 
-   if (pos != 0) {
+   if (pos != nullptr) {
       // Compute sin/cos of azimuth
       double saz, caz;
       sinCos(az,&saz,&caz);
@@ -246,11 +245,11 @@ inline bool Nav::aer2xyz(
 
    if (pos != nullptr) {
       // Compute sin/cos of azimuth
-      double saz, caz;
+      double saz(0.0), caz(0.0);
       sinCos(az,&saz,&caz);
 
       // Compute sin/cos of elevation
-      double sel, cel;
+      double sel(0.0), cel(0.0);
       sinCos(el,&sel,&cel);
 
       // ---
@@ -604,18 +603,17 @@ inline bool Nav::convertPosVec2llE(
    double north = pos.x();
    double east = pos.y();
    double down = pos.z();
-   if (lat != 0) {
+   if (lat != nullptr) {
       *lat = slat + Angle::R2DCC * (north / rm);
    }
-   if (lon != 0) {
+   if (lon != nullptr) {
       if (cosSlat != 0) {
          *lon = Angle::aepcdDeg( slon + Angle::R2DCC * (east / rn) / cosSlat );
-      }
-      else {
+      } else {
          *lon = slon;
       }
    }
-   if (alt != 0) {
+   if (alt != nullptr) {
       *alt = -down;
    }
 
@@ -716,7 +714,7 @@ inline bool Nav::convertLL2PosVecE(
    )
 {
    bool ok = false;
-   if (pos != 0) {
+   if (pos != nullptr) {
       // Initialize earth model parameters
       const EarthModel* pModel = em;
       if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
@@ -725,9 +723,9 @@ inline bool Nav::convertLL2PosVecE(
       const double e2 = pModel->getE2();  // eccentricity squared
 
       // Define Constants
-      const double q       = 1.0 - e2 * sinSlat * sinSlat;
-      const double rn      = a / std::sqrt(q);
-      const double rm      = rn * (1.0 - e2) / q;
+      const double q   = 1.0 - e2 * sinSlat * sinSlat;
+      const double rn  = a / std::sqrt(q);
+      const double rm  = rn * (1.0 - e2) / q;
 
       // Compute NED variables
       double x = Angle::D2RCC * Angle::aepcdDeg(lat - slat) * rm;

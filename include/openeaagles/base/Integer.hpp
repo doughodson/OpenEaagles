@@ -10,7 +10,7 @@ namespace base {
 //------------------------------------------------------------------------------
 // Class:  Integer
 //
-// Description:  Class for integer numbers.
+// Description:  Class for integer numbers
 //
 // Slots: None
 // Events: None

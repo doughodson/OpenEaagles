@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class:  Statistic
-//------------------------------------------------------------------------------
+
 #ifndef __oe_base_Statistic_H__
 #define __oe_base_Statistic_H__
 
@@ -13,7 +11,6 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Statistic
-// Base class:  Object-> Statistic
 //
 // Description:  General statistics class: acts like a statistical calculator:
 //               Computes the mean, absolute mean, the variance, standard

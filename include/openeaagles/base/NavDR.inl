@@ -324,8 +324,7 @@ inline bool NavDR::getR2Matrix(
    if (absW1 < EPS) {
       osg::Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
       *pR2 = I3;
-   }
-   else {
+   } else {
       const double absW2 = absW1 * absW1;
       const double absW3 = absW1 * absW2;
       const double absW4 = absW1 * absW3;

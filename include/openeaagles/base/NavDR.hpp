@@ -128,7 +128,7 @@ public:
 
 };
 
-#include "openeaagles/base/NavDR.hpp"
+#include "openeaagles/base/NavDR.inl"
 
 }
 }

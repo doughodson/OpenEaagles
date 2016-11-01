@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Hsv
-//------------------------------------------------------------------------------
+
 #include "openeaagles/base/Hsv.hpp"
 #include "openeaagles/base/Float.hpp"
 #include "openeaagles/base/units/Angles.hpp"

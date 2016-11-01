@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Hls
-//------------------------------------------------------------------------------
+
 #include "openeaagles/base/Hls.hpp"
 #include "openeaagles/base/Float.hpp"
 #include "openeaagles/base/util/math_utils.hpp"

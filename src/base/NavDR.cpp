@@ -31,7 +31,6 @@ bool NavDR::deadReckoning(
    osg::Vec4d newP = p;
    osg::Vec4d newRPY = rpy;
 
-
    switch (drNum) {
 
       //--------------------------------------------------------------
@@ -171,5 +170,5 @@ bool NavDR::deadReckoning(
    return true;
 }
 
-}  // end namespace base
-}  // end namespace oe
+}
+}

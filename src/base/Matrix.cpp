@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Matrix
-//------------------------------------------------------------------------------
+
 #include "openeaagles/base/Matrix.hpp"
 #include "openeaagles/base/Vectors.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
@@ -12,16 +10,10 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// Matrix
-//==============================================================================
 IMPLEMENT_SUBCLASS(Matrix,"Matrix")
 EMPTY_SLOTTABLE(Matrix)
 EMPTY_SERIALIZER(Matrix)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Matrix::Matrix()
 {
    STANDARD_CONSTRUCTOR()

@@ -9,10 +9,6 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// IoDevice
-//==============================================================================
-
 IMPLEMENT_SUBCLASS(IoDevice,"IoDevice")
 
 // slot table for this class type
@@ -27,9 +23,6 @@ BEGIN_SLOT_MAP(IoDevice)
    ON_SLOT(2, setSlotDevices,  PairStream)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 IoDevice::IoDevice()
 {
    STANDARD_CONSTRUCTOR()
@@ -37,18 +30,12 @@ IoDevice::IoDevice()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// Init member data
-//------------------------------------------------------------------------------
 void IoDevice::initData()
 {
    adapters = nullptr;
    devices = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void IoDevice::copyData(const IoDevice& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -77,9 +64,6 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void IoDevice::deleteData()
 {
    setSlotAdapters(nullptr);
