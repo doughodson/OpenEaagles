@@ -133,23 +133,23 @@ namespace base {
 //    Using getRefCount() returns the current value of the Object's reference count
 //
 //
-// Factory classes and the factory names:
+// Factory names:
 //
-//    The user written factory classes (e.g., Factory) or functions will create an object
+//    The user written factory functions will create an object
 //    given its 'factory' name and will return a pointer to the new object or zero if the
 //    object wasn't found.  These new objects have a reference count of one.  The
 //    object's factory name, which is defined by a parameter to the IMPLEMENT_SUBCLASS()
 //    macro, is usually the same or similar to the class name.
 //
-//    A static factory method or factory function is passed to the parser (see parser.y),
-//    as a helper function to build an object tree.  The factory class or function is used
-//    to construct objects using the factory names that were parsed from the input file.
+//    The factory function is passed to the parser (see edl_parser.y); which servers
+//    as a helper function to build an object tree.  The function constructs objects
+//    using factory names parsed from the input file.
 //
-//    Typically an application will build its own application level factory,
+//    Typically an application will build its own application factory function,
 //    which in turn will call the various factory methods for the model libraries and
-//    Openoe libraries that the application requires.  By ordering these factory
-//    calls at the application level, the factory can search a library containing
-//    a few more specific models prior to searching a library of many generic models,
+//    framework libraries that the application requires.  By ordering these factory
+//    calls at within the application, the factory can search a library containing
+//    a more specific models prior to searching a library of other generic models,
 //    and if a more specific model exists for a given factory name then it is used,
 //    otherwise the library of generic models is searched and its model, if found,
 //    is used.

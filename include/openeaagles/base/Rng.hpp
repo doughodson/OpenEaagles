@@ -253,13 +253,9 @@ private:
 
 };
 
-
 #include "openeaagles/base/Rng.inl"
-
 
 }
 }
 
 #endif
-
-
