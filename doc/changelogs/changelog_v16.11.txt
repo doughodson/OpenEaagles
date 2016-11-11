@@ -1,0 +1,15 @@
+================================================================================
+Changes since v16.10a
+================================================================================
+
+--------------------------------------------------------------------------------
+General framework-wide changes and improvements
+
+
+--------------------------------------------------------------------------------
+base library
+
+   Nav class - updated code to use nullptr in more places
+   
+   NavDR class - updated header file to properly include inline header file (bug fix)
+
