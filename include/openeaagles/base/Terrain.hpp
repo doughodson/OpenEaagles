@@ -195,8 +195,8 @@ private:
    const String* file;              // Data file name
    double neLat, neLon;             // Northeast lat/lon (degs)
    double swLat, swLon;             // Southwest lat/lon (degs)
-   double   minElev;                // Minimum elevation (m)
-   double   maxElev;                // Maximum elevation (m)
+   double minElev;                  // Minimum elevation (m)
+   double maxElev;                  // Maximum elevation (m)
 };
 
 

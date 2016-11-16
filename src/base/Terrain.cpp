@@ -41,12 +41,12 @@ Terrain::Terrain()
    path = nullptr;
    file = nullptr;
 
-   neLat = 0;
-   neLon = 0;
-   swLat = 0;
-   swLon = 0;
-   minElev = 0;
-   maxElev = 0;
+   neLat = 0.0;
+   neLon = 0.0;
+   swLat = 0.0;
+   swLon = 0.0;
+   minElev = 0.0;
+   maxElev = 0.0;
 }
 
 void Terrain::copyData(const Terrain& org, const bool cc)
@@ -81,9 +81,6 @@ void Terrain::copyData(const Terrain& org, const bool cc)
    maxElev = org.maxElev;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Terrain::deleteData()
 {
    clearData();
@@ -92,9 +89,6 @@ void Terrain::deleteData()
    setFilename(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// reset() -- Reset the simulation & players
-//------------------------------------------------------------------------------
 void Terrain::reset()
 {
    if ( !isDataLoaded() ) {
@@ -104,9 +98,6 @@ void Terrain::reset()
    BaseClass::reset();
 }
 
-//------------------------------------------------------------------------------
-// clear our data
-//------------------------------------------------------------------------------
 void Terrain::clearData()
 {
 }
@@ -343,11 +334,11 @@ bool Terrain::occultCheck(
    // Tangent of the angle to the target point --
    // If the angle to any terrain point is greater than this
    // angle then the target is occulted by the terrain point
-   double tgtTan = (tgtAlt - refAlt) / range;
+   const double tgtTan = (tgtAlt - refAlt) / range;
 
    // Loop through all elevation points looking for an angle
    // that's greater than our ref angle
-   double deltaRng = (range / (n - 1));
+   const double deltaRng = (range / (n - 1));
    double currentRange = 0;
    if (validFlags != nullptr) {
       // with valid flags
@@ -398,7 +389,7 @@ bool Terrain::occultCheck2(
 
    // Loop through all elevation points looking for an angle
    // that's greater than our ref angle
-   double deltaRng = (range / (n - 1));
+   const double deltaRng = (range / (n - 1));
    double currentRange = 0;
    if (validFlags != nullptr) {
       // with valid flags
@@ -463,11 +454,11 @@ bool Terrain::vbwShadowChecker(
    // tangent value and flag as terrain masked all points with tangent
    // values less than the current.
 
-   double deltaRng = (range / (n - 1));
+   const double deltaRng = (range / (n - 1));
    double currentRange = 0;
    if (validFlags != nullptr) {
       // with valid flags
-      double tanLookAngle = 0;
+      double tanLookAngle = 0.0;
       for (unsigned int i = 0; i < n; i++) {
          if (validFlags[i]) {
             // Valid data -- compute the tangent of the look angle to the point and
@@ -552,8 +543,8 @@ bool Terrain::aac(
    // the terrain.
    // ---
 
-   double deltaRng = (range / (n - 1));
-   double deltaRng2 = deltaRng * 2.0f;
+   const double deltaRng = (range / (n - 1));
+   const double deltaRng2 = deltaRng * 2.0f;
    double currentRange = deltaRng;
 
    if (maskFlags != nullptr) {
@@ -627,8 +618,8 @@ bool Terrain::cLight(
    // the terrain.
    // ---
 
-   double deltaRng = (range / (n - 1));
-   double deltaRng2 = deltaRng * 2.0f;
+   const double deltaRng = (range / (n - 1));
+   const double deltaRng2 = deltaRng * 2.0f;
 
    if (maskFlags != nullptr) {
       // with mask flags
@@ -712,8 +703,8 @@ bool Terrain::getElevationColor(
       }
 
       // Lower & upper elevation limits
-      double lowLimit = idx * elevSteps;
-      double highLimit = (idx+1) * elevSteps;
+      const double lowLimit = idx * elevSteps;
+      const double highLimit = (idx+1) * elevSteps;
 
       // Interpolate between colors
       colorHsv.colorInterpolate(deltaElev, lowLimit, highLimit, *colorTable[idx], *colorTable[(idx+1)]);
