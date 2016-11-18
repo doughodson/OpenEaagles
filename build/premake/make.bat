@@ -1,7 +1,7 @@
 rem
 rem set premake location
 rem
-@SET Premake=..\..\..\OpenEaagles3rdParty\bin\premake5-alpha9.exe
+@SET Premake=..\..\..\OpenEaagles3rdParty\bin\premake5-alpha10.exe
 rem
 rem delete old solution/workspace files
 rem
