@@ -552,14 +552,6 @@ bool MapPage::setSlotNorthUp(const base::Number* const x)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for MapPage
-//------------------------------------------------------------------------------
-base::Object* MapPage::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
-
-}  // end of graphics namespace
-}  // end of oe namespace
+}
 

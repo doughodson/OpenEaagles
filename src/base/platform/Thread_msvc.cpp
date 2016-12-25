@@ -3,6 +3,7 @@
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
 #include "openeaagles/base/util/system.hpp"
+#include <iostream>
 
 /* ----------------------------------------------------------------- */
 /* Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'  */
@@ -354,7 +355,7 @@ void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigne
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
       DWORD count = 0;
       for (unsigned int i = 0; i < num; i++) {
-         if (threads[i] != 0) {
+         if (threads[i] != nullptr) {
             handles[count++] = static_cast<HANDLE>(threads[i]->completedSig);
          }
       }
@@ -370,13 +371,13 @@ void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigne
 //-----------------------------------------------------------------------------
 int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned int num)
 {
-   if (threads != 0 && num > 0) {
+   if (threads != nullptr && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
       //Need to keep a mapping of handle index -> thread index (since we skip invalid ones)
       int indexes[MAXIMUM_WAIT_OBJECTS];
       DWORD count = 0;
       for (unsigned int i = 0; i < num; i++) {
-         if (threads[i] != 0) {
+         if (threads[i] != nullptr) {
             handles[count] = static_cast<HANDLE>(threads[i]->completedSig);
             indexes[count++] = i;
          }

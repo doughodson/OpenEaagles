@@ -12,6 +12,8 @@
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 
+#include <iosfwd>
+
 namespace oe {
 namespace base {
 
@@ -41,7 +43,7 @@ namespace base {
 //
 //    Each derived class must provide a standard constructor that requires no
 //    parameters (e.g., Foo()).  This is required by the class factories (i.e., the
-//    form functions) to constructor instances of derived classes.
+//    factory functions) to constructor instances of derived classes.
 //
 //    The copy constructors, assignment operators (=), virtual destructors,
 //    and clone functions are provided for all derived classes using the
@@ -256,17 +258,6 @@ namespace base {
 //          Note: the MSG_ERROR type message can not be disabled.
 //
 //
-// Templates:
-//
-//    QQueue -- Quick Queue (see QQueue.h)
-//       Use put() to add items and get() to remove items.  Use the constructor's
-//       'qsize' parameter to set the size of the queue.
-//
-//    QStack -- Quick Stack (see QStack.h)
-//       Use push() to add items and pop() to remove items.  Use the constructor's
-//       'ssize' parameter to set the size of the stack.
-//
-//
 // Exception:
 //    Exception
 //       Object's general exception class which returns a description.
@@ -280,13 +271,13 @@ namespace base {
 //       (See macro STANDARD_CONSTRUCTOR())
 //
 //
-// Table of known Openoe classes and object counters
+// Table of known classes and object counters
 //
-//    A list of 'known' Openoe classes is maintained as a table of pointers
-//    to the _Static structure, which is contained in each Openoe class.  The
+//    A list of 'known' classes is maintained as a table of pointers
+//    to the _Static structure, which is contained in each class.  The
 //    table is a private, static member variable.  The various IMPLEMENT_SUBCLASS
 //    macros register the class using the registerClass() function; therefore all
-//    Openoe classes implemented in an application are known.
+//    classes implemented in an application are known.
 //
 //    The STANDARD_CONSTRUCTOR() and STANDARD_DESTRUCTOR() macros increment and
 //    decrement, respectively, a counter located in each class _Static structure.
@@ -295,8 +286,8 @@ namespace base {
 //    instantiated objects, is also maintained.
 //
 //       writeClassList(std::ostream& sout)
-//          Writes the table of known Openoe classes, which includes the
-//          form name, object counters and full C++ class name for each class,
+//          Writes the table of known classes, which includes the
+//          factory name, object counters and full C++ class name for each class,
 //          to the 'sout' output stream.
 //
 //------------------------------------------------------------------------------
@@ -304,7 +295,7 @@ class Object
 {
    // -------------------------------------------------------------------------
    // Standard object stuff --
-   //    derived classes will use the macro DECLARE_SUBCLASS(); see macros.h
+   //    derived classes will use the macro DECLARE_SUBCLASS(); see macros.hpp
    // -------------------------------------------------------------------------
    public: virtual ~Object();
    public: Object(const Object& org);
@@ -327,9 +318,7 @@ class Object
    // Slot table functions
    public: static const SlotTable& getSlotTable();
    protected: virtual bool setSlotByIndex(const int slotindex, Object* const obj);
-   protected: virtual Object* getSlotByIndex(const int slotindex);
    public: bool setSlotByName(const char* const slotname, Object* const obj);
-   public: Object* getSlotByName(const char* const slotname);
    public: const char* slotIndex2Name(const int slotindex) const;
    public: int slotName2Index(const char* const slotname) const;
 
@@ -337,7 +326,7 @@ class Object
    protected: struct _Static {
       const unsigned int classIndex;   // Registered class index
       const char* const cname;         // class name from 'type_info'
-      const char* const fname;         // class form name
+      const char* const fname;         // class factory name
       const SlotTable* const st;       // Pointer to the SlotTable
       const _Static* const bstatic;    // Pointer to the base class _Static object
       int count;                       // NCurrent of instances

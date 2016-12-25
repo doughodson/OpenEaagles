@@ -1099,5 +1099,5 @@ void Eadi3DPage::setLocalizerValid(const bool locValid)
     localizerDevValid = locValid;
 }
 
-}; // end instruments namespace
-}; // end oe namespace
+}
+}

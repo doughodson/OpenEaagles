@@ -12,9 +12,6 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Page,"Page")
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Page)
     "page",                // 1: Initial subpage
     "pages",               // 2: Subpages
@@ -23,10 +20,6 @@ BEGIN_SLOTTABLE(Page)
     "focusSlavedToSubpage", // 5: Slave the focus to the subpage (default: true)
 END_SLOTTABLE(Page)
 
-
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Page)
     ON_SLOT(1,setPage,base::Identifier)
     ON_SLOT(2,setSubpageStream,base::PairStream)
@@ -36,9 +29,6 @@ BEGIN_SLOT_MAP(Page)
     ON_SLOT(5,setSlotFocusSlavedToSubpage,base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event handler
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Page)
     ON_EVENT(ON_ENTRY,onEntry)
     ON_EVENT(ON_EXIT,onExit)
@@ -46,9 +36,6 @@ BEGIN_EVENT_HANDLER(Page)
     ON_ANYKEY(onKeyHit)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Page::Page() : cpName()
 {
    STANDARD_CONSTRUCTOR()
@@ -63,9 +50,6 @@ Page::Page() : cpName()
    subpageSP = SUBPAGE_STACK_SIZE;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Page::copyData(const Page& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -103,9 +87,6 @@ void Page::copyData(const Page& org, const bool cc)
     caller = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Page::deleteData()
 {
     // De-select the current pages
@@ -120,7 +101,6 @@ void Page::deleteData()
     if (pageChgEvents != nullptr) pageChgEvents->unref();
     pageChgEvents = nullptr;
 }
-
 
 //------------------------------------------------------------------------------
 // updateTC() -- Update time critical stuff here
@@ -556,18 +536,6 @@ bool Page::setSlotFocusSlavedToSubpage(const base::Number* const msg)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Page
-//------------------------------------------------------------------------------
-base::Object* Page::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Page::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

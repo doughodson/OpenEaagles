@@ -5,9 +5,10 @@
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Airport,"Airport")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Airport, "Airport")
 EMPTY_SERIALIZER(Airport)
-
+EMPTY_COPYDATA(Airport)
+EMPTY_DELETEDATA(Airport)
 
 // Airport class field Position Table
 const Airport::Ptbl Airport::ptable = {
@@ -24,10 +25,6 @@ const Airport::Ptbl Airport::ptable = {
         AP_MAGVAR                   // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Airport::Airport()
 {
    STANDARD_CONSTRUCTOR()
@@ -39,10 +36,6 @@ Airport::Airport(const char* const s) : Record(s)
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
-
-EMPTY_COPYDATA(Airport)
-EMPTY_DELETEDATA(Airport)
-
 
 //------------------------------------------------------------------------------
 // Type functions
@@ -58,7 +51,6 @@ int Airport::isAirportType(const Airport::AirportType tt) const
 {
    return tt == airportType();
 }
-
 
 // ident: returns the identifier field
 void Airport::ident(char id[]) const

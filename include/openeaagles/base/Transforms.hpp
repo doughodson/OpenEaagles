@@ -3,7 +3,7 @@
 #define __oe_base_Transform_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Matrixd"
 
 namespace oe {
 namespace base {
@@ -49,7 +49,7 @@ class Transform : public Object
 
 public:
     Transform();
-    operator const osg::Matrix&()           { return m; }
+    operator const osg::Matrixd&()           { return m; }
     virtual bool setComputematrix1(const Angle* const sc1obj);
     virtual bool setComputematrix1(const Number* const sc1obj);
     virtual bool setComputematrix2(const Angle* const sc2obj);
@@ -61,7 +61,7 @@ public:
 
 protected:
     virtual void computeMatrix();
-    osg::Matrix m;              // transformation matrix
+    osg::Matrixd m;              // transformation matrix
     double      v[4];           // values
     int         nv;             // Number of values
 };

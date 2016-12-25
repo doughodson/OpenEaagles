@@ -2,7 +2,7 @@
 #ifndef __oe_models_RacModel_H__
 #define __oe_models_RacModel_H__
 
-#include "openeaagles/simulation/dynamics/AerodynamicsModel.hpp"
+#include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
 
 namespace oe {
 
@@ -26,9 +26,9 @@ namespace models {
 //    cmdHeading     <Angle>     ! Command Heading
 //    cmdSpeed       <Number>    ! Command speed           (kts)
 //------------------------------------------------------------------------------
-class RacModel : public simulation::AerodynamicsModel
+class RacModel : public AerodynamicsModel
 {
-    DECLARE_SUBCLASS(RacModel, simulation::AerodynamicsModel)
+    DECLARE_SUBCLASS(RacModel, AerodynamicsModel)
 
 public:
     RacModel();

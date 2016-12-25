@@ -1,16 +1,15 @@
-//------------------------------------------------------------------------------
-// Class: dis::Nib
-//------------------------------------------------------------------------------
 
 #include "openeaagles/networks/dis/Nib.hpp"
 #include "openeaagles/networks/dis/Ntm.hpp"
 #include "openeaagles/networks/dis/EmissionPduHandler.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/Jammer.hpp"
-#include "openeaagles/simulation/Radar.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/systems/Jammer.hpp"
+#include "openeaagles/models/systems/Radar.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
+
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
@@ -18,7 +17,7 @@ namespace oe {
 
 namespace dis {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Nib,"DisNib")
+IMPLEMENT_PARTIAL_SUBCLASS(Nib, "DisNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
@@ -212,7 +211,7 @@ bool Nib::networkOutputManagers(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateTheIPlayer()
 {
-    simulation::Player* p = getPlayer();
+    models::Player* p = getPlayer();
 
    // ---
    // If we haven't tried to created the IPlayer yet ...
@@ -360,9 +359,9 @@ bool Nib::emitterBeamsManager(const double curExecTime)
       // Check for the single-beam RADAR
       {
          // (DPG -- #### only a simple, single-beam Radar)
-         const base::Pair * pair = getPlayer()->getSensorByType(typeid(simulation::Radar));
+         const base::Pair * pair = getPlayer()->getSensorByType(typeid(models::Radar));
          if (pair != nullptr) {
-            simulation::RfSensor* rs = (simulation::RfSensor*) pair->object();
+            models::RfSensor* rs = (models::RfSensor*) pair->object();
 
             // When we have a R/F sensor, create a handler for it
             EmissionPduHandler* handler = nullptr;
@@ -389,9 +388,9 @@ bool Nib::emitterBeamsManager(const double curExecTime)
 
       // Check for a Jammer
       {
-         const base::Pair * pair = getPlayer()->getSensorByType(typeid(simulation::Jammer));
+         const base::Pair * pair = getPlayer()->getSensorByType(typeid(models::Jammer));
          if (pair != nullptr) {
-            simulation::RfSensor* js = (simulation::RfSensor*) pair->object();
+            models::RfSensor* js = (models::RfSensor*) pair->object();
 
             bool singleBeam = true;
             base::PairStream* subcomponents = js->getComponents();
@@ -402,7 +401,7 @@ bool Nib::emitterBeamsManager(const double curExecTime)
                while (item != nullptr && numEmissionSystems < MAX_EM_SYSTEMS) {
 
                   base::Pair* pair = static_cast<base::Pair*>( item->getValue() );
-                  simulation::Jammer* jam = dynamic_cast<simulation::Jammer*>( pair->object() );
+                  models::Jammer* jam = dynamic_cast<models::Jammer*>( pair->object() );
                   if (jam != nullptr) {
                      singleBeam = false;
 

@@ -13,11 +13,8 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(FileReader,"FileReader")
+IMPLEMENT_SUBCLASS(FileReader, "FileReader")
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(FileReader)
     "pathname",      // 1) Path to the file
     "filename",      // 2) File name (appended to pathname)
@@ -31,10 +28,6 @@ BEGIN_SLOT_MAP(FileReader)
     ON_SLOT(3,setSlotRecordLength,Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 FileReader::FileReader()
 {
    STANDARD_CONSTRUCTOR()
@@ -47,14 +40,10 @@ FileReader::FileReader()
    rnum = 1;
    crnum = -1;
 
-
    pathname[0] = '\0';
    filename[0] = '\0';
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void FileReader::copyData(const FileReader& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -77,9 +66,6 @@ void FileReader::copyData(const FileReader& org, const bool cc)
    setRecordLength(org.getRecordLength());
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void FileReader::deleteData()
 {
    // Close file and delete stream
@@ -95,7 +81,6 @@ void FileReader::deleteData()
       rec = nullptr;
    }
 }
-
 
 //------------------------------------------------------------------------------
 // isReady() -- Returns true we're ready to get records
@@ -249,17 +234,6 @@ const char* FileReader::getRecord(const int nn, const int ll)
 
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-Object* FileReader::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

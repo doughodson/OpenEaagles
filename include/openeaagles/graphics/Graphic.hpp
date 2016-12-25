@@ -3,10 +3,10 @@
 #define __oe_graphics_Graphic_H__
 
 #include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/osg/Vec2"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec2d"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
+#include "openeaagles/base/osg/Matrixd"
 
 #include "openeaagles/base/util/platform_api.hpp"
 #include <GL/gl.h>
@@ -113,7 +113,7 @@ class Material;
 //          or Identifier.  The Identifier argument provides a color name that is
 //          used to lookup the Color from the color table.
 //      setColor(Number* num)
-//          Sets a color rotary object, based on the value passed in.. see graphics/ColorRotary.h for
+//          Sets a color rotary object, based on the value passed in.. see graphics/ColorRotary.hpp for
 //          how to set up a list of colors and breakpoints.
 //
 //
@@ -240,17 +240,17 @@ public:
    virtual void draw();
    virtual void drawFunc();
 
-   const osg::Vec3* getVertices() const { return vertices; }            // Vertices
-   unsigned int getNumberOfVertices() const { return nv; }              // Number of vertices
-   bool setVertices(const osg::Vec3* const v, const unsigned int n);    // Sets the vertices list
+   const osg::Vec3d* getVertices() const { return vertices; }            // Vertices
+   unsigned int getNumberOfVertices() const { return nv; }               // Number of vertices
+   bool setVertices(const osg::Vec3d* const v, const unsigned int n);    // Sets the vertices list
 
-   const osg::Vec2* getTextureCoord() const { return texCoord; }        // Texture Coordinates (at vertices)
-   unsigned int getNumberOfTextureCoords() const { return ntc; }        // Number of texture coordinates
-   bool setTextureCoord(const osg::Vec2* const v, const unsigned int n); // Sets the list of texture coordinates
+   const osg::Vec2d* getTextureCoord() const { return texCoord; }         // Texture Coordinates (at vertices)
+   unsigned int getNumberOfTextureCoords() const { return ntc; }          // Number of texture coordinates
+   bool setTextureCoord(const osg::Vec2d* const v, const unsigned int n); // Sets the list of texture coordinates
 
-   const osg::Vec3* getNormals() const { return norms; }                // Normals (at vertices)
-   unsigned int getNumberOfNormals() const { return nn; }               // Number of Normals
-   bool setNormals(const osg::Vec3* const v, const unsigned int n);     // Sets the list of normal vectors
+   const osg::Vec3d* getNormals() const { return norms; }                // Normals (at vertices)
+   unsigned int getNumberOfNormals() const { return nn; }                // Number of Normals
+   bool setNormals(const osg::Vec3d* const v, const unsigned int n);     // Sets the list of normal vectors
 
    bool isVisible() const                 { return visible; }           // Checks the visibility attribute.
    bool setVisibility(const bool v);                                    // Sets the visibility attribute.
@@ -291,7 +291,7 @@ public:
 
    // Matrix functions
    bool matrixIsActive()                            { return haveMatrix; }
-   const osg::Matrix& getMatrix() const             { return m; }
+   const osg::Matrixd& getMatrix() const            { return m; }
    void lcRotate(const double a);
    void lcRotate(const double x, const double y, const double z, const double a);
    void lcTranslate(const double, const double);
@@ -334,8 +334,8 @@ public:
 
    // Light functions
    bool setLightPosition(const double x, const double y, const double z = 1, const double w = 0);
-   bool setLightPosition(osg::Vec4& newPos);
-   osg::Vec4 getLightPos()                          { return lightPos; }
+   bool setLightPosition(osg::Vec4d& newPos);
+   osg::Vec4d getLightPos()                          { return lightPos; }
 
 
    // Select (pick) functions
@@ -360,8 +360,8 @@ public:
    //    Returns false if the original line is outside of the clip box, and therefore
    //    the endpoints are not changed.
    static bool clipLine2D(
-         osg::Vec2* ep1,      // Line endpoint #1
-         osg::Vec2* ep2,      // Line endpoint #2
+         osg::Vec2d* ep1,     // Line endpoint #1
+         osg::Vec2d* ep2,     // Line endpoint #2
          const double minX,   // Clip box min X value
          const double maxX,   // Clip box max X value
          const double minY,   // Clip box min Y value
@@ -427,67 +427,67 @@ protected:
    virtual bool setSlotVisibility(const base::Number* const msg);
    virtual bool setSlotTranslateLight(base::PairStream* const msg);
 
-   virtual void processComponents(            // Process our subcomponent list (which should be other Graphics)
-        base::PairStream* const list,         // Source list of components
-        const std::type_info& filter,         // Type filter
-        base::Pair* const add = 0,            // Optional pair to add
-        base::Component* const remove = 0     // Optional subcomponent to remove
+   virtual void processComponents(                  // Process our subcomponent list (which should be other Graphics)
+        base::PairStream* const list,               // Source list of components
+        const std::type_info& filter,               // Type filter
+        base::Pair* const add = nullptr,            // Optional pair to add
+        base::Component* const remove = nullptr     // Optional subcomponent to remove
    ) override;
 
 private:
-   void          initData();
-   void          setupMatrix();
-   void          setupMaterial();
+   void initData();
+   void setupMatrix();
+   void setupMaterial();
 
-   base::PairStream* transforms;  // transformations
-   osg::Matrix   m;                // transformation matrix
-   osg::Matrix   m1;               // saved 'm'
+   base::PairStream* transforms;   // transformations
+   osg::Matrixd   m;               // transformation matrix
+   osg::Matrixd   m1;              // saved 'm'
    bool          haveMatrix;       // Have a transformation matrix flag
    bool          haveMatrix1;      // saved 'haveMatrix'
 
    bool          postDraw;                       // Post draw component (child) graphic
    GLuint        texture;                        // Texture
-   base::safe_ptr<base::Identifier> texName;   // Texture name
+   base::safe_ptr<base::Identifier> texName;     // Texture name
 
    bool          visible;          // True if this object is visible
    GLfloat       linewidth;        // Linewidth
    GLuint        selName;          // Select name
    double        fRate;            // Flash rate
 
-   base::Color*  color;           // Color
-   base::Identifier*  colorName;  // Color name (if from color table)
+   base::Color*  color;            // Color
+   base::Identifier*  colorName;   // Color name (if from color table)
 
-   osg::Vec3*       vertices;      // Vertices
+   osg::Vec3d*      vertices;      // Vertices
    unsigned int     nv;            // Number of vertices
 
-   osg::Vec2*       texCoord;      // Texture Coordinates
+   osg::Vec2d*      texCoord;      // Texture Coordinates
    unsigned int     ntc;           // Number of texture coordinates
 
-   osg::Vec3*       norms;         // normals at each vertices
+   osg::Vec3d*      norms;         // normals at each vertices
    unsigned int     nn;            // number of normal vectors
 
-   graphics::Display* displayPtr; // Points to our Display
+   graphics::Display* displayPtr;     // Points to our Display
 
-   GLuint         dlist;            // Possible Display list
-   bool           noDisplayList;    // True to disable Display List
+   GLuint         dlist;              // Possible Display list
+   bool           noDisplayList;      // True to disable Display List
 
-   double        scissorX;         // Left edge of the scissor box
-   double        scissorY;         // Bottom edge of the scissor box
-   double        scissorWidth;     // How far to extend the scissor horizontally
-   double        scissorHeight;    // How far to extend the scissor vertically
+   double        scissorX;            // Left edge of the scissor box
+   double        scissorY;            // Bottom edge of the scissor box
+   double        scissorWidth;        // How far to extend the scissor horizontally
+   double        scissorHeight;       // How far to extend the scissor vertically
 
-   static double fTimer;           // Flash control timer
-   static GLuint autoSelName;      // our automatic select name counter
+   static double fTimer;              // Flash control timer
+   static GLuint autoSelName;         // our automatic select name counter
 
-   bool          stipple;          // line stipple flag (line, lineloop, circle (not filled))
-   GLuint        stippleFactor;    // line stipple factor (multiplier for each bit in line stipple pattern)
-   GLushort      stipplePattern;   // line stipple pattern (16-bit pattern for which fragments of line to draw)
-   bool          mask;             // are we masking?
-   base::Identifier* materialName;   // our material name
+   bool          stipple;             // line stipple flag (line, lineloop, circle (not filled))
+   GLuint        stippleFactor;       // line stipple factor (multiplier for each bit in line stipple pattern)
+   GLushort      stipplePattern;      // line stipple pattern (16-bit pattern for which fragments of line to draw)
+   bool          mask;                // are we masking?
+   base::Identifier* materialName;    // our material name
    graphics::Material* materialObj;   // material object, if we have one.
 
-   osg::Vec4 lightPos;             // light position relative to us (default is leave it where it was)
-   bool lightMoved;                // our light is moving!
+   osg::Vec4d lightPos;               // light position relative to us (default is leave it where it was)
+   bool lightMoved;                   // our light is moving!
 };
 
 inline GLuint Graphic::getNewSelectName()
@@ -509,7 +509,7 @@ inline void Graphic::lcRestoreMatrix()
 
 inline void Graphic::lcRotate(const double a)
 {
-   osg::Matrix rr;
+   osg::Matrixd rr;
    rr.makeRotate(a, 0.0f, 0.0f, 1.0f);
    m.preMult(rr);
    haveMatrix = true;
@@ -517,7 +517,7 @@ inline void Graphic::lcRotate(const double a)
 
 inline void Graphic::lcRotate(const double x, const double y, const double z, const double a)
 {
-   osg::Matrix rr;
+   osg::Matrixd rr;
    rr.makeRotate(a, x, y, z);
    m.preMult(rr);
    haveMatrix = true;
@@ -525,7 +525,7 @@ inline void Graphic::lcRotate(const double x, const double y, const double z, co
 
 inline void Graphic::lcScale(const double s)
 {
-   osg::Matrix ss;
+   osg::Matrixd ss;
    ss.makeScale(s,s,s);
    m.preMult(ss);
    haveMatrix = true;
@@ -533,7 +533,7 @@ inline void Graphic::lcScale(const double s)
 
 inline void Graphic::lcScale(const double sx, const double sy)
 {
-   osg::Matrix ss;
+   osg::Matrixd ss;
    ss.makeScale(sx,sy,1.0f);
    m.preMult(ss);
    haveMatrix = true;
@@ -541,7 +541,7 @@ inline void Graphic::lcScale(const double sx, const double sy)
 
 inline void Graphic::lcTranslate(const double x, const double y)
 {
-   osg::Matrix tt;
+   osg::Matrixd tt;
    tt.makeTranslate(x,y,0.0f);
    m.preMult(tt);
    haveMatrix = true;
@@ -549,7 +549,7 @@ inline void Graphic::lcTranslate(const double x, const double y)
 
 inline void Graphic::lcTranslate(const double x, const double y, const double z)
 {
-   osg::Matrix tt;
+   osg::Matrixd tt;
    tt.makeTranslate(x,y,z);
    m.preMult(tt);
    haveMatrix = true;

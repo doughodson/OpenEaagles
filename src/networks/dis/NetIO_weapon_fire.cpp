@@ -7,9 +7,11 @@
 #include "openeaagles/networks/dis/Nib.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -53,11 +55,11 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // ---
     // 1) Find the target (local) player
     // ---
-    simulation::Player* tPlayer = nullptr;
+    models::Player* tPlayer = nullptr;
     if (tSiteId == getSiteID() && tApplicationId == getApplicationID()) {
         // Must be local
         base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
-        tPlayer = getSimulation()->findPlayer(tPlayerId);
+        tPlayer = dynamic_cast<models::Player*>(getSimulation()->findPlayer(tPlayerId));  // added DDH
     }
     //std::cout << "Net Fire(2) tPlayer = " << tPlayer << std::endl;
 

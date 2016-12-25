@@ -1,14 +1,12 @@
 
 #include "openeaagles/linearsystem/Limit.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class Limit
-//==============================================================================
-IMPLEMENT_SUBCLASS(Limit,"Limit")
+IMPLEMENT_SUBCLASS(Limit, "Limit")
 
 //------------------------------------------------------------------------------
 // slot table for this class type
@@ -24,9 +22,6 @@ BEGIN_SLOT_MAP(Limit)
    ON_SLOT( 2, setSlotUpperLimit, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Limit::Limit()
 {
    STANDARD_CONSTRUCTOR()
@@ -64,18 +59,6 @@ bool Limit::setSlotUpperLimit(const base::Number* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Limit
-//------------------------------------------------------------------------------
-base::Object* Limit::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Limit::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

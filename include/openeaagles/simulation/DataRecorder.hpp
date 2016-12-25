@@ -1,117 +1,15 @@
-//------------------------------------------------------------------------------
-// Classes:
-//    DataRecorder      -- Abstract data recorder class
-//    RecorderComponent -- Base class for all data recorder components
-//
-// Macros used to sample data
-//
-//       BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)
-//          Starts a record data sample section
-//          'pRecorder' is a pointer to the data recorder
-//          'token' is the recorder event token (see openeaagles/simulation/recorderTokens.h)
-//
-//       END_RECORD_DATA_SAMPLE()
-//          Completes the record data sample section
-//
-//       SAMPLE_1_OBJECT(  P1 )
-//       SAMPLE_2_OBJECTS( P1, P2 )
-//       SAMPLE_3_OBJECTS( P1, P2, P3 )
-//       SAMPLE_4_OBJECTS( P1, P2, P3, P4 )
-//          Sample data from 1 to 4 objects
-//
-//       SAMPLE_1_VALUE(  V1 )
-//       SAMPLE_2_VALUES( V1, V2 )
-//       SAMPLE_3_VALUES( V1, V2, V3 )
-//       SAMPLE_4_VALUES( V1, V2, V3, V4 )
-//          From 1 to 4 sample values
-//
-// Examples:
-//
-//    Simple event
-//          BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_SIMPLE_EVENT )
-//          END_RECORD_DATA_SAMPLE()
-//
-//    Event with a single object
-//          BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_SMALL_EVENT )
-//             SAMPLE_1_OBJECT( newPlayer )
-//          END_RECORD_DATA_SAMPLE()
-//
-//    Event with several objects and values
-//          BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_BIG_EVENT )
-//             SAMPLE_2_OBJECTS( ownship, tgtPlayer )
-//             SAMPLE_2_VALUES( someValue, anotherValue )
-//          END_RECORD_DATA_SAMPLE()
-//
-//  Notes:
-//    1) If the pointer to the Data Recorder is zero (null)
-//       then no data is recorded
-//
-//------------------------------------------------------------------------------
+
 #ifndef __oe_simulation_DataRecorder_H__
 #define __oe_simulation_DataRecorder_H__
 
-#include "openeaagles/base/Component.hpp"
-#include "openeaagles/simulation/dataRecorderTokens.hpp"
+#include "openeaagles/simulation/RecorderComponent.hpp"
+#include "openeaagles/simulation/recorder_macros.hpp"
 
 namespace oe {
-   namespace base { class List; }
+namespace base { class List; }
 namespace simulation {
-   class Simulation;
-   class Station;
-
-//------------------------------------------------------------------------------
-// Class: RecorderComponent
-// Description: Base class for all data recorder components
-//
-// Notes:
-//    1) Use the setEnabledList() function to limit the processing to only
-//    DataRecords with matching recorder event IDs.  Default is to process
-//    all DataRecords.
-//
-//
-// Slots:
-//    enabledList <list>         ! List of data records that are enabled for processing
-//                               ! Overrides the disabledList!
-//                               ! (default: all records are enabled -- except those
-//                               !  listed in 'disabledList')
-//
-//    disabledList <list>        ! List of data records that are disabled from processing
-//                               ! Only valid if 'enabledList' is NOT set!
-//                               ! (default: no records are disabled)
-//
-//------------------------------------------------------------------------------
-class RecorderComponent : public base::Component
-{
-   DECLARE_SUBCLASS(RecorderComponent, base::Component)
-
-public:
-   RecorderComponent();
-
-   // Checks the data filters and returns true if the record should be processed.
-   bool isDataEnabled(const unsigned int id) const;
-
-   // Set a list of 'n' of data records enabled for processing,
-   // or set 'n' to zero to enable all data records.
-   bool setEnabledList(const unsigned int* const list, const unsigned int n);
-
-   // Set a list of 'n' of data records disabled from being processed
-   bool setDisabledList(const unsigned int* const list, const unsigned int n);
-
-protected:
-   // Slot functions
-   bool setSlotEnabledList(const base::List* const list);
-   bool setSlotDisabledList(const base::List* const list);
-
-private:
-   void initData();
-
-   unsigned int* enabledList;       // List of data records enabled for processing (default: all)
-   unsigned int numEnabled;         // Number of enabled record IDs, or zero for all records enabled
-
-   unsigned int* disabledList;      // List of data records disabled from being processed (default: none)
-   unsigned int numDisabled;        // Number of disabled record IDs
-};
-
+class Simulation;
+class Station;
 
 //------------------------------------------------------------------------------
 // Class: DataRecorder
@@ -124,10 +22,10 @@ private:
 //    for implementing the recording 'hooks' in the simulation code.
 //
 //    2) The actual data recorder is implemented by the derived class
-//    oe::recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.h")
+//    oe::recorder::DataRecorder (see "openeaagles/recorder/DataRecorder.hpp")
 //
 //    3) Recorded data records are defined by their "recorder event id" tokens;
-//       (see openeaagles/simulation/dataRecorderTokens.h)
+//       (see openeaagles/simulation/dataRecorderTokens.hpp)
 //------------------------------------------------------------------------------
 class DataRecorder : public RecorderComponent
 {
@@ -172,10 +70,22 @@ private:
    Simulation* sim;     // The simulation system (not ref()'d)
 };
 
-#include "openeaagles/simulation/DataRecorder.inl"
+// Record Data function
+inline bool DataRecorder::recordData(
+      const unsigned int id,
+      const base::Object* pObjects[4],
+      const double values[4]
+   )
+{
+   bool recorded = false;
+   if (isDataEnabled(id)) {
+      recorded = recordDataImp(id, pObjects, values);
+      if (!recorded) processUnhandledId(id);
+   }
+   return recorded;
+}
 
 }
 }
 
 #endif
-

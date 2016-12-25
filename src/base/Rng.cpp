@@ -1,25 +1,20 @@
 
 #include "openeaagles/base/Rng.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Rng,"Rng")
+IMPLEMENT_SUBCLASS(Rng, "Rng")
 EMPTY_SERIALIZER(Rng)
 EMPTY_COPYDATA(Rng)
 EMPTY_DELETEDATA(Rng)
 
-//-----
-// slot table for this class type
-//-----
 BEGIN_SLOTTABLE(Rng)
    "seed",     // seed
 END_SLOTTABLE(Rng)
 
-//-----
-// Map slot table to handles 
-//-----
 BEGIN_SLOT_MAP(Rng)
    ON_SLOT(1,setSlotSeed,Number)
 END_SLOT_MAP()
@@ -33,14 +28,6 @@ unsigned int Rng::state[n] = {0x0};
 int Rng::p = 0;
 bool Rng::init = false;
 
-
-//==============================================================================
-// Rng class constructors
-//==============================================================================
-
-//-----
-// default constructor: uses default seed only if this is the first instance
-//-----
 Rng::Rng()
 {
    STANDARD_CONSTRUCTOR()
@@ -50,28 +37,17 @@ Rng::Rng()
    init = true;
 }
 
-//-----
-// constructor with 32 bit int as seed
-//-----
 Rng::Rng(unsigned int s)
 {
    seed(s);
    init = true;
 }
 
-//-----
-// constructor with array of size 32 bit ints as seed
-//-----
 Rng::Rng(const unsigned int* array, int size)
 {
    seed(array, size);
    init = true;
 }
-
-
-//==============================================================================
-// Rng class member functions
-//==============================================================================
 
 //-----
 // draw() -- this will be defined in the distribution classes
@@ -157,16 +133,5 @@ bool Rng::setSlotSeed(const Number* const x)
    return ok;
 }
 
-//-----
-// getSlotByIndex()
-//-----
-Object* Rng::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-
 }
 }
-
-

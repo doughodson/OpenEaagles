@@ -3,8 +3,10 @@
 #define __oe_base_MonitorMetrics_H__
 
 #include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/safe_ptr.hpp"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
 namespace base {
@@ -47,7 +49,7 @@ class MonitorMetrics : public Object
 public:
     MonitorMetrics();
     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
-                   const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
+                   const osg::Matrixd& phosphorCoordinates, const osg::Vec3d& whiteRGB, const osg::Vec3d& whiteCIE);
     bool setSlotRed(const Table1* red);
     bool setSlotGreen(const Table1* green);
     bool setSlotBlue(const Table1* blue);
@@ -55,13 +57,13 @@ public:
     bool setSlotWhiteRGB(const List* whiteRGB);
     bool setSlotWhiteCIE(const List* whiteCIE);
 
-    void cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie) const;
+    void cie2rgb(osg::Vec4d& rgba, const osg::Vec3d& cie) const;
 
 private:
     bool computeMatrix();
 
     // transform matrix from CIE to RGB for this monitor
-    osg::Matrix transform;
+    osg::Matrixd transform;
 
     // RGB luminance vs RGB level on this monitor
     safe_ptr<const Table1> redLuminance;
@@ -69,11 +71,11 @@ private:
     safe_ptr<const Table1> blueLuminance;
 
     // CIE coordinates of Red, Green, and Blue for this monitor
-    osg::Matrix phosphorCoordinates;
+    osg::Matrixd phosphorCoordinates;
 
     // CIE and RGB coordinates of a reference white
-    osg::Vec3 refwhiteRGB;
-    osg::Vec3 refwhiteCIE;
+    osg::Vec3d refwhiteRGB;
+    osg::Vec3d refwhiteCIE;
 };
 
 }

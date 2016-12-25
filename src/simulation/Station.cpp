@@ -1,13 +1,11 @@
-//------------------------------------------------------------------------------
-// Class:  Station
-//------------------------------------------------------------------------------
 
 #include "openeaagles/simulation/Station.hpp"
 
+#include "openeaagles/simulation/IPlayer.hpp"
+
 #include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/NetIO.hpp"
-#include "openeaagles/simulation/Otw.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/INetIO.hpp"
+#include "openeaagles/simulation/IOtw.hpp"
 #include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/Color.hpp"
@@ -20,8 +18,6 @@
 #include "openeaagles/base/units/Times.hpp"
 
 #include <ctime>
-
-// #define NET_TIMING_TEST
 
 namespace oe {
 namespace simulation {
@@ -103,7 +99,7 @@ BEGIN_SLOT_MAP(Station)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
-   ON_SLOT( 3,  setSlotOutTheWindow,          Otw)
+   ON_SLOT( 3,  setSlotOutTheWindow,          IOtw)
    ON_SLOT( 3,  setSlotOutTheWindow,          base::PairStream)
 
    ON_SLOT( 4,  setSlotIoHandler,             base::IoHandler)
@@ -337,7 +333,7 @@ void Station::reset()
       base::List::Item* item = otw ->getFirstItem();
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Otw* p = static_cast<Otw*>(pair->object());
+         IOtw* p = static_cast<IOtw*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -348,7 +344,7 @@ void Station::reset()
       base::List::Item* item = networks ->getFirstItem();
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         NetIO* p = static_cast<NetIO*>(pair->object());
+         INetIO* p = static_cast<INetIO*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -399,7 +395,7 @@ void Station::updateTC(const double dt)
       while (item != nullptr) {
 
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Otw* p = static_cast<Otw*>(pair->object());
+         IOtw* p = static_cast<IOtw*>(pair->object());
 
          // Set ownship & player list
          p->setOwnship(ownship);
@@ -672,7 +668,7 @@ void Station::processBackgroundTasks(const double dt)
       base::List::Item* item = otw ->getFirstItem();
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         Otw* p = static_cast<Otw*>(pair->object());
+         IOtw* p = static_cast<IOtw*>(pair->object());
          p->updateData(dt);
          item = item->getNext();
       }
@@ -690,7 +686,7 @@ void Station::processNetworkInputTasks(const double dt)
       base::List::Item* item = networks->getFirstItem();
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         NetIO* p = static_cast<NetIO*>(pair->object());
+         INetIO* p = static_cast<INetIO*>(pair->object());
 
          p->inputFrame( dt );
 
@@ -709,7 +705,7 @@ void Station::processNetworkOutputTasks(const double dt)
       base::List::Item* item = networks->getFirstItem();
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         NetIO* p = static_cast<NetIO*>(pair->object());
+         INetIO* p = static_cast<INetIO*>(pair->object());
 
          p->outputFrame( dt );
 
@@ -735,13 +731,13 @@ const Simulation* Station::getSimulation() const
 }
 
 // Returns the ownship (primary) player
-Player* Station::getOwnship()
+IPlayer* Station::getOwnship()
 {
    return ownship;
 }
 
 // Returns the ownship (primary) player (const version)
-const Player* Station::getOwnship() const
+const IPlayer* Station::getOwnship() const
 {
    return ownship;
 }
@@ -985,7 +981,7 @@ bool Station::setOwnshipByName(const char* const newOS)
       if (newOS != nullptr) {
          base::Pair* p = pl->findByName(newOS);
          if (p != nullptr) {
-            Player* newOwnship = static_cast<Player*>(p->object());
+            IPlayer* newOwnship = static_cast<IPlayer*>(p->object());
             if (newOwnship != ownship) {
                // Ok, we found the new ownship and it IS a different
                // player then the previous ownship ...
@@ -1007,7 +1003,7 @@ bool Station::setOwnshipByName(const char* const newOS)
 //------------------------------------------------------------------------------
 // setOwnshipPlayer() -- set this player as our ownship
 //------------------------------------------------------------------------------
-bool Station::setOwnshipPlayer(Player* const newOS)
+bool Station::setOwnshipPlayer(IPlayer* const newOS)
 {
     // Is it already own ownship?  Yes, then nothing else to do.
     if (newOS == ownship) return true;
@@ -1032,7 +1028,7 @@ bool Station::setOwnshipPlayer(Player* const newOS)
         while (item != nullptr && !set) {
             base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                Player* ip = dynamic_cast<Player*>( pair->object() );
+                IPlayer* ip = dynamic_cast<IPlayer*>( pair->object() );
                 if (ip == newOS && ip->isLocalPlayer()) {
                     // Unref the old stuff
                     if (ownshipName != nullptr) { ownshipName->unref(); ownshipName = nullptr; }
@@ -1091,7 +1087,7 @@ bool Station::setSlotSimulation(Simulation* const p)
 //-----------------------------------------------------------------------------
 // setSlotOutTheWindow() -- Sets a list of Out-The-Window subsystems
 //-----------------------------------------------------------------------------
-bool Station::setSlotOutTheWindow(Otw* const p)
+bool Station::setSlotOutTheWindow(IOtw* const p)
 {
     base::PairStream* list = new base::PairStream();
     base::Pair* pair = new base::Pair("1",p);
@@ -1110,7 +1106,7 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
    if (list != nullptr) {
       for (base::List::Item* item = list->getFirstItem(); item != nullptr; item = item->getNext()) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Otw* p = dynamic_cast<Otw*>(pair->object());
+            IOtw* p = dynamic_cast<IOtw*>(pair->object());
             if (p != nullptr) {
             if (newList == nullptr) {
                newList = new base::PairStream();
@@ -1215,7 +1211,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
         // we are no longer the container for these networks
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            NetIO* p = static_cast<NetIO*>(pair->object());
+            INetIO* p = static_cast<INetIO*>(pair->object());
             p->container(nullptr);
         }
     }
@@ -1227,7 +1223,7 @@ bool Station::setSlotNetworks(base::PairStream* const a)
     if (networks != nullptr) {
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            NetIO* p = dynamic_cast<NetIO*>(pair->object());
+            INetIO* p = dynamic_cast<INetIO*>(pair->object());
             if (p != nullptr) {
                 // We are this network's container
                 p->container(this);
@@ -1454,18 +1450,6 @@ bool Station::setSlotEnableUpdateTimers(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Station::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Station::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

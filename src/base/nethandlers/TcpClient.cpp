@@ -196,17 +196,6 @@ bool TcpClient::setSlotIpAddress(const String* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* TcpClient::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& TcpClient::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -235,4 +224,3 @@ std::ostream& TcpClient::serialize(std::ostream& sout, const int i, const bool s
 
 }
 }
-

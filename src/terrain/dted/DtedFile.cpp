@@ -38,6 +38,7 @@
 #include <fstream>
 #include <cstdio>
 #include <cstring>
+#include <iostream>
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -120,9 +121,6 @@ static const unsigned char  DATA_RECOGNITION_SENTINEL = 170; // 252 base 8
 static const char* UHL_RECOGNITION_SENTINEL = "UHL";
 static const char  UHL_FIXED_BY_STANDARD_BYTE = '1';
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 DtedFile::DtedFile()
 {
    STANDARD_CONSTRUCTOR()
@@ -130,9 +128,6 @@ DtedFile::DtedFile()
    verifyChecksum = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void DtedFile::copyData(const DtedFile& org, const bool)
 {
    BaseClass::copyData(org);
@@ -140,13 +135,9 @@ void DtedFile::copyData(const DtedFile& org, const bool)
    verifyChecksum = org.verifyChecksum;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void DtedFile::deleteData()
 {
 }
-
 
 //------------------------------------------------------------------------------
 // Slot functions
@@ -193,7 +184,7 @@ bool DtedFile::loadData()
     }
 
     // Read cell parameters from the DTED headers
-    if (! readDtedHeaders(in))
+    if ( !readDtedHeaders(in))
     {
         clearData();
         in.close();
@@ -204,7 +195,7 @@ bool DtedFile::loadData()
     }
 
     // Read elevation data from the DTED file
-    if (! readDtedData(in))
+    if ( !readDtedData(in))
     {
         clearData();
         in.close();
@@ -322,13 +313,13 @@ bool DtedFile::readDtedData(std::istream& in)
 
     // Allocate the elevation array
     columns = new short*[nptlong];
-    for(unsigned int i=0; i<nptlong; i++)
+    for (unsigned int i=0; i<nptlong; i++)
     {
         columns[i] = new short[nptlat];
     }
 
     // Read the elevation array.
-    for(unsigned int lon=0; lon<nptlong; lon++)
+    for (unsigned int lon=0; lon<nptlong; lon++)
     {
         unsigned long checksum = 0;
 
@@ -342,7 +333,7 @@ bool DtedFile::readDtedData(std::istream& in)
             }
             return false;
         }
-        for(unsigned int i=0; i<sizeof(head); i++)
+        for (unsigned int i=0; i<sizeof(head); i++)
             checksum += (reinterpret_cast<unsigned char*>(&head))[i];
 
         if (head.recognition_sentinel[0] != DATA_RECOGNITION_SENTINEL)
@@ -448,17 +439,6 @@ long DtedFile::readValue(const unsigned char hbyte, const unsigned char byte1, c
     return height;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* DtedFile::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() --
-//------------------------------------------------------------------------------
 std::ostream& DtedFile::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

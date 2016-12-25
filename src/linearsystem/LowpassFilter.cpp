@@ -103,17 +103,6 @@ bool LowpassFilter::setSlotWc(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for LowpassFilter
-//------------------------------------------------------------------------------
-base::Object* LowpassFilter::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& LowpassFilter::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

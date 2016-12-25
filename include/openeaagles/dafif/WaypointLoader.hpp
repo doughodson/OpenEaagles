@@ -48,7 +48,7 @@ public:
    virtual Waypoint* waypoint(const int n);
    virtual Waypoint* getWaypoint(const int n);
 
-   virtual bool load(const char* code = 0) override;
+   virtual bool load(const char* code = nullptr) override;
    virtual int getRecordLength() override;
    virtual int getMaxRecords() override;
    virtual int queryByRange() override;

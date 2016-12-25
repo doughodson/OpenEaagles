@@ -13,9 +13,6 @@ namespace base {
 IMPLEMENT_SUBCLASS(MonitorMetrics,"monitorMetrics")
 EMPTY_SERIALIZER(MonitorMetrics)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(MonitorMetrics)
     "red",       // 1: ... Red Luminance vs RGB level
     "green",     // 2: ... Green Luminance vs RGB level
@@ -35,11 +32,8 @@ BEGIN_SLOT_MAP(MonitorMetrics)
     ON_SLOT(6,setSlotWhiteCIE,List)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 MonitorMetrics::MonitorMetrics(const Table1* redLumTbl, const Table1* greenLumTbl, const Table1* blueLumTbl,
-                               const osg::Matrix& phosphorCoordMatrix, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE)
+                               const osg::Matrixd& phosphorCoordMatrix, const osg::Vec3d& whiteRGB, const osg::Vec3d& whiteCIE)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -85,10 +79,6 @@ MonitorMetrics::MonitorMetrics()
     computeMatrix();
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void MonitorMetrics::copyData(const MonitorMetrics& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -178,8 +168,8 @@ bool MonitorMetrics::setSlotWhiteCIE(const List* whiteCIE)
 
 bool MonitorMetrics::computeMatrix()
 {
-    osg::Matrix phosInv;
-    osg::Vec3 k;
+    osg::Matrixd phosInv;
+    osg::Vec3d k;
 
     // Invert phosphor matrix
     if ( phosInv.invert( phosphorCoordinates ) == false ) {
@@ -202,9 +192,9 @@ bool MonitorMetrics::computeMatrix()
     return true;
 }
 
-void MonitorMetrics::cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie) const
+void MonitorMetrics::cie2rgb(osg::Vec4d& rgba, const osg::Vec3d& cie) const
 {
-    osg::Vec3 rgb, ciexyz;
+    osg::Vec3d rgb, ciexyz;
 
     ciexyz.set(cie[Cie::X], cie[Cie::Y], 1-cie[Cie::X]-cie[Cie::Y]);
     rgb = transform * ciexyz;
@@ -214,14 +204,6 @@ void MonitorMetrics::cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie) const
     rgba[Color::GREEN] = redLuminance->lfi( rgb[Color::GREEN] );
     rgba[Color::BLUE] = redLuminance->lfi( rgb[Color::BLUE] );
     rgba[Color::ALPHA] = Color::getDefaultAlpha();
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* MonitorMetrics::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 }

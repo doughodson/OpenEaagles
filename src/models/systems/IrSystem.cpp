@@ -1,0 +1,259 @@
+
+#include "openeaagles/models/systems/IrSystem.hpp"
+
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/systems/IrSeeker.hpp"
+#include "openeaagles/models/systems/OnboardComputer.hpp"
+#include "openeaagles/models/Tdb.hpp"
+
+#include "openeaagles/simulation/Simulation.hpp"
+
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/PairStream.hpp"
+
+namespace oe {
+namespace models {
+
+IMPLEMENT_SUBCLASS(IrSystem, "IrSystem")
+EMPTY_SERIALIZER(IrSystem)
+
+// Slot table
+BEGIN_SLOTTABLE(IrSystem)
+   "seekerName",        //  1: Name of the requested Seeker  (base::String)
+   "disableQueries",    //  2: Disable sending queries packets flag (default: false)
+END_SLOTTABLE(IrSystem)
+
+//  Map slot table
+BEGIN_SLOT_MAP(IrSystem)
+   ON_SLOT(1,  setSlotSeekerName,  base::String)
+   ON_SLOT(2,  setSlotDisableQueries,  base::Number)
+END_SLOT_MAP()
+
+//------------------------------------------------------------------------------
+// Constructors, destructor, copy operator and clone()
+//------------------------------------------------------------------------------
+IrSystem::IrSystem() : seeker(nullptr) , seekerName(nullptr)
+{
+   STANDARD_CONSTRUCTOR()
+
+   disableQueries = false;
+}
+
+//------------------------------------------------------------------------------
+// copyData() -- copy member data
+//------------------------------------------------------------------------------
+void IrSystem::copyData(const IrSystem& org, const bool cc)
+{
+   BaseClass::copyData(org);
+
+   if (cc) {
+      seeker = nullptr;
+      seekerName = nullptr;
+   }
+
+   disableQueries = org.disableQueries;
+
+   // No seeker yet
+   setSeeker(nullptr);
+   base::String* p = const_cast<base::String*>(static_cast<const base::String*>(org.getSeekerName()));
+   setSlotSeekerName( p );
+}
+
+
+//------------------------------------------------------------------------------
+// deleteData() -- delete member data
+//------------------------------------------------------------------------------
+void IrSystem::deleteData()
+{
+   setSeeker(nullptr);
+   setSlotSeekerName(nullptr);
+}
+
+//------------------------------------------------------------------------------
+// shutdownNotification()
+//------------------------------------------------------------------------------
+bool IrSystem::shutdownNotification()
+{
+   setSeeker(nullptr);
+   return BaseClass::shutdownNotification();
+}
+
+//------------------------------------------------------------------------------
+// reset() -- Reset parameters
+//------------------------------------------------------------------------------
+void IrSystem::reset()
+{
+   // FAB - sensor needs to know its seeker without waiting for updateData
+   if (getSeeker() == nullptr && getSeekerName() != nullptr && getOwnship() != nullptr) {
+      // We have a name of the seeker, but not the seeker itself
+      const char* name = *getSeekerName();
+
+      // Get the named seeker from the player's list of gimbals
+      IrSeeker* p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
+      if (p != nullptr) {
+         setSeeker( p );
+      }
+
+      if (getSeeker() == nullptr) {
+         // The assigned seeker was not found!
+         if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "IrSystem::update() ERROR -- seeker: " << name << ", was not found!" << std::endl;
+         }
+         setSlotSeekerName(nullptr);
+      }
+   }
+
+   BaseClass::reset();
+}
+
+//------------------------------------------------------------------------------
+// updateData() -- update background data here
+//------------------------------------------------------------------------------
+void IrSystem::updateData(const double dt)
+{
+   // ---
+   // Do we need to find the seeker?
+   // ---
+   if (getSeeker() == nullptr && getSeekerName() != nullptr && getOwnship() != nullptr) {
+      // We have a name of the seeker, but not the seeker itself
+      const char* name = *getSeekerName();
+
+      // Get the named seeker from the player's list of gimbals
+      IrSeeker* p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
+      if (p != nullptr) {
+         setSeeker( p );
+         // FAB - not needed - esp if multiple sensors on a seeker.
+         //getSeeker()->setSystem(this);
+      }
+
+      if (getSeeker() == nullptr) {
+         // The assigned seeker was not found!
+         if (isMessageEnabled(MSG_ERROR)) {
+            std::cerr << "IrSystem::update() ERROR -- seeker: " << name << ", was not found!" << std::endl;
+         }
+         setSlotSeekerName(nullptr);
+      }
+   }
+
+   // ---
+   // Process our players of interest
+   // ---
+   processPlayersOfInterest();
+
+   // ---
+   // Our base class methods
+   // ---
+   BaseClass::updateData(dt);
+}
+
+//------------------------------------------------------------------------------
+// Process players of interest -- This will work with the function in Gimbal to create
+// a filtered list of players that we plan to send emission packets to.
+//------------------------------------------------------------------------------
+void IrSystem::processPlayersOfInterest()
+{
+   // ---
+   // Do we have a seeker?
+   // ---
+   if (getSeeker() != nullptr) {
+      base::PairStream* poi = nullptr;
+      simulation::Simulation* sim = getSimulation();
+      if ( sim != nullptr && !areQueriesDisabled() )
+         poi = getSimulation()->getPlayers();
+
+      // Pass our players of interest to the seeker for processing
+      getSeeker()->processPlayersOfInterest(poi);
+
+      if (poi != nullptr) { poi->unref(); poi = nullptr; }
+   }
+}
+
+//------------------------------------------------------------------------------
+// Get functions
+//------------------------------------------------------------------------------
+
+// isQuerying() -- Returns true if the IR system is currently observing targets
+bool IrSystem::isQuerying() const
+{
+    // Default: if we're enabled and have a seeker, we're transmitting.
+    return ( !areQueriesDisabled() && getSeeker() != nullptr && getOwnship() != nullptr );
+}
+
+// Returns true if sending query packets has been disabled
+bool IrSystem::areQueriesDisabled() const
+{
+   return disableQueries;
+}
+
+// Pointer to the seeker model, or zero (0) if none
+IrSeeker* IrSystem::getSeeker()
+{
+   return seeker;
+}
+
+// Pointer to the seeker model, or zero (0) if none
+const IrSeeker* IrSystem::getSeeker() const
+{
+   return seeker;
+}
+
+// Name of the seeker model, or zero (0) if none
+const base::String* IrSystem::getSeekerName() const
+{
+   return seekerName;
+}
+
+//------------------------------------------------------------------------------
+// Set functions
+//------------------------------------------------------------------------------
+
+// Disables/enables sending the R/F emissions packets
+bool IrSystem::setDisableQueriesFlag(const bool b)
+{
+   disableQueries = b;
+   return true;
+}
+
+// setSeeker() -- set the seeker
+bool IrSystem::setSeeker(IrSeeker* const p)
+{
+   if (seeker != nullptr) {
+      seeker->unref();
+   }
+   seeker = p;
+   if (seeker != nullptr) {
+      seeker->ref();
+   }
+   return true;
+}
+
+//------------------------------------------------------------------------------
+// Slot Functions  (return 'true' if the slot was set, else 'false')
+//------------------------------------------------------------------------------
+
+// seekerName: IrSeeker name  (base::String)
+bool IrSystem::setSlotSeekerName(base::String* const p)
+{
+   if (seekerName != nullptr) {
+      seekerName->unref();
+   }
+   seekerName = p;
+   if (seekerName != nullptr) {
+      seekerName->ref();
+   }
+   return true;
+}
+
+// setSlotDisableQueries() -- sets the disable sending emissions flag
+bool IrSystem::setSlotDisableQueries(base::Number* const msg)
+{
+   bool ok = false;
+   if (msg != nullptr) {
+      ok = setDisableQueriesFlag( msg->getBoolean() );
+   }
+   return ok;
+}
+
+}
+}
+

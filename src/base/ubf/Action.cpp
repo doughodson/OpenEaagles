@@ -1,8 +1,6 @@
-//------------------------------------------------------------------------------
-// Class: Action
-//------------------------------------------------------------------------------
 
 #include "openeaagles/base/ubf/Action.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {

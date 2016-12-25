@@ -8,14 +8,16 @@
 #include "openeaagles/networks/dis/Ntm.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/GroundVehicle.hpp"
-#include "openeaagles/simulation/LifeForms.hpp"
-#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/GroundVehicle.hpp"
+#include "openeaagles/models/players/LifeForms.hpp"
+#include "openeaagles/models/players/Missile.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/systems/StoresMgr.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
-#include "openeaagles/simulation/StoresMgr.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -181,25 +183,25 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Life form states
    {
       unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );
-      if (getPlayer() != nullptr && getPlayer()->isMajorType(simulation::Player::LIFE_FORM)) {
-         simulation::LifeForm* lf = dynamic_cast<simulation::LifeForm*>(getPlayer());
+      if (getPlayer() != nullptr && getPlayer()->isMajorType(models::Player::LIFE_FORM)) {
+         models::LifeForm* lf = dynamic_cast<models::LifeForm*>(getPlayer());
          if (lf != nullptr) {
             // get our life form state (appearance bit 16 - 19)
-            if (bits == 1) lf->setActionState(simulation::LifeForm::UPRIGHT_STANDING);
-            else if (bits == 2) lf->setActionState(simulation::LifeForm::UPRIGHT_WALKING);
-            else if (bits == 3) lf->setActionState(simulation::LifeForm::UPRIGHT_RUNNING);
-            else if (bits == 4) lf->setActionState(simulation::LifeForm::KNEELING);
-            else if (bits == 5) lf->setActionState(simulation::LifeForm::PRONE);
-            else if (bits == 6) lf->setActionState(simulation::LifeForm::CRAWLING);
-            else if (bits == 8) lf->setActionState(simulation::LifeForm::PARACHUTING);
-            else if (bits == 9) lf->setActionState(simulation::LifeForm::JUMPING);
-            else if (bits == 10) lf->setActionState(simulation::LifeForm::SITTING);
-            else if (bits == 11) lf->setActionState(simulation::LifeForm::SQUATTING);
-            else if (bits == 12) lf->setActionState(simulation::LifeForm::CROUCHING);
-            else if (bits == 13) lf->setActionState(simulation::LifeForm::WADING);
-            else if (bits == 14) lf->setActionState(simulation::LifeForm::SURRENDER);
-            else if (bits == 15) lf->setActionState(simulation::LifeForm::DETAINED);
-            else lf->setActionState(simulation::LifeForm::UPRIGHT_STANDING);
+            if (bits == 1) lf->setActionState(models::LifeForm::UPRIGHT_STANDING);
+            else if (bits == 2) lf->setActionState(models::LifeForm::UPRIGHT_WALKING);
+            else if (bits == 3) lf->setActionState(models::LifeForm::UPRIGHT_RUNNING);
+            else if (bits == 4) lf->setActionState(models::LifeForm::KNEELING);
+            else if (bits == 5) lf->setActionState(models::LifeForm::PRONE);
+            else if (bits == 6) lf->setActionState(models::LifeForm::CRAWLING);
+            else if (bits == 8) lf->setActionState(models::LifeForm::PARACHUTING);
+            else if (bits == 9) lf->setActionState(models::LifeForm::JUMPING);
+            else if (bits == 10) lf->setActionState(models::LifeForm::SITTING);
+            else if (bits == 11) lf->setActionState(models::LifeForm::SQUATTING);
+            else if (bits == 12) lf->setActionState(models::LifeForm::CROUCHING);
+            else if (bits == 13) lf->setActionState(models::LifeForm::WADING);
+            else if (bits == 14) lf->setActionState(models::LifeForm::SURRENDER);
+            else if (bits == 15) lf->setActionState(models::LifeForm::DETAINED);
+            else lf->setActionState(models::LifeForm::UPRIGHT_STANDING);
          }
       }
    }
@@ -207,10 +209,10 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // Active or inactive
    if ((pdu->appearance & DEACTIVATE_BIT) != 0) {
       // Player has just gone inactive
-      setMode(simulation::Player::INACTIVE);
+      setMode(models::Player::INACTIVE);
    }
    else {
-      setMode(simulation::Player::ACTIVE);
+      setMode(models::Player::ACTIVE);
    }
 
    // Process the articulated parameters and attached parts
@@ -222,10 +224,10 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 //------------------------------------------------------------------------------
 void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 {
-   simulation::Player* p = getPlayer();
+   models::Player* p = getPlayer();
    if ( pdu->numberOfArticulationParameters > 0 && p != nullptr ) {
-      simulation::AirVehicle* av = dynamic_cast<simulation::AirVehicle*>(p);
-      simulation::GroundVehicle* gv = dynamic_cast<simulation::GroundVehicle*>(p);
+      models::AirVehicle* av = dynamic_cast<models::AirVehicle*>(p);
+      models::GroundVehicle* gv = dynamic_cast<models::GroundVehicle*>(p);
 
       // ---
       // Loop for all articulation parameters ...
@@ -286,11 +288,11 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
             unsigned int sta = ap->parameterType; // station number
 
             if (sta >= 1 && sta <= MAX_AMSL) {
-               simulation::StoresMgr* sms = p->getStoresManagement();
+               models::StoresMgr* sms = p->getStoresManagement();
 
                // If needed, create the stores manager
                if (sms == nullptr) {
-                  sms = new simulation::StoresMgr();
+                  sms = new models::StoresMgr();
                   base::Pair* pair = new base::Pair("storesMgr", sms);
                   sms->unref();   // pair owns it
                   p->addComponent(pair);
@@ -301,7 +303,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                // either in INACTIVE mode (not launched) or LAUNCHED mode (kind == 0)
                if (sms != nullptr) {
 
-                  simulation::Weapon* wpn = nullptr;
+                  models::Weapon* wpn = nullptr;
 
                   // find the weapon at station 'sta'
                   base::PairStream* stores = sms->getStores();
@@ -313,7 +315,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                         const base::Identifier* slot = pair->slot();
                         if (slot->isNumber()) s = static_cast<unsigned int>(slot->getNumber());
                         if (s == sta) {
-                           wpn = static_cast<simulation::Weapon*>(pair->object());  // Found it
+                           wpn = static_cast<models::Weapon*>(pair->object());  // Found it
                         }
                         item = item->getNext();
                      }
@@ -339,12 +341,12 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                               ap->parameterValue.entityType.extra
                            );
                         if (ntm != nullptr) {
-                           const simulation::Player* tp = ntm->getTemplatePlayer();
-                           if (tp != nullptr && tp->isClassType(typeid(simulation::Weapon)) ) {
+                           const models::Player* tp = ntm->getTemplatePlayer();
+                           if (tp != nullptr && tp->isClassType(typeid(models::Weapon)) ) {
                               // We've found the weapon that matches the entity type,
                               // so clone it and add it to the SMS with the correct
                               // station number
-                              wpn = static_cast<simulation::Weapon*>(tp->clone());  // clone and cast to a Weapon
+                              wpn = static_cast<models::Weapon*>(tp->clone());  // clone and cast to a Weapon
                               char cbuf[20];
                               std::sprintf(cbuf,"%i",sta);
                               base::Pair* pair = new base::Pair(cbuf, wpn);
@@ -356,13 +358,13 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                      }
 
                      // If we have the weapon then set it INACTIVE (not launched)
-                     if (wpn != nullptr) wpn->setMode(simulation::Player::INACTIVE);
+                     if (wpn != nullptr) wpn->setMode(models::Player::INACTIVE);
 
                   }
 
                   // No weapon attached, so set our weapon (if any) to launched!
                   else if (wpn != nullptr) {
-                     wpn->setMode(simulation::Player::LAUNCHED);
+                     wpn->setMode(models::Player::LAUNCHED);
                   }
 
                } // end of SMS != 0 check
@@ -385,11 +387,11 @@ bool Nib::entityStateManager(const double curExecTime)
    bool ok = false;
 
    // Get the player pointer
-   const simulation::Player* player = getPlayer();
+   const models::Player* player = getPlayer();
    if (player == nullptr) return ok;
 
    // Dummy weapon?
-   const simulation::Weapon* ww = dynamic_cast<const simulation::Weapon*>( player );
+   const models::Weapon* ww = dynamic_cast<const models::Weapon*>( player );
    if (ww != nullptr) {
       if (ww->isDummy()) return ok;
    }
@@ -465,15 +467,15 @@ bool Nib::entityStateManager(const double curExecTime)
       // ---
       // Force ID: When mapping Player side to force IDs ...
       // ---
-      if (getSide() == simulation::Player::BLUE) {
+      if (getSide() == models::Player::BLUE) {
          // blue's are friendly, ...
          pdu->forceID = NetIO::FRIENDLY_FORCE;
       }
-      else if (getSide() == simulation::Player::RED) {
+      else if (getSide() == models::Player::RED) {
          // red's are not, ...
          pdu->forceID = NetIO::OPPOSING_FORCE;
       }
-      else if (getSide() == simulation::Player::WHITE) {
+      else if (getSide() == models::Player::WHITE) {
          // white is neutral, ...
          pdu->forceID = NetIO::NEUTRAL_FORCE;
       }
@@ -551,7 +553,7 @@ bool Nib::entityStateManager(const double curExecTime)
 
          // Deactive this entity?
          {
-            if (isMode(simulation::Player::DELETE_REQUEST) || player->isDead() )
+            if (isMode(models::Player::DELETE_REQUEST) || player->isDead() )
                pdu->appearance |= DEACTIVATE_BIT;
          }
 
@@ -575,7 +577,7 @@ bool Nib::entityStateManager(const double curExecTime)
                pdu->appearance |= CAMOUFLAGE_BIT;
 
                // Land based camouflage bits
-               if (player->isMajorType(simulation::Player::GROUND_VEHICLE)) {
+               if (player->isMajorType(models::Player::GROUND_VEHICLE)) {
                   // Subtract one to match DIS camouflage bits.
                   // Our camouflage type for DIS is the camouflage appearance bits
                   // plus one because our camouflage type of zero is no camouflage.
@@ -586,8 +588,8 @@ bool Nib::entityStateManager(const double curExecTime)
          }
 
          // Life forms appearance bits
-         if (player->isMajorType(simulation::Player::LIFE_FORM)) {
-            const simulation::LifeForm* lf = dynamic_cast<const simulation::LifeForm*>(player);
+         if (player->isMajorType(models::Player::LIFE_FORM)) {
+            const models::LifeForm* lf = dynamic_cast<const models::LifeForm*>(player);
             if (lf != nullptr) {
                // Health (aka damaged for other domains) same bits (3-4) - this is from the NIB, because it IS
                // updated
@@ -599,21 +601,21 @@ bool Nib::entityStateManager(const double curExecTime)
                // data is from the player, because NIB doesn't have actions associated with it
                {
                   unsigned int bits = 1;      // upright, standing still
-                  if (lf->getActionState() == simulation::LifeForm::UPRIGHT_STANDING) bits = 1;       // standing
-                  else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_WALKING) bits = 2;   // walking
-                  else if (lf->getActionState() == simulation::LifeForm::UPRIGHT_RUNNING) bits = 3;   // running
-                  else if (lf->getActionState() == simulation::LifeForm::KNEELING) bits = 4;          // kneeling
-                  else if (lf->getActionState() == simulation::LifeForm::PRONE) bits = 5;             // prone
-                  else if (lf->getActionState() == simulation::LifeForm::CRAWLING) bits = 6;          // crawling
-                  else if (lf->getActionState() == simulation::LifeForm::SWIMMING) bits = 7;          // swimming
-                  else if (lf->getActionState() == simulation::LifeForm::PARACHUTING) bits = 8;       // parachuting
-                  else if (lf->getActionState() == simulation::LifeForm::JUMPING) bits = 9;           // jumping
-                  else if (lf->getActionState() == simulation::LifeForm::SITTING) bits = 10;          // sitting
-                  else if (lf->getActionState() == simulation::LifeForm::SQUATTING) bits = 11;        // squatting
-                  else if (lf->getActionState() == simulation::LifeForm::CROUCHING) bits = 12;        // crouching
-                  else if (lf->getActionState() == simulation::LifeForm::WADING) bits = 13;           // wading
-                  else if (lf->getActionState() == simulation::LifeForm::SURRENDER) bits = 14;        // surrender
-                  else if (lf->getActionState() == simulation::LifeForm::DETAINED) bits = 15;         // detained
+                  if (lf->getActionState() == models::LifeForm::UPRIGHT_STANDING) bits = 1;       // standing
+                  else if (lf->getActionState() == models::LifeForm::UPRIGHT_WALKING) bits = 2;   // walking
+                  else if (lf->getActionState() == models::LifeForm::UPRIGHT_RUNNING) bits = 3;   // running
+                  else if (lf->getActionState() == models::LifeForm::KNEELING) bits = 4;          // kneeling
+                  else if (lf->getActionState() == models::LifeForm::PRONE) bits = 5;             // prone
+                  else if (lf->getActionState() == models::LifeForm::CRAWLING) bits = 6;          // crawling
+                  else if (lf->getActionState() == models::LifeForm::SWIMMING) bits = 7;          // swimming
+                  else if (lf->getActionState() == models::LifeForm::PARACHUTING) bits = 8;       // parachuting
+                  else if (lf->getActionState() == models::LifeForm::JUMPING) bits = 9;           // jumping
+                  else if (lf->getActionState() == models::LifeForm::SITTING) bits = 10;          // sitting
+                  else if (lf->getActionState() == models::LifeForm::SQUATTING) bits = 11;        // squatting
+                  else if (lf->getActionState() == models::LifeForm::CROUCHING) bits = 12;        // crouching
+                  else if (lf->getActionState() == models::LifeForm::WADING) bits = 13;           // wading
+                  else if (lf->getActionState() == models::LifeForm::SURRENDER) bits = 14;        // surrender
+                  else if (lf->getActionState() == models::LifeForm::DETAINED) bits = 15;         // detained
                   else bits = 1;
                   pdu->appearance |= (bits << 16);
                }
@@ -736,7 +738,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    // ---
    // Air Vehicle articulated parts and attachments
    // ---
-   if ( getPlayer()->isMajorType(simulation::Player::AIR_VEHICLE) ) {
+   if ( getPlayer()->isMajorType(models::Player::AIR_VEHICLE) ) {
 
       // Check wing sweep angle.
       if (getAPartWingSweepCnt() > 0) {
@@ -800,7 +802,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
    // ---
    // Ground Vehicle articulated parts and attachments
    // ---
-   else if ( getPlayer()->isMajorType(simulation::Player::GROUND_VEHICLE) ) {
+   else if ( getPlayer()->isMajorType(models::Player::GROUND_VEHICLE) ) {
 
       // Check launcher elevation angle
       if (getAPartLauncherElevationCnt() > 0) {
@@ -820,7 +822,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
       unsigned int n = getAPartNumberAttachedNumMissiles();
       for (unsigned int i = 0; i < n; i++) {
 
-         const simulation::Missile* msl = getAPartAttachedMissile(i+1);
+         const models::Missile* msl = getAPartAttachedMissile(i+1);
 
          // Find the missile's entity type
          if (apartMslTypes[i] == nullptr) {
@@ -843,7 +845,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
             ap->changeIndicator = static_cast<unsigned char>(getAPartAttacheMissileChangeCnt(i+1) & 0xff);
             ap->id = 1;                   // ATTACHED to LAUNCHER (above)
             ap->parameterType = (i+1);    // Station number
-            if (msl->isMode(simulation::Player::LAUNCHED)) {
+            if (msl->isMode(models::Player::LAUNCHED)) {
                ap->parameterValue.entityType.kind = 0;
                ap->parameterValue.entityType.domain = 0;
                ap->parameterValue.entityType.country = 0;

@@ -1905,9 +1905,9 @@ struct EmissionSystem {
       location.swapBytes();
 
       // Then swap emission data
-      for(int i = 0; i < numberOfBeams; i++) {
+      for (int i = 0; i < numberOfBeams; i++) {
          EmitterBeamData* bd = getEmitterBeamData(i);
-         if (bd != 0) bd->swapBytes();
+         if (bd != nullptr) bd->swapBytes();
       }
    }
 

@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Class: Nib
-//------------------------------------------------------------------------------
 
 #include "openeaagles/networks/hla/Nib.hpp"
 #include "openeaagles/networks/hla/NetIO.hpp"
@@ -20,9 +17,6 @@
 namespace oe {
 namespace hla {
 
-//==============================================================================
-// Class: Nib
-//==============================================================================
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)

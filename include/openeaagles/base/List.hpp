@@ -116,7 +116,7 @@ namespace base {
 //
 //      List* list = <some list>
 //      List::Item* item = list->getFirstItem();
-//      while (item != 0) {
+//      while (item != nullptr) {
 //          Object* obj = item->getValue();
 //          <... code to use the object ...>
 //          item = item->getNext();
@@ -129,7 +129,7 @@ class List : public Object
 
 public:
    struct Item {
-      Item() { next = 0; previous = 0; value = 0; }
+      Item() { next = nullptr; previous = nullptr; value = nullptr; }
 
       Item* getNext()                  { return next; }
       const Item* getNext() const      { return next; }

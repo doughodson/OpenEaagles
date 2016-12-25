@@ -1,16 +1,13 @@
-// Class: IoData
 
 #include "openeaagles/iodevice/IoData.hpp"
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// IoData
-//==============================================================================
-IMPLEMENT_SUBCLASS(IoData,"IoData")
+IMPLEMENT_SUBCLASS(IoData, "IoData")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(IoData)
@@ -28,9 +25,6 @@ BEGIN_SLOT_MAP(IoData)
    ON_SLOT( 4, setSlotNumDO,    base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 IoData::IoData()
 {
    STANDARD_CONSTRUCTOR()
@@ -38,9 +32,6 @@ IoData::IoData()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
 void IoData::initData()
 {
    numAI = 0;
@@ -56,9 +47,6 @@ void IoData::initData()
    doTable = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void IoData::copyData(const IoData& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -86,9 +74,6 @@ void IoData::copyData(const IoData& org, const bool cc)
 
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void IoData::deleteData()
 {
    setNumAI(0);
@@ -418,17 +403,6 @@ bool IoData::setSlotNumDO(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* IoData::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& IoData::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

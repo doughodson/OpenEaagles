@@ -5,9 +5,6 @@
 namespace oe {
 namespace base {
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 SlotTable::SlotTable(const char* s[], const unsigned int ns, const SlotTable& base)
 {
    baseTable = const_cast<SlotTable*>(&base);
@@ -22,23 +19,6 @@ SlotTable::SlotTable(const char* s[], const unsigned int ns)
    nslots1 = ns;
 }
 
-void SlotTable::copyData(const SlotTable& org)
-{
-   baseTable = org.baseTable;
-   slots1 = org.slots1;
-   nslots1 = org.nslots1;
-}
-
-void SlotTable::deleteData()
-{
-   baseTable = nullptr;
-   slots1 = nullptr;
-   nslots1 = 0;
-}
-
-//------------------------------------------------------------------------------
-// Destructor
-//------------------------------------------------------------------------------
 SlotTable::~SlotTable()
 {
    baseTable = nullptr;
@@ -57,7 +37,6 @@ unsigned int SlotTable::n() const
       return nslots1;
 }
 
-
 //------------------------------------------------------------------------------
 // name() -- returns the name of the slot at index 'slotindex'
 //------------------------------------------------------------------------------
@@ -73,15 +52,14 @@ const char* SlotTable::name(const unsigned int slotindex) const
 
    // if not in baseTable, check our table
    if (name == nullptr) {
-      int i = static_cast<int>(slotindex);      // a) start with slotindex
+      int i = static_cast<int>(slotindex);            // a) start with slotindex
       if (baseTable != nullptr) i -= baseTable->n();  // b) subt baseTable->n()
-      --i;                                      // c) make it zero based
-      if (i >= 0) name = slots1[i];             // d) get the name
+      --i;                                            // c) make it zero based
+      if (i >= 0) name = slots1[i];                   // d) get the name
    }
 
    return name;
 }
-
 
 //------------------------------------------------------------------------------
 // index() -- returns the index of the slot named 'slotname'
@@ -109,24 +87,6 @@ unsigned int SlotTable::index(const char* const slotname) const
    if (i == 0 && baseTable != nullptr) i = baseTable->index(slotname);
 
    return i;
-}
-
-
-//------------------------------------------------------------------------------
-// serialize()
-//------------------------------------------------------------------------------
-std::ostream& SlotTable::serialize(std::ostream& sout, const int, const bool) const
-{
-   unsigned int n = 0;
-   if (baseTable != nullptr) {
-      baseTable->serialize(sout);
-      n = baseTable->n();
-   }
-
-   for (unsigned int i = 0; i < nslots1; i++) {
-      sout << (i+n) << "\t" << slots1[i] << std::endl;
-   }
-   return sout;
 }
 
 }

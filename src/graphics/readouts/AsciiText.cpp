@@ -95,11 +95,6 @@ bool AsciiText::setTextList(const base::List* const stlobj)
    return ok;
 }
 
-base::Object* AsciiText::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
 std::ostream& AsciiText::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

@@ -126,8 +126,6 @@ class MapDrawer;
 // updateData() - Update map data.
 //      void CadrgMap::updateData(double dt)
 //
-// getSlotByIndex() - Get the slot data.
-//      base::Object* CadrgMap::getSlotByIndex(const int si)
 //
 // ---------------------------------------------------------------------------------
 class CadrgMap : public graphics::MapPage

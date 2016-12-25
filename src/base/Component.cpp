@@ -4,7 +4,6 @@
 #include "openeaagles/base/Boolean.hpp"
 #include "openeaagles/base/Float.hpp"
 #include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/Logger.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -23,7 +22,7 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Component,"Component")
+IMPLEMENT_SUBCLASS(Component, "Component")
 
 //------------------------------------------------------------------------------
 // Slot table for this form type
@@ -31,12 +30,11 @@ IMPLEMENT_SUBCLASS(Component,"Component")
 BEGIN_SLOTTABLE(Component)
     "components",          // 1) Children components                                  (PairStream)
     "select",              // 2) Manage only this child component (component idx)     (Number)
-    "logger",              // 3) Event logger                                         (Logger)
-    "enableTimingStats",   // 4) Enable/disable the timing statistics for updateTC()  (Number) (default: false)
-    "printTimingStats",    // 5) Enable/disable the printing of the timing statistics (Number) (default: false)
-    "freeze",              // 6) Freeze flag: true(1), false(0); default: false       (Number) (default: false)
-    "enableMessageType",   // 7) Enable message type { WARNING INFO DEBUG USER DATA }
-    "disableMessageType"   // 8) Disable message type { WARNING INFO DEBUG USER DATA }
+    "enableTimingStats",   // 3) Enable/disable the timing statistics for updateTC()  (Number) (default: false)
+    "printTimingStats",    // 4) Enable/disable the printing of the timing statistics (Number) (default: false)
+    "freeze",              // 5) Freeze flag: true(1), false(0); default: false       (Number) (default: false)
+    "enableMessageType",   // 6) Enable message type { WARNING INFO DEBUG USER DATA }
+    "disableMessageType"   // 7) Disable message type { WARNING INFO DEBUG USER DATA }
 END_SLOTTABLE(Component)
 
 // Map slot table to handles
@@ -45,14 +43,13 @@ BEGIN_SLOT_MAP(Component)
     ON_SLOT( 1, setSlotComponent, Component)
     ON_SLOT( 2, select, Number)
     ON_SLOT( 2, select, String)
-    ON_SLOT( 3, setSlotEventLogger, Logger)
-    ON_SLOT( 4, setSlotEnableTimingStats, Number)
-    ON_SLOT( 5, setSlotPrintTimingStats, Number)
-    ON_SLOT( 6, setSlotFreeze, Number)
-    ON_SLOT( 7, setSlotEnableMsgType, Identifier)
-    ON_SLOT( 7, setSlotEnableMsgType, Number)
-    ON_SLOT( 8, setSlotDisableMsgType, Identifier)
-    ON_SLOT( 8, setSlotDisableMsgType, Number)
+    ON_SLOT( 3, setSlotEnableTimingStats, Number)
+    ON_SLOT( 4, setSlotPrintTimingStats, Number)
+    ON_SLOT( 5, setSlotFreeze, Number)
+    ON_SLOT( 6, setSlotEnableMsgType, Identifier)
+    ON_SLOT( 6, setSlotEnableMsgType, Number)
+    ON_SLOT( 7, setSlotDisableMsgType, Identifier)
+    ON_SLOT( 7, setSlotDisableMsgType, Number)
 END_SLOT_MAP()
 
 // Event Table
@@ -71,10 +68,6 @@ BEGIN_EVENT_HANDLER(Component)
     return _used;
 }
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Component::Component()
 {
    STANDARD_CONSTRUCTOR()
@@ -87,9 +80,6 @@ Component::Component()
    selected = nullptr;
    selection = nullptr;
 
-   elog = nullptr;       // No event logger
-   elog0 = nullptr;
-
    timingStats = nullptr;
    pts = false;
 
@@ -97,9 +87,6 @@ Component::Component()
    shutdown = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Component::copyData(const Component& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -109,19 +96,9 @@ void Component::copyData(const Component& org, const bool cc)
       containerPtr = nullptr;
       selected = nullptr;
       selection = nullptr;
-      elog = nullptr;
-      elog0 = nullptr;
       timingStats = nullptr;
       shutdown = false;
    }
-
-   // Copy event logger
-   const Logger* p = org.elog;
-   elog = const_cast<Logger*>(p);
-   if (org.elog0 != nullptr)
-      elog0 = static_cast<Logger*>(org.elog0->clone());
-   else
-      elog0 = nullptr;
 
    // Copy selection
    setSelectionName(org.selection);
@@ -152,9 +129,6 @@ void Component::copyData(const Component& org, const bool cc)
    frz = org.frz;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Component::deleteData()
 {
     // just in case our components haven't heard, we're shutting down!
@@ -231,11 +205,6 @@ void Component::reset()
         }
         subcomponents->unref();
         subcomponents = nullptr;
-    }
-
-    // Reset the log file
-    if (elog0 != nullptr) {
-        elog0->reset();
     }
 }
 
@@ -323,11 +292,6 @@ void Component::updateTC(const double dt)
         subcomponents->unref();
         subcomponents = nullptr;
     }
-
-    // Update our log file
-    if (elog0 != nullptr) {
-        elog0->tcFrame(dt);
-    }
 }
 
 
@@ -355,11 +319,6 @@ void Component::updateData(const double dt)
         }
         subcomponents->unref();
         subcomponents = nullptr;
-    }
-
-    // Update our log file
-    if (elog0 != nullptr) {
-        elog0->updateData(dt);
     }
 }
 
@@ -419,9 +378,6 @@ bool Component::shutdownNotification()
       subcomponents->unref();
       subcomponents = nullptr;
    }
-
-   // And tell the logger
-   if (elog != nullptr) elog->event(SHUTDOWN_EVENT);
 
    shutdown = true;
    return shutdown;
@@ -637,38 +593,6 @@ const Identifier* Component::findNameOfComponent(const Component* const p) const
         subcomponents = nullptr;
     }
     return name;
-}
-
-//------------------------------------------------------------------------------
-// getEventLogger() -- Returns a pointer to the logger assigned to this component
-//------------------------------------------------------------------------------
-Logger* Component::getEventLogger()
-{
-    return elog;
-}
-
-//------------------------------------------------------------------------------
-// getAnyEventLogger() -- Returns a pointer to the logger assigned to this
-//  component or to one of its containers.
-//------------------------------------------------------------------------------
-Logger* Component::getAnyEventLogger()
-{
-    if (elog == nullptr && containerPtr != nullptr) {
-        elog = containerPtr->getAnyEventLogger();
-    }
-    return elog;
-}
-
-//------------------------------------------------------------------------------
-// setEventLogger() -- Sets the event logger
-//  -- may be set by a container or as a slot (setSlotEventLogger())
-//------------------------------------------------------------------------------
-bool Component::setEventLogger(Logger* const logger)
-{
-    if (elog != nullptr) elog->container(nullptr);
-    elog = logger;
-    if (elog != nullptr) elog->container(this);
-    return true;
 }
 
 //------------------------------------------------------------------------------
@@ -914,13 +838,6 @@ bool Component::setSlotComponent(Component* const single)
    pairStream->unref();
 
    return true;
-}
-
-// setSlotEventLogger() -- Sets the event logger slot
-bool Component::setSlotEventLogger(Logger* const logger)
-{
-    elog0 = logger;     // Save for the print routine
-    return setEventLogger(logger);
 }
 
 // enableMessageType --- Enable message type { WARNING INFO DEBUG DATA USER }
@@ -1176,20 +1093,6 @@ bool Component::send(const char* const id, const int event, Object* const value[
    return val;
 }
 
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-Object* Component::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Component::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -1224,13 +1127,6 @@ std::ostream& Component::serialize(std::ostream& sout, const int i, const bool s
             if (num != nullptr) sout << num->getInt();
         }
         sout << std::endl;
-    }
-
-    // Event logger
-    if (elog0 != nullptr) {
-        indent(sout,i+j);
-        sout << "logger: " << std::endl;
-        elog0->serialize(sout,i+j,slotsOnly);
     }
 
     // enableTimingStats

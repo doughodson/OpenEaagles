@@ -3,21 +3,15 @@
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
 #include "openeaagles/base/util/system.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
-
-//==============================================================================
-// class Thread
-//==============================================================================
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Thread, "Thread")
 EMPTY_SLOTTABLE(Thread)
 EMPTY_SERIALIZER(Thread)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Thread::Thread(Component* const p, const double pri) : parent(p), priority(pri)
 {
    STANDARD_CONSTRUCTOR()
@@ -38,9 +32,6 @@ Thread::Thread() : parent(nullptr), priority(0), killed(false), stackSize(0), th
    stackSize = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Thread::copyData(const Thread& org, const bool)
 {
    BaseClass::copyData(org);
@@ -48,9 +39,6 @@ void Thread::copyData(const Thread& org, const bool)
    std::cerr << "Thread(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Thread::deleteData()
 {
    if (!isTerminated()) {

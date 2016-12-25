@@ -27,5 +27,6 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f platform/*.o
 	-rm -f *.o
 	-rm -f $(LIB)

@@ -7,9 +7,11 @@
 #include "openeaagles/networks/dis/Nib.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -32,14 +34,14 @@ bool Nib::weaponFireMsgFactory(const double)
     //Simulation* sim = disIO->getSimulation();
 
     // Set the NIB mode so that we don't do this again.
-    setMode(simulation::Player::ACTIVE);
+    setMode(models::Player::ACTIVE);
 
     // Our NIB's player is a weapon that just became active
-    simulation::Weapon* mPlayer = static_cast<simulation::Weapon*>(getPlayer());
+    models::Weapon* mPlayer = static_cast<models::Weapon*>(getPlayer());
 
     // Ok, we have the weapon, now get the firing and target players
-    simulation::Player* tPlayer = mPlayer->getTargetPlayer();
-    simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+    models::Player* tPlayer = mPlayer->getTargetPlayer();
+    models::Player* fPlayer = mPlayer->getLaunchVehicle();
     if (fPlayer == nullptr) return false;
 
     // ---

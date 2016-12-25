@@ -1,13 +1,14 @@
 
 #include "openeaagles/models/dynamics/JSBSimModel.hpp"
 
+#include "openeaagles/simulation/IPlayer.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/simulation/Player.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
@@ -665,7 +666,7 @@ void JSBSimModel::setBrakes(const double left, const double right)
 void JSBSimModel::dynamics(const double dt)
 {
     // Get our Player (must have one!)
-    simulation::Player* p = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+    simulation::IPlayer* p = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
     if (p == nullptr) return;
 
     if (fdmex == nullptr) return;
@@ -807,8 +808,6 @@ void JSBSimModel::dynamics(const double dt)
             }
         }
     }
-
-    BaseClass::dynamics(dt);
 }
 
 
@@ -828,7 +827,7 @@ void JSBSimModel::reset()
     rollTrimSw    = static_cast<double>(0.0);
 
     // Get our Player (must have one!)
-    simulation::Player* p = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+    simulation::IPlayer* p = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
     if (p == nullptr) return;
 
     // must have strings set
@@ -954,14 +953,6 @@ bool JSBSimModel::setDebugLevel(const base::Integer* const level)
       debugLevel = level->getInt();
    }
    return true;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* JSBSimModel::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------

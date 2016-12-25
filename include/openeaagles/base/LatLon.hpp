@@ -13,7 +13,7 @@ class Number;
 //------------------------------------------------------------------------------
 // Class:  LatLon
 //
-// Description:  Class/form for latitude or longitude numbers.
+// Description:  For latitude or longitude numbers.
 //
 // Factory name: LatLon
 // Slots:
@@ -63,9 +63,6 @@ class Number;
 //
 //      void LatLon::setSec(const double s)
 //          Sets seconds -- then calls computeVal().
-//
-//      Object* LatLon::getSlotByIndex(const int si)
-//          getSlotByIndex() for LatLon
 //
 //      std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 //          serialize() -- print the value of this object to the output stream sout.

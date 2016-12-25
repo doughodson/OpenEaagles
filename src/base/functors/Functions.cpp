@@ -10,6 +10,7 @@
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -338,17 +339,6 @@ bool Polynomial::setSlotCoefficients(const List* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* Polynomial::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Polynomial::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

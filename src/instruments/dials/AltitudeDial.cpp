@@ -1,9 +1,11 @@
+
 #include "openeaagles/instruments/dials/AltitudeDial.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AltitudeDial,"AltitudeDial")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AltitudeDial, "AltitudeDial")
 EMPTY_SERIALIZER(AltitudeDial)
 
 //------------------------------------------------------------------------------
@@ -102,6 +104,6 @@ bool AltitudeDial::figureRotation(const double thisAlt)
     return true;
 }
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}
 

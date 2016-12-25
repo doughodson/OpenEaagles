@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Event Tokens IDs (EID) for configuration files
 // 
-// (Master event list is eventTokens.h)
+// (Master event list is eventTokens.hpp)
 //------------------------------------------------------------------------------
 #ifndef __oe_Event_Tokens_EPP__
 #define __oe_Event_Tokens_EPP__
@@ -202,7 +202,7 @@
                                           /* or no argument for one-shot event */
 #define  EID_DMS_AFT_EVENT          1412  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
-#define  EID_DMS_LEFT_EVENT         1413  /*  Passes requested switch state as Boolean */
+#define  EID_DMS_LEFT_EVENT         1413  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */
 #define  EID_DMS_RIGHT_EVENT        1414  /* Passes requested switch state as Boolean */
                                           /* or no argument for one-shot event */

@@ -11,13 +11,11 @@
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_SUBCLASS(AirportLoader,"AirportLoader")
+IMPLEMENT_SUBCLASS(AirportLoader, "AirportLoader")
 EMPTY_SLOTTABLE(AirportLoader)
 EMPTY_SERIALIZER(AirportLoader)
+EMPTY_DELETEDATA(AirportLoader)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 AirportLoader::AirportLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
@@ -41,10 +39,6 @@ AirportLoader::AirportLoader(
    firstAirport = nullptr;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void AirportLoader::copyData(const AirportLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -54,14 +48,6 @@ void AirportLoader::copyData(const AirportLoader& org, const bool cc)
       firstAirport = nullptr;
    }
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void AirportLoader::deleteData()
-{
-}
-
 
 //------------------------------------------------------------------------------
 // load() --
@@ -178,8 +164,6 @@ bool AirportLoader::load(const char* country)
       r = db->getNextRecord();
       runway.setRecord(r);
    }
-
-
 
 #ifndef ALT_ILS_FILE    /* read ILS records from DAFIF file */
 
@@ -494,7 +478,6 @@ int AirportLoader::getMaxRecords()
 {
    return AIRPORT_MAX_RECORDS;
 }
-
 
 //------------------------------------------------------------------------------
 // airport() -- get the airport by number: 0 ... numberOfRecords()-1

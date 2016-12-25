@@ -7,7 +7,7 @@
 namespace oe {
 
 namespace base { class NetHandler; }
-namespace simulation { class Iff; class RfSensor; }
+namespace models { class Iff; class RfSensor; }
 
 namespace dis {
    class Nib;
@@ -239,7 +239,7 @@ public:
    virtual bool setVersion(const unsigned char v);                            // Sets the operating version number
 
    // Emission PDU handler
-   const EmissionPduHandler* findEmissionPduHandler(const simulation::RfSensor* const);
+   const EmissionPduHandler* findEmissionPduHandler(const models::RfSensor* const);
    const EmissionPduHandler* findEmissionPduHandler(const EmissionSystem* const);
 
    // Generate a federate name from the site and application numbers:
@@ -278,7 +278,7 @@ public:
    virtual double getMaxPositionErr(const simulation::Nib* const nib) const override;
    virtual double getMaxOrientationErr(const simulation::Nib* const nib) const override;
    virtual double getMaxAge(const simulation::Nib* const nib) const override;
-   virtual simulation::Nib* createNewOutputNib(simulation::Player* const player) override;
+   virtual simulation::Nib* createNewOutputNib(models::Player* const player) override;
 
    // DIS v7 additions
    virtual double getHbtPduEe() const;

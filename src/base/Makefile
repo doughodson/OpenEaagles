@@ -90,7 +90,6 @@ OBJS =  \
 	LatLon.o \
 	List.o \
 	Locus.o \
-	Logger.o \
 	Matrix.o \
 	MonitorMetrics.o \
 	Nav.o \
@@ -109,7 +108,6 @@ OBJS =  \
 	Statistic.o \
 	StateMachine.o \
 	String.o \
-	Terrain.o \
 	Thread.o \
 	ThreadPool.o \
 	Timers.o \

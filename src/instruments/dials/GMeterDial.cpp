@@ -144,5 +144,5 @@ void GMeterDial::updateData(const double dt)
 
 }
 
-}  // end of Instruments namespace
-}  // end of oe namespace
+}
+}

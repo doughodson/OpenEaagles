@@ -351,7 +351,7 @@ inline bool Nav::convertEcef2Geod(
          )
 {
    bool ok = false;
-   if (lla != 0) {
+   if (lla != nullptr) {
       double lat(0.0), lon(0.0), alt(0.0);
       ok = convertEcef2Geod(vec[IX], vec[IY], vec[IZ], &lat, &lon, &alt, em);
       if (ok) { lla[ILAT] = lat; lla[ILON] = lon; lla[IALT] = alt; }
@@ -383,7 +383,7 @@ inline bool Nav::convertGeod2Ecef(
          )
 {
    bool ok = false;
-   if (ecef != 0) {
+   if (ecef != nullptr) {
       double x(0.0), y(0.0), z(0.0);
       ok = convertGeod2Ecef(lla[ILAT], lla[ILON], lla[IALT], &x, &y, &z, em);
       if (ok) { ecef[IX] = x; ecef[IY] = y; ecef[IZ] = z; }

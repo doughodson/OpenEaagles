@@ -56,7 +56,7 @@ namespace instruments {
 
 base::Object* factory(const std::string& name)
 {
-    base::Object* obj = 0;
+    base::Object* obj = nullptr;
 
     // Instrument
     if ( name == Instrument::getFactoryName() ) {

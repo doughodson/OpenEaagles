@@ -10,11 +10,23 @@ namespace oe {
 namespace graphics {
 
 //------------------------------------------------------------------------------
-// Class: Clip3D
-// Base class: Object -> Clip3D
+// Clip3D -- 3D polygon clipper
+//
+// Based on the following and modifed to use Performer pfVec3 and C++
+//
+//  /*
+//   * Generic Convex Polygon Scan Conversion and Clipping
+//   * by Paul Heckbert
+//   * from "Graphics Gems", Academic Press, 1990
+//   */
+//
+//  /*
+//   * poly_clip.c: homogeneous 3-D convex polygon clipper
+//   *
+//   * Paul Heckbert 1985, Dec 1989
+//   */
 //
 // Factory name: Clip3D
-// Description: 3D polygon clipping
 //
 //------------------------------------------------------------------------------
 class Clip3D : public base::Object
@@ -50,13 +62,13 @@ public:
    // user provided output arrays, which must be of at least size 'num'.
    //------------------------------------------------------------------------------
    unsigned int clip(
-         osg::Vec3* const out,            // Output polygon vertices
-         osg::Vec3* const outNorm,        // Output polygon vertices
-         osg::Vec2* const outTCoord,      // Output polygon vertices
-         const osg::Vec3* const in,       // Input polygon vertices
-         const osg::Vec3* const inNorm,   // Input polygon vertices
-         const osg::Vec2* const inTCoord, // Input polygon vertices
-         const unsigned int num           // Number of vertices in arrays
+         osg::Vec3d* const out,            // Output polygon vertices
+         osg::Vec3d* const outNorm,        // Output polygon vertices
+         osg::Vec2d* const outTCoord,      // Output polygon vertices
+         const osg::Vec3d* const in,       // Input polygon vertices
+         const osg::Vec3d* const inNorm,   // Input polygon vertices
+         const osg::Vec2d* const inTCoord, // Input polygon vertices
+         const unsigned int num            // Number of vertices in arrays
       ) const;
 
    //------------------------------------------------------------------------------
@@ -65,17 +77,17 @@ public:
    // of vertices in the clipped polygon is returned by the function.
    //------------------------------------------------------------------------------
    static unsigned int polyClip2Halfspace(
-      osg::Vec3* const q,           // Output polygon vertices
-      osg::Vec3* const qn,          // (optional) Output polygon normals
-      osg::Vec2* const qt,          // (optional) Output polygon texture coordinates
-      const osg::Vec3* const p,     // Input polygon vertices
-      const osg::Vec3* const pn,    // (optional) Input polygon normals
-      const osg::Vec2* const pt,    // (optional) Input polygon texture coordinates
-      const unsigned int n,         // Number of vertices/normals
-      const unsigned int index,     // Coordinate index: X -> 0; Y -> 1; and Z -> 2
-      const double k,               // Value of the clipping plane
-      const bool clipUpperPlane);   // if clipping against an upper plane, 
-                                    //  else against a lower plane
+      osg::Vec3d* const q,           // Output polygon vertices
+      osg::Vec3d* const qn,          // (optional) Output polygon normals
+      osg::Vec2d* const qt,          // (optional) Output polygon texture coordinates
+      const osg::Vec3d* const p,     // Input polygon vertices
+      const osg::Vec3d* const pn,    // (optional) Input polygon normals
+      const osg::Vec2d* const pt,    // (optional) Input polygon texture coordinates
+      const unsigned int n,          // Number of vertices/normals
+      const unsigned int index,      // Coordinate index: X -> 0; Y -> 1; and Z -> 2
+      const double k,                // Value of the clipping plane
+      const bool clipUpperPlane);    // if clipping against an upper plane, 
+                                     //  else against a lower plane
 
 private:
    double x0, x1;     // left and right

@@ -137,13 +137,5 @@ bool BmpTexture::setSlotTextureFileName(base::String* const s)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Page
-//------------------------------------------------------------------------------
-base::Object* BmpTexture::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 }
 }

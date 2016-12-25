@@ -1,5 +1,6 @@
 
 #include "openeaagles/instruments/eadi3d/Eadi3DFont.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {

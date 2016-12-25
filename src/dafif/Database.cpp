@@ -14,25 +14,18 @@
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Database,"Database")
+IMPLEMENT_ABSTRACT_SUBCLASS(Database, "Database")
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Database)
     "pathname",      // 1) Path to the file
     "filename",      // 2) File name (appended to pathname)
 END_SLOTTABLE(Database)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Database)
-    ON_SLOT(1,setSlotPathname,base::String)
-    ON_SLOT(2,setSlotFilename,base::String)
+    ON_SLOT(1, setSlotPathname, base::String)
+    ON_SLOT(2, setSlotFilename, base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Database::Database()
 {
    STANDARD_CONSTRUCTOR()
@@ -58,10 +51,6 @@ Database::Database()
    dbLoaded = false;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Database::copyData(const Database& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -88,9 +77,6 @@ void Database::copyData(const Database& org, const bool cc)
    dbLoaded = false;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Database::deleteData()
 {
    if (db != nullptr) {
@@ -127,7 +113,6 @@ bool Database::openDatabaseFile()
    db->open();
    return db->isReady();
 }
-
 
 //------------------------------------------------------------------------------
 // getArea(), setArea() -- get/set the search area (ref point)
@@ -517,18 +502,6 @@ void Database::printIcaoList(std::ostream& sout)
    }
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* Database::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Database::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

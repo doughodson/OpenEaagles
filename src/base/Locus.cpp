@@ -1,10 +1,11 @@
 
 #include "openeaagles/base/Locus.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Locus,"Locus")
+IMPLEMENT_SUBCLASS(Locus, "Locus")
 EMPTY_SLOTTABLE(Locus)
 EMPTY_SERIALIZER(Locus)
 
@@ -38,9 +39,6 @@ Locus::Locus(
    setData(newData, n, lat, lon, ang, mn, mx);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Locus::copyData(const Locus& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -61,9 +59,6 @@ void Locus::copyData(const Locus& org, const bool cc)
       );
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Locus::deleteData()
 {
    clearData();

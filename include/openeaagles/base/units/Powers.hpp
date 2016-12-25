@@ -64,6 +64,7 @@
 #include "openeaagles/base/Number.hpp"
 
 #include <cmath>
+#include <iostream>
 
 namespace oe {
 namespace base {

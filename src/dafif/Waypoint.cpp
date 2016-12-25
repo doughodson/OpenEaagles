@@ -4,8 +4,10 @@
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint,"Waypoint")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Waypoint, "Waypoint")
 EMPTY_SERIALIZER(Waypoint)
+EMPTY_COPYDATA(Waypoint)
+EMPTY_DELETEDATA(Waypoint)
 
 
 //  Waypoint class field Position Table
@@ -23,10 +25,6 @@ const Waypoint::Ptbl Waypoint::ptable = {
         WP_MAGVAR                   // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Waypoint::Waypoint()
 {
    STANDARD_CONSTRUCTOR()
@@ -38,10 +36,6 @@ Waypoint::Waypoint(const char* const s) : Record(s)
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
-
-EMPTY_COPYDATA(Waypoint)
-EMPTY_DELETEDATA(Waypoint)
-
 
 //------------------------------------------------------------------------------
 // Printing functions

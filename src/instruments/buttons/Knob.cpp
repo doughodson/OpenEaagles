@@ -10,12 +10,9 @@
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(Knob,"Knob")
+IMPLEMENT_SUBCLASS(Knob, "Knob")
 EMPTY_SERIALIZER(Knob)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Knob)
     "valueTable",        // 1) table with rotation and values, else we do 1 to 1
     "endless",           // 2) If true, the knob will continue rotating past last value forever.
@@ -24,9 +21,6 @@ BEGIN_SLOTTABLE(Knob)
                          // if you have a value table and have endless set, it will reset at your high limit back to your low limit
 END_SLOTTABLE(Knob)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Knob)
     ON_SLOT(1, setSlotValueTable, base::Table1)
     ON_SLOT(2, setSlotEndless, base::Number)
@@ -34,17 +28,11 @@ BEGIN_SLOT_MAP(Knob)
     ON_SLOT(4, setSlotEndlessLimit, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Knob)
     ON_EVENT(ON_MOTION, onMotion)
     ON_EVENT(ON_SINGLE_CLICK, onSingleClick)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Knob::Knob()
 {
     STANDARD_CONSTRUCTOR()
@@ -64,9 +52,6 @@ Knob::Knob()
     endlessLimit = 360;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Knob::copyData(const Knob& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -86,9 +71,6 @@ void Knob::copyData(const Knob& org, const bool cc)
     endlessLimit = org.endlessLimit;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Knob::deleteData()
 {
     setSlotValueTable(nullptr);
@@ -299,9 +281,6 @@ void Knob::computeRotation()
     }
 }
 
-//------------------------------------------------------------------------------
-// draw() -
-//------------------------------------------------------------------------------
 void Knob::draw()
 {
     // rotate our knob!
@@ -312,9 +291,6 @@ void Knob::draw()
     lcRestoreMatrix();
 }
 
-//------------------------------------------------------------------------------
-// updateData()
-//------------------------------------------------------------------------------
 void Knob::updateData(const double dt)
 {
     BaseClass::updateData(dt);
@@ -322,13 +298,5 @@ void Knob::updateData(const double dt)
     findStartTimer += dt;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Knob
-//------------------------------------------------------------------------------
-base::Object* Knob::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

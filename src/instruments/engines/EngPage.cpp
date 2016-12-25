@@ -4,12 +4,9 @@
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage,"EngPage")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage, "EngPage")
 EMPTY_SERIALIZER(EngPage)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 EngPage::EngPage()
 {
     STANDARD_CONSTRUCTOR()
@@ -36,9 +33,6 @@ EngPage::EngPage()
     }
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void EngPage::copyData(const EngPage& org, const bool)
 {
     // Always copy base class stuff first
@@ -66,9 +60,6 @@ void EngPage::copyData(const EngPage& org, const bool)
     }
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 EMPTY_DELETEDATA(EngPage)
 
 // Set functions
@@ -168,5 +159,5 @@ void EngPage::updateData(const double dt)
 
 }
 
-}  // end of Instruments namespace
-}  // end of oe Namespace
+}
+}

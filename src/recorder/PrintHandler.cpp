@@ -331,14 +331,6 @@ void PrintHandler::printToOutput(const char* const msg)
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* PrintHandler::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
 // Print the data from a DataRecord
 //------------------------------------------------------------------------------
 void PrintHandler::processRecordImp(const DataRecordHandle* const handle)

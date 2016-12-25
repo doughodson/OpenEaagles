@@ -10,7 +10,6 @@ namespace base { class Object; }
 
 namespace dis {
 
-// factory function
 base::Object* factory(const std::string& name);
 
 }

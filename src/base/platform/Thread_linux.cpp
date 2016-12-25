@@ -5,6 +5,7 @@
 #include "openeaagles/base/util/system.hpp"
 
 #include <signal.h>
+#include <iostream>
 
 // max number of processors we'll allow
 static const unsigned int MAX_CPUS = 32;

@@ -1,46 +1,26 @@
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Number,"Number")
+IMPLEMENT_SUBCLASS(Number, "Number")
 EMPTY_SERIALIZER(Number)
+EMPTY_DELETEDATA(Number)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Number)
     "value",
 END_SLOTTABLE(Number)
 
-
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Number)
     ON_SLOT(1, setSlotValue, Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Number::copyData(const Number& org, const bool)
 {
    BaseClass::copyData(org);
    val = org.val;
-}
-
-EMPTY_DELETEDATA(Number)
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* Number::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------

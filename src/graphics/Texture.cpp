@@ -5,13 +5,10 @@
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(Texture,"Texture")
+IMPLEMENT_SUBCLASS(Texture, "Texture")
 EMPTY_SERIALIZER(Texture)
 EMPTY_DELETEDATA(Texture)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Texture)
     "width",        //  1) Size of the texture map
     "height",       //  2) Size of the texture map
@@ -27,9 +24,6 @@ BEGIN_SLOTTABLE(Texture)
     "minFilter",    // 12) glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER)
 END_SLOTTABLE(Texture)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Texture)
     ON_SLOT(1,  setSlotWidth, base::Number)
     ON_SLOT(2,  setSlotHeight, base::Number)
@@ -45,10 +39,6 @@ BEGIN_SLOT_MAP(Texture)
    ON_SLOT(12, setSlotMinFilter, base::Identifier)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Texture::Texture()
 {
    STANDARD_CONSTRUCTOR()
@@ -77,9 +67,6 @@ void Texture::initData()
     blueBias = 0.0f;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -
-//------------------------------------------------------------------------------
 void Texture::copyData(const Texture& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -98,7 +85,6 @@ void Texture::copyData(const Texture& org, const bool cc)
     blueScale = org.blueScale;
     blueBias = org.blueBias;
 }
-
 
 //------------------------------------------------------------------------------
 // loadTexture() - load our texture
@@ -470,14 +456,6 @@ bool Texture::setSlotMinFilter(const base::Identifier* const v)
         }
     }
     return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() - for our slot table
-//------------------------------------------------------------------------------
-base::Object* Texture::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 }

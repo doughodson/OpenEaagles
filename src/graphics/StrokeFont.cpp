@@ -1,13 +1,11 @@
-//------------------------------------------------------------------------------
-// Class: StrokeFont
-// Description: Modified version of SGI's stroke font
-//------------------------------------------------------------------------------
+
 #include "openeaagles/graphics/StrokeFont.hpp"
+#include <iostream>
 
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont,"StrokeFont")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont, "StrokeFont")
 EMPTY_SERIALIZER(StrokeFont)
 
 // SGI font scaled so six stroke font points (units used below) is 1 screen unit

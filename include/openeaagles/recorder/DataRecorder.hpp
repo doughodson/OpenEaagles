@@ -3,9 +3,10 @@
 #define __oe_recorder_DataRecorder_H__
 
 #include "openeaagles/simulation/DataRecorder.hpp"
+#include <string>
 
 namespace oe {
-   namespace simulation { class Player; class Track; class Emission; }
+   namespace models { class Player; class Track; class Emission; }
    namespace base { class String; }
 
 namespace recorder {
@@ -91,13 +92,13 @@ protected:
    bool setSlotYear(base::Number* const msg);
 
    // data filler functions
-   virtual void genPlayerId( pb::PlayerId* const id, const simulation::Player* const player );
-   virtual void genPlayerState( pb::PlayerState* const state, const simulation::Player* const player );
-   virtual void genTrackData( pb::TrackData* const trkMsg, const simulation::Track* const track );
-   virtual void genEmissionData( pb::EmissionData* const emMsg, const simulation::Emission* const emData);
+   virtual void genPlayerId( pb::PlayerId* const id, const models::Player* const player );
+   virtual void genPlayerState( pb::PlayerState* const state, const models::Player* const player );
+   virtual void genTrackData( pb::TrackData* const trkMsg, const models::Track* const track );
+   virtual void genEmissionData( pb::EmissionData* const emMsg, const models::Emission* const emData);
    virtual void sendDataRecord(pb::DataRecord* const msg);       // Send the DataRecord to our output handler
    virtual void timeStamp(pb::DataRecord* const msg);            // Time stamp the DataRecord
-   virtual std::string genTrackId(const simulation::Track* const track);
+   virtual std::string genTrackId(const models::Track* const track);
    void setFirstPass(const bool f);
 
    // Recorder data event handlers

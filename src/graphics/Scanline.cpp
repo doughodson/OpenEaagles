@@ -1,6 +1,3 @@
-//==============================================================================
-// Scanline --
-//==============================================================================
 
 #include "openeaagles/graphics/Scanline.hpp"
 #include "openeaagles/graphics/Clip3D.hpp"
@@ -92,7 +89,7 @@ void Scanline::deleteData()
 //------------------------------------------------------------------------------
 void Scanline::setMatrix()
 {
-   osg::Matrix rr;
+   osg::Matrixd rr;
 
    // start with an identity matrix
    mat.makeIdentity();
@@ -248,11 +245,11 @@ unsigned int Scanline::reduceVert(Polygon* const polygon)
    if (polygon == nullptr) return 0;
 
    unsigned int n1 = polygon->getNumberOfVertices();
-   osg::Vec3* tvect  = const_cast<osg::Vec3*>(static_cast<const osg::Vec3*>(polygon->getVertices()));
+   osg::Vec3d* tvect  = const_cast<osg::Vec3d*>(static_cast<const osg::Vec3d*>(polygon->getVertices()));
    if (tvect == nullptr) return 0;
 
-   osg::Vec3* tnorms = const_cast<osg::Vec3*>(static_cast<const osg::Vec3*>(polygon->getNormals()));
-   osg::Vec2* tcoord = const_cast<osg::Vec2*>(static_cast<const osg::Vec2*>(polygon->getTextureCoord()));
+   osg::Vec3d* tnorms = const_cast<osg::Vec3d*>(static_cast<const osg::Vec3d*>(polygon->getNormals()));
+   osg::Vec2d* tcoord = const_cast<osg::Vec2d*>(static_cast<const osg::Vec2d*>(polygon->getTextureCoord()));
 
    bool reduced = true;
    while (reduced && n1 > 2) {
@@ -345,23 +342,23 @@ bool Scanline::addPolygon(const Polygon* const polygon)
    // Transform the vertices and normals
    // ---
    {
-      osg::Vec3* tv = new osg::Vec3[n];
+      osg::Vec3d* tv = new osg::Vec3d[n];
 
       // Transform the vectors first
-      const osg::Vec3* v = tmpPolygon->getVertices();
+      const osg::Vec3d* v = tmpPolygon->getVertices();
       for (unsigned int i = 0; i < n; i++) {
-         osg::Vec4 p( v[i][0], v[i][1], v[i][2], 1.0f );
-         osg::Vec4 q = p * mat;
+         osg::Vec4d p( v[i][0], v[i][1], v[i][2], 1.0f );
+         osg::Vec4d q = p * mat;
          tv[i].set(q[0],q[1],q[2]);
       }
       tmpPolygon->setVertices(tv,n);
 
       // Transform the normals (if any)
       if (nn > 0) {
-         const osg::Vec3* norms = tmpPolygon->getNormals();
+         const osg::Vec3d* norms = tmpPolygon->getNormals();
          for (unsigned int i = 0; i < nn; i++) {
-            osg::Vec4 p( norms[i][0], norms[i][1], norms[i][2], 0.0f );
-            osg::Vec4 q = p * mat;
+            osg::Vec4d p( norms[i][0], norms[i][1], norms[i][2], 0.0f );
+            osg::Vec4d q = p * mat;
             tv[i].set(q[0],q[1],q[2]);
          }
          tmpPolygon->setNormals(tv,nn);
@@ -387,7 +384,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
       // we're looking ( 0, 0, 1 ) and the normal of the new polygon is the
       // same as checking the z value only.
       clipPolygon->calcNormal();
-      osg::Vec3 norm = *(clipPolygon->getNormal());
+      osg::Vec3d norm = *(clipPolygon->getNormal());
       if (norm[2] < 0.1f) {
          clipPolygon->unref();
          return false;
@@ -406,8 +403,8 @@ bool Scanline::addPolygon(const Polygon* const polygon)
       int  nTET = 0;
       Edge* tet[100];     // temp edge table
       {
-         const osg::Vec3* cvect = clipPolygon->getVertices();
-         const osg::Vec3* cnorms = clipPolygon->getNormals();
+         const osg::Vec3d* cvect = clipPolygon->getVertices();
+         const osg::Vec3d* cnorms = clipPolygon->getNormals();
 
          unsigned int ii = cn - 1;
          for (unsigned int j = 0; j < cn; j++) {
@@ -529,7 +526,7 @@ const Scanline::PolyData* Scanline::step(const int x)
    }
    else if (nAPT > 1) {
       // when there are several active polygon, we choose the one on top
-      osg::Vec2 point(curX,curY);
+      osg::Vec2d point(curX,curY);
       double zmin = apt[0]->polygon->calcZ(point);
       curPoly = apt[0];
       for (unsigned int i = 1; i < nAPT; i++) {
@@ -583,7 +580,7 @@ void Scanline::toggleActivePolygon()
             p->x0 = aet[refAET]->x;
             double deltaX = (aet[j]->x - p->x0);
             if (deltaX > 0.0f) {
-               osg::Vec3 deltaNorm = aet[j]->cn - aet[refAET]->cn;
+               osg::Vec3d deltaNorm = aet[j]->cn - aet[refAET]->cn;
                p->nslope = deltaNorm * (1.0f/deltaX);
             }
             else {
@@ -601,7 +598,7 @@ void Scanline::toggleActivePolygon()
 //==============================================================================
 // Scanline::PolyData class
 //==============================================================================
-IMPLEMENT_PARTIAL_SUBCLASS(Scanline::PolyData,"ScanlinePolyData")
+IMPLEMENT_PARTIAL_SUBCLASS(Scanline::PolyData, "ScanlinePolyData")
 EMPTY_SLOTTABLE(Scanline::PolyData)
 EMPTY_SERIALIZER(Scanline::PolyData)
 
@@ -674,7 +671,7 @@ void Scanline::PolyData::deleteData()
 // Functions --
 //------------------------------------------------------------------------------
 
-void Scanline::PolyData::getNorm(osg::Vec3& cnorm, const double x) const
+void Scanline::PolyData::getNorm(osg::Vec3d& cnorm, const double x) const
 {
    double dist = x - x0;
    cnorm = n0 + nslope * dist;
@@ -683,7 +680,7 @@ void Scanline::PolyData::getNorm(osg::Vec3& cnorm, const double x) const
 //==============================================================================
 // Edge routines
 //==============================================================================
-IMPLEMENT_PARTIAL_SUBCLASS(Scanline::Edge,"ScanlineEdge")
+IMPLEMENT_PARTIAL_SUBCLASS(Scanline::Edge, "ScanlineEdge")
 EMPTY_SLOTTABLE(Scanline::Edge)
 EMPTY_SERIALIZER(Scanline::Edge)
 
@@ -705,13 +702,13 @@ Scanline::Edge::Edge() : polygon(nullptr)
 
 Scanline::Edge::Edge(
                const double v0[2],
-               const osg::Vec3& vn0,
+               const osg::Vec3d& vn0,
                const double v1[2],
-               const osg::Vec3& vn1,
+               const osg::Vec3d& vn1,
                PolyData* const p
             ) : polygon(nullptr)
 {
-   osg::Vec3 uvn;
+   osg::Vec3d uvn;
    if (v0[1] <= v1[1]) {
       lv.set(v0[0],v0[1]);
       uv.set(v1[0],v1[1]);

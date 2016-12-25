@@ -38,5 +38,5 @@ void DialPointer::draw()
     lcRestoreMatrix();
 }
 
-}  // end of Instruments namespace
-}  // end of oe namespace
+}
+}

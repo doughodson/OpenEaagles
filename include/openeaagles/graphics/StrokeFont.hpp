@@ -9,10 +9,8 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class:  StrokeFont
-//
-// Description:  Stroke font
+// Description: Modified version of SGI's stroke font
 // Factory name: StrokeFont
-//
 //
 // public methods (member functions):
 //      (All of the classes derived from Font have the same public methods.)

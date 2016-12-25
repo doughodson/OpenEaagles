@@ -1,40 +1,29 @@
+
 #include "openeaagles/instruments/buttons/PushButton.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(PushButton,"PushButton")
+IMPLEMENT_SUBCLASS(PushButton, "PushButton")
 EMPTY_SERIALIZER(PushButton)
+EMPTY_DELETEDATA(PushButton)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PushButton)
    "maintained",        // if this is true, we keep our button state after we release the mouse
    "startdepressed",    // do we start depressed or up?
 END_SLOTTABLE(PushButton)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(PushButton)
    ON_SLOT(1, setSlotFunction, base::Number)
    ON_SLOT(2, setSlotStartState, base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(PushButton)
    ON_EVENT(INPUT_LEFT_EDGE, onMouseDown)
 END_EVENT_HANDLER()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 PushButton::PushButton()
 {
    STANDARD_CONSTRUCTOR()
@@ -46,9 +35,6 @@ PushButton::PushButton()
    buttonStatusSD.empty();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void PushButton::copyData(const PushButton& org, const bool)
 {
    BaseClass::copyData(org);
@@ -57,11 +43,6 @@ void PushButton::copyData(const PushButton& org, const bool)
    buttonStatusSD.empty();
    initState = org.initState;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(PushButton)
 
 // SLOT FUNCTIONS
 //------------------------------------------------------------------------------
@@ -151,13 +132,5 @@ void PushButton::updateData(const double dt)
    send("buttons", SELECT, currentState, buttonStatusSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Button
-//------------------------------------------------------------------------------
-base::Object* PushButton::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

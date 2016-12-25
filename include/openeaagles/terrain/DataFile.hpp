@@ -2,7 +2,7 @@
 #ifndef __oe_terrain_DataFile_H__
 #define __oe_terrain_DataFile_H__
 
-#include "openeaagles/base/Terrain.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
 
 namespace oe {
 namespace terrain {
@@ -17,9 +17,9 @@ namespace terrain {
 //    2) the final elevation point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class DataFile : public base::Terrain
+class DataFile : public Terrain
 {
-   DECLARE_SUBCLASS(DataFile, base::Terrain)
+   DECLARE_SUBCLASS(DataFile, Terrain)
 
 public:
    DataFile();
@@ -53,7 +53,7 @@ public:
    const short* getColumn(const unsigned int idx) const;
 
    // ---
-   // base::Terrain interface
+   // simulation::Terrain interface
    // ---
 
    virtual bool isDataLoaded() const override;
@@ -88,7 +88,7 @@ protected:
    unsigned int nptlong;            // Number of points in longitude (i.e., number of columns)
    short    voidValue;              // Value representing a void (missing) data point
 
-   // base::Terrain protected interface
+   // simulation::Terrain protected interface
    virtual void clearData() override;
 };
 

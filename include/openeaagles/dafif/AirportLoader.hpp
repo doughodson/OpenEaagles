@@ -55,7 +55,7 @@ namespace dafif {
 //------------------------------------------------------------------------------
 class AirportLoader : public Database
 {
-   DECLARE_SUBCLASS(AirportLoader,Database)
+   DECLARE_SUBCLASS(AirportLoader, Database)
 
 public:
    AirportLoader();
@@ -96,7 +96,7 @@ public:
    struct AirportKey;
    struct RunwayKey;
 
-   virtual bool load(const char* code = 0) override;
+   virtual bool load(const char* code = nullptr) override;
    virtual int getRecordLength() override;
    virtual int getMaxRecords() override;
    virtual int queryByRange() override;

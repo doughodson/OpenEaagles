@@ -7,10 +7,12 @@
 #include "openeaagles/networks/dis/Nib.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -46,7 +48,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 1) Find the target player
    // ---
-   simulation::Player* tPlayer = nullptr;
+   models::Player* tPlayer = nullptr;
    if (tPlayerId != 0 && tSiteId != 0 && tApplicationId != 0) {
       simulation::Nib* tNib = findDisNib(tPlayerId, tSiteId, tApplicationId, OUTPUT_NIB);
       if (tNib != nullptr) {
@@ -58,7 +60,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 2) Find the firing player and munitions (networked) IPlayers
    // ---
-   simulation::Player* fPlayer = nullptr;
+   models::Player* fPlayer = nullptr;
    if (fPlayerId != 0 && fSiteId != 0 && fApplicationId != 0) {
       simulation::Nib* fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
       if (fNib != nullptr) {
@@ -66,7 +68,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       }
       else {
          base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
-         fPlayer = getSimulation()->findPlayer(fPlayerId);
+         fPlayer = dynamic_cast<models::Player*>(getSimulation()->findPlayer(fPlayerId));   // added DDH
       }
    }
 
@@ -80,7 +82,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 3) Update the data of the munition's NIB and player
    // ---
-   simulation::Weapon* mPlayer = nullptr;
+   models::Weapon* mPlayer = nullptr;
    if (mNib != nullptr) {
 
       // ---
@@ -112,14 +114,14 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          arates);
 
       // Set the NIB's mode to DETONATED
-      mNib->setMode(simulation::Player::DETONATED);
+      mNib->setMode(models::Player::DETONATED);
 
       // Find the munition player and set its mode, location and target position
-      mPlayer = dynamic_cast<simulation::Weapon*>(mNib->getPlayer());
+      mPlayer = dynamic_cast<models::Weapon*>(mNib->getPlayer());
       if (mPlayer != nullptr) {
 
          // Munition's mode
-         mPlayer->setMode(simulation::Player::DETONATED);
+         mPlayer->setMode(models::Player::DETONATED);
 
          // munition's position, velocity and acceleration at the time of the detonation
          mPlayer->setGeocPosition(geocPos);
@@ -127,14 +129,14 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          mPlayer->setGeocAcceleration(geocAcc);
 
          // detonation results
-         mPlayer->setDetonationResults(simulation::Weapon::Detonation(pdu->detonationResult));
+         mPlayer->setDetonationResults(models::Weapon::Detonation(pdu->detonationResult));
 
          // Munition's target player and the location of detonation relative to target
          mPlayer->setTargetPlayer(tPlayer,false);
          double x = pdu->locationInEntityCoordinates.component[0];
          double y = pdu->locationInEntityCoordinates.component[1];
          double z = pdu->locationInEntityCoordinates.component[2];
-         osg::Vec3 loc(x,y,z);
+         osg::Vec3d loc(x,y,z);
          mPlayer->setDetonationLocation(loc);
 
          // Munition's launcher

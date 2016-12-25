@@ -3,7 +3,9 @@
 #define __oe_base_Matrix_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Matrix"
+
+#include "openeaagles/base/osg/Matrixf"
+#include "openeaagles/base/osg/Matrixd"
 
 #include <cmath>
 
@@ -54,7 +56,7 @@ public:
 
    bool isSquare() const                                                { return (rows == cols); }
    bool isGoodIndex(const unsigned int i, const unsigned int j) const   { return (i < rows) && (j < cols); }
-   bool isGoodMatrix() const                                            { return ((mda != 0) && ((rows > 0) & (cols > 0))); }
+   bool isGoodMatrix() const                                            { return ((mda != nullptr) && ((rows > 0) & (cols > 0))); }
    bool isSymmetric() const;
 
    // The (i,j) element

@@ -6,15 +6,11 @@
 #include "dafifc.hpp"
 
 namespace oe {
-   namespace base {
-      class FileReader;
-      class String;
-   }
+namespace base { class FileReader; class String; }
 namespace dafif {
 
 //------------------------------------------------------------------------------
 // Class: Database
-// Base class:  base::Object -> Database
 //
 // Description: Abstract class used to access DAFIF databases; both file
 //              loaders and network clients.

@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Class: Arbiter
-//------------------------------------------------------------------------------
 
 #include "openeaagles/base/ubf/Arbiter.hpp"
 #include "openeaagles/base/ubf/Action.hpp"
@@ -16,9 +13,6 @@ IMPLEMENT_SUBCLASS(Arbiter, "UbfArbiter")
 EMPTY_COPYDATA(Arbiter)
 EMPTY_SERIALIZER(Arbiter)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Arbiter)
    "behaviors"                    //  1) behaviors
 END_SLOTTABLE(Arbiter)
@@ -28,10 +22,6 @@ BEGIN_SLOT_MAP(Arbiter)
    ON_SLOT(1, setSlotBehaviors, base::PairStream)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Arbiter::Arbiter()
 {
    STANDARD_CONSTRUCTOR()
@@ -164,14 +154,6 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
    }
 
    return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Arbiter::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 }

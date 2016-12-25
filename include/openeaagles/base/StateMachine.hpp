@@ -303,8 +303,8 @@ protected:
    // ---
    // Event handlers
    // ---
-   virtual bool onEntry(Object* const msg = 0);
-   virtual bool onReturn(Object* const msg = 0);
+   virtual bool onEntry(Object* const msg = nullptr);
+   virtual bool onReturn(Object* const msg = nullptr);
    virtual bool onExit();
 
    // ---

@@ -8,8 +8,10 @@
 #include "openeaagles/networks/dis/EmissionPduHandler.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/Radar.hpp"
+#include "openeaagles/models/systems/Radar.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
+
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -474,7 +476,7 @@ void NetIO::processInputList()
 
 //   std::cout << "n = " << getInputListSize();      // #DPG#
 //   base::PairStream* p = getSimulation()->getPlayers();
-//   if (p != 0) {
+//   if (p != nullptr) {
 //      std::cout << ";  np = " << p->entries();
 //      p->unref();
 //   }
@@ -590,7 +592,7 @@ simulation::Nib* NetIO::nibFactory(const simulation::NetIO::IoType ioType)
 // Create a new NIBs
 //------------------------------------------------------------------------------
 
-simulation::Nib* NetIO::createNewOutputNib(simulation::Player* const player)
+simulation::Nib* NetIO::createNewOutputNib(models::Player* const player)
 {
    Nib* nib = static_cast<Nib*>(nibFactory(OUTPUT_NIB));
    if (nib != nullptr) {
@@ -1359,7 +1361,7 @@ void NetIO::clearEmissionPduHandlers()
 //------------------------------------------------------------------------------
 
 // By RfSensor data
-const EmissionPduHandler* NetIO::findEmissionPduHandler(const simulation::RfSensor* const msg)
+const EmissionPduHandler* NetIO::findEmissionPduHandler(const models::RfSensor* const msg)
 {
    const EmissionPduHandler* handler = nullptr;
    if (msg != nullptr && nEmissionHandlers > 0) {
@@ -1786,18 +1788,7 @@ bool NetIO::setSlotExerciseID(const base::Number* const num)
     }
     return ok;
 }
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* NetIO::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
 
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -1872,7 +1863,7 @@ void NetIO::testInputEntityTypes(const unsigned int n)
 
             std::cout << "; foundNtm= " << foundNtm;
             if (foundNtm != nullptr) {
-               const simulation::Player* foundP = origNtm->getTemplatePlayer();
+               const models::Player* foundP = origNtm->getTemplatePlayer();
                std::cout << "; form: " << foundP->getFactoryName();
                base::safe_ptr<const base::String> foundType( static_cast<const base::String*>( foundP->getType() ) );
                if (foundType != nullptr) std::cout << "; type: " << *foundType;
@@ -1911,8 +1902,8 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
          std::cout << "; origNtm= " << origNtm;
          if (origNtm != nullptr) {
 
-            const simulation::Player* origP = origNtm->getTemplatePlayer();
-            simulation::Player* origP1 = origP->clone();
+            const models::Player* origP = origNtm->getTemplatePlayer();
+            models::Player* origP1 = origP->clone();
 
             std::cout << "; form: " << origP->getFactoryName();
             base::safe_ptr<base::String> origType( (base::String*) origP->getType() );
@@ -2280,7 +2271,7 @@ bool NtmInputNode::add2OurLists(simulation::Ntm* const ntm)
 //------------------------------------------------------------------------------
 void NtmInputNode::print(std::ostream& sout, const int icnt) const
 {
-   // Print our node's form name
+   // Print our node's factory name
    indent(sout,icnt);
    sout << "( NtmInputNode: level=" << level << ", code=" << code;
    sout << std::endl;

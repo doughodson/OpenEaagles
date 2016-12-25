@@ -4,14 +4,12 @@
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class NetOutput
-//==============================================================================
-IMPLEMENT_SUBCLASS(NetOutput,"RecorderNetOutput")
+IMPLEMENT_SUBCLASS(NetOutput, "RecorderNetOutput")
 EMPTY_SERIALIZER(NetOutput)
 
 BEGIN_SLOTTABLE(NetOutput)
@@ -25,9 +23,6 @@ BEGIN_SLOT_MAP(NetOutput)
     ON_SLOT(2, setSlotNoWait,    oe::base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 NetOutput::NetOutput() : netHandler(nullptr)
 {
    STANDARD_CONSTRUCTOR()
@@ -41,9 +36,6 @@ void NetOutput::initData()
    noWaitFlag = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void NetOutput::copyData(const NetOutput& org, const bool)
 {
    BaseClass::copyData(org);
@@ -54,10 +46,6 @@ void NetOutput::copyData(const NetOutput& org, const bool)
    networkInitFailed = false;
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void NetOutput::deleteData()
 {
    closeConnections();
@@ -166,15 +154,6 @@ bool NetOutput::setSlotNoWait(oe::base::Number* const msg)
       ok = true;
    }
    return ok;
-}
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-oe::base::Object* NetOutput::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 }

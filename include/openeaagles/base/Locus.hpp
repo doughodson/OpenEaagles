@@ -34,18 +34,18 @@ public:
        const double maxRng          // Range to last data point (meters)
        );
 
-    bool isDataValid() const           { return data != 0; }   // True if we have a valid data array
-    double getData(const unsigned int idx) const;              // The idx'th data point, [ idx: 0 ... (getNumPts()-1) ]
-    double getRange(const unsigned int idx) const;             // The range to the idx'th point (meters), [ idx: 0 ... (getNumPts()-1) ]
+    bool isDataValid() const           { return data != nullptr; }   // True if we have a valid data array
+    double getData(const unsigned int idx) const;                    // The idx'th data point, [ idx: 0 ... (getNumPts()-1) ]
+    double getRange(const unsigned int idx) const;                   // The range to the idx'th point (meters), [ idx: 0 ... (getNumPts()-1) ]
 
-    unsigned int getNumPts() const     { return np; }          // Number of data points
-    double getRefLatitude() const      { return refLat; }      // Reference latitude (degs)
-    double getRefLongitude() const     { return refLon; }      // Reference longitude (degs)
-    double getDirection() const        { return angle; }       // The 'true heading' angle of the data array (degs)
-    double getMinRng() const           { return minRng; }      // Range to the first data point (meters)
-    double getMaxRng() const           { return maxRng; }      // Range to the last data point (meters)
-    double getDeltaRange() const       { return deltaRng; }    // Distance between the data points (meters)
-    const double* getDataArray() const { return data; }        // The array of data points
+    unsigned int getNumPts() const     { return np; }                // Number of data points
+    double getRefLatitude() const      { return refLat; }            // Reference latitude (degs)
+    double getRefLongitude() const     { return refLon; }            // Reference longitude (degs)
+    double getDirection() const        { return angle; }             // The 'true heading' angle of the data array (degs)
+    double getMinRng() const           { return minRng; }            // Range to the first data point (meters)
+    double getMaxRng() const           { return maxRng; }            // Range to the last data point (meters)
+    double getDeltaRange() const       { return deltaRng; }          // Distance between the data points (meters)
+    const double* getDataArray() const { return data; }              // The array of data points
 
     // Sets the data array and its stated conditions
     virtual void setData(

@@ -1042,16 +1042,6 @@ bool SymbolLoader::setSlotInterconnect(const base::Number* const msg)
 }
 
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* SymbolLoader::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-
 //==============================================================================
 // class SlSymbol
 //==============================================================================
@@ -1188,5 +1178,5 @@ void SlSymbol::setHdgGraphics(Graphic* const v)
    phdg = v;
 }
 
-}  // end of graphics namespace
-}  // end of oe namespace
+}
+}

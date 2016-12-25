@@ -292,7 +292,7 @@ inline bool MapPage::toggleCentered()
    return true;
 }
 
-}  // End graphics namespace
-}  // End oe namespace
+}
+}
 
 #endif

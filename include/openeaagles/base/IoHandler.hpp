@@ -27,7 +27,7 @@ namespace base {
 //    handlers will contain a number of I/O adapters that control the flow of
 //    data between a device handler and an I/O data buffer (see IoAdapter.h).
 //
-//    For an example, see the Openoe example 'testIo'.
+//    For an example, see the example 'testIo'.
 //
 //
 // Notes:

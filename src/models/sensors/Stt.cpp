@@ -1,10 +1,10 @@
 
 #include "openeaagles/models/sensors/Stt.hpp"
 
-#include "openeaagles/simulation/Antenna.hpp"
-#include "openeaagles/simulation/Player.hpp"
-#include "openeaagles/simulation/Track.hpp"
-#include "openeaagles/simulation/TrackManager.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/systems/Antenna.hpp"
+#include "openeaagles/models/systems/TrackManager.hpp"
+#include "openeaagles/models/Track.hpp"
 
 namespace oe {
 namespace models {
@@ -32,10 +32,10 @@ void Stt::dynamics(const double dt)
     // ---
     // Update the antenna's Reference position
     // ---
-    simulation::TrackManager* tm = getTrackManager();
+    TrackManager* tm = getTrackManager();
     if (getAntenna() != nullptr && getOwnship() != nullptr && tm != nullptr) {
 
-        base::safe_ptr<simulation::Track> trackList[2];
+        base::safe_ptr<Track> trackList[2];
         int n = tm->getTrackList(trackList,2);
 
         if (n > 0) {
@@ -49,9 +49,9 @@ void Stt::dynamics(const double dt)
             // rotate to ownship heading
             double sinHdg = getOwnship()->getSinHeading();
             double cosHdg = getOwnship()->getCosHeading();
-            double x =  dpoi[simulation::Player::INORTH] * cosHdg + dpoi[simulation::Player::IEAST] * sinHdg;
-            double y = -dpoi[simulation::Player::INORTH] * sinHdg + dpoi[simulation::Player::IEAST] * cosHdg;
-            double z = dpoi[simulation::Player::IDOWN];
+            double x =  dpoi[Player::INORTH] * cosHdg + dpoi[Player::IEAST] * sinHdg;
+            double y = -dpoi[Player::INORTH] * sinHdg + dpoi[Player::IEAST] * cosHdg;
+            double z = dpoi[Player::IDOWN];
 
             // Compute az & el to track
             double grng = std::sqrt(x*x + y*y);
@@ -73,7 +73,7 @@ void Stt::dynamics(const double dt)
             // Set the reference 'look' angles and conical scan mode
             getAntenna()->setRefAzimuth(az);
             getAntenna()->setRefElevation(el);
-            getAntenna()->setScanMode(simulation::Antenna::CONICAL_SCAN);
+            getAntenna()->setScanMode(Antenna::CONICAL_SCAN);
         }
         else {
             // ---
@@ -81,7 +81,7 @@ void Stt::dynamics(const double dt)
             // ---
             getAntenna()->setRefAzimuth(0.0);
             getAntenna()->setRefElevation(0.0);
-            getAntenna()->setScanMode(simulation::Antenna::HORIZONTAL_BAR_SCAN);
+            getAntenna()->setScanMode(Antenna::HORIZONTAL_BAR_SCAN);
         }
     }
 }

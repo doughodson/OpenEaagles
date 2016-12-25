@@ -73,7 +73,7 @@ public:
    virtual void printFreqList(std::ostream& sout);
    virtual void printChannelList(std::ostream& sout);
 
-   virtual bool load(const char* code = 0) override;
+   virtual bool load(const char* code = nullptr) override;
    virtual int getRecordLength() override;
    virtual int getMaxRecords() override;
    virtual int queryByRange() override;

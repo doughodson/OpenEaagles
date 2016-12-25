@@ -11,15 +11,12 @@ namespace base {
 // Class: Transform
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(Transform,"Transform")
+IMPLEMENT_SUBCLASS(Transform, "Transform")
 
 BEGIN_SLOTTABLE(Transform)
         "x", "y", "z", "w"
 END_SLOTTABLE(Transform)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Transform
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Transform)
     ON_SLOT(1,setComputematrix1,Angle)
     ON_SLOT(1,setComputematrix1,Number)
@@ -31,10 +28,6 @@ BEGIN_SLOT_MAP(Transform)
     ON_SLOT(4,setComputematrix4,Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Transform::Transform()
 {
     STANDARD_CONSTRUCTOR()
@@ -42,9 +35,6 @@ Transform::Transform()
     nv = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Transform::copyData(const Transform& org, const bool)
 {
    BaseClass::copyData(org);
@@ -55,25 +45,11 @@ void Transform::copyData(const Transform& org, const bool)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Transform::deleteData()
 {
    m.makeIdentity();
    nv = 0;
 }
-
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Transform
-//------------------------------------------------------------------------------
-Object* Transform::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 
 //------------------------------------------------------------------------------
 // computeMatrix()
@@ -82,9 +58,6 @@ void Transform::computeMatrix()
 {
 }
 
-//------------------------------------------------------------------------------
-// serialize() -- print functions
-//------------------------------------------------------------------------------
 std::ostream& Transform::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -138,13 +111,13 @@ void Translation::computeMatrix()
     m.makeIdentity();
     if (nv == 2) {
         // Translate X and Y
-        osg::Matrix tt;
+        osg::Matrixd tt;
         tt.makeTranslate(v[0], v[1], 0.0f);
         m.preMult(tt);
     }
     else if (nv >= 3) {
         // Translate X, Y and Z
-        osg::Matrix tt;
+        osg::Matrixd tt;
         tt.makeTranslate(v[0], v[1], v[2]);
         m.preMult(tt);
     }
@@ -179,13 +152,13 @@ void Rotation::computeMatrix()
     m.makeIdentity();
     if (nv == 1) {
         // Single value: rotate about the Z axis
-        osg::Matrix rr;
+        osg::Matrixd rr;
         rr.makeRotate(v[0], 0.0f, 0.0f, 1.0f);
         m.preMult(rr);
     }
     else if (nv == 4) {
         // Four values: rotate about vector [ v[0] v[1] v[2] ] by v[3] degrees
-        osg::Matrix rr;
+        osg::Matrixd rr;
         rr.makeRotate(v[3], v[0], v[1], v[2]);
         m.preMult(rr);
     }
@@ -220,19 +193,19 @@ void Scale::computeMatrix()
     m.makeIdentity();
     if (nv == 1) {
        // Single value: scale X and Y by the value and hold Z constant
-        osg::Matrix ss;
+        osg::Matrixd ss;
         ss.makeScale(v[0], v[0], 1.0f);
         m.preMult(ss);
     }
     if (nv == 2) {
         // Two values: scale X and Y by the values and hold Z constant
-        osg::Matrix ss;
+        osg::Matrixd ss;
         ss.makeScale(v[0], v[1], 1.0f);
         m.preMult(ss);
     }
     else if (nv >= 3) {
         // Three values: scale X, Y and Z
-        osg::Matrix ss;
+        osg::Matrixd ss;
         ss.makeScale(v[0], v[1], v[2]);
         m.preMult(ss);
     }

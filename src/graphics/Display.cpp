@@ -820,7 +820,7 @@ void Display::clearScissor()
 //------------------------------------------------------------------------------
 // setColor() -- change the current color vector
 //------------------------------------------------------------------------------
-void Display::setColor(const osg::Vec4& newColor)
+void Display::setColor(const osg::Vec4d& newColor)
 {
    if (color != newColor) {
       color = newColor;
@@ -1104,7 +1104,7 @@ bool Display::setNormalFont(const base::Identifier* const fontName)
 void Display::outputTextLC(const int ln, const int cp, const char* sp, const int n, const bool vf) const
 {
    if (currentFont == nullptr || n <= 0) return;
-   osg::Vec4 ocolor = getCurrentColor();
+   osg::Vec4d ocolor = getCurrentColor();
 
    Display* that = const_cast<Display*>(this);
    // If manual reverse text, draw a background polygon
@@ -1219,7 +1219,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
    if (currentFont == nullptr || n <= 0) return;
 
    Display* that = const_cast<Display*>(this);
-   osg::Vec4 ocolor = getCurrentColor();
+   osg::Vec4d ocolor = getCurrentColor();
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
       // Offsets to center to polygon
@@ -2026,17 +2026,6 @@ Image* Display::readFrameBuffer(const unsigned int x, const unsigned int y, cons
    return newImage;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Page
-//------------------------------------------------------------------------------
-base::Object* Display::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

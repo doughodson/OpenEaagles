@@ -1,14 +1,12 @@
 
 #include "openeaagles/linearsystem/Sz1.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class Sz1
-//==============================================================================
-IMPLEMENT_SUBCLASS(Sz1,"Sz1")
+IMPLEMENT_SUBCLASS(Sz1, "Sz1")
 
 //------------------------------------------------------------------------------
 // slot table for this class type
@@ -36,9 +34,6 @@ BEGIN_SLOT_MAP(Sz1)
    ON_SLOT( 8, setSlotD2,   base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Sz1::Sz1()
 {
    STANDARD_CONSTRUCTOR()
@@ -92,17 +87,6 @@ bool Sz1::setSlotD2(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Sz1
-//------------------------------------------------------------------------------
-base::Object* Sz1::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Sz1::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

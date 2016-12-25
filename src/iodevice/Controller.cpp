@@ -2,11 +2,12 @@
 #include "openeaagles/iodevice/Controller.hpp"
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-/* both the linux and windows version use the 'UsbJoystick' form name */
+// both the linux and windows version use the 'UsbJoystick' factory name
 IMPLEMENT_SUBCLASS(Controller, "Controller")
 
 // slot table for this class type
@@ -19,9 +20,6 @@ BEGIN_SLOT_MAP(Controller)
     ON_SLOT( 1, setSlotDeviceIndex,  oe::base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Controller::Controller()
 {
    STANDARD_CONSTRUCTOR()
@@ -29,9 +27,6 @@ Controller::Controller()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// Init our data
-//------------------------------------------------------------------------------
 void Controller::initData()
 {
    deviceIndex = 0;
@@ -47,9 +42,6 @@ void Controller::initData()
    }
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Controller::copyData(const Controller& org, const bool)
 {
    BaseClass::copyData(org);
@@ -70,9 +62,6 @@ void Controller::copyData(const Controller& org, const bool)
 
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Controller::deleteData()
 {
    numAI = 0;
@@ -154,17 +143,6 @@ bool Controller::setSlotDeviceIndex(const oe::base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* Controller::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Controller::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

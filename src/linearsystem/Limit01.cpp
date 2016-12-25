@@ -1,5 +1,6 @@
 
 #include "openeaagles/linearsystem/Limit01.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {

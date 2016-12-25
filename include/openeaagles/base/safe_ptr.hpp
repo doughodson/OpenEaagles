@@ -8,7 +8,7 @@ namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Template safe_ptr<T>
+// Template: safe_ptr<T>
 //
 // Description: Thread-safe shared pointer to an object of type T.
 //              Provides automatic ref() and unref() of the object.

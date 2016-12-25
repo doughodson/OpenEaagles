@@ -61,7 +61,7 @@
 ) // end of the side slip graphic          
 
 // ADI - altitude direction indicator
-// See Adi.h for input/output parameters and send commands
+// See Adi.hpp for input/output parameters and send commands
 // Setting up the outline of the adi
 ( Graphic 
     scissorX: -5.05

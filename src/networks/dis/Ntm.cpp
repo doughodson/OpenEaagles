@@ -12,11 +12,9 @@ namespace oe {
 
 namespace dis {
 
-IMPLEMENT_SUBCLASS(Ntm,"DisNtm")
+IMPLEMENT_SUBCLASS(Ntm, "DisNtm")
+EMPTY_DELETEDATA(Ntm)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Ntm)
     "disEntityType", // 1) DIS Entity type (base::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
@@ -26,9 +24,6 @@ BEGIN_SLOT_MAP(Ntm)
     ON_SLOT(1, setSlotDisEntityType, base::List)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Ntm::Ntm()
 {
    STANDARD_CONSTRUCTOR()
@@ -42,9 +37,6 @@ Ntm::Ntm()
    disExtra = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Ntm::copyData(const Ntm& org, const bool)
 {
    BaseClass::copyData(org);
@@ -56,13 +48,6 @@ void Ntm::copyData(const Ntm& org, const bool)
    disSubcategory = org.disSubcategory;
    disSpecific = org.disSpecific;
    disExtra = org.disExtra;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Ntm::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -200,17 +185,6 @@ bool Ntm::setSlotDisEntityType(const base::List* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Ntm::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

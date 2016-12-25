@@ -293,17 +293,6 @@ bool SignalGen::setSlotChannel(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* SignalGen::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& SignalGen::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

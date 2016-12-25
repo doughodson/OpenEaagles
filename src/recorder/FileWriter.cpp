@@ -18,26 +18,18 @@
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class FileWriter
-//==============================================================================
-IMPLEMENT_SUBCLASS(FileWriter,"RecorderFileWriter")
+IMPLEMENT_SUBCLASS(FileWriter, "RecorderFileWriter")
 
-// Slot table for this form type
 BEGIN_SLOTTABLE(FileWriter)
     "filename",         // 1) Data file name (required)
     "pathname",         // 2) Path to the data file directory (optional)
 END_SLOTTABLE(FileWriter)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(FileWriter)
     ON_SLOT( 1, setFilename, base::String)
     ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 FileWriter::FileWriter()
 {
    STANDARD_CONSTRUCTOR()
@@ -55,9 +47,6 @@ void FileWriter::initData()
    eodFlag    = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void FileWriter::copyData(const FileWriter& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -78,9 +67,6 @@ void FileWriter::copyData(const FileWriter& org, const bool cc)
    setFullFilename(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void FileWriter::deleteData()
 {
    if (sout != nullptr) {
@@ -409,17 +395,6 @@ bool FileWriter::setPathName(const base::String* const msg)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* FileWriter::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& FileWriter::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

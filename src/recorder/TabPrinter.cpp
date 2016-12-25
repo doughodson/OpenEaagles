@@ -154,15 +154,6 @@ bool TabPrinter::setSlotDivider(const base::String* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* TabPrinter::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 //------------------------------------------------------------------------------
 // Print the data from a DataRecord
 //------------------------------------------------------------------------------

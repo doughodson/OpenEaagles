@@ -454,7 +454,7 @@ void Field::drawFunc()
     // Set the color
     // ---
     bool restoreColor = false;
-    osg::Vec4 ocolor = dsp->getCurrentColor();
+    osg::Vec4d ocolor = dsp->getCurrentColor();
     // only use default colors if we aren't inheriting our container's colors
 
     if (!isInheritColor()) {
@@ -463,7 +463,7 @@ void Field::drawFunc()
             if (isHighLighted()) cc = dsp->getHighlightColor();
             else cc = dsp->getNormColor();
             if (cc != nullptr) {
-                const osg::Vec4* p = cc->getRGBA();
+                const osg::Vec4d* p = cc->getRGBA();
                 dsp->setColor(*p);
                 restoreColor = true;
             }
@@ -504,11 +504,6 @@ void Field::drawFunc()
     // ---
     if (restoreColor) dsp->setColor(ocolor);
 
-}
-
-base::Object* Field::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------

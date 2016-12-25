@@ -4,6 +4,7 @@
 #include <cctype>
 #include <cstdlib>
 #include <cstring>
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -35,7 +36,6 @@ const SlotTable Object::slottable(nullptr, 0);
 // Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.h
 //------------------------------------------------------------------------------
 
-// Constructor
 Object::Object()
 {
    STANDARD_CONSTRUCTOR()
@@ -110,13 +110,6 @@ bool Object::setSlotByIndex(const int, Object* const)
     return false;
 }
 
-// get slots by index
-Object* Object::getSlotByIndex(const int)
-{
-    // We have no slots, so we shouldn't ever be here!
-    return nullptr;
-}
-
 // get factory name
 const char* Object::getFactoryName()
 {
@@ -172,7 +165,6 @@ int Object::slotName2Index(const char* const slotname) const
     return slotindex;
 }
 
-
 //------------------------------------------------------------------------------
 // setSlotByName() -- set the value of slot 'slotname' to 'obj'  Returns
 //                 true if the slot and object were processed; returns
@@ -188,22 +180,11 @@ bool Object::setSlotByName(const char* const slotname, Object* const obj)
 }
 
 //------------------------------------------------------------------------------
-// getSlotByName() -- Returns a pointer to the slot named 'slotname'.
-//------------------------------------------------------------------------------
-Object* Object::getSlotByName(const char* const slotname)
-{
-    Object* obj = nullptr;
-    int slotindex = slotName2Index(slotname);
-    if (slotindex > 0) obj = getSlotByIndex(slotindex);
-    return obj;
-}
-
-//------------------------------------------------------------------------------
 // slotIndex2Name() -- returns the name of the slot at 'slotindex'
 //------------------------------------------------------------------------------
 const char* Object::slotIndex2Name(const int slotindex) const
 {
-    return  slotTable->name(slotindex);
+    return slotTable->name(slotindex);
 }
 
 //------------------------------------------------------------------------------

@@ -3,7 +3,7 @@
 // lat longs and such to determine screen position.  Map page also tells all of its components which are map pages what its reference lat and lon is, what the
 // range is, displacement, and any other pertinent information (see MapPage.cpp, and .h).  This is very similar to instrument in the fact that it eliminates
 // redundancy.
-// The MapPage event handler does different things depending on the event message sent to it.  See MapPage.h for an explanation of what each event does.
+// The MapPage event handler does different things depending on the event message sent to it.  See MapPage.hpp for an explanation of what each event does.
 mappage:
 ( MapPage
     // This slot sets the outer circular radius of our map, in units.  It uses this to calculate nautical miles per inches and for other calculations

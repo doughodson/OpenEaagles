@@ -35,11 +35,7 @@ const EarthModel EarthModel::wgs60              ( 6378165.0,    1.0 / 298.3 );
 const EarthModel EarthModel::wgs66              ( 6378145.0,    1.0 / 298.25);
 const EarthModel EarthModel::wgs72              ( 6378135.0,    1.0 / 298.26);
 
-//------------------------------------------------------------------------------
-// EarthModel class
-//------------------------------------------------------------------------------
-
-IMPLEMENT_SUBCLASS(EarthModel,"EarthModel")
+IMPLEMENT_SUBCLASS(EarthModel, "EarthModel")
 EMPTY_DELETEDATA(EarthModel)
 
 BEGIN_SLOTTABLE(EarthModel)
@@ -58,9 +54,6 @@ BEGIN_SLOT_MAP(EarthModel)
    ON_SLOT(3, setSlotF, Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 EarthModel::EarthModel(const double a0, const double f0)
 {
    STANDARD_CONSTRUCTOR()
@@ -83,9 +76,6 @@ void EarthModel::initData(const double a0, const double f0)
    e2 = f*(2.0 - f);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void EarthModel::copyData(const EarthModel& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -212,19 +202,6 @@ bool EarthModel::setSlotF(const Number* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for EarthModel
-//------------------------------------------------------------------------------
-Object* EarthModel::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& EarthModel::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -249,6 +226,5 @@ std::ostream& EarthModel::serialize(std::ostream& sout, const int i, const bool 
     return sout;
 }
 
-
-}  // End base namespace
-}  // End oe namespace
+}
+}

@@ -1,8 +1,7 @@
 
 #include "openeaagles/models/dynamics/LaeroModel.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
-#include "openeaagles/simulation/AirVehicle.hpp"
+#include "openeaagles/simulation/IPlayer.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/String.hpp"
@@ -10,8 +9,7 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
 #include "openeaagles/base/osg/Math"
 
@@ -22,7 +20,7 @@
 namespace oe {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel,"LaeroModel")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LaeroModel, "LaeroModel")
 EMPTY_SERIALIZER(LaeroModel)
 EMPTY_DELETEDATA(LaeroModel)
 
@@ -155,10 +153,9 @@ void LaeroModel::copyData(const LaeroModel& org, const bool cc)
    wDot1    = org.wDot1;
 }
 
-
-//----------------------------------------------------------
-// updateTC() -- update time critical stuff here
-//----------------------------------------------------------
+//------------------------------------------------------------------------------
+// dynamics() -- update player's vehicle dynamics
+//------------------------------------------------------------------------------
 void LaeroModel::dynamics(const double dt)
 {
     update4DofModel(dt);
@@ -172,7 +169,7 @@ void LaeroModel::reset()
 {
    BaseClass::reset();
 
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    if (pPlr != nullptr) {
       double initVel = pPlr->getInitVelocity();
       u = initVel * base::Distance::NM2M / base::Time::H2S;
@@ -187,7 +184,7 @@ void LaeroModel::update4DofModel(const double dt)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
 
    if (pPlr != nullptr) {
 
@@ -309,7 +306,7 @@ bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
@@ -353,7 +350,7 @@ bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
@@ -397,7 +394,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
@@ -443,7 +440,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //   // get data pointers
 //   //-------------------------------------------------------
 //   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
-//   bool ok = (pPlr != 0);
+//   bool ok = (pPlr != nullptr);
 //   if (ok) {
 //
 //      //-------------------------------------------------------
@@ -494,7 +491,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //   //-------------------------------------------------------
 //   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
 //
-//   bool ok = (pPlr != 0);
+//   bool ok = (pPlr != nullptr);
 //   if (ok) {
 //
 //      //----------------------------------------------------
@@ -522,7 +519,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
 
    bool ok = (pPlr != nullptr);
    if (ok) {
@@ -580,7 +577,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
 
    bool ok = (pPlr != nullptr);
    if (ok) {
@@ -627,7 +624,7 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   simulation::Player* pPlr = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pPlr = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 

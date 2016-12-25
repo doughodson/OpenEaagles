@@ -2,7 +2,7 @@
 #ifndef __oe_models_LaeroModel_H__
 #define __oe_models_LaeroModel_H__
 
-#include "openeaagles/simulation/dynamics/AerodynamicsModel.hpp"
+#include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
 
 namespace oe {
 namespace models {
@@ -13,9 +13,9 @@ namespace models {
 //    A small, simple, reconfigurable 4 degree of freedom aerodynamic model
 //    written by Larry Buckner
 //------------------------------------------------------------------------------
-class LaeroModel : public simulation::AerodynamicsModel
+class LaeroModel : public AerodynamicsModel
 {
-   DECLARE_SUBCLASS(LaeroModel, simulation::AerodynamicsModel )
+   DECLARE_SUBCLASS(LaeroModel, AerodynamicsModel )
 
 public:
    LaeroModel();

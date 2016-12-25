@@ -9,7 +9,6 @@ namespace oe {
 namespace base {
 
 class Identifier;
-class Logger;
 class Number;
 class Pair;
 class PairStream;
@@ -19,7 +18,7 @@ class String;
 //------------------------------------------------------------------------------
 // Class: Component
 //
-// Description: Base class for all Openoe components.  Components provide
+// Description: Base class for all components.  Components provide
 //              a common interface for time critical and non-time critical tasks,
 //              and for passing event messages.  Any component can be a container
 //              for a list of components.
@@ -236,22 +235,6 @@ class String;
 //    have changed.
 //
 //
-// Data Logger:
-//    You can attach a data logger, slot 'logger', to any component (see Logger.h).
-//    A logger can be used to collect data at major simulation events (e.g., weapon
-//    released), which are not to be confused with the event tokens and event()
-//    functions described above.
-//
-//       Logger* getEventLogger()
-//          getEventLogger() returns the data logger assigned to this component.
-//
-//       Logger* getAnyEventLogger()
-//          getAnyEventLogger() will start at this component and searches up
-//          the component tree until a logger is found.
-//
-//       In either case, zero is returned if no logger is found.
-//
-//
 // Object class' message functions
 //
 //    The Object class' isMessageEnabled() function has been extended to search
@@ -282,7 +265,7 @@ public:
 
    // SendData class used by the send() member functions
    class SendData {
-      public:  SendData()   { obj = 0; past = 0; }
+      public:  SendData()   { obj = nullptr; past = nullptr; }
       public:  ~SendData()  { empty(); }
       public:  void empty();
       public:  Component* getObject(Component* p, const char* const id, const int n = 0);
@@ -299,11 +282,11 @@ public:
 public:
    Component();
 
-   Component* container()                          { return containerPtr; }
-   const Component* container() const              { return containerPtr; }
+   Component* container()                                                    { return containerPtr; }
+   const Component* container() const                                        { return containerPtr; }
    Component* findContainerByType(const std::type_info& type);
    const Component* findContainerByType(const std::type_info& type) const;
-   Component* container(Component* const p)        { return (containerPtr = p); }
+   Component* container(Component* const p)                                  { return (containerPtr = p); }
 
    unsigned int getNumberOfComponents() const;
 
@@ -311,7 +294,8 @@ public:
    const PairStream* getComponents() const;
    virtual bool addComponent(Pair* const p);
 
-   virtual Pair* findByName(const char* const slotname);                // find a component by its name
+   // find a component by its name
+   virtual Pair* findByName(const char* const slotname);
    virtual const Pair* findByName(const char* const slotname) const;
 
    virtual Pair* findByIndex(const int slotindex);
@@ -320,9 +304,9 @@ public:
    virtual Pair* findByType(const std::type_info& type);
    virtual const Pair* findByType(const std::type_info& type) const;
 
-   bool isComponentSelected() const                { return (selection != nullptr); }
-   Component* getSelectedComponent()               { return selected; }
-   const Component* getSelectedComponent() const   { return selected; }
+   bool isComponentSelected() const                                          { return (selection != nullptr); }
+   Component* getSelectedComponent()                                         { return selected; }
+   const Component* getSelectedComponent() const                             { return selected; }
 
    virtual const Identifier* findNameOfComponent(const Component* const p) const;
 
@@ -335,8 +319,8 @@ public:
    virtual void freeze(const bool fflag);
    virtual void reset();
 
-   bool isShutdown() const    { return shutdown; }
-   bool isNotShutdown() const { return !shutdown; }
+   bool isShutdown() const                                                   { return shutdown; }
+   bool isNotShutdown() const                                                { return !shutdown; }
 
    // ---
    // Sends the 'event' token with an optional argument 'obj' to this component.
@@ -376,16 +360,11 @@ public:
    bool send(const char* const id, const int event, Object* const value[], SendData sd[], const int n);
 
    // Timing-Critical Statistics (managed by the tcFrame() function)
-   const Statistic* getTimingStats() const           { return timingStats; }
-   bool isTimingStatsEnabled() const                 { return (timingStats != nullptr); }
-   bool isTimingStatsPrintEnabled() const            { return (pts && isTimingStatsEnabled()); }
+   const Statistic* getTimingStats() const                                   { return timingStats; }
+   bool isTimingStatsEnabled() const                                         { return (timingStats != nullptr); }
+   bool isTimingStatsPrintEnabled() const                                    { return (pts && isTimingStatsEnabled()); }
    virtual bool setTimingStatsEnabled(const bool b);
    virtual bool setPrintTimingStats(const bool b);
-
-   // Event (data) logger functions
-   Logger* getEventLogger();
-   Logger* getAnyEventLogger();
-   virtual bool setEventLogger(Logger* const logger);
 
    // Slot functions
    virtual bool setSlotComponent(PairStream* const multiple);        // Sets the components list
@@ -393,7 +372,6 @@ public:
    virtual bool setSlotEnableTimingStats(const Number* const num);   // Sets the timing enabled flag
    virtual bool setSlotPrintTimingStats(const Number* const num);    // Sets the print timing stats flag
    virtual bool setSlotFreeze(const Number* const num);              // Sets the freeze flag
-   virtual bool setSlotEventLogger(Logger* const logger);            // Sets the Event logger
    virtual bool setSlotEnableMsgType(const Identifier* const msg);   // Enables message types by name
    virtual bool setSlotEnableMsgType(const Number* const msg);       // Enables message types by bit
    virtual bool setSlotDisableMsgType(const Identifier* const msg);  // Disables message types by name
@@ -418,10 +396,10 @@ protected:
    //   -- Swap our 'components' list with this new list
    //   -- Handle component selection.
    virtual void processComponents(
-         PairStream* const list,       // Source list of components
-         const std::type_info& filter, // Type filter
-         Pair* const add = 0,          // Optional pair to add
-         Component* const remove = 0   // Optional component to remove
+         PairStream* const list,             // Source list of components
+         const std::type_info& filter,       // Type filter
+         Pair* const add = nullptr,          // Optional pair to add
+         Component* const remove = nullptr   // Optional component to remove
       );
 
 private:
@@ -431,8 +409,6 @@ private:
    Component* selected;             // Selected child (process only this one)
    Object*    selection;            // Name of selected child
 
-   safe_ptr<Logger> elog;           // Our event logger
-   safe_ptr<Logger> elog0;          // Event logger from slots
    Statistic* timingStats;          // Timing statistics
    bool pts;                        // Print timing statistics
    bool frz;                        // Freeze flag -- true if this component is frozen

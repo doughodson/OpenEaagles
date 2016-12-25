@@ -70,7 +70,7 @@ private:
 
 inline DsMagvar::DsMagvar(const char* file)
 {
-   if (file != 0) {
+   if (file != nullptr) {
       geomag(12,file);
       haveData = true;
    }

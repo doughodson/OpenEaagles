@@ -136,26 +136,6 @@ FtglHaloFont::FtglHaloFont()
     linewidth = 1;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for FtglFonts and FtglExtrdFonts
-//------------------------------------------------------------------------------
-base::Object* FtglFonts::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-base::Object* FtglExtrdFont::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-base::Object* FtglHaloFont::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void FtglFonts::copyData(const FtglFonts& org, const bool)
 {
     BaseClass::copyData(org);
@@ -201,9 +181,6 @@ void FtglHaloFont::copyData(const FtglHaloFont& org, const bool)
     linewidth = org.linewidth;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void FtglFonts::deleteData()
 {
 }

@@ -1,10 +1,11 @@
 
 #include "openeaagles/linearsystem/DiffEquation.hpp"
+#include <iostream>
 
 namespace oe {
 namespace linearsystem {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation,"DiffEquation")
+IMPLEMENT_ABSTRACT_SUBCLASS(DiffEquation, "DiffEquation")
 EMPTY_SLOTTABLE(DiffEquation)
 EMPTY_SERIALIZER(DiffEquation)
 

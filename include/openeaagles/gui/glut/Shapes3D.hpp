@@ -9,10 +9,7 @@
 #include "openeaagles/graphics/Shapes.hpp"
 
 namespace oe {
-namespace base {
-    class Number;
-}
-
+namespace base { class Number; }
 namespace glut {
 
 //------------------------------------------------------------------------------

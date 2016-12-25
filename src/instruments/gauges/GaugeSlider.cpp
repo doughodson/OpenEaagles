@@ -1,4 +1,6 @@
+
 #include "openeaagles/instruments/gauges/GaugeSlider.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -47,5 +49,5 @@ void GaugeSlider::draw()
     lcRestoreMatrix();
 }
 
-}  // end instruments namespace
-}  // end oe namespace
+}
+}

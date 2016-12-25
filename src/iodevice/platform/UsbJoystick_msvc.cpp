@@ -18,6 +18,7 @@
 
 #include "UsbJoystick_msvc.h"
 #include "openeaagles/base/util/platform_api.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {

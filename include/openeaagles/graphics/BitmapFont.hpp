@@ -22,7 +22,7 @@ namespace graphics {
 //
 // public methods (member functions):
 //      (All of the classes derived from Font have the same public methods.)
-//      (See font.h for descriptions of those functions.)
+//      (See font.hpp for descriptions of those functions.)
 //
 //   outputText(double x, double y, char* txt, int n, bool vf)
 //   -- Output n characters of txt at (x,y). Output vertically if vf == true.

@@ -1,5 +1,7 @@
+
 #include "openeaagles/instruments/gauges/TickMarks.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -213,13 +215,5 @@ bool TickMarks::setFlip(const bool x)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for TickMarks
-//------------------------------------------------------------------------------
-base::Object* TickMarks::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

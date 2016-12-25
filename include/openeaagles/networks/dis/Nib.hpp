@@ -40,7 +40,7 @@ public:
    virtual void entityStatePdu2Nib(const EntityStatePDU* const pdu);
 
    // Update check functions
-   virtual bool isIffUpdateRequired(const double curExecTime, const simulation::Iff* const iffSystem);
+   virtual bool isIffUpdateRequired(const double curExecTime, const models::Iff* const iffSystem);
 
    //These are all going to be moved to separate classes, but for now, are just virtual functions, see above in disIO)
    virtual bool IffManager(const double curExecTime);

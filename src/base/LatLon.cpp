@@ -8,12 +8,10 @@ namespace oe {
 namespace base {
 
 IMPLEMENT_SUBCLASS(LatLon,"LatLon")
+EMPTY_DELETEDATA(LatLon)
 
 // DPG_NOTE -- This needs to be handled in the lexical section of the parser
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(LatLon)
     "direction",    // { "n", "s", "e", "w" }
     "degrees",
@@ -21,19 +19,13 @@ BEGIN_SLOTTABLE(LatLon)
     "seconds",
 END_SLOTTABLE(LatLon)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(LatLon)
-    ON_SLOT(1,setDirection,String)
-    ON_SLOT(2,setDegrees,Number)
-    ON_SLOT(3,setMinutes,Number)
-    ON_SLOT(4,setSeconds,Number)
+    ON_SLOT(1,setDirection, String)
+    ON_SLOT(2,setDegrees, Number)
+    ON_SLOT(3,setMinutes, Number)
+    ON_SLOT(4,setSeconds, Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 LatLon::LatLon()
 {
     STANDARD_CONSTRUCTOR()
@@ -43,9 +35,6 @@ LatLon::LatLon()
     sec = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void LatLon::copyData(const LatLon& org, const bool)
 {
    BaseClass::copyData(org);
@@ -54,9 +43,6 @@ void LatLon::copyData(const LatLon& org, const bool)
    min = org.min;
    sec = org.sec;
 }
-
-EMPTY_DELETEDATA(LatLon)
-
 
 //------------------------------------------------------------------------------
 // computeVal() --
@@ -67,7 +53,6 @@ void LatLon::computeVal()
     val = deg + (static_cast<double>(min) + static_cast<double>(sec)/60.0) / 60.0;
     if (dir == SOUTH || dir == WEST) val = -val;
 }
-
 
 //------------------------------------------------------------------------------
 // Support Functions
@@ -160,7 +145,7 @@ bool LatLon::setSec(const double s)
 {
    bool ok = true;
 
-   double ss = std::fabs(s);
+   const double ss = std::fabs(s);
    // check for valid second numbers
    if (ss >= 0.0 && ss < 60.0) {
       sec = ss;
@@ -176,19 +161,6 @@ bool LatLon::setSec(const double s)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for LatLon
-//------------------------------------------------------------------------------
-Object* LatLon::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& LatLon::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     //int j = 0;

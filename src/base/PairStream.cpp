@@ -8,22 +8,13 @@ namespace oe {
 namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(PairStream, "PairStream")
+EMPTY_COPYDATA(PairStream)
+EMPTY_DELETEDATA(PairStream)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 PairStream::PairStream()
 {
     STANDARD_CONSTRUCTOR()
 }
-
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-EMPTY_COPYDATA(PairStream)
-EMPTY_DELETEDATA(PairStream)
-
 
 //------------------------------------------------------------------------------
 // findByType() -- find a Pair by object type
@@ -51,7 +42,6 @@ const Pair* PairStream::findByType(const std::type_info& type) const
     }
     return p;
 }
-
 
 //------------------------------------------------------------------------------
 // findByName() -- find a Pair by name
@@ -123,9 +113,6 @@ bool PairStream::operator!=(const PairStream& stream) const
     return *s1 != *s2;
 }
 
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& PairStream::serialize(std::ostream& sout, const int i, const bool) const
 {
     const Item* item = getFirstItem();

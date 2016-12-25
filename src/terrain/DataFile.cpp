@@ -458,5 +458,5 @@ void DataFile::clearData()
    setMaxElevation(0);
 }
 
-}// end terrain namespace
-}// end oe namespace
+}
+}

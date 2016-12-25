@@ -8,7 +8,7 @@ namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Template safe_queue<T>
+// Template: safe_queue<T>
 //
 // Description: Thread-safe queue of items of type T
 //

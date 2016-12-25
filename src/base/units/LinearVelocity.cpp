@@ -90,17 +90,7 @@ LinearVelocity::LinearVelocity(const Distance* const newDistance, const Time* co
     }
 
 }
-//---------------------------------------------------------------------
-// getSlotByIndex()
-//---------------------------------------------------------------------
-Object* LinearVelocity::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
 
-//---------------------------------------------------------------------
-// copyData()
-//---------------------------------------------------------------------
 void LinearVelocity::copyData(const LinearVelocity& org, const bool)
 {
     BaseClass::copyData(org);
@@ -110,9 +100,6 @@ void LinearVelocity::copyData(const LinearVelocity& org, const bool)
 
 }
 
-//---------------------------------------------------------------------
-// deleteData()
-//---------------------------------------------------------------------
 void LinearVelocity::deleteData()
 {
 }

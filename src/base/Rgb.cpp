@@ -5,27 +5,21 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Rgb,"rgb")
+IMPLEMENT_SUBCLASS(Rgb, "rgb")
+EMPTY_DELETEDATA(Rgb)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Rgb)
     "red",      // 1: red component,   range(0.0f .. 1.0f)
     "green",    // 2: green component, range(0.0f .. 1.0f)
     "blue",     // 3: blue component,  range(0.0f .. 1.0f)
 END_SLOTTABLE(Rgb)
 
-// Map slot table to handles 
 BEGIN_SLOT_MAP(Rgb)
     ON_SLOT(1,setSlotRed,Number)
     ON_SLOT(2,setSlotGreen,Number)
     ON_SLOT(3,setSlotBlue,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Rgb::Rgb(const double r, const double g, const double b)
 {
    STANDARD_CONSTRUCTOR()
@@ -40,19 +34,9 @@ Rgb::Rgb()
    STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Rgb::copyData(const Rgb& org, const bool)
 {
    BaseClass::copyData(org);
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void Rgb::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -90,19 +74,6 @@ bool Rgb::setSlotAlpha(Number* const msg)
     return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Rgb
-//------------------------------------------------------------------------------
-Object* Rgb::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Rgb::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

@@ -1,6 +1,8 @@
+
 #include "openeaagles/instruments/dials/AnalogDial.hpp"
 #include "openeaagles/base/Number.hpp"
 #include <GL/glu.h>
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -199,13 +201,5 @@ bool AnalogDial::setSlices(const int x)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for AnalogDial
-//------------------------------------------------------------------------------
-base::Object* AnalogDial::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

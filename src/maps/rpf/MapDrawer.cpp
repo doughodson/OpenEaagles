@@ -496,14 +496,6 @@ void MapDrawer::updateData(const double dt)
     }
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* MapDrawer::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 }
 }
 

@@ -3,6 +3,7 @@
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -10,7 +11,7 @@ namespace base {
 //==============================================================================
 // class FStorage
 //==============================================================================
-IMPLEMENT_SUBCLASS(FStorage,"FStorage")
+IMPLEMENT_SUBCLASS(FStorage, "FStorage")
 EMPTY_SLOTTABLE(FStorage)
 EMPTY_CONSTRUCTOR(FStorage)
 EMPTY_COPYDATA(FStorage)
@@ -82,17 +83,6 @@ bool Function::setSlotLfiTable(const Table* const msg)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* Function::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Function::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

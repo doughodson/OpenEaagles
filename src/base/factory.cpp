@@ -3,7 +3,6 @@
 
 #include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/base/Logger.hpp"
 #include "openeaagles/base/FileReader.hpp"
 #include "openeaagles/base/Statistic.hpp"
 #include "openeaagles/base/Transforms.hpp"
@@ -118,9 +117,6 @@ Object* factory(const std::string& name)
     // Components
     else if ( name == FileReader::getFactoryName() ) {
         obj = new FileReader();
-    }
-    else if ( name == Logger::getFactoryName() ) {
-        obj = new Logger();
     }
     else if ( name == Statistic::getFactoryName() ) {
         obj = new Statistic();

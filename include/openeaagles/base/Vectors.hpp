@@ -14,11 +14,6 @@
 
 #include "openeaagles/base/Matrix.hpp"
 
-#include "openeaagles/base/osg/Vec2"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
-#include "openeaagles/base/osg/Matrix"
-
 namespace oe {
 namespace base {
 
@@ -220,7 +215,7 @@ inline RVector* getRowVector(const Matrix& A, const unsigned int r)
    const unsigned int N = A.getCols();
 
    RVector* pV = new RVector(N);
-   if (pV == 0) return 0;
+   if (pV == nullptr) return nullptr;
 
    for (unsigned int c = 0; c < N; c++)
    {
@@ -433,7 +428,7 @@ inline CVector* getColVector(const Matrix& A, const unsigned int c)
 
    const unsigned int N = A.getRows();
    CVector* pV = new CVector(N);
-   if (pV == 0) return 0;
+   if (pV == nullptr) return nullptr;
 
    for (unsigned int r = 0; r < N; r++) {
       (*pV)[r] = A(r,c);
@@ -478,7 +473,7 @@ inline Matrix* outerProduct(const CVector& v1, const RVector& v2)
 // ---
 inline CVector* crossProduct(const CVector& v1, const CVector& v2)
 {
-   CVector* p = 0;
+   CVector* p = nullptr;
    if (v1.getSize() == 3 && v2.getSize() == 3) {
       p = new CVector(3);
       (*p)[0] =  ( v1[1]*v2[2] - v1[2]*v2[1] );
@@ -490,7 +485,7 @@ inline CVector* crossProduct(const CVector& v1, const CVector& v2)
 
 inline RVector* crossProduct(const RVector& v1, const RVector& v2)
 {
-   RVector* p = 0;
+   RVector* p = nullptr;
    if (v1.getSize() == 3 && v2.getSize() == 3) {
       p = new RVector(3);
       (*p)[0] =  ( v1[1]*v2[2] - v1[2]*v2[1] );

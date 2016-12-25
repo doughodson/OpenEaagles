@@ -73,20 +73,20 @@ public:
 public:
    Polygon();
 
-   const osg::Vec3* getNormal() const        { return &norm; }
-   void setNormal(const osg::Vec3& nn)       { norm = nn; }
+   const osg::Vec3d* getNormal() const        { return &norm; }
+   void setNormal(const osg::Vec3d& nn)       { norm = nn; }
    bool calcNormal();
-   static bool calcNormal(osg::Vec3& norm, const osg::Vec3 v[3]);
+   static bool calcNormal(osg::Vec3d& norm, const osg::Vec3d v[3]);
 
    // Coefficients of the plane equation
    bool arePlaneCoeffValid() const           { return coeffValid; }
-   const osg::Vec4* getPlaneCoeff() const    { return &coeff; }
+   const osg::Vec4d* getPlaneCoeff() const    { return &coeff; }
    bool calcPlaneCoeff();
-   static bool calcPlaneCoeff(osg::Vec4& cc, const osg::Vec3 v[3]);
+   static bool calcPlaneCoeff(osg::Vec4d& cc, const osg::Vec3d v[3]);
 
    // Compute the Z value of the polygon
-   double calcZ(const osg::Vec2& point) const;
-   static double calcZ(const osg::Vec2& point, const osg::Vec4& coeff);
+   double calcZ(const osg::Vec2d& point) const;
+   static double calcZ(const osg::Vec2d& point, const osg::Vec4d& coeff);
 
    unsigned int getLayer() const             { return layerValue; }
    void setLayer(const unsigned int newLayer);
@@ -94,9 +94,9 @@ public:
    virtual void drawFunc() override;
 
 private:
-   osg::Vec4      coeff;      // Coefficients of the plane equation
+   osg::Vec4d     coeff;      // Coefficients of the plane equation
    bool           coeffValid; // 'coeff' numbers are valid
-   osg::Vec3      norm;       // normal to the polygon
+   osg::Vec3d     norm;       // normal to the polygon
    unsigned int   layerValue; // Layer value
 };
 

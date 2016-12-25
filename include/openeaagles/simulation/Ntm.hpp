@@ -5,6 +5,11 @@
 #include "openeaagles/simulation/NetIO.hpp"
 
 namespace oe {
+
+namespace models {
+class Player;
+}
+
 namespace simulation {
 class Nib;
 
@@ -32,12 +37,12 @@ class Nib;
 //
 //
 // Slots:
-//     template   <Player>   ! Template player (default: 0)
+//     template   <Player>   ! Template player (default: nullptr)
 //
 //
 // Notes:
 //    1) When matching a target player's type to the Ntm template players ...
-//       a) Using form names, the target player's class is matched with the
+//       a) Using factory names, the target player's class is matched with the
 //          template player's class.
 //       b) Given a template player with a matching class (or base class), the
 //          template player's type string (see function Player::getType) is
@@ -65,17 +70,17 @@ public:
    Ntm();
 
    // Template player
-   const Player* getTemplatePlayer() const    { return tPlayer; }
+   const models::Player* getTemplatePlayer() const    { return tPlayer; }
 
    // This network specific function is used to copy the entity
    // type codes to a target NIB object.
    virtual bool copyEntityType(Nib* const targetNib) const =0;
 
    // Slot functions
-   virtual bool setSlotTemplatePlayer(const Player* const msg);     // Sets the template player
+   virtual bool setSlotTemplatePlayer(const models::Player* const msg);     // Sets the template player
 
 private:
-   base::safe_ptr<const Player>  tPlayer; // Template player
+   base::safe_ptr<const models::Player> tPlayer; // Template player
 };
 
 }

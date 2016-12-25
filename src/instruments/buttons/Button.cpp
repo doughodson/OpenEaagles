@@ -5,53 +5,34 @@
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(Button,"Button")
+IMPLEMENT_SUBCLASS(Button, "Button")
 EMPTY_SERIALIZER(Button)
+EMPTY_DELETEDATA(Button)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Button)
     "eventId",        // Which event we will send for each button (A, B, C events)
 END_SLOTTABLE(Button)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Button)
     ON_SLOT(1, setSlotEventId, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Button)
     ON_EVENT(ON_SINGLE_CLICK, onSingleClick)
     ON_EVENT(ON_CANCEL, onCancel)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Button::Button()
 {
     STANDARD_CONSTRUCTOR()
     eventId = -1;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Button::copyData(const Button& org, const bool)
 {
     BaseClass::copyData(org);
     eventId = org.eventId;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Button)
 
 //------------------------------------------------------------------------------
 // setSlotEventId() - sets our slot event Id
@@ -94,13 +75,5 @@ bool Button::onCancel()
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Button
-//------------------------------------------------------------------------------
-base::Object* Button::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

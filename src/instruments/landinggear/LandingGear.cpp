@@ -1,6 +1,7 @@
 
 #include "openeaagles/instruments/landinggear/LandingGear.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -233,13 +234,5 @@ void LandingGear::drawFunc()
     glLineWidth(lw);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for LandingGear
-//------------------------------------------------------------------------------
-base::Object* LandingGear::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

@@ -7,10 +7,12 @@
 #include "openeaagles/networks/dis/Nib.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -26,7 +28,7 @@ namespace dis {
 bool Nib::munitionDetonationMsgFactory(const double)
 {
    // Dummy weapon?
-   const simulation::Weapon* ww = dynamic_cast<const simulation::Weapon*>( getPlayer() );
+   const models::Weapon* ww = dynamic_cast<const models::Weapon*>( getPlayer() );
    if (ww != nullptr) {
       if (ww->isDummy()) return true;
    }
@@ -38,12 +40,12 @@ bool Nib::munitionDetonationMsgFactory(const double)
     NetIO* disIO = static_cast<NetIO*>(getNetIO());
 
     // If our NIB's player just detonated, then it must be a weapon!
-    simulation::Weapon* mPlayer = dynamic_cast<simulation::Weapon*>(getPlayer());
+    models::Weapon* mPlayer = dynamic_cast<models::Weapon*>(getPlayer());
     if (mPlayer == nullptr) return false;
 
     // Ok, we have the weapon, now get the firing and target players
-    simulation::Player* tPlayer = mPlayer->getTargetPlayer();
-    simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+    models::Player* tPlayer = mPlayer->getTargetPlayer();
+    models::Player* fPlayer = mPlayer->getLaunchVehicle();
     if (fPlayer == nullptr) return false;
 
     // ---
@@ -144,7 +146,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
     // ---
     // Location
     // ---
-    osg::Vec3 lpos = mPlayer->getDetonationLocation();
+    osg::Vec3d lpos = mPlayer->getDetonationLocation();
     pdu.locationInEntityCoordinates.component[0] = static_cast<float>(lpos[0]);
     pdu.locationInEntityCoordinates.component[1] = static_cast<float>(lpos[1]);
     pdu.locationInEntityCoordinates.component[2] = static_cast<float>(lpos[2]);

@@ -2,7 +2,9 @@
 #ifndef __oe_terrain_SrtmHgtFile_H__
 #define __oe_terrain_SrtmHgtFile_H__
 
-#include "../DataFile.hpp"
+#include "openeaagles/terrain/DataFile.hpp"
+
+#include <iostream>
 
 namespace oe {
    namespace base { class Number; }
@@ -62,7 +64,6 @@ private:
 
     virtual bool loadData() override;
 };
-
 
 }
 }

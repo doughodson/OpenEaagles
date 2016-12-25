@@ -571,11 +571,6 @@ bool NumericReadout::setSlotOverflowChar(const base::String* const socobj)
    return ok;
 }
 
-base::Object* NumericReadout::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
 std::ostream& NumericReadout::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

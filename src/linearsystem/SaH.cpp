@@ -186,18 +186,6 @@ bool SaH::setSlotSampleRate(const base::Number* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for SaH
-//------------------------------------------------------------------------------
-base::Object* SaH::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& SaH::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

@@ -165,17 +165,6 @@ bool Table1::setXBreakpoints1(const List* const sxb1obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table1::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table1::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -396,17 +385,6 @@ bool Table2::setYBreakpoints2(const List* const syb2obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table2::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table2::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -664,17 +642,6 @@ bool Table3::setZBreakpoints3(const List* const szb3obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table3::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table3::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -976,17 +943,6 @@ bool Table4::setWBreakpoints4(const List* const swb4obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table4::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table4::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -1310,17 +1266,6 @@ bool Table5::setVBreakpoints5(const List* const swb5obj)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table5::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table5::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

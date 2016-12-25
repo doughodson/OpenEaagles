@@ -1,12 +1,15 @@
+
 #include "openeaagles/simulation/Nib.hpp"
 #include "openeaagles/simulation/Ntm.hpp"
-
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/GroundVehicle.hpp"
-#include "openeaagles/simulation/Missile.hpp"
-#include "openeaagles/simulation/SamVehicles.hpp"
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/StoresMgr.hpp"
+
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/GroundVehicle.hpp"
+#include "openeaagles/models/players/Missile.hpp"
+#include "openeaagles/models/players/SamVehicles.hpp"
+#include "openeaagles/models/systems/StoresMgr.hpp"
+#include "openeaagles/models/SynchronizedState.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -20,9 +23,6 @@
 namespace oe {
 namespace simulation {
 
-//==============================================================================
-// Class: Nib
-//==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")
 EMPTY_SERIALIZER(Nib)
 
@@ -46,8 +46,8 @@ void Nib::initData()
    entityTypeChecked = false;
 
    base::utStrcpy(pname, PNAME_BUF_SIZE, "OPENEAAGLES");
-   side = Player::BLUE;
-   mode = Player::INACTIVE;
+   side = models::Player::BLUE;
+   mode = models::Player::INACTIVE;
 
    timeoutEnbFlg = true;
    damage = 0.0;
@@ -100,8 +100,8 @@ void Nib::copyData(const Nib& org, const bool cc)
 
    ioType = org.ioType;
 
-   const Player* p = org.pPlayer;
-   setPlayer( const_cast<Player*>(p) );
+   const models::Player* p = org.pPlayer;
+   setPlayer( const_cast<models::Player*>(p) );
    setNetIO(nullptr);
    setTypeMapper(org.ntm);
 
@@ -210,9 +210,9 @@ bool Nib::shutdownNotification()
 }
 
 //------------------------------------------------------------------------------
-// setPlayer() -- sets a pointer to the Openoe player
+// setPlayer() -- sets a pointer to a player
 //------------------------------------------------------------------------------
-bool Nib::setPlayer(Player* const p)
+bool Nib::setPlayer(models::Player* const p)
 {
     pPlayer = p;
     if (pPlayer != nullptr) {
@@ -226,7 +226,7 @@ bool Nib::setPlayer(Player* const p)
 
 
 //------------------------------------------------------------------------------
-// setPlayer() -- sets a pointer to the Openoe player
+// setPlayer() -- sets a pointer to a player
 //------------------------------------------------------------------------------
 void Nib::setPlayerName(const char* s)
 {
@@ -291,7 +291,7 @@ bool Nib::networkOutputManagers(const double)
 //------------------------------------------------------------------------------
 // setOutputPlayerType() -- sets the kind, country, ... variables
 //------------------------------------------------------------------------------
-bool Nib::setOutputPlayerType(const Player* const p)
+bool Nib::setOutputPlayerType(const models::Player* const p)
 {
    bool ok = false;
 
@@ -352,12 +352,12 @@ void Nib::setPlayerID(const unsigned short v)
     playerID = v;
 }
 
-void Nib::setMode(const Player::Mode m)
+void Nib::setMode(const models::Player::Mode m)
 {
     mode = m;
 }
 
-void Nib::setSide(const Player::Side s)
+void Nib::setSide(const models::Player::Side s)
 {
     side = s;
 }
@@ -422,7 +422,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    // 1) Make sure that we have a valid player and entity type
    // ---
-   const Player* player = getPlayer();
+   const models::Player* player = getPlayer();
    if (player == nullptr || isEntityTypeInvalid()) result = NO;
 
    // ---
@@ -431,7 +431,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    if ( (result == UNSURE) && isNotMode( player->getMode()) ) result = YES;
 
    // 2-a) NIB is being deleted, send one more update to deactivate the entity
-   if ( (result == UNSURE) && isMode( Player::DELETE_REQUEST ) ) result = YES;
+   if ( (result == UNSURE) && isMode( models::Player::DELETE_REQUEST ) ) result = YES;
 
    // ---
    // 3) When we're a local player, check for one of the following ...
@@ -439,7 +439,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    if ( (result == UNSURE) && player->isLocalPlayer()) {
 
       //double drTime = curExecTime - getTimeExec();
-      SynchronizedState playerState = player->getSynchronizedState();
+      models::SynchronizedState playerState = player->getSynchronizedState();
       const double drTime = static_cast<double>(playerState.getTimeExec()) - getTimeExec();
 
       // 3-a) Freeze flag has changed
@@ -498,7 +498,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
             // Compute angular error
             //osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
-            osg::Vec3 errAngles = drAngles - playerState.getGeocEulerAngles();
+            osg::Vec3d errAngles = drAngles - playerState.getGeocEulerAngles();
 
             // Check if any angle error is greater than the max error
             errAngles[0] = std::fabs( base::Angle::aepcdDeg(errAngles[0]) );
@@ -516,9 +516,9 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    // 4) Check for air vehicle articulated and attached parts (always check this)
    // ---
-   if ( player != nullptr && player->isMajorType(Player::AIR_VEHICLE) ) {
+   if ( player != nullptr && player->isMajorType(models::Player::AIR_VEHICLE) ) {
 
-      const AirVehicle* av = static_cast<const AirVehicle*>(player);
+      const models::AirVehicle* av = static_cast<const models::AirVehicle*>(player);
 
       // (4-a) Check wing sweep angle.  We only send out wing sweep as
       // an part if the position is greater than zero or if we've previously been
@@ -570,13 +570,13 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    // ---
    // 5) Check for ground vehicle articulated and attached parts (always check this)
    // ---
-   if ( player != nullptr && player->isMajorType(Player::GROUND_VEHICLE) ) {
+   if ( player != nullptr && player->isMajorType(models::Player::GROUND_VEHICLE) ) {
 
-      const GroundVehicle* gv = static_cast<const GroundVehicle*>(player);
+      const models::GroundVehicle* gv = static_cast<const models::GroundVehicle*>(player);
 
       // (5-a) Send launcher elevation angle and for an attached missile
       //       (on SamVehicles and Artillery only)
-      if ( gv->isClassType(typeid(SamVehicle)) || gv->isClassType(typeid(Artillery)) ) {
+      if ( gv->isClassType(typeid(models::SamVehicle)) || gv->isClassType(typeid(models::Artillery)) ) {
 
          const double angle = gv->getLauncherPosition();  //  (radians)
 
@@ -584,7 +584,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
          if (apartLnchrElevCnt == 0) {
 
             // find all missiles missiles
-            const StoresMgr* sm = gv->getStoresManagement();
+            const models::StoresMgr* sm = gv->getStoresManagement();
             if (sm != nullptr) {
                const base::PairStream* stores = sm->getStores();
                if (stores != nullptr) {
@@ -592,13 +592,13 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
                      const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
                      if (pair != nullptr) {
-                        const Missile* msl = dynamic_cast<const Missile*>( pair->object() );
+                        const models::Missile* msl = dynamic_cast<const models::Missile*>( pair->object() );
                         if (msl != nullptr) {
                            // Save the pointer to the missile, set the missile's change count to 1,
                            // and up the missile count
                            msl->ref();
                            apartMsl[apartNumMissiles] = msl;
-                           apartMslAttached[apartNumMissiles] = !(msl->isMode(Player::LAUNCHED));
+                           apartMslAttached[apartNumMissiles] = !(msl->isMode(models::Player::LAUNCHED));
                            apartMslCnt[apartNumMissiles] = 1;
                            apartNumMissiles++;
                         }
@@ -630,7 +630,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
             // Check all missiles for change in launched status
             for (unsigned int i = 0; i < apartNumMissiles; i++) {
-               bool attached = !(apartMsl[i]->isMode(Player::LAUNCHED));
+               bool attached = !(apartMsl[i]->isMode(models::Player::LAUNCHED));
                if (attached != apartMslAttached[i]) {
                   // There's been a change in status
                   apartMslAttached[i] = attached;
@@ -663,7 +663,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::playerState2Nib()
 {
-   const Player* player = getPlayer();
+   const models::Player* player = getPlayer();
    if (player != nullptr) {
       // Player name
       const char* cname = nullptr;
@@ -673,7 +673,7 @@ void Nib::playerState2Nib()
       else setPlayerName("OPENEAAGLES");
 
       freeze( player->isFrozen() );
-      if (!isMode(Player::DELETE_REQUEST)) setMode( player->getMode() );
+      if (!isMode(models::Player::DELETE_REQUEST)) setMode( player->getMode() );
       setDamage( player->getDamage() );
       setSmoke( player->getSmoke() );
       setFlames( player->getFlames() );
@@ -729,7 +729,7 @@ void Nib::playerState2Nib()
 //------------------------------------------------------------------------------
 void Nib::nib2PlayerState()
 {
-   Player* player = getPlayer();
+   models::Player* player = getPlayer();
    if (player != nullptr) {
 
       // Drive modes

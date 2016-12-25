@@ -381,13 +381,5 @@ bool AoAIndexer::setAoaGreenMax(const double b)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for AoAIndexer
-//------------------------------------------------------------------------------
-base::Object* AoAIndexer::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

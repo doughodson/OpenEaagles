@@ -3,6 +3,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/base/Operators.hpp"
 
+#include <iostream>
+
 namespace oe {
 namespace base {
 
@@ -78,15 +80,6 @@ EMPTY_DELETEDATA(Multiply)
 
 EMPTY_COPYDATA(Divide)
 EMPTY_DELETEDATA(Divide)
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Add
-//------------------------------------------------------------------------------
-Object* Add::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
 
 //------------------------------------------------------------------------------
 // operation() -- the operations

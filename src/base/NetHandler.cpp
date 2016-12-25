@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Class: NetHandler
-//------------------------------------------------------------------------------
 
 // M$ WinSock has slightly different return types, some different calling, and
 // is missing some of the calls that are standard in Berkeley and POSIX socket
@@ -27,12 +24,11 @@
 
 #include "openeaagles/base/NetHandler.hpp"
 
+#include <iostream>
+
 namespace oe {
 namespace base {
 
-//==============================================================================
-// Class: NetHandler
-//==============================================================================
 IMPLEMENT_ABSTRACT_SUBCLASS(NetHandler, "NetHandler")
 EMPTY_SLOTTABLE(NetHandler)
 EMPTY_SERIALIZER(NetHandler)
@@ -42,9 +38,6 @@ EMPTY_DELETEDATA(NetHandler)
 // Byte order
 bool NetHandler::netByteOrder = checkByteOrder();
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 NetHandler::NetHandler()
 {
    STANDARD_CONSTRUCTOR()

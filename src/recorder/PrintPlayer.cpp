@@ -17,7 +17,6 @@
 namespace oe {
 namespace recorder {
 
-
 //==============================================================================
 // Class PrintPlayer
 //==============================================================================
@@ -84,15 +83,6 @@ bool PrintPlayer::setName(const base::String* const msg)
    name = msg;
    if (name != nullptr) { name->ref(); }
    return true;
-}
-
-
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* PrintPlayer::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------

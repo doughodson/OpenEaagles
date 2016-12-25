@@ -1,13 +1,13 @@
 
 #include "openeaagles/models/dynamics/RacModel.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/IPlayer.hpp"
+
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/osg/Matrix"
-#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
 
 #include <cmath>
@@ -73,12 +73,11 @@ void RacModel::reset()
 }
 
 //------------------------------------------------------------------------------
-// updateTC() -- update time critical stuff here
+// dynamics() -- update player's vehicle dynamics
 //------------------------------------------------------------------------------
 void RacModel::dynamics(const double dt)
 {
     updateRAC(dt);
-    BaseClass::dynamics(dt);
 }
 
 //------------------------------------------------------------------------------
@@ -106,14 +105,14 @@ double RacModel::getSideSlip() const
 
 double RacModel::getFlightPath() const
 {
-   const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const simulation::IPlayer* pp = static_cast<const simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    if (pp == nullptr) return 0;
    return static_cast<double>(pp->getPitchR());
 }
 
 double RacModel::getCalibratedAirspeed() const
 {
-   const simulation::Player* pp = static_cast<const simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   const simulation::IPlayer* pp = static_cast<const simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    if (pp == nullptr) return 0;
    return pp->getTotalVelocityKts();
 }
@@ -196,7 +195,7 @@ bool RacModel::setCommandedAltitude(const double m, const double, const double)
 void RacModel::updateRAC(const double dt)
 {
    // Get our Player (must have one!)
-   simulation::Player* pp = static_cast<simulation::Player*>( findContainerByType(typeid(simulation::Player)) );
+   simulation::IPlayer* pp = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
@@ -252,10 +251,10 @@ void RacModel::updateRAC(const double dt)
    // ---
    // Get old angular values
    // ---
-   const osg::Vec3 oldRates = pp->getAngularVelocities();
+   const osg::Vec3d oldRates = pp->getAngularVelocities();
    //double pa1 = oldRates[simulation::Player::IROLL];
-   double qa1 = oldRates[simulation::Player::IPITCH];
-   double ra1 = oldRates[simulation::Player::IYAW];
+   double qa1 = oldRates[simulation::IPlayer::IPITCH];
+   double ra1 = oldRates[simulation::IPlayer::IYAW];
 
    // ---
    // Find pitch rate and update pitch
@@ -386,17 +385,6 @@ bool RacModel::setSlotCmdVelocity(const base::Number* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Graphic
-//------------------------------------------------------------------------------
-base::Object* RacModel::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& RacModel::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

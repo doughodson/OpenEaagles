@@ -1,3 +1,4 @@
+
 #include "openeaagles/instruments/Instrument.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/graphics/ColorRotary.hpp"
@@ -17,51 +18,39 @@ BEGIN_SLOTTABLE(Instrument)
     "allowComponentPass",   // 3) if this is true, we will send all instrument values we receive down to our components.
 END_SLOTTABLE(Instrument)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Instrument
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Instrument)
     ON_SLOT(1, setSlotScalingTable, base::Table1)
     ON_SLOT(2, setSlotInstVal, base::Number)
     ON_SLOT(3, setSlotAllowValPass, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-//  Event table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Instrument)
     ON_EVENT_OBJ(UPDATE_INSTRUMENTS, onUpdateInstVal, base::Number)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Instrument::Instrument()
 {
     STANDARD_CONSTRUCTOR()
-    myTable = 0;
+    myTable = nullptr;
     instVal = 0;
     allowPassing = true;
     preScaleInstVal = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Instrument::copyData(const Instrument& org, const bool cc)
 {
     // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
-    if (cc) myTable = 0;
+    if (cc) myTable = nullptr;
 
-    if (org.myTable != 0) {
+    if (org.myTable != nullptr) {
         base::Table1* copy = org.myTable->clone();
         setSlotScalingTable( copy );
         copy->unref();
     }
     else {
-        setSlotScalingTable(0);
+        setSlotScalingTable(nullptr);
     }
 
     instVal = org.instVal;
@@ -69,14 +58,11 @@ void Instrument::copyData(const Instrument& org, const bool cc)
     preScaleInstVal = org.preScaleInstVal;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Instrument::deleteData()
 {
-   if (myTable != 0) {
+   if (myTable != nullptr) {
       myTable->unref();
-      myTable = 0;
+      myTable = nullptr;
    }
 }
 
@@ -87,10 +73,10 @@ void Instrument::deleteData()
 bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 {
    bool ok = false;
-   if (newTable != 0) {
-      if (myTable != 0) myTable->unref();
+   if (newTable != nullptr) {
+      if (myTable != nullptr) myTable->unref();
       myTable = newTable;
-      if (myTable != 0) myTable->ref();
+      if (myTable != nullptr) myTable->ref();
       ok = true;
    }
    return ok;
@@ -102,7 +88,7 @@ bool Instrument::setSlotScalingTable(const base::Table1* const newTable)
 bool Instrument::setSlotInstVal(const base::Number* const newVal)
 {
     bool ok = false;
-    if (newVal != 0) ok = setInstVal(newVal->getReal());
+    if (newVal != nullptr) ok = setInstVal(newVal->getReal());
     return ok;
 }
 
@@ -112,7 +98,7 @@ bool Instrument::setSlotInstVal(const base::Number* const newVal)
 bool Instrument::setSlotAllowValPass(const base::Number* const newAVP)
 {
     bool ok = false;
-    if (newAVP != 0) ok = setAllowValPass(newAVP->getBoolean());
+    if (newAVP != nullptr) ok = setAllowValPass(newAVP->getBoolean());
     return ok;
 }
 
@@ -148,7 +134,7 @@ bool Instrument::setInstVal(const double newPos)
     preScaleInstVal = newPos;
 
     // do we have a table to use?
-    if (myTable != 0) instVal = myTable->lfi(newPos);
+    if (myTable != nullptr) instVal = myTable->lfi(newPos);
     else instVal = newPos;
     return true;
 }
@@ -163,37 +149,29 @@ void Instrument::updateData(const double dt)
 
    // check for a color rotary, just in case we need one
    graphics::ColorRotary* cr = dynamic_cast<graphics::ColorRotary*>(getColor());
-   if (cr != 0) cr->determineColor(preScaleInstVal);
+   if (cr != nullptr) cr->determineColor(preScaleInstVal);
 
    // only tell the rest of our instruments our value if we want them to know it
    if (allowPassing) {
       // sort out the instruments from our components
       base::PairStream* ps = getComponents();
-      if (ps != 0) {
+      if (ps != nullptr) {
          base::List::Item* item = ps->getFirstItem();
-         while(item != 0) {
+         while(item != nullptr) {
             base::Pair* pair = (base::Pair*) item->getValue();
-            if (pair != 0) {
+            if (pair != nullptr) {
                // send the value down to all of our instrument components
                Instrument* myInst = dynamic_cast<Instrument*>(pair->object());
                base::Number n = preScaleInstVal;
-               if (myInst != 0) myInst->event(UPDATE_INSTRUMENTS, &n);
+               if (myInst != nullptr) myInst->event(UPDATE_INSTRUMENTS, &n);
             }
             item = item->getNext();
          }
          ps->unref();
-         ps = 0;
+         ps = nullptr;
       }
    }
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Instrument
-//------------------------------------------------------------------------------
-base::Object* Instrument::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

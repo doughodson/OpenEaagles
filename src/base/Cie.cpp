@@ -10,11 +10,8 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Cie,"cie")
+IMPLEMENT_SUBCLASS(Cie, "cie")
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Cie)
     "luminance", // 1: ... Luminance component, range(0.0 to 1.0)
     "x",         // 2: ... X component, range(0.0 to 1.0)
@@ -30,9 +27,6 @@ BEGIN_SLOT_MAP(Cie)
     ON_SLOT(4,setMonitor, MonitorMetrics)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Cie::Cie(const MonitorMetrics*, const double l, const double x, const double y)
 {
    STANDARD_CONSTRUCTOR()
@@ -52,9 +46,6 @@ Cie::Cie()
    cie2rgb(color,cie,monitor);   // set the rgb values
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Cie::copyData(const Cie& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -88,7 +79,7 @@ double Cie::y() const
     return cie[Y];
 }
 
-void Cie::getCIE(osg::Vec3& hhh) const
+void Cie::getCIE(osg::Vec3d& hhh) const
 {
     hhh.set(cie[LUMINANCE],cie[X],cie[Y]);
 }
@@ -99,8 +90,8 @@ void Cie::getCIE(osg::Vec3& hhh) const
 bool Cie::setLuminance(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[LUMINANCE] = value; cie2rgb(color,cie,monitor); }
     else std::cerr << "Cie::setLuminance: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -112,8 +103,8 @@ bool Cie::setLuminance(Number* const msg)
 bool Cie::setX(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[X] = value; cie2rgb(color,cie,monitor); }
     else std::cerr << "Cie::setX: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -125,8 +116,8 @@ bool Cie::setX(Number* const msg)
 bool Cie::setY(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { cie[Y] = value; cie2rgb(color,cie,monitor); }
     else std::cerr << "Cie::setY: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -144,17 +135,9 @@ bool Cie::setMonitor(MonitorMetrics* const msg)
 }
 
 //------------------------------------------------------------------------------
-// getSlotByIndex() for Cie
-//------------------------------------------------------------------------------
-Object* Cie::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
 // cie2rgb() -- converts a CIE color to a Red, Green, Blue (RGB) value.
 //------------------------------------------------------------------------------
-void Cie::cie2rgb(osg::Vec4& rgb, const osg::Vec3& cie, const MonitorMetrics* m)
+void Cie::cie2rgb(osg::Vec4d& rgb, const osg::Vec3d& cie, const MonitorMetrics* m)
 {
    if ( m == nullptr )
       return;
@@ -162,9 +145,6 @@ void Cie::cie2rgb(osg::Vec4& rgb, const osg::Vec3& cie, const MonitorMetrics* m)
    m->cie2rgb(rgb, cie);
 }
 
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Cie::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

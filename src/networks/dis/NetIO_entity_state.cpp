@@ -8,14 +8,16 @@
 #include "openeaagles/networks/dis/Ntm.hpp"
 #include "openeaagles/networks/dis/pdu.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/GroundVehicle.hpp"
-#include "openeaagles/simulation/LifeForms.hpp"
-#include "openeaagles/simulation/Missile.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/GroundVehicle.hpp"
+#include "openeaagles/models/players/LifeForms.hpp"
+#include "openeaagles/models/players/Missile.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/systems/StoresMgr.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
-#include "openeaagles/simulation/StoresMgr.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -98,19 +100,19 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
             // Side: When mapping Force ID to Player Side ...
             if (pdu->forceID == FRIENDLY_FORCE) {
                 // Friendly's are blue, ...
-                nib->setSide(simulation::Player::BLUE);
+                nib->setSide(models::Player::BLUE);
             }
             else if (pdu->forceID == OPPOSING_FORCE) {
                 // opposing side is red, ...
-                nib->setSide(simulation::Player::RED);
+                nib->setSide(models::Player::RED);
             }
             else if (pdu->forceID == NEUTRAL_FORCE) {
                 // Neutrals are white, ...
-                nib->setSide(simulation::Player::WHITE);
+                nib->setSide(models::Player::WHITE);
             }
             else  {
                 // and everyone else is gray.
-                nib->setSide(simulation::Player::GRAY);
+                nib->setSide(models::Player::GRAY);
             }
 
             addNib2InputList(nib);

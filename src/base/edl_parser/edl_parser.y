@@ -7,7 +7,7 @@
 //
 //       This is a user supplied function, via our constructor, that is
 //       used by the parser to create objects using their 'factory' names
-//       (see Object.h).  The object's factory name is passed to
+//       (see Object.hpp).  The object's factory name is passed to
 //       the function.  The function will construct a default object and
 //       return a pointer to the new object.  If the name is not
 //       recognized then no object is created and nullptr is returned.

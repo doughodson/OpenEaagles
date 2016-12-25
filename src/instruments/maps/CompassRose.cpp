@@ -248,13 +248,5 @@ void CompassRose::updateData(const double dt)
     send("dial", UPDATE_VALUE, rad, dialSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for CompassRose
-//------------------------------------------------------------------------------
-base::Object* CompassRose::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

@@ -1,5 +1,7 @@
+
 #include "openeaagles/instruments/dials/DialArcSegment.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 #include <GL/glu.h>
 #include <cmath>
@@ -164,13 +166,5 @@ void DialArcSegment::updateData(const double dt)
     if (isDynamic) setSweepAngle(getInstValue());
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Instrument
-//------------------------------------------------------------------------------
-base::Object* DialArcSegment::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end of Instruments namespace
-}  // end of oe namespace
+}

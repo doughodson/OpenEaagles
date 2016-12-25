@@ -207,17 +207,6 @@ bool UdpBroadcastHandler::setSlotNetworkMask(const String* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* UdpBroadcastHandler::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& UdpBroadcastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

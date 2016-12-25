@@ -118,5 +118,5 @@ bool MfdPage::onOsbL8()    { return false; }
 bool MfdPage::onOsbL9()    { return false; }
 bool MfdPage::onOsbL10()   { return false; }
 
-}  // end of graphics namespace
-}  // end of oe namespace
+}
+}

@@ -3,10 +3,12 @@
 #define __oe_base_Color_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
+
+namespace osg { class Vec3d; }
+
 namespace base {
 
 class Number;
@@ -60,8 +62,8 @@ public:
 public:
     Color();
 
-    operator const osg::Vec3*() const;
-    operator const osg::Vec4*() const;
+    operator const osg::Vec3d*() const;
+    operator const osg::Vec4d*() const;
 
     double red() const;
     double green() const;
@@ -73,17 +75,16 @@ public:
     virtual bool setBlue(const double b);
     virtual bool setAlpha(const double a);
 
-    const osg::Vec3* getRGB() const;
-    const osg::Vec4* getRGBA() const;
+    const osg::Vec3d* getRGB() const;
+    const osg::Vec4d* getRGBA() const;
 
     static double getDefaultAlpha();
     static void setDefaultAlpha(const double alpha);
 
 protected:
-    osg::Vec4 color;                // RGBA color vector
+    osg::Vec4d color;                // RGBA color vector
     static double defaultAlpha;
 };
-
 
 }
 }

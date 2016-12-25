@@ -8,11 +8,8 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(StateMachine,"AbstractStateMachine")
+IMPLEMENT_ABSTRACT_SUBCLASS(StateMachine, "AbstractStateMachine")
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(StateMachine)
     "stateMachines",  // 1: List of state machine objects (StateMachine class)
 END_SLOTTABLE(StateMachine)
@@ -22,9 +19,6 @@ BEGIN_SLOT_MAP(StateMachine)
 END_SLOT_MAP()
 
 
-//------------------------------------------------------------------------------
-//  Event mapping table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(StateMachine)
 
     ON_EVENT_OBJ(ON_ENTRY, onEntry, Object)     // always check w/Object first
@@ -41,18 +35,12 @@ BEGIN_EVENT_HANDLER(StateMachine)
 END_EVENT_HANDLER()
 
 
-// -----------------------------------------------------------------
-// Constructor:
-// -----------------------------------------------------------------
 StateMachine::StateMachine()
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init our member data
-//------------------------------------------------------------------------------
 void StateMachine::initData()
 {
    nState = INVALID_STATE;
@@ -80,9 +68,6 @@ void StateMachine::initData()
    stMachList = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy our member data
-//------------------------------------------------------------------------------
 void StateMachine::copyData(const StateMachine& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -91,10 +76,6 @@ void StateMachine::copyData(const StateMachine& org, const bool cc)
    setSlotStateMachines(org.stMachList);
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete our member data
-//------------------------------------------------------------------------------
 void StateMachine::deleteData()
 {
    setStMach(nullptr,CURR_STATE);
@@ -532,18 +513,6 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* StateMachine::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& StateMachine::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

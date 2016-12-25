@@ -6,8 +6,10 @@
 namespace oe {
 namespace dafif {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid,"Navaid")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Navaid, "Navaid")
 EMPTY_SERIALIZER(Navaid)
+EMPTY_COPYDATA(Navaid)
+EMPTY_DELETEDATA(Navaid)
 
 
 // Navaid class field Position Table
@@ -25,28 +27,17 @@ const Navaid::Ptbl Navaid::ptable = {
    NA_MAGVAR                     // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Navaid::Navaid()
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Navaid::Navaid(const char* const s) : Record(s)
 {
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
-
-EMPTY_COPYDATA(Navaid)
-EMPTY_DELETEDATA(Navaid)
-
 
 //------------------------------------------------------------------------------
 // Get functions
@@ -146,7 +137,6 @@ void Navaid::printRecord(std::ostream& sout) const
 
 }
 
-
 //------------------------------------------------------------------------------
 //  print true bearing and range to system
 //------------------------------------------------------------------------------
@@ -165,7 +155,6 @@ void Navaid::printTrueBearingRange(std::ostream& sout, const double aclat, const
    else
        sout << "    true bearing " << bearing << std::endl;
 }
-
 
 }
 }

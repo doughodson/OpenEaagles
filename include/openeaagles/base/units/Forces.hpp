@@ -57,6 +57,7 @@
 #define __oe_base_Forces_H__
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {

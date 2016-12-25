@@ -1,10 +1,11 @@
 
 #include "openeaagles/base/IoAdapter.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(IoAdapter,"AbstractIoAdapter")
+IMPLEMENT_ABSTRACT_SUBCLASS(IoAdapter, "AbstractIoAdapter")
 EMPTY_SLOTTABLE(IoAdapter)
 EMPTY_CONSTRUCTOR(IoAdapter)
 EMPTY_COPYDATA(IoAdapter)

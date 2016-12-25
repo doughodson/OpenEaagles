@@ -12,9 +12,6 @@ IMPLEMENT_SUBCLASS(NavaidLoader,"NavaidLoader")
 EMPTY_SLOTTABLE(NavaidLoader)
 EMPTY_SERIALIZER(NavaidLoader)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 NavaidLoader::NavaidLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
@@ -48,10 +45,6 @@ NavaidLoader::NavaidLoader(
    load(country);
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -65,9 +58,6 @@ void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void NavaidLoader::deleteData()
 {
    delete[] fl;
@@ -76,9 +66,6 @@ void NavaidLoader::deleteData()
    ncl = 0;
 }
 
-//------------------------------------------------------------------------------
-// load() --
-//------------------------------------------------------------------------------
 bool NavaidLoader::load(const char* country)
 {
    // ---
@@ -151,7 +138,6 @@ bool NavaidLoader::load(const char* country)
    return true;
 }
 
-
 //------------------------------------------------------------------------------
 // getRecordLength()
 //------------------------------------------------------------------------------
@@ -167,7 +153,6 @@ int NavaidLoader::getMaxRecords()
 {
    return NAVAID_MAX_RECORDS;
 }
-
 
 //------------------------------------------------------------------------------
 // navaid() -- get the NAVAID by number: 0 ... numberOfRecords()-1
@@ -191,7 +176,6 @@ Navaid* NavaidLoader::getNavaid(const int n)
        return nullptr;
 }
 
-
 //------------------------------------------------------------------------------
 // queryByRange() -- find NAVAID record(s) less than mrng from the
 // ref point (sorted by range)
@@ -200,7 +184,6 @@ int NavaidLoader::queryByRange()
 {
    return queryByType(Navaid::ANY);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByIdent() -- find NAVAID record(s) by identifier
@@ -213,7 +196,6 @@ int NavaidLoader::queryByIdent(const char* id)
    return Database::mQuery(&pkey, rl, nrl, il_cmp);
 }
 
-
 //------------------------------------------------------------------------------
 // queryByKey() -- find a NAVAID record by the NAVAID record key
 //------------------------------------------------------------------------------
@@ -223,7 +205,6 @@ int NavaidLoader::queryByKey(const char* navaidkey)
    Key* pkey = &key;
    return Database::sQuery(&pkey, rl, nrl, kl_cmp);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByFreq() -- find NAVAID record(s) by frequency/Channel
@@ -235,7 +216,6 @@ int NavaidLoader::queryByFreq(const float freq)
    Key* pkey = &key;
    return Database::mQuery(&pkey, reinterpret_cast<Key**>(fl), nfl, fl_cmp);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByChannel() -- find NAVAID record(s) by channel number
@@ -249,7 +229,6 @@ int NavaidLoader::queryByChannel(const long chan, const char band)
    Key* pkey = &key;
    return Database::mQuery(&pkey, reinterpret_cast<Key**>(cl), ncl, cl_cmp);
 }
-
 
 //------------------------------------------------------------------------------
 // queryByType() -- find 't' type NAVAID record(s) less than mrng from the
@@ -281,7 +260,6 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
 
    return nql;
 }
-
 
 //------------------------------------------------------------------------------
 // qsort and bsearch callbacks

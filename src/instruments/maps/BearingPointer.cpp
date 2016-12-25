@@ -257,13 +257,5 @@ bool BearingPointer::setSlotTailGraphic(const graphics::Graphic* const newT)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for BearingPointer
-//------------------------------------------------------------------------------
-base::Object* BearingPointer::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

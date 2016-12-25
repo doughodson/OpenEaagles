@@ -79,13 +79,5 @@ base::Color* ColorGradient::getColorByIdx(const int idx)
     return fCol;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for ColorGradient
-//------------------------------------------------------------------------------
-base::Object* graphics::ColorGradient::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 }
 }

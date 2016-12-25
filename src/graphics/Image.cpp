@@ -6,6 +6,7 @@
 #include <cstring>
 #include <cstdio>
 #include <cstdint>
+#include <iostream>
 
 // if OpenGL extension is not defined by glu.h, try loading glext.h
 #ifndef GL_BGR_EXT

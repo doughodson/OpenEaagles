@@ -8,16 +8,9 @@
 namespace oe {
 namespace rprfom {
 
-//------------------------------------------------------------------------------
-// Class: Ntm
-//------------------------------------------------------------------------------
-
 IMPLEMENT_SUBCLASS(Ntm, "HlaNtm")
 EMPTY_DELETEDATA(Ntm)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Ntm)
     "entityType", // 1) Entity type (base::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
@@ -27,9 +20,6 @@ BEGIN_SLOT_MAP(Ntm)
     ON_SLOT(1, setSlotEntityType, base::List)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Ntm::Ntm()
 {
    STANDARD_CONSTRUCTOR()
@@ -43,9 +33,6 @@ Ntm::Ntm()
    extra = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Ntm::copyData(const Ntm& org, const bool)
 {
    BaseClass::copyData(org);
@@ -194,17 +181,6 @@ bool Ntm::setSlotEntityType(const base::List* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Ntm::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

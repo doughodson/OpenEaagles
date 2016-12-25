@@ -2,9 +2,9 @@
 #ifndef __oe_base_NavDR_H__
 #define __oe_base_NavDR_H__
 
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
+#include "openeaagles/base/osg/Matrixd"
 #include <cmath>
 
 namespace oe {

@@ -2,11 +2,12 @@
 #include "openeaagles/instruments/landinggear/LandingLight.hpp"
 #include "openeaagles/base/Number.hpp"
 #include <GL/glu.h>
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(LandingLight,"LandingLight")
+IMPLEMENT_SUBCLASS(LandingLight, "LandingLight")
 EMPTY_SERIALIZER(LandingLight)
 
 BEGIN_SLOTTABLE(LandingLight)
@@ -138,13 +139,5 @@ void LandingLight::updateData(const double dt)
     send("index", SELECT, x, selSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for LandingLight
-//------------------------------------------------------------------------------
-base::Object* LandingLight::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

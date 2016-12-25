@@ -1,3 +1,4 @@
+
 #include "openeaagles/dafif/Runway.hpp"
 #include "openeaagles/base/Nav.hpp"
 #include <iostream>
@@ -7,7 +8,8 @@ namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Runway,"Runway")
 EMPTY_SERIALIZER(Runway)
-
+EMPTY_COPYDATA(Runway)
+EMPTY_DELETEDATA(Runway)
 
 // Runway class field Position Table
 const Runway::Ptbl Runway::ptable = {
@@ -24,10 +26,6 @@ const Runway::Ptbl Runway::ptable = {
     RW_MAGVAR                   // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Runway::Runway()
 {
    STANDARD_CONSTRUCTOR()
@@ -40,10 +38,6 @@ Runway::Runway(const char* const s) : Record(s)
    ptbl = &ptable;
 }
 
-EMPTY_COPYDATA(Runway)
-EMPTY_DELETEDATA(Runway)
-
-
 //------------------------------------------------------------------------------
 // Get ILS glide slope and aircraft glide slope
 //------------------------------------------------------------------------------
@@ -55,7 +49,6 @@ void Runway::getRunwayMagHeading(const double aclat, const double aclon, const d
    *magHeading1 = magHeading(LOW_END);
    *magHeading2 = magHeading(HIGH_END);
 }
-
 
 //------------------------------------------------------------------------------
 // Printing functions

@@ -10,7 +10,6 @@ namespace base { class Object; }
 
 namespace glut {
 
-// factory function
 base::Object* factory(const std::string& name);
 
 }

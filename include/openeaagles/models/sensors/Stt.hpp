@@ -2,7 +2,7 @@
 #ifndef __oe_models_Stt_H__
 #define __oe_models_Stt_H__
 
-#include "openeaagles/simulation/Radar.hpp"
+#include "openeaagles/models/systems/Radar.hpp"
 
 namespace oe {
 namespace models {
@@ -11,9 +11,9 @@ namespace models {
 // Class: Stt
 // Description: Simple, Single-Target-Track Mode Radar
 //------------------------------------------------------------------------------
-class Stt : public simulation::Radar
+class Stt : public Radar
 {
-    DECLARE_SUBCLASS(Stt, simulation::Radar)
+    DECLARE_SUBCLASS(Stt, Radar)
 
 public:
     Stt();

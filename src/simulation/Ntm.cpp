@@ -1,28 +1,21 @@
+
 #include "openeaagles/simulation/Ntm.hpp"
+
+#include "openeaagles/models/players/Player.hpp"
 
 namespace oe {
 namespace simulation {
 
-//==============================================================================
-// Ntm class
-//==============================================================================
-IMPLEMENT_ABSTRACT_SUBCLASS(Ntm,"Ntm")
+IMPLEMENT_ABSTRACT_SUBCLASS(Ntm, "Ntm")
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Ntm)
    "template",       // 1) Template player
 END_SLOTTABLE(Ntm)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
-    ON_SLOT(1, setSlotTemplatePlayer, Player)
+    ON_SLOT(1, setSlotTemplatePlayer, models::Player)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Ntm::Ntm()
 {
    STANDARD_CONSTRUCTOR()
@@ -30,9 +23,6 @@ Ntm::Ntm()
    tPlayer = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Ntm::copyData(const Ntm& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -44,9 +34,6 @@ void Ntm::copyData(const Ntm& org, const bool cc)
    setSlotTemplatePlayer( org.tPlayer );
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Ntm::deleteData()
 {
    setSlotTemplatePlayer( nullptr );
@@ -57,23 +44,12 @@ void Ntm::deleteData()
 //------------------------------------------------------------------------------
 
 // Sets the template player
-bool Ntm::setSlotTemplatePlayer(const Player* const msg)
+bool Ntm::setSlotTemplatePlayer(const models::Player* const msg)
 {
    tPlayer = msg;
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Ntm::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Ntm::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

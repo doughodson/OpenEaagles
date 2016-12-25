@@ -10,7 +10,7 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Matrix,"Matrix")
+IMPLEMENT_SUBCLASS(Matrix, "Matrix")
 EMPTY_SLOTTABLE(Matrix)
 EMPTY_SERIALIZER(Matrix)
 

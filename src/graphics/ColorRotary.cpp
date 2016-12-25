@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// ColorRotary
-//------------------------------------------------------------------------------
 
 #include "openeaagles/graphics/ColorRotary.hpp"
 
@@ -8,7 +5,7 @@
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
 namespace graphics {
@@ -149,21 +146,13 @@ bool ColorRotary::determineColor(const double value)
         if (pair != nullptr) {
             base::Color* listcolor = dynamic_cast<base::Color*>(pair->object());
             if (listcolor != nullptr) {
-               const osg::Vec4* vec = static_cast<const osg::Vec4*>(listcolor->getRGBA());
+               const osg::Vec4d* vec = static_cast<const osg::Vec4d*>(listcolor->getRGBA());
                color = *vec;
                ok = true;
             }
         }
     }
     return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for ColorRotary
-//------------------------------------------------------------------------------
-base::Object* graphics::ColorRotary::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 }

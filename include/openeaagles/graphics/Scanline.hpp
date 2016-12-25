@@ -3,9 +3,9 @@
 #define __oe_graphics_Scanline_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/osg/Vec2"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec2d"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/safe_ptr.hpp"
 
 namespace oe {
@@ -50,12 +50,12 @@ protected:
       DECLARE_SUBCLASS(PolyData,base::Object)
    public:
       PolyData();
-      void getNorm(osg::Vec3& lnorm, const double x) const;
+      void getNorm(osg::Vec3d& lnorm, const double x) const;
 
-      double      x0;                    // X value at start
-      osg::Vec3   n0;                    // Initial Norm
-      osg::Vec3   nslope;                // Norm slope
-      bool        aptEdge2;              // reached second edge
+      double x0;                            // X value at start
+      osg::Vec3d n0;                        // Initial Norm
+      osg::Vec3d nslope;                    // Norm slope
+      bool aptEdge2;                        // reached second edge
       base::safe_ptr<Polygon> polygon;      // Clipped (working) polygon
       base::safe_ptr<const Polygon> orig;   // Original polygon
    };
@@ -66,20 +66,20 @@ protected:
       DECLARE_SUBCLASS(Edge,base::Object)
    public:
       Edge();
-      Edge(const double v0[2], const osg::Vec3& vn0, const double v1[2], const osg::Vec3& vn1, PolyData* const p);
+      Edge(const double v0[2], const osg::Vec3d& vn0, const double v1[2], const osg::Vec3d& vn1, PolyData* const p);
       Edge(const double v0[2], const double v1[2], PolyData* const p);
 
       void incEdgeStart();
 
-      osg::Vec2   lv;         // Lower Vertex
-      osg::Vec2   uv;         // Upper Vertex
-      double      x;          // Current X value
-      double      slope;      // slope of the edge
-      osg::Vec3   lvn;        // Lower Vertex Norm
-      osg::Vec3   cn;         // Current Norm
-      osg::Vec3   nslope;     // Norm slope
-      bool        valid;      // valid edge
-      bool        pointLock;  // after incEdgeStart() edge became a point
+      osg::Vec2d   lv;         // Lower Vertex
+      osg::Vec2d   uv;         // Upper Vertex
+      double      x;           // Current X value
+      double      slope;       // slope of the edge
+      osg::Vec3d   lvn;        // Lower Vertex Norm
+      osg::Vec3d   cn;         // Current Norm
+      osg::Vec3d   nslope;     // Norm slope
+      bool        valid;       // valid edge
+      bool        pointLock;   // after incEdgeStart() edge became a point
       base::safe_ptr<PolyData> polygon;    // This edge belongs to this polygon
    };
 
@@ -117,7 +117,7 @@ private:
    double         curY;                   // current Y value (scanline number)
    PolyData*       curPoly;               // Current polygon (one on top)
 
-   osg::Matrix    mat;                    // matrix used by scanner
+   osg::Matrixd    mat;                   // matrix used by scanner
 
    PolyData*       pt[MAX_POLYS];         // Polygons Table (PT)
    unsigned int   nPT;                    // Number of polygons in PT

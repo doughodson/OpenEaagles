@@ -66,6 +66,7 @@
 #define __oe_base_Distance_H__
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {

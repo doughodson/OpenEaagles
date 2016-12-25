@@ -1,3 +1,4 @@
+
 #include "openeaagles/dafif/Ils.hpp"
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/units/Angles.hpp"
@@ -9,6 +10,8 @@ namespace dafif {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Ils,"Ils")
 EMPTY_SERIALIZER(Ils)
+EMPTY_COPYDATA(Ils)
+EMPTY_DELETEDATA(Ils)
 
 // Ils class field Position Table
 const Ils::Ptbl Ils::ptable = {
@@ -25,10 +28,6 @@ const Ils::Ptbl Ils::ptable = {
         ILS_MAGVAR                      // magVariance
 };
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Ils::Ils()
 {
    STANDARD_CONSTRUCTOR()
@@ -40,9 +39,6 @@ Ils::Ils(const char* const s) : Record(s)
    STANDARD_CONSTRUCTOR()
    ptbl = &ptable;
 }
-
-EMPTY_COPYDATA(Ils)
-EMPTY_DELETEDATA(Ils)
 
 //------------------------------------------------------------------------------
 // Type functions
@@ -59,7 +55,6 @@ int Ils::isIlsType(const Ils::IlsType tt) const
    return tt == ilsType();
 }
 
-
 //------------------------------------------------------------------------------
 // Get ILS glide slope and aircraft glide slope
 //------------------------------------------------------------------------------
@@ -71,7 +66,6 @@ void Ils::getGlideSlopeData(const double aclat, const double aclon, const double
    *acGlideSlope = static_cast<float>(-lookangle);
    *deltaGlideSlope = *ilsGlideSlope - *acGlideSlope;
 }
-
 
 //------------------------------------------------------------------------------
 // Printing functions

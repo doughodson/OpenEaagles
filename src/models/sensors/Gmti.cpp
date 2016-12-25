@@ -1,11 +1,13 @@
 
 #include "openeaagles/models/sensors/Gmti.hpp"
 
-#include "openeaagles/simulation/Antenna.hpp"
-#include "openeaagles/simulation/Emission.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/systems/Antenna.hpp"
+#include "openeaagles/models/systems/TrackManager.hpp"
+#include "openeaagles/models/Emission.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/TrackManager.hpp"
+
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -19,7 +21,7 @@
 namespace oe {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Gmti,"Gmti")
+IMPLEMENT_SUBCLASS(Gmti, "Gmti")
 
 // Slot table
 BEGIN_SLOTTABLE(Gmti)
@@ -61,9 +63,9 @@ void Gmti::dynamics(const double dt)
         // rotate to ownship heading
         double sinHdg = getOwnship()->getSinHeading();
         double cosHdg = getOwnship()->getCosHeading();
-        double x =  dpoi[simulation::Player::INORTH] * cosHdg + dpoi[simulation::Player::IEAST] * sinHdg;
-        double y = -dpoi[simulation::Player::INORTH] * sinHdg + dpoi[simulation::Player::IEAST] * cosHdg;
-        double z = dpoi[simulation::Player::IDOWN];
+        double x =  dpoi[models::Player::INORTH] * cosHdg + dpoi[models::Player::IEAST] * sinHdg;
+        double y = -dpoi[models::Player::INORTH] * sinHdg + dpoi[models::Player::IEAST] * cosHdg;
+        double z = dpoi[models::Player::IDOWN];
 
         // Compute az & el to POI
         double grng = std::sqrt(x*x + y*y);
@@ -105,7 +107,7 @@ void Gmti::setPoi(const double x, const double y, const double z)
     poiVec.set(x, y, z);
 }
 
-void Gmti::setPoi(const osg::Vec3& newPoi)
+void Gmti::setPoi(const osg::Vec3d& newPoi)
 {
     poiVec = newPoi;
 }
@@ -125,17 +127,6 @@ bool Gmti::setSlotPoi(base::List* const numList)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Gmti::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Gmti::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

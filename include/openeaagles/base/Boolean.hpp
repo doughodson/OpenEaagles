@@ -3,6 +3,7 @@
 #define __oe_base_Boolean_H__
 
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -160,7 +161,7 @@ inline bool operator||(const Boolean& b1, const bool b2)
 //------------------------------------------------------------------------------
 inline std::istream& operator>>(std::istream& sin, Boolean& n)
 {
-    double tmp;
+    double tmp = 0.0;
     sin >> tmp;
     if (tmp != 0.0f) tmp = 1.0f;
     else tmp = 0.0f;

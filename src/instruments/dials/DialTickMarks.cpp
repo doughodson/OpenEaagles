@@ -1,5 +1,7 @@
+
 #include "openeaagles/instruments/dials/DialTickMarks.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -152,13 +154,5 @@ bool DialTickMarks::setQuantity(const int newQ)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for DialTickMarks
-//------------------------------------------------------------------------------
-base::Object* DialTickMarks::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

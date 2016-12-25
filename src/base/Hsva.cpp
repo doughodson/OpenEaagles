@@ -6,11 +6,10 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Hsva,"hsva")
+IMPLEMENT_SUBCLASS(Hsva, "hsva")
+EMPTY_COPYDATA(Hsva)
+EMPTY_DELETEDATA(Hsva)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Hsva)
     "alpha",    // alpha component,   range(0.0f .. 1.0f)
 END_SLOTTABLE(Hsva)
@@ -20,9 +19,6 @@ BEGIN_SLOT_MAP(Hsva)
     ON_SLOT(1,setAlpha,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Hsva::Hsva(const double h, const double s,
                const double v, const double a) : Hsv(h,s,v)
 {
@@ -34,13 +30,6 @@ Hsva::Hsva()
 {
     STANDARD_CONSTRUCTOR()
 }
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-EMPTY_COPYDATA(Hsva)
-EMPTY_DELETEDATA(Hsva)
-
 
 //------------------------------------------------------------------------------
 // Color map interpolation - given a value, min & max limit,
@@ -56,10 +45,10 @@ bool Hsva::colorInterpolate(
       const Hsva& maxColor   // Minimum HSV color
  )
 {
-   double p = (value - minValue) / (maxValue - minValue );
-   osg::Vec4 deltaColor = maxColor.hsv - minColor.hsv;
+   const double p = (value - minValue) / (maxValue - minValue );
+   osg::Vec4d deltaColor = maxColor.hsv - minColor.hsv;
    deltaColor[base::Hsv::HUE] = base::Angle::aepcdDeg(deltaColor[base::Hsv::HUE]);
-   osg::Vec4 newColor = minColor.hsv + deltaColor * p;
+   osg::Vec4d newColor = minColor.hsv + deltaColor * p;
    newColor[base::Hsv::HUE] = base::Angle::aepcdDeg(newColor[base::Hsv::HUE]);
    if (newColor[base::Hsv::HUE] < 0) {
       newColor[base::Hsv::HUE] += 360.0f;
@@ -68,18 +57,6 @@ bool Hsva::colorInterpolate(
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Hsva
-//------------------------------------------------------------------------------
-Object* Hsva::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Hsva::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

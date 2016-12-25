@@ -1,10 +1,11 @@
 
 #include "openeaagles/base/IoData.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(IoData,"GenericIoData")
+IMPLEMENT_SUBCLASS(IoData, "GenericIoData")
 EMPTY_SLOTTABLE(IoData)
 EMPTY_CONSTRUCTOR(IoData)
 EMPTY_COPYDATA(IoData)

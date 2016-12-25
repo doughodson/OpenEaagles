@@ -3,7 +3,7 @@
 #define __oe_graphics_Material_H__
 
 #include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/osg/Vec4"
+#include "openeaagles/base/osg/Vec4d"
 
 #include "openeaagles/base/util/platform_api.hpp"
 #include <GL/glu.h>
@@ -46,21 +46,21 @@ public:
     Material();
 
     // set data
-    virtual bool setAmbientColor(osg::Vec4 x);
+    virtual bool setAmbientColor(osg::Vec4d x);
     virtual bool setAmbientColor(double x, double y, double z, double w = 1.0);
-    virtual bool setDiffuseColor(osg::Vec4 x);
+    virtual bool setDiffuseColor(osg::Vec4d x);
     virtual bool setDiffuseColor(double x, double y, double z, double w = 1.0);
-    virtual bool setEmissiveColor(osg::Vec4 x);
+    virtual bool setEmissiveColor(osg::Vec4d x);
     virtual bool setEmissiveColor(double x, double y, double z, double w = 1.0);
-    virtual bool setSpecularColor(osg::Vec4 x);
+    virtual bool setSpecularColor(osg::Vec4d x);
     virtual bool setSpecularColor(double x, double y, double z, double w = 1.0);
     virtual bool setShininess(double x);
 
     // get data
-    osg::Vec4& getAmbientColor()        { return ambientColor; }
-    osg::Vec4& getDiffuseColor()        { return diffuseColor; }
-    osg::Vec4& getEmissiveColor()       { return emissiveColor; }
-    osg::Vec4& getSpecularColor()       { return specularColor; }
+    osg::Vec4d& getAmbientColor()       { return ambientColor; }
+    osg::Vec4d& getDiffuseColor()       { return diffuseColor; }
+    osg::Vec4d& getEmissiveColor()      { return emissiveColor; }
+    osg::Vec4d& getSpecularColor()      { return specularColor; }
     double     getShininess()           { return shininess; }
 
 protected:
@@ -75,11 +75,11 @@ protected:
     bool setSlotShininess(const base::Number*const x);
 
 private:
-    osg::Vec4 ambientColor;     // ambient color
-    osg::Vec4 diffuseColor;     // diffuse color
-    osg::Vec4 emissiveColor;    // emissive color
-    osg::Vec4 specularColor;    // specular color
-    double shininess;           // shininess value
+    osg::Vec4d ambientColor;     // ambient color
+    osg::Vec4d diffuseColor;     // diffuse color
+    osg::Vec4d emissiveColor;    // emissive color
+    osg::Vec4d specularColor;    // specular color
+    double shininess;            // shininess value
 };
 
 }

@@ -32,9 +32,6 @@ int GlutDisplay::numGlutDisplays = 0;                                   // Numbe
 const float GlutDisplay::CLICK_TIME = 0.5f;                             // our double click timeout
 const unsigned int DEFAULT_IDLE_SLEEP = 40;                             // default idle CB sleep time
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(GlutDisplay)
    "fullScreen",           // 1) Full screen flag     -- Main windows only --
    "idleSleepTime",        // 2) Idle sleep time (MS; default: 40ms) -- Main windows only --
@@ -45,9 +42,6 @@ BEGIN_SLOTTABLE(GlutDisplay)
    "stencilBuff",          // 7) Enable the stencil buffer (default: false)
 END_SLOTTABLE(GlutDisplay)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(GlutDisplay)
    ON_SLOT(1,setSlotFullScreen,base::Number)
    ON_SLOT(2,setSlotIdleSleepTime,base::Number)
@@ -58,16 +52,10 @@ BEGIN_SLOT_MAP(GlutDisplay)
    ON_SLOT(7,setSlotStencilBuff,base::Number)
 END_SLOT_MAP()
 
-//-----------------------------------------------------------------------------
-// Event handler macro
-//-----------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(GlutDisplay)
    ON_EVENT(ESC_KEY,onEscKey)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 GlutDisplay::GlutDisplay()
 {
    STANDARD_CONSTRUCTOR()
@@ -75,9 +63,6 @@ GlutDisplay::GlutDisplay()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// InitData
-//------------------------------------------------------------------------------
 void GlutDisplay::initData()
 {
    winId = -1;
@@ -95,9 +80,6 @@ void GlutDisplay::initData()
    swSize.set(50.0, 50.0);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy our objects data
-//------------------------------------------------------------------------------
 void GlutDisplay::copyData(const GlutDisplay& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -121,9 +103,6 @@ void GlutDisplay::copyData(const GlutDisplay& org, const bool cc)
    picked = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- copy our objects data
-//------------------------------------------------------------------------------
 void GlutDisplay::deleteData()
 {
    if (picked != nullptr) picked->unref();
@@ -1044,17 +1023,6 @@ bool GlutDisplay::setSlotStencilBuff(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Page
-//------------------------------------------------------------------------------
-base::Object* GlutDisplay::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& GlutDisplay::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

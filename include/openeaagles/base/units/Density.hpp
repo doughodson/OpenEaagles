@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: Density
-//------------------------------------------------------------------------------
+
 #ifndef __oe_base_Density_H__
 #define __oe_base_Density_H__
 
@@ -32,9 +30,6 @@ namespace base {
 
 // setSlotVolume() -- sets our volume object.
 //     bool Density::setSlotVolume(const Volume* newVolume)
-
-// getSlotByIndex() for Density
-//     Object* Density::getSlotByIndex(const int si)
 
 // set() -- sets our density from some other density
 //     void Density::set(const Density& n)
@@ -76,8 +71,8 @@ inline std::ostream& operator<<(std::ostream& sout, const Density& n)
     const Volume* v = n.getVolume();
 
     sout << "( " << n.getFactoryName() << " " << n.getReal();
-    if ( m != 0 ) sout << " " << *m;
-    if ( v != 0 ) sout << " " << *v;
+    if ( m != nullptr ) sout << " " << *m;
+    if ( v != nullptr ) sout << " " << *v;
     sout << " )";
     return sout;
 }

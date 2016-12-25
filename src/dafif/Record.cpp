@@ -14,9 +14,6 @@ namespace dafif {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Record,"Record")
 EMPTY_SERIALIZER(Record)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Record::Record()
 {
    STANDARD_CONSTRUCTOR()
@@ -31,9 +28,6 @@ Record::Record(const char* const s)
    setStr(s);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Record::copyData(const Record& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -44,14 +38,10 @@ void Record::copyData(const Record& org, const bool cc)
    ptbl = org.ptbl;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Record::deleteData()
 {
    resetData();
 }
-
 
 //------------------------------------------------------------------------------
 // resetData: clears our member data

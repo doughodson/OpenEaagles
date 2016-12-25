@@ -1,12 +1,10 @@
-//------------------------------------------------------------------------------
-// Class: CadrgTocEntry
-//------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstdio>
 #include <cstring>
+#include <iostream>
 
 namespace oe {
 namespace rpf {
@@ -22,9 +20,6 @@ IMPLEMENT_SUBCLASS(CadrgTocEntry, "CadrgTocEntry")
 EMPTY_SLOTTABLE(CadrgTocEntry)
 EMPTY_SERIALIZER(CadrgTocEntry)
 
-// ---------------------------------------------------------------------------------------------------
-// Constructor()
-// ---------------------------------------------------------------------------------------------------
 CadrgTocEntry::CadrgTocEntry()
 {
     STANDARD_CONSTRUCTOR()
@@ -52,9 +47,6 @@ void CadrgTocEntry::initData()
     mapIndex = -1;
 }
 
-// ---------------------------------------------------------------------------------------------------
-// copyData()
-// ---------------------------------------------------------------------------------------------------
 void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool cc)
 {
     // Copy our baseclass stuff first
@@ -79,9 +71,6 @@ void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool cc)
     mapIndex = org.mapIndex;
 }
 
-// ---------------------------------------------------------------------------------------------------
-// deleteData()
-// ---------------------------------------------------------------------------------------------------
 void CadrgTocEntry::deleteData()
 {
     // Delete our frames properly

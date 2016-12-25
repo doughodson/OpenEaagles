@@ -1,9 +1,7 @@
-// ------------------------------------------------------------------------------
-// Class: TextureTable
-// ------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/TextureTable.hpp"
 #include "openeaagles/graphics/Texture.hpp"
+#include <iostream>
 
 namespace oe {
 namespace rpf {
@@ -12,9 +10,6 @@ IMPLEMENT_SUBCLASS(TextureTable, "TextureTable")
 EMPTY_SLOTTABLE(TextureTable)
 EMPTY_SERIALIZER(TextureTable)
 
-//------------------------------------------------------------------------------
-// Constructor()
-//------------------------------------------------------------------------------
 TextureTable::TextureTable()
 {
     STANDARD_CONSTRUCTOR()
@@ -32,9 +27,6 @@ TextureTable::TextureTable()
     }
 }
 
-//------------------------------------------------------------------------------
-// copyData()
-//------------------------------------------------------------------------------
 void TextureTable::copyData(const TextureTable& org, const bool cc)
 {
     // Copy our baseclass stuff first
@@ -71,9 +63,6 @@ void TextureTable::copyData(const TextureTable& org, const bool cc)
     }
 }
 
-//------------------------------------------------------------------------------
-// deleteData()
-//------------------------------------------------------------------------------
 void TextureTable::deleteData()
 {
     for (int i = 0; i < maxTableSize; i++) {

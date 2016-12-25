@@ -9,7 +9,7 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(IoDevice,"IoDevice")
+IMPLEMENT_SUBCLASS(IoDevice, "IoDevice")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(IoDevice)
@@ -324,17 +324,6 @@ bool IoDevice::setSlotDevices(PairStream* const list)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-Object* IoDevice::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& IoDevice::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

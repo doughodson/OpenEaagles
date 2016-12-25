@@ -7,16 +7,10 @@
 namespace oe {
 namespace base {
 
-//------------------------------------------------------------------------------
-// AngularVelocity
-//------------------------------------------------------------------------------
 IMPLEMENT_SUBCLASS(AngularVelocity, "AngularVelocity")
 EMPTY_SERIALIZER(AngularVelocity)
 EMPTY_DELETEDATA(AngularVelocity)
 
-//------------------------------------------------------------------------------
-// Slot Table:
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(AngularVelocity)
     "angle",    // 1: angle
     "time",     // 2: time
@@ -28,9 +22,6 @@ BEGIN_SLOT_MAP(AngularVelocity)
     ON_SLOT(2, setSlotTime, Time)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors:
-//------------------------------------------------------------------------------
 AngularVelocity::AngularVelocity()
 {
     STANDARD_CONSTRUCTOR()
@@ -262,17 +253,6 @@ bool AngularVelocity::setSeconds(const double newTime)
     return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for AngularVelocity
-//------------------------------------------------------------------------------
-Object* AngularVelocity::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data:
-//------------------------------------------------------------------------------
 void AngularVelocity::copyData(const AngularVelocity& org, const bool)
 {
     BaseClass::copyData(org);

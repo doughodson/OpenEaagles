@@ -7,7 +7,7 @@
 
 namespace oe {
 
-namespace simulation { class Antenna; }
+namespace models { class Antenna; class RfSensor; }
 
 namespace dis {
 
@@ -111,17 +111,17 @@ public:
    unsigned char getEmitterFunction() const;                   // Emitter function code
    virtual bool setEmitterFunction(const unsigned char num);   // Emitter function code
 
-   simulation::RfSensor* getSensor();                          // Our R/F emitter System
-   const simulation::RfSensor* getSensor() const;              // Our R/F emitter System (const version)
-   virtual bool setSensor(simulation::RfSensor* const msg);    // Sets our R/F emitter system
+   models::RfSensor* getSensor();                          // Our R/F emitter System
+   const models::RfSensor* getSensor() const;              // Our R/F emitter System (const version)
+   virtual bool setSensor(models::RfSensor* const msg);    // Sets our R/F emitter system
 
-   simulation::RfSensor* getSensorModel();                     // Our template sensor model
-   const simulation::RfSensor* getSensorModel() const;         // Our template sensor model
-   virtual bool setSensorModel(simulation::RfSensor* const msg); // Sets our template sensor model
+   models::RfSensor* getSensorModel();                     // Our template sensor model
+   const models::RfSensor* getSensorModel() const;         // Our template sensor model
+   virtual bool setSensorModel(models::RfSensor* const msg); // Sets our template sensor model
 
-   simulation::Antenna* getAntennaModel();                     // Our template antenna model
-   const simulation::Antenna* getAntennaModel() const;         // Our template antenna model
-   virtual bool setAntennaModel(simulation::Antenna* const msg); // Sets our template antenna model
+   models::Antenna* getAntennaModel();                     // Our template antenna model
+   const models::Antenna* getAntennaModel() const;         // Our template antenna model
+   virtual bool setAntennaModel(models::Antenna* const msg); // Sets our template antenna model
 
    double getEmPduExecTime() const { return emPduExecTime; }
    virtual void setEmPduExecTime(const double v);
@@ -134,7 +134,7 @@ public:
 
    // True if RfSensor data matches our parameters
    // (does not check the default handler flags)
-   virtual bool isMatchingRfSystemType(const simulation::RfSensor* const p) const;
+   virtual bool isMatchingRfSystemType(const models::RfSensor* const p) const;
 
    // True if EmissionSystem PDU data matches our parameters
    // (does not check the default handler flags)
@@ -152,8 +152,8 @@ public:
    // Slot functions
    virtual bool setSlotEmitterName(const base::Number* const msg);      // Sets our DIS Emitter Name
    virtual bool setSlotEmitterFunction(const base::Number* const msg);  // Sets our DIS Emitter Function
-   virtual bool setSlotSensorTemplate(simulation::RfSensor* const msg);    // Sets our template sensor model
-   virtual bool setSlotAntennaTemplate(simulation::Antenna* const msg);    // Sets our template antenna model
+   virtual bool setSlotSensorTemplate(models::RfSensor* const msg);    // Sets our template sensor model
+   virtual bool setSlotAntennaTemplate(models::Antenna* const msg);    // Sets our template antenna model
    virtual bool setSlotDefaultIn(const base::Number* const msg);
    virtual bool setSlotDefaultOut(const base::Number* const msg);
 
@@ -188,9 +188,9 @@ private:
    unsigned char emitterIdNumber;   // Unique ID number for each emitter system
    unsigned char emitterFunction;   // Emitter function code
 
-   base::safe_ptr<simulation::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
-   base::safe_ptr<simulation::RfSensor> sensorModel;         // Our template sensor model
-   base::safe_ptr<simulation::Antenna>  antennaModel;        // Our template antenna model
+   base::safe_ptr<models::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
+   base::safe_ptr<models::RfSensor> sensorModel;         // Our template sensor model
+   base::safe_ptr<models::Antenna>  antennaModel;        // Our template antenna model
 
    double           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
 };
@@ -199,14 +199,14 @@ inline unsigned char EmissionPduHandler::getEmitterIdNumber() const  { return em
 inline unsigned short EmissionPduHandler::getEmitterName() const     { return emitterName; }
 inline unsigned char EmissionPduHandler::getEmitterFunction() const  { return emitterFunction; }
 
-inline simulation::RfSensor* EmissionPduHandler::getSensor()             { return sensor; }
-inline const simulation::RfSensor* EmissionPduHandler::getSensor() const { return sensor; }
+inline models::RfSensor* EmissionPduHandler::getSensor()             { return sensor; }
+inline const models::RfSensor* EmissionPduHandler::getSensor() const { return sensor; }
 
-inline simulation::RfSensor* EmissionPduHandler::getSensorModel()    { return sensorModel; }
-inline const simulation::RfSensor* EmissionPduHandler::getSensorModel() const { return sensorModel; }
+inline models::RfSensor* EmissionPduHandler::getSensorModel()    { return sensorModel; }
+inline const models::RfSensor* EmissionPduHandler::getSensorModel() const { return sensorModel; }
 
-inline simulation::Antenna* EmissionPduHandler::getAntennaModel()    { return antennaModel; }
-inline const simulation::Antenna* EmissionPduHandler::getAntennaModel() const { return antennaModel; }
+inline models::Antenna* EmissionPduHandler::getAntennaModel()    { return antennaModel; }
+inline const models::Antenna* EmissionPduHandler::getAntennaModel() const { return antennaModel; }
 
 inline bool EmissionPduHandler::isDefaultIncomingHandler() const     { return defaultIn; }
 inline bool EmissionPduHandler::isDefaultOutgoingHandler() const     { return defaultOut; }

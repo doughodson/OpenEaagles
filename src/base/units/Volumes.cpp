@@ -4,7 +4,7 @@
 
 #include "openeaagles/base/units/Volumes.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {

@@ -139,18 +139,6 @@ bool Density::setSlotVolume(const Volume* newVolume)
     else return false;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Density
-//------------------------------------------------------------------------------
-Object* Density::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

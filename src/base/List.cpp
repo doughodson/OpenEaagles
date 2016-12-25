@@ -10,11 +10,8 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List,"List")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List, "List")
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 List::List() : headP(nullptr), tailP(nullptr), num(0)
 {
     STANDARD_CONSTRUCTOR()
@@ -44,10 +41,6 @@ List::List(const int values[], const unsigned int nv) : headP(nullptr), tailP(nu
     }
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void List::copyData(const List& org, const bool cc)
 {
     BaseClass::copyData(org);

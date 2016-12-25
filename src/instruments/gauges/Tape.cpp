@@ -2,6 +2,7 @@
 #include "openeaagles/instruments/gauges/Tape.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -255,13 +256,5 @@ void Tape::updateData(const double dt)
     else send("tapegraphic", UPDATE_VALUE, newVal, transTapeGraphicVSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Tape
-//------------------------------------------------------------------------------
-base::Object* Tape::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

@@ -9,12 +9,9 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Complex,"Complex")
+IMPLEMENT_SUBCLASS(Complex, "Complex")
 EMPTY_DELETEDATA(Complex)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Complex)
    "imag",      // 1: imaginary component
 END_SLOTTABLE(Complex)
@@ -23,10 +20,6 @@ END_SLOTTABLE(Complex)
 BEGIN_SLOT_MAP(Complex)
    ON_SLOT(1,setSlotImaginary,Number)
 END_SLOT_MAP()
-
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 
 Complex::Complex()
 {
@@ -46,9 +39,6 @@ Complex::Complex(const double r, const double i) : Number(r)
    imag = i;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Complex::copyData(const Complex& org, const bool)
 {
    BaseClass::copyData(org);
@@ -109,18 +99,6 @@ bool Complex::setSlotImaginary(const Number* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Rgb
-//------------------------------------------------------------------------------
-Object* Complex::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Complex::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -145,6 +123,6 @@ std::ostream& Complex::serialize(std::ostream& sout, const int i, const bool slo
     return sout;
 }
 
-}  // end namespace base
-}  // end namespace oe
+}
+}
 

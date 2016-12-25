@@ -4,19 +4,22 @@
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/safe_queue.hpp"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Matrixd"
 
 namespace oe {
-   namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; class Terrain; }
-   namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
-
+namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
+namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 namespace simulation {
-   class DataRecorder;
-   class IrAtmosphere;
-   class Player;
-   class SimBgThread;
-   class SimTcThread;
-   class Station;
+
+class DataRecorder;
+class SimBgThread;
+class SimTcThread;
+class Station;
+
+class IPlayer;
+
+class ITerrain;
+class IAtmosphere;
 
 //------------------------------------------------------------------------------
 // Class: Simulation
@@ -29,53 +32,53 @@ namespace simulation {
 //
 // Factory name: Simulation
 // Slots --
-//    players        <base::PairStream>     ! Local player list (base::PairStream of Player) (default: 0)
+//    players        <base::PairStream>       ! Local player list (base::PairStream of Player) (default: nullptr)
 //
-//    latitude       <base::LatLon>         ! Reference (gaming area) latitude (default: 0.0)
-//                   <base::Number>         ! Reference (gaming area) latitude (deg)
+//    latitude       <base::LatLon>           ! Reference (gaming area) latitude (default: 0.0)
+//                   <base::Number>           ! Reference (gaming area) latitude (deg)
 //
-//    longitude      <base::LatLon>         ! reference (gaming area) longitude (default 0.0)
-//                   <base::Number>         ! reference (gaming area) longitude (deg)
+//    longitude      <base::LatLon>           ! reference (gaming area) longitude (default 0.0)
+//                   <base::Number>           ! reference (gaming area) longitude (deg)
 //
-//    gamingAreaRange <base::Distance>      ! Max valid range of the simulation's gaming area or zero for unlimited
-//                                           !   default: zero -- unlimited range
+//    gamingAreaRange <base::Distance>        ! Max valid range of the simulation's gaming area or zero for unlimited
+//                                            !   default: zero -- unlimited range
 //
-//    earthModel     <base::EarthModel>     ! Earth model for geodetic lat/lon (default is WGS-84)
-//                   <base::Identifier>     ! Earth model by name (see EarthModel.h)
+//    earthModel     <base::EarthModel>       ! Earth model for geodetic lat/lon (default is WGS-84)
+//                   <base::Identifier>       ! Earth model by name (see EarthModel.hpp)
 //
 //    gamingAreaUseEarthModel <base::Boolean> ! If true, use the 'earthModel' or its WGS-84 default for flat
-//                                           ! earth projections between geodetic lat/lon and the gaming
-//                                           ! area's NED coordinates.  Otherwise, use a standard spherical
-//                                           ! earth with a radius of Nav::ERAD60. (default: false)
+//                                            ! earth projections between geodetic lat/lon and the gaming
+//                                            ! area's NED coordinates.  Otherwise, use a standard spherical
+//                                            ! earth with a radius of Nav::ERAD60. (default: false)
 //
-//    simulationTime <base::Time>           ! Initial simulated time since midnight (UTC) (second),
-//                                           ! or -1 to use current time of day (default: -1)
+//    simulationTime <base::Time>             ! Initial simulated time since midnight (UTC) (second),
+//                                            ! or -1 to use current time of day (default: -1)
 //
-//    day            <base::Number>         ! Initial simulated day of month [ 1 .. 31 ],
-//                                           ! or zero to use current day (default: 0)
+//    day            <base::Number>           ! Initial simulated day of month [ 1 .. 31 ],
+//                                            ! or zero to use current day (default: 0)
 //
-//    month          <base::Number>         ! Initial simulated month [ 1 .. 12 ],
-//                                           ! or zero to use current month (default: 0)
+//    month          <base::Number>           ! Initial simulated month [ 1 .. 12 ],
+//                                            ! or zero to use current month (default: 0)
 //
-//    year           <base::Number>         ! Initial simulated year [ 1970 .. 2100 ],
-//                                           ! or zero to use current year (default: 0)
+//    year           <base::Number>           ! Initial simulated year [ 1970 .. 2100 ],
+//                                            ! or zero to use current year (default: 0)
 //
-//    airportLoader  <dafif::AirportLoader>  ! Airport database (default: 0)
-//    navaidLoader   <dafif::NavaidLoader>   ! NAVAID database (default: 0)
-//    waypointLoader <dafif::WaypointLoader> ! Waypoint database (default: 0)
+//    airportLoader  <dafif::AirportLoader>   ! Airport database (default: nullptr)
+//    navaidLoader   <dafif::NavaidLoader>    ! NAVAID database (default: nullptr)
+//    waypointLoader <dafif::WaypointLoader>  ! Waypoint database (default: nullptr)
 //
-//    terrain        <base::Terrain>        ! Terrain elevation database (default: 0)
-//    irAtmosphere   <IrAtmosphere>          ! Atmosphere database for IR algorithms (default: 0)
+//    terrain        <ITerrain>               ! Terrain elevation database (default: nullptr)
+//    atmosphere     <IAtmosphere>            ! Atmosphere
 //
-//    firstWeaponId  <base::Number>         ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
+//    firstWeaponId  <base::Number>           ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
 //
-//    numTcThreads   <base::Number>         ! Number of T/C threads to use with the player list
-//                                           !   default: 1 -- no additional threads)
-//                                           !   range: [ 1 .. (#CPUs-1) ]; minimum of one
+//    numTcThreads   <base::Number>           ! Number of T/C threads to use with the player list
+//                                            !   default: 1 -- no additional threads)
+//                                            !   range: [ 1 .. (#CPUs-1) ]; minimum of one
 //
-//    numBgThreads   <base::Number>         ! Number of background threads to use with the player list
-//                                           !   default: 1 -- no additional threads)
-//                                           !   range: [ 1 .. (#CPUs-1) ]; minimum of one
+//    numBgThreads   <base::Number>           ! Number of background threads to use with the player list
+//                                            !   default: 1 -- no additional threads)
+//                                            !   range: [ 1 .. (#CPUs-1) ]; minimum of one
 //
 //
 // The player list
@@ -192,13 +195,13 @@ namespace simulation {
 //       'month' and 'year' to override the computer system's time and/or
 //       date with your own simulated time and/or date.
 //
-//    4) See "openeaagles/base/util/system.h" for additional time related functions.
+//    4) See "openeaagles/base/util/system.hpp" for additional time related functions.
 //
 //
 // Environments:
 //
 //    Current simulation environments include terrain elevation posts, getTerrain(),
-//    IR atmosphere model, getIrAtmosphere(), and DAFIF navigational aids,
+//    atmosphere model, getAtmosphere(), and DAFIF navigational aids,
 //    getNavaids(), getAirports() and getWaypoints().
 //
 //
@@ -233,8 +236,8 @@ public:
 public:
     Simulation();
 
-    base::PairStream* getPlayers();               // Returns the player list; pre-ref()'d
-    const base::PairStream* getPlayers() const;   // Returns the player list; pre-ref()'d (const version)
+    base::PairStream* getPlayers();                // Returns the player list; pre-ref()'d
+    const base::PairStream* getPlayers() const;    // Returns the player list; pre-ref()'d (const version)
 
     double getRefLatitude() const;                 // Returns the reference latitude (degs)
     double getRefLongitude() const;                // Returns the reference longitude (degs)
@@ -274,10 +277,10 @@ public:
     unsigned short getNewWeaponEventID();          // Generates a unique weapon event ID [1 .. 65535]
     unsigned short getNewReleasedWeaponID();       // Generates a unique ID number for released weapons
 
-    const base::Terrain* getTerrain() const;      // Returns the terrain elevation database
+    const ITerrain* getTerrain() const;            // Returns the terrain elevation database
 
-    IrAtmosphere* getIrAtmosphere();               // Returns the atmosphere database for IR algorithms
-    const IrAtmosphere* getIrAtmosphere() const;   // Returns the atmosphere database for IR algorithms (const version)
+    IAtmosphere* getAtmosphere();                  // Returns the atmosphere model
+    const IAtmosphere* getAtmosphere() const;      // Returns the atmosphere model (const version)
 
     dafif::AirportLoader* getAirports();           // Returns the airport loader
     dafif::NavaidLoader* getNavaids();             // Returns the NAVAID loader
@@ -288,14 +291,14 @@ public:
     Station* getStation();                         // Returns our Station
     const Station* getStation() const;             // Returns our Station (const version)
 
-    Player* findPlayer(const short id, const int netID = 0);             // Find a player by player (and network) ID
-    const Player* findPlayer(const short id, const int netID = 0) const; // Find a player by player (and network) ID (const version)
+    IPlayer* findPlayer(const short id, const int netID = 0);             // Find a player by player (and network) ID
+    const IPlayer* findPlayer(const short id, const int netID = 0) const; // Find a player by player (and network) ID (const version)
 
-    Player* findPlayerByName(const char* const playerName);             // Find a player by name
-    const Player* findPlayerByName(const char* const playerName) const; // Find a player by name (const version)
+    IPlayer* findPlayerByName(const char* const playerName);             // Find a player by name
+    const IPlayer* findPlayerByName(const char* const playerName) const; // Find a player by name (const version)
 
-    virtual bool addNewPlayer(const char* const playerName, Player* const player); // Add a new player
-    virtual bool addNewPlayer(base::Pair* const player);                          // Add a new player (pair: name, player)
+    virtual bool addNewPlayer(const char* const playerName, IPlayer* const player); // Add a new player
+    virtual bool addNewPlayer(base::Pair* const player);                           // Add a new player (pair: name, player)
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 
@@ -326,7 +329,7 @@ protected:
     virtual void updatePlayerList();                  // Updates the current player list
     bool setSlotPlayers(base::PairStream* const msg);
 
-    base::Terrain* getTerrain();                     // Returns the terrain elevation database
+    ITerrain* getTerrain();                           // Returns the terrain elevation database
 
     virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
     virtual bool setGamingAreaUseEarthModel(const bool flg);
@@ -351,8 +354,8 @@ private:
    Station* getStationImp();
 
    bool insertPlayerSort(base::Pair* const newPlayer, base::PairStream* const newList);
-   Player* findPlayerPrivate(const short id, const int netID) const;
-   Player* findPlayerByNamePrivate(const char* const playerName) const;
+   IPlayer* findPlayerPrivate(const short id, const int netID) const;
+   IPlayer* findPlayerByNamePrivate(const char* const playerName) const;
 
    bool setSlotRefLatitude(const base::LatLon* const msg);
    bool setSlotRefLatitude(const base::Number* const msg);
@@ -362,8 +365,6 @@ private:
    bool setSlotDay(const base::Number* const msg);
    bool setSlotMonth(const base::Number* const msg);
    bool setSlotYear(const base::Number* const msg);
-   bool setSlotTerrain(base::Terrain* const msg);
-   bool setSlotIrAtmosphere(IrAtmosphere* const msg);
    bool setSlotFirstWeaponId(const base::Number* const msg);
    bool setSlotNumTcThreads(const base::Number* const msg);
    bool setSlotNumBgThreads(const base::Number* const msg);
@@ -372,10 +373,12 @@ private:
    bool setSlotEarthModel(const base::String* const msg);
    bool setSlotGamingAreaEarthModel(const base::Number* const msg);
 
+   // environmental models
+   bool setSlotTerrain(ITerrain* const msg);
+   bool setSlotAtmosphere(IAtmosphere* const msg);
+
    base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
    base::safe_ptr<base::PairStream> origPlayers; // Original player list
-
-   bool loggedHeadings;          // set true once headings have been added to output file
 
    // Our Earth Model, or default to using base::EarthModel::wgs84 if zero
    const base::EarthModel* em;
@@ -418,8 +421,8 @@ private:
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   IrAtmosphere*          irAtmosphere; // Atmosphere data for IR algorithms
-   base::Terrain*        terrain;      // Terrain data
+   IAtmosphere*           atmosphere;   // Atmosphere model
+   ITerrain*              terrain;      // Terrain model
    dafif::AirportLoader*  airports;     // Airport loader
    dafif::NavaidLoader*   navaids;      // NAVAID loader
    dafif::WaypointLoader* waypoints;    // Waypoint loader

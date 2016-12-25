@@ -108,8 +108,8 @@ public:
    void setFocusSlavedToSubpage(const bool f)   { focusSlavedToSubpage = f; }
 
    // call new sub-page
-   bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = 0);
-   bool newSubpage(const char* const name, Page* theCaller, base::Object* theArg = 0);
+   bool newSubpage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
+   bool newSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
 
    // event handler functions
    virtual bool onEntry();
@@ -143,14 +143,14 @@ protected:
 
    // Manage our (sub)page stack
    bool clearSubpageStack();
-   bool pushSubpage(const char* const name, Page* theCaller, base::Object* theArg = 0);
-   bool popSubpage(Page* theCaller, base::Object* theArg = 0);
+   bool pushSubpage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool popSubpage(Page* theCaller, base::Object* theArg = nullptr);
 
    // Call/push/pop major pages (our container's pages, which we are a member of)
-   bool newPage(Page* const newPage, Page* theCaller, base::Object* theArg = 0);
-   bool newPage(const char* const name, Page* theCaller, base::Object* theArg = 0);
-   bool pushPage(const char* const name, Page* theCaller, base::Object* theArg = 0);
-   bool popPage(Page* theCaller, base::Object* theArg = 0);
+   bool newPage(Page* const newPage, Page* theCaller, base::Object* theArg = nullptr);
+   bool newPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool pushPage(const char* const name, Page* theCaller, base::Object* theArg = nullptr);
+   bool popPage(Page* theCaller, base::Object* theArg = nullptr);
 
 private:
    bool processSubpages();

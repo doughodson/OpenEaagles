@@ -181,6 +181,7 @@ workspace "oe"
    project "models"
       files {
          "../../include/openeaagles/models/**.h*",
+         "../../include/openeaagles/models/**.inl",
          "../../src/models/**.cpp"
       }
       includedirs { OE3rdPartyIncPath.."/JSBSim" }
@@ -190,12 +191,8 @@ workspace "oe"
    project "otw"
       files {
          "../../include/openeaagles/otw/**.h*",
-         "../../src/otw/**.h",
+         "../../src/otw/**.h*",
          "../../src/otw/**.cpp"
-      }
-      excludes {
-         "../../include/openeaagles/otw/OtwCigiClV2.h",
-         "../../src/otw/OtwCigiClV2.cpp"
       }
       targetname "otw"
 
@@ -232,7 +229,7 @@ workspace "oe"
    project "simulation"
       files {
          "../../include/openeaagles/simulation/**.h*",
-         "../../include/openeaagles/simulation/*.inl",
+         "../../include/openeaagles/simulation/**.inl",
          "../../src/simulation/**.cpp"
       }
       targetname "simulation"

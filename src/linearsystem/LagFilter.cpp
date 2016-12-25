@@ -109,18 +109,6 @@ bool LagFilter::setSlotTau(const base::Number* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for LagFilter
-//------------------------------------------------------------------------------
-base::Object* LagFilter::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& LagFilter::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

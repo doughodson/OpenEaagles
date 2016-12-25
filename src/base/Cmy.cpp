@@ -7,10 +7,8 @@ namespace oe {
 namespace base {
 
 IMPLEMENT_SUBCLASS(Cmy,"cmy")
+EMPTY_DELETEDATA(Cmy)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Cmy)
     "cyan",     // 1: ... Cyan component, range(0.0 to 1.0)
     "magenta",  // 2: ... Magenta component, range(0.0 to 1.0)
@@ -24,9 +22,6 @@ BEGIN_SLOT_MAP(Cmy)
     ON_SLOT(3,setYellow,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Cmy::Cmy(const double c, const double m, const double y)
 {
    STANDARD_CONSTRUCTOR()
@@ -45,18 +40,11 @@ Cmy::Cmy()
    cmy2rgb(color,cmy);   // set the rgb values
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Cmy::copyData(const Cmy& org, const bool)
 {
    BaseClass::copyData(org);
    cmy = org.cmy;
 }
-
-EMPTY_DELETEDATA(Cmy)
-
 
 //------------------------------------------------------------------------------
 // Data access functions
@@ -76,7 +64,7 @@ double Cmy::yellow() const
     return cmy[YELLOW];
 }
 
-void Cmy::getCMY(osg::Vec3& hhh) const
+void Cmy::getCMY(osg::Vec3d& hhh) const
 {
     hhh.set(cmy[CYAN],cmy[MAGENTA],cmy[YELLOW]);
 }
@@ -100,8 +88,8 @@ bool Cmy::setCyan(Number* const msg)
 bool Cmy::setMagenta(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[MAGENTA] = value; cmy2rgb(color,cmy); }
     else std::cerr << "Cmy::setMagenta: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
@@ -113,19 +101,11 @@ bool Cmy::setMagenta(Number* const msg)
 bool Cmy::setYellow(Number* const msg)
 {
     if (msg == nullptr) return false;
-    double value = msg->getReal();
-    bool ok = (value >= 0 && value <= 1);
+    const double value = msg->getReal();
+    const bool ok = (value >= 0 && value <= 1);
     if (ok) { cmy[YELLOW] = value; cmy2rgb(color,cmy); }
     else std::cerr << "Cmy::setYellow: invalid entry(" << value << "), valid range: 0 to 1" << std::endl;
     return ok;
-}
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Cmy
-//------------------------------------------------------------------------------
-Object* Cmy::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
 
 //------------------------------------------------------------------------------
@@ -134,7 +114,7 @@ Object* Cmy::getSlotByIndex(const int si)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Cmy::cmy2rgb(osg::Vec4& rgb, const osg::Vec3& cmy)
+void Cmy::cmy2rgb(osg::Vec4d& rgb, const osg::Vec3d& cmy)
 {
     rgb[RED]   = 1 - cmy[CYAN];
     rgb[GREEN] = 1 - cmy[MAGENTA];
@@ -148,7 +128,7 @@ void Cmy::cmy2rgb(osg::Vec4& rgb, const osg::Vec3& cmy)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Cmy::rgb2cmy(osg::Vec3& cmy, const osg::Vec4& rgb)
+void Cmy::rgb2cmy(osg::Vec3d& cmy, const osg::Vec4d& rgb)
 {
     cmy[CYAN]    = 1 - rgb[RED];
     cmy[MAGENTA] = 1 - rgb[GREEN];

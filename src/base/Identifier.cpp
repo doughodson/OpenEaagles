@@ -5,14 +5,11 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Identifier,"Identifier")
+IMPLEMENT_SUBCLASS(Identifier, "Identifier")
 EMPTY_SLOTTABLE(Identifier)
 EMPTY_COPYDATA(Identifier)
 EMPTY_DELETEDATA(Identifier)
 
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Identifier::Identifier() : String()
 {
    STANDARD_CONSTRUCTOR()
@@ -23,7 +20,6 @@ Identifier::Identifier(const char* string) : String()
    STANDARD_CONSTRUCTOR()
    setStr(string);
 }
-
 
 //------------------------------------------------------------------------------
 // Replace spaces with underscores, and then call our BaseClass::setStr()
@@ -87,10 +83,6 @@ std::ostream& operator<<(std::ostream& sout, const Identifier& ident)
     return sout;
 }
 
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Identifier::serialize(std::ostream& sout, const int, const bool) const
 {
     const char* s = *this;

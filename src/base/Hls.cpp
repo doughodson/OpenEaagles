@@ -9,11 +9,9 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_SUBCLASS(Hls,"hls")
+IMPLEMENT_SUBCLASS(Hls, "hls")
+EMPTY_DELETEDATA(Hls)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Hls)
     "hue",         // 1: ... Hue component, range(0.0 to 360.0)
     "lightness",   // 2: ... Lightness component, range(0.0 to 1.0)
@@ -27,9 +25,6 @@ BEGIN_SLOT_MAP(Hls)
     ON_SLOT(3,setSaturation,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Hls::Hls(const double h, const double l, const double s)
 {
    STANDARD_CONSTRUCTOR()
@@ -48,18 +43,11 @@ Hls::Hls()
    hls2rgb(color,hls);   // set the rgb values
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Hls::copyData(const Hls& org, const bool)
 {
    BaseClass::copyData(org);
    hls = org.hls;
 }
-
-EMPTY_DELETEDATA(Hls)
-
 
 //------------------------------------------------------------------------------
 // Data access functions
@@ -79,7 +67,7 @@ double Hls::lightness() const
     return hls[LIGHTNESS];
 }
 
-void Hls::getHLS(osg::Vec3& hhh) const
+void Hls::getHLS(osg::Vec3d& hhh) const
 {
     hhh.set(hls[HUE],hls[SATURATION],hls[LIGHTNESS]);
 }
@@ -123,13 +111,6 @@ bool Hls::setLightness(Number* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Hls
-//------------------------------------------------------------------------------
-Object* Hls::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
 
 //------------------------------------------------------------------------------
 // value() -- utility function used in hls2rgb
@@ -153,7 +134,7 @@ double Hls::value(double n1, double n2, double hue)
 // hls2rgb() -- converts a Hue, Saturation, Lightness (HLS) color to a
 //              Red, Green, Blue (RGB) value.
 //------------------------------------------------------------------------------
-void Hls::hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls)
+void Hls::hls2rgb(osg::Vec4d& rgb, const osg::Vec3d& hls)
 {
     double m1, m2;
 
@@ -181,7 +162,7 @@ void Hls::hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls)
 // rgb2hls() -- converts a Red, Green, Blue (RGB) color to a
 //              Hue, Saturation, Lightness (HLS) value.
 //------------------------------------------------------------------------------
-void Hls::rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb)
+void Hls::rgb2hls(osg::Vec3d& hls, const osg::Vec4d& rgb)
 {
     const double maxcol = std::fmax( rgb[RED], std::fmax( rgb[GREEN], rgb[BLUE] ) );
     const double mincol = std::fmin( rgb[RED], std::fmin( rgb[GREEN], rgb[BLUE] ) );

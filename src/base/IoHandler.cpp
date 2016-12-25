@@ -26,7 +26,7 @@ class IoThread : public ThreadPeriodicTask {
 // IoHandler
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(IoHandler,"IoHandler")
+IMPLEMENT_SUBCLASS(IoHandler, "IoHandler")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(IoHandler)
@@ -48,19 +48,12 @@ BEGIN_SLOT_MAP(IoHandler)
    ON_SLOT(6, setSlotPriority,   Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 IoHandler::IoHandler()
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-
-//------------------------------------------------------------------------------
-// Init member data
-//------------------------------------------------------------------------------
 void IoHandler::initData()
 {
    inData = nullptr;
@@ -75,10 +68,6 @@ void IoHandler::initData()
    thread = nullptr;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void IoHandler::copyData(const IoHandler& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -132,9 +121,6 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void IoHandler::deleteData()
 {
    inData = nullptr;
@@ -394,17 +380,6 @@ bool IoHandler::setSlotPriority(const Number* const num)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-Object* IoHandler::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& IoHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -463,7 +438,7 @@ std::ostream& IoHandler::serialize(std::ostream& sout, const int i, const bool s
 //=============================================================================
 // IoThread: Data I/O thread
 //=============================================================================
-IMPLEMENT_SUBCLASS(IoThread,"IoThread")
+IMPLEMENT_SUBCLASS(IoThread, "IoThread")
 EMPTY_SLOTTABLE(IoThread)
 EMPTY_COPYDATA(IoThread)
 EMPTY_DELETEDATA(IoThread)

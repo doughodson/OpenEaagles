@@ -2,6 +2,7 @@
 #include "openeaagles/base/ThreadPool.hpp"
 #include "openeaagles/base/Thread.hpp"
 #include "openeaagles/base/util/atomics.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -34,7 +35,7 @@ private:
 };
 
 
-IMPLEMENT_SUBCLASS(ThreadPoolThread,"ThreadPoolThread")
+IMPLEMENT_SUBCLASS(ThreadPoolThread, "ThreadPoolThread")
 EMPTY_SLOTTABLE(ThreadPoolThread)
 EMPTY_COPYDATA(ThreadPoolThread)
 EMPTY_SERIALIZER(ThreadPoolThread)
@@ -418,11 +419,6 @@ bool ThreadPool::setSlotPriority(const Number* const msg)
       }
    }
    return ok;
-}
-
-Object* ThreadPool::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
 }
 
 }

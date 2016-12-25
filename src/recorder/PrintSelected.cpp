@@ -195,14 +195,6 @@ bool PrintSelected::setSlotTimeOnly(const base::Number* const msg)
    }
    return ok;
 }
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* PrintSelected::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 
 //------------------------------------------------------------------------------
 // processRecordImp

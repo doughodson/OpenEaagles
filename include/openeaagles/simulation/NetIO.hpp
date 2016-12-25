@@ -2,19 +2,30 @@
 #ifndef __oe_simulation_NetIO_H__
 #define __oe_simulation_NetIO_H__
 
-#include "openeaagles/base/Component.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/simulation/INetIO.hpp"
+
+#include "openeaagles/base/String.hpp"
 
 namespace oe {
-   namespace base { class Angle; class Distance; class Identifier; class List;
-                     class String; class Time;
-   }
+
+namespace base {
+class Angle;
+class Distance;
+class Identifier;
+class List;
+class String;
+class Time;
+}
+
+namespace models {
+class Player;
+}
 
 namespace simulation {
-   class Nib;
-   class Ntm;
-   class Simulation;
-   class Station;
+class Nib;
+class Ntm;
+class Simulation;
+class Station;
 
 //------------------------------------------------------------------------------
 // Class:  NetIO
@@ -35,10 +46,10 @@ namespace simulation {
 //    timeline             (base::Identifier)  ! Source of the time line { UTC or EXEC } (default: UTC)
 //
 //    inputEntityTypes     (base::PairSteam)   ! Incoming entity type mappers (default: 0)
-//                                              !   (Ntm objects that map incoming entity types to oe player types)
+//                                             !   (Ntm objects that map incoming entity types to oe player types)
 //
 //    outputEntityTypes    (base::PairSteam)   ! Outgoing entity type mappers (default: 0)
-//                                              !   (Ntm objects that map oe player types to outgoing entity types)
+//                                             !   (Ntm objects that map oe player types to outgoing entity types)
 //
 //    maxTimeDR            (base::Time)        ! Max DR time (default: 5 seconds)
 //    maxPositionError     (base::Distance)    ! Max DR position error (default: 3 meters)
@@ -46,7 +57,7 @@ namespace simulation {
 //    maxAge               (base::Time)        ! Max age (without update) of networked players (default: 12.5 seconds)
 //
 //    maxEntityRange       (base::Distance)    ! Max entity range of networked players,
-//                                              !  or zero for no max range (default: 0 -- no range filtering)
+//                                             !  or zero for no max range (default: 0 -- no range filtering)
 //
 //
 // NetIO class objects:
@@ -143,9 +154,9 @@ namespace simulation {
 // Note: public and protected sections for Nib and Ntm support are located
 //       after the main public and protected sections.
 //------------------------------------------------------------------------------
-class NetIO : public base::Component
+class NetIO : public INetIO
 {
-   DECLARE_SUBCLASS(NetIO, base::Component)
+   DECLARE_SUBCLASS(NetIO, INetIO)
 
 public:
     // Source of the time line
@@ -164,10 +175,10 @@ public:
    NetIO();
 
    // Updates the 'input' side of the network
-   virtual void inputFrame(const double dt);
+   virtual void inputFrame(const double dt) override;
 
    // Updates the 'output' side of the network
-   virtual void outputFrame(const double dt);
+   virtual void outputFrame(const double dt) override;
 
    // Network ID number
    unsigned short getNetworkID() const { return netID; }
@@ -185,50 +196,50 @@ public:
    TSource getTimeline() const { return timeline; }
 
    // True if inputs are enabled
-   bool isInputEnabled() const { return inputFlg; }
+   bool isInputEnabled() const  { return inputFlg; }
 
    // True if outputs are enabled
    bool isOutputEnabled() const { return outputFlg; }
 
    // True if relaying is enabled
-   bool isRelayEnabled() const { return (relayFlg && isInputEnabled() && isOutputEnabled()); }
+   bool isRelayEnabled() const  { return (relayFlg && isInputEnabled() && isOutputEnabled()); }
 
    // Entity filter: Returns max entity ranged (meters)
-   virtual double getMaxEntityRange(const Nib* const nib = 0) const;
+   virtual double getMaxEntityRange(const Nib* const nib = nullptr) const;
 
    // Entity filter: Returns max entity ranged squared (meters^2)
-   virtual double getMaxEntityRangeSquared(const Nib* const nib = 0) const;
+   virtual double getMaxEntityRangeSquared(const Nib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max DR time before next 'heart beat' (seconds)
-   virtual double getMaxTimeDR(const Nib* const nib = 0) const;
+   virtual double getMaxTimeDR(const Nib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max DR position error (meters)
-   virtual double getMaxPositionErr(const Nib* const nib = 0) const;
+   virtual double getMaxPositionErr(const Nib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max DR orientation error (radians)
-   virtual double getMaxOrientationErr(const Nib* const nib = 0) const;
+   virtual double getMaxOrientationErr(const Nib* const nib = nullptr) const;
 
    // Dead-Reckoning: Returns max age before a networked player is removed (seconds)
-   virtual double getMaxAge(const Nib* const nib = 0) const;
+   virtual double getMaxAge(const Nib* const nib = nullptr) const;
 
    // Network initialization
-   bool isNetworkInitialized() const { return netInit; }
-   bool didInitializationFail() const { return netInitFail; }
+   bool isNetworkInitialized() const       { return netInit; }
+   bool didInitializationFail() const      { return netInitFail; }
    virtual bool networkInitialization();
 
    // Other components
-   Station* getStation() { return station; }
-   const Station* getStation() const { return station; }
+   Station* getStation()                   { return station; }
+   const Station* getStation() const       { return station; }
 
-   Simulation* getSimulation() { return simulation; }
+   Simulation* getSimulation()             { return simulation; }
    const Simulation* getSimulation() const { return simulation; }
 
    // Event IDs
-   unsigned short getNewIffEventID() { return ++iffEventID; }
-   unsigned short getNewEmissionEventID() { return ++emEventID; }
+   unsigned short getNewIffEventID()       { return ++iffEventID; }
+   unsigned short getNewEmissionEventID()  { return ++emEventID; }
 
    // IPlayer factory: creates a networked player based on NIB data
-   virtual Player* createIPlayer(Nib* const nib);
+   virtual models::Player* createIPlayer(Nib* const nib);
 
    virtual void reset() override;
 
@@ -283,13 +294,13 @@ public:
 public:
    // NIB support
    virtual Nib* findNib(const unsigned short playerID, const base::String* const federateName, const IoType ioType);
-   virtual Nib* findNib(const Player* const player, const IoType ioType);
+   virtual Nib* findNib(const models::Player* const player, const IoType ioType);
    virtual bool addNibToList(Nib* const nib, const IoType ioType);
    virtual void removeNibFromList(Nib* const nib, const IoType ioType);
 
    // More NIB support
    virtual Nib* createNewInputNib();
-   virtual Nib* createNewOutputNib(Player* const player);
+   virtual Nib* createNewOutputNib(models::Player* const player);
    virtual void destroyInputNib(Nib* const nib);
    virtual void destroyOutputNib(Nib* const nib);
    virtual bool addNib2InputList(Nib* const nib);
@@ -303,7 +314,7 @@ protected:
 
    // Create a new Network Interface Block (NIB) for 'player' and insert it
    // in the output list.  Returns a pointer to the new NIB or 0.
-   Nib* insertNewOutputNib(Player* const player);
+   Nib* insertNewOutputNib(models::Player* const player);
 
    // Number of NIBs on the input list
    unsigned int getInputListSize() const {
@@ -355,11 +366,11 @@ public:
    virtual const Ntm* findNetworkTypeMapper(const Nib* const nib) const;
 
    // Finds the network type mapper by Player
-   virtual const Ntm* findNetworkTypeMapper(const Player* const p) const;
+   virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const;
 
    // NTM input node
    class NtmInputNode : public base::Object {
-      DECLARE_SUBCLASS(NtmInputNode,base::Object)
+      DECLARE_SUBCLASS(NtmInputNode, base::Object)
    public:
       NtmInputNode();
       virtual const Ntm* findNetworkTypeMapper(const Nib* const p) const =0;
@@ -369,10 +380,10 @@ public:
 
    // NTM output node
    class NtmOutputNode : public base::Object {
-      DECLARE_SUBCLASS(NtmOutputNode,base::Object)
+      DECLARE_SUBCLASS(NtmOutputNode, base::Object)
    public:
       NtmOutputNode();
-      virtual const Ntm* findNetworkTypeMapper(const Player* const p) const =0;
+      virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const =0;
       virtual bool add2OurLists(Ntm* const ntm) =0;
       virtual void print(std::ostream& sout, const int icnt=0) const =0;
    };
@@ -404,7 +415,6 @@ protected:
    virtual void testInputEntityTypes(const unsigned int n);    // Test rig for incoming quick lookup
 
 
-
 //------------------------------------------------------------------------------
 // Private data
 //------------------------------------------------------------------------------
@@ -413,12 +423,12 @@ private:
    void cleanupInputList();                             // Clean-up the Input-List (remove out of date items)
 
    // Network Model IDs
-   unsigned short netID;                                // Networkd ID
-   base::safe_ptr<const base::String> federationName; // Federation name
-   base::safe_ptr<const base::String> federateName;   // Federate name
+   unsigned short netID;                                // Network ID
+   base::safe_ptr<const base::String> federationName;   // Federation name
+   base::safe_ptr<const base::String> federateName;     // Federate name
 
-   base::safe_ptr<Station>    station;                 // Our station class
-   base::safe_ptr<Simulation> simulation;              // Our simulation class
+   base::safe_ptr<Station> station;                     // Our station class
+   base::safe_ptr<Simulation> simulation;               // Our simulation class
    TSource          timeline;                           // Source of our timeline
    unsigned short   iffEventID;                         // IFF event ID (as needed)
    unsigned short   emEventID;                          // Emission event ID (as needed)
@@ -457,7 +467,7 @@ private: // Nib related private
       }
       // NIB IDs  -- Comparisons in this order --
       unsigned short id;                           // Player id
-      base::safe_ptr<const base::String> fName;  // Federate name
+      base::safe_ptr<const base::String> fName;    // Federate name
    };
 
    // Search callbacks: object name compare function --

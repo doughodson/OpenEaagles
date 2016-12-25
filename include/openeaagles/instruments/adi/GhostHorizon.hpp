@@ -33,12 +33,12 @@ protected:
     bool setSlotHeight(const base::Number* const x);
 
 private:
-    osg::Vec3 skyColor;     // color of our sky
-    osg::Vec3 groundColor;  // color of our ground
+    osg::Vec3d skyColor;        // color of our sky
+    osg::Vec3d groundColor;     // color of our ground
     base::String* gColorName;   // ground color name
     base::String* sColorName;   // sky color name
-    double width;           // width of our polygon
-    double height;          // height of our polygon
+    double width;               // width of our polygon
+    double height;              // height of our polygon
 };
 
 }

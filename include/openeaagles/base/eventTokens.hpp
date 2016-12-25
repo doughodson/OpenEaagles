@@ -2,7 +2,7 @@
 // Standard Event Tokens
 //
 // ### DO NOT include this file; this file is included as part of
-//     Component.h (i.e., the 'enum' is contained in Component )
+//     Component.hpp (i.e., the 'enum' is contained in Component)
 //
 // ### This file MUST match eventTokens.epp
 //
@@ -200,44 +200,44 @@ enum {
     TGT_DESIGNATE         = 1402,  // Target designate
 
     WPN_REL_EVENT         = 1405,  // Passes requested switch state as Boolean
-                                         // or no argument for one-shot event
+                                   // or no argument for one-shot event
 
     TRIGGER_SW_EVENT      = 1406,  // Passes requested switch state as Boolean
-                                         // or no argument for one-shot event
+                                   // or no argument for one-shot event
 
     TMS_FWD_EVENT         = 1407,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     TMS_AFT_EVENT         = 1408,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     TMS_LEFT_EVENT        = 1409,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     TMS_RIGHT_EVENT       = 1410,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
 
     DMS_FWD_EVENT         = 1411,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     DMS_AFT_EVENT         = 1412,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     DMS_LEFT_EVENT        = 1413,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     DMS_RIGHT_EVENT       = 1414,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
 
     CMS_FWD_EVENT         = 1415,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     CMS_AFT_EVENT         = 1416,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     CMS_LEFT_EVENT        = 1417,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     CMS_RIGHT_EVENT       = 1418,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
 
     PINKY_SW_EVENT        = 1419,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     NWS_SW_EVENT          = 1420,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
     CURSOR_ZERO_EVENT     = 1421,  // Passes requested switch state as Boolean
-                                        // or no argument for one-shot event
+                                   // or no argument for one-shot event
 
     CURSOR_X_EVENT        = 1422,  // Passes requested position state as double
     CURSOR_Y_EVENT        = 1423,  // Passes requested position state as double

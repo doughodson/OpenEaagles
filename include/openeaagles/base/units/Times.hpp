@@ -55,6 +55,7 @@
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {

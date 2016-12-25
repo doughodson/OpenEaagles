@@ -5,7 +5,7 @@
 
 #include "openeaagles/base/units/Areas.hpp"
 #include "openeaagles/base/osg/Math"
-#include "openeaagles/base/SlotTable.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {

@@ -180,19 +180,6 @@ bool BitmapFont::setReverse(const base::Number* const rnumber)
     return true;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Page
-//------------------------------------------------------------------------------
-base::Object* BitmapFont::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& BitmapFont::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     unsigned int j = 0;

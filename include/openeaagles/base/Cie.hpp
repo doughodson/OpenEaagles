@@ -3,10 +3,13 @@
 #define __oe_base_Cie_H__
 
 #include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/osg/Matrix"
 #include "openeaagles/base/safe_ptr.hpp"
+#include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
+
+namespace osg { class Vec4d; }
+
 namespace base {
 
 class MonitorMetrics;
@@ -66,17 +69,17 @@ public:
     double luminance() const;
     double x() const;
     double y() const;
-    void getCIE(osg::Vec3& cie) const;
+    void getCIE(osg::Vec3d& cie) const;
 
     virtual bool setMonitor(MonitorMetrics* const msg);
     virtual bool setLuminance(Number* const msg);
     virtual bool setX(Number* const msg);
     virtual bool setY(Number* const msg);
 
-    static void cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie, const MonitorMetrics* m);
+    static void cie2rgb(osg::Vec4d& rgba, const osg::Vec3d& cie, const MonitorMetrics* m);
 
 protected:
-    osg::Vec3 cie;
+    osg::Vec3d cie;
     safe_ptr<const MonitorMetrics> monitor;
 };
 

@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: FlowRate
-//------------------------------------------------------------------------------
+
 #ifndef __oe_base_FlowRate_H__
 #define __oe_base_FlowRate_H__
 
@@ -18,9 +16,6 @@ namespace base {
 // Slots:
 //    volume     <Volume>   ! Volume (default: 1 ft^3)
 //    flowTime   <Time>     ! Time (default: 1 second)
-//
-// getSlotByIndex() for FlowRate
-//     Object* FlowRate::getSlotByIndex(const int si)
 //
 // set() -- sets our velocity from some other velocity
 //     bool FlowRate::set(const double newFlowRate, Volume* newVolume, Time* newTime)

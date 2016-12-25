@@ -1,7 +1,11 @@
 
 #include "openeaagles/base/Color.hpp"
 
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
+
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -12,9 +16,6 @@ EMPTY_DELETEDATA(Color)
 
 double Color::defaultAlpha = 1.0f;
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Color::Color()
 {
     STANDARD_CONSTRUCTOR()
@@ -24,9 +25,6 @@ Color::Color()
     color[ALPHA] = defaultAlpha;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Color::copyData(const Color& org, const bool)
 {
    BaseClass::copyData(org);
@@ -36,14 +34,14 @@ void Color::copyData(const Color& org, const bool)
 //------------------------------------------------------------------------------
 // data access functions
 //------------------------------------------------------------------------------
-Color::operator const osg::Vec3*() const
+Color::operator const osg::Vec3d*() const
 {
     // Note: Color is a Vec4, which is just a four element array [ r g b a ], and
     // we're reinterpreting it as a Vec3, which is a three element array [ r g b ].
-    return reinterpret_cast<const osg::Vec3*>( &color );
+    return reinterpret_cast<const osg::Vec3d*>( &color );
 }
 
-Color::operator const osg::Vec4*() const
+Color::operator const osg::Vec4d*() const
 {
     return &color;
 }
@@ -73,15 +71,15 @@ double Color::alpha() const
 }
 
 // Get the address of the color vector array(3)
-const osg::Vec3* Color::getRGB() const
+const osg::Vec3d* Color::getRGB() const
 {
     // Note: Color is a Vec4, which is just a four element array [ r g b a ], and
     // we're reinterpreting it as a Vec3, which is a three element array [ r g b ].
-    return reinterpret_cast<const osg::Vec3*>( &color );
+    return reinterpret_cast<const osg::Vec3d*>( &color );
 }
 
 // Get the address of the color vector array(4)
-const osg::Vec4* Color::getRGBA() const
+const osg::Vec4d* Color::getRGBA() const
 {
     return &color;
 }

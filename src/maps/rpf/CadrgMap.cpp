@@ -745,14 +745,6 @@ void CadrgMap::updateData(double dt)
     }
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() - Get the slot data.
-//------------------------------------------------------------------------------
-base::Object* CadrgMap::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
 }
 }
 

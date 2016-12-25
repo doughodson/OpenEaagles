@@ -64,10 +64,10 @@ inline const Complex& Complex::operator-=(const double r)
 //------------------------------------------------------------------------------
 inline const Complex& Complex::multiply(const Complex& z)
 {
-   double r1 = getReal();
-   double i1 = getImag();
-   double r2 = z.getReal();
-   double i2 = z.getImag();
+   const double r1 = getReal();
+   const double i1 = getImag();
+   const double r2 = z.getReal();
+   const double i2 = z.getImag();
    setReal( r1*r2 - i1*i2 );
    setImag( r1*i2 + i1*r2 );
    return *this;
@@ -98,11 +98,11 @@ inline const Complex& Complex::operator*=(const double r)
 inline const Complex& Complex::divide(const Complex& z)
 {
    if (z != Complex(0.0)) {
-      double r1 = getReal();
-      double i1 = getImag();
-      double r2 = z.getReal();
-      double i2 = z.getImag();
-      double d  = r2*r2 + i2*i2;
+      const double r1 = getReal();
+      const double i1 = getImag();
+      const double r2 = z.getReal();
+      const double i2 = z.getImag();
+      const double d  = r2*r2 + i2*i2;
       if (d != 0) {
          setReal( (r1*r2 + i1*i2) / d );
          setImag( (i1*r2 - r1*i2) / d );
@@ -239,10 +239,10 @@ inline Complex operator-(const Complex& z)
 inline Complex multiply(const Complex& z1, const Complex& z2)
 {
    Complex t;
-   double r1 = z1.getReal();
-   double i1 = z1.getImag();
-   double r2 = z2.getReal();
-   double i2 = z2.getImag();
+   const double r1 = z1.getReal();
+   const double i1 = z1.getImag();
+   const double r2 = z2.getReal();
+   const double i2 = z2.getImag();
    t.setReal(r1*r2 - i1*i2);
    t.setImag(r1*i2 + i1*r2);
    return t;
@@ -286,11 +286,11 @@ inline Complex divide(const Complex& z1, const Complex& z2)
 {
    Complex t;
    if (z2 != Complex(0.0)) {
-      double r1  = z1.getReal();
-      double i1  = z1.getImag();
-      double r2  = z2.getReal();
-      double i2  = z2.getImag();
-      double den = r2*r2 + i2*i2;
+      const double r1  = z1.getReal();
+      const double i1  = z1.getImag();
+      const double r2  = z2.getReal();
+      const double i2  = z2.getImag();
+      const double den = r2*r2 + i2*i2;
       t.setReal((r1*r2 + i1*i2) / den);
       t.setImag((i1*r2 - r1*i2) / den);
    }
@@ -307,9 +307,9 @@ inline Complex divide(const double r, const Complex& z)
 {
    Complex t;
    if (z != Complex(0.0)) {
-      double r2  = z.getReal();
-      double i2  = z.getImag();
-      double den = r2*r2 + i2*i2;
+      const double r2  = z.getReal();
+      const double i2  = z.getImag();
+      const double den = r2*r2 + i2*i2;
       t.setReal(+r*r2 / den);
       t.setImag(-r*i2 / den);
    }
@@ -397,7 +397,7 @@ inline bool Complex::operator==(const Complex& z) const
 inline Complex Complex::zExp() const
 {
     Complex t;
-    double x = std::exp(getReal());
+    const double x = std::exp(getReal());
     t.setReal(x*std::cos(getImag()));
     t.setImag(x*std::sin(getImag()));
     return t;
@@ -407,8 +407,8 @@ inline Complex Complex::zLog() const
 {
    Complex t(*this);
    if (t != Complex(0.0)) {
-      double re = std::log(getReal()*getReal() + getImag()*getImag()) / 2.0;
-      double im = std::atan2(getImag(), static_cast<double>(getReal()));
+      const double re = std::log(getReal()*getReal() + getImag()*getImag()) / 2.0;
+      const double im = std::atan2(getImag(), static_cast<double>(getReal()));
       t.setReal(re);
       t.setImag(im);
    }
@@ -440,7 +440,7 @@ inline Complex Complex::zInv() const
 {
    Complex t(*this);
    if (t != Complex(0.0)) {
-      double den = getReal()*getReal() + getImag()*getImag();
+      const double den = getReal()*getReal() + getImag()*getImag();
       t.setImag(-getImag());
       t.divide(den);
    }

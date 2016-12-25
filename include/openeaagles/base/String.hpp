@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <cctype>
 #include <cstring>
+#include <iostream>
 
 namespace oe {
 namespace base {
@@ -160,7 +161,7 @@ inline const char* String::getString() const
 //------------------------------------------------------------------------------
 inline char* String::getCopyString() const
 {
-    char* p = 0;
+    char* p = nullptr;
     size_t l = len();
     if (l > 0) {
         p = new char[l+1];
@@ -231,9 +232,9 @@ inline bool operator==(const String& s1, const String& s2)
 inline bool operator==(const char* s1, const String& s2)
 {
    bool ok = false;
-   if (s1 == 0 || s2.isEmpty()) {
+   if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then both must be null to be equal
-      if (s1 == 0 && s2.isEmpty()) ok = true;
+      if (s1 == nullptr && s2.isEmpty()) ok = true;
    }
    else ok = (std::strcmp(s1, s2) == 0);
    return ok;
@@ -242,9 +243,9 @@ inline bool operator==(const char* s1, const String& s2)
 inline bool operator==(const String& s1, const char* s2)
 {
    bool ok = false;
-   if (s1.isEmpty() || s2 == 0) {
+   if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then both must be null to be equal
-      if (s1.isEmpty() && s2 == 0) ok = true;
+      if (s1.isEmpty() && s2 == nullptr) ok = true;
    }
    else ok = (std::strcmp(s1, s2) == 0);
    return ok;
@@ -264,9 +265,9 @@ inline bool operator!=(const String& s1, const String& s2)
 inline bool operator!=(const char* s1, const String& s2)
 {
    bool ok = false;
-   if (s1 == 0 || s2.isEmpty()) {
+   if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only one must be null to be not equal
-      if (s1 != 0 || !s2.isEmpty()) ok = true;
+      if (s1 != nullptr || !s2.isEmpty()) ok = true;
    }
    else ok = (std::strcmp(s1, s2) != 0);
    return ok;
@@ -275,9 +276,9 @@ inline bool operator!=(const char* s1, const String& s2)
 inline bool operator!=(const String& s1, const char* s2)
 {
    bool ok = false;
-   if (s1.isEmpty() || s2 == 0) {
+   if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only one must be null to be not equal
-      if (!s1.isEmpty() || s2 != 0) ok = true;
+      if (!s1.isEmpty() || s2 != nullptr) ok = true;
    }
    else ok = (std::strcmp(s1, s2) != 0);
    return ok;
@@ -297,9 +298,9 @@ inline bool operator<(const String& s1, const String& s2)
 inline bool operator<(const char* s1, const String& s2)
 {
    bool ok = false;
-   if (s1 == 0 || s2.isEmpty()) {
+   if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only s1 must be null to be less than s2
-      if (s1 == 0 && !s2.isEmpty()) ok = true;
+      if (s1 == nullptr && !s2.isEmpty()) ok = true;
    }
    else ok = (std::strcmp(s1, s2) < 0);
    return ok;
@@ -308,9 +309,9 @@ inline bool operator<(const char* s1, const String& s2)
 inline bool operator<(const String& s1, const char* s2)
 {
    bool ok = false;
-   if (s1.isEmpty() || s2 == 0) {
+   if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only s1 must be null to be less than s2
-      if (s1.isEmpty() && s2 != 0) ok = true;
+      if (s1.isEmpty() && s2 != nullptr) ok = true;
    }
    else ok = (std::strcmp(s1, s2) < 0);
    return ok;
@@ -330,9 +331,9 @@ inline bool operator<=(const String& s1, const String& s2)
 inline bool operator<=(const char* s1, const String& s2)
 {
    bool ok = false;
-   if (s1 == 0 || s2.isEmpty()) {
+   if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then s1 must be null to be less than or equal s2.
-      if (s1 == 0) ok = true;
+      if (s1 == nullptr) ok = true;
    }
    else ok = (std::strcmp(s1, s2) <= 0);
    return ok;
@@ -341,7 +342,7 @@ inline bool operator<=(const char* s1, const String& s2)
 inline bool operator<=(const String& s1, const char* s2)
 {
    bool ok = false;
-   if (s1.isEmpty() || s2 == 0) {
+   if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then s1 must be null to be less than or equal s2.
       if (s1.isEmpty()) ok = true;
    }
@@ -363,9 +364,9 @@ inline bool operator>(const String& s1, const String& s2)
 inline bool operator>(const char* s1, const String& s2)
 {
    bool ok = false;
-   if (s1 == 0 || s2.isEmpty()) {
+   if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then only s2 must be null to be less than s1
-      if (s1 != 0 && s2.isEmpty()) ok = true;
+      if (s1 != nullptr && s2.isEmpty()) ok = true;
    }
    else ok = (std::strcmp(s1, s2) > 0);
    return ok;
@@ -374,9 +375,9 @@ inline bool operator>(const char* s1, const String& s2)
 inline bool operator>(const String& s1, const char* s2)
 {
    bool ok = false;
-   if (s1.isEmpty() || s2 == 0) {
+   if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then only s2 must be null to be less than s1
-      if (!s1.isEmpty() && s2 == 0) ok = true;
+      if (!s1.isEmpty() && s2 == nullptr) ok = true;
    }
    else ok = (std::strcmp(s1, s2) > 0);
    return ok;
@@ -396,7 +397,7 @@ inline bool operator>=(const String& s1, const String& s2)
 inline bool operator>=(const char* s1, const String& s2)
 {
    bool ok = false;
-   if (s1 == 0 || s2.isEmpty()) {
+   if (s1 == nullptr || s2.isEmpty()) {
       // if a string is null, then s2 must be null to be less than or equal s1
       if (s2.isEmpty()) ok = true;
    }
@@ -407,9 +408,9 @@ inline bool operator>=(const char* s1, const String& s2)
 inline bool operator>=(const String& s1, const char* s2)
 {
    bool ok = false;
-   if (s1.isEmpty() || s2 == 0) {
+   if (s1.isEmpty() || s2 == nullptr) {
       // if a string is null, then s2 must be null to be less than or equal s1
-      if (s2 == 0) ok = true;
+      if (s2 == nullptr) ok = true;
    }
    else ok = (std::strcmp(s1, s2) >= 0);
    return ok;
@@ -436,7 +437,7 @@ inline std::istream& operator>>(std::istream& sin, String& s)
 {
     const int a = 256;
     char* buf = new char[a+1];
-    int   n1   = 0;
+    int   n1 = 0;
     char  c;
 
     sin.get(c);

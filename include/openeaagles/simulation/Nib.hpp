@@ -4,9 +4,15 @@
 
 #include "openeaagles/simulation/NetIO.hpp"
 
+#include "openeaagles/models/players/Player.hpp"
+
 namespace oe {
+
+namespace models {
+class Missile;
+}
+
 namespace simulation {
-   class Missile;
 
 //------------------------------------------------------------------------------
 // Class: Nib
@@ -56,18 +62,18 @@ public:
 public:
    Nib(const NetIO::IoType ioType);
 
-   NetIO::IoType getIoType() const { return ioType; }
+   NetIO::IoType getIoType() const                    { return ioType; }
 
-   NetIO* getNetIO()  { return pNetIO; }             // Controlling Network I/O
-   const NetIO* getNetIO() const { return pNetIO; }  // Controlling Network I/O (const version)
-   virtual bool setNetIO(NetIO* const p);  // Sets our Network I/O controller
+   NetIO* getNetIO()                                  { return pNetIO; }  // Controlling Network I/O
+   const NetIO* getNetIO() const                      { return pNetIO; }  // Controlling Network I/O (const version)
+   virtual bool setNetIO(NetIO* const p);                                 // Sets our Network I/O controller
 
    // The player, its name and ID
-   Player* getPlayer()                             { return pPlayer; }
-   unsigned short getPlayerID() const              { return playerID; }
-   const char* getPlayerName() const               { return pname; }
+   models::Player* getPlayer()                        { return pPlayer; }
+   unsigned short getPlayerID() const                 { return playerID; }
+   const char* getPlayerName() const                  { return pname; }
 
-   virtual bool setPlayer(Player* const p);
+   virtual bool setPlayer(models::Player* const p);
    virtual void setPlayerID(const unsigned short v);
    virtual void setPlayerName(const char* s);
 
@@ -75,16 +81,16 @@ public:
    virtual bool setFederateName(const base::String* const msg);   // Sets our federate name
 
    // Mode
-   bool isMode(const Player::Mode m) const            { return mode == m; }
-   bool isNotMode(const Player::Mode m) const         { return mode != m; }
-   Player::Mode getMode() const                       { return mode; }
-   virtual void setMode(const Player::Mode m);
+   bool isMode(const models::Player::Mode m) const            { return mode == m; }
+   bool isNotMode(const models::Player::Mode m) const         { return mode != m; }
+   models::Player::Mode getMode() const                       { return mode; }
+   virtual void setMode(const models::Player::Mode m);
 
    // Side
-   bool isSide(const Player::Side s) const            { return (s == side); }
-   bool isNotSide(const Player::Side s) const         { return (s != side); }
-   Player::Side getSide() const                       { return side; }
-   virtual void setSide(const Player::Side s);
+   bool isSide(const models::Player::Side s) const            { return (s == side); }
+   bool isNotSide(const models::Player::Side s) const         { return (s != side); }
+   models::Player::Side getSide() const                       { return side; }
+   virtual void setSide(const models::Player::Side s);
 
    // Dead Reckoning (DR) algorithm (see enum DeadReckoning)
    bool isDeadReckoning(const unsigned char dr) const { return (drNum == dr); }
@@ -129,54 +135,54 @@ public:
    void setCheckedFlag(const bool flg)                { checked = flg; }
 
    // Standard player (entity) type codes
-   const Ntm* getTypeMapper() const               { return ntm; }
-   bool isEntityTypeChecked() const               { return entityTypeChecked; }
-   bool isEntityTypeUnchecked() const             { return !entityTypeChecked; }
-   bool isEntityTypeValid() const                 { return (ntm != 0); }
-   bool isEntityTypeInvalid() const               { return (ntm == 0); }
+   const Ntm* getTypeMapper() const                   { return ntm; }
+   bool isEntityTypeChecked() const                   { return entityTypeChecked; }
+   bool isEntityTypeUnchecked() const                 { return !entityTypeChecked; }
+   bool isEntityTypeValid() const                     { return (ntm != nullptr); }
+   bool isEntityTypeInvalid() const                   { return (ntm == nullptr); }
    virtual bool setTypeMapper(const Ntm* const p);
    virtual void setEntityTypeChecked(const bool f);
 
    // Appearance
-   double getDamage() const                       { return damage; }
-   double getSmoke() const                        { return smoking; }
-   double getFlames() const                       { return flames; }
-   unsigned int getCamouflageType() const         { return camouflage; }
+   double getDamage() const                           { return damage; }
+   double getSmoke() const                            { return smoking; }
+   double getFlames() const                           { return flames; }
+   unsigned int getCamouflageType() const             { return camouflage; }
    virtual bool setDamage(const double v);
    virtual bool setSmoke(const double v);
    virtual bool setFlames(const double v);
    virtual bool setCamouflageType(const unsigned int v);
 
    // Articulated Part: wing sweep angle change count
-   unsigned int getAPartWingSweepCnt() const { return apartWingSweepCnt; }
+   unsigned int getAPartWingSweepCnt() const          { return apartWingSweepCnt; }
 
    // Articulated Part: wing sweep (radians)
-   double getAPartWingSweep() const          { return apartWingSweep; }
+   double getAPartWingSweep() const                   { return apartWingSweep; }
 
    // Articulated Part: gear position change count
-   unsigned int getAPartGearPosCnt() const   { return apartGearPosCnt; }
+   unsigned int getAPartGearPosCnt() const            { return apartGearPosCnt; }
 
    // Articulated Part: landing gear position (% [0% up; 100% down] )
-   double getAPartPartGearPos() const        { return apartLandingGear; }
+   double getAPartPartGearPos() const                 { return apartLandingGear; }
 
    // Articulated Part: bay door position change count
-   unsigned int getAPartBayDoorCnt() const   { return apartBayDoorCnt; }
+   unsigned int getAPartBayDoorCnt() const            { return apartBayDoorCnt; }
 
    // Articulated Part: bay door position (% [0% closed; 100% open] )
-   double getAPartBayDoorPos() const         { return apartBayDoor; }
+   double getAPartBayDoorPos() const                  { return apartBayDoor; }
 
    // Articulated Part: launcher elevation angle change count
-   unsigned int getAPartLauncherElevationCnt() const   { return apartLnchrElevCnt; }
+   unsigned int getAPartLauncherElevationCnt() const  { return apartLnchrElevCnt; }
 
    // Articulated Part: Launcher elevation angle (radians)
-   double getAPartLauncherElevation() const         { return apartLnchrElev; }
+   double getAPartLauncherElevation() const               { return apartLnchrElev; }
 
    // Articulated Part: Number of attached missiles
    unsigned int getAPartNumberAttachedNumMissiles() const { return apartNumMissiles; }
 
    // Articulated Part: Returns a pointer to the n'th attached missiles
    //                   [n: 1 .. number-of-missiles]
-   const Missile* getAPartAttachedMissile(const unsigned int n) const {
+   const models::Missile* getAPartAttachedMissile(const unsigned int n) const {
       return (n >= 1 && n <= apartNumMissiles ? apartMsl[n-1] : 0);
    }
 
@@ -186,20 +192,20 @@ public:
       return (n >= 1 && n <= apartNumMissiles ? apartMslCnt[n-1] : 0);
    }
 
-   bool wasDetonationMessageSent() const           { return detMsgSent; }
+   bool wasDetonationMessageSent() const          { return detMsgSent; }
    virtual bool setDetonationMessageSent(const bool flg);
 
    // NIB timeout
-   bool isTimeoutEnabled() const                   { return timeoutEnbFlg; }
-   void setTimeoutEnabled(const bool flg)          { timeoutEnbFlg = flg; }
+   bool isTimeoutEnabled() const                  { return timeoutEnbFlg; }
+   void setTimeoutEnabled(const bool flg)         { timeoutEnbFlg = flg; }
 
-   double getTimeExec() const                      { return execTime; }
+   double getTimeExec() const                     { return execTime; }
    virtual void setTimeExec(const double t);
 
-   double getTimeUtc() const                       { return utcTime; }
+   double getTimeUtc() const                      { return utcTime; }
    virtual void setTimeUtc(const double t);
 
-   virtual bool setOutputPlayerType(const Player* const p);
+   virtual bool setOutputPlayerType(const models::Player* const p);
    virtual bool isPlayerStateUpdateRequired(const double curExecTime);
    virtual void playerState2Nib();
    virtual void nib2PlayerState();
@@ -221,7 +227,7 @@ protected:
       ) const;
 
    // Update our DR time and return the new time
-   double updateDrTime(const double dt)               { return (drTime += dt); }
+   double updateDrTime(const double dt)           { return (drTime += dt); }
 
    virtual bool shutdownNotification() override;
 
@@ -229,13 +235,13 @@ private:
    // compute the rotational matrix R0
    static bool drComputeMatrixR0(
          const osg::Vec3d& RPY,      // [radians]
-         osg::Matrixd* const pR0    // Rotational matrix R0
+         osg::Matrixd* const pR0     // Rotational matrix R0
       );
 
    // compute the wwT matrix
    static bool drComputeMatrixWwT(
          const osg::Vec3d& av,       // angular velocities [rps]
-         osg::Matrixd* const pwwT   // matrix
+         osg::Matrixd* const pwwT    // matrix
       );
 
    // compute the omega matrix
@@ -274,20 +280,20 @@ private:
    NetIO::IoType ioType;               // Input/Output direction of this NIB
 
    base::safe_ptr<const base::String> federateName; // Federate name
-   base::safe_ptr<Player> pPlayer;                   // Our player
-   base::safe_ptr<NetIO> pNetIO;                     // Our Network
-   bool checked;                       // NIB was checked
-   unsigned short  playerID;           // Player ID
+   base::safe_ptr<models::Player> pPlayer;          // Our player
+   base::safe_ptr<NetIO> pNetIO;                    // Our Network
+   bool checked;                                    // NIB was checked
+   unsigned short  playerID;                        // Player ID
 
    // Type mapper and type checked flags
-   base::safe_ptr<const Ntm> ntm;     // Type mapper
+   base::safe_ptr<const Ntm> ntm;      // Type mapper
    bool entityTypeChecked;             // Entity type has been checked
 
    // Player data
    static const unsigned int PNAME_BUF_SIZE = 64;
    char        pname[PNAME_BUF_SIZE];  // Name
-   Player::Side side;                  // Side
-   Player::Mode mode;                  // NIB Mode
+   models::Player::Side side;          // Side
+   models::Player::Mode mode;          // NIB Mode
    bool        timeoutEnbFlg;          // NIB can timeout flag
    double      damage;                 // Damage state from no damage(0.0) to destroyed (1.0)
    double      smoking;                // Smoke state from no smoke (0.0) to maximum (1.0)
@@ -329,10 +335,10 @@ private:
    double apartBayDoor;                // Articulated Part: bay door position (% [0% closed; 100% open] )
    double apartLnchrElev;              // Articulated Part: Launcher elevation angle (radians)
 
-   const Missile* apartMsl[MAX_AMSL];  // Articulated Part: Attached missiles
-   unsigned int apartMslCnt[MAX_AMSL]; // Articulated Part: Attached missile change counts
-   bool apartMslAttached[MAX_AMSL];    // Articulated Part: Missile attached (not launched) flag
-   unsigned int apartNumMissiles;      // Articulated Part: Number of attached missiles
+   const models::Missile* apartMsl[MAX_AMSL];  // Articulated Part: Attached missiles
+   unsigned int apartMslCnt[MAX_AMSL];         // Articulated Part: Attached missile change counts
+   bool apartMslAttached[MAX_AMSL];            // Articulated Part: Missile attached (not launched) flag
+   unsigned int apartNumMissiles;              // Articulated Part: Number of attached missiles
 };
 
 }

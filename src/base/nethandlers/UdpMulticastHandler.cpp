@@ -299,17 +299,6 @@ bool UdpMulticastHandler::setSlotLoopback(const Number* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* UdpMulticastHandler::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -344,4 +333,3 @@ std::ostream& UdpMulticastHandler::serialize(std::ostream& sout, const int i, co
 
 }
 }
-

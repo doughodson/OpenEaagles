@@ -1,4 +1,3 @@
-// Class: DiscreteInput
 
 #include "openeaagles/iodevice/DiscreteInput.hpp"
 
@@ -7,14 +6,12 @@
 #include "openeaagles/base/IoHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 
+#include <iostream>
+
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// DiscreteInput
-//==============================================================================
-
-IMPLEMENT_SUBCLASS(DiscreteInput,"DiscreteInput")
+IMPLEMENT_SUBCLASS(DiscreteInput, "DiscreteInput")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(DiscreteInput)
@@ -36,9 +33,6 @@ BEGIN_SLOT_MAP(DiscreteInput)
     ON_SLOT( 6, setSlotNum,      base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 DiscreteInput::DiscreteInput()
 {
    STANDARD_CONSTRUCTOR()
@@ -57,9 +51,6 @@ void DiscreteInput::initData()
    num = 1;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void DiscreteInput::copyData(const DiscreteInput& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -74,9 +65,6 @@ void DiscreteInput::copyData(const DiscreteInput& org, const bool cc)
    num = org.num;
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void DiscreteInput::deleteData()
 {
 }
@@ -264,17 +252,6 @@ bool DiscreteInput::setSlotNum(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* DiscreteInput::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& DiscreteInput::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

@@ -49,6 +49,7 @@
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/constants.hpp"
+#include <iostream>
 
 #include <cmath>
 

@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Agent
-//------------------------------------------------------------------------------
 
 #include "openeaagles/base/ubf/Agent.hpp"
 #include "openeaagles/base/ubf/Action.hpp"
@@ -193,15 +190,6 @@ bool Agent::setSlotBehavior(Behavior* const x)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* Agent::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-
 //==============================================================================
 // Class: AgentTC
 // Description: An Agent that manages a component (the "actor") with a behavior,
@@ -233,4 +221,3 @@ void AgentTC::updateData(const double dt)
 }
 }
 }
-

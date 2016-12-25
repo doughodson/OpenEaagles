@@ -233,17 +233,6 @@ bool Table::setDataTable(const List* const sdtobj)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Table
-//------------------------------------------------------------------------------
-Object* Table::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& Table::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

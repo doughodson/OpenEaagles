@@ -1,5 +1,7 @@
+
 #include "openeaagles/instruments/gauges/AnalogGauge.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
@@ -176,14 +178,5 @@ bool AnalogGauge::setDrawMe(const bool x)
     return true;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for AnalogGauge
-//------------------------------------------------------------------------------
-base::Object* AnalogGauge::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

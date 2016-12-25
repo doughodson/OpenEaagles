@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Class: NetIO
-//------------------------------------------------------------------------------
 
 #include "openeaagles/networks/hla/NetIO.hpp"
 #include "openeaagles/networks/hla/Nib.hpp"
@@ -1019,17 +1016,6 @@ int NetIO::compareObjHandles(const void* p1, const void* p2)
    return result;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* NetIO::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;

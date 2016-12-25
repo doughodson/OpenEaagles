@@ -1,32 +1,25 @@
 
 #include "openeaagles/instruments/buttons/Switch.hpp"
 #include "openeaagles/base/Number.hpp"
+#include <iostream>
 
 namespace oe {
 namespace instruments {
 
-IMPLEMENT_SUBCLASS(Switch,"Switch")
+IMPLEMENT_SUBCLASS(Switch, "Switch")
 EMPTY_SERIALIZER(Switch)
+EMPTY_DELETEDATA(Switch)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Switch)
    "selections",    // 1) How many selections are there?
    "currentState",  // 2) Which state do you want to start on?
 END_SLOTTABLE(Switch)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Switch)
    ON_SLOT(1, setSlotNumSelections, base::Number)
    ON_SLOT(2, setSlotCurrentState, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Switch::Switch()
 {
     STANDARD_CONSTRUCTOR()
@@ -35,9 +28,6 @@ Switch::Switch()
     currentStateSD.empty();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Switch::copyData(const Switch& org, const bool)
 {
     BaseClass::copyData(org);
@@ -45,11 +35,6 @@ void Switch::copyData(const Switch& org, const bool)
     numSelections = org.numSelections;
     currentStateSD.empty();
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Switch)
 
 // SLOT functions
 //------------------------------------------------------------------------------
@@ -102,9 +87,6 @@ bool Switch::onSingleClick()
     return BaseClass::onSingleClick();
 }
 
-//------------------------------------------------------------------------------
-// updateData()
-//------------------------------------------------------------------------------
 void Switch::updateData(const double dt)
 {
     BaseClass::updateData(dt);
@@ -112,13 +94,5 @@ void Switch::updateData(const double dt)
     send("switch", SELECT, currentState, currentStateSD);
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Switch
-//------------------------------------------------------------------------------
-base::Object* Switch::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
 }
-
-}  // end instruments namespace
-}  // end oe namespace
+}

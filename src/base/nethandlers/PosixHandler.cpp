@@ -619,17 +619,6 @@ bool PosixHandler::setSlotIgnoreSourcePort(const Number* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* PosixHandler::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -670,4 +659,3 @@ std::ostream& PosixHandler::serialize(std::ostream& sout, const int i, const boo
 
 }
 }
-

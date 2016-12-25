@@ -5,7 +5,7 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stack,"Stack")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Stack, "Stack")
 
 EMPTY_COPYDATA(Stack)
 EMPTY_DELETEDATA(Stack)

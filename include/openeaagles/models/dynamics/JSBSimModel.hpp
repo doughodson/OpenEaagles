@@ -2,7 +2,7 @@
 #ifndef __oe_models_JSBSimModel_H__
 #define __oe_models_JSBSimModel_H__
 
-#include "openeaagles/simulation/dynamics/AerodynamicsModel.hpp"
+#include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
 #include "openeaagles/base/String.hpp"
 
 namespace JSBSim {
@@ -23,9 +23,9 @@ namespace models {
 // Class: JSBSimModel
 // Description: JSBSim Model
 //------------------------------------------------------------------------------
-class JSBSimModel : public simulation::AerodynamicsModel
+class JSBSimModel : public AerodynamicsModel
 {
-    DECLARE_SUBCLASS(JSBSimModel, simulation::AerodynamicsModel)
+    DECLARE_SUBCLASS(JSBSimModel, AerodynamicsModel)
 
 public:
     JSBSimModel();

@@ -9,7 +9,8 @@ OBJS =  \
 	srtm/SrtmHgtFile.o \
 	DataFile.o \
 	factory.o \
-	QuadMap.o
+	QuadMap.o \
+	Terrain.o
 
 .PHONY: all clean
 

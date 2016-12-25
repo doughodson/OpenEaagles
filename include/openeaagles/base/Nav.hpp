@@ -3,9 +3,10 @@
 #define __oe_base_Nav_H__
 
 #include "openeaagles/base/EarthModel.hpp"
-#include "openeaagles/base/osg/Vec3"
-#include "openeaagles/base/osg/Vec4"
-#include "openeaagles/base/osg/Matrix"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
+#include "openeaagles/base/osg/Matrixd"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
@@ -13,7 +14,7 @@
 
 namespace oe {
 namespace base {
-   class EarthModel;
+class EarthModel;
 
 //------------------------------------------------------------------------------
 // Class: Nav
@@ -284,7 +285,7 @@ public:
          double* const brg,                 // OUT: True bearing (degs)
          double* const slantRng,            // OUT: Slant range (nm)
          double* const dist,                // OUT: Distance (ground range) (nm)
-         double* const elev=0,              // OUT: Optional: elevation angle (degs)
+         double* const elev=nullptr,        // OUT: Optional: elevation angle (degs)
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -342,7 +343,7 @@ public:
          const double dlon,                 // IN:  Destination longitude (degs)
          double* const brg,                 // OUT: True initial bearing (degs)
          double* const dist,                // OUT: Geodesic distance (nm)
-         double* const brg2=0,              // OUT: Optional: true final bearing (degs)
+         double* const brg2=nullptr,        // OUT: Optional: true final bearing (degs)
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 

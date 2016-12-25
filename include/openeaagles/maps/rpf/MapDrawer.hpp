@@ -56,8 +56,6 @@ class CadrgMap;
 // drawTexture() - draws a tile at a specific position.
 //      void MapDrawer::drawTexture(const int row, const int column, const int idx)
 //
-// getSlotByIndex()
-//      base::Object* MapDrawer::getSlotByIndex(const int si)
 //
 // -------------------------------------------------------------------------------
 class MapDrawer : public graphics::MapPage

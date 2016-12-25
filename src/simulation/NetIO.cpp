@@ -3,19 +3,22 @@
 #include "openeaagles/simulation/Nib.hpp"
 #include "openeaagles/simulation/Ntm.hpp"
 
-#include "openeaagles/simulation/Aam.hpp"
-#include "openeaagles/simulation/Agm.hpp"
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/Bomb.hpp"
-#include "openeaagles/simulation/Effects.hpp"
-#include "openeaagles/simulation/GroundVehicle.hpp"
-#include "openeaagles/simulation/Guns.hpp"
-#include "openeaagles/simulation/Missile.hpp"
-#include "openeaagles/simulation/Player.hpp"
-#include "openeaagles/simulation/Sam.hpp"
-#include "openeaagles/simulation/SamVehicles.hpp"
-#include "openeaagles/simulation/Ships.hpp"
-#include "openeaagles/simulation/Signatures.hpp"
+#include "openeaagles/models/systems/Guns.hpp"
+
+// players
+#include "openeaagles/models/players/Aam.hpp"
+#include "openeaagles/models/players/Agm.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/Bomb.hpp"
+#include "openeaagles/models/players/Effects.hpp"
+#include "openeaagles/models/players/GroundVehicle.hpp"
+#include "openeaagles/models/players/Missile.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/players/Sam.hpp"
+#include "openeaagles/models/players/SamVehicles.hpp"
+#include "openeaagles/models/players/Ships.hpp"
+#include "openeaagles/models/Signatures.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
@@ -41,10 +44,6 @@
 namespace oe {
 namespace simulation {
 
-//==============================================================================
-// Class: NetIO
-//==============================================================================
-
 IMPLEMENT_ABSTRACT_SUBCLASS(NetIO, "NetIO")
 
 //------------------------------------------------------------------------------
@@ -55,9 +54,6 @@ const double NET_UPDATE_RATE      = 5.0;                     //  seconds
 const double NET_THRESHOLD_MTR    = 3.0;                     //  meters
 const double NET_THRESHOLD_RAD    = (3.0 * base::PI/180.0);  //  radians
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(NetIO)
    "networkID",            //  1: Network ID (this interface)
    "federationName",       //  2: Federation name
@@ -100,9 +96,6 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(14, setSlotMaxEntityRange,     base::Distance)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 NetIO::NetIO()
 {
    STANDARD_CONSTRUCTOR()
@@ -144,10 +137,6 @@ NetIO::NetIO()
    outputNtmTree = nullptr;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void NetIO::copyData(const NetIO& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -214,9 +203,6 @@ void NetIO::copyData(const NetIO& org, const bool cc)
     }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void NetIO::deleteData()
 {
    for (unsigned int i = 0; i < nInNibs; i++) {
@@ -243,9 +229,6 @@ void NetIO::deleteData()
    netInitFail = false;
 }
 
-//------------------------------------------------------------------------------
-// reset() -- Reset parameters
-//------------------------------------------------------------------------------
 void NetIO::reset()
 {
     // Initialization
@@ -481,7 +464,7 @@ void NetIO::cleanupInputList()
             // 2) Destroy the NIB
             destroyInputNib(nib);
       }
-      else if (nib->isMode(Player::DELETE_REQUEST) ) {
+      else if (nib->isMode(models::Player::DELETE_REQUEST) ) {
             // We have one that has a DELETE_REQUEST
             //std::cout << "REMOVED(DR): cur=" << curExecTime << ", NIB=" << nib->getTimeExec() << std::endl;
 
@@ -518,7 +501,7 @@ void NetIO::updateOutputList()
          unsigned int i = 0;  // src index
          unsigned int j = 0;  // dest index
          while (i < nOutNibs) {
-            if (outputList[i]->isMode(Player::DELETE_REQUEST)) {
+            if (outputList[i]->isMode(models::Player::DELETE_REQUEST)) {
                // Deleting this NIB
                //std::cout << "NetIO::updateOutputList() cleanup: nib = " << outputList[i] << std::endl;
                destroyOutputNib(outputList[i++]);
@@ -549,7 +532,7 @@ void NetIO::updateOutputList()
 
             // Get player list items
             base::Pair* playerPair = static_cast<base::Pair*>(playerItem->getValue());
-            Player* player = static_cast<Player*>(playerPair->object());
+            models::Player* player = static_cast<models::Player*>(playerPair->object());
 
             if (player->isLocalPlayer() || (isRelayEnabled() && player->getNetworkID() != getNetworkID()) )  {
                if ( player->isActive() && player->isNetOutputEnabled()) {
@@ -591,7 +574,7 @@ void NetIO::updateOutputList()
             // Request removal;
             // (note: the network specific code now has one frame to cleanup its own code
             //  before the NIB is dropped from the output list next frame -- see above)
-            outputList[i]->setMode(Player::DELETE_REQUEST);
+            outputList[i]->setMode(models::Player::DELETE_REQUEST);
          }
       }
 
@@ -620,12 +603,12 @@ void NetIO::processOutputList()
          // but its NIB state is still inactive, then we say the weapon has just
          // been fired. (delay until after the entity state PDU)
          bool fired =
-            (nib->isMode(Player::INACTIVE) || nib->isMode(Player::PRE_RELEASE)) &&
-            nib->getPlayer()->isMode(Player::ACTIVE) &&
-            nib->getPlayer()->isMajorType(Player::WEAPON);
+            (nib->isMode(models::Player::INACTIVE) || nib->isMode(models::Player::PRE_RELEASE)) &&
+            nib->getPlayer()->isMode(models::Player::ACTIVE) &&
+            nib->getPlayer()->isMajorType(models::Player::WEAPON);
 
          // Send a detonation message
-         if (nib->getPlayer()->isMode(Player::DETONATED) && !nib->wasDetonationMessageSent()) {
+         if (nib->getPlayer()->isMode(models::Player::DETONATED) && !nib->wasDetonationMessageSent()) {
             nib->munitionDetonationMsgFactory(static_cast<double>(curExecTime));
          }
 
@@ -656,7 +639,7 @@ Nib* NetIO::createNewInputNib()
     return nib;
 }
 
-Nib* NetIO::createNewOutputNib(Player* const player)
+Nib* NetIO::createNewOutputNib(models::Player* const player)
 {
    Nib* nib = nibFactory(OUTPUT_NIB);
    if (nib != nullptr) {
@@ -693,7 +676,7 @@ void NetIO::destroyInputNib(Nib* const nib)
 {
    if (nib->getPlayer() != nullptr) {
       // All we really need do is request deletion of the IPlayer.
-      nib->getPlayer()->setMode(Player::DELETE_REQUEST);
+      nib->getPlayer()->setMode(models::Player::DELETE_REQUEST);
    }
    // Once no one has a reference to us, our destructor will be called.
    nib->unref();
@@ -701,7 +684,7 @@ void NetIO::destroyInputNib(Nib* const nib)
 
 void NetIO::destroyOutputNib(Nib* const nib)
 {
-   Player* p = nib->getPlayer();
+   models::Player* p = nib->getPlayer();
    if (p != nullptr) p->setOutgoingNib(nullptr, netID);
 
    // Once no one has a reference to us, our destructor will be called.
@@ -711,16 +694,16 @@ void NetIO::destroyOutputNib(Nib* const nib)
 //------------------------------------------------------------------------------
 // createIPlayer() -- Create a new IPlayer
 //------------------------------------------------------------------------------
-Player* NetIO::createIPlayer(Nib* const nib)
+models::Player* NetIO::createIPlayer(Nib* const nib)
 {
-   Player* player = nullptr;
+   models::Player* player = nullptr;
 
    // Range filter
    bool inRange = true;
    double maxRng2 = getMaxEntityRangeSquared(nib);
    if (nib != nullptr && maxRng2 > 0) {
       const Station* sta = getStation();
-      const Player* own = sta->getOwnship();
+      const models::Player* own = dynamic_cast<const models::Player*>(sta->getOwnship());
       if (own != nullptr) {
          osg::Vec3d delta = nib->getDrPosition() - own->getGeocPosition();
          inRange = (delta.length2() <= maxRng2);
@@ -742,7 +725,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
       // Clone the 'template' player object (if any)
       // ---
       if (typeMapper != nullptr) {
-         const Player* templatePlayer = typeMapper->getTemplatePlayer();
+         const models::Player* templatePlayer = typeMapper->getTemplatePlayer();
          if (templatePlayer != nullptr) {
             player = templatePlayer->clone();
          }
@@ -759,7 +742,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
          player->setSide( nib->getSide() );
          player->setName( nib->getPlayerName() );
          player->setNib(nib);
-         player->setMode(Player::INACTIVE);
+         player->setMode(models::Player::INACTIVE);
          player->setGeocPosition( nib->getDrPosition() );
          player->setGeocEulerAngles( nib->getDrEulerAngles() );
          player->setGeocVelocity( nib->getDrVelocity() );
@@ -790,7 +773,7 @@ Player* NetIO::createIPlayer(Nib* const nib)
 //    Create a new Network Interface Block (NIB) for 'player' and insert it
 //    in the output list.  Returns a pointer to the new NIB or 0.
 //------------------------------------------------------------------------------
-Nib* NetIO::insertNewOutputNib(Player* const player)
+Nib* NetIO::insertNewOutputNib(models::Player* const player)
 {
     Nib* newNib = nullptr;
     if (player != nullptr) {
@@ -841,7 +824,7 @@ Nib* NetIO::findNib(const unsigned short playerID, const base::String* const fed
    return found;
 }
 
-Nib* NetIO::findNib(const Player* const player, const IoType ioType)
+Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
 {
    Nib* found = nullptr;
    if (player != nullptr) {
@@ -980,7 +963,7 @@ const Ntm* NetIO::findNetworkTypeMapper(const Nib* const nib) const
 }
 
 // Finds the network type mapper by Player
-const Ntm* NetIO::findNetworkTypeMapper(const Player* const p) const
+const Ntm* NetIO::findNetworkTypeMapper(const models::Player* const p) const
 {
    const Ntm* result = nullptr;
    if (outputNtmTree != nullptr && p != nullptr) {
@@ -1322,17 +1305,6 @@ bool NetIO::setSlotMaxEntityRange(const base::Distance* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-base::Object* NetIO::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -1518,10 +1490,10 @@ class NtmOutputNodeStd : public NetIO::NtmOutputNode
    DECLARE_SUBCLASS(NtmOutputNodeStd,NetIO::NtmOutputNode)
 
 public:
-   NtmOutputNodeStd(const Player* const p, const char* const formName);
+   NtmOutputNodeStd(const models::Player* const p, const char* const formName);
 
    // NetIO::NtmOutputNode class functions
-   virtual const Ntm* findNetworkTypeMapper(const Player* const p) const override;
+   virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const override;
    virtual bool add2OurLists(Ntm* const ntm) override;
    virtual void print(std::ostream& sout, const int icnt) const override;
 
@@ -1530,9 +1502,9 @@ private:
    bool addNtmSorted(Ntm* const ntm);
 
    char* nodeFactoryName;     // Factory name for this node
-   const Player* tp;          // Template player for this node
-   base::List* ntmList;      // List of Ntm objects at this level
-   base::List* subnodeList;  // List of NtmOutputNode nodes for players derived this level
+   const models::Player* tp;  // Template player for this node
+   base::List* ntmList;       // List of Ntm objects at this level
+   base::List* subnodeList;   // List of NtmOutputNode nodes for players derived this level
 };
 
 IMPLEMENT_SUBCLASS(NtmOutputNodeStd,"NtmOutputNodeStd")
@@ -1550,7 +1522,7 @@ NetIO::NtmOutputNode* NetIO::rootNtmOutputNodeFactory() const
 //------------------------------------------------------------------------------
 // Class support functions
 //------------------------------------------------------------------------------
-NtmOutputNodeStd::NtmOutputNodeStd(const Player* const p, const char* const name)
+NtmOutputNodeStd::NtmOutputNodeStd(const models::Player* const p, const char* const name)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -1645,7 +1617,7 @@ void NtmOutputNodeStd::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM node for the target player, 'p'.
 //------------------------------------------------------------------------------
-const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
+const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const models::Player* const p) const
 {
    const Ntm* result = nullptr;
 
@@ -1677,7 +1649,7 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
 
             // Get the template player and its type string with length
             const Ntm* tstNtm = static_cast<const Ntm*>(item->getValue());
-            const Player* const tp = tstNtm->getTemplatePlayer();
+            const models::Player* const tp = tstNtm->getTemplatePlayer();
             const base::String* const tpType = tp->getType();
             const size_t tpTypeLen = tpType->len();
 
@@ -1699,9 +1671,9 @@ const Ntm* NtmOutputNodeStd::findNetworkTypeMapper(const Player* const p) const
 
 //------------------------------------------------------------------------------
 // Check if the target NTM's template player is the same or derived from
-// this node's player using form names.
-//  1) if form name match: the Ntm is added to the NTM list, 'ntmList'
-//  2) if the target form is derived from this form then a new node is created
+// this node's player using factory names.
+//  1) if factory name match: the Ntm is added to the NTM list, 'ntmList'
+//  2) if the target factory is derived from this factory then a new node is created
 //  3) if there's not match then nothing changes and false is returned.
 //------------------------------------------------------------------------------
 bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
@@ -1712,9 +1684,9 @@ bool NtmOutputNodeStd::add2OurLists(Ntm* const tgtNtm)
 
       ok = true;  // default is true (root node matches all)
       if (nodeFactoryName != nullptr) {
-         // Using form names, check if the target Ntm's
+         // Using factory names, check if the target Ntm's
          // template player our form
-         const Player* const p = tgtNtm->getTemplatePlayer();
+         const models::Player* const p = tgtNtm->getTemplatePlayer();
          ok = p->isFactoryName(nodeFactoryName);
       }
 
@@ -1745,11 +1717,11 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
    bool ok = false;
    if (tgtNtm != nullptr) {
 
-      const Player* const tp = tgtNtm->getTemplatePlayer();
+      const models::Player* const tp = tgtNtm->getTemplatePlayer();
       const char* const tpfn = tp->getFactoryName();
 
       // Case #1 : when the Ntm's template player has the same
-      // form name as this node then we just add it to the list
+      // factory name as this node then we just add it to the list
       // of Ntm objects assigned to this node.
       if (nodeFactoryName != nullptr) {
          ok = (std::strcmp(tpfn, nodeFactoryName) == 0);
@@ -1757,7 +1729,7 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
       }
 
       // Case #2 : when the Ntm's template player does not have the
-      // same form name as this node (i.e., it's derived from this
+      // same factory name as this node (i.e., it's derived from this
       // node's player class) then create a new NtmOutputNodeStd node for
       // this Ntm object and add it to our list of subnodes.
       if (!ok) {
@@ -1803,7 +1775,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
       newItem->value = newNtm;
 
       // Get the template player's type string from the 'new' Ntm
-      const Player* newP = newNtm->getTemplatePlayer();
+      const models::Player* newP = newNtm->getTemplatePlayer();
       const base::String* newTypeStr = newP->getType();
       const size_t newTypeLen = newTypeStr->len();
 
@@ -1814,7 +1786,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
 
          // Get the ref player's string from the 'ref' Ntm.
          const Ntm* refNtm =  static_cast<const Ntm*>(refItem->getValue());
-         const Player* refP = refNtm->getTemplatePlayer();
+         const models::Player* refP = refNtm->getTemplatePlayer();
          const base::String* refTypeStr = refP->getType();
          const size_t refTypeLen = refTypeStr->len();
 

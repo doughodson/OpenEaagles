@@ -18,26 +18,18 @@
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class FileReader
-//==============================================================================
-IMPLEMENT_SUBCLASS(FileReader,"RecorderFileReader")
+IMPLEMENT_SUBCLASS(FileReader, "RecorderFileReader")
 
-// Slot table for this form type
 BEGIN_SLOTTABLE(FileReader)
     "filename",         // 1) Data file name
     "pathname",         // 2) Path to the data file directory (optional)
 END_SLOTTABLE(FileReader)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(FileReader)
     ON_SLOT( 1, setFilename, base::String)
     ON_SLOT( 2, setPathName, base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 FileReader::FileReader()
 {
    STANDARD_CONSTRUCTOR()
@@ -55,9 +47,6 @@ void FileReader::initData()
    firstPassFlg = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void FileReader::copyData(const FileReader& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -76,9 +65,6 @@ void FileReader::copyData(const FileReader& org, const bool cc)
    firstPassFlg = true;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void FileReader::deleteData()
 {
    if (sin != nullptr) {
@@ -93,7 +79,6 @@ void FileReader::deleteData()
    if (ibuf != nullptr) { delete[] ibuf; ibuf = nullptr; }
 }
 
-
 //------------------------------------------------------------------------------
 // get functions
 //------------------------------------------------------------------------------
@@ -106,7 +91,6 @@ bool FileReader::isFailed() const
 {
    return fileFailed || (sin != nullptr && sin->fail());
 }
-
 
 //------------------------------------------------------------------------------
 // Open the data file
@@ -315,17 +299,6 @@ bool FileReader::setPathName(const base::String* const msg)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* FileReader::getSlotByIndex(const int si)
-{
-   return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& FileReader::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

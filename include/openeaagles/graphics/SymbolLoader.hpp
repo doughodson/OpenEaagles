@@ -274,20 +274,20 @@ inline bool SymbolLoader::setInterconnect(const bool flg) { interconnect = flg; 
 
 inline SlSymbol* SymbolLoader::getSymbol(const int idx)
 {
-   SlSymbol* p = 0;
+   SlSymbol* p = nullptr;
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
       const int i = (idx - 1);
-      if (symbols[i] != 0) p = symbols[i];
+      if (symbols[i] != nullptr) p = symbols[i];
    }
    return p;
 }
 
 inline const SlSymbol* SymbolLoader::getSymbol(const int idx) const
 {
-   const SlSymbol* p = 0;
+   const SlSymbol* p = nullptr;
    if (idx >= 1 && idx <= MAX_SYMBOLS) {
       const int i = (idx - 1);
-      if (symbols[i] != 0) p = symbols[i];
+      if (symbols[i] != nullptr) p = symbols[i];
    }
    return p;
 }

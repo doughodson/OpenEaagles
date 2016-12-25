@@ -1,4 +1,3 @@
-// Shapes
 
 #include "openeaagles/graphics/Shapes.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -95,13 +94,6 @@ bool Circle::setSlotSlices(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* Circle::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Circle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -185,13 +177,6 @@ bool OcclusionCircle::setSlotOuterRadius(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* OcclusionCircle::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& OcclusionCircle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -295,13 +280,6 @@ bool Arc::setSlotIsConnected(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* Arc::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Arc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -384,13 +362,6 @@ bool OcclusionArc::setSlotOuterRadius(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* OcclusionArc::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& OcclusionArc::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -428,7 +399,7 @@ void Point::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3* v = getVertices();
+   const osg::Vec3d* v = getVertices();
    glBegin(GL_POINTS);
    for (unsigned int i = 0; i < n; i++) {
       lcVertex3v( v[i].ptr() );
@@ -452,7 +423,7 @@ void LineLoop::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3* v = getVertices();
+   const osg::Vec3d* v = getVertices();
    if (n >= 2) {
       glBegin(GL_LINE_LOOP);
       for (unsigned int i = 0; i < n; i++) {
@@ -496,7 +467,7 @@ void Line::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3* v = getVertices();
+   const osg::Vec3d* v = getVertices();
    if (n >= 2) {
       if (segment) {
          // Draw as line segments (pairs of vertices)
@@ -526,13 +497,6 @@ bool Line::setSlotSegments(const base::Number* const x)
     return ok;
 }
 
-// getSlotByIndex()
-base::Object* Line::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -623,12 +587,12 @@ void Quad::drawFunc()
 
         if (ok) {
             // get our regular vertices here
-            const osg::Vec3* v = getVertices();
+            const osg::Vec3d* v = getVertices();
 
             const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
-                const osg::Vec2* texCoord = getTextureCoord();
+                const osg::Vec2d* texCoord = getTextureCoord();
                 unsigned int tc = 0; // texture count
                 for (unsigned int i = 0; i < nv; i++) {
                     // add our textures coordinates
@@ -664,13 +628,6 @@ void Quad::drawFunc()
     else std::cerr << "Quad::drawFunc() - Quad or QuadStrip needs at least 4 vertices!" << std::endl;
 }
 
-// getSlotByIndex()
-base::Object* Quad::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Quad::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
@@ -761,12 +718,12 @@ void Triangle::drawFunc()
 
         if (ok) {
             // get our regular vertices here
-            const osg::Vec3* v = getVertices();
+            const osg::Vec3d* v = getVertices();
 
             const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
-                const osg::Vec2* texCoord = getTextureCoord();
+                const osg::Vec2d* texCoord = getTextureCoord();
                 unsigned int tc = 0; // texture count
                 for (unsigned int i = 0; i < nv; i++) {
                     // add our textures coordinates
@@ -801,13 +758,6 @@ void Triangle::drawFunc()
     else std::cerr << "Triangle::drawFunc() - Triangle or Triangle needs at least 3 vertices!" << std::endl;
 }
 
-// getSlotByIndex()
-base::Object* Triangle::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-// serialize()
 std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

@@ -22,17 +22,6 @@ END_SLOT_MAP()
 
 EMPTY_DELETEDATA(Uniform)
 
-//------------------------------------------------------------------------------
-// slot table function
-//------------------------------------------------------------------------------
-Object* Uniform::getSlotByIndex(const int si)
-{
-  return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Uniform::Uniform()
 {
   STANDARD_CONSTRUCTOR()
@@ -40,9 +29,6 @@ Uniform::Uniform()
   max  = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData
-//------------------------------------------------------------------------------
 void Uniform::copyData(const Uniform& org, const bool cc)
 {
   BaseClass::copyData(org);
@@ -51,8 +37,6 @@ void Uniform::copyData(const Uniform& org, const bool cc)
   max = org.max;
 }
 
-//------------------------------------------------------------
-//------------------------------------------------------------
 double Uniform::draw()
 {
   // uniform distribution over [min,max)
@@ -60,8 +44,6 @@ double Uniform::draw()
   return min * (1 - u) + max * u;
 }
 
-//------------------------------------------------------------
-//------------------------------------------------------------
 bool Uniform::setSlotMin(const Number* const x)
 {
   bool ok = false;
@@ -70,8 +52,6 @@ bool Uniform::setSlotMin(const Number* const x)
   return ok;
 }
 
-//------------------------------------------------------------
-//------------------------------------------------------------
 bool Uniform::setSlotMax(const Number* const x)
 {
   bool ok = false;
@@ -80,9 +60,6 @@ bool Uniform::setSlotMax(const Number* const x)
   return ok;
 }
 
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Uniform::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
   int j = 0;
@@ -110,5 +87,3 @@ std::ostream& Uniform::serialize(std::ostream& sout, const int i, const bool slo
 
 }
 }
-
-

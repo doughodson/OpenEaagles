@@ -121,7 +121,7 @@ namespace dafif {
 //------------------------------------------------------------------------------
 class Record : public base::String
 {
-   DECLARE_SUBCLASS(Record,base::String)
+   DECLARE_SUBCLASS(Record, base::String)
 
 public:
    // record types

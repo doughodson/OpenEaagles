@@ -8,7 +8,7 @@ namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Template safe_stack<T>
+// Template: safe_stack<T>
 //
 // Description: Thread-safe stack of items of type T
 //

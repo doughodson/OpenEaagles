@@ -1,6 +1,8 @@
+
+#ifndef __oe_base_macros__
+#define __oe_base_macros__
+
 //------------------------------------------------------------------------------
-// Framework Macros
-//
 // Object class macros:
 //
 //    DECLARE_SUBCLASS(ThisType,BaseType)
@@ -35,7 +37,7 @@
 //       Common destructor tasks.  This macro required in every destructor.
 //
 //    BEGIN_SLOTTABLE(ThisType) and END_SLOTTABLE(ThisType)
-//       These macros are used to define a slot table (see Object.h)
+//       These macros are used to define a slot table (see Object.hpp)
 //       for the class 'ThisType'.
 //
 //    BEGIN_SLOT_MAP(ThisType) and  END_SLOT_MAP()
@@ -125,6 +127,7 @@
 
 #include <typeinfo>   // need typeid()
 #include <cstring>    // need std::strcmp
+#include <iostream>   // need std::ostream
 
 #define DECLARE_SUBCLASS(ThisType,BaseType)                                                                                     \
     typedef BaseType BaseClass;                                                                                                 \
@@ -141,7 +144,6 @@
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
-    protected: virtual ::oe::base::Object* getSlotByIndex(const int slotindex) override;                                        \
     public: static const ::oe::base::SlotTable& getSlotTable();                                                                 \
     protected: static const ::oe::base::SlotTable slottable;                                                                    \
     private: static const char* slotnames[];                                                                                    \
@@ -160,7 +162,7 @@
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
-        if (name == 0) return false;                                                   \
+        if (name == nullptr) return false;                                             \
         if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
@@ -199,7 +201,7 @@
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
-        if (name == 0) return false;                                                   \
+        if (name == nullptr) return false;                                             \
         if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
@@ -221,7 +223,7 @@
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
-        if (name == 0) return false;                                                   \
+        if (name == nullptr) return false;                                             \
         if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
@@ -236,7 +238,7 @@
     }                                                                                  \
     ThisType* ThisType::clone() const                                                  \
     {                                                                                  \
-        return 0;                                                                      \
+        return nullptr;                                                                \
     }                                                                                  \
     ThisType::ThisType(const ThisType& org) : BaseClass()                              \
     {                                                                                  \
@@ -263,7 +265,6 @@
     _static.count--;
 
 
-
 #define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \
     const int ThisType::nslots = 0;                                                        \
@@ -271,13 +272,7 @@
     bool ThisType::setSlotByIndex(const int si, ::oe::base::Object* const obj)             \
     {                                                                                      \
         return BaseClass::setSlotByIndex(si,obj);                                          \
-    }                                                                                      \
-    ::oe::base::Object* ThisType::getSlotByIndex(const int si)                             \
-    {                                                                                      \
-        return BaseClass::getSlotByIndex(si);                                              \
     }
-
-
 
 #define IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType,FACTORYNAME)                       \
     IMPLEMENT_SUBCLASS(ThisType,FACTORYNAME)                                           \
@@ -362,7 +357,7 @@
 #define ON_SLOT(idx,setFunc,ObjType)                                                   \
     if ( !_ok ) {                                                                      \
         ObjType* _msg = dynamic_cast<ObjType*>(obj);                                   \
-        if (idx == _n1 && _msg != 0) {                                                 \
+        if (idx == _n1 && _msg != nullptr) {                                           \
             _ok = setFunc(_msg);                                                       \
         }                                                                              \
     }
@@ -384,7 +379,7 @@
 
 
 #define ON_EVENT_OBJ(token,onEvent,ObjType)                                            \
-    if (!_used && token == _event && dynamic_cast<ObjType*>(_obj) != 0) {              \
+    if (!_used && token == _event && dynamic_cast<ObjType*>(_obj) != nullptr) {        \
         _used = onEvent(static_cast<ObjType*>(_obj));                                  \
     }
 
@@ -397,9 +392,9 @@
 
 
 
-#define ON_ANYKEY_OBJ(onEvent,ObjType)                                                 \
-    if (!_used && _event <= MAX_KEY_EVENT && dynamic_cast<ObjType*>(_obj) != 0) {      \
-        _used = onEvent(_event,(static_cast<ObjType*>(_obj)));                         \
+#define ON_ANYKEY_OBJ(onEvent,ObjType)                                                       \
+    if (!_used && _event <= MAX_KEY_EVENT && dynamic_cast<ObjType*>(_obj) != nullptr) {      \
+        _used = onEvent(_event,(static_cast<ObjType*>(_obj)));                               \
     }
 
 
@@ -468,3 +463,4 @@
       _next =_cstate+1;        /* next is just one more! */                \
    }
 
+#endif

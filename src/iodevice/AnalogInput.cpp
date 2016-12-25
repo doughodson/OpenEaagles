@@ -1,4 +1,3 @@
-// Class: AnalogInput
 
 #include "openeaagles/iodevice/AnalogInput.hpp"
 
@@ -7,15 +6,12 @@
 #include "openeaagles/base/IoHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
+#include <iostream>
 
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// AnalogInput
-//==============================================================================
-
-IMPLEMENT_SUBCLASS(AnalogInput,"AnalogInput")
+IMPLEMENT_SUBCLASS(AnalogInput, "AnalogInput")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(AnalogInput)
@@ -39,9 +35,6 @@ BEGIN_SLOT_MAP(AnalogInput)
     ON_SLOT( 7, setTable,        base::Table1)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AnalogInput::AnalogInput()
 {
    STANDARD_CONSTRUCTOR()
@@ -61,9 +54,6 @@ void AnalogInput::initData()
    table = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AnalogInput::copyData(const AnalogInput& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -87,9 +77,6 @@ void AnalogInput::copyData(const AnalogInput& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void AnalogInput::deleteData()
 {
    setTable(nullptr);
@@ -327,17 +314,6 @@ bool AnalogInput::setSlotGain(const base::Number* const msg)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* AnalogInput::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& AnalogInput::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;

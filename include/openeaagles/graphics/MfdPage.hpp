@@ -76,7 +76,7 @@ protected:
     virtual bool onOsbL10();
 };
 
-}  // end of graphics namespace
-}  // end of oe namespace
+}
+}
 
 #endif

@@ -61,19 +61,18 @@ public:
     double cyan() const;
     double magenta() const;
     double yellow() const;
-    void getCMY(osg::Vec3& cmy) const;
+    void getCMY(osg::Vec3d& cmy) const;
 
     virtual bool setCyan(Number* const msg);
     virtual bool setMagenta(Number* const msg);
     virtual bool setYellow(Number* const msg);
 
-    static void cmy2rgb(osg::Vec4& rgb, const osg::Vec3& cmy);
-    static void rgb2cmy(osg::Vec3& cmy, const osg::Vec4& rgb);
+    static void cmy2rgb(osg::Vec4d& rgb, const osg::Vec3d& cmy);
+    static void rgb2cmy(osg::Vec3d& cmy, const osg::Vec4d& rgb);
 
 protected:
-    osg::Vec3 cmy;
+    osg::Vec3d cmy;
 };
-
 
 }
 }

@@ -204,17 +204,6 @@ bool UdpUnicastHandler::setSlotIpAddress(const String* const msg)
     return ok;
 }
 
-//------------------------------------------------------------------------------
-// getSlotByIndex()
-//------------------------------------------------------------------------------
-Object* UdpUnicastHandler::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -243,4 +232,3 @@ std::ostream& UdpUnicastHandler::serialize(std::ostream& sout, const int i, cons
 
 }
 }
-

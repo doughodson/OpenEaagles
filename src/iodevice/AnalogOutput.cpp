@@ -1,4 +1,3 @@
-// Class: AnalogOutput
 
 #include "openeaagles/iodevice/AnalogOutput.hpp"
 
@@ -8,14 +7,12 @@
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
 
+#include <iostream>
+
 namespace oe {
 namespace iodevice {
 
-//==============================================================================
-// AnalogOutput
-//==============================================================================
-
-IMPLEMENT_SUBCLASS(AnalogOutput,"AnalogOutput")
+IMPLEMENT_SUBCLASS(AnalogOutput, "AnalogOutput")
 
 // slot table for this class type
 BEGIN_SLOTTABLE(AnalogOutput)
@@ -37,9 +34,6 @@ BEGIN_SLOT_MAP(AnalogOutput)
     ON_SLOT( 6, setTable,        base::Table1)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AnalogOutput::AnalogOutput()
 {
    STANDARD_CONSTRUCTOR()
@@ -58,9 +52,6 @@ void AnalogOutput::initData()
    table = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AnalogOutput::copyData(const AnalogOutput& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -82,9 +73,6 @@ void AnalogOutput::copyData(const AnalogOutput& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void AnalogOutput::deleteData()
 {
    setTable(nullptr);
@@ -204,7 +192,7 @@ void AnalogOutput::processInputs(const double, const base::IoDevice* const, base
 //------------------------------------------------------------------------------
 void AnalogOutput::processOutputs(const double, const base::IoData* const outData, base::IoDevice* const device)
 {
-   // Get a value form the cockpit output handler
+   // Get a value from the cockpit output handler
    if (outData != nullptr) {
       outData->getAnalogOutput(location,&value);
    }
@@ -284,18 +272,6 @@ bool AnalogOutput::setSlotGain(const base::Number* const msg)
    return ok;
 }
 
-
-//------------------------------------------------------------------------------
-// getSlotByIndex() for Component
-//------------------------------------------------------------------------------
-base::Object* AnalogOutput::getSlotByIndex(const int si)
-{
-    return BaseClass::getSlotByIndex(si);
-}
-
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& AnalogOutput::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
