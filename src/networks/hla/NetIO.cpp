@@ -20,25 +20,18 @@ namespace hla {
 
 IMPLEMENT_PARTIAL_SUBCLASS(NetIO, "HlaNetIO")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(NetIO)
    "fedFile",          // 1) FED file name
    "regulatingTime",   // 2) Regulating time flag
    "constrainedTime",  // 3) constrained time flag
 END_SLOTTABLE(NetIO)
 
-// Map slot table to handles 
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1, setSlotFedFile, base::String)
    ON_SLOT(2, setSlotRegulatingTime, base::Number)
    ON_SLOT(3, setSlotConstrainedTime, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 NetIO::NetIO() : rtiAmb(nullptr), fedAmb(nullptr)
 {
    STANDARD_CONSTRUCTOR()
@@ -87,9 +80,6 @@ NetIO* NetIO::clone() const
    return nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void NetIO::copyData(const NetIO& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -183,9 +173,6 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    cFlag = org.cFlag;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void NetIO::deleteData()
 {
    if (isNetworkInitialized()) {

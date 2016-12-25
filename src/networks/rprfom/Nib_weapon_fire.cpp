@@ -4,9 +4,11 @@
 #include "openeaagles/networks/rprfom/Nib.hpp"
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
@@ -38,10 +40,10 @@ bool Nib::weaponFireMsgFactory(const double)
       RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER );
 
    // Set our mode so that we don't do this again.
-   setMode(simulation::Player::ACTIVE);
+   setMode(models::Player::ACTIVE);
 
    // If our player just launched, then it must be a weapon!
-   simulation::Weapon* mPlayer = dynamic_cast<simulation::Weapon*>(getPlayer());
+   models::Weapon* mPlayer = dynamic_cast<models::Weapon*>(getPlayer());
    if (mPlayer == nullptr) return false;  // Early out -- it wasn't a weapon! 
 
    // ---
@@ -115,7 +117,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    {
       Nib* fNib = nullptr;
-      simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+      models::Player* fPlayer = mPlayer->getLaunchVehicle();
       if (fPlayer != nullptr) {
          if (fPlayer->isNetworkedPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
@@ -148,7 +150,7 @@ bool Nib::weaponFireMsgFactory(const double)
    // ---
    {
       Nib* tNib = nullptr;
-      simulation::Player* tPlayer = mPlayer->getTargetPlayer();
+      models::Player* tPlayer = mPlayer->getTargetPlayer();
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr) tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, simulation::NetIO::OUTPUT_NIB) );

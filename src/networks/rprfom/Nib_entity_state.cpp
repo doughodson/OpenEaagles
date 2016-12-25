@@ -4,8 +4,10 @@
 #include "openeaagles/networks/rprfom/Nib.hpp"
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/Player.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
@@ -303,26 +305,26 @@ void Nib::entityState2Nib()
          // Side: When mapping Force ID to Player Side ...
          if (physicalEntity->forceIdentifier == FRIENDLY) {
             // Friendly's are blue, ...
-            setSide(simulation::Player::BLUE);
+            setSide(models::Player::BLUE);
          }
          else if (physicalEntity->forceIdentifier == OPPOSING) {
             // opposing side is red, ...
-            setSide(simulation::Player::RED);
+            setSide(models::Player::RED);
          }
          else if (physicalEntity->forceIdentifier == NEUTRAL) {
             // Neutrals are white, ...
-            setSide(simulation::Player::WHITE);
+            setSide(models::Player::WHITE);
          }
          else  {
             // and everyone else is gray.
-            setSide(simulation::Player::GRAY);
+            setSide(models::Player::GRAY);
          }
          setAttributeUpdateRequiredFlag(NetIO::FORCE_IDENTIFIER_AI, false);
       }
 
    }
 
-   setMode(simulation::Player::ACTIVE);    
+   setMode(models::Player::ACTIVE);    
    setTimeExec( (double) getNetIO()->getCurrentTime() );
 }
 
@@ -333,7 +335,7 @@ void Nib::entityState2Nib()
 bool Nib::entityStateManager(const double curExecTime)
 {
    bool ok = true;
-   if (getPlayer()->isMode(simulation::Player::ACTIVE) && isPlayerStateUpdateRequired(curExecTime)) {
+   if (getPlayer()->isMode(models::Player::ACTIVE) && isPlayerStateUpdateRequired(curExecTime)) {
 
       // Need to update this entity object ...
 
@@ -634,15 +636,15 @@ void Nib::updatePhysicalEntity(
       if (isAttributeUpdateEnabled(NetIO::FORCE_IDENTIFIER_AI)) {
 
          // Force ID: When mapping Player side to force IDs ...
-         if (getSide() == simulation::Player::BLUE) {
+         if (getSide() == models::Player::BLUE) {
             // blue's are friendly, ...
             physicalEntity->forceIdentifier = FRIENDLY;     
          }
-         else if (getSide() == simulation::Player::RED) {
+         else if (getSide() == models::Player::RED) {
             // red's are not, ...
             physicalEntity->forceIdentifier = OPPOSING;
          }
-         else if (getSide() == simulation::Player::WHITE) {
+         else if (getSide() == models::Player::WHITE) {
             // white is neutral, ...
             physicalEntity->forceIdentifier = NEUTRAL;
          }

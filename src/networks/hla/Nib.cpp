@@ -2,6 +2,7 @@
 #include "openeaagles/networks/hla/Nib.hpp"
 #include "openeaagles/networks/hla/NetIO.hpp"
 #include "openeaagles/networks/hla/Ambassador.hpp"
+
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"

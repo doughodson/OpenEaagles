@@ -7,12 +7,14 @@
 
 #include "openeaagles/networks/dis/Ntm.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/Missile.hpp"
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/Missile.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/Signatures.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Signatures.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
@@ -27,14 +29,11 @@ IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Nib::Nib(const simulation::NetIO::IoType ioType) : hla::Nib(ioType) 
 {
    STANDARD_CONSTRUCTOR()
 
-   baseEntity = 0;
+   baseEntity = nullptr;
    fireEvent = 0;
    geodPos[0] = 0;
    geodPos[1] = 0;
@@ -86,14 +85,14 @@ void Nib::copyData(const Nib& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-   baseEntity = 0;
+      baseEntity = nullptr;
    }
 
    // Base entity
-   if (org.baseEntity != 0)
+   if (org.baseEntity != nullptr)
       setBaseEntity( (BaseEntity*) org.baseEntity->clone() );
    else
-      setBaseEntity(0);
+      setBaseEntity(nullptr);
 
    // other stuff
    fireEvent = org.fireEvent;
@@ -117,12 +116,9 @@ void Nib::copyData(const Nib& org, const bool cc)
    appID = org.appID;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() --
-//------------------------------------------------------------------------------
 void Nib::deleteData()
 {
-    setBaseEntity(0);
+    setBaseEntity(nullptr);
 }
 
 //------------------------------------------------------------------------------
@@ -130,16 +126,15 @@ void Nib::deleteData()
 //------------------------------------------------------------------------------
 void Nib::setBaseEntity(BaseEntity* const p)
 {
-   if (baseEntity != 0) baseEntity->unref();
+   if (baseEntity != nullptr) baseEntity->unref();
    baseEntity = p;
-   if (baseEntity != 0) baseEntity->ref();
+   if (baseEntity != nullptr) baseEntity->ref();
 }
 
 void Nib::setWeaponFireEvent(const unsigned short e)
 {
    fireEvent = e;
 }
-
 
 /// Set (DIS) Entity type enumerations
 bool Nib::setEntityType(
@@ -196,13 +191,13 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 //------------------------------------------------------------------------------
 void Nib::updateTheIPlayer()
 {
-   simulation::Player* p = getPlayer();
+   models::Player* p = getPlayer();
 
    // ---
    // If we haven't tried to created the IPlayer yet and we have at least position,
    // velocity and orientation, then try to create one
    // ---
-   if (p == 0 && isEntityTypeUnchecked() && haveEntityIdFlg && haveEntityTypeFlg && haveWorldLocationFlg && haveOrientationFlg) {
+   if (p == nullptr && isEntityTypeUnchecked() && haveEntityIdFlg && haveEntityTypeFlg && haveWorldLocationFlg && haveOrientationFlg) {
       // Create the player
       p = getNetIO()->createIPlayer(this);
    }
@@ -210,7 +205,7 @@ void Nib::updateTheIPlayer()
    // ---
    // When we have a player, update it's data from our object's attributes
    // ---
-   if (p != 0) {
+   if (p != nullptr) {
       // This transfers player data from our basic NIB to the player.
       nib2PlayerState();
       // ... transfer additional data in the future ....

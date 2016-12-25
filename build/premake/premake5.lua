@@ -27,16 +27,9 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 --HLA_ROOT = "../../../portico-2.0.1"
 --HLAIncPath = HLA_ROOT.."/include/hla13"
 HLA_ROOT = "../../../openrti"
-HLAIncPath = HLA_ROOT.."/include/RTI13"
-if (_ACTION == "vs2012") then
-  HLALibPath = HLA_ROOT.."/lib/vc11"
-end
-if (_ACTION == "vs2013") then
-  HLALibPath = HLA_ROOT.."/lib/vc12"
-end
-if (_ACTION == "vs2015") then
-  HLALibPath = HLA_ROOT.."/lib/vc14"
-end
+--HLAIncPath = HLA_ROOT.."/include/RTI13"
+HLAIncPath = HLA_ROOT.."/include"
+HLALibPath = HLA_ROOT.."/lib"
 print ("HLA Paths:")
 print ("  Include   : "..HLALibPath)
 --print ("  Libraries : "..OELibPath)
@@ -142,14 +135,14 @@ workspace "oe"
       targetname "dis"
 
    -- IEEE HLA interface library (abstract support)
---   project "hla"
---      files {
---         "../../include/openeaagles/networks/hla/**.h*",
---         "../../src/networks/hla/**.cpp"
---      }
---      includedirs { HLAIncPath }
---      defines { "RTI_USES_STD_FSTREAM" }
---      targetname "hla"
+   project "hla"
+      files {
+         "../../include/openeaagles/networks/hla/**.h*",
+         "../../src/networks/hla/**.cpp"
+      }
+      includedirs { HLAIncPath }
+      defines { "RTI_USES_STD_FSTREAM" }
+      targetname "hla"
 	  
    -- graphical instruments library
    project "instruments"
@@ -216,14 +209,14 @@ workspace "oe"
       targetname "rpf"
 
    -- IEEE HLA interface library for RPR FOM
---   project "rprfom"
---      files {
---         "../../include/openeaagles/networks/rprfom/**.h*",
---         "../../src/networks/rprfom/**.cpp"
---      }
---      includedirs { HLAIncPath }
---      defines { "RTI_USES_STD_FSTREAM" }
---      targetname "rprfom"
+   project "rprfom"
+      files {
+         "../../include/openeaagles/networks/rprfom/**.h*",
+         "../../src/networks/rprfom/**.cpp"
+      }
+      includedirs { HLAIncPath }
+      defines { "RTI_USES_STD_FSTREAM" }
+      targetname "rprfom"
 
    -- simulation library
    project "simulation"

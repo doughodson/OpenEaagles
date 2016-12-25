@@ -4,8 +4,10 @@
 #include "openeaagles/networks/rprfom/Nib.hpp"
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/Player.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 

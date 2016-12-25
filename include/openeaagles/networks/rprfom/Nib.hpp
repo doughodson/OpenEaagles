@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace simulation { class Player; }
+namespace models { class Player; }
 
 namespace rprfom {
 

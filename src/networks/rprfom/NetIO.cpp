@@ -5,15 +5,17 @@
 #include "openeaagles/networks/rprfom/RprFom.hpp"
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/simulation/AirVehicle.hpp"
-#include "openeaagles/simulation/GroundVehicle.hpp"
-#include "openeaagles/simulation/LifeForms.hpp"
-#include "openeaagles/simulation/Missile.hpp"
-#include "openeaagles/simulation/Player.hpp"
-#include "openeaagles/simulation/Ships.hpp"
+#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/players/GroundVehicle.hpp"
+#include "openeaagles/models/players/LifeForms.hpp"
+#include "openeaagles/models/players/Missile.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/players/Ships.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/Signatures.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Signatures.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
@@ -70,28 +72,16 @@ private:
 IMPLEMENT_SUBCLASS(NetIO, "RprFomNetIO")
 EMPTY_SLOTTABLE(NetIO)
 EMPTY_SERIALIZER(NetIO)
+EMPTY_DELETEDATA(NetIO)
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 NetIO::NetIO()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void NetIO::copyData(const NetIO& org, const bool)
 {
     BaseClass::copyData(org);
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void NetIO::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -129,7 +119,7 @@ unsigned int NetIO::getNumberOfInteractionParameters() const
 //------------------------------------------------------------------------------
 // Create a new output NIB
 //------------------------------------------------------------------------------
-simulation::Nib* NetIO::createNewOutputNib(simulation::Player* const player)
+simulation::Nib* NetIO::createNewOutputNib(models::Player* const player)
 {
     // ---
     // Check if we are enabled to register this class of objects and
@@ -137,31 +127,31 @@ simulation::Nib* NetIO::createNewOutputNib(simulation::Player* const player)
     // ---
     unsigned int idx = 0;
     BaseEntity* baseEntity = nullptr;
-    if (player->isClassType(typeid(simulation::AirVehicle))) {
+    if (player->isClassType(typeid(models::AirVehicle))) {
         if (isObjectClassRegistrationEnabled( AIRCRAFT_CLASS )) {
             baseEntity = new Aircraft();
             idx = AIRCRAFT_CLASS;
         }
     }
-    else if (player->isClassType(typeid(simulation::Missile))) {
+    else if (player->isClassType(typeid(models::Missile))) {
         if (isObjectClassRegistrationEnabled( MUNITION_CLASS )) {
             baseEntity = new Munition();
             idx = MUNITION_CLASS;
         }
     }
-    else if (player->isClassType(typeid(simulation::LifeForm))) {
+    else if (player->isClassType(typeid(models::LifeForm))) {
         if (isObjectClassRegistrationEnabled( HUMAN_CLASS )) {
             baseEntity = new Human();
             idx = HUMAN_CLASS;
         }
     }
-    else if (player->isClassType(typeid(simulation::GroundVehicle))) {
+    else if (player->isClassType(typeid(models::GroundVehicle))) {
         if (isObjectClassRegistrationEnabled( GROUND_VEHICLE_CLASS )) {
             baseEntity = new GroundVehicle();
             idx = GROUND_VEHICLE_CLASS;
         }
     }
-    else if (player->isClassType(typeid(simulation::Ship))) {
+    else if (player->isClassType(typeid(models::Ship))) {
         if (isObjectClassRegistrationEnabled( SURFACE_VESSEL_CLASS )) {
             baseEntity = new SurfaceVessel();
             idx = SURFACE_VESSEL_CLASS;
@@ -329,7 +319,7 @@ const Ntm* NetIO::findNtmByTypeCodes(
 // Description: DIS incoming NTM node
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(NtmInputNode,"NtmInputNode")
+IMPLEMENT_SUBCLASS(NtmInputNode, "NtmInputNode")
 EMPTY_SLOTTABLE(NtmInputNode)
 EMPTY_SERIALIZER(NtmInputNode)
 

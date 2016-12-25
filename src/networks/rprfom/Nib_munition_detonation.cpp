@@ -4,9 +4,11 @@
 #include "openeaagles/networks/rprfom/Nib.hpp"
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
-#include "openeaagles/simulation/Player.hpp"
+#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/players/Weapon.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
-#include "openeaagles/simulation/Weapon.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
@@ -35,10 +37,10 @@ bool Nib::munitionDetonationMsgFactory(const double)
       RTI::ParameterSetFactory::create( NetIO::NUM_INTERACTION_PARAMETER );
 
    // Set our mode so that we don't do this again.
-   setMode(simulation::Player::DETONATED);
+   setMode(models::Player::DETONATED);
 
    // If our player just detonated, then it must be a weapon!
-   simulation::Weapon* mPlayer = dynamic_cast<simulation::Weapon*>(getPlayer());
+   models::Weapon* mPlayer = dynamic_cast<models::Weapon*>(getPlayer());
    if (mPlayer == nullptr) return false;   // Early out -- it wasn't a weapon
 
    // ---
@@ -111,7 +113,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    {
       Nib* fNib = nullptr;
-      simulation::Player* fPlayer = mPlayer->getLaunchVehicle();
+      models::Player* fPlayer = mPlayer->getLaunchVehicle();
       if (fPlayer != nullptr) {
          if (fPlayer->isNetworkedPlayer()) {
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
@@ -144,7 +146,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // ---
    {
       Nib* tNib = nullptr;
-      simulation::Player* tPlayer = mPlayer->getTargetPlayer();
+      models::Player* tPlayer = mPlayer->getTargetPlayer();
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr)
@@ -260,25 +262,25 @@ bool Nib::munitionDetonationMsgFactory(const double)
    {
       DetonationResultCodeEnum8 detonationResultCode;
       switch ( mPlayer->getDetonationResults() ) {
-         case simulation::Weapon::DETONATE_OTHER :
+         case models::Weapon::DETONATE_OTHER :
             detonationResultCode = DetonationResultCodeOther;
             break;
-         case simulation::Weapon::DETONATE_ENTITY_IMPACT :
+         case models::Weapon::DETONATE_ENTITY_IMPACT :
             detonationResultCode = EntityImpact;
             break;
-         case simulation::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION :
+         case models::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION :
             detonationResultCode = EntityProximateDetonation;
             break;
-         case simulation::Weapon::DETONATE_GROUND_IMPACT :
+         case models::Weapon::DETONATE_GROUND_IMPACT :
             detonationResultCode = GroundImpact;
             break;
-         case simulation::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION :
+         case models::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION :
             detonationResultCode = GroundProximateDetonation;
             break;
-         case simulation::Weapon::DETONATE_DETONATION :
+         case models::Weapon::DETONATE_DETONATION :
             detonationResultCode = Detonation;
             break;
-         case simulation::Weapon::DETONATE_NONE :
+         case models::Weapon::DETONATE_NONE :
             detonationResultCode = None;
             break;
          default :

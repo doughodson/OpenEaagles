@@ -6,7 +6,7 @@
 
 namespace oe {
 
-namespace simulation { class Player; }
+namespace models { class Player; }
 
 namespace hla { class Ambassador; }
 
@@ -203,7 +203,7 @@ public:
     ) override;
 
     // Simulation::NetIO interface
-    virtual simulation::Nib* createNewOutputNib(simulation::Player* const player) override;
+    virtual simulation::Nib* createNewOutputNib(models::Player* const player) override;
     virtual simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
 
 protected:

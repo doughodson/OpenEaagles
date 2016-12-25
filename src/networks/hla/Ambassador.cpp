@@ -3,6 +3,8 @@
 #include "openeaagles/networks/hla/NetIO.hpp"
 #include "openeaagles/networks/hla/Nib.hpp"
 
+#include "openeaagles/models/players/player.hpp"
+
 #include <iostream>
 
 // turn off the "unreferenced formal parameter" warning.
@@ -156,7 +158,7 @@ throw (
    Nib* nib = netIO->findNibByObjectHandle(theObject, NetIO::INPUT_NIB);
    if (nib != nullptr) {
       // set NIB delete request (Simulation::NetIO::cleanupInputList() should handle this)
-      nib->setMode(simulation::Player::DELETE_REQUEST);
+      nib->setMode(models::Player::DELETE_REQUEST);
    }
 }
 
