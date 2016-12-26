@@ -3,7 +3,7 @@
 #include "openeaagles/networks/hla/NetIO.hpp"
 #include "openeaagles/networks/hla/Nib.hpp"
 
-#include "openeaagles/models/players/player.hpp"
+#include "openeaagles/models/players/Player.hpp"
 
 #include <iostream>
 
