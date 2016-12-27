@@ -31,9 +31,9 @@ namespace rprfom {
 // Description: RPR FOM incoming NTM class
 //==============================================================================
 
-class NtmInputNode : public simulation::NetIO::NtmInputNode
+class NtmInputNode : public interop::NetIO::NtmInputNode
 {
-   DECLARE_SUBCLASS(NtmInputNode, simulation::NetIO::NtmInputNode)
+   DECLARE_SUBCLASS(NtmInputNode, interop::NetIO::NtmInputNode)
 
 public:
    enum { ROOT_LVL, KIND_LVL, DOMAIN_LVL, COUNTRYCODE_LVL,
@@ -53,8 +53,8 @@ public:
       ) const;
 
    // NetIO::NtmOutputNode class functions
-   virtual const simulation::Ntm* findNetworkTypeMapper(const simulation::Nib* const nib) const override;
-   virtual bool add2OurLists(simulation::Ntm* const ntm) override;
+   virtual const interop::Ntm* findNetworkTypeMapper(const interop::Nib* const nib) const override;
+   virtual bool add2OurLists(interop::Ntm* const ntm) override;
    virtual void print(std::ostream& sout, const int icnt) const override;
 
 private:
@@ -119,7 +119,7 @@ unsigned int NetIO::getNumberOfInteractionParameters() const
 //------------------------------------------------------------------------------
 // Create a new output NIB
 //------------------------------------------------------------------------------
-simulation::Nib* NetIO::createNewOutputNib(models::Player* const player)
+interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
 {
     // ---
     // Check if we are enabled to register this class of objects and
@@ -163,7 +163,7 @@ simulation::Nib* NetIO::createNewOutputNib(models::Player* const player)
     // ---
     Nib* nib = nullptr;
     if (baseEntity != nullptr) {
-        nib = static_cast<Nib*>(nibFactory(simulation::NetIO::OUTPUT_NIB));
+        nib = static_cast<Nib*>(nibFactory(interop::NetIO::OUTPUT_NIB));
         if (nib != nullptr) {
            nib->setBaseEntity(baseEntity);
            nib->setNetIO(this);
@@ -222,7 +222,7 @@ void NetIO::processInputList()
 //------------------------------------------------------------------------------
 // nibFactory() -- Create a new NIB
 //------------------------------------------------------------------------------
-simulation::Nib* NetIO::nibFactory(const simulation::NetIO::IoType ioType)
+interop::Nib* NetIO::nibFactory(const interop::NetIO::IoType ioType)
 {
     return new Nib(ioType);
 }
@@ -326,7 +326,7 @@ EMPTY_SERIALIZER(NtmInputNode)
 //------------------------------------------------------------------------------
 // root incoming NTM node factory
 //------------------------------------------------------------------------------
-simulation::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
+interop::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 {
    return new rprfom::NtmInputNode(rprfom::NtmInputNode::ROOT_LVL, 0); // root level
 }
@@ -391,9 +391,9 @@ void NtmInputNode::deleteData()
 //------------------------------------------------------------------------------
 // Find the NTM based on the incoming entity type codes in the NIB
 //------------------------------------------------------------------------------
-const simulation::Ntm* NtmInputNode::findNetworkTypeMapper(const simulation::Nib* const nib) const
+const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::Nib* const nib) const
 {
-   const simulation::Ntm* result = nullptr;
+   const interop::Ntm* result = nullptr;
 
    const rprfom::Nib* rprFomNib = dynamic_cast<const rprfom::Nib*>( nib );
    if (rprFomNib != nullptr) {
@@ -471,7 +471,7 @@ const Ntm* NtmInputNode::findNtmByTypeCodes(
 //------------------------------------------------------------------------------
 // Add the NTM to our sublist of nodes.
 //------------------------------------------------------------------------------
-bool NtmInputNode::add2OurLists(simulation::Ntm* const ntm)
+bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
 {
    bool ok = false;
 

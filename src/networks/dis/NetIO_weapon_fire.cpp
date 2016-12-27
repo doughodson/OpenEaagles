@@ -66,8 +66,8 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // ---
     // 2) Find the firing player and munitions (networked) IPlayers
     // ---
-    simulation::Nib* fNib = nullptr;
-    simulation::Nib* mNib = nullptr;
+    interop::Nib* fNib = nullptr;
+    interop::Nib* mNib = nullptr;
     if (fSiteId != getSiteID() || fApplicationId != getApplicationID()) {
         // Must be networked players
         fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);

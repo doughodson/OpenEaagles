@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_NetIO_H__
-#define __oe_simulation_NetIO_H__
+#ifndef __oe_interop_NetIO_H__
+#define __oe_interop_NetIO_H__
 
 #include "openeaagles/simulation/INetIO.hpp"
 
@@ -8,24 +8,13 @@
 
 namespace oe {
 
-namespace base {
-class Angle;
-class Distance;
-class Identifier;
-class List;
-class String;
-class Time;
-}
+namespace base { class Angle; class Distance; class Identifier; class List; class String; class Time; }
+namespace models { class Player; }
+namespace simulation { class Simulation; class Station; }
 
-namespace models {
-class Player;
-}
-
-namespace simulation {
+namespace interop {
 class Nib;
 class Ntm;
-class Simulation;
-class Station;
 
 //------------------------------------------------------------------------------
 // Class:  NetIO
@@ -87,7 +76,7 @@ class Station;
 //    (Note: without the incoming Ntm list, all network entities are ignored)
 //
 //    When an entity's type matches a Ntm object, the matching Ntm's "template
-//    player" (see Ntm.h) is cloned to create the surrogate "interoperability
+//    player" (see Ntm.hpp) is cloned to create the surrogate "interoperability
 //    player" or IPlayer, which is added to simulation's player list.
 //
 //    A network specific Network Interface Block (Nib) is created, using the
@@ -154,9 +143,9 @@ class Station;
 // Note: public and protected sections for Nib and Ntm support are located
 //       after the main public and protected sections.
 //------------------------------------------------------------------------------
-class NetIO : public INetIO
+class NetIO : public simulation::INetIO
 {
-   DECLARE_SUBCLASS(NetIO, INetIO)
+   DECLARE_SUBCLASS(NetIO, simulation::INetIO)
 
 public:
     // Source of the time line
@@ -166,7 +155,7 @@ public:
     };
 
     // Max network ID
-    static const unsigned int MAX_NETWORD_ID = 2;
+//    static const unsigned int MAX_NETWORD_ID = 2;
 
     //  Max number of new, outgoing players published per frame
     static const unsigned int MAX_NEW_OUTGOING = OE_CONFIG_MAX_NETIO_NEW_OUTGOING;
@@ -181,7 +170,7 @@ public:
    virtual void outputFrame(const double dt) override;
 
    // Network ID number
-   unsigned short getNetworkID() const { return netID; }
+   unsigned short getNetworkID() const override { return netID; }
 
    // Federate name as String
    virtual const base::String* getFederateName() const;
@@ -228,11 +217,11 @@ public:
    virtual bool networkInitialization();
 
    // Other components
-   Station* getStation()                   { return station; }
-   const Station* getStation() const       { return station; }
+   simulation::Station* getStation()                   { return station; }
+   const simulation::Station* getStation() const       { return station; }
 
-   Simulation* getSimulation()             { return simulation; }
-   const Simulation* getSimulation() const { return simulation; }
+   simulation::Simulation* getSimulation()             { return simulation; }
+   const simulation::Simulation* getSimulation() const { return simulation; }
 
    // Event IDs
    unsigned short getNewIffEventID()       { return ++iffEventID; }
@@ -427,8 +416,8 @@ private:
    base::safe_ptr<const base::String> federationName;   // Federation name
    base::safe_ptr<const base::String> federateName;     // Federate name
 
-   base::safe_ptr<Station> station;                     // Our station class
-   base::safe_ptr<Simulation> simulation;               // Our simulation class
+   base::safe_ptr<simulation::Station> station;         // Our station class
+   base::safe_ptr<simulation::Simulation> simulation;   // Our simulation class
    TSource          timeline;                           // Source of our timeline
    unsigned short   iffEventID;                         // IFF event ID (as needed)
    unsigned short   emEventID;                          // Emission event ID (as needed)

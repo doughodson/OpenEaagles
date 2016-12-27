@@ -1,7 +1,7 @@
 
-#include "openeaagles/simulation/NetIO.hpp"
-#include "openeaagles/simulation/Nib.hpp"
-#include "openeaagles/simulation/Ntm.hpp"
+#include "openeaagles/networks/interop/NetIO.hpp"
+#include "openeaagles/networks/interop/Nib.hpp"
+#include "openeaagles/networks/interop/Ntm.hpp"
 
 #include "openeaagles/models/systems/Guns.hpp"
 
@@ -42,7 +42,7 @@
 #endif
 
 namespace oe {
-namespace simulation {
+namespace interop {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(NetIO, "NetIO")
 
@@ -420,7 +420,7 @@ bool NetIO::networkInitialization()
     netInitFail = false;
 
     // 1) Find our Station
-    station = static_cast<Station*>( findContainerByType(typeid(Station)) );
+    station = static_cast<simulation::Station*>( findContainerByType(typeid(simulation::Station)) );
     if (station != nullptr) {
         // 2) Find the Simulation
         simulation = station->getSimulation();
@@ -653,7 +653,7 @@ Nib* NetIO::createNewOutputNib(models::Player* const player)
 
       const base::String* fName = getFederateName();
       if (player->isNetworkedPlayer()) {
-         Nib* pNib = player->getNib();
+         Nib* pNib = dynamic_cast<Nib*>(player->getNib());
          fName = pNib->getFederateName();
       }
       nib->setFederateName(fName);
@@ -702,7 +702,7 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
    bool inRange = true;
    double maxRng2 = getMaxEntityRangeSquared(nib);
    if (nib != nullptr && maxRng2 > 0) {
-      const Station* sta = getStation();
+      const simulation::Station* sta = getStation();
       const models::Player* own = dynamic_cast<const models::Player*>(sta->getOwnship());
       if (own != nullptr) {
          osg::Vec3d delta = nib->getDrPosition() - own->getGeocPosition();
@@ -832,7 +832,7 @@ Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
       const base::String* fName = getFederateName();
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
-         const Nib* pNib = player->getNib();
+         const Nib* pNib = dynamic_cast<const Nib*>(player->getNib());
          fName = pNib->getFederateName();
       }
       // Now find the NIB using the player's IDs

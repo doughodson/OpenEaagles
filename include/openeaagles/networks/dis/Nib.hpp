@@ -2,7 +2,8 @@
 #ifndef __oe_dis_Nib_H__
 #define __oe_dis_Nib_H__
 
-#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/networks/interop/Nib.hpp"
+
 #include "openeaagles/networks/dis/NetIO.hpp"
 
 namespace oe {
@@ -19,15 +20,15 @@ class Ntm;
 //    the relationship between players and their corresponding DIS entities.
 //
 //------------------------------------------------------------------------------
-class Nib : public simulation::Nib
+class Nib : public interop::Nib
 {
-    DECLARE_SUBCLASS(Nib, simulation::Nib)
+    DECLARE_SUBCLASS(Nib, interop::Nib)
 
 public:
     enum { MAX_EM_SYSTEMS = 16 };
 
 public:
-    Nib(const simulation::NetIO::IoType ioType);
+    Nib(const interop::NetIO::IoType ioType);
 
    // Site & App IDs
    unsigned short getSiteID() const                           { return siteID; }

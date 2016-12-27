@@ -2,12 +2,13 @@
 #ifndef __oe_dis_NetIO_H__
 #define __oe_dis_NetIO_H__
 
-#include "openeaagles/simulation/NetIO.hpp"
+#include "openeaagles/networks/interop/NetIO.hpp"
 
 namespace oe {
 
 namespace base { class NetHandler; }
 namespace models { class Iff; class RfSensor; }
+namespace interop { class Nib; }
 
 namespace dis {
    class Nib;
@@ -37,7 +38,6 @@ namespace dis {
    struct ActionRequestPDU;
    struct ActionRequestPDU_R;
    struct ActionResponsePDU_R;
-
 
 //------------------------------------------------------------------------------
 // Class: dis::NetIO
@@ -112,9 +112,9 @@ namespace dis {
 //       is matched with the EmissionPduHandler's "emitterName" value.
 //
 //------------------------------------------------------------------------------
-class NetIO : public simulation::NetIO
+class NetIO : public interop::NetIO
 {
-    DECLARE_SUBCLASS(NetIO, simulation::NetIO)
+    DECLARE_SUBCLASS(NetIO, interop::NetIO)
 
 public:
    // Max PDU buffer size
@@ -272,13 +272,13 @@ public:
          const unsigned char  extra = 0
       ) const;
 
-   virtual double getMaxEntityRange(const simulation::Nib* const nib) const override;
-   virtual double getMaxEntityRangeSquared(const simulation::Nib* const nib) const override;
-   virtual double getMaxTimeDR(const simulation::Nib* const nib) const override;
-   virtual double getMaxPositionErr(const simulation::Nib* const nib) const override;
-   virtual double getMaxOrientationErr(const simulation::Nib* const nib) const override;
-   virtual double getMaxAge(const simulation::Nib* const nib) const override;
-   virtual simulation::Nib* createNewOutputNib(models::Player* const player) override;
+   virtual double getMaxEntityRange(const interop::Nib* const nib) const override;
+   virtual double getMaxEntityRangeSquared(const interop::Nib* const nib) const override;
+   virtual double getMaxTimeDR(const interop::Nib* const nib) const override;
+   virtual double getMaxPositionErr(const interop::Nib* const nib) const override;
+   virtual double getMaxOrientationErr(const interop::Nib* const nib) const override;
+   virtual double getMaxAge(const interop::Nib* const nib) const override;
+   virtual interop::Nib* createNewOutputNib(models::Player* const player) override;
 
    // DIS v7 additions
    virtual double getHbtPduEe() const;
@@ -360,8 +360,8 @@ protected:
    virtual bool initNetwork() override;                                                   // Initialize the network
    virtual void netInputHander() override;                                                // Network input handler
    virtual void processInputList() override;                                              // Update players/systems from the Input-list
-   virtual simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType) override;  // Create a new Nib
-   virtual simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
+   virtual interop::Nib* nibFactory(const interop::NetIO::IoType ioType) override;  // Create a new Nib
+   virtual interop::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
    virtual void testOutputEntityTypes(const unsigned int) override;                       // Test quick lookup of outgoing entity types
    virtual void testInputEntityTypes(const unsigned int) override;                        // Test quick lookup of incoming entity types
 

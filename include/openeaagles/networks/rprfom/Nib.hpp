@@ -7,6 +7,7 @@
 namespace oe {
 
 namespace models { class Player; }
+namespace interop { class NetIO; }
 
 namespace rprfom {
 
@@ -26,7 +27,7 @@ public:
    static const unsigned int MAX_EMITTER_BEAMS = 6;
 
 public:
-   Nib(const simulation::NetIO::IoType ioType);
+   Nib(const interop::NetIO::IoType ioType);
 
    unsigned short getWeaponFireEvent() const                  { return fireEvent; }
    virtual void setWeaponFireEvent(const unsigned short e);

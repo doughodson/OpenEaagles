@@ -7,14 +7,13 @@
 namespace oe {
 
 namespace models { class Player; }
-
 namespace hla { class Ambassador; }
+namespace interop { class NetIO; class Nib; }
 
 namespace rprfom {
 
 class BaseEntity;
 class EmitterBeam;
-class Nib;
 class Ntm;
 
 //------------------------------------------------------------------------------
@@ -203,8 +202,8 @@ public:
     ) override;
 
     // Simulation::NetIO interface
-    virtual simulation::Nib* createNewOutputNib(models::Player* const player) override;
-    virtual simulation::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
+    virtual interop::Nib* createNewOutputNib(models::Player* const player) override;
+    virtual interop::NetIO::NtmInputNode* rootNtmInputNodeFactory() const override;
 
 protected:
     virtual bool receiveWeaponFire(const RTI::ParameterHandleValuePairSet& theParameters);
@@ -221,7 +220,7 @@ protected:
     // Update players/systems from the Input-list
     virtual void processInputList() override;
     // Create a new rprfom::Nib
-    virtual simulation::Nib* nibFactory(const simulation::NetIO::IoType ioType) override;
+    virtual interop::Nib* nibFactory(const interop::NetIO::IoType ioType) override;
 };
 
 }

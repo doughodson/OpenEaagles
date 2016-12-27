@@ -2,7 +2,7 @@
 #ifndef __oe_hla_NetIO_H__
 #define __oe_hla_NetIO_H__
 
-#include "openeaagles/simulation/NetIO.hpp"
+#include "openeaagles/networks/interop/NetIO.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/safe_ptr.hpp"
 
@@ -27,9 +27,9 @@ class Nib;
 //      constrainedTime:    ! constrained time flag
 //
 //------------------------------------------------------------------------------
-class NetIO : public simulation::NetIO
+class NetIO : public interop::NetIO
 {
-   DECLARE_SUBCLASS(NetIO, simulation::NetIO)
+   DECLARE_SUBCLASS(NetIO, interop::NetIO)
 
 public:
 
@@ -133,8 +133,8 @@ public:
     // NIB lookup/search support
     Nib* findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType);
     Nib* findNibByObjectName(const char* name, const IoType ioType);
-    virtual void addNibToObjectTables(simulation::Nib* const nib, const IoType ioType);
-    virtual void removeNibFromObjectTables(simulation::Nib* const nib, const IoType ioType);
+    virtual void addNibToObjectTables(interop::Nib* const nib, const IoType ioType);
+    virtual void removeNibFromObjectTables(interop::Nib* const nib, const IoType ioType);
 
     // ---
     // Other RTI functions
@@ -167,8 +167,8 @@ public:
     void setConstrained(const RTI::Boolean flag)            { cFlag = flag; }
 
     // simulation::NetIO Interface
-    virtual void destroyInputNib(simulation::Nib* const nib) override;
-    virtual void destroyOutputNib(simulation::Nib* const nib) override;
+    virtual void destroyInputNib(interop::Nib* const nib) override;
+    virtual void destroyOutputNib(interop::Nib* const nib) override;
 
 protected:
     virtual void clearAllObjectClassHandles();

@@ -8,8 +8,8 @@
 
 #include "openeaagles/models/players/Weapon.hpp"
 
-#include "openeaagles/simulation/NetIO.hpp"
-#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/simulation/INetIO.hpp"
+#include "openeaagles/simulation/INib.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -684,7 +684,7 @@ OtwModel* Otw::findModel(const simulation::IPlayer* const player, const TableTyp
       const base::String* fName = nullptr;
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
-         const simulation::Nib* pNib = player->getNib();
+         const simulation::INib* pNib = player->getNib();
          fName = pNib->getFederateName();
       }
       // Now find the model using the player's IDs

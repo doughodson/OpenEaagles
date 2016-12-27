@@ -29,7 +29,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Nib, "Nib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
-Nib::Nib(const simulation::NetIO::IoType ioType) : hla::Nib(ioType) 
+Nib::Nib(const interop::NetIO::IoType ioType) : hla::Nib(ioType) 
 {
    STANDARD_CONSTRUCTOR()
 
@@ -78,9 +78,6 @@ Nib* Nib::clone() const
     return new Nib(*this);
 }
 
-//------------------------------------------------------------------------------
-// copyData() --
-//------------------------------------------------------------------------------
 void Nib::copyData(const Nib& org, const bool cc)
 {
    BaseClass::copyData(org);

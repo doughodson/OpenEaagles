@@ -7,6 +7,7 @@ namespace models {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Designator, "Designator")
 EMPTY_SERIALIZER(Designator)
+EMPTY_DELETEDATA(Designator)
 
 Designator::Designator() : data()
 {
@@ -16,10 +17,6 @@ Designator::Designator() : data()
 void Designator::copyData(const Designator& org, const bool)
 {
     BaseClass::copyData(org);
-}
-
-void Designator::deleteData()
-{
 }
 
 }

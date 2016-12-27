@@ -2,7 +2,7 @@
 #ifndef __oe_rprfom_Ntm_H__
 #define __oe_rprfom_Ntm_H__
 
-#include "openeaagles/simulation/Ntm.hpp"
+#include "openeaagles/networks/interop/Ntm.hpp"
 #include "openeaagles/networks/rprfom/NetIO.hpp"
 
 namespace oe {
@@ -22,9 +22,9 @@ namespace rprfom {
 //                            !  example: [ 1 2 333 4 5 6 7 ]
 //
 //------------------------------------------------------------------------------
-class Ntm : public simulation::Ntm
+class Ntm : public interop::Ntm
 {
-    DECLARE_SUBCLASS(Ntm, simulation::Ntm)
+    DECLARE_SUBCLASS(Ntm, interop::Ntm)
 
 public:
    Ntm();
@@ -52,7 +52,7 @@ public:
    virtual bool setSlotEntityType(const base::List* const msg);         // Sets entity type enumerations
 
    // Simulation::Ntm class functions
-   virtual bool copyEntityType(simulation::Nib* const targetNib) const override;
+   virtual bool copyEntityType(interop::Nib* const targetNib) const override;
 
 private:
    // Standard type codes

@@ -39,7 +39,7 @@ class Weapon;
 
 // Other item types
 class Emission;
-class Nib;
+class INib;
 class IrQueryMsg;
 class IrSignature;
 class RfSignature;
@@ -607,13 +607,13 @@ public:
    virtual bool isNetworkedPlayer() const =0;        // True if this is a networked player (IPlayer)
    virtual bool isLocalPlayer() const =0;            // True if this is a local player
 
-   virtual int getNetworkID() const =0;                       // ID of a networked player's controlling network model
-   virtual Nib* getNib() =0;                                  // Networked player's Nib object
-   virtual const Nib* getNib() const =0;                      // Networked player's Nib object  (const version)
+   virtual int getNetworkID() const =0;                        // ID of a networked player's controlling network model
+   virtual INib* getNib() =0;                                  // Networked player's Nib object
+   virtual const INib* getNib() const =0;                      // Networked player's Nib object  (const version)
 
-   virtual bool isNetOutputEnabled() const =0;                        // Is player output to the network enabled?
-   virtual Nib* getLocalNib(const unsigned int netId) =0;             // Player's outgoing NIB(s)
-   virtual const Nib* getLocalNib(const unsigned int netId) const =0; // Player's outgoing NIB(s)  (const version)
+   virtual bool isNetOutputEnabled() const =0;                         // Is player output to the network enabled?
+   virtual INib* getLocalNib(const unsigned int netId) =0;             // Player's outgoing NIB(s)
+   virtual const INib* getLocalNib(const unsigned int netId) const =0; // Player's outgoing NIB(s)  (const version)
 
    // ---
    // Internal autopilot controls
@@ -686,10 +686,10 @@ public:
    virtual bool setCommandedAltitudeM(const double a) =0;            // Sets commanded (HAE) altitude (meters)
    virtual bool setCommandedAltitudeFt(const double a) =0;           // Sets commanded (HAE) altitude (feet)
 
-   virtual bool setNib(Nib* const p) =0;                             // Sets the networked player's Nib object
+   virtual bool setNib(INib* const p) =0;                            // Sets the networked player's Nib object
 
-   virtual bool setEnableNetOutput(const bool f) =0;                 // Sets the network output enabled flag
-   virtual bool setOutgoingNib(Nib* const p, const unsigned int id) =0; // Sets the outgoing NIB for network 'id'
+   virtual bool setEnableNetOutput(const bool f) =0;                     // Sets the network output enabled flag
+   virtual bool setOutgoingNib(INib* const p, const unsigned int id) =0; // Sets the outgoing NIB for network 'id'
 
    virtual void setTerrainElevation(const double v) =0;              // Sets the elevation of the terrain at this player's location (meters)
    virtual bool setTerrainOffset(const double v) =0;                 // Sets the ground clamping offset (meters)

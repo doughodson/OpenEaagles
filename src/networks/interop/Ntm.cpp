@@ -1,10 +1,10 @@
 
-#include "openeaagles/simulation/Ntm.hpp"
+#include "openeaagles/networks/interop/Ntm.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
 
 namespace oe {
-namespace simulation {
+namespace interop {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(Ntm, "Ntm")
 

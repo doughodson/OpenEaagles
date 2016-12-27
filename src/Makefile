@@ -42,6 +42,7 @@ PROJECTS += "gui/glut"
 #
 # Interoperability interfaces
 #
+PROJECTS += networks/interop
 PROJECTS += networks/dis
 #PROJECTS += networks/hla
 #PROJECTS += networks/rprfom

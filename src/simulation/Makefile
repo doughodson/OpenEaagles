@@ -8,11 +8,9 @@ OBJS =  \
 	environment/ITerrain.o \
 	DataRecorder.o \
 	INetIO.o \
+	INib.o \
 	IOtw.o \
 	IPlayer.o \
-	NetIO.o \
-	Nib.o \
-	Ntm.o \
 	RecorderComponent.o \
 	Simulation.o \
 	Station.o \

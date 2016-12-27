@@ -14,6 +14,9 @@ class INetIO : public base::Component
 public:
    INetIO();
 
+    // Max network ID
+    static const unsigned int MAX_NETWORD_ID = 2;
+
    //
    // interface required/used by Station class
    //
@@ -23,6 +26,9 @@ public:
 
    // Updates the 'output' side of the network
    virtual void outputFrame(const double dt) =0;
+
+   // Network ID number
+   virtual unsigned short getNetworkID() const =0;
 
 };
 

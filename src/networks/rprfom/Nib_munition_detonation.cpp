@@ -119,7 +119,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
             fNib = dynamic_cast<Nib*>( fPlayer->getNib() );
          }
          else {
-            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, simulation::NetIO::OUTPUT_NIB) );
+            fNib = dynamic_cast<Nib*>( netIO->findNib(fPlayer, interop::NetIO::OUTPUT_NIB) );
          }
       }
 
@@ -150,7 +150,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
       if (tPlayer != nullptr) {
          tNib = dynamic_cast<Nib*>( tPlayer->getNib() );
          if (tNib == nullptr)
-            tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, simulation::NetIO::OUTPUT_NIB) );
+            tNib = dynamic_cast<Nib*>( netIO->findNib(tPlayer, interop::NetIO::OUTPUT_NIB) );
       }
 
       if (tNib != nullptr) {

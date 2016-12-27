@@ -22,7 +22,7 @@ IMPLEMENT_PARTIAL_SUBCLASS(Nib, "HlaNib")
 EMPTY_SLOTTABLE(Nib)
 EMPTY_SERIALIZER(Nib)
 
-Nib::Nib(const simulation::NetIO::IoType ioType) : simulation::Nib(ioType), oname()
+Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType), oname()
 {
    STANDARD_CONSTRUCTOR()
    handle = 0;
@@ -32,7 +32,7 @@ Nib::Nib(const simulation::NetIO::IoType ioType) : simulation::Nib(ioType), onam
    clearAllAttributeUpdateRequiredFlags();
 }
 
-Nib::Nib(const Nib& org) : simulation::Nib(org.getIoType())
+Nib::Nib(const Nib& org) : interop::Nib(org.getIoType())
 { 
    STANDARD_CONSTRUCTOR()
    copyData(org,true);

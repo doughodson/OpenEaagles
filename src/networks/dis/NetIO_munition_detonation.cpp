@@ -50,7 +50,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    models::Player* tPlayer = nullptr;
    if (tPlayerId != 0 && tSiteId != 0 && tApplicationId != 0) {
-      simulation::Nib* tNib = findDisNib(tPlayerId, tSiteId, tApplicationId, OUTPUT_NIB);
+      interop::Nib* tNib = findDisNib(tPlayerId, tSiteId, tApplicationId, OUTPUT_NIB);
       if (tNib != nullptr) {
          tPlayer = tNib->getPlayer();
       }
@@ -62,7 +62,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    models::Player* fPlayer = nullptr;
    if (fPlayerId != 0 && fSiteId != 0 && fApplicationId != 0) {
-      simulation::Nib* fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
+      interop::Nib* fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
       if (fNib != nullptr) {
          fPlayer = fNib->getPlayer();
       }
@@ -72,7 +72,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       }
    }
 
-   simulation::Nib* mNib = nullptr;
+   interop::Nib* mNib = nullptr;
    if (mPlayerId != 0 && mSiteId != 0 && mApplicationId != 0) {
       mNib = findDisNib(mPlayerId, mSiteId, mApplicationId, INPUT_NIB);
    }
@@ -106,7 +106,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 
       // (re)initialize the dead reckoning function
       mNib->resetDeadReckoning(
-         simulation::Nib::STATIC_DRM,
+         interop::Nib::STATIC_DRM,
          geocPos,
          geocVel,
          geocAcc,

@@ -11,8 +11,8 @@
 #include "openeaagles/dafif/WaypointLoader.hpp"
 
 #include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/NetIO.hpp"
-#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/simulation/INetIO.hpp"
+#include "openeaagles/simulation/INib.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/EarthModel.hpp"
@@ -1491,8 +1491,8 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
             if (refPlayer->isNetworkedPlayer()) {
 
                // Get the NIBs
-               const Nib* nNib = newPlayer->getNib();
-               const Nib* rNib = refPlayer->getNib();
+               const INib* nNib = newPlayer->getNib();
+               const INib* rNib = refPlayer->getNib();
 
                // Compare federate names
                int result = std::strcmp(*nNib->getFederateName(), *rNib->getFederateName());

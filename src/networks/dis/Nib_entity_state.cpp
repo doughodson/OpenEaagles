@@ -449,7 +449,7 @@ bool Nib::entityStateManager(const double curExecTime)
       pdu->header.PDUType = NetIO::PDU_ENTITY_STATE;
       pdu->header.protocolFamily = NetIO::PDU_FAMILY_ENTITY_INFO;
       //
-      if (disIO->getTimeline() == simulation::NetIO::UTC)
+      if (disIO->getTimeline() == interop::NetIO::UTC)
          pdu->header.timeStamp = disIO->makeTimeStamp( getTimeUtc(), true );
       else
          pdu->header.timeStamp = disIO->makeTimeStamp( getTimeExec(), false );

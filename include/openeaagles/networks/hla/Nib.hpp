@@ -2,7 +2,7 @@
 #ifndef __oe_hla_Nib_H__
 #define __oe_hla_Nib_H__
 
-#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/networks/interop/Nib.hpp"
 #include "openeaagles/networks/hla/NetIO.hpp"
 
 #include <RTI.hh>
@@ -21,12 +21,12 @@ class Ambassador;
 //        -- (input)  an attribute has received a value (via reflectAttributeValues())
 //        -- (output) an attribute update is required (via provideAttributeValueUpdate())
 //------------------------------------------------------------------------------
-class Nib : public simulation::Nib
+class Nib : public interop::Nib
 {
-   DECLARE_SUBCLASS(Nib, simulation::Nib)
+   DECLARE_SUBCLASS(Nib, interop::Nib)
 
 public:
-   Nib(const simulation::NetIO::IoType ioType);
+   Nib(const interop::NetIO::IoType ioType);
 
    // Returns true if the object has been registered
    bool isRegistered() const                                { return (handle != 0); }

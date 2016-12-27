@@ -12,7 +12,7 @@
 #include "openeaagles/models/Track.hpp"
 #include "openeaagles/models/Emission.hpp"
 
-#include "openeaagles/simulation/Nib.hpp"
+#include "openeaagles/simulation/INib.hpp"
 #include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/String.hpp"
@@ -845,7 +845,7 @@ void DataRecorder::genPlayerId(pb::PlayerId* const id, const models::Player* con
 
          // Networked player federation name
          if ( player->isNetworkedPlayer() ) {
-            const simulation::Nib* nib = player->getNib();
+            const simulation::INib* nib = player->getNib();
             const base::String* fedName = nib->getFederateName();
             if (fedName != nullptr) id->set_fed_name( *fedName );
          }

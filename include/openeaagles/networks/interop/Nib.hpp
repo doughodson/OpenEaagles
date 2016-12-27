@@ -1,18 +1,18 @@
 
-#ifndef __oe_simulation_Nib_H__
-#define __oe_simulation_Nib_H__
+#ifndef __oe_interop_Nib_H__
+#define __oe_interop_Nib_H__
 
-#include "openeaagles/simulation/NetIO.hpp"
+#include "openeaagles/simulation/INib.hpp"
+
+#include "openeaagles/networks/interop/NetIO.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
 
 namespace oe {
 
-namespace models {
-class Missile;
-}
+namespace models { class Missile; }
 
-namespace simulation {
+namespace interop {
 
 //------------------------------------------------------------------------------
 // Class: Nib
@@ -40,9 +40,9 @@ namespace simulation {
 // Factory name: Nib
 //
 //------------------------------------------------------------------------------
-class Nib : public base::Component
+class Nib : public simulation::INib
 {
-   DECLARE_SUBCLASS(Nib, base::Component)
+   DECLARE_SUBCLASS(Nib, simulation::INib)
 
 public:
    // Standard (mil-std-1278.1) Dead_Reckoning Model codes [ 0 .. 9 ]
@@ -64,20 +64,20 @@ public:
 
    NetIO::IoType getIoType() const                    { return ioType; }
 
-   NetIO* getNetIO()                                  { return pNetIO; }  // Controlling Network I/O
+   NetIO* getNetIO() override                         { return pNetIO; }  // Controlling Network I/O
    const NetIO* getNetIO() const                      { return pNetIO; }  // Controlling Network I/O (const version)
    virtual bool setNetIO(NetIO* const p);                                 // Sets our Network I/O controller
 
    // The player, its name and ID
    models::Player* getPlayer()                        { return pPlayer; }
-   unsigned short getPlayerID() const                 { return playerID; }
+   unsigned short getPlayerID() const override        { return playerID; }
    const char* getPlayerName() const                  { return pname; }
 
    virtual bool setPlayer(models::Player* const p);
    virtual void setPlayerID(const unsigned short v);
    virtual void setPlayerName(const char* s);
 
-   virtual const base::String* getFederateName() const;           // Federate name as String
+   virtual const base::String* getFederateName() const override;  // Federate name as String
    virtual bool setFederateName(const base::String* const msg);   // Sets our federate name
 
    // Mode
@@ -98,26 +98,26 @@ public:
    bool setDeadReckoning(const unsigned char dr)      { drNum = dr; return true; }
 
    // DR's position vector @ T0 (meters) (ECEF)
-   const osg::Vec3d& getDrPosition() const            { return drP0; }
+   const osg::Vec3d& getDrPosition() const                    { return drP0; }
 
    // DR's velocity vector @ T0 (m/sec)  (ECEF or Body based on the DR algorithm)
-   const osg::Vec3d& getDrVelocity() const            { return drV0; }
+   const osg::Vec3d& getDrVelocity() const override           { return drV0; }
 
    // DR's acceleration vector @ T0 ((m/sec)/sec) (ECEF or Body based on the DR algorithm)
-   const osg::Vec3d& getDrAcceleration() const        { return drA0; }
+   const osg::Vec3d& getDrAcceleration() const override       { return drA0; }
 
    // DR's Euler angles @ T0 (rad) [ phi theta psi ] (Body/ECEF)
-   const osg::Vec3d& getDrEulerAngles() const         { return drRPY0; }
+   const osg::Vec3d& getDrEulerAngles() const                 { return drRPY0; }
 
    // DR's angular rates @ T0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
-   const osg::Vec3d& getDrAngularVelocities() const   { return drAV0; }
+   const osg::Vec3d& getDrAngularVelocities() const override  { return drAV0; }
 
    // update incoming entity dead reckoning
    bool updateDeadReckoning(
       const double dt,              // delta time (sec)
       osg::Vec3d* const pNewPos,    // New DR position
       osg::Vec3d* const pNewAngles  // New DR orientation
-   );
+   ) override;
 
    // (re)initialize the dead reckoning function
    bool resetDeadReckoning(

@@ -31,6 +31,7 @@ class Time;
 
 namespace simulation {
 class Simulation;
+class INib;
 }
 
 namespace models {
@@ -50,7 +51,6 @@ class Weapon;
 
 // Other item types
 class Emission;
-class Nib;
 class IrQueryMsg;
 class IrSignature;
 class RfSignature;
@@ -259,13 +259,13 @@ public:
    virtual bool isNetworkedPlayer() const override;                 // True if this is a networked player (IPlayer)
    virtual bool isLocalPlayer() const override;                     // True if this is a local player
 
-   virtual int getNetworkID() const override;                       // ID of a networked player's controlling network model
-   virtual simulation::Nib* getNib() override;                      // Networked player's Nib object
-   virtual const simulation::Nib* getNib() const override;          // Networked player's Nib object  (const version)
+   virtual int getNetworkID() const override;                        // ID of a networked player's controlling network model
+   virtual simulation::INib* getNib() override;                      // Networked player's Nib object
+   virtual const simulation::INib* getNib() const override;          // Networked player's Nib object  (const version)
 
-   virtual bool isNetOutputEnabled() const override;                                    // Is player output to the network enabled?
-   virtual simulation::Nib* getLocalNib(const unsigned int netId) override;             // Player's outgoing NIB(s)
-   virtual const simulation::Nib* getLocalNib(const unsigned int netId) const override; // Player's outgoing NIB(s)  (const version)
+   virtual bool isNetOutputEnabled() const override;                                     // Is player output to the network enabled?
+   virtual simulation::INib* getLocalNib(const unsigned int netId) override;             // Player's outgoing NIB(s)
+   virtual const simulation::INib* getLocalNib(const unsigned int netId) const override; // Player's outgoing NIB(s)  (const version)
 
    // ---
    // Internal autopilot controls
@@ -392,10 +392,10 @@ public:
    virtual bool setCommandedAltitudeM(const double a) override;            // Sets commanded (HAE) altitude (meters)
    virtual bool setCommandedAltitudeFt(const double a) override;           // Sets commanded (HAE) altitude (feet)
 
-   virtual bool setNib(simulation::Nib* const p) override;                 // Sets the networked player's Nib object
+   virtual bool setNib(simulation::INib* const p) override;                 // Sets the networked player's Nib object
 
    virtual bool setEnableNetOutput(const bool f) override;                 // Sets the network output enabled flag
-   virtual bool setOutgoingNib(simulation::Nib* const p, const unsigned int id) override; // Sets the outgoing NIB for network 'id'
+   virtual bool setOutgoingNib(simulation::INib* const p, const unsigned int id) override; // Sets the outgoing NIB for network 'id'
 
    virtual void setTerrainElevation(const double v) override;              // Sets the elevation of the terrain at this player's location (meters)
    virtual bool setTerrainOffset(const double v) override;                 // Sets the ground clamping offset (meters)
@@ -818,14 +818,14 @@ private:
    // ---
    // Incoming IPlayer network support
    // ---
-   simulation::Nib* nib;         // Network Interface Block (ref()'d)
+   simulation::INib* nib;        // Network Interface Block (ref()'d)
    int netID;                    // Network id
 
    // ---
    // Outgoing network support data
    // ---
    bool enableNetOutput;         // Allow output to the network
-   simulation::Nib** nibList;    // Pointer to a list of outgoing NIBs
+   simulation::INib** nibList;   // Pointer to a list of outgoing NIBs
 
    // ---
    // System pointers

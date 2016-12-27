@@ -1,16 +1,14 @@
 
-#ifndef __oe_simulation_Ntm_H__
-#define __oe_simulation_Ntm_H__
+#ifndef __oe_interop_Ntm_H__
+#define __oe_interop_Ntm_H__
 
-#include "openeaagles/simulation/NetIO.hpp"
+#include "openeaagles/networks/interop/NetIO.hpp"
 
 namespace oe {
 
-namespace models {
-class Player;
-}
+namespace models { class Player; }
 
-namespace simulation {
+namespace interop {
 class Nib;
 
 //------------------------------------------------------------------------------

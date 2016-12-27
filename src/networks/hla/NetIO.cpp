@@ -795,7 +795,7 @@ bool NetIO::setSlotConstrainedTime(base::Number* const msg)
 //------------------------------------------------------------------------------
 // addNibToObjectTables() -- adds a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::addNibToObjectTables(simulation::Nib* const nib, const IoType ioType)
+void NetIO::addNibToObjectTables(interop::Nib* const nib, const IoType ioType)
 {
    Nib* hlaNib = dynamic_cast<Nib*>(nib);
 
@@ -856,7 +856,7 @@ void NetIO::addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n)
 //------------------------------------------------------------------------------
 // removeNibFromObjectTables() -- removes a NIB to the quick access object tables
 //------------------------------------------------------------------------------
-void NetIO::removeNibFromObjectTables(simulation::Nib* const nib, const IoType ioType)
+void NetIO::removeNibFromObjectTables(interop::Nib* const nib, const IoType ioType)
 {
    Nib* hlaNib = dynamic_cast<Nib*>(nib);
 
@@ -931,18 +931,18 @@ Nib* NetIO::findNibByObjectName(const char* name, const IoType ioType)
 //------------------------------------------------------------------------------
 // Destroy the NIB s
 //------------------------------------------------------------------------------
-void NetIO::destroyInputNib(simulation::Nib* const nib)
+void NetIO::destroyInputNib(interop::Nib* const nib)
 {
    std::cout << "NetIO::destroyInputNib(" << nib << ")" << std::endl;
    if (nib != nullptr) {
       // Remove it from our object name and handle tables
-      removeNibFromObjectTables(nib, simulation::NetIO::INPUT_NIB);
+      removeNibFromObjectTables(nib, interop::NetIO::INPUT_NIB);
       // Let our base class handle the rest
       BaseClass::destroyInputNib(nib);
    }
 }
 
-void NetIO::destroyOutputNib(simulation::Nib* const nib0)
+void NetIO::destroyOutputNib(interop::Nib* const nib0)
 {
    std::cout << "NetIO::destroyOutputNib(" << nib0 << ")" << std::endl;
    Nib* nib = dynamic_cast<Nib*>(nib0);

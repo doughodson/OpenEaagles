@@ -125,24 +125,6 @@ workspace "oe"
          "../../src/dafif/**.cpp"
       }
       targetname "dafif"
-
-   -- IEEE DIS interface library
-   project "dis"
-      files {
-         "../../include/openeaagles/networks/dis/**.h*",
-         "../../src/networks/dis/**.cpp"
-      }
-      targetname "dis"
-
-   -- IEEE HLA interface library (abstract support)
-   project "hla"
-      files {
-         "../../include/openeaagles/networks/hla/**.h*",
-         "../../src/networks/hla/**.cpp"
-      }
-      includedirs { HLAIncPath }
-      defines { "RTI_USES_STD_FSTREAM" }
-      targetname "hla"
 	  
    -- graphical instruments library
    project "instruments"
@@ -208,16 +190,6 @@ workspace "oe"
       }
       targetname "rpf"
 
-   -- IEEE HLA interface library for RPR FOM
-   project "rprfom"
-      files {
-         "../../include/openeaagles/networks/rprfom/**.h*",
-         "../../src/networks/rprfom/**.cpp"
-      }
-      includedirs { HLAIncPath }
-      defines { "RTI_USES_STD_FSTREAM" }
-      targetname "rprfom"
-
    -- simulation library
    project "simulation"
       files {
@@ -234,3 +206,6 @@ workspace "oe"
          "../../src/terrain/**.cpp"
       }
       targetname "terrain"
+
+   -- interoperability libraries
+   dofile "interop.lua"

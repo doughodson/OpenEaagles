@@ -661,13 +661,13 @@ inline int Player::getNetworkID() const
 }
 
 // Networked player's Nib object
-inline simulation::Nib* Player::getNib()
+inline simulation::INib* Player::getNib()
 {
    return nib;
 }
 
 // Networked player's Nib object  (const version)
-inline const simulation::Nib* Player::getNib() const
+inline const simulation::INib* Player::getNib() const
 {
    return nib;
 }

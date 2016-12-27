@@ -8,6 +8,10 @@ General framework-wide changes and improvements
 - Moved all players, systems and component-based models from simulation library
   into models library
 
+- Moved all interoperability implementation code into a new 'interop' library.
+  This effectively removes circular references between 'simulation', 'models'
+  and 'interop' (i.e, interoperability) and 'otw' functionality.
+
 - In simulation library, created mostly abstract interface classes for NetIO,
   Otw, Player, Atmosphere and Terrain.  They serve as the connection between
   simulation infrastructure (i.e., architecture) and models.  Moved all

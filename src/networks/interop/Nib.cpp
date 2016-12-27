@@ -1,6 +1,7 @@
 
-#include "openeaagles/simulation/Nib.hpp"
-#include "openeaagles/simulation/Ntm.hpp"
+#include "openeaagles/networks/interop/Nib.hpp"
+#include "openeaagles/networks/interop/Ntm.hpp"
+
 #include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/models/players/AirVehicle.hpp"
@@ -21,7 +22,7 @@
 #include <cmath>
 
 namespace oe {
-namespace simulation {
+namespace interop {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")
 EMPTY_SERIALIZER(Nib)
@@ -649,7 +650,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    //    last input (player's NIB) is different that our exec time.
    // ---
    if ( (result == UNSURE) && player->isNetworkedPlayer() ) {
-      const Nib* playerNib = player->getNib();
+      const Nib* playerNib = dynamic_cast<const Nib*>(player->getNib());
       if (playerNib->getTimeExec() != getTimeExec()) {
          result = YES;
       }

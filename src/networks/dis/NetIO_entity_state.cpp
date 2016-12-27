@@ -31,7 +31,6 @@
 #endif
 
 namespace oe {
-
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -52,7 +51,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
     if (site == getSiteID() &&  app == getApplicationID()) return;
 
     // Search test (reject PDUs from players on our output list)
-    simulation::Nib* testNib = findDisNib(playerId, site, app, OUTPUT_NIB);
+    interop::Nib* testNib = findDisNib(playerId, site, app, OUTPUT_NIB);
     if (testNib != nullptr) return;
 
     // ---
@@ -86,7 +85,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                fname->unref();
             }
 
-            nib->setDeadReckoning( simulation::Nib::DeadReckoning( pdu->deadReckoningAlgorithm ) );
+            nib->setDeadReckoning( interop::Nib::DeadReckoning( pdu->deadReckoningAlgorithm ) );
 
             nib->setEntityType(
                pdu->entityType.kind,
