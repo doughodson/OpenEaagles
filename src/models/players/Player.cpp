@@ -1,6 +1,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
+#include "openeaagles/models/Simulation.hpp"
 #include "openeaagles/models/players/Missile.hpp"
 #include "openeaagles/models/players/Weapon.hpp"
 #include "openeaagles/models/dynamics/DynamicsModel.hpp"
@@ -21,11 +22,11 @@
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/IrSignature.hpp"
 
-#include "openeaagles/simulation/environment/ITerrain.hpp"
+#include "openeaagles/terrain/ITerrain.hpp"
+
 #include "openeaagles/simulation/DataRecorder.hpp"
 #include "openeaagles/simulation/INetIO.hpp"
 #include "openeaagles/simulation/INib.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/Boolean.hpp"
 #include "openeaagles/base/List.hpp"
@@ -3444,7 +3445,7 @@ void Player::updateElevation()
    // elevation is from the OTW system.
    const simulation::Simulation* s = getSimulation();
    if (s != nullptr && !isTerrainElevationRequired()) {
-      const simulation::ITerrain* terrain = s->getTerrain();
+      const terrain::ITerrain* terrain = s->getTerrain();
       if (terrain != nullptr) {
          double el = 0;
          terrain->getElevation(&el, getLatitude(), getLongitude(), isDtedTerrainInterpolationEnabled());

@@ -29,12 +29,11 @@ class List;
 class Time;
 }
 
-namespace simulation {
-class Simulation;
-class INib;
-}
+namespace simulation { class INib; }
 
 namespace models {
+
+class Simulation;
 
 // Major component types
 class Datalink;

@@ -12,6 +12,7 @@ OBJS =  \
 	dynamics/LaeroModel.o  \
 	dynamics/RacModel.o \
 	dynamics/SpaceDynamicsModel.o \
+	environment/IAtmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \
 	navigation/Bullseye.o \
@@ -83,7 +84,8 @@ OBJS =  \
 	SensorMsg.o \
 	Signatures.o \
 	SimAgent.o \
-	SynchronizedState.o \
+	SimAgent.o \
+	Simulation.o \
 	TargetData.o \
 	Tdb.o \
 	Track.o \

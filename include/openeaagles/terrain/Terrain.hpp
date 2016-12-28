@@ -2,7 +2,7 @@
 #ifndef __oe_terrain_Terrain_H__
 #define __oe_terrain_Terrain_H__
 
-#include "openeaagles/simulation/environment/ITerrain.hpp"
+#include "openeaagles/terrain/ITerrain.hpp"
 
 #include "openeaagles/base/osg/Vec2d"
 #include "openeaagles/base/osg/Vec3d"
@@ -27,9 +27,9 @@ namespace terrain {
 //    2) the final point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class Terrain : public simulation::ITerrain
+class Terrain : public ITerrain
 {
-    DECLARE_SUBCLASS(Terrain, simulation::ITerrain)
+    DECLARE_SUBCLASS(Terrain, ITerrain)
 
 public:
    Terrain();

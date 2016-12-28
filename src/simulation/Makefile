@@ -4,15 +4,13 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboesimulation.a
 
 OBJS =  \
-	environment/IAtmosphere.o \
-	environment/ITerrain.o \
 	DataRecorder.o \
 	INetIO.o \
 	INib.o \
 	IOtw.o \
 	IPlayer.o \
+	ISimulation.o \
 	RecorderComponent.o \
-	Simulation.o \
 	Station.o \
 	factory.o
 

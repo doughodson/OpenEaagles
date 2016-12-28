@@ -1,8 +1,8 @@
 
-#include "openeaagles/simulation/environment/IAtmosphere.hpp"
+#include "openeaagles/models/environment/IAtmosphere.hpp"
 
 namespace oe {
-namespace simulation {
+namespace models {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(IAtmosphere, "IAtmosphere")
 

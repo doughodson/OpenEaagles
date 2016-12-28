@@ -6,7 +6,7 @@
 #include "openeaagles/simulation/DataRecorder.hpp"
 #include "openeaagles/simulation/INetIO.hpp"
 #include "openeaagles/simulation/IOtw.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/ISimulation.hpp"
 
 #include "openeaagles/base/Color.hpp"
 #include "openeaagles/base/IoHandler.hpp"
@@ -61,7 +61,7 @@ class BgThread : public base::ThreadPeriodicTask
 //=============================================================================
 // Station class
 //=============================================================================
-IMPLEMENT_SUBCLASS(Station,"Station")
+IMPLEMENT_SUBCLASS(Station, "Station")
 
 const double Station::DEFAULT_TC_THREAD_PRI  = 0.8;
 const double Station::DEFAULT_BG_THREAD_PRI  = 0.5;
@@ -95,7 +95,7 @@ END_SLOTTABLE(Station)
 // Slot table
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Station)
-   ON_SLOT( 1,  setSlotSimulation,            Simulation)
+   ON_SLOT( 1,  setSlotSimulation,            ISimulation)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
@@ -187,7 +187,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Set the simulation exec
    if (org.sim != nullptr) {
-      Simulation* copy = org.sim->clone();
+      ISimulation* copy = org.sim->clone();
       setSlotSimulation( copy );
       copy->unref();
    }
@@ -493,7 +493,7 @@ bool Station::shutdownNotification()
    setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
 
    // Tell our simulation to shut down
-   Simulation* s = getSimulation();
+   ISimulation* s = getSimulation();
    if (s != nullptr) {
       s->event(SHUTDOWN_EVENT);
    }
@@ -719,13 +719,13 @@ void Station::processNetworkOutputTasks(const double dt)
 //------------------------------------------------------------------------------
 
 // Returns the simulation model
-Simulation* Station::getSimulation()
+ISimulation* Station::getSimulation()
 {
    return sim;
 }
 
 // Returns the simulation model (const version)
-const Simulation* Station::getSimulation() const
+const ISimulation* Station::getSimulation() const
 {
    return sim;
 }
@@ -1070,7 +1070,7 @@ bool Station::setDataRecorder(DataRecorder* const p)
 //-----------------------------------------------------------------------------
 // setSlotSimulation() -- Sets a pointer to our simulation subsystem
 //-----------------------------------------------------------------------------
-bool Station::setSlotSimulation(Simulation* const p)
+bool Station::setSlotSimulation(ISimulation* const p)
 {
     if (sim != nullptr) {
         sim->container(nullptr);

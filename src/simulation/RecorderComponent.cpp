@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/RecorderComponent.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/ISimulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/List.hpp"

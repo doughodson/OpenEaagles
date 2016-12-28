@@ -1,8 +1,8 @@
 
-#include "openeaagles/simulation/environment/ITerrain.hpp"
+#include "openeaagles/terrain/ITerrain.hpp"
 
 namespace oe {
-namespace simulation {
+namespace terrain {
 
 IMPLEMENT_ABSTRACT_SUBCLASS(ITerrain, "ITerrain")
 

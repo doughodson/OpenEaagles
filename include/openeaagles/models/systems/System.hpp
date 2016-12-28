@@ -8,10 +8,8 @@ namespace oe {
 
 namespace base { class String; }
 
-namespace simulation { class Simulation; }
-
 namespace models {
-
+class Simulation;
 class Player;
 
 //------------------------------------------------------------------------------
@@ -79,7 +77,7 @@ public:
    virtual Player* getOwnship();                         // Returns a pointer to our ownship player
    virtual const Player* getOwnship() const;             // Returns a pointer to our ownship player (const version)
 
-   virtual simulation::Simulation* getSimulation();              // Returns a pointer to the Simulation model
+   virtual models::Simulation* getSimulation();          // Returns a pointer to the Simulation model
    virtual const simulation::Simulation* getSimulation() const;  // Returns a pointer to the Simulation model (const version)
 
    // Event handler(s)

@@ -1,14 +1,16 @@
 
-#ifndef __oe_simulation_Simulation_H__
-#define __oe_simulation_Simulation_H__
+#ifndef __oe_simulation_ISimulation_H__
+#define __oe_simulation_ISimulation_H__
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/safe_queue.hpp"
 #include "openeaagles/base/osg/Matrixd"
 
 namespace oe {
+
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
 namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
+
 namespace simulation {
 
 class DataRecorder;
@@ -18,11 +20,8 @@ class Station;
 
 class IPlayer;
 
-class ITerrain;
-class IAtmosphere;
-
 //------------------------------------------------------------------------------
-// Class: Simulation
+// Class: ISimulation
 //
 // Description: General class to manage the player list, the simulation and
 //              executive times, the reference position, and other common
@@ -221,9 +220,9 @@ class IAtmosphere;
 //    other components.
 //
 //------------------------------------------------------------------------------
-class Simulation : public base::Component
+class ISimulation : public base::Component
 {
-    DECLARE_SUBCLASS(Simulation, base::Component)
+    DECLARE_SUBCLASS(ISimulation, base::Component)
 
 public:
    // Minimum released weapon ID
@@ -234,7 +233,7 @@ public:
    static const int MAX_NEW_PLAYERS = 1000;
 
 public:
-    Simulation();
+    ISimulation();
 
     base::PairStream* getPlayers();                // Returns the player list; pre-ref()'d
     const base::PairStream* getPlayers() const;    // Returns the player list; pre-ref()'d (const version)
@@ -276,15 +275,6 @@ public:
     unsigned short getNewEventID();                // Generates an unique major simulation event ID [1 .. 65535]
     unsigned short getNewWeaponEventID();          // Generates a unique weapon event ID [1 .. 65535]
     unsigned short getNewReleasedWeaponID();       // Generates a unique ID number for released weapons
-
-    const ITerrain* getTerrain() const;            // Returns the terrain elevation database
-
-    IAtmosphere* getAtmosphere();                  // Returns the atmosphere model
-    const IAtmosphere* getAtmosphere() const;      // Returns the atmosphere model (const version)
-
-    dafif::AirportLoader* getAirports();           // Returns the airport loader
-    dafif::NavaidLoader* getNavaids();             // Returns the NAVAID loader
-    dafif::WaypointLoader* getWaypoints();         // Returns the waypoint loader
 
     DataRecorder* getDataRecorder();               // Returns the data recorder
 
@@ -329,8 +319,6 @@ protected:
     virtual void updatePlayerList();                  // Updates the current player list
     bool setSlotPlayers(base::PairStream* const msg);
 
-    ITerrain* getTerrain();                           // Returns the terrain elevation database
-
     virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
     virtual bool setGamingAreaUseEarthModel(const bool flg);
 
@@ -372,10 +360,6 @@ private:
    bool setSlotEarthModel(const base::EarthModel* const msg);
    bool setSlotEarthModel(const base::String* const msg);
    bool setSlotGamingAreaEarthModel(const base::Number* const msg);
-
-   // environmental models
-   bool setSlotTerrain(ITerrain* const msg);
-   bool setSlotAtmosphere(IAtmosphere* const msg);
 
    base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
    base::safe_ptr<base::PairStream> origPlayers; // Original player list
@@ -421,11 +405,6 @@ private:
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   IAtmosphere*           atmosphere;   // Atmosphere model
-   ITerrain*              terrain;      // Terrain model
-   dafif::AirportLoader*  airports;     // Airport loader
-   dafif::NavaidLoader*   navaids;      // NAVAID loader
-   dafif::WaypointLoader* waypoints;    // Waypoint loader
    Station*               station;      // The Station that owns us (not ref()'d)
 
    // Time critical thread pool

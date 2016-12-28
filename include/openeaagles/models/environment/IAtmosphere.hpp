@@ -1,11 +1,11 @@
 
-#ifndef __oe_simulation_IAtmosphere_H__
-#define __oe_simulation_IAtmosphere_H__
+#ifndef __oe_models_IAtmosphere_H__
+#define __oe_models_IAtmosphere_H__
 
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-namespace simulation {
+namespace models {
 
 class IAtmosphere : public base::Component
 {

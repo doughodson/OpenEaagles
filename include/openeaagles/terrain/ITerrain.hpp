@@ -1,11 +1,11 @@
 
-#ifndef __oe_simulation_ITerrain_H__
-#define __oe_simulation_ITerrain_H__
+#ifndef __oe_terrain_ITerrain_H__
+#define __oe_terrain_ITerrain_H__
 
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-namespace simulation {
+namespace terrain {
 
 class ITerrain : public base::Component
 {

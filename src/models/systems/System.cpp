@@ -181,9 +181,9 @@ bool System::killedNotification(Player* const p)
 //-----------------------------------------------------------------------------
 
 // Returns a pointer to the main Simulation class
-simulation::Simulation* System::getSimulation()
+models::Simulation* System::getSimulation()
 {
-   simulation::Simulation* p = nullptr;
+   models::Simulation* p = nullptr;
    if (ownship != nullptr) p = ownship->getSimulation();
    return p;
 }

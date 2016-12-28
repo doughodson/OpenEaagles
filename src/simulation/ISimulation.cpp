@@ -1,14 +1,7 @@
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/ISimulation.hpp"
 
 #include "openeaagles/simulation/IPlayer.hpp"
-
-#include "openeaagles/simulation/environment/IAtmosphere.hpp"
-#include "openeaagles/simulation/environment/ITerrain.hpp"
-
-#include "openeaagles/dafif/AirportLoader.hpp"
-#include "openeaagles/dafif/NavaidLoader.hpp"
-#include "openeaagles/dafif/WaypointLoader.hpp"
 
 #include "openeaagles/simulation/DataRecorder.hpp"
 #include "openeaagles/simulation/INetIO.hpp"
@@ -86,37 +79,32 @@ private:
    unsigned int n0;
 };
 
-IMPLEMENT_PARTIAL_SUBCLASS(Simulation, "Simulation")
+IMPLEMENT_PARTIAL_SUBCLASS(ISimulation, "ISimulation")
 
-BEGIN_SLOTTABLE(Simulation)
-   "players",        //  1) All players
-   "latitude",       //  2) Ref latitude
-   "longitude",      //  3) Ref longitude
-   "simulationTime", //  4) Simulation time
-   "day",            //  5) Initial simulated day of month [ 1 .. 31 ]
-   "month",          //  6) Initial simulated month [ 1 .. 12 ]
-   "year",           //  7) Initial simulated year [ 1970 .. 2100 ]
-   "airportLoader",  //  8) Airport database
-   "navaidLoader",   //  9) NAVAID database
-   "waypointLoader", // 10) Waypoint database
-   "terrain",        // 11) Terrain elevation database
-   "atmosphere",     // 12) Atmospheric model
-   "firstWeaponId",  // 13) First Released Weapon ID (default: 10001)
-   "numTcThreads",   // 14) Number of T/C threads to use with the player list
-   "numBgThreads",   // 15) Number of background threads to use with the player list
+BEGIN_SLOTTABLE(ISimulation)
+   "players",                //  1) All players
+   "latitude",               //  2) Ref latitude
+   "longitude",              //  3) Ref longitude
+   "simulationTime",         //  4) Simulation time
+   "day",                    //  5) Initial simulated day of month [ 1 .. 31 ]
+   "month",                  //  6) Initial simulated month [ 1 .. 12 ]
+   "year",                   //  7) Initial simulated year [ 1970 .. 2100 ]
+   "firstWeaponId",          //  8) First Released Weapon ID (default: 10001)
+   "numTcThreads",           //  9) Number of T/C threads to use with the player list
+   "numBgThreads",           // 10) Number of background threads to use with the player list
 
-   "gamingAreaRange", // 16) Max valid range of the simulation's gaming area or zero for unlimited
-                      //     (default: zero -- unlimited range)
+   "gamingAreaRange",        // 11) Max valid range of the simulation's gaming area or zero for unlimited
+                             //     (default: zero -- unlimited range)
 
-   "earthModel",      // 17) Earth model for geodetic lat/lon (default is WGS-84)
+   "earthModel",             // 12) Earth model for geodetic lat/lon (default is WGS-84)
 
-   "gamingAreaUseEarthModel" // 18) If true, use the 'earthModel' or its WGS-84 default for flat
-                     //    earth projections between geodetic lat/lon and the gaming
-                     //    area's NED coordinates.  Otherwise, use a standard spherical
-                     //    earth with a radius of Nav::ERAD60. (default: false)
-END_SLOTTABLE(Simulation)
+   "gamingAreaUseEarthModel" // 13) If true, use the 'earthModel' or its WGS-84 default for flat
+                             //    earth projections between geodetic lat/lon and the gaming
+                             //    area's NED coordinates.  Otherwise, use a standard spherical
+                             //    earth with a radius of Nav::ERAD60. (default: false)
+END_SLOTTABLE(ISimulation)
 
-BEGIN_SLOT_MAP(Simulation)
+BEGIN_SLOT_MAP(ISimulation)
     ON_SLOT( 1, setSlotPlayers,         base::PairStream)
 
     ON_SLOT( 2, setSlotRefLatitude,     base::LatLon)
@@ -129,61 +117,52 @@ BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 5, setSlotDay,             base::Number)
     ON_SLOT( 6, setSlotMonth,           base::Number)
     ON_SLOT( 7, setSlotYear,            base::Number)
-    ON_SLOT( 8, setAirports,            dafif::AirportLoader)
-    ON_SLOT( 9, setNavaids,             dafif::NavaidLoader)
-    ON_SLOT(10, setWaypoints,           dafif::WaypointLoader)
-    ON_SLOT(11, setSlotTerrain,         ITerrain)
-    ON_SLOT(12, setSlotAtmosphere,      IAtmosphere)
-    ON_SLOT(13, setSlotFirstWeaponId,   base::Number)
-    ON_SLOT(14, setSlotNumTcThreads,    base::Number)
-    ON_SLOT(15, setSlotNumBgThreads,    base::Number)
-    ON_SLOT(16, setSlotGamingAreaRange, base::Distance)
+    ON_SLOT( 8, setSlotFirstWeaponId,   base::Number)
+    ON_SLOT( 9, setSlotNumTcThreads,    base::Number)
+    ON_SLOT(10, setSlotNumBgThreads,    base::Number)
 
-    ON_SLOT(17, setSlotEarthModel,      base::EarthModel)
-    ON_SLOT(17, setSlotEarthModel,      base::String)
+    ON_SLOT(11, setSlotGamingAreaRange, base::Distance)
 
-    ON_SLOT(18, setSlotGamingAreaEarthModel, base::Number)
+    ON_SLOT(12, setSlotEarthModel,      base::EarthModel)
+    ON_SLOT(12, setSlotEarthModel,      base::String)
+
+    ON_SLOT(13, setSlotGamingAreaEarthModel, base::Number)
 
 END_SLOT_MAP()
 
-Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
+ISimulation::ISimulation() : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
 
-Simulation::Simulation(const Simulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
+ISimulation::ISimulation(const ISimulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
 
-Simulation::~Simulation()
+ISimulation::~ISimulation()
 {
    STANDARD_DESTRUCTOR()
 }
 
-Simulation& Simulation::operator=(const Simulation& org)
+ISimulation& ISimulation::operator=(const ISimulation& org)
 {
     if (this != &org) copyData(org,false);
     return *this;
 }
 
-Simulation* Simulation::clone() const
+ISimulation* ISimulation::clone() const
 {
-   return new Simulation(*this);
+   return new ISimulation(*this);
 }
 
-void Simulation::initData()
+void ISimulation::initData()
 {
    origPlayers = nullptr;
    players = nullptr;
-   airports = nullptr;
-   navaids = nullptr;
-   waypoints = nullptr;
-   terrain = nullptr;
-   atmosphere = nullptr;
    station = nullptr;
 
    em = nullptr;
@@ -235,7 +214,7 @@ void Simulation::initData()
    bgThreadsFailed = false;
 }
 
-void Simulation::copyData(const Simulation& org, const bool cc)
+void ISimulation::copyData(const ISimulation& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -257,33 +236,6 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    if (org.players != nullptr) {
       players = org.players->clone();
       players->unref();  // safe_ptr<> has it
-   }
-
-   const dafif::AirportLoader* apLoader = org.airports;
-   setAirports( const_cast<dafif::AirportLoader*>(static_cast<const dafif::AirportLoader*>(apLoader)) );
-
-   const dafif::NavaidLoader* naLoader = org.navaids;
-   setNavaids( const_cast<dafif::NavaidLoader*>(static_cast<const dafif::NavaidLoader*>(naLoader)) );
-
-   const dafif::WaypointLoader* wpLoader = org.waypoints;
-   setWaypoints( const_cast<dafif::WaypointLoader*>(static_cast<const dafif::WaypointLoader*>(wpLoader)) );
-
-   if (org.terrain != nullptr) {
-      ITerrain* copy = org.terrain->clone();
-      setSlotTerrain( copy );
-      copy->unref();
-   }
-   else {
-      setSlotTerrain(nullptr);
-   }
-
-   if (org.atmosphere != nullptr) {
-      IAtmosphere* copy = org.atmosphere->clone();
-      setSlotAtmosphere( copy );
-      copy->unref();
-   }
-   else {
-      setSlotAtmosphere(nullptr);
    }
 
    setEarthModel( org.em );
@@ -346,16 +298,10 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    reqBgThreads = org.reqBgThreads;
 }
 
-void Simulation::deleteData()
+void ISimulation::deleteData()
 {
    if (origPlayers != nullptr) { origPlayers = nullptr; }
    if (players != nullptr)     { players = nullptr; }
-
-   setSlotAtmosphere( nullptr );
-   setSlotTerrain( nullptr );
-   setAirports( nullptr );
-   setNavaids( nullptr );
-   setWaypoints( nullptr );
 
    base::Pair* newPlayer = newPlayerQueue.get();
    while (newPlayer != nullptr) {
@@ -385,7 +331,7 @@ void Simulation::deleteData()
 //------------------------------------------------------------------------------
 // reset() -- Reset the simulation & players
 //------------------------------------------------------------------------------
-void Simulation::reset()
+void ISimulation::reset()
 {
    // ---
    // Something old and something new ...
@@ -444,21 +390,6 @@ void Simulation::reset()
    // Swap the lists
    // ---
    players = newList;
-
-   // ---
-   // First time resetting the terrain database will load the data
-   // ---
-   if (terrain != nullptr) {
-      std::cout << "Loading Terrain Data..." << std::endl;
-      terrain->reset();
-      std::cout << "Finished!" << std::endl;
-   }
-
-
-   // ---
-   // Reset atmospheric model
-   // ---
-   if (atmosphere != nullptr) atmosphere->reset();
 
    // ---
    // Create the T/C thread pool
@@ -611,7 +542,7 @@ void Simulation::reset()
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation
 //------------------------------------------------------------------------------
-bool Simulation::shutdownNotification()
+bool ISimulation::shutdownNotification()
 {
    // ---
    // Shutdown our baseclass, which will notify our components
@@ -651,12 +582,6 @@ bool Simulation::shutdownNotification()
    }
 
    // ---
-   // Tell the environments ...
-   // ---
-   if (atmosphere != nullptr) atmosphere->event(SHUTDOWN_EVENT);
-   if (terrain != nullptr) terrain->event(SHUTDOWN_EVENT);
-
-   // ---
    // Shut down the thread pools
    // ---
    if (numTcThreads > 0) {
@@ -680,7 +605,7 @@ bool Simulation::shutdownNotification()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::updateTC(const double dt)
+void ISimulation::updateTC(const double dt)
 {
    // ---
    // Update the executive time
@@ -820,7 +745,7 @@ void Simulation::updateTC(const double dt)
 // Time critical thread processing for every n'th player starting
 // with the idx'th player
 //------------------------------------------------------------------------------
-void Simulation::updateTcPlayerList(
+void ISimulation::updateTcPlayerList(
    base::PairStream* const playerList,
    const double dt,
    const unsigned int idx,
@@ -846,7 +771,7 @@ void Simulation::updateTcPlayerList(
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::updateData(const double dt)
+void ISimulation::updateData(const double dt)
 {
     // Delta-Time (Frozen?)
     double dt0 = dt;
@@ -890,30 +815,13 @@ void Simulation::updateData(const double dt)
             std::cerr << std::endl;
         }
     }
-
-    // ---
-    // Load DAFIF files (one pre frame)
-    // ---
-    if (airports != nullptr && airports->numberOfRecords() == 0) {
-       // Load Airports
-       airports->load();
-    }
-    else if (navaids != nullptr && navaids->numberOfRecords() == 0) {
-       // Load Navaids
-       navaids->load();
-    }
-    else if (waypoints != nullptr && waypoints->numberOfRecords() == 0) {
-       // Load Waypoints
-       waypoints->load();
-    }
-
 }
 
 //------------------------------------------------------------------------------
 // Background thread processing for every n'th player starting
 // with the idx'th player
 //------------------------------------------------------------------------------
-void Simulation::updateBgPlayerList(
+void ISimulation::updateBgPlayerList(
          base::PairStream* const playerList,
          const double dt,
          const unsigned int idx,
@@ -939,7 +847,7 @@ void Simulation::updateBgPlayerList(
 //------------------------------------------------------------------------------
 // printTimingStats() -- Update time critical stuff here
 //------------------------------------------------------------------------------
-void Simulation::printTimingStats()
+void ISimulation::printTimingStats()
 {
    const base::Statistic* ts = getTimingStats();
    int c = cycle();
@@ -956,109 +864,109 @@ void Simulation::printTimingStats()
 //------------------------------------------------------------------------------
 
 // Returns the player list
-base::PairStream* Simulation::getPlayers()
+base::PairStream* ISimulation::getPlayers()
 {
    return players.getRefPtr();
 }
 
 // Returns the player list (const version)
-const base::PairStream* Simulation::getPlayers() const
+const base::PairStream* ISimulation::getPlayers() const
 {
    return players.getRefPtr();
 }
 
 // Returns a pointer to the EarthModel
-const base::EarthModel* Simulation::getEarthModel() const
+const base::EarthModel* ISimulation::getEarthModel() const
 {
    return em;
 }
 
 // Gaming area using the earth model?
-bool Simulation::isGamingAreaUsingEarthModel() const
+bool ISimulation::isGamingAreaUsingEarthModel() const
 {
    return gaUseEmFlg;
 }
 
 // Returns the reference latitude
-double Simulation::getRefLatitude() const
+double ISimulation::getRefLatitude() const
 {
    return refLat;
 }
 
 // Returns the reference longitude
-double Simulation::getRefLongitude() const
+double ISimulation::getRefLongitude() const
 {
    return refLon;
 }
 
 // Returns the sine of the reference latitude
-double Simulation::getSinRefLat() const
+double ISimulation::getSinRefLat() const
 {
    return sinRlat;
 }
 
 // Returns the cosine of the reference latitude
-double Simulation::getCosRefLat() const
+double ISimulation::getCosRefLat() const
 {
    return cosRlat;
 }
 
 // Max valid range (meters) of the gaming area or zero if there's no limit.
-double Simulation::getMaxRefRange() const
+double ISimulation::getMaxRefRange() const
 {
    return maxRefRange;
 }
 
 // World transformation matrix:
-const osg::Matrixd& Simulation::getWorldMat() const
+const osg::Matrixd& ISimulation::getWorldMat() const
 {
    return wm;
 }
 
 // Real-time cycle counter
-unsigned int Simulation::cycle() const
+unsigned int ISimulation::cycle() const
 {
    return cycleCnt;
 }
 
 // Real-time frame counter [0 .. 15]
-unsigned int Simulation::frame() const
+unsigned int ISimulation::frame() const
 {
    return frameCnt;
 }
 
 // Real-time phase counter [0 .. 3]
-unsigned int Simulation::phase() const
+unsigned int ISimulation::phase() const
 {
    return phaseCnt;
 }
 
 // Returns the exec counter (R/T phases since start)
-unsigned int Simulation::getExecCounter() const
+unsigned int ISimulation::getExecCounter() const
 {
    return ((cycleCnt << 6) + (frameCnt << 2) + phaseCnt);
 }
 
 // Returns executive time, which is time since start (sec)
-double Simulation::getExecTimeSec() const
+double ISimulation::getExecTimeSec() const
 {
    return execTime;
 }
 
 // Returns computer systems time of day (UTC -- seconds since midnight)
-double Simulation::getSysTimeOfDay() const
+double ISimulation::getSysTimeOfDay() const
 {
    return pcTime;
 }
 
 // Returns the simulated time of day (UTC -- seconds since midnight)
-double Simulation::getSimTimeOfDay() const
+double ISimulation::getSimTimeOfDay() const
 {
    return simTime;
 }
 
 // Simulated time (UTC) values, where ...
-void Simulation::getSimTimeValues(
+void ISimulation::getSimTimeValues(
       unsigned long* const simSec,  // (OUT) The whole seconds since midnight (00:00:00), January 1, 1970
       unsigned long* const simUSec  // (OUT) The number of microseconds in the current second.
    ) const
@@ -1068,66 +976,25 @@ void Simulation::getSimTimeValues(
 }
 
 // Generates an unique major simulation event ID [1 .. 65535]
-unsigned short Simulation::getNewEventID()
+unsigned short ISimulation::getNewEventID()
 {
    return ++eventID;
 }
 
 // Generates a unique weapon event ID [1 .. 65535]
-unsigned short Simulation::getNewWeaponEventID()
+unsigned short ISimulation::getNewWeaponEventID()
 {
    return ++eventWpnID;
 }
 
 // Generates a unique ID number for released weapons
-unsigned short Simulation::getNewReleasedWeaponID()
+unsigned short ISimulation::getNewReleasedWeaponID()
 {
    return relWpnId++;
 };
 
-// Returns the terrain elevation database
-const ITerrain* Simulation::getTerrain() const
-{
-   return terrain;
-}
-
-ITerrain* Simulation::getTerrain()
-{
-   return terrain;
-}
-
-// Returns the atmosphere model
-IAtmosphere* Simulation::getAtmosphere()
-{
-   return atmosphere;
-}
-
-// Returns the atmospheric model
-const IAtmosphere* Simulation::getAtmosphere() const
-{
-   return atmosphere;
-}
-
-// Returns the airport loader
-dafif::AirportLoader* Simulation::getAirports()
-{
-   return airports;
-}
-
-// Returns the NAVAID loader
-dafif::NavaidLoader* Simulation::getNavaids()
-{
-   return navaids;
-}
-
-// Returns the waypoint loader
-dafif::WaypointLoader* Simulation::getWaypoints()
-{
-   return waypoints;
-}
-
 // Returns the data recorder
-DataRecorder* Simulation::getDataRecorder()
+DataRecorder* ISimulation::getDataRecorder()
 {
    DataRecorder* p = nullptr;
    Station* sta = getStation();
@@ -1136,7 +1003,7 @@ DataRecorder* Simulation::getDataRecorder()
 }
 
 // Our Station
-Station* Simulation::getStation()
+Station* ISimulation::getStation()
 {
    if (station == nullptr) {
       getStationImp();
@@ -1145,15 +1012,15 @@ Station* Simulation::getStation()
 }
 
 // Our Station (const version)
-const Station* Simulation::getStation() const
+const Station* ISimulation::getStation() const
 {
    if (station == nullptr) {
-      (const_cast<Simulation*>(this))->getStationImp();
+      (const_cast<ISimulation*>(this))->getStationImp();
    }
    return station;
 }
 
-Station* Simulation::getStationImp()
+Station* ISimulation::getStationImp()
 {
    if (station == nullptr) {
       station = static_cast<Station*>(findContainerByType(typeid(Station)));
@@ -1164,57 +1031,11 @@ Station* Simulation::getStationImp()
    return station;
 }
 
-
-//------------------------------------------------------------------------------
-// Sets the airport loader
-//------------------------------------------------------------------------------
-bool Simulation::setAirports(dafif::AirportLoader* const p)
-{
-   if (airports != nullptr) {
-      airports->unref();
-   }
-   airports = p;
-   if (airports != nullptr) {
-      airports->ref();
-   }
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// Sets the navaid loader
-//------------------------------------------------------------------------------
-bool Simulation::setNavaids(dafif::NavaidLoader* const p)
-{
-   if (navaids != nullptr) {
-      navaids->unref();
-   }
-   navaids = p;
-   if (navaids != nullptr) {
-      navaids->ref();
-   }
-   return true;
-}
-
-//------------------------------------------------------------------------------
-// Sets the waypoint loader
-//------------------------------------------------------------------------------
-bool Simulation::setWaypoints(dafif::WaypointLoader* const p)
-{
-   if (waypoints != nullptr) {
-      waypoints->unref();
-   }
-   waypoints = p;
-   if (waypoints != nullptr) {
-      waypoints->ref();
-   }
-   return true;
-}
-
 //------------------------------------------------------------------------------
 // setSlotPlayers() -- set the original player list (make sure we have only
 // player type objects with unique names and IDs)
 //------------------------------------------------------------------------------
-bool Simulation::setSlotPlayers(base::PairStream* const pl)
+bool ISimulation::setSlotPlayers(base::PairStream* const pl)
 {
    // Early out if we're just zeroing the player lists
    if (pl == nullptr) {
@@ -1333,7 +1154,7 @@ bool Simulation::setSlotPlayers(base::PairStream* const pl)
 //                       1) remove 'deleteRequest' mode players
 //                       2) add new players
 //------------------------------------------------------------------------------
-void Simulation::updatePlayerList()
+void ISimulation::updatePlayerList()
 {
     // ---
     // Do we need to swap player lists?  Only if a player
@@ -1435,7 +1256,7 @@ void Simulation::updatePlayerList()
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool Simulation::addNewPlayer(base::Pair* const player)
+bool ISimulation::addNewPlayer(base::Pair* const player)
 {
     if (player == nullptr) return false;
     player->ref();
@@ -1451,7 +1272,7 @@ bool Simulation::addNewPlayer(base::Pair* const player)
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool Simulation::addNewPlayer(const char* const playerName, IPlayer* const player)
+bool ISimulation::addNewPlayer(const char* const playerName, IPlayer* const player)
 {
     if (playerName == nullptr || player == nullptr) return false;
 
@@ -1464,7 +1285,7 @@ bool Simulation::addNewPlayer(const char* const playerName, IPlayer* const playe
 //------------------------------------------------------------------------------
 // insertPlayerSort() -- Insert the new player into the new list in sorted order
 //------------------------------------------------------------------------------
-bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream* const newList)
+bool ISimulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream* const newList)
 {
     newList->ref();
 
@@ -1534,17 +1355,17 @@ bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStr
 //------------------------------------------------------------------------------
 // findPlayer() -- Find a player that matches 'id' and 'networkID'
 //------------------------------------------------------------------------------
-IPlayer* Simulation::findPlayer(const short id, const int netID)
+IPlayer* ISimulation::findPlayer(const short id, const int netID)
 {
    return findPlayerPrivate(id, netID);
 }
 
-const IPlayer* Simulation::findPlayer(const short id, const int netID) const
+const IPlayer* ISimulation::findPlayer(const short id, const int netID) const
 {
    return findPlayerPrivate(id, netID);
 }
 
-IPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
+IPlayer* ISimulation::findPlayerPrivate(const short id, const int netID) const
 {
     // Quick out
     if (players == nullptr) return nullptr;
@@ -1578,17 +1399,17 @@ IPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
 //------------------------------------------------------------------------------
 // findPlayerByName() -- Find a player by name
 //------------------------------------------------------------------------------
-IPlayer* Simulation::findPlayerByName(const char* const playerName)
+IPlayer* ISimulation::findPlayerByName(const char* const playerName)
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-const IPlayer* Simulation::findPlayerByName(const char* const playerName) const
+const IPlayer* ISimulation::findPlayerByName(const char* const playerName) const
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-IPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
+IPlayer* ISimulation::findPlayerByNamePrivate(const char* const playerName) const
 {
     // Quick out
     if (players == nullptr || playerName == nullptr) return nullptr;
@@ -1614,7 +1435,7 @@ IPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
 // Data set routines
 //------------------------------------------------------------------------------
 
-bool Simulation::setEarthModel(const base::EarthModel* const msg)
+bool ISimulation::setEarthModel(const base::EarthModel* const msg)
 {
    if (em != nullptr) {
       em->unref();
@@ -1628,14 +1449,14 @@ bool Simulation::setEarthModel(const base::EarthModel* const msg)
    return true;
 }
 
-bool Simulation::setGamingAreaUseEarthModel(const bool flg)
+bool ISimulation::setGamingAreaUseEarthModel(const bool flg)
 {
    gaUseEmFlg = flg;
    return true;
 }
 
 // Sets Ref latitude
-bool Simulation::setRefLatitude(const double v)
+bool ISimulation::setRefLatitude(const double v)
 {
    bool ok = (v <= 90.0 && v >= -90.0);
    if (ok) {
@@ -1650,7 +1471,7 @@ bool Simulation::setRefLatitude(const double v)
 }
 
 // Sets Ref longitude
-bool Simulation::setRefLongitude(const double v)
+bool ISimulation::setRefLongitude(const double v)
 {
    bool ok = (v <= 180.0 && v >= -180.0);
    if (ok) {
@@ -1662,7 +1483,7 @@ bool Simulation::setRefLongitude(const double v)
 }
 
 // Sets the max range (meters) of the gaming area or zero if there's no limit.
-bool Simulation::setMaxRefRange(const double v)
+bool ISimulation::setMaxRefRange(const double v)
 {
    bool ok = (v >= 0);
    if (ok) maxRefRange = v;
@@ -1670,44 +1491,44 @@ bool Simulation::setMaxRefRange(const double v)
 }
 
 // Sets the initial simulation time (sec; or less than zero to slave to UTC)
-bool Simulation::setInitialSimulationTime(const long time)
+bool ISimulation::setInitialSimulationTime(const long time)
 {
    simTime0 = time;
    return true;
 }
 
 // Increment the cycle counter
-void Simulation::incCycle()
+void ISimulation::incCycle()
 {
    cycleCnt++;
 }
 
 // Sets the cycle counter
-void Simulation::setCycle(const unsigned int c)
+void ISimulation::setCycle(const unsigned int c)
 {
    cycleCnt = c;
 }
 
 // Sets the frame counter
-void Simulation::setFrame(const unsigned int f)
+void ISimulation::setFrame(const unsigned int f)
 {
    frameCnt = f;
 }
 
 // Sets the phase counter
-void Simulation::setPhase(const unsigned int c)
+void ISimulation::setPhase(const unsigned int c)
 {
    phaseCnt = c;
 }
 
 // Sets the simulation event ID counter
-void Simulation::setEventID(unsigned short id)
+void ISimulation::setEventID(unsigned short id)
 {
    eventID = id;
 }
 
 // Sets the weapon ID event counter
-void Simulation::setWeaponEventID(unsigned short id)
+void ISimulation::setWeaponEventID(unsigned short id)
 {
    eventWpnID = id;
 }
@@ -1715,7 +1536,7 @@ void Simulation::setWeaponEventID(unsigned short id)
 //------------------------------------------------------------------------------
 // Set Slot routines
 //------------------------------------------------------------------------------
-bool Simulation::setSlotRefLatitude(const base::LatLon* const msg)
+bool ISimulation::setSlotRefLatitude(const base::LatLon* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1724,7 +1545,7 @@ bool Simulation::setSlotRefLatitude(const base::LatLon* const msg)
     return ok;
 }
 
-bool Simulation::setSlotRefLatitude(const base::Number* const msg)
+bool ISimulation::setSlotRefLatitude(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1733,7 +1554,7 @@ bool Simulation::setSlotRefLatitude(const base::Number* const msg)
     return ok;
 }
 
-bool Simulation::setSlotRefLongitude(const base::LatLon* const msg)
+bool ISimulation::setSlotRefLongitude(const base::LatLon* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1742,7 +1563,7 @@ bool Simulation::setSlotRefLongitude(const base::LatLon* const msg)
     return ok;
 }
 
-bool Simulation::setSlotRefLongitude(const base::Number* const msg)
+bool ISimulation::setSlotRefLongitude(const base::Number* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1751,7 +1572,7 @@ bool Simulation::setSlotRefLongitude(const base::Number* const msg)
     return ok;
 }
 
-bool Simulation::setSlotSimulationTime(const base::Time* const msg)
+bool ISimulation::setSlotSimulationTime(const base::Time* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1766,7 +1587,7 @@ bool Simulation::setSlotSimulationTime(const base::Time* const msg)
     return ok;
 }
 
-bool Simulation::setSlotDay(const base::Number* const msg)
+bool ISimulation::setSlotDay(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1782,7 +1603,7 @@ bool Simulation::setSlotDay(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotMonth(const base::Number* const msg)
+bool ISimulation::setSlotMonth(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1798,7 +1619,7 @@ bool Simulation::setSlotMonth(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotYear(const base::Number* const msg)
+bool ISimulation::setSlotYear(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1814,23 +1635,7 @@ bool Simulation::setSlotYear(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotTerrain(ITerrain* const msg)
-{
-   if (terrain != nullptr) terrain->unref();
-   terrain = msg;
-   if (terrain != nullptr) terrain->ref();
-   return true;
-}
-
-bool Simulation::setSlotAtmosphere(IAtmosphere* const msg)
-{
-   if (atmosphere != nullptr) atmosphere->unref();
-   atmosphere = msg;
-   if (atmosphere != nullptr) atmosphere->ref();
-   return true;
-}
-
-bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
+bool ISimulation::setSlotFirstWeaponId(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1847,7 +1652,7 @@ bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
+bool ISimulation::setSlotNumTcThreads(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1872,7 +1677,7 @@ bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
+bool ISimulation::setSlotNumBgThreads(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1897,7 +1702,7 @@ bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
    return ok;
 }
 
-bool Simulation::setSlotGamingAreaRange(const base::Distance* const msg)
+bool ISimulation::setSlotGamingAreaRange(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1906,12 +1711,12 @@ bool Simulation::setSlotGamingAreaRange(const base::Distance* const msg)
    return ok;
 }
 
-bool Simulation::setSlotEarthModel(const base::EarthModel* const msg)
+bool ISimulation::setSlotEarthModel(const base::EarthModel* const msg)
 {
    return setEarthModel(msg);
 }
 
-bool Simulation::setSlotEarthModel(const base::String* const msg)
+bool ISimulation::setSlotEarthModel(const base::String* const msg)
 {
    bool ok = false;
    if (msg != nullptr && msg->len() > 0) {
@@ -1932,7 +1737,7 @@ bool Simulation::setSlotEarthModel(const base::String* const msg)
    return ok;
 }
 
-bool Simulation::setSlotGamingAreaEarthModel(const base::Number* const msg)
+bool ISimulation::setSlotGamingAreaEarthModel(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1941,7 +1746,7 @@ bool Simulation::setSlotGamingAreaEarthModel(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& Simulation::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& ISimulation::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
     if ( !slotsOnly ) {
@@ -1998,7 +1803,7 @@ std::ostream& Simulation::serialize(std::ostream& sout, const int i, const bool 
 //=============================================================================
 // SimTcThread: Time critical thread
 //=============================================================================
-IMPLEMENT_SUBCLASS(SimTcThread,"SimTcThread")
+IMPLEMENT_SUBCLASS(SimTcThread, "SimTcThread")
 EMPTY_SLOTTABLE(SimTcThread)
 EMPTY_COPYDATA(SimTcThread)
 EMPTY_DELETEDATA(SimTcThread)
@@ -2035,7 +1840,7 @@ unsigned long SimTcThread::userFunc()
    // Make sure we've a player list and our index is valid ...
    if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
       // then call the Simulation class' update TC player list functions
-      Simulation* sim = static_cast<Simulation*>(getParent());
+      ISimulation* sim = static_cast<ISimulation*>(getParent());
       sim->updateTcPlayerList(pl0, dt0, idx0, n0);
    }
 
@@ -2045,7 +1850,7 @@ unsigned long SimTcThread::userFunc()
 //=============================================================================
 // SimBgThread: Background thread
 //=============================================================================
-IMPLEMENT_SUBCLASS(SimBgThread,"SimBgThread")
+IMPLEMENT_SUBCLASS(SimBgThread, "SimBgThread")
 EMPTY_SLOTTABLE(SimBgThread)
 EMPTY_COPYDATA(SimBgThread)
 EMPTY_DELETEDATA(SimBgThread)
@@ -2082,7 +1887,7 @@ unsigned long SimBgThread::userFunc()
    // Make sure we've a player list and our index is valid ...
    if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
       // then call the Simulation class' update TC player list functions
-      Simulation* sim = static_cast<Simulation*>(getParent());
+      ISimulation* sim = static_cast<ISimulation*>(getParent());
       sim->updateBgPlayerList(pl0, dt0, idx0, n0);
    }
 

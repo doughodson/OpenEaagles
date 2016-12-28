@@ -88,7 +88,7 @@ dafif::NavaidLoader* NavRadio::getNavaidLoader()
 {
    // If we don't have a NAVAID loader, try to get one from our simulation
    if (nvdb == nullptr) {
-      simulation::Simulation* sim = getSimulation();
+      models::Simulation* sim = getSimulation();
       if (sim != nullptr) {
          dafif::NavaidLoader* p = sim->getNavaids();
          if (p != nullptr && p->isDbLoader()) {
