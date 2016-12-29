@@ -86,6 +86,7 @@ OBJS =  \
 	SimAgent.o \
 	SimAgent.o \
 	Simulation.o \
+	SynchronizedState.o \
 	TargetData.o \
 	Tdb.o \
 	Track.o \
