@@ -817,7 +817,7 @@ private:
    // ---
    // System pointers
    // ---
-   models::Simulation* sim;     // The simulation system that owns us (not ref()'d)
+   Simulation* sim;             // The simulation system that owns us (not ref()'d)
 
    base::Pair* dynamicsModel;   // Dynamics Model (ref()'d)
    base::Pair* datalink;        // Datalink model (ref()'d)
