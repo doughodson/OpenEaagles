@@ -59,7 +59,11 @@ EMPTY_SERIALIZER(Simulation)
 Simulation::Simulation()
 {
    STANDARD_CONSTRUCTOR()
+   initData();
+}
 
+void Simulation::initData()
+{
    airports = nullptr;
    navaids = nullptr;
    waypoints = nullptr;
@@ -70,7 +74,7 @@ Simulation::Simulation()
 void Simulation::copyData(const Simulation& org, const bool cc)
 {
    BaseClass::copyData(org);
-//   if (cc) initData();
+   if (cc) initData();
 
    const dafif::AirportLoader* apLoader = org.airports;
    setAirports( const_cast<dafif::AirportLoader*>(static_cast<const dafif::AirportLoader*>(apLoader)) );

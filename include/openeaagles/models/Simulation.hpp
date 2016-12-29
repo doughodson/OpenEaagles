@@ -204,6 +204,7 @@ protected:
     virtual bool shutdownNotification() override;
 
 private:
+   void initData();
 
    // environmental models
    bool setSlotTerrain(terrain::Terrain* const msg);

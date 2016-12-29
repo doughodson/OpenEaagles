@@ -1213,8 +1213,8 @@ void ISimulation::updatePlayerList()
         // ---
         // Add any new players
         // ---
-      base::Pair* newPlayer = newPlayerQueue.get();
-      while (newPlayer != nullptr) {
+        base::Pair* newPlayer = newPlayerQueue.get();
+        while (newPlayer != nullptr) {
             // get the player
             IPlayer* ip = static_cast<IPlayer*>(newPlayer->object());
 
@@ -1231,7 +1231,7 @@ void ISimulation::updatePlayerList()
 
             newPlayer->unref();
 
-         newPlayer = newPlayerQueue.get();
+            newPlayer = newPlayerQueue.get();
         }
 
         // ---

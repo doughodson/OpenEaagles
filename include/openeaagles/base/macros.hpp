@@ -22,7 +22,7 @@
 //
 //    IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, "factoryName") 
 //       Macro to implement an abstract class.  Same as IMPLEMENT_SUBCLASS()
-//       except that the clone function always returns a zero(0).
+//       except that the clone function always returns a null pointer.
 //
 //    IMPLEMENT_PARTIAL_SUBCLASS(ThisType, "factoryName")
 //       Same as IMPLEMENT_SUBCLASS() except that the copy constructor,

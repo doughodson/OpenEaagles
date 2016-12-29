@@ -9,7 +9,6 @@
 namespace oe {
 
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
-namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 
 namespace simulation {
 
@@ -401,7 +400,7 @@ private:
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   Station*               station;      // The Station that owns us (not ref()'d)
+   Station* station;             // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
    static const unsigned short MAX_TC_THREADS = 32;
