@@ -36,7 +36,7 @@
 namespace oe {
 namespace models {
 
-IMPLEMENT_PARTIAL_SUBCLASS(Simulation, "Simulation")
+IMPLEMENT_SUBCLASS(Simulation, "Simulation")
 
 BEGIN_SLOTTABLE(Simulation)
    "airportLoader",  //  1) Airport database
@@ -65,22 +65,6 @@ Simulation::Simulation()
    waypoints = nullptr;
    terrain = nullptr;
    atmosphere = nullptr;
-}
-
-Simulation::~Simulation()
-{
-   STANDARD_DESTRUCTOR()
-}
-
-Simulation& Simulation::operator=(const Simulation& org)
-{
-    if (this != &org) copyData(org,false);
-    return *this;
-}
-
-Simulation* Simulation::clone() const
-{
-   return new Simulation(*this);
 }
 
 void Simulation::copyData(const Simulation& org, const bool cc)
@@ -165,7 +149,6 @@ bool Simulation::shutdownNotification()
 
    return true;
 }
-
 
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here

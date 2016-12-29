@@ -292,10 +292,6 @@ public:
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 
-    virtual bool setAirports(dafif::AirportLoader* const p);   // Sets the airport loader
-    virtual bool setNavaids(dafif::NavaidLoader* const p);     // Sets the NAVAID loader
-    virtual bool setWaypoints(dafif::WaypointLoader* const p); // Sets the waypoint loader
-
     virtual void updateTC(const double dt = 0.0) override;
     virtual void updateData(const double dt = 0.0) override;
     virtual void reset() override;

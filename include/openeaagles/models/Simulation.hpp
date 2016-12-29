@@ -4,15 +4,7 @@
 
 #include "openeaagles/simulation/ISimulation.hpp"
 
-//#include "openeaagles/base/Component.hpp"
-//#include "openeaagles/base/safe_queue.hpp"
-//#include "openeaagles/base/osg/Matrixd"
-
 namespace oe {
-
-//namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
-
-//namespace simulation { class IPlayer; }
 
 namespace models { class IAtmosphere; }
 namespace terrain { class ITerrain; }
@@ -202,7 +194,6 @@ public:
     virtual bool setNavaids(dafif::NavaidLoader* const p);     // Sets the NAVAID loader
     virtual bool setWaypoints(dafif::WaypointLoader* const p); // Sets the waypoint loader
 
-    virtual void updateTC(const double dt = 0.0) override;
     virtual void updateData(const double dt = 0.0) override;
     virtual void reset() override;
 
