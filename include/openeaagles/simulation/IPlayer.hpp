@@ -6,21 +6,8 @@
 
 namespace oe {
 
-namespace osg {
-class Vec2d;
-class Vec3d;
-class Quat;
-class Matrixd;
-}
-
-namespace base {
-class Angle;
-class Boolean;
-class Distance;
-class LatLon;
-class List;
-class Time;
-}
+namespace osg { class Vec2d; class Vec3d; class Quat; class Matrixd; }
+namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; }
 
 namespace simulation {
 

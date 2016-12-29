@@ -1222,15 +1222,6 @@ void ISimulation::updatePlayerList()
                SAMPLE_1_OBJECT( ip )
             END_RECORD_DATA_SAMPLE()
 
-/*  DDH
-            // TabLogger is deprecated
-            if (getAnyEventLogger() != nullptr) {  // EventLogger Deprecated
-                TabLogger::TabLogEvent* evt = new TabLogger::LogPlayerData(1, ip); // code 1 for "new" msg
-                getAnyEventLogger()->log(evt);
-                evt->unref();
-            }
-*/
-
             // Set container and name
             ip->container(this);
             ip->setName(*newPlayer->slot());

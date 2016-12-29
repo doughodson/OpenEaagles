@@ -949,7 +949,7 @@ double Player::getEarthRadius() const
 //------------------------------------------------------------------------------
 
 // Controlling simulation model
-models::Simulation* Player::getSimulation()
+Simulation* Player::getSimulation()
 {
    if (sim == nullptr) {
       getSimulationImp();

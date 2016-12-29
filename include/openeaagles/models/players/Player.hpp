@@ -15,20 +15,8 @@
 
 namespace oe {
 
-namespace osg {
-class Vec2d;
-class Vec3d;
-}
-
-namespace base {
-class Angle;
-class Boolean;
-class Distance;
-class LatLon;
-class List;
-class Time;
-}
-
+namespace osg { class Vec2d; class Vec3d; }
+namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; }
 namespace simulation { class INib; }
 
 namespace models {
@@ -293,8 +281,8 @@ public:
    // Systems
    // ---
 
-   models::Simulation* getSimulation();                               // Controlling simulation model
-   const models::Simulation* getSimulation() const;                   // Controlling simulation model (const version)
+   Simulation* getSimulation();                                       // Controlling simulation model
+   const Simulation* getSimulation() const;                           // Controlling simulation model (const version)
 
    DynamicsModel* getDynamicsModel();                                 // Player's dynamics model
    const DynamicsModel* getDynamicsModel() const;                     // Player's dynamics model (const version)
