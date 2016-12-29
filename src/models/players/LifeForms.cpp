@@ -7,7 +7,7 @@
 #include "openeaagles/models/systems/StoresMgr.hpp"
 #include "openeaagles/models/systems/Guns.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -217,7 +217,7 @@ void LifeForm::look(const double up, const double sdws)
             const double maxEl = (0.7f * static_cast<double>(base::Angle::D2RCC));
             //double maxRange = 1500.0f; // long range right now
             const double la = lookAngle * static_cast<double>(base::Angle::D2RCC);
-            simulation::Simulation* sim = getSimulation();
+            Simulation* sim = getSimulation();
             if (sim != nullptr) {
                 base::PairStream* players = sim->getPlayers();
                 if (players != nullptr) {

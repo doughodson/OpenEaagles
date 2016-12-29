@@ -3,19 +3,12 @@
 #define __oe_models_JSBSimModel_H__
 
 #include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
-#include "openeaagles/base/String.hpp"
 
-namespace JSBSim {
-    class FGFDMExec;
-    class FGPropertyManager;
-}
+namespace JSBSim { class FGFDMExec; class FGPropertyManager; }
 
 namespace oe {
 
-namespace base {
-    class String;
-    class Integer;
-};
+namespace base { class String; class Integer; }
 
 namespace models {
 
@@ -80,11 +73,11 @@ public:
     virtual bool setCommandedAltitude(const double a, const double aMps = 0, const double maxPitch = 0) override;
 
     // slot methods
-    const base::String* getRootDir() const  { return rootDir;    }   // JSBSim root directory
+    const base::String* getRootDir() const                  { return rootDir;    }   // JSBSim root directory
     virtual bool setRootDir(const base::String* const);
-    const base::String* getModel() const    { return model;      }   // JSBSim model
+    const base::String* getModel() const                    { return model;      }   // JSBSim model
     virtual bool setModel(const base::String* const);
-    int getDebugLevel() const                { return debugLevel; }   // JSBSim debug level
+    int getDebugLevel() const                               { return debugLevel; }   // JSBSim debug level
     virtual bool setDebugLevel(const base::Integer* const);
 
 protected:

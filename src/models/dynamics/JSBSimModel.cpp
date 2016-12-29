@@ -2,7 +2,6 @@
 #include "openeaagles/models/dynamics/JSBSimModel.hpp"
 
 #include "openeaagles/simulation/IPlayer.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/functors/Tables.hpp"

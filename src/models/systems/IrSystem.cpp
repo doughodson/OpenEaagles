@@ -6,7 +6,7 @@
 #include "openeaagles/models/systems/OnboardComputer.hpp"
 #include "openeaagles/models/Tdb.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -157,7 +157,7 @@ void IrSystem::processPlayersOfInterest()
    // ---
    if (getSeeker() != nullptr) {
       base::PairStream* poi = nullptr;
-      simulation::Simulation* sim = getSimulation();
+      Simulation* sim = getSimulation();
       if ( sim != nullptr && !areQueriesDisabled() )
          poi = getSimulation()->getPlayers();
 

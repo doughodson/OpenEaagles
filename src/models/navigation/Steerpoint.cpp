@@ -4,9 +4,9 @@
 #include "openeaagles/models/navigation/Navigation.hpp"
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/Actions.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/simulation/environment/ITerrain.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/terrain/ITerrain.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
@@ -308,7 +308,7 @@ double Steerpoint::getCmdAltitudeFt() const
 // Set the ground elevation at the steerpoint from this terrain database
 // Returns true if successful.
 //------------------------------------------------------------------------------
-bool Steerpoint::setElevation(const simulation::ITerrain* const terrain, const bool interp)
+bool Steerpoint::setElevation(const terrain::ITerrain* const terrain, const bool interp)
 {
    bool ok = false;
    if (!needLL) {

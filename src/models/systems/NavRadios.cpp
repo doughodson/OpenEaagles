@@ -6,7 +6,7 @@
 #include "openeaagles/dafif/AirportLoader.hpp"
 #include "openeaagles/dafif/NavaidLoader.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -103,7 +103,7 @@ dafif::AirportLoader* NavRadio::getAirportLoader()
 {
    // If we don't have an airport loader, try to get one from our simulation
    if (apdb == nullptr) {
-      simulation::Simulation* sim = getSimulation();
+      Simulation* sim = getSimulation();
       if (sim != nullptr) {
          dafif::AirportLoader* p = sim->getAirports();
          if (p != nullptr && p->isDbLoader()) {

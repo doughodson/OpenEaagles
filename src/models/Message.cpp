@@ -1,10 +1,13 @@
 
 #include "openeaagles/models/Message.hpp"
 
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/List.hpp"
+
 namespace oe {
 namespace models {
 
-IMPLEMENT_SUBCLASS(Message,"Message")
+IMPLEMENT_SUBCLASS(Message, "Message")
 EMPTY_SLOTTABLE(Message)
 EMPTY_SERIALIZER(Message)
 

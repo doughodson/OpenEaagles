@@ -5,8 +5,7 @@
 #include "openeaagles/models/systems/TrackManager.hpp"
 #include "openeaagles/models/systems/OnboardComputer.hpp"
 #include "openeaagles/models/Message.hpp"
-
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -358,7 +357,7 @@ bool Datalink::sendMessage(base::Object* const msg)
       // No comm radio -- then we'll send this out to the other players ourself.
       // ---
       else if (getOwnship() != nullptr) {
-         simulation::Simulation* sim = getSimulation();
+         Simulation* sim = getSimulation();
          if (sim != nullptr) {
 
             base::PairStream* players = sim->getPlayers();

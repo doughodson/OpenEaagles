@@ -927,7 +927,7 @@ double Player::getEarthRadius() const
 {
    double erad = base::Nav::ERAD60 * base::Distance::NM2M;  // (default)
 
-   const simulation::Simulation* sim = getSimulation();
+   const Simulation* sim = getSimulation();
    if (sim != nullptr) {
       const base::EarthModel* pModel = sim->getEarthModel();
       if (pModel == nullptr) pModel = &base::EarthModel::wgs84;
@@ -949,7 +949,7 @@ double Player::getEarthRadius() const
 //------------------------------------------------------------------------------
 
 // Controlling simulation model
-simulation::Simulation* Player::getSimulation()
+models::Simulation* Player::getSimulation()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -958,7 +958,7 @@ simulation::Simulation* Player::getSimulation()
 }
 
 // Controlling simulation model (const version)
-const simulation::Simulation* Player::getSimulation() const
+const Simulation* Player::getSimulation() const
 {
    if (sim == nullptr) {
       (const_cast<Player*>(this))->getSimulationImp();
@@ -967,10 +967,10 @@ const simulation::Simulation* Player::getSimulation() const
 }
 
 // Find our simulation model
-simulation::Simulation* Player::getSimulationImp()
+Simulation* Player::getSimulationImp()
 {
    if (sim == nullptr) {
-      sim = static_cast<simulation::Simulation*>(findContainerByType(typeid(simulation::Simulation)));
+      sim = static_cast<Simulation*>(findContainerByType(typeid(Simulation)));
       if (sim == nullptr && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Player::getSimulationImp(): ERROR, unable to locate the Simulation class!" << std::endl;
       }
@@ -2050,7 +2050,7 @@ bool Player::setPosition(const double n, const double e, const bool slaved)
 // Position relative to the simulation ref point (meters)
 bool Player::setPosition(const double n, const double e, const double d, const bool slaved)
 {
-   simulation::Simulation* s = getSimulation();
+   Simulation* s = getSimulation();
    const double maxRefRange = s->getMaxRefRange();
    const base::EarthModel* em = s->getEarthModel();
 
@@ -2112,7 +2112,7 @@ bool Player::setPositionLL(const double lat, const double lon, const bool slaved
 // Sets present position using lat/long position; (degs) and altitude (m)
 bool Player::setPositionLLA(const double lat, const double lon, const double alt, const bool slaved)
 {
-   simulation::Simulation* s = getSimulation();
+   Simulation* s = getSimulation();
    const double maxRefRange = s->getMaxRefRange();
    const base::EarthModel* em = s->getEarthModel();
 
@@ -2159,7 +2159,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
 // Geocentric position vector (meters)
 bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
 {
-   simulation::Simulation* s = getSimulation();
+   Simulation* s = getSimulation();
    const double maxRefRange = s->getMaxRefRange();
    const base::EarthModel* em = s->getEarthModel();
 
@@ -3443,7 +3443,7 @@ void Player::updateElevation()
 {
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
    // elevation is from the OTW system.
-   const simulation::Simulation* s = getSimulation();
+   const Simulation* s = getSimulation();
    if (s != nullptr && !isTerrainElevationRequired()) {
       const terrain::ITerrain* terrain = s->getTerrain();
       if (terrain != nullptr) {

@@ -14,8 +14,8 @@
 #include "openeaagles/models/players/Missile.hpp"
 #include "openeaagles/models/players/Weapon.hpp"
 #include "openeaagles/models/systems/StoresMgr.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/Nav.hpp"

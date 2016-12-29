@@ -11,7 +11,7 @@ namespace ubf { class Behavior; class State; }
 }
 
 namespace simulation {
-class Simulation;
+class ISimulation;
 class Station;
 }
 
@@ -53,7 +53,7 @@ protected:
    base::Component*      getActor() { return actor;}
 
    simulation::Station*    getStation();
-   simulation::Simulation* getSimulation();
+   simulation::ISimulation* getSimulation();
 
    struct AgentItem
    {

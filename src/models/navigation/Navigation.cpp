@@ -5,8 +5,7 @@
 #include "openeaagles/models/navigation/Bullseye.hpp"
 #include "openeaagles/models/navigation/Route.hpp"
 #include "openeaagles/models/navigation/Steerpoint.hpp"
-
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
@@ -226,7 +225,7 @@ void Navigation::reset()
    if (bull != nullptr) bull->event(RESET_EVENT);
 
    // Set the reference center of our gaming area
-   const simulation::Simulation* sim = getSimulation();
+   const Simulation* sim = getSimulation();
    if (sim != nullptr) {
       refLat = sim->getRefLatitude();
       refLon = sim->getRefLongitude();

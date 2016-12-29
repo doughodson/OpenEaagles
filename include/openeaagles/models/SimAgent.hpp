@@ -7,7 +7,7 @@
 namespace oe {
 
 namespace simulation {
-class Simulation;
+class ISimulation;
 class Station;
 }
 
@@ -37,7 +37,7 @@ protected:
    virtual void initActor() override;
 
    simulation::Station*     getStation();
-   simulation::Simulation*  getSimulation();
+   simulation::ISimulation* getSimulation();
 
    // sets which component ("actor") the agent is for
    void setActorPlayerByName(const char*);

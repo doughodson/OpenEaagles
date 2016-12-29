@@ -7,8 +7,6 @@
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/systems/IrSensor.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
-
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Number.hpp"

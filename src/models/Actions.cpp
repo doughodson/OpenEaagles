@@ -8,7 +8,7 @@
 #include "openeaagles/models/systems/StoresMgr.hpp"
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -566,7 +566,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
          if (sms != nullptr) {
 
             // Get the simulation ref point
-            simulation::Simulation* sim = own->getSimulation();
+            Simulation* sim = own->getSimulation();
             const double refLat = sim->getRefLatitude();
             const double refLon = sim->getRefLongitude();
 

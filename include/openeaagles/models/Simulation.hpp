@@ -2,7 +2,7 @@
 #ifndef __oe_models_Simulation_H__
 #define __oe_models_Simulation_H__
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/ISimulation.hpp"
 
 //#include "openeaagles/base/Component.hpp"
 //#include "openeaagles/base/safe_queue.hpp"
@@ -181,9 +181,9 @@ namespace models {
 //    other components.
 //
 //------------------------------------------------------------------------------
-class Simulation : public simulation::Simulation
+class Simulation : public simulation::ISimulation
 {
-    DECLARE_SUBCLASS(Simulation, simulation::Simulation)
+    DECLARE_SUBCLASS(Simulation, simulation::ISimulation)
 
 public:
     Simulation();

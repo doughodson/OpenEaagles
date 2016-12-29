@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/players/Bullet.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
@@ -223,7 +223,7 @@ bool Bullet::checkForTargetHit()
         //double diffAz = 0;
         //double diffEl = 0;
         double maxRange = 1; // close range of detonation
-        simulation::Simulation* sim = getSimulation();
+        Simulation* sim = getSimulation();
         if (sim != nullptr) {
             base::PairStream* players = sim->getPlayers();
             if (players != nullptr) {

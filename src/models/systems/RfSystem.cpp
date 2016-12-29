@@ -5,7 +5,7 @@
 #include "openeaagles/models/systems/Antenna.hpp"
 #include "openeaagles/models/Emission.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -226,7 +226,7 @@ void RfSystem::processPlayersOfInterest()
 
       // Pass our players of interest to the antenna for processing
       base::PairStream* poi = nullptr;
-      simulation::Simulation* sim = getSimulation();
+      Simulation* sim = getSimulation();
       if ( sim != nullptr && !areEmissionsDisabled() ) {
          poi = sim->getPlayers();
       }

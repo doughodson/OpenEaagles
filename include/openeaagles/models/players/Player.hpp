@@ -293,8 +293,8 @@ public:
    // Systems
    // ---
 
-   simulation::Simulation* getSimulation();                           // Controlling simulation model
-   const simulation::Simulation* getSimulation() const;               // Controlling simulation model (const version)
+   models::Simulation* getSimulation();                               // Controlling simulation model
+   const models::Simulation* getSimulation() const;                   // Controlling simulation model (const version)
 
    DynamicsModel* getDynamicsModel();                                 // Player's dynamics model
    const DynamicsModel* getDynamicsModel() const;                     // Player's dynamics model (const version)
@@ -699,7 +699,7 @@ protected:
 private:
 
    void initData();
-   simulation::Simulation* getSimulationImp();
+   Simulation* getSimulationImp();
 
    // ---
    // Player identity
@@ -829,7 +829,7 @@ private:
    // ---
    // System pointers
    // ---
-   simulation::Simulation* sim;   // The simulation system that owns us (not ref()'d)
+   models::Simulation* sim;     // The simulation system that owns us (not ref()'d)
 
    base::Pair* dynamicsModel;   // Dynamics Model (ref()'d)
    base::Pair* datalink;        // Datalink model (ref()'d)

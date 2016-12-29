@@ -77,8 +77,8 @@ public:
    virtual Player* getOwnship();                         // Returns a pointer to our ownship player
    virtual const Player* getOwnship() const;             // Returns a pointer to our ownship player (const version)
 
-   virtual models::Simulation* getSimulation();          // Returns a pointer to the Simulation model
-   virtual const simulation::Simulation* getSimulation() const;  // Returns a pointer to the Simulation model (const version)
+   virtual Simulation* getSimulation();                  // Returns a pointer to the Simulation model
+   virtual const Simulation* getSimulation() const;      // Returns a pointer to the Simulation model (const version)
 
    // Event handler(s)
    virtual bool killedNotification(Player* const killedBy = 0); // Killed (KILL_EVENT) event handler

@@ -3,7 +3,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -109,7 +109,7 @@ void System::updateTC(const double dt0)
    // ---
    // Four phases per frame
    // ---
-   simulation::Simulation* sim = ownship->getSimulation();
+   Simulation* sim = ownship->getSimulation();
    if (sim == nullptr) return;
 
    switch (sim->phase()) {
@@ -189,9 +189,9 @@ models::Simulation* System::getSimulation()
 }
 
 // Returns a pointer to the main Simulation class (const version)
-const simulation::Simulation* System::getSimulation() const
+const Simulation* System::getSimulation() const
 {
-   const simulation::Simulation* p = nullptr;
+   const Simulation* p = nullptr;
    if (ownship != nullptr) p = ownship->getSimulation();
    return p;
 }
