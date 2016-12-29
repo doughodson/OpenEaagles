@@ -2,7 +2,7 @@
 #ifndef __oe_terrain_Terrain_H__
 #define __oe_terrain_Terrain_H__
 
-#include "openeaagles/terrain/ITerrain.hpp"
+#include "openeaagles/base/Component.hpp"
 
 #include "openeaagles/base/osg/Vec2d"
 #include "openeaagles/base/osg/Vec3d"
@@ -27,9 +27,9 @@ namespace terrain {
 //    2) the final point [n-1] is at the maximum range
 //    3) The size of all arrays, n, must contain at least 2 points (ref point & max range)
 //------------------------------------------------------------------------------
-class Terrain : public ITerrain
+class Terrain : public base::Component
 {
-    DECLARE_SUBCLASS(Terrain, ITerrain)
+    DECLARE_SUBCLASS(Terrain, base::Component)
 
 public:
    Terrain();
@@ -70,7 +70,7 @@ public:
          const double lat,             // Reference latitude (degs)
          const double lon,             // Reference longitude (degs)
          const bool interp = false     // Interpolate between elevation posts (default: false)
-      ) const override = 0;
+      ) const = 0;
 
    // Returns true if a target point is occulted by the terrain as seen from the ref point
    virtual bool targetOcculting(
@@ -80,7 +80,7 @@ public:
          const double tgtLat,          // Target latitude (degs)
          const double tgtLon,          // Target longitude (degs)
          const double tgtAlt           // Target altitude (meters)
-      ) const override;
+      ) const;
 
    // Returns true if any terrain in the 'truBrg' direction for 'dist' meters
    // occults (or masks) a target with a look angle of atan(tanLookAng)
@@ -91,7 +91,7 @@ public:
       const double truBrg,             // True direction angle from north to look (degs)
       const double dist,               // Distance to check (meters)
       const double tanLookAng          // Tangent of the look angle
-   ) const override;
+   ) const;
 
    // Returns true if the target at the altitude 'tgtAlt' and range 'range' is
    // occulted by the elevation points as seen from the reference altitude, 'refAlt'.

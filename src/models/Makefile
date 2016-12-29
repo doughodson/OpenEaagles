@@ -12,7 +12,7 @@ OBJS =  \
 	dynamics/LaeroModel.o  \
 	dynamics/RacModel.o \
 	dynamics/SpaceDynamicsModel.o \
-	environment/IAtmosphere.o \
+	environment/Atmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \
 	navigation/Bullseye.o \

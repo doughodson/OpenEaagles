@@ -22,7 +22,7 @@
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/IrSignature.hpp"
 
-#include "openeaagles/terrain/ITerrain.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
 
 #include "openeaagles/simulation/DataRecorder.hpp"
 #include "openeaagles/simulation/INetIO.hpp"
@@ -3445,7 +3445,7 @@ void Player::updateElevation()
    // elevation is from the OTW system.
    const Simulation* s = getSimulation();
    if (s != nullptr && !isTerrainElevationRequired()) {
-      const terrain::ITerrain* terrain = s->getTerrain();
+      const terrain::Terrain* terrain = s->getTerrain();
       if (terrain != nullptr) {
          double el = 0;
          terrain->getElevation(&el, getLatitude(), getLongitude(), isDtedTerrainInterpolationEnabled());

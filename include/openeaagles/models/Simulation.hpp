@@ -6,11 +6,11 @@
 
 namespace oe {
 
-namespace models { class IAtmosphere; }
-namespace terrain { class ITerrain; }
+namespace terrain { class Terrain; }
 namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 
 namespace models {
+class Atmosphere;
 
 //------------------------------------------------------------------------------
 // Class: Simulation
@@ -28,8 +28,8 @@ namespace models {
 //    navaidLoader   <dafif::NavaidLoader>    ! NAVAID database (default: nullptr)
 //    waypointLoader <dafif::WaypointLoader>  ! Waypoint database (default: nullptr)
 //
-//    terrain        <terrain::ITerrain>      ! Terrain elevation database (default: nullptr)
-//    atmosphere     <IAtmosphere>            ! Atmosphere
+//    terrain        <terrain::Terrain>       ! Terrain elevation database (default: nullptr)
+//    atmosphere     <Atmosphere>             ! Atmosphere
 //
 //
 //
@@ -181,10 +181,10 @@ public:
     Simulation();
 
 
-    const terrain::ITerrain* getTerrain() const;   // Returns the terrain elevation database
+    const terrain::Terrain* getTerrain() const;    // Returns the terrain elevation database
 
-    IAtmosphere* getAtmosphere();                  // Returns the atmosphere model
-    const IAtmosphere* getAtmosphere() const;      // Returns the atmosphere model (const version)
+    Atmosphere* getAtmosphere();                   // Returns the atmosphere model
+    const Atmosphere* getAtmosphere() const;       // Returns the atmosphere model (const version)
 
     dafif::AirportLoader* getAirports();           // Returns the airport loader
     dafif::NavaidLoader* getNavaids();             // Returns the NAVAID loader
@@ -199,18 +199,18 @@ public:
 
 protected:
 
-    terrain::ITerrain* getTerrain();                  // Returns the terrain elevation database
+    terrain::Terrain* getTerrain();                  // Returns the terrain elevation database
 
     virtual bool shutdownNotification() override;
 
 private:
 
    // environmental models
-   bool setSlotTerrain(terrain::ITerrain* const msg);
-   bool setSlotAtmosphere(IAtmosphere* const msg);
+   bool setSlotTerrain(terrain::Terrain* const msg);
+   bool setSlotAtmosphere(Atmosphere* const msg);
 
-   IAtmosphere*           atmosphere;   // Atmosphere model
-   terrain::ITerrain*     terrain;      // Terrain model
+   Atmosphere*            atmosphere;   // Atmosphere model
+   terrain::Terrain*      terrain;      // Terrain model
    dafif::AirportLoader*  airports;     // Airport loader
    dafif::NavaidLoader*   navaids;      // NAVAID loader
    dafif::WaypointLoader* waypoints;    // Waypoint loader

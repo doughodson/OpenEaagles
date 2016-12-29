@@ -17,7 +17,7 @@ class String;
 class Time;
 }
 
-namespace terrain { class ITerrain; }
+namespace terrain { class Terrain; }
 
 namespace models {
 class Navigation;
@@ -128,7 +128,7 @@ public:
     // Set the ground elevation at the steerpoint from this terrain database
     // Interpolate between elevation posts if the optional 'interp' flag is true.
     // Returns true if successful.
-    virtual bool setElevation(const terrain::ITerrain* const terrain, const bool interp = false);
+    virtual bool setElevation(const terrain::Terrain* const terrain, const bool interp = false);
 
     // Set parameters
     virtual void setSteerpointType(const StptType t)    { stptType = t; }

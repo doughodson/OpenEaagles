@@ -9,7 +9,6 @@ OBJS =  \
 	srtm/SrtmHgtFile.o \
 	DataFile.o \
 	factory.o \
-	ITerrain.o \
 	QuadMap.o \
 	Terrain.o
 

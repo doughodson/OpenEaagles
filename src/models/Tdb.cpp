@@ -5,7 +5,7 @@
 #include "openeaagles/models/systems/Gimbal.hpp"
 #include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/terrain/ITerrain.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Nav.hpp"
@@ -219,7 +219,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    // ---
    // Terrain occulting check setup
    // ---
-   const terrain::ITerrain* terrain = nullptr;
+   const terrain::Terrain* terrain = nullptr;
    if (gimbal->isTerrainOccultingEnabled()) {
       const Simulation* const sim = ownship->getSimulation();
       terrain = sim->getTerrain();

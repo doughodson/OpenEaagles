@@ -3,8 +3,8 @@
 
 #include "openeaagles/simulation/IPlayer.hpp"
 
-#include "openeaagles/models/environment/IAtmosphere.hpp"
-#include "openeaagles/terrain/ITerrain.hpp"
+#include "openeaagles/models/environment/Atmosphere.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
 
 #include "openeaagles/dafif/AirportLoader.hpp"
 #include "openeaagles/dafif/NavaidLoader.hpp"
@@ -50,8 +50,8 @@ BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 1, setAirports,            dafif::AirportLoader)
     ON_SLOT( 2, setNavaids,             dafif::NavaidLoader)
     ON_SLOT( 3, setWaypoints,           dafif::WaypointLoader)
-    ON_SLOT( 4, setSlotTerrain,         terrain::ITerrain)
-    ON_SLOT( 5, setSlotAtmosphere,      IAtmosphere)
+    ON_SLOT( 4, setSlotTerrain,         terrain::Terrain)
+    ON_SLOT( 5, setSlotAtmosphere,      Atmosphere)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(Simulation)
@@ -82,7 +82,7 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    setWaypoints( const_cast<dafif::WaypointLoader*>(static_cast<const dafif::WaypointLoader*>(wpLoader)) );
 
    if (org.terrain != nullptr) {
-      terrain::ITerrain* copy = org.terrain->clone();
+      terrain::Terrain* copy = org.terrain->clone();
       setSlotTerrain( copy );
       copy->unref();
    }
@@ -91,7 +91,7 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    }
 
    if (org.atmosphere != nullptr) {
-      IAtmosphere* copy = org.atmosphere->clone();
+      Atmosphere* copy = org.atmosphere->clone();
       setSlotAtmosphere( copy );
       copy->unref();
    }
@@ -178,24 +178,24 @@ void Simulation::updateData(const double dt)
 //------------------------------------------------------------------------------
 
 // Returns the terrain elevation database
-const terrain::ITerrain* Simulation::getTerrain() const
+const terrain::Terrain* Simulation::getTerrain() const
 {
    return terrain;
 }
 
-terrain::ITerrain* Simulation::getTerrain()
+terrain::Terrain* Simulation::getTerrain()
 {
    return terrain;
 }
 
 // Returns the atmosphere model
-IAtmosphere* Simulation::getAtmosphere()
+Atmosphere* Simulation::getAtmosphere()
 {
    return atmosphere;
 }
 
 // Returns the atmospheric model
-const IAtmosphere* Simulation::getAtmosphere() const
+const Atmosphere* Simulation::getAtmosphere() const
 {
    return atmosphere;
 }
@@ -267,7 +267,7 @@ bool Simulation::setWaypoints(dafif::WaypointLoader* const p)
 // Set Slot routines
 //------------------------------------------------------------------------------
 
-bool Simulation::setSlotTerrain(terrain::ITerrain* const msg)
+bool Simulation::setSlotTerrain(terrain::Terrain* const msg)
 {
    if (terrain != nullptr) terrain->unref();
    terrain = msg;
@@ -275,7 +275,7 @@ bool Simulation::setSlotTerrain(terrain::ITerrain* const msg)
    return true;
 }
 
-bool Simulation::setSlotAtmosphere(IAtmosphere* const msg)
+bool Simulation::setSlotAtmosphere(Atmosphere* const msg)
 {
    if (atmosphere != nullptr) atmosphere->unref();
    atmosphere = msg;
