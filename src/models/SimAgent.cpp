@@ -2,8 +2,8 @@
 #include "openeaagles/models/SimAgent.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/simulation/ISimulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/ubf/Action.hpp"
@@ -73,12 +73,12 @@ simulation::Station* SimAgent::getStation()
    return myStation;
 }
 
-simulation::ISimulation* SimAgent::getSimulation()
+Simulation* SimAgent::getSimulation()
 {
-   simulation::ISimulation* sim = nullptr;
+   Simulation* sim = nullptr;
    simulation::Station* s = getStation();
    if (s != nullptr) {
-      sim = s->getSimulation();
+      sim = dynamic_cast<Simulation*>(s->getSimulation());
    }
    return sim;
 }
@@ -92,7 +92,7 @@ void SimAgent::initActor()
          BaseClass::initActor();
       }
       else {
-         simulation::ISimulation* sim = getSimulation();
+         Simulation* sim = getSimulation();
          if ( sim != nullptr ) {
             base::Component* player = sim->findPlayerByName(actorPlayerName->getString());
             if (actorComponentName == nullptr) {

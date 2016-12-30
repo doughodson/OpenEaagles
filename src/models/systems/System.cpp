@@ -13,26 +13,20 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(System, "System")
 
-
 BEGIN_SLOTTABLE(System)
    "powerSwitch",    //  1) Power switch position ("OFF", "STBY", "ON") (default: "ON")
 END_SLOTTABLE(System)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(System)
    ON_SLOT( 1, setSlotPowerSwitch, base::String)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(System)
     ON_EVENT_OBJ(KILL_EVENT,killedNotification,Player)
     ON_EVENT(KILL_EVENT,killedNotification)
 END_EVENT_HANDLER()
 
-System::System() : ownship(nullptr)
+System::System()
 {
    STANDARD_CONSTRUCTOR()
 

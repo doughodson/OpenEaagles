@@ -23,17 +23,15 @@
 namespace oe {
 namespace models {
 
-   // default flight control attributes associated with flying a pattern
-   const double Autopilot::STD_RATE_TURN_DPS   = 3.0;       // 3.0 degrees per second
-   const double Autopilot::STD_MAX_BANK_ANGLE  = 30.0;      // 30.0 degrees of roll
-   const double Autopilot::STD_MAX_CLIMB_RATE  = 2000.0 * (base::Distance::FT2M) / (base::Time::M2S);
-   const double Autopilot::STD_MAX_PITCH_ANGLE = 10.0;      // 10.0 degrees of pitch
-   const double Autopilot::STD_MAX_ACCEL_NPS   = 5.0;       // NPS
+// default flight control attributes associated with flying a pattern
+const double Autopilot::STD_RATE_TURN_DPS   = 3.0;       // 3.0 degrees per second
+const double Autopilot::STD_MAX_BANK_ANGLE  = 30.0;      // 30.0 degrees of roll
+const double Autopilot::STD_MAX_CLIMB_RATE  = 2000.0 * (base::Distance::FT2M) / (base::Time::M2S);
+const double Autopilot::STD_MAX_PITCH_ANGLE = 10.0;      // 10.0 degrees of pitch
+const double Autopilot::STD_MAX_ACCEL_NPS   = 5.0;       // NPS
 
+IMPLEMENT_SUBCLASS(Autopilot, "Autopilot")
 
-IMPLEMENT_SUBCLASS(Autopilot,"Autopilot")
-
-// slot table for this class type
 BEGIN_SLOTTABLE(Autopilot)
    "navMode",                    //  1) Nav (route follow) mode flag (default: true)
    "holdAltitude",               //  2) Hold altitude (default: player's altitude) (Distance)
@@ -59,7 +57,6 @@ BEGIN_SLOTTABLE(Autopilot)
    "maxAcceleration",            // 22) Maximum velocity acceleration            (Number) - NPS
 END_SLOTTABLE(Autopilot)
 
-//  Map slot names to handlers
 BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT( 1, setSlotNavMode,                    base::Number)
     ON_SLOT( 2, setSlotHoldAltitude,               base::Distance)
@@ -89,9 +86,6 @@ BEGIN_SLOT_MAP(Autopilot)
     ON_SLOT(22, setSlotMaxVelAccNps,               base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Autopilot::Autopilot()
 {
    STANDARD_CONSTRUCTOR()
@@ -150,9 +144,6 @@ Autopilot::Autopilot()
    maxVelAccNps = STD_MAX_ACCEL_NPS;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Autopilot::copyData(const Autopilot& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -213,44 +204,32 @@ void Autopilot::copyData(const Autopilot& org, const bool cc)
    maxVelAccNps = org.maxVelAccNps;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Autopilot::deleteData()
 {
    setLeadPlayer(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// shutdownNotification()
-//------------------------------------------------------------------------------
 bool Autopilot::shutdownNotification()
 {
    setLeadPlayer(nullptr);
    return BaseClass::shutdownNotification();
 }
 
-//------------------------------------------------------------------------------
-// reset() -- Reset parameters
-//------------------------------------------------------------------------------
 void Autopilot::reset()
 {
-    BaseClass::reset();
+   BaseClass::reset();
 
-    Player* pv = getOwnship();
-    if (pv != nullptr) {
-        // If heading, altitude or velocity hold modes are set and their
-        // hold values were not set by a slot function, then use the player's
-        // current values.
-        if (hdgHoldOn && !holdHdgSet) cmdHdg = static_cast<double>(pv->getHeadingD());
-        if (altHoldOn && !holdAltSet) cmdAlt = static_cast<double>(pv->getAltitudeFt());
-        if (spdHoldOn && !holdSpdSet) cmdSpd = pv->getTotalVelocityKts();
-    }
+   Player* pv = getOwnship();
+   if (pv != nullptr) {
+      // If heading, altitude or velocity hold modes are set and their
+      // hold values were not set by a slot function, then use the player's
+      // current values.
+      if (hdgHoldOn && !holdHdgSet) cmdHdg = static_cast<double>(pv->getHeadingD());
+      if (altHoldOn && !holdAltSet) cmdAlt = static_cast<double>(pv->getAltitudeFt());
+      if (spdHoldOn && !holdSpdSet) cmdSpd = pv->getTotalVelocityKts();
+   }
 }
 
-//------------------------------------------------------------------------------
-// process() -- Process phase
-//------------------------------------------------------------------------------
 void Autopilot::process(const double dt)
 {
    modeManager();
@@ -303,7 +282,6 @@ bool Autopilot::modeManager()
    return true;
 }
 
-
 //------------------------------------------------------------------------------
 // processModeNavigation() -- Process for the "navigation system" mode
 //------------------------------------------------------------------------------
@@ -312,6 +290,7 @@ bool Autopilot::processModeNavigation()
    bool ok = false;
 
    const Navigation* nav = getOwnship()->getNavigation();
+
    if (nav != nullptr) {
       // Do we have valid NAV steering data?
       if (nav->isNavSteeringValid()) {
@@ -968,7 +947,6 @@ bool Autopilot::headingController()
          if ( isHeadingHoldOn() || isNavModeOn() ) {
             const int ihdg10 = static_cast<int>( getCommandedHeadingD() * 10.0f );
             const double hdg = static_cast<double>(ihdg10) / 10.0;
-
             md->setCommandedHeadingD(hdg, maxTurnRateDps, maxBankAngleDegs);
             md->setHeadingHoldOn( true );
          } else {

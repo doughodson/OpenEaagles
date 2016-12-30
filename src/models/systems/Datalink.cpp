@@ -421,7 +421,7 @@ base::Object* Datalink::receiveMessage()
 //------------------------------------------------------------------------------
 bool Datalink::queueIncomingMessage(base::Object* const msg)
 {
-   // Only queue message if Ownship is local.  IPlayer messages are processed on their local systems
+   // Only queue message if Ownship is local.  Networked player messages are processed on their local systems
    if ((getOwnship() == nullptr) || !(getOwnship()->isLocalPlayer())) {
       return true;
    }

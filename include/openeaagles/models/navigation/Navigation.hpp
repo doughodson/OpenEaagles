@@ -17,13 +17,13 @@ class Route;
 class Bullseye;
 
 //------------------------------------------------------------------------------
-// Classes:     Navigation
+// Class: Navigation
 // Description: Generic Navigation System ...
 //              Maintains present position; routes; steering cues;
 //              NAV subsystems (INS, GPS); NAVAIDS (TACAN, ILS)
 //
 //    This class is one of the "top level" systems attached to a Player
-//    class (see Player.h).
+//    class (see Player.hpp).
 //
 // Factory name: Navigation
 // Slots:

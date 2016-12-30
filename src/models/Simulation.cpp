@@ -1,8 +1,6 @@
 
 #include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/simulation/IPlayer.hpp"
-
 #include "openeaagles/models/environment/Atmosphere.hpp"
 #include "openeaagles/terrain/Terrain.hpp"
 

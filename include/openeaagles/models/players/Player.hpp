@@ -243,7 +243,7 @@ public:
    // ---
    // Interoperability network data
    // ---
-   virtual bool isNetworkedPlayer() const override;                 // True if this is a networked player (IPlayer)
+   virtual bool isNetworkedPlayer() const override;                 // True if this is a networked player
    virtual bool isLocalPlayer() const override;                     // True if this is a local player
 
    virtual int getNetworkID() const override;                        // ID of a networked player's controlling network model
@@ -803,7 +803,7 @@ private:
    double      dataLogTime;      // Data log time (seconds)
 
    // ---
-   // Incoming IPlayer network support
+   // Incoming network Player support
    // ---
    simulation::INib* nib;        // Network Interface Block (ref()'d)
    int netID;                    // Network id

@@ -642,7 +642,7 @@ inline bool Player::isTerrainElevationRequired() const
    return tElevReq;
 }
 
-// True if this is a networked player (IPlayer)
+// True if this is a networked player
 inline bool Player::isNetworkedPlayer() const
 {
    return (nib != nullptr);

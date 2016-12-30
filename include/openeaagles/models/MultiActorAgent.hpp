@@ -10,12 +10,10 @@ namespace base {
 namespace ubf { class Behavior; class State; }
 }
 
-namespace simulation {
-class ISimulation;
-class Station;
-}
+namespace simulation { class Station; }
 
 namespace models {
+class Simulation;
 
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
@@ -50,10 +48,10 @@ protected:
    base::ubf::State* getState() const                { return state; }
 
    void setActor(base::Component* c);
-   base::Component*      getActor() { return actor;}
+   base::Component* getActor()                       { return actor;}
 
-   simulation::Station*    getStation();
-   simulation::ISimulation* getSimulation();
+   simulation::Station* getStation();
+   Simulation* getSimulation();
 
    struct AgentItem
    {

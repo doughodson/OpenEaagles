@@ -23,9 +23,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Navigation, "Navigation")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Navigation)
     "route",            // 1) Primary route
     "utc",              // 2) initial UTC time
@@ -38,18 +35,13 @@ BEGIN_SLOTTABLE(Navigation)
     "bullseye",         // 4) Bullseye (just one for now)
 END_SLOTTABLE(Navigation)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Navigation)
-    ON_SLOT(1,setSlotRoute,Route)
-    ON_SLOT(2,setSlotUtc,base::Time)
-    ON_SLOT(3,setSlotFeba,base::PairStream)
-    ON_SLOT(4,setSlotBullseye,Bullseye)
+    ON_SLOT(1,setSlotRoute, Route)
+    ON_SLOT(2,setSlotUtc, base::Time)
+    ON_SLOT(3,setSlotFeba, base::PairStream)
+    ON_SLOT(4,setSlotBullseye, Bullseye)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Navigation::Navigation() : rm()
 {
    STANDARD_CONSTRUCTOR()
@@ -105,9 +97,6 @@ void Navigation::initData()
    refLon = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Navigation::copyData(const Navigation& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -176,9 +165,6 @@ void Navigation::copyData(const Navigation& org, const bool cc)
    setFeba(org.feba, org.nFeba);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Navigation::deleteData()
 {
     priRoute = nullptr;
@@ -189,9 +175,6 @@ void Navigation::deleteData()
     setFeba(nullptr, 0);
 }
 
-//------------------------------------------------------------------------------
-// reset() -- Reset parameters
-//------------------------------------------------------------------------------
 void Navigation::reset()
 {
    BaseClass::reset();

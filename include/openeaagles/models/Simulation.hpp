@@ -180,7 +180,6 @@ class Simulation : public simulation::ISimulation
 public:
     Simulation();
 
-
     const terrain::Terrain* getTerrain() const;    // Returns the terrain elevation database
 
     Atmosphere* getAtmosphere();                   // Returns the atmosphere model
