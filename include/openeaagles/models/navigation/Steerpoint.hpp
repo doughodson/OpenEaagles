@@ -7,15 +7,7 @@
 
 namespace oe {
 
-namespace base {
-class Angle;
-class Distance;
-class Identifier;
-class LatLon;
-class List;
-class String;
-class Time;
-}
+namespace base { class Angle; class Distance; class Identifier; class LatLon; class List; class String; class Time; }
 
 namespace terrain { class Terrain; }
 

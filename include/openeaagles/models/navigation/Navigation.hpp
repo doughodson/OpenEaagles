@@ -54,16 +54,16 @@ class Navigation : public System
    DECLARE_SUBCLASS(Navigation, System)
 
 public:
-    Navigation();
+   Navigation();
 
-    // Positional Data
+   // Positional Data
    virtual bool isPositionDataValid() const;                // Is system position valid?
    virtual double getLatitude() const;                      // Returns system latitude (degs)
    virtual double getLongitude() const;                     // Returns system longitude (degs)
    virtual double getAltitudeFt() const;                    // Returns system altitude (ft)
    virtual double getAltitudeM() const;                     // Returns system altitude (m)
 
-    // Attitude Data
+   // Attitude Data
    virtual bool isAttitudeDataValid() const;                // Is system attitude valid?
    virtual double getPitchDeg() const;                      // Returns system pitch (degs)
    virtual double getRollDeg() const;                       // Returns system roll  (degs)
@@ -75,7 +75,7 @@ public:
                                                             //       Vi  = Vb * M
                                                             //    Where: 'Vb' is a body vector; 'Vi' is an inertial vector
 
-    // Mag Var
+   // Mag Var
    virtual bool isMagVarValid() const;                      // Is the magnetic variation valid?
    virtual double getMagVarDeg() const;                     // Returns the magnetic variation
    virtual double getMagHeadingD() const;                   // Returns the mag heading

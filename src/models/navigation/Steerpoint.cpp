@@ -4,7 +4,6 @@
 #include "openeaagles/models/navigation/Navigation.hpp"
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/Actions.hpp"
-#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/terrain/Terrain.hpp"
 

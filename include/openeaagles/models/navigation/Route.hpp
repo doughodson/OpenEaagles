@@ -6,14 +6,7 @@
 
 namespace oe {
 
-namespace base {
-class Identifier;
-class Distance;
-class NauticalMiles;
-class Number;
-class Pair;
-class PairStream;
-}
+namespace base { class Identifier; class Distance; class NauticalMiles; class Number; class Pair; class PairStream; }
 
 namespace models {
 class Navigation;
