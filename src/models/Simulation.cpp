@@ -173,6 +173,7 @@ void Simulation::updateData(const double dt)
        waypoints->load();
     }
 
+    BaseClass::updateData(dt);
 }
 
 //------------------------------------------------------------------------------
