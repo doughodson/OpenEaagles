@@ -71,7 +71,7 @@ workspace "oe"
    -- common debug configuration flags and symbols
    filter { "Debug32" }
       targetsuffix "_d"
-      flags { "Symbols" }
+      symbols "On"
       -- enable compiler intrinsics
       buildoptions { "/Oi" }
       defines { "WIN32", "_LIB", "_DEBUG" }

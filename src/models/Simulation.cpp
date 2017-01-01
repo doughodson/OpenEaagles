@@ -1,35 +1,12 @@
 
 #include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/models/environment/Atmosphere.hpp"
-#include "openeaagles/terrain/Terrain.hpp"
-
 #include "openeaagles/dafif/AirportLoader.hpp"
 #include "openeaagles/dafif/NavaidLoader.hpp"
 #include "openeaagles/dafif/WaypointLoader.hpp"
 
-/*
-#include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/INetIO.hpp"
-#include "openeaagles/simulation/INib.hpp"
-#include "openeaagles/simulation/Station.hpp"
-
-#include "openeaagles/base/EarthModel.hpp"
-#include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/Nav.hpp"
-#include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/Thread.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/base/util/system.hpp"
-*/
-
-//#include <cstring>
-//#include <cmath>
+#include "openeaagles/models/environment/Atmosphere.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
 
 namespace oe {
 namespace models {
@@ -57,6 +34,7 @@ EMPTY_SERIALIZER(Simulation)
 Simulation::Simulation()
 {
    STANDARD_CONSTRUCTOR()
+
    initData();
 }
 
@@ -111,13 +89,12 @@ void Simulation::deleteData()
    setWaypoints( nullptr );
 }
 
-//------------------------------------------------------------------------------
-// reset() -- Reset the simulation & players
-//------------------------------------------------------------------------------
 void Simulation::reset()
 {
+   BaseClass::reset();
+
    // ---
-   // First time resetting the terrain database will load the data
+   // First time reset of terrain database will load the data
    // ---
    if (terrain != nullptr) {
       std::cout << "Loading Terrain Data..." << std::endl;
@@ -129,13 +106,8 @@ void Simulation::reset()
    // Reset atmospheric model
    // ---
    if (atmosphere != nullptr) atmosphere->reset();
-
-   BaseClass::reset();
 }
 
-//------------------------------------------------------------------------------
-// shutdownNotification() -- Shutdown the simulation
-//------------------------------------------------------------------------------
 bool Simulation::shutdownNotification()
 {
    // ---
@@ -152,33 +124,44 @@ bool Simulation::shutdownNotification()
    return true;
 }
 
-//------------------------------------------------------------------------------
-// updateData() -- update non-time critical stuff here
-//------------------------------------------------------------------------------
 void Simulation::updateData(const double dt)
 {
-    // ---
-    // Load DAFIF files (one pre frame)
-    // ---
-    if (airports != nullptr && airports->numberOfRecords() == 0) {
-       // Load Airports
-       airports->load();
-    }
-    else if (navaids != nullptr && navaids->numberOfRecords() == 0) {
-       // Load Navaids
-       navaids->load();
-    }
-    else if (waypoints != nullptr && waypoints->numberOfRecords() == 0) {
-       // Load Waypoints
-       waypoints->load();
-    }
+   // ---
+   // Load DAFIF files (one pre frame)
+   // ---
+   if (airports != nullptr && airports->numberOfRecords() == 0) {
+      // Load Airports
+      airports->load();
+   }
+   else if (navaids != nullptr && navaids->numberOfRecords() == 0) {
+      // Load Navaids
+      navaids->load();
+   }
+   else if (waypoints != nullptr && waypoints->numberOfRecords() == 0) {
+      // Load Waypoints
+      waypoints->load();
+   }
 
-    BaseClass::updateData(dt);
+   BaseClass::updateData(dt);
 }
 
-//------------------------------------------------------------------------------
-// Get functions
-//------------------------------------------------------------------------------
+// Returns the airport loader
+dafif::AirportLoader* Simulation::getAirports()
+{
+   return airports;
+}
+
+// Returns the NAVAID loader
+dafif::NavaidLoader* Simulation::getNavaids()
+{
+   return navaids;
+}
+
+// Returns the waypoint loader
+dafif::WaypointLoader* Simulation::getWaypoints()
+{
+   return waypoints;
+}
 
 // Returns the terrain elevation database
 const terrain::Terrain* Simulation::getTerrain() const
@@ -201,24 +184,6 @@ Atmosphere* Simulation::getAtmosphere()
 const Atmosphere* Simulation::getAtmosphere() const
 {
    return atmosphere;
-}
-
-// Returns the airport loader
-dafif::AirportLoader* Simulation::getAirports()
-{
-   return airports;
-}
-
-// Returns the NAVAID loader
-dafif::NavaidLoader* Simulation::getNavaids()
-{
-   return navaids;
-}
-
-// Returns the waypoint loader
-dafif::WaypointLoader* Simulation::getWaypoints()
-{
-   return waypoints;
 }
 
 //------------------------------------------------------------------------------
@@ -265,10 +230,6 @@ bool Simulation::setWaypoints(dafif::WaypointLoader* const p)
    }
    return true;
 }
-
-//------------------------------------------------------------------------------
-// Set Slot routines
-//------------------------------------------------------------------------------
 
 bool Simulation::setSlotTerrain(terrain::Terrain* const msg)
 {

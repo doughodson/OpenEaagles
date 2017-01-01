@@ -11,6 +11,8 @@ OBJS =  \
 	IPlayer.o \
 	ISimulation.o \
 	RecorderComponent.o \
+	SimBgThread.o \
+	SimTcThread.o \
 	Station.o \
 	factory.o
 

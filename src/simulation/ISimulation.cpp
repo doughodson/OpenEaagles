@@ -3,6 +3,9 @@
 
 #include "openeaagles/simulation/IPlayer.hpp"
 
+#include "openeaagles/simulation/SimTcThread.hpp"
+#include "openeaagles/simulation/SimBgThread.hpp"
+
 #include "openeaagles/simulation/DataRecorder.hpp"
 #include "openeaagles/simulation/INetIO.hpp"
 #include "openeaagles/simulation/INib.hpp"
@@ -14,7 +17,6 @@
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/Thread.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
@@ -27,81 +29,30 @@
 namespace oe {
 namespace simulation {
 
-//=============================================================================
-// Declare the threads
-//=============================================================================
-
-class SimTcThread : public base::ThreadSyncTask {
-   DECLARE_SUBCLASS(SimTcThread, base::ThreadSyncTask)
-public:
-   SimTcThread(base::Component* const parent, const double priority);
-
-   // Parent thread signals start to this child thread with these parameters.
-   void start(
-      base::PairStream* const pl0,
-      const double dt0,
-      const unsigned int idx0,
-      const unsigned int n0
-   );
-
-private:
-   // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc() override;
-
-private:
-   base::PairStream* pl0;
-   double dt0;
-   unsigned int idx0;
-   unsigned int n0;
-};
-
-class SimBgThread : public base::ThreadSyncTask {
-   DECLARE_SUBCLASS(SimBgThread,base::ThreadSyncTask)
-public:
-   SimBgThread(base::Component* const parent, const double priority);
-
-   // Parent thread signals start to this child thread with these parameters.
-   void start(
-      base::PairStream* const pl0,
-      const double dt0,
-      const unsigned int idx0,
-      const unsigned int n0
-   );
-
-private:
-   // ThreadSyncTask class function -- our userFunc()
-   virtual unsigned long userFunc() override;
-
-private:
-   base::PairStream* pl0;
-   double dt0;
-   unsigned int idx0;
-   unsigned int n0;
-};
-
 IMPLEMENT_PARTIAL_SUBCLASS(ISimulation, "ISimulation")
 
 BEGIN_SLOTTABLE(ISimulation)
-   "players",                //  1) All players
-   "latitude",               //  2) Ref latitude
-   "longitude",              //  3) Ref longitude
-   "simulationTime",         //  4) Simulation time
-   "day",                    //  5) Initial simulated day of month [ 1 .. 31 ]
-   "month",                  //  6) Initial simulated month [ 1 .. 12 ]
-   "year",                   //  7) Initial simulated year [ 1970 .. 2100 ]
-   "firstWeaponId",          //  8) First Released Weapon ID (default: 10001)
-   "numTcThreads",           //  9) Number of T/C threads to use with the player list
-   "numBgThreads",           // 10) Number of background threads to use with the player list
+   "players",        //  1) All players
+   "latitude",       //  2) Ref latitude
+   "longitude",      //  3) Ref longitude
+   "simulationTime", //  4) Simulation time
+   "day",            //  5) Initial simulated day of month [ 1 .. 31 ]
+   "month",          //  6) Initial simulated month [ 1 .. 12 ]
+   "year",           //  7) Initial simulated year [ 1970 .. 2100 ]
 
-   "gamingAreaRange",        // 11) Max valid range of the simulation's gaming area or zero for unlimited
-                             //     (default: zero -- unlimited range)
+   "firstWeaponId",  // 8) First Released Weapon ID (default: 10001)
+   "numTcThreads",   // 9) Number of T/C threads to use with the player list
+   "numBgThreads",   // 10) Number of background threads to use with the player list
 
-   "earthModel",             // 12) Earth model for geodetic lat/lon (default is WGS-84)
+   "gamingAreaRange", // 11) Max valid range of the simulation's gaming area or zero for unlimited
+                      //     (default: zero -- unlimited range)
+
+   "earthModel",      // 12) Earth model for geodetic lat/lon (default is WGS-84)
 
    "gamingAreaUseEarthModel" // 13) If true, use the 'earthModel' or its WGS-84 default for flat
-                             //    earth projections between geodetic lat/lon and the gaming
-                             //    area's NED coordinates.  Otherwise, use a standard spherical
-                             //    earth with a radius of Nav::ERAD60. (default: false)
+                     //    earth projections between geodetic lat/lon and the gaming
+                     //    area's NED coordinates.  Otherwise, use a standard spherical
+                     //    earth with a radius of Nav::ERAD60. (default: false)
 END_SLOTTABLE(ISimulation)
 
 BEGIN_SLOT_MAP(ISimulation)
@@ -117,10 +68,10 @@ BEGIN_SLOT_MAP(ISimulation)
     ON_SLOT( 5, setSlotDay,             base::Number)
     ON_SLOT( 6, setSlotMonth,           base::Number)
     ON_SLOT( 7, setSlotYear,            base::Number)
+
     ON_SLOT( 8, setSlotFirstWeaponId,   base::Number)
     ON_SLOT( 9, setSlotNumTcThreads,    base::Number)
     ON_SLOT(10, setSlotNumBgThreads,    base::Number)
-
     ON_SLOT(11, setSlotGamingAreaRange, base::Distance)
 
     ON_SLOT(12, setSlotEarthModel,      base::EarthModel)
@@ -1031,6 +982,8 @@ Station* ISimulation::getStationImp()
    return station;
 }
 
+
+
 //------------------------------------------------------------------------------
 // setSlotPlayers() -- set the original player list (make sure we have only
 // player type objects with unique names and IDs)
@@ -1213,8 +1166,8 @@ void ISimulation::updatePlayerList()
         // ---
         // Add any new players
         // ---
-        base::Pair* newPlayer = newPlayerQueue.get();
-        while (newPlayer != nullptr) {
+      base::Pair* newPlayer = newPlayerQueue.get();
+      while (newPlayer != nullptr) {
             // get the player
             IPlayer* ip = static_cast<IPlayer*>(newPlayer->object());
 
@@ -1231,7 +1184,7 @@ void ISimulation::updatePlayerList()
 
             newPlayer->unref();
 
-            newPlayer = newPlayerQueue.get();
+         newPlayer = newPlayerQueue.get();
         }
 
         // ---
@@ -1789,100 +1742,6 @@ std::ostream& ISimulation::serialize(std::ostream& sout, const int i, const bool
     }
 
     return sout;
-}
-
-//=============================================================================
-// SimTcThread: Time critical thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(SimTcThread, "SimTcThread")
-EMPTY_SLOTTABLE(SimTcThread)
-EMPTY_COPYDATA(SimTcThread)
-EMPTY_DELETEDATA(SimTcThread)
-EMPTY_SERIALIZER(SimTcThread)
-
-SimTcThread::SimTcThread(base::Component* const parent, const double priority)
-      : base::ThreadSyncTask(parent, priority)
-{
-   STANDARD_CONSTRUCTOR()
-
-   pl0 = nullptr;
-   dt0 = 0.0;
-   idx0 = 0;
-   n0 = 0;
-}
-
-void SimTcThread::start(
-         base::PairStream* const pl1,
-         const double dt1,
-         const unsigned int idx1,
-         const unsigned int n1
-      )
-{
-   pl0 = pl1;
-   dt0 = dt1;
-   idx0 = idx1;
-   n0 = n1;
-
-   signalStart();
-}
-
-unsigned long SimTcThread::userFunc()
-{
-   // Make sure we've a player list and our index is valid ...
-   if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
-      // then call the Simulation class' update TC player list functions
-      ISimulation* sim = static_cast<ISimulation*>(getParent());
-      sim->updateTcPlayerList(pl0, dt0, idx0, n0);
-   }
-
-   return 0;
-}
-
-//=============================================================================
-// SimBgThread: Background thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(SimBgThread, "SimBgThread")
-EMPTY_SLOTTABLE(SimBgThread)
-EMPTY_COPYDATA(SimBgThread)
-EMPTY_DELETEDATA(SimBgThread)
-EMPTY_SERIALIZER(SimBgThread)
-
-SimBgThread::SimBgThread(base::Component* const parent, const double priority)
-      : base::ThreadSyncTask(parent, priority)
-{
-   STANDARD_CONSTRUCTOR()
-
-   pl0 = nullptr;
-   dt0 = 0.0;
-   idx0 = 0;
-   n0 = 0;
-}
-
-void SimBgThread::start(
-         base::PairStream* const pl1,
-         const double dt1,
-         const unsigned int idx1,
-         const unsigned int n1
-      )
-{
-   pl0 = pl1;
-   dt0 = dt1;
-   idx0 = idx1;
-   n0 = n1;
-
-   signalStart();
-}
-
-unsigned long SimBgThread::userFunc()
-{
-   // Make sure we've a player list and our index is valid ...
-   if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
-      // then call the Simulation class' update TC player list functions
-      ISimulation* sim = static_cast<ISimulation*>(getParent());
-      sim->updateBgPlayerList(pl0, dt0, idx0, n0);
-   }
-
-   return 0;
 }
 
 }

@@ -7,9 +7,7 @@
 #include "openeaagles/base/osg/Matrixd"
 
 namespace oe {
-
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
-
 namespace simulation {
 
 class DataRecorder;
@@ -22,13 +20,11 @@ class IPlayer;
 //------------------------------------------------------------------------------
 // Class: ISimulation
 //
-// Description: General class to manage the player list, the simulation and
-//              executive times, the reference position, and other common
-//              simulation support components (ground truths, terrain elevation
-//              database, etc)
+// Description: General class to manage the execution of a list of players
 //
 //
-// Factory name: Simulation
+// Factory name: ISimulation
+//
 // Slots --
 //    players        <base::PairStream>       ! Local player list (base::PairStream of Player) (default: nullptr)
 //
@@ -60,13 +56,6 @@ class IPlayer;
 //
 //    year           <base::Number>           ! Initial simulated year [ 1970 .. 2100 ],
 //                                            ! or zero to use current year (default: 0)
-//
-//    airportLoader  <dafif::AirportLoader>   ! Airport database (default: nullptr)
-//    navaidLoader   <dafif::NavaidLoader>    ! NAVAID database (default: nullptr)
-//    waypointLoader <dafif::WaypointLoader>  ! Waypoint database (default: nullptr)
-//
-//    terrain        <ITerrain>               ! Terrain elevation database (default: nullptr)
-//    atmosphere     <IAtmosphere>            ! Atmosphere
 //
 //    firstWeaponId  <base::Number>           ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
 //
@@ -196,12 +185,6 @@ class IPlayer;
 //    4) See "openeaagles/base/util/system.hpp" for additional time related functions.
 //
 //
-// Environments:
-//
-//    Current simulation environments include terrain elevation posts, getTerrain(),
-//    atmosphere model, getAtmosphere(), and DAFIF navigational aids,
-//    getNavaids(), getAirports() and getWaypoints().
-//
 //
 // Event IDs:
 //
@@ -215,8 +198,7 @@ class IPlayer;
 // Shutdown:
 //
 //    At shutdown, the parent object must send a SHUTDOWN_EVENT event to
-//    this object, which will send it to all players, environments and
-//    other components.
+//    this object, which will send it to all players, and other components.
 //
 //------------------------------------------------------------------------------
 class ISimulation : public base::Component
@@ -400,7 +382,7 @@ private:
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   Station* station;             // The Station that owns us (not ref()'d)
+   Station*               station;      // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
    static const unsigned short MAX_TC_THREADS = 32;
