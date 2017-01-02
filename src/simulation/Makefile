@@ -14,6 +14,9 @@ OBJS =  \
 	SimBgThread.o \
 	SimTcThread.o \
 	Station.o \
+	StationBgThread.o \
+	StationNetThread.o \
+	StationTcThread.o \
 	factory.o
 
 .PHONY: all clean
