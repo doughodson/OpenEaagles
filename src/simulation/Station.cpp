@@ -6,16 +6,19 @@
 #include "openeaagles/simulation/DataRecorder.hpp"
 #include "openeaagles/simulation/INetIO.hpp"
 #include "openeaagles/simulation/IOtw.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/ISimulation.hpp"
 
 #include "openeaagles/base/Color.hpp"
 #include "openeaagles/base/IoHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Thread.hpp"
 #include "openeaagles/base/Timers.hpp"
 #include "openeaagles/base/units/Times.hpp"
+
+#include "openeaagles/simulation/StationTcThread.hpp"
+#include "openeaagles/simulation/StationBgThread.hpp"
+#include "openeaagles/simulation/StationNetThread.hpp"
 
 #include <ctime>
 
@@ -24,52 +27,12 @@ namespace simulation {
 
 static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
 
-//=============================================================================
-// Declare the thread classes
-//=============================================================================
-
-// ---
-// Time-critical thread
-// ---
-class TcThread : public base::ThreadPeriodicTask
-{
-   DECLARE_SUBCLASS(TcThread,base::ThreadPeriodicTask)
-   public: TcThread(base::Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt) override;
-};
-
-// ---
-// Interoperability Networks thread
-// ---
-class NetThread : public base::ThreadPeriodicTask
-{
-   DECLARE_SUBCLASS(NetThread,base::ThreadPeriodicTask)
-   public: NetThread(base::Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt) override;
-};
-
-// ---
-// Background thread
-// ---
-class BgThread : public base::ThreadPeriodicTask
-{
-   DECLARE_SUBCLASS(BgThread,base::ThreadPeriodicTask)
-   public: BgThread(base::Component* const parent, const double priority, const double rate);
-   private: virtual unsigned long userFunc(const double dt) override;
-};
-
-//=============================================================================
-// Station class
-//=============================================================================
-IMPLEMENT_SUBCLASS(Station,"Station")
+IMPLEMENT_SUBCLASS(Station, "Station")
 
 const double Station::DEFAULT_TC_THREAD_PRI  = 0.8;
 const double Station::DEFAULT_BG_THREAD_PRI  = 0.5;
 const double Station::DEFAULT_NET_THREAD_PRI = 0.5;
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Station)
    "simulation",        //  1: Simulation model
    "networks",          //  2: List of Network models
@@ -91,11 +54,8 @@ BEGIN_SLOTTABLE(Station)
    "dataRecorder",      // 18) Our Data Recorder
 END_SLOTTABLE(Station)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Station)
-   ON_SLOT( 1,  setSlotSimulation,            Simulation)
+   ON_SLOT( 1,  setSlotSimulation,            ISimulation)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
@@ -126,16 +86,12 @@ BEGIN_SLOT_MAP(Station)
    ON_SLOT(18, setDataRecorder,            DataRecorder)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Station::Station()
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
-
 
 //------------------------------------------------------------------------------
 // Init member data
@@ -172,9 +128,6 @@ void Station::initData()
    startupResetTimer = -1.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Station::copyData(const Station& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -187,7 +140,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Set the simulation exec
    if (org.sim != nullptr) {
-      Simulation* copy = org.sim->clone();
+      ISimulation* copy = org.sim->clone();
       setSlotSimulation( copy );
       copy->unref();
    }
@@ -273,9 +226,6 @@ void Station::copyData(const Station& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Station::deleteData()
 {
    // Terminate any old threads
@@ -493,7 +443,7 @@ bool Station::shutdownNotification()
    setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
 
    // Tell our simulation to shut down
-   Simulation* s = getSimulation();
+   ISimulation* s = getSimulation();
    if (s != nullptr) {
       s->event(SHUTDOWN_EVENT);
    }
@@ -719,13 +669,13 @@ void Station::processNetworkOutputTasks(const double dt)
 //------------------------------------------------------------------------------
 
 // Returns the simulation model
-Simulation* Station::getSimulation()
+ISimulation* Station::getSimulation()
 {
    return sim;
 }
 
 // Returns the simulation model (const version)
-const Simulation* Station::getSimulation() const
+const ISimulation* Station::getSimulation() const
 {
    return sim;
 }
@@ -1070,7 +1020,7 @@ bool Station::setDataRecorder(DataRecorder* const p)
 //-----------------------------------------------------------------------------
 // setSlotSimulation() -- Sets a pointer to our simulation subsystem
 //-----------------------------------------------------------------------------
-bool Station::setSlotSimulation(Simulation* const p)
+bool Station::setSlotSimulation(ISimulation* const p)
 {
     if (sim != nullptr) {
         sim->container(nullptr);
@@ -1536,73 +1486,6 @@ std::ostream& Station::serialize(std::ostream& sout, const int i, const bool slo
     }
 
     return sout;
-}
-
-//=============================================================================
-// Time-critical thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(TcThread,"TcThread")
-EMPTY_SLOTTABLE(TcThread)
-EMPTY_COPYDATA(TcThread)
-EMPTY_DELETEDATA(TcThread)
-EMPTY_SERIALIZER(TcThread)
-
-TcThread::TcThread(base::Component* const parent, const double priority, const double rate)
-      : base::ThreadPeriodicTask(parent, priority, rate)
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-unsigned long TcThread::userFunc(const double dt)
-{
-   Station* station = static_cast<Station*>(getParent());
-   station->processTimeCriticalTasks(dt);
-   return 0;
-}
-
-//=============================================================================
-// Interoperability Networks thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(NetThread,"NetThread")
-EMPTY_SLOTTABLE(NetThread)
-EMPTY_COPYDATA(NetThread)
-EMPTY_DELETEDATA(NetThread)
-EMPTY_SERIALIZER(NetThread)
-
-NetThread::NetThread(base::Component* const parent, const double priority, const double rate)
-      : base::ThreadPeriodicTask(parent, priority, rate)
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-unsigned long NetThread::userFunc(const double dt)
-{
-   Station* station = static_cast<Station*>(getParent());
-   station->processNetworkInputTasks(dt);
-   station->processNetworkOutputTasks(dt);
-   return 0;
-}
-
-//=============================================================================
-// Background thread
-//=============================================================================
-IMPLEMENT_SUBCLASS(BgThread,"BgThread")
-EMPTY_SLOTTABLE(BgThread)
-EMPTY_COPYDATA(BgThread)
-EMPTY_DELETEDATA(BgThread)
-EMPTY_SERIALIZER(BgThread)
-
-BgThread::BgThread(base::Component* const parent, const double priority, const double rate)
-      : base::ThreadPeriodicTask(parent, priority, rate)
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-unsigned long BgThread::userFunc(const double dt)
-{
-   Station* station = static_cast<Station*>(getParent());
-   station->processBackgroundTasks(dt);
-   return 0;
 }
 
 }

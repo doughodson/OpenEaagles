@@ -15,26 +15,13 @@
 
 namespace oe {
 
-namespace osg {
-class Vec2d;
-class Vec3d;
-}
-
-namespace base {
-class Angle;
-class Boolean;
-class Distance;
-class LatLon;
-class List;
-class Time;
-}
-
-namespace simulation {
-class Simulation;
-class INib;
-}
+namespace osg { class Vec2d; class Vec3d; }
+namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; }
+namespace simulation { class INib; }
 
 namespace models {
+
+class Simulation;
 
 // Major component types
 class Datalink;
@@ -256,7 +243,7 @@ public:
    // ---
    // Interoperability network data
    // ---
-   virtual bool isNetworkedPlayer() const override;                 // True if this is a networked player (IPlayer)
+   virtual bool isNetworkedPlayer() const override;                 // True if this is a networked player
    virtual bool isLocalPlayer() const override;                     // True if this is a local player
 
    virtual int getNetworkID() const override;                        // ID of a networked player's controlling network model
@@ -294,8 +281,8 @@ public:
    // Systems
    // ---
 
-   simulation::Simulation* getSimulation();                           // Controlling simulation model
-   const simulation::Simulation* getSimulation() const;               // Controlling simulation model (const version)
+   Simulation* getSimulation();                                       // Controlling simulation model
+   const Simulation* getSimulation() const;                           // Controlling simulation model (const version)
 
    DynamicsModel* getDynamicsModel();                                 // Player's dynamics model
    const DynamicsModel* getDynamicsModel() const;                     // Player's dynamics model (const version)
@@ -700,7 +687,7 @@ protected:
 private:
 
    void initData();
-   simulation::Simulation* getSimulationImp();
+   Simulation* getSimulationImp();
 
    // ---
    // Player identity
@@ -816,7 +803,7 @@ private:
    double      dataLogTime;      // Data log time (seconds)
 
    // ---
-   // Incoming IPlayer network support
+   // Incoming network Player support
    // ---
    simulation::INib* nib;        // Network Interface Block (ref()'d)
    int netID;                    // Network id
@@ -830,7 +817,7 @@ private:
    // ---
    // System pointers
    // ---
-   simulation::Simulation* sim;   // The simulation system that owns us (not ref()'d)
+   Simulation* sim;             // The simulation system that owns us (not ref()'d)
 
    base::Pair* dynamicsModel;   // Dynamics Model (ref()'d)
    base::Pair* datalink;        // Datalink model (ref()'d)

@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_Simulation_H__
-#define __oe_simulation_Simulation_H__
+#ifndef __oe_simulation_ISimulation_H__
+#define __oe_simulation_ISimulation_H__
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/safe_queue.hpp"
@@ -8,7 +8,6 @@
 
 namespace oe {
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
-namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 namespace simulation {
 
 class DataRecorder;
@@ -18,19 +17,14 @@ class Station;
 
 class IPlayer;
 
-class ITerrain;
-class IAtmosphere;
-
 //------------------------------------------------------------------------------
-// Class: Simulation
+// Class: ISimulation
 //
-// Description: General class to manage the player list, the simulation and
-//              executive times, the reference position, and other common
-//              simulation support components (ground truths, terrain elevation
-//              database, etc)
+// Description: General class to manage the execution of a list of players
 //
 //
-// Factory name: Simulation
+// Factory name: ISimulation
+//
 // Slots --
 //    players        <base::PairStream>       ! Local player list (base::PairStream of Player) (default: nullptr)
 //
@@ -62,13 +56,6 @@ class IAtmosphere;
 //
 //    year           <base::Number>           ! Initial simulated year [ 1970 .. 2100 ],
 //                                            ! or zero to use current year (default: 0)
-//
-//    airportLoader  <dafif::AirportLoader>   ! Airport database (default: nullptr)
-//    navaidLoader   <dafif::NavaidLoader>    ! NAVAID database (default: nullptr)
-//    waypointLoader <dafif::WaypointLoader>  ! Waypoint database (default: nullptr)
-//
-//    terrain        <ITerrain>               ! Terrain elevation database (default: nullptr)
-//    atmosphere     <IAtmosphere>            ! Atmosphere
 //
 //    firstWeaponId  <base::Number>           ! First Released Weapon ID; [ 10001 ... 65535 ] (default: 10001)
 //
@@ -198,12 +185,6 @@ class IAtmosphere;
 //    4) See "openeaagles/base/util/system.hpp" for additional time related functions.
 //
 //
-// Environments:
-//
-//    Current simulation environments include terrain elevation posts, getTerrain(),
-//    atmosphere model, getAtmosphere(), and DAFIF navigational aids,
-//    getNavaids(), getAirports() and getWaypoints().
-//
 //
 // Event IDs:
 //
@@ -217,13 +198,12 @@ class IAtmosphere;
 // Shutdown:
 //
 //    At shutdown, the parent object must send a SHUTDOWN_EVENT event to
-//    this object, which will send it to all players, environments and
-//    other components.
+//    this object, which will send it to all players, and other components.
 //
 //------------------------------------------------------------------------------
-class Simulation : public base::Component
+class ISimulation : public base::Component
 {
-    DECLARE_SUBCLASS(Simulation, base::Component)
+    DECLARE_SUBCLASS(ISimulation, base::Component)
 
 public:
    // Minimum released weapon ID
@@ -234,7 +214,7 @@ public:
    static const int MAX_NEW_PLAYERS = 1000;
 
 public:
-    Simulation();
+    ISimulation();
 
     base::PairStream* getPlayers();                // Returns the player list; pre-ref()'d
     const base::PairStream* getPlayers() const;    // Returns the player list; pre-ref()'d (const version)
@@ -277,15 +257,6 @@ public:
     unsigned short getNewWeaponEventID();          // Generates a unique weapon event ID [1 .. 65535]
     unsigned short getNewReleasedWeaponID();       // Generates a unique ID number for released weapons
 
-    const ITerrain* getTerrain() const;            // Returns the terrain elevation database
-
-    IAtmosphere* getAtmosphere();                  // Returns the atmosphere model
-    const IAtmosphere* getAtmosphere() const;      // Returns the atmosphere model (const version)
-
-    dafif::AirportLoader* getAirports();           // Returns the airport loader
-    dafif::NavaidLoader* getNavaids();             // Returns the NAVAID loader
-    dafif::WaypointLoader* getWaypoints();         // Returns the waypoint loader
-
     DataRecorder* getDataRecorder();               // Returns the data recorder
 
     Station* getStation();                         // Returns our Station
@@ -301,10 +272,6 @@ public:
     virtual bool addNewPlayer(base::Pair* const player);                           // Add a new player (pair: name, player)
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
-
-    virtual bool setAirports(dafif::AirportLoader* const p);   // Sets the airport loader
-    virtual bool setNavaids(dafif::NavaidLoader* const p);     // Sets the NAVAID loader
-    virtual bool setWaypoints(dafif::WaypointLoader* const p); // Sets the waypoint loader
 
     virtual void updateTC(const double dt = 0.0) override;
     virtual void updateData(const double dt = 0.0) override;
@@ -328,8 +295,6 @@ public:
 protected:
     virtual void updatePlayerList();                  // Updates the current player list
     bool setSlotPlayers(base::PairStream* const msg);
-
-    ITerrain* getTerrain();                           // Returns the terrain elevation database
 
     virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
     virtual bool setGamingAreaUseEarthModel(const bool flg);
@@ -372,10 +337,6 @@ private:
    bool setSlotEarthModel(const base::EarthModel* const msg);
    bool setSlotEarthModel(const base::String* const msg);
    bool setSlotGamingAreaEarthModel(const base::Number* const msg);
-
-   // environmental models
-   bool setSlotTerrain(ITerrain* const msg);
-   bool setSlotAtmosphere(IAtmosphere* const msg);
 
    base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
    base::safe_ptr<base::PairStream> origPlayers; // Original player list
@@ -421,11 +382,6 @@ private:
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   IAtmosphere*           atmosphere;   // Atmosphere model
-   ITerrain*              terrain;      // Terrain model
-   dafif::AirportLoader*  airports;     // Airport loader
-   dafif::NavaidLoader*   navaids;      // NAVAID loader
-   dafif::WaypointLoader* waypoints;    // Waypoint loader
    Station*               station;      // The Station that owns us (not ref()'d)
 
    // Time critical thread pool

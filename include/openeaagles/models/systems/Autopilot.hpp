@@ -133,8 +133,8 @@ public:
    virtual double getLeadFollowingDistanceRight() const { return  leadOffset[1]; }
    virtual double getLeadFollowingDeltaAltitude() const { return -leadOffset[2]; }
    virtual bool isFollowTheLeadModeOn() const           { return followLeadModeOn; }  // "Follow the lead" mode flag
-   virtual const base::Identifier* getLeadPlayerName() { return leadName; }
-   virtual const Player* getLeadPlayer();                            // Our lead player
+   virtual const base::Identifier* getLeadPlayerName()  { return leadName; }
+   virtual const Player* getLeadPlayer();                                             // Our lead player
 
    // get pilot limits
    double getMaxTurnRate() const;
@@ -147,7 +147,7 @@ public:
    virtual bool setLeadFollowingDistanceRight(const double right);   // Desired distance (meters) right(+) of the lead
    virtual bool setLeadFollowingDeltaAltitude(const double above);   // Desired delta altitude (meters) above(+) the lead
    virtual bool setFollowTheLeadMode(const bool f);                  // "Follow the lead" mode flag
-   virtual bool setLeadPlayerName(const base::Identifier* const);   // Changes the name of our lead player
+   virtual bool setLeadPlayerName(const base::Identifier* const);    // Changes the name of our lead player
    virtual bool setLeadPlayerName(const char* x);                    // set the lead player name by characters
    virtual bool setLeadPlayer(const Player* const);                  // Our lead player
 
@@ -162,7 +162,7 @@ public:
    // Roll Control Input
    //      Normalized inputs
    //      roll:  -1.0 -> max left;  0.0 -> center;  1.0 -> max right
-   virtual double getControlStickRollInput() const { return stickRollPos; }
+   virtual double getControlStickRollInput() const                     { return stickRollPos; }
 
    // Sets the stick roll input (see getControlStickRollInput()
    virtual bool setControlStickRollInput(const double roll);
@@ -170,7 +170,7 @@ public:
    // Pitch Control Input
    //      Normalized inputs
    //      pitch:  -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
-   virtual double getControlStickPitchInput() const { return stickPitchPos; }
+   virtual double getControlStickPitchInput() const                    { return stickPitchPos; }
 
    // Sets the control stick pitch input (getControlStickPitchInput xxx())
    virtual bool setControlStickPitchInput(const double pitch);

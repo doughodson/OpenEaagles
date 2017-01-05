@@ -16,7 +16,7 @@
 #include "openeaagles/base/units/Times.hpp"
 
 #include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 namespace oe {
 namespace models {

@@ -2,8 +2,8 @@
 #include "openeaagles/models/MultiActorAgent.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/ubf/Action.hpp"
@@ -51,7 +51,7 @@ void MultiActorAgent::deleteData()
 
 void MultiActorAgent::reset()
 {
-   simulation::Simulation* sim = getSimulation();
+   Simulation* sim = getSimulation();
    if (sim != nullptr) {
       // convert component names to component ptrs, for all behaviors in the list
       for (unsigned int i=0; i<nAgents; i++) {
@@ -130,12 +130,12 @@ simulation::Station* MultiActorAgent::getStation()
    return myStation;
 }
 
-simulation::Simulation* MultiActorAgent::getSimulation()
+Simulation* MultiActorAgent::getSimulation()
 {
-   simulation::Simulation* sim = nullptr;
+   Simulation* sim = nullptr;
    simulation::Station* s = getStation();
    if (s != nullptr) {
-      sim = s->getSimulation();
+      sim = dynamic_cast<Simulation*>(s->getSimulation());
    }
    return sim;
 }

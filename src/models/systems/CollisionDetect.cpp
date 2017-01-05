@@ -1,8 +1,7 @@
 
 #include "openeaagles/models/systems/CollisionDetect.hpp"
 #include "openeaagles/models/players/Player.hpp"
-
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -173,7 +172,7 @@ void CollisionDetect::updateData(const double dt)
    BaseClass::updateData(dt);
 
    const Player* const ownship = getOwnship();
-   simulation::Simulation* const sim = getSimulation();
+   Simulation* const sim = getSimulation();
 
    // early out checks ...
    if (ownship == nullptr || sim == nullptr || maxPlayers == 0) return;

@@ -5,13 +5,13 @@
 #include "openeaagles/models/systems/Antenna.hpp"
 #include "openeaagles/models/systems/TrackManager.hpp"
 #include "openeaagles/models/Emission.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
 
 #include <cmath>
 

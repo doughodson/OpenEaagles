@@ -8,8 +8,6 @@
 namespace oe {
 namespace base { class List; }
 namespace simulation {
-class Simulation;
-class Station;
 
 //------------------------------------------------------------------------------
 // Class: RecorderComponent

@@ -6,7 +6,7 @@
 #include "openeaagles/models/systems/Datalink.hpp"
 #include "openeaagles/models/Emission.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Identifier.hpp"

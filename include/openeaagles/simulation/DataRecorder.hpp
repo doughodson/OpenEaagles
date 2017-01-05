@@ -8,7 +8,7 @@
 namespace oe {
 namespace base { class List; }
 namespace simulation {
-class Simulation;
+class ISimulation;
 class Station;
 
 //------------------------------------------------------------------------------
@@ -34,11 +34,11 @@ class DataRecorder : public RecorderComponent
 public:
    DataRecorder();
 
-   Station* getStation();                    // Our parent station
-   const Station* getStation() const;        // Our parent station (const version)
+   Station* getStation();                     // Our parent station
+   const Station* getStation() const;         // Our parent station (const version)
 
-   Simulation* getSimulation();              // The simulation
-   const Simulation* getSimulation() const;  // The simulation (const version)
+   ISimulation* getSimulation();              // The simulation
+   const ISimulation* getSimulation() const;  // The simulation (const version)
 
    // Record Data function
    bool recordData(
@@ -64,10 +64,10 @@ protected:
 private:
    void initData();
    Station* getStationImp();
-   Simulation* getSimulationImp();
+   ISimulation* getSimulationImp();
 
-   Station* sta;     // The Station that owns us (not ref()'d)
-   Simulation* sim;     // The simulation system (not ref()'d)
+   Station* sta;         // The Station that owns us (not ref()'d)
+   ISimulation* sim;     // The simulation system (not ref()'d)
 };
 
 // Record Data function

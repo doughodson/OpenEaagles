@@ -7,7 +7,7 @@
 #include <iostream>
 
 namespace oe {
-   namespace base { class Number; }
+namespace base { class Number; }
 namespace terrain {
 
 //------------------------------------------------------------------------------

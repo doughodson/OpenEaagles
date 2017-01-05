@@ -8,9 +8,9 @@
 #include "openeaagles/models/systems/Guns.hpp"
 #include "openeaagles/models/systems/Stores.hpp"
 #include "openeaagles/models/Track.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Nav.hpp"
@@ -250,7 +250,7 @@ void Weapon::reset()
 
    // Test player?
    if (tstTgtNam != nullptr) {
-      simulation::Simulation* s = getSimulation();
+      Simulation* s = getSimulation();
       if (s != nullptr) {
          Player* t = dynamic_cast<Player*>(s->findPlayerByName( *tstTgtNam ));   // added DDH
          if (t != nullptr) setTargetPlayer(t, true);
@@ -426,7 +426,7 @@ bool Weapon::onJettisonEvent()
 //------------------------------------------------------------------------------
 void Weapon::checkDetonationEffect()
 {
-   simulation::Simulation* s = getSimulation();
+   Simulation* s = getSimulation();
    if (s != nullptr) {
       // Only local players within 10X max burst range
       double maxRng = 10.0 * getMaxBurstRng();
@@ -545,7 +545,7 @@ Weapon* Weapon::prerelease()
 
    // If we're not already (pre)released or jettisoned,
    //   and we'll need a launching player and a simulation
-   simulation::Simulation* sim = static_cast<simulation::Simulation*>( findContainerByType(typeid(simulation::Simulation)) );
+   Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
    Player* lplayer = getLaunchVehicle();
    if (!isReleased() && !isJettisoned() && flyout == nullptr && lplayer != nullptr && sim != nullptr) {
 
@@ -613,7 +613,7 @@ Weapon* Weapon::release()
 
          // and we have a launching player and a simulation ...
          Player* lplayer = getLaunchVehicle();
-         simulation::Simulation* sim = static_cast<simulation::Simulation*>( findContainerByType(typeid(simulation::Simulation)) );
+         Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
          if ( lplayer != nullptr && sim != nullptr) {
 
             // then release the weapon!

@@ -4,16 +4,19 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboesimulation.a
 
 OBJS =  \
-	environment/IAtmosphere.o \
-	environment/ITerrain.o \
 	DataRecorder.o \
 	INetIO.o \
 	INib.o \
 	IOtw.o \
 	IPlayer.o \
+	ISimulation.o \
 	RecorderComponent.o \
-	Simulation.o \
+	SimBgThread.o \
+	SimTcThread.o \
 	Station.o \
+	StationBgThread.o \
+	StationNetThread.o \
+	StationTcThread.o \
 	factory.o
 
 .PHONY: all clean

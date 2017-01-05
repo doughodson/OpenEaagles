@@ -8,10 +8,8 @@ namespace oe {
 
 namespace base { class String; }
 
-namespace simulation { class Simulation; }
-
 namespace models {
-
+class Simulation;
 class Player;
 
 //------------------------------------------------------------------------------
@@ -76,14 +74,11 @@ public:
    virtual unsigned int getPowerSwitch() const;          // Returns the system's master power switch setting (see power enumeration)
    virtual bool setPowerSwitch(const unsigned int p);    // Sets the system's master power switch setting (see power enumeration)
 
-   virtual Player* getOwnship();                         // Returns a pointer to our ownship player
-   virtual const Player* getOwnship() const;             // Returns a pointer to our ownship player (const version)
-
-   virtual simulation::Simulation* getSimulation();              // Returns a pointer to the Simulation model
-   virtual const simulation::Simulation* getSimulation() const;  // Returns a pointer to the Simulation model (const version)
-
    // Event handler(s)
    virtual bool killedNotification(Player* const killedBy = 0); // Killed (KILL_EVENT) event handler
+
+   virtual Player* getOwnship();                         // Returns a pointer to our ownship player
+   virtual const Player* getOwnship() const;             // Returns a pointer to our ownship player (const version)
 
    virtual void updateData(const double dt = 0.0) override;
    virtual void updateTC(const double dt = 0.0) override;
@@ -92,6 +87,10 @@ public:
    virtual bool isFrozen() const override;
 
 protected:
+
+   virtual Simulation* getSimulation();                  // Returns a pointer to the Simulation model
+   virtual const Simulation* getSimulation() const;      // Returns a pointer to the Simulation model (const version)
+
    // Slot function(s)
    virtual bool setSlotPowerSwitch(const base::String* const msg);
 

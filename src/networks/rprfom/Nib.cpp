@@ -13,8 +13,6 @@
 #include "openeaagles/models/players/Weapon.hpp"
 #include "openeaagles/models/Signatures.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
-
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"

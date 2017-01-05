@@ -17,7 +17,7 @@
 #include "openeaagles/models/environment/IrAtmosphere.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/units/Distances.hpp"
@@ -263,7 +263,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
    }
 
    if (ownship != nullptr) {
-      simulation::Simulation* sim = ownship->getSimulation();
+      Simulation* sim = ownship->getSimulation();
       if (sim)
          atmos = dynamic_cast<IrAtmosphere*>(sim->getAtmosphere());
    }

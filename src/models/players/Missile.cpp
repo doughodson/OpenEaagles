@@ -3,9 +3,9 @@
 
 #include "openeaagles/models/Track.hpp"
 #include "openeaagles/models/systems/TrackManager.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"

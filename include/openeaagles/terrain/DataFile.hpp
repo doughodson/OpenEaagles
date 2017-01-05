@@ -88,7 +88,6 @@ protected:
    unsigned int nptlong;            // Number of points in longitude (i.e., number of columns)
    short    voidValue;              // Value representing a void (missing) data point
 
-   // simulation::Terrain protected interface
    virtual void clearData() override;
 };
 

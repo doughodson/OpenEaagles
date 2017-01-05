@@ -6,7 +6,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/simulation/ISimulation.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
@@ -412,7 +412,7 @@ void Nib::updateBasicEntity(
       NetIO* netIO = static_cast<NetIO*>(getNetIO());
 
       // Our simulation
-      simulation::Simulation* ourSim = netIO->getSimulation();
+      simulation::ISimulation* ourSim = netIO->getSimulation();
 
       // Get the player data
       playerState2Nib();

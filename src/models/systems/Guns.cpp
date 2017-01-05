@@ -2,11 +2,11 @@
 #include "openeaagles/models/systems/Guns.hpp"
 
 #include "openeaagles/models/players/Bullet.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/DataRecorder.hpp"
 
 #include "openeaagles/base/Nav.hpp"
@@ -317,7 +317,7 @@ void Gun::burstFrame()
       // When we have a bullet model ... we're going to create a bullet (weapon)
       // player to flyout the rounds.
       Bullet* wpn = getBulletType();
-      simulation::Simulation* sim = static_cast<simulation::Simulation*>( findContainerByType(typeid(simulation::Simulation)) );
+      Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
       if (wpn != nullptr && ownship != nullptr && sim != nullptr) {
 
          // Compute the bullet burst's initial position and velocity

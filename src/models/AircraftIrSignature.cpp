@@ -6,7 +6,7 @@
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/players/AirVehicle.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/List.hpp"
@@ -593,7 +593,7 @@ double* AircraftIrSignature::getHeatSignature(IrQueryMsg* msg)
     Player* target = msg->getTarget();
     if (target != nullptr) {
         IrAtmosphere* atmos = nullptr;
-        simulation::Simulation* sim = target->getSimulation();
+        Simulation* sim = target->getSimulation();
         if (sim != nullptr) {
             atmos = dynamic_cast<IrAtmosphere*>( sim->getAtmosphere() );
         }

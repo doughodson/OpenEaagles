@@ -15,7 +15,7 @@ class Time;
 
 namespace simulation {
 class DataRecorder;
-class Simulation;
+class ISimulation;
 class IPlayer;
 class IOtw;
 
@@ -29,7 +29,7 @@ class IOtw;
 //
 // Factory name: Station
 // Slots --
-//    simulation         <Simulation>          ! Simulation model (default: nullptr)
+//    simulation         <ISimulation>         ! Simulation model (default: nullptr)
 //
 //    networks           <base::PairStream>    ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
@@ -158,8 +158,8 @@ public:
 public:
    Station();
 
-   Simulation* getSimulation();                              // Simulation model
-   const Simulation* getSimulation() const;                  // Simulation model (const version)
+   ISimulation* getSimulation();                            // Simulation model
+   const ISimulation* getSimulation() const;                // Simulation model (const version)
 
    base::PairStream* getPlayers();                          // Simulation's player list; pre-ref()'d
    const base::PairStream* getPlayers() const;              // Simulation's player list; pre-ref()'d (const version)
@@ -237,7 +237,7 @@ public:
    // ---
    // Slot functions
    // ---
-   virtual bool setSlotSimulation(Simulation* const);
+   virtual bool setSlotSimulation(ISimulation* const);
    virtual bool setSlotOutTheWindow(IOtw* const);
    virtual bool setSlotOutTheWindow(base::PairStream* const);
    virtual bool setSlotIoHandler(base::IoHandler* const);
@@ -283,7 +283,7 @@ private:
    virtual void createNetworkProcess();           // Creates a network thread
    virtual void createBackgroundProcess();        // Creates a B/G thread
 
-   Simulation* sim;                               // Simulation model
+   ISimulation* sim;                              // Simulation model
    base::safe_ptr<base::PairStream> otw;          // List of  Out-The-Window visual system interfaces
    base::safe_ptr<base::PairStream> networks;     // List of networks
    base::safe_ptr<base::PairStream> ioHandlers;   // List of I/O data handlers

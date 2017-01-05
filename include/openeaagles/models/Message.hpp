@@ -3,10 +3,9 @@
 #define __oe_models_Message_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/base/String.hpp"
-#include "openeaagles/base/List.hpp"
 
 namespace oe {
+namespace base { class List; class String; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -58,8 +57,8 @@ private:
    AckCodes ack;                 // ack code
 };
 
-inline const base::String* Message::getSenderName() const              { return senderName;    }
-inline const base::List* Message::getDestNames() const                 { return destNames;     }
+inline const base::String* Message::getSenderName() const               { return senderName;    }
+inline const base::List* Message::getDestNames() const                  { return destNames;     }
 inline double Message::getTimeStamp() const                             { return timeStamp;     }
 inline double Message::getLifeSpan() const                              { return lifeSpan;      }
 inline Message::AckCodes Message::getAckCode() const                    { return ack;           }

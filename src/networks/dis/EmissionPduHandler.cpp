@@ -12,7 +12,7 @@
 #include "openeaagles/models/systems/Jammer.hpp"
 #include "openeaagles/models/systems/Radar.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/functors/Functions.hpp"
 #include "openeaagles/base/functors/Tables.hpp"

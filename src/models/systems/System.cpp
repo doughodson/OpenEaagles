@@ -3,7 +3,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/simulation/Simulation.hpp"
+#include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -13,26 +13,20 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(System, "System")
 
-
 BEGIN_SLOTTABLE(System)
    "powerSwitch",    //  1) Power switch position ("OFF", "STBY", "ON") (default: "ON")
 END_SLOTTABLE(System)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(System)
    ON_SLOT( 1, setSlotPowerSwitch, base::String)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(System)
     ON_EVENT_OBJ(KILL_EVENT,killedNotification,Player)
     ON_EVENT(KILL_EVENT,killedNotification)
 END_EVENT_HANDLER()
 
-System::System() : ownship(nullptr)
+System::System()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -109,7 +103,7 @@ void System::updateTC(const double dt0)
    // ---
    // Four phases per frame
    // ---
-   simulation::Simulation* sim = ownship->getSimulation();
+   Simulation* sim = ownship->getSimulation();
    if (sim == nullptr) return;
 
    switch (sim->phase()) {
@@ -181,17 +175,17 @@ bool System::killedNotification(Player* const p)
 //-----------------------------------------------------------------------------
 
 // Returns a pointer to the main Simulation class
-simulation::Simulation* System::getSimulation()
+Simulation* System::getSimulation()
 {
-   simulation::Simulation* p = nullptr;
+   Simulation* p = nullptr;
    if (ownship != nullptr) p = ownship->getSimulation();
    return p;
 }
 
 // Returns a pointer to the main Simulation class (const version)
-const simulation::Simulation* System::getSimulation() const
+const Simulation* System::getSimulation() const
 {
-   const simulation::Simulation* p = nullptr;
+   const Simulation* p = nullptr;
    if (ownship != nullptr) p = ownship->getSimulation();
    return p;
 }
