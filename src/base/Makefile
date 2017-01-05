@@ -88,6 +88,7 @@ OBJS =  \
 	IoDevice.o \
 	IoHandler.o \
 	LatLon.o \
+	LinkedList.o \
 	List.o \
 	Locus.o \
 	Matrix.o \
