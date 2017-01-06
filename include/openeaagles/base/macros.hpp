@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 // Object class macros:
 //
-//    DECLARE_SUBCLASS(ThisType,BaseType)
+//    DECLARE_SUBCLASS(ThisType, BaseType)
 //       Macro to declare all of the required member functions and member
 //       variables for the class 'ThisType', which is derived from class 'BaseType'.
 //       Defines the type 'BaseClass', which can be used by the member functions as an
@@ -86,7 +86,7 @@
 //       events (see eventTokens.h) that are not mapped or processed by the
 //       Component class are passed to the container class.
 //
-//    ON_EVENT(token,onEvent)  (see eventTokens.h)
+//    ON_EVENT(token,onEvent)  (see eventTokens.hpp)
 //       Maps an event token, 'token', to the "on event" member function, 'onEvent'.
 //
 //    ON_EVENT_OBJ(token,onEvent,ObjType) 
@@ -96,7 +96,7 @@
 //    ON_ANYKEY(onEvent)
 //       Maps any event token to the "on event" member function, 'onEvent'.
 //
-//    ON_ANYKEY_OBJ(onEvent,ObjType)
+//    ON_ANYKEY_OBJ(onEvent, ObjType)
 //       Maps any event token with an argument of type 'ObjType' to the "on event"
 //       member function, 'onEvent'.
 //
@@ -138,7 +138,7 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static ::oe::base::MetaObject _static;                                                                             \
+    private: static ::oe::base::MetaObject metadata;                                                                            \
     private: static const unsigned int classIndex;                                                                              \
     protected: static const ::oe::base::MetaObject* getStatic();                                                                \
     public: static const char* getFactoryName();                                                                                \
@@ -153,16 +153,16 @@
 
 
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    ::oe::base::MetaObject ThisType::_static(                                          \
-      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
+    ::oe::base::MetaObject ThisType::metadata(                                         \
+      registerClass(&metadata), typeid(ThisType).name(), FACTORYNAME,                  \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const ::oe::base::MetaObject* ThisType::getStatic() { return &_static; }           \
-    const char* ThisType::getFactoryName() { return _static.fname; }                   \
+    const ::oe::base::MetaObject* ThisType::getStatic() { return &metadata; }          \
+    const char* ThisType::getFactoryName() { return metadata.fname; }                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
+        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                     \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable()  { return slottable; }       \
@@ -192,16 +192,16 @@
 
 
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    ::oe::base::MetaObject ThisType::_static(                                          \
-      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
+    ::oe::base::MetaObject ThisType::metadata(                                         \
+      registerClass(&metadata), typeid(ThisType).name(), FACTORYNAME,                  \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const ::oe::base::MetaObject* ThisType::getStatic() { return &_static; }           \
-    const char* ThisType::getFactoryName() { return _static.fname; }                   \
+    const ::oe::base::MetaObject* ThisType::getStatic() { return &metadata; }          \
+    const char* ThisType::getFactoryName() { return metadata.fname; }                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
+        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                     \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
@@ -214,16 +214,16 @@
 
 
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    ::oe::base::MetaObject ThisType::_static(                                          \
-      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
+    ::oe::base::MetaObject ThisType::metadata(                                         \
+      registerClass(&metadata), typeid(ThisType).name(), FACTORYNAME,                  \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const ::oe::base::MetaObject* ThisType::getStatic() { return &_static; }           \
-    const char* ThisType::getFactoryName() { return _static.fname; }                   \
+    const ::oe::base::MetaObject* ThisType::getStatic() { return &metadata; }          \
+    const char* ThisType::getFactoryName() { return metadata.fname; }                  \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
+        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                     \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
@@ -254,14 +254,14 @@
 
 #define STANDARD_CONSTRUCTOR()                                                         \
     slotTable = &slottable;                                                            \
-    if (++_static.count > _static.mc) _static.mc = _static.count;                      \
-    _static.tc++;
+    if (++metadata.count > metadata.mc) metadata.mc = metadata.count;                  \
+    metadata.tc++;
 
 
 
 #define STANDARD_DESTRUCTOR()                                                          \
     deleteData();                                                                      \
-    _static.count--;
+    metadata.count--;
 
 
 #define EMPTY_SLOTTABLE(ThisType)                                                          \

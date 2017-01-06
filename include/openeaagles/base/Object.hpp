@@ -339,8 +339,8 @@ class Object
       private:_Static& operator=(const _Static&);
    };
 */
-   private: static MetaObject _static;
-   protected: static const MetaObject* getStatic(); //Get the _Static member
+   private: static MetaObject metadata;
+   protected: static const MetaObject* getStatic();
 
 public:
    // Standard message types

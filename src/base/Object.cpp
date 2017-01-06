@@ -13,13 +13,13 @@ namespace base {
 // Table of registered classes
 //    Note: class Object is pre-registered as the first class
 // ---
-const MetaObject* Object::classes[MAX_CLASSES] = { &Object::_static };
+const MetaObject* Object::classes[MAX_CLASSES] = { &Object::metadata };
 unsigned int Object::numClasses = 1;
 
 // ---
 // Object's static member data
 // ---
-MetaObject Object::_static(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
+MetaObject Object::metadata(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -80,7 +80,7 @@ bool Object::isClassType(const std::type_info& type) const
 bool Object::isFactoryName(const char name[]) const
 {
     if (name == nullptr) return false;
-    if ( std::strcmp(_static.fname, name) == 0 )  return true;
+    if ( std::strcmp(metadata.fname, name) == 0 )  return true;
     else return false;
 }
 
@@ -113,13 +113,13 @@ bool Object::setSlotByIndex(const int, Object* const)
 // get factory name
 const char* Object::getFactoryName()
 {
-    return _static.fname;
+    return metadata.fname;
 }
 
 // get class name
 const char* Object::getClassName()
 {
-    return _static.cname;
+    return metadata.cname;
 }
 
 // get slot table
@@ -313,7 +313,7 @@ std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
 //------------------------------------------------------------------------------
 const MetaObject* Object::getStatic()
 {
-    return &_static;
+    return &metadata;
 }
 
 }
