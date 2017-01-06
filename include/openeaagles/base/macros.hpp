@@ -129,7 +129,7 @@
 #include <cstring>    // need std::strcmp
 #include <iostream>   // need std::ostream
 
-#define DECLARE_SUBCLASS(ThisType,BaseType)                                                                                     \
+#define DECLARE_SUBCLASS(ThisType, BaseType)                                                                                    \
     typedef BaseType BaseClass;                                                                                                 \
     public: ThisType(const ThisType& org);                                                                                      \
     public: virtual ~ThisType();                                                                                                \
@@ -138,9 +138,9 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static MetaObject _static;                                                                                     \
+    private: static ::oe::base::MetaObject _static;                                                                             \
     private: static const unsigned int classIndex;                                                                              \
-    protected: static const MetaObject* getStatic();                                                                               \
+    protected: static const ::oe::base::MetaObject* getStatic();                                                                \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
@@ -153,11 +153,11 @@
 
 
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    MetaObject ThisType::_static(                                                      \
+    ::oe::base::MetaObject ThisType::_static(                                          \
       registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const MetaObject* ThisType::getStatic() { return &_static; }                       \
+    const ::oe::base::MetaObject* ThisType::getStatic() { return &_static; }           \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -192,11 +192,11 @@
 
 
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    MetaObject ThisType::_static(                                                      \
+    ::oe::base::MetaObject ThisType::_static(                                          \
       registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const MetaObject* ThisType::getStatic() { return &_static; }                       \
+    const ::oe::base::MetaObject* ThisType::getStatic() { return &_static; }           \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -214,11 +214,11 @@
 
 
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    MetaObject ThisType::_static(                                                      \
+    ::oe::base::MetaObject ThisType::_static(                                          \
       registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const MetaObject* ThisType::getStatic() { return &_static; }                       \
+    const ::oe::base::MetaObject* ThisType::getStatic() { return &_static; }           \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
