@@ -12,7 +12,7 @@
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 
-#include "openeaagles/base/MetaObject.hpp"
+#include "openeaagles/base/ClassMetadata.hpp"
 
 #include <iosfwd>
 
@@ -324,24 +324,6 @@ class Object
    public: const char* slotIndex2Name(const int slotindex) const;
    public: int slotName2Index(const char* const slotname) const;
 
-   // Static member variables
-/*
-   protected: struct _Static {
-      const unsigned int classIndex;   // Registered class index
-      const char* const cname;         // class name from 'type_info'
-      const char* const fname;         // class factory name
-      const SlotTable* const st;       // Pointer to the SlotTable
-      const _Static* const bstatic;    // Pointer to the base class _Static object
-      int count;                       // NCurrent of instances
-      int mc;                          // Max number of instances
-      int tc;                          // Total number of instances
-      _Static(const unsigned int, const char* const, const char* const, const SlotTable* const, const _Static* const);
-      private:_Static& operator=(const _Static&);
-   };
-*/
-   private: static MetaObject metadata;
-   protected: static const MetaObject* getStatic();
-
 public:
    // Standard message types
    static const unsigned short MSG_ERROR   = 0x0001;  // Error messages; ALWAYS ENABLED (use std::cerr)
@@ -408,7 +390,8 @@ protected:
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
    unsigned short getMessageDisableBits() const { return disMsgBits; }
 
-   static unsigned int registerClass(const MetaObject* const a);
+   static unsigned int registerClass(const ClassMetadata* const a);
+   static const ClassMetadata* getMetadata();
 
 private:
    unsigned short enbMsgBits;       // Enabled message bits
@@ -416,10 +399,12 @@ private:
    mutable long semaphore;          // ref(), unref() semaphore
    mutable unsigned int refCount;   // reference count
 
+   static ClassMetadata metadata;
+
    // Table of registered classes:
-   // --- pointers to the static member structure, _Static
+   // --- pointers to the metadata objects
    static const unsigned int MAX_CLASSES = OE_CONFIG_MAX_CLASSES;
-   static const MetaObject* classes[MAX_CLASSES];
+   static const ClassMetadata* classes[MAX_CLASSES];
    static unsigned int numClasses;
 };
 

@@ -129,9 +129,9 @@ class LinkedList : public Object
     protected: void copyData(const LinkedList& org, const bool cc = false);                                                       
     protected: void deleteData();                                                                                               
     public: virtual bool isClassType(const std::type_info& type) const override;                                                
-    private: static struct _Static _static;                                                                                     
+    private: static ::oe::base::ClassMetadata metadata;                                                                                     
     private: static const unsigned int classIndex;                                                                              
-    protected: static const _Static* getStatic()       { return nullptr; }                                                                               
+    protected: static const ::oe::base::ClassMetadata* getMetadata()       { return nullptr; }                                                                               
     public: static const char* getFactoryName();                                                                                
     public: virtual bool isFactoryName(const char name[]) const override;                                                       
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        
@@ -216,25 +216,25 @@ private:
 
 /*                                      
 template <class T>
-    LinkedList<T>::_Static LinkedList<T>::_static(                                               
-      registerClass(&_static), typeid(LinkedList<T>.name(), "LinkedList",                   
-        &LinkedList<T>::slottable, BaseClass::getStatic()                                   
+    LinkedList<T>::_Static LinkedList<T>::metadata(                                               
+      registerClass(&metadata), typeid(LinkedList<T>.name(), "LinkedList",                   
+        &LinkedList<T>::slottable, BaseClass::getMetadata()                                   
     );                                                                                 
 */
 
 /*
 template <class T>
-    const LinkedList::_Static* LinkedList<T>::getStatic() { return &_static; }                
+    const LinkedList::ClassMetadata* LinkedList<T>::getMetadata() { return &metadata; }                
 */
 
 template <class T>
-    const char* LinkedList<T>::getFactoryName() { return _static.fname; }                   
+    const char* LinkedList<T>::getFactoryName() { return metadata.fname; }                   
 
 template <class T>
     bool LinkedList<T>::isFactoryName(const char name[]) const                              
     {                                                                                  
         if (name == nullptr) return false;                                             
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      
+        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                      
         else return LinkedList<T>::Object::isFactoryName(name);                          
     }                                                                                  
 

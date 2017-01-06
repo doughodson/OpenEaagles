@@ -13,13 +13,13 @@ namespace base {
 // Table of registered classes
 //    Note: class Object is pre-registered as the first class
 // ---
-const MetaObject* Object::classes[MAX_CLASSES] = { &Object::metadata };
+const ClassMetadata* Object::classes[MAX_CLASSES] = { &Object::metadata };
 unsigned int Object::numClasses = 1;
 
 // ---
 // Object's static member data
 // ---
-MetaObject Object::metadata(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
+ClassMetadata Object::metadata(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -277,7 +277,7 @@ void Object::writeClassList(std::ostream& sout)
 //------------------------------------------------------------------------------
 // Register a new class type
 //------------------------------------------------------------------------------
-unsigned int Object::registerClass(const MetaObject* const p)
+unsigned int Object::registerClass(const ClassMetadata* const p)
 {
    unsigned int idx = 0;
    if (numClasses < MAX_CLASSES) {
@@ -309,9 +309,9 @@ std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
 }
 
 //------------------------------------------------------------------------------
-// Get the Object _Static member
+// return class metadata
 //------------------------------------------------------------------------------
-const MetaObject* Object::getStatic()
+const ClassMetadata* Object::getMetadata()
 {
     return &metadata;
 }

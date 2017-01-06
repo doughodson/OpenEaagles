@@ -69,6 +69,7 @@ OBJS =  \
 	util/system.o \
 	Boolean.o \
 	Cie.o \
+	ClassMetadata.o \
 	Cmy.o \
 	Color.o \
 	Complex.o \
@@ -91,7 +92,6 @@ OBJS =  \
 	List.o \
 	Locus.o \
 	Matrix.o \
-	MetaObject.o \
 	MonitorMetrics.o \
 	Nav.o \
 	NavDR.o \
