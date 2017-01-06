@@ -55,7 +55,12 @@ General framework-wide changes and improvements
 base library
 
    Object class
-     -- Removed getSlotByIndex() and getSlotByName() methods - both were unused.
+     -- removed getSlotByIndex() and getSlotByName() methods - both were unused.
+     -- extracted defined '_Static' structure out of Object and into it's own
+        standalone class called ClassMetadata, which is what it is.  Updated
+        Object itself to use a variable called 'metadata' in lue of '_static'
+        to store class and object related metadata.  This has NO impact on API,
+        but does make the code more readable.
 
    Component class
      -- component-based data logger functionality has been removed.  Removal of
