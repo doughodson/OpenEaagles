@@ -138,9 +138,9 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static struct _Static _static;                                                                                     \
+    private: static MetaObject _static;                                                                                     \
     private: static const unsigned int classIndex;                                                                              \
-    protected: static const _Static* getStatic();                                                                               \
+    protected: static const MetaObject* getStatic();                                                                               \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
@@ -152,13 +152,12 @@
     private:
 
 
-
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    ThisType::_Static ThisType::_static(                                               \
+    MetaObject ThisType::_static(                                                      \
       registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
+    const MetaObject* ThisType::getStatic() { return &_static; }                       \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -193,11 +192,11 @@
 
 
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    ThisType::_Static ThisType::_static(                                               \
+    MetaObject ThisType::_static(                                                      \
       registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
+    const MetaObject* ThisType::getStatic() { return &_static; }                       \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -215,11 +214,11 @@
 
 
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    ThisType::_Static ThisType::_static(                                               \
+    MetaObject ThisType::_static(                                                      \
       registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
         &ThisType::slottable, BaseClass::getStatic()                                   \
     );                                                                                 \
-    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
+    const MetaObject* ThisType::getStatic() { return &_static; }                       \
     const char* ThisType::getFactoryName() { return _static.fname; }                   \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \

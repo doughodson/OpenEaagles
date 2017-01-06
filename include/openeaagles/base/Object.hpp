@@ -12,6 +12,8 @@
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 
+#include "openeaagles/base/MetaObject.hpp"
+
 #include <iosfwd>
 
 namespace oe {
@@ -323,6 +325,7 @@ class Object
    public: int slotName2Index(const char* const slotname) const;
 
    // Static member variables
+/*
    protected: struct _Static {
       const unsigned int classIndex;   // Registered class index
       const char* const cname;         // class name from 'type_info'
@@ -335,8 +338,9 @@ class Object
       _Static(const unsigned int, const char* const, const char* const, const SlotTable* const, const _Static* const);
       private:_Static& operator=(const _Static&);
    };
-   private: static struct _Static _static;
-   protected: static const _Static* getStatic(); //Get the _Static member
+*/
+   private: static MetaObject _static;
+   protected: static const MetaObject* getStatic(); //Get the _Static member
 
 public:
    // Standard message types
@@ -404,7 +408,7 @@ protected:
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
    unsigned short getMessageDisableBits() const { return disMsgBits; }
 
-   static unsigned int registerClass(const _Static* const a);
+   static unsigned int registerClass(const MetaObject* const a);
 
 private:
    unsigned short enbMsgBits;       // Enabled message bits
@@ -415,7 +419,7 @@ private:
    // Table of registered classes:
    // --- pointers to the static member structure, _Static
    static const unsigned int MAX_CLASSES = OE_CONFIG_MAX_CLASSES;
-   static const _Static* classes[MAX_CLASSES];
+   static const MetaObject* classes[MAX_CLASSES];
    static unsigned int numClasses;
 };
 
