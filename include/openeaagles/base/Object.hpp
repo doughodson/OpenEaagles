@@ -380,6 +380,8 @@ public:
       }
    };
 
+   static const ObjMetadata* getMetadata();
+
 protected:
    // Slot table for this object (set to the object's class slot table)
    const SlotTable* slotTable;
@@ -391,7 +393,6 @@ protected:
    unsigned short getMessageDisableBits() const { return disMsgBits; }
 
    static unsigned int registerClass(const ObjMetadata* const a);
-   static const ObjMetadata* getMetadata();
 
 private:
    unsigned short enbMsgBits;       // Enabled message bits

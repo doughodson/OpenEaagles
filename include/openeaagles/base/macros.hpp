@@ -138,9 +138,9 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static ::oe::base::ObjMetadata metadata;                                                                         \
+    private: static ::oe::base::ObjMetadata metadata;                                                                           \
     private: static const unsigned int classIndex;                                                                              \
-    protected: static const ::oe::base::ObjMetadata* getMetadata();                                                           \
+    public: static const ::oe::base::ObjMetadata* getMetadata();                                                                \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
