@@ -69,7 +69,6 @@ OBJS =  \
 	util/system.o \
 	Boolean.o \
 	Cie.o \
-	ClassMetadata.o \
 	Cmy.o \
 	Color.o \
 	Complex.o \
@@ -98,6 +97,7 @@ OBJS =  \
 	NetHandler.o \
 	Number.o \
 	Object.o \
+	ObjMetadata.o \
 	Operators.o \
 	Pair.o \
 	PairStream.o \

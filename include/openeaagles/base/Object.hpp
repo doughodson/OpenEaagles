@@ -12,7 +12,7 @@
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 
-#include "openeaagles/base/ClassMetadata.hpp"
+#include "openeaagles/base/ObjMetadata.hpp"
 
 #include <iosfwd>
 
@@ -390,8 +390,8 @@ protected:
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
    unsigned short getMessageDisableBits() const { return disMsgBits; }
 
-   static unsigned int registerClass(const ClassMetadata* const a);
-   static const ClassMetadata* getMetadata();
+   static unsigned int registerClass(const ObjMetadata* const a);
+   static const ObjMetadata* getMetadata();
 
 private:
    unsigned short enbMsgBits;       // Enabled message bits
@@ -399,12 +399,12 @@ private:
    mutable long semaphore;          // ref(), unref() semaphore
    mutable unsigned int refCount;   // reference count
 
-   static ClassMetadata metadata;
+   static ObjMetadata metadata;
 
    // Table of registered classes:
    // --- pointers to the metadata objects
    static const unsigned int MAX_CLASSES = OE_CONFIG_MAX_CLASSES;
-   static const ClassMetadata* classes[MAX_CLASSES];
+   static const ObjMetadata* classes[MAX_CLASSES];
    static unsigned int numClasses;
 };
 
