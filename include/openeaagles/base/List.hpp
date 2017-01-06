@@ -15,7 +15,7 @@ namespace base {
 //
 // Public members:
 //
-//      List(float values[], unsigned int nv)
+//      List(double values[], unsigned int nv)
 //      List(int values[], unsigned int nv)
 //          Constructors; construct a list of 'nv' Float (Integer)
 //          objects each containing a value from 'values'.
@@ -33,7 +33,7 @@ namespace base {
 //      Object* get()
 //          Returns a pointer to the object at the head of this list and
 //          the object IS REMOVED from the list.  Empty lists will return
-//          null(0).  Ownership of Object is passed to the caller
+//          nullptr.  Ownership of Object is passed to the caller
 //          (i.e., this routine does not unref() the object and the
 //          caller should not ref() the object).
 //
@@ -158,7 +158,7 @@ public:
    void clear();
 
    Object* get()                                   { return removeHead(); }
-   void put(Object* obj)                           { if (obj == 0) return;  addTail(obj); }
+   void put(Object* obj)                           { if (obj == nullptr) return;  addTail(obj); }
 
    unsigned int getNumberList(double values[], const unsigned int max) const;
    unsigned int getNumberList(float values[], const unsigned int max) const;

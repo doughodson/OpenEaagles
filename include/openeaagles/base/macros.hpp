@@ -274,8 +274,8 @@
         return BaseClass::setSlotByIndex(si,obj);                                          \
     }
 
-#define IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType,FACTORYNAME)                       \
-    IMPLEMENT_SUBCLASS(ThisType,FACTORYNAME)                                           \
+#define IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType, FACTORYNAME)                       \
+    IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                           \
     EMPTY_SLOTTABLE(ThisType)
 
 

@@ -105,7 +105,7 @@ void List::clear()
 
 
 //------------------------------------------------------------------------------
-// find(Object*) -- find an object on the list
+// find(Object*) -- find object on the list
 //------------------------------------------------------------------------------
 unsigned int List::getIndex(const Object* const obj) const
 {
@@ -122,7 +122,7 @@ unsigned int List::getIndex(const Object* const obj) const
 }
 
 //------------------------------------------------------------------------------
-// addHead(Object*) -- Adds an item to the head of the list.
+// addHead(Object*) -- Adds object to the head of the list.
 //------------------------------------------------------------------------------
 void List::addHead(Object* const obj)
 {
@@ -134,7 +134,7 @@ void List::addHead(Object* const obj)
 }
 
 //------------------------------------------------------------------------------
-// addTail(Object*) -- Adds an item to the tail of the list.
+// addTail(Object*) -- Adds object to the tail of the list.
 //------------------------------------------------------------------------------
 void List::addTail(Object* const obj)
 {
@@ -146,7 +146,7 @@ void List::addTail(Object* const obj)
 }
 
 //------------------------------------------------------------------------------
-// remove(Object*) -- Removes an object from the list.
+// remove(Object*) -- Removes object from the list.
 //------------------------------------------------------------------------------
 bool List::remove(const Object* const obj)
 {
@@ -371,7 +371,6 @@ bool List::operator==(const List& l) const
       tt = tt->getNext();
       ll = ll->getNext();
    }
-
    return true;
 }
 
@@ -402,10 +401,6 @@ const Object* List::getPosition1(const unsigned int n) const
         return nullptr;
 }
 
-
-//------------------------------------------------------------------------------
-// serialize() -- print the value of this object to the output stream sout.
-//------------------------------------------------------------------------------
 std::ostream& List::serialize(std::ostream& sout, const int, const bool) const
 {
     std::cout << "{" << std::endl;
