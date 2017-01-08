@@ -213,13 +213,12 @@ private:
 
 //#define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)  BELOW
 
-/*                                      
+                                    
 template <class T>
-    LinkedList<T>::_Static LinkedList<T>::metadata(                                               
-      typeid(LinkedList<T>.name(), "LinkedList",                   
-        &LinkedList<T>::slottable, BaseClass::getMetadata()                                   
+    ::oe::base::ObjMetadata LinkedList<T>::metadata(                                               
+      typeid(LinkedList).name(), "LinkedList",                   
+        &LinkedList::slottable, Object::getMetadata()                                   
     );                                                                                 
-*/
 
 
 template <class T>
