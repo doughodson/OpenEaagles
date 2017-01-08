@@ -130,8 +130,7 @@ class LinkedList : public Object
     protected: void deleteData();                                                                                               
     public: virtual bool isClassType(const std::type_info& type) const override;                                                
     private: static ::oe::base::ObjMetadata metadata;                                                                                     
-    private: static const unsigned int classIndex;                                                                              
-    protected: static const ::oe::base::ObjMetadata* getMetadata()       { return nullptr; }                                                                               
+    protected: static const ::oe::base::ObjMetadata* getMetadata();                                                                                
     public: static const char* getFactoryName();                                                                                
     public: virtual bool isFactoryName(const char name[]) const override;                                                       
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        
@@ -222,19 +221,19 @@ template <class T>
     );                                                                                 
 */
 
-/*
-template <class T>
-    const LinkedList::ClassMetadata* LinkedList<T>::getMetadata() { return &metadata; }                
-*/
 
 template <class T>
-    const char* LinkedList<T>::getFactoryName() { return metadata.fname; }                   
+    const ::oe::base::ObjMetadata* LinkedList<T>::getMetadata() { return &metadata; }                
+
+
+template <class T>
+    const char* LinkedList<T>::getFactoryName() { return metadata.getFactoryName(); }                   
 
 template <class T>
     bool LinkedList<T>::isFactoryName(const char name[]) const                              
     {                                                                                  
         if (name == nullptr) return false;                                             
-        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                      
+        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;                      
         else return LinkedList<T>::Object::isFactoryName(name);                          
     }                                                                                  
 
