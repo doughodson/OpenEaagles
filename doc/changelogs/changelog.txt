@@ -88,6 +88,7 @@ base library
    SlotTable class
      -- removed useless methods such as copyData, deleteData -- probably remnant
         from long ago, when it might have been an Object-based class.
+     -- deleted copy and assignment operators
 
 --------------------------------------------------------------------------------
 dafif library
