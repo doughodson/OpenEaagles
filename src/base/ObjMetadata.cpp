@@ -12,7 +12,11 @@ ObjMetadata::ObjMetadata(
       const SlotTable* const slottbl,
       const ObjMetadata* const metadata
    ) : cname(cn), fname(fn), slottable(slottbl), baseMetadata(metadata), count(0), mc(0), tc(0)
+{}
+
+const char* ObjMetadata::getClassName()
 {
+    return cname;
 }
 
 }

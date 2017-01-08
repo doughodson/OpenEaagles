@@ -73,6 +73,11 @@ base library
         greatly simplifies Object, its associated macros and instance creation.
         It also reduces the barrier to understanding what the code is doing.
 
+   ObjMetadata
+     -- new class that replaces _Static class once defined in Object
+     -- added getClassname() to this newly defined class.  It effectively replaces
+        getClassName() in Object, which was never used.
+
    Component class
      -- component-based data logger functionality has been removed.  Removal of
         rippled into simulation library with the deletion of SimLogger and

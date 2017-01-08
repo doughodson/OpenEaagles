@@ -19,6 +19,8 @@ public:
    ObjMetadata(const ObjMetadata&) = delete;
    ObjMetadata& operator=(const ObjMetadata&) = delete;
 
+   const char* getClassName();
+
    const char* const cname;                  // class name from 'type_info'
    const char* const fname;                  // class factory name
    const SlotTable* const slottable;         // pointer to the SlotTable

@@ -109,12 +109,6 @@ const char* Object::getFactoryName()
     return metadata.fname;
 }
 
-// get class name
-const char* Object::getClassName()
-{
-    return metadata.cname;
-}
-
 // get slot table
 const SlotTable& Object::getSlotTable()
 {

@@ -9,6 +9,8 @@
 // lock/unlock, etc - reference system needs it
 #include "openeaagles/base/util/atomics.hpp"
 
+#include <typeinfo>
+
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 
@@ -291,17 +293,18 @@ class Object
    // Standard object stuff --
    //    derived classes will use the macro DECLARE_SUBCLASS(); see macros.hpp
    // -------------------------------------------------------------------------
-   public: virtual ~Object();
+   public: Object();
    public: Object(const Object& org);
    public: Object& operator=(const Object& org);
    public: virtual Object* clone() const;
+   public: virtual ~Object();
+
    protected: void copyData(const Object& org, const bool cc = false);
    protected: void deleteData();
 
    public: virtual bool isClassType(const std::type_info& type) const;
    public: virtual bool isFactoryName(const char name[]) const;
    public: static const char* getFactoryName();
-   public: static const char* getClassName();
    public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
 
    // Slot table
@@ -329,8 +332,6 @@ public:
    static const unsigned short MSG_ALL     = 0xFFFF;  // All message types mask
 
 public:
-   Object();
-
    virtual bool isValid() const;
 
    virtual bool isMessageEnabled(const unsigned short msgType) const;
