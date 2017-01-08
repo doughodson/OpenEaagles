@@ -19,6 +19,11 @@ const char* ObjMetadata::getClassName()
     return cname;
 }
 
+const char* ObjMetadata::getFactoryName()
+{
+    return fname;
+}
+
 }
 }
 

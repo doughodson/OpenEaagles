@@ -72,10 +72,11 @@ base library
         comprehensive in this area. Removing the code associated with all this
         greatly simplifies Object, its associated macros and instance creation.
         It also reduces the barrier to understanding what the code is doing.
+     -- removed getClassName() method
 
    ObjMetadata
      -- new class that replaces _Static class once defined in Object
-     -- added getClassname() to this newly defined class.  It effectively replaces
+     -- added getClassName() to this newly defined class.  It effectively replaces
         getClassName() in Object, which was never used.
 
    Component class

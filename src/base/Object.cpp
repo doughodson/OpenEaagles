@@ -73,7 +73,7 @@ bool Object::isClassType(const std::type_info& type) const
 bool Object::isFactoryName(const char name[]) const
 {
     if (name == nullptr) return false;
-    if ( std::strcmp(metadata.fname, name) == 0 )  return true;
+    if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;
     else return false;
 }
 
@@ -103,10 +103,9 @@ bool Object::setSlotByIndex(const int, Object* const)
     return false;
 }
 
-// get factory name
 const char* Object::getFactoryName()
 {
-    return metadata.fname;
+    return metadata.getFactoryName();
 }
 
 // get slot table

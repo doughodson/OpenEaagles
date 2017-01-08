@@ -20,6 +20,7 @@ public:
    ObjMetadata& operator=(const ObjMetadata&) = delete;
 
    const char* getClassName();
+   const char* getFactoryName();
 
    const char* const cname;                  // class name from 'type_info'
    const char* const fname;                  // class factory name

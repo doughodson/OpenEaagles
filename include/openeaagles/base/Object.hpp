@@ -302,17 +302,19 @@ class Object
    protected: void copyData(const Object& org, const bool cc = false);
    protected: void deleteData();
 
+   public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
+
+   // helper methods
    public: virtual bool isClassType(const std::type_info& type) const;
    public: virtual bool isFactoryName(const char name[]) const;
    public: static const char* getFactoryName();
-   public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
 
-   // Slot table
+   // slot table
    protected: static const SlotTable slottable;    // class slot table
    private: static const char* slotnames[];        // slot names in this object's slot table
    private: static const int nslots;               // number of slots in this object's slot table
 
-   // Slot table functions
+   // slot table functions
    public: static const SlotTable& getSlotTable();
    protected: virtual bool setSlotByIndex(const int slotindex, Object* const obj);
    public: bool setSlotByName(const char* const slotname, Object* const obj);
@@ -320,7 +322,7 @@ class Object
    public: int slotName2Index(const char* const slotname) const;
 
 public:
-   // Standard message types
+   // standard message types
    static const unsigned short MSG_ERROR   = 0x0001;  // Error messages; ALWAYS ENABLED (use std::cerr)
    static const unsigned short MSG_WARNING = 0x0002;  // Warning messages (use std::cerr)
    static const unsigned short MSG_INFO    = 0x0004;  // Informational messages (use std::cout)
@@ -328,7 +330,7 @@ public:
    static const unsigned short MSG_DATA    = 0x0010;  // Data messages(use std::cout)
    static const unsigned short MSG_USER    = 0x0020;  // User debug/trace messages(use std::cout)
    static const unsigned short MSG_STD_ALL = 0x00FF;  // Standard message types mask
-   // Non-standard or user defined message are the high order bits (0xFF00)
+   // non-standard or user defined message are the high order bits (0xFF00)
    static const unsigned short MSG_ALL     = 0xFFFF;  // All message types mask
 
 public:
@@ -342,9 +344,7 @@ public:
    // ref(), unref() and getRefCount()
    #include "openeaagles/base/ref.inl"
 
-   // ---
-   // General exception class
-   // ---
+   // general exception class
    class Exception {
    public:
       Exception()                                { }
@@ -373,10 +373,10 @@ public:
    static const ObjMetadata* getMetadata();
 
 protected:
-   // Slot table for this object (set to the object's class slot table)
+   // slot table for this object (set to the object's class slot table)
    const SlotTable* slotTable;
 
-   // Indents the output steam by 'ident' spaces. (used with serialize())
+   // indents the output steam by 'ident' spaces. (used with serialize())
    void indent(std::ostream& sout, const int ident) const;
 
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
