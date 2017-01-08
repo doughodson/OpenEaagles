@@ -129,9 +129,9 @@ class LinkedList : public Object
     protected: void copyData(const LinkedList& org, const bool cc = false);                                                       
     protected: void deleteData();                                                                                               
     public: virtual bool isClassType(const std::type_info& type) const override;                                                
-    private: static ::oe::base::ClassMetadata metadata;                                                                                     
+    private: static ::oe::base::ObjMetadata metadata;                                                                                     
     private: static const unsigned int classIndex;                                                                              
-    protected: static const ::oe::base::ClassMetadata* getMetadata()       { return nullptr; }                                                                               
+    protected: static const ::oe::base::ObjMetadata* getMetadata()       { return nullptr; }                                                                               
     public: static const char* getFactoryName();                                                                                
     public: virtual bool isFactoryName(const char name[]) const override;                                                       
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        
@@ -217,7 +217,7 @@ private:
 /*                                      
 template <class T>
     LinkedList<T>::_Static LinkedList<T>::metadata(                                               
-      registerClass(&metadata), typeid(LinkedList<T>.name(), "LinkedList",                   
+      typeid(LinkedList<T>.name(), "LinkedList",                   
         &LinkedList<T>::slottable, BaseClass::getMetadata()                                   
     );                                                                                 
 */

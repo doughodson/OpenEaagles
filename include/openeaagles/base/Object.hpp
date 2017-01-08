@@ -273,24 +273,16 @@ namespace base {
 //       (See macro STANDARD_CONSTRUCTOR())
 //
 //
-// Table of known classes and object counters
+// Object Metadata
 //
-//    A list of 'known' classes is maintained as a table of pointers
-//    to the _Static structure, which is contained in each class.  The
-//    table is a private, static member variable.  The various IMPLEMENT_SUBCLASS
-//    macros register the class using the registerClass() function; therefore all
-//    classes implemented in an application are known.
-//
-//    The STANDARD_CONSTRUCTOR() and STANDARD_DESTRUCTOR() macros increment and
-//    decrement, respectively, a counter located in each class _Static structure.
-//    This provides a count of the current number of instantiated objects for the
-//    class.  The maximum number of this count, as well as the total number of
-//    instantiated objects, is also maintained.
-//
-//       writeClassList(std::ostream& sout)
-//          Writes the table of known classes, which includes the
-//          factory name, object counters and full C++ class name for each class,
-//          to the 'sout' output stream.
+//    Each class has an associated 'ObjMetadata' object instance which is used
+//    to store additional class and object instance information.  For example,
+//    the metadata object contains the number of instances of a particular class
+//    exists, as well as the total number of objects that have ever been
+//    created and the maximum number that has existed at the same time.  This
+//    capability was added to Object to serves as a debugging tool to monitor
+//    the creation and deletion of large numbers of particular classes of interest
+//    to spot potential memory leaks.
 //
 //------------------------------------------------------------------------------
 class Object
@@ -349,9 +341,6 @@ public:
    // ref(), unref() and getRefCount()
    #include "openeaagles/base/ref.inl"
 
-   // Output the list of known oe classes
-   static void writeClassList(std::ostream& sout);
-
    // ---
    // General exception class
    // ---
@@ -392,8 +381,6 @@ protected:
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
    unsigned short getMessageDisableBits() const { return disMsgBits; }
 
-   static unsigned int registerClass(const ObjMetadata* const a);
-
 private:
    unsigned short enbMsgBits;       // Enabled message bits
    unsigned short disMsgBits;       // Disabled message bits
@@ -401,12 +388,6 @@ private:
    mutable unsigned int refCount;   // reference count
 
    static ObjMetadata metadata;
-
-   // Table of registered classes:
-   // --- pointers to the metadata objects
-   static const unsigned int MAX_CLASSES = OE_CONFIG_MAX_CLASSES;
-   static const ObjMetadata* classes[MAX_CLASSES];
-   static unsigned int numClasses;
 };
 
 }

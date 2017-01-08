@@ -15,11 +15,10 @@ class ObjMetadata
 {
 public:
    ObjMetadata() = default;
-   ObjMetadata(const unsigned int, const char* const, const char* const, const SlotTable* const, const ObjMetadata* const);
+   ObjMetadata(const char* const, const char* const, const SlotTable* const, const ObjMetadata* const);
    ObjMetadata(const ObjMetadata&) = delete;
    ObjMetadata& operator=(const ObjMetadata&) = delete;
 
-   const unsigned int classIndex;            // registered class index
    const char* const cname;                  // class name from 'type_info'
    const char* const fname;                  // class factory name
    const SlotTable* const slottable;         // pointer to the SlotTable

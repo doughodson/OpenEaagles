@@ -10,16 +10,9 @@ namespace oe {
 namespace base {
 
 // ---
-// Table of registered classes
-//    Note: class Object is pre-registered as the first class
+// Class and object metadata
 // ---
-const ObjMetadata* Object::classes[MAX_CLASSES] = { &Object::metadata };
-unsigned int Object::numClasses = 1;
-
-// ---
-// Object's static member data
-// ---
-ObjMetadata Object::metadata(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
+ObjMetadata Object::metadata(typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -254,38 +247,6 @@ bool Object::disableMessageTypes(const unsigned short msgTypeBits)
    enbMsgBits &= ~msgTypeBits;
 
    return true;
-}
-
-//------------------------------------------------------------------------------
-// Writes out the class list
-//------------------------------------------------------------------------------
-void Object::writeClassList(std::ostream& sout)
-{
-   sout << "Number of classes: " << numClasses << std::endl;
-   for (unsigned int i = 0; i < numClasses; i++) {
-      sout
-         << classes[i]->classIndex
-         << ": " << classes[i]->fname
-         << "(" << classes[i]->count
-         << "/" << classes[i]->mc
-         << "/" << classes[i]->tc
-         << ") => " << classes[i]->cname
-         << std::endl;
-   }
-}
-
-//------------------------------------------------------------------------------
-// Register a new class type
-//------------------------------------------------------------------------------
-unsigned int Object::registerClass(const ObjMetadata* const p)
-{
-   unsigned int idx = 0;
-   if (numClasses < MAX_CLASSES) {
-      classes[numClasses] = p;
-      idx = numClasses;
-      numClasses++;
-   }
-   return idx;
 }
 
 //------------------------------------------------------------------------------

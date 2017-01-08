@@ -154,7 +154,7 @@
 
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
     ::oe::base::ObjMetadata ThisType::metadata(                                        \
-      registerClass(&metadata), typeid(ThisType).name(), FACTORYNAME,                  \
+      typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
     const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
@@ -190,10 +190,9 @@
     }
 
 
-
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
     ::oe::base::ObjMetadata ThisType::metadata(                                        \
-      registerClass(&metadata), typeid(ThisType).name(), FACTORYNAME,                  \
+      typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
     const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
@@ -212,10 +211,9 @@
     }
 
 
-
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
     ::oe::base::ObjMetadata ThisType::metadata(                                        \
-      registerClass(&metadata), typeid(ThisType).name(), FACTORYNAME,                  \
+      typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
     const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
@@ -251,18 +249,15 @@
     }
 
 
-
 #define STANDARD_CONSTRUCTOR()                                                         \
     slotTable = &slottable;                                                            \
     if (++metadata.count > metadata.mc) metadata.mc = metadata.count;                  \
     metadata.tc++;
 
 
-
 #define STANDARD_DESTRUCTOR()                                                          \
     deleteData();                                                                      \
     metadata.count--;
-
 
 #define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \
@@ -278,13 +273,11 @@
     EMPTY_SLOTTABLE(ThisType)
 
 
-
 #define EMPTY_CONSTRUCTOR(ThisType)                                                    \
     ThisType::ThisType()                                                               \
     {                                                                                  \
         STANDARD_CONSTRUCTOR()                                                         \
     }
-
 
 
 #define EMPTY_COPYDATA(ThisType)                                                       \
@@ -294,12 +287,10 @@
     }
 
 
-
 #define EMPTY_DELETEDATA(ThisType)                                                     \
     void ThisType::deleteData()                                                        \
     {                                                                                  \
     }
-
 
 
 #define EMPTY_SERIALIZER(ThisType)                                                     \
@@ -321,10 +312,8 @@
     }
 
 
-
 #define BEGIN_SLOTTABLE(ThisType)                                                      \
     const char* ThisType::slotnames[] = {
-
 
 
 #define END_SLOTTABLE(ThisType)                                                                \
@@ -346,11 +335,9 @@
         int _n1 = (slotindex - _n);
 
 
-
 #define END_SLOT_MAP()                                                                 \
         return _ok;                                                                    \
     }
-
 
 
 #define ON_SLOT(idx,setFunc,ObjType)                                                   \
@@ -362,12 +349,10 @@
     }
 
 
-
 #define BEGIN_EVENT_HANDLER(ThisType)                                                  \
     bool ThisType::event(const int _event, ::oe::base::Object* const _obj)             \
     {                                                                                  \
         bool _used = false;
-
 
 
 #define END_EVENT_HANDLER()                                                            \
@@ -376,12 +361,10 @@
     }
 
 
-
 #define ON_EVENT_OBJ(token,onEvent,ObjType)                                            \
     if (!_used && token == _event && dynamic_cast<ObjType*>(_obj) != nullptr) {        \
         _used = onEvent(static_cast<ObjType*>(_obj));                                  \
     }
-
 
 
 #define ON_EVENT(token,onEvent)                                                        \
@@ -390,19 +373,16 @@
     }
 
 
-
 #define ON_ANYKEY_OBJ(onEvent,ObjType)                                                       \
     if (!_used && _event <= MAX_KEY_EVENT && dynamic_cast<ObjType*>(_obj) != nullptr) {      \
         _used = onEvent(_event,(static_cast<ObjType*>(_obj)));                               \
     }
 
 
-
 #define ON_ANYKEY(onEvent)                                                             \
     if (!_used && _event <= MAX_KEY_EVENT) {                                           \
         _used = onEvent(_event);                                                       \
     }
-
 
 
 #define BEGIN_STATE_TABLE(ThisType)                                        \
@@ -415,11 +395,9 @@
         bool _ok = false;
 
 
-
 #define END_STATE_TABLE()                                                  \
         return _next;                                                      \
     }
-
 
 
 #define STATE_FUNC(state,stateFunc)                                        \
@@ -436,7 +414,6 @@
    }
 
 
-
 #define STATE_MACH(state,name)                                             \
    if (state == _cstate) {                                                 \
       _ok = setStMach(name, _code);                                        \
@@ -445,7 +422,6 @@
    else if (_code == FIND_NEXT_STATE && _ok && _next == INVALID_STATE) {   \
       _next = state;                                                       \
    }
-
 
 
 #define ANY_STATE_FUNC(stateFunc)                                          \

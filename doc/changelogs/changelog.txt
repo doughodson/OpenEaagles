@@ -61,6 +61,17 @@ base library
         Object itself to use a variable called 'metadata' in lue of '_static'
         to store class and object related metadata.  This has NO impact on API,
         but does make the code more readable.
+     -- removed both registerClass() and WriteClassList() methods and underlying
+        support structure to maintain a list of classes compiled into an application.
+        This was used so that a developer could print out a list of classes
+        available within application and interesting metadata related to them,
+        such as the number of instances currently in existance.  In theory,
+        this information could be used to help debug memory leaks within a running
+        application.  Not only can this capability be replicated outside of
+        Object itself, other tools exist (e.g., Valgrind) that are much more
+        comprehensive in this area. Removing the code associated with all this
+        greatly simplifies Object, its associated macros and instance creation.
+        It also reduces the barrier to understanding what the code is doing.
 
    Component class
      -- component-based data logger functionality has been removed.  Removal of
