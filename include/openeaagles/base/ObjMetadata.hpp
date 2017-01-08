@@ -19,8 +19,8 @@ public:
    ObjMetadata(const ObjMetadata&) = delete;
    ObjMetadata& operator=(const ObjMetadata&) = delete;
 
-   const char* getClassName();
-   const char* getFactoryName();
+   const char* getClassName() const;
+   const char* getFactoryName() const;
 
    const SlotTable* const slottable;         // pointer to the SlotTable
    const ObjMetadata* const baseMetadata;    // pointer to the base object's metadata

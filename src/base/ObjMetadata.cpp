@@ -14,12 +14,12 @@ ObjMetadata::ObjMetadata(
    ) : cname(cn), fname(fn), slottable(slottbl), baseMetadata(metadata), count(0), mc(0), tc(0)
 {}
 
-const char* ObjMetadata::getClassName()
+const char* ObjMetadata::getClassName() const
 {
     return cname;
 }
 
-const char* ObjMetadata::getFactoryName()
+const char* ObjMetadata::getFactoryName() const
 {
     return fname;
 }
