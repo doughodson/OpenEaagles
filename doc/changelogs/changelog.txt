@@ -76,8 +76,9 @@ base library
 
    ObjMetadata
      -- new class that replaces _Static class once defined in Object
-     -- added getClassName() to this newly defined class.  It effectively replaces
-        getClassName() in Object, which was never used.
+     -- added getClassName() and getFactoryName() to this newly defined class.
+        The goal is to move all 'meta' data about classes and objects including
+        static class functionality into this class.
 
    Component class
      -- component-based data logger functionality has been removed.  Removal of

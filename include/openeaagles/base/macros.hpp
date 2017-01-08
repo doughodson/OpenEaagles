@@ -139,7 +139,6 @@
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
     private: static ::oe::base::ObjMetadata metadata;                                                                           \
-    private: static const unsigned int classIndex;                                                                              \
     public: static const ::oe::base::ObjMetadata* getMetadata();                                                                \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
@@ -158,11 +157,11 @@
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
     const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
-    const char* ThisType::getFactoryName() { return metadata.fname; }                  \
+    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                     \
+        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable()  { return slottable; }       \
@@ -196,11 +195,11 @@
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
     const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
-    const char* ThisType::getFactoryName() { return metadata.fname; }                  \
+    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                     \
+        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
@@ -217,11 +216,11 @@
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
     const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
-    const char* ThisType::getFactoryName() { return metadata.fname; }                  \
+    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metadata.fname,name) == 0 )  return true;                     \
+        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
