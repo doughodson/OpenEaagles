@@ -4,9 +4,8 @@
 #include "openeaagles/networks/rprfom/Nib.hpp"
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
+#include "openeaagles/models/WorldModel.hpp"
 #include "openeaagles/models/players/Player.hpp"
-
-#include "openeaagles/simulation/ISimulation.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
@@ -412,7 +411,8 @@ void Nib::updateBasicEntity(
       NetIO* netIO = static_cast<NetIO*>(getNetIO());
 
       // Our simulation
-      simulation::ISimulation* ourSim = netIO->getSimulation();
+//      simulation::ISimulation* ourSim = netIO->getSimulation();
+      models::WorldModel* ourSim = dynamic_cast<models::WorldModel*>(netIO->getSimulation());   // DDH
 
       // Get the player data
       playerState2Nib();

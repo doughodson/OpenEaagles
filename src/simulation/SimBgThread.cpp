@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/SimBgThread.hpp"
 
-#include "openeaagles/simulation/ISimulation.hpp"
+#include "openeaagles/simulation/SimExec.hpp"
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -46,7 +46,7 @@ unsigned long SimBgThread::userFunc()
    // Make sure we've a player list and our index is valid ...
    if (pl0 != nullptr && idx0 > 0 && idx0 <= n0) {
       // then call the Simulation class' update TC player list functions
-      ISimulation* sim = static_cast<ISimulation*>(getParent());
+      SimExec* sim = static_cast<SimExec*>(getParent());
       sim->updateBgPlayerList(pl0, dt0, idx0, n0);
    }
 

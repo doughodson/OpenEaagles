@@ -6,7 +6,7 @@
 #include "openeaagles/simulation/DataRecorder.hpp"
 #include "openeaagles/simulation/INetIO.hpp"
 #include "openeaagles/simulation/IOtw.hpp"
-#include "openeaagles/simulation/ISimulation.hpp"
+#include "openeaagles/simulation/SimExec.hpp"
 
 #include "openeaagles/base/Color.hpp"
 #include "openeaagles/base/IoHandler.hpp"
@@ -55,7 +55,7 @@ BEGIN_SLOTTABLE(Station)
 END_SLOTTABLE(Station)
 
 BEGIN_SLOT_MAP(Station)
-   ON_SLOT( 1,  setSlotSimulation,            ISimulation)
+   ON_SLOT( 1,  setSlotSimulation,            SimExec)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
@@ -140,7 +140,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Set the simulation exec
    if (org.sim != nullptr) {
-      ISimulation* copy = org.sim->clone();
+      SimExec* copy = org.sim->clone();
       setSlotSimulation( copy );
       copy->unref();
    }
@@ -443,7 +443,7 @@ bool Station::shutdownNotification()
    setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
 
    // Tell our simulation to shut down
-   ISimulation* s = getSimulation();
+   SimExec* s = getSimulation();
    if (s != nullptr) {
       s->event(SHUTDOWN_EVENT);
    }
@@ -669,13 +669,13 @@ void Station::processNetworkOutputTasks(const double dt)
 //------------------------------------------------------------------------------
 
 // Returns the simulation model
-ISimulation* Station::getSimulation()
+SimExec* Station::getSimulation()
 {
    return sim;
 }
 
 // Returns the simulation model (const version)
-const ISimulation* Station::getSimulation() const
+const SimExec* Station::getSimulation() const
 {
    return sim;
 }
@@ -1020,7 +1020,7 @@ bool Station::setDataRecorder(DataRecorder* const p)
 //-----------------------------------------------------------------------------
 // setSlotSimulation() -- Sets a pointer to our simulation subsystem
 //-----------------------------------------------------------------------------
-bool Station::setSlotSimulation(ISimulation* const p)
+bool Station::setSlotSimulation(SimExec* const p)
 {
     if (sim != nullptr) {
         sim->container(nullptr);

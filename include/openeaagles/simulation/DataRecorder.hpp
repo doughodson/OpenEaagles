@@ -8,7 +8,7 @@
 namespace oe {
 namespace base { class List; }
 namespace simulation {
-class ISimulation;
+class SimExec;
 class Station;
 
 //------------------------------------------------------------------------------
@@ -37,14 +37,14 @@ public:
    Station* getStation();                     // Our parent station
    const Station* getStation() const;         // Our parent station (const version)
 
-   ISimulation* getSimulation();              // The simulation
-   const ISimulation* getSimulation() const;  // The simulation (const version)
+   SimExec* getSimulation();                  // The executable simulation
+   const SimExec* getSimulation() const;      // The executable simulation (const version)
 
    // Record Data function
    bool recordData(
-      const unsigned int id,              // Recorder event Id
-      const base::Object* pObjects[4],   // Sample objects
-      const double values[4]              // Sample values
+      const unsigned int id,                  // Recorder event Id
+      const base::Object* pObjects[4],        // Sample objects
+      const double values[4]                  // Sample values
    );
 
    // Background thread processing of the data records
@@ -53,9 +53,9 @@ public:
 protected:
    // Implementation of the record data function
    virtual bool recordDataImp(
-      const unsigned int id,              // Recorder event Id
-      const base::Object* pObjects[4],   // Sample objects
-      const double values[4]              // Sample values
+      const unsigned int id,                  // Recorder event Id
+      const base::Object* pObjects[4],        // Sample objects
+      const double values[4]                  // Sample values
    );
 
    // Process the unhandled or unknown recorder event IDs
@@ -64,10 +64,10 @@ protected:
 private:
    void initData();
    Station* getStationImp();
-   ISimulation* getSimulationImp();
+   SimExec* getSimulationImp();
 
    Station* sta;         // The Station that owns us (not ref()'d)
-   ISimulation* sim;     // The simulation system (not ref()'d)
+   SimExec* sim;         // The simulation system (not ref()'d)
 };
 
 // Record Data function

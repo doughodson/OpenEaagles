@@ -15,7 +15,7 @@
 #include "openeaagles/models/players/Weapon.hpp"
 #include "openeaagles/models/systems/StoresMgr.hpp"
 
-#include "openeaagles/simulation/ISimulation.hpp"
+#include "openeaagles/simulation/SimExec.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/Nav.hpp"
@@ -50,7 +50,7 @@ static const unsigned int DEACTIVATE_BIT  = 0x00800000;   // State bit (0 - acti
 void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
 {
    NetIO* const disIO = static_cast<NetIO*>(getNetIO());
-   simulation::ISimulation* sim = disIO->getSimulation();
+   simulation::SimExec* sim = disIO->getSimulation();
 
    // Mark the current time
    setTimeExec( static_cast<double>(sim->getExecTimeSec()) );
@@ -407,7 +407,7 @@ bool Nib::entityStateManager(const double curExecTime)
 
       // Get our NetIO and the main simulation
       NetIO* disIO = static_cast<NetIO*>(getNetIO());
-      simulation::ISimulation* sim = disIO->getSimulation();
+      simulation::SimExec* sim = disIO->getSimulation();
 
       // Capture the player data, reset the dead reckoning and
       // mark the current time.

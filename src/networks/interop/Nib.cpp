@@ -2,8 +2,6 @@
 #include "openeaagles/networks/interop/Nib.hpp"
 #include "openeaagles/networks/interop/Ntm.hpp"
 
-#include "openeaagles/simulation/ISimulation.hpp"
-
 #include "openeaagles/models/players/AirVehicle.hpp"
 #include "openeaagles/models/players/GroundVehicle.hpp"
 #include "openeaagles/models/players/Missile.hpp"

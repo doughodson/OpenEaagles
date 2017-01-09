@@ -44,6 +44,7 @@
 #include "openeaagles/models/sensors/Stt.hpp"
 
 // simulation models
+#include "openeaagles/models/WorldModel.hpp"
 #include "openeaagles/models/Simulation.hpp"
 
 // system models
@@ -131,6 +132,9 @@ base::Object* factory(const std::string& name)
    }
 
    // Simulation models
+   else if ( name == WorldModel::getFactoryName() ) {
+      obj = new WorldModel();
+   }
    else if ( name == Simulation::getFactoryName() ) {
       obj = new Simulation();
    }

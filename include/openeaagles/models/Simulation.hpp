@@ -1,8 +1,8 @@
 
-#ifndef __oe_simulation_Simulation_H__
-#define __oe_simulation_Simulation_H__
+#ifndef __oe_models_Simulation_H__
+#define __oe_models_Simulation_H__
 
-#include "openeaagles/simulation/ISimulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 namespace oe {
 namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
@@ -40,9 +40,9 @@ class Atmosphere;
 //
 // Factory name: Simulation
 //------------------------------------------------------------------------------
-class Simulation : public simulation::ISimulation
+class Simulation : public WorldModel
 {
-    DECLARE_SUBCLASS(Simulation, simulation::ISimulation)
+    DECLARE_SUBCLASS(Simulation, WorldModel)
 
 public:
     Simulation();

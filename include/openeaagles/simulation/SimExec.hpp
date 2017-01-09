@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_ISimulation_H__
-#define __oe_simulation_ISimulation_H__
+#ifndef __oe_simulation_SimExec_H__
+#define __oe_simulation_SimExec_H__
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/safe_queue.hpp"
@@ -18,32 +18,16 @@ class Station;
 class IPlayer;
 
 //------------------------------------------------------------------------------
-// Class: ISimulation
+// Class: SimExec
 //
-// Description: General class to manage the execution of a list of players
+// Description: Simulation executive, a class to manage the execution of a world
+//              model that contains a list of players
 //
 //
-// Factory name: ISimulation
+// Factory name: SimExec
 //
 // Slots --
 //    players        <base::PairStream>       ! Local player list (base::PairStream of Player) (default: nullptr)
-//
-//    latitude       <base::LatLon>           ! Reference (gaming area) latitude (default: 0.0)
-//                   <base::Number>           ! Reference (gaming area) latitude (deg)
-//
-//    longitude      <base::LatLon>           ! reference (gaming area) longitude (default 0.0)
-//                   <base::Number>           ! reference (gaming area) longitude (deg)
-//
-//    gamingAreaRange <base::Distance>        ! Max valid range of the simulation's gaming area or zero for unlimited
-//                                            !   default: zero -- unlimited range
-//
-//    earthModel     <base::EarthModel>       ! Earth model for geodetic lat/lon (default is WGS-84)
-//                   <base::Identifier>       ! Earth model by name (see EarthModel.hpp)
-//
-//    gamingAreaUseEarthModel <base::Boolean> ! If true, use the 'earthModel' or its WGS-84 default for flat
-//                                            ! earth projections between geodetic lat/lon and the gaming
-//                                            ! area's NED coordinates.  Otherwise, use a standard spherical
-//                                            ! earth with a radius of Nav::ERAD60. (default: false)
 //
 //    simulationTime <base::Time>             ! Initial simulated time since midnight (UTC) (second),
 //                                            ! or -1 to use current time of day (default: -1)
@@ -95,30 +79,6 @@ class IPlayer;
 //
 //    g) You can find players on the list by Player ID [plus Net ID], findPlayer(),
 //       or by name using findPlayerByName().
-//
-//
-// Gaming area reference point:
-//
-//    The reference latitude and longitude is the center of the simulation's
-//    gaming area.  Each player has a position, [ x y z ] NED in meters, from this
-//    reference point that is computed using flat earth equations (see base::Nav)
-//    and using the cosine of this reference latitude.  The NED coordinate system's
-//    'down' is perpendicular to this tangent plane.
-//
-//       double getRefLatitude()
-//       double getRefLongitude()
-//          Return the reference point (degrees)
-//
-//       const osg::Matrixd& getWorldMat()
-//          Returns the world transformation matrix;
-//          earth (NED) <== > Earth Centered, Earth Fixed (ECEF);
-//          where the NED XY plane is tangent to and centered at
-//          our reference point.
-//
-//                Matrix M = getWorldMat() = Rz[-lon] * Ry[90+lat]
-//                Usage:
-//                   Vned  = M * Vecef
-//                   Vecef = Vned * M;
 //
 //
 // Cycles, frames and phases:
@@ -185,7 +145,6 @@ class IPlayer;
 //    4) See "openeaagles/base/util/system.hpp" for additional time related functions.
 //
 //
-//
 // Event IDs:
 //
 //    There are several player events that need to be identified uniquely
@@ -201,9 +160,9 @@ class IPlayer;
 //    this object, which will send it to all players, and other components.
 //
 //------------------------------------------------------------------------------
-class ISimulation : public base::Component
+class SimExec : public base::Component
 {
-    DECLARE_SUBCLASS(ISimulation, base::Component)
+    DECLARE_SUBCLASS(SimExec, base::Component)
 
 public:
    // Minimum released weapon ID
@@ -214,28 +173,10 @@ public:
    static const int MAX_NEW_PLAYERS = 1000;
 
 public:
-    ISimulation();
+    SimExec();
 
     base::PairStream* getPlayers();                // Returns the player list; pre-ref()'d
     const base::PairStream* getPlayers() const;    // Returns the player list; pre-ref()'d (const version)
-
-    double getRefLatitude() const;                 // Returns the reference latitude (degs)
-    double getRefLongitude() const;                // Returns the reference longitude (degs)
-    double getSinRefLat() const;                   // Returns the sine of the reference latitude
-    double getCosRefLat() const;                   // Returns the cosine of the reference latitude
-    double getMaxRefRange() const;                 // Max valid range (meters) of the gaming area or zero if there's no limit.
-    const osg::Matrixd& getWorldMat() const;       // World transformation matrix
-                                                   //    ECEF <==> NED
-                                                   //       where the NED XY plane is tangent at our ref point
-                                                   //    matrix = Rz[-lon] * Ry[90+lat]
-                                                   //    Usage:
-                                                   //       Vned  = M * Vecef
-                                                   //       Vecef = Vned * M;
-
-    const base::EarthModel* getEarthModel() const; // Returns a pointer to the EarthModel
-                                                   // (default: if zero we're using base::EarthModel::wgs84)
-
-    bool isGamingAreaUsingEarthModel() const;      // Gaming area using the earth model?
 
     unsigned int cycle() const;                    // Cycle counter; each cycle represents 16 frames.
     unsigned int frame() const;                    // Frame counter [0 .. 15]; each frame represents a call to our updateTC()
@@ -296,13 +237,6 @@ protected:
     virtual void updatePlayerList();                  // Updates the current player list
     bool setSlotPlayers(base::PairStream* const msg);
 
-    virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
-    virtual bool setGamingAreaUseEarthModel(const bool flg);
-
-    virtual bool setRefLatitude(const double v);      // Sets Ref latitude
-    virtual bool setRefLongitude(const double v);     // Sets Ref longitude
-    virtual bool setMaxRefRange(const double v);      // Sets the max range (meters) of the gaming area or zero if there's no limit.
-
     virtual void incCycle();                          // Increments the cycle counter
     virtual void setCycle(const unsigned int c);      // Sets the cycle counter
     virtual void setFrame(const unsigned int f);      // Sets the frame counter
@@ -322,39 +256,18 @@ private:
    IPlayer* findPlayerPrivate(const short id, const int netID) const;
    IPlayer* findPlayerByNamePrivate(const char* const playerName) const;
 
-   bool setSlotRefLatitude(const base::LatLon* const msg);
-   bool setSlotRefLatitude(const base::Number* const msg);
-   bool setSlotRefLongitude(const base::LatLon* const msg);
-   bool setSlotRefLongitude(const base::Number* const msg);
    bool setSlotSimulationTime(const base::Time* const msg);
    bool setSlotDay(const base::Number* const msg);
    bool setSlotMonth(const base::Number* const msg);
    bool setSlotYear(const base::Number* const msg);
+
    bool setSlotFirstWeaponId(const base::Number* const msg);
+
    bool setSlotNumTcThreads(const base::Number* const msg);
    bool setSlotNumBgThreads(const base::Number* const msg);
-   bool setSlotGamingAreaRange(const base::Distance* const msg);
-   bool setSlotEarthModel(const base::EarthModel* const msg);
-   bool setSlotEarthModel(const base::String* const msg);
-   bool setSlotGamingAreaEarthModel(const base::Number* const msg);
 
    base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
    base::safe_ptr<base::PairStream> origPlayers; // Original player list
-
-   // Our Earth Model, or default to using base::EarthModel::wgs84 if zero
-   const base::EarthModel* em;
-
-   double  refLat;               // Reference (center of gaming area) latitude (deg)
-   double  refLon;               // Reference (center of gaming area) longitude (deg)
-   double  sinRlat;              // Sine of ref latitude
-   double  cosRlat;              // Cosine of ref latitude
-   double  maxRefRange;          // Max valid range (meters) of the gaming area or zero if there's no limit.
-   bool gaUseEmFlg;              // Gaming area using earth model projections
-   osg::Matrixd wm;              // World transformation matrix:
-                                 //    Local tangent plane (NED) <==> Earth Centered, Earth Fixed (ECEF)
-                                 //    Usage:
-                                 //       ecef = wm; * earthNED
-                                 //       earthNED  = ecef * wm;
 
    unsigned int  cycleCnt;       // Real-Time Cycle Counter (Cycles consist of Frames)
    unsigned int  frameCnt;       // Real-Time Frame Counter (Frames consist of Phases)
@@ -382,7 +295,7 @@ private:
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   Station*               station;      // The Station that owns us (not ref()'d)
+   Station* station;             // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
    static const unsigned short MAX_TC_THREADS = 32;

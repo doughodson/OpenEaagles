@@ -90,6 +90,7 @@ OBJS =  \
 	TargetData.o \
 	Tdb.o \
 	Track.o \
+	WorldModel.o \
 	factory.o
 
 .PHONY: all clean

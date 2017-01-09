@@ -9,9 +9,9 @@ OBJS =  \
 	INib.o \
 	IOtw.o \
 	IPlayer.o \
-	ISimulation.o \
 	RecorderComponent.o \
 	SimBgThread.o \
+	SimExec.o \
 	SimTcThread.o \
 	Station.o \
 	StationBgThread.o \

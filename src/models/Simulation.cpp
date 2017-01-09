@@ -8,6 +8,20 @@
 #include "openeaagles/models/environment/Atmosphere.hpp"
 #include "openeaagles/terrain/Terrain.hpp"
 
+#include "openeaagles/base/EarthModel.hpp"
+#include "openeaagles/base/Identifier.hpp"
+#include "openeaagles/base/LatLon.hpp"
+#include "openeaagles/base/Nav.hpp"
+
+#include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Pair.hpp"
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/Statistic.hpp"
+#include "openeaagles/base/util/system.hpp"
+
+
 namespace oe {
 namespace models {
 

@@ -5,17 +5,11 @@
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-
-namespace base {
-class IoHandler;
-class Number;
-class Thread;
-class Time;
-}
+namespace base { class IoHandler; class Number; class Thread; class Time; }
 
 namespace simulation {
 class DataRecorder;
-class ISimulation;
+class SimExec;
 class IPlayer;
 class IOtw;
 
@@ -29,7 +23,7 @@ class IOtw;
 //
 // Factory name: Station
 // Slots --
-//    simulation         <ISimulation>         ! Simulation model (default: nullptr)
+//    simulation         <SimExec>             ! Executable simulation model (default: nullptr)
 //
 //    networks           <base::PairStream>    ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
@@ -89,7 +83,7 @@ class IOtw;
 //       external interrupt).
 //
 //    2) Thread priorities are from zero (lowest) to one (highest).
-//       (see base/Thread.h)
+//       (see base/Thread.hpp)
 //
 //    3) updateTC() -- The main application can use createTimeCriticalProcess()
 //       to create a thread, which will run at 'tcRate' Hz and 'tcPriority'
@@ -158,18 +152,18 @@ public:
 public:
    Station();
 
-   ISimulation* getSimulation();                            // Simulation model
-   const ISimulation* getSimulation() const;                // Simulation model (const version)
+   SimExec* getSimulation();                                // Simulation model
+   const SimExec* getSimulation() const;                    // Simulation model (const version)
 
    base::PairStream* getPlayers();                          // Simulation's player list; pre-ref()'d
    const base::PairStream* getPlayers() const;              // Simulation's player list; pre-ref()'d (const version)
 
-   IPlayer* getOwnship();                                     // The ownship (primary) player
-   const IPlayer* getOwnship() const;                         // The ownship (primary) player (const version)
+   IPlayer* getOwnship();                                   // The ownship (primary) player
+   const IPlayer* getOwnship() const;                       // The ownship (primary) player (const version)
 
    const base::String* getOwnshipName() const;              // The ownship's name
-   virtual bool setOwnshipPlayer(IPlayer* const newOS);       // Sets the ownship player
-   virtual bool setOwnshipByName(const char* const newOS);   // Selects the ownship player by name
+   virtual bool setOwnshipPlayer(IPlayer* const newOS);     // Sets the ownship player
+   virtual bool setOwnshipByName(const char* const newOS);  // Selects the ownship player by name
 
    base::PairStream* getOutTheWindowList();                 // OTW systems
    const base::PairStream* getOutTheWindowList() const;     // OTW systems (const version)
@@ -180,9 +174,9 @@ public:
    base::PairStream* getIoHandlers();                       // I/O handlers
    const base::PairStream* getIoHandlers() const;           // I/O handlers (const version)
 
-   DataRecorder* getDataRecorder();                          // Returns the data recorder
-   const DataRecorder* getDataRecorder() const;              // Returns the data recorder (const version)
-   virtual bool setDataRecorder(DataRecorder* const p);      // Sets the data recorder
+   DataRecorder* getDataRecorder();                         // Returns the data recorder
+   const DataRecorder* getDataRecorder() const;             // Returns the data recorder (const version)
+   virtual bool setDataRecorder(DataRecorder* const p);     // Sets the data recorder
 
    // Is Timer::updateTimers() being called from our updateTC()
    bool isUpdateTimersEnabled() const;
@@ -237,7 +231,7 @@ public:
    // ---
    // Slot functions
    // ---
-   virtual bool setSlotSimulation(ISimulation* const);
+   virtual bool setSlotSimulation(SimExec* const);
    virtual bool setSlotOutTheWindow(IOtw* const);
    virtual bool setSlotOutTheWindow(base::PairStream* const);
    virtual bool setSlotIoHandler(base::IoHandler* const);
@@ -283,7 +277,7 @@ private:
    virtual void createNetworkProcess();           // Creates a network thread
    virtual void createBackgroundProcess();        // Creates a B/G thread
 
-   ISimulation* sim;                              // Simulation model
+   SimExec* sim;                                  // Executable simulation model
    base::safe_ptr<base::PairStream> otw;          // List of  Out-The-Window visual system interfaces
    base::safe_ptr<base::PairStream> networks;     // List of networks
    base::safe_ptr<base::PairStream> ioHandlers;   // List of I/O data handlers
