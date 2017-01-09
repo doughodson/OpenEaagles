@@ -47,7 +47,7 @@ clean:
 	-rm -f buttons/*.o
 	-rm -f dials/*.o
 	-rm -f eadi3d/*.o
-	-rm -f eng/*.o
+	-rm -f engines/*.o
 	-rm -f gauges/*.o
 	-rm -f landinggear/*.o
 	-rm -f maps/*.o

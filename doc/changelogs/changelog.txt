@@ -55,7 +55,30 @@ General framework-wide changes and improvements
 base library
 
    Object class
-     -- Removed getSlotByIndex() and getSlotByName() methods - both were unused.
+     -- removed getSlotByIndex() and getSlotByName() methods - both were unused.
+     -- extracted defined '_Static' structure out of Object and into it's own
+        standalone class called ClassMetadata, which is what it is.  Updated
+        Object itself to use a variable called 'metadata' in lue of '_static'
+        to store class and object related metadata.  This has NO impact on API,
+        but does make the code more readable.
+     -- removed both registerClass() and WriteClassList() methods and underlying
+        support structure to maintain a list of classes compiled into an application.
+        This was used so that a developer could print out a list of classes
+        available within application and interesting metadata related to them,
+        such as the number of instances currently in existance.  In theory,
+        this information could be used to help debug memory leaks within a running
+        application.  Not only can this capability be replicated outside of
+        Object itself, other tools exist (e.g., Valgrind) that are much more
+        comprehensive in this area. Removing the code associated with all this
+        greatly simplifies Object, its associated macros and instance creation.
+        It also reduces the barrier to understanding what the code is doing.
+     -- removed getClassName() method
+
+   ObjMetadata
+     -- new class that replaces _Static class once defined in Object
+     -- added getClassName() and getFactoryName() to this newly defined class.
+        The goal is to move all 'meta' data about classes and objects including
+        static class functionality into this class.
 
    Component class
      -- component-based data logger functionality has been removed.  Removal of
@@ -65,6 +88,7 @@ base library
    SlotTable class
      -- removed useless methods such as copyData, deleteData -- probably remnant
         from long ago, when it might have been an Object-based class.
+     -- deleted copy and assignment operators
 
 --------------------------------------------------------------------------------
 dafif library

@@ -15,11 +15,6 @@
 #define OE_VERSION                         160X
 #endif
 
-// Max number of 'registered' classes (see Object.hpp)
-#ifndef OE_CONFIG_MAX_CLASSES
-#define OE_CONFIG_MAX_CLASSES              1000
-#endif
-
 // Max number of interval timers (see Timers.h)
 #ifndef OE_CONFIG_MAX_INTERVAL_TIMERS
 #define OE_CONFIG_MAX_INTERVAL_TIMERS      500

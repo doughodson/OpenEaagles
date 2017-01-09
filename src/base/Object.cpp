@@ -10,16 +10,9 @@ namespace oe {
 namespace base {
 
 // ---
-// Table of registered classes
-//    Note: class Object is pre-registered as the first class
+// Class and object metadata
 // ---
-const Object::_Static* Object::classes[MAX_CLASSES] = { &Object::_static };
-unsigned int Object::numClasses = 1;
-
-// ---
-// Object's static member data
-// ---
-Object::_Static Object::_static(0, typeid(Object).name(), "Object", &Object::slottable, nullptr);
+ObjMetadata Object::metadata(typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -80,7 +73,7 @@ bool Object::isClassType(const std::type_info& type) const
 bool Object::isFactoryName(const char name[]) const
 {
     if (name == nullptr) return false;
-    if ( std::strcmp(_static.fname, name) == 0 )  return true;
+    if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;
     else return false;
 }
 
@@ -110,16 +103,9 @@ bool Object::setSlotByIndex(const int, Object* const)
     return false;
 }
 
-// get factory name
 const char* Object::getFactoryName()
 {
-    return _static.fname;
-}
-
-// get class name
-const char* Object::getClassName()
-{
-    return _static.cname;
+    return metadata.getFactoryName();
 }
 
 // get slot table
@@ -257,38 +243,6 @@ bool Object::disableMessageTypes(const unsigned short msgTypeBits)
 }
 
 //------------------------------------------------------------------------------
-// Writes out the class list
-//------------------------------------------------------------------------------
-void Object::writeClassList(std::ostream& sout)
-{
-   sout << "Number of classes: " << numClasses << std::endl;
-   for (unsigned int i = 0; i < numClasses; i++) {
-      sout
-         << classes[i]->classIndex
-         << ": " << classes[i]->fname
-         << "(" << classes[i]->count
-         << "/" << classes[i]->mc
-         << "/" << classes[i]->tc
-         << ") => " << classes[i]->cname
-         << std::endl;
-   }
-}
-
-//------------------------------------------------------------------------------
-// Register a new class type
-//------------------------------------------------------------------------------
-unsigned int Object::registerClass(const _Static* const p)
-{
-   unsigned int idx = 0;
-   if (numClasses < MAX_CLASSES) {
-      classes[numClasses] = p;
-      idx = numClasses;
-      numClasses++;
-   }
-   return idx;
-}
-
-//------------------------------------------------------------------------------
 // indent() -- indent the output stream by 'ii' spaces
 //------------------------------------------------------------------------------
 void Object::indent(std::ostream& sout, const int ii) const
@@ -308,31 +262,12 @@ std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
    return sout;
 }
 
-//==============================================================================
-// struct  Object::_Static
-//==============================================================================
-
-Object::_Static::_Static(
-      const unsigned int ci,
-      const char* const cn,
-      const char* const fn,
-      const SlotTable* const p,
-      const _Static* const bs
-   ) : classIndex(ci), cname(cn), fname(fn), st(p), bstatic(bs), count(0), mc(0), tc(0)
-{
-}
-
-Object::_Static& Object::_Static::operator=(const _Static&)
-{
-   return *this;
-}
-
 //------------------------------------------------------------------------------
-// Get the Object _Static member
+// return class metadata
 //------------------------------------------------------------------------------
-const Object::_Static* Object::getStatic()
+const ObjMetadata* Object::getMetadata()
 {
-    return &_static;
+    return &metadata;
 }
 
 }

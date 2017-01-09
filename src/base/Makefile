@@ -97,6 +97,7 @@ OBJS =  \
 	NetHandler.o \
 	Number.o \
 	Object.o \
+	ObjMetadata.o \
 	Operators.o \
 	Pair.o \
 	PairStream.o \

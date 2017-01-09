@@ -9,8 +9,12 @@
 // lock/unlock, etc - reference system needs it
 #include "openeaagles/base/util/atomics.hpp"
 
+#include <typeinfo>
+
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
+
+#include "openeaagles/base/ObjMetadata.hpp"
 
 #include <iosfwd>
 
@@ -271,24 +275,16 @@ namespace base {
 //       (See macro STANDARD_CONSTRUCTOR())
 //
 //
-// Table of known classes and object counters
+// Object Metadata
 //
-//    A list of 'known' classes is maintained as a table of pointers
-//    to the _Static structure, which is contained in each class.  The
-//    table is a private, static member variable.  The various IMPLEMENT_SUBCLASS
-//    macros register the class using the registerClass() function; therefore all
-//    classes implemented in an application are known.
-//
-//    The STANDARD_CONSTRUCTOR() and STANDARD_DESTRUCTOR() macros increment and
-//    decrement, respectively, a counter located in each class _Static structure.
-//    This provides a count of the current number of instantiated objects for the
-//    class.  The maximum number of this count, as well as the total number of
-//    instantiated objects, is also maintained.
-//
-//       writeClassList(std::ostream& sout)
-//          Writes the table of known classes, which includes the
-//          factory name, object counters and full C++ class name for each class,
-//          to the 'sout' output stream.
+//    Each class has an associated 'ObjMetadata' object instance which is used
+//    to store additional class and object instance information.  For example,
+//    the metadata object contains the number of instances of a particular class
+//    exists, as well as the total number of objects that have ever been
+//    created and the maximum number that has existed at the same time.  This
+//    capability was added to Object to serves as a debugging tool to monitor
+//    the creation and deletion of large numbers of particular classes of interest
+//    to spot potential memory leaks.
 //
 //------------------------------------------------------------------------------
 class Object
@@ -297,49 +293,36 @@ class Object
    // Standard object stuff --
    //    derived classes will use the macro DECLARE_SUBCLASS(); see macros.hpp
    // -------------------------------------------------------------------------
-   public: virtual ~Object();
+   public: Object();
    public: Object(const Object& org);
    public: Object& operator=(const Object& org);
    public: virtual Object* clone() const;
+   public: virtual ~Object();
+
    protected: void copyData(const Object& org, const bool cc = false);
    protected: void deleteData();
 
+   public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
+
+   // helper methods
    public: virtual bool isClassType(const std::type_info& type) const;
    public: virtual bool isFactoryName(const char name[]) const;
    public: static const char* getFactoryName();
-   public: static const char* getClassName();
-   public: virtual std::ostream& serialize(std::ostream& sout, const int i = 0, const bool slotsOnly = false) const;
 
-   // Slot table
+   // slot table
    protected: static const SlotTable slottable;    // class slot table
    private: static const char* slotnames[];        // slot names in this object's slot table
    private: static const int nslots;               // number of slots in this object's slot table
 
-   // Slot table functions
+   // slot table functions
    public: static const SlotTable& getSlotTable();
    protected: virtual bool setSlotByIndex(const int slotindex, Object* const obj);
    public: bool setSlotByName(const char* const slotname, Object* const obj);
    public: const char* slotIndex2Name(const int slotindex) const;
    public: int slotName2Index(const char* const slotname) const;
 
-   // Static member variables
-   protected: struct _Static {
-      const unsigned int classIndex;   // Registered class index
-      const char* const cname;         // class name from 'type_info'
-      const char* const fname;         // class factory name
-      const SlotTable* const st;       // Pointer to the SlotTable
-      const _Static* const bstatic;    // Pointer to the base class _Static object
-      int count;                       // NCurrent of instances
-      int mc;                          // Max number of instances
-      int tc;                          // Total number of instances
-      _Static(const unsigned int, const char* const, const char* const, const SlotTable* const, const _Static* const);
-      private:_Static& operator=(const _Static&);
-   };
-   private: static struct _Static _static;
-   protected: static const _Static* getStatic(); //Get the _Static member
-
 public:
-   // Standard message types
+   // standard message types
    static const unsigned short MSG_ERROR   = 0x0001;  // Error messages; ALWAYS ENABLED (use std::cerr)
    static const unsigned short MSG_WARNING = 0x0002;  // Warning messages (use std::cerr)
    static const unsigned short MSG_INFO    = 0x0004;  // Informational messages (use std::cout)
@@ -347,12 +330,10 @@ public:
    static const unsigned short MSG_DATA    = 0x0010;  // Data messages(use std::cout)
    static const unsigned short MSG_USER    = 0x0020;  // User debug/trace messages(use std::cout)
    static const unsigned short MSG_STD_ALL = 0x00FF;  // Standard message types mask
-   // Non-standard or user defined message are the high order bits (0xFF00)
+   // non-standard or user defined message are the high order bits (0xFF00)
    static const unsigned short MSG_ALL     = 0xFFFF;  // All message types mask
 
 public:
-   Object();
-
    virtual bool isValid() const;
 
    virtual bool isMessageEnabled(const unsigned short msgType) const;
@@ -363,12 +344,7 @@ public:
    // ref(), unref() and getRefCount()
    #include "openeaagles/base/ref.inl"
 
-   // Output the list of known oe classes
-   static void writeClassList(std::ostream& sout);
-
-   // ---
-   // General exception class
-   // ---
+   // general exception class
    class Exception {
    public:
       Exception()                                { }
@@ -394,17 +370,17 @@ public:
       }
    };
 
+   static const ObjMetadata* getMetadata();
+
 protected:
-   // Slot table for this object (set to the object's class slot table)
+   // slot table for this object (set to the object's class slot table)
    const SlotTable* slotTable;
 
-   // Indents the output steam by 'ident' spaces. (used with serialize())
+   // indents the output steam by 'ident' spaces. (used with serialize())
    void indent(std::ostream& sout, const int ident) const;
 
    unsigned short getMessageEnableBits() const  { return enbMsgBits; }
    unsigned short getMessageDisableBits() const { return disMsgBits; }
-
-   static unsigned int registerClass(const _Static* const a);
 
 private:
    unsigned short enbMsgBits;       // Enabled message bits
@@ -412,11 +388,7 @@ private:
    mutable long semaphore;          // ref(), unref() semaphore
    mutable unsigned int refCount;   // reference count
 
-   // Table of registered classes:
-   // --- pointers to the static member structure, _Static
-   static const unsigned int MAX_CLASSES = OE_CONFIG_MAX_CLASSES;
-   static const _Static* classes[MAX_CLASSES];
-   static unsigned int numClasses;
+   static ObjMetadata metadata;
 };
 
 }

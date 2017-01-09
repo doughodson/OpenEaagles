@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 // Object class macros:
 //
-//    DECLARE_SUBCLASS(ThisType,BaseType)
+//    DECLARE_SUBCLASS(ThisType, BaseType)
 //       Macro to declare all of the required member functions and member
 //       variables for the class 'ThisType', which is derived from class 'BaseType'.
 //       Defines the type 'BaseClass', which can be used by the member functions as an
@@ -86,7 +86,7 @@
 //       events (see eventTokens.h) that are not mapped or processed by the
 //       Component class are passed to the container class.
 //
-//    ON_EVENT(token,onEvent)  (see eventTokens.h)
+//    ON_EVENT(token,onEvent)  (see eventTokens.hpp)
 //       Maps an event token, 'token', to the "on event" member function, 'onEvent'.
 //
 //    ON_EVENT_OBJ(token,onEvent,ObjType) 
@@ -96,7 +96,7 @@
 //    ON_ANYKEY(onEvent)
 //       Maps any event token to the "on event" member function, 'onEvent'.
 //
-//    ON_ANYKEY_OBJ(onEvent,ObjType)
+//    ON_ANYKEY_OBJ(onEvent, ObjType)
 //       Maps any event token with an argument of type 'ObjType' to the "on event"
 //       member function, 'onEvent'.
 //
@@ -129,7 +129,7 @@
 #include <cstring>    // need std::strcmp
 #include <iostream>   // need std::ostream
 
-#define DECLARE_SUBCLASS(ThisType,BaseType)                                                                                     \
+#define DECLARE_SUBCLASS(ThisType, BaseType)                                                                                    \
     typedef BaseType BaseClass;                                                                                                 \
     public: ThisType(const ThisType& org);                                                                                      \
     public: virtual ~ThisType();                                                                                                \
@@ -138,9 +138,8 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static struct _Static _static;                                                                                     \
-    private: static const unsigned int classIndex;                                                                              \
-    protected: static const _Static* getStatic();                                                                               \
+    private: static ::oe::base::ObjMetadata metadata;                                                                           \
+    public: static const ::oe::base::ObjMetadata* getMetadata();                                                                \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
@@ -152,18 +151,17 @@
     private:
 
 
-
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    ThisType::_Static ThisType::_static(                                               \
-      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
-        &ThisType::slottable, BaseClass::getStatic()                                   \
+    ::oe::base::ObjMetadata ThisType::metadata(                                        \
+      typeid(ThisType).name(), FACTORYNAME,                                            \
+        &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
-    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFactoryName() { return _static.fname; }                   \
+    const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
+    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
+        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable()  { return slottable; }       \
@@ -191,18 +189,17 @@
     }
 
 
-
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    ThisType::_Static ThisType::_static(                                               \
-      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
-        &ThisType::slottable, BaseClass::getStatic()                                   \
+    ::oe::base::ObjMetadata ThisType::metadata(                                        \
+      typeid(ThisType).name(), FACTORYNAME,                                            \
+        &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
-    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFactoryName() { return _static.fname; }                   \
+    const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
+    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
+        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
@@ -213,18 +210,17 @@
     }
 
 
-
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    ThisType::_Static ThisType::_static(                                               \
-      registerClass(&_static), typeid(ThisType).name(), FACTORYNAME,                   \
-        &ThisType::slottable, BaseClass::getStatic()                                   \
+    ::oe::base::ObjMetadata ThisType::metadata(                                        \
+      typeid(ThisType).name(), FACTORYNAME,                                            \
+        &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
-    const ThisType::_Static* ThisType::getStatic() { return &_static; }                \
-    const char* ThisType::getFactoryName() { return _static.fname; }                   \
+    const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
+    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(_static.fname,name) == 0 )  return true;                      \
+        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
@@ -252,18 +248,15 @@
     }
 
 
-
 #define STANDARD_CONSTRUCTOR()                                                         \
     slotTable = &slottable;                                                            \
-    if (++_static.count > _static.mc) _static.mc = _static.count;                      \
-    _static.tc++;
-
+    if (++metadata.count > metadata.mc) metadata.mc = metadata.count;                  \
+    metadata.tc++;
 
 
 #define STANDARD_DESTRUCTOR()                                                          \
     deleteData();                                                                      \
-    _static.count--;
-
+    metadata.count--;
 
 #define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \
@@ -274,10 +267,9 @@
         return BaseClass::setSlotByIndex(si,obj);                                          \
     }
 
-#define IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType,FACTORYNAME)                       \
-    IMPLEMENT_SUBCLASS(ThisType,FACTORYNAME)                                           \
+#define IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(ThisType, FACTORYNAME)                       \
+    IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                           \
     EMPTY_SLOTTABLE(ThisType)
-
 
 
 #define EMPTY_CONSTRUCTOR(ThisType)                                                    \
@@ -287,7 +279,6 @@
     }
 
 
-
 #define EMPTY_COPYDATA(ThisType)                                                       \
     void ThisType::copyData(const ThisType& org, const bool)                           \
     {                                                                                  \
@@ -295,12 +286,10 @@
     }
 
 
-
 #define EMPTY_DELETEDATA(ThisType)                                                     \
     void ThisType::deleteData()                                                        \
     {                                                                                  \
     }
-
 
 
 #define EMPTY_SERIALIZER(ThisType)                                                     \
@@ -322,10 +311,8 @@
     }
 
 
-
 #define BEGIN_SLOTTABLE(ThisType)                                                      \
     const char* ThisType::slotnames[] = {
-
 
 
 #define END_SLOTTABLE(ThisType)                                                                \
@@ -347,11 +334,9 @@
         int _n1 = (slotindex - _n);
 
 
-
 #define END_SLOT_MAP()                                                                 \
         return _ok;                                                                    \
     }
-
 
 
 #define ON_SLOT(idx,setFunc,ObjType)                                                   \
@@ -363,12 +348,10 @@
     }
 
 
-
 #define BEGIN_EVENT_HANDLER(ThisType)                                                  \
     bool ThisType::event(const int _event, ::oe::base::Object* const _obj)             \
     {                                                                                  \
         bool _used = false;
-
 
 
 #define END_EVENT_HANDLER()                                                            \
@@ -377,12 +360,10 @@
     }
 
 
-
 #define ON_EVENT_OBJ(token,onEvent,ObjType)                                            \
     if (!_used && token == _event && dynamic_cast<ObjType*>(_obj) != nullptr) {        \
         _used = onEvent(static_cast<ObjType*>(_obj));                                  \
     }
-
 
 
 #define ON_EVENT(token,onEvent)                                                        \
@@ -391,19 +372,16 @@
     }
 
 
-
 #define ON_ANYKEY_OBJ(onEvent,ObjType)                                                       \
     if (!_used && _event <= MAX_KEY_EVENT && dynamic_cast<ObjType*>(_obj) != nullptr) {      \
         _used = onEvent(_event,(static_cast<ObjType*>(_obj)));                               \
     }
 
 
-
 #define ON_ANYKEY(onEvent)                                                             \
     if (!_used && _event <= MAX_KEY_EVENT) {                                           \
         _used = onEvent(_event);                                                       \
     }
-
 
 
 #define BEGIN_STATE_TABLE(ThisType)                                        \
@@ -416,11 +394,9 @@
         bool _ok = false;
 
 
-
 #define END_STATE_TABLE()                                                  \
         return _next;                                                      \
     }
-
 
 
 #define STATE_FUNC(state,stateFunc)                                        \
@@ -437,7 +413,6 @@
    }
 
 
-
 #define STATE_MACH(state,name)                                             \
    if (state == _cstate) {                                                 \
       _ok = setStMach(name, _code);                                        \
@@ -446,7 +421,6 @@
    else if (_code == FIND_NEXT_STATE && _ok && _next == INVALID_STATE) {   \
       _next = state;                                                       \
    }
-
 
 
 #define ANY_STATE_FUNC(stateFunc)                                          \

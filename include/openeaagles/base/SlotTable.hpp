@@ -25,8 +25,11 @@ namespace base {
 class SlotTable
 {
 public:
+   SlotTable() = default;
    SlotTable(const char* slotnames[], const unsigned int nslots, const SlotTable& baseTable);
    SlotTable(const char* slotnames[], const unsigned int nslots);
+   SlotTable(const SlotTable&) = delete;
+   SlotTable& operator=(const SlotTable&) = delete;
    virtual ~SlotTable();
 
    // Returns the last slot index number, which includes all base class slots.
