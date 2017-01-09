@@ -123,6 +123,10 @@ linearsystem library
 --------------------------------------------------------------------------------
 models library
 
+   WorldModel
+      -- Contains the guts of what used to be in Simulation class concerning
+         the modeled world -- class does not contain any code related to
+         execution of players, etc.
 
 --------------------------------------------------------------------------------
 otw library
@@ -149,8 +153,9 @@ simulation library
       -- Removed 2 undefined methods "isSmoothing()" and "getSmoothingRate()".
          Both were undefined and not used.
 
-   Simulation class
-     -- Changed slot name for 'irAtmosphere' to 'atmosphere' to be more general.
+   Simulation class (deleted)
+     -- extracted core model related functionality into models/WorldModel class
+     -- renamed to SimExec - it contains ONLY execution oriented functionality
 
 --------------------------------------------------------------------------------
 terrain library
