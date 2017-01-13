@@ -156,8 +156,8 @@ void IoHandler::reset()
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<Pair* const>(item->getValue());
-         auto p = static_cast<IoDevice* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->reset();
          item = item->getNext();
       }
@@ -181,8 +181,8 @@ bool IoHandler::shutdownNotification()
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<Pair* const>(item->getValue());
-         auto p = static_cast<IoDevice* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -248,8 +248,8 @@ void IoHandler::inputDevicesImp(const double dt)
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<Pair* const>(item->getValue());
-         auto p = static_cast<IoDevice* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->processInputs(dt, inData);
          item = item->getNext();
       }
@@ -271,8 +271,8 @@ void IoHandler::outputDevicesImp(const double dt)
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto const pair = static_cast<Pair* const>(item->getValue());
-         auto const p = static_cast<IoDevice* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->processOutputs(dt, outData);
          item = item->getNext();
       }
@@ -330,7 +330,7 @@ bool IoHandler::setSlotDevices(PairStream* const list)
       List::Item* item = list->getFirstItem();
       while (item != nullptr) {
          cnt++;
-         auto pair = static_cast<Pair* const>(item->getValue());
+         const auto pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
          if (ok) {
             static_cast<IoDevice*>(pair->object())->container(this);

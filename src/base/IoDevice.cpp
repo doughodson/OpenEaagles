@@ -109,8 +109,8 @@ bool IoDevice::shutdownNotification()
    if (adapters != nullptr) {
       List::Item* item = adapters->getFirstItem();
       while (item != nullptr) {
-         auto const pair = static_cast<Pair* const>(item->getValue());
-         auto const p = static_cast<IoAdapter* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoAdapter*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -120,8 +120,8 @@ bool IoDevice::shutdownNotification()
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto const pair = static_cast<Pair* const>(item->getValue());
-         auto const p = static_cast<IoDevice* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -144,8 +144,8 @@ void IoDevice::processInputs(const double dt, IoData* const inData)
 
       List::Item* item = adapters->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<Pair* const>(item->getValue());
-         auto p = static_cast<IoAdapter* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoAdapter*>(pair->object());
          p->processInputs(dt, this, inData);
          item = item->getNext();
       }
@@ -155,8 +155,8 @@ void IoDevice::processInputs(const double dt, IoData* const inData)
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<Pair* const>(item->getValue());
-         auto p = static_cast<IoDevice* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->processInputs(dt, inData);
          item = item->getNext();
       }
@@ -176,8 +176,8 @@ void IoDevice::processOutputs(const double dt, const IoData* const outData)
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<Pair* const>(item->getValue());
-         auto p = static_cast<IoDevice* const>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->processOutputs(dt, outData);
          item = item->getNext();
       }
@@ -189,8 +189,8 @@ void IoDevice::processOutputs(const double dt, const IoData* const outData)
       if (outData != nullptr) {
          List::Item* item = adapters->getFirstItem();
          while (item != nullptr) {
-            auto pair = static_cast<Pair* const>(item->getValue());
-            auto p = static_cast<IoAdapter* const>(pair->object());
+            const auto pair = static_cast<Pair*>(item->getValue());
+            const auto p = static_cast<IoAdapter*>(pair->object());
             p->processOutputs(dt, outData, this);
             item = item->getNext();
          }
@@ -277,7 +277,7 @@ bool IoDevice::setSlotAdapters(PairStream* const list)
       List::Item* item = list->getFirstItem();
       while (item != nullptr) {
          cnt++;
-         auto pair = static_cast<Pair* const>(item->getValue());
+         const auto pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoAdapter));
          if (ok) {
             static_cast<IoAdapter*>(pair->object())->container(this);
@@ -306,7 +306,7 @@ bool IoDevice::setSlotDevices(PairStream* const list)
       List::Item* item = list->getFirstItem();
       while (item != nullptr) {
          cnt++;
-         auto pair = static_cast<Pair* const>(item->getValue());
+         const auto pair = static_cast<Pair*>(item->getValue());
          ok = pair->object()->isClassType(typeid(IoDevice));
          if (ok) {
             static_cast<IoDevice*>(pair->object())->container(this);
