@@ -11,7 +11,6 @@
 #include "openeaagles/models/players/Missile.hpp"
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/players/Ships.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
 #include "openeaagles/models/Signatures.hpp"
 
 #include "openeaagles/models/Simulation.hpp"
@@ -257,7 +256,7 @@ void NetIO::discoverObjectInstance(
    };
 
    if (baseEntity != nullptr) {
-      Nib* nib = dynamic_cast<Nib*>( createNewInputNib() );
+      auto nib = dynamic_cast<Nib*>( createNewInputNib() );
       if (nib != nullptr) {
          nib->setObjectHandle(theObject);
          nib->setObjectName(theObjectName);
@@ -307,7 +306,7 @@ const Ntm* NetIO::findNtmByTypeCodes(
 {
    const rprfom::Ntm* result = nullptr;
 
-   const rprfom::NtmInputNode* root = dynamic_cast<const rprfom::NtmInputNode*>( getRootNtmInputNode() );
+   auto root = dynamic_cast<const rprfom::NtmInputNode*>( getRootNtmInputNode() );
    if (root != nullptr) {
       result = root->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
    }
@@ -395,7 +394,7 @@ const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::Nib* cons
 {
    const interop::Ntm* result = nullptr;
 
-   const rprfom::Nib* rprFomNib = dynamic_cast<const rprfom::Nib*>( nib );
+   auto rprFomNib = dynamic_cast<const rprfom::Nib*>( nib );
    if (rprFomNib != nullptr) {
       result = findNtmByTypeCodes(
             rprFomNib->getEntityKind(),
@@ -476,7 +475,7 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
    bool ok = false;
 
    // Make sure we have the correct kind of NTM ...
-   rprfom::Ntm* disNtm = dynamic_cast<rprfom::Ntm*>( ntm );
+   auto disNtm = dynamic_cast<rprfom::Ntm*>( ntm );
    if (disNtm != nullptr) {
 
       // Make sure that the NTM's code for this level matches our code
@@ -577,7 +576,7 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
             }
 
             if (!alreadyExists) {
-               NtmInputNode* newNode = new NtmInputNode( (level+1), nextLevelCode, disNtm );
+               auto newNode = new NtmInputNode( (level+1), nextLevelCode, disNtm );
                subnodeList->put(newNode);
                newNode->unref();   // ref()'d when put into the subnode list
                ok = true;
@@ -613,7 +612,7 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
          // one of our existing subnodes, then create a new subnode for it.
          if (!ok && !err) {
             // Create a new node and add the NTM
-            NtmInputNode* newNode = new NtmInputNode( (level+1), nextLevelCode );
+            auto newNode = new NtmInputNode( (level+1), nextLevelCode );
             subnodeList->put(newNode);
             ok = newNode->add2OurLists(disNtm);
             newNode->unref();   // ref()'d when put into the subnode list

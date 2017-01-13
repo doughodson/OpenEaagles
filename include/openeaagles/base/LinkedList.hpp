@@ -389,7 +389,7 @@ template <class T>
 void LinkedList<T>::addHead(T* const obj)
 {
     if (obj == nullptr) return;
-    Item* d = new Item;
+    auto d = new Item;
     d->value = obj;
     obj->ref();
     addHead(d);
@@ -402,7 +402,7 @@ template <class T>
 void LinkedList<T>::addTail(T* const obj)
 {
     if (obj == nullptr) return;
-    Item* d = new Item;
+    auto d = new Item;
     d->value = obj;
     obj->ref();
     addTail(d);

@@ -137,7 +137,7 @@ bool CadrgMap::setSlotPathnames(const base::PairStream* const x)
         while (item != nullptr && count < MAX_FILES) {
             base::Pair* p = (base::Pair*)item->getValue();
             if (p != nullptr) {
-                base::String* text = dynamic_cast<base::String*>(p->object());
+                auto text = dynamic_cast<base::String*>(p->object());
                 if (text != nullptr) {
                     ok = setPathName(text->getString());
                 }
@@ -162,7 +162,7 @@ void CadrgMap::sortMaps(const int count)
         std::cout << "CadrgMap - loading map files..." << std::endl;
         // Go through and see if we have matching scales
         // list of possible scales
-        base::String* scales = new base::String[MAX_FILES];
+        auto scales = new base::String[MAX_FILES];
         int sCount = 0;
         // We are going to have to create a list of which scale to add and how many to add
         int num2Add[MAX_FILES] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -304,7 +304,7 @@ bool CadrgMap::setMaxTableSize(const int x)
     if (stack != nullptr) stack->unref();
     stack = new base::List();
     for (int i = 0; i < size; i++) {
-        CadrgFrame* t = new CadrgFrame();
+        auto t = new CadrgFrame();
         stack->addHead(t);
         t->unref();
     }
@@ -338,7 +338,7 @@ bool CadrgMap::zoomInMapLevel()
         // Early out check, we have zoomed in as far as we can
         if (std::strcmp(mapLevel->getString(), "5M") == 0) return false;
 
-        base::String* newLevel = new base::String();
+        auto newLevel = new base::String();
         //Zoom in if we can
         if (std::strcmp(mapLevel->getString(), "10M") == 0) {
             newLevel->setStr("5M");
@@ -400,7 +400,7 @@ bool CadrgMap::zoomOutMapLevel()
         // Early out check, we have zoomed out as far as we can
         if (std::strcmp(mapLevel->getString(), "1:5M") == 0) return false;
 
-        base::String* newLevel = new base::String();
+        auto newLevel = new base::String();
         //Zoom in if we can
         if (std::strcmp(mapLevel->getString(), "5M") == 0) {
             newLevel->setStr("10M");

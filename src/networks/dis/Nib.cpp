@@ -399,8 +399,8 @@ bool Nib::emitterBeamsManager(const double curExecTime)
                base::List::Item* item = subcomponents->getFirstItem();
                while (item != nullptr && numEmissionSystems < MAX_EM_SYSTEMS) {
 
-                  base::Pair* pair = static_cast<base::Pair*>( item->getValue() );
-                  models::Jammer* jam = dynamic_cast<models::Jammer*>( pair->object() );
+                  auto pair = static_cast<base::Pair*>( item->getValue() );
+                  auto jam = dynamic_cast<models::Jammer*>( pair->object() );
                   if (jam != nullptr) {
                      singleBeam = false;
 
@@ -409,7 +409,7 @@ bool Nib::emitterBeamsManager(const double curExecTime)
 
                      // First, try to find an Emission PDU handler for this type system.
                      // If we find one, then clone it for our use.
-                     NetIO* const disIO = static_cast<NetIO*>(getNetIO());
+                     auto const disIO = static_cast<NetIO*>(getNetIO());
                      const EmissionPduHandler* tmp = disIO->findEmissionPduHandler(jam);
                      if (tmp != nullptr) {
                         handler = tmp->clone();

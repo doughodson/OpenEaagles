@@ -424,7 +424,7 @@ bool Image::writeFileBMP(const char* const filename, const char* const path)
    }
 
    // Create the output stream
-   std::ofstream* fout = new std::ofstream();
+   auto fout = new std::ofstream();
 
    // Open the output file
    fout->open(bitmapFile, std::ios::out | std::ios::binary);
@@ -529,7 +529,7 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
 {
     // Allocate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
-    GLubyte* bmap = new GLubyte[bmSize];
+    auto bmap = new GLubyte[bmSize];
 
     // Position to start of bitmap
     std::fseek(fp, offset, SEEK_SET);
@@ -562,12 +562,12 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
 {
     // Allocate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
-    GLubyte* bmap = new GLubyte[bmSize];
+    auto bmap = new GLubyte[bmSize];
 
     // Read the color table
     size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;
-    GLubyte* colorTable = new GLubyte[ctSize*4];
+    auto colorTable = new GLubyte[ctSize*4];
     size_t nItemRead = std::fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
@@ -575,7 +575,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
 
     // Read the bitmap
     unsigned int nbytes = (((bmfi->biWidth + 3) / 4 ) * 4); // round up to 4 byte boundary
-    GLubyte* tbuf = new GLubyte[nbytes];
+    auto tbuf = new GLubyte[nbytes];
     for (unsigned int i = 0; bmap != nullptr && i < getHeight(); i++) {
         size_t n = std::fread(tbuf, nbytes, 1, fp);
         if (n > 0) {

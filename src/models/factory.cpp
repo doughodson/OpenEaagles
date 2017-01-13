@@ -36,7 +36,6 @@
 #include "openeaagles/models/players/SamVehicles.hpp"
 #include "openeaagles/models/players/Ships.hpp"
 #include "openeaagles/models/players/SpaceVehicle.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
 
 // sensor models
 #include "openeaagles/models/sensors/Gmti.hpp"

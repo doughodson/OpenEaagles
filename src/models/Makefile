@@ -12,7 +12,7 @@ OBJS =  \
 	dynamics/LaeroModel.o  \
 	dynamics/RacModel.o \
 	dynamics/SpaceDynamicsModel.o \
-	environment/Atmosphere.o \
+	environment/AbstractAtmosphere.o \
 	environment/IrAtmosphere.o \
 	environment/IrAtmosphere1.o \
 	navigation/Bullseye.o \
@@ -22,6 +22,7 @@ OBJS =  \
 	navigation/Route.o \
 	navigation/Steerpoint.o \
 	players/Aam.o \
+	players/AbstractWeapon.o \
 	players/Agm.o \
 	players/AirVehicle.o \
 	players/Bomb.o \
@@ -36,7 +37,6 @@ OBJS =  \
 	players/SamVehicles.o \
 	players/Ships.o \
 	players/SpaceVehicle.o \
-	players/Weapon.o \
 	sensors/Gmti.o \
 	sensors/Stt.o \
 	sensors/Tws.o \

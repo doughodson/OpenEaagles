@@ -58,7 +58,7 @@ AngularVelocity::AngularVelocity(const Angle* const newAngle, const Time* const 
     //Check and convert the angle to radians
     if (newAngle != nullptr)
     {
-        double finalAngle = static_cast<double>(Radians::convertStatic(*newAngle));
+        auto finalAngle = static_cast<double>(Radians::convertStatic(*newAngle));
         okAngle = setRadians(finalAngle);
     }
 
@@ -104,13 +104,13 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Angle to convert angles:
-    Radians* internalRadians = new Radians(static_cast<double>(angle));
+    auto internalRadians = new Radians(static_cast<double>(angle));
 
     //Find out what units the angle is in:
     if (dynamic_cast<Degrees*>(newAngleUnit) != nullptr)
     {
         //New angle is in degrees:
-        Degrees* degrees = new Degrees;
+        auto degrees = new Degrees;
         desiredAngle = static_cast<double>(degrees->convert(*internalRadians));
         degrees->unref();
     }
@@ -122,7 +122,7 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     else if (dynamic_cast<Semicircles*>(newAngleUnit) != nullptr)
     {
         //New angle is in semicircles:
-        Semicircles* semicircles = new Semicircles;
+        auto semicircles = new Semicircles;
         desiredAngle = static_cast<double>(semicircles->convert(*internalRadians));
         semicircles->unref();
     }
@@ -134,33 +134,22 @@ double AngularVelocity::convert(Angle* newAngleUnit, Time* newTimeUnit)
     internalRadians->unref();
 
     //Find out what units the time input is in - do not use built in convert - very easy to do by hand:
-    Seconds* q = dynamic_cast<Seconds*>(newTimeUnit);
-    if(q != nullptr)
-    {
+    auto q = dynamic_cast<Seconds*>(newTimeUnit);
+    if (q != nullptr) {
         desiredTime = time;
-    }
-    else if(dynamic_cast<MilliSeconds*>(newTimeUnit) != nullptr)
-    {
+    } else if(dynamic_cast<MilliSeconds*>(newTimeUnit) != nullptr) {
         //Time in milliseconds:
         desiredTime = time*1000;
-    }
-    else if(dynamic_cast<Minutes*>(newTimeUnit) != nullptr)
-    {
+    } else if(dynamic_cast<Minutes*>(newTimeUnit) != nullptr) {
         //Time in minutes:
         desiredTime = time/60;
-    }
-    else if(dynamic_cast<Hours*>(newTimeUnit) != nullptr)
-    {
+    } else if(dynamic_cast<Hours*>(newTimeUnit) != nullptr) {
         //Time in hours:
         desiredTime = time/3600;
-    }
-    else if(dynamic_cast<Days*>(newTimeUnit) != nullptr)
-    {
+    } else if(dynamic_cast<Days*>(newTimeUnit) != nullptr) {
         //Time in days:
         desiredTime = time/86400;
-    }
-    else
-    {
+    } else {
         //Give Error - Not sure what type it is:
         std::cerr << "Time Conversion Type Not Found." << std::endl;
     };

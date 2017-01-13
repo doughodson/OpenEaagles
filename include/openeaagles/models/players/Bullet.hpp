@@ -2,7 +2,7 @@
 #ifndef __oe_models_Bullet_H__
 #define __oe_models_Bullet_H__
 
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 namespace oe {
 namespace models {
@@ -17,9 +17,9 @@ namespace models {
 //
 // Factory name: Bullet
 //------------------------------------------------------------------------------
-class Bullet : public Weapon
+class Bullet : public AbstractWeapon
 {
-    DECLARE_SUBCLASS(Bullet, Weapon)
+    DECLARE_SUBCLASS(Bullet, AbstractWeapon)
 
 public:
    static const double DEFAULT_MUZZLE_VEL;         // Meters / second

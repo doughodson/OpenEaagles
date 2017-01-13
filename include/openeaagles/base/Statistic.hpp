@@ -170,7 +170,7 @@ inline double Statistic::variance() const
    if (numer < 0.0) {
      numer = 0.0;
    }
-   double denom = static_cast<double>(n) * static_cast<double>(n1);
+   const auto denom = static_cast<double>(n) * static_cast<double>(n1);
    if (denom != 0.0) {
       var = (numer / denom);
    }

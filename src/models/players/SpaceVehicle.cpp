@@ -67,7 +67,7 @@ double SpaceVehicle::getGrossWeight() const
 bool SpaceVehicle::setControlStickYawInput(const double yaw)
 {
    bool ok = false;
-   SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
+   auto model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setControlStickYawInput(yaw);
    }
@@ -81,7 +81,7 @@ bool SpaceVehicle::setControlStickYawInput(const double yaw)
 bool SpaceVehicle::setTranslateXInput(const double transx)
 {
    bool ok = false;
-   SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
+   auto model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setTranslateXInput(transx);
    }
@@ -95,7 +95,7 @@ bool SpaceVehicle::setTranslateXInput(const double transx)
 bool SpaceVehicle::setTranslateYInput(const double transy)
 {
    bool ok = false;
-   SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
+   auto model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setTranslateYInput(transy);
    }
@@ -109,7 +109,7 @@ bool SpaceVehicle::setTranslateYInput(const double transy)
 bool SpaceVehicle::setTranslateZInput(const double transz)
 {
    bool ok = false;
-   SpaceDynamicsModel* model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
+   auto model = dynamic_cast<SpaceDynamicsModel*>(getDynamicsModel());
    if (model != nullptr) {
       ok = model->setTranslateZInput(transz);
    }

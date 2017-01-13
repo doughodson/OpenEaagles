@@ -20,7 +20,7 @@ inline void lock(long int& semaphore)
 
 #if 0
 
-   long int* sem = static_cast<long int*>(&semaphore);
+   auto sem = static_cast<long int*>(&semaphore);
    while (__sync_lock_test_and_set(sem, 1));
 
 #else
@@ -52,7 +52,7 @@ inline void unlock(long int& semaphore)
 {
 #if 0
 
-   long int* sem = static_cast<long int*>(&semaphore);
+   auto sem = static_cast<long int*>(&semaphore);
    __sync_lock_release(sem);
 
 #else

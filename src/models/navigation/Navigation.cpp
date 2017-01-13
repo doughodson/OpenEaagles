@@ -853,29 +853,29 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
     if (msg != nullptr) {
         // allocate space for the points
         int max = msg->entries();
-        osg::Vec2d* tmpFeba = new osg::Vec2d[max];
+        auto tmpFeba = new osg::Vec2d[max];
 
         // Get the points from the pair stream
         int np = 0;
         const base::List::Item* item = msg->getFirstItem();
         while (item != nullptr && np < max && ok) {
             bool validFlg = false;
-            const base::Pair* p = dynamic_cast<const base::Pair*>(item->getValue());
+            auto p = dynamic_cast<const base::Pair*>(item->getValue());
             if (p != nullptr) {
                 const base::Object* obj2 = p->object();
-                const base::List* msg2 = dynamic_cast<const base::List*>(obj2);
+                auto msg2 = dynamic_cast<const base::List*>(obj2);
                 if (msg2 != nullptr) {
                     double values[2];
                     int n = 0;
 
                     { // Get the north (first) distance
                         const base::Number* pNum = nullptr;
-                        const base::Pair* pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(1));
+                        auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(1));
                         if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
                         else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(1));
 
                         if (pNum != nullptr) {
-                            const base::Distance* pDist = dynamic_cast<const base::Distance*>(pNum);
+                            auto pDist = dynamic_cast<const base::Distance*>(pNum);
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             }
@@ -887,12 +887,12 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
 
                     { // Get the east (second) distance
                         const base::Number* pNum = nullptr;
-                        const base::Pair* pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(2));
+                        auto pair2 = dynamic_cast<const base::Pair*>(msg2->getPosition(2));
                         if (pair2 != nullptr) pNum = dynamic_cast<const base::Number*>(pair2->object());
                         else pNum = dynamic_cast<const base::Number*>(msg2->getPosition(2));
 
                         if (pNum != nullptr) {
-                            const base::Distance* pDist = dynamic_cast<const base::Distance*>(pNum);
+                            auto pDist = dynamic_cast<const base::Distance*>(pNum);
                             if (pDist != nullptr) {
                                 values[n++] = base::NauticalMiles::convertStatic(*pDist);
                             }

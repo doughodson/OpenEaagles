@@ -133,12 +133,12 @@ bool Action::execute(base::Component* actor)
    if (actor != nullptr) {
 
       // Was the actor our OBC?
-      OnboardComputer* obc = dynamic_cast<OnboardComputer*>( actor );
+      auto obc = dynamic_cast<OnboardComputer*>( actor );
 
       // If not, was it our ownship ...
       //   and can we get our OBC from our ownship
       if (obc == nullptr) {
-         Player* own = dynamic_cast<Player*>( actor );
+         auto own = dynamic_cast<Player*>( actor );
          if (own != nullptr) {
             obc = own->getOnboardComputer();
          }
@@ -582,7 +582,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
             }
 
             // Release the weapon and set the target
-            Weapon* flyout = sms->releaseOneBomb();
+            AbstractWeapon* flyout = sms->releaseOneBomb();
             if (flyout != nullptr) {
                 flyout->setTargetPosition(tgtPos);
             }

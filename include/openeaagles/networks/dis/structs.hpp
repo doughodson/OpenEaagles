@@ -1785,7 +1785,7 @@ struct EmitterBeamData {
    const TrackJamTargets* getTrackTarget(const int idx) const {
       const TrackJamTargets* tjt = nullptr;
       if (idx < numberOfTargetsInTrack) {
-         uint8_t* p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
+         auto p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this) + (sizeof(TrackJamTargets) * idx);
          tjt = (const TrackJamTargets*) p;
       }
       return tjt;
@@ -1937,7 +1937,7 @@ struct EmissionSystem {
    const EmitterBeamData* getEmitterBeamData(const int idx) const {
       const EmitterBeamData* bd = nullptr;
       if (idx < numberOfBeams) {
-         uint8_t *p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this);
+         auto p = const_cast<uint8_t*>(reinterpret_cast<const uint8_t*>(this)) + sizeof(*this);
 
          // First Emitter beam data is just after this structure
          bd = reinterpret_cast<const EmitterBeamData*>(p);

@@ -1,6 +1,6 @@
 
-#ifndef __oe_models_Weapon_H__
-#define __oe_models_Weapon_H__
+#ifndef __oe_models_AbstractWeapon_H__
+#define __oe_models_AbstractWeapon_H__
 
 #include "openeaagles/models/players/Player.hpp"
 
@@ -14,10 +14,10 @@ class Stores;
 class Track;
 
 //------------------------------------------------------------------------------
-// Class: Weapon
+// Class: AbstractWeapon
 // Description: Abstract class for all weapon types
 //
-// Factory name: Weapon
+// Factory name: AbstractWeapon
 // Slots:
 //    released      <base::Number>    ! Weapon has been released (default: false)
 //    failed        <base::Number>    ! Weapon failed (e.g., reasonableness Test) (default: false)
@@ -128,9 +128,9 @@ class Track;
 // 3) When a weapon is copied or cloned, the launcher and station are set to zero.
 //
 //------------------------------------------------------------------------------
-class Weapon : public Player
+class AbstractWeapon : public Player
 {
-    DECLARE_SUBCLASS(Weapon, Player)
+    DECLARE_SUBCLASS(AbstractWeapon, Player)
 
 public:
     // Weapon Categories (bits) These bits can be bitwise OR'd together
@@ -152,10 +152,10 @@ public:
     };
 
 public:
-   Weapon();
+   AbstractWeapon();
 
-   Weapon* getPointer();                            // Pre-ref()'d pointer to the initial or fly-out based on mode
-   const Weapon* getPointer() const;                // Pre-ref()'d pointer to the initial or fly-out based on mode (const version)
+   AbstractWeapon* getPointer();                    // Pre-ref()'d pointer to the initial or fly-out based on mode
+   const AbstractWeapon* getPointer() const;        // Pre-ref()'d pointer to the initial or fly-out based on mode (const version)
 
    bool isWeaponID(const int n) const;              // True if weapon type IDs match
    int getWeaponID() const;                         // Weapon type ID number
@@ -207,11 +207,11 @@ public:
    Player* getTargetPlayer();                       // Our target player, if any
    const Player* getTargetPlayer() const;           // Our target player, if any (const version)
 
-   Weapon* getFlyoutWeapon();                      // Pre-ref()'d pointer to the fly-out weapon
-   const Weapon* getFlyoutWeapon() const;          // Pre-ref()'d pointer to the fly-out weapon (const version)
+   AbstractWeapon* getFlyoutWeapon();                      // Pre-ref()'d pointer to the fly-out weapon
+   const AbstractWeapon* getFlyoutWeapon() const;          // Pre-ref()'d pointer to the fly-out weapon (const version)
 
-   Weapon* getInitialWeapon();                     // Pre-ref()'d pointer to the initial weapon
-   const Weapon* getInitialWeapon() const;         // Pre-ref()'d pointer to the initial weapon (const version)
+   AbstractWeapon* getInitialWeapon();                     // Pre-ref()'d pointer to the initial weapon
+   const AbstractWeapon* getInitialWeapon() const;         // Pre-ref()'d pointer to the initial weapon (const version)
 
    unsigned short getReleaseEventID() const;       // Release event ID (to help match weapon launch and detonation events)
    bool isReleaseHold() const;                     // Is weapon is holding in PRE_RELEASE mode?
@@ -263,11 +263,11 @@ public:
    // prerelease() -- prerelease this weapon.
    //    Returns a point to the flyout weapon player, which is still
    //    in release hold.
-   virtual Weapon* prerelease();
+   virtual AbstractWeapon* prerelease();
 
    // release() -- release this weapon
    //    Returns a pointer to the flyout weapon player
-   virtual Weapon* release();
+   virtual AbstractWeapon* release();
 
    // Event handlers
    virtual bool onDesignatorEvent(const Designator* const msg);
@@ -333,10 +333,10 @@ protected:
    virtual bool setJettisoned(const bool f);
 
    // Sets a pointer to the fly-out weapon
-   virtual bool setFlyoutWeapon(Weapon* const p);
+   virtual bool setFlyoutWeapon(AbstractWeapon* const p);
 
    // Sets a pointer to the initial weapon
-   virtual bool setInitialWeapon(Weapon* const p);
+   virtual bool setInitialWeapon(AbstractWeapon* const p);
 
    // At detonation: compute the location of the detonation relative to the target player
    bool setLocationOfDetonation();
@@ -351,11 +351,11 @@ private:
     static const double DEFAULT_MAX_TGT_RNG;     // meters
     static const double DEFAULT_MAX_TGT_LOS_ERR; // radians
 
-    base::safe_ptr<Weapon>  flyoutWpn;      // Initial weapon: points to the cloned flyout weapon
-                                            // Cloned flyout: weapon: points to self
+    base::safe_ptr<AbstractWeapon>  flyoutWpn;      // Initial weapon: points to the cloned flyout weapon
+                                                    // Cloned flyout: weapon: points to self
 
-    base::safe_ptr<Weapon>  initialWpn;     // Initial weapon: points to self
-                                            // Cloned flyout: points to the initial weapon
+    base::safe_ptr<AbstractWeapon>  initialWpn;     // Initial weapon: points to self
+                                                    // Cloned flyout: points to the initial weapon
 
     osg::Vec3d tgtPos;                      // Target Position -- platform coord (NED)
     bool       tgtPosValid;                 // If true, target position is valid

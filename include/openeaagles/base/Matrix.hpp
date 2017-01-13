@@ -337,7 +337,7 @@ inline Matrix* subtract(const Matrix& m1, const Matrix& m2)
 
 inline Matrix* minus(const Matrix& m1)
 {
-   Matrix* temp = new Matrix(m1);
+   auto temp = new Matrix(m1);
 
    for (unsigned int i = 0; i < temp->rows; i++) {
       unsigned int idx = temp->cols*i;
@@ -375,7 +375,7 @@ inline Matrix* multiply(const Matrix& m1, const Matrix& m2)
 
 inline Matrix* multiply(const Matrix& m1, const double s)
 {
-   Matrix* temp = new Matrix(m1);
+   auto temp = new Matrix(m1);
    for (unsigned int i=0; i<temp->rows; i++) {
       for (unsigned int j=0; j<temp->cols; j++) {
          unsigned int idx = temp->cols*i + j;

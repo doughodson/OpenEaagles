@@ -482,8 +482,8 @@ unsigned int Route::getSteerpoints(base::safe_ptr<Steerpoint>* const stptList, c
 
         // Get the route we're flying 'to'
         while (item != nullptr && i < max) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Steerpoint* p = dynamic_cast<Steerpoint*>(pair->object());
+            auto pair = static_cast<base::Pair*>(item->getValue());
+            auto p = dynamic_cast<Steerpoint*>(pair->object());
             if (p != nullptr) {
                 stptList[i++] = p;
             }
@@ -509,8 +509,8 @@ unsigned int Route::getAllSteerpoints(base::safe_ptr<Steerpoint>* const stptList
     if (stptList != nullptr && max > 0 && steerpoints != nullptr) {
         base::List::Item* item = steerpoints->getFirstItem();
         while (item != nullptr && i < max) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Steerpoint* p = dynamic_cast<Steerpoint*>(pair->object());
+            auto pair = static_cast<base::Pair*>(item->getValue());
+            auto p = dynamic_cast<Steerpoint*>(pair->object());
             if (p != nullptr) {
                 stptList[i++] = p;
             }
@@ -542,7 +542,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
     // now we have the slot name, which is the next number in the steerpoint list
     // now create a new pair, and if we have a component list, add it to it, if
     // not, then create a new component list
-    base::Pair* p = new base::Pair(numString, newStpt);
+    auto p = new base::Pair(numString, newStpt);
     if (p != nullptr) {
 
         // We're its container
@@ -555,7 +555,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
         if (steerpoints != nullptr && num != 0) {
 
             // Copy the current steerpoint list
-            base::PairStream* tempList = new base::PairStream();
+            auto tempList = new base::PairStream();
             {
                base::List::Item* item = steerpoints->getFirstItem();
                while (item != nullptr) {
@@ -587,7 +587,7 @@ bool Route::insertSteerpoint(Steerpoint* const newStpt, const int pos)
 
                 // now we should have the reference pair at the 'pos' position
                 if (item != nullptr) {
-                    base::List::Item* newItem = new base::List::Item;
+                    auto newItem = new base::List::Item;
                     newItem->value = p;
                     p->ref();
                     // insert 'newItem' just before 'item'

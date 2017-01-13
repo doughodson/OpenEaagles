@@ -2,7 +2,7 @@
 #ifndef __oe_recorder_DataRecorder_H__
 #define __oe_recorder_DataRecorder_H__
 
-#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
 #include <string>
 
 namespace oe {
@@ -52,9 +52,9 @@ namespace recorder {
 //    REID_TRACK_DATA         ! obj[0] => (player); obj[1] => (track)
 //
 //------------------------------------------------------------------------------
-class DataRecorder : public simulation::DataRecorder
+class DataRecorder : public simulation::AbstractDataRecorder
 {
-   DECLARE_SUBCLASS(DataRecorder, simulation::DataRecorder)
+   DECLARE_SUBCLASS(DataRecorder, simulation::AbstractDataRecorder)
 
 public:
    DataRecorder();

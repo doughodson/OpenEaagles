@@ -2,7 +2,7 @@
 #ifndef __oe_models_Player_H__
 #define __oe_models_Player_H__
 
-#include "openeaagles/simulation/IPlayer.hpp"
+#include "openeaagles/simulation/AbstractPlayer.hpp"
 
 #include "openeaagles/models/SynchronizedState.hpp"
 
@@ -17,7 +17,7 @@ namespace oe {
 
 namespace osg { class Vec2d; class Vec3d; }
 namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; }
-namespace simulation { class INib; }
+namespace simulation { class AbstractNib; }
 
 namespace models {
 
@@ -34,7 +34,7 @@ class Pilot;
 class Radio;
 class RfSensor;
 class StoresMgr;
-class Weapon;
+class AbstractWeapon;
 
 // Other item types
 class Emission;
@@ -43,9 +43,9 @@ class IrSignature;
 class RfSignature;
 class Track;
 
-class Player : public simulation::IPlayer
+class Player : public simulation::AbstractPlayer
 {
-   DECLARE_SUBCLASS(Player, simulation::IPlayer)
+   DECLARE_SUBCLASS(Player, simulation::AbstractPlayer)
 
 public:
    Player();
@@ -246,13 +246,13 @@ public:
    virtual bool isNetworkedPlayer() const override;                 // True if this is a networked player
    virtual bool isLocalPlayer() const override;                     // True if this is a local player
 
-   virtual int getNetworkID() const override;                        // ID of a networked player's controlling network model
-   virtual simulation::INib* getNib() override;                      // Networked player's Nib object
-   virtual const simulation::INib* getNib() const override;          // Networked player's Nib object  (const version)
+   virtual int getNetworkID() const override;                               // ID of a networked player's controlling network model
+   virtual simulation::AbstractNib* getNib() override;                      // Networked player's Nib object
+   virtual const simulation::AbstractNib* getNib() const override;          // Networked player's Nib object  (const version)
 
-   virtual bool isNetOutputEnabled() const override;                                     // Is player output to the network enabled?
-   virtual simulation::INib* getLocalNib(const unsigned int netId) override;             // Player's outgoing NIB(s)
-   virtual const simulation::INib* getLocalNib(const unsigned int netId) const override; // Player's outgoing NIB(s)  (const version)
+   virtual bool isNetOutputEnabled() const override;                                            // Is player output to the network enabled?
+   virtual simulation::AbstractNib* getLocalNib(const unsigned int netId) override;             // Player's outgoing NIB(s)
+   virtual const simulation::AbstractNib* getLocalNib(const unsigned int netId) const override; // Player's outgoing NIB(s)  (const version)
 
    // ---
    // Internal autopilot controls
@@ -379,10 +379,10 @@ public:
    virtual bool setCommandedAltitudeM(const double a) override;            // Sets commanded (HAE) altitude (meters)
    virtual bool setCommandedAltitudeFt(const double a) override;           // Sets commanded (HAE) altitude (feet)
 
-   virtual bool setNib(simulation::INib* const p) override;                 // Sets the networked player's Nib object
+   virtual bool setNib(simulation::AbstractNib* const p) override;                                // Sets the networked player's Nib object
 
-   virtual bool setEnableNetOutput(const bool f) override;                 // Sets the network output enabled flag
-   virtual bool setOutgoingNib(simulation::INib* const p, const unsigned int id) override; // Sets the outgoing NIB for network 'id'
+   virtual bool setEnableNetOutput(const bool f) override;                                        // Sets the network output enabled flag
+   virtual bool setOutgoingNib(simulation::AbstractNib* const p, const unsigned int id) override; // Sets the outgoing NIB for network 'id'
 
    virtual void setTerrainElevation(const double v) override;              // Sets the elevation of the terrain at this player's location (meters)
    virtual bool setTerrainOffset(const double v) override;                 // Sets the ground clamping offset (meters)
@@ -557,7 +557,7 @@ public:
    // ---
    // Process weapon detonation
    // ---
-   virtual void processDetonation(const double detRange, Weapon* const wpn = nullptr);
+   virtual void processDetonation(const double detRange, AbstractWeapon* const wpn = nullptr);
 
    // ---
    // Event handler(s)
@@ -805,14 +805,14 @@ private:
    // ---
    // Incoming network Player support
    // ---
-   simulation::INib* nib;        // Network Interface Block (ref()'d)
-   int netID;                    // Network id
+   simulation::AbstractNib* nib;        // Network Interface Block (ref()'d)
+   int netID;                           // Network id
 
    // ---
    // Outgoing network support data
    // ---
-   bool enableNetOutput;         // Allow output to the network
-   simulation::INib** nibList;   // Pointer to a list of outgoing NIBs
+   bool enableNetOutput;                // Allow output to the network
+   simulation::AbstractNib** nibList;   // Pointer to a list of outgoing NIBs
 
    // ---
    // System pointers

@@ -2,14 +2,14 @@
 #ifndef __oe_recorder_OutputHandler_H__
 #define __oe_recorder_OutputHandler_H__
 
-#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/AbstractRecorderComponent.hpp"
 #include "openeaagles/base/List.hpp"
 
 namespace oe {
    namespace base { class List; }
 
 namespace recorder {
-   class DataRecordHandle;
+class DataRecordHandle;
 
 //------------------------------------------------------------------------------
 // Class: OutputHandler
@@ -34,9 +34,9 @@ namespace recorder {
 //    components     ! Must contain only 'OutputHandler' type objects
 //
 //------------------------------------------------------------------------------
-class OutputHandler : public simulation::RecorderComponent
+class OutputHandler : public simulation::AbstractRecorderComponent
 {
-   DECLARE_SUBCLASS(OutputHandler, simulation::RecorderComponent)
+   DECLARE_SUBCLASS(OutputHandler, simulation::AbstractRecorderComponent)
 
 public:
    OutputHandler();

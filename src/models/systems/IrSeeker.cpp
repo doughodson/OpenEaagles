@@ -118,7 +118,7 @@ void IrSeeker::reset()
 //------------------------------------------------------------------------------
 unsigned int IrSeeker::processPlayersOfInterest(base::PairStream* const poi)
 {
-   TdbIr* tdb0 = new TdbIr(getMaxPlayersOfInterest(), this);
+   auto tdb0 = new TdbIr(getMaxPlayersOfInterest(), this);
 
    unsigned int ntgts = tdb0->processPlayers(poi);
    setCurrentTdb(tdb0);

@@ -5,10 +5,8 @@
 
 #include "openeaagles/base/String.hpp"
 
-#include "openeaagles/simulation/IPlayer.hpp"
-
-#include "openeaagles/simulation/INetIO.hpp"
-#include "openeaagles/simulation/INib.hpp"
+#include "openeaagles/simulation/AbstractPlayer.hpp"
+#include "openeaagles/simulation/AbstractNib.hpp"
 
 namespace oe {
 namespace otw {
@@ -53,7 +51,7 @@ void OtwModel::deleteData()
 // ---
 // OtwModel() -- set & ref the player pointer
 // ---
-void OtwModel::setPlayer(simulation::IPlayer* const p)
+void OtwModel::setPlayer(simulation::AbstractPlayer* const p)
 {
    if (player != nullptr) {
       player->unref();
@@ -66,7 +64,7 @@ void OtwModel::setPlayer(simulation::IPlayer* const p)
    if (player != nullptr) {
       player->ref();
       playerID = player->getID();
-      const simulation::INib* nib = player->getNib();
+      const simulation::AbstractNib* nib = player->getNib();
       if (nib != nullptr) {
          federateName = nib->getFederateName();
       }
@@ -79,7 +77,7 @@ void OtwModel::setPlayer(simulation::IPlayer* const p)
 // ---
 // initialize() -- initialize the model
 // ---
-void OtwModel::initialize(simulation::IPlayer* const p, const Otm** const otwModelTable, const unsigned int numModels)
+void OtwModel::initialize(simulation::AbstractPlayer* const p, const Otm** const otwModelTable, const unsigned int numModels)
 {
    setPlayer(p);
    state = OtwModel::ACTIVE;

@@ -1,8 +1,8 @@
 
-#ifndef __oe_simulation_DataRecorder_H__
-#define __oe_simulation_DataRecorder_H__
+#ifndef __oe_simulation_AbstractDataRecorder_H__
+#define __oe_simulation_AbstractDataRecorder_H__
 
-#include "openeaagles/simulation/RecorderComponent.hpp"
+#include "openeaagles/simulation/AbstractRecorderComponent.hpp"
 #include "openeaagles/simulation/recorder_macros.hpp"
 
 namespace oe {
@@ -12,7 +12,7 @@ class SimExec;
 class Station;
 
 //------------------------------------------------------------------------------
-// Class: DataRecorder
+// Class: AbstractDataRecorder
 // Description: Abstract data recorder
 //
 // Slots:
@@ -27,12 +27,12 @@ class Station;
 //    3) Recorded data records are defined by their "recorder event id" tokens;
 //       (see openeaagles/simulation/dataRecorderTokens.hpp)
 //------------------------------------------------------------------------------
-class DataRecorder : public RecorderComponent
+class AbstractDataRecorder : public AbstractRecorderComponent
 {
-   DECLARE_SUBCLASS(DataRecorder, RecorderComponent)
+   DECLARE_SUBCLASS(AbstractDataRecorder, AbstractRecorderComponent)
 
 public:
-   DataRecorder();
+   AbstractDataRecorder();
 
    Station* getStation();                     // Our parent station
    const Station* getStation() const;         // Our parent station (const version)
@@ -71,7 +71,7 @@ private:
 };
 
 // Record Data function
-inline bool DataRecorder::recordData(
+inline bool AbstractDataRecorder::recordData(
       const unsigned int id,
       const base::Object* pObjects[4],
       const double values[4]

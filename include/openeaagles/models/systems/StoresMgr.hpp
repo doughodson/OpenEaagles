@@ -21,7 +21,7 @@ class Missile;
 class Player;
 class Sam;
 class Track;
-class Weapon;
+class AbstractWeapon;
 
 //------------------------------------------------------------------------------
 // Class: StoresMgr
@@ -86,11 +86,11 @@ public:
    virtual bool isWeaponDeliveryMode(const unsigned int mode) const;  // Is this the delivery mode?
    virtual unsigned int getWeaponDeliveryMode() const;                // Returns the delivery mode
 
-   virtual bool isGunSelected() const;                 // Returns true when gun is selected
-   virtual bool isWeaponReleased() const;              // Are weapons being released?
+   virtual bool isGunSelected() const;                                // Returns true when gun is selected
+   virtual bool isWeaponReleased() const;                             // Are weapons being released?
 
-   virtual Weapon* getCurrentWeapon();                 // The current weapon (Pre-ref()'d)
-   virtual const Weapon* getCurrentWeapon() const;     // The current weapon (Pre-ref()'d) (const version)
+   virtual AbstractWeapon* getCurrentWeapon();                 // The current weapon (Pre-ref()'d)
+   virtual const AbstractWeapon* getCurrentWeapon() const;     // The current weapon (Pre-ref()'d) (const version)
 
    virtual bool setMasterArm(const unsigned int newMode);        // Sets the master arm mode
    virtual bool setWeaponDeliveryMode(const unsigned int mode);  // Sets the weapon delivery mode
@@ -179,7 +179,7 @@ public:
    virtual Bomb* getSpecificBomb(const base::String* const bombType);
 
    // Get the first weapon by type from our weapons list (Pre-ref()'d)
-   virtual Weapon* getSpecificWeapon(const std::type_info& type);
+   virtual AbstractWeapon* getSpecificWeapon(const std::type_info& type);
 
    // Get the target track
    virtual Track* getNextTarget();
@@ -189,8 +189,8 @@ public:
    virtual bool onWpnRelEvent(const base::Boolean* const sw = 0) override;
    virtual bool onTriggerSwEvent(const base::Boolean* const sw = 0) override;
 
-   virtual Weapon* getCurrentWeapon() override;
-   virtual const Weapon* getCurrentWeapon() const override;
+   virtual AbstractWeapon* getCurrentWeapon() override;
+   virtual const AbstractWeapon* getCurrentWeapon() const override;
    virtual bool isWeaponReleased() const override;
    virtual Missile* getNextMissile() override;
    virtual const Missile* getNextMissile() const override;

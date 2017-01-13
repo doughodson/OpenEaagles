@@ -51,6 +51,21 @@ General framework-wide changes and improvements
   Using include files that do nothing but include other include files is considered bad
   practice -- this clarifies the codebase by making it more explicit.
 
+- started using 'auto' keyword to declare types in a significant way; specifically
+  used in places that declare variables that are initialized with rather long and
+  obvious type definitions.  For example:
+
+  oe::models::Autopilot* ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
+
+  can be reduced to:
+
+  auto ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
+
+- renamed many of the classes that are abstract to 'Abstract<classname>'.  For example,
+  NetIO in simulation library became 'AbstractNetIO'.  This makes those classes more
+  obvious in the role they place in relation to other classes.  Often they define a
+  set of functionality that is common or shared with subclasses.
+
 --------------------------------------------------------------------------------
 base library
 

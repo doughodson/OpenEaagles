@@ -169,7 +169,7 @@ bool FileWriter::openFile()
       nameLength += 4;                         // add characters for possible version number, "_V99"
       nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-      char* fullname = new char[nameLength];
+      auto fullname = new char[nameLength];
       fullname[0] = '\0';
 
       //---
@@ -188,7 +188,7 @@ bool FileWriter::openFile()
       if ( !validName ) {
          // If the file already exists, try appending a version number "v99" ..
 
-         char* origname = new char[nameLength];
+         auto origname = new char[nameLength];
          base::utStrcpy(origname, nameLength, fullname);
 
          validName = false;
@@ -261,7 +261,7 @@ void FileWriter::closeFile()
          eodFlag = true;
 
          // write something to signify don't read any more (e.g., last message)
-         pb::DataRecord* lastMsg = new pb::DataRecord();
+         auto lastMsg = new pb::DataRecord();
 
          // This will be the token representing the last message, but it can be
          // anything that is not one of the other event messages
@@ -274,7 +274,7 @@ void FileWriter::closeFile()
          time->set_utc_time(0);
 
          // get a handle
-         DataRecordHandle* handle = new DataRecordHandle(lastMsg);
+         auto handle = new DataRecordHandle(lastMsg);
 
          // write the message
          processRecordImp(handle);

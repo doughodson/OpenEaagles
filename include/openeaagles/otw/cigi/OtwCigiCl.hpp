@@ -27,9 +27,7 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 
 namespace oe {
 namespace base { class Number; class NetHandler; class Thread; }
-
 namespace models {
-
 class AirVehicle;
 class Building;
 class Effects;
@@ -39,8 +37,7 @@ class Missile;
 class Player;
 class Ship;
 class SpaceVehicle;
-class Weapon;
-
+class AbstractWeapon;
 }
 
 namespace otw {
@@ -214,7 +211,7 @@ protected:
    virtual bool setMissileData(OtwModelCigiCl* const m, const unsigned short entity, const models::Missile* const p);
    virtual bool setShipData(OtwModelCigiCl* const m, const unsigned short entity, const models::Ship* const p);
    virtual bool setSpaceVehicleData(OtwModelCigiCl* const m, const unsigned short entity, const models::SpaceVehicle* const p);
-   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const models::Weapon* const p);
+   virtual bool setWeaponData(OtwModelCigiCl* const m, const unsigned short entity, const models::AbstractWeapon* const p);
    virtual bool setCommonModelData(CigiEntityCtrlV3* const ec, const unsigned short entity, const models::Player* const p);
 
 private:

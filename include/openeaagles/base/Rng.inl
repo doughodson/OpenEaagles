@@ -94,10 +94,10 @@ inline unsigned int Rng::drawGeometric(const double p)
 //-----------------------------------------------------------------
 inline double Rng::drawUniformCont(const double a, const double b)
 {
-   //base::Rng* pU = new base::Rng;
+   //auto pU = new base::Rng;
    double u = 0.0;
    if (a <= b) {
-      u = a + (b - a)*drawClosed();
+      u = a + (b - a) * drawClosed();
    }
    return u;
 }

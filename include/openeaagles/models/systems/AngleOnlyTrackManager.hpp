@@ -7,8 +7,8 @@
 
 namespace oe {
 namespace models {
-   class IrQueryMsg;
-   class Track;
+class IrQueryMsg;
+class Track;
 
 //------------------------------------------------------------------------------
 // Class: AngleOnlyTrackManager

@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/RecorderComponent.hpp"
+#include "openeaagles/simulation/AbstractRecorderComponent.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include <iostream>
@@ -7,25 +7,25 @@
 namespace oe {
 namespace simulation {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(RecorderComponent, "RecorderComponent")
+IMPLEMENT_ABSTRACT_SUBCLASS(AbstractRecorderComponent, "AbstractRecorderComponent")
 
-BEGIN_SLOTTABLE(RecorderComponent)
+BEGIN_SLOTTABLE(AbstractRecorderComponent)
     "enabledList",         // 1)  List of enabled data records
     "disabledList",        // 2)  List of disabled data records
-END_SLOTTABLE(RecorderComponent)
+END_SLOTTABLE(AbstractRecorderComponent)
 
-BEGIN_SLOT_MAP(RecorderComponent)
+BEGIN_SLOT_MAP(AbstractRecorderComponent)
     ON_SLOT( 1, setSlotEnabledList,  base::List)
     ON_SLOT( 2, setSlotDisabledList, base::List)
 END_SLOT_MAP()
 
-RecorderComponent::RecorderComponent()
+AbstractRecorderComponent::AbstractRecorderComponent()
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-void RecorderComponent::initData()
+void AbstractRecorderComponent::initData()
 {
    enabledList = nullptr;
    numEnabled = 0;
@@ -34,7 +34,7 @@ void RecorderComponent::initData()
    numDisabled = 0;
 }
 
-void RecorderComponent::copyData(const RecorderComponent& org, const bool cc)
+void AbstractRecorderComponent::copyData(const AbstractRecorderComponent& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -43,7 +43,7 @@ void RecorderComponent::copyData(const RecorderComponent& org, const bool cc)
    setDisabledList(org.disabledList, org.numDisabled);
 }
 
-void RecorderComponent::deleteData()
+void AbstractRecorderComponent::deleteData()
 {
    setEnabledList(nullptr, 0);
    setDisabledList(nullptr, 0);
@@ -52,7 +52,7 @@ void RecorderComponent::deleteData()
 //------------------------------------------------------------------------------
 // Set a list of 'n' of data records enabled for processing
 //------------------------------------------------------------------------------
-bool RecorderComponent::setEnabledList(const unsigned int* const list, const unsigned int n)
+bool AbstractRecorderComponent::setEnabledList(const unsigned int* const list, const unsigned int n)
 {
    // Remove the old list
    if (enabledList != nullptr) {
@@ -77,7 +77,7 @@ bool RecorderComponent::setEnabledList(const unsigned int* const list, const uns
 //------------------------------------------------------------------------------
 // Set a list of 'n' of data records disabled from being processed
 //------------------------------------------------------------------------------
-bool RecorderComponent::setDisabledList(const unsigned int* const list, const unsigned int n)
+bool AbstractRecorderComponent::setDisabledList(const unsigned int* const list, const unsigned int n)
 {
    // Remove the old list
    if (disabledList != nullptr) {
@@ -102,7 +102,7 @@ bool RecorderComponent::setDisabledList(const unsigned int* const list, const un
 //------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-bool RecorderComponent::setSlotEnabledList(const base::List* const list)
+bool AbstractRecorderComponent::setSlotEnabledList(const base::List* const list)
 {
    unsigned int n2 = 0;
    unsigned int* p2 = nullptr;
@@ -111,7 +111,7 @@ bool RecorderComponent::setSlotEnabledList(const base::List* const list)
    unsigned int n = list->entries();
    if (n > 0) {
       // get the numbers from the list and set them as the filter list
-      int* p1 = new int[n];
+      auto p1 = new int[n];
       unsigned int n1 = list->getNumberList(p1, n);
       if (n1 > 0) {
          // Make sure they're positive
@@ -136,7 +136,7 @@ bool RecorderComponent::setSlotEnabledList(const base::List* const list)
    return true;
 }
 
-bool RecorderComponent::setSlotDisabledList(const base::List* const list)
+bool AbstractRecorderComponent::setSlotDisabledList(const base::List* const list)
 {
    unsigned int n2 = 0;
    unsigned int* p2 = nullptr;
@@ -145,7 +145,7 @@ bool RecorderComponent::setSlotDisabledList(const base::List* const list)
    unsigned int n = list->entries();
    if (n > 0) {
       // get the numbers from the list and set them as the filter list
-      int* p1 = new int[n];
+      auto p1 = new int[n];
       unsigned int n1 = list->getNumberList(p1, n);
       if (n1 > 0) {
          // Make sure they're positive
@@ -170,7 +170,7 @@ bool RecorderComponent::setSlotDisabledList(const base::List* const list)
    return true;
 }
 
-std::ostream& RecorderComponent::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& AbstractRecorderComponent::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
    int j = 0;
    if ( !slotsOnly ) {

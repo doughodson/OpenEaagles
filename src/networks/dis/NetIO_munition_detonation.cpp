@@ -9,7 +9,7 @@
 
 #include "openeaagles/models/players/AirVehicle.hpp"
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 #include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Nav.hpp"
@@ -81,7 +81,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
    // ---
    // 3) Update the data of the munition's NIB and player
    // ---
-   models::Weapon* mPlayer = nullptr;
+   models::AbstractWeapon* mPlayer = nullptr;
    if (mNib != nullptr) {
 
       // ---
@@ -116,7 +116,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
       mNib->setMode(models::Player::DETONATED);
 
       // Find the munition player and set its mode, location and target position
-      mPlayer = dynamic_cast<models::Weapon*>(mNib->getPlayer());
+      mPlayer = dynamic_cast<models::AbstractWeapon*>(mNib->getPlayer());
       if (mPlayer != nullptr) {
 
          // Munition's mode
@@ -128,7 +128,7 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
          mPlayer->setGeocAcceleration(geocAcc);
 
          // detonation results
-         mPlayer->setDetonationResults(models::Weapon::Detonation(pdu->detonationResult));
+         mPlayer->setDetonationResults(models::AbstractWeapon::Detonation(pdu->detonationResult));
 
          // Munition's target player and the location of detonation relative to target
          mPlayer->setTargetPlayer(tPlayer,false);

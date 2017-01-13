@@ -2,13 +2,13 @@
 #ifndef __oe_otw_Otw_H__
 #define __oe_otw_Otw_H__
 
-#include "openeaagles/simulation/IOtw.hpp"
+#include "openeaagles/simulation/AbstractOtw.hpp"
 
 namespace oe {
 
 namespace base { class Distance; class Identifier; class Number; class PairStream; class String; }
 
-namespace simulation { class IPlayer; }
+namespace simulation { class AbstractPlayer; }
 
 namespace otw {
 
@@ -46,9 +46,9 @@ class OtwModel; class Otm;
 //    otwModelTypes  <PairStream>   ! OTW system's model type IDs (list of Otm objects) (default: 0)
 //
 //------------------------------------------------------------------------------
-class Otw : public simulation::IOtw
+class Otw : public simulation::AbstractOtw
 {
-    DECLARE_SUBCLASS(Otw, simulation::IOtw)
+    DECLARE_SUBCLASS(Otw, simulation::AbstractOtw)
 
 public:
     // Model table types
@@ -60,13 +60,13 @@ public:
 public:
     Otw();
 
-    const simulation::IPlayer* getOwnship() const  { return ownship; }        // Our ownship -- the player that we're following
-    unsigned int getMaxModels() const              { return maxModels; }      // Max number of active, in-range player/models
-    unsigned int getMaxElevations() const          { return maxElevations; }  // Max number of terrain elevation requests
-    double getMaxRange() const                     { return maxRange; }       // Max range of active player/models
-    double getRefLatitude() const                  { return refLat; }         // Visual database reference latitude  (degs)
-    double getRefLongitude() const                 { return refLon; }         // Visual database reference longitude (degs)
-    virtual bool isResetInProgress() const;                                   // True if visual system is resetting
+    const simulation::AbstractPlayer* getOwnship() const  { return ownship; }        // Our ownship -- the player that we're following
+    unsigned int getMaxModels() const                     { return maxModels; }      // Max number of active, in-range player/models
+    unsigned int getMaxElevations() const                 { return maxElevations; }  // Max number of terrain elevation requests
+    double getMaxRange() const                            { return maxRange; }       // Max range of active player/models
+    double getRefLatitude() const                         { return refLat; }         // Visual database reference latitude  (degs)
+    double getRefLongitude() const                        { return refLon; }         // Visual database reference longitude (degs)
+    virtual bool isResetInProgress() const;                                          // True if visual system is resetting
 
     virtual bool setRefLatitude(const double v);                     // Sets the visual database reference latitude  (degs)
     virtual bool setRefLongitude(const double v);                    // Sets the visual database reference longitude (degs)
@@ -78,7 +78,7 @@ public:
 
     // Sets our ownship pointer; public version, which is usually called by the Station class.  Derived classes
     // can override this function and control the switching of the ownship using setOwnship0()
-    virtual void setOwnship(simulation::IPlayer* const newOwnship) override;
+    virtual void setOwnship(simulation::AbstractPlayer* const newOwnship) override;
 
     // Slot functions
     virtual bool setSlotMaxRange(const base::Distance* const msg);        // Sets the max range (Distance) slot
@@ -93,16 +93,16 @@ public:
     virtual void reset() override;
 
 protected:
-    virtual void setOwnship0(simulation::IPlayer* const newOwnship);     // Sets our ownship player
+    virtual void setOwnship0(simulation::AbstractPlayer* const newOwnship);     // Sets our ownship player
 
     // Computers the range (meters) from our ownship to this player.
-    virtual double computeRangeToPlayer(const simulation::IPlayer* const ip) const;
+    virtual double computeRangeToPlayer(const simulation::AbstractPlayer* const ip) const;
 
     // Find a player's model object in table 'type' by the player IDs
     virtual OtwModel* findModel(const unsigned short playerID, const base::String* const federateName, const TableType type);
 
     // Find a player's model object in table 'type' using a pointer to the player
-    virtual OtwModel* findModel(const simulation::IPlayer* const player, const TableType type);
+    virtual OtwModel* findModel(const simulation::AbstractPlayer* const player, const TableType type);
 
     // Add a player's model object to table 'type'
     virtual bool addModelToList(OtwModel* const model, const TableType type);
@@ -153,8 +153,8 @@ private:
    void clearOtwModelTypes();                     // Clear the OTW model types table
    void mapPlayerList2ModelTable();               // Map the player list to the model table
    void mapPlayers2ElevTable();                   // Map player list to terrain elevation table
-   OtwModel* newModelEntry(simulation::IPlayer* const ip);     // Create a new model entry for this player & return the table index
-   OtwModel* newElevEntry(simulation::IPlayer* const ip);      // Create a new elevation entry for this player & return the table index
+   OtwModel* newModelEntry(simulation::AbstractPlayer* const ip);     // Create a new model entry for this player & return the table index
+   OtwModel* newElevEntry(simulation::AbstractPlayer* const ip);      // Create a new elevation entry for this player & return the table index
 
    // Parameters
    double         maxRange;                        // Max range of visual system  (meters)
@@ -166,7 +166,7 @@ private:
    double         refLon;                          // Visual database reference longitude (deg)
 
    // Simulation inputs
-   simulation::IPlayer* ownship;                   // Current ownship
+   simulation::AbstractPlayer* ownship;            // Current ownship
    base::PairStream* playerList;                   // Current player list
    bool           rstFlg;                          // Reset in progress
    bool           rstReq;                          // Reset request flag

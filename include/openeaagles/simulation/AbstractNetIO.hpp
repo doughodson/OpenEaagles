@@ -1,21 +1,21 @@
 
-#ifndef __oe_simulation_INetIO_H__
-#define __oe_simulation_INetIO_H__
+#ifndef __oe_simulation_AbstractNetIO_H__
+#define __oe_simulation_AbstractNetIO_H__
 
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
 namespace simulation {
 
-class INetIO : public base::Component
+class AbstractNetIO : public base::Component
 {
-   DECLARE_SUBCLASS(INetIO, base::Component)
+   DECLARE_SUBCLASS(AbstractNetIO, base::Component)
 
 public:
-   INetIO();
+   AbstractNetIO();
 
-    // Max network ID
-    static const unsigned int MAX_NETWORD_ID = 2;
+   // Max network ID
+   static const unsigned int MAX_NETWORD_ID = 2;
 
    //
    // interface required/used by Station class

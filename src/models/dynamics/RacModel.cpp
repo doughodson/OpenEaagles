@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/dynamics/RacModel.hpp"
 
-#include "openeaagles/simulation/IPlayer.hpp"
+#include "openeaagles/simulation/AbstractPlayer.hpp"
 
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -105,14 +105,14 @@ double RacModel::getSideSlip() const
 
 double RacModel::getFlightPath() const
 {
-   const simulation::IPlayer* pp = static_cast<const simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
+   auto pp = static_cast<const simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
    if (pp == nullptr) return 0;
    return static_cast<double>(pp->getPitchR());
 }
 
 double RacModel::getCalibratedAirspeed() const
 {
-   const simulation::IPlayer* pp = static_cast<const simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
+   auto pp = static_cast<const simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
    if (pp == nullptr) return 0;
    return pp->getTotalVelocityKts();
 }
@@ -195,7 +195,7 @@ bool RacModel::setCommandedAltitude(const double m, const double, const double)
 void RacModel::updateRAC(const double dt)
 {
    // Get our Player (must have one!)
-   simulation::IPlayer* pp = static_cast<simulation::IPlayer*>( findContainerByType(typeid(simulation::IPlayer)) );
+   auto pp = static_cast<simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
@@ -253,8 +253,8 @@ void RacModel::updateRAC(const double dt)
    // ---
    const osg::Vec3d oldRates = pp->getAngularVelocities();
    //double pa1 = oldRates[simulation::Player::IROLL];
-   double qa1 = oldRates[simulation::IPlayer::IPITCH];
-   double ra1 = oldRates[simulation::IPlayer::IYAW];
+   double qa1 = oldRates[simulation::AbstractPlayer::IPITCH];
+   double ra1 = oldRates[simulation::AbstractPlayer::IYAW];
 
    // ---
    // Find pitch rate and update pitch

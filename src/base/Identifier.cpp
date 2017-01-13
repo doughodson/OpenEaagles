@@ -31,7 +31,7 @@ void Identifier::setStr(const char* string)
 
    // copy the string and replace any spaces
    if (len > 0) {
-      char* newStr = new char[len+1];
+      auto newStr = new char[len+1];
       for (unsigned int i = 0; i < len; i++) {
          if (string[i] == ' ') newStr[i] = '_';
          else newStr[i] = string[i];
@@ -63,7 +63,7 @@ void Identifier::catStr(const char* s)
 
    // replace any spaces
    size_t len = std::strlen(s);
-   char* newStr = new char[len+1];
+   auto newStr = new char[len+1];
    for (unsigned int i = 0; i < len; i++) {
       if (s[i] == ' ') newStr[i] = '_';
       else newStr[i] = s[i];

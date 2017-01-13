@@ -605,7 +605,7 @@ void Quad::drawFunc()
             // draw without texture
             else {
                 // get our color gradient and apply it (if we have one)
-                ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+                auto colGradient = dynamic_cast<ColorGradient*>(getColor());
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != nullptr) {
@@ -736,7 +736,7 @@ void Triangle::drawFunc()
             // draw without texture
             else {
                 // get our color gradient and apply it (if we have one)
-                ColorGradient* colGradient = dynamic_cast<ColorGradient*>(getColor());
+                auto colGradient = dynamic_cast<ColorGradient*>(getColor());
 
                 for (unsigned int i = 0; i < nv; i++) {
                     if (colGradient != nullptr) {

@@ -1,0 +1,13 @@
+
+File: Table.cpp
+
+-- loadVector() allocated double array (p = new double[n]), but if no error, array never released.
+-- see method setDataTable
+-- loadData() -- consider using a C++ smart pointer to mgt memory to new double[] (unique pointer?)
+
+Scan for places where std::err is being used, they are often near use of 'delete' is used -- consider
+cleaning up code to use unique smart pointers.
+
+
+
+

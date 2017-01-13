@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_IPlayer_H__
-#define __oe_simulation_IPlayer_H__
+#ifndef __oe_simulation_AbstractPlayer_H__
+#define __oe_simulation_AbstractPlayer_H__
 
 #include "openeaagles/base/Component.hpp"
 
@@ -26,7 +26,7 @@ class Weapon;
 
 // Other item types
 class Emission;
-class INib;
+class AbstractNib;
 class IrQueryMsg;
 class IrSignature;
 class RfSignature;
@@ -34,7 +34,7 @@ class Simulation;
 class Track;
 
 //------------------------------------------------------------------------------
-// Class: IPlayer
+// Class: AbstractPlayer
 //
 // Description: Abstract interface for all players (e.g., aircraft, ground vehicles, etc.)
 //              Provides interfaces for player IDs, types, status, state vectors,
@@ -42,7 +42,7 @@ class Track;
 //
 //
 //------------------------------------------------------------------------------
-// Factory name: Player
+// Factory name: AbstractPlayer
 // Slots --
 //
 //    ! ---
@@ -112,10 +112,10 @@ class Track;
 //    side           <base::String>      ! Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE } (default: GRAY)
 //    mode           <base::String>      ! Initial player mode ( INACTIVE, ACTIVE, DEAD ) (default: ACTIVE)
 //    useCoordSys    <base::String>      ! Coord system to use for updating player position { WORLD, GEOD, LOCAL }
-//                                        !   (default: based on the coord system used to set the initial position)
+//                                       !   (default: based on the coord system used to set the initial position)
 //
-//    signature      <RfSignature>        ! Player's RCS signature (default: 0)
-//    irSignature    <IrSignature>        ! Player's IR signature (default: 0)
+//    signature      <RfSignature>       ! Player's RCS signature (default: 0)
+//    irSignature    <IrSignature>       ! Player's IR signature (default: 0)
 //    camouflageType <base::Integer>     ! User defined camouflage type (positive integer or zero for none) (default: 0)
 //
 //    terrainElevReq <base::Boolean>     ! Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
@@ -132,7 +132,7 @@ class Track;
 //    enableNetOutput <base::Boolean>    ! Enable network output of this player (default: true)
 //
 //    dataLogTime    <base::Time>        ! Time between player data samples to an optional data
-//                                        ! logger, or zero if none (default: 0)
+//                                       ! logger, or zero if none (default: 0)
 //
 //    ! ---
 //    ! Angular test rates:
@@ -151,14 +151,14 @@ class Track;
 //    CRASH_EVENT             <Player>             ! Collision with
 //    CRASH_EVENT             (none)               ! Crashed
 //    RF_EMISSION             <Emission>           ! Hit by RF emission
-//    RF_REFLECTIONS_REQUEST  <base::Component>   ! Requests for reflected R/F emissions (must re-request once a second)
-//    RF_REFLECTIONS_CANCEL   <base::Component>   ! Cancel requests for reflected R/F emissions
-//    WPN_REL_EVENT           <base::Boolean>     ! Weapon release switch with position
+//    RF_REFLECTIONS_REQUEST  <base::Component>    ! Requests for reflected R/F emissions (must re-request once a second)
+//    RF_REFLECTIONS_CANCEL   <base::Component>    ! Cancel requests for reflected R/F emissions
+//    WPN_REL_EVENT           <base::Boolean>      ! Weapon release switch with position
 //    WPN_REL_EVENT           (none)               ! Weapon release switch (single shot)
-//    TRIGGER_SW_EVENT        <base::Boolean>     ! Trigger switch with position
+//    TRIGGER_SW_EVENT        <base::Boolean>      ! Trigger switch with position
 //    TRIGGER_SW_EVENT        (none)               ! Trigger switch (single shot)
 //    TGT_STEP_EVENT          (none)               ! Target step switch
-//    DATALINK_MESSAGE        <base::Object>      ! Hit with a datalink message
+//    DATALINK_MESSAGE        <base::Object>       ! Hit with a datalink message
 //    IR_QUERY_MSG            <IrQueryMsg>         ! IR seeker requests signature
 //
 //
@@ -346,12 +346,12 @@ class Track;
 //
 //
 //------------------------------------------------------------------------------
-class IPlayer : public base::Component
+class AbstractPlayer : public base::Component
 {
-   DECLARE_SUBCLASS(IPlayer, base::Component)
+   DECLARE_SUBCLASS(AbstractPlayer, base::Component)
 
 public:
-   IPlayer();
+   AbstractPlayer();
 
    // Player mode
    enum Mode {
@@ -594,13 +594,13 @@ public:
    virtual bool isNetworkedPlayer() const =0;        // True if this is a networked player (IPlayer)
    virtual bool isLocalPlayer() const =0;            // True if this is a local player
 
-   virtual int getNetworkID() const =0;                        // ID of a networked player's controlling network model
-   virtual INib* getNib() =0;                                  // Networked player's Nib object
-   virtual const INib* getNib() const =0;                      // Networked player's Nib object  (const version)
+   virtual int getNetworkID() const =0;                               // ID of a networked player's controlling network model
+   virtual AbstractNib* getNib() =0;                                  // Networked player's Nib object
+   virtual const AbstractNib* getNib() const =0;                      // Networked player's Nib object  (const version)
 
-   virtual bool isNetOutputEnabled() const =0;                         // Is player output to the network enabled?
-   virtual INib* getLocalNib(const unsigned int netId) =0;             // Player's outgoing NIB(s)
-   virtual const INib* getLocalNib(const unsigned int netId) const =0; // Player's outgoing NIB(s)  (const version)
+   virtual bool isNetOutputEnabled() const =0;                                // Is player output to the network enabled?
+   virtual AbstractNib* getLocalNib(const unsigned int netId) =0;             // Player's outgoing NIB(s)
+   virtual const AbstractNib* getLocalNib(const unsigned int netId) const =0; // Player's outgoing NIB(s)  (const version)
 
    // ---
    // Internal autopilot controls
@@ -673,10 +673,10 @@ public:
    virtual bool setCommandedAltitudeM(const double a) =0;            // Sets commanded (HAE) altitude (meters)
    virtual bool setCommandedAltitudeFt(const double a) =0;           // Sets commanded (HAE) altitude (feet)
 
-   virtual bool setNib(INib* const p) =0;                            // Sets the networked player's Nib object
+   virtual bool setNib(AbstractNib* const p) =0;                                // Sets the networked player's Nib object
 
-   virtual bool setEnableNetOutput(const bool f) =0;                     // Sets the network output enabled flag
-   virtual bool setOutgoingNib(INib* const p, const unsigned int id) =0; // Sets the outgoing NIB for network 'id'
+   virtual bool setEnableNetOutput(const bool f) =0;                            // Sets the network output enabled flag
+   virtual bool setOutgoingNib(AbstractNib* const p, const unsigned int id) =0; // Sets the outgoing NIB for network 'id'
 
    virtual void setTerrainElevation(const double v) =0;              // Sets the elevation of the terrain at this player's location (meters)
    virtual bool setTerrainOffset(const double v) =0;                 // Sets the ground clamping offset (meters)

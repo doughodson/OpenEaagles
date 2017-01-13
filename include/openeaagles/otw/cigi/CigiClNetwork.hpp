@@ -20,7 +20,6 @@ class CigiOutgoingMsg;
 namespace oe {
 namespace base { class NetHandler; class Thread; }
 namespace otw {
-
 class OtwCigiCl;
 class CigiClNetworkSignalProcessing;
 

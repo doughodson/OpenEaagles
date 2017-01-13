@@ -65,7 +65,7 @@ void SimAgent::deleteData()
 simulation::Station* SimAgent::getStation()
 {
    if ( myStation==nullptr ) {
-      simulation::Station* s = dynamic_cast<simulation::Station*>(findContainerByType(typeid(simulation::Station)));
+      auto s = dynamic_cast<simulation::Station*>(findContainerByType(typeid(simulation::Station)));
       if (s != nullptr) {
          myStation = s;
       }

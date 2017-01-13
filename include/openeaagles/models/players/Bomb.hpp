@@ -2,7 +2,7 @@
 #ifndef __oe_models_Bomb_H__
 #define __oe_models_Bomb_H__
 
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 namespace oe {
 
@@ -28,9 +28,9 @@ namespace models {
 //    dragIndex      <Number>      ! drag index used by default dynamics (default: 0.0006f)
 //
 //------------------------------------------------------------------------------
-class Bomb : public Weapon
+class Bomb : public AbstractWeapon
 {
-    DECLARE_SUBCLASS(Bomb, Weapon)
+    DECLARE_SUBCLASS(Bomb, AbstractWeapon)
 
 public:
     // Arming options

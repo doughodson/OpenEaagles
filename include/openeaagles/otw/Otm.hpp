@@ -9,7 +9,7 @@ namespace oe {
 
 namespace base { class Identifier; class Number; class String; }
 
-namespace simulation { class IPlayer; }
+namespace simulation { class AbstractPlayer; }
 
 namespace otw {
 
@@ -61,22 +61,22 @@ class Otm : public base::Object
 public:
     Otm();
 
-    unsigned int getTypeId() const                                        { return typeId; }      // OTW entity type ID number
-    virtual bool setTypeId(const unsigned int newType);                   // Sets the OTW entity type number
-    virtual bool setSlotTypeId(const base::Number* const msg);            // Sets the OTW entity type number
+    unsigned int getTypeId() const                                          { return typeId; }      // OTW entity type ID number
+    virtual bool setTypeId(const unsigned int newType);                     // Sets the OTW entity type number
+    virtual bool setSlotTypeId(const base::Number* const msg);              // Sets the OTW entity type number
 
     const base::Identifier* getRefFactoryName() const                       { return refFactoryName; } // Reference factory name
     virtual bool setSlotRefFactoryName(const base::Identifier* const msg);  // Sets the Reference factory name
 
-    const base::String* getRefTypeName() const                           { return refTypeName; } // Reference type name
-    virtual bool setSlotRefTypeName(const base::String* const msg);      // Sets the Reference type name
+    const base::String* getRefTypeName() const                              { return refTypeName; } // Reference type name
+    virtual bool setSlotRefTypeName(const base::String* const msg);         // Sets the Reference type name
 
     // True if player's factory & type names match our reference factory and type names.
-    virtual bool isMatchingPlayerType(const simulation::IPlayer* const p) const;
+    virtual bool isMatchingPlayerType(const simulation::AbstractPlayer* const p) const;
 
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name
-    base::safe_ptr<const base::String> refTypeName;           // Reference type name (e.g., "F-16C", "T-71"
+    base::safe_ptr<const base::String> refTypeName;           // Reference type name (e.g., "F-16C", "T-71")
     unsigned int typeId;                                      // OTW entity type ID number
 };
 

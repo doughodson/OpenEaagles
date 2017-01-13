@@ -20,7 +20,7 @@ Rotary2::Rotary2()
 {
    STANDARD_CONSTRUCTOR()
 
-   base::Integer* p = new base::Integer(1);    // default rotary item
+   auto p = new base::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
 }

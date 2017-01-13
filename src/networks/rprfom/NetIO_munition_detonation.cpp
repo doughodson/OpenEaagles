@@ -5,7 +5,7 @@
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 #include "openeaagles/models/Simulation.hpp"
 
@@ -174,7 +174,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
     RTIObjectIdStruct firingObjectIdentifier;
     RTIObjectIdStruct munitionObjectIdentifier;
     RTIObjectIdStruct targetObjectIdentifier;
-    models::Weapon::Detonation detonationResult = models::Weapon::DETONATE_NONE;
+    models::AbstractWeapon::Detonation detonationResult = models::AbstractWeapon::DETONATE_NONE;
 
     // ---
     // Extract the required data from the interaction's parameters
@@ -194,28 +194,28 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
 
             switch ( DetonationResultCodeEnum8( netBuffer[0] ) ) {
                 case DetonationResultCodeOther :
-                    detonationResult = models::Weapon::DETONATE_OTHER;
+                    detonationResult = models::AbstractWeapon::DETONATE_OTHER;
                     break;
                 case EntityImpact :
-                    detonationResult = models::Weapon::DETONATE_ENTITY_IMPACT;
+                    detonationResult = models::AbstractWeapon::DETONATE_ENTITY_IMPACT;
                     break;
                 case EntityProximateDetonation :
-                    detonationResult = models::Weapon::DETONATE_ENTITY_PROXIMATE_DETONATION;
+                    detonationResult = models::AbstractWeapon::DETONATE_ENTITY_PROXIMATE_DETONATION;
                     break;
                 case GroundImpact :
-                    detonationResult = models::Weapon::DETONATE_GROUND_IMPACT;
+                    detonationResult = models::AbstractWeapon::DETONATE_GROUND_IMPACT;
                     break;
                 case GroundProximateDetonation :
-                    detonationResult = models::Weapon::DETONATE_GROUND_PROXIMATE_DETONATION;
+                    detonationResult = models::AbstractWeapon::DETONATE_GROUND_PROXIMATE_DETONATION;
                     break;
                 case Detonation :
-                    detonationResult = models::Weapon::DETONATE_DETONATION;
+                    detonationResult = models::AbstractWeapon::DETONATE_DETONATION;
                     break;
                 case None :
-                    detonationResult = models::Weapon::DETONATE_NONE;
+                    detonationResult = models::AbstractWeapon::DETONATE_NONE;
                     break;
                 default :
-                    detonationResult = models::Weapon::DETONATE_OTHER;
+                    detonationResult = models::AbstractWeapon::DETONATE_OTHER;
                     break;
             };
         }
@@ -282,7 +282,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // ---
         // 3) Tell the target player that it was killed by the firing player
         // ---
-        if (detonationResult == models::Weapon::DETONATE_ENTITY_IMPACT) {
+        if (detonationResult == models::AbstractWeapon::DETONATE_ENTITY_IMPACT) {
             if (fNib != nullptr) {
                 tPlayer->event(KILL_EVENT,fNib->getPlayer());
             }
@@ -295,7 +295,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // 4) Update the mode of the munition IPlayer
         // ---
         if (mNib != nullptr) {
-            models::Weapon* mPlayer = dynamic_cast<models::Weapon*>(mNib->getPlayer());
+            auto mPlayer = dynamic_cast<models::AbstractWeapon*>(mNib->getPlayer());
             if (mPlayer != nullptr) {
                 mPlayer->setMode(models::Player::DETONATED);
                 mPlayer->setDetonationResults(detonationResult);

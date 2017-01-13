@@ -49,7 +49,7 @@ void IrShape::copyData(const IrShape& org, const bool)
 bool IrShape::setSlotIrShapeArea(const oe::base::Number* const num)
 {
    double value = 0.0;
-   const base::Area* a = dynamic_cast<const base::Area*>(num);
+   auto a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
       base::SquareMeters sm;
       value = static_cast<double>(sm.convert(*a));
@@ -112,7 +112,7 @@ bool IrSphere::setSlotIrSphereRadius(const oe::base::Number* const s)
 {
    double value = 0.0;
 
-   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
+   auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
@@ -175,7 +175,7 @@ bool IrBox::setSlotIrBoxX(const oe::base::Number* const s)
 {
    double value = 0.0;
 
-   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
+   auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
@@ -191,7 +191,7 @@ bool IrBox::setSlotIrBoxY(const oe::base::Number* const s)
 {
    double value = 0.0;
 
-   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
+   auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));
@@ -207,7 +207,7 @@ bool IrBox::setSlotIrBoxZ(const oe::base::Number* const s)
 {
    double value = 0.0;
 
-   const base::Distance* d = dynamic_cast<const base::Distance*>(s);
+   auto d = dynamic_cast<const base::Distance*>(s);
    if (d != nullptr) {
       base::Meters m;
       value = static_cast<double>(m.convert(*d));

@@ -3,7 +3,7 @@
 
 #include "openeaagles/models/Simulation.hpp"
 #include "openeaagles/models/players/Missile.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 #include "openeaagles/models/dynamics/DynamicsModel.hpp"
 #include "openeaagles/models/navigation/Navigation.hpp"
 #include "openeaagles/models/systems/Datalink.hpp"
@@ -24,9 +24,9 @@
 
 #include "openeaagles/terrain/Terrain.hpp"
 
-#include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/INetIO.hpp"
-#include "openeaagles/simulation/INib.hpp"
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include "openeaagles/simulation/AbstractNetIO.hpp"
+#include "openeaagles/simulation/AbstractNib.hpp"
 
 #include "openeaagles/base/Boolean.hpp"
 #include "openeaagles/base/List.hpp"
@@ -330,8 +330,8 @@ void Player::initData()
    nib = nullptr;
    netID = 0;
    enableNetOutput = true;
-   nibList = new simulation::INib*[simulation::INetIO::MAX_NETWORD_ID];
-   for (unsigned int i = 0; i < simulation::INetIO::MAX_NETWORD_ID; i++) {
+   nibList = new simulation::AbstractNib*[simulation::AbstractNetIO::MAX_NETWORD_ID];
+   for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
       nibList[i] = nullptr;
    }
 
@@ -480,7 +480,7 @@ void Player::copyData(const Player& org, const bool cc)
 
    // NIB pointers are not copied!
    setNib( nullptr );
-   for (unsigned int i = 0; i < simulation::INetIO::MAX_NETWORD_ID; i++) {
+   for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
       setOutgoingNib(nullptr, i);
    }
 
@@ -519,7 +519,7 @@ void Player::deleteData()
 
    setNib(nullptr);
    if (nibList != nullptr) {
-      for (unsigned int i = 0; i < simulation::INetIO::MAX_NETWORD_ID; i++) {
+      for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
          setOutgoingNib(nullptr, i);
       }
       delete[] nibList;
@@ -549,7 +549,7 @@ bool Player::shutdownNotification()
 {
    if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
    if (nibList != nullptr) {
-      for (unsigned int i = 0; i < simulation::INetIO::MAX_NETWORD_ID; i++) {
+      for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
          if (nibList[i] != nullptr) nibList[i]->event(SHUTDOWN_EVENT);
       }
    }
@@ -903,20 +903,20 @@ bool Player::isDestroyed() const
 }
 
 // Player's outgoing NIB(s)
-simulation::INib* Player::getLocalNib(const unsigned int netId)
+simulation::AbstractNib* Player::getLocalNib(const unsigned int netId)
 {
-   simulation::INib* p = nullptr;
-   if (nibList != nullptr && netId >= 1 && netId <= simulation::INetIO::MAX_NETWORD_ID) {
+   simulation::AbstractNib* p = nullptr;
+   if (nibList != nullptr && netId >= 1 && netId <= simulation::AbstractNetIO::MAX_NETWORD_ID) {
       p = nibList[netId-1];
    }
    return p;
 }
 
 // Player's outgoing NIB(s)  (const version)
-const simulation::INib* Player::getLocalNib(const unsigned int netId) const
+const simulation::AbstractNib* Player::getLocalNib(const unsigned int netId) const
 {
-   const simulation::INib* p = nullptr;
-   if (nibList != nullptr && netId >= 1 && netId <= simulation::INetIO::MAX_NETWORD_ID) {
+   const simulation::AbstractNib* p = nullptr;
+   if (nibList != nullptr && netId >= 1 && netId <= simulation::AbstractNetIO::MAX_NETWORD_ID) {
       p = nibList[netId-1];
    }
    return p;
@@ -1950,14 +1950,14 @@ bool Player::setCommandedAltitudeFt(const double a)
 }
 
 // Sets a pointer to the Network Interface Block (NIB)
-bool Player::setNib(simulation::INib* const n)
+bool Player::setNib(simulation::AbstractNib* const n)
 {
    if (nib != nullptr) nib->unref();
    nib = n;
    if (nib != nullptr) {
       // Ref() the new NIB and get the network ID
       nib->ref();
-      simulation::INetIO* netIO = nib->getNetIO();
+      simulation::AbstractNetIO* netIO = nib->getNetIO();
       if (netIO != nullptr) netID = netIO->getNetworkID();
    }
    else {
@@ -1974,10 +1974,10 @@ bool Player::setEnableNetOutput(const bool x)
 }
 
 // Sets the outgoing NIB for network 'id'
-bool Player::setOutgoingNib(simulation::INib* const p, const unsigned int id)
+bool Player::setOutgoingNib(simulation::AbstractNib* const p, const unsigned int id)
 {
    bool ok = false;
-   if (nibList != nullptr && id >= 1 && id <= simulation::INetIO::MAX_NETWORD_ID) {
+   if (nibList != nullptr && id >= 1 && id <= simulation::AbstractNetIO::MAX_NETWORD_ID) {
       unsigned int idx = id - 1;
       if (nibList[idx] != nullptr) nibList[idx]->unref();
       nibList[idx] = p;
@@ -2549,7 +2549,7 @@ int Player::setThrottles(const double* const data, const int num)
 //------------------------------------------------------------------------------
 // Process weapon detonation
 //------------------------------------------------------------------------------
-void Player::processDetonation(const double detRange, Weapon* const wpn)
+void Player::processDetonation(const double detRange, AbstractWeapon* const wpn)
 {
    if (!isKillOverride()) {
 

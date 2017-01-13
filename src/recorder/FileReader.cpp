@@ -125,7 +125,7 @@ bool FileReader::openFile()
       nameLength += filename->len();           // add the length of the file name
       nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-      char* fullname = new char[nameLength];
+      auto fullname = new char[nameLength];
       fullname[0] = '\0';
 
       //---
@@ -256,7 +256,7 @@ const DataRecordHandle* FileReader::readRecordImp()
 
             // Parse the DataRecord
             std::string wireFormat(ibuf, n);
-            pb::DataRecord* dataRecord = new pb::DataRecord();
+            auto dataRecord = new pb::DataRecord();
             bool ok = dataRecord->ParseFromString(wireFormat);
 
             // Create a handle for the DataRecord (it now has ownership)

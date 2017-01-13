@@ -23,7 +23,7 @@ void State::updateGlobalState()
       if (isComponentSelected()) {
          // When we've selected only one
          if (getSelectedComponent() != nullptr) {
-            State* state = dynamic_cast<State*>(getSelectedComponent());
+            auto state = dynamic_cast<State*>(getSelectedComponent());
             if (state != nullptr)
                state->updateGlobalState();
          }
@@ -32,9 +32,9 @@ void State::updateGlobalState()
          // When we should update them all
          base::List::Item* item = subcomponents->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            base::Component* obj = static_cast<base::Component*>(pair->object());
-            State* state = dynamic_cast<State*>(obj);
+            auto pair = static_cast<base::Pair*>(item->getValue());
+            auto obj = static_cast<base::Component*>(pair->object());
+            auto state = dynamic_cast<State*>(obj);
             if (state != nullptr)
                state->updateGlobalState();
             item = item->getNext();
@@ -53,7 +53,7 @@ void State::updateState(const base::Component* const actor)
       if (isComponentSelected()) {
          // When we've selected only one
          if (getSelectedComponent() != nullptr) {
-            State* state = dynamic_cast<State*>(getSelectedComponent());
+            auto state = dynamic_cast<State*>(getSelectedComponent());
             if (state != nullptr)
                state->updateState(actor);
          }
@@ -62,9 +62,9 @@ void State::updateState(const base::Component* const actor)
          // When we should update them all
          base::List::Item* item = subcomponents->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            base::Component* obj = static_cast<base::Component*>(pair->object());
-            State* state = dynamic_cast<State*>(obj);
+            auto pair = static_cast<base::Pair*>(item->getValue());
+            auto obj = static_cast<base::Component*>(pair->object());
+            auto state = dynamic_cast<State*>(obj);
             if (state != nullptr)
                state->updateState(actor);
             item = item->getNext();

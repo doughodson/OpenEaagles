@@ -507,7 +507,7 @@ bool CommRadio::transmitDataMessage(base::Object* const msg)
 
    if (msg != nullptr && isTransmitterEnabled() && getAntenna() != nullptr) {
       // Send the emission to the other player
-      Emission* em = new Emission();
+      auto em = new Emission();
       em->setDataMessage(msg);
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());

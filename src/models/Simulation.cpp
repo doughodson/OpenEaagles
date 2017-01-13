@@ -5,7 +5,7 @@
 #include "openeaagles/dafif/NavaidLoader.hpp"
 #include "openeaagles/dafif/WaypointLoader.hpp"
 
-#include "openeaagles/models/environment/Atmosphere.hpp"
+#include "openeaagles/models/environment/AbstractAtmosphere.hpp"
 #include "openeaagles/terrain/Terrain.hpp"
 
 #include "openeaagles/base/EarthModel.hpp"
@@ -21,7 +21,6 @@
 #include "openeaagles/base/Statistic.hpp"
 #include "openeaagles/base/util/system.hpp"
 
-
 namespace oe {
 namespace models {
 
@@ -36,11 +35,11 @@ BEGIN_SLOTTABLE(Simulation)
 END_SLOTTABLE(Simulation)
 
 BEGIN_SLOT_MAP(Simulation)
-    ON_SLOT( 1, setAirports,            dafif::AirportLoader)
-    ON_SLOT( 2, setNavaids,             dafif::NavaidLoader)
-    ON_SLOT( 3, setWaypoints,           dafif::WaypointLoader)
-    ON_SLOT( 4, setSlotTerrain,         terrain::Terrain)
-    ON_SLOT( 5, setSlotAtmosphere,      Atmosphere)
+    ON_SLOT( 1, setAirports,         dafif::AirportLoader)
+    ON_SLOT( 2, setNavaids,          dafif::NavaidLoader)
+    ON_SLOT( 3, setWaypoints,        dafif::WaypointLoader)
+    ON_SLOT( 4, setSlotTerrain,      terrain::Terrain)
+    ON_SLOT( 5, setSlotAtmosphere,   AbstractAtmosphere)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(Simulation)
@@ -85,7 +84,7 @@ void Simulation::copyData(const Simulation& org, const bool cc)
    }
 
    if (org.atmosphere != nullptr) {
-      Atmosphere* copy = org.atmosphere->clone();
+      AbstractAtmosphere* copy = org.atmosphere->clone();
       setSlotAtmosphere( copy );
       copy->unref();
    }
@@ -189,13 +188,13 @@ terrain::Terrain* Simulation::getTerrain()
 }
 
 // Returns the atmosphere model
-Atmosphere* Simulation::getAtmosphere()
+AbstractAtmosphere* Simulation::getAtmosphere()
 {
    return atmosphere;
 }
 
 // Returns the atmospheric model
-const Atmosphere* Simulation::getAtmosphere() const
+const AbstractAtmosphere* Simulation::getAtmosphere() const
 {
    return atmosphere;
 }
@@ -253,7 +252,7 @@ bool Simulation::setSlotTerrain(terrain::Terrain* const msg)
    return true;
 }
 
-bool Simulation::setSlotAtmosphere(Atmosphere* const msg)
+bool Simulation::setSlotAtmosphere(AbstractAtmosphere* const msg)
 {
    if (atmosphere != nullptr) atmosphere->unref();
    atmosphere = msg;

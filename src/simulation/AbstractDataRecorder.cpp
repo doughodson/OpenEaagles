@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
 #include "openeaagles/simulation/SimExec.hpp"
 #include "openeaagles/simulation/Station.hpp"
@@ -10,23 +10,23 @@
 namespace oe {
 namespace simulation {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(DataRecorder, "Abstract_DataRecorder")
-EMPTY_SLOTTABLE(DataRecorder)
-EMPTY_SERIALIZER(DataRecorder)
+IMPLEMENT_ABSTRACT_SUBCLASS(AbstractDataRecorder, "AbstractDataRecorder")
+EMPTY_SLOTTABLE(AbstractDataRecorder)
+EMPTY_SERIALIZER(AbstractDataRecorder)
 
-DataRecorder::DataRecorder()
+AbstractDataRecorder::AbstractDataRecorder()
 {
    STANDARD_CONSTRUCTOR()
    initData();
 }
 
-void DataRecorder::initData()
+void AbstractDataRecorder::initData()
 {
    sta = nullptr;
    sim = nullptr;
 }
 
-void DataRecorder::copyData(const DataRecorder& org, const bool cc)
+void AbstractDataRecorder::copyData(const AbstractDataRecorder& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -35,7 +35,7 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
    sim = nullptr;
 }
 
-void DataRecorder::deleteData()
+void AbstractDataRecorder::deleteData()
 {
    sta = nullptr;
    sim = nullptr;
@@ -44,13 +44,13 @@ void DataRecorder::deleteData()
 //------------------------------------------------------------------------------
 // Background thread processing of the data records
 //------------------------------------------------------------------------------
-void DataRecorder::processRecords()
+void AbstractDataRecorder::processRecords()
 {
    // nothing to do at this level
 }
 
 // Our parent Station
-Station* DataRecorder::getStation()
+Station* AbstractDataRecorder::getStation()
 {
    if (sta == nullptr) {
       getStationImp();
@@ -59,16 +59,16 @@ Station* DataRecorder::getStation()
 }
 
 // Our parent Station (const version)
-const Station* DataRecorder::getStation() const
+const Station* AbstractDataRecorder::getStation() const
 {
    if (sta == nullptr) {
-      (const_cast<DataRecorder*>(this))->getStationImp();
+      (const_cast<AbstractDataRecorder*>(this))->getStationImp();
    }
    return sta;
 }
 
 // Find our parent Station
-Station* DataRecorder::getStationImp()
+Station* AbstractDataRecorder::getStationImp()
 {
    if (sta == nullptr) {
       sta = static_cast<Station*>(findContainerByType(typeid(Station)));
@@ -80,7 +80,7 @@ Station* DataRecorder::getStationImp()
 }
 
 // The simulation
-SimExec* DataRecorder::getSimulation()
+SimExec* AbstractDataRecorder::getSimulation()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -88,16 +88,16 @@ SimExec* DataRecorder::getSimulation()
    return sim;
 }
 
-const SimExec* DataRecorder::getSimulation() const
+const SimExec* AbstractDataRecorder::getSimulation() const
 {
    if (sim == nullptr) {
-      (const_cast<DataRecorder*>(this))->getSimulationImp();
+      (const_cast<AbstractDataRecorder*>(this))->getSimulationImp();
    }
    return sim;
 }
 
 // The simulation
-SimExec* DataRecorder::getSimulationImp()
+SimExec* AbstractDataRecorder::getSimulationImp()
 {
    if (sim == nullptr) {
       Station* p = getStation();
@@ -107,7 +107,7 @@ SimExec* DataRecorder::getSimulationImp()
 }
 
 
-bool DataRecorder::recordDataImp(const unsigned int id, const base::Object* pObjects[4], const double values[4])
+bool AbstractDataRecorder::recordDataImp(const unsigned int id, const base::Object* pObjects[4], const double values[4])
 {
    return true;
 }

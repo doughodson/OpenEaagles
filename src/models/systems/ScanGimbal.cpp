@@ -979,7 +979,7 @@ bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
     bool ok = false;
     if (newScanRadius != nullptr) {
         double x = newScanRadius->getDouble();
-        const base::Angle* aa = dynamic_cast<const base::Angle*>(newScanRadius);
+        auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
         if (aa != nullptr) {
             x = base::Radians::convertStatic(*aa);
         }
@@ -1005,10 +1005,10 @@ bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
         osg::Vec2d tempVerts(0.0, 0.0);
 
         while (item != nullptr && nprv < n) {
-            const base::Pair* p = dynamic_cast<const base::Pair*>(item->getValue());
+            auto p = dynamic_cast<const base::Pair*>(item->getValue());
                 if (p != nullptr) {
                     const base::Object* obj2 = p->object();
-                    const base::List* msg2 = dynamic_cast<const base::List*>(obj2);
+                    auto msg2 = dynamic_cast<const base::List*>(obj2);
                     if (msg2 != nullptr) {
                         double values[2];
                         int nl = msg2->getNumberList(values, 2);

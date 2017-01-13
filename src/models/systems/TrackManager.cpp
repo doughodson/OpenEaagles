@@ -7,7 +7,7 @@
 #include "openeaagles/models/Emission.hpp"
 #include "openeaagles/models/Track.hpp"
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -15,7 +15,7 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/units/Times.hpp"
 
-#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
 #include "openeaagles/models/Simulation.hpp"
 
 namespace oe {
@@ -446,7 +446,7 @@ bool TrackManager::setSlotMaxTracks(const base::Number* const num)
 bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
 {
    double age = 0.0;
-   const base::Time* p = dynamic_cast<const base::Time*>(num);
+   auto p = dynamic_cast<const base::Time*>(num);
    if (p != nullptr) {
       // We have a time and we want it in seconds ...
       base::Seconds seconds;
@@ -713,10 +713,8 @@ void AirTrkMgr::deleteData()
 //------------------------------------------------------------------------------
 void AirTrkMgr::processTrackList(const double dt)
 {
-   double tmp;
-
    // Make sure we have an ownship to work with
-   Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -727,7 +725,7 @@ void AirTrkMgr::processTrackList(const double dt)
    // ---
    osg::Vec3d osVel = ownship->getVelocity();
    osg::Vec3d osAccel = ownship->getAcceleration();
-   double osGndTrk = ownship->getGroundTrack();
+   const double osGndTrk = ownship->getGroundTrack();
 
    base::lock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
@@ -746,6 +744,7 @@ void AirTrkMgr::processTrackList(const double dt)
    double newSignal[MAX_REPORTS];
    double newRdot[MAX_REPORTS];
    osg::Vec3d tgtPos[MAX_REPORTS];
+   double tmp =0.0;
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
 
       if (nReports < MAX_REPORTS) {
@@ -754,7 +753,7 @@ void AirTrkMgr::processTrackList(const double dt)
 
       bool dummy = false;
       if (tgt->isMajorType(Player::WEAPON)) {
-         dummy = (static_cast<const Weapon*>(tgt))->isDummy();
+         dummy = (static_cast<const AbstractWeapon*>(tgt))->isDummy();
       }
 
       if ( tgt->isMajorType(Player::AIR_VEHICLE) ||
@@ -848,7 +847,7 @@ void AirTrkMgr::processTrackList(const double dt)
    //      X(k) is the state vector [ pos vel accel ]
    //      U(k) is the difference between the observed & predicted positions
    // ---
-   double d2 = posGate * posGate;    // position gate squared
+   const double d2 = posGate * posGate;    // position gate squared
    base::lock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
@@ -934,7 +933,7 @@ void AirTrkMgr::processTrackList(const double dt)
    for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
-         RfTrack* newTrk = new RfTrack();
+         auto newTrk = new RfTrack();
          newTrk->setTrackID( getNewTrackID() );
          newTrk->setTarget( emissions[i]->getTarget() );
          newTrk->setType(Track::AIR_TRACK_BIT | Track::ONBOARD_SENSOR_BIT);
@@ -965,7 +964,7 @@ void AirTrkMgr::processTrackList(const double dt)
 bool AirTrkMgr::setPositionGate(const base::Number* const num)
 {
    double value = 0.0;
-   const base::Distance* p = dynamic_cast<const base::Distance*>(num);
+   auto p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
       base::Meters meters;
@@ -994,7 +993,7 @@ bool AirTrkMgr::setPositionGate(const base::Number* const num)
 bool AirTrkMgr::setRangeGate(const base::Number* const num)
 {
    double value = 0.0;
-   const base::Distance* p = dynamic_cast<const base::Distance*>(num);
+   auto p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
       base::Meters meters;
@@ -1158,7 +1157,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    double tmp;
 
    // Make sure we have an ownship to work with
-   Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -1460,7 +1459,7 @@ void RwrTrkMgr::deleteData()
 void RwrTrkMgr::processTrackList(const double dt)
 {
    // Make sure we have an ownship to work with
-   Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -1648,7 +1647,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
-         RfTrack* newTrk = new RfTrack();
+         auto newTrk = new RfTrack();
          newTrk->setTrackID( getNewTrackID() );
          newTrk->setTarget( emissions[i]->getOwnship() );  // The emissions ownship is our target!
          newTrk->setType(Track::RWR_TRACK_BIT  | Track::ONBOARD_SENSOR_BIT);

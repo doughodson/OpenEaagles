@@ -95,7 +95,7 @@ void TexturePager::setSize(int tableSize)
     else stack = new base::List();
 
     for (int i = 0; i < size; i++) {
-        graphics::Texture* t = new graphics::Texture();
+        auto t = new graphics::Texture();
         stack->addHead(t);
      }
 }
@@ -256,7 +256,7 @@ void TexturePager::loadNewTextures()
                         if (stack != nullptr) {
                             base::List::Item* item = stack->getFirstItem();
                             if (item != nullptr) {
-                                graphics::Texture* obj = dynamic_cast<graphics::Texture*>(item->getValue());
+                                auto obj = dynamic_cast<graphics::Texture*>(item->getValue());
                                 if (obj != nullptr) {
                                     // Set our new texture object there, and remove it from our stack.
                                     table.setTextureObject(r, c, obj);

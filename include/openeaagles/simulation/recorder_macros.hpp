@@ -85,7 +85,7 @@
 
 #define BEGIN_RECORD_DATA_SAMPLE(pRecorder, token)                                 \
 {                                                                                  \
-   ::oe::simulation::DataRecorder* _p = pRecorder;                                 \
+   ::oe::simulation::AbstractDataRecorder* _p = pRecorder;                         \
    if (pRecorder != nullptr)  {                                                    \
       unsigned int _token = token;                                                 \
       const ::oe::base::Object* _obj[4] = { nullptr, nullptr, nullptr, nullptr };  \

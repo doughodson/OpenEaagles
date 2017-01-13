@@ -4,12 +4,11 @@
 #include "openeaagles/otw/Otm.hpp"
 #include "openeaagles/otw/OtwModel.hpp"
 
-#include "openeaagles/simulation/IPlayer.hpp"
+#include "openeaagles/simulation/AbstractPlayer.hpp"
 
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
-#include "openeaagles/simulation/INetIO.hpp"
-#include "openeaagles/simulation/INib.hpp"
+#include "openeaagles/simulation/AbstractNib.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -276,7 +275,7 @@ void Otw::mapPlayerList2ModelTable()
          models::Player* p = static_cast<models::Player*>(pair->object());
 
          bool dummy = false;
-         const models::Weapon* wpn = dynamic_cast<const models::Weapon*>( p );
+         auto wpn = dynamic_cast<const models::AbstractWeapon*>( p );
          if (wpn != nullptr) dummy = wpn->isDummy();
 
          if ( p != getOwnship() && !dummy ) {
@@ -403,7 +402,7 @@ void Otw::mapPlayers2ElevTable()
 //------------------------------------------------------------------------------
 // computeRangeToPlayer() -- Calculate range from ownship to player
 //------------------------------------------------------------------------------
-double Otw::computeRangeToPlayer(const simulation::IPlayer* const ip) const
+double Otw::computeRangeToPlayer(const simulation::AbstractPlayer* const ip) const
 {
     double rng = maxRange*2.0 + 1.0;  // Default is out-of-range
     if (ownship != nullptr) {
@@ -417,7 +416,7 @@ double Otw::computeRangeToPlayer(const simulation::IPlayer* const ip) const
 // newModelEntry() -- Generates a new model entry for this player.
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-OtwModel* Otw::newModelEntry(simulation::IPlayer* const ip)
+OtwModel* Otw::newModelEntry(simulation::AbstractPlayer* const ip)
 {
    OtwModel* model = nullptr;
 
@@ -439,7 +438,7 @@ OtwModel* Otw::newModelEntry(simulation::IPlayer* const ip)
 // newElevEntry() -- Generates a new elevation entry for this player
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-OtwModel* Otw::newElevEntry(simulation::IPlayer* const ip)
+OtwModel* Otw::newElevEntry(simulation::AbstractPlayer* const ip)
 {
    OtwModel* model = nullptr;
 
@@ -462,7 +461,7 @@ OtwModel* Otw::newElevEntry(simulation::IPlayer* const ip)
 // the Station class.  Derived versions of Otw can override this function
 // and control the switch of ownship using setOwnship0()
 //------------------------------------------------------------------------------
-void Otw::setOwnship(simulation::IPlayer* const newOwnship)
+void Otw::setOwnship(simulation::AbstractPlayer* const newOwnship)
 {
    setOwnship0(newOwnship);
 }
@@ -470,7 +469,7 @@ void Otw::setOwnship(simulation::IPlayer* const newOwnship)
 //------------------------------------------------------------------------------
 // Sets our ownship player (for derived class control)
 //------------------------------------------------------------------------------
-void Otw::setOwnship0(simulation::IPlayer* const newOwnship)
+void Otw::setOwnship0(simulation::AbstractPlayer* const newOwnship)
 {
     // Nothing's changed, just return
     if (ownship == newOwnship) return;
@@ -676,7 +675,7 @@ OtwModel* Otw::findModel(const unsigned short playerID, const base::String* cons
    return found;
 }
 
-OtwModel* Otw::findModel(const simulation::IPlayer* const player, const TableType type)
+OtwModel* Otw::findModel(const simulation::AbstractPlayer* const player, const TableType type)
 {
    OtwModel* found = nullptr;
    if (player != nullptr) {
@@ -684,7 +683,7 @@ OtwModel* Otw::findModel(const simulation::IPlayer* const player, const TableTyp
       const base::String* fName = nullptr;
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
-         const simulation::INib* pNib = player->getNib();
+         const simulation::AbstractNib* pNib = player->getNib();
          fName = pNib->getFederateName();
       }
       // Now find the model using the player's IDs
@@ -857,8 +856,8 @@ bool Otw::setSlotOtwModelTypes(const base::PairStream* const msg)
        // into the table.
        const base::List::Item* item = msg->getFirstItem();
        while (item != nullptr && nOtwModelTypes < MAX_MODELS_TYPES) {
-          const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
-          const Otm* otwType = dynamic_cast<const Otm*>( pair->object() );
+          auto pair = static_cast<const base::Pair*>(item->getValue());
+          auto otwType = dynamic_cast<const Otm*>( pair->object() );
           if (otwType != nullptr) {
              // We have an Otm object, so put it in the table
              otwType->ref();

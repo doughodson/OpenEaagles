@@ -2,7 +2,7 @@
 #ifndef __oe_interop_NetIO_H__
 #define __oe_interop_NetIO_H__
 
-#include "openeaagles/simulation/INetIO.hpp"
+#include "openeaagles/simulation/AbstractNetIO.hpp"
 
 #include "openeaagles/base/String.hpp"
 
@@ -143,9 +143,9 @@ class Ntm;
 // Note: public and protected sections for Nib and Ntm support are located
 //       after the main public and protected sections.
 //------------------------------------------------------------------------------
-class NetIO : public simulation::INetIO
+class NetIO : public simulation::AbstractNetIO
 {
-   DECLARE_SUBCLASS(NetIO, simulation::INetIO)
+   DECLARE_SUBCLASS(NetIO, simulation::AbstractNetIO)
 
 public:
     // Source of the time line

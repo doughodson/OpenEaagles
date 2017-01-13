@@ -12,7 +12,6 @@
 #include "openeaagles/models/players/GroundVehicle.hpp"
 #include "openeaagles/models/players/LifeForms.hpp"
 #include "openeaagles/models/players/Missile.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
 #include "openeaagles/models/systems/StoresMgr.hpp"
 #include "openeaagles/models/Simulation.hpp"
 
@@ -80,7 +79,7 @@ void NetIO::processEntityStatePDU(const EntityStatePDU* const pdu)
                nib->setApplicationID(app);
                char cbuff[32];
                makeFederateName(cbuff, 32, site, app);
-               base::String* fname = new base::String(cbuff);
+               auto fname = new base::String(cbuff);
                nib->setFederateName(fname);
                fname->unref();
             }

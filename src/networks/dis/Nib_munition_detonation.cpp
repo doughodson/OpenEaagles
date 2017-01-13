@@ -9,7 +9,7 @@
 
 #include "openeaagles/models/players/AirVehicle.hpp"
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 #include "openeaagles/models/Simulation.hpp"
 
@@ -28,7 +28,7 @@ namespace dis {
 bool Nib::munitionDetonationMsgFactory(const double)
 {
    // Dummy weapon?
-   const models::Weapon* ww = dynamic_cast<const models::Weapon*>( getPlayer() );
+   auto ww = dynamic_cast<const models::AbstractWeapon*>( getPlayer() );
    if (ww != nullptr) {
       if (ww->isDummy()) return true;
    }
@@ -40,7 +40,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
     NetIO* disIO = static_cast<NetIO*>(getNetIO());
 
     // If our NIB's player just detonated, then it must be a weapon!
-    models::Weapon* mPlayer = dynamic_cast<models::Weapon*>(getPlayer());
+    auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
     if (mPlayer == nullptr) return false;
 
     // Ok, we have the weapon, now get the firing and target players
@@ -90,7 +90,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
             }
             else {
                // Networked player, use its NIB's IDs
-               const Nib* fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
+               auto fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
                if (fNIB != nullptr) {
                   pdu.targetEntityID.simulationID.siteIdentification = fNIB->getSiteID();
                   pdu.targetEntityID.simulationID.applicationIdentification = fNIB->getApplicationID();

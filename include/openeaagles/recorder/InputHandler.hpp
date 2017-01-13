@@ -2,19 +2,19 @@
 #ifndef __oe_recorder_InputHandler_H__
 #define __oe_recorder_InputHandler_H__
 
-#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/AbstractRecorderComponent.hpp"
 
 namespace oe {
 namespace recorder {
-   class DataRecordHandle;
+class DataRecordHandle;
 
 //------------------------------------------------------------------------------
 // Class: InputHandler
 // Description: Read and parse data records from an input source
 //------------------------------------------------------------------------------
-class InputHandler : public simulation::RecorderComponent
+class InputHandler : public simulation::AbstractRecorderComponent
 {
-    DECLARE_SUBCLASS(InputHandler, simulation::RecorderComponent)
+    DECLARE_SUBCLASS(InputHandler, simulation::AbstractRecorderComponent)
 
 public:
    InputHandler();

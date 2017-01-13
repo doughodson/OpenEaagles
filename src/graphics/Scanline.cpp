@@ -245,11 +245,11 @@ unsigned int Scanline::reduceVert(Polygon* const polygon)
    if (polygon == nullptr) return 0;
 
    unsigned int n1 = polygon->getNumberOfVertices();
-   osg::Vec3d* tvect  = const_cast<osg::Vec3d*>(static_cast<const osg::Vec3d*>(polygon->getVertices()));
+   auto tvect  = const_cast<osg::Vec3d*>(static_cast<const osg::Vec3d*>(polygon->getVertices()));
    if (tvect == nullptr) return 0;
 
-   osg::Vec3d* tnorms = const_cast<osg::Vec3d*>(static_cast<const osg::Vec3d*>(polygon->getNormals()));
-   osg::Vec2d* tcoord = const_cast<osg::Vec2d*>(static_cast<const osg::Vec2d*>(polygon->getTextureCoord()));
+   auto tnorms = const_cast<osg::Vec3d*>(static_cast<const osg::Vec3d*>(polygon->getNormals()));
+   auto tcoord = const_cast<osg::Vec2d*>(static_cast<const osg::Vec2d*>(polygon->getTextureCoord()));
 
    bool reduced = true;
    while (reduced && n1 > 2) {
@@ -342,7 +342,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
    // Transform the vertices and normals
    // ---
    {
-      osg::Vec3d* tv = new osg::Vec3d[n];
+      auto tv = new osg::Vec3d[n];
 
       // Transform the vectors first
       const osg::Vec3d* v = tmpPolygon->getVertices();
@@ -392,7 +392,7 @@ bool Scanline::addPolygon(const Polygon* const polygon)
       clipPolygon->calcPlaneCoeff();
 
       // Create a new PolyData structure for this polygon
-      PolyData* newPolyData = new PolyData();
+      auto newPolyData = new PolyData();
       newPolyData->polygon = clipPolygon;
       newPolyData->orig = polygon;
 

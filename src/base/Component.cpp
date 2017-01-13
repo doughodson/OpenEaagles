@@ -107,7 +107,7 @@ void Component::copyData(const Component& org, const bool cc)
    // Copy child components
    const PairStream* oc = org.components.getRefPtr();
    if (oc != nullptr) {
-      PairStream* tmp = static_cast<PairStream*>(oc->clone());
+      auto tmp = static_cast<PairStream*>(oc->clone());
       oc->unref();
       processComponents(tmp, typeid(Component));
       tmp->unref();
@@ -197,8 +197,8 @@ void Component::reset()
             // When we should reset them all
             List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                Pair* pair = static_cast<Pair*>(item->getValue());
-                Component* obj = static_cast<Component*>(pair->object());
+                auto pair = static_cast<Pair*>(item->getValue());
+                auto obj = static_cast<Component*>(pair->object());
                 obj->reset();
                 item = item->getNext();
             }
@@ -241,10 +241,10 @@ void Component::tcFrame(const double dt)
       #if defined(WIN32)
          LARGE_INTEGER cFreq;
          QueryPerformanceFrequency(&cFreq);
-         double freq = static_cast<double>( cFreq.QuadPart );
+         auto freq = static_cast<double>( cFreq.QuadPart );
          LARGE_INTEGER fcnt;
          QueryPerformanceCounter(&fcnt);
-         double endCnt = static_cast<double>( fcnt.QuadPart );
+         auto endCnt = static_cast<double>( fcnt.QuadPart );
          double dcnt = endCnt - tcStartTime;
          dtime = (dcnt/freq) * 1000.0;
       #else
@@ -283,8 +283,8 @@ void Component::updateTC(const double dt)
             // When we should update them all
             List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                Pair* pair = static_cast<Pair*>(item->getValue());
-                Component* obj = static_cast<Component*>( pair->object() );
+                auto pair = static_cast<Pair*>(item->getValue());
+                auto obj = static_cast<Component*>( pair->object() );
                 obj->tcFrame(dt);
                 item = item->getNext();
             }
@@ -311,8 +311,8 @@ void Component::updateData(const double dt)
             // When we should update them all
             List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                Pair* pair = static_cast<Pair*>(item->getValue());
-                Component* obj = static_cast<Component*>(pair->object());
+                auto pair = static_cast<Pair*>(item->getValue());
+                auto obj = static_cast<Component*>(pair->object());
                 obj->updateData(dt);
                 item = item->getNext();
             }
@@ -370,8 +370,8 @@ bool Component::shutdownNotification()
    if (subcomponents != nullptr) {
       List::Item* item = subcomponents->getFirstItem();
       while (item != nullptr) {
-         Pair* pair = static_cast<Pair*>(item->getValue());
-         Component* p = static_cast<Component*>(pair->object());
+         auto pair = static_cast<Pair*>(item->getValue());
+         auto p = static_cast<Component*>(pair->object());
          p->event(SHUTDOWN_EVENT);
          item = item->getNext();
       }
@@ -452,7 +452,7 @@ const Pair* Component::findByName(const char* const slotname) const
             // Found it?
             if (q1 != nullptr) {
                 // Check its components for 'yyy'
-                const Component* gobj = static_cast<const Component*>(q1->object());
+                auto gobj = static_cast<const Component*>(q1->object());
                 q = gobj->findByName(&name[i]);
             }
 
@@ -468,8 +468,8 @@ const Pair* Component::findByName(const char* const slotname) const
             //  so check our components' components
             const List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr && q == nullptr) {
-                const Pair* p = static_cast<const Pair*>(item->getValue());
-                const Component* obj = static_cast<const Component*>(p->object());
+                auto p = static_cast<const Pair*>(item->getValue());
+                auto obj = static_cast<const Component*>(p->object());
                 q = obj->findByName(slotname);
                 item = item->getNext();
             }
@@ -532,8 +532,8 @@ const Pair* Component::findByType(const std::type_info& type) const
         q = subcomponents->findByType(type);
         const List::Item* item = subcomponents->getFirstItem();
         while (item != nullptr && q == nullptr) {
-            const Pair* p = static_cast<const Pair*>(item->getValue());
-            const Component* obj = static_cast<const Component*>(p->object());
+            auto p = static_cast<const Pair*>(item->getValue());
+            auto obj = static_cast<const Component*>(p->object());
             q = obj->findByType(type);
             item = item->getNext();
         }
@@ -574,13 +574,13 @@ const Identifier* Component::findNameOfComponent(const Component* const p) const
 
             const List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr && name == nullptr) {
-                const Pair* pair = static_cast<const Pair*>(item->getValue());
-                const Component* child = static_cast<const Component*>(pair->object());
+                auto pair = static_cast<const Pair*>(item->getValue());
+                auto child = static_cast<const Component*>(pair->object());
                 const Identifier* name0 = child->findNameOfComponent(p);
                 if (name0 != nullptr) {
                     // Found it, so prefix it with our child's name and
                     // return the full name.
-                    Identifier* fullname = static_cast<Identifier*>(pair->slot()->clone());
+                    auto fullname = static_cast<Identifier*>(pair->slot()->clone());
                     *fullname += ".";
                     *fullname += name0->getString();
                     name = fullname;
@@ -636,14 +636,14 @@ void Component::processComponents(
    // ---
    // Create a new list, copy (filter) the component pairs and set their container pointers
    // ---
-   PairStream* newList = new PairStream();
+   auto newList = new PairStream();
    if (list != nullptr) {
 
       // Add the (filtered) components to the new list and set their container
       List::Item* item = list->getFirstItem();
       while (item != nullptr) {
-         Pair* pair = static_cast<Pair*>(item->getValue());
-         Component* cp = dynamic_cast<Component*>( pair->object() );
+         auto pair = static_cast<Pair*>(item->getValue());
+         auto cp = dynamic_cast<Component*>( pair->object() );
          if ( cp != nullptr && cp != remove && (skipFilter || cp->isClassType(filter)) ) {
             newList->put(pair);
             cp->container(this);
@@ -660,7 +660,7 @@ void Component::processComponents(
    // Add the optional component
    // ---
    if (add != nullptr) {
-      Component* cp = dynamic_cast<Component*>( add->object() );
+      auto cp = dynamic_cast<Component*>( add->object() );
       if ( cp != nullptr && (skipFilter || cp->isClassType(filter)) ) {
          newList->put(add);
          cp->container(this);
@@ -678,12 +678,12 @@ void Component::processComponents(
    // ---
    if (selection != nullptr) {
       if (selection->isClassType(typeid(String))) {
-            String* str = new String(*(static_cast<String*>(selection)));
+            auto str = new String(*(static_cast<String*>(selection)));
             select(str);
             str->unref();
       }
       else {
-            Integer* num = new Integer((static_cast<Number*>(selection))->getInt());
+            auto num = new Integer((static_cast<Number*>(selection))->getInt());
             select(num);
             num->unref();
       }
@@ -828,8 +828,8 @@ bool Component::setSlotComponent(PairStream* const multiple)
 bool Component::setSlotComponent(Component* const single)
 {
    // When a only one component ... make it a PairStream
-   PairStream* pairStream = new PairStream();
-   Pair* pair = new Pair("1", single);
+   auto pairStream = new PairStream();
+   auto pair = new Pair("1", single);
    pairStream->put( pair );
    pair->unref();
 
@@ -919,7 +919,7 @@ bool Component::send(const char* const id, const int event)
     bool val = false;
     Pair* p = findByName(id);
     if (p != nullptr) {
-        Component* g = static_cast<Component*>(p->object());
+        auto g = static_cast<Component*>(p->object());
         val = g->event(event);
     }
     return val;
@@ -1118,12 +1118,12 @@ std::ostream& Component::serialize(std::ostream& sout, const int i, const bool s
     if (selection != nullptr) {
         indent(sout,i+j);
         sout << "select: ";
-        String* str = dynamic_cast<String*>(selection);
+        auto str = dynamic_cast<String*>(selection);
         if (str != nullptr) {
             sout << *str;
         }
         else {
-            Number* num = dynamic_cast<Number*>(selection);
+            auto num = dynamic_cast<Number*>(selection);
             if (num != nullptr) sout << num->getInt();
         }
         sout << std::endl;
@@ -1282,7 +1282,7 @@ Component* Component::SendData::getObject(Component* gobj, const char* const id,
 // or null(0) if the value hasn't changed.
 Object* Component::SendData::getValue(const int value)
 {
-    Integer* num = dynamic_cast<Integer*>(past);
+    auto num = dynamic_cast<Integer*>(past);
     if (num == nullptr) {
         if (past != nullptr) past->unref();
         past = new Integer(value);
@@ -1299,7 +1299,7 @@ Object* Component::SendData::getValue(const int value)
 // or null(0) if the value hasn't changed.
 Object* Component::SendData::getValue(const float value)
 {
-    Float* num = dynamic_cast<Float*>(past);
+    auto num = dynamic_cast<Float*>(past);
     if (num == nullptr) {
         if (past != nullptr) past->unref();
         past = new Float(value);
@@ -1314,7 +1314,7 @@ Object* Component::SendData::getValue(const float value)
 
 Object* Component::SendData::getValue(const double value)
 {
-    Number* num = dynamic_cast<Number*>(past);
+    auto num = dynamic_cast<Number*>(past);
     if (num == nullptr) {
         if (past != nullptr) past->unref();
         past = new Float(value);
@@ -1333,7 +1333,7 @@ Object* Component::SendData::getValue(const double value)
 Object* Component::SendData::getValue(const char* const value)
 {
     // get our past string
-    String* str = dynamic_cast<String*>(past);
+    auto str = dynamic_cast<String*>(past);
     if (str == nullptr) {
         if (past != nullptr) past->unref();
         past = new String(value);
@@ -1363,7 +1363,7 @@ Object* Component::SendData::getValue(const char* const value)
 // or null(0) if the value hasn't changed.
 Object* Component::SendData::getValue(const bool value)
 {
-    Boolean* num = dynamic_cast<Boolean*>(past);
+    auto num = dynamic_cast<Boolean*>(past);
     if (num == nullptr) {
         if (past != nullptr) past->unref();
         past = new Boolean(value);

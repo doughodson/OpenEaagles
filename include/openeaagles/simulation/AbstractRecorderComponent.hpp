@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_RecorderComponent_H__
-#define __oe_simulation_RecorderComponent_H__
+#ifndef __oe_simulation_AbstractRecorderComponent_H__
+#define __oe_simulation_AbstractRecorderComponent_H__
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/simulation/dataRecorderTokens.hpp"
@@ -10,7 +10,7 @@ namespace base { class List; }
 namespace simulation {
 
 //------------------------------------------------------------------------------
-// Class: RecorderComponent
+// Class: AbstractRecorderComponent
 // Description: Base class for all data recorder components
 //
 // Notes:
@@ -30,12 +30,12 @@ namespace simulation {
 //                               ! (default: no records are disabled)
 //
 //------------------------------------------------------------------------------
-class RecorderComponent : public base::Component
+class AbstractRecorderComponent : public base::Component
 {
-   DECLARE_SUBCLASS(RecorderComponent, base::Component)
+   DECLARE_SUBCLASS(AbstractRecorderComponent, base::Component)
 
 public:
-   RecorderComponent();
+   AbstractRecorderComponent();
 
    // Checks the data filters and returns true if the record should be processed.
    bool isDataEnabled(const unsigned int id) const;
@@ -64,7 +64,7 @@ private:
 
 
 // Data record enabled function
-inline bool RecorderComponent::isDataEnabled(const unsigned int id) const
+inline bool AbstractRecorderComponent::isDataEnabled(const unsigned int id) const
 {
    bool ok = true;   // default is enabled
 

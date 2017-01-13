@@ -5,7 +5,7 @@
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 #include "openeaagles/models/Simulation.hpp"
 

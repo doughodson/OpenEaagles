@@ -26,7 +26,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 {
-   Thread* thread = static_cast<Thread*>(lpParam);
+   auto thread = static_cast<Thread*>(lpParam);
    Component* parent = thread->getParent();
 
    // Make sure that our Thread class and its parent are not going to go a way.
@@ -256,7 +256,7 @@ unsigned long ThreadPeriodicTask::mainThreadFunc()
 
             // How long should we sleep for
             const double st = refTime - t0;
-            const int sleepFor = static_cast<int>(st*1000.0);
+            const auto sleepFor = static_cast<int>(st*1000.0);
 
             // wait for the next frame
             if (sleepFor > 0) Sleep(sleepFor);

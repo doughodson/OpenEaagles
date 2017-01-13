@@ -100,7 +100,7 @@ bool SigConstant::setRCS(const base::Number* const num)
     bool ok = false;
     double r = -1.0;
 
-    const base::Area* d = dynamic_cast<const base::Area*>(num);
+    auto d = dynamic_cast<const base::Area*>(num);
     if (d != nullptr) {
         // Has area units and we need square meters
         base::SquareMeters m2;
@@ -168,7 +168,7 @@ bool SigSphere::setRadiusFromSlot(base::Number* const num)
     bool ok = false;
     double r = -1.0;
 
-    base::Distance* d = dynamic_cast<base::Distance*>(num);
+    auto d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
         base::Meters meters;
@@ -251,7 +251,7 @@ bool SigPlate::setA(base::Number* const num)
     bool ok = false;
     double v = -1.0;
 
-    base::Distance* d = dynamic_cast<base::Distance*>(num);
+    auto d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
         base::Meters meters;
@@ -275,7 +275,7 @@ bool SigPlate::setB(base::Number* const num)
     bool ok = false;
     double v = -1.0;
 
-    base::Distance* d = dynamic_cast<base::Distance*>(num);
+    auto d = dynamic_cast<base::Distance*>(num);
     if (d != nullptr) {
         // Has distance units and we need meters
         base::Meters meters;
@@ -416,7 +416,7 @@ double SigSwitch::getRCS(const Emission* const em)
       // find a RfSignature with this index
       base::Pair* pair = findByIndex(camouflage);
       if (pair != nullptr) {
-         RfSignature* sig = dynamic_cast<RfSignature*>( pair->object() );
+         auto sig = dynamic_cast<RfSignature*>( pair->object() );
          if (sig != nullptr) {
 
             // OK -- we've found the correct RfSignature subcomponent

@@ -2,16 +2,13 @@
 #ifndef __oe_interop_Nib_H__
 #define __oe_interop_Nib_H__
 
-#include "openeaagles/simulation/INib.hpp"
+#include "openeaagles/simulation/AbstractNib.hpp"
 
 #include "openeaagles/networks/interop/NetIO.hpp"
-
 #include "openeaagles/models/players/Player.hpp"
 
 namespace oe {
-
 namespace models { class Missile; }
-
 namespace interop {
 
 //------------------------------------------------------------------------------
@@ -40,9 +37,9 @@ namespace interop {
 // Factory name: Nib
 //
 //------------------------------------------------------------------------------
-class Nib : public simulation::INib
+class Nib : public simulation::AbstractNib
 {
-   DECLARE_SUBCLASS(Nib, simulation::INib)
+   DECLARE_SUBCLASS(Nib, simulation::AbstractNib)
 
 public:
    // Standard (mil-std-1278.1) Dead_Reckoning Model codes [ 0 .. 9 ]

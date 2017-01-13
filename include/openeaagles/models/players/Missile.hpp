@@ -2,7 +2,7 @@
 #ifndef __oe_models_Missile_H__
 #define __oe_models_Missile_H__
 
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 #include "openeaagles/base/units/Angles.hpp"
 
@@ -30,9 +30,9 @@ class Track;
 //   cmdSpeed     <Number>  ! Command speed (m/s) (default: 0.0)
 //
 //------------------------------------------------------------------------------
-class Missile : public Weapon
+class Missile : public AbstractWeapon
 {
-    DECLARE_SUBCLASS(Missile, Weapon)
+    DECLARE_SUBCLASS(Missile, AbstractWeapon)
 
 public:
     Missile();

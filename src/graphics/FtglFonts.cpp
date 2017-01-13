@@ -278,7 +278,7 @@ void FtglBitmapFont::outputText(const double x, const double y, const char* txt,
     if (nn <= 0) return;
 
     // output the text
-    FTGLBitmapFont* ftgl1 = static_cast<FTGLBitmapFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLBitmapFont*>(FTGL());
     if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
@@ -318,7 +318,7 @@ void FtglBitmapFont::outputText(const char* txt, const int n, const bool vf, con
     if (nn <= 0) return;
 
     // output the text
-    FTGLBitmapFont* ftgl1 = static_cast<FTGLBitmapFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLBitmapFont*>(FTGL());
     if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
@@ -365,7 +365,7 @@ void FtglBitmapFont::loadFont()
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
-    FTGLBitmapFont* ftglFont = new FTGLBitmapFont(fontPathname);
+    auto ftglFont = new FTGLBitmapFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -403,7 +403,7 @@ void FtglExtrdFont::outputText(const double x, const double y, const char* txt, 
     if (nn <= 0) return;
 
     // Output the text
-    FTGLExtrdFont* ftgl1 = static_cast<FTGLExtrdFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLExtrdFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
@@ -450,7 +450,7 @@ void FtglExtrdFont::outputText(const char* txt, const int n, const bool vf, cons
     if (nn <= 0) return;
 
     // Output the text
-    FTGLExtrdFont* ftgl1 = static_cast<FTGLExtrdFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLExtrdFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -499,7 +499,7 @@ void FtglExtrdFont::loadFont()
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
-    FTGLExtrdFont* ftglFont = new FTGLExtrdFont(fontPathname);
+    auto ftglFont = new FTGLExtrdFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -540,7 +540,7 @@ void FtglOutlineFont::outputText(const double x, const double y, const char* txt
     if (nn <= 0) return;
 
     // Output the text
-    FTGLOutlineFont* ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
@@ -587,7 +587,7 @@ void FtglOutlineFont::outputText(const char* txt, const int n, const bool vf, co
     if (nn <= 0) return;
 
     // Output the text
-    FTGLOutlineFont* ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLOutlineFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -636,7 +636,7 @@ void FtglOutlineFont::loadFont()
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
-    FTGLOutlineFont* ftglFont = new FTGLOutlineFont(fontPathname);
+    auto ftglFont = new FTGLOutlineFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -674,7 +674,7 @@ void FtglPixmapFont::outputText(const double x, const double y, const char* txt,
     if (nn <= 0) return;
 
     // output the text
-    FTGLPixmapFont* ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
     if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
@@ -716,7 +716,7 @@ void FtglPixmapFont::outputText(const char* txt, const int n, const bool vf, con
     if (nn <= 0) return;
 
     // output the text
-    FTGLPixmapFont* ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLPixmapFont*>(FTGL());
     if (ftgl1 != nullptr) {
         if (vf) {
             // Vertical text
@@ -763,7 +763,7 @@ void FtglPixmapFont::loadFont()
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
-    FTGLPixmapFont* ftglFont = new FTGLPixmapFont(fontPathname);
+    auto ftglFont = new FTGLPixmapFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -802,7 +802,7 @@ void FtglPolygonFont::outputText(const double x, const double y, const char* txt
     if (nn <= 0) return;
 
     // output the text
-    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
@@ -849,7 +849,7 @@ void FtglPolygonFont::outputText(const char* txt, const int n, const bool vf, co
     if (nn <= 0) return;
 
     // output the text
-    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -899,7 +899,7 @@ void FtglPolygonFont::loadFont()
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
-    FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);
+    auto ftglFont = new FTGLPolygonFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -982,7 +982,7 @@ void FtglHaloFont::outputText(const double x, const double y, const char* txt, c
     glColor4fv(ocolor);
 
     // output the text
-    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
@@ -1073,7 +1073,7 @@ void FtglHaloFont::outputText(const char* txt, const int n, const bool vf, const
     glColor4fv(ocolor);
 
     // output the text
-    FTGLPolygonFont* ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLPolygonFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -1122,7 +1122,7 @@ void FtglHaloFont::loadFont()
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
-    FTGLPolygonFont* ftglFont = new FTGLPolygonFont(fontPathname);
+    auto ftglFont = new FTGLPolygonFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());
@@ -1177,7 +1177,7 @@ void FtglTextureFont::outputText(const double x, const double y, const char* txt
     if (nn <= 0) return;
 
     // output the text
-    FTGLTextureFont* ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glTranslated(x, y, 0.0);
@@ -1224,7 +1224,7 @@ void FtglTextureFont::outputText(const char* txt, const int n, const bool vf, co
     if (nn <= 0) return;
 
     // output the text
-    FTGLTextureFont* ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
+    auto ftgl1 = static_cast<FTGLTextureFont*>(FTGL());
     if (ftgl1 != nullptr) {
         glPushMatrix();
         glScalef(static_cast<GLfloat>(getFontWidth()), static_cast<GLfloat>(getFontHeight()), 1.0f);
@@ -1274,7 +1274,7 @@ void FtglTextureFont::loadFont()
     else base::utStrcpy(fontPathname, FONTPATHNAME_LENGTH, "./");
     base::utStrcat(fontPathname, FONTPATHNAME_LENGTH, filename());
 
-    FTGLTextureFont* ftglFont = new FTGLTextureFont(fontPathname);
+    auto ftglFont = new FTGLTextureFont(fontPathname);
     if (ftglFont != nullptr && !ftglFont->Error()) {
         // set the face size and return the pointer, then tell our base class that we have a loaded font
         ftglFont->FaceSize(getFaceSize());

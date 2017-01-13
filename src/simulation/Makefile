@@ -4,12 +4,12 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboesimulation.a
 
 OBJS =  \
-	DataRecorder.o \
-	INetIO.o \
-	INib.o \
-	IOtw.o \
-	IPlayer.o \
-	RecorderComponent.o \
+	AbstractDataRecorder.o \
+	AbstractNetIO.o \
+	AbstractNib.o \
+	AbstractOtw.o \
+	AbstractPlayer.o \
+	AbstractRecorderComponent.o \
 	SimBgThread.o \
 	SimExec.o \
 	SimTcThread.o \

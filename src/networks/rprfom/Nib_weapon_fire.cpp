@@ -5,7 +5,7 @@
 #include "openeaagles/networks/hla/Ambassador.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 #include "openeaagles/models/Simulation.hpp"
 
@@ -43,7 +43,7 @@ bool Nib::weaponFireMsgFactory(const double)
    setMode(models::Player::ACTIVE);
 
    // If our player just launched, then it must be a weapon!
-   models::Weapon* mPlayer = dynamic_cast<models::Weapon*>(getPlayer());
+   auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
    if (mPlayer == nullptr) return false;  // Early out -- it wasn't a weapon! 
 
    // ---

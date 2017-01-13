@@ -41,9 +41,9 @@ void Jammer::transmit(const double)
 {
     // Send the emission to the other player
     if ( !areEmissionsDisabled() && isTransmitting() ) {
-        Emission* em = new Emission();
+        auto em = new Emission();
         em->setFrequency(getFrequency());
-        double p = getPeakPower();
+        const double p = getPeakPower();
         em->setPower(p);
         em->setTransmitLoss(getRfTransmitLoss());
         em->setMaxRangeNM(getRange());

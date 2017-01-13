@@ -179,7 +179,7 @@ bool IrSignature::setSlotEffectiveArea(oe::base::Number* const num)
    bool ok = false;
    double value = 0.0;
 
-   const base::Area* a = dynamic_cast<const base::Area*>(num);
+   auto a = dynamic_cast<const base::Area*>(num);
    if (a != nullptr) {
       base::SquareMeters sm;
       value = static_cast<double>(sm.convert(*a));
@@ -198,7 +198,7 @@ bool IrSignature::setSlotEffectiveArea(oe::base::Number* const num)
 bool IrSignature::getIrSignature(IrQueryMsg* const msg)
 {
    bool ok = false;
-   //IrQueryMsg* msg = dynamic_cast<IrQueryMsg*>( msg0 );     // FAB - do we really need to cast away const?
+   //auto msg = dynamic_cast<IrQueryMsg*>( msg0 );     // FAB - do we really need to cast away const?
    if (msg != nullptr) {
       double projectedAreaInFOV = getSignatureArea(msg);
       msg->setProjectedArea(projectedAreaInFOV);

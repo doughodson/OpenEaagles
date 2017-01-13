@@ -653,7 +653,7 @@ Nib* NetIO::createNewOutputNib(models::Player* const player)
 
       const base::String* fName = getFederateName();
       if (player->isNetworkedPlayer()) {
-         Nib* pNib = dynamic_cast<Nib*>(player->getNib());
+         auto pNib = dynamic_cast<Nib*>(player->getNib());
          fName = pNib->getFederateName();
       }
       nib->setFederateName(fName);
@@ -703,7 +703,7 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
    double maxRng2 = getMaxEntityRangeSquared(nib);
    if (nib != nullptr && maxRng2 > 0) {
       const simulation::Station* sta = getStation();
-      const models::Player* own = dynamic_cast<const models::Player*>(sta->getOwnship());
+      auto own = dynamic_cast<const models::Player*>(sta->getOwnship());
       if (own != nullptr) {
          osg::Vec3d delta = nib->getDrPosition() - own->getGeocPosition();
          inRange = (delta.length2() <= maxRng2);
@@ -754,7 +754,7 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
          // ---
          // Add it to the player list
          // ---
-         base::Pair* playerPair = new base::Pair(nib->getPlayerName(), player);
+         auto playerPair = new base::Pair(nib->getPlayerName(), player);
          getSimulation()->addNewPlayer(playerPair);
 
          player->reset();
@@ -832,7 +832,7 @@ Nib* NetIO::findNib(const models::Player* const player, const IoType ioType)
       const base::String* fName = getFederateName();
       if (player->isNetworkedPlayer()) {
          // If networked, used original IDs
-         const Nib* pNib = dynamic_cast<const Nib*>(player->getNib());
+         auto pNib = dynamic_cast<const Nib*>(player->getNib());
          fName = pNib->getFederateName();
       }
       // Now find the NIB using the player's IDs
@@ -1200,8 +1200,8 @@ bool NetIO::setSlotInputEntityTypes(base::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        base::List::Item* item = msg->getFirstItem();
        while (item != nullptr) {
-          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-          Ntm* ntm = dynamic_cast<Ntm*>( pair->object() );
+          auto pair = static_cast<base::Pair*>(item->getValue());
+          auto ntm = dynamic_cast<Ntm*>( pair->object() );
           if (ntm != nullptr) {
              // We have an Ntm object, so put it in the table
              addInputEntityType(ntm);
@@ -1231,8 +1231,8 @@ bool NetIO::setSlotOutputEntityTypes(base::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        base::List::Item* item = msg->getFirstItem();
        while (item != nullptr) {
-          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-          Ntm* ntm = dynamic_cast<Ntm*>( pair->object() );
+          auto pair = static_cast<base::Pair*>(item->getValue());
+          auto ntm = dynamic_cast<Ntm*>( pair->object() );
           if (ntm != nullptr) {
             // We have an Ntm object, so put it in the table
             addOutputEntityType(ntm);
@@ -1734,13 +1734,13 @@ bool NtmOutputNodeStd::checkAndAddNtm(Ntm* const tgtNtm)
       // this Ntm object and add it to our list of subnodes.
       if (!ok) {
          // Create a new node and add the NTM
-         NtmOutputNodeStd* newNode = new NtmOutputNodeStd(tp,tpfn);
+         auto newNode = new NtmOutputNodeStd(tp,tpfn);
          newNode->addNtmSorted(tgtNtm);
 
          // Case #2A : check if any of our subnodes is really a subnode of the new node.
          base::List::Item* item = subnodeList->getFirstItem();
          while (item != nullptr) {
-            NtmOutputNodeStd* subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
+            auto subnode = static_cast<NtmOutputNodeStd*>(item->getValue());
             item = item->getNext();
 
             if ( subnode->tp->isFactoryName( tpfn ) ) {
@@ -1771,7 +1771,7 @@ bool NtmOutputNodeStd::addNtmSorted(Ntm* const newNtm)
       newNtm->ref();
 
       // Create a new List::Item to contain this Ntm
-      base::List::Item* newItem = new base::List::Item();
+      auto newItem = new base::List::Item();
       newItem->value = newNtm;
 
       // Get the template player's type string from the 'new' Ntm

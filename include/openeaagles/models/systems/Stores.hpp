@@ -8,7 +8,7 @@ namespace oe {
    namespace base { class Number; class PairStream; }
 
 namespace models {
-   class Weapon;
+class AbstractWeapon;
 
 //------------------------------------------------------------------------------
 // Class: Stores
@@ -21,14 +21,14 @@ namespace models {
 //    numStations <Number>             ! Number of stations (less than or equal MAX_STATIONS)
 //                                     ! (default: 0)
 //
-//    stores      <base::PairStream>  ! Our weapons and other external stores (default 0)
+//    stores      <base::PairStream>   ! Our weapons and other external stores (default 0)
 //                                     ! -- make sure to set the number of stations first,
 //
 //    selected    <Number>             ! Selected weapon station number (default: 0)
 //
 //
 // Events:
-//    JETTISON_EVENT <Weapon>          ! Jettison this weapon
+//    JETTISON_EVENT <AbstractWeapon>  ! Jettison this weapon
 //    JETTISON_EVENT <ExternalStore>   ! Jettison this external store
 //
 //
@@ -134,8 +134,8 @@ public:
    // if 's' is zero then the 'selected' station's weapon is returned.
    // When the weapon is in release (or pre-released) mode, then the "flyout"
    // weapon is returned.
-   virtual Weapon* getWeapon(const unsigned int s = 0);
-   virtual const Weapon* getWeapon(const unsigned int s = 0) const; // const version
+   virtual AbstractWeapon* getWeapon(const unsigned int s = 0);
+   virtual const AbstractWeapon* getWeapon(const unsigned int s = 0) const; // const version
 
    // Returns a pre-ref()'d pointer to the external store at station 's', or
    // if 's' is zero then the 'selected' station's store is returned.
@@ -150,25 +150,25 @@ public:
    // Pre-release the weapon; that is, create the "flyout" and place it on the
    // player list.  Returns a pre-ref()'d pointer to the simulation's flyout
    // or zero if the weapon failed to pre-release.
-   virtual Weapon* prereleaseWeapon(Weapon* const wpn);
+   virtual AbstractWeapon* prereleaseWeapon(AbstractWeapon* const wpn);
 
    // Pre-release the weapon at station 's', or if 's' is zero then release
    // the selected station's weapon.
-   virtual Weapon* prereleaseWeapon(const unsigned int s = 0);
+   virtual AbstractWeapon* prereleaseWeapon(const unsigned int s = 0);
 
    // Release the weapon; returns a pre-ref()'d pointer to the flyout weapon or zero if
    // the weapon failed to pre-release.
-   virtual Weapon* releaseWeapon(Weapon* const wpn);
+   virtual AbstractWeapon* releaseWeapon(AbstractWeapon* const wpn);
 
    // Release the weapon at station 's', or if 's' is zero then release
    // the selected weapon.
-   virtual Weapon* releaseWeapon(const unsigned int s = 0);
+   virtual AbstractWeapon* releaseWeapon(const unsigned int s = 0);
 
    // Jettison all jettisonable stores
    virtual bool jettisonAll();
 
    // Event handlers
-   virtual bool onJettisonEvent(Weapon* const msg);
+   virtual bool onJettisonEvent(AbstractWeapon* const msg);
    virtual bool onJettisonEvent(ExternalStore* const msg);
 
    virtual void updateTC(const double dt = 0.0) override;
@@ -184,7 +184,7 @@ protected:
    virtual void updateBlockedFlags();
 
    // Assign a weapon to a station
-   virtual bool assignWeaponToStation(const unsigned int station, Weapon* const wpnPtr);
+   virtual bool assignWeaponToStation(const unsigned int station, AbstractWeapon* const wpnPtr);
 
    // Assign a external store to a station
    virtual bool assignExtStoreToStation(const unsigned int station, ExternalStore* const esPtr);
@@ -206,10 +206,10 @@ private:
    base::safe_ptr<base::PairStream> storesList;
 
    // Station tables
-   base::safe_ptr<Weapon> weaponTbl[MAX_STATIONS];    // Weapons by station
-   unsigned int numWpn;                                // Number of weapons in table
+   base::safe_ptr<AbstractWeapon> weaponTbl[MAX_STATIONS];    // Weapons by station
+   unsigned int numWpn;                                       // Number of weapons in table
 
-   base::safe_ptr<ExternalStore> esTbl[MAX_STATIONS]; // External store by station
+   base::safe_ptr<ExternalStore> esTbl[MAX_STATIONS];  // External store by station
    unsigned int numEs;                                 // Number of external stores in table
 
    unsigned int ns;                       // Number of Stations

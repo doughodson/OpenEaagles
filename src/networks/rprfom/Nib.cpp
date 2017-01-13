@@ -10,7 +10,6 @@
 #include "openeaagles/models/players/AirVehicle.hpp"
 #include "openeaagles/models/players/Missile.hpp"
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Weapon.hpp"
 #include "openeaagles/models/Signatures.hpp"
 
 #include "openeaagles/base/Pair.hpp"

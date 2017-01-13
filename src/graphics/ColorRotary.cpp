@@ -103,9 +103,9 @@ bool ColorRotary::setSlotValues(const base::PairStream* const newStream)
         base::PairStream* a = newStream->clone();
         base::List::Item* item = a->getFirstItem();
         while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                base::Number* n = dynamic_cast<base::Number*>(pair->object());
+                auto n = dynamic_cast<base::Number*>(pair->object());
                 if (n != nullptr) {
                     myValues[numVals] = n->getReal();
                     numVals++;
@@ -144,9 +144,9 @@ bool ColorRotary::determineColor(const double value)
     if (myColors != nullptr) {
         base::Pair* pair = myColors->getPosition(breakPoint);
         if (pair != nullptr) {
-            base::Color* listcolor = dynamic_cast<base::Color*>(pair->object());
+            auto listcolor = dynamic_cast<base::Color*>(pair->object());
             if (listcolor != nullptr) {
-               const osg::Vec4d* vec = static_cast<const osg::Vec4d*>(listcolor->getRGBA());
+               auto vec = static_cast<const osg::Vec4d*>(listcolor->getRGBA());
                color = *vec;
                ok = true;
             }

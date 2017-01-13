@@ -214,7 +214,7 @@ inline RVector* getRowVector(const Matrix& A, const unsigned int r)
 
    const unsigned int N = A.getCols();
 
-   RVector* pV = new RVector(N);
+   auto pV = new RVector(N);
    if (pV == nullptr) return nullptr;
 
    for (unsigned int c = 0; c < N; c++)
@@ -427,7 +427,7 @@ inline CVector* getColVector(const Matrix& A, const unsigned int c)
    if (!B1 || !B2) return 0;
 
    const unsigned int N = A.getRows();
-   CVector* pV = new CVector(N);
+   auto pV = new CVector(N);
    if (pV == nullptr) return nullptr;
 
    for (unsigned int r = 0; r < N; r++) {
@@ -502,7 +502,7 @@ inline CVector* getDiag(const Matrix& A)
    }
 
    const unsigned int N = A.getRows();
-   CVector* p = new CVector(N);
+   auto p = new CVector(N);
    for (unsigned int i = 0; i < N; i++) {
       (*p)[i] = A(i,i);
    }

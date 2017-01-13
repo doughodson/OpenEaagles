@@ -8,7 +8,7 @@ namespace oe {
 namespace dafif { class AirportLoader; class NavaidLoader; class WaypointLoader; }
 namespace terrain { class Terrain; }
 namespace models {
-class Atmosphere;
+class AbstractAtmosphere;
 
 //------------------------------------------------------------------------------
 // Class: Simulation
@@ -53,8 +53,8 @@ public:
 
     const terrain::Terrain* getTerrain() const;    // Returns the terrain elevation database
 
-    Atmosphere* getAtmosphere();                   // Returns the atmosphere model
-    const Atmosphere* getAtmosphere() const;       // Returns the atmosphere model (const version)
+    AbstractAtmosphere* getAtmosphere();                   // Returns the atmosphere model
+    const AbstractAtmosphere* getAtmosphere() const;       // Returns the atmosphere model (const version)
 
     virtual bool setAirports(dafif::AirportLoader* const p);   // Sets the airport loader
     virtual bool setNavaids(dafif::NavaidLoader* const p);     // Sets the NAVAID loader
@@ -62,7 +62,7 @@ public:
 
     // environmental models
     bool setSlotTerrain(terrain::Terrain* const msg);
-    bool setSlotAtmosphere(Atmosphere* const msg);
+    bool setSlotAtmosphere(AbstractAtmosphere* const msg);
 
     virtual void updateData(const double dt = 0.0) override;
     virtual void reset() override;
@@ -78,8 +78,8 @@ private:
    dafif::NavaidLoader*   navaids;      // NAVAID loader
    dafif::WaypointLoader* waypoints;    // Waypoint loader
 
-   Atmosphere*            atmosphere;   // Atmosphere model
-   terrain::Terrain*      terrain;      // Terrain model
+   AbstractAtmosphere* atmosphere;   // Atmosphere model
+   terrain::Terrain*   terrain;      // Terrain model
 
 };
 

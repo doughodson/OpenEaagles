@@ -54,19 +54,19 @@ bool Nav::aer2xyzArray(
    )
 {
    // Compute sin/cos of azimuth
-   double* saz = new double[n];
-   double* caz = new double[n];
+   auto saz = new double[n];
+   auto caz = new double[n];
    sinCosArray(az,saz,caz,n);
 
    // Compute sin/cos of elevation
-   double* sel = new double[n];
-   double* cel = new double[n];
+   auto sel = new double[n];
+   auto cel = new double[n];
    sinCosArray(el,sel,cel,n);
 
    // ---
    // Compute to x, y and z positions (player coordinates)
    // ---
-   osg::Vec3d* pos0 = new osg::Vec3d[n];
+   auto pos0 = new osg::Vec3d[n];
    for (unsigned int i = 0; i < n; i++) {
       const double d = -rng[i] * sel[i];    // Down
       const double r = rng[i] * cel[i];     // [Ground Range]
@@ -97,19 +97,19 @@ bool Nav::aer2xyzArray(
    )
 {
    // Compute sin/cos of azimuth
-   double* saz = new double[n];
-   double* caz = new double[n];
+   auto saz = new double[n];
+   auto caz = new double[n];
    sinCosArray(az,saz,caz,n);
 
    // Compute sin/cos of elevation
-   double* sel = new double[n];
-   double* cel = new double[n];
+   auto sel = new double[n];
+   auto cel = new double[n];
    sinCosArray(el,sel,cel,n);
 
    // ---
    // Compute to x, y and z positions (player coordinates)
    // ---
-   //osg::Vec3d* pos0 = new osg::Vec3d[n];
+   //auto pos0 = new osg::Vec3d[n];
    for (unsigned int i = 0; i < n; i++) {
       const double d = -rng[i] * sel[i];    // Down
       const double r = rng[i] * cel[i];     // [Ground Range]

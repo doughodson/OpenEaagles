@@ -10,12 +10,12 @@ namespace oe {
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
 namespace simulation {
 
-class DataRecorder;
+class AbstractDataRecorder;
 class SimBgThread;
 class SimTcThread;
 class Station;
 
-class IPlayer;
+class AbstractPlayer;
 
 //------------------------------------------------------------------------------
 // Class: SimExec
@@ -27,7 +27,7 @@ class IPlayer;
 // Factory name: SimExec
 //
 // Slots --
-//    players        <base::PairStream>       ! Local player list (base::PairStream of Player) (default: nullptr)
+//    players        <base::PairStream>       ! Local player list (base::PairStream of AbstractPlayer) (default: nullptr)
 //
 //    simulationTime <base::Time>             ! Initial simulated time since midnight (UTC) (second),
 //                                            ! or -1 to use current time of day (default: -1)
@@ -198,19 +198,19 @@ public:
     unsigned short getNewWeaponEventID();          // Generates a unique weapon event ID [1 .. 65535]
     unsigned short getNewReleasedWeaponID();       // Generates a unique ID number for released weapons
 
-    DataRecorder* getDataRecorder();               // Returns the data recorder
+    AbstractDataRecorder* getDataRecorder();       // Returns the data recorder
 
     Station* getStation();                         // Returns our Station
     const Station* getStation() const;             // Returns our Station (const version)
 
-    IPlayer* findPlayer(const short id, const int netID = 0);             // Find a player by player (and network) ID
-    const IPlayer* findPlayer(const short id, const int netID = 0) const; // Find a player by player (and network) ID (const version)
+    AbstractPlayer* findPlayer(const short id, const int netID = 0);                       // Find a player by player (and network) ID
+    const AbstractPlayer* findPlayer(const short id, const int netID = 0) const;           // Find a player by player (and network) ID (const version)
 
-    IPlayer* findPlayerByName(const char* const playerName);             // Find a player by name
-    const IPlayer* findPlayerByName(const char* const playerName) const; // Find a player by name (const version)
+    AbstractPlayer* findPlayerByName(const char* const playerName);                        // Find a player by name
+    const AbstractPlayer* findPlayerByName(const char* const playerName) const;            // Find a player by name (const version)
 
-    virtual bool addNewPlayer(const char* const playerName, IPlayer* const player); // Add a new player
-    virtual bool addNewPlayer(base::Pair* const player);                           // Add a new player (pair: name, player)
+    virtual bool addNewPlayer(const char* const playerName, AbstractPlayer* const player); // Add a new player
+    virtual bool addNewPlayer(base::Pair* const player);                                   // Add a new player (pair: name, player)
 
     virtual bool setInitialSimulationTime(const long time);    // Sets the initial simulated time (sec; or less than zero to slave to UTC)
 
@@ -253,8 +253,8 @@ private:
    Station* getStationImp();
 
    bool insertPlayerSort(base::Pair* const newPlayer, base::PairStream* const newList);
-   IPlayer* findPlayerPrivate(const short id, const int netID) const;
-   IPlayer* findPlayerByNamePrivate(const char* const playerName) const;
+   AbstractPlayer* findPlayerPrivate(const short id, const int netID) const;
+   AbstractPlayer* findPlayerByNamePrivate(const char* const playerName) const;
 
    bool setSlotSimulationTime(const base::Time* const msg);
    bool setSlotDay(const base::Number* const msg);

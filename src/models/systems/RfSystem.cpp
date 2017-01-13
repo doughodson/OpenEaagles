@@ -97,7 +97,7 @@ void RfSystem::copyData(const RfSystem& org, const bool cc)
 
    // No antenna yet
    setAntenna(nullptr);
-   base::String* p = const_cast<base::String*>(static_cast<const base::String*>(org.getAntennaName()));
+   auto p = const_cast<base::String*>(static_cast<const base::String*>(org.getAntennaName()));
    setSlotAntennaName( p );
 
    xmitEnable = org.xmitEnable;
@@ -171,7 +171,7 @@ void RfSystem::reset()
       const char* name = *getAntennaName();
 
       // Get the named antenna from the player's list of gimbals, antennas and optics
-      Antenna* p = dynamic_cast<Antenna*>( getOwnship()->getGimbalByName(name) );
+      auto p = dynamic_cast<Antenna*>( getOwnship()->getGimbalByName(name) );
       if (p != nullptr) {
          setAntenna( p );
          getAntenna()->setSystem(this);
@@ -628,7 +628,7 @@ bool RfSystem::setSlotFrequency(base::Number* const v)
     bool ok = false;
     double x = -1.0;
 
-    const base::Frequency* p = dynamic_cast<const base::Frequency*>(v);
+    auto p = dynamic_cast<const base::Frequency*>(v);
     if (p != nullptr) {
         // Has frequency and we need hertz
         x = base::Hertz::convertStatic(*p);
@@ -657,7 +657,7 @@ bool RfSystem::setSlotBandwidth(base::Number* const num)
 
         double bw = -1.0f;
 
-        const base::Frequency* p = dynamic_cast<const base::Frequency*>(num);
+        auto p = dynamic_cast<const base::Frequency*>(num);
         if (p != nullptr) {
             // Has frequency and we need hertz
             bw = base::Hertz::convertStatic(*p);
@@ -685,7 +685,7 @@ bool RfSystem::setSlotBandwidthNoise(base::Number* const num)
 
         double bw = -1.0f;
 
-        const base::Frequency* p = dynamic_cast<const base::Frequency*>(num);
+        auto p = dynamic_cast<const base::Frequency*>(num);
         if (p != nullptr) {
             // Has frequency and we need hertz
             bw = base::Hertz::convertStatic(*p);
@@ -711,7 +711,7 @@ bool RfSystem::setSlotPeakPower(base::Number* const v)
     bool ok = false;
     double x = -1.0;
 
-    base::Power* p = dynamic_cast<base::Power*>(v);
+    auto p = dynamic_cast<base::Power*>(v);
     if (p != nullptr) {
         // Has power units and we need watts
         base::Watts watts;

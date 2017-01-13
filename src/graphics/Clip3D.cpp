@@ -112,7 +112,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    // ---
    // Clone the original polygon
    // ---
-   Polygon* outPoly = static_cast<Polygon*>(inPoly.clone());
+   auto outPoly = static_cast<Polygon*>(inPoly.clone());
 
    // ---
    // check if all vertices are "inside" all of the six planes
@@ -134,7 +134,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    // ---
 
    // p: pre-clipped polygon
-   osg::Vec3d* const poly1 = new osg::Vec3d[num*3];
+   auto const poly1 = new osg::Vec3d[num*3];
    for (unsigned int i = 0; i < num; i++) {
       poly1[i] = in[i];
    }
@@ -163,7 +163,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    }
 
    // q: clipped polygon
-   osg::Vec3d* const poly2 = new osg::Vec3d[num*3];
+   auto const poly2 = new osg::Vec3d[num*3];
    osg::Vec3d* q = poly2;
 
    // qn: clipped normals

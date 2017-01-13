@@ -195,7 +195,7 @@ void Radar::transmit(const double dt)
    // Transmitting, scanning and have an antenna?
    if ( !areEmissionsDisabled() && isTransmitting() ) {
       // Send the emission to the other player
-      Emission* em = new Emission();
+      auto em = new Emission();
       em->setFrequency(getFrequency());
       em->setBandwidth(getBandwidth());
       const double prf1 = getPRF();

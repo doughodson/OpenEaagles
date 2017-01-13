@@ -1,14 +1,13 @@
 
 #include "openeaagles/simulation/SimExec.hpp"
 
-#include "openeaagles/simulation/IPlayer.hpp"
+#include "openeaagles/simulation/AbstractPlayer.hpp"
 
 #include "openeaagles/simulation/SimTcThread.hpp"
 #include "openeaagles/simulation/SimBgThread.hpp"
 
-#include "openeaagles/simulation/DataRecorder.hpp"
-#include "openeaagles/simulation/INetIO.hpp"
-#include "openeaagles/simulation/INib.hpp"
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
+#include "openeaagles/simulation/AbstractNib.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/PairStream.hpp"
@@ -250,7 +249,7 @@ void SimExec::reset()
          base::List::Item* item = origPlayerList->getFirstItem();
          while (item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            IPlayer* ip = static_cast<IPlayer*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
 
             // reinstated the container pointer and player name
             ip->container(this);
@@ -272,7 +271,7 @@ void SimExec::reset()
          base::List::Item* item = origPlayerList->getFirstItem();
          while (item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            IPlayer* ip = static_cast<IPlayer*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             if (ip->isNetworkedPlayer()) {
 
                // reinstated the container pointer and player name
@@ -430,7 +429,7 @@ void SimExec::reset()
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          if (pair != nullptr) {
-            IPlayer* ip = static_cast<IPlayer*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             if (ip != nullptr) ip->event(RESET_EVENT);
          }
          item = item->getNext();
@@ -660,7 +659,7 @@ void SimExec::updateTcPlayerList(
          count++;
          if (count == index) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            IPlayer* ip = static_cast<IPlayer*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             ip->tcFrame(dt);
             index += n;
          }
@@ -736,7 +735,7 @@ void SimExec::updateBgPlayerList(
          count++;
          if (count == index) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            IPlayer* ip = static_cast<IPlayer*>(pair->object());
+            AbstractPlayer* ip = static_cast<AbstractPlayer*>(pair->object());
             ip->updateData(dt);
             index += n;
          }
@@ -847,9 +846,9 @@ unsigned short SimExec::getNewReleasedWeaponID()
 };
 
 // Returns the data recorder
-DataRecorder* SimExec::getDataRecorder()
+AbstractDataRecorder* SimExec::getDataRecorder()
 {
-   DataRecorder* p = nullptr;
+   AbstractDataRecorder* p = nullptr;
    Station* sta = getStation();
    if (sta != nullptr) p = sta->getDataRecorder();
    return p;
@@ -908,7 +907,7 @@ bool SimExec::setSlotPlayers(base::PairStream* const pl)
       while (item != nullptr && ok) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         IPlayer* ip = dynamic_cast<IPlayer*>( pair->object() );
+         auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
          if (ip == nullptr) {
             // Item is NOT a Player
             std::cerr << "simulation::setSlotPlayers: slot: " << *pair->slot() << " is NOT of a Player type!" << std::endl;
@@ -932,7 +931,7 @@ bool SimExec::setSlotPlayers(base::PairStream* const pl)
       while (item1 != nullptr) {
          base::Pair* pair1 = static_cast<base::Pair*>(item1->getValue());
          item1 = item1->getNext();
-         IPlayer* ip1 = static_cast<IPlayer*>(pair1->object());
+         AbstractPlayer* ip1 = static_cast<AbstractPlayer*>(pair1->object());
 
          // unassigned ID
          if ( (ip1->getID() == 0) && (maxID < 65535) ) {
@@ -943,7 +942,7 @@ bool SimExec::setSlotPlayers(base::PairStream* const pl)
          base::List::Item* item2 = item1;
          while (item2 != nullptr) {
             base::Pair* pair2 = static_cast<base::Pair*>(item2->getValue());
-            IPlayer* ip2 = static_cast<IPlayer*>(pair2->object());
+            AbstractPlayer* ip2 = static_cast<AbstractPlayer*>(pair2->object());
 
             // unassigned ID
             if ( (ip2->getID() == 0)  && (maxID < 65535) ) {
@@ -974,7 +973,7 @@ bool SimExec::setSlotPlayers(base::PairStream* const pl)
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         IPlayer* ip = static_cast<IPlayer*>(pair->object());
+         auto ip = static_cast<AbstractPlayer*>(pair->object());
          ip->container(this);
          ip->setName(*pair->slot());
       }
@@ -1025,8 +1024,8 @@ void SimExec::updatePlayerList()
         base::List::Item* item = pl->getFirstItem();
         while (!yes && item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            IPlayer* p = static_cast<IPlayer*>(pair->object());
-            yes = p->isMode(IPlayer::DELETE_REQUEST);
+            auto p = static_cast<AbstractPlayer*>(pair->object());
+            yes = p->isMode(AbstractPlayer::DELETE_REQUEST);
             item = item->getNext();
         }
     }
@@ -1049,8 +1048,8 @@ void SimExec::updatePlayerList()
         while (item != nullptr) {
             base::Pair* pair = static_cast<base::Pair*>(item->getValue());
             item = item->getNext();
-            IPlayer* p = static_cast<IPlayer*>(pair->object());
-            if (p->isNotMode(IPlayer::DELETE_REQUEST)) {
+            auto p = static_cast<AbstractPlayer*>(pair->object());
+            if (p->isNotMode(AbstractPlayer::DELETE_REQUEST)) {
                 // Add the player to the new list
                 newList->put(pair);
             }
@@ -1071,7 +1070,7 @@ void SimExec::updatePlayerList()
       base::Pair* newPlayer = newPlayerQueue.get();
       while (newPlayer != nullptr) {
             // get the player
-            IPlayer* ip = static_cast<IPlayer*>(newPlayer->object());
+            auto ip = static_cast<AbstractPlayer*>(newPlayer->object());
 
             BEGIN_RECORD_DATA_SAMPLE( getDataRecorder(), REID_NEW_PLAYER )
                SAMPLE_1_OBJECT( ip )
@@ -1118,11 +1117,11 @@ bool SimExec::addNewPlayer(base::Pair* const player)
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool SimExec::addNewPlayer(const char* const playerName, IPlayer* const player)
+bool SimExec::addNewPlayer(const char* const playerName, AbstractPlayer* const player)
 {
     if (playerName == nullptr || player == nullptr) return false;
 
-    base::Pair* pair = new base::Pair(playerName, player);
+    auto pair = new base::Pair(playerName, player);
     bool ok = addNewPlayer(pair);
     pair->unref();
     return ok;
@@ -1141,7 +1140,7 @@ bool SimExec::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream
     newItem->value = newPlayerPair;
 
     // Get the player
-    IPlayer* newPlayer = static_cast<IPlayer*>(newPlayerPair->object());
+    auto newPlayer = static_cast<AbstractPlayer*>(newPlayerPair->object());
 
     // Search the new player list and insert into the correct position --
     //  -- sorted by network ID and player ID
@@ -1149,7 +1148,7 @@ bool SimExec::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream
     base::List::Item* refItem = newList->getFirstItem();
     while (refItem != nullptr && !inserted) {
         base::Pair* refPair = static_cast<base::Pair*>(refItem->getValue());
-        IPlayer* refPlayer = static_cast<IPlayer*>(refPair->object());
+        auto refPlayer = static_cast<AbstractPlayer*>(refPair->object());
 
         bool insert = false;
         if (newPlayer->isNetworkedPlayer()) {
@@ -1158,8 +1157,8 @@ bool SimExec::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream
             if (refPlayer->isNetworkedPlayer()) {
 
                // Get the NIBs
-               const INib* nNib = newPlayer->getNib();
-               const INib* rNib = refPlayer->getNib();
+               const AbstractNib* nNib = newPlayer->getNib();
+               const AbstractNib* rNib = refPlayer->getNib();
 
                // Compare federate names
                int result = std::strcmp(*nNib->getFederateName(), *rNib->getFederateName());
@@ -1201,28 +1200,28 @@ bool SimExec::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream
 //------------------------------------------------------------------------------
 // findPlayer() -- Find a player that matches 'id' and 'networkID'
 //------------------------------------------------------------------------------
-IPlayer* SimExec::findPlayer(const short id, const int netID)
+AbstractPlayer* SimExec::findPlayer(const short id, const int netID)
 {
    return findPlayerPrivate(id, netID);
 }
 
-const IPlayer* SimExec::findPlayer(const short id, const int netID) const
+const AbstractPlayer* SimExec::findPlayer(const short id, const int netID) const
 {
    return findPlayerPrivate(id, netID);
 }
 
-IPlayer* SimExec::findPlayerPrivate(const short id, const int netID) const
+AbstractPlayer* SimExec::findPlayerPrivate(const short id, const int netID) const
 {
     // Quick out
     if (players == nullptr) return nullptr;
 
     // Find a Player that matches player ID and Sources
-    IPlayer* iplayer = nullptr;
+    AbstractPlayer* iplayer = nullptr;
     const base::List::Item* item = players->getFirstItem();
     while (iplayer == nullptr && item != nullptr) {
-        const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
+        auto pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
-            IPlayer* ip = const_cast<IPlayer*>(static_cast<const IPlayer*>(pair->object()));
+            auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
             if (ip != nullptr) {
                 if (netID > 0) {
                     if ((ip->getID() == id) && (ip->getNetworkID() == netID)) {
@@ -1245,28 +1244,28 @@ IPlayer* SimExec::findPlayerPrivate(const short id, const int netID) const
 //------------------------------------------------------------------------------
 // findPlayerByName() -- Find a player by name
 //------------------------------------------------------------------------------
-IPlayer* SimExec::findPlayerByName(const char* const playerName)
+AbstractPlayer* SimExec::findPlayerByName(const char* const playerName)
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-const IPlayer* SimExec::findPlayerByName(const char* const playerName) const
+const AbstractPlayer* SimExec::findPlayerByName(const char* const playerName) const
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-IPlayer* SimExec::findPlayerByNamePrivate(const char* const playerName) const
+AbstractPlayer* SimExec::findPlayerByNamePrivate(const char* const playerName) const
 {
     // Quick out
     if (players == nullptr || playerName == nullptr) return nullptr;
 
     // Find a Player named 'playerName'
-    IPlayer* iplayer = nullptr;
+    AbstractPlayer* iplayer = nullptr;
     const base::List::Item* item = players->getFirstItem();
     while (iplayer == nullptr && item != nullptr) {
         const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
         if (pair != nullptr) {
-            IPlayer* ip = const_cast<IPlayer*>(static_cast<const IPlayer*>(pair->object()));
+            auto ip = const_cast<AbstractPlayer*>(static_cast<const AbstractPlayer*>(pair->object()));
             if (ip != nullptr && ip->isName(playerName)) {
                iplayer = ip;
             }

@@ -99,8 +99,8 @@ void LifeForm::reset()
 
 void LifeForm::fire()
 {
-    base::Number* hdgObj = new base::Number(getHeadingR());
-    base::Number* pitchObj = new base::Number(lookAngle * base::Angle::D2RCC);
+    auto hdgObj = new base::Number(getHeadingR());
+    auto pitchObj = new base::Number(lookAngle * base::Angle::D2RCC);
     StoresMgr* mgr = getStoresManagement();
     if (mgr != nullptr) {
         if (getSimulation() != nullptr) {
@@ -122,7 +122,7 @@ void LifeForm::fire()
                 Gun* myGun = mgr->getGun();
                 if (myGun != nullptr) {
                     myGun->setGunArmed(true);
-                    base::Number* num = new base::Number(lookAngle * base::Angle::D2RCC);
+                    auto num = new base::Number(lookAngle * base::Angle::D2RCC);
                     myGun->setSlotPitch(num);
                     num->unref();
                     myGun->fireControl(true);
@@ -223,9 +223,9 @@ void LifeForm::look(const double up, const double sdws)
                 if (players != nullptr) {
                     base::List::Item* item = players->getFirstItem();
                     while (item != nullptr && !tgtAquired) {
-                        base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+                        auto pair = static_cast<base::Pair*>(item->getValue());
                         if (pair != nullptr) {
-                            Player* player = dynamic_cast<Player*>(pair->object());
+                            auto player = dynamic_cast<Player*>(pair->object());
                             if (player != nullptr && player != this && !player->isMajorType(WEAPON) && !player->isDestroyed()) {
                                 // ok, calculate our position from this guy
                                 tgtPos = player->getPosition();

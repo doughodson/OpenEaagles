@@ -2,7 +2,7 @@
 #ifndef __oe_models_IrAtmosphere_H__
 #define __oe_models_IrAtmosphere_H__
 
-#include "openeaagles/models/environment/Atmosphere.hpp"
+#include "openeaagles/models/environment/AbstractAtmosphere.hpp"
 
 namespace oe {
 
@@ -85,9 +85,9 @@ class IrQueryMsg;
 //   )
 //
 //------------------------------------------------------------------------------
-class IrAtmosphere : public Atmosphere
+class IrAtmosphere : public AbstractAtmosphere
 {
-   DECLARE_SUBCLASS(IrAtmosphere, Atmosphere)
+   DECLARE_SUBCLASS(IrAtmosphere, AbstractAtmosphere)
 
 public:
    IrAtmosphere();

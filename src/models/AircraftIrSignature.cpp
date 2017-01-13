@@ -213,7 +213,7 @@ void AircraftIrSignature::deleteData()
 bool AircraftIrSignature::getIrSignature(IrQueryMsg* const msg)
 {
     bool ok = false;
-    //IrQueryMsg* msg = dynamic_cast<IrQueryMsg*>( msg0 );
+    //auto msg = dynamic_cast<IrQueryMsg*>( msg0 );
     if (msg != nullptr) {
         const double projectedAreaInFOV = getSignatureArea(msg);
         msg->setProjectedArea(projectedAreaInFOV);
@@ -378,7 +378,7 @@ double AircraftIrSignature::getHotPartsWavebandFactor(double midpoint, double wi
 double AircraftIrSignature::getCalculatedAirframeHeatSignature(const IrQueryMsg* const msg) {
 
     double irPower = 0;
-    const AirVehicle* targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const Player*>(msg->getTarget()));
+    auto targetAircraft = dynamic_cast<const AirVehicle*>(static_cast<const Player*>(msg->getTarget()));
     if(targetAircraft != nullptr) {
         // this will need checks to ensure targetAircraft is , in fact,
         // an airvehicle and not something else.

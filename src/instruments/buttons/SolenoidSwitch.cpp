@@ -96,8 +96,8 @@ bool SolenoidSwitch::setSlotEventMap(const base::PairStream* const x)
         int count = 0;
         const base::List::Item* item = x->getFirstItem();
         while (item != nullptr && count < 3) {
-            base::Pair* pair = (base::Pair*)item->getValue();
-            base::Number* num = dynamic_cast<base::Number*>(pair->object());
+            auto pair = static_cast<const base::Pair*>(item->getValue());
+            auto num = dynamic_cast<const base::Number*>(pair->object());
             if (num != nullptr) eventMap[count] = num->getInt();
             count++;
             item = item->getNext();

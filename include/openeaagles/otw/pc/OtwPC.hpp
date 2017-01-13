@@ -5,10 +5,9 @@
 #include "openeaagles/otw/Otw.hpp"
 
 namespace oe {
-
 namespace base { class NetHandler; }
-
 namespace otw {
+class OtwModel;
 
 //------------------------------------------------------------------------------
 // Class: OtwPC

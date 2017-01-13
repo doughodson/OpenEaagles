@@ -52,7 +52,7 @@ void Ntm::copyData(const Ntm& org, const bool)
 bool Ntm::copyEntityType(interop::Nib* const targetNib) const
 {
    bool ok = false;
-   Nib* tgtNib = dynamic_cast<Nib*>(targetNib);
+   auto tgtNib = dynamic_cast<Nib*>(targetNib);
    if (tgtNib != nullptr) {
       ok = tgtNib->setEntityType(kind, domain, country, category, subcategory, specific, extra);
    }

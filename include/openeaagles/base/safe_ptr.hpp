@@ -15,14 +15,14 @@ namespace base {
 //
 // Example #1
 //
-//    Object* p = new Object();         // New object; ref cnt is one
+//    auto p = new Object();            // New object; ref cnt is one
 //
-//    base::safe_ptr<Object> sp1( p ); // ref cnt is two
+//    base::safe_ptr<Object> sp1( p );  // ref cnt is two
 //
-//    base::safe_ptr<Object> sp2();    // 'sp2' is null
+//    base::safe_ptr<Object> sp2();     // 'sp2' is null
 //    sp2 = p;                          // ref cnt is three
 //
-//    base::safe_ptr<Object> sp3(sp2); // ref cnt is four
+//    base::safe_ptr<Object> sp3(sp2);  // ref cnt is four
 //
 //    p->unref();                // ref cnt is three
 //    sp3 = 0;                   // ref cnt is two

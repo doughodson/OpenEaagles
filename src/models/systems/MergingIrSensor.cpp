@@ -63,7 +63,7 @@ void MergingIrSensor::reset()
 
    // check the type of our track manager - we need to use the AirAngleOnlyTrkMgrPT
    if (getTrackManager() != nullptr) {
-      const AirAngleOnlyTrkMgrPT* a = dynamic_cast<const AirAngleOnlyTrkMgrPT*>(getTrackManager());
+      auto a = dynamic_cast<const AirAngleOnlyTrkMgrPT*>(getTrackManager());
       if (a == nullptr) {
          if (isMessageEnabled(MSG_WARNING)) {
             std::cerr << "MergingIrSensor::reset() : track manager is not an AirAngleOnlyTrkMgrPT" << std::endl;
@@ -83,7 +83,7 @@ void MergingIrSensor::mergeIrReturns()
    int numRecords = storedMessagesQueue.entries();
    if (numRecords > 0) {
 
-      //int* deleteArray = new int [numRecords];
+      //auto deleteArray = new int [numRecords];
       //if (deleteArray == 0) {
       //   if (isMessageEnabled(MSG_ERROR)) {
       //      std::cerr << "Error: Allocation memory failure in IrSensor::mergeIrReturns" << std::endl;
@@ -268,7 +268,7 @@ bool MergingIrSensor::setSlotAzimuthBin(const base::Number* const msg)
 {
    double value = 0.0;
 
-   const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
+   auto a = dynamic_cast<const base::Angle*>(msg);
    if (a != nullptr) {
        base::Radians r;
        value = static_cast<double>(r.convert(*a));
@@ -284,7 +284,7 @@ bool MergingIrSensor::setSlotElevationBin(const base::Number* const msg)
 {
    double value = 0.0;
 
-   const base::Angle* a = dynamic_cast<const base::Angle*>(msg);
+   auto a = dynamic_cast<const base::Angle*>(msg);
    if (a != nullptr) {
        base::Radians r;
        value = static_cast<double>(r.convert(*a));

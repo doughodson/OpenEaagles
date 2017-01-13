@@ -8,13 +8,13 @@ namespace oe {
 namespace base { class IoHandler; class Number; class Thread; class Time; }
 
 namespace simulation {
-class DataRecorder;
+class AbstractDataRecorder;
 class SimExec;
-class IPlayer;
-class IOtw;
+class AbstractPlayer;
+class AbstractOtw;
 
 //------------------------------------------------------------------------------
-// Class:  Station
+// Class: Station
 //
 // Description:  Application's top level container class with support for the
 //               simulation model, controls & displays, network interfaces
@@ -23,40 +23,40 @@ class IOtw;
 //
 // Factory name: Station
 // Slots --
-//    simulation         <SimExec>             ! Executable simulation model (default: nullptr)
+//    simulation         <SimExec>              ! Executable simulation model (default: nullptr)
 //
-//    networks           <base::PairStream>    ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
+//    networks           <base::PairStream>     ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
-//    otw                <Otw>                 ! Single Out-The-Window (OTW) visual system (default: nullptr)
-//    otw                <base::PairStream>    ! List of Out-The-Window (OTW) visual systems
+//    otw                <AbstractOtw>          ! Single Out-The-Window (OTW) visual system (default: nullptr)
+//    otw                <base::PairStream>     ! List of Out-The-Window (OTW) visual systems
 //
-//    ioHandler          <base::IoHandler>     ! Single I/O data handler (default: nullptr)
-//    ioHandler          <base::PairStream>    ! List of I/O data handlers
+//    ioHandler          <base::IoHandler>      ! Single I/O data handler (default: nullptr)
+//    ioHandler          <base::PairStream>     ! List of I/O data handlers
 //
-//    ownship            <base::String>        ! Player name of our ownship (primary) player (default: nullptr)
+//    ownship            <base::String>         ! Player name of our ownship (primary) player (default: nullptr)
 //
-//    tcRate             <base::Number>        ! Time-critical thread rate (Hz) (default: 50hz)
-//    tcPriority         <base::Number>        ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
-//    tcStackSize        <base::Number>        ! Time-critical thread stack size (default: <system default size>)
+//    tcRate             <base::Number>         ! Time-critical thread rate (Hz) (default: 50hz)
+//    tcPriority         <base::Number>         ! Time-critical thread priority  (default: DEFAULT_TC_THREAD_PRI)
+//    tcStackSize        <base::Number>         ! Time-critical thread stack size (default: <system default size>)
 //
-//    fastForwardRate    <base::Number>        ! Fast forward rate for time critical functions
-//                                             ! (i.e., the number of times updateTC() is called per frame).
-//                                             ! (default: DEFAULT_FAST_FORWARD_RATE)
+//    fastForwardRate    <base::Number>         ! Fast forward rate for time critical functions
+//                                              ! (i.e., the number of times updateTC() is called per frame).
+//                                              ! (default: DEFAULT_FAST_FORWARD_RATE)
 //
-//    netRate            <base::Number>        ! Network thread rate (Hz) (default: 0hz)
-//    netPriority        <base::Number>        ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
-//    netStackSize       <base::Number>        ! Network thread stack size (default: <system default size>)
+//    netRate            <base::Number>         ! Network thread rate (Hz) (default: 0hz)
+//    netPriority        <base::Number>         ! Network thread priority (default: DEFAULT_NET_THREAD_PRI )
+//    netStackSize       <base::Number>         ! Network thread stack size (default: <system default size>)
 //
-//    bgRate             <base::Number>        ! Background thread rate (Hz) (default: 0 -- no thread)
-//    bgPriority         <base::Number>        ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
-//    bgStackSize        <base::Number>        ! Background thread stack size (default: <system default size>)
+//    bgRate             <base::Number>         ! Background thread rate (Hz) (default: 0 -- no thread)
+//    bgPriority         <base::Number>         ! Background thread priority (default: DEFAULT_BG_THREAD_PRI )
+//    bgStackSize        <base::Number>         ! Background thread stack size (default: <system default size>)
 //
-//    startupResetTime   <base::Time>          ! Startup (initial) RESET event timer value (default: no reset event)
-//                                             !  (some simulations may need this -- let it run a few initial frames then reset)
+//    startupResetTime   <base::Time>           ! Startup (initial) RESET event timer value (default: no reset event)
+//                                              !  (some simulations may need this -- let it run a few initial frames then reset)
 //
-//    enableUpdateTimers <base::Boolean>       ! Enable calling base::Timers::updateTimers() from updateTC() (default: false)
+//    enableUpdateTimers <base::Boolean>        ! Enable calling base::Timers::updateTimers() from updateTC() (default: false)
 //
-//    dataRecorder       <DataRecorder>        ! Our Data Recorder
+//    dataRecorder       <AbstractDataRecorder> ! Our Data Recorder
 //
 //
 // Ownship player:
@@ -152,31 +152,31 @@ public:
 public:
    Station();
 
-   SimExec* getSimulation();                                // Simulation model
-   const SimExec* getSimulation() const;                    // Simulation model (const version)
+   SimExec* getSimulation();                                        // Simulation model
+   const SimExec* getSimulation() const;                            // Simulation model (const version)
 
-   base::PairStream* getPlayers();                          // Simulation's player list; pre-ref()'d
-   const base::PairStream* getPlayers() const;              // Simulation's player list; pre-ref()'d (const version)
+   base::PairStream* getPlayers();                                  // Simulation's player list; pre-ref()'d
+   const base::PairStream* getPlayers() const;                      // Simulation's player list; pre-ref()'d (const version)
 
-   IPlayer* getOwnship();                                   // The ownship (primary) player
-   const IPlayer* getOwnship() const;                       // The ownship (primary) player (const version)
+   AbstractPlayer* getOwnship();                                    // The ownship (primary) player
+   const AbstractPlayer* getOwnship() const;                        // The ownship (primary) player (const version)
 
-   const base::String* getOwnshipName() const;              // The ownship's name
-   virtual bool setOwnshipPlayer(IPlayer* const newOS);     // Sets the ownship player
-   virtual bool setOwnshipByName(const char* const newOS);  // Selects the ownship player by name
+   const base::String* getOwnshipName() const;                      // The ownship's name
+   virtual bool setOwnshipPlayer(AbstractPlayer* const newOS);      // Sets the ownship player
+   virtual bool setOwnshipByName(const char* const newOS);          // Selects the ownship player by name
 
-   base::PairStream* getOutTheWindowList();                 // OTW systems
-   const base::PairStream* getOutTheWindowList() const;     // OTW systems (const version)
+   base::PairStream* getOutTheWindowList();                         // OTW systems
+   const base::PairStream* getOutTheWindowList() const;             // OTW systems (const version)
 
-   base::PairStream* getNetworks();                         // Interoperability network handlers
-   const base::PairStream* getNetworks() const;             // Interoperability network handlers (const version)
+   base::PairStream* getNetworks();                                 // Interoperability network handlers
+   const base::PairStream* getNetworks() const;                     // Interoperability network handlers (const version)
 
-   base::PairStream* getIoHandlers();                       // I/O handlers
-   const base::PairStream* getIoHandlers() const;           // I/O handlers (const version)
+   base::PairStream* getIoHandlers();                               // I/O handlers
+   const base::PairStream* getIoHandlers() const;                   // I/O handlers (const version)
 
-   DataRecorder* getDataRecorder();                         // Returns the data recorder
-   const DataRecorder* getDataRecorder() const;             // Returns the data recorder (const version)
-   virtual bool setDataRecorder(DataRecorder* const p);     // Sets the data recorder
+   AbstractDataRecorder* getDataRecorder();                         // Returns the data recorder
+   const AbstractDataRecorder* getDataRecorder() const;             // Returns the data recorder (const version)
+   virtual bool setDataRecorder(AbstractDataRecorder* const p);     // Sets the data recorder
 
    // Is Timer::updateTimers() being called from our updateTC()
    bool isUpdateTimersEnabled() const;
@@ -232,7 +232,7 @@ public:
    // Slot functions
    // ---
    virtual bool setSlotSimulation(SimExec* const);
-   virtual bool setSlotOutTheWindow(IOtw* const);
+   virtual bool setSlotOutTheWindow(AbstractOtw* const);
    virtual bool setSlotOutTheWindow(base::PairStream* const);
    virtual bool setSlotIoHandler(base::IoHandler* const);
    virtual bool setSlotIoHandler(base::PairStream* const);
@@ -281,10 +281,10 @@ private:
    base::safe_ptr<base::PairStream> otw;          // List of  Out-The-Window visual system interfaces
    base::safe_ptr<base::PairStream> networks;     // List of networks
    base::safe_ptr<base::PairStream> ioHandlers;   // List of I/O data handlers
-   IPlayer* ownship;                               // Ownship (primary) player
+   AbstractPlayer* ownship;                       // Ownship (primary) player
    const base::String* ownshipName;               // Name of our ownship player
    bool tmrUpdateEnbl;                            // Enable base::Timers::updateTimers() call from updateTC()
-   DataRecorder* dataRecorder;                    // Data Recorder
+   AbstractDataRecorder* dataRecorder;            // Data Recorder
 
    double tcRate;                                 // Time-critical thread Rate (hz)
    double tcPri;                                  // Priority of the time-critical thread (0->lowest, 1->highest)

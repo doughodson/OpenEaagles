@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_INib_H__
-#define __oe_simulation_INib_H__
+#ifndef __oe_simulation_AbstractNib_H__
+#define __oe_simulation_AbstractNib_H__
 
 #include "openeaagles/base/Component.hpp"
 
@@ -9,20 +9,20 @@ namespace oe {
 namespace osg { class Vec3d; }
 
 namespace simulation {
-class INetIO;
+class AbstractNetIO;
 
-class INib : public base::Component
+class AbstractNib : public base::Component
 {
-   DECLARE_SUBCLASS(INib, base::Component)
+   DECLARE_SUBCLASS(AbstractNib, base::Component)
 
 public:
-   INib();
+   AbstractNib();
 
    virtual const base::String* getFederateName() const =0;           // Federate name as String
 
    virtual unsigned short getPlayerID() const =0;
 
-   virtual INetIO* getNetIO() =0;
+   virtual AbstractNetIO* getNetIO() =0;
 
    // update incoming entity dead reckoning
    virtual bool updateDeadReckoning(

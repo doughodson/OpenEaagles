@@ -176,7 +176,7 @@ void Hsv::hsv2rgb(osg::Vec3d& rgb, const osg::Vec3d& hsv)
 
         // computer some parameters
         //int i = ffloor(h);
-        int i = static_cast<int>(h);
+        auto i = static_cast<int>(h);
         double f = h - static_cast<double>(i);
         double p = v * (1.0f - s);
         double q = v * (1.0f - (s * f));

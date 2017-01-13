@@ -458,8 +458,8 @@ int Database::rangeSort()
 //------------------------------------------------------------------------------
 int Database::rlqs(const void* p1, const void* p2)
 {
-   const Key* k1 = *(static_cast<const Key**>(const_cast<void*>(p1)));
-   const Key* k2 = *(static_cast<const Key**>(const_cast<void*>(p2)));
+   auto k1 = *(static_cast<const Key**>(const_cast<void*>(p1)));
+   auto k2 = *(static_cast<const Key**>(const_cast<void*>(p2)));
 
    int result = 0;
    if (k1->rng2 < k2->rng2)      result = -1;
@@ -470,8 +470,8 @@ int Database::rlqs(const void* p1, const void* p2)
 
 int Database::ol_cmp(const void* p1, const void* p2)
 {
-   Key* k1 = *(static_cast<Key**>(const_cast<void*>(p1)));
-   Key* k2 = *(static_cast<Key**>(const_cast<void*>(p2)));
+   auto k1 = *(static_cast<Key**>(const_cast<void*>(p1)));
+   auto k2 = *(static_cast<Key**>(const_cast<void*>(p2)));
 
    return std::strcmp(k1->icao,k2->icao);
 }

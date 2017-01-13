@@ -194,9 +194,9 @@ int GlutDisplay::createWindow()
       if (subDisplays() != nullptr) {
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
+            auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -271,9 +271,9 @@ int GlutDisplay::createSubWindow(const int mainId)
       if (subDisplays() != nullptr) {
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = dynamic_cast<base::Pair*>(item->getValue());
+            auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               GlutDisplay* dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -344,9 +344,9 @@ void GlutDisplay::reshapeIt(int w, int h)
          // go through and put our new numbers in
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+            auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               GlutDisplay* gd = dynamic_cast<GlutDisplay*>(pair->object());
+               auto gd = dynamic_cast<GlutDisplay*>(pair->object());
                if (gd != nullptr) gd->reshapeSubWindow();
             }
             item = item->getNext();
@@ -390,10 +390,10 @@ void GlutDisplay::reshapeSubWindow()
 
          // we have our new viewport width and height
          // multiply it by our ratio and reset our width and height
-         const int newX = static_cast<int>(swPosition.x() * static_cast<double>(mainWinWidth) + 0.5);
-         const int newY = static_cast<int>(swPosition.y() * static_cast<double>(mainWinHeight) + 0.5);
-         const int newWidth = static_cast<int>(swSize.x() * static_cast<double>(mainWinWidth) + 0.5);
-         const int newHeight = static_cast<int>(swSize.y() * static_cast<double>(mainWinHeight) + 0.5);
+         const auto newX = static_cast<int>(swPosition.x() * static_cast<double>(mainWinWidth) + 0.5);
+         const auto newY = static_cast<int>(swPosition.y() * static_cast<double>(mainWinHeight) + 0.5);
+         const auto newWidth = static_cast<int>(swSize.x() * static_cast<double>(mainWinWidth) + 0.5);
+         const auto newHeight = static_cast<int>(swSize.y() * static_cast<double>(mainWinHeight) + 0.5);
 
          setViewport(newX, newY, newWidth, newHeight);
 

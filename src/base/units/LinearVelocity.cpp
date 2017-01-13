@@ -129,55 +129,55 @@ double LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Meters to convert distances:
-    Meters* internalMeters = new Meters(static_cast<double>(distance));
+    auto internalMeters = new Meters(static_cast<double>(distance));
 
     //Find out what units the distance is in:
     if(dynamic_cast<Feet*>(newDistanceUnit) != nullptr)
     {
         //New distance is in Feet:
-        Feet* feet = new Feet;
+        auto feet = new Feet;
         desiredDistance = feet->convert(*internalMeters);
         feet->unref();
     }
     else if(dynamic_cast<Meters*>(newDistanceUnit) != nullptr)
     {
         //New distance is in Meters:
-        Meters* meters = new Meters;
+        auto meters = new Meters;
         desiredDistance = meters->convert(*internalMeters);
         meters->unref();
     }
     else if(dynamic_cast<CentiMeters*>(newDistanceUnit) != nullptr)
     {
         //New distance is in CentiMeters:
-        CentiMeters* centimeters = new CentiMeters;
+        auto centimeters = new CentiMeters;
         desiredDistance = centimeters->convert(*internalMeters);
         centimeters->unref();
     }
     else if(dynamic_cast<KiloMeters*>(newDistanceUnit) != nullptr)
     {
         //New distance is in KiloMeters:
-        KiloMeters* kilometers = new KiloMeters;
+        auto kilometers = new KiloMeters;
         desiredDistance = kilometers->convert(*internalMeters);
         kilometers->unref();
     }
     else if(dynamic_cast<Inches*>(newDistanceUnit) != nullptr)
     {
         //New distance is in Inches:
-        Inches* inches = new Inches;
+        auto inches = new Inches;
         desiredDistance = inches->convert(*internalMeters);
         inches->unref();
     }
     else if(dynamic_cast<NauticalMiles*>(newDistanceUnit) != nullptr)
     {
         //New distance is in NauticalMiles:
-        NauticalMiles* nauticalmiles = new NauticalMiles;
+        auto nauticalmiles = new NauticalMiles;
         desiredDistance = nauticalmiles->convert(*internalMeters);
         nauticalmiles->unref();
     }
     else if(dynamic_cast<StatuteMiles*>(newDistanceUnit) != nullptr)
     {
         //New distance is in StatuteMiles:
-        StatuteMiles* statutemiles = new StatuteMiles;
+        auto statutemiles = new StatuteMiles;
         desiredDistance = statutemiles->convert(*internalMeters);
         statutemiles->unref();
     }
@@ -189,7 +189,7 @@ double LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     internalMeters->unref();
 
     //Find out what units the time input is in - do not use built in convert - very easy to do by hand:
-    Seconds* q = dynamic_cast<Seconds*>(newTimeUnit);
+    auto q = dynamic_cast<Seconds*>(newTimeUnit);
     if(q != nullptr)
     {
         desiredTime = time;

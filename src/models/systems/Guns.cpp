@@ -7,7 +7,7 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/simulation/DataRecorder.hpp"
+#include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 
@@ -352,7 +352,7 @@ void Gun::burstFrame()
 osg::Vec3d Gun::computeInitBulletPosition()
 {
    osg::Vec3d pe1 = posVec;
-   Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship != nullptr) {
       // Body position to earth (NED) position
       osg::Vec3d gunPosE = posVec * ownship->getRotMat();
@@ -367,7 +367,7 @@ osg::Vec3d Gun::computeInitBulletPosition()
 osg::Vec3d Gun::computeInitBulletVelocity()
 {
    osg::Vec3d ve1(0,0,0);   // velocity -- earth (m/s)
-   Player* ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship != nullptr) {
       // compute the earth (NED) to gun matrix
       osg::Matrixd mm = getRotMat() * ownship->getRotMat();
@@ -477,7 +477,7 @@ bool Gun::setSlotRoll(const base::Number* const num)
    bool ok = false;
    double value = -1000.0;
 
-   const base::Angle* p = dynamic_cast<const base::Angle*>(num);
+   auto p = dynamic_cast<const base::Angle*>(num);
    if (p != nullptr) {
       base::Radians radian;
       value = radian.convert(*p);
@@ -504,7 +504,7 @@ bool Gun::setSlotPitch(const base::Number* const num)
    bool ok = false;
    double value = -1000.0;
 
-   const base::Angle* p = dynamic_cast<const base::Angle*>(num);
+   auto p = dynamic_cast<const base::Angle*>(num);
    if (p != nullptr) {
       base::Radians radian;
       value = radian.convert(*p);
@@ -531,7 +531,7 @@ bool Gun::setSlotYaw(const base::Number* const num)
    bool ok = false;
    double value = -1000.0;
 
-   const base::Angle* p = dynamic_cast<const base::Angle*>(num);
+   auto p = dynamic_cast<const base::Angle*>(num);
    if (p != nullptr) {
       base::Radians radian;
       value = radian.convert(*p);

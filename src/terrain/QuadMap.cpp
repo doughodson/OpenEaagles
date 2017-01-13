@@ -164,8 +164,8 @@ void QuadMap::findDataFiles()
          unsigned int count = 0;
          base::List::Item* item = subcomponents->getFirstItem();
          while (item != nullptr && count < MAX_DATA_FILES) {
-            base::Pair* pair = static_cast<base::Pair*>( item->getValue() );
-            Terrain* dataFile = dynamic_cast<Terrain*>( pair->object() );
+            auto pair = static_cast<base::Pair*>( item->getValue() );
+            auto dataFile = dynamic_cast<Terrain*>( pair->object() );
             if (dataFile != nullptr && dataFile->isDataLoaded()) {
                dataFile->ref();
                dataFiles[count] = dataFile;

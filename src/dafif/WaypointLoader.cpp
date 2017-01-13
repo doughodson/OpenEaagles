@@ -212,8 +212,8 @@ int WaypointLoader::queryByKey(const char* waypointkey)
 //------------------------------------------------------------------------------
 int WaypointLoader::kl_cmp(const void* p1, const void* p2)
 {
-   const WaypointKey* k1 = *(static_cast<const WaypointKey**>(const_cast<void*>(p1)));
-   const WaypointKey* k2 = *(static_cast<const WaypointKey**>(const_cast<void*>(p2)));
+   auto k1 = *(static_cast<const WaypointKey**>(const_cast<void*>(p1)));
+   auto k2 = *(static_cast<const WaypointKey**>(const_cast<void*>(p2)));
 
    // compare the keys
    int result = std::strcmp(k1->key, k2->key);
@@ -223,8 +223,8 @@ int WaypointLoader::kl_cmp(const void* p1, const void* p2)
 
 int WaypointLoader::il_cmp(const void* p1, const void* p2)
 {
-   const WaypointKey* k1 = *(static_cast<const WaypointKey**>(const_cast<void*>(p1)));
-   const WaypointKey* k2 = *(static_cast<const WaypointKey**>(const_cast<void*>(p2)));
+   auto k1 = *(static_cast<const WaypointKey**>(const_cast<void*>(p1)));
+   auto k2 = *(static_cast<const WaypointKey**>(const_cast<void*>(p2)));
 
    // compare the ids
    int result = std::strcmp(k1->ident, k2->ident);

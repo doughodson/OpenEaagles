@@ -2,7 +2,7 @@
 #ifndef __oe_models_Effects_H__
 #define __oe_models_Effects_H__
 
-#include "openeaagles/models/players/Weapon.hpp"
+#include "openeaagles/models/players/AbstractWeapon.hpp"
 
 namespace oe {
 namespace models {
@@ -21,9 +21,9 @@ namespace models {
 //    dragIndex   <Number>   ! drag index used by default dynamics (default: 0.0006f)
 //
 //------------------------------------------------------------------------------
-class Effects : public Weapon
+class Effects : public AbstractWeapon
 {
-    DECLARE_SUBCLASS(Effects, Weapon)
+    DECLARE_SUBCLASS(Effects, AbstractWeapon)
 
 public:
     Effects();

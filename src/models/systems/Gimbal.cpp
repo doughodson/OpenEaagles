@@ -252,7 +252,7 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
 {
    if (isComponentSelected()) {
       // Just pass it to our selected subcomponent
-      Gimbal* sc = dynamic_cast<Gimbal*>( getSelectedComponent() );
+      auto sc = dynamic_cast<Gimbal*>( getSelectedComponent() );
       if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
    }
    else {
@@ -260,8 +260,8 @@ bool Gimbal::onRfEmissionEvent(Emission* const em)
       base::PairStream* subcomponents = getComponents();
       if (subcomponents != nullptr) {
          for (base::List::Item* item = subcomponents->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            Gimbal* sc = dynamic_cast<Gimbal*>( pair->object() );
+            auto pair = static_cast<base::Pair*>(item->getValue());
+            auto sc = dynamic_cast<Gimbal*>( pair->object() );
             if (sc != nullptr && sc->getPowerSwitch() != System::PWR_OFF) sc->onRfEmissionEvent(em);
          }
          subcomponents->unref();
@@ -1142,8 +1142,8 @@ bool Gimbal::setSlotPlayerTypes(const base::PairStream* const msg)
       unsigned int mask = 0;
       const base::List::Item* item = msg->getFirstItem();
       while (item != nullptr) {
-         const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
-         const base::String* type = dynamic_cast<const base::String*>( pair->object() );
+         auto pair = static_cast<const base::Pair*>(item->getValue());
+         auto type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
             if ( utStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);
@@ -1255,7 +1255,7 @@ void Gimbal::updateMatrix()
    // Is our parent (container) also a gimbal?
    // If so then post multiply by our container's matrix
    // ---
-   const Gimbal* p = dynamic_cast<const Gimbal*>( container() );
+   auto p = dynamic_cast<const Gimbal*>( container() );
    if (p != nullptr) { mm1 *= p->getRotMat(); }
 
    // Set as the new matrix
@@ -1339,7 +1339,7 @@ void Gimbal::limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& u
 //------------------------------------------------------------------------------
 unsigned int Gimbal::processPlayersOfInterest(base::PairStream* const poi)
 {
-   Tdb* tdb0 = new Tdb(maxPlayers, this);
+   auto tdb0 = new Tdb(maxPlayers, this);
 
    unsigned int ntgts = tdb0->processPlayers(poi);
    setCurrentTdb(tdb0);
