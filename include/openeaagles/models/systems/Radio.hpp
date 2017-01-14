@@ -17,7 +17,7 @@ class Datalink;
 // Description: Base class for all radios (Comm, Nav, IFF, etc.)
 //
 //    This class is one of the "top level" systems attached to a Player
-//    class (see Player.h).
+//    class (see Player.hpp).
 //
 //    For many Radio models, the maximum detection range, which is set using the
 //    'maxDetectRange' slot, along with the frequency are sufficient to determine

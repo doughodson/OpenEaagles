@@ -56,7 +56,6 @@ OBJS =  \
 	systems/IrSystem.o \
 	systems/Jammer.o \
 	systems/MergingIrSensor.o \
-	systems/NavRadios.o \
 	systems/OnboardComputer.o \
 	systems/Pilot.o \
 	systems/Radar.o \

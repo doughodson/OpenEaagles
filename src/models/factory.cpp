@@ -62,7 +62,6 @@
 #include "openeaagles/models/systems/IrSensor.hpp"
 #include "openeaagles/models/systems/Jammer.hpp"
 #include "openeaagles/models/systems/MergingIrSensor.hpp"
-#include "openeaagles/models/systems/NavRadios.hpp"
 #include "openeaagles/models/systems/OnboardComputer.hpp"
 #include "openeaagles/models/systems/Pilot.hpp"
 #include "openeaagles/models/systems/Radar.hpp"
@@ -381,15 +380,6 @@ base::Object* factory(const std::string& name)
    }
    else if ( name == CommRadio::getFactoryName() ) {
       obj = new CommRadio();
-   }
-   else if ( name == NavRadio::getFactoryName() ) {
-      obj = new NavRadio();
-   }
-   else if ( name == TacanRadio::getFactoryName() ) {
-      obj = new TacanRadio();
-   }
-   else if ( name == IlsRadio::getFactoryName() ) {
-      obj = new IlsRadio();
    }
    else if ( name == Iff::getFactoryName() ) {
       obj = new Iff();

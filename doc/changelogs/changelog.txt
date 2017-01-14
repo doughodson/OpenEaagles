@@ -5,55 +5,15 @@ Changes since v16.11
 --------------------------------------------------------------------------------
 General framework-wide changes and improvements
 
-- Moved all players, systems and component-based models from simulation library
-  into models library
-
-- Moved all interoperability implementation code into a new 'interop' library.
-  This effectively removes circular references between 'simulation', 'models'
-  and 'interop' (i.e, interoperability) and 'otw' functionality.
-
-- In simulation library, created mostly abstract interface classes for NetIO,
-  Otw, Player, Atmosphere and Terrain.  They serve as the connection between
-  simulation infrastructure (i.e., architecture) and models.  Moved all
-  model implementation code into respective libraries -- models, terrain, otw.
-  The goal is to divorce, simplify and focus the contents of the 'simulation'
-  library to defining the basic architecture of a simulation.  It is now much
-  less concerned about models and interoperability interfaces.
-  In domain driven design (DDD) literature, this is called refactoring a ball
-  of mud into more clear individual boundary contexts. In other words, simplify
-  for understanding, clarity and general improvement.
-
-- Grouped somewhat obvious highly related models into subfolders within the models
-  library.  This includes folders for players, systems, dynamic models, environment,
-  navigation, etc.  This can be improved, but it's a good start.
-
 - Updated through replacement 0's with nullptr.
-
-- In Object, the method getSlotByIndex() has been removed.  Therefore any derived
-  Object-based classes no longer need to define it.  For legacy code, methods of
-  the form below (in all class definitions), should be deleted.
-
-   base::Object* <<CLASSNAME>>::getSlotByIndex(const int si)
-   {
-      return BaseClass::getSlotByIndex(si);
-   }
-
-   This change simplifies the codebase by eliminating unused methods and
-   reducing code clutter.
 
 - Old logger functionality has been removed in favor of binary data recorder
   library.  The classes base::Logger, simulation::SimLogger and simulation::TabLogger
   have been removed.
 
-- Changed osg references from aliased types (e.g., Vec3, Vec4, Matrix) to proper
-  declaration of Vec3d, Vec4d, Matrixd and removed Vec3, Vec4 and Matrix include
-  files which did nothing but include other files and define aliases (via typedef).
-  Using include files that do nothing but include other include files is considered bad
-  practice -- this clarifies the codebase by making it more explicit.
-
 - started using 'auto' keyword to declare types in a significant way; specifically
   used in places that declare variables that are initialized with rather long and
-  obvious type definitions.  For example:
+  obvious type definitions. For example:
 
   oe::models::Autopilot* ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
 
@@ -65,12 +25,34 @@ General framework-wide changes and improvements
   NetIO in simulation library became 'AbstractNetIO'.  This makes those classes more
   obvious in the role they place in relation to other classes.  Often they define a
   set of functionality that is common or shared with subclasses.
+--------------------------------------------------------------------------------
+
+#####################################################
+Infrastructure oriented libraries
+#####################################################
 
 --------------------------------------------------------------------------------
 base library
 
+- Changed osg references from aliased types (e.g., Vec3, Vec4, Matrix) to proper
+  declaration of Vec3d, Vec4d, Matrixd and removed Vec3, Vec4 and Matrix include
+  files which did nothing but include other files and define aliases (via typedef).
+  Using include files that do nothing but include other include files is considered bad
+  practice -- this clarifies the codebase by making it more explicit.
+
    Object class
-     -- removed getSlotByIndex() and getSlotByName() methods - both were unused.
+     -- In Object, the method getSlotByIndex() has been removed.  Therefore any derived
+        Object-based classes no longer need to define it.  For legacy code, methods of
+        the form below (in all class definitions), should be deleted.
+
+        base::Object* <<CLASSNAME>>::getSlotByIndex(const int si)
+        {
+           return BaseClass::getSlotByIndex(si);
+        }
+
+        This change simplifies the codebase by eliminating unused methods and
+        reducing code clutter.
+
      -- extracted defined '_Static' structure out of Object and into it's own
         standalone class called ClassMetadata, which is what it is.  Updated
         Object itself to use a variable called 'metadata' in lue of '_static'
@@ -106,59 +88,21 @@ base library
      -- deleted copy and assignment operators
 
 --------------------------------------------------------------------------------
-dafif library
-
-
---------------------------------------------------------------------------------
-dis library
-
---------------------------------------------------------------------------------
-glut library
-
---------------------------------------------------------------------------------
-graphics library
-
-
---------------------------------------------------------------------------------
-hla library
-
-
---------------------------------------------------------------------------------
-instruments library
-
-
---------------------------------------------------------------------------------
-iodevice library
-
-
---------------------------------------------------------------------------------
-linearsystem library
-
-
---------------------------------------------------------------------------------
-models library
-
-   WorldModel
-      -- Contains the guts of what used to be in Simulation class concerning
-         the modeled world -- class does not contain any code related to
-         execution of players, etc.
-
---------------------------------------------------------------------------------
-otw library
-
-- Much cleanup of this library by breaking out and making explicit all the OTW
-  related code.  This included cigi classes now logically grouped within 'cigi'
-  folder.
-
---------------------------------------------------------------------------------
-recorder library
-
---------------------------------------------------------------------------------
-rpf library
 
 
 --------------------------------------------------------------------------------
 simulation library
+
+- In simulation library, created mostly abstract interface classes for NetIO,
+  Otw, Player, Atmosphere and Terrain.  They serve as the connection between
+  simulation infrastructure (i.e., architecture) and models.  Moved all
+  model implementation code into respective libraries -- models, terrain, otw.
+  The goal is to divorce, simplify and focus the contents of the 'simulation'
+  library to defining the basic architecture of a simulation.  It is now much
+  less concerned about models and interoperability interfaces.
+  In domain driven design (DDD) literature, this is called refactoring a ball
+  of mud into more clear individual boundary contexts. In other words, simplify
+  for understanding, clarity and general improvement.
 
    Otm class
       -- Renamed 'formName' slot to 'factoryName' to align code with this 
@@ -173,6 +117,114 @@ simulation library
      -- renamed to SimExec - it contains ONLY execution oriented functionality
 
 --------------------------------------------------------------------------------
-terrain library
+
+#####################################################
+Graphics oriented libraries
+#####################################################
 
 --------------------------------------------------------------------------------
+graphics library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+glut library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+instruments library
+--------------------------------------------------------------------------------
+
+#####################################################
+Interoperability oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+interop library
+
+- Moved all interoperability implementation code into this new 'interop' library.
+  This effectively removes circular references between 'simulation', 'models'
+  and 'interop' (i.e, interoperability) and 'otw' functionality.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+dis library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+hla library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+rprfom library
+--------------------------------------------------------------------------------
+
+#####################################################
+Out the window (OTW) oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+otw library
+
+- Much cleanup of this library by breaking out and making explicit all the OTW
+  related code.  This included cigi classes now logically grouped within 'cigi'
+  folder.
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Models & general capabilities oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+models library
+
+- Moved all players, systems and component-based models from simulation library
+  into this library
+
+- Grouped somewhat obvious highly related models into subfolders within the models
+  library.  This includes folders for players, systems, dynamic models, environment,
+  navigation, etc.  This can be improved, but it's a good start.
+
+- Removed NavRadio-based classes: NavRadio, IlsRadio and TacanRadio.  These classes
+  used DAFIF data to navigate to airports and navaids.  In the real world, this
+  capability is used to land an aircraft through instrumentation.  The models
+  as designed could not do a full landing, but could navigate to a location.  They
+  have been moved into the testDafif example to 'keep' and show how to extend
+  a world model that includes DAFIF oriented information.
+
+   WorldModel (added)
+      -- Contains the guts of what used to be in Simulation class concerning
+         the modeled world -- class does not contain any code related to
+         execution of players, etc.
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+dafif library
+
+- Removed all dependencies to this library throughout framework. Add new 'testDafif'
+  example that loads DAFIF data and performs allows one to interact with it to
+  understand functionality.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+iodevice library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+linearsystem library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+rpf library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+recorder library
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+terrain library
+--------------------------------------------------------------------------------
+
