@@ -197,13 +197,13 @@ std::ostream& FlowRate::serialize(std::ostream& sout, const int i, const bool sl
     if (myVolume != nullptr) {
         indent(sout, i+j);
         sout << "volume: ";
-        auto mv = static_cast<Volume*>(myVolume);
+        const auto mv = static_cast<Volume*>(myVolume);
         mv->serialize(sout, i+j);
     }
     if (myTime != nullptr) {
         indent(sout, i+j);
         sout << "time: ";
-        auto mt = static_cast<Time*>(myTime);
+        const auto mt = static_cast<Time*>(myTime);
         mt->serialize(sout, i+j);
     }
 

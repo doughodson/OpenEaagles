@@ -486,7 +486,7 @@ GLubyte BitmapFont::reverseByteOrder(GLubyte byte)
 // Reverse the order of the bytes
 void BitmapFont::reverseBitmapOrder(GLubyte* bitmap, unsigned int numBitmapBytes, unsigned int numBytesWide)
 {
-   auto temp = new GLubyte[numBytesWide];
+   const auto temp = new GLubyte[numBytesWide];
 
    for (unsigned int i = 0; i < numBitmapBytes/2; i += numBytesWide) {
 
@@ -545,7 +545,7 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    unsigned int numFileBytes = numBytesWide * height1;
    unsigned int numFontBytes = numBytesWide * getBitmapHeight();
 
-   auto bitmap = new GLubyte[numFontBytes];
+   const auto bitmap = new GLubyte[numFontBytes];
 
    unsigned int i;  // index
 

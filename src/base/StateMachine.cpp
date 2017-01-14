@@ -93,8 +93,8 @@ void StateMachine::reset()
    if (stMachList != nullptr) {
       List::Item* item = stMachList->getFirstItem();
       while (item != nullptr) {
-         auto p = static_cast<Pair*>(item->getValue());
-         auto q = static_cast<Component*>(p->object());
+         const auto p = static_cast<Pair*>(item->getValue());
+         const auto q = static_cast<Component*>(p->object());
          q->reset();
          item = item->getNext();
       }
@@ -294,7 +294,7 @@ bool StateMachine::goToSubstate(const unsigned short newSubstate)
 bool StateMachine::nextState(Object* const arg)
 {
    bool ok = false;
-   auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->next(arg);
    }
@@ -304,7 +304,7 @@ bool StateMachine::nextState(Object* const arg)
 bool StateMachine::goToState(const unsigned short newState, Object* const arg)
 {
    bool ok = false;
-   auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->goTo(newState,arg);
    }
@@ -314,7 +314,7 @@ bool StateMachine::goToState(const unsigned short newState, Object* const arg)
 bool StateMachine::callState(const unsigned short newState, Object* const arg)
 {
    bool ok = false;
-   auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr && sp > 0) {
       ok = parent->call(newState,arg);
       if (ok) {
@@ -328,7 +328,7 @@ bool StateMachine::callState(const unsigned short newState, Object* const arg)
 bool StateMachine::rtnState(Object* const arg)
 {
    bool ok = false;
-   auto parent = dynamic_cast<StateMachine*>( container() );
+   const auto parent = dynamic_cast<StateMachine*>( container() );
    if (parent != nullptr) {
       ok = parent->rtn(arg);
    }
@@ -474,8 +474,8 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
    if (stMachList != nullptr) {
       List::Item* item = stMachList->getFirstItem();
       while (item != nullptr) {
-         auto p = static_cast<Pair*>(item->getValue());
-         auto q = static_cast<Component*>(p->object());
+         const auto p = static_cast<Pair*>(item->getValue());
+         const auto q = static_cast<Component*>(p->object());
          q->container(nullptr);
          item = item->getNext();
       }
@@ -484,18 +484,18 @@ bool StateMachine::setSlotStateMachines(const PairStream* const msg)
 
    // Build a new list containing only StateMachine class (or derived) objects
    if (msg != nullptr) {
-      auto newList = new PairStream();
+      const auto newList = new PairStream();
 
       // For each object in the list; if it's a StateMachine (or derived from) then
       // clone the object and add it to the new list.
       const List::Item* item = msg->getFirstItem();
       while (item != nullptr) {
-         auto p = static_cast<const Pair*>(item->getValue());
-         auto q = dynamic_cast<const StateMachine*>(p->object());
+         const auto p = static_cast<const Pair*>(item->getValue());
+         const auto q = dynamic_cast<const StateMachine*>(p->object());
 
          if (q != nullptr) {
-            auto cp = static_cast<Pair*>(p->clone());
-            auto cq = static_cast<StateMachine*>(cp->object());
+            const auto cp = static_cast<Pair*>(p->clone());
+            const auto cq = static_cast<StateMachine*>(cp->object());
             cq->container(this);
             newList->put(cp);
          }

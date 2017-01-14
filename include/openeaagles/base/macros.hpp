@@ -341,7 +341,7 @@
 
 #define ON_SLOT(idx,setFunc,ObjType)                                                   \
     if ( !_ok ) {                                                                      \
-        auto _msg = dynamic_cast<ObjType*>(obj);                                       \
+        const auto _msg = dynamic_cast<ObjType*>(obj);                                 \
         if (idx == _n1 && _msg != nullptr) {                                           \
             _ok = setFunc(_msg);                                                       \
         }                                                                              \

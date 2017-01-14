@@ -40,13 +40,13 @@ void Arbiter::deleteData()
 Action* Arbiter::genAction(const State* const state, const double dt)
 {
    // create list for action set
-   auto actionSet = new base::List();
+   const auto actionSet = new base::List();
 
    // fill out list of recommended actions by behaviors
    base::List::Item* item = behaviors->getFirstItem();
    while (item != nullptr) {
       // get a behavior
-      auto behavior = static_cast<Behavior*>(item->getValue());
+      const auto behavior = static_cast<Behavior*>(item->getValue());
       // generate action, we have reference
       Action* action = behavior->genAction(state, dt);
       if (action != nullptr) {
@@ -84,7 +84,7 @@ Action* Arbiter::genComplexAction(base::List* const actionSet)
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
-      auto action = static_cast<Action*>(item->getValue());
+      const auto action = static_cast<Action*>(item->getValue());
       if (maxVote==0 || action->getVote() > maxVote) {
 
          // Yes ...
@@ -131,9 +131,9 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
    {
       base::List::Item* item = x->getFirstItem();
       while (item != nullptr && ok) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         auto b = dynamic_cast<Behavior*>( pair->object() );
+         const auto b = dynamic_cast<Behavior*>( pair->object() );
          if (b == nullptr) {
             // Item is NOT a behavior
             std::cerr << "setSlotBehaviors: slot: " << *pair->slot() << " is NOT of a Behavior type!" << std::endl;
@@ -146,9 +146,9 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
    if (ok) {
       base::List::Item* item = x->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         auto b = static_cast<Behavior*>(pair->object());
+         const auto b = static_cast<Behavior*>(pair->object());
          addBehavior(b);
       }
    }

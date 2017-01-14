@@ -129,55 +129,55 @@ double LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     newTimeUnit->setValue(1);
 
     //Take the internal unit and create an object of Meters to convert distances:
-    auto internalMeters = new Meters(static_cast<double>(distance));
+    const auto internalMeters = new Meters(static_cast<double>(distance));
 
     //Find out what units the distance is in:
-    if(dynamic_cast<Feet*>(newDistanceUnit) != nullptr)
+    if (dynamic_cast<Feet*>(newDistanceUnit) != nullptr)
     {
         //New distance is in Feet:
-        auto feet = new Feet;
+        const auto feet = new Feet;
         desiredDistance = feet->convert(*internalMeters);
         feet->unref();
     }
-    else if(dynamic_cast<Meters*>(newDistanceUnit) != nullptr)
+    else if (dynamic_cast<Meters*>(newDistanceUnit) != nullptr)
     {
         //New distance is in Meters:
-        auto meters = new Meters;
+        const auto meters = new Meters;
         desiredDistance = meters->convert(*internalMeters);
         meters->unref();
     }
-    else if(dynamic_cast<CentiMeters*>(newDistanceUnit) != nullptr)
+    else if (dynamic_cast<CentiMeters*>(newDistanceUnit) != nullptr)
     {
         //New distance is in CentiMeters:
-        auto centimeters = new CentiMeters;
+        const auto centimeters = new CentiMeters;
         desiredDistance = centimeters->convert(*internalMeters);
         centimeters->unref();
     }
-    else if(dynamic_cast<KiloMeters*>(newDistanceUnit) != nullptr)
+    else if (dynamic_cast<KiloMeters*>(newDistanceUnit) != nullptr)
     {
         //New distance is in KiloMeters:
-        auto kilometers = new KiloMeters;
+        const auto kilometers = new KiloMeters;
         desiredDistance = kilometers->convert(*internalMeters);
         kilometers->unref();
     }
-    else if(dynamic_cast<Inches*>(newDistanceUnit) != nullptr)
+    else if (dynamic_cast<Inches*>(newDistanceUnit) != nullptr)
     {
         //New distance is in Inches:
-        auto inches = new Inches;
+        const auto inches = new Inches;
         desiredDistance = inches->convert(*internalMeters);
         inches->unref();
     }
-    else if(dynamic_cast<NauticalMiles*>(newDistanceUnit) != nullptr)
+    else if (dynamic_cast<NauticalMiles*>(newDistanceUnit) != nullptr)
     {
         //New distance is in NauticalMiles:
-        auto nauticalmiles = new NauticalMiles;
+        const auto nauticalmiles = new NauticalMiles;
         desiredDistance = nauticalmiles->convert(*internalMeters);
         nauticalmiles->unref();
     }
-    else if(dynamic_cast<StatuteMiles*>(newDistanceUnit) != nullptr)
+    else if (dynamic_cast<StatuteMiles*>(newDistanceUnit) != nullptr)
     {
         //New distance is in StatuteMiles:
-        auto statutemiles = new StatuteMiles;
+        const auto statutemiles = new StatuteMiles;
         desiredDistance = statutemiles->convert(*internalMeters);
         statutemiles->unref();
     }
@@ -189,27 +189,27 @@ double LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     internalMeters->unref();
 
     //Find out what units the time input is in - do not use built in convert - very easy to do by hand:
-    auto q = dynamic_cast<Seconds*>(newTimeUnit);
-    if(q != nullptr)
+    const auto q = dynamic_cast<Seconds*>(newTimeUnit);
+    if (q != nullptr)
     {
         desiredTime = time;
     }
-    else if(dynamic_cast<MilliSeconds*>(newTimeUnit) != nullptr)
+    else if (dynamic_cast<MilliSeconds*>(newTimeUnit) != nullptr)
     {
         //Time in milliseconds:
         desiredTime = time*1000;
     }
-    else if(dynamic_cast<Minutes*>(newTimeUnit) != nullptr)
+    else if (dynamic_cast<Minutes*>(newTimeUnit) != nullptr)
     {
         //Time in minutes:
         desiredTime = time/60;
     }
-    else if(dynamic_cast<Hours*>(newTimeUnit) != nullptr)
+    else if (dynamic_cast<Hours*>(newTimeUnit) != nullptr)
     {
         //Time in hours:
         desiredTime = time/3600;
     }
-    else if(dynamic_cast<Days*>(newTimeUnit) != nullptr)
+    else if (dynamic_cast<Days*>(newTimeUnit) != nullptr)
     {
         //Time in days:
         desiredTime = time/86400;

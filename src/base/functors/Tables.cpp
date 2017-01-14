@@ -85,7 +85,7 @@ bool Table1::loadData(const List& list, double* const table)
     if (n1 <= 0 || n1 != nx) return false;
 
     // Transfer numbers from the list to a temp table
-    auto p = new double[nx];
+    const auto p = new double[nx];
     unsigned int n2 = list.getNumberList(p, nx);
     bool ok = (nx == n2);
     if (ok) {
@@ -143,7 +143,7 @@ Table1::lfi(const double iv1, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_1D(iv1, getXData(), getNumXPoints(), getDataTable(), isExtrapolationEnabled(), &s->xbp);
@@ -277,9 +277,9 @@ bool Table2::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        auto p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -337,7 +337,7 @@ Table2::lfi(const double iv1, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_2D( iv1, ytable[0], getXData(), getNumXPoints(),
@@ -358,7 +358,7 @@ Table2::lfi(const double iv1, const double iv2, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_2D( iv1, iv2, getXData(), getNumXPoints(), getYData(),
@@ -512,9 +512,9 @@ bool Table3::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        auto p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -573,7 +573,7 @@ Table3::lfi(const double iv1, FStorage* const f) const
 
    const double* y_data = getYData();
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_3D( iv1, y_data[0], ztable[0], getXData(), getNumXPoints(),
@@ -594,7 +594,7 @@ Table3::lfi(const double iv1, const double iv2, FStorage* const f) const
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_3D( iv1, iv2, ztable[0], getXData(), getNumXPoints(),
@@ -615,7 +615,7 @@ Table3::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_3D( iv1, iv2, iv3, getXData(), getNumXPoints(), getYData(),
@@ -781,9 +781,9 @@ bool Table4::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        auto p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -844,7 +844,7 @@ Table4::lfi(const double iv1, FStorage* const f) const
    const double* y_data = getYData();
    const double* z_data = getZData();
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_4D( iv1, y_data[0], z_data[0], wtable[0], getXData(),
@@ -868,7 +868,7 @@ Table4::lfi(const double iv1, const double iv2, FStorage* const f) const
 
    const double* z_data = getZData();
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_4D( iv1, iv2, z_data[0], wtable[0], getXData(),
@@ -891,7 +891,7 @@ Table4::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_4D( iv1, iv2, iv3, wtable[0], getXData(), getNumXPoints(),
@@ -914,7 +914,7 @@ Table4::lfi(const double iv1, const double iv2, const double iv3, const double i
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-       auto s = dynamic_cast<TableStorage*>(f);
+       const auto s = dynamic_cast<TableStorage*>(f);
        if (s == nullptr) throw new ExpInvalidFStorage();
 
        return lfi_4D( iv1, iv2, iv3, iv4, getXData(), getNumXPoints(),
@@ -1069,9 +1069,9 @@ bool Table5::loadData(const List& list, double* const table)
     unsigned int k = BaseClass::tableSize();
     const List::Item* item = list.getFirstItem();
     while (ok && item != nullptr) {
-        auto p = dynamic_cast<const Pair*>(item->getValue());
+        const auto p = dynamic_cast<const Pair*>(item->getValue());
         if (p != nullptr) {
-            auto slist = dynamic_cast<const List*>(p->object());
+            const auto slist = dynamic_cast<const List*>(p->object());
             if (slist != nullptr) {
                 ok &= BaseClass::loadData(*slist, &table[i]);
                 i += k;
@@ -1132,7 +1132,7 @@ Table5::lfi(const double iv1, FStorage* const f) const
    const double* z_data = getZData();
    const double* w_data = getWData();
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, y_data[0], z_data[0], w_data[0], vtable[0], getXData(),
@@ -1159,7 +1159,7 @@ Table5::lfi(const double iv1, const double iv2, FStorage* const f) const
    const double* z_data = getZData();
    const double* w_data = getWData();
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, z_data[0], w_data[0], vtable[0], getXData(),
@@ -1185,7 +1185,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, FStorage* cons
 
    const double* w_data = getWData();
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, iv3, w_data[0], vtable[0], getXData(), getNumXPoints(),
@@ -1210,7 +1210,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, const double i
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, iv3, iv4, vtable[0], getXData(), getNumXPoints(),
@@ -1235,7 +1235,7 @@ Table5::lfi(const double iv1, const double iv2, const double iv3, const double i
    if (!valid) throw new ExpInvalidTable(); // Not valid - throw an exception
 
    if (f != nullptr) {
-      auto s = dynamic_cast<TableStorage*>(f);
+      const auto s = dynamic_cast<TableStorage*>(f);
       if (s == nullptr) throw new ExpInvalidFStorage();
 
       return lfi_5D( iv1, iv2, iv3, iv4, iv5, getXData(), getNumXPoints(),

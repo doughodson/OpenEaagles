@@ -31,7 +31,7 @@ double Func1::f(const double iv1, FStorage* const s) const
 
    // No derived class handled this ...
 
-   auto p = static_cast<const Table1*>(getTable());
+   const auto p = static_cast<const Table1*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<double>(iv1), s);
@@ -71,7 +71,7 @@ double Func2::f(const double iv1, const double iv2, FStorage* const s) const
 
    // No derived class handled this ...
 
-   auto p = static_cast<const Table2*>(getTable());
+   const auto p = static_cast<const Table2*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2), s);
@@ -111,7 +111,7 @@ double Func3::f(const double iv1, const double iv2, const double iv3, FStorage* 
 
    // No derived class handled this ...
 
-   auto p = static_cast<const Table3*>(getTable());
+   const auto p = static_cast<const Table3*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2), static_cast<double>(iv3), s);
@@ -151,7 +151,7 @@ double Func4::f(const double iv1, const double iv2, const double iv3, const doub
 
    // No derived class handled this ...
 
-   auto p = static_cast<const Table4*>(getTable());
+   const auto p = static_cast<const Table4*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2),
@@ -192,7 +192,7 @@ double Func5::f(const double iv1, const double iv2, const double iv3, const doub
 
    // No derived class handled this ...
 
-   auto p = static_cast<const Table5*>(getTable());
+   const auto p = static_cast<const Table5*>(getTable());
    if (p != nullptr) {
       // But we do have an optional table that'll handle it.
       value = p->lfi(static_cast<double>(iv1), static_cast<double>(iv2), static_cast<double>(iv3),

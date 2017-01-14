@@ -26,7 +26,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 {
-   auto thread = static_cast<Thread*>(lpParam);
+   const auto thread = static_cast<Thread*>(lpParam);
    Component* parent = thread->getParent();
 
    // Make sure that our Thread class and its parent are not going to go a way.

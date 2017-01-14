@@ -134,7 +134,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    // ---
 
    // p: pre-clipped polygon
-   auto const poly1 = new osg::Vec3d[num*3];
+   const auto poly1 = new osg::Vec3d[num*3];
    for (unsigned int i = 0; i < num; i++) {
       poly1[i] = in[i];
    }
@@ -163,7 +163,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    }
 
    // q: clipped polygon
-   auto const poly2 = new osg::Vec3d[num*3];
+   const auto poly2 = new osg::Vec3d[num*3];
    osg::Vec3d* q = poly2;
 
    // qn: clipped normals

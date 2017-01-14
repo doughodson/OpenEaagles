@@ -436,7 +436,7 @@ inline std::ostream& operator<<(std::ostream& sout, const String& s)
 inline std::istream& operator>>(std::istream& sin, String& s)
 {
     const int a = 256;
-    auto buf = new char[a+1];
+    const auto buf = new char[a+1];
     int   n1 = 0;
     char  c;
 

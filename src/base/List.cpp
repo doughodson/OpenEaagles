@@ -23,7 +23,7 @@ List::List(const double values[], const unsigned int nv) : headP(nullptr), tailP
 
     // Create Float's for each value and add to the list.
     for (unsigned int i = 0; i < nv; i++) {
-        auto p = new Float(values[i]);
+        const auto p = new Float(values[i]);
         put(p);
         p->unref(); // ref() by put(), so we can unref().
     }
@@ -35,7 +35,7 @@ List::List(const int values[], const unsigned int nv) : headP(nullptr), tailP(nu
 
     // Create Integer's for each value and add to the list.
     for (unsigned int i = 0; i < nv; i++) {
-        auto p = new Integer(values[i]);
+        const auto p = new Integer(values[i]);
         put(p);
         p->unref(); // ref() by put(), so we can unref().
     }
@@ -127,7 +127,7 @@ unsigned int List::getIndex(const Object* const obj) const
 void List::addHead(Object* const obj)
 {
     if (obj == nullptr) return;
-    auto d = new Item;
+    const auto d = new Item;
     d->value = obj;
     obj->ref();
     addHead(d);
@@ -139,7 +139,7 @@ void List::addHead(Object* const obj)
 void List::addTail(Object* const obj)
 {
     if (obj == nullptr) return;
-    auto d = new Item;
+    const auto d = new Item;
     d->value = obj;
     obj->ref();
     addTail(d);
@@ -180,12 +180,12 @@ unsigned int List::getNumberList(double values[], const unsigned int max) const
     unsigned int n = 0;
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
-        auto gp = dynamic_cast<const Pair*>(p1);
+        const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        auto pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getDouble();
@@ -203,12 +203,12 @@ unsigned int List::getNumberList(float values[], const unsigned int max) const
     unsigned int n = 0;
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
-        auto gp = dynamic_cast<const Pair*>(p1);
+        const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        auto pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getFloat();
@@ -227,12 +227,12 @@ unsigned int List::getNumberList(int values[], const unsigned int max) const
     unsigned int n = 0;
     for (const Item* p = getFirstItem(); p != nullptr && n < max; p = p->getNext() ) {
         const Object* p1 = p->getValue();
-        auto gp = dynamic_cast<const Pair*>(p1);
+        const auto gp = dynamic_cast<const Pair*>(p1);
         if (gp != nullptr) {
             // when the item is a Pair, use the object it contains.
             p1 = gp->object();
         }
-        auto pp = dynamic_cast<const Number*>(p1);
+        const auto pp = dynamic_cast<const Number*>(p1);
         if (pp != nullptr) {
             // when we have a number
             values[n++] = pp->getInt();

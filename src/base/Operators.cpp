@@ -33,7 +33,7 @@ END_SLOTTABLE(Add)
 //------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Add)
     // Accept an Number at any slot index ...
-    auto _msg = dynamic_cast<Number*>(obj);
+    const auto _msg = dynamic_cast<Number*>(obj);
     if (_msg != nullptr) { _ok = setSecondNumber(_msg); }
 END_SLOT_MAP()
 

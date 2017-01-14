@@ -82,19 +82,19 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    // ---
    if (org.inData != nullptr && org.inData == org.outData) {
       // Common input/output buffer
-      auto copy = static_cast<IoData*>(org.inData->clone());
+      const auto copy = static_cast<IoData*>(org.inData->clone());
       setSlotIoData(copy);
       copy->unref();
    }
    else {
       // Separate input/output buffers
       if (org.inData != nullptr) {
-         auto copy = static_cast<IoData*>(org.inData->clone());
+         const auto copy = static_cast<IoData*>(org.inData->clone());
          setSlotInputData(copy);
          copy->unref();
       }
       if (org.outData != nullptr) {
-         auto copy = static_cast<IoData*>(org.outData->clone());
+         const auto copy = static_cast<IoData*>(org.outData->clone());
          setSlotOutputData(copy);
          copy->unref();
       }
@@ -104,7 +104,7 @@ void IoHandler::copyData(const IoHandler& org, const bool cc)
    // copy the list of I/O devices
    // ---
    if (org.devices != nullptr) {
-      auto copy = static_cast<PairStream*>(org.devices->clone());
+      const auto copy = static_cast<PairStream*>(org.devices->clone());
       setSlotDevices(copy);
       copy->unref();
    }
@@ -452,7 +452,7 @@ IoThread::IoThread(Component* const parent, const double priority, const double 
 
 unsigned long IoThread::userFunc(const double dt)
 {
-   auto ioHandler = static_cast<IoHandler*>(getParent());
+   const auto ioHandler = static_cast<IoHandler*>(getParent());
    ioHandler->inputDevicesImp( static_cast<double>(dt) );
    ioHandler->outputDevicesImp( static_cast<double>(dt) );
    return 0;

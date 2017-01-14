@@ -24,7 +24,7 @@ Pair* PairStream::findByType(const std::type_info& type)
     Pair* p = nullptr;
     const Item* item = getFirstItem();
     while (item != nullptr && p == nullptr) {
-        auto pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
+        const auto pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
         if (pair->object()->isClassType(type)) p = pair;
         item = item->getNext();
     }
@@ -36,7 +36,7 @@ const Pair* PairStream::findByType(const std::type_info& type) const
     const Pair* p = nullptr;
     const Item* item = getFirstItem();
     while (item != nullptr && p == nullptr) {
-        auto pair = static_cast<const Pair*>(item->getValue());
+        const auto pair = static_cast<const Pair*>(item->getValue());
         if (pair->object()->isClassType(type)) p = pair;
         item = item->getNext();
     }
@@ -52,7 +52,7 @@ Pair* PairStream::findByName(const char* const slotname)
     if (slotname != nullptr) {
         const Item* item = getFirstItem();
         while (item != nullptr && p == nullptr) {
-            auto pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
+            const auto pair = const_cast<Pair*>(static_cast<const Pair*>(item->getValue()));
             if ( *(pair->slot()) == slotname ) p = pair;
             item = item->getNext();
         }
@@ -66,7 +66,7 @@ const Pair* PairStream::findByName(const char* const slotname) const
     if (slotname != nullptr) {
         const Item* item = getFirstItem();
         while (item != nullptr && p == nullptr) {
-            auto pair = static_cast<const Pair*>(item->getValue());
+            const auto pair = static_cast<const Pair*>(item->getValue());
             if ( *(pair->slot()) == slotname ) p = pair;
             item = item->getNext();
         }
@@ -85,7 +85,7 @@ const Identifier* PairStream::findName(const Object* const obj) const
     if (obj != nullptr) {
         const Item* item = getFirstItem();
         while (item != nullptr && p == nullptr) {
-            auto pair = static_cast<const Pair*>(item->getValue());
+            const auto pair = static_cast<const Pair*>(item->getValue());
             if (pair->object() == obj) {
                 p = static_cast<Identifier*>(pair->slot()->clone());
             }
@@ -117,7 +117,7 @@ std::ostream& PairStream::serialize(std::ostream& sout, const int i, const bool)
 {
     const Item* item = getFirstItem();
     while (item != nullptr) {
-        auto pair = static_cast<const Pair*>(item->getValue());
+        const auto pair = static_cast<const Pair*>(item->getValue());
         indent(sout,i);
         pair->serialize(sout,i);
         item = item->getNext();

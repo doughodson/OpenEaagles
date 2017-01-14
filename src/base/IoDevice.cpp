@@ -49,7 +49,7 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
    // copy the list of I/O adapters
    // ---
    if (org.adapters != nullptr) {
-      auto copy = static_cast<PairStream*>(org.adapters->clone());
+      const auto copy = static_cast<PairStream*>(org.adapters->clone());
       setSlotAdapters(copy);
       copy->unref();
    }
@@ -58,7 +58,7 @@ void IoDevice::copyData(const IoDevice& org, const bool cc)
    // copy the list of I/O devices
    // ---
    if (org.devices != nullptr) {
-      auto copy = static_cast<PairStream*>(org.devices->clone());
+      const auto copy = static_cast<PairStream*>(org.devices->clone());
       setSlotDevices(copy);
       copy->unref();
    }
@@ -81,8 +81,8 @@ void IoDevice::reset()
    if (adapters != nullptr) {
       List::Item* item = adapters->getFirstItem();
       while (item != nullptr) {
-         auto const pair = static_cast<Pair*>(item->getValue());
-         auto const p = static_cast<IoAdapter*>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoAdapter*>(pair->object());
          p->reset();
          item = item->getNext();
       }
@@ -92,8 +92,8 @@ void IoDevice::reset()
    if (devices != nullptr) {
       List::Item* item = devices->getFirstItem();
       while (item != nullptr) {
-         auto const pair = static_cast<Pair*>(item->getValue());
-         auto const p = static_cast<IoDevice*>(pair->object());
+         const auto pair = static_cast<Pair*>(item->getValue());
+         const auto p = static_cast<IoDevice*>(pair->object());
          p->reset();
          item = item->getNext();
       }

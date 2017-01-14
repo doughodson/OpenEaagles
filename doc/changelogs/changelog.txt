@@ -17,9 +17,16 @@ General framework-wide changes and improvements
 
   oe::models::Autopilot* ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
 
-  can be reduced to:
+  can be written as:
 
   auto ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
+
+  and improved upon like this:
+
+  const auto ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
+
+  which results in const'ing the pointer variable itself, if appropriate (i.e.,
+  oe::models::Autopilot* const ap).
 
 - renamed many of the classes that are abstract to 'Abstract<classname>'.  For example,
   NetIO in simulation library became 'AbstractNetIO'.  This makes those classes more

@@ -184,7 +184,7 @@ bool Table::loadVector(const List& list, double** table, unsigned int* nn)
     unsigned int n = list.entries();
     if (n <= 0) return false;
 
-    auto p = new double[n];
+    const auto p = new double[n];
     unsigned int n2 = list.getNumberList(p, n);
     bool ok = (n == n2);
     if (ok) {
@@ -213,7 +213,7 @@ bool Table::setDataTable(const List* const sdtobj)
         unsigned int ts = tableSize();
         if (ts > 0) {
             // Allocate table space and load the table
-            auto p = new double[ts];
+            const auto p = new double[ts];
             ok = loadData(*sdtobj, p);
             if (ok) {
                 // Loading completed, so

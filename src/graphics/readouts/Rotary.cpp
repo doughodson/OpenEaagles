@@ -17,7 +17,7 @@ Rotary::Rotary()
 {
    STANDARD_CONSTRUCTOR()
 
-   auto p = new base::Integer(1);    // default rotary item
+   const auto p = new base::Integer(1);    // default rotary item
    setSelectionName(p);
    p->unref();
    preDrawSelectList = true;
@@ -32,7 +32,7 @@ void Rotary::draw()
       int start = 1;
       base::Pair* p = findByIndex(start);
       while (p != nullptr) {
-         auto g = dynamic_cast<graphics::Graphic*>(p->object());
+         const auto g = dynamic_cast<graphics::Graphic*>(p->object());
          if (g != nullptr) g->draw();
          p = findByIndex(++start);
       }

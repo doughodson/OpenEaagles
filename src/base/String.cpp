@@ -168,7 +168,7 @@ bool String::getSubString(String& subStr, const unsigned int startIndex, const s
    else
       maxChars = numChars;
 
-   auto subString = new char[maxChars + 1];
+   const auto subString = new char[maxChars + 1];
    utStrncpy(subString, (maxChars + 1), &str[startIndex], maxChars);
    subString[maxChars] = '\0';
    subStr.setStr(subString);

@@ -145,7 +145,7 @@ void Agent::setState(State* const x)
    state = x;
    state->ref();
    state->container(this);
-   auto p = new base::Pair("", state);
+   const auto p = new base::Pair("", state);
    addComponent(p);
    p->unref();
 }

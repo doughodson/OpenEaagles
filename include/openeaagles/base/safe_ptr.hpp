@@ -15,7 +15,7 @@ namespace base {
 //
 // Example #1
 //
-//    auto p = new Object();            // New object; ref cnt is one
+//    const auto p = new Object();      // New object; ref cnt is one
 //
 //    base::safe_ptr<Object> sp1( p );  // ref cnt is two
 //
