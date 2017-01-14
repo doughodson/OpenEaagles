@@ -55,7 +55,7 @@ void IrSystem::copyData(const IrSystem& org, const bool cc)
 
    // No seeker yet
    setSeeker(nullptr);
-   auto p = const_cast<base::String*>(static_cast<const base::String*>(org.getSeekerName()));
+   const auto p = const_cast<base::String*>(static_cast<const base::String*>(org.getSeekerName()));
    setSlotSeekerName( p );
 }
 
@@ -89,7 +89,7 @@ void IrSystem::reset()
       const char* name = *getSeekerName();
 
       // Get the named seeker from the player's list of gimbals
-      auto p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
+      const auto p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
       if (p != nullptr) {
          setSeeker( p );
       }
@@ -119,7 +119,7 @@ void IrSystem::updateData(const double dt)
       const char* name = *getSeekerName();
 
       // Get the named seeker from the player's list of gimbals
-      auto p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
+      const auto p = dynamic_cast<IrSeeker*>( getOwnship()->getGimbalByName(name) );
       if (p != nullptr) {
          setSeeker( p );
          // FAB - not needed - esp if multiple sensors on a seeker.

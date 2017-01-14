@@ -580,8 +580,8 @@ bool CollisionDetect::setSlotPlayerTypes(const base::PairStream* const msg)
       unsigned int mask = 0;
       const base::List::Item* item = msg->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<const base::Pair*>(item->getValue());
-         auto type = dynamic_cast<const base::String*>( pair->object() );
+         const auto pair = static_cast<const base::Pair*>(item->getValue());
+         const auto type = dynamic_cast<const base::String*>( pair->object() );
          if (type != nullptr) {
             if ( utStrcasecmp(*type,"air") == 0 ) {
                mask = (mask | Player::AIR_VEHICLE);

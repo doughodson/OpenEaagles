@@ -119,8 +119,8 @@ void Stores::updateTC(const double dt)
       if (list != nullptr) {
          base::List::Item* item = list->getFirstItem();
          while (item != nullptr) {
-            auto pair = static_cast<base::Pair*>(item->getValue());
-            auto p = dynamic_cast<ExternalStore*>( pair->object() );
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<ExternalStore*>( pair->object() );
             if (p != nullptr) p->updateTC(dt);
             item = item->getNext();
          }
@@ -144,8 +144,8 @@ void Stores::updateData(const double dt)
       if (list != nullptr) {
          base::List::Item* item = list->getFirstItem();
          while (item != nullptr) {
-            auto pair = static_cast<base::Pair*>(item->getValue());
-            auto p = dynamic_cast<ExternalStore*>( pair->object() );
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<ExternalStore*>( pair->object() );
             if (p != nullptr) p->updateData(dt);
             item = item->getNext();
          }
@@ -594,7 +594,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
    //      that it has a valid station number.
    //   -- Clone the store and if it's a weapon then assign it to the station.
    // ---
-   auto newStores = new base::PairStream();
+   const auto newStores = new base::PairStream();
 
    const base::List::Item* item = msg->getFirstItem();
    while (item != nullptr) {
@@ -626,7 +626,7 @@ bool Stores::setSlotStores(const base::PairStream* const msg)
                   // Weapon types ...
 
                   // Assign the weapon to the station
-                  auto cwpn = static_cast<AbstractWeapon*>( cpair->object() );
+                  const auto cwpn = static_cast<AbstractWeapon*>( cpair->object() );
                   assignWeaponToStation(stationNumber, cwpn);
 
                }

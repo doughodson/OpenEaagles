@@ -114,7 +114,7 @@ void MultiActorAgent::setState(base::ubf::State* const x)
    state = x;
    state->ref();
    state->container(this);
-   auto p = new base::Pair("", state);
+   const auto p = new base::Pair("", state);
    addComponent(p);
    p->unref();
 }
@@ -122,7 +122,7 @@ void MultiActorAgent::setState(base::ubf::State* const x)
 simulation::Station* MultiActorAgent::getStation()
 {
    if ( myStation == nullptr ) {
-      auto s = dynamic_cast<simulation::Station*>(findContainerByType(typeid(simulation::Station)));
+      const auto s = dynamic_cast<simulation::Station*>(findContainerByType(typeid(simulation::Station)));
       if (s != nullptr) {
          myStation = s;
       }
@@ -194,9 +194,9 @@ bool MultiActorAgent::setSlotAgentList(base::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        base::List::Item* item = msg->getFirstItem();
        while (item != nullptr) {
-          auto pair = static_cast<base::Pair*>(item->getValue());
+          const auto pair = static_cast<base::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
-          auto b = dynamic_cast<base::ubf::Behavior*>( pair->object() );
+          const auto b = dynamic_cast<base::ubf::Behavior*>( pair->object() );
           if (b != nullptr) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);

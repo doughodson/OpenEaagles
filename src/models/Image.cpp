@@ -135,7 +135,7 @@ bool Image::setOriginalImageData(const unsigned char* const ti, const unsigned i
 bool Image::testImage(const unsigned w0, const unsigned h0)
 {
     unsigned int d0 = 1;
-    auto image = new unsigned char[w0*h0*d0];
+    const auto image = new unsigned char[w0*h0*d0];
 
     for (unsigned int h = 0; h < h0; h++) {
         for (unsigned int w = 0; w < w0; w++) {

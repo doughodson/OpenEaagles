@@ -355,7 +355,7 @@ bool RfSensor::setRanges(const double* const rngs, const int n)
 
     // Copy new ranges
     if (n > 0 && rngs != nullptr) {
-        auto tmp = new double[n];
+        const auto tmp = new double[n];
         for (int i = 0; i < n; i++) {
             tmp[i] = rngs[i];
         }
@@ -444,7 +444,7 @@ bool RfSensor::setSlotModeSingle(RfSensor* const obj)
 
     modes = new base::PairStream();
 
-    auto p = new base::Pair("1",obj);
+    const auto p = new base::Pair("1",obj);
     modes->put( p );
     p->unref();
 
@@ -704,9 +704,9 @@ bool RfSensor::processModes()
         // that we are their master mode.
         const base::List::Item* item = modes->getFirstItem();
         while (item != nullptr) {
-            auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+            const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
             item = item->getNext();
-            auto m = dynamic_cast<RfSensor*>(p->object());
+            const auto m = dynamic_cast<RfSensor*>(p->object());
             if (m != nullptr) {
                 // It MUST be of type Mode
                 m->setMasterMode(this);

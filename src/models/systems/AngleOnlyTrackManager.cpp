@@ -179,7 +179,7 @@ bool AngleOnlyTrackManager::setSlotAzimuthBin(const base::Number* const msg)
 {
     double value = 0.0;
 
-    auto a = dynamic_cast<const base::Angle*>(msg);
+    const auto a = dynamic_cast<const base::Angle*>(msg);
     if (a != nullptr) {
         base::Radians r;
         value = static_cast<double>(r.convert(*a));
@@ -200,7 +200,7 @@ bool AngleOnlyTrackManager::setSlotElevationBin(const base::Number* const msg)
 {
     double value = 0.0;
 
-    auto a = dynamic_cast<const base::Angle*>(msg);
+    const auto a = dynamic_cast<const base::Angle*>(msg);
     if (a != nullptr) {
         base::Radians r;
         value = static_cast<double>(r.convert(*a));
@@ -311,7 +311,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
     double tmp;
 
     // Make sure we have an ownship to work with
-    auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+    const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
     if (ownship == nullptr || dt == 0.0) return;
 
     // Make sure we have the A and B matrix
@@ -926,10 +926,10 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
                 }
 
                 // a track's target can change w/o track changing - sync track target with target from most recent query return
-                auto trk = dynamic_cast<IrTrack*>(tracks[it]);
+                const auto trk = dynamic_cast<IrTrack*>(tracks[it]);
                 if ( trk && (trk->getLastQuery()->getTarget() != trk->getTarget()) ) {
                     const Player* tgt = trk->getLastQuery()->getTarget();
-                    auto ttgt = const_cast<Player*>(tgt);
+                    const auto ttgt = const_cast<Player*>(tgt);
                     // if track contained merged targets, a track's target may change
                     tracks[it]->setTarget( ttgt );
                     if (isMessageEnabled(MSG_INFO))

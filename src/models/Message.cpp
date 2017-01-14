@@ -91,7 +91,7 @@ bool Message::addDestName(const char* const name)
 {
    bool ret = false;
    if (name != nullptr) {
-      auto p = new base::String(name);
+      const auto p = new base::String(name);
       ret = addDestName(p);
    }
    return ret;

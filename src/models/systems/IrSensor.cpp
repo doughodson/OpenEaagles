@@ -228,10 +228,10 @@ void IrSensor::transmit(const double dt)
    BaseClass::transmit(dt);
 
    // In transmit (request IR) mode and have a IrSeeker
-   auto seeker = dynamic_cast<IrSeeker*>( getSeeker() );
+   const auto seeker = dynamic_cast<IrSeeker*>( getSeeker() );
    if (seeker != nullptr && isQuerying()) {
       // Send the emission to the other player
-      auto irQuery = new IrQueryMsg();
+      const auto irQuery = new IrQueryMsg();
       if (irQuery != nullptr) {
          irQuery->setLowerWavelength(getLowerWavelength());
          irQuery->setUpperWavelength(getUpperWavelength());
@@ -339,7 +339,7 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
 
       // allow all signals to be returned; threshold test will be applied in process()
       {
-         auto outMsg = new IrQueryMsg();
+         const auto outMsg = new IrQueryMsg();
          outMsg->setTarget(msg->getTarget());
          outMsg->setGimbalAzimuth( static_cast<double>(msg->getGimbal()->getAzimuth()) );
          outMsg->setGimbalElevation( static_cast<double>(msg->getGimbal()->getElevation()) );
@@ -536,7 +536,7 @@ bool IrSensor::setSensorType(const SensorType st)
 //{
 //   double value = 0.0f;
 //
-//   auto a = dynamic_cast<const base::Angle*>(msg);
+//   const auto a = dynamic_cast<const base::Angle*>(msg);
 //   if (a != nullptr) {
 //       base::Radians r;
 //       value = (double)r.convert(*a);
@@ -560,7 +560,7 @@ bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
 {
    double value = 0.0;
 
-   auto d = dynamic_cast<const base::Distance*>(msg);
+   const auto d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
        base::Meters m;
        value = static_cast<double>(m.convert(*d));
@@ -577,7 +577,7 @@ bool IrSensor::setSlotMaximumRange(const base::Number* const msg)
 //{
 //   double value = 0.0f;
 //
-//   auto a = dynamic_cast<const base::Angle*>(msg);
+//   const auto a = dynamic_cast<const base::Angle*>(msg);
 //   if (a != nullptr) {
 //       base::Radians r;
 //       value = (double)r.convert(*a);
@@ -597,7 +597,7 @@ bool IrSensor::setSlotLowerWavelength(const base::Number* const msg)
    double value = 0.0;
    bool ok = false;
 
-   auto d = dynamic_cast<const base::Distance*>(msg);
+   const auto d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
        base::MicroMeters mm;
        value = static_cast<double>(mm.convert(*d));
@@ -621,7 +621,7 @@ bool IrSensor::setSlotUpperWavelength(const base::Number* const msg)
    bool ok = false;
    double value = 0.0;
 
-   auto d = dynamic_cast<const base::Distance*>(msg);
+   const auto d = dynamic_cast<const base::Distance*>(msg);
    if (d != nullptr) {
        base::MicroMeters mm;
        value = static_cast<double>(mm.convert(*d));

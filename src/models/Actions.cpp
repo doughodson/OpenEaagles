@@ -138,7 +138,7 @@ bool Action::execute(base::Component* actor)
       // If not, was it our ownship ...
       //   and can we get our OBC from our ownship
       if (obc == nullptr) {
-         auto own = dynamic_cast<Player*>( actor );
+         const auto own = dynamic_cast<Player*>( actor );
          if (own != nullptr) {
             obc = own->getOnboardComputer();
          }

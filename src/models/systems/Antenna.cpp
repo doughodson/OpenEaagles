@@ -444,8 +444,8 @@ void Antenna::rfTransmit(Emission* const xmit)
       bool haveGainTgt = false;
       double gainTgt[MAX_PLAYERS];
       if (gainPattern != nullptr) {
-         auto gainFunc1 = dynamic_cast<base::Func1*>(gainPattern);
-         auto gainFunc2 = dynamic_cast<base::Func2*>(gainPattern);
+         const auto gainFunc1 = dynamic_cast<base::Func1*>(gainPattern);
+         const auto gainFunc2 = dynamic_cast<base::Func2*>(gainPattern);
          if (gainFunc2 != nullptr) {
             // ---
             // Antenna pattern: 2D table (az & el off antenna boresight)
@@ -665,8 +665,8 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          double rGainDb = 0.0;
          if (gainPattern != nullptr) {
 
-            auto gainFunc1 = dynamic_cast<base::Func1*>(gainPattern);
-            auto gainFunc2 = dynamic_cast<base::Func2*>(gainPattern);
+            const auto gainFunc1 = dynamic_cast<base::Func1*>(gainPattern);
+            const auto gainFunc2 = dynamic_cast<base::Func2*>(gainPattern);
             if (gainFunc2 != nullptr) {
                // ---
                // 3-a) Antenna pattern: 2D table (az & el off antenna boresight)

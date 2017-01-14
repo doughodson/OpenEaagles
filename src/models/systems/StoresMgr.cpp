@@ -220,7 +220,7 @@ AbstractWeapon* StoresMgr::getCurrentWeapon()
       // for its selected station's weapon
       ExternalStore* es = getExternalStore();
       if (es != nullptr) {
-         auto ss = dynamic_cast<Stores*>( es );
+         const auto ss = dynamic_cast<Stores*>( es );
          if (ss != nullptr) wpn = ss->getWeapon();
          es->unref();
       }
@@ -240,7 +240,7 @@ const AbstractWeapon* StoresMgr::getCurrentWeapon() const
       // for its selected station's weapon
       const ExternalStore* es = getExternalStore();
       if (es != nullptr) {
-         auto ss = dynamic_cast<const Stores*>( es );
+         const auto ss = dynamic_cast<const Stores*>( es );
          if (ss != nullptr) wpn = ss->getWeapon();
          es->unref();
       }
@@ -341,15 +341,15 @@ void StoresMgr::searchAndAdd(base::PairStream* const mainList, const std::type_i
       const base::List::Item* item = mainList->getFirstItem();
       while (item != nullptr) {
 
-         auto pair = static_cast<const base::Pair*>(item->getValue());
-         auto p = static_cast<const base::Component*>(pair->object());
+         const auto pair = static_cast<const base::Pair*>(item->getValue());
+         const auto p = static_cast<const base::Component*>(pair->object());
 
          // Check the type and add to the list
          bool isType = p->isClassType(type);
          if (isType) sublist->put(const_cast<base::Pair*>(pair));
 
          // If this is a Stores object then check its stores for 'type' objects as well
-         auto sp = dynamic_cast<const Stores*>(p);
+         const auto sp = dynamic_cast<const Stores*>(p);
          if ( sp != nullptr ) {
             const base::PairStream* pstores = sp->getStores();
             if (pstores != nullptr) {
@@ -386,7 +386,7 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
 
       // Create the new weapons list that contains all weapons
       {
-         auto newWeapons = new base::PairStream();
+         const auto newWeapons = new base::PairStream();
          searchAndAdd(stores, typeid(AbstractWeapon), newWeapons);
          if (newWeapons->entries() > 0) weaponsList = newWeapons;
          newWeapons->unref();
@@ -395,7 +395,7 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
       // Create the new external stores list that contains all
       // non-weapon, external stores (e.g., fuel tanks, pods, guns)
       {
-         auto newExternal = new base::PairStream();
+         const auto newExternal = new base::PairStream();
          searchAndAdd(stores, typeid(ExternalStore), newExternal);
          if (newExternal->entries() > 0) externalList = newExternal;
          newExternal->unref();
@@ -403,7 +403,7 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
 
       // Create the new fuel tank list that contains all fuel tanks
       {
-         auto newFuel = new base::PairStream();
+         const auto newFuel = new base::PairStream();
          searchAndAdd(stores, typeid(FuelTank), newFuel);
          if (newFuel->entries() > 0) fuelList = newFuel;
          newFuel->unref();
@@ -412,11 +412,9 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
       // Find the primary gun; i.e., the first gun found on our stores
       base::List::Item* item = stores->getFirstItem();
       while (item != nullptr && gunPtr == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-
-         auto p = dynamic_cast<Gun*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<Gun*>(pair->object());
          if (p != nullptr) gunPtr = p;
-
          item = item->getNext();
       }
 
@@ -516,7 +514,7 @@ void SimpleStoresMgr::updateData(const double dt)
             while (item != nullptr) {
                const base::Pair* pair = static_cast<const base::Pair*>(item->getValue());
                if (pair != nullptr) {
-                  auto s = dynamic_cast<const AbstractWeapon*>( pair->object() );
+                  const auto s = dynamic_cast<const AbstractWeapon*>( pair->object() );
                   if ( s != nullptr && s->isMode(Player::INACTIVE) && std::strcmp(s->getFactoryName(), wpn->getFactoryName()) == 0 ) {
                      count++;
                   }
@@ -609,8 +607,8 @@ Missile* SimpleStoresMgr::getNextMissileImp()
       // find the first free (inactive) missile
       base::List::Item* item = list->getFirstItem();
       while (item != nullptr && msl == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto p = dynamic_cast<Missile*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<Missile*>(pair->object());
          if (p != nullptr) {
             if (p->isInactive() || p->isReleaseHold()) {
                msl = static_cast<Missile*>(p->getPointer());
@@ -647,8 +645,8 @@ Sam* SimpleStoresMgr::getNextSamImp()
       // find the first free (inactive) SAM
       base::List::Item* item = list->getFirstItem();
       while (item != nullptr && msl == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto p = dynamic_cast<Sam*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<Sam*>(pair->object());
          if (p != nullptr) {
             if (p->isInactive() || p->isReleaseHold()) {
                msl = static_cast<Sam*>(p->getPointer());
@@ -686,8 +684,8 @@ Bomb* SimpleStoresMgr::getNextBombImp()
       // find the first free (inactive) bomb
       base::List::Item* item = list->getFirstItem();
       while (item != nullptr && bomb == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto p = dynamic_cast<Bomb*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<Bomb*>(pair->object());
          if (p != nullptr) {
             if (p->isInactive() || p->isReleaseHold()) {
                bomb = static_cast<Bomb*>(p->getPointer());
@@ -725,8 +723,8 @@ Chaff* SimpleStoresMgr::getNextChaffImp()
       // find the first free (inactive) chaff bundle
       base::List::Item* item = list->getFirstItem();
       while (item != nullptr && chaff == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto p = dynamic_cast<Chaff*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<Chaff*>(pair->object());
          if (p != nullptr) {
             if (p->isInactive() || p->isReleaseHold()) {
                chaff = static_cast<Chaff*>(p->getPointer());
@@ -764,8 +762,8 @@ Flare* SimpleStoresMgr::getNextFlareImp()
       // find the first free (inactive) flare
       base::List::Item* item = list->getFirstItem();
       while (item != nullptr && flare == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto p = dynamic_cast<Flare*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<Flare*>(pair->object());
          if (p != nullptr) {
             if (p->isInactive() || p->isReleaseHold()) {
                flare = static_cast<Flare*>(p->getPointer());
@@ -803,8 +801,8 @@ Decoy* SimpleStoresMgr::getNextDecoyImp()
       // find the first free (inactive) decoy
       base::List::Item* item = list->getFirstItem();
       while (item != nullptr && decoy == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto p = dynamic_cast<Decoy*>( pair->object() );
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<Decoy*>( pair->object() );
          if (p != nullptr) {
             if (p->isInactive() || p->isReleaseHold()) {
                decoy = static_cast<Decoy*>(p->getPointer());
@@ -831,8 +829,8 @@ Missile* SimpleStoresMgr::getSpecificMissile(const base::String* const missileTy
          // Find the first free (inactive) missile of type weaponType
          base::List::Item* item = list->getFirstItem();
          while (item != nullptr && msl == nullptr) {
-            auto pair = static_cast<base::Pair*>(item->getValue());
-            auto p = dynamic_cast<Missile*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<Missile*>(pair->object());
             if (p != nullptr && p->isInactive()) {
                // Ok, we have a missile, but is it the type we want?
                if (*p->getType() == *missileType) {
@@ -862,8 +860,8 @@ Bomb* SimpleStoresMgr::getSpecificBomb(const base::String* const bombType)
          // Find the first free (inactive) bomb
          base::List::Item* item = list->getFirstItem();
          while (item != nullptr && bomb == nullptr) {
-            auto pair = static_cast<base::Pair*>(item->getValue());
-            auto p = dynamic_cast<Bomb*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<Bomb*>(pair->object());
             if (p != nullptr && p->isInactive()) {
                // Ok, we have a bomb, but is it the type we want?
                if (*p->getType() == *bombType) {
@@ -890,8 +888,8 @@ AbstractWeapon* SimpleStoresMgr::getSpecificWeapon(const std::type_info& type)
       // Find the first free (inactive) bomb
       base::List::Item* item = list->getFirstItem();
       while (item != nullptr && wpn == nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto p = dynamic_cast<AbstractWeapon*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = dynamic_cast<AbstractWeapon*>(pair->object());
          if (p != nullptr && p->isInactive() && p->isClassType(type)) {
             p->ref();
             wpn = p;

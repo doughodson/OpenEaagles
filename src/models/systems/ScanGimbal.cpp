@@ -979,7 +979,7 @@ bool ScanGimbal::setSlotScanRadius(const base::Number* const newScanRadius)
     bool ok = false;
     if (newScanRadius != nullptr) {
         double x = newScanRadius->getDouble();
-        auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
+        const auto aa = dynamic_cast<const base::Angle*>(newScanRadius);
         if (aa != nullptr) {
             x = base::Radians::convertStatic(*aa);
         }
@@ -1005,23 +1005,23 @@ bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
         osg::Vec2d tempVerts(0.0, 0.0);
 
         while (item != nullptr && nprv < n) {
-            auto p = dynamic_cast<const base::Pair*>(item->getValue());
-                if (p != nullptr) {
-                    const base::Object* obj2 = p->object();
-                    auto msg2 = dynamic_cast<const base::List*>(obj2);
-                    if (msg2 != nullptr) {
-                        double values[2];
-                        int nl = msg2->getNumberList(values, 2);
+            const auto p = dynamic_cast<const base::Pair*>(item->getValue());
+            if (p != nullptr) {
+                const base::Object* obj2 = p->object();
+                const auto msg2 = dynamic_cast<const base::List*>(obj2);
+                if (msg2 != nullptr) {
+                    double values[2];
+                    int nl = msg2->getNumberList(values, 2);
 
-                        if (nl == 2) {
-                            // set our values in our vector array
-                            prScanVertices[nprv].set(values[0],values[1]);
-                            nprv++;
-                        }
-                        else ok = false;
+                    if (nl == 2) {
+                        // set our values in our vector array
+                        prScanVertices[nprv].set(values[0],values[1]);
+                        nprv++;
                     }
+                    else ok = false;
                 }
-        item = item->getNext();
+            }
+            item = item->getNext();
         }
     }
     return ok;

@@ -446,7 +446,7 @@ bool TrackManager::setSlotMaxTracks(const base::Number* const num)
 bool TrackManager::setSlotMaxTrackAge(const base::Number* const num)
 {
    double age = 0.0;
-   auto p = dynamic_cast<const base::Time*>(num);
+   const auto p = dynamic_cast<const base::Time*>(num);
    if (p != nullptr) {
       // We have a time and we want it in seconds ...
       base::Seconds seconds;
@@ -714,7 +714,7 @@ void AirTrkMgr::deleteData()
 void AirTrkMgr::processTrackList(const double dt)
 {
    // Make sure we have an ownship to work with
-   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -933,7 +933,7 @@ void AirTrkMgr::processTrackList(const double dt)
    for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
-         auto newTrk = new RfTrack();
+         const auto newTrk = new RfTrack();
          newTrk->setTrackID( getNewTrackID() );
          newTrk->setTarget( emissions[i]->getTarget() );
          newTrk->setType(Track::AIR_TRACK_BIT | Track::ONBOARD_SENSOR_BIT);
@@ -964,7 +964,7 @@ void AirTrkMgr::processTrackList(const double dt)
 bool AirTrkMgr::setPositionGate(const base::Number* const num)
 {
    double value = 0.0;
-   auto p = dynamic_cast<const base::Distance*>(num);
+   const auto p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
       base::Meters meters;
@@ -993,7 +993,7 @@ bool AirTrkMgr::setPositionGate(const base::Number* const num)
 bool AirTrkMgr::setRangeGate(const base::Number* const num)
 {
    double value = 0.0;
-   auto p = dynamic_cast<const base::Distance*>(num);
+   const auto p = dynamic_cast<const base::Distance*>(num);
    if (p != nullptr) {
       // We have a distance and we want it in meters ...
       base::Meters meters;
@@ -1157,7 +1157,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    double tmp;
 
    // Make sure we have an ownship to work with
-   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -1459,7 +1459,7 @@ void RwrTrkMgr::deleteData()
 void RwrTrkMgr::processTrackList(const double dt)
 {
    // Make sure we have an ownship to work with
-   auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship == nullptr || dt == 0) return;
 
    // Make sure we have the A and B matrix
@@ -1647,7 +1647,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    for (unsigned int i = 0; i < nReports; i++) {
       if ((reportNumMatches[i] == 0) && (nTrks < maxTrks)) {
          // This is a new report, so create a new track for it
-         auto newTrk = new RfTrack();
+         const auto newTrk = new RfTrack();
          newTrk->setTrackID( getNewTrackID() );
          newTrk->setTarget( emissions[i]->getOwnship() );  // The emissions ownship is our target!
          newTrk->setType(Track::RWR_TRACK_BIT  | Track::ONBOARD_SENSOR_BIT);

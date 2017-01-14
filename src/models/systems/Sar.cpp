@@ -251,7 +251,7 @@ void Sar::process(const double dt)
       if (ttimer <= 0) {
 
          // ### test -- Generate a test image ###
-         auto p = new Image();
+         const auto p = new Image();
          p->testImage(width,height);
          p->setImageId(getNextId());
          p->setLatitude(getStarePointLatitude());
@@ -263,7 +263,7 @@ void Sar::process(const double dt)
          }
          if (getResolution() > 0) p->setResolution( getResolution() );
          else p->setResolution( 3.0 * base::Distance::FT2M );
-         auto pp = new base::Pair("image", p);
+         const auto pp = new base::Pair("image", p);
          addImage(pp);
          // ### TEST
 
