@@ -77,9 +77,9 @@ void SamVehicle::updateData(const double dt)
       if (stores != nullptr) {
          const base::List::Item* item = stores->getFirstItem();
          while (item != nullptr) {
-            auto pair = static_cast<const base::Pair*>(item->getValue());
+            const auto pair = static_cast<const base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               auto sam = dynamic_cast<const Sam*>( pair->object() );
+               const auto sam = dynamic_cast<const Sam*>( pair->object() );
                if (sam != nullptr) {
                   // We have a SAM that hasn't been launched
                   if (sam->isInactive()) count++;

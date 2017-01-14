@@ -665,7 +665,7 @@ void JSBSimModel::setBrakes(const double left, const double right)
 void JSBSimModel::dynamics(const double dt)
 {
     // Get our Player (must have one!)
-    auto p = static_cast<Player*>( findContainerByType(typeid(Player)) );
+    const auto p = static_cast<Player*>( findContainerByType(typeid(Player)) );
     if (p == nullptr) return;
 
     if (fdmex == nullptr) return;
@@ -826,7 +826,7 @@ void JSBSimModel::reset()
     rollTrimSw    = static_cast<double>(0.0);
 
     // Get our Player (must have one!)
-    auto p = static_cast<Player*>( findContainerByType(typeid(Player)) );
+    const auto p = static_cast<Player*>( findContainerByType(typeid(Player)) );
     if (p == nullptr) return;
 
     // must have strings set

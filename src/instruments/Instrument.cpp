@@ -148,7 +148,7 @@ void Instrument::updateData(const double dt)
    BaseClass::updateData(dt);
 
    // check for a color rotary, just in case we need one
-   auto cr = dynamic_cast<graphics::ColorRotary*>(getColor());
+   const auto cr = dynamic_cast<graphics::ColorRotary*>(getColor());
    if (cr != nullptr) cr->determineColor(preScaleInstVal);
 
    // only tell the rest of our instruments our value if we want them to know it
@@ -158,10 +158,10 @@ void Instrument::updateData(const double dt)
       if (ps != nullptr) {
          base::List::Item* item = ps->getFirstItem();
          while(item != nullptr) {
-            auto pair = dynamic_cast<base::Pair*>(item->getValue());
+            const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
                // send the value down to all of our instrument components
-               auto myInst = dynamic_cast<Instrument*>(pair->object());
+               const auto myInst = dynamic_cast<Instrument*>(pair->object());
                base::Number n = preScaleInstVal;
                if (myInst != nullptr) myInst->event(UPDATE_INSTRUMENTS, &n);
             }

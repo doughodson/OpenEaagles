@@ -55,7 +55,7 @@ bool RotarySwitch::setSlotAngles(const base::PairStream* const x)
         while(item != nullptr) {
             base::Pair* pair = (base::Pair*)item->getValue();
             if (pair != nullptr) {
-                auto n = dynamic_cast<base::Number*>(pair->object());
+                const auto n = dynamic_cast<base::Number*>(pair->object());
                 if (n != nullptr) {
                     angles[numAngs++] = n->getReal();
                 }

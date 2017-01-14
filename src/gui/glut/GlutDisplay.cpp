@@ -194,9 +194,9 @@ int GlutDisplay::createWindow()
       if (subDisplays() != nullptr) {
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            auto pair = dynamic_cast<base::Pair*>(item->getValue());
+            const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               const auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -271,9 +271,9 @@ int GlutDisplay::createSubWindow(const int mainId)
       if (subDisplays() != nullptr) {
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            auto pair = dynamic_cast<base::Pair*>(item->getValue());
+            const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
+               const auto dobj = dynamic_cast<GlutDisplay*>( pair->object() );
                if (dobj != nullptr) dobj->createSubWindow(winId);
             }
             item = item->getNext();
@@ -344,9 +344,9 @@ void GlutDisplay::reshapeIt(int w, int h)
          // go through and put our new numbers in
          base::List::Item* item = subDisplays()->getFirstItem();
          while (item != nullptr) {
-            auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-               auto gd = dynamic_cast<GlutDisplay*>(pair->object());
+               const auto gd = dynamic_cast<GlutDisplay*>(pair->object());
                if (gd != nullptr) gd->reshapeSubWindow();
             }
             item = item->getNext();

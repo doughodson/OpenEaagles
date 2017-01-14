@@ -105,14 +105,14 @@ double RacModel::getSideSlip() const
 
 double RacModel::getFlightPath() const
 {
-   auto pp = static_cast<const simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
+   const auto pp = static_cast<const simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
    if (pp == nullptr) return 0;
    return static_cast<double>(pp->getPitchR());
 }
 
 double RacModel::getCalibratedAirspeed() const
 {
-   auto pp = static_cast<const simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
+   const auto pp = static_cast<const simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
    if (pp == nullptr) return 0;
    return pp->getTotalVelocityKts();
 }
@@ -195,11 +195,11 @@ bool RacModel::setCommandedAltitude(const double m, const double, const double)
 void RacModel::updateRAC(const double dt)
 {
    // Get our Player (must have one!)
-   auto pp = static_cast<simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
+   const auto pp = static_cast<simulation::AbstractPlayer*>( findContainerByType(typeid(simulation::AbstractPlayer)) );
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
-   double g = base::ETHG * base::Distance::FT2M;
+   const double g = base::ETHG * base::Distance::FT2M;
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)

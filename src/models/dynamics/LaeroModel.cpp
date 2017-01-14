@@ -169,9 +169,9 @@ void LaeroModel::reset()
 {
    BaseClass::reset();
 
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    if (pPlr != nullptr) {
-      double initVel = pPlr->getInitVelocity();
+      const double initVel = pPlr->getInitVelocity();
       u = initVel * base::Distance::NM2M / base::Time::H2S;
    }
 }
@@ -184,7 +184,7 @@ void LaeroModel::update4DofModel(const double dt)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
    if (pPlr != nullptr) {
 
@@ -306,7 +306,7 @@ bool LaeroModel::flyPhi(const double phiCmdDeg, const double phiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
@@ -350,7 +350,7 @@ bool LaeroModel::flyTht(const double thtCmdDeg, const double thtDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
@@ -394,7 +394,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 
@@ -519,7 +519,7 @@ bool LaeroModel::setCommandedHeadingD(const double h, const double hDps, const d
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
    bool ok = (pPlr != nullptr);
    if (ok) {
@@ -577,7 +577,7 @@ bool LaeroModel::setCommandedAltitude(const double a, const double aMps, const d
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
    bool ok = (pPlr != nullptr);
    if (ok) {
@@ -624,7 +624,7 @@ bool LaeroModel::setCommandedVelocityKts(const double v, const double vNps)
    //-------------------------------------------------------
    // get data pointers
    //-------------------------------------------------------
-   auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
+   const auto pPlr = static_cast<Player*>( findContainerByType(typeid(Player)) );
    bool ok = (pPlr != nullptr);
    if (ok) {
 

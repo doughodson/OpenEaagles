@@ -268,11 +268,11 @@ int NavaidLoader::queryByType(const Navaid::NavaidType t)
 // kl_cmp() -- key list compare function
 int NavaidLoader::kl_cmp(const void* p1, const void* p2)
 {
-   auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    // compare the keys
-   int result = std::strcmp(k1->key, k2->key);
+   const int result = std::strcmp(k1->key, k2->key);
    return result;
 }
 
@@ -280,8 +280,8 @@ int NavaidLoader::kl_cmp(const void* p1, const void* p2)
 // il_cmp() -- identifier list compare function
 int NavaidLoader::il_cmp(const void* p1, const void* p2)
 {
-   auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    // compare the id's
    int result = std::strcmp(k1->ident, k2->ident);
@@ -299,8 +299,8 @@ int NavaidLoader::il_cmp(const void* p1, const void* p2)
 // fl_cmp() -- frequency list compare function
 int NavaidLoader::fl_cmp(const void* p1, const void* p2)
 {
-   auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    int result = 0;
 
@@ -317,8 +317,8 @@ int NavaidLoader::fl_cmp(const void* p1, const void* p2)
 // cl_cmp() -- channel list compare function
 int NavaidLoader::cl_cmp(const void* p1, const void* p2)
 {
-   auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
-   auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
+   const auto k1 = *(static_cast<const NavaidKey**>(const_cast<void*>(p1)));
+   const auto k2 = *(static_cast<const NavaidKey**>(const_cast<void*>(p2)));
 
    int result = 0;
 

@@ -252,7 +252,7 @@ void AbstractWeapon::reset()
    if (tstTgtNam != nullptr) {
       Simulation* s = getSimulation();
       if (s != nullptr) {
-         auto t = dynamic_cast<Player*>(s->findPlayerByName( *tstTgtNam ));   // added DDH
+         const auto t = dynamic_cast<Player*>(s->findPlayerByName( *tstTgtNam ));   // added DDH
          if (t != nullptr) setTargetPlayer(t, true);
      }
    }

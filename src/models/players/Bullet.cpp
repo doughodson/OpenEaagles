@@ -229,9 +229,9 @@ bool Bullet::checkForTargetHit()
             if (players != nullptr) {
                 base::List::Item* item = players->getFirstItem();
                 while (item != nullptr) {
-                    auto pair = static_cast<base::Pair*>(item->getValue());
+                    const auto pair = static_cast<base::Pair*>(item->getValue());
                     if (pair != nullptr) {
-                        auto player = dynamic_cast<Player*>(pair->object());
+                        const auto player = dynamic_cast<Player*>(pair->object());
                         if (player != nullptr && player != ownship && player->isMajorType(LIFE_FORM) && !player->isDestroyed()) {
                             // ok, calculate our position from this guy
                             tgtPos = player->getPosition();
