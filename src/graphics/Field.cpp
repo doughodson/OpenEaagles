@@ -429,7 +429,7 @@ void Field::drawFunc()
     // ---
     graphics::Field* parent = nullptr;
     if (container() != nullptr) {
-        auto fp = dynamic_cast<graphics::Field*>(container());
+        const auto fp = dynamic_cast<graphics::Field*>(container());
         if (fp != nullptr) parent = fp;
     }
 
@@ -578,8 +578,8 @@ bool Field::setSlotHighlight(const base::Number* const shobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                auto child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotHighlight(shobj); //changed from obj
                 item = item->getNext();
             }
@@ -614,8 +614,8 @@ bool Field::setSlotUnderline(const base::Number* const suobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                auto child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotUnderline(suobj);
                 item = item->getNext();
             }
@@ -651,8 +651,8 @@ bool Field::setSlotReversed(const base::Number* const srobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                auto child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotReversed(srobj);
                 item = item->getNext();
             }
@@ -755,8 +755,8 @@ bool Field::setSlotJustification(const base::String* const sjobj)
 
             const base::List::Item* item = subcomponents->getFirstItem();
             while (item != nullptr) {
-                auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
-                auto child = dynamic_cast<Field*>(p->object());
+                const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+                const auto child = dynamic_cast<Field*>(p->object());
                 if (child != nullptr) child->setSlotJustification(sjobj);
                 item = item->getNext();
             }

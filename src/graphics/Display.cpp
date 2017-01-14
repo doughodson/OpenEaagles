@@ -151,12 +151,12 @@ void Display::initData()
       colorName = new base::Identifier();
 
       normColor = nullptr;
-      auto nc = new base::Rgba(0.0, 1.0, 0.0, 1.0); // default: green
+      const auto nc = new base::Rgba(0.0, 1.0, 0.0, 1.0); // default: green
       setNormColor( nc );
       nc->unref();
 
       hiColor = nullptr;
-      auto hc = new base::Rgba(1.0, 0.0, 0.0, 1.0); // default: red
+      const auto hc = new base::Rgba(1.0, 0.0, 0.0, 1.0); // default: red
       setHighlightColor( hc );
       hc->unref();
    }
@@ -305,9 +305,9 @@ void Display::updateTC(const double dt)
    if (subdisplays != nullptr) {
       base::List::Item* item = subdisplays->getFirstItem();
       while (item != nullptr) {
-         auto pair = dynamic_cast<base::Pair*>(item->getValue());
+         const auto pair = dynamic_cast<base::Pair*>(item->getValue());
          if (pair != nullptr) {
-            auto obj = dynamic_cast<Display*>( pair->object() );
+            const auto obj = dynamic_cast<Display*>( pair->object() );
             if (obj != nullptr) obj->tcFrame(dt);
          }
          item = item->getNext();
@@ -325,8 +325,8 @@ void Display::reset()
       // Reset all of our sub-displays
       base::List::Item* item = subdisplays->getFirstItem();
       while (item != nullptr) {
-         auto pair = static_cast<base::Pair*>(item->getValue());
-         auto obj = static_cast<Component*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto obj = static_cast<Component*>(pair->object());
          if (obj != nullptr) obj->reset();
          item = item->getNext();
       }
@@ -347,7 +347,7 @@ void Display::select()
 //------------------------------------------------------------------------------
 void Display::keyboardEvent(const int key)
 {
-   auto focusDisplay = dynamic_cast<Display*>( focusPtr );
+   const auto focusDisplay = dynamic_cast<Display*>( focusPtr );
    if ( focusDisplay != nullptr && focusDisplay != this) {
       // When our focus is a Display ...
       focusDisplay->keyboardEvent(key);
@@ -423,7 +423,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         if (focus() != nullptr && focus() != subdisplay) {
             // if our previous focus was a display, exit it properly
             if (focus()->isClassType(typeid(Display))) {
-                auto dis = static_cast<graphics::Display*>(focus());
+                const auto dis = static_cast<graphics::Display*>(focus());
                 dis->onMouseExit();
             }
             focus(subdisplay);
@@ -435,7 +435,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
         // if we aren't a subdisplay, but we are a display, we
         // still need to call our entry and exit routines
         if (focus() != nullptr && focus()->isClassType(typeid(Display))) {
-            auto dis = static_cast<graphics::Display*>(focus());
+            const auto dis = static_cast<graphics::Display*>(focus());
             dis->onMouseExit();
         }
 
@@ -454,7 +454,7 @@ void Display::setMouse(const int x, const int y, Display* const subdisplay)
    my = ly;
 
    // Send these coordinates to our parent display
-   auto parentDisplay = static_cast<Display*>(findContainerByType(typeid(Display)));
+   const auto parentDisplay = static_cast<Display*>(findContainerByType(typeid(Display)));
    if (parentDisplay != nullptr) {
       parentDisplay->setMouse(lx,ly,this);
    }
@@ -859,7 +859,7 @@ GLuint Display::getTextureByName(const base::Identifier* texName)
    if (texName != nullptr && textures != nullptr) {
       const base::Pair* pair = textures->findByName( *texName );
       if (pair != nullptr) {
-         auto pt = dynamic_cast<const Texture*>( pair->object() );
+         const auto pt = dynamic_cast<const Texture*>( pair->object() );
          if (pt != nullptr) tex = pt->getTexture();
       }
    }
@@ -880,7 +880,7 @@ Material* Display::getMaterial(const base::Identifier* name)
    if (name !=nullptr && materials != nullptr) {
       const base::Pair* pair = materials->findByName( *name );
       if (pair != nullptr) {
-         auto mat = dynamic_cast<const Material*>( pair->object() );
+         const auto mat = dynamic_cast<const Material*>( pair->object() );
          if (mat != nullptr) temp = const_cast<Material*>(static_cast<const Material*>(mat));
       }
    }
@@ -1106,7 +1106,7 @@ void Display::outputTextLC(const int ln, const int cp, const char* sp, const int
    if (currentFont == nullptr || n <= 0) return;
    osg::Vec4d ocolor = getCurrentColor();
 
-   auto that = const_cast<Display*>(this);
+   const auto that = const_cast<Display*>(this);
    // If manual reverse text, draw a background polygon
    // Computer posiiton
    GLdouble x = 0.0;
@@ -1218,7 +1218,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
 {
    if (currentFont == nullptr || n <= 0) return;
 
-   auto that = const_cast<Display*>(this);
+   const auto that = const_cast<Display*>(this);
    osg::Vec4d ocolor = getCurrentColor();
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
@@ -1418,12 +1418,12 @@ void Display::addColor(base::Pair* pp)
 base::PairStream* Display::defaultColors()
 {
    // allocate our new colortable
-   auto defColorTable = new base::PairStream();
+   const auto defColorTable = new base::PairStream();
 
    // black
    {
-      auto color = new base::Rgba(0.0f, 0.0f, 0.0f, 1.0f);
-      auto pair = new base::Pair("black", color);
+      const auto color = new base::Rgba(0.0f, 0.0f, 0.0f, 1.0f);
+      const auto pair = new base::Pair("black", color);
       defColorTable->put(pair);
       // now unref our local variables, because our pair ref()'d the Rgba object, and
       // PairStream ref()'d the pair.
@@ -1432,56 +1432,56 @@ base::PairStream* Display::defaultColors()
    }
    // red
    {
-      auto color = new base::Rgba(1.0f, 0.0f, 0.0f, 1.0f);
-      auto pair = new base::Pair("red", color);
+      const auto color = new base::Rgba(1.0f, 0.0f, 0.0f, 1.0f);
+      const auto pair = new base::Pair("red", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // green
    {
-      auto color = new base::Rgba(0.0f, 1.0f, 0.0f, 1.0f);
-      auto pair = new base::Pair("green", color);
+      const auto color = new base::Rgba(0.0f, 1.0f, 0.0f, 1.0f);
+      const auto pair = new base::Pair("green", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // yellow
    {
-      auto color = new base::Rgba(1.0f, 1.0f, 0.0f, 1.0f);
-      auto pair = new base::Pair("yellow", color);
+      const auto color = new base::Rgba(1.0f, 1.0f, 0.0f, 1.0f);
+      const auto pair = new base::Pair("yellow", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // blue
    {
-      auto color = new base::Rgba(0.0f, 0.0f, 1.0f, 1.0f);
-      auto pair = new base::Pair("blue", color);
+      const auto color = new base::Rgba(0.0f, 0.0f, 1.0f, 1.0f);
+      const auto pair = new base::Pair("blue", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // magenta
    {
-      auto color = new base::Rgba(1.0f, 0.0f, 1.0f, 1.0f);
-      auto pair = new base::Pair("magenta", color);
+      const auto color = new base::Rgba(1.0f, 0.0f, 1.0f, 1.0f);
+      const auto pair = new base::Pair("magenta", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // cyan
    {
-      auto color = new base::Rgba(0.0f, 1.0f, 1.0f, 1.0f);
-      auto pair = new base::Pair("cyan", color);
+      const auto color = new base::Rgba(0.0f, 1.0f, 1.0f, 1.0f);
+      const auto pair = new base::Pair("cyan", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
    }
    // white
    {
-      auto color = new base::Rgba(1.0f, 1.0f, 1.0f, 1.0f);
-      auto pair = new base::Pair("white", color);
+      const auto color = new base::Rgba(1.0f, 1.0f, 1.0f, 1.0f);
+      const auto pair = new base::Pair("white", color);
       defColorTable->put(pair);
       color->unref();
       pair->unref();
@@ -1833,9 +1833,9 @@ bool Display::processSubdisplays()
    if (subdisplays != nullptr) {
       const base::List::Item* item = subdisplays->getFirstItem();
       while (ok && item != nullptr) {
-         auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+         const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
-         auto g = dynamic_cast<Display*>(p->object());
+         const auto g = dynamic_cast<Display*>(p->object());
          if (g != nullptr) {
             g->container(this);
             g->setSubdisplayFlag(true);
@@ -1861,9 +1861,9 @@ bool Display::processTextures()
    if (textures != nullptr) {
       const base::List::Item* item = textures->getFirstItem();
       while (ok && item != nullptr) {
-         auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+         const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
-         auto g = dynamic_cast<Texture*>(p->object());
+         const auto g = dynamic_cast<Texture*>(p->object());
          if (g == nullptr) {
             // It MUST be of type Texture
             if (isMessageEnabled(MSG_ERROR)) {
@@ -1886,9 +1886,9 @@ bool Display::processMaterials()
    if (materials != nullptr) {
       const base::List::Item* item = materials->getFirstItem();
       while (ok && item != nullptr) {
-         auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+         const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
-         auto g = dynamic_cast<Material*>(p->object());
+         const auto g = dynamic_cast<Material*>(p->object());
          if (g == nullptr) {
             // It MUST be of type Material
             if (isMessageEnabled(MSG_ERROR)) {
@@ -1971,7 +1971,7 @@ void Display::loadTextures()
    if (textures != nullptr) {
       const base::List::Item* item = textures->getFirstItem();
       while (item != nullptr) {
-         auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
+         const auto p = const_cast<base::Pair*>(static_cast<const base::Pair*>(item->getValue()));
          item = item->getNext();
          Texture* g = static_cast<Texture*>(p->object());
          g->loadTexture();
@@ -2018,10 +2018,10 @@ Image* Display::readFrameBuffer(const unsigned int x, const unsigned int y, cons
    unsigned int size = (width + 3) / 4;
    unsigned int w = size * 4;
 
-   auto pixelData = new GLubyte[PIXEL_SIZE * w * height];
+   const auto pixelData = new GLubyte[PIXEL_SIZE * w * height];
    glReadPixels(x, y, w, height, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixelData);
 
-   auto newImage = new Image(w, height, PIXEL_SIZE, GL_BGR_EXT, pixelData);
+   const auto newImage = new Image(w, height, PIXEL_SIZE, GL_BGR_EXT, pixelData);
 
    return newImage;
 }

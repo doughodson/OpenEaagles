@@ -113,7 +113,7 @@ void MapPage::copyData(const MapPage& org, const bool cc)
 void MapPage::updateData(const double dt)
 {
    // find our nearest map page above us and get the data from it!
-   auto page = static_cast<MapPage*>(findContainerByType(typeid(MapPage)));
+   const auto page = static_cast<MapPage*>(findContainerByType(typeid(MapPage)));
    if (page != nullptr) {
       setHeadingDeg(page->getHeadingDeg());
       setDisplacement(page->getDisplacement());

@@ -154,7 +154,7 @@ void Polygon::drawFunc()
         else {
             // get our color gradient, because if we have one, instead of a regular color, we will
             // override it here and set it on a per vertex level.
-            auto colGradient = dynamic_cast<ColorGradient*>(getColor());
+            const auto colGradient = dynamic_cast<ColorGradient*>(getColor());
             glBegin(GL_POLYGON);
             osg::Vec3d* ptr = nullptr;
             for (unsigned int i = 0; i < nv; i++) {

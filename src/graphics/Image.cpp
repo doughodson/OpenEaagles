@@ -529,7 +529,7 @@ GLubyte* Image::readRgbValuesBMP(FILE* const fp, const unsigned int offset, cons
 {
     // Allocate the texture memory bits
     unsigned int bmSize = getWidth() * getHeight() * getNumComponents();
-    auto bmap = new GLubyte[bmSize];
+    const auto bmap = new GLubyte[bmSize];
 
     // Position to start of bitmap
     std::fseek(fp, offset, SEEK_SET);
@@ -567,7 +567,7 @@ GLubyte* Image::readColorValuesBMP(FILE* const fp, const unsigned int offset, co
     // Read the color table
     size_t ctSize = 256;
     if (bmfi->biClrUsed > 0) ctSize = bmfi->biClrUsed;
-    auto colorTable = new GLubyte[ctSize*4];
+    const auto colorTable = new GLubyte[ctSize*4];
     size_t nItemRead = std::fread(colorTable, 4, ctSize, fp);
 
     // Position to start of colors
