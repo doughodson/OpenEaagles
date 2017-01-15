@@ -43,7 +43,7 @@ bool Nib::weaponFireMsgFactory(const double)
    setMode(models::Player::ACTIVE);
 
    // If our player just launched, then it must be a weapon!
-   auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
+   const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
    if (mPlayer == nullptr) return false;  // Early out -- it wasn't a weapon! 
 
    // ---

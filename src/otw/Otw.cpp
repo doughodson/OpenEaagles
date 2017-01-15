@@ -271,11 +271,11 @@ void Otw::mapPlayerList2ModelTable()
       while (item != nullptr) {
 
          // Get a pointer to the player, 'p'
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         models::Player* p = static_cast<models::Player*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<models::Player*>(pair->object());
 
          bool dummy = false;
-         auto wpn = dynamic_cast<const models::AbstractWeapon*>( p );
+         const auto wpn = dynamic_cast<const models::AbstractWeapon*>( p );
          if (wpn != nullptr) dummy = wpn->isDummy();
 
          if ( p != getOwnship() && !dummy ) {
@@ -856,8 +856,8 @@ bool Otw::setSlotOtwModelTypes(const base::PairStream* const msg)
        // into the table.
        const base::List::Item* item = msg->getFirstItem();
        while (item != nullptr && nOtwModelTypes < MAX_MODELS_TYPES) {
-          auto pair = static_cast<const base::Pair*>(item->getValue());
-          auto otwType = dynamic_cast<const Otm*>( pair->object() );
+          const auto pair = static_cast<const base::Pair*>(item->getValue());
+          const auto otwType = dynamic_cast<const Otm*>( pair->object() );
           if (otwType != nullptr) {
              // We have an Otm object, so put it in the table
              otwType->ref();

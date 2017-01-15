@@ -169,7 +169,7 @@ bool FileWriter::openFile()
       nameLength += 4;                         // add characters for possible version number, "_V99"
       nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-      auto fullname = new char[nameLength];
+      const auto fullname = new char[nameLength];
       fullname[0] = '\0';
 
       //---
@@ -188,7 +188,7 @@ bool FileWriter::openFile()
       if ( !validName ) {
          // If the file already exists, try appending a version number "v99" ..
 
-         auto origname = new char[nameLength];
+         const auto origname = new char[nameLength];
          base::utStrcpy(origname, nameLength, fullname);
 
          validName = false;
@@ -261,7 +261,7 @@ void FileWriter::closeFile()
          eodFlag = true;
 
          // write something to signify don't read any more (e.g., last message)
-         auto lastMsg = new pb::DataRecord();
+         const auto lastMsg = new pb::DataRecord();
 
          // This will be the token representing the last message, but it can be
          // anything that is not one of the other event messages

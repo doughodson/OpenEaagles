@@ -125,7 +125,7 @@ bool FileReader::openFile()
       nameLength += filename->len();           // add the length of the file name
       nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-      auto fullname = new char[nameLength];
+      const auto fullname = new char[nameLength];
       fullname[0] = '\0';
 
       //---

@@ -797,7 +797,7 @@ bool NetIO::setSlotConstrainedTime(base::Number* const msg)
 //------------------------------------------------------------------------------
 void NetIO::addNibToObjectTables(interop::Nib* const nib, const IoType ioType)
 {
-   auto hlaNib = dynamic_cast<Nib*>(nib);
+   const auto hlaNib = dynamic_cast<Nib*>(nib);
 
    if (hlaNib != nullptr && nInObjects < MAX_OBJECTS) {
       // Add to the 'by object name' and 'by object handle' tables
@@ -858,7 +858,7 @@ void NetIO::addNibToHandleTable(Nib* const nib, Nib** tbl, const unsigned int n)
 //------------------------------------------------------------------------------
 void NetIO::removeNibFromObjectTables(interop::Nib* const nib, const IoType ioType)
 {
-   auto hlaNib = dynamic_cast<Nib*>(nib);
+   const auto hlaNib = dynamic_cast<Nib*>(nib);
 
    if (hlaNib != nullptr && nInObjects > 0) {
       // Remove from the 'by object name' and 'by object handle' tables
@@ -945,7 +945,7 @@ void NetIO::destroyInputNib(interop::Nib* const nib)
 void NetIO::destroyOutputNib(interop::Nib* const nib0)
 {
    std::cout << "NetIO::destroyOutputNib(" << nib0 << ")" << std::endl;
-   auto nib = dynamic_cast<Nib*>(nib0);
+   const auto nib = dynamic_cast<Nib*>(nib0);
    if (nib != nullptr) {
       if (nib->isRegistered()) {
          // When this output NIB was registered as an HLA object ...

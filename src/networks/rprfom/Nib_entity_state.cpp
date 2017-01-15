@@ -29,7 +29,7 @@ void Nib::reflectAttributeValues(const RTI::AttributeHandleValuePairSet& theAttr
    if (netIO != nullptr && baseEntity != nullptr) {
 
       // PhysicalEntity pointer
-      auto physicalEntity = dynamic_cast<PhysicalEntity*>(baseEntity);
+      const auto physicalEntity = dynamic_cast<PhysicalEntity*>(baseEntity);
 
       RTI::ULong length;
       char netBuffer[1000];
@@ -297,7 +297,7 @@ void Nib::entityState2Nib()
    }
     
    // PhysicalEntity pointer
-   auto physicalEntity = dynamic_cast<PhysicalEntity*>(baseEntity);
+   const auto physicalEntity = dynamic_cast<PhysicalEntity*>(baseEntity);
    if (physicalEntity != nullptr) {
 
       if (isAttributeUpdateRequired(NetIO::FORCE_IDENTIFIER_AI)) {
@@ -412,7 +412,7 @@ void Nib::updateBasicEntity(
 
       // Our simulation
 //      simulation::ISimulation* ourSim = netIO->getSimulation();
-      auto ourSim = dynamic_cast<models::WorldModel*>(netIO->getSimulation());   // DDH
+      const auto ourSim = dynamic_cast<models::WorldModel*>(netIO->getSimulation());   // DDH
 
       // Get the player data
       playerState2Nib();
@@ -627,7 +627,7 @@ void Nib::updatePhysicalEntity(
          const double)
 {
    // PhysicalEntity??
-   auto physicalEntity =  dynamic_cast<PhysicalEntity*>(baseEntity);
+   const auto physicalEntity =  dynamic_cast<PhysicalEntity*>(baseEntity);
    if (physicalEntity != nullptr) {
       // Our handler 
       NetIO* netIO = static_cast<NetIO*>(getNetIO());

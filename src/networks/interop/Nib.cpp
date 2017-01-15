@@ -589,9 +589,9 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
                if (stores != nullptr) {
                   const base::List::Item* item = stores->getFirstItem();
                   while (item != nullptr && apartNumMissiles < MAX_AMSL) {
-                     auto pair = static_cast<const base::Pair*>(item->getValue());
+                     const auto pair = static_cast<const base::Pair*>(item->getValue());
                      if (pair != nullptr) {
-                        auto msl = dynamic_cast<const models::Missile*>( pair->object() );
+                        const auto msl = dynamic_cast<const models::Missile*>( pair->object() );
                         if (msl != nullptr) {
                            // Save the pointer to the missile, set the missile's change count to 1,
                            // and up the missile count
@@ -648,7 +648,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
    //    last input (player's NIB) is different that our exec time.
    // ---
    if ( (result == UNSURE) && player->isNetworkedPlayer() ) {
-      auto playerNib = dynamic_cast<const Nib*>(player->getNib());
+      const auto playerNib = dynamic_cast<const Nib*>(player->getNib());
       if (playerNib->getTimeExec() != getTimeExec()) {
          result = YES;
       }

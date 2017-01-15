@@ -184,7 +184,7 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    {
       unsigned int bits = ( (pdu->appearance >> 16) & 0x0000000f );
       if (getPlayer() != nullptr && getPlayer()->isMajorType(models::Player::LIFE_FORM)) {
-         auto lf = dynamic_cast<models::LifeForm*>(getPlayer());
+         const auto lf = dynamic_cast<models::LifeForm*>(getPlayer());
          if (lf != nullptr) {
             // get our life form state (appearance bit 16 - 19)
             if (bits == 1) lf->setActionState(models::LifeForm::UPRIGHT_STANDING);
@@ -226,8 +226,8 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
 {
    models::Player* p = getPlayer();
    if ( pdu->numberOfArticulationParameters > 0 && p != nullptr ) {
-      auto av = dynamic_cast<models::AirVehicle*>(p);
-      auto gv = dynamic_cast<models::GroundVehicle*>(p);
+      const auto av = dynamic_cast<models::AirVehicle*>(p);
+      const auto gv = dynamic_cast<models::GroundVehicle*>(p);
 
       // ---
       // Loop for all articulation parameters ...
@@ -293,7 +293,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                // If needed, create the stores manager
                if (sms == nullptr) {
                   sms = new models::StoresMgr();
-                  auto pair = new base::Pair("storesMgr", sms);
+                  const auto pair = new base::Pair("storesMgr", sms);
                   sms->unref();   // pair owns it
                   p->addComponent(pair);
                   pair->unref(); // player owns it
@@ -349,7 +349,7 @@ void Nib::processArticulationParameters(const EntityStatePDU* const pdu)
                               wpn = static_cast<models::AbstractWeapon*>(tp->clone());  // clone and cast to a Weapon
                               char cbuf[20];
                               std::sprintf(cbuf,"%i",sta);
-                              auto pair = new base::Pair(cbuf, wpn);
+                              const auto pair = new base::Pair(cbuf, wpn);
                               wpn->unref();   // pair owns it
                               sms->addComponent(pair);
                               pair->unref(); // sms owns it
@@ -391,7 +391,7 @@ bool Nib::entityStateManager(const double curExecTime)
    if (player == nullptr) return ok;
 
    // Dummy weapon?
-   auto ww = dynamic_cast<const models::AbstractWeapon*>( player );
+   const auto ww = dynamic_cast<const models::AbstractWeapon*>( player );
    if (ww != nullptr) {
       if (ww->isDummy()) return ok;
    }
@@ -589,7 +589,7 @@ bool Nib::entityStateManager(const double curExecTime)
 
          // Life forms appearance bits
          if (player->isMajorType(models::Player::LIFE_FORM)) {
-            auto lf = dynamic_cast<const models::LifeForm*>(player);
+            const auto lf = dynamic_cast<const models::LifeForm*>(player);
             if (lf != nullptr) {
                // Health (aka damaged for other domains) same bits (3-4) - this is from the NIB, because it IS
                // updated
@@ -827,7 +827,7 @@ unsigned char Nib::manageArticulationParameters(EntityStatePDU* const pdu)
          // Find the missile's entity type
          if (apartMslTypes[i] == nullptr) {
 
-            auto ntm = dynamic_cast<const Ntm*>( disIO->findNetworkTypeMapper(msl) );
+            const auto ntm = dynamic_cast<const Ntm*>( disIO->findNetworkTypeMapper(msl) );
             if (ntm != nullptr) {
 
                // found the NTM for the missile -- and it must be a DIS NTM

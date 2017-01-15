@@ -295,7 +295,7 @@ bool NetIO::receiveMunitionDetonation(const RTI::ParameterHandleValuePairSet& th
         // 4) Update the mode of the munition IPlayer
         // ---
         if (mNib != nullptr) {
-            auto mPlayer = dynamic_cast<models::AbstractWeapon*>(mNib->getPlayer());
+            const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(mNib->getPlayer());
             if (mPlayer != nullptr) {
                 mPlayer->setMode(models::Player::DETONATED);
                 mPlayer->setDetonationResults(detonationResult);

@@ -40,7 +40,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
    setMode(models::Player::DETONATED);
 
    // If our player just detonated, then it must be a weapon!
-   auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
+   const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
    if (mPlayer == nullptr) return false;   // Early out -- it wasn't a weapon
 
    // ---

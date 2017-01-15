@@ -86,13 +86,13 @@ void CigiClNetworkSignalProcessing::OnHotResp(CigiBasePacket* packet)
 {
    if (p != nullptr) {
 
-      auto m3 = dynamic_cast<CigiHatHotRespV3*> (packet);
+      const auto m3 = dynamic_cast<CigiHatHotRespV3*> (packet);
       if (m3 != nullptr) {
          p->hatHotResp( m3 );
       }
       else {
 
-         auto m3_2 = dynamic_cast<CigiHatHotRespV3_2*> (packet);
+         const auto m3_2 = dynamic_cast<CigiHatHotRespV3_2*> (packet);
          if (m3_2 != nullptr) {
             CigiHatHotRespV3 resp;
             resp.SetHatHotID(m3_2->GetHatHotID());
@@ -101,7 +101,7 @@ void CigiClNetworkSignalProcessing::OnHotResp(CigiBasePacket* packet)
             p->hatHotResp( &resp );
          }
          else {
-            auto mx3_2 = dynamic_cast<CigiHatHotXRespV3_2*> (packet);
+            const auto mx3_2 = dynamic_cast<CigiHatHotXRespV3_2*> (packet);
             if (mx3_2 != nullptr) {
                CigiHatHotRespV3 resp;
                resp.SetHatHotID(mx3_2->GetHatHotID());
@@ -159,7 +159,7 @@ NetThread::NetThread(base::Component* const parent, const double priority): base
 
 unsigned long NetThread::userFunc()
 {
-   auto otwNet = dynamic_cast<CigiClNetwork*>( getParent() );
+   const auto otwNet = dynamic_cast<CigiClNetwork*>( getParent() );
    if (otwNet != nullptr) {
       if (otwNet->isMessageEnabled(MSG_INFO)) {
          std::cout << "NetThread::userFunc(): CigiClNetwork = " << otwNet << std::endl;

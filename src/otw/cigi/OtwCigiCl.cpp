@@ -236,7 +236,7 @@ void OtwCigiCl::deleteData()
 //------------------------------------------------------------------------------
 OtwModel* OtwCigiCl::modelFactory()
 {
-   auto p = new OtwModelCigiCl();
+   const auto p = new OtwModelCigiCl();
    p->setID( ++entityIdCount );
    return p;
 }
@@ -246,7 +246,7 @@ OtwModel* OtwCigiCl::modelFactory()
 //------------------------------------------------------------------------------
 OtwModel* OtwCigiCl::hotFactory()
 {
-   auto p = new OtwModelCigiCl();
+   const auto p = new OtwModelCigiCl();
    p->setID( ++elevReqIdCount );
    return p;
 }
@@ -396,7 +396,7 @@ bool OtwCigiCl::updateOwnshipModel()
 
    // code above changed to this by DDH -- NOTE, this appears to be wrong, not AirVehicle!
    bool active = false;
-   auto av = dynamic_cast<const models::Player*>(getOwnship());
+   const auto av = dynamic_cast<const models::Player*>(getOwnship());
    if (av != nullptr) {
       active = av->isActive() || av->isMode(models::Player::PRE_RELEASE);
    }
@@ -419,7 +419,7 @@ bool OtwCigiCl::updateOwnshipModel()
       ec->SetAnimationState(CigiEntityCtrlV3::Stop);
       ec->SetAlpha(255);
       if (getOwnshipComponentControlPacket(iw) != nullptr) {
-         auto player = dynamic_cast<const models::LifeForm*>(getOwnship());
+         const auto player = dynamic_cast<const models::LifeForm*>(getOwnship());
          CigiCompCtrlV3* animation = ownshipCC[iw];
          if (animation != nullptr) {
             animation->SetCompClassV3(CigiCompCtrlV3::EntityV3);
@@ -431,7 +431,7 @@ bool OtwCigiCl::updateOwnshipModel()
 
             if (player != nullptr) {
                // get our ownship models id and our model
-               auto lf = const_cast<models::LifeForm*>(static_cast<const models::LifeForm*>(player));
+               const auto lf = const_cast<models::LifeForm*>(static_cast<const models::LifeForm*>(player));
                if (lf != nullptr) {
                   if (lf->getDamage() < 1) {
                      // Choose Animation state
@@ -484,7 +484,7 @@ int OtwCigiCl::updateModels()
                //  (id*8+5) is attached part entity
 
                // Get the player
-               auto player = dynamic_cast<const models::Player*>(model->getPlayer());  // DDH
+               const auto player = dynamic_cast<const models::Player*>(model->getPlayer());  // DDH
 
                // Set the model data and ...
                if (player->isMajorType(models::Player::AIR_VEHICLE)) {
@@ -506,9 +506,9 @@ int OtwCigiCl::updateModels()
                   setBuildingData(model, entity, static_cast<const models::Building*>(player));
                }
                else if (player->isMajorType(models::Player::WEAPON)) {
-                  auto effect = dynamic_cast<const models::Effects*>(model->getPlayer());
-                  auto msl = dynamic_cast<const models::Missile*>(model->getPlayer());
-                  auto wpn = dynamic_cast<const models::AbstractWeapon*>(model->getPlayer());
+                  const auto effect = dynamic_cast<const models::Effects*>(model->getPlayer());
+                  const auto msl = dynamic_cast<const models::Missile*>(model->getPlayer());
+                  const auto wpn = dynamic_cast<const models::AbstractWeapon*>(model->getPlayer());
                   if (effect != nullptr)     // Effects before general weapons (because effects are also weapons)
                      setEffectsData(model, entity, effect);
                   else if (msl != nullptr)   // Missiles before general weapons (because missiles are also weapons)
@@ -855,9 +855,9 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
          if (stores != nullptr) {
             const base::List::Item* item = stores->getFirstItem();
             while (item != nullptr && apartNumMissiles == 0) {
-               auto pair = static_cast<const base::Pair*>(item->getValue());
+               const auto pair = static_cast<const base::Pair*>(item->getValue());
                if (pair != nullptr) {
-                  auto msl = dynamic_cast<const models::Missile*>( pair->object() );
+                  const auto msl = dynamic_cast<const models::Missile*>( pair->object() );
                   if (msl != nullptr) apartNumMissiles++;
                }
                item = item->getNext();
@@ -1061,7 +1061,7 @@ bool OtwCigiCl::setLifeFormData(OtwModelCigiCl* const m, const unsigned short en
       }
       m->parentActive = ok;
 
-      auto lf = const_cast<models::LifeForm*>(static_cast<const models::LifeForm*>(p));
+      const auto lf = const_cast<models::LifeForm*>(static_cast<const models::LifeForm*>(p));
 
       if (lf->getDamage() <= 0.9f) {
          // Choose Animation state

@@ -28,7 +28,7 @@ namespace dis {
 bool Nib::munitionDetonationMsgFactory(const double)
 {
    // Dummy weapon?
-   auto ww = dynamic_cast<const models::AbstractWeapon*>( getPlayer() );
+   const auto ww = dynamic_cast<const models::AbstractWeapon*>( getPlayer() );
    if (ww != nullptr) {
       if (ww->isDummy()) return true;
    }
@@ -37,10 +37,10 @@ bool Nib::munitionDetonationMsgFactory(const double)
     //std::cout << "NetIO::munitionDetonationMsgFactory() HERE!!" << std::endl;
 
     // Get our NetIO
-    NetIO* disIO = static_cast<NetIO*>(getNetIO());
+    const auto disIO = static_cast<NetIO*>(getNetIO());
 
     // If our NIB's player just detonated, then it must be a weapon!
-    auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
+    const auto mPlayer = dynamic_cast<models::AbstractWeapon*>(getPlayer());
     if (mPlayer == nullptr) return false;
 
     // Ok, we have the weapon, now get the firing and target players
@@ -90,7 +90,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
             }
             else {
                // Networked player, use its NIB's IDs
-               auto fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
+               const auto fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
                if (fNIB != nullptr) {
                   pdu.targetEntityID.simulationID.siteIdentification = fNIB->getSiteID();
                   pdu.targetEntityID.simulationID.applicationIdentification = fNIB->getApplicationID();

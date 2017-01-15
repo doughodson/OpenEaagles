@@ -102,7 +102,7 @@ CadrgFrameEntry* CadrgTocEntry::getFrameEntry(const int v, const int h)
 // -----------------------------------------------------------------------------------------
 void CadrgTocEntry::generateItems()
 {
-    auto tempTitle = new char[100];
+    const auto tempTitle = new char[100];
 
     // Terminate our scale, if we haven't yet.
     for (int j = 10; j > 0; j--) {

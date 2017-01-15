@@ -37,7 +37,7 @@ bool Nib::weaponFireMsgFactory(const double)
     setMode(models::Player::ACTIVE);
 
     // Our NIB's player is a weapon that just became active
-    auto mPlayer = static_cast<models::AbstractWeapon*>(getPlayer());
+    const auto mPlayer = static_cast<models::AbstractWeapon*>(getPlayer());
 
     // Ok, we have the weapon, now get the firing and target players
     models::Player* tPlayer = mPlayer->getTargetPlayer();
@@ -85,7 +85,7 @@ bool Nib::weaponFireMsgFactory(const double)
             tOk = true;
          }
          else {
-            auto fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
+            const auto fNIB = dynamic_cast<const Nib*>( tPlayer->getNib() );
             if (fNIB != nullptr) {
                // Networked player, use its NIB's IDs
                pdu.targetEntityID.simulationID.siteIdentification = fNIB->getSiteID();

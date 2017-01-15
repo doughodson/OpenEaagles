@@ -283,7 +283,7 @@ void Station::reset()
       base::List::Item* item = otw ->getFirstItem();
       while (item != nullptr) {
          base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         auto p = static_cast<AbstractOtw*>(pair->object());
+         const auto p = static_cast<AbstractOtw*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -293,8 +293,8 @@ void Station::reset()
    if (networks != nullptr) {
       base::List::Item* item = networks ->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         auto p = static_cast<AbstractNetIO*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractNetIO*>(pair->object());
          p->event(RESET_EVENT);
          item = item->getNext();
       }
@@ -344,8 +344,8 @@ void Station::updateTC(const double dt)
       base::List::Item* item = otw->getFirstItem();
       while (item != nullptr) {
 
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         auto p = static_cast<AbstractOtw*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractOtw*>(pair->object());
 
          // Set ownship & player list
          p->setOwnship(ownship);
@@ -617,8 +617,8 @@ void Station::processBackgroundTasks(const double dt)
    if (otw != nullptr) {
       base::List::Item* item = otw ->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         auto p = static_cast<AbstractOtw*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractOtw*>(pair->object());
          p->updateData(dt);
          item = item->getNext();
       }
@@ -635,8 +635,8 @@ void Station::processNetworkInputTasks(const double dt)
    if (networks != nullptr) {
       base::List::Item* item = networks->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         auto p = static_cast<AbstractNetIO*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractNetIO*>(pair->object());
 
          p->inputFrame( dt );
 
@@ -654,8 +654,8 @@ void Station::processNetworkOutputTasks(const double dt)
    if (networks != nullptr) {
       base::List::Item* item = networks->getFirstItem();
       while (item != nullptr) {
-         base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-         auto p = static_cast<AbstractNetIO*>(pair->object());
+         const auto pair = static_cast<base::Pair*>(item->getValue());
+         const auto p = static_cast<AbstractNetIO*>(pair->object());
 
          p->outputFrame( dt );
 
@@ -931,7 +931,7 @@ bool Station::setOwnshipByName(const char* const newOS)
       if (newOS != nullptr) {
          base::Pair* p = pl->findByName(newOS);
          if (p != nullptr) {
-            auto newOwnship = static_cast<AbstractPlayer*>(p->object());
+            const auto newOwnship = static_cast<AbstractPlayer*>(p->object());
             if (newOwnship != ownship) {
                // Ok, we found the new ownship and it IS a different
                // player then the previous ownship ...
@@ -976,9 +976,9 @@ bool Station::setOwnshipPlayer(AbstractPlayer* const newOS)
     if (pl != nullptr) {
         base::List::Item* item = pl->getFirstItem();
         while (item != nullptr && !set) {
-            auto pair = dynamic_cast<base::Pair*>(item->getValue());
+            const auto pair = dynamic_cast<base::Pair*>(item->getValue());
             if (pair != nullptr) {
-                auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
+                const auto ip = dynamic_cast<AbstractPlayer*>( pair->object() );
                 if (ip == newOS && ip->isLocalPlayer()) {
                     // Unref the old stuff
                     if (ownshipName != nullptr) { ownshipName->unref(); ownshipName = nullptr; }
@@ -1039,8 +1039,8 @@ bool Station::setSlotSimulation(SimExec* const p)
 //-----------------------------------------------------------------------------
 bool Station::setSlotOutTheWindow(AbstractOtw* const p)
 {
-    auto list = new base::PairStream();
-    auto pair = new base::Pair("1",p);
+    const auto list = new base::PairStream();
+    const auto pair = new base::Pair("1",p);
     list->put( pair );
     pair->unref();
     bool ok = setSlotOutTheWindow(list);
@@ -1055,8 +1055,8 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
    // Make sure the new list only has OTW type objects
    if (list != nullptr) {
       for (base::List::Item* item = list->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            auto p = dynamic_cast<AbstractOtw*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<AbstractOtw*>(pair->object());
             if (p != nullptr) {
             if (newList == nullptr) {
                newList = new base::PairStream();
@@ -1096,7 +1096,7 @@ bool Station::setSlotOutTheWindow(base::PairStream* const list)
 //-----------------------------------------------------------------------------
 bool Station::setSlotIoHandler(base::IoHandler* const p)
 {
-    auto list = new base::PairStream();
+    const auto list = new base::PairStream();
     list->put( new base::Pair("1",p) );
     return setSlotIoHandler(list);
 }
@@ -1122,8 +1122,8 @@ bool Station::setSlotIoHandler(base::PairStream* const list)
     // Make sure the new list is setup correctly
     if (ioHandlers != nullptr) {
         for (base::List::Item* item = ioHandlers->getFirstItem(); item != nullptr; item = item->getNext()) {
-            auto pair = static_cast<base::Pair*>(item->getValue());
-            auto p = dynamic_cast<base::IoHandler*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<base::IoHandler*>(pair->object());
             if (p != nullptr) {
                 // We are its container
                 p->container(this);
@@ -1160,8 +1160,8 @@ bool Station::setSlotNetworks(base::PairStream* const a)
     if (networks != nullptr) {
         // we are no longer the container for these networks
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
-            base::Pair* pair = static_cast<base::Pair*>(item->getValue());
-            auto p = static_cast<AbstractNetIO*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = static_cast<AbstractNetIO*>(pair->object());
             p->container(nullptr);
         }
     }
@@ -1172,8 +1172,8 @@ bool Station::setSlotNetworks(base::PairStream* const a)
     // Make sure the new network list is setup correctly
     if (networks != nullptr) {
         for (base::List::Item* item = networks->getFirstItem(); item != nullptr; item = item->getNext()) {
-            auto pair = static_cast<base::Pair*>(item->getValue());
-            auto p = dynamic_cast<AbstractNetIO*>(pair->object());
+            const auto pair = static_cast<base::Pair*>(item->getValue());
+            const auto p = dynamic_cast<AbstractNetIO*>(pair->object());
             if (p != nullptr) {
                 // We are this network's container
                 p->container(this);

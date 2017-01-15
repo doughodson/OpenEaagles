@@ -608,7 +608,7 @@ interop::Nib* NetIO::createNewOutputNib(models::Player* const player)
       unsigned short site = getSiteID();
       unsigned short app  = getApplicationID();
       if (player->isNetworkedPlayer()) {
-         auto pNib = dynamic_cast<interop::Nib*>(player->getNib());
+         const auto pNib = dynamic_cast<interop::Nib*>(player->getNib());
          fName = pNib->getFederateName();
          // Mapping another federate name to DIS site and application IDs.
          // Currently using parseFederateName(), but really should have a
@@ -924,7 +924,7 @@ const dis::Ntm* NetIO::findNtmByTypeCodes(
 {
    const dis::Ntm* result = nullptr;
 
-   auto disRoot = dynamic_cast<const dis::NtmInputNode*>( getRootNtmInputNode() );
+   const auto disRoot = dynamic_cast<const dis::NtmInputNode*>( getRootNtmInputNode() );
    if (disRoot != nullptr) {
 
       result = disRoot->findNtmByTypeCodes(kind, domain, countryCode, category, subcategory, specific, extra);
@@ -941,7 +941,7 @@ double NetIO::getMaxEntityRange(const interop::Nib* const nib) const
 {
    double value = 0;
    if (nib != nullptr) {
-      auto disNib = dynamic_cast<const Nib*>(nib);
+      const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
          const unsigned char k = disNib->getEntityKind();
          const unsigned char d = disNib->getEntityDomain();
@@ -958,7 +958,7 @@ double NetIO::getMaxEntityRangeSquared(const interop::Nib* const nib) const
 {
    double value = 0;
    if (nib != nullptr) {
-      auto disNib = dynamic_cast<const Nib*>(nib);
+      const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
          const unsigned char k = disNib->getEntityKind();
          const unsigned char d = disNib->getEntityDomain();
@@ -975,7 +975,7 @@ double NetIO::getMaxTimeDR(const interop::Nib* const nib) const
 {
    double value = 0.0;
    if (nib != nullptr) {
-      auto disNib = dynamic_cast<const Nib*>(nib);
+      const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
          const unsigned char k = disNib->getEntityKind();
          const unsigned char d = disNib->getEntityDomain();
@@ -992,7 +992,7 @@ double NetIO::getMaxPositionErr(const interop::Nib* const nib) const
 {
    double value = 0.0;
    if (nib != nullptr) {
-      auto disNib = dynamic_cast<const Nib*>(nib);
+      const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
          const unsigned char k = disNib->getEntityKind();
          const unsigned char d = disNib->getEntityDomain();
@@ -1009,7 +1009,7 @@ double NetIO::getMaxOrientationErr(const interop::Nib* const nib) const
 {
    double value = 0.0;
    if (nib != nullptr) {
-      auto disNib = dynamic_cast<const Nib*>(nib);
+      const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
          const unsigned char k = disNib->getEntityKind();
          const unsigned char d = disNib->getEntityDomain();
@@ -1026,7 +1026,7 @@ double NetIO::getMaxAge(const interop::Nib* const nib) const
 {
    double value = 0;
    if (nib != nullptr) {
-      auto disNib = dynamic_cast<const Nib*>(nib);
+      const auto disNib = dynamic_cast<const Nib*>(nib);
       if (disNib != nullptr) {
          const unsigned char k = disNib->getEntityKind();
          const unsigned char d = disNib->getEntityDomain();
@@ -1050,7 +1050,7 @@ void NetIO::defineFederateName()
       char cbuff[32];
       bool ok = makeFederateName(cbuff, 32, siteID, appID);
       if (ok) {
-         auto p = new base::String(cbuff);
+         const auto p = new base::String(cbuff);
          setFederateName(p);
          p->unref();
       }
@@ -1067,7 +1067,7 @@ void NetIO::defineFederationName()
       char cbuff[32];
       bool ok = makeFederationName(cbuff, 32, exerciseID);
       if (ok) {
-         auto p = new base::String(cbuff);
+         const auto p = new base::String(cbuff);
          setFederationName(p);
          p->unref();
       }
@@ -1459,9 +1459,9 @@ bool NetIO::setSlotMaxEntityRange(const base::PairStream* const msg)
       while (item != nullptr) {
 
             // get the slot and object from the pair
-            auto p = static_cast<const base::Pair*>(item->getValue());
+            const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
-            auto pp = dynamic_cast<const base::Distance*>( p->object() );
+            const auto pp = dynamic_cast<const base::Distance*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1502,9 +1502,9 @@ bool NetIO::setSlotMaxTimeDR(const base::PairStream* const msg)
       while (item != nullptr) {
 
             // get the slot and object from the pair
-            auto p = static_cast<const base::Pair*>(item->getValue());
+            const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
-            auto pp = dynamic_cast<const base::Time*>( p->object() );
+            const auto pp = dynamic_cast<const base::Time*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1547,9 +1547,9 @@ bool NetIO::setSlotMaxPositionErr(const base::PairStream* const msg)
       while (item != nullptr) {
 
             // get the slot and object from the pair
-            auto p = static_cast<const base::Pair*>(item->getValue());
+            const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
-            auto pp = dynamic_cast<const base::Distance*>( p->object() );
+            const auto pp = dynamic_cast<const base::Distance*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1590,9 +1590,9 @@ bool NetIO::setSlotMaxOrientationErr(const base::PairStream* const msg)
       while (item != nullptr) {
 
             // get the slot and object from the pair
-            auto p = static_cast<const base::Pair*>(item->getValue());
+            const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
-            auto pp = dynamic_cast<const base::Angle*>( p->object() );
+            const auto pp = dynamic_cast<const base::Angle*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1634,9 +1634,9 @@ bool NetIO::setSlotMaxAge(const base::PairStream* const msg)
       while (item != nullptr) {
 
             // get the slot and object from the pair
-            auto p = static_cast<const base::Pair*>(item->getValue());
+            const auto p = static_cast<const base::Pair*>(item->getValue());
             const char* const slotname = *p->slot();
-            auto pp = dynamic_cast<const base::Time*>( p->object() );
+            const auto pp = dynamic_cast<const base::Time*>( p->object() );
 
             if (pp != nullptr) {
                // Ok, we have a valid object,
@@ -1679,8 +1679,8 @@ bool NetIO::setSlotEmissionPduHandlers(base::PairStream* const msg)
        // Now scan the pair stream and put all Ntm objects into the table.
        base::List::Item* item = msg->getFirstItem();
        while (item != nullptr && nEmissionHandlers < MAX_EMISSION_HANDLERS) {
-          auto pair = static_cast<base::Pair*>(item->getValue());
-          auto handler = dynamic_cast<EmissionPduHandler*>( pair->object() );
+          const auto pair = static_cast<base::Pair*>(item->getValue());
+          const auto handler = dynamic_cast<EmissionPduHandler*>( pair->object() );
           if (handler != nullptr) {
              // We have an Ntm object, so put it in the table
              addEmissionPduHandler(handler);
@@ -1918,14 +1918,14 @@ void NetIO::testOutputEntityTypes(const unsigned int n)
                }
 #endif
 
-               auto newType = new base::String(cbuff);
+               const auto newType = new base::String(cbuff);
                origP1->setType(newType);
 
-               auto origType1 = const_cast<base::String*>(static_cast<const base::String*>(origP1->getType()));
+               const auto origType1 = const_cast<base::String*>(static_cast<const base::String*>(origP1->getType()));
                std::cout << "; type1: " << *origType1;
             }
 
-            const Ntm* foundNtm = static_cast<const Ntm*>(root->findNetworkTypeMapper(origP1));
+            const auto foundNtm = static_cast<const Ntm*>(root->findNetworkTypeMapper(origP1));
             std::cout << "; foundNtm= " << foundNtm;
             if (foundNtm != nullptr) {
                std::cout << "; [ ";
@@ -2031,7 +2031,7 @@ const interop::Ntm* NtmInputNode::findNetworkTypeMapper(const interop::Nib* cons
 {
    const interop::Ntm* result = nullptr;
 
-   auto disNib = dynamic_cast<const dis::Nib*>( nib );
+   const auto disNib = dynamic_cast<const dis::Nib*>( nib );
    if (disNib != nullptr) {
       result = findNtmByTypeCodes(
             disNib->getEntityKind(),
@@ -2112,7 +2112,7 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
    bool ok = false;
 
    // Make sure we have the correct kind of NTM ...
-   auto disNtm = dynamic_cast<dis::Ntm*>( ntm );
+   const auto disNtm = dynamic_cast<dis::Ntm*>( ntm );
    if (disNtm != nullptr) {
 
       // Make sure that the NTM's code for this level matches our code
@@ -2215,7 +2215,7 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
             }
 
             if (!alreadyExists) {
-               auto newNode = new NtmInputNode( (level+1), nextLevelCode, disNtm );
+               const auto newNode = new NtmInputNode( (level+1), nextLevelCode, disNtm );
                subnodeList->put(newNode);
                newNode->unref();   // ref()'d when put into the subnodelist
                ok = true;
@@ -2253,7 +2253,7 @@ bool NtmInputNode::add2OurLists(interop::Ntm* const ntm)
          // one of our existing subnodes, then create a new subnode for it.
          if (!ok && !err) {
             // Create a new node and add the NTM
-            auto newNode = new NtmInputNode( (level+1), nextLevelCode );
+            const auto newNode = new NtmInputNode( (level+1), nextLevelCode );
             subnodeList->put(newNode);
             ok = newNode->add2OurLists(disNtm);
             newNode->unref();   // ref()'d when put into the subnodelist

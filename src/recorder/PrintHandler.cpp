@@ -173,7 +173,7 @@ bool PrintHandler::openFile()
    nameLength += 4;                         // add characters for possible version number, "_V99"
    nameLength += 1;                         // Add one for the null(0) at the end of the string
 
-   auto fullname = new char[nameLength];
+   const auto fullname = new char[nameLength];
    fullname[0] = '\0';
 
 
@@ -194,7 +194,7 @@ bool PrintHandler::openFile()
    if ( !validName ) {
       // If the file already exists, try appending a version number "v99" ..
 
-      auto origname = new char[nameLength];
+      const auto origname = new char[nameLength];
       base::utStrcpy(origname, nameLength, fullname);
 
       validName = false;

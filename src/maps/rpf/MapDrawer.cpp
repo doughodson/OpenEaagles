@@ -442,7 +442,7 @@ void MapDrawer::drawTexture(const int row, const int column, const int idx)
 {
     if (pagers[idx] != nullptr && myMap != nullptr && getDisplay() != nullptr) {
         TextureTable& tbl = pagers[idx]->getTable();
-        auto newTex = dynamic_cast<graphics::Texture*>(tbl.getTexture(row, column));
+        const auto newTex = dynamic_cast<graphics::Texture*>(tbl.getTexture(row, column));
         if (newTex != nullptr) {
             // Bind our texture and set up our modulation
             glBindTexture(GL_TEXTURE_2D, newTex->getTexture());
@@ -491,7 +491,7 @@ void MapDrawer::updateData(const double dt)
 
     // Set our map if we don't have one
     if (myMap == nullptr) {
-        auto map = dynamic_cast<CadrgMap*>(findContainerByType(typeid(CadrgMap)));
+        const auto map = dynamic_cast<CadrgMap*>(findContainerByType(typeid(CadrgMap)));
         if (map != nullptr) setMap(map);
     }
 }

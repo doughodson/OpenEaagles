@@ -363,14 +363,14 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                if (gimbal == nullptr) {
                   // Create the container gimbal!
                   gimbal = new models::Gimbal();
-                  auto pair = new base::Pair("gimbal", gimbal);
+                  const auto pair = new base::Pair("gimbal", gimbal);
                   gimbal->unref();  // pair owns it
                   player->addComponent(pair);
                   pair->unref();    // player owns it
                }
                // Add this antenna to the container gimbal
                ap->container(gimbal);
-               auto pair = new base::Pair("antenna", ap);
+               const auto pair = new base::Pair("antenna", ap);
                ap->unref();   // pair owns it
                gimbal->addComponent(pair);
                pair->unref(); // top level gimbal owns it
@@ -383,14 +383,14 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                if (sm == nullptr) {
                   // Create the sensor manager
                   sm = new models::SensorMgr();
-                  auto pair = new base::Pair("sensorMgr", sm);
+                  const auto pair = new base::Pair("sensorMgr", sm);
                   sm->unref();   // pair owns it
                   player->addComponent(pair);
                   pair->unref(); // player owns it
                }
                // Add this system to the sensor manager
                rp->container(sm);
-               auto pair = new base::Pair("sensor", rp);
+               const auto pair = new base::Pair("sensor", rp);
                rp->unref();   // pair owns it
                sm->addComponent(pair);
                pair->unref(); // sensor manager owns it
