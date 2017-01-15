@@ -723,7 +723,7 @@ bool DataRecorder::recordNewTrack(const base::Object* objs[4], const double valu
    }
 
    // Emission Data
-   const auto const rfTrk = dynamic_cast<const models::RfTrack*>(newTrack);
+   const auto rfTrk = dynamic_cast<const models::RfTrack*>(newTrack);
    if (rfTrk != nullptr) {
 
       const models::Emission* emissionData = rfTrk->getLastEmission();
