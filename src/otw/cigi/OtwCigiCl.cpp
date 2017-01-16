@@ -40,8 +40,8 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 #include "openeaagles/base/Thread.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"
@@ -871,7 +871,7 @@ bool OtwCigiCl::setGndVehicleData(OtwModelCigiCl* const m, const unsigned short 
       launcherAPC->SetEntityID(entity);
       launcherAPC->SetArtPartID(1);       // for MAZ-543; 1 is the launcher
       launcherAPC->SetPitchEn(true);  // Pitch enabled
-      launcherAPC->SetPitch( static_cast<float>(p->getLauncherPosition() * base::Angle::R2DCC) );
+      launcherAPC->SetPitch( static_cast<float>(p->getLauncherPosition() * base::angle::R2DCC) );
       m->launcherApcActive = true;
 
       // Attached missile

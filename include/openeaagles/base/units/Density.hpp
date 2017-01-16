@@ -9,11 +9,12 @@
 
 namespace oe {
 namespace base {
+
 //------------------------------------------------------------------------------
 // Classes: Density
 //
 // Description:  Density as a function of mass and volume.
-
+//
 // Factory name: Density
 // Slots:
 //    mass    <Mass>    ! Mass (default: 1 kg)
@@ -21,25 +22,25 @@ namespace base {
 //
 // getMassUnits() -- get units of this density object
 //     const Mass* Density::getMass() const
-
+//
 // getVolumeUnits() -- get units of this density object
 //     const Volume* Density::getVolume() const
-
+//
 // setSlotMass() -- sets our mass object.
 //     bool Density::setSlotMass(const Mass* newMass)
-
+//
 // setSlotVolume() -- sets our volume object.
 //     bool Density::setSlotVolume(const Volume* newVolume)
-
+//
 // set() -- sets our density from some other density
 //     void Density::set(const Density& n)
-
+//
 // convert() -- converts from one mass/volume ratio to another
 //     double Density::convert(const Density& n) const
-
+//
 // serialize() -- print the value of this object to the output stream sout.
 //     std::ostream& Density::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
-
+//
 // NOTE: The = operator and copy constructor WILL change the units
 // of the target density object.  To perform a conversion, use set().
 //------------------------------------------------------------------------------

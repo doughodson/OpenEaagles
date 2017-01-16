@@ -2,7 +2,7 @@
 #ifndef __oe_models_Action_H__
 #define __oe_models_Action_H__
 
-#include "openeaagles/base/ubf/Action.hpp"
+#include "openeaagles/base/ubf/AbstractAction.hpp"
 #include "openeaagles/base/safe_ptr.hpp"
 
 namespace oe {
@@ -36,9 +36,9 @@ class Steerpoint;
 //  function will find the OnboardComputer and 'trigger()' the action.
 //
 //------------------------------------------------------------------------------
-class Action : public base::ubf::Action
+class Action : public base::ubf::AbstractAction
 {
-    DECLARE_SUBCLASS(Action, base::ubf::Action)
+    DECLARE_SUBCLASS(Action, base::ubf::AbstractAction)
 
 public:
    Action();

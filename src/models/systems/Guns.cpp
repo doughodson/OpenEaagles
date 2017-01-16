@@ -11,6 +11,8 @@
 
 #include "openeaagles/base/Nav.hpp"
 
+#include "openeaagles/base/units/Angles.hpp"
+
 #include <cmath>
 
 namespace oe {

@@ -11,7 +11,7 @@
 #include "openeaagles/base/Number.hpp"
 
 #include "openeaagles/base/Nav.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -181,11 +181,11 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
 
         // FAB determine angle to horizon, positive angles are down
         {
-            double hDist = 1000000.0 * base::Distance::NM2M;  // Distance to horizon (m) (default: really far away)
+            double hDist = 1000000.0 * base::distance::NM2M;  // Distance to horizon (m) (default: really far away)
             double hTanAng = 0;
 
             // earth radius in meters
-            const double er = base::Nav::ERAD60 * base::Distance::NM2M;
+            const double er = base::Nav::ERAD60 * base::distance::NM2M;
 
             // distance from the center of the earth
             const double distEC = msg->getOwnship()->getAltitudeM() + er;

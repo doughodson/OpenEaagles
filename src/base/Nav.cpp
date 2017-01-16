@@ -148,16 +148,16 @@ bool Nav::gbd2ll(
    const EarthModel* pModel = em;
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA  = Distance::M2NM * pModel->getA();
+   const double eemA  = distance::M2NM * pModel->getA();
    //const double eemF  = pModel->getF();
    const double eemE2 = pModel->getE2();
 
    // ---
    // *** Convert slat/slon & brg to radians **
    // ---
-   const double slatr = slat * Angle::D2RCC;
-   const double slonr = slon * Angle::D2RCC;
-   const double psi = Angle::aepcdDeg(brg) * Angle::D2RCC;
+   const double slatr = slat * angle::D2RCC;
+   const double slonr = slon * angle::D2RCC;
+   const double psi = angle::aepcdDeg(brg) * angle::D2RCC;
 
    // ---
    // *** Transform source point about zero longitude **
@@ -202,8 +202,8 @@ bool Nav::gbd2ll(
    // ---
    // *** Convert to degrees **
    // ---
-   double dlat0 = dlatr * Angle::R2DCC;
-   double dlon0 = dlonr * Angle::R2DCC;
+   double dlat0 = dlatr * angle::R2DCC;
+   double dlon0 = dlonr * angle::R2DCC;
 
    // ---
    // *** Apply ellipsoidal correction **
@@ -240,26 +240,26 @@ bool Nav::gbd2llS(
    const double arc     = dist / ERAD60;
    const double sinArc  = std::sin(arc);
    const double cosArc  = std::cos(arc);
-   const double sinLat1 = std::sin(Angle::D2RCC * slat);
-   const double cosLat1 = std::cos(Angle::D2RCC * slat);
-   const double sinBrng = std::sin(Angle::D2RCC * brg);
+   const double sinLat1 = std::sin(angle::D2RCC * slat);
+   const double cosLat1 = std::cos(angle::D2RCC * slat);
+   const double sinBrng = std::sin(angle::D2RCC * brg);
 
    // -----------------------------------------------------
    // compute latitude
    double k1 = sinLat1 * cosArc;
-   double k2 = cosLat1 * sinArc * std::cos(Angle::D2RCC * brg);
+   double k2 = cosLat1 * sinArc * std::cos(angle::D2RCC * brg);
    double k3 = k1 + k2;
    k3 = alimd(k3, 1.0);
    double k4 = dist * std::asin(k3);
    k4 = alimd(k4, 1.0);
-   *dlat = Angle::R2DCC * std::asin(k3);
+   *dlat = angle::R2DCC * std::asin(k3);
 
    // -----------------------------------------------------
    // compute longitude
    k1 = sinBrng * sinArc * cosLat1;
    k2 = cosArc - sinLat1 * (k1 + k2);
-   k3 = Angle::R2DCC * std::atan2(k1, k2);
-   *dlon = Angle::aepcdDeg(slon + k3);
+   k3 = angle::R2DCC * std::atan2(k1, k2);
+   *dlon = angle::aepcdDeg(slon + k3);
 
    return true;
 }
@@ -286,7 +286,7 @@ bool Nav::gll2bd(
    const EarthModel* pModel = em;
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double eemA  = Distance::M2NM * pModel->getA();
+   const double eemA  = distance::M2NM * pModel->getA();
    //const double eemF  = pModel->getF();
    const double eemE2 = pModel->getE2();
 
@@ -302,10 +302,10 @@ bool Nav::gll2bd(
    // ---
 
    // Ellipsoidal correction factor
-   const double ellip = 0.00334 * std::pow( std::cos(slat*Angle::D2RCC), 2 );
+   const double ellip = 0.00334 * std::pow( std::cos(slat * angle::D2RCC), 2 );
 
-   double dlat0 = Angle::aepcdDeg( dlat + ellip * Angle::aepcdDeg(dlat - slat) );
-   double dlon0 = Angle::aepcdDeg( dlon - ellip * Angle::aepcdDeg(dlon - slon) );
+   double dlat0 = angle::aepcdDeg( dlat + ellip * angle::aepcdDeg(dlat - slat) );
+   double dlon0 = angle::aepcdDeg( dlon - ellip * angle::aepcdDeg(dlon - slon) );
 
    // *** Transform lat/lon about zero longitude **
    double tslat = slat;          // Transformed source lat (deg)
@@ -318,10 +318,10 @@ bool Nav::gll2bd(
    // ---
    // *** Convert lat/lon to radians **
    // ---
-   const double tslatr = tslat * Angle::D2RCC;  // Transformed source lat (rad)
-   //double tslonr = tslon * Angle::D2RCC;  // Transformed source lon (rad)
-   const double tdlatr = tdlat * Angle::D2RCC;  // Transformed destination lat (rad)
-   const double tdlonr = tdlon * Angle::D2RCC;  // Transformed destination lon (rad)
+   const double tslatr = tslat * angle::D2RCC;  // Transformed source lat (rad)
+   //double tslonr = tslon * angle::D2RCC;      // Transformed source lon (rad)
+   const double tdlatr = tdlat * angle::D2RCC;  // Transformed destination lat (rad)
+   const double tdlonr = tdlon * angle::D2RCC;  // Transformed destination lon (rad)
 
    // ---
    // *** Calculate Gaussian radius of curvature at source lat **
@@ -352,9 +352,9 @@ bool Nav::gll2bd(
    else z = (x >= 0 ? 1.0 : -1.0);
    z = alimd(z, 1.0);
 
-   x = std::acos(z) * Angle::R2DCC;
+   x = std::acos(z) * angle::R2DCC;
    if (tzlonr < 0.0) x = 360.0 - x;
-   *brg = Angle::aepcdDeg(x);
+   *brg = angle::aepcdDeg(x);
 
    return true;
 }
@@ -372,12 +372,12 @@ bool Nav::gll2bdS(
       double* const dist   // OUT: distance (ground range) (nm)
    )
 {
-   const double sinLat1 = std::sin(Angle::D2RCC * slat);
-   const double cosLat1 = std::cos(Angle::D2RCC * slat);
-   const double sinLat2 = std::sin(Angle::D2RCC * dlat);
-   const double cosLat2 = std::cos(Angle::D2RCC * dlat);
-   const double sinDLon = std::sin(Angle::D2RCC * (dlon - slon));
-   const double cosDLon = std::cos(Angle::D2RCC * (dlon - slon));
+   const double sinLat1 = std::sin(angle::D2RCC * slat);
+   const double cosLat1 = std::cos(angle::D2RCC * slat);
+   const double sinLat2 = std::sin(angle::D2RCC * dlat);
+   const double cosLat2 = std::cos(angle::D2RCC * dlat);
+   const double sinDLon = std::sin(angle::D2RCC * (dlon - slon));
+   const double cosDLon = std::cos(angle::D2RCC * (dlon - slon));
 
    // -----------------------------------------------------
    // compute distance
@@ -393,7 +393,7 @@ bool Nav::gll2bdS(
       double k1 = sinDLon * cosLat2;
       double k2 = cosLat1 * sinLat2 - sinLat1 * cosLat2 * cosDLon;
       double k3 = std::atan2(k1, k2);
-      *brg = Angle::aepcdDeg(Angle::R2DCC * k3);
+      *brg = angle::aepcdDeg(angle::R2DCC * k3);
    }
 
    return true;
@@ -425,7 +425,7 @@ bool Nav::glla2bd(
    )
 {
    // Delta altitudes (in NMs)
-   const double deltaAlt = (dalt - salt) * Distance::M2NM;
+   const double deltaAlt = (dalt - salt) * distance::M2NM;
 
    // Early out: check for source and destination at same point.
    if( (dlat == slat) && ( dlon == slon ) ) {
@@ -447,7 +447,7 @@ bool Nav::glla2bd(
       *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
 
       if (elev != nullptr && (*slantRng) > 0) {
-         *elev = Angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
+         *elev = angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
       }
    }
 
@@ -471,7 +471,7 @@ bool Nav::glla2bdS(
    )
 {
    // Delta altitudes (in NMs)
-   const double deltaAlt = (dalt - salt) * Distance::M2NM;
+   const double deltaAlt = (dalt - salt) * distance::M2NM;
 
    // Early out: check for source and destination at same point.
    if ( (dlat == slat) && ( dlon == slon ) ) {
@@ -492,7 +492,7 @@ bool Nav::glla2bdS(
    if (ok) {
       *slantRng = std::sqrt ( (*dist) * (*dist) + deltaAlt * deltaAlt );
       if (elev != nullptr && (*slantRng) > 0) {
-         *elev = Angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
+         *elev = angle::R2DCC * std::asin(deltaAlt/ (*slantRng));
       }
    }
 
@@ -531,11 +531,11 @@ bool Nav::vbd2ll(
    //-----------------------------------
    // local constants
    //-----------------------------------
-   const double tanU1       = (1.0 - eemF) * std::tan(Angle::D2RCC * slat);
+   const double tanU1       = (1.0 - eemF) * std::tan(angle::D2RCC * slat);
    const double u1          = std::atan(tanU1);
    const double sinU1       = std::sin(u1);
    const double cosU1       = std::cos(u1);
-   const double alpha1      = Angle::D2RCC * brng;
+   const double alpha1      = angle::D2RCC * brng;
    const double sinAlpha1   = std::sin(alpha1);
    const double cosAlpha1   = std::cos(alpha1);
    const double sigma1      = std::atan2(tanU1, cosAlpha1);
@@ -572,7 +572,7 @@ bool Nav::vbd2ll(
    //-----------------------------------
    // initialization
    //-----------------------------------
-   const double s     = dist*Distance::NM2M;  // geodesic distance in meters
+   const double s     = dist * distance::NM2M;  // geodesic distance in meters
    const double baseS = (s / eemB / a);
    double sigma = baseS;
 
@@ -611,7 +611,7 @@ bool Nav::vbd2ll(
    p = sinU1 * cosSigma + cosU1 * sinSigma * cosAlpha1;
    q = sinU1 * sinSigma - cosU1 * cosSigma * cosAlpha1;
    r = (1.0 - eemF) * std::sqrt(sinAlpha * sinAlpha + q*q);
-   *dlat = Angle::R2DCC * std::atan2(p, r);                             // Eq. 8
+   *dlat = angle::R2DCC * std::atan2(p, r);                             // Eq. 8
 
    //-----------------------------------
    // calculate destination longitude
@@ -624,7 +624,7 @@ bool Nav::vbd2ll(
    c = (eemF / 16.0) * cosSqrAlpha * r;                                 // Eq. 10
    p = (cos2SigmaM + c * cosSigma * (-1.0 + 2.0 * cosSqr2SigmaM));
    q = (1.0 - c) * eemF * sinAlpha * (sigma + c * sinSigma * p);
-   *dlon = Angle::aepcdDeg(slon + Angle::R2DCC*(lambda - q));
+   *dlon = angle::aepcdDeg(slon + angle::R2DCC*(lambda - q));
 
    return true;
 }
@@ -665,10 +665,10 @@ bool Nav::vll2bd(
    // local constants
    //-----------------------------------
    //const double EPS      = 1.0E-12;
-   const double deltaLon = Angle::aepcdDeg(dlon - slon);
-   const double l        = Angle::D2RCC * deltaLon;
-   const double u1       = std::atan((1.0 - eemF) * std::tan(Angle::D2RCC * slat));
-   const double u2       = std::atan((1.0 - eemF) * std::tan(Angle::D2RCC * dlat));
+   const double deltaLon = angle::aepcdDeg(dlon - slon);
+   const double l        = angle::D2RCC * deltaLon;
+   const double u1       = std::atan((1.0 - eemF) * std::tan(angle::D2RCC * slat));
+   const double u2       = std::atan((1.0 - eemF) * std::tan(angle::D2RCC * dlat));
    const double sinU1    = std::sin(u1);
    const double cosU1    = std::cos(u1);
    const double sinU2    = std::sin(u2);
@@ -752,7 +752,7 @@ bool Nav::vll2bd(
    p = cosU2 * sinLambda;
    q = cosU1 * sinU2 - sinU1 * cosU2 * cosLambda;
    const double Alfa1 = std::atan2(p, q);                                     // Eq. 20
-   *brng = Angle::aepcdDeg(Angle::R2DCC * Alfa1);
+   *brng = angle::aepcdDeg(angle::R2DCC * Alfa1);
 
    //-----------------------------------
    // calculate destination bearing (deg)
@@ -761,7 +761,7 @@ bool Nav::vll2bd(
       p =  cosU1 * sinLambda;
       q = -sinU1 * cosU2 + cosU1 * sinU2 * cosLambda;
       const double Alfa2 = std::atan2(p, q);                                  // Eq. 21
-      *brng2 = Angle::aepcdDeg(180.0 + Angle::R2DCC * Alfa2);
+      *brng2 = angle::aepcdDeg(180.0 + angle::R2DCC * Alfa2);
    }
 
    //-----------------------------------
@@ -782,7 +782,7 @@ bool Nav::vll2bd(
    r = (b / 4.0) * (cosSigma * (-1.0 + 2.0 * cosSqr2SigmaM) - q);
    const double delSigma = b * sinSigma * (cos2SigmaM + r);                   // Eq. 6
 
-   *dist = (eemB * a * (sigma - delSigma)) * Distance::M2NM;
+   *dist = (eemB * a * (sigma - delSigma)) * distance::M2NM;
 
    return true;
 }
@@ -918,8 +918,8 @@ bool Nav::computeWorldMatrix(
    )
 {
    const double phi  = 0;
-   const double theta = -(90.0 + latD) * Angle::D2RCC;
-   const double psi   = lonD * Angle::D2RCC;
+   const double theta = -(90.0 + latD) * angle::D2RCC;
+   const double psi   = lonD * angle::D2RCC;
    computeRotationalMatrix(phi, theta, psi, m);
    return true;
 }
@@ -1010,8 +1010,8 @@ bool Nav::convertEcef2Geod(
          // begin iteration loop
 
          // Calculate Outputs
-         *pLat = Angle::R2DCC * phi;
-         *pLon = Angle::R2DCC * std::atan2(y, x);
+         *pLat = angle::R2DCC * phi;
+         *pLon = angle::R2DCC * std::atan2(y, x);
          *pAlt = newH;
          break;
       } // NORMAL
@@ -1072,10 +1072,10 @@ bool Nav::convertGeod2Ecef(
    //---------------------------------------------
    const double EPS = 0.5;  // degrees
 
-   const double sinLat = std::sin(Angle::D2RCC * lat);
-   const double cosLat = std::cos(Angle::D2RCC * lat);
-   const double sinLon = std::sin(Angle::D2RCC * lon);
-   const double cosLon = std::cos(Angle::D2RCC * lon);
+   const double sinLat = std::sin(angle::D2RCC * lat);
+   const double cosLat = std::cos(angle::D2RCC * lat);
+   const double sinLon = std::sin(angle::D2RCC * lon);
+   const double cosLon = std::cos(angle::D2RCC * lon);
    const double w      = std::sqrt(1.0 - e2*sinLat*sinLat);
    const double rn     = a/w;
 
@@ -1156,8 +1156,8 @@ bool Nav::getGeocCoords(
 {
    static const double ellipseC1   = (1.0 - ellipseF) * (1.0 - ellipseF);
 
-   const double lat = geodPos[ILAT] * Angle::D2RCC;
-   const double lon = geodPos[ILON] * Angle::D2RCC;
+   const double lat = geodPos[ILAT] * angle::D2RCC;
+   const double lon = geodPos[ILON] * angle::D2RCC;
    const double alt = geodPos[IALT];                 // meters
 
    const double sinlat = std::sin(lat);
@@ -1318,8 +1318,8 @@ bool Nav::getGeodCoords(
       }
    }
 
-   geodPos[ILAT] = lat * Angle::R2DCC; /* return as degrees */
-   geodPos[ILON] = lon * Angle::R2DCC; /* return as degrees */
+   geodPos[ILAT] = lat * angle::R2DCC; /* return as degrees */
+   geodPos[ILON] = lon * angle::R2DCC; /* return as degrees */
    geodPos[IALT] = alt;   /* return as meters */
 
    return true;
@@ -1334,8 +1334,8 @@ bool Nav::getGeodAngle(
       double geodAngle[3]           // OUT: Geodetic Euler angles (radians) [ IPHI ITHETA IPSI ]
    )
 {
-   const double phi    = geodPos[ILAT] * Angle::D2RCC; // Latitude
-   const double lambda = geodPos[ILON] * Angle::D2RCC; // Longitude
+   const double phi    = geodPos[ILAT] * angle::D2RCC; // Latitude
+   const double lambda = geodPos[ILON] * angle::D2RCC; // Longitude
 
    const double dis_roll  = geocAngle[IPHI];
    const double dis_pitch = geocAngle[ITHETA];
@@ -1454,8 +1454,8 @@ bool Nav::getSimPosAccVel(
 {
    getGeodCoords(geocPos, geodPos);
 
-   const double lat = geodPos[ILAT] * Angle::D2RCC;
-   const double lon = geodPos[ILON] * Angle::D2RCC;
+   const double lat = geodPos[ILAT] * angle::D2RCC;
+   const double lon = geodPos[ILON] * angle::D2RCC;
 
    const double cos_lat = std::cos(lat);
    const double sin_lat = std::sin(lat);
@@ -1499,8 +1499,8 @@ bool Nav::getWorldPosAccVel(
    /* get the geocentric position */
    getGeocCoords(geodPos, geocPos);
 
-   const double lat = geodPos[ILAT] * Angle::D2RCC;
-   const double lon = geodPos[ILON] * Angle::D2RCC;
+   const double lat = geodPos[ILAT] * angle::D2RCC;
+   const double lon = geodPos[ILON] * angle::D2RCC;
 
    const double cos_lat = std::cos(lat);
    const double sin_lat = std::sin(lat);
@@ -1652,7 +1652,7 @@ bool Nav::convertLL2Utm(
    const bool ok = latValid && lonValid;
    if (ok) {
       const double LATDEG  = lat;
-      const double LATRAD  = lat*Angle::D2RCC;
+      const double LATRAD  = lat * angle::D2RCC;
       const double LONDEG  = lon;
 
       //-----------------------------------
@@ -1781,7 +1781,7 @@ bool Nav::convertLL2Utm(
       const int    LONZONE = 1 + static_cast<int>((LONDEG + 180.0)/6.0);
       const double LONORIG = 6.0*(LONZONE - 1) - 180.0 + 3.0;
 
-      const double dL1 = Angle::D2RCC*(LONDEG - LONORIG);
+      const double dL1 = angle::D2RCC*(LONDEG - LONORIG);
       const double dL2 = dL1*dL1;
       const double dL3 = dL1*dL2;
       const double dL4 = dL1*dL3;
@@ -1977,10 +1977,10 @@ bool Nav::convertUtm2LL(
    //-----------------------------------
    // calculate latitude and longitude
    //-----------------------------------
-   const double LATDEG = FPLAT*Angle::R2DCC;
+   const double LATDEG = FPLAT * angle::R2DCC;
    const double LONDEG = 6.0*(lonZone - 1.0) - 180.0 + 3.0;
-   *pLat = LATDEG + Angle::R2DCC*(-DE2*T10 + DE4*T11 - DE6*T12 + DE8*T13);
-   *pLon = LONDEG + Angle::R2DCC*(+DE1*T14 - DE3*T15 + DE5*T16 - DE7*T17);
+   *pLat = LATDEG + angle::R2DCC*(-DE2*T10 + DE4*T11 - DE6*T12 + DE8*T13);
+   *pLon = LONDEG + angle::R2DCC*(+DE1*T14 - DE3*T15 + DE5*T16 - DE7*T17);
 
    return true;
 }

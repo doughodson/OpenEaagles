@@ -1,6 +1,3 @@
-// Energies.cpp: implementation of the Energy class.
-// Energy, KiloWattHours, BTUs, Joules, FootPounds
-//////////////////////////////////////////////////////////////////////
 
 #include "openeaagles/base/units/Energies.hpp"
 #include "openeaagles/base/osg/Math"
@@ -9,27 +6,13 @@
 namespace oe {
 namespace base {
 
-
-//////////////////////////////////////////////////////////////////////
+//==============================================================================
 // Energy() --
-//////////////////////////////////////////////////////////////////////
-IMPLEMENT_ABSTRACT_SUBCLASS(Energy, "Energy")
+//==============================================================================
+IMPLEMENT_ABSTRACT_SUBCLASS(Energy, "AbstractEnergy")
 EMPTY_SLOTTABLE(Energy)
+EMPTY_DELETEDATA(Energy)
 
-// Conversion constants
-const double Energy::J2KWH = 0.0000002777777778f;     // Joules => KiloWattHours
-const double Energy::KWH2J = (1 / Energy::J2KWH);   // KiloWattHours => Joules
-const double Energy::J2BTU = 0.0009478f;              // Joules => BTUs
-const double Energy::BTU2J = (1 / Energy::J2BTU);   // BTUs => Joules
-const double Energy::J2FP = 0.7376f;                  // Joules => FootPounds
-const double Energy::FP2J = (1 / Energy::J2FP);     // FootPounds => Joules
-const double Energy::J2C = 0.2388888889f;             // Joules => Calories
-const double Energy::C2J = (1 / Energy::J2C);       // Calories => Joules
-
-
-//------------------------------------------------------------------------------
-//constructors
-//------------------------------------------------------------------------------
 Energy::Energy()
 {
     STANDARD_CONSTRUCTOR()
@@ -40,26 +23,12 @@ Energy::Energy(const double value) : Number(value)
     STANDARD_CONSTRUCTOR()
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() --
-//------------------------------------------------------------------------------
 void Energy::copyData(const Energy& org, const bool)
 {
    BaseClass::copyData(org);
    val = fromEnergy(org.toEnergy());;
 }
 
-
-//------------------------------------------------------------------------------
-// deletedDataFunc() --
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Energy)
-
-
-//------------------------------------------------------------------------------
-// serialize()
-//------------------------------------------------------------------------------
 std::ostream& Energy::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -81,12 +50,13 @@ std::ostream& Energy::serialize(std::ostream& sout, const int i, const bool slot
     return sout;
 }
 
-
 //==============================================================================
 // KiloWattHours() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloWattHours, "KiloWattHours")
 EMPTY_SERIALIZER(KiloWattHours)
+EMPTY_COPYDATA(KiloWattHours)
+EMPTY_DELETEDATA(KiloWattHours)
 
 KiloWattHours::KiloWattHours() : Energy()
 {
@@ -104,15 +74,13 @@ KiloWattHours::KiloWattHours(const Energy& value) : Energy()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(KiloWattHours)
-EMPTY_DELETEDATA(KiloWattHours)
-
-
 //==============================================================================
 // BTUs() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(BTUs, "BTUs")
 EMPTY_SERIALIZER(BTUs)
+EMPTY_COPYDATA(BTUs)
+EMPTY_DELETEDATA(BTUs)
 
 BTUs::BTUs() : Energy()
 {
@@ -130,15 +98,13 @@ BTUs::BTUs(const Energy& value) : Energy()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(BTUs)
-EMPTY_DELETEDATA(BTUs)
-
-
 //==============================================================================
 // Calories() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Calories, "Calories")
 EMPTY_SERIALIZER(Calories)
+EMPTY_COPYDATA(Calories)
+EMPTY_DELETEDATA(Calories)
 
 Calories::Calories() : Energy()
 {
@@ -157,15 +123,13 @@ Calories::Calories(const Energy& value) : Energy()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(Calories)
-EMPTY_DELETEDATA(Calories)
-
-
 //==============================================================================
 // Joules() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Joules, "Joules")
 EMPTY_SERIALIZER(Joules)
+EMPTY_COPYDATA(Joules)
+EMPTY_DELETEDATA(Joules)
 
 Joules::Joules() : Energy()
 {
@@ -183,15 +147,13 @@ Joules::Joules(const Energy& value) : Energy()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(Joules)
-EMPTY_DELETEDATA(Joules)
-
-
 //==============================================================================
 // FootPounds() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(FootPounds, "FootPounds")
 EMPTY_SERIALIZER(FootPounds)
+EMPTY_COPYDATA(FootPounds)
+EMPTY_DELETEDATA(FootPounds)
 
 FootPounds::FootPounds() : Energy()
 {
@@ -208,9 +170,6 @@ FootPounds::FootPounds(const Energy& value) : Energy()
     STANDARD_CONSTRUCTOR()
     BaseClass::copyData(value,true);
 }
-
-EMPTY_COPYDATA(FootPounds)
-EMPTY_DELETEDATA(FootPounds)
 
 }
 }

@@ -1,8 +1,8 @@
 
 #include "openeaagles/base/ubf/Agent.hpp"
-#include "openeaagles/base/ubf/Action.hpp"
-#include "openeaagles/base/ubf/Behavior.hpp"
-#include "openeaagles/base/ubf/State.hpp"
+#include "openeaagles/base/ubf/AbstractAction.hpp"
+#include "openeaagles/base/ubf/AbstractBehavior.hpp"
+#include "openeaagles/base/ubf/AbstractState.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/String.hpp"
@@ -22,9 +22,6 @@ IMPLEMENT_SUBCLASS(Agent, "UbfAgent")
 EMPTY_SERIALIZER(Agent)
 EMPTY_COPYDATA(Agent)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Agent)
    "state",                      //  1) The agent's state object
    "behavior"                    //  2) behavior
@@ -32,14 +29,10 @@ END_SLOTTABLE(Agent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(Agent)
-   ON_SLOT(1, setSlotState, State)
-   ON_SLOT(2, setSlotBehavior, Behavior)
+   ON_SLOT(1, setSlotState, AbstractState)
+   ON_SLOT(2, setSlotBehavior, AbstractBehavior)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Agent::Agent()
 {
    STANDARD_CONSTRUCTOR()
@@ -56,9 +49,6 @@ void Agent::deleteData()
    myActor = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// Reset the system
-//------------------------------------------------------------------------------
 void Agent::reset()
 {
    // Reset our behavior and state objects
@@ -78,27 +68,11 @@ void Agent::reset()
    BaseClass::reset();
 }
 
-
-//------------------------------------------------------------------------------
-// updateTC() -
-//------------------------------------------------------------------------------
-void Agent::updateTC(const double dt)
-{
-}
-
-
-//------------------------------------------------------------------------------
-// updateData()
-//------------------------------------------------------------------------------
 void Agent::updateData(const double dt)
 {
    controller(dt);
 }
 
-
-//------------------------------------------------------------------------------
-// updateData()
-//------------------------------------------------------------------------------
 void Agent::controller(const double dt)
 {
    base::Component* actor = getActor();
@@ -109,7 +83,7 @@ void Agent::controller(const double dt)
       getState()->updateState(actor);
 
       // generate an action, but allow possibility of no action returned
-      Action* action = getBehavior()->genAction(state, dt);
+      AbstractAction* action = getBehavior()->genAction(state, dt);
       if (action) {
          action->execute(actor);
          action->unref();
@@ -121,7 +95,7 @@ void Agent::controller(const double dt)
 //------------------------------------------------------------------------------
 // Set our behavior model
 //------------------------------------------------------------------------------
-void Agent::setBehavior(Behavior* const x)
+void Agent::setBehavior(AbstractBehavior* const x)
 {
    if (x==nullptr)
       return;
@@ -136,7 +110,7 @@ void Agent::setBehavior(Behavior* const x)
 //------------------------------------------------------------------------------
 // Set our state model
 //------------------------------------------------------------------------------
-void Agent::setState(State* const x)
+void Agent::setState(AbstractState* const x)
 {
    if (x==nullptr)
       return;
@@ -170,7 +144,7 @@ void Agent::initActor()
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool Agent::setSlotState(State* const state)
+bool Agent::setSlotState(AbstractState* const state)
 {
    bool ok = false;
    if (state != nullptr) {
@@ -180,7 +154,7 @@ bool Agent::setSlotState(State* const state)
    return ok;
 }
 
-bool Agent::setSlotBehavior(Behavior* const x)
+bool Agent::setSlotBehavior(AbstractBehavior* const x)
 {
    bool ok = false;
    if ( x!=nullptr ) {
@@ -209,13 +183,6 @@ EMPTY_DELETEDATA(AgentTC)
 void AgentTC::updateTC(const double dt)
 {
    controller(dt);
-}
-
-//------------------------------------------------------------------------------
-// updateData() -
-//------------------------------------------------------------------------------
-void AgentTC::updateData(const double dt)
-{
 }
 
 }

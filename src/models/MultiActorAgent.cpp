@@ -6,9 +6,9 @@
 
 #include "openeaagles/simulation/Station.hpp"
 
-#include "openeaagles/base/ubf/Action.hpp"
-#include "openeaagles/base/ubf/Behavior.hpp"
-#include "openeaagles/base/ubf/State.hpp"
+#include "openeaagles/base/ubf/AbstractAction.hpp"
+#include "openeaagles/base/ubf/AbstractBehavior.hpp"
+#include "openeaagles/base/ubf/AbstractState.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -29,7 +29,7 @@ END_SLOTTABLE(MultiActorAgent)
 
 //  mapping of slots to handles
 BEGIN_SLOT_MAP(MultiActorAgent)
-   ON_SLOT(1,  setSlotState, base::ubf::State)
+   ON_SLOT(1,  setSlotState, base::ubf::AbstractState)
    ON_SLOT(2,  setSlotAgentList, base::PairStream)
 END_SLOT_MAP()
 
@@ -88,13 +88,13 @@ void MultiActorAgent::controller(const double dt)
          if (agentList[i].actor != nullptr) {
 
             setActor(agentList[i].actor);
-            base::ubf::Behavior* behavior = agentList[i].behavior;
+            base::ubf::AbstractBehavior* behavior = agentList[i].behavior;
 
             // update ubf state
             getState()->updateState(agentList[i].actor);
 
             // generate an action
-            base::ubf::Action* action = behavior->genAction(getState(), dt);
+            base::ubf::AbstractAction* action = behavior->genAction(getState(), dt);
             if (action) { // allow possibility of no action returned
                action->execute(getActor());
                action->unref();
@@ -105,7 +105,7 @@ void MultiActorAgent::controller(const double dt)
    }
 }
 
-void MultiActorAgent::setState(base::ubf::State* const x)
+void MultiActorAgent::setState(base::ubf::AbstractState* const x)
 {
    if (x == nullptr)
       return;
@@ -154,7 +154,7 @@ bool MultiActorAgent::clearAgentList()
 }
 
 // Adds an item to the input entity type table
-bool MultiActorAgent::addAgent(base::String* name, base::ubf::Behavior* const b)
+bool MultiActorAgent::addAgent(base::String* name, base::ubf::AbstractBehavior* const b)
 {
    bool ok = false;
    if (nAgents < MAX_AGENTS) {
@@ -173,7 +173,7 @@ bool MultiActorAgent::addAgent(base::String* name, base::ubf::Behavior* const b)
 //------------------------------------------------------------------------------
 
 // Sets the state object for this agent
-bool MultiActorAgent::setSlotState(base::ubf::State* const state)
+bool MultiActorAgent::setSlotState(base::ubf::AbstractState* const state)
 {
    bool ok = false;
    if (state != nullptr) {
@@ -196,7 +196,7 @@ bool MultiActorAgent::setSlotAgentList(base::PairStream* const msg)
        while (item != nullptr) {
           const auto pair = static_cast<base::Pair*>(item->getValue());
           //std::cerr << "MultiActorAgent::setSlotagentList: slot: " << *pair->slot() << std::endl;
-          const auto b = dynamic_cast<base::ubf::Behavior*>( pair->object() );
+          const auto b = dynamic_cast<base::ubf::AbstractBehavior*>( pair->object() );
           if (b != nullptr) {
              // We have an  object, so put it in the table
              addAgent(pair->slot(), b);

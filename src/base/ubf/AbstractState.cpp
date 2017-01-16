@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/ubf/State.hpp"
+#include "openeaagles/base/ubf/AbstractState.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -8,14 +8,14 @@ namespace oe {
 namespace base {
 namespace ubf {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(State, "UbfState")
-EMPTY_SLOTTABLE(State)
-EMPTY_CONSTRUCTOR(State)
-EMPTY_DELETEDATA(State)
-EMPTY_COPYDATA(State)
-EMPTY_SERIALIZER(State)
+IMPLEMENT_ABSTRACT_SUBCLASS(AbstractState, "AbstractState")
+EMPTY_SLOTTABLE(AbstractState)
+EMPTY_CONSTRUCTOR(AbstractState)
+EMPTY_DELETEDATA(AbstractState)
+EMPTY_COPYDATA(AbstractState)
+EMPTY_SERIALIZER(AbstractState)
 
-void State::updateGlobalState()
+void AbstractState::updateGlobalState()
 {
    // Update all my children
    base::PairStream* subcomponents = getComponents();
@@ -23,7 +23,7 @@ void State::updateGlobalState()
       if (isComponentSelected()) {
          // When we've selected only one
          if (getSelectedComponent() != nullptr) {
-            const auto state = dynamic_cast<State*>(getSelectedComponent());
+            const auto state = dynamic_cast<AbstractState*>(getSelectedComponent());
             if (state != nullptr)
                state->updateGlobalState();
          }
@@ -34,7 +34,7 @@ void State::updateGlobalState()
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto obj = static_cast<base::Component*>(pair->object());
-            const auto state = dynamic_cast<State*>(obj);
+            const auto state = dynamic_cast<AbstractState*>(obj);
             if (state != nullptr)
                state->updateGlobalState();
             item = item->getNext();
@@ -45,7 +45,7 @@ void State::updateGlobalState()
    }
 }
 
-void State::updateState(const base::Component* const actor)
+void AbstractState::updateState(const base::Component* const actor)
 {
    // Update all my children
    base::PairStream* subcomponents = getComponents();
@@ -53,7 +53,7 @@ void State::updateState(const base::Component* const actor)
       if (isComponentSelected()) {
          // When we've selected only one
          if (getSelectedComponent() != nullptr) {
-            const auto state = dynamic_cast<State*>(getSelectedComponent());
+            const auto state = dynamic_cast<AbstractState*>(getSelectedComponent());
             if (state != nullptr)
                state->updateState(actor);
          }
@@ -64,7 +64,7 @@ void State::updateState(const base::Component* const actor)
          while (item != nullptr) {
             const auto pair = static_cast<base::Pair*>(item->getValue());
             const auto obj = static_cast<base::Component*>(pair->object());
-            const auto state = dynamic_cast<State*>(obj);
+            const auto state = dynamic_cast<AbstractState*>(obj);
             if (state != nullptr)
                state->updateState(actor);
             item = item->getNext();
@@ -76,13 +76,13 @@ void State::updateState(const base::Component* const actor)
 }
 
 
-const State* State::getUbfStateByType(const std::type_info& type) const
+const AbstractState* AbstractState::getUbfStateByType(const std::type_info& type) const
 {
-   const State* p = this;
+   const AbstractState* p = this;
    if ( !p->isClassType(type) ) {
       const base::Pair* pair = findByType(type);
       if (pair != nullptr) {
-         p = dynamic_cast<const State*>( pair->object() );
+         p = dynamic_cast<const AbstractState*>( pair->object() );
       }
    }
    return p;

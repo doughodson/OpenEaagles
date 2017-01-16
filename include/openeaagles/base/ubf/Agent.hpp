@@ -8,9 +8,9 @@ namespace oe {
 namespace base {
 namespace ubf {
 
-class Behavior;
-class State;
-class Action;
+class AbstractBehavior;
+class AbstractState;
+class AbstractAction;
 
 //------------------------------------------------------------------------------
 // Class: Agent
@@ -27,8 +27,8 @@ class Action;
 //
 // Factory name: UbfAgent
 // Slots:
-//    state       <State>     ! The agent's state object
-//    behavior    <Behavior>  ! behavior
+//    state       <AbstractState>     ! The agent's state object
+//    behavior    <AbstractBehavior>  ! behavior
 //------------------------------------------------------------------------------
 class Agent : public base::Component
 {
@@ -37,7 +37,6 @@ class Agent : public base::Component
 public:
    Agent();
 
-   virtual void updateTC(const double dt = 0.0) override;
    virtual void updateData(const double dt = 0.0) override;
    virtual void reset() override;
 
@@ -45,11 +44,11 @@ protected:
    // generic controller
    virtual void controller(const double dt = 0.0);
 
-   Behavior* getBehavior() const          { return behavior; }
-   void setBehavior(Behavior* const);
+   AbstractBehavior* getBehavior() const          { return behavior; }
+   void setBehavior(AbstractBehavior* const);
 
-   State* getState() const                { return state; }
-   void setState(State* const);
+   AbstractState* getState() const                { return state; }
+   void setState(AbstractState* const);
 
    virtual void initActor();
 
@@ -57,12 +56,12 @@ protected:
    void setActor(base::Component* const myActor);
 
    // slot functions
-   virtual bool setSlotBehavior(Behavior* const);
-   bool setSlotState(State* const state);
+   virtual bool setSlotBehavior(AbstractBehavior* const);
+   bool setSlotState(AbstractState* const state);
 
 private:
-   Behavior* behavior;
-   State* state;
+   AbstractBehavior* behavior;
+   AbstractState* state;
    safe_ptr<base::Component> myActor;
 };
 
@@ -85,9 +84,7 @@ class AgentTC : public Agent
 public:
    AgentTC();
 
-   // Component interface
    virtual void updateTC(const double dt = 0.0) override;
-   virtual void updateData(const double dt = 0.0) override;
 };
 
 }

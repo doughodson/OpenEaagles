@@ -207,11 +207,11 @@ public:
    Player* getTargetPlayer();                       // Our target player, if any
    const Player* getTargetPlayer() const;           // Our target player, if any (const version)
 
-   AbstractWeapon* getFlyoutWeapon();                      // Pre-ref()'d pointer to the fly-out weapon
-   const AbstractWeapon* getFlyoutWeapon() const;          // Pre-ref()'d pointer to the fly-out weapon (const version)
+   AbstractWeapon* getFlyoutWeapon();               // Pre-ref()'d pointer to the fly-out weapon
+   const AbstractWeapon* getFlyoutWeapon() const;   // Pre-ref()'d pointer to the fly-out weapon (const version)
 
-   AbstractWeapon* getInitialWeapon();                     // Pre-ref()'d pointer to the initial weapon
-   const AbstractWeapon* getInitialWeapon() const;         // Pre-ref()'d pointer to the initial weapon (const version)
+   AbstractWeapon* getInitialWeapon();              // Pre-ref()'d pointer to the initial weapon
+   const AbstractWeapon* getInitialWeapon() const;  // Pre-ref()'d pointer to the initial weapon (const version)
 
    unsigned short getReleaseEventID() const;       // Release event ID (to help match weapon launch and detonation events)
    bool isReleaseHold() const;                     // Is weapon is holding in PRE_RELEASE mode?

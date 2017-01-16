@@ -10,8 +10,11 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/osg/Quat"
-#include "openeaagles/base/units/Angles.hpp"
+
+//#include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 

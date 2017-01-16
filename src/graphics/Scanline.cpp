@@ -1,8 +1,9 @@
 
 #include "openeaagles/graphics/Scanline.hpp"
+
 #include "openeaagles/graphics/Clip3D.hpp"
 #include "openeaagles/graphics/Polygon.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 namespace graphics {
@@ -182,7 +183,7 @@ void Scanline::setArea(
    cy = yCenter;
    sx = xSize;
    sy = ySize;
-   angle = zRotDeg * static_cast<double>(base::Angle::D2RCC);
+   angle = zRotDeg * static_cast<double>(base::angle::D2RCC);
    setMatrix();
 }
 

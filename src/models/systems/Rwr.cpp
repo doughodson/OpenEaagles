@@ -8,7 +8,9 @@
 
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/base/util/math_utils.hpp"
 
 #include <cmath>
@@ -143,7 +145,7 @@ void Rwr::receive(const double dt)
             // Store received power for real-beam display
             const double sigDbl = 10.0f * std::log10(signal);
             const double signal10 = (sigDbl + 50.0f)/50.f;
-            const int idx = getRayIndex( static_cast<double>(base::Angle::R2DCC * aoa) );
+            const int idx = getRayIndex( static_cast<double>(base::angle::R2DCC * aoa) );
             rays[0][idx] = base::lim01(rays[0][idx] + signal10);
             //if (idx == 0 && getOwnship()->getID() == 1011) {
             //   std::cout << "sig = " << signal10 << std::endl;
@@ -213,7 +215,7 @@ bool Rwr::killedNotification(Player* const p)
 //------------------------------------------------------------------------------
 int Rwr::getRayIndex(const double az) const
 {
-    double az1 = base::Angle::aepcdDeg(az);
+    double az1 = base::angle::aepcdDeg(az);
     if (az1 < 0.0) az1 += 360.0;
     int idx = static_cast<int>( (az1/ getDegreesPerRay()) + 0.5 );
     if (idx >= NUM_RAYS || idx < 0) idx = 0;
@@ -226,7 +228,7 @@ int Rwr::getRayIndex(const double az) const
 double Rwr::getRayAzimuth(const int idx) const
 {
     const double az = getDegreesPerRay() * static_cast<double>(idx);
-    return base::Angle::aepcdDeg(az);
+    return base::angle::aepcdDeg(az);
 }
 
 //------------------------------------------------------------------------------

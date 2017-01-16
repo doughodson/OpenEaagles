@@ -18,9 +18,11 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/osg/Matrixd"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -152,7 +154,7 @@ void AbstractWeapon::initData()
    setLethalRange(50.0);
    setSOBT(9999.0);
    setEOBT(0.0);
-   setMaxGimbalAngle(30.0 * static_cast<double>(base::Angle::D2RCC));
+   setMaxGimbalAngle(30.0 * static_cast<double>(base::angle::D2RCC));
 }
 
 void AbstractWeapon::copyData(const AbstractWeapon& org, const bool cc)

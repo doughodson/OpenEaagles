@@ -10,8 +10,8 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrixd"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -512,7 +512,7 @@ void Missile::weaponDynamics(const double dt)
    // ---
    // Find pitch rate and update pitch
    // ---
-   double qa = base::Angle::aepcdRad(cmdPitch - static_cast<double>(getPitchR()));
+   double qa = base::angle::aepcdRad(cmdPitch - static_cast<double>(getPitchR()));
    if(qa > qa_max) qa = qa_max;
    if(qa < qa_min) qa = qa_min;
 
@@ -520,7 +520,7 @@ void Missile::weaponDynamics(const double dt)
    const double newTheta = static_cast<double>(getPitch() + (qa + qa1) * dt / 2.0);
 
    // Find turn rate
-   double ra = base::Angle::aepcdRad(cmdHeading - static_cast<double>(getHeadingR()));
+   double ra = base::angle::aepcdRad(cmdHeading - static_cast<double>(getHeadingR()));
    if(ra > ra_max) ra = ra_max;
    if(ra < -ra_max) ra = -ra_max;
 
@@ -531,7 +531,7 @@ void Missile::weaponDynamics(const double dt)
 
    // Roll angle proportional to max turn rate - filtered
    double pa = 0.0;
-   const double newPhi = static_cast<double>( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (base::Angle::D2RCC * 60.0)) );
+   const double newPhi = static_cast<double>( 0.98 * getRollR() + 0.02 * ((ra / ra_max) * (base::angle::D2RCC * 60.0)) );
 
    // Sent angular values
    setEulerAngles(newPhi, newTheta, newPsi);

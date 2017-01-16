@@ -20,6 +20,8 @@
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include <cmath>
 #include <cstring>
 
@@ -441,7 +443,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
                antenna->setRefAzimuth( 0 );
                antenna->setRefElevation( bd->beamData.beamElevationCenter );
                antenna->setScanMode( models::ScanGimbal::CIRCULAR_SCAN );
-               antenna->setCmdRate( (24.0f * static_cast<double>(base::Angle::D2RCC)), 0 );  // default rates
+               antenna->setCmdRate( (24.0f * static_cast<double>(base::angle::D2RCC)), 0 );  // default rates
          }
          else {
             // Standard search volume parameters
@@ -652,9 +654,9 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
          else {
             // Default values
             bd.beamData.beamAzimuthCenter   = 0.0f;
-            bd.beamData.beamAzimuthSweep    = 30.0f * static_cast<float>(base::Angle::D2RCC);
+            bd.beamData.beamAzimuthSweep    = 30.0f * static_cast<float>(base::angle::D2RCC);
             bd.beamData.beamElevationCenter = 0.0f;
-            bd.beamData.beamElevationSweep  = 2.0f * static_cast<float>(base::Angle::D2RCC);
+            bd.beamData.beamElevationSweep  = 2.0f * static_cast<float>(base::angle::D2RCC);
          }
          bd.beamData.beamSweepSync = 0;
 
@@ -672,7 +674,7 @@ bool EmissionPduHandler::isUpdateRequired(const double curExecTime, bool* const 
 
          if (getEmitterFunction() != ESF_JAMMING) {
             // Radar
-            if ( bd.beamData.beamAzimuthSweep == 0 || bd.beamData.beamAzimuthSweep >= (180.0f * base::Angle::D2RCC) ) {
+            if ( bd.beamData.beamAzimuthSweep == 0 || bd.beamData.beamAzimuthSweep >= (180.0f * base::angle::D2RCC) ) {
                // ... full azimuth sweep?  assume searching
                bd.beamFunction = BF_SEARCH;
                es.emitterSystem.function = ESF_EW; // override emitter sys function to EW when searching

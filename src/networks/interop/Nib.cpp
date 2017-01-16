@@ -12,8 +12,8 @@
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include "openeaagles/base/util/str_utils.hpp"
 
@@ -500,13 +500,13 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
             osg::Vec3d errAngles = drAngles - playerState.getGeocEulerAngles();
 
             // Check if any angle error is greater than the max error
-            errAngles[0] = std::fabs( base::Angle::aepcdDeg(errAngles[0]) );
+            errAngles[0] = std::fabs( base::angle::aepcdDeg(errAngles[0]) );
             if (errAngles[0] >= maxAngleErr) result = YES;
 
-            errAngles[1] = std::fabs( base::Angle::aepcdDeg(errAngles[1]) );
+            errAngles[1] = std::fabs( base::angle::aepcdDeg(errAngles[1]) );
             if (errAngles[1] >= maxAngleErr) result = YES;
 
-            errAngles[2] = std::fabs( base::Angle::aepcdDeg(errAngles[2]) );
+            errAngles[2] = std::fabs( base::angle::aepcdDeg(errAngles[2]) );
             if (errAngles[2] >= maxAngleErr) result = YES;
          }
       }
@@ -827,7 +827,7 @@ bool Nib::resetDeadReckoning(
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
       const double len = err.length();
-      if (len < (2.0 * base::Distance::KM2M) ) {
+      if (len < (2.0 * base::distance::KM2M) ) {
          smoothVel = err/drTime;
          smoothTime = drTime;
       }

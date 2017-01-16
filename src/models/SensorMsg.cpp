@@ -3,7 +3,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 namespace models {
@@ -102,12 +102,12 @@ void SensorMsg::setRange(const double r)
 
 double SensorMsg::getRangeRateFPS() const
 {
-   return getRangeRate() * base::Distance::M2FT;
+   return getRangeRate() * base::distance::M2FT;
 }
 
 double SensorMsg::getRangeRateKts() const
 {
-   return getRangeRate() * base::Distance::M2NM * 3600.0f;
+   return getRangeRate() * base::distance::M2NM * 3600.0f;
 }
 
 

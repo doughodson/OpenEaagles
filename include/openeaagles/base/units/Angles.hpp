@@ -1,13 +1,25 @@
 //------------------------------------------------------------------------------
 // Classes:  Angle, Degrees, Radians, Semicircles
-// Base class:  Object -> Number -> Angle
-//              Object -> Number -> Angle -> Degrees
-//              Object -> Number -> Angle -> Radians
-//              Object -> Number -> Angle -> Semicircles
-//
-// Description:  Numbers as angles -- Degrees, Radians, Semicircles.
-//               Base unit for Angle derivations is a semicircle.
-//
+//------------------------------------------------------------------------------
+
+#ifndef __oe_base_Angles_H__
+#define __oe_base_Angles_H__
+
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/util/constants.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
+#include <iostream>
+
+#include <cmath>
+
+namespace oe {
+namespace base {
+
+//------------------------------------------------------------------------------
+// Class:  Angle
+// Description:  Base class for angles.  Defined as a semicircle which is
+//               equivalent to an instance of Semicircle with its value equal
+//               to 1.0.
 //
 // Public methods (Defined in Angle, and inherited by all derived classes):
 //
@@ -22,15 +34,6 @@
 //        Converts the value of an Angle derived instance into
 //        the units of another Angle derived instance.
 //
-//     Conversion routines:
-//        double degreesToRadians(const double v)
-//        double degreesToSemicircles(const double v)
-//        double radiansToDegrees(const double v)
-//        double radiansToSemicircles(const double v)
-//        double semicirclesToRadians(const double v)
-//        double semicirclesToDegrees(const double v)
-//        Return the appropriate conversion factors.
-//
 //     Output stream operator: >>
 //        ostream& operator<<(ostream& sout, const Angle& n)
 //        Sends "( <the Angle derived instance class name and value> )"
@@ -43,35 +46,6 @@
 //        Static function to convert the given Angle derived
 //        instance into the units of a specific Angle derived class.
 //
-//------------------------------------------------------------------------------
-#ifndef __oe_base_Angles_H__
-#define __oe_base_Angles_H__
-
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/util/constants.hpp"
-#include <iostream>
-
-#include <cmath>
-
-namespace oe {
-namespace base {
-
-// -----------------------------------------------------------------------------
-// Defined constants:
-// All constants were collected via the internet from
-// http://physics.nist.gov/cuu/Units/outside.html
-// National Institute of Technology Standards website.
-//
-// Since all Angles are based in Semicircles, all conversions will either
-// convert to or from semicircles.
-// -----------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Class:  Angle
-// Base class:  Object -> Number -> Angle
-// Description:  Base class for angles.  Defined as a semicircle which is
-//               equivalent to an instance of Semicircle with its value equal
-//               to 1.0.
 //------------------------------------------------------------------------------
 class Angle : public Number
 {
@@ -88,103 +62,15 @@ public:
     virtual double fromAngle(const double a) const = 0;
     double convert(const Angle& n) { return fromAngle(n.toAngle()); }
 
-    // Conversions between angles
-    static double degreesToRadians(const double v)     { return (v * D2SC) * SC2R; }
-    static double degreesToSemicircles(const double v) { return v * D2SC; }
-    static double radiansToDegrees(const double v)     { return (R2SC * v) * SC2D; }
-    static double radiansToSemicircles(const double v) { return v * R2SC; }
-    static double semicirclesToRadians(const double v) { return v * SC2R; }
-    static double semicirclesToDegrees(const double v) { return v * SC2D; }
-
-    // Conversion constants:
-    static const double D2SC;   // Degrees to Semi-Circle Conversion Constant
-    static const double SC2D;   // Semi-Circle to Degrees Conversion Constant
-    static const double R2SC;   // Radians to Semi-Circle Conversion Constant
-    static const double SC2R;   // Semi-Circle to Radians Conversion Constant
-    static const double R2DCC;  // Radians to Degrees Conversion Constant
-    static const double D2RCC;  // Degrees to Radians Conversion Constant
-
-    // Angle End-Point Check (keeps angles within the range: -180 <= x <= 180
-    static float  aepcfDeg(float x);     // (float-degrees)
-    static double aepcdDeg(double x);    // (double-degrees)
-    static float  aepcfRad(float x);     // (float-radians)
-    static double aepcdRad(double x);    // (double-radians)
 };
-
 
 inline std::ostream& operator<<(std::ostream& sout, const Angle& n)
     { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
 
-// aepcfDeg -- angle end point check (float-degrees)
-inline float Angle::aepcfDeg(float x)
-{
-   float y(0.0);
-   if (x < -180.0f || x > 180.0f) {
-      y = fmodf(x, 360.0f);
-      if (y >  180.0f) y -= 360.0f;
-      if (y < -180.0f) y += 360.0f;
-      return(y);
-   }
-   else if (x == -180.0f)
-      return(180.0f);
-   else
-      return(x);
-}
-
-// aepcdDeg -- angle end point check (float-degrees)
-inline double Angle::aepcdDeg(double x)
-{
-   double y(0.0);
-   if (x < -180.0 || x > 180.0) {
-      y = std::fmod(x, 360.0);
-      if (y >  180.0) y -= 360.0;
-      if (y < -180.0) y += 360.0;
-      return(y);
-   }
-   else if (x == -180.0)
-      return(180.0);
-   else
-      return(x);
-}
-
-
-// aepcfRad -- angle end point check (float-radians)
-inline float Angle::aepcfRad(float x)
-{
-   float y(0.0);
-   if (x < -static_cast<float>(PI) || x > static_cast<float>(PI)) {
-      y = fmodf(x, (2.0f * static_cast<float>(PI)));
-      if (y >  static_cast<float>(PI)) y -= (2.0f * static_cast<float>(PI));
-      if (y < -static_cast<float>(PI)) y += (2.0f * static_cast<float>(PI));
-      return(y);
-   }
-   else if (x == -static_cast<float>(PI))
-      return(static_cast<float>(PI));
-   else
-      return(x);
-}
-
-// aepcdRad -- angle end point check (double-radians)
-inline double Angle::aepcdRad(double x)
-{
-   double y(0.0);
-   if (x < -PI || x > PI) {
-      y = std::fmod(x, (2.0 * PI));
-      if (y >  PI) y -= (2.0 * PI);
-      if (y < -PI) y += (2.0 * PI);
-      return(y);
-   }
-   else if (x == -PI)
-      return(PI);
-   else
-      return(x);
-}
-
 //------------------------------------------------------------------------------
-// Class:  Degrees
-// Base class:  Object -> Number -> Angle -> Degrees
-// Description:  Angle * 180.0
+// Class: Degrees
+// Description: Angle * 180.0
 //------------------------------------------------------------------------------
 class Degrees : public Angle
 {
@@ -195,16 +81,14 @@ public:
     Degrees(const double value);
     Degrees(const Angle& value);
 
-    static double convertStatic(const Angle& n)              { return n.toAngle() * SC2D; }
-    virtual double toAngle() const override                  { return static_cast<double>(val * D2SC); }
-    virtual double fromAngle(const double a) const override  { return a * SC2D; }
+    static double convertStatic(const Angle& n)              { return n.toAngle() * angle::SC2D; }
+    virtual double toAngle() const override                  { return static_cast<double>(val * angle::D2SC); }
+    virtual double fromAngle(const double a) const override  { return a * angle::SC2D; }
 };
 
-
 //------------------------------------------------------------------------------
-// Class:  Radians
-// Base class:  Object -> Number -> Angle -> Radians
-// Description:  Angle * PI
+// Class: Radians
+// Description: Angle * PI
 //------------------------------------------------------------------------------
 class Radians : public Angle
 {
@@ -215,15 +99,13 @@ public:
     Radians(const double value);
     Radians(const Angle& value);
 
-    static double convertStatic(const Angle& n)              { return n.toAngle() * SC2R; }
-    virtual double toAngle() const override                  { return static_cast<double>(val * R2SC); }
-    virtual double fromAngle(const double a) const override  { return a * SC2R; }
+    static double convertStatic(const Angle& n)              { return n.toAngle() * angle::SC2R; }
+    virtual double toAngle() const override                  { return static_cast<double>(val * angle::R2SC); }
+    virtual double fromAngle(const double a) const override  { return a * angle::SC2R; }
 };
 
-
 //------------------------------------------------------------------------------
-// Class:  Semicircles
-// Base class:  Object -> Number -> Angle -> Semicircles
+// Class: Semicircles
 // Description:  An instance of Semicircles with its value equal to 1.0 is
 //               one base unit for distances.
 //------------------------------------------------------------------------------

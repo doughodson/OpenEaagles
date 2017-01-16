@@ -9,13 +9,8 @@
 #include "openeaagles/base/util/constants.hpp"
 
 namespace oe {
-   namespace base {
-      class Function;
-      class Power;
-   }
-
+namespace base { class Angle; class Function; class Power; }
 namespace models {
-
 class Player;
 class RfSystem;
 
@@ -28,22 +23,22 @@ class RfSystem;
 //
 // Factory name: Antenna
 // Slots:
-//      polarization    <base::String>  ! Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
-//                                       ! (default: NONE)
+//      polarization    <base::String>          ! Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
+//                                              ! (default: NONE)
 //
-//      threshold       <base::Power>   ! Antenna threshold  (default: 0.0)
+//      threshold       <base::Power>           ! Antenna threshold  (default: 0.0)
 //
-//      gain            <base::Number>  ! Gain (default: 1.0)              (no units)
+//      gain            <base::Number>          ! Gain (default: 1.0)              (no units)
 //
-//      gainPattern     <base::Function> ! Gain pattern (base::Func1 or base::Func2) (db)
-//                                       ! (default: 0)
+//      gainPattern     <base::Function>        ! Gain pattern (base::Func1 or base::Func2) (db)
+//                                              ! (default: 0)
 //
-//      gainPatternDeg  <base::Boolean> ! Gain pattern is in degrees (true) or radians (false) (default: false)
+//      gainPatternDeg  <base::Boolean>         ! Gain pattern is in degrees (true) or radians (false) (default: false)
 //
-//      recycle         <base::Boolean> ! Recycle emissions flag (default: true)
+//      recycle         <base::Boolean>         ! Recycle emissions flag (default: true)
 //
-//      beamWidth       <base::Angle>   ! Beam Width  (must be greater than zero) (default: 3.5 degrees)
-//                      <base::Number>  ! Beam width in radians
+//      beamWidth       <base::Angle>           ! Beam Width  (must be greater than zero) (default: 3.5 degrees)
+//                      <base::Number>          ! Beam width in radians
 //
 //
 // Note

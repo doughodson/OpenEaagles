@@ -7,11 +7,23 @@
 //              Object -> Number -> Energy -> Calories
 //              Object -> Number -> Energy -> FootPounds
 //              Object -> Number -> Energy -> Joules
+//------------------------------------------------------------------------------
 
-//
-// Description:  Numbers as energy -- KiloWatt-hours, BTUs, Calories, Foot Pounds, and Joules
-//               Base unit for Energy derivations are Joules.
-//
+#ifndef __oe_Energies_H__
+#define __oe_Energies_H__
+
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+#include <iostream>
+
+namespace oe {
+namespace base {
+
+//------------------------------------------------------------------------------
+// Class:  Energy
+// Description:  Base class for energy.  Defined as a Joule which is
+//               equivalent to an instance of Joules with its value equal
+//               to 1.0.
 //
 // Public methods (Defined in Energy, and inherited by all derived classes):
 //
@@ -27,28 +39,6 @@
 //        the units of another Energy derived instance.
 //
 //
-//     Conversion routines:
-//        static double btusToFootPounds(const double v) { return v * 777.9f; }
-//        static double btusToJoules(const double v) { return v * 1055; }
-//        static double btusToKiloWattHours(const double v) { return v * 0.0002930f; }
-//        static double btusToCalories(const double v) { return v * 252; }
-//        static double footPoundsToBTUs(const double v) { return v * 0.001285f; }
-//        static double footPoundsToJoules(const double v)  { return v * 1.356f; }
-//        static double footPoundsToKiloWattHours(const double v) { return v * 0.0000006776f; }
-//        static double footPoundsToCalories(const double v) { return v * 0.3239f; }
-//        static double joulesToBTUs(const double v) { return v * 0.0009481f; }
-//        static double joulesToFootPounds(const double v) { return v * 0.7376f; }
-//        static double joulesToKiloWattHours(const double v) { return v * 0.0000002778f; }
-//        static double joulesToCalories(const double v) { return v * 0.2389f; }
-//        static double kiloWattHoursToBTUs(const double v) { return v * 3413; }
-//        static double kiloWattHoursToFootPounds(const double v) { return v * 2655000; }
-//        static double kiloWattHoursToJoules(const double v) { return v * 3600000; }
-//        static double kiloWattHoursToCalories(const double v) { return v * 860100; }
-//        static double caloriesToBTUs(const double v) { return v * 0.003986f; }
-//        static double caloriesToFootPounds(const double v) { return v * 3.087f; }
-//        static double caloriesToJoules(const double v) { return v * 4.186f; }
-//        static double caloriesToKiloWattHours(const double v) { return v * 0.000001163f; }
-//
 //     Output stream operator: >>
 //        ostream& operator<<(ostream& sout, const Energy& n)
 //        Sends "( <the Energy derived instance class name and value> )"
@@ -61,35 +51,6 @@
 //        Static function to convert the given Energy derived
 //        instance into the units of a specific Energy derived
 //        class.
-//
-//------------------------------------------------------------------------------
-
-#ifndef __oe_Energies_H__
-#define __oe_Energies_H__
-
-#include "openeaagles/base/Number.hpp"
-#include <iostream>
-
-namespace oe {
-namespace base {
-
-// ----------------------------------------------------------------------------
-// Define Energy Conversion Constants:
-//
-// These constants were obtained from the Department of Energy, and are assumed
-// accurate as of 2/5/03.
-//
-// http://www.eia.doe.gov/kids/units.xls - Department of Energy
-// Source cited for website: Monthly Energy Review, Energy Information
-// Administration, Appendix A "Thermal conversion Factors" Sept. 2002, p. 161
-// ----------------------------------------------------------------------------
-
-//------------------------------------------------------------------------------
-// Class:  Energy
-// Base class:  Object -> Number -> Energy
-// Description:  Base class for energy.  Defined as a Joule which is
-//               equivalent to an instance of Joules with its value equal
-//               to 1.0.
 //------------------------------------------------------------------------------
 class Energy : public Number
 {
@@ -105,38 +66,6 @@ public:
     virtual double toEnergy() const = 0;
     virtual double fromEnergy(const double a) const = 0;
     double convert(const Energy& n){ return fromEnergy(n.toEnergy()); }
-
-    // Conversions between Energy
-    static double btusToFootPounds(const double v)          { return (v * BTU2J) * J2FP; }
-    static double btusToJoules(const double v)              { return v * BTU2J; }
-    static double btusToKiloWattHours(const double v)       { return (v * BTU2J) * J2KWH; }
-    static double btusToCalories(const double v)            { return (v * BTU2J) * J2C; }
-    static double footPoundsToBTUs(const double v)          { return (v * FP2J) * J2BTU; }
-    static double footPoundsToJoules(const double v)        { return v * FP2J; }
-    static double footPoundsToKiloWattHours(const double v) { return (v * FP2J) * J2KWH; }
-    static double footPoundsToCalories(const double v)      { return (v * FP2J) * J2C; }
-    static double joulesToBTUs(const double v)              { return v * J2BTU; }
-    static double joulesToFootPounds(const double v)        { return v * J2FP; }
-    static double joulesToKiloWattHours(const double v)     { return v * J2KWH; }
-    static double joulesToCalories(const double v)          { return v * J2C; }
-    static double kiloWattHoursToBTUs(const double v)       { return (v * KWH2J) * J2BTU; }
-    static double kiloWattHoursToFootPounds(const double v) { return (v * KWH2J) * J2FP; }
-    static double kiloWattHoursToJoules(const double v)     { return v * KWH2J; }
-    static double kiloWattHoursToCalories(const double v)   { return (v * KWH2J) * J2C; }
-    static double caloriesToBTUs(const double v)            { return (v * C2J) * J2BTU; }
-    static double caloriesToFootPounds(const double v)      { return (v * C2J) * J2FP; }
-    static double caloriesToJoules(const double v)          { return v * C2J; }
-    static double caloriesToKiloWattHours(const double v)   { return (v * C2J) * J2KWH; }
-
-   // Conversion constants
-   static const double J2KWH;
-   static const double KWH2J;
-   static const double J2BTU;
-   static const double BTU2J;
-   static const double J2FP;
-   static const double FP2J;
-   static const double J2C;
-   static const double C2J;
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Energy& n)
@@ -144,7 +73,6 @@ inline std::ostream& operator<<(std::ostream& sout, const Energy& n)
 
 //------------------------------------------------------------------------------
 // Class:  Joules
-// Base class:  Object -> Number -> Energy -> Joules
 // Description: An instance of Joules with its value equal to 1.0 is one
 //              base unit for energy.
 //------------------------------------------------------------------------------
@@ -164,7 +92,6 @@ public:
 
 //------------------------------------------------------------------------------
 // Class:  KiloWattHours
-// Base class:  Object -> Number -> Energy -> KiloWattHours
 // Description: Joules * 0.000000277778
 //------------------------------------------------------------------------------
 class KiloWattHours : public Energy
@@ -176,15 +103,14 @@ public:
     KiloWattHours(const double value);
     KiloWattHours(const Energy& value);
 
-    static double convertStatic(const Energy& n)             { return n.toEnergy() * J2KWH; }
-    virtual double toEnergy() const override                 { return static_cast<double>(val * KWH2J); }
-    virtual double fromEnergy(const double a) const override { return a * J2KWH; }
+    static double convertStatic(const Energy& n)             { return n.toEnergy() * energy::J2KWH; }
+    virtual double toEnergy() const override                 { return static_cast<double>(val * energy::KWH2J); }
+    virtual double fromEnergy(const double a) const override { return a * energy::J2KWH; }
 };
 
 
 //------------------------------------------------------------------------------
 // Class:  BTUs
-// Base class:  Object -> Number -> Energy -> BTUs
 // Description:  Joules * 9.478 x 10 -04
 //------------------------------------------------------------------------------
 class BTUs : public Energy
@@ -196,15 +122,14 @@ public:
     BTUs(const double value);
     BTUs(const Energy& value);
 
-    static double convertStatic(const Energy& n)             { return n.toEnergy() * J2BTU; }
-    virtual double toEnergy() const override                 { return static_cast<double>(val * BTU2J); }
-    virtual double fromEnergy(const double a) const override { return a * J2BTU; }
+    static double convertStatic(const Energy& n)             { return n.toEnergy() * energy::J2BTU; }
+    virtual double toEnergy() const override                 { return static_cast<double>(val * energy::BTU2J); }
+    virtual double fromEnergy(const double a) const override { return a * energy::J2BTU; }
 };
 
 
 //------------------------------------------------------------------------------
 // Class:  Calories
-// Base class:  Object -> Number -> Energy -> Calories
 // Description:  Joules * 0.2388888888888888889
 //------------------------------------------------------------------------------
 class Calories : public Energy
@@ -216,15 +141,14 @@ public:
     Calories(const double value);
     Calories(const Energy& value);
 
-    static double convertStatic(const Energy& n)               { return n.toEnergy() * J2C; }
-    virtual double toEnergy() const override                   { return static_cast<double>(val * C2J); }
-    virtual double fromEnergy(const double a) const override   { return a * J2C; }
+    static double convertStatic(const Energy& n)               { return n.toEnergy() * energy::J2C; }
+    virtual double toEnergy() const override                   { return static_cast<double>(val * energy::C2J); }
+    virtual double fromEnergy(const double a) const override   { return a * energy::J2C; }
 };
 
 
 //------------------------------------------------------------------------------
 // Class:  FootPounds
-// Base class:  Object -> Number -> Energy -> FootPounds
 // Description:  Joules * 0.7376
 //------------------------------------------------------------------------------
 class FootPounds : public Energy
@@ -236,9 +160,9 @@ public:
     FootPounds(const double value);
     FootPounds(const Energy& value);
 
-    static double convertStatic(const Energy& n)              { return n.toEnergy() * J2FP; }
-    virtual double toEnergy() const override                  { return static_cast<double>(val * FP2J); }
-    virtual double fromEnergy(const double a) const override  { return a * J2FP; }
+    static double convertStatic(const Energy& n)              { return n.toEnergy() * energy::J2FP; }
+    virtual double toEnergy() const override                  { return static_cast<double>(val * energy::FP2J); }
+    virtual double fromEnergy(const double a) const override  { return a * energy::J2FP; }
 };
 
 }

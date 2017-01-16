@@ -8,6 +8,8 @@
 #include "openeaagles/base/Float.hpp"
 #include "openeaagles/base/Integer.hpp"
 
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"
 
@@ -22,15 +24,8 @@
 namespace oe {
 namespace recorder {
 
-
-//==============================================================================
-// Class PrintSelected
-//==============================================================================
 IMPLEMENT_SUBCLASS(PrintSelected,"PrintSelected")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PrintSelected)
    "messageToken",   // 1) Message ID (token)
    "fieldName",      // 2) Full field name (e.g., oe.Recorder.Pb.PlayerId.name)
@@ -41,7 +36,6 @@ BEGIN_SLOTTABLE(PrintSelected)
    "timeOnly",       // 7) match time conditions only. Print ALL messages that match
 END_SLOTTABLE(PrintSelected)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(PrintSelected)
    ON_SLOT( 1, setSlotMsgToken,        base::Number)
    ON_SLOT( 2, setSlotFieldName,       base::String)
@@ -53,10 +47,8 @@ BEGIN_SLOT_MAP(PrintSelected)
 END_SLOT_MAP()
 
 EMPTY_SERIALIZER(PrintSelected)
+EMPTY_DELETEDATA(PrintSelected)
 
-//------------------------------------------------------------------------------
-// Default Constructor
-//------------------------------------------------------------------------------
 PrintSelected::PrintSelected()
 {
    STANDARD_CONSTRUCTOR()
@@ -80,9 +72,6 @@ void PrintSelected::initData()
    timeOnly = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void PrintSelected::copyData(const PrintSelected& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -98,14 +87,6 @@ void PrintSelected::copyData(const PrintSelected& org, const bool cc)
    foundSelected = org.foundSelected;
    printHeader = org.printHeader;
    timeOnly = org.timeOnly;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void PrintSelected::deleteData()
-{
-
 }
 
 // Slots
@@ -784,7 +765,7 @@ std::string PrintSelected::printTimeMsg(double time)
     double ss = 0;  // Sec
 
     // utc time
-    base::Time::getHHMMSS(static_cast<double>(time), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(time), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     std::string timeStr;
     timeStr.assign(cbuf);

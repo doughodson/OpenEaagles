@@ -23,43 +23,43 @@ class Action;
 //
 // Factory name: Steerpoint
 // Slots:
-//   stptType  <base::Identifier>  ! Steerpoint type; default: DEST
-//                                  ! { ROUTE, DEST, MARK, FIX, OAP, TGT }
+//   stptType  <base::Identifier>     ! Steerpoint type; default: DEST
+//                                    ! { ROUTE, DEST, MARK, FIX, OAP, TGT }
 //
-//   latitude  <base::LatLon>      ! Steerpoint latitude  (default: 0)
-//             <base::Number>      ! (or as degrees decimal)
+//   latitude  <base::LatLon>         ! Steerpoint latitude  (default: 0)
+//             <base::Number>         ! (or as degrees decimal)
 //
-//   longitude <base::LatLon>      ! Steerpoint longitude (default: 0)
-//             <base::Number>      ! (or as degrees decimal)
+//   longitude <base::LatLon>         ! Steerpoint longitude (default: 0)
+//             <base::Number>         ! (or as degrees decimal)
 //
-//   xPos      <base::Distance>    ! X (north) distance from gaming area reference point
-//   yPos      <base::Distance>    ! Y (east) distance from gaming area reference point
-//                                  ! (default: 0, 0)
-//   elevation <base::Distance>    ! Terrain elevation at steerpoint (default: 0)
-//             <base::Number>      ! (or as meters)
+//   xPos      <base::Distance>       ! X (north) distance from gaming area reference point
+//   yPos      <base::Distance>       ! Y (east) distance from gaming area reference point
+//                                    ! (default: 0, 0)
+//   elevation <base::Distance>       ! Terrain elevation at steerpoint (default: 0)
+//             <base::Number>         ! (or as meters)
 //
-//   altitude  <base::Distance>    ! Commanded altitude to steerpoint (default: 0)
-//             <base::Number>      ! (or as meters)
+//   altitude  <base::Distance>       ! Commanded altitude to steerpoint (default: 0)
+//             <base::Number>         ! (or as meters)
 //
-//   airspeed  <base::Number>      ! Commanded true airspeed (Kts) (default: 0)
+//   airspeed  <base::Number>         ! Commanded true airspeed (Kts) (default: 0)
 //
-//   pta       <base::Distance>    ! Planned Time of Arrival (PTA)  (default: 0)
-//             <base::Number>      ! (or as seconds)
+//   pta       <base::Distance>       ! Planned Time of Arrival (PTA)  (default: 0)
+//             <base::Number>         ! (or as seconds)
 //
-//   sca       <base::Distance>    ! Safe Clearance Altitude (SCA) (default: 0)
-//             <base::Number>      ! (or as feet)
+//   sca       <base::Distance>       ! Safe Clearance Altitude (SCA) (default: 0)
+//             <base::Number>         ! (or as feet)
 //
-//   description <base::String>    ! Description of steerpoint (default: 0)
+//   description <base::String>       ! Description of steerpoint (default: 0)
 //
-//   magvar    <base::Angle>       ! Magnetic Var at steerpoint (default: 0)
-//             <base::Number>      ! (or as degrees)
+//   magvar    <base::Angle>          ! Magnetic Var at steerpoint (default: 0)
+//             <base::Number>         ! (or as degrees)
 //
-//   next      <base::Number>      ! "Next" steerpoint number (default: 0)
-//             <base::Identifier>  ! or by steerpoint name
+//   next      <base::Number>         ! "Next" steerpoint number (default: 0)
+//             <base::Identifier>     ! or by steerpoint name
 //
-//   action    <Action>             ! Action to be triggered at steerpoint crossing (auto only)
-//                                  !  Note: the "to" steerpoint will have sequenced to the
-//                                  !  next steerpoint when action is triggered. (default: 0)
+//   action    <Action>               ! Action to be triggered at steerpoint crossing (auto only)
+//                                    !  Note: the "to" steerpoint will have sequenced to the
+//                                    !  next steerpoint when action is triggered. (default: 0)
 //
 //------------------------------------------------------------------------------
 class Steerpoint : public base::Component

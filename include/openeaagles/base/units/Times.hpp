@@ -8,10 +8,23 @@
 //              Object -> Number -> Time -> Minutes
 //              Object -> Number -> Time -> Hours
 //              Object -> Number -> Time -> Days
-//
-// Description:  Numbers as times -- seconds, milliseconds, minutes, hours,
-//               or days.  Base unit for Time derivations is seconds
-//
+//------------------------------------------------------------------------------
+
+#ifndef __oe_base_Times_H__
+#define __oe_base_Times_H__
+
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/util/math_utils.hpp"
+#include "openeaagles/base/units/time_utils.hpp"
+#include <iostream>
+
+namespace oe {
+namespace base {
+
+//------------------------------------------------------------------------------
+// Class: Time
+// Description:  Base class for times.  Defined as a second which is equivalent
+// to an instance of Seconds with its value equal to 1.0.
 //
 // Public methods (Defined in Time, and inherited by all derived classes):
 //
@@ -26,17 +39,6 @@
 //        Converts the value of an Time derived instance into
 //        the units of another Time derived instance.
 //
-//     Conversion routines:
-//        double SecondsToMilliSeconds(const double v) { return v * S2MS; }
-//        double MilliSecondsToSeconds(const double v) { return v * MS2S; }
-//        double MinutesToSeconds(const double v)      { return v * M2S; }
-//        double SecondsToMinutes(const double v)      { return v * S2M; }
-//        double HoursToMinutes(const double v)        { return (v * H2S) * S2M; }
-//        double MinutesToHours(const double v)        { return (v * M2S) * S2H; }
-//        double DaysToHours(const double v)           { return (v * D2S) * S2H; }
-//        double HoursToDays(const double v)           { return (v * H2S) * S2D; }
-//        Return the appropriate conversion factors.
-//
 //      Output stream operator:  >>
 //        ostream& operator<<(ostream& sout, const Time& n)
 //        Sends "( <the Time derived instance class name and value> )"
@@ -49,34 +51,6 @@
 //        Static function to convert the given Time derived
 //        instance into the units of another Time derived instance.
 //
-//------------------------------------------------------------------------------
-#ifndef __oe_base_Times_H__
-#define __oe_base_Times_H__
-
-#include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
-#include <iostream>
-
-namespace oe {
-namespace base {
-
-// ----------------------------------------------------------------------------
-// Defined Power Conversion Constants:
-//
-// These constants were obtained (and cross referenced) from the following
-// website, and are assumed accurate as of 2/5/03.
-// www.nist.gov - National Institute of Standard Technology
-// ----------------------------------------------------------------------------
-// Since all units are converted to or from KiloWatts, only those constants
-// will be defined.
-// ----------------------------------------------------------------------------
-
-
-//------------------------------------------------------------------------------
-// Class:  Time
-// Base class:  Object -> Number -> Time
-// Description:  Base class for times.  Defined as a second which is equivalent
-// to an instance of Seconds with its value equal to 1.0.
 //------------------------------------------------------------------------------
 class Time : public Number
 {
@@ -92,81 +66,13 @@ public:
     virtual double toTime() const =0;
     virtual double fromTime(const double a) const =0;
     double convert(const Time& n)                        { return fromTime(n.toTime()); }
-
-    // Conversions between times
-    static double SecondsToMilliSeconds(const double v)  { return v * S2MS; }
-    static double MilliSecondsToSeconds(const double v)  { return v * MS2S; }
-
-    static double MinutesToSeconds(const double v)       { return v * M2S; }
-    static double SecondsToMinutes(const double v)       { return v * S2M; }
-
-    static double HoursToMinutes(const double v)         { return (v * H2S) * S2M; }
-    static double MinutesToHours(const double v)         { return (v * M2S) * S2H; }
-
-    static double DaysToHours(const double v)            { return (v * D2S) * S2H; }
-    static double HoursToDays(const double v)            { return (v * H2S) * S2D; }
-
-    // Convert integer hours, minutes and seconds to time in seconds
-    static double putHHMMSS(const int hh, const int mm, const int ss);
-
-    // Convert time in seconds to integer hours, minutes and seconds
-    static void getHHMMSS(const double sec, int* const hh, int* const mm, int* const ss);
-    static void getHHMMSS(const double sec, int* const hh, int* const mm, double* const ss);
-
-    // Conversion constants
-    static const double S2NS;    // Seconds to nanoseconds
-    static const double NS2S;    // Nanoseconds to seconds
-    static const double S2US;    // Seconds to microseconds
-    static const double US2S;    // Microseconds to seconds
-    static const double S2MS;    // Seconds to milliseconds
-    static const double MS2S;    // Milliseconds to seconds
-    static const double S2M;     // Seconds to minutes
-    static const double M2S;     // Minutes to seconds
-    static const double S2H;     // Seconds to hours
-    static const double H2S;     // Hours to seconds
-    static const double M2D;     // Minutes to days
-    static const double D2M;     // Days to minutes
-    static const double S2D;     // Seconds to days
-    static const double D2S;     // Days to seconds
 };
-
 
 inline std::ostream& operator<<(std::ostream& sout, const Time& n)
     { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
 
-
-// getHHMMSS -- convert time in seconds to integer hours, minutes and seconds
-inline void Time::getHHMMSS(const double sec, int* const hh, int* const mm, int* const ss)
-{
-    double rem = sec;
-
-    *hh  = int(rem / 3600.0f);
-    rem -= static_cast<double>(*hh) * 3600.0f;
-    *mm  = int(rem / 60.0f);
-    rem -= static_cast<double>(*mm) * 60.0f;
-    *ss  = nint(rem);
-}
-
-// getHHMMSS -- convert time in seconds to integer hours, minutes and seconds
-inline void Time::getHHMMSS(const double sec, int* const hh, int* const mm, double* const ss)
-{
-    double rem = sec;
-
-    *hh  = int(rem / 3600.0f);
-    rem -= static_cast<double>(*hh) * 3600.0f;
-    *mm  = int(rem / 60.0f);
-    rem -= static_cast<double>(*mm) * 60.0f;
-    *ss  = rem;
-}
-
-// putHHMMSS -- convert integer hours, minutes and seconds to time in seconds
-inline double Time::putHHMMSS(const int hh, const int mm, const int ss)
-{
-    return static_cast<double>((3600.0f * hh) + (60.0f * mm) + ss);
-}
-
 //------------------------------------------------------------------------------
-// Class:  Seconds // Base class:  Object -> Number -> Time -> Seconds
+// Class: Seconds
 // Description:  An instance of Seconds with its value equal to 1.0 is one base unit for times.
 //------------------------------------------------------------------------------
 class Seconds : public Time
@@ -183,10 +89,8 @@ public:
     virtual double fromTime(const double a) const override  { return a; }
 };
 
-
 //------------------------------------------------------------------------------
 // Class:  MilliSeconds
-// Base class:  Object -> Number -> Time -> MilliSeconds
 // Description:  Seconds / 1000.0
 //------------------------------------------------------------------------------
 class MilliSeconds : public Time
@@ -198,15 +102,13 @@ public:
     MilliSeconds(const double value);
     MilliSeconds(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * S2MS; }
-    virtual double toTime() const override                  { return static_cast<double>(val * MS2S); }
-    virtual double fromTime(const double a) const override  { return a * S2MS; }
+    static double convertStatic(const Time &n)              { return n.toTime() * time::S2MS; }
+    virtual double toTime() const override                  { return static_cast<double>(val * time::MS2S); }
+    virtual double fromTime(const double a) const override  { return a * time::S2MS; }
 };
-
 
 //------------------------------------------------------------------------------
 // Class:  MicroSeconds
-// Base class:  Object -> Number -> Time -> MicroSeconds
 // Description:  Seconds / 1000000.0
 //------------------------------------------------------------------------------
 class MicroSeconds : public Time
@@ -218,15 +120,13 @@ public:
     MicroSeconds(const double value);
     MicroSeconds(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * S2US; }
-    virtual double toTime() const override                  { return static_cast<double>(val * US2S); }
-    virtual double fromTime(const double a) const override  { return a * S2US; }
+    static double convertStatic(const Time &n)              { return n.toTime() * time::S2US; }
+    virtual double toTime() const override                  { return static_cast<double>(val * time::US2S); }
+    virtual double fromTime(const double a) const override  { return a * time::S2US; }
 };
-
 
 //------------------------------------------------------------------------------
 // Class:  NanoSeconds
-// Base class:  Object -> Number -> Time -> NanoSeconds
 // Description:  Seconds / 1000000000.0
 //------------------------------------------------------------------------------
 class NanoSeconds : public Time
@@ -238,15 +138,14 @@ public:
     NanoSeconds(const double value);
     NanoSeconds(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * S2NS; }
-    virtual double toTime() const override                  { return static_cast<double>(val * NS2S); }
-    virtual double fromTime(const double a) const override  { return a * S2NS; }
+    static double convertStatic(const Time &n)              { return n.toTime() * time::S2NS; }
+    virtual double toTime() const override                  { return static_cast<double>(val * time::NS2S); }
+    virtual double fromTime(const double a) const override  { return a * time::S2NS; }
 };
 
 
 //------------------------------------------------------------------------------
 // Class:  Minutes
-// Base class:  Object -> Number -> Time -> Minutes
 // Description:  Seconds * 60.0
 //------------------------------------------------------------------------------
 class Minutes : public Time
@@ -258,14 +157,13 @@ public:
     Minutes(const double value);
     Minutes(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * S2M; }
-    virtual double toTime() const override                  { return static_cast<double>(val * M2S); }
-    virtual double fromTime(const double a) const override  { return a * S2M; }
+    static double convertStatic(const Time &n)              { return n.toTime() * time::S2M; }
+    virtual double toTime() const override                  { return static_cast<double>(val * time::M2S); }
+    virtual double fromTime(const double a) const override  { return a * time::S2M; }
 };
 
 //------------------------------------------------------------------------------
 // Class:  Hours
-// Base class:  Object -> Number -> Time -> Hours
 // Description:  Seconds * 3600.0
 //------------------------------------------------------------------------------
 class Hours : public Time
@@ -277,14 +175,13 @@ public:
     Hours(const double value);
     Hours(const Time& org);
 
-    static double convertStatic(const Time &n)              { return n.toTime() * S2H; }
-    virtual double toTime() const override                  { return static_cast<double>(val * H2S); }
-    virtual double fromTime(const double a) const override  { return a * S2H; }
+    static double convertStatic(const Time &n)              { return n.toTime() * time::S2H; }
+    virtual double toTime() const override                  { return static_cast<double>(val * time::H2S); }
+    virtual double fromTime(const double a) const override  { return a * time::S2H; }
 };
 
 //------------------------------------------------------------------------------
 // Class:  Days
-// Base class:  Object -> Number -> Time -> Days
 // Description:  Seconds * 3600.0 * 24.0
 //------------------------------------------------------------------------------
 class Days : public Time
@@ -296,9 +193,9 @@ public:
     Days(const double value);
     Days(const Time& org);
 
-    static double convertStatic(const Time &n)             { return n.toTime() * S2D; }
-    virtual double toTime() const override                 { return static_cast<double>(val * D2S); }
-    virtual double fromTime(const double a) const override { return a * S2D; }
+    static double convertStatic(const Time &n)             { return n.toTime() * time::S2D; }
+    virtual double toTime() const override                 { return static_cast<double>(val * time::D2S); }
+    virtual double fromTime(const double a) const override { return a * time::S2D; }
 };
 
 }

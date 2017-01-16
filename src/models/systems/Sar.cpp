@@ -11,8 +11,7 @@
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -236,8 +235,8 @@ void Sar::process(const double dt)
          xyz2AzEl(posB, &tgt_az, &tgt_el);
 
          // Command to that position
-         const double az = tgt_az * static_cast<double>(base::Angle::D2RCC);
-         const double el = tgt_el * static_cast<double>(base::Angle::D2RCC);
+         const double az = tgt_az * static_cast<double>(base::angle::D2RCC);
+         const double el = tgt_el * static_cast<double>(base::angle::D2RCC);
 
          ant->setRefAzimuth(az);
          ant->setRefElevation(el);
@@ -262,7 +261,7 @@ void Sar::process(const double dt)
             std::cout << "Sar:: Generating test image: resolution: " << getResolution() << std::endl;
          }
          if (getResolution() > 0) p->setResolution( getResolution() );
-         else p->setResolution( 3.0 * base::Distance::FT2M );
+         else p->setResolution( 3.0 * base::distance::FT2M );
          const auto pp = new base::Pair("image", p);
          addImage(pp);
          // ### TEST
@@ -318,12 +317,12 @@ void Sar::xyz2AzEl(const double x, const double y, const double z, double* const
 {
    // Compute azimuth (degs)
    if (az != nullptr) {
-      *az = std::atan2(y, x) * static_cast<double>(base::Angle::R2DCC);
+      *az = std::atan2(y, x) * static_cast<double>(base::angle::R2DCC);
    }
 
    if (el != nullptr) {
       const double r = std::sqrt(x * x + y * y);
-      *el = std::atan2(-z, r) * static_cast<double>(base::Angle::R2DCC);
+      *el = std::atan2(-z, r) * static_cast<double>(base::angle::R2DCC);
    }
 }
 

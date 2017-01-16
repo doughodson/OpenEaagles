@@ -11,9 +11,12 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Powers.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/base/util/math_utils.hpp"
 
 #include <cmath>
@@ -101,7 +104,7 @@ void Antenna::initData()
    threshold = 0.0;
    gainPatternDeg = false;  // default: radians
    recycle = true;          // recycle emissions
-   beamWidth = (base::Angle::D2RCC * 3.5);
+   beamWidth = (base::angle::D2RCC * 3.5);
 }
 
 //------------------------------------------------------------------------------
@@ -461,7 +464,7 @@ void Antenna::rfTransmit(Emission* const xmit)
             double gainTgt0[MAX_PLAYERS];
             if (gainPatternDeg) {
                for (unsigned int i1 = 0; i1 < ntgts; i1++) {
-                  gainTgt0[i1] = gainFunc2->f( (aazr[i1] * base::Angle::R2DCC), (aelr[i1] * base::Angle::R2DCC) )/10.0;
+                  gainTgt0[i1] = gainFunc2->f( (aazr[i1] * base::angle::R2DCC), (aelr[i1] * base::angle::R2DCC) )/10.0;
                }
             }
             else {
@@ -484,7 +487,7 @@ void Antenna::rfTransmit(Emission* const xmit)
             double gainTgt0[MAX_PLAYERS];
             if (gainPatternDeg) {
                for (unsigned int i2 = 0; i2 < ntgts; i2++) {
-                  gainTgt0[i2] = gainFunc1->f( aar[i2]*base::Angle::R2DCC )/10.0;
+                  gainTgt0[i2] = gainFunc1->f( aar[i2] * base::angle::R2DCC )/10.0;
                }
             }
             else {
@@ -689,7 +692,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
 
                // Lookup gain in 2D table and convert from dB
                if (gainPatternDeg)
-                  rGainDb = gainFunc2->f( aazr * base::Angle::R2DCC, aelr * base::Angle::R2DCC );
+                  rGainDb = gainFunc2->f( aazr * base::angle::R2DCC, aelr * base::angle::R2DCC );
                else
                   rGainDb = gainFunc2->f( aazr, aelr );
 
@@ -705,7 +708,7 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
 
                // Lookup gain in 1D table and convert from dB
                if (gainPatternDeg)
-                  rGainDb = gainFunc1->f( aar * base::Angle::R2DCC );
+                  rGainDb = gainFunc1->f( aar * base::angle::R2DCC );
                else
                   rGainDb = gainFunc1->f(aar);
 

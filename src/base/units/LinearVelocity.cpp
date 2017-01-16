@@ -7,34 +7,21 @@
 namespace oe {
 namespace base {
 
-//---------------------------------------------------------------------
-// Conversion Constants
-//---------------------------------------------------------------------
 const double LinearVelocity::FPS2KTSCC = 0.59248384864341771016513018598233;
 
-//---------------------------------------------------------------------
-// LinearVelocity
-//---------------------------------------------------------------------
 IMPLEMENT_SUBCLASS(LinearVelocity, "LinearVelocity")
 EMPTY_SERIALIZER(LinearVelocity)
+EMPTY_DELETEDATA(LinearVelocity)
 
-//---------------------------------------------------------------------
-// Slot Table
-//---------------------------------------------------------------------
 BEGIN_SLOTTABLE(LinearVelocity)
     "distance",    // 1: distance
     "time",        // 2: time
 END_SLOTTABLE(LinearVelocity)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(LinearVelocity)
     ON_SLOT(1, setSlotDistance, Distance)
     ON_SLOT(2, setSlotTime, Time)
 END_SLOT_MAP()
-
-//---------------------------------------------------------------------
-// Constructors
-//---------------------------------------------------------------------
 
 LinearVelocity::LinearVelocity()
 {
@@ -86,9 +73,7 @@ LinearVelocity::LinearVelocity(const Distance* const newDistance, const Time* co
     {
         //Give error if something was not set correctly:
         std::cerr << "Distance or Time not set correctly - new LinearVelocity Object bad." << std::endl;
-
     }
-
 }
 
 void LinearVelocity::copyData(const LinearVelocity& org, const bool)
@@ -97,16 +82,8 @@ void LinearVelocity::copyData(const LinearVelocity& org, const bool)
 
     distance = org.distance;
     time = org.time;
-
 }
 
-void LinearVelocity::deleteData()
-{
-}
-
-//---------------------------------------------------------------------
-// getLinearVelocity()
-//---------------------------------------------------------------------
 double LinearVelocity::getMetersPerSecond() const
 {
     return static_cast<double>(val);
@@ -225,12 +202,8 @@ double LinearVelocity::convert(Distance* newDistanceUnit, Time* newTimeUnit)
     return desiredResult;
 }
 
-//---------------------------------------------------------------------
-// setMetersPerSecond()
-//---------------------------------------------------------------------
 bool LinearVelocity::setMetersPerSecond(const double newLinearVelocity)
 {
-
     //Set distance and time - units in meters per second -> num = input; den = 1
     bool ok1 = setMeters(newLinearVelocity);
     bool ok2 = setSeconds(1);
@@ -241,41 +214,30 @@ bool LinearVelocity::setMetersPerSecond(const double newLinearVelocity)
     return ok1;
 }
 
-//---------------------------------------------------------------------
-// setSlotDistance()
-//---------------------------------------------------------------------
 bool LinearVelocity::setSlotDistance(const Distance* const msg)
 {
     bool ok = false;
 
     //Try to convert Number to a distance
-    if(msg != nullptr)
-    {
-        double finalNumber = Meters::convertStatic(*msg);
+    if( msg != nullptr ) {
+        const double finalNumber = Meters::convertStatic(*msg);
         ok = setMeters(finalNumber);
     }
     return ok;
 }
 
-//---------------------------------------------------------------------
-// setSlotTime()
-///---------------------------------------------------------------------
 bool LinearVelocity::setSlotTime(const Time* const msg)
 {
     bool ok = false;
 
     //Try to convert Number to a distance
-    if(msg != nullptr)
-    {
-        double finalNumber = Seconds::convertStatic(*msg);
+    if (msg != nullptr) {
+        const double finalNumber = Seconds::convertStatic(*msg);
         ok = setSeconds(finalNumber);
     }
     return ok;
 }
 
-//---------------------------------------------------------------------
-// setMeters()
-//---------------------------------------------------------------------
 bool LinearVelocity::setMeters(const double newDistance)
 {
     distance = newDistance;
@@ -284,9 +246,6 @@ bool LinearVelocity::setMeters(const double newDistance)
     return true;
 }
 
-//---------------------------------------------------------------------
-// setTime()
-//---------------------------------------------------------------------
 bool LinearVelocity::setSeconds(const double newTime)
 {
     //Set Time:
@@ -295,7 +254,6 @@ bool LinearVelocity::setSeconds(const double newTime)
     val = distance/time;
     return true;
 }
-
 
 }
 }

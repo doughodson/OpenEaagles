@@ -1,19 +1,23 @@
-//------------------------------------------------------------------------------
-// Class: Instrument -> Adi -> GhostHorizon
-//
-// Description: Takes a pitch and roll in and determines when and where to draw the
-// ghost horizon graphic
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_GhostHorizon_H__
 #define __oe_instruments_GhostHorizon_H__
 
 #include "openeaagles/instruments/adi/Adi.hpp"
 
 namespace oe {
+namespace base { class Color; class String; class Number; }
 namespace instruments {
 
-class GhostHorizon : public Adi {
+//------------------------------------------------------------------------------
+// Class: GhostHorizon
+//
+// Description: Takes a pitch and roll in and determines when and where to draw the
+// ghost horizon graphic
+//------------------------------------------------------------------------------
+class GhostHorizon : public Adi
+{
     DECLARE_SUBCLASS(GhostHorizon, Adi)
+
 public:
     GhostHorizon();
 

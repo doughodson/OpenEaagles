@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_ubf_State_H__
-#define __oe_base_ubf_State_H__
+#ifndef __oe_base_ubf_AbstractState_H__
+#define __oe_base_ubf_AbstractState_H__
 
 #include "openeaagles/base/Component.hpp"
 
@@ -9,22 +9,22 @@ namespace base {
 namespace ubf {
 
 //------------------------------------------------------------------------------
-// Class: State
+// Class: AbstractState
 //
 // Description: The actor's state vector, as seen by the Behaviors.
 //
 // Factory name: UbfState
 //------------------------------------------------------------------------------
-class State : public base::Component
+class AbstractState : public base::Component
 {
-   DECLARE_SUBCLASS(State, base::Component)
+   DECLARE_SUBCLASS(AbstractState, base::Component)
 public:
-   State();
+   AbstractState();
 
    virtual void updateGlobalState();
    virtual void updateState(const base::Component* const actor);
 
-   virtual const State* getUbfStateByType(const std::type_info& type) const;
+   virtual const AbstractState* getUbfStateByType(const std::type_info& type) const;
 };
 
 }

@@ -1,6 +1,6 @@
 
 #include "openeaagles/base/ubf/Arbiter.hpp"
-#include "openeaagles/base/ubf/Action.hpp"
+#include "openeaagles/base/ubf/AbstractAction.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -37,7 +37,7 @@ void Arbiter::deleteData()
 //------------------------------------------------------------------------------
 // genAction() - generate an action
 //------------------------------------------------------------------------------
-Action* Arbiter::genAction(const State* const state, const double dt)
+AbstractAction* Arbiter::genAction(const AbstractState* const state, const double dt)
 {
    // create list for action set
    const auto actionSet = new base::List();
@@ -46,9 +46,9 @@ Action* Arbiter::genAction(const State* const state, const double dt)
    base::List::Item* item = behaviors->getFirstItem();
    while (item != nullptr) {
       // get a behavior
-      const auto behavior = static_cast<Behavior*>(item->getValue());
+      const auto behavior = static_cast<AbstractBehavior*>(item->getValue());
       // generate action, we have reference
-      Action* action = behavior->genAction(state, dt);
+      AbstractAction* action = behavior->genAction(state, dt);
       if (action != nullptr) {
          // add to action set
          actionSet->addTail(action);
@@ -61,7 +61,7 @@ Action* Arbiter::genAction(const State* const state, const double dt)
 
    // given the set of recommended actions, the arbiter
    // decides what action to take
-   Action* complexAction = genComplexAction(actionSet);
+   AbstractAction* complexAction = genComplexAction(actionSet);
 
    // done with action set
    actionSet->unref();
@@ -74,9 +74,9 @@ Action* Arbiter::genAction(const State* const state, const double dt)
 //------------------------------------------------------------------------------
 // Default: select the action with the highest vote
 //------------------------------------------------------------------------------
-Action* Arbiter::genComplexAction(base::List* const actionSet)
+AbstractAction* Arbiter::genComplexAction(base::List* const actionSet)
 {
-   Action* complexAction = nullptr;
+   AbstractAction* complexAction = nullptr;
    unsigned int maxVote = 0;
 
    // process entire action set
@@ -84,7 +84,7 @@ Action* Arbiter::genComplexAction(base::List* const actionSet)
    while (item != nullptr) {
 
       // Is this action's vote higher than the previous?
-      const auto action = static_cast<Action*>(item->getValue());
+      const auto action = static_cast<AbstractAction*>(item->getValue());
       if (maxVote==0 || action->getVote() > maxVote) {
 
          // Yes ...
@@ -113,7 +113,7 @@ Action* Arbiter::genComplexAction(base::List* const actionSet)
 //------------------------------------------------------------------------------
 // addBehavior() - add a new behavior
 //------------------------------------------------------------------------------
-void Arbiter::addBehavior(Behavior* const x)
+void Arbiter::addBehavior(AbstractBehavior* const x)
 {
    behaviors->addTail(x);
    x->container(this);
@@ -133,7 +133,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
       while (item != nullptr && ok) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         const auto b = dynamic_cast<Behavior*>( pair->object() );
+         const auto b = dynamic_cast<AbstractBehavior*>( pair->object() );
          if (b == nullptr) {
             // Item is NOT a behavior
             std::cerr << "setSlotBehaviors: slot: " << *pair->slot() << " is NOT of a Behavior type!" << std::endl;
@@ -148,7 +148,7 @@ bool Arbiter::setSlotBehaviors(base::PairStream* const x)
       while (item != nullptr) {
          const auto pair = static_cast<base::Pair*>(item->getValue());
          item = item->getNext();
-         const auto b = static_cast<Behavior*>(pair->object());
+         const auto b = static_cast<AbstractBehavior*>(pair->object());
          addBehavior(b);
       }
    }

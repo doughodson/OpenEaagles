@@ -163,7 +163,7 @@ bool Hsv::setHSVA(const osg::Vec4d& vec)
 void Hsv::hsv2rgb(osg::Vec3d& rgb, const osg::Vec3d& hsv)
 {
     // local HSV values
-    double h = base::Angle::aepcdDeg(hsv[HUE]);
+    double h = angle::aepcdDeg(hsv[HUE]);
     if (h < 0.0f) h += 360.0f;
     double s = hsv[SATURATION];
     double v = hsv[VALUE];

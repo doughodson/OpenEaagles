@@ -47,6 +47,17 @@ base library
   Using include files that do nothing but include other include files is considered bad
   practice -- this clarifies the codebase by making it more explicit.
 
+- Extracted constants and conversion methods from within unit classes, such as,
+  Angle, Distance, Mass and Power and into unit_utils.hpp.  This clarifies
+  the nature of the functions, simplifies the classes, and makes their usage more
+  clear.  The classes Angle, Mass, etc, are 'abstract', but they have not been
+  renamed to 'AbstractXYZ', etc, to avoid massive changes to existing programs
+  and their somewhat obvious abstractness as indicated by name.
+
+- Renamed fundamental 'ubf' classes such as Action, Behavior and State to AbsractAction,
+  AbstractBehavior and AbstractState is make visible the role they play in defining
+  the ubf pattern. 
+
    Object class
      -- In Object, the method getSlotByIndex() has been removed.  Therefore any derived
         Object-based classes no longer need to define it.  For legacy code, methods of

@@ -3,8 +3,8 @@
 
 #include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 namespace models {
@@ -20,8 +20,8 @@ END_SLOTTABLE(AirVehicle)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(AirVehicle)
-    ON_SLOT(1,setInitGearPos,base::String)
-    ON_SLOT(1,setInitGearPos,base::Number)
+    ON_SLOT(1,setInitGearPos, base::String)
+    ON_SLOT(1,setInitGearPos, base::Number)
 END_SLOT_MAP()
 
 AirVehicle::AirVehicle()
@@ -80,17 +80,17 @@ void AirVehicle::reset()
 //------------------------------------------------------------------------------
 double AirVehicle::getAngleOfAttackD() const
 {
-   return ( static_cast<double>(base::Angle::R2DCC) * getAngleOfAttack() );
+   return ( static_cast<double>(base::angle::R2DCC) * getAngleOfAttack() );
 }
 
 double AirVehicle::getFlightPathD() const
 {
-   return ( static_cast<double>(base::Angle::R2DCC) * getFlightPath() );
+   return ( static_cast<double>(base::angle::R2DCC) * getFlightPath() );
 }
 
 double AirVehicle::getSideSlipD() const
 {
-   return ( static_cast<double>(base::Angle::R2DCC) * getSideSlip() );
+   return ( static_cast<double>(base::angle::R2DCC) * getSideSlip() );
 }
 
 AerodynamicsModel* AirVehicle::getAerodynamicsModel()

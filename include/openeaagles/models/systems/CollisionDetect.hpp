@@ -34,15 +34,15 @@ class Player;
 //
 // Factory name: CollisionDetect
 // Slots:
-//    collisionRange    <Distance>     ! Collision range (default: 4 Meters)
-//    maxPlayers        <Number>       ! Max number of players of interest (default: 20)
-//    playerTypes       <PairStream>   ! List of player of interest types (default: all types )
-//                                     !   Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
-//    maxRange2Players  <Distance>     ! Max range from ownship to players of interest, or zero for all (default: 1.0 NM)
-//    maxAngle2Players  <Angle>        ! Max angle off the 'nose' of our ownship to players of interest, or zero for all (default: 0)
-//    localOnly         <Boolean>      ! Only check for collisions with local players (default: false)
-//    useWorldCoordinates <Boolean>    ! Using world (ECEF) coordinate system; else NED on the simulation gaming area (default: true)
-//    sendCrashEvents   <Boolean>      ! Send 'CRASH_EVENT' events on collisions (default: false)
+//    collisionRange      <Distance>       ! Collision range (default: 4 Meters)
+//    maxPlayers          <Number>         ! Max number of players of interest (default: 20)
+//    playerTypes         <PairStream>     ! List of player of interest types (default: all types )
+//                                         !   Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
+//    maxRange2Players    <Distance>       ! Max range from ownship to players of interest, or zero for all (default: 1.0 NM)
+//    maxAngle2Players    <Angle>          ! Max angle off the 'nose' of our ownship to players of interest, or zero for all (default: 0)
+//    localOnly           <Boolean>        ! Only check for collisions with local players (default: false)
+//    useWorldCoordinates <Boolean>        ! Using world (ECEF) coordinate system; else NED on the simulation gaming area (default: true)
+//    sendCrashEvents     <Boolean>        ! Send 'CRASH_EVENT' events on collisions (default: false)
 //
 //------------------------------------------------------------------------------
 class CollisionDetect : public System
@@ -99,13 +99,13 @@ protected:
 protected:
    struct PlayerOfInterest {
       base::safe_ptr<Player> player;    // The player
-      double range;           // Previous range (m)
-      double rangeRate;       // Previous range rate (m/s)
-      double distance;        // Distance at collision (m)
-      unsigned int passCnt;   // Pass count
-      bool active;            // This entry is active (in-use)
-      bool collided;          // We've collided with this player
-      bool unmatched;         // Entry not yet matched during an update
+      double range;                     // Previous range (m)
+      double rangeRate;                 // Previous range rate (m/s)
+      double distance;                  // Distance at collision (m)
+      unsigned int passCnt;             // Pass count
+      bool active;                      // This entry is active (in-use)
+      bool collided;                    // We've collided with this player
+      bool unmatched;                   // Entry not yet matched during an update
 
       PlayerOfInterest()
          : player(0), range(0.0), rangeRate(0.0),

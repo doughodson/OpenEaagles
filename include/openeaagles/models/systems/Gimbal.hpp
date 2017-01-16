@@ -8,18 +8,8 @@
 #include "openeaagles/base/osg/Matrixd"
 
 namespace oe {
-
-namespace base {
-
-class Angle;
-class Distance;
-class List;
-class PairStream;
-
-}
-
+namespace base { class Angle; class Distance; class List; class PairStream; }
 namespace models {
-
 class Emission;
 class SensorMsg;
 class Tdb;
@@ -63,59 +53,59 @@ class Tdb;
 // Factory name: Gimbal
 // Slots:
 //
-//    type                 (String)  Physical gimbal type: "mechanical" or "electronic" (default: ELECTRONIC)
+//    type                 (String)          ! Physical gimbal type: "mechanical" or "electronic" (default: ELECTRONIC)
 //
-//    location             (List)    Relative location vector (meters) [ x y z ] (default: 0,0,0)
+//    location             (List)            ! Relative location vector (meters) [ x y z ] (default: 0,0,0)
 //
-//    initPosition         (List)    Initial position vector (radians) [ az el roll ] (default: 0,0,0)
-//    initPosAzimuth       (Angle)   Initial azimuth position (default: 0)
-//    initPosElevation     (Angle)   Initial elevation position (default: 0)
-//    initPosRoll          (Angle)   Initial roll position (default: 0)
+//    initPosition         (List)            ! Initial position vector (radians) [ az el roll ] (default: 0,0,0)
+//    initPosAzimuth       (Angle)           ! Initial azimuth position (default: 0)
+//    initPosElevation     (Angle)           ! Initial elevation position (default: 0)
+//    initPosRoll          (Angle)           ! Initial roll position (default: 0)
 //
-//    azimuthLimits        (List)    Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
-//    azimuthLimitLeft     (Angle)   Left azimuth limit[ range: -pi to pi; else unlimited ]
-//    azimuthLimitRight    (Angle)   Right azimuth limit[ range: -pi to pi; else unlimited ]
-//    elevationLimits      (List)    Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
+//    azimuthLimits        (List)            ! Lower & upper azimuth limits (radians) [ left right ][ range: -pi to pi; else unlimited ]
+//    azimuthLimitLeft     (Angle)           ! Left azimuth limit[ range: -pi to pi; else unlimited ]
+//    azimuthLimitRight    (Angle)           ! Right azimuth limit[ range: -pi to pi; else unlimited ]
+//    elevationLimits      (List)            ! Lower & upper elevation limits (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
 //
-//    elevationLimitLower  (Angle)   Lower elevation limit[ range: -pi to pi; else unlimited ]
-//    elevationLimitUpper  (Angle)   Upper elevation limit[ range: -pi to pi; else unlimited ]
+//    elevationLimitLower  (Angle)           ! Lower elevation limit[ range: -pi to pi; else unlimited ]
+//    elevationLimitUpper  (Angle)           ! Upper elevation limit[ range: -pi to pi; else unlimited ]
 //
-//    rollLimits           (Angle)   Roll limit vector (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
-//    rollLimitLower       (Angle)   Lower roll limit[ range: -pi to pi; else unlimited ]
-//    rollLimitUpper       (Angle)   Upper roll limit[ range: -pi to pi; else unlimited ]
+//    rollLimits           (Angle)           ! Roll limit vector (radians) [ lower upper ][ range: -pi to pi; else unlimited ]
+//    rollLimitLower       (Angle)           ! Lower roll limit[ range: -pi to pi; else unlimited ]
+//    rollLimitUpper       (Angle)           ! Upper roll limit[ range: -pi to pi; else unlimited ]
 //
-//    maxRates             (List)    Max mechanical rate vector (rad/sec) [ az el roll ]
-//    maxRateAzimuth       (Angle)   Max "mechanical" azimuth rate    (Angle/sec) (default: D2RCC * 120.0)
-//    maxRateElevation     (Angle)   Max "mechanical" elevation rate  (Angle/sec) (default: D2RCC * 120.0)
-//    maxRateRoll          (Angle)   Max "mechanical" roll rate       (Angle/sec) (default: D2RCC * 120.0)
+//    maxRates             (List)            ! Max mechanical rate vector (rad/sec) [ az el roll ]
+//    maxRateAzimuth       (Angle)           ! Max "mechanical" azimuth rate    (Angle/sec) (default: D2RCC * 120.0)
+//    maxRateElevation     (Angle)           ! Max "mechanical" elevation rate  (Angle/sec) (default: D2RCC * 120.0)
+//    maxRateRoll          (Angle)           ! Max "mechanical" roll rate       (Angle/sec) (default: D2RCC * 120.0)
 //
-//    commandPosition      (List)    Commanded position vector (radians) [ az el roll ] (sets POSITION_SERVO)
-//    commandPosAzimuth    (Angle)   Commanded azimuth position    (sets POSITION_SERVO) (default: 0)
-//    commandPosElevation  (Angle)   Commanded elevation position  (sets POSITION_SERVO) (default: 0)
-//    commandPosRoll       (Angle)   Commanded roll position       (sets POSITION_SERVO) (default: 0)
+//    commandPosition      (List)            ! Commanded position vector (radians) [ az el roll ] (sets POSITION_SERVO)
+//    commandPosAzimuth    (Angle)           ! Commanded azimuth position    (sets POSITION_SERVO) (default: 0)
+//    commandPosElevation  (Angle)           ! Commanded elevation position  (sets POSITION_SERVO) (default: 0)
+//    commandPosRoll       (Angle)           ! Commanded roll position       (sets POSITION_SERVO) (default: 0)
 //
-//    commandRates         (List)    Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-//    commandRateAzimuth   (Angle)   Commanded azimuth rate     (Angle/sec) (sets RATE_SERVO)
-//    commandRateElevation (Angle)   Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
-//    commandRateRoll      (Angle)   Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
+//    commandRates         (List)            ! Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+//    commandRateAzimuth   (Angle)           ! Commanded azimuth rate     (Angle/sec) (sets RATE_SERVO)
+//    commandRateElevation (Angle)           ! Commanded elevation rate  (Angle/sec) (sets RATE_SERVO)
+//    commandRateRoll      (Angle)           ! Commanded roll rate        (Angle/sec) (sets RATE_SERVO)
 //
-//    terrainOcculting     (Boolean) Enable terrain occulting of the players of interest (default: false)
-//    checkHorizon         (Boolean) Enable horizon masking check (default: true)
+//    terrainOcculting     (Boolean)         ! Enable terrain occulting of the players of interest (default: false)
+//    checkHorizon         (Boolean)         ! Enable horizon masking check (default: true)
 //
-//    playerOfInterestTypes (PairStream)   List of player of interest types (default: all types )
-//                                         Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
+//    playerOfInterestTypes (PairStream)     ! List of player of interest types (default: all types )
+//                                           ! Valid types: { "air" "ground" "weapon" "ship" "building" "lifeform" "space" }
 //
-//    maxPlayersOfInterest  (Number)         Max number of players of interest (default: 200)
-//    maxRange2PlayersOfInterest (Distance)  Max range to players of interest, or zero for all (default: 0)
-//    maxAngle2PlayersOfInterest (Angle)     Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
-//    localPlayersOfInterestOnly (Number)    Sets the local only players of interest flag (default: false)
+//    maxPlayersOfInterest  (Number)         ! Max number of players of interest (default: 200)
+//    maxRange2PlayersOfInterest (Distance)  ! Max range to players of interest, or zero for all (default: 0)
+//    maxAngle2PlayersOfInterest (Angle)     ! Max angle off the gimbal boresight to players of interest, or zero for all (default: 0)
+//    localPlayersOfInterestOnly (Number)    ! Sets the local only players of interest flag (default: false)
 //
-//    useWorldCoordinates  (Number)          Using player of interest's world (ECEF) coordinate system (default: true)
-//    useOwnHeadingOnly    <Number>          Whether only the ownship heading is used by the target data block (default: true)
+//    useWorldCoordinates  (Number)          ! Using player of interest's world (ECEF) coordinate system (default: true)
+//    useOwnHeadingOnly    (Number)          ! Whether only the ownship heading is used by the target data block (default: true)
 //
 //
 // Events:
-//    RF_EMISSION       (Emission)  Default handler: Pass emissions to subcomponents.
+//    RF_EMISSION       (Emission)           ! Default handler: Pass emissions to subcomponents.
 //
 //
 //  Handy support functions
@@ -273,49 +263,49 @@ public:  // Public section
 
 
    // Event handler(s)
-   virtual bool onRfEmissionEvent(Emission* const);                      // Handles R/F emission events
+   virtual bool onRfEmissionEvent(Emission* const);                             // Handles R/F emission events
 
    // Slot functions
-   virtual bool setSlotType(const base::String* const msg);             // Physical gimbal type: "mechanical" or "electronic"
-   virtual bool setSlotLocation(const base::List* const msg);           // Relative location vector (meters) [ x y z ]
+   virtual bool setSlotType(const base::String* const msg);                     // Physical gimbal type: "mechanical" or "electronic"
+   virtual bool setSlotLocation(const base::List* const msg);                   // Relative location vector (meters) [ x y z ]
 
-   virtual bool setSlotPosition(const base::List* const msg);           // Initial position vector (radians) [ az el roll ]
-   virtual bool setSlotPosAzimuth(const base::Angle* const msg);        // Initial azimuth position
-   virtual bool setSlotPosElevation(const base::Angle* const msg);      // Initial elevation position
-   virtual bool setSlotPosRoll(const base::Angle* const msg);           // Initial roll position
+   virtual bool setSlotPosition(const base::List* const msg);                   // Initial position vector (radians) [ az el roll ]
+   virtual bool setSlotPosAzimuth(const base::Angle* const msg);                // Initial azimuth position
+   virtual bool setSlotPosElevation(const base::Angle* const msg);              // Initial elevation position
+   virtual bool setSlotPosRoll(const base::Angle* const msg);                   // Initial roll position
 
-   virtual bool setSlotAzimuthLimits(const base::List* const msg);      // Azimuth limit vector (radians) [ left right ]
-   virtual bool setSlotAzimuthLimitLeft(const base::Angle* const msg);  // Left azimuth limit
-   virtual bool setSlotAzimuthLimitRight(const base::Angle* const msg); // Right azimuth limit
+   virtual bool setSlotAzimuthLimits(const base::List* const msg);              // Azimuth limit vector (radians) [ left right ]
+   virtual bool setSlotAzimuthLimitLeft(const base::Angle* const msg);          // Left azimuth limit
+   virtual bool setSlotAzimuthLimitRight(const base::Angle* const msg);         // Right azimuth limit
 
-   virtual bool setSlotElevationLimits(const base::List* const msg);    // Elevation limit vector (radians) [ lower upper ]
-   virtual bool setSlotElevationLower(const base::Angle* const msg);    // Lower elevation limit
-   virtual bool setSlotElevationUpper(const base::Angle* const msg);    // Upper elevation limit
+   virtual bool setSlotElevationLimits(const base::List* const msg);            // Elevation limit vector (radians) [ lower upper ]
+   virtual bool setSlotElevationLower(const base::Angle* const msg);            // Lower elevation limit
+   virtual bool setSlotElevationUpper(const base::Angle* const msg);            // Upper elevation limit
 
-   virtual bool setSlotRollLimits(const base::List* const msg);         // Roll limit vector (radians) [ lower upper ]
-   virtual bool setSlotRollLimitLower(const base::Angle* const msg);    // Lower roll limit
-   virtual bool setSlotRollLimitUpper(const base::Angle* const msg);    // Upper roll limit
+   virtual bool setSlotRollLimits(const base::List* const msg);                 // Roll limit vector (radians) [ lower upper ]
+   virtual bool setSlotRollLimitLower(const base::Angle* const msg);            // Lower roll limit
+   virtual bool setSlotRollLimitUpper(const base::Angle* const msg);            // Upper roll limit
 
-   virtual bool setSlotMaxRates(const base::List* const msg);           // Max "mechanical" rate vector (rad/sec) [ az el roll ]
-   virtual bool setSlotMaxRateAzimuth(const base::Angle* const msg);    // Max "mechanical" azimuth rate (base::Angle/sec)
-   virtual bool setSlotMaxRateElevation(const base::Angle* const msg);  // Max "mechanical" elevation rate (base::Angle/sec)
-   virtual bool setSlotMaxRateRoll(const base::Angle* const msg);       // Max "mechanical" roll rate (base::Angle/sec)
+   virtual bool setSlotMaxRates(const base::List* const msg);                   // Max "mechanical" rate vector (rad/sec) [ az el roll ]
+   virtual bool setSlotMaxRateAzimuth(const base::Angle* const msg);            // Max "mechanical" azimuth rate (base::Angle/sec)
+   virtual bool setSlotMaxRateElevation(const base::Angle* const msg);          // Max "mechanical" elevation rate (base::Angle/sec)
+   virtual bool setSlotMaxRateRoll(const base::Angle* const msg);               // Max "mechanical" roll rate (base::Angle/sec)
 
-   virtual bool setSlotCmdPos(const base::List* const msg);             // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosAzimuth(const base::Angle* const msg);     // Commanded azimuth position  (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosElevation(const base::Angle* const msg);   // Commanded elevation position (sets POSITION_SERVO)
-   virtual bool setSlotCmdPosRoll(const base::Angle* const msg);        // Commanded roll position  (sets POSITION_SERVO)
+   virtual bool setSlotCmdPos(const base::List* const msg);                     // Commanded position vector  [ az el roll ] (sets POSITION_SERVO)
+   virtual bool setSlotCmdPosAzimuth(const base::Angle* const msg);             // Commanded azimuth position  (sets POSITION_SERVO)
+   virtual bool setSlotCmdPosElevation(const base::Angle* const msg);           // Commanded elevation position (sets POSITION_SERVO)
+   virtual bool setSlotCmdPosRoll(const base::Angle* const msg);                // Commanded roll position  (sets POSITION_SERVO)
 
-   virtual bool setSlotCmdRate(const base::List* const msg);            // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
-   virtual bool setSlotCmdRateAzimuth(const base::Angle* const msg);    // Commanded azimuth rate (sets RATE_SERVO)
-   virtual bool setSlotCmdRateElevation(const base::Angle* const msg);  // Commanded elevation rate (sets RATE_SERVO)
-   virtual bool setSlotCmdRateRoll(const base::Angle* const msg);       // Commanded roll rate (sets RATE_SERVO)
+   virtual bool setSlotCmdRate(const base::List* const msg);                    // Commanded rate vector (rad/sec) [ az el roll ] (sets RATE_SERVO)
+   virtual bool setSlotCmdRateAzimuth(const base::Angle* const msg);            // Commanded azimuth rate (sets RATE_SERVO)
+   virtual bool setSlotCmdRateElevation(const base::Angle* const msg);          // Commanded elevation rate (sets RATE_SERVO)
+   virtual bool setSlotCmdRateRoll(const base::Angle* const msg);               // Commanded roll rate (sets RATE_SERVO)
 
-   virtual bool setSlotTerrainOcculting(const base::Number* const msg); // Enable target terrain occulting (default: false)
-   virtual bool setSlotCheckHorizon(const base::Number* const msg);     // Enable horizon masking check (default: true)
+   virtual bool setSlotTerrainOcculting(const base::Number* const msg);         // Enable target terrain occulting (default: false)
+   virtual bool setSlotCheckHorizon(const base::Number* const msg);             // Enable horizon masking check (default: true)
 
-   virtual bool setSlotPlayerTypes(const base::PairStream* const msg);  // Player of interest types (default: 0 )
-   virtual bool setSlotMaxPlayers(const base::Number* const msg);       // Max number of players of interest (default: 0)
+   virtual bool setSlotPlayerTypes(const base::PairStream* const msg);          // Player of interest types (default: 0 )
+   virtual bool setSlotMaxPlayers(const base::Number* const msg);               // Max number of players of interest (default: 0)
 
    // Max range to players of interest or zero for all (meters)
    virtual bool setSlotMaxRange2PlayersOfInterest(const base::Distance* const msg);

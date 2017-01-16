@@ -1,6 +1,3 @@
-// Powers.cpp: implementation of the Power class.
-// Powers, KiloWatts, Watts, Horsepower
-//////////////////////////////////////////////////////////////////////
 
 #include "openeaagles/base/units/Powers.hpp"
 #include "openeaagles/base/osg/Math"
@@ -9,23 +6,13 @@
 namespace oe {
 namespace base {
 
-//////////////////////////////////////////////////////////////////////
+//==============================================================================
 // Power() --
-//////////////////////////////////////////////////////////////////////
+//==============================================================================
 IMPLEMENT_ABSTRACT_SUBCLASS(Power, "Power")
 EMPTY_SLOTTABLE(Power)
+EMPTY_DELETEDATA(Power)
 
-// Conversion constants
-const double Power::W2KW = 0.001f;                // Watts => KiloWatts
-const double Power::KW2W = (1 / Power::W2KW);   // KiloWatts => Watts
-const double Power::W2HP = 1341.0f;               // Watts => Horsepower
-const double Power::HP2W = (1 / Power::W2HP);   // Horsepower => Watts
-const double Power::W2MW = 1000.0f;               // Watts => MilliWatts
-const double Power::MW2W = (1 / Power::W2MW);   // MilliWatts => Watts
-
-//------------------------------------------------------------------------------
-//constructors
-//------------------------------------------------------------------------------
 Power::Power()
 {
    STANDARD_CONSTRUCTOR()
@@ -36,25 +23,12 @@ Power::Power(const double value) : Number(value)
    STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData() --
-//------------------------------------------------------------------------------
 void Power::copyData(const Power& org, const bool)
 {
    BaseClass::copyData(org);
    val = fromPower(org.toPower());;
 }
 
-
-//------------------------------------------------------------------------------
-// deletedDataFunc() --
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Power)
-
-
-//------------------------------------------------------------------------------
-// serialize()
-//------------------------------------------------------------------------------
 std::ostream& Power::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -76,12 +50,13 @@ std::ostream& Power::serialize(std::ostream& sout, const int i, const bool slots
     return sout;
 }
 
-
 //==============================================================================
 // KiloWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloWatts, "KiloWatts")
 EMPTY_SERIALIZER(KiloWatts)
+EMPTY_COPYDATA(KiloWatts)
+EMPTY_DELETEDATA(KiloWatts)
 
 KiloWatts::KiloWatts() : Power()
 {
@@ -99,15 +74,13 @@ KiloWatts::KiloWatts(const Power& org) : Power()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(KiloWatts)
-EMPTY_DELETEDATA(KiloWatts)
-
-
 //==============================================================================
 // Watts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Watts, "Watts")
 EMPTY_SERIALIZER(Watts)
+EMPTY_COPYDATA(Watts)
+EMPTY_DELETEDATA(Watts)
 
 Watts::Watts() : Power()
 {
@@ -125,15 +98,13 @@ Watts::Watts(const Power& org) : Power()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(Watts)
-EMPTY_DELETEDATA(Watts)
-
-
 //==============================================================================
 // Horsepower() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Horsepower, "Horsepower")
 EMPTY_SERIALIZER(Horsepower)
+EMPTY_COPYDATA(Horsepower)
+EMPTY_DELETEDATA(Horsepower)
 
 Horsepower::Horsepower() : Power()
 {
@@ -152,14 +123,13 @@ Horsepower::Horsepower(const Power& org) : Power()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(Horsepower)
-EMPTY_DELETEDATA(Horsepower)
-
 //==============================================================================
 // DecibelWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelWatts, "DecibelWatts")
 EMPTY_SERIALIZER(DecibelWatts)
+EMPTY_COPYDATA(DecibelWatts)
+EMPTY_DELETEDATA(DecibelWatts)
 
 DecibelWatts::DecibelWatts() : Power()
 {
@@ -177,14 +147,13 @@ DecibelWatts::DecibelWatts(const Power& org) : Power()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(DecibelWatts)
-EMPTY_DELETEDATA(DecibelWatts)
-
 //==============================================================================
 // MilliWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilliWatts, "MilliWatts")
 EMPTY_SERIALIZER(MilliWatts)
+EMPTY_COPYDATA(MilliWatts)
+EMPTY_DELETEDATA(MilliWatts)
 
 MilliWatts::MilliWatts() : Power()
 {
@@ -202,15 +171,13 @@ MilliWatts::MilliWatts(const Power& org) : Power()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(MilliWatts)
-EMPTY_DELETEDATA(MilliWatts)
-
-
 //==============================================================================
 // DecibelMilliWatts() --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(DecibelMilliWatts, "DecibelMilliWatts")
 EMPTY_SERIALIZER(DecibelMilliWatts)
+EMPTY_COPYDATA(DecibelMilliWatts)
+EMPTY_DELETEDATA(DecibelMilliWatts)
 
 DecibelMilliWatts::DecibelMilliWatts() : Power()
 {
@@ -227,9 +194,6 @@ DecibelMilliWatts::DecibelMilliWatts(const Power& org) : Power()
     STANDARD_CONSTRUCTOR()
     BaseClass::copyData(org,true);
 }
-
-EMPTY_COPYDATA(DecibelMilliWatts)
-EMPTY_DELETEDATA(DecibelMilliWatts)
 
 }
 }

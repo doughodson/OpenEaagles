@@ -1,6 +1,7 @@
 
 #include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 namespace models {
@@ -30,7 +31,7 @@ double AerodynamicsModel::getAngleOfAttackR() const
 
 double AerodynamicsModel::getAngleOfAttackD() const
 { 
-   return ( static_cast<double>(base::Angle::R2DCC) * getAngleOfAttack() );
+   return ( static_cast<double>(base::angle::R2DCC) * getAngleOfAttack() );
 }
 
 double AerodynamicsModel::getFlightPathR() const
@@ -40,7 +41,7 @@ double AerodynamicsModel::getFlightPathR() const
 
 double AerodynamicsModel::getFlightPathD() const
 { 
-   return ( static_cast<double>(base::Angle::R2DCC) * getFlightPath() );
+   return ( static_cast<double>(base::angle::R2DCC) * getFlightPath() );
 }
 
 double AerodynamicsModel::getSideSlipR() const
@@ -50,7 +51,7 @@ double AerodynamicsModel::getSideSlipR() const
 
 double AerodynamicsModel::getSideSlipD() const
 { 
-   return ( static_cast<double>(base::Angle::R2DCC) * getSideSlip() );
+   return ( static_cast<double>(base::angle::R2DCC) * getSideSlip() );
 }
 
 //------------------------------------------------------------------------------

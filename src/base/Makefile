@@ -42,11 +42,11 @@ OBJS =  \
 	osg/Matrixf.o \
 	osg/Quat.o \
 	platform/Thread_linux.o \
-	ubf/Action.o \
+	ubf/AbstractAction.o \
+	ubf/AbstractBehavior.o \
+	ubf/AbstractState.o \
 	ubf/Agent.o \
 	ubf/Arbiter.o \
-	ubf/Behavior.o \
-	ubf/State.o \
 	units/Angles.o \
 	units/AngularVelocity.o \
 	units/Areas.o \

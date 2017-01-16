@@ -5,8 +5,11 @@
 
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
 
@@ -199,7 +202,7 @@ void RacModel::updateRAC(const double dt)
    if (pp == nullptr) return;
 
    // Acceleration of Gravity (M/S)
-   const double g = base::ETHG * base::Distance::FT2M;
+   const double g = base::ETHG * base::distance::FT2M;
 
    // Set default commanded values
    if (cmdAltitude < -9000.0)
@@ -215,7 +218,7 @@ void RacModel::updateRAC(const double dt)
    // ---
 
    // Max altitude rate 6000 ft /min converted to M/S
-   double maxAltRate = (3000.0 / 60.0) * base::Distance::FT2M;
+   double maxAltRate = (3000.0 / 60.0) * base::distance::FT2M;
 
    // commanded vertical velocity is delta altitude limited to max rate
    double cmdAltRate = (cmdAltitude - pp->getAltitudeM());
@@ -259,12 +262,12 @@ void RacModel::updateRAC(const double dt)
    // ---
    // Find pitch rate and update pitch
    // ---
-   double qa = base::Angle::aepcdRad(cmdPitch - pp->getPitchR()) * 0.1;
+   double qa = base::angle::aepcdRad(cmdPitch - pp->getPitchR()) * 0.1;
    if(qa > qa_max) qa = qa_max;
    if(qa < qa_min) qa = qa_min;
 
    // Find turn rate
-   double ra = base::Angle::aepcdRad((cmdHeading  * base::Angle::D2RCC) - pp->getHeadingR()) * 0.1;
+   double ra = base::angle::aepcdRad((cmdHeading  * base::angle::D2RCC) - pp->getHeadingR()) * 0.1;
    if(ra > ra_max) ra = ra_max;
    if(ra < -ra_max) ra = -ra_max;
 
@@ -285,10 +288,10 @@ void RacModel::updateRAC(const double dt)
 
    // Roll angle is proportional to max turn rate - filtered
    double pa = 0.0;
-   double newPhi = 0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (base::Angle::D2RCC * 60.0));
+   double newPhi = 0.98 * pp->getRollR() + 0.02 * (ra / ra_max * (base::angle::D2RCC * 60.0));
 
    // Find Acceleration
-   double cmdVelMPS = cmdVelocity * (base::Distance::NM2M / 3600.0);
+   double cmdVelMPS = cmdVelocity * (base::distance::NM2M / 3600.0);
    double vpdot = (cmdVelMPS - pp->getTotalVelocity()) * 0.05;
    if(vpdot > maxAccel)  vpdot = maxAccel;
    if(vpdot < -maxAccel) vpdot = -maxAccel;

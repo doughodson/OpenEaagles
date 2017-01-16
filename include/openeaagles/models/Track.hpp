@@ -5,10 +5,10 @@
 #include "openeaagles/base/Object.hpp"
 
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Vec4d"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 namespace models {
@@ -103,12 +103,12 @@ public:
    // Azimuth angle, ownship->track, true north
    double getTrueAzimuth() const                   { return taz; }
    double getTrueAzimuthR() const                  { return taz; }
-   double getTrueAzimuthD() const                  { return static_cast<double>(base::Angle::R2DCC * taz); }
+   double getTrueAzimuthD() const                  { return static_cast<double>(base::angle::R2DCC * taz); }
 
    // Azimuth angle, ownship->track, relative to ownship
    double getRelAzimuth() const                    { return raz[0]; }
    double getRelAzimuthR() const                   { return raz[0]; }
-   double getRelAzimuthD() const                   { return static_cast<double>(base::Angle::R2DCC * raz[0]); }
+   double getRelAzimuthD() const                   { return static_cast<double>(base::angle::R2DCC * raz[0]); }
    void setRelAzimuth(double az)                   { raz[0] = az; }
 
    // Azimuth angle rate, ownship->track, relative to ownship
@@ -122,7 +122,7 @@ public:
    // Elevation angle, ownship->track, relative to ownship
    double getElevation() const                     { return rel[0]; }
    double getElevationR() const                    { return rel[0]; }
-   double getElevationD() const                    { return static_cast<double>(base::Angle::R2DCC * rel[0]); }
+   double getElevationD() const                    { return static_cast<double>(base::angle::R2DCC * rel[0]); }
 
    void setElevation(double el)                    {rel[0] = el; }
 
@@ -137,7 +137,7 @@ public:
    // Azimuth angle, ownship->track, relative to ownship
    double getPredictedAzimuth() const              { return predictedRaz[0]; }
    double getPredictedAzimuthR() const             { return predictedRaz[0]; }
-   double getPredictedAzimuthD() const             { return static_cast<double>(base::Angle::R2DCC * predictedRaz[0]); }
+   double getPredictedAzimuthD() const             { return static_cast<double>(base::angle::R2DCC * predictedRaz[0]); }
 
    void setPredictedAzimuth(double az)             { predictedRaz[0] = az; }
 
@@ -148,7 +148,7 @@ public:
    // Elevation angle, ownship->track, relative to ownship
    double getPredictedElevation() const            { return predictedRel[0]; }
    double getPredictedElevationR() const           { return predictedRel[0]; }
-   double getPredictedElevationD() const           { return static_cast<double>(base::Angle::R2DCC * predictedRel[0]); }
+   double getPredictedElevationD() const           { return static_cast<double>(base::angle::R2DCC * predictedRel[0]); }
 
    void setPredictedElevation(double el)           {predictedRel[0] = el; }
 
@@ -158,23 +158,23 @@ public:
 
    // Track's estimated ground speed (m/s)
    double getGroundSpeed() const                   { return gndSpd; }
-   double getGroundSpeedFPS() const                { return getGroundSpeed() * static_cast<double>(base::Distance::M2FT); }
-   double getGroundSpeedKts() const                { return getGroundSpeed() * static_cast<double>(base::Distance::M2NM * 3600.0f); }
+   double getGroundSpeedFPS() const                { return getGroundSpeed() * static_cast<double>(base::distance::M2FT); }
+   double getGroundSpeedKts() const                { return getGroundSpeed() * static_cast<double>(base::distance::M2NM * 3600.0f); }
 
    // Ground track angle, true north
    double getGroundTrack() const                   { return gndTrk; }
    double getGroundTrackR() const                  { return gndTrk; }
-   double getGroundTrackD() const                  { return static_cast<double>(base::Angle::R2DCC * gndTrk); }
+   double getGroundTrackD() const                  { return static_cast<double>(base::angle::R2DCC * gndTrk); }
 
    // Ground track angle, relative to ownship
    double getRelGroundTrack() const                { return relGndTrk; }
    double getRelGroundTrackR() const               { return relGndTrk; }
-   double getRelGroundTrackD() const               { return static_cast<double>(base::Angle::R2DCC * relGndTrk); }
+   double getRelGroundTrackD() const               { return static_cast<double>(base::angle::R2DCC * relGndTrk); }
 
    // Track->ownship aspect angle
    double getAspectAngle() const                   { return aa; }
    double getAspectAngleR() const                  { return aa; }
-   double getAspectAngleD() const                  { return static_cast<double>(base::Angle::R2DCC * aa); }
+   double getAspectAngleD() const                  { return static_cast<double>(base::angle::R2DCC * aa); }
 
    // Track velocity vector
    const osg::Vec3d& getVelocity() const            { return vel; }

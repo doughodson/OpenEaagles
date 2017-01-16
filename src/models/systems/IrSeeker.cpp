@@ -18,8 +18,8 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -227,7 +227,7 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
       const osg::Vec3d* losO2T = tdb0->getLosVectors();
       const osg::Vec3d* losT2O = tdb0->getTargetLosVectors();
       Player** targets = tdb0->getTargets();
-      const double maximumRange = irQuery->getMaxRangeNM()*base::Distance::NM2M;
+      const double maximumRange = irQuery->getMaxRangeNM()*base::distance::NM2M;
 
       // ---
       // Send query packets to the targets

@@ -7,9 +7,8 @@
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -169,7 +168,7 @@ bool WorldModel::setRefLatitude(const double v)
    if (ok) {
       // Set the latitude and compute the world matrix
       refLat = v;
-      const double r = base::Angle::D2RCC * refLat;
+      const double r = base::angle::D2RCC * refLat;
       sinRlat = std::sin(r);
       cosRlat = std::cos(r);
       base::Nav::computeWorldMatrix(refLat, refLon, &wm);

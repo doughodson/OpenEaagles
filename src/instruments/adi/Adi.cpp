@@ -1,6 +1,9 @@
 
 #include "openeaagles/instruments/adi/Adi.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/base/util/math_utils.hpp"
 
 namespace oe {
@@ -66,12 +69,12 @@ void Adi::updateData(const double dt)
     // drive our adi toward the actual pitch, from our current pitch, no faster
     // than our MAX_RATE (this allows for greater fidelity, simulates an analog adi)
     double delta = 0;
-    delta = base::alim (base::Angle::aepcdDeg(pitch - curTheta), maxRate * dt);
-    curTheta = base::Angle::aepcdDeg(curTheta + delta);
+    delta = base::alim (base::angle::aepcdDeg(pitch - curTheta), maxRate * dt);
+    curTheta = base::angle::aepcdDeg(curTheta + delta);
 
     // now do the same thing for roll
-    delta = base::alim (base::Angle::aepcdRad(roll - curPhi), maxRate * dt);
-    curPhi = base::Angle::aepcdRad(curPhi + delta);
+    delta = base::alim (base::angle::aepcdRad(roll - curPhi), maxRate * dt);
+    curPhi = base::angle::aepcdRad(curPhi + delta);
 
     // get our table, and do the linear interpolation ourself
     setInstVal(curTheta);
@@ -147,7 +150,7 @@ bool Adi::onUpdateMaxRateAdi(const base::Number* const newMR)
 //------------------------------------------------------------------------------
 bool Adi::setRollDeg(const double newR)
 {
-    roll = newR * static_cast<double>(base::Angle::D2RCC);
+    roll = newR * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 

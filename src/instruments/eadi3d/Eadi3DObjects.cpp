@@ -2,7 +2,7 @@
 
 #include "openeaagles/instruments/eadi3d/Eadi3DObjects.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -536,7 +536,7 @@ void Eadi3DObjects::drawArrow2(float bAngle, float s, float c)
 //------------------------------------------------------------------------------
 void Eadi3DObjects::makeGlobe()
 {
-    float h = static_cast<float>(std::sin(5.0 * base::Angle::D2RCC) * radius);
+    float h = static_cast<float>(std::sin(5.0 * base::angle::D2RCC) * radius);
     globeArrowV1[1] = h + h;
     globeArrowV2[2] = -h;
     globeArrowV3[2] = h;
@@ -554,14 +554,14 @@ void Eadi3DObjects::makeGlobe()
             glColor3fv(WHITE);
             for (float a = -20.0; a >= -60.0; a -= 20.0) {
                 float bAngle = a;
-                float s = static_cast<float>(std::sin(a * base::Angle::D2RCC));
-                float c = static_cast<float>(std::cos(a * base::Angle::D2RCC));
+                float s = static_cast<float>(std::sin(a * base::angle::D2RCC));
+                float c = static_cast<float>(std::cos(a * base::angle::D2RCC));
                 drawArrow(bAngle, s, c);
                 drawArrow(-bAngle, s, -c);
             }
             float bAngle = -80.0;
-            float s = static_cast<float>(std::sin(-80.0 * base::Angle::D2RCC));
-            float c = static_cast<float>(std::cos(-80.0 * base::Angle::D2RCC));
+            float s = static_cast<float>(std::sin(-80.0 * base::angle::D2RCC));
+            float c = static_cast<float>(std::cos(-80.0 * base::angle::D2RCC));
             drawArrow2(bAngle, s, c);
             drawArrow2(-bAngle, s, -c);
         }
@@ -570,16 +570,16 @@ void Eadi3DObjects::makeGlobe()
         glColor3fv(WHITE);
         glPushMatrix();
             glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-            float s = static_cast<float>(std::sin(-90.0 * base::Angle::D2RCC));
-            float c = static_cast<float>(std::cos(-85.0 * base::Angle::D2RCC));
+            float s = static_cast<float>(std::sin(-90.0 * base::angle::D2RCC));
+            float c = static_cast<float>(std::cos(-85.0 * base::angle::D2RCC));
             glPushMatrix();
         glTranslatef(0.0f, 0.0f, -s * radius);
         irisgl.circf(0.0f, 0.0f, c * radius);
         glPopMatrix();
         glLineWidth(2.0);
         for (float a = -80.0; a <= 80.0; a += 10.0) {
-            s = static_cast<float>(std::sin(a * base::Angle::D2RCC));
-            c = static_cast<float>(std::cos(a * base::Angle::D2RCC));
+            s = static_cast<float>(std::sin(a * base::angle::D2RCC));
+            c = static_cast<float>(std::cos(a * base::angle::D2RCC));
             glPushMatrix();
             glTranslatef(0.0, 0.0, -s * radius);
             glColor3fv(WHITE);
@@ -611,8 +611,8 @@ void Eadi3DObjects::makeGlobe()
             }
             glPopMatrix();
         }
-        s = static_cast<float>(std::sin(90.0 * base::Angle::D2RCC));
-        c = static_cast<float>(std::cos(85.0 * base::Angle::D2RCC));
+        s = static_cast<float>(std::sin(90.0 * base::angle::D2RCC));
+        c = static_cast<float>(std::cos(85.0 * base::angle::D2RCC));
         glPushMatrix();
             glTranslatef(0., 0., -s * radius);
             irisgl.circf(0.0, 0.0, c * radius);

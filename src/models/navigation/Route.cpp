@@ -17,9 +17,8 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Times.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cstdio>
 
@@ -212,7 +211,7 @@ void Route::autoSequencer(const double, const Navigation* const nav)
       if (toSP->getDistNM() <= autoSeqDistNM) {
          // We're within range of the steerpoint, so compute our relative
          // to see if we just passed it.
-         const double rbrg = base::Angle::aepcdDeg(toSP->getTrueBrgDeg() - nav->getHeadingDeg());
+         const double rbrg = base::angle::aepcdDeg(toSP->getTrueBrgDeg() - nav->getHeadingDeg());
          if ( std::fabs(rbrg) >= 90.0) {
             // We're within range and we're going away from it, so ...
             triggerAction();

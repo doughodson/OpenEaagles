@@ -4,8 +4,8 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -104,7 +104,7 @@ void Effects::updateTOF(const double dt)
 void Effects::weaponDynamics(const double dt)
 {
    // Useful constant
-   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // ---
    // Compute & Set acceleration vector (earth)

@@ -15,6 +15,8 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/units/Times.hpp"
 
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 #include "openeaagles/models/Simulation.hpp"
 
@@ -636,7 +638,7 @@ void AirTrkMgr::initData()
 {
    setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
 
-   posGate =  2.0 * base::Distance::NM2M;
+   posGate =  2.0 * base::distance::NM2M;
    rngGate =  500.0;
    velGate =   10.0;
 

@@ -15,10 +15,13 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/String.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Frequencies.hpp"
 #include "openeaagles/base/units/Powers.hpp"
 #include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/base/util/str_utils.hpp"
 
 namespace oe {
@@ -49,11 +52,11 @@ BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(2,setSlotModeSingle,RfSensor)
     ON_SLOT(3,setSlotRanges,base::List)
     ON_SLOT(4,setSlotInitRangeIdx,base::Number)
-    ON_SLOT(5,setSlotPrf,base::Frequency)        // Check for base::Frequency before base::Number
+    ON_SLOT(5,setSlotPrf,base::Frequency)             // Check for base::Frequency before base::Number
     ON_SLOT(5,setSlotPrf,base::Number)
-    ON_SLOT(6,setSlotPulseWidth,base::Time)      // Check for base::Time before base::Number
+    ON_SLOT(6,setSlotPulseWidth,base::Time)           // Check for base::Time before base::Number
     ON_SLOT(6,setSlotPulseWidth,base::Number)
-    ON_SLOT(7,setSlotBeamWidth,base::Angle)      // Check for base::Angle before base::Number
+    ON_SLOT(7,setSlotBeamWidth,base::Angle)           // Check for base::Angle before base::Number
     ON_SLOT(7,setSlotBeamWidth,base::Number)
     ON_SLOT(8,setSlotTypeId,base::String)
     ON_SLOT(9,setSlotSyncXmitWithScan,base::Number)
@@ -83,7 +86,7 @@ RfSensor::RfSensor() : modes(nullptr), ranges(nullptr), masterModePtr(nullptr), 
     initRngIdx = 1;
     prf = 0.0;
     pulseWidth = 0.0;
-    beamWidth = (static_cast<double>(base::Angle::D2RCC) * 3.5);
+    beamWidth = (static_cast<double>(base::angle::D2RCC) * 3.5);
     syncXmitWithScan = false;
 
     typeId[0] = '\0';
@@ -797,7 +800,7 @@ std::ostream& RfSensor::serialize(std::ostream& sout, const int i, const bool sl
 
     //"beamWidth",        // Beam Width              (Angle) or (Number: Radian)
     indent(sout,i+j);
-    sout << "beamWidth: ( Degrees " << beamWidth*base::Angle::R2DCC << " ) " << std::endl;
+    sout << "beamWidth: ( Degrees " << beamWidth*base::angle::R2DCC << " ) " << std::endl;
 
     //"syncXmitWithScan", // Flag: If true, transmitter on is sync'd with the antenna scan (default: false)
     indent(sout,i+j);

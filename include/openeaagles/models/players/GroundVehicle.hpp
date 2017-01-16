@@ -5,11 +5,7 @@
 #include "openeaagles/models/players/Player.hpp"
 
 namespace oe {
-   namespace base {
-      class Distance;
-      class Identifier;
-      class Time;
-   }
+namespace base { class Angle; class Distance; class Identifier; class Time; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -17,10 +13,10 @@ namespace models {
 //
 // Factory name: GroundVehicle
 // Slots:
-//    commandedPosition <Identifier>   ! Launcher's init commanded position [UP, DOWN, NONE] (default: NONE)
-//    launcherDownAngle <Angle>        ! Min (down) Launcher angle (default: 0.0)
-//    launcherUpAngle   <Angle>        ! Max (up) Launcher angle (default: PI/2.0)
-//    launcherMoveTime  <Time>         ! Max time to move between 'down' and 'up' positions (default: 10.0f)
+//    commandedPosition <Identifier>     ! Launcher's init commanded position [UP, DOWN, NONE] (default: NONE)
+//    launcherDownAngle <Angle>          ! Min (down) Launcher angle (default: 0.0)
+//    launcherUpAngle   <Angle>          ! Max (up) Launcher angle (default: PI/2.0)
+//    launcherMoveTime  <Time>           ! Max time to move between 'down' and 'up' positions (default: 10.0f)
 //
 // Notes:
 //   (1) The launcher move time should be greater than zero seconds, and the up

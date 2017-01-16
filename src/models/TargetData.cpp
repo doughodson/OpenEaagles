@@ -4,6 +4,7 @@
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/String.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
@@ -13,9 +14,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(TargetData, "TargetData")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(TargetData)
     "enabled",             //  1) Target enabled flag (default: false)
     "completed",           //  2) Target completed flag (default: false)
@@ -32,38 +30,34 @@ BEGIN_SLOTTABLE(TargetData)
     "velocity",            // 13) Impact velocity (ft/sec) (default: 0)
 END_SLOTTABLE(TargetData)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(TargetData)
-    ON_SLOT( 1, setSlotEnabled,base::Number)
-    ON_SLOT( 2, setSlotCompleted,base::Number)
-    ON_SLOT( 3,setSlotWpnType,base::String)
-    ON_SLOT( 4, setSlotQuantity,base::Number)
-    ON_SLOT( 5, setSlotManualAssign,base::Number)
-    ON_SLOT( 6,setSlotStickType,base::Identifier)
+    ON_SLOT( 1, setSlotEnabled, base::Number)
+    ON_SLOT( 2, setSlotCompleted, base::Number)
+    ON_SLOT( 3,setSlotWpnType, base::String)
+    ON_SLOT( 4, setSlotQuantity, base::Number)
+    ON_SLOT( 5, setSlotManualAssign, base::Number)
+    ON_SLOT( 6,setSlotStickType, base::Identifier)
 
-    ON_SLOT( 7, setSlotStickDistance,base::Distance)
-    ON_SLOT( 7,setSlotStickDistance,base::Number)
+    ON_SLOT( 7, setSlotStickDistance, base::Distance)
+    ON_SLOT( 7,setSlotStickDistance, base::Number)
 
-    ON_SLOT( 8, setSlotInterval,base::Time)
-    ON_SLOT( 8, setSlotInterval,base::Number)
+    ON_SLOT( 8, setSlotInterval, base::Time)
+    ON_SLOT( 8, setSlotInterval, base::Number)
 
-    ON_SLOT( 9, setSlotMaxMissDistance,base::Distance)
-    ON_SLOT( 9, setSlotMaxMissDistance,base::Number)
+    ON_SLOT( 9, setSlotMaxMissDistance, base::Distance)
+    ON_SLOT( 9, setSlotMaxMissDistance, base::Number)
 
-    ON_SLOT(10, setSlotArmDelay,base::Time)
-    ON_SLOT(10,setSlotArmDelay,base::Number)
+    ON_SLOT(10, setSlotArmDelay, base::Time)
+    ON_SLOT(10,setSlotArmDelay, base::Number)
 
-    ON_SLOT(11, setSlotAngle,base::Angle)
-    ON_SLOT(11,setSlotAngle,base::Number)
+    ON_SLOT(11, setSlotAngle, base::Angle)
+    ON_SLOT(11,setSlotAngle, base::Number)
 
-    ON_SLOT(12, setSlotAzimuth,base::Angle)
-    ON_SLOT(12,setSlotAzimuth,base::Number)
-    ON_SLOT(13,setSlotVelocity,base::Number)
+    ON_SLOT(12, setSlotAzimuth, base::Angle)
+    ON_SLOT(12,setSlotAzimuth, base::Number)
+    ON_SLOT(13,setSlotVelocity, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 TargetData::TargetData()
 {
     STANDARD_CONSTRUCTOR()
@@ -83,10 +77,6 @@ TargetData::TargetData()
     velocity     = 0.0;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void TargetData::copyData(const TargetData& org, const bool cc)
 {
     BaseClass::copyData(org);
@@ -110,10 +100,6 @@ void TargetData::copyData(const TargetData& org, const bool cc)
     velocity     = org.velocity;
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void TargetData::deleteData()
 {
     setWpnType(nullptr);

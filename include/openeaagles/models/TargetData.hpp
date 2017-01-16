@@ -5,15 +5,7 @@
 #include "openeaagles/base/Object.hpp"
 
 namespace oe {
-   namespace base {
-      class Angle;
-      class Distance;
-      class Identifier;
-      class Number;
-      class String;
-      class Time;
-   }
-
+namespace base { class Angle; class Distance; class Identifier; class Number; class String; class Time; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -23,32 +15,32 @@ namespace models {
 //
 // Factory name: TargetData
 // Slots:
-//    enabled          <Boolean>    ! Target enabled flag (default: false)
-//    completed        <Boolean>    ! Target completed flag (default: false)
-//    weaponType       <String>     ! Type of weapon to release (default: 0)
-//    quantity         <Integer>    ! Number of weapons to release (default: 0)
-//    manualAssign     <Boolean>    ! Manually assign weapon to target? (default: false)
-//    stickType        <Identifier> ! Weapon stick option (MIDPOINT, LEADING_EDGE) (default: MIDPOINT)
+//    enabled          <Boolean>        ! Target enabled flag (default: false)
+//    completed        <Boolean>        ! Target completed flag (default: false)
+//    weaponType       <String>         ! Type of weapon to release (default: 0)
+//    quantity         <Integer>        ! Number of weapons to release (default: 0)
+//    manualAssign     <Boolean>        ! Manually assign weapon to target? (default: false)
+//    stickType        <Identifier>     ! Weapon stick option (MIDPOINT, LEADING_EDGE) (default: MIDPOINT)
 //
-//    stickDistance    <Distance>   ! Weapon stick length (default: 0)
-//    stickDistance    <Number>     ! (feet)
+//    stickDistance    <Distance>       ! Weapon stick length (default: 0)
+//    stickDistance    <Number>         ! (feet)
 //
-//    interval         <Time>       ! Time between weapon releases (default: 0)
-//    interval         <Number>     ! (MSec)
+//    interval         <Time>           ! Time between weapon releases (default: 0)
+//    interval         <Number>         ! (MSec)
 //
-//    maxMissDistance  <Distance>   ! Maximum miss distance (default: 0)
-//    maxMissDistance  <Number>     ! (feet)
+//    maxMissDistance  <Distance>       ! Maximum miss distance (default: 0)
+//    maxMissDistance  <Number>         ! (feet)
 // 
-//    armDelay         <Time>       ! Arming delay (default: 0)
-//    armDelay         <Number>     ! (0-99.9 sec)
+//    armDelay         <Time>           ! Arming delay (default: 0)
+//    armDelay         <Number>         ! (0-99.9 sec)
 //
-//    angle            <Angle>      ! Impact angle (default: 0)
-//    angle            <Number>     ! (degrees)
+//    angle            <Angle>          ! Impact angle (default: 0)
+//    angle            <Number>         ! (degrees)
 //
-//    azimuth          <Angle>      ! Azimuth angle (default: 0)
-//    azimuth          <Number>     ! (degrees)
+//    azimuth          <Angle>          ! Azimuth angle (default: 0)
+//    azimuth          <Number>         ! (degrees)
 //
-//    velocity         <Number>     ! Impact velocity (ft/sec) (default: 0)
+//    velocity         <Number>         ! Impact velocity (ft/sec) (default: 0)
 //------------------------------------------------------------------------------
 class TargetData : public base::Object
 {

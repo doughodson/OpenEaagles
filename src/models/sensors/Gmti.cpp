@@ -10,10 +10,8 @@
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Powers.hpp"
-#include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/Frequencies.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -80,15 +78,15 @@ void Gmti::dynamics(const double dt)
         getAntenna()->getScanVolume(&width, &height);
 
         // Limit to within search scan limits of antenna
-        if (az < base::Angle::aepcdRad(leftLim + width/2.0))
-            az = base::Angle::aepcdRad(leftLim + width/2.0);
-        else if (az > base::Angle::aepcdRad(rightLim - width/2.0))
-            az = base::Angle::aepcdRad(rightLim - width/2.0);
+        if (az < base::angle::aepcdRad(leftLim + width/2.0))
+            az = base::angle::aepcdRad(leftLim + width/2.0);
+        else if (az > base::angle::aepcdRad(rightLim - width/2.0))
+            az = base::angle::aepcdRad(rightLim - width/2.0);
 
-        if (el < base::Angle::aepcdRad(lowerLim + height/2.0))
-            el = base::Angle::aepcdRad(lowerLim + height/2.0);
-        else if (el > base::Angle::aepcdRad(upperLim - height/2.0))
-            el = base::Angle::aepcdRad(upperLim - height/2.0);
+        if (el < base::angle::aepcdRad(lowerLim + height/2.0))
+            el = base::angle::aepcdRad(lowerLim + height/2.0);
+        else if (el > base::angle::aepcdRad(upperLim - height/2.0))
+            el = base::angle::aepcdRad(upperLim - height/2.0);
 
         // Set the reference 'look' angles
         getAntenna()->setRefAzimuth(az);

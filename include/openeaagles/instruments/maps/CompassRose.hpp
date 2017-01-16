@@ -1,6 +1,16 @@
+
+#ifndef __oe_instruments_CompassRose_H__
+#define __oe_instruments_CompassRose_H__
+
+#include "openeaagles/graphics/Graphic.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
+namespace oe {
+namespace base { class Number; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: CompassRose
-// Base Class: base::Object -> graphics::Graphic -> CompassRose
 //
 // Description: Generic compass used as a direction indicator.  It will
 // rotate about a heading either by someone telling it through a member function.
@@ -12,15 +22,6 @@
 //      UPDATE_VALUE5 -> displacement
 //      UPDATE_VALUE6 -> centered or not
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_CompassRose_H__
-#define __oe_instruments_CompassRose_H__
-
-#include "openeaagles/graphics/Graphic.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-
-namespace oe {
-namespace instruments {
-
 class CompassRose : public graphics::Graphic
 {
     DECLARE_SUBCLASS(CompassRose, graphics::Graphic)
@@ -35,7 +36,7 @@ public:
     virtual bool setDisplacement(const double newD);
     virtual bool setCentered(const bool newC);
 
-    double getRotationDeg() const      { return rot * static_cast<double>(base::Angle::R2DCC); }
+    double getRotationDeg() const      { return rot * static_cast<double>(base::angle::R2DCC); }
     double getRotationRad() const      { return rot; }
     double getCenteredRadius() const   { return cenRadius; }
     double getDeCenteredRadius() const { return decRadius; }

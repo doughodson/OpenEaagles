@@ -16,9 +16,11 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
+
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstdlib>
@@ -119,24 +121,24 @@ END_SLOTTABLE(NetIO)
 
 // Map slot table to handles
 BEGIN_SLOT_MAP(NetIO)
-   ON_SLOT(1, setSlotNetInput,         base::NetHandler)
-   ON_SLOT(2, setSlotNetOutput,        base::NetHandler)
-   ON_SLOT(3, setSlotVersion,          base::Number)
+   ON_SLOT(1, setSlotNetInput,            base::NetHandler)
+   ON_SLOT(2, setSlotNetOutput,           base::NetHandler)
+   ON_SLOT(3, setSlotVersion,             base::Number)
 
-   ON_SLOT(4, setSlotMaxTimeDR,        base::Time)
-   ON_SLOT(4, setSlotMaxTimeDR,        base::PairStream)
+   ON_SLOT(4, setSlotMaxTimeDR,           base::Time)
+   ON_SLOT(4, setSlotMaxTimeDR,           base::PairStream)
 
-   ON_SLOT(5, setSlotMaxPositionErr,   base::Distance)
-   ON_SLOT(5, setSlotMaxPositionErr,   base::PairStream)
+   ON_SLOT(5, setSlotMaxPositionErr,      base::Distance)
+   ON_SLOT(5, setSlotMaxPositionErr,      base::PairStream)
 
-   ON_SLOT(6, setSlotMaxOrientationErr, base::Angle)
-   ON_SLOT(6, setSlotMaxOrientationErr, base::PairStream)
+   ON_SLOT(6, setSlotMaxOrientationErr,   base::Angle)
+   ON_SLOT(6, setSlotMaxOrientationErr,   base::PairStream)
 
-   ON_SLOT(7, setSlotMaxAge,           base::Time)
-   ON_SLOT(7, setSlotMaxAge,           base::PairStream)
+   ON_SLOT(7, setSlotMaxAge,              base::Time)
+   ON_SLOT(7, setSlotMaxAge,              base::PairStream)
 
-   ON_SLOT(8, setSlotMaxEntityRange,   base::Distance)
-   ON_SLOT(8, setSlotMaxEntityRange,   base::PairStream)
+   ON_SLOT(8, setSlotMaxEntityRange,      base::Distance)
+   ON_SLOT(8, setSlotMaxEntityRange,      base::PairStream)
 
    ON_SLOT(9, setSlotEmissionPduHandlers, base::PairStream)
 
@@ -145,9 +147,6 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(12, setSlotExerciseID,         base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 NetIO::NetIO() : netInput(nullptr), netOutput(nullptr)
 {
    STANDARD_CONSTRUCTOR()
@@ -178,9 +177,6 @@ void NetIO::initData()
    nEmissionHandlers = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void NetIO::copyData(const NetIO& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -215,9 +211,6 @@ void NetIO::copyData(const NetIO& org, const bool cc)
    netOutput = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void NetIO::deleteData()
 {
     clearEmissionPduHandlers();
@@ -234,9 +227,6 @@ bool NetIO::setVersion(const unsigned char v)
    return true;
 }
 
-//------------------------------------------------------------------------------
-// initNetwork() -- Init the network
-//------------------------------------------------------------------------------
 bool NetIO::initNetwork()
 {
     bool ok = true;

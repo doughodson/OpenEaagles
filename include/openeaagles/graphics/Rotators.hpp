@@ -3,9 +3,11 @@
 #define __oe_graphics_Rotators_H__
 
 #include "Graphic.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
+namespace base { class Angle; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -38,11 +40,11 @@ public:
 
     // Get functions
     double getXRotation()    const  { return xRot; }
-    double getXRotationDeg() const  { return xRot * static_cast<double>(base::Angle::R2DCC); }
+    double getXRotationDeg() const  { return xRot * static_cast<double>(base::angle::R2DCC); }
     double getYRotation()    const  { return yRot; }
-    double getYRotationDeg() const  { return yRot * static_cast<double>(base::Angle::R2DCC); }
+    double getYRotationDeg() const  { return yRot * static_cast<double>(base::angle::R2DCC); }
     double getZRotation()    const  { return zRot; }
-    double getZRotationDeg() const  { return zRot * static_cast<double>(base::Angle::R2DCC); }
+    double getZRotationDeg() const  { return zRot * static_cast<double>(base::angle::R2DCC); }
     // get all angles
     void getRotationAngles(double& x, double& y, double& z);
 

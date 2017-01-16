@@ -5,9 +5,7 @@
 #include "openeaagles/models/dynamics/AerodynamicsModel.hpp"
 
 namespace oe {
-
 namespace base { class Angle; class Distance; class Number; }
-
 namespace models {
 
 //------------------------------------------------------------------------------

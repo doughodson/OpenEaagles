@@ -4,9 +4,11 @@
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 
 //#include "openeaagles/simulation/recorderTokens.hpp"
-#include "openeaagles/base/units/Times.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/base/Nav.hpp"
 
 // Disable all deprecation warnings for now.  Until we fix them,
@@ -1383,17 +1385,17 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
       // angles (convert to degrees)
       if (msg->has_angles()) {
          if (msg->angles().has_x()) {
-            sout << msg->angles().x() * base::Angle::R2DCC << divider;
+            sout << msg->angles().x() * base::angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_y()) {
-            sout << msg->angles().y() * base::Angle::R2DCC << divider;
+            sout << msg->angles().y() * base::angle::R2DCC << divider;
          }
          else sout << divider;
 
          if (msg->angles().has_z()) {
-            sout << msg->angles().z() * base::Angle::R2DCC << divider;
+            sout << msg->angles().z() * base::angle::R2DCC << divider;
          }
          else sout << divider;
       }
@@ -1494,17 +1496,17 @@ void TabPrinter::printCommonTrackDataMsg(std::ostream& sout, const pb::TrackData
       else sout << divider;
 
       if (msg->has_true_az()) {
-         sout << msg->true_az() * base::Angle::R2DCC << divider;
+         sout << msg->true_az() * base::angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_rel_az()) {
-         sout << msg->rel_az() * base::Angle::R2DCC << divider;
+         sout << msg->rel_az() * base::angle::R2DCC << divider;
       }
       else sout << divider;
 
       if (msg->has_elevation()) {
-         sout << msg->elevation() * base::Angle::R2DCC << divider;
+         sout << msg->elevation() * base::angle::R2DCC << divider;
       }
       else sout << divider;
 
@@ -1654,12 +1656,12 @@ void TabPrinter::printEmissionDataMsg(std::ostream& sout, const pb::EmissionData
       else sout << " " << divider;
       if (msg->has_azimuth_aoi()) {
          // Convert to degrees
-         sout << msg->azimuth_aoi() * base::Angle::R2DCC << divider;
+         sout << msg->azimuth_aoi() * base::angle::R2DCC << divider;
       }
       else sout << " " << divider;
       if (msg->elevation_aoi()) {
          // Convert to degrees
-         sout << msg->elevation_aoi() * base::Angle::R2DCC << divider;
+         sout << msg->elevation_aoi() * base::angle::R2DCC << divider;
       }
       else sout << " " << divider;
    }
@@ -1868,7 +1870,7 @@ void TabPrinter::printExecTimeMsg(std::ostream& sout, double execTime)
     double ss = 0;  // Sec
 
     // exec time
-    base::Time::getHHMMSS(static_cast<double>(execTime), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(execTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1884,7 +1886,7 @@ void TabPrinter::printUtcTimeMsg(std::ostream& sout, double utcTime)
     double ss = 0;  // Sec
 
     // sim time
-    base::Time::getHHMMSS(static_cast<double>(utcTime), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(utcTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }
@@ -1900,7 +1902,7 @@ void TabPrinter::printSimTimeMsg(std::ostream& sout, double simTime)
     double ss = 0;  // Sec
 
     // utc time
-    base::Time::getHHMMSS(static_cast<double>(simTime), &hh, &mm, &ss);
+    base::time::getHHMMSS(static_cast<double>(simTime), &hh, &mm, &ss);
     std::sprintf(cbuf, "%02d:%02d:%06.3f", hh, mm, ss);
     sout << cbuf;
 }

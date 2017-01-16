@@ -7,10 +7,6 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// Class: Transform
-//==============================================================================
-
 IMPLEMENT_SUBCLASS(Transform, "Transform")
 
 BEGIN_SLOTTABLE(Transform)
@@ -18,14 +14,14 @@ BEGIN_SLOTTABLE(Transform)
 END_SLOTTABLE(Transform)
 
 BEGIN_SLOT_MAP(Transform)
-    ON_SLOT(1,setComputematrix1,Angle)
-    ON_SLOT(1,setComputematrix1,Number)
-    ON_SLOT(2,setComputematrix2,Angle)
-    ON_SLOT(2,setComputematrix2,Number)
-    ON_SLOT(3,setComputematrix3,Angle)
-    ON_SLOT(3,setComputematrix3,Number)
-    ON_SLOT(4,setComputematrix4,Angle)
-    ON_SLOT(4,setComputematrix4,Number)
+    ON_SLOT(1,setComputematrix1, Angle)
+    ON_SLOT(1,setComputematrix1, Number)
+    ON_SLOT(2,setComputematrix2, Angle)
+    ON_SLOT(2,setComputematrix2, Number)
+    ON_SLOT(3,setComputematrix3, Angle)
+    ON_SLOT(3,setComputematrix3, Number)
+    ON_SLOT(4,setComputematrix4, Angle)
+    ON_SLOT(4,setComputematrix4, Number)
 END_SLOT_MAP()
 
 Transform::Transform()
@@ -51,9 +47,6 @@ void Transform::deleteData()
    nv = 0;
 }
 
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Transform::computeMatrix()
 {
 }
@@ -92,9 +85,6 @@ std::ostream& Transform::serialize(std::ostream& sout, const int i, const bool s
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translation, "Translation")
 EMPTY_SERIALIZER(Translation)
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Translation::Translation()
 {
    STANDARD_CONSTRUCTOR()
@@ -103,9 +93,6 @@ Translation::Translation()
 EMPTY_COPYDATA(Translation)
 EMPTY_DELETEDATA(Translation)
 
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Translation::computeMatrix()
 {
     m.makeIdentity();
@@ -132,9 +119,6 @@ void Translation::computeMatrix()
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotation, "Rotation")
 EMPTY_SERIALIZER(Rotation)
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Rotation::Rotation()
 {
    STANDARD_CONSTRUCTOR()
@@ -143,10 +127,6 @@ Rotation::Rotation()
 EMPTY_COPYDATA(Rotation)
 EMPTY_DELETEDATA(Rotation)
 
-
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Rotation::computeMatrix()
 {
     m.makeIdentity();
@@ -172,10 +152,6 @@ void Rotation::computeMatrix()
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Scale, "Scale")
 EMPTY_SERIALIZER(Scale)
 
-
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Scale::Scale()
 {
    STANDARD_CONSTRUCTOR()
@@ -184,10 +160,6 @@ Scale::Scale()
 EMPTY_COPYDATA(Scale)
 EMPTY_DELETEDATA(Scale)
 
-
-//------------------------------------------------------------------------------
-// computeMatrix()
-//------------------------------------------------------------------------------
 void Scale::computeMatrix()
 {
     m.makeIdentity();

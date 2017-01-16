@@ -4,7 +4,8 @@
 
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+//#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 
@@ -57,8 +58,8 @@ public:
     virtual int getCategory() const override;
     virtual void atReleaseInit() override;
 
-    virtual void setCmdPitchD(const double x)  { cmdPitch   = x * static_cast<double>(base::Angle::D2RCC); }
-    virtual void setCmdHdgD(const double x)    { cmdHeading = x * static_cast<double>(base::Angle::D2RCC); }
+    virtual void setCmdPitchD(const double x)  { cmdPitch   = x * static_cast<double>(base::angle::D2RCC); }
+    virtual void setCmdHdgD(const double x)    { cmdHeading = x * static_cast<double>(base::angle::D2RCC); }
 
     virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb) override;
     virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb) override;

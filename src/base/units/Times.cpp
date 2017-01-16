@@ -11,28 +11,10 @@ namespace base {
 //==============================================================================
 // Time --
 //==============================================================================
-IMPLEMENT_ABSTRACT_SUBCLASS(Time, "Time")
+IMPLEMENT_ABSTRACT_SUBCLASS(Time, "AbstractTime")
 EMPTY_SLOTTABLE(Time)
+EMPTY_DELETEDATA(Time)
 
-// Conversion constants
-const double Time::S2NS = 1000000000.0f;           // Seconds => nanoseconds
-const double Time::NS2S = (1.0f / 1000000000.0f);  // nanoseconds => Seconds
-const double Time::S2US = 1000000.0f;              // Seconds => microseconds
-const double Time::US2S = (1.0f / 1000000.0f);     // microseconds => Seconds
-const double Time::S2MS = 1000.0f;                 // Seconds => MilliSeconds
-const double Time::MS2S = (1.0f / 1000.0f);        // MilliSeconds => Seconds
-const double Time::M2S  =  60.0f;                  // Minutes => Seconds
-const double Time::S2M  = (1.0f / 60.0f);          // Seconds => Minutes
-const double Time::H2S  = 3600.0f;                 // Hours => Seconds
-const double Time::S2H  = (1.0f / 3600.0f);        // Seconds => Hours
-const double Time::D2M  = 1440.0f;                 // Days => Minutes
-const double Time::M2D  = (1.0f / 1440.0f);        // Minutes => Days
-const double Time::D2S  = 86400.0f;                // Days => Seconds
-const double Time::S2D  = (1.0f / 86400.0f);       // Seconds => Days
-
-//------------------------------------------------------------------------------
-// constructors
-//------------------------------------------------------------------------------
 Time::Time() : Number()
 {
     STANDARD_CONSTRUCTOR()
@@ -43,23 +25,12 @@ Time::Time(const double value) : Number(value)
     STANDARD_CONSTRUCTOR()
 }
 
-// ---
-// copy data
-// ---
 void Time::copyData(const Time& org, const bool)
 {
    BaseClass::copyData(org);
    val = fromTime(org.toTime());;
 }
 
-// ---
-// delete data
-// ---
-EMPTY_DELETEDATA(Time)
-
-// ---
-// serialize() -- print functions
-// ---
 std::ostream& Time::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -81,12 +52,13 @@ std::ostream& Time::serialize(std::ostream& sout, const int i, const bool slotsO
     return sout;
 }
 
-
 //==============================================================================
 // Seconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Seconds, "Seconds")
 EMPTY_SERIALIZER(Seconds)
+EMPTY_COPYDATA(Seconds)
+EMPTY_DELETEDATA(Seconds)
 
 Seconds::Seconds() : Time()
 {
@@ -104,15 +76,13 @@ Seconds::Seconds(const Time& org) : Time()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(Seconds)
-EMPTY_DELETEDATA(Seconds)
-
-
 //==============================================================================
 // MilliSeconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MilliSeconds, "MilliSeconds")
 EMPTY_SERIALIZER(MilliSeconds)
+EMPTY_COPYDATA(MilliSeconds)
+EMPTY_DELETEDATA(MilliSeconds)
 
 MilliSeconds::MilliSeconds() : Time()
 {
@@ -130,14 +100,13 @@ MilliSeconds::MilliSeconds(const Time& org) : Time()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(MilliSeconds)
-EMPTY_DELETEDATA(MilliSeconds)
-
 //==============================================================================
 // MicroSeconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MicroSeconds, "MicroSeconds")
 EMPTY_SERIALIZER(MicroSeconds)
+EMPTY_COPYDATA(MicroSeconds)
+EMPTY_DELETEDATA(MicroSeconds)
 
 MicroSeconds::MicroSeconds() : Time()
 {
@@ -155,14 +124,13 @@ MicroSeconds::MicroSeconds(const Time& org) : Time()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(MicroSeconds)
-EMPTY_DELETEDATA(MicroSeconds)
-
 //==============================================================================
 // NanoSeconds --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(NanoSeconds, "NanoSeconds")
 EMPTY_SERIALIZER(NanoSeconds)
+EMPTY_COPYDATA(NanoSeconds)
+EMPTY_DELETEDATA(NanoSeconds)
 
 NanoSeconds::NanoSeconds() : Time()
 {
@@ -180,15 +148,13 @@ NanoSeconds::NanoSeconds(const Time& org) : Time()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(NanoSeconds)
-EMPTY_DELETEDATA(NanoSeconds)
-
-
 //==============================================================================
 // Minutes --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Minutes, "Minutes")
 EMPTY_SERIALIZER(Minutes)
+EMPTY_COPYDATA(Minutes)
+EMPTY_DELETEDATA(Minutes)
 
 Minutes::Minutes() : Time()
 {
@@ -206,15 +172,13 @@ Minutes::Minutes(const Time& org) : Time()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(Minutes)
-EMPTY_DELETEDATA(Minutes)
-
-
 //==============================================================================
 // Hours --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Hours, "Hours")
 EMPTY_SERIALIZER(Hours)
+EMPTY_COPYDATA(Hours)
+EMPTY_DELETEDATA(Hours)
 
 Hours::Hours() : Time()
 {
@@ -232,15 +196,13 @@ Hours::Hours(const Time& org) : Time()
     BaseClass::copyData(org,true);
 }
 
-EMPTY_COPYDATA(Hours)
-EMPTY_DELETEDATA(Hours)
-
-
 //==============================================================================
 // Days --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Days, "Days")
 EMPTY_SERIALIZER(Days)
+EMPTY_COPYDATA(Days)
+EMPTY_DELETEDATA(Days)
 
 Days::Days() : Time()
 {
@@ -257,9 +219,6 @@ Days::Days(const Time& org) : Time()
     STANDARD_CONSTRUCTOR()
     BaseClass::copyData(org,true);
 }
-
-EMPTY_COPYDATA(Days)
-EMPTY_DELETEDATA(Days)
 
 }
 }

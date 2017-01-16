@@ -10,6 +10,8 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include <cmath>
 
 namespace oe {

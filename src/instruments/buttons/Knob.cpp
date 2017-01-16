@@ -1,7 +1,10 @@
 
 #include "openeaagles/instruments/buttons/Knob.hpp"
-#include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/graphics/Display.hpp"
+
+#include "openeaagles/base/Number.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
 
 #include <GL/glu.h>
@@ -202,7 +205,7 @@ void Knob::computeRotation()
            angle = atan2f(static_cast<float>(posMoveY), static_cast<float>(-posMoveX));
         }
 
-        angle *= static_cast<double>(base::Angle::R2DCC);
+        angle *= static_cast<double>(base::angle::R2DCC);
 
         if (start) {
             startAngle = static_cast<double>(degsRotation);
@@ -285,8 +288,8 @@ void Knob::draw()
 {
     // rotate our knob!
     lcSaveMatrix();
-    if (endless) lcRotate(angle * static_cast<double>(base::Angle::D2RCC));
-    else lcRotate(-degsRotation * static_cast<double>(base::Angle::D2RCC));
+    if (endless) lcRotate(angle * static_cast<double>(base::angle::D2RCC));
+    else lcRotate(-degsRotation * static_cast<double>(base::angle::D2RCC));
     Graphic::draw();
     lcRestoreMatrix();
 }

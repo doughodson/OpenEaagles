@@ -12,7 +12,8 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrixd"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -100,7 +101,7 @@ void LifeForm::reset()
 void LifeForm::fire()
 {
     const auto hdgObj = new base::Number(getHeadingR());
-    const auto pitchObj = new base::Number(lookAngle * base::Angle::D2RCC);
+    const auto pitchObj = new base::Number(lookAngle * base::angle::D2RCC);
     StoresMgr* mgr = getStoresManagement();
     if (mgr != nullptr) {
         if (getSimulation() != nullptr) {
@@ -122,7 +123,7 @@ void LifeForm::fire()
                 Gun* myGun = mgr->getGun();
                 if (myGun != nullptr) {
                     myGun->setGunArmed(true);
-                    const auto num = new base::Number(lookAngle * base::Angle::D2RCC);
+                    const auto num = new base::Number(lookAngle * base::angle::D2RCC);
                     myGun->setSlotPitch(num);
                     num->unref();
                     myGun->fireControl(true);
@@ -168,8 +169,8 @@ void LifeForm::move(const double fwd, const double sdws)
         const double yVel = tempFwd * (std::sin(hdg));
 
         // now calculate our sideways velocity
-        const double xxVel = tempSdws * (std::cos((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
-        const double yyVel = tempSdws * (std::sin((hdg + (90 * static_cast<double>(base::Angle::D2RCC)))));
+        const double xxVel = tempSdws * (std::cos((hdg + (90 * static_cast<double>(base::angle::D2RCC)))));
+        const double yyVel = tempSdws * (std::sin((hdg + (90 * static_cast<double>(base::angle::D2RCC)))));
 
         // now add the vectors
         const double newXVel = xVel + xxVel;
@@ -195,7 +196,7 @@ void LifeForm::look(const double up, const double sdws)
             if (std::fabs(tempSdws) < 0.00005) tempSdws = 0;
             if (std::fabs(tempUp) < 0.05) tempUp = 0;
             hdg += tempSdws;
-            hdg = base::Angle::aepcdRad(hdg);
+            hdg = base::angle::aepcdRad(hdg);
             // we don't change our pitch when we look up and down, we only change our look angle, so we have to keep
             // that separate.  WE do, however, change our heading based on where we are looking, so that is correct
             ptc += tempUp;
@@ -213,10 +214,10 @@ void LifeForm::look(const double up, const double sdws)
             osg::Vec3d tgtPos;
             osg::Vec3d vecPos;
             double az = 0.0, el = 0.0, range = 0.0, diffAz = 0.0, diffEl = 0.0;
-            const double maxAz = (0.7f * static_cast<double>(base::Angle::D2RCC));
-            const double maxEl = (0.7f * static_cast<double>(base::Angle::D2RCC));
+            const double maxAz = (0.7f * static_cast<double>(base::angle::D2RCC));
+            const double maxEl = (0.7f * static_cast<double>(base::angle::D2RCC));
             //double maxRange = 1500.0f; // long range right now
-            const double la = lookAngle * static_cast<double>(base::Angle::D2RCC);
+            const double la = lookAngle * static_cast<double>(base::angle::D2RCC);
             Simulation* sim = getSimulation();
             if (sim != nullptr) {
                 base::PairStream* players = sim->getPlayers();
@@ -235,8 +236,8 @@ void LifeForm::look(const double up, const double sdws)
                                 range = std::sqrt(range);
                                 // now get our elevation
                                 el = std::atan2(-vecPos.z(), range);
-                                diffAz = std::fabs(base::Angle::aepcdRad(az - static_cast<double>(getHeadingR())));
-                                diffEl = std::fabs(base::Angle::aepcdRad(la - el));
+                                diffAz = std::fabs(base::angle::aepcdRad(az - static_cast<double>(getHeadingR())));
+                                diffEl = std::fabs(base::angle::aepcdRad(la - el));
                                 if ((diffAz <= maxAz) && (diffEl <= maxEl)) {
                                     lockMode = TGT_IN_SIGHT;
                                     tgtAquired = true;
@@ -266,7 +267,7 @@ void LifeForm::look(const double up, const double sdws)
                 // now get our elevation
                 const double el = std::atan2(-vecPos.z(), range);
                 // now force that on us
-                setLookAngle(el * static_cast<double>(base::Angle::R2DCC));
+                setLookAngle(el * static_cast<double>(base::angle::R2DCC));
                 setEulerAngles(0, 0, az);
             }
         }

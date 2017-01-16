@@ -1,8 +1,14 @@
 
 #include "openeaagles/instruments/adi/GhostHorizon.hpp"
-#include "openeaagles/base/functors/Tables.hpp"
+
+#include "openeaagles/base/Color.hpp"
+#include "openeaagles/base/String.hpp"
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Rgba.hpp"
+#include "openeaagles/base/functors/Tables.hpp"
+
 #include "openeaagles/graphics/Display.hpp"
+
 
 namespace oe {
 namespace instruments {

@@ -29,9 +29,12 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>
@@ -1391,13 +1394,13 @@ std::ostream& NetIO::serialize(std::ostream& sout, const int i, const bool slots
    sout << "maxPositionError: ( Meters " << maxPositionErr << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "maxOrientationError: ( Degrees " << (maxOrientationErr*base::Angle::R2DCC) << " )" << std::endl;
+   sout << "maxOrientationError: ( Degrees " << (maxOrientationErr*base::angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
    sout << "maxAge: ( Seconds " << maxAge << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "maxEntityRange: ( NauticalMiles " << (maxEntityRange*base::Distance::M2NM) << " )" << std::endl;
+   sout << "maxEntityRange: ( NauticalMiles " << (maxEntityRange*base::distance::M2NM) << " )" << std::endl;
 
    BaseClass::serialize(sout,i+j,true);
 

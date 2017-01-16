@@ -34,12 +34,15 @@
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/base/units/Times.hpp"
 
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Vec4d"
 #include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/osg/Quat"
+
+#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -56,8 +59,8 @@ BEGIN_SLOTTABLE(Player)
    "initPosition",      //  4) Initial Position Vector: meters [ north east down ]
 
    // Player's initial position in latitude, longitude and altitude (from initAlt above)
-   "initLatitude",      //  5) Initial latitude    (base::Angle, base::LatLon or degrees)
-   "initLongitude",     //  6) Initial longitude    (base::Angle, base::LatLon or degrees)
+   "initLatitude",      //  5) Initial latitude      (base::Angle, base::LatLon or degrees)
+   "initLongitude",     //  6) Initial longitude     (base::Angle, base::LatLon or degrees)
 
    // Player's initial geocentric position
    "initGeocentric",    //  7) Initial geocentric position vector [ x y z ] (meters)
@@ -177,25 +180,25 @@ END_SLOT_MAP()
 BEGIN_EVENT_HANDLER(Player)
 
    // We're just killed by 'Player'
-   ON_EVENT_OBJ(KILL_EVENT,killedNotification,Player)
+   ON_EVENT_OBJ(KILL_EVENT, killedNotification, Player)
 
    // We're just killed by unknown player
-   ON_EVENT(KILL_EVENT,killedNotification)
+   ON_EVENT(KILL_EVENT, killedNotification)
 
    // We just collided 'Player'
-   ON_EVENT_OBJ(CRASH_EVENT,collisionNotification,Player)
+   ON_EVENT_OBJ(CRASH_EVENT, collisionNotification, Player)
 
    // We just crashed
    ON_EVENT(CRASH_EVENT,crashNotification)
 
    // We were just hit by a R/F emission
-   ON_EVENT_OBJ(RF_EMISSION,onRfEmissionEventPlayer,Emission)
+   ON_EVENT_OBJ(RF_EMISSION, onRfEmissionEventPlayer, Emission)
 
    // Another player is requesting reflection of the R/F emission hitting us
    ON_EVENT_OBJ(RF_REFLECTIONS_REQUEST, onReflectionsRequest, base::Component)
 
    // We were just hit by a reflected R/F emission
-   ON_EVENT_OBJ(RF_REFLECTED_EMISSION,onRfReflectedEmissionEventPlayer,Emission)
+   ON_EVENT_OBJ(RF_REFLECTED_EMISSION, onRfReflectedEmissionEventPlayer, Emission)
 
    // Another player is cancelling its request for reflected R/F emissions
    ON_EVENT_OBJ(RF_REFLECTIONS_CANCEL,  onReflectionsCancel,  base::Component)
@@ -204,25 +207,25 @@ BEGIN_EVENT_HANDLER(Player)
    ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEventPlayer,base::Object)
 
    // Weapon release button event (with switch state)
-   ON_EVENT_OBJ(WPN_REL_EVENT,onWpnRelEvent,base::Boolean)
+   ON_EVENT_OBJ(WPN_REL_EVENT, onWpnRelEvent, base::Boolean)
 
    // Weapon release button event
-   ON_EVENT(WPN_REL_EVENT,onWpnRelEvent)
+   ON_EVENT(WPN_REL_EVENT, onWpnRelEvent)
 
    // Trigger switch (with switch state)
-   ON_EVENT_OBJ(TRIGGER_SW_EVENT,onTriggerSwEvent,base::Boolean)
+   ON_EVENT_OBJ(TRIGGER_SW_EVENT, onTriggerSwEvent, base::Boolean)
 
    // Trigger event
-   ON_EVENT(TRIGGER_SW_EVENT,onTriggerSwEvent)
+   ON_EVENT(TRIGGER_SW_EVENT, onTriggerSwEvent)
 
    // Target step switch event
-   ON_EVENT(TGT_STEP_EVENT,onTgtStepEvent)
+   ON_EVENT(TGT_STEP_EVENT, onTgtStepEvent)
 
    // An IR seeker is querying us for our IR signature
-   ON_EVENT_OBJ(IR_QUERY,onIrMsgEventPlayer,IrQueryMsg)
+   ON_EVENT_OBJ(IR_QUERY, onIrMsgEventPlayer, IrQueryMsg)
 
    // We were just hit with a directed energy emission
-   ON_EVENT_OBJ(DE_EMISSION,onDeEmissionEvent,base::Object)
+   ON_EVENT_OBJ(DE_EMISSION, onDeEmissionEvent, base::Object)
 
 END_EVENT_HANDLER()
 
@@ -818,7 +821,7 @@ bool Player::isHeadingHoldOn() const
 // Return commanded heading, default (radians)
 double Player::getCommandedHeading() const
 {
-   return getCommandedHeadingD() * static_cast<double>(base::Angle::D2RCC);
+   return getCommandedHeadingD() * static_cast<double>(base::angle::D2RCC);
 }
 
 // Return commanded heading (degrees)
@@ -833,7 +836,7 @@ double Player::getCommandedHeadingD() const
 // Return commanded heading (radians)
 double Player::getCommandedHeadingR() const
 {
-   return getCommandedHeadingD() * static_cast<double>(base::Angle::D2RCC);
+   return getCommandedHeadingD() * static_cast<double>(base::angle::D2RCC);
 }
 
 // Return true if velocity-hold mode is on
@@ -857,13 +860,13 @@ double Player::getCommandedVelocityKts() const
 // Commanded (true) velocity (Feet/Sec)
 double Player::getCommandedVelocityFps() const
 {
-   return getCommandedVelocityKts() * base::Distance::NM2FT / base::Time::H2S;
+   return getCommandedVelocityKts() * base::distance::NM2FT / base::time::H2S;
 }
 
 // Commanded (true) velocity (Meters/Sec)
 double Player::getCommandedVelocityMps() const
 {
-   return getCommandedVelocityKts() * base::Distance::NM2M / base::Time::H2S;
+   return getCommandedVelocityKts() * base::distance::NM2M / base::time::H2S;
 }
 
 // Return true if altitude-hold mode is on
@@ -893,7 +896,7 @@ double Player::getCommandedAltitudeM() const
 // Get commanded (HAE) altitude (feet)
 double Player::getCommandedAltitudeFt() const
 {
-   return getCommandedAltitude() * base::Distance::M2FT;
+   return getCommandedAltitude() * base::distance::M2FT;
 }
 
 // True if player is destroyed
@@ -925,7 +928,7 @@ const simulation::AbstractNib* Player::getLocalNib(const unsigned int netId) con
 // Earth radius (meters)
 double Player::getEarthRadius() const
 {
-   double erad = base::Nav::ERAD60 * base::Distance::NM2M;  // (default)
+   double erad = base::Nav::ERAD60 * base::distance::NM2M;  // (default)
 
    const Simulation* sim = getSimulation();
    if (sim != nullptr) {
@@ -936,7 +939,7 @@ double Player::getEarthRadius() const
       const double e2 = pModel->getE2();  // eccentricity squared
 
       const double slat = getLatitude();
-      const double cosSlat = std::cos(base::Angle::D2RCC * slat);
+      const double cosSlat = std::cos(base::angle::D2RCC * slat);
 
       erad = b / std::sqrt(1.0 - e2*cosSlat*cosSlat);
    }
@@ -1883,7 +1886,7 @@ bool Player::setHeadingHoldOn(const bool b)
 // Sets the commanded (true) heading (radians)
 bool Player::setCommandedHeading(const double h)
 {
-   return setCommandedHeadingD( h * base::Angle::R2DCC );
+   return setCommandedHeadingD( h * base::angle::R2DCC );
 }
 
 // Sets commanded (true) heading (true: degs)
@@ -1898,7 +1901,7 @@ bool Player::setCommandedHeadingD(const double h)
 // Sets the commanded (true) heading (radians)
 bool Player::setCommandedHeadingR(const double h)
 {
-   return setCommandedHeadingD( h * base::Angle::R2DCC );
+   return setCommandedHeadingD( h * base::angle::R2DCC );
 }
 
 // Enable/Disable velocity hold
@@ -1946,7 +1949,7 @@ bool Player::setCommandedAltitudeM(const double a)
 // Sets commanded (HAE) altitude (feet)
 bool Player::setCommandedAltitudeFt(const double a)
 {
-   return setCommandedAltitude( a * base::Distance::FT2M );
+   return setCommandedAltitude( a * base::distance::FT2M );
 }
 
 // Sets a pointer to the Network Interface Block (NIB)
@@ -3166,8 +3169,8 @@ void Player::positionUpdate(const double dt)
 
          if (!pfrz) {
 
-            const double slat = std::sin(latitude * base::Angle::D2RCC);
-            const double clat = std::cos(latitude * base::Angle::D2RCC);
+            const double slat = std::sin(latitude * base::angle::D2RCC);
+            const double clat = std::cos(latitude * base::angle::D2RCC);
 
             const base::EarthModel* em = getSimulation()->getEarthModel();
             if (em == nullptr) em = &base::EarthModel::wgs84;
@@ -3183,14 +3186,14 @@ void Player::positionUpdate(const double dt)
             // ### May not support crossing the north or south pole correctly ###
             double dn = (ue + ue0) * 0.5 * dt;
             double dlatR = ( 1.0 / rm ) * dn;
-            newLatitude += (dlatR * base::Angle::R2DCC);
+            newLatitude += (dlatR * base::angle::R2DCC);
             if (newLatitude >  90.0) {
                newLatitude = 180.0 - newLatitude;
-               newLongitude = base::Angle::aepcdDeg( newLongitude + 180.0 );
+               newLongitude = base::angle::aepcdDeg( newLongitude + 180.0 );
             }
             if (newLatitude < -90.0) {
                newLatitude = -180.0 - newLatitude;
-               newLongitude = base::Angle::aepcdDeg( newLongitude + 180.0 );
+               newLongitude = base::angle::aepcdDeg( newLongitude + 180.0 );
             }
 
             // Update longitude
@@ -3198,7 +3201,7 @@ void Player::positionUpdate(const double dt)
                const double de = (ve + ve0) * 0.5 * dt;
                const double dlonR = ( 1.0 / (rn * clat) ) * de;
 
-               newLongitude += (dlonR * base::Angle::R2DCC);
+               newLongitude += (dlonR * base::angle::R2DCC);
                if (newLongitude >  180.0) newLongitude -= 360.0;
                if (newLongitude < -180.0) newLongitude += 360.0;
             }
@@ -3299,9 +3302,9 @@ void Player::positionUpdate(const double dt)
       // Update angles
       osg::Vec3d oldAngles = getEulerAngles();
       osg::Vec3d newAngles;
-      newAngles[0] = base::Angle::aepcdRad(oldAngles[0] + (pe * dt));
-      newAngles[1] = base::Angle::aepcdRad(oldAngles[1] + (qe * dt));
-      newAngles[2] = base::Angle::aepcdRad(oldAngles[2] + (re * dt));
+      newAngles[0] = base::angle::aepcdRad(oldAngles[0] + (pe * dt));
+      newAngles[1] = base::angle::aepcdRad(oldAngles[1] + (qe * dt));
+      newAngles[2] = base::angle::aepcdRad(oldAngles[2] + (re * dt));
       if (newAngles[1] >  base::PI/2) newAngles[1] -= base::PI;
       if (newAngles[1] < -base::PI/2) newAngles[1] += base::PI;
       setEulerAngles(newAngles);
@@ -3312,11 +3315,11 @@ void Player::positionUpdate(const double dt)
 
       if (isMessageEnabled(MSG_INFO)) {
          std::cout << "r1[ " << getRollD() << ", " << getPitchD() << ", " << getHeadingD() << " ]";
-         std::cout << " tr[ " << testAngRates[0]*base::Angle::R2DCC << ", " << testAngRates[1]*base::Angle::R2DCC << ", " << testAngRates[2]*base::Angle::R2DCC << " ]";
-         std::cout << " er[ " << pe*base::Angle::R2DCC << ", " << qe*base::Angle::R2DCC << ", " << re*base::Angle::R2DCC << " ]";
-         std::cout << " br[ " << pa*base::Angle::R2DCC << ", " << qa*base::Angle::R2DCC << ", " << ra*base::Angle::R2DCC << " ]";
-         std::cout << " na[ " << newAngles[0]*base::Angle::R2DCC << ", " << newAngles[1]*base::Angle::R2DCC << ", " << newAngles[2]*base::Angle::R2DCC << " ]";
-         std::cout << " oa[ " << oldAngles[0]*base::Angle::R2DCC << ", " << oldAngles[1]*base::Angle::R2DCC << ", " << oldAngles[2]*base::Angle::R2DCC << " ]";
+         std::cout << " tr[ " << testAngRates[0]*base::angle::R2DCC << ", " << testAngRates[1]*base::angle::R2DCC << ", " << testAngRates[2]*base::angle::R2DCC << " ]";
+         std::cout << " er[ " << pe*base::angle::R2DCC << ", " << qe*base::angle::R2DCC << ", " << re*base::angle::R2DCC << " ]";
+         std::cout << " br[ " << pa*base::angle::R2DCC << ", " << qa*base::angle::R2DCC << ", " << ra*base::angle::R2DCC << " ]";
+         std::cout << " na[ " << newAngles[0]*base::angle::R2DCC << ", " << newAngles[1]*base::angle::R2DCC << ", " << newAngles[2]*base::angle::R2DCC << " ]";
+         std::cout << " oa[ " << oldAngles[0]*base::angle::R2DCC << ", " << oldAngles[1]*base::angle::R2DCC << ", " << oldAngles[2]*base::angle::R2DCC << " ]";
          std::cout << std::endl;
       }
    }
@@ -4062,7 +4065,7 @@ bool Player::setSlotInitVelocityKts(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      initVp = (msg->getReal() * oe::base::Distance::NM2M) / 3600.0f;
+      initVp = (msg->getReal() * oe::base::distance::NM2M) / 3600.0f;
       ok = true;
    }
    return ok;
@@ -4342,17 +4345,17 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
       sout << "initYPos: ( Meters " << vec.y() << " )" << std::endl;
 
       indent(sout, i+j);
-      sout << "initAlt: ( Feet " << (getInitAltitude() * base::Distance::M2FT) << " )" << std::endl;
+      sout << "initAlt: ( Feet " << (getInitAltitude() * base::distance::M2FT) << " )" << std::endl;
    }
 
    indent(sout,i+j);
-   sout << "initRoll: ( Degrees " << (initAngles[IROLL] * base::Angle::R2DCC) << " )" << std::endl;
+   sout << "initRoll: ( Degrees " << (initAngles[IROLL] * base::angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "initPitch: ( Degrees " << (initAngles[IPITCH] * base::Angle::R2DCC) << " )" << std::endl;
+   sout << "initPitch: ( Degrees " << (initAngles[IPITCH] * base::angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "initYawRate: ( Degrees " << (initAngles[IYAW] * base::Angle::R2DCC) << " )" << std::endl;
+   sout << "initYawRate: ( Degrees " << (initAngles[IYAW] * base::angle::R2DCC) << " )" << std::endl;
 
 
    // Velocity (ft/s)
@@ -4449,7 +4452,7 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    }
 
    indent(sout, i+j);
-   sout << "terrainOffset: ( Feet " << (getTerrainOffset() * base::Distance::M2FT) << " )" << std::endl;
+   sout << "terrainOffset: ( Feet " << (getTerrainOffset() * base::distance::M2FT) << " )" << std::endl;
 
 
    // Position Freeze (default: false)
@@ -4504,13 +4507,13 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
    sout << "dataLogTime: ( Seconds " << dataLogTime << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "testRollRate: ( Degrees " << (testAngRates[IROLL] * base::Angle::R2DCC) << " )" << std::endl;
+   sout << "testRollRate: ( Degrees " << (testAngRates[IROLL] * base::angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "testPitchRate: ( Degrees " << (testAngRates[IPITCH] * base::Angle::R2DCC) << " )" << std::endl;
+   sout << "testPitchRate: ( Degrees " << (testAngRates[IPITCH] * base::angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
-   sout << "testHeadingRate: ( Degrees " << (testAngRates[IYAW] * base::Angle::R2DCC) << " )" << std::endl;
+   sout << "testHeadingRate: ( Degrees " << (testAngRates[IYAW] * base::angle::R2DCC) << " )" << std::endl;
 
    indent(sout,i+j);
 

@@ -5,6 +5,8 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
+#include "openeaagles/base/units/unit_utils.hpp"
+
 #include <cmath>
 
 namespace oe {
@@ -170,7 +172,7 @@ bool Bullet::burstOfBullets(const osg::Vec3d* const pos, const osg::Vec3d* const
 //------------------------------------------------------------------------------
 void Bullet::updateBurstTrajectories(const double dt)
 {
-   static const double g = base::ETHG * base::Distance::FT2M;      // Acceleration of Gravity (m/s/s)
+   static const double g = base::ETHG * base::distance::FT2M;      // Acceleration of Gravity (m/s/s)
 
    // For all active bursts
    for (int i = 0; i < nbt; i++) {

@@ -6,7 +6,7 @@
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/SensorMsg.hpp"
 
-#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -266,7 +266,7 @@ bool Track::setPosition(const osg::Vec3d& p)
 
    // compute angles
    taz = std::atan2(pos.y(),pos.x());
-   raz[0] = base::Angle::aepcdRad(taz - osGndTrk);
+   raz[0] = base::angle::aepcdRad(taz - osGndTrk);
    rel[0] = std::atan2(-pos.z(), gndRng);
 
    // Set LOS unit vector
@@ -308,7 +308,7 @@ bool Track::setVelocity(const osg::Vec3d v)
 
    gndSpd = std::sqrt(totalVel[0]*totalVel[0] + totalVel[1]*totalVel[1]);
    gndTrk = std::atan2(totalVel[1], totalVel[0]);
-   relGndTrk = base::Angle::aepcdRad(gndTrk - osGndTrk);
+   relGndTrk = base::angle::aepcdRad(gndTrk - osGndTrk);
 
    double tmp1 = pos[1] * totalVel[0] - pos[0] * totalVel[1];
    double tmp2 = pos[0] * totalVel[0] + pos[1] * totalVel[1];

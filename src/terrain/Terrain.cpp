@@ -8,8 +8,8 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/Rgba.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include "openeaagles/base/osg/Vec2d"
 #include "openeaagles/base/osg/Vec3d"
@@ -231,7 +231,7 @@ bool Terrain::targetOcculting(
    double brgDeg = 0.0;
    double distNM = 0.0;
    base::Nav::fll2bd(refLat, refLon, tgtLat, tgtLon, &brgDeg, &distNM);
-   double dist = (distNM * base::Distance::NM2M);
+   double dist = (distNM * base::distance::NM2M);
 
    // Number of points (default: 100M data)
    unsigned int numPts = static_cast<unsigned int>((dist / 100.0f) + 0.5f);
@@ -444,8 +444,8 @@ bool Terrain::vbwShadowChecker(
    if (beamLower < -89.9999f) beamLower = -89.9999f;
 
    // tangents of the upper and lower edges of the beam
-   double tanUpper = std::tan(beamUpper * static_cast<double>(base::Angle::D2RCC));
-   double tanLower = std::tan(beamLower * static_cast<double>(base::Angle::D2RCC));
+   double tanUpper = std::tan(beamUpper * static_cast<double>(base::angle::D2RCC));
+   double tanLower = std::tan(beamLower * static_cast<double>(base::angle::D2RCC));
 
    // Loop through all other elevation points -- keep track of the current max
    // tangent value and flag as terrain masked all points with tangent

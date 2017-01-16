@@ -24,14 +24,14 @@ inline bool Nav::fbd2llE(
    const EarthModel* pModel = em;
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a  = Distance::M2NM * pModel->getA();   // semi-major axis
+   const double a  = distance::M2NM * pModel->getA();   // semi-major axis
    const double e2 = pModel->getE2();  // eccentricity squared
 
    // Define Local Constants
-   const double sinSlat = std::sin(Angle::D2RCC * slat);
-   const double cosSlat = std::cos(Angle::D2RCC * slat);
-   const double sinBrng = std::sin(Angle::D2RCC * brng);
-   const double cosBrng = std::cos(Angle::D2RCC * brng);
+   const double sinSlat = std::sin(angle::D2RCC * slat);
+   const double cosSlat = std::cos(angle::D2RCC * slat);
+   const double sinBrng = std::sin(angle::D2RCC * brng);
+   const double cosBrng = std::cos(angle::D2RCC * brng);
    const double q       = 1.0 - e2 * sinSlat * sinSlat;
    const double rn      = a / std::sqrt(q);
    const double rm      = rn * (1.0 - e2) / q;
@@ -40,11 +40,11 @@ inline bool Nav::fbd2llE(
    double dN = cosBrng * dist;
    double dE = sinBrng * dist;
 
-   if (dlat != nullptr) *dlat = slat + Angle::R2DCC * (dN / rm);
+   if (dlat != nullptr) *dlat = slat + angle::R2DCC * (dN / rm);
 
    if (dlon != nullptr) {
       if (cosSlat != 0)
-         *dlon = Angle::aepcdDeg( slon + Angle::R2DCC * (dE / rn) / cosSlat );
+         *dlon = angle::aepcdDeg( slon + angle::R2DCC * (dE / rn) / cosSlat );
       else
          *dlon = slon;
    }
@@ -72,12 +72,12 @@ inline bool Nav::fll2bdE(
    const EarthModel* pModel = em;
    if (pModel == nullptr) { pModel = &EarthModel::wgs84; }
 
-   const double a  = Distance::M2NM * pModel->getA();   // semi-major axis
+   const double a  = distance::M2NM * pModel->getA();   // semi-major axis
    const double e2 = pModel->getE2();  // eccentricity squared
 
    // Define Local Constants
-   const double sinSlat = std::sin(Angle::D2RCC * slat);
-   const double cosSlat = std::cos(Angle::D2RCC * slat);
+   const double sinSlat = std::sin(angle::D2RCC * slat);
+   const double cosSlat = std::cos(angle::D2RCC * slat);
    const double q       = 1.0 - e2 * sinSlat * sinSlat;
    const double rn      = a / std::sqrt(q);
    const double rm      = rn * (1.0 - e2) / q;
@@ -90,10 +90,10 @@ inline bool Nav::fll2bdE(
 
    // Compute brg/dist
    else {
-      double dN = Angle::D2RCC * Angle::aepcdDeg(dlat - slat) * rm;
-      double dE = Angle::D2RCC * Angle::aepcdDeg(dlon - slon) * rn * cosSlat;
+      double dN = angle::D2RCC * angle::aepcdDeg(dlat - slat) * rm;
+      double dE = angle::D2RCC * angle::aepcdDeg(dlon - slon) * rn * cosSlat;
 
-      *brng = Angle::R2DCC * std::atan2(dE, dN);
+      *brng = angle::R2DCC * std::atan2(dE, dN);
       *dist = std::sqrt(dN*dN + dE*dE);
    }
 
@@ -117,7 +117,7 @@ inline bool Nav::fbd2llS(
 {
    bool ok = false;
    if (dlat != nullptr && dlon != nullptr) {
-      double ang = brg * Angle::D2RCC;
+      double ang = brg * angle::D2RCC;
       double ew = std::sin(ang) * dist;
       double ns = std::cos(ang) * dist;
 
@@ -126,7 +126,7 @@ inline bool Nav::fbd2llS(
       double tlat = slat;
       if (tlat > 89.0 || tlat < -89.0) tlat = 89.0;
 
-      *dlon = Angle::aepcdDeg( slon + ( ew / (60.0 * std::cos(tlat*Angle::D2RCC)) ) );
+      *dlon = angle::aepcdDeg( slon + ( ew / (60.0 * std::cos(tlat * angle::D2RCC)) ) );
       ok = true;
    }
    return ok;
@@ -148,9 +148,9 @@ inline bool Nav::fll2bdS(
 {
    bool ok = false;
    if (brg != nullptr && dist != nullptr) {
-      double ns = ( Angle::aepcdDeg(dlat - slat) * 60.0 );
-      double ew = ( Angle::aepcdDeg(dlon - slon) * 60.0 * std::cos(slat*Angle::D2RCC) );
-      *brg = std::atan2(ew,ns) * Angle::R2DCC;
+      double ns = ( angle::aepcdDeg(dlat - slat) * 60.0 );
+      double ew = ( angle::aepcdDeg(dlon - slon) * 60.0 * std::cos(slat * angle::D2RCC) );
+      *brg = std::atan2(ew,ns) * angle::R2DCC;
       *dist = sqrt(ns*ns + ew*ew);
       ok = true;
    }
@@ -284,9 +284,9 @@ inline bool Nav::xyz2aer(
    )
 {
    // Compute AER position vector
-   double ranj = std::sqrt(x*x + y*y + z*z);
-   double elev = Angle::R2DCC * std::asin(-z / ranj);
-   double azim = Angle::R2DCC * std::atan2(y, x);
+   const double ranj = std::sqrt(x*x + y*y + z*z);
+   const double elev = angle::R2DCC * std::asin(-z / ranj);
+   const double azim = angle::R2DCC * std::atan2(y, x);
 
    (*aer)[0] = azim;
    (*aer)[1] = elev;
@@ -311,9 +311,9 @@ inline bool Nav::xyz2aer(
    double z = vb[2];
 
    // Compute AER position vector
-   double ranj = std::sqrt(x*x + y*y + z*z);
-   double elev = Angle::R2DCC * std::asin(-z / ranj);
-   double azim = Angle::R2DCC * std::atan2(y, x);
+   const double ranj = std::sqrt(x*x + y*y + z*z);
+   const double elev = angle::R2DCC * std::asin(-z / ranj);
+   const double azim = angle::R2DCC * std::atan2(y, x);
 
    (*aer)[0] = azim;
    (*aer)[1] = elev;
@@ -409,7 +409,7 @@ inline bool Nav::computeRotationalMatrixDeg(
          )
 {
    return computeRotationalMatrix(
-         phiD*Angle::D2RCC, thetaD*Angle::D2RCC, psiD*Angle::D2RCC,
+         phiD * angle::D2RCC, thetaD * angle::D2RCC, psiD * angle::D2RCC,
          rm,
          scPhi, scTht, scPsi
       );
@@ -441,7 +441,7 @@ inline bool Nav::computeRotationalMatrixDeg(
          )
 {
    return computeRotationalMatrix(
-         angles[0]*Angle::D2RCC, angles[1]*Angle::D2RCC, angles[2]*Angle::D2RCC,
+         angles[0] * angle::D2RCC, angles[1] * angle::D2RCC, angles[2] * angle::D2RCC,
          m,
          scPhi, scTht, scPsi
       );
@@ -460,9 +460,9 @@ inline bool Nav::computeEulerAnglesDeg(
    bool ok = computeEulerAngles(rm, &angles, scPhi, scTht, scPsi);
    if (ok && anglesD != nullptr) {
       anglesD->set(
-         angles[0] * base::Angle::R2DCC,
-         angles[1] * base::Angle::R2DCC,
-         angles[2] * base::Angle::R2DCC
+         angles[0] * angle::R2DCC,
+         angles[1] * angle::R2DCC,
+         angles[2] * angle::R2DCC
          );
    }
    return ok;
@@ -604,11 +604,11 @@ inline bool Nav::convertPosVec2llE(
    double east = pos.y();
    double down = pos.z();
    if (lat != nullptr) {
-      *lat = slat + Angle::R2DCC * (north / rm);
+      *lat = slat + angle::R2DCC * (north / rm);
    }
    if (lon != nullptr) {
       if (cosSlat != 0) {
-         *lon = Angle::aepcdDeg( slon + Angle::R2DCC * (east / rn) / cosSlat );
+         *lon = angle::aepcdDeg( slon + angle::R2DCC * (east / rn) / cosSlat );
       } else {
          *lon = slon;
       }
@@ -631,8 +631,8 @@ inline bool Nav::convertPosVec2llE(
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
    )
 {
-   const double sinSlat = std::sin(Angle::D2RCC * slat);
-   const double cosSlat = std::cos(Angle::D2RCC * slat);
+   const double sinSlat = std::sin(angle::D2RCC * slat);
+   const double cosSlat = std::cos(angle::D2RCC * slat);
    return convertPosVec2llE(slat, slon, sinSlat, cosSlat, pos, lat, lon, alt, em);
 }
 
@@ -654,10 +654,10 @@ inline bool Nav::convertPosVec2llS(
    bool ok = false;
    if (lat != nullptr && lon != nullptr && alt != nullptr) {
 
-      *lat = (pos[INORTH] * Distance::M2NM)/60.0 + slat;
+      *lat = (pos[INORTH] * distance::M2NM)/60.0 + slat;
 
       if (cosSlat != 0)
-         *lon = Angle::aepcdDeg( (pos[IEAST] * Distance::M2NM)/(60.0 * cosSlat) + slon );
+         *lon = angle::aepcdDeg( (pos[IEAST] * distance::M2NM)/(60.0 * cosSlat) + slon );
       else
          *lon = slon;
 
@@ -678,7 +678,7 @@ inline bool Nav::convertPosVec2LL(
       double* const alt          // OUT: Altitude (meters)
    )
 {
-   const double cosSlat = std::cos(Angle::D2RCC * slat);
+   const double cosSlat = std::cos(angle::D2RCC * slat);
    return convertPosVec2llS(slat, slon, cosSlat, pos, lat, lon, alt);
 }
 
@@ -693,7 +693,7 @@ inline bool Nav::convertPosVec2LL(
    )
 {
    osg::Vec3d posD = pos;
-   const double cosSlat = std::cos(Angle::D2RCC * slat);
+   const double cosSlat = std::cos(angle::D2RCC * slat);
    return convertPosVec2llS(slat, slon, cosSlat, posD, lat, lon, alt);
 }
 
@@ -728,9 +728,9 @@ inline bool Nav::convertLL2PosVecE(
       const double rm  = rn * (1.0 - e2) / q;
 
       // Compute NED variables
-      double x = Angle::D2RCC * Angle::aepcdDeg(lat - slat) * rm;
-      double y = Angle::D2RCC * Angle::aepcdDeg(lon - slon) * rn * cosSlat;
-      double z = ( -alt );
+      const double x = angle::D2RCC * angle::aepcdDeg(lat - slat) * rm;
+      const double y = angle::D2RCC * angle::aepcdDeg(lon - slon) * rn * cosSlat;
+      const double z = ( -alt );
       pos->set(x, y, z);
       ok = true;
    }
@@ -755,9 +755,9 @@ inline bool Nav::convertLL2PosVecS(
 {
    bool ok = false;
    if (pos != nullptr) {
-      double x = ( Angle::aepcdDeg(lat - slat) * 60.0 * Distance::NM2M );
-      double y = ( Angle::aepcdDeg(lon - slon) * 60.0 * Distance::NM2M * cosSlat );
-      double z = ( -alt );
+      const double x = ( angle::aepcdDeg(lat - slat) * 60.0 * distance::NM2M );
+      const double y = ( angle::aepcdDeg(lon - slon) * 60.0 * distance::NM2M * cosSlat );
+      const double z = ( -alt );
       pos->set(x, y, z);
       ok = true;
    }
@@ -775,8 +775,8 @@ inline bool Nav::convertLL2PosVecE(
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
    )
 {
-   const double sinSlat = std::sin(Angle::D2RCC * slat);
-   const double cosSlat = std::cos(Angle::D2RCC * slat);
+   const double sinSlat = std::sin(angle::D2RCC * slat);
+   const double cosSlat = std::cos(angle::D2RCC * slat);
    return convertLL2PosVecE(slat, slon, sinSlat, cosSlat, lat, lon, alt, pos, em);
 }
 
@@ -790,7 +790,7 @@ inline bool Nav::convertLL2PosVec(
       osg::Vec3d* const pos      // OUT: NED position vector from ref point (Meters)
    )
 {
-   const double cosSlat = std::cos(Angle::D2RCC * slat);
+   const double cosSlat = std::cos(angle::D2RCC * slat);
    return convertLL2PosVecS(slat, slon, cosSlat, lat, lon, alt, pos);
 }
 
@@ -806,7 +806,7 @@ inline bool Nav::convertLL2PosVec(
 {
    bool ok = false;
    if (pos != nullptr) {
-      const double cosSlat = std::cos(Angle::D2RCC * slat);
+      const double cosSlat = std::cos(angle::D2RCC * slat);
       osg::Vec3d posD;
       ok = convertLL2PosVecS(slat, slon, cosSlat, lat, lon, alt, &posD);
       *pos = posD;

@@ -1,4 +1,7 @@
+
 #include "openeaagles/instruments/maps/CompassRose.hpp"
+
+#include "openeaagles/base/Number.hpp"
 
 namespace oe {
 namespace instruments {
@@ -22,18 +25,14 @@ BEGIN_SLOTTABLE(CompassRose)
     "displacement",     // how far to translate
 END_SLOTTABLE(CompassRose)       
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(CompassRose)
     ON_SLOT(1, setSlotCenteredRadius, base::Number)
     ON_SLOT(2, setSlotDeCenteredRadius, base::Number)
     ON_SLOT(3, setSlotDisplacement, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
+EMPTY_DELETEDATA(CompassRose)
+
 CompassRose::CompassRose()
 {
     STANDARD_CONSTRUCTOR()
@@ -47,9 +46,6 @@ CompassRose::CompassRose()
     rot = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void CompassRose::copyData(const CompassRose& org, const bool)
 {
     // copy our base class stuff first
@@ -64,11 +60,6 @@ void CompassRose::copyData(const CompassRose& org, const bool)
     dialSD.empty();
     rot = org.rot;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(CompassRose)
 
 // Slot functions
 //------------------------------------------------------------------------------
@@ -107,7 +98,7 @@ bool CompassRose::setSlotDisplacement(const base::Number* const newD)
 //------------------------------------------------------------------------------
 bool CompassRose::setRotationDeg(const double newR)
 {
-    rot = newR * static_cast<double>(base::Angle::D2RCC);
+    rot = newR * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 

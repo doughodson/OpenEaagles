@@ -55,7 +55,7 @@ void CollisionDetect::initData()
    poiLock = 0;
 
    playerTypes = 0xFFFF;      // Default: all types
-   maxRange2Players = (1.0 * base::Distance::NM2M); // Default: 1.0 NM
+   maxRange2Players = (1.0 * base::distance::NM2M); // Default: 1.0 NM
    maxAngle2Players = 0.0;    // Default: all angles
    collisionRange = 4.0;      // Default: 4 meters
    useWorld = true;           // Default: Using ECEF

@@ -1,6 +1,3 @@
-// -------------------------------------------------------------------------------
-// Class: MapDrawer
-// -------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/MapDrawer.hpp"
 #include "openeaagles/maps/rpf/CadrgMap.hpp"
@@ -9,8 +6,9 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/graphics/Display.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 #include "openeaagles/graphics/Texture.hpp"
+#include "openeaagles/base/Number.hpp"
 
 #include <cmath>
 
@@ -387,8 +385,8 @@ void MapDrawer::drawMap(const int zone, const int idx)
             if (!nu) {
                 const GLfloat hdg = static_cast<GLfloat>(getHeadingDeg());
                 glRotatef(hdg, 0.0f, 0.0f, 1.0f);
-                sinAng = static_cast<double>(std::sin(hdg * static_cast<double>(base::Angle::D2RCC)));
-                cosAng = static_cast<double>(std::cos(hdg * static_cast<double>(base::Angle::D2RCC)));
+                sinAng = static_cast<double>(std::sin(hdg * static_cast<double>(base::angle::D2RCC)));
+                cosAng = static_cast<double>(std::cos(hdg * static_cast<double>(base::angle::D2RCC)));
             }
 
             // Translate down the pixels first

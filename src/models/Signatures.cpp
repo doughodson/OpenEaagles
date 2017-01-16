@@ -9,9 +9,9 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
 #include "openeaagles/base/units/Areas.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -520,8 +520,8 @@ double SigAzEl::getRCS(const Emission* const em)
 
       // If the table's independent variables are in degrees ..
       if (isInDegrees()) {
-         iv1 *= static_cast<double>(base::Angle::R2DCC);
-         iv2 *= static_cast<double>(base::Angle::R2DCC);
+         iv1 *= static_cast<double>(base::angle::R2DCC);
+         iv2 *= static_cast<double>(base::angle::R2DCC);
       }
 
       rcs = tbl->lfi(iv1,iv2);

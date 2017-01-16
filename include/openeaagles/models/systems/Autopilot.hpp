@@ -6,8 +6,7 @@
 #include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
-   namespace base { class Angle; class Distance; class Identifier; class Number; class Time; }
-
+namespace base { class Angle; class Distance; class Identifier; class Number; class Time; }
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -16,41 +15,41 @@ namespace models {
 // Factory name: Autopilot
 //
 // Slots:
-//    navMode                    <Number>     ! Nav (route follow) mode flag (default: true)
+//    navMode                    <Number>          ! Nav (route follow) mode flag (default: true)
 //
-//    holdAltitude               <Distance>   ! Hold altitude (Distance) [default: player's altitude]
-//    altitudeHoldMode           <Number>     ! Altitude hold mode flag [ default: true ]
+//    holdAltitude               <Distance>        ! Hold altitude (Distance) [default: player's altitude]
+//    altitudeHoldMode           <Number>          ! Altitude hold mode flag [ default: true ]
 //
-//    holdVelocityKts            <Number>     ! Hold velocity (Kts) (Number) [default: player's velocity]
-//    velocityHoldMode           <Number>     ! Velocity hold mode flag [ default: true ]
+//    holdVelocityKts            <Number>          ! Hold velocity (Kts) (Number) [default: player's velocity]
+//    velocityHoldMode           <Number>          ! Velocity hold mode flag [ default: true ]
 //
-//    holdHeading                <Distance>   ! Hold heading (Angle) [default: player's heading]
-//    headingHoldMode            <Number>     ! Heading hold mode flag [ default: true ]
+//    holdHeading                <Angle>           ! Hold heading (AbstractAngle) [default: player's heading]
+//    headingHoldMode            <Number>          ! Heading hold mode flag [ default: true ]
 //
-//    loiterMode                 <Number>     ! Loiter mode flag (default: false)
-//    loiterPatternLength        <Distance>   ! Loiter pattern length (default: 10.0f)
-//    loiterPatternLength        <Number>     ! Loiter pattern length (nautical miles)
-//    loiterPatternTime          <Time>       ! Loiter pattern time (seconds on inbound / outbound course)
-//    loiterPatternCcwFlag       <Number>     ! Loiter pattern counter-clockwise flag (default: false, clockwise)
+//    loiterMode                 <Number>          ! Loiter mode flag (default: false)
+//    loiterPatternLength        <Distance>        ! Loiter pattern length (default: 10.0f)
+//    loiterPatternLength        <Number>          ! Loiter pattern length (nautical miles)
+//    loiterPatternTime          <Time>            ! Loiter pattern time (seconds on inbound / outbound course)
+//    loiterPatternCcwFlag       <Number>          ! Loiter pattern counter-clockwise flag (default: false, clockwise)
 //
-//    leadFollowingDistanceTrail <Distance>   ! Desired distance behind(+) the lead (Default: 1 NM trail)
-//    leadFollowingDistanceTrail <Number>     ! Desired distance behind(+) the lead (meters)
+//    leadFollowingDistanceTrail <Distance>        ! Desired distance behind(+) the lead (Default: 1 NM trail)
+//    leadFollowingDistanceTrail <Number>          ! Desired distance behind(+) the lead (meters)
 //
-//    leadFollowingDistanceRight <Distance>   ! Desired distance right(+) of the lead (Default: 1 NM right)
-//    leadFollowingDistanceRight <Number>     ! Desired distance right(+) of the lead (meters)
+//    leadFollowingDistanceRight <Distance>        ! Desired distance right(+) of the lead (Default: 1 NM right)
+//    leadFollowingDistanceRight <Number>          ! Desired distance right(+) of the lead (meters)
 //
-//    leadFollowingDeltaAltitude <Distance>   ! Desired delta altitude above(+) the lead (Default: 2000ft below)
-//    leadFollowingDeltaAltitude <Number>     ! Desired delta altitude above(+) the lead (meters)
+//    leadFollowingDeltaAltitude <Distance>        ! Desired delta altitude above(+) the lead (Default: 2000ft below)
+//    leadFollowingDeltaAltitude <Number>          ! Desired delta altitude above(+) the lead (meters)
 //
-//    leadPlayerName             <Identifier> ! Name of our lead player (default: 0)
-//    followTheLeadMode          <Number>     ! "Follow the lead" mode flag (must be set after 'leadPlayer') (default: false)
+//    leadPlayerName             <Identifier>      ! Name of our lead player (default: 0)
+//    followTheLeadMode          <Number>          ! "Follow the lead" mode flag (must be set after 'leadPlayer') (default: false)
 //
-//    maxRateOfTurnDps           <Number>     ! Maximum rate of turn (degrees per second)
-//    maxBankAngle               <Number>     ! Maximum bank angle (degrees)
-//    maxClimbRateFpm            <Number>     ! Maximum climb / dive rate (feet per minute)
-//    maxClimbRateMps            <Number>     ! Maximum climb / dive rate (meters per second)
-//    maxPitchAngle              <Number>     ! Maximum pitch angle (degrees)
-//    maxAcceleration            <Number>     ! Maximum velocity acceleration (NPS)
+//    maxRateOfTurnDps           <Number>          ! Maximum rate of turn (degrees per second)
+//    maxBankAngle               <Number>          ! Maximum bank angle (degrees)
+//    maxClimbRateFpm            <Number>          ! Maximum climb / dive rate (feet per minute)
+//    maxClimbRateMps            <Number>          ! Maximum climb / dive rate (meters per second)
+//    maxPitchAngle              <Number>          ! Maximum pitch angle (degrees)
+//    maxAcceleration            <Number>          ! Maximum velocity acceleration (NPS)
 //
 // Notes:
 //   1) Default is Nav (route follow) mode, which forces heading, altitude and

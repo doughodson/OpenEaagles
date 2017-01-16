@@ -1,6 +1,17 @@
+
+#ifndef __oe_instruments_BearingPointer_H__
+#define __oe_instruments_BearingPointer_H__
+
+#include "openeaagles/instruments/maps/CompassRose.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
+
+namespace oe {
+namespace base { class Angle; class Number; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: BearingPointer
-// Base Class: base::Object -> graphics::Graphic -> CompassRose -> BearingPointer
 //
 // Description: This is a bearing pointer, which works in conjunction with
 // a compass rose to determine bearing, however, it is independent of CompassRose,
@@ -13,14 +24,6 @@
 //      UPDATE_VALUE7 - sets bearing (radians or base::Angle)
 //      UPDATE_VALUE8 - sets bearing (degrees)
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_BearingPointer_H__
-#define __oe_instruments_BearingPointer_H__
-
-#include "openeaagles/instruments/maps/CompassRose.hpp"
-
-namespace oe {
-namespace instruments {
-
 class BearingPointer : public CompassRose
 {
     DECLARE_SUBCLASS(BearingPointer, CompassRose)
@@ -29,7 +32,7 @@ public:
     BearingPointer();
 
     double getBearingRad() const { return bearing; } // radians
-    double getBearingDeg() const { return bearing * static_cast<double>(base::Angle::R2DCC); }    // degrees
+    double getBearingDeg() const { return bearing * static_cast<double>(base::angle::R2DCC); }    // degrees
     graphics::Graphic* getHeadGraphic() const { return head; }
     graphics::Graphic* getTailGraphic() const { return tail; }
 

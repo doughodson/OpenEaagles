@@ -7,7 +7,9 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -78,7 +80,7 @@ ScanGimbal::ScanGimbal()
    barNum = 1;
    conAngle = 0.0;
    revPerSec = 5.0;  // 5 hz
-   scanRadius = (2.0 * base::Angle::D2RCC); // 2 degree radius
+   scanRadius = (2.0 * base::angle::D2RCC); // 2 degree radius
    myLastAngle = 0.0;
    prScanVertices = nullptr;
    nprv = 0;
@@ -229,7 +231,7 @@ void ScanGimbal::conicalScanController(const double dt)
         case 2: {
             // start scan
             setFastSlewMode(false);
-            setConAngle( base::Angle::aepcdDeg(degPerDT + getConAngle()) );
+            setConAngle( base::angle::aepcdDeg(degPerDT + getConAngle()) );
 
             // Trigger the SCAN_START event handler
             onStartScanEvent(&iBar);
@@ -243,7 +245,7 @@ void ScanGimbal::conicalScanController(const double dt)
             // turn revolutions per second into degrees per sec per frame
             // now we get this to each time step
             double conAngleN1 = getConAngle();
-            setConAngle( base::Angle::aepcdDeg(degPerDT + getConAngle()) );
+            setConAngle( base::angle::aepcdDeg(degPerDT + getConAngle()) );
 
             // end scan - finished with one rotation, check if our reference has moved
             bool onceAround = false;
@@ -268,9 +270,9 @@ void ScanGimbal::conicalScanController(const double dt)
     }
 
     // azimuth
-    const double newX = getScanRadius() * std::sin(getConAngle() * base::Angle::D2RCC);
+    const double newX = getScanRadius() * std::sin(getConAngle() * base::angle::D2RCC);
     // elevation
-    const double newY = getScanRadius() * std::cos(getConAngle() * base::Angle::D2RCC);
+    const double newY = getScanRadius() * std::cos(getConAngle() * base::angle::D2RCC);
     setScanPos(newX, newY);
 
     // command our new position
@@ -359,7 +361,7 @@ void ScanGimbal::spiralScanController(const double dt)
     if (getRevPerSec() < 0.0) {
         fullAngleRadians = -fullAngleRadians;
     }
-    fullAngleRadians = (fullAngleRadians + getConAngle()) * base::Angle::D2RCC;
+    fullAngleRadians = (fullAngleRadians + getConAngle()) * base::angle::D2RCC;
 
     // azimuth
     const double newX = getScanRadius() * (fullAngleRadians / (2.0 * base::PI)) * std::sin(fullAngleRadians);
@@ -403,7 +405,7 @@ void ScanGimbal::circularScanController(const double)
             onStartScanEvent(&iBar);
             setServoMode(RATE_SERVO);
             setFastSlewMode(false);
-            myLastAngle = base::Angle::aepcdRad(getPosition().x() - getRefPosition().x());
+            myLastAngle = base::angle::aepcdRad(getPosition().x() - getRefPosition().x());
             setScanState(3);
         }
             break;
@@ -412,7 +414,7 @@ void ScanGimbal::circularScanController(const double)
             // end scan - finished with one rotation, start over again
             bool onceAround = false;
 
-            double myAngle = base::Angle::aepcdRad(getPosition().x() - getRefPosition().x());
+            double myAngle = base::angle::aepcdRad(getPosition().x() - getRefPosition().x());
             // clockwise
             if(getCmdAzRate() >= 0.0) {
                 onceAround = (myLastAngle < 0.0 && myAngle >= 0.0);
@@ -683,12 +685,12 @@ bool ScanGimbal::resetScan()
 
 double ScanGimbal::getScanWidthD() const
 {
-   return scanWidth * base::Angle::R2DCC;
+   return scanWidth * base::angle::R2DCC;
 }
 
 double ScanGimbal::getScanHeightD() const
 {
-   return scanHeight * base::Angle::R2DCC;
+   return scanHeight * base::angle::R2DCC;
 }
 
 void ScanGimbal::getScanVolume(double* const width, double* const height) const
@@ -699,13 +701,13 @@ void ScanGimbal::getScanVolume(double* const width, double* const height) const
 
 void ScanGimbal::getScanVolumeD(double* const width, double* const height) const
 {
-   if (width != nullptr) *width = scanWidth * base::Angle::R2DCC;
-   if (height != nullptr) *height = scanHeight * base::Angle::R2DCC;
+   if (width != nullptr) *width = scanWidth * base::angle::R2DCC;
+   if (height != nullptr) *height = scanHeight * base::angle::R2DCC;
 }
 
 double ScanGimbal::getScanRadiusD() const
 {
-   return scanRadius * base::Angle::R2DCC;
+   return scanRadius * base::angle::R2DCC;
 }
 
 //------------------------------------------------------------------------------
@@ -746,11 +748,11 @@ bool ScanGimbal::setSearchVolume(const double width, const double height, const 
     scanHeight = height;
 
     if (reqBars != 1 && reqBars != 2 && reqBars != 3 && reqBars != 4) {
-        if (scanHeight < (base::Angle::D2RCC * 1.0f))
+        if (scanHeight < (base::angle::D2RCC * 1.0f))
             numBars = 1;
-        else if (scanHeight < (base::Angle::D2RCC * 5.0f))
+        else if (scanHeight < (base::angle::D2RCC * 5.0f))
             numBars = 2;
-        else if (scanHeight < (base::Angle::D2RCC * 10.0f))
+        else if (scanHeight < (base::angle::D2RCC * 10.0f))
             numBars = 3;
         else
             numBars = 4;

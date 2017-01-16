@@ -1,0 +1,122 @@
+
+References for unit definition and conversion
+---------------------------------------------
+
+#---------------
+# Angles
+#---------------
+
+The NIST Reference on Constants, Units, and Uncertainty
+
+All constants were collected via the internet from
+http://physics.nist.gov/cuu/Units/outside.html
+National Institute of Technology Standards website.
+
+Note: Since all Angles are based in Semicircles, all conversions will either convert
+to or from semicircles.
+
+#---------------
+# Area
+#---------------
+
+These constants were obtained from the following websites, and are assumed
+accurate as of 2/5/03.
+
+http://www.engineering.ucsb.edu/~me15web/top_menu/tables/table_4_unit_conversion.htm#4a
+- California State Berkley Engineering Department
+http://web.aces.uiuc.edu/aim/IAH/math/area.html - University of Illinois
+http://marian.creighton.edu/~besser/javascr/area.html - Creighton University
+http://www.units.muohio.edu/hydrogeology/glg207l/207lexercises/areas.jpg - Ohio University
+http://quickfacts.census.gov/qfd/meta/long_101619.htm - Census Department
+http://academic.regis.edu/mlotfy/cs422/Problem%20Document.htm - Regis University
+http://unr.edu/homepage/kimura/tables.html - University of Nevada, Reno
+
+Note: All Decibel conversions came from the radar detection system PowerPoint presentation
+slides 47 and 48.
+
+#---------------
+# Energy
+#---------------
+
+These constants were obtained from the Department of Energy, and are assumed
+accurate as of 2/5/03.
+
+http://www.eia.doe.gov/kids/units.xls - Department of Energy
+Source cited for website: Monthly Energy Review, Energy Information
+Administration, Appendix A "Thermal conversion Factors" Sept. 2002, p. 161
+
+#---------------
+# Force
+#---------------
+
+These constants were obtained (and cross referenced) from the following
+websites, and are assumed accurate as of 2/5/03.
+
+http://labserver.catlin.edu/faculty/merrilla/ics/SpaceTravel.html
+- Catlin Gabel School
+http://www.pitt.edu/~rsup/forceconv.html  - University of Pittsburg
+http://www.unc.edu/~rowlett/units/dictK.html - U. of N.C.(Chapel Hill)
+Source for above (unc) website: Russ Rowlett dictionary - July 28, 2000
+http://www.uoregon.edu/~opp/climbing/forcesinleadfalls.pdf - U. of Oregon
+
+#---------------
+# Frequency
+#---------------
+
+All metric conversions were based on the conversion tables found in
+the Transportation Energy Data Book: Edition 22 - 2002, which can be found out
+http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf
+
+Note: Since all frequency classes are based in hertz, all conversions will either
+convert to or from hertz.
+
+#---------------
+# Mass
+#---------------
+
+These constants were obtained (and cross referenced) from the following
+websites, and are assumed accurate as of 2/5/03.
+
+http://oncampus.richmond.edu/academics/as/education/projects/webunits/measurement/mass1.html
+- University of Richmond
+http://www.ex.ac.uk/cimt/dictunit/ccmass.htm - University of Exeter
+http://iul.eng.fiu.edu/Teaching/controls/course/summer2001/Appendices.pdf
+- Florida International University
+http://faculty.millikin.edu/~jaskill.nsm.faculty.mu/slug.html - Millikin University
+http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf
+- Source:  Transportation Energy Data Book: Edition 22 - 2002
+
+Note: Since all units are converted to or from KiloGrams, only those constants
+will be defined.
+
+#---------------
+# Power
+#---------------
+
+These constants were obtained (and cross referenced) from the following
+websites, and are assumed accurate as of 2/5/03.
+
+http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf
+- U.S. Center for Transportation Analysis
+http://www.energy.rochester.edu/units/conversions.pdf
+- Henry Manczyk, C.P.E., C.E.M.
+http://www.uwsp.edu/cnr/wcee/keep/Mod1/Whatis/energyresourcetables.htm
+- U. of Wisconsin
+http://lectureonline.cl.msu.edu/~mmp/kap5/cd129.htm
+- Michigan State University
+
+Note: Since all units are converted to or from Watts, only those constants
+will be defined.
+
+#---------------
+# Volume
+#---------------
+
+These constants were obtained from the following websites, and are assumed
+accurate as of 9/03/03.
+
+http://ts.nist.gov/ts/htdocs/230/235/h4402/appenc.pdf - National Institute of Standards and Technology
+http://www.calculator.org/properties/volume.prop - Flow Simulation Calculator
+http://www.gcsaa.org/resource/supertools/volume_form.asp - Golf Course Superintendents Association of America
+http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf - Transportation Energy Data Book: Edition 22 - 2002
+

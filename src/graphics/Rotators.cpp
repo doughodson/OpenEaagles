@@ -1,5 +1,8 @@
+
 #include "openeaagles/graphics/Rotators.hpp"
+
 #include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/Angles.hpp"
 
 namespace oe {
 namespace graphics {
@@ -61,7 +64,7 @@ bool Rotators::setXRotation(const double angle)
 //------------------------------------------------------------------------------
 bool Rotators::setXRotationDeg(const double angle)
 {
-    xRot = angle * static_cast<double>(base::Angle::D2RCC);
+    xRot = angle * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 
@@ -79,7 +82,7 @@ bool Rotators::setYRotation(const double angle)
 //------------------------------------------------------------------------------
 bool Rotators::setYRotationDeg(const double angle)
 {
-    yRot = angle * static_cast<double>(base::Angle::D2RCC);
+    yRot = angle * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 
@@ -88,7 +91,7 @@ bool Rotators::setYRotationDeg(const double angle)
 //------------------------------------------------------------------------------
 bool Rotators::setZRotationDeg(const double angle)
 {
-    zRot = angle * static_cast<double>(base::Angle::D2RCC);
+    zRot = angle * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 
@@ -117,9 +120,9 @@ bool Rotators::setRotations(const double x, const double y, const double z)
 //------------------------------------------------------------------------------
 bool Rotators::setRotationsDeg(const double x, const double y, const double z)
 {
-    xRot = x * static_cast<double>(base::Angle::D2RCC);
-    yRot = y * static_cast<double>(base::Angle::D2RCC);
-    zRot = z * static_cast<double>(base::Angle::D2RCC);
+    xRot = x * static_cast<double>(base::angle::D2RCC);
+    yRot = y * static_cast<double>(base::angle::D2RCC);
+    zRot = z * static_cast<double>(base::angle::D2RCC);
     return true;
 }
 

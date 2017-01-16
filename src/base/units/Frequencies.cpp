@@ -8,29 +8,13 @@
 namespace oe {
 namespace base {
 
-
 //==============================================================================
 // Frequency --
 //==============================================================================
-IMPLEMENT_ABSTRACT_SUBCLASS(Frequency, "Frequency")
+IMPLEMENT_ABSTRACT_SUBCLASS(Frequency, "AbstractFrequency")
 EMPTY_SLOTTABLE(Frequency)
+EMPTY_DELETEDATA(Frequency)
 
-// Conversion constants
-const double Frequency::KHz2Hz = 1000.0f;                   // KiloHertz => Hertz
-const double Frequency::Hz2KHz = (1.0f / 1000.0f);          // Hertz => KiloHertz
-
-const double Frequency::MHz2Hz = 1000000.0f;                // MegaHertz => Hertz
-const double Frequency::Hz2MHz = (1.0f / 1000000.0f);       // Hertz => MegaHertz
-
-const double Frequency::GHz2Hz = 1000000000.0f;             // GigaHertz => Hertz
-const double Frequency::Hz2GHz = (1.0f / 1000000000.0f);    // Hertz => GigaHertz
-
-const double Frequency::THz2Hz = 1000000000000.0f;          // TeraHertz => Hertz
-const double Frequency::Hz2THz = (1.0f / 1000000000000.0f); // Hertz => TeraHertz
-
-// ---
-// constructors
-// ---
 Frequency::Frequency() : Number()
 {
     STANDARD_CONSTRUCTOR()
@@ -41,23 +25,12 @@ Frequency::Frequency(const double value) : Number(value)
     STANDARD_CONSTRUCTOR()
 }
 
-// ---
-// copy data
-// ---
 void Frequency::copyData(const Frequency& org, const bool)
 {
    BaseClass::copyData(org);
    val = fromFrequency(org.toFrequency());;
 }
 
-// ---
-// delete data
-// ---
-EMPTY_DELETEDATA(Frequency)
-
-// ---
-// serialize() -- print functions
-// ---
 std::ostream& Frequency::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -79,12 +52,13 @@ std::ostream& Frequency::serialize(std::ostream& sout, const int i, const bool s
     return sout;
 }
 
-
 //==============================================================================
 // Hertz --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Hertz, "Hertz")
 EMPTY_SERIALIZER(Hertz)
+EMPTY_COPYDATA(Hertz)
+EMPTY_DELETEDATA(Hertz)
 
 Hertz::Hertz() : Frequency()
 {
@@ -102,15 +76,13 @@ Hertz::Hertz(const Frequency& value) : Frequency()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(Hertz)
-EMPTY_DELETEDATA(Hertz)
-
-
 //==============================================================================
 // KiloHertz --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(KiloHertz, "KiloHertz")
 EMPTY_SERIALIZER(KiloHertz)
+EMPTY_COPYDATA(KiloHertz)
+EMPTY_DELETEDATA(KiloHertz)
 
 KiloHertz::KiloHertz() : Frequency()
 {
@@ -128,14 +100,13 @@ KiloHertz::KiloHertz(const Frequency& value) : Frequency()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(KiloHertz)
-EMPTY_DELETEDATA(KiloHertz)
-
 //==============================================================================
 // MegaHertz --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(MegaHertz, "MegaHertz")
 EMPTY_SERIALIZER(MegaHertz)
+EMPTY_COPYDATA(MegaHertz)
+EMPTY_DELETEDATA(MegaHertz)
 
 MegaHertz::MegaHertz() : Frequency()
 {
@@ -153,14 +124,13 @@ MegaHertz::MegaHertz(const Frequency& value) : Frequency()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(MegaHertz)
-EMPTY_DELETEDATA(MegaHertz)
-
 //==============================================================================
 // GigaHertz --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GigaHertz, "GigaHertz")
 EMPTY_SERIALIZER(GigaHertz)
+EMPTY_COPYDATA(GigaHertz)
+EMPTY_DELETEDATA(GigaHertz)
 
 GigaHertz::GigaHertz() : Frequency()
 {
@@ -178,14 +148,13 @@ GigaHertz::GigaHertz(const Frequency& value) : Frequency()
     BaseClass::copyData(value,true);
 }
 
-EMPTY_COPYDATA(GigaHertz)
-EMPTY_DELETEDATA(GigaHertz)
-
 //==============================================================================
 // TeraHertz --
 //==============================================================================
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(TeraHertz, "TeraHertz")
 EMPTY_SERIALIZER(TeraHertz)
+EMPTY_COPYDATA(TeraHertz)
+EMPTY_DELETEDATA(TeraHertz)
 
 TeraHertz::TeraHertz() : Frequency()
 {
@@ -202,9 +171,6 @@ TeraHertz::TeraHertz(const Frequency& value) : Frequency()
     STANDARD_CONSTRUCTOR()
     BaseClass::copyData(value,true);
 }
-
-EMPTY_COPYDATA(TeraHertz)
-EMPTY_DELETEDATA(TeraHertz)
 
 }
 }

@@ -13,16 +13,15 @@ class Number;
 
 //------------------------------------------------------------------------------
 // Class: Transform
-// Base class:  Object -> Transform
 // Factory name:Transform
 // Slots:
-//  x    <Number>    ! x transform (default: identity)
+//  x    <Number>   ! x transform (default: identity)
 //  x    <Angle>    ! x transform (default: identity)
-//  y    <Number>    ! y transform (default: identity)
+//  y    <Number>   ! y transform (default: identity)
 //  y    <Angle>    ! y transform (default: identity)
-//  z    <Number>    ! z transform (default: identity)
+//  z    <Number>   ! z transform (default: identity)
 //  z    <Angle>    ! z transform (default: identity)
-//  w    <Number>    ! w transform (default: identity)
+//  w    <Number>   ! w transform (default: identity)
 //  w    <Angle>    ! w transform (default: identity)
 //
 // Description: Coordinate Transformations (e.g., translate, rotate, scale)
@@ -49,7 +48,7 @@ class Transform : public Object
 
 public:
     Transform();
-    operator const osg::Matrixd&()           { return m; }
+    operator const osg::Matrixd&()                                         { return m; }
     virtual bool setComputematrix1(const Angle* const sc1obj);
     virtual bool setComputematrix1(const Number* const sc1obj);
     virtual bool setComputematrix2(const Angle* const sc2obj);

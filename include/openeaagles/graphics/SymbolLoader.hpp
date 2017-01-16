@@ -4,7 +4,10 @@
 
 #include "openeaagles/graphics/MapPage.hpp"
 
+#include "openeaagles/base/units/unit_utils.hpp"
+
 namespace oe {
+namespace base { class Degrees; }
 namespace graphics {
 
 class SlSymbol;
@@ -311,7 +314,7 @@ inline double SlSymbol::getScreenXPos() const            { return xScreenPos; }
 inline double SlSymbol::getScreenYPos() const            { return yScreenPos; }
 
 inline double SlSymbol::getHeadingDeg() const            { return hdg; }
-inline double SlSymbol::getHeadingRad() const            { return static_cast<double>(hdg * base::Angle::D2RCC); }
+inline double SlSymbol::getHeadingRad() const            { return static_cast<double>(hdg * base::angle::D2RCC); }
 inline base::Degrees* SlSymbol::getHdgAngleObj() const   { return hdgAng; }
 inline Graphic* SlSymbol::getHdgGraphics() const         { return phdg; }
 

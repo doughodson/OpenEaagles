@@ -395,7 +395,7 @@ std::ostream& Radio::serialize(std::ostream& sout, const int i, const bool slots
       for (unsigned short chan = 1; chan <= getNumberOfChannels(); chan++) {
          double freq = getChannelFrequency(chan);
          indent(sout,i+j+4);
-         sout << "( MegaHertz " << (freq * base::Frequency::Hz2MHz) << " )" << std::endl;
+         sout << "( MegaHertz " << (freq * base::frequency::Hz2MHz) << " )" << std::endl;
       }
 
       indent(sout,i+j);

@@ -14,9 +14,11 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -272,7 +274,7 @@ void Steerpoint::reset()
 
 double Steerpoint::getElevationFt() const
 {
-    return getElevationM() * base::Distance::M2FT;
+    return getElevationM() * base::distance::M2FT;
 }
 
 const char* Steerpoint::getDescription() const
@@ -300,7 +302,7 @@ double Steerpoint::getLongitude() const
 
 double Steerpoint::getCmdAltitudeFt() const
 {
-    return getCmdAltitude() * base::Distance::M2FT;
+    return getCmdAltitude() * base::distance::M2FT;
 }
 
 //------------------------------------------------------------------------------
@@ -712,10 +714,10 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
 
             setTrueBrgDeg( static_cast<double>(toBrg) );
             setDistNM( static_cast<double>(toDist) );
-            setMagBrgDeg( base::Angle::aepcdDeg( getTrueBrgDeg() - getMagVarDeg() ) );
+            setMagBrgDeg( base::angle::aepcdDeg( getTrueBrgDeg() - getMagVarDeg() ) );
 
             if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
-                toTTG = (toDist/nav->getGroundSpeedKts()) * base::Time::H2S;
+                toTTG = (toDist/nav->getGroundSpeedKts()) * base::time::H2S;
             }
             setTTG(static_cast<double>(toTTG));
 
@@ -729,10 +731,10 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
                 // When we have a 'from' steerpoint, we can compute this leg's data
                 base::Nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
                 setTrueCrsDeg( static_cast<double>(toBrg) );
-                setMagCrsDeg( base::Angle::aepcdDeg( getTrueCrsDeg() - getMagVarDeg() ) );
+                setMagCrsDeg( base::angle::aepcdDeg( getTrueCrsDeg() - getMagVarDeg() ) );
                 setLegDistNM( static_cast<double>(toDist) );
                 if (nav->isVelocityDataValid() && nav->getGroundSpeedKts() > 0.0) {
-                    toTTG = (toDist/nav->getGroundSpeedKts()) * base::Time::H2S;
+                    toTTG = (toDist/nav->getGroundSpeedKts()) * base::time::H2S;
                 }
                 setLegTime( static_cast<double>(toTTG) );
                 setDistEnrouteNM( from->getDistEnrouteNM() + getLegDistNM() );
@@ -753,14 +755,14 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             // ---
             setETA( static_cast<double>(getETE() + nav->getUTC()) );
             double delta = getPTA() - getETA();
-            if (delta >= base::Time::D2S) delta -= base::Time::D2S;
+            if (delta >= base::time::D2S) delta -= base::time::D2S;
             setELT( delta );
 
             // ---
             // Compute Cross-track error (NM); negative values are when the desired track
             //  to this point is left of our navigation position
             // ---
-            double aa = base::Angle::aepcdDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<double>(base::Angle::D2RCC);
+            double aa = base::angle::aepcdDeg( getTrueBrgDeg() - getTrueCrsDeg() ) * static_cast<double>(base::angle::D2RCC);
             setCrossTrackErrNM( getDistNM() * std::sin(aa) );
 
             // ---

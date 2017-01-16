@@ -6,10 +6,6 @@
 
 #include "openeaagles/simulation/Station.hpp"
 
-#include "openeaagles/base/ubf/Action.hpp"
-#include "openeaagles/base/ubf/Behavior.hpp"
-#include "openeaagles/base/ubf/State.hpp"
-
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/String.hpp"
 

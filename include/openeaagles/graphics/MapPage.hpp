@@ -3,7 +3,8 @@
 #define __oe_graphics_MapPage_H__
 
 #include "openeaagles/graphics/MfdPage.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -191,11 +192,11 @@ private:
 
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }
 inline double MapPage::getReferenceLonDeg() const  { return referenceLon; }
-inline double MapPage::getReferenceLatRad() const  { return referenceLat * base::Angle::D2RCC; }
-inline double MapPage::getReferenceLonRad() const  { return referenceLon * base::Angle::D2RCC; }
+inline double MapPage::getReferenceLatRad() const  { return referenceLat * base::angle::D2RCC; }
+inline double MapPage::getReferenceLonRad() const  { return referenceLon * base::angle::D2RCC; }
 inline double MapPage::getCosRefLat() const        { return static_cast<double>(cosineLatReference); }
 inline double MapPage::getHeadingDeg() const       { return static_cast<double>(heading); }
-inline double MapPage::getHeadingRad() const       { return static_cast<double>(heading * base::Angle::D2RCC); }
+inline double MapPage::getHeadingRad() const       { return static_cast<double>(heading * base::angle::D2RCC); }
 inline double MapPage::getOuterRadius() const      { return static_cast<double>(outerRadius); }
 inline double MapPage::getCurrentRadius() const    { return static_cast<double>(isCentered ? outerRadius : outerRadiusDC);  }
 inline double MapPage::getOuterRadiusDC() const    { return static_cast<double>(outerRadiusDC); }
@@ -208,7 +209,7 @@ inline bool   MapPage::getNorthUp() const          { return northUp; }
 inline bool MapPage::setReferenceLatDeg(const double newLat)
 {
    referenceLat = newLat;
-   cosineLatReference = static_cast<double>(std::cos((base::Angle::D2RCC*referenceLat)));
+   cosineLatReference = static_cast<double>(std::cos((base::angle::D2RCC*referenceLat)));
    return true;
 }
 
@@ -221,19 +222,19 @@ inline bool MapPage::setReferenceLonDeg(const double newLon)
 inline bool MapPage::setReferenceLatRad(const double newLat)
 {
    cosineLatReference = static_cast<double>(std::cos(newLat));
-   referenceLat = newLat * base::Angle::R2DCC;
+   referenceLat = newLat * base::angle::R2DCC;
    return true;
 }
 
 inline bool MapPage::setReferenceLonRad(const double newLon)
 {
-   referenceLon = newLon * base::Angle::R2DCC;
+   referenceLon = newLon * base::angle::R2DCC;
    return true;
 }
 
 inline bool MapPage::setHeadingDeg(const double newHeading)
 {
-   double hdgRad = static_cast<double>(base::Angle::D2RCC * newHeading);
+   double hdgRad = static_cast<double>(base::angle::D2RCC * newHeading);
    heading = newHeading;
    headingSin = static_cast<double>(std::sin(hdgRad));
    headingCos = static_cast<double>(std::cos(hdgRad));
@@ -242,7 +243,7 @@ inline bool MapPage::setHeadingDeg(const double newHeading)
 
 inline bool MapPage::setHeadingRad(const double newHeading)
 {
-   heading = newHeading * static_cast<double>(base::Angle::R2DCC);
+   heading = newHeading * static_cast<double>(base::angle::R2DCC);
    double temp = newHeading;
    if (northUp) temp = 0;
    headingSin = static_cast<double>(std::sin(temp));

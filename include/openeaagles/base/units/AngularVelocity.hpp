@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Class AngularVelocity
-//------------------------------------------------------------------------------
 
 #ifndef __oe_base_AngularVelocity_H__
 #define __oe_base_AngularVelocity_H__
@@ -15,7 +12,6 @@ class Time;
 
 //------------------------------------------------------------------------------
 // Class AngularVelocity
-// Base class:  Object -> Number -> AngularVelocity
 //
 // Description: Angular velocity with internal units of radians/second.
 //                Will convert to desired units if needed.
@@ -88,10 +84,6 @@ class AngularVelocity : public Number
 
 public:
 
-//------------------------------------------------------------------------------
-//Constructors:
-//------------------------------------------------------------------------------
-
     //Constructor for input parser:
     AngularVelocity();
     //Constructor with input as radians per second:
@@ -99,18 +91,10 @@ public:
     //Constructor with angle in units desired and time in units desired:
     AngularVelocity(const Angle* const newAngle, const Time* const newTime);
 
-//------------------------------------------------------------------------------
-//Get functions:
-//------------------------------------------------------------------------------
-
     //Returns in radians/second:
     double getRadiansPerSecond() const;
     //Convert routine - converts angular velocity and outputs in units specified:
     double convert(Angle* newAngle, Time* newTime);
-
-//------------------------------------------------------------------------------
-//Set functions:
-//------------------------------------------------------------------------------
 
     //Sets Value of Object - Be sure input is in (rad/sec)
     bool setRadiansPerSecond(const double newAngularVelocity);
@@ -126,10 +110,8 @@ public:
     bool setSlotTime(const Time* const msg);        //Input as type of time (Seconds, MilliSeconds, ...)
 
 private:
-
     double        angle;                            // holds our angle (radians)
     double        time;                             // holds our time (seconds)
-
 };
 
 }

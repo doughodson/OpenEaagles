@@ -14,9 +14,9 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
+
 #include "openeaagles/base/units/Times.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 namespace models {
@@ -251,7 +251,7 @@ void Navigation::process(const double dt)
 
    // Update UTC
    double v = utc + dt;
-   if (v >= base::Time::D2S) v = (v - base::Time::D2S);
+   if (v >= base::time::D2S) v = (v - base::time::D2S);
    setUTC(v);
 
    // ---
@@ -294,7 +294,7 @@ double Navigation::getLongitude() const
 // Returns system altitude (ft)
 double Navigation::getAltitudeFt() const
 {
-    return getAltitudeM() * base::Distance::M2FT;
+    return getAltitudeM() * base::distance::M2FT;
 }
 
 // Returns system altitude (m)
@@ -348,7 +348,7 @@ double Navigation::getMagVarDeg() const
 // Returns the mag heading
 double Navigation::getMagHeadingD() const
 {
-   return base::Angle::aepcdDeg(getHeadingDeg() + getMagVarDeg());
+   return base::angle::aepcdDeg(getHeadingDeg() + getMagVarDeg());
 }
 
 // Are the winds valid?
@@ -534,7 +534,7 @@ bool Navigation::setAttitude(const double roll0, const double pitch0, const doub
    heading = thdg0;
    base::Nav::computeRotationalMatrixDeg(roll0, pitch0, thdg0, &rm);
 
-   if (magVarValid) mhdg = base::Angle::aepcdDeg(heading - magvar);
+   if (magVarValid) mhdg = base::angle::aepcdDeg(heading - magvar);
    else mhdg = heading;
 
    attValid = true;
@@ -551,7 +551,7 @@ bool Navigation::setAttitude(const bool flg)
 bool Navigation::setMagVar(const double mvDeg)
 {
    magvar = mvDeg;
-   if (attValid) mhdg = base::Angle::aepcdDeg(heading - magvar);
+   if (attValid) mhdg = base::angle::aepcdDeg(heading - magvar);
    magVarValid = true;
    return true;
 }

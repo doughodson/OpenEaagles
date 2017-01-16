@@ -1,18 +1,18 @@
 
-#ifndef __oe_base_ubf_Action_H__
-#define __oe_base_ubf_Action_H__
+#ifndef __oe_base_ubf_AbstractAction_H__
+#define __oe_base_ubf_AbstractAction_H__
 
 #include "openeaagles/base/Object.hpp"
 
 namespace oe {
 
 namespace base {
-   class Component;
+class Component;
 
 namespace ubf {
 
 //------------------------------------------------------------------------------
-// Class: Action
+// Class: AbstractAction
 //
 // Description:
 //    Abstract base class for all Actions. They are responsible for
@@ -20,12 +20,12 @@ namespace ubf {
 //
 // Factory name: UbfAction
 //------------------------------------------------------------------------------
-class Action : public base::Object
+class AbstractAction : public base::Object
 {
-   DECLARE_SUBCLASS(Action, base::Object)
+   DECLARE_SUBCLASS(AbstractAction, base::Object)
 
 public:
-   Action();
+   AbstractAction();
 
    unsigned int getVote() const;
    void setVote(const unsigned int x);
@@ -37,8 +37,8 @@ private:
    unsigned int vote;
 };
 
-inline void Action::setVote(const unsigned int x)      { vote = x; return; }
-inline unsigned int Action::getVote() const            { return vote; }
+inline void AbstractAction::setVote(const unsigned int x)      { vote = x; return; }
+inline unsigned int AbstractAction::getVote() const            { return vote; }
 
 }
 }

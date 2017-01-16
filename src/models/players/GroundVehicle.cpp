@@ -3,8 +3,8 @@
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
 
 #include <cmath>

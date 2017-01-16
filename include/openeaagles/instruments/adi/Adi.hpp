@@ -17,20 +17,23 @@
 #define __oe_instruments_Adi_H__
 
 #include "openeaagles/instruments/Instrument.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
+namespace base { class Number; class Angle; }
 namespace instruments {
 
-class Adi : public Instrument {
-    DECLARE_SUBCLASS(Adi,Instrument)
+class Adi : public Instrument
+{
+    DECLARE_SUBCLASS(Adi, Instrument)
 
 public:
     Adi();
 
     double getPitchInches() const       { return scaledPitch; }
     double getPitch() const             { return getPreScaleInstValue(); }
-    double getRollDeg() const           { return curPhi * static_cast<double>(base::Angle::R2DCC); }
+    double getRollDeg() const           { return curPhi * static_cast<double>(base::angle::R2DCC); }
     double getRollRad() const           { return curPhi; }
     double getMaxRate() const           { return maxRate; }
 

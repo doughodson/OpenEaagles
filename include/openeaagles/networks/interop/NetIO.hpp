@@ -253,20 +253,20 @@ protected:
    virtual bool setFederationName(const base::String* const msg); // Sets our federation name
 
    // Set slot routines
-   virtual bool setSlotNetworkID(const base::Number* const p);                // Sets the network ID
-   virtual bool setSlotFederateName(const base::String* const msg);           // Sets our federate name
-   virtual bool setSlotFederationName(const base::String* const msg);         // Sets our federation name
-   virtual bool setSlotEnableInput(const base::Number* const p);              // Sets input enabled flag
-   virtual bool setSlotEnableOutput(const base::Number* const p);             // Sets output enabled flag
-   virtual bool setSlotEnableRelay(const base::Number* const p);              // Sets relay enabled flag
-   virtual bool setSlotTimeline(const base::Identifier* const p);             // Sets the source of the time ( UTC or EXEC )
-   virtual bool setSlotInputEntityTypes(base::PairStream* const msg);         // Sets the table of input entity to player mapper objects
-   virtual bool setSlotOutputEntityTypes(base::PairStream* const msg);        // Sets the table of output entity to player mapper objects
-   virtual bool setSlotMaxTimeDR(const base::Time* const msg);                // Sets the mac DR time(s)
-   virtual bool setSlotMaxPositionErr(const base::Distance* const msg);       // Sets the max positional error(s)
-   virtual bool setSlotMaxOrientationErr(const base::Angle* const msg);       // Sets the max orientation error(s)
-   virtual bool setSlotMaxAge(const base::Time* const msg);                   // Sets the max age(s)
-   virtual bool setSlotMaxEntityRange(const base::Distance* const msg);       // Sets the max entity range(s)
+   virtual bool setSlotNetworkID(const base::Number* const p);                   // Sets the network ID
+   virtual bool setSlotFederateName(const base::String* const msg);              // Sets our federate name
+   virtual bool setSlotFederationName(const base::String* const msg);            // Sets our federation name
+   virtual bool setSlotEnableInput(const base::Number* const p);                 // Sets input enabled flag
+   virtual bool setSlotEnableOutput(const base::Number* const p);                // Sets output enabled flag
+   virtual bool setSlotEnableRelay(const base::Number* const p);                 // Sets relay enabled flag
+   virtual bool setSlotTimeline(const base::Identifier* const p);                // Sets the source of the time ( UTC or EXEC )
+   virtual bool setSlotInputEntityTypes(base::PairStream* const msg);            // Sets the table of input entity to player mapper objects
+   virtual bool setSlotOutputEntityTypes(base::PairStream* const msg);           // Sets the table of output entity to player mapper objects
+   virtual bool setSlotMaxTimeDR(const base::Time* const msg);                   // Sets the mac DR time(s)
+   virtual bool setSlotMaxPositionErr(const base::Distance* const msg);          // Sets the max positional error(s)
+   virtual bool setSlotMaxOrientationErr(const base::Angle* const msg);          // Sets the max orientation error(s)
+   virtual bool setSlotMaxAge(const base::Time* const msg);                      // Sets the max age(s)
+   virtual bool setSlotMaxEntityRange(const base::Distance* const msg);          // Sets the max entity range(s)
 
    virtual bool shutdownNotification() override;
 

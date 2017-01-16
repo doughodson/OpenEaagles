@@ -17,8 +17,8 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/osg/Vec3d"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+
+#include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
 namespace otw {
@@ -191,9 +191,9 @@ void OtwPC::sendPcData()
         fmd.m_z_cg = 0;          // altitude
 
         const osg::Vec3d pos = av->getPosition();
-        fmd.m_pilot_eye_x = pos[0] * base::Distance::M2FT;
-        fmd.m_pilot_eye_y = pos[1] * base::Distance::M2FT;
-        fmd.m_pilot_eye_z = -pos[2] * base::Distance::M2FT;   // altitude
+        fmd.m_pilot_eye_x = pos[0] * base::distance::M2FT;
+        fmd.m_pilot_eye_y = pos[1] * base::distance::M2FT;
+        fmd.m_pilot_eye_z = -pos[2] * base::distance::M2FT;   // altitude
 
         fmd.m_alphad = av->getAngleOfAttackD();
         fmd.m_betad = av->getSideSlipD();

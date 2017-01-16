@@ -5,11 +5,8 @@
 #include "openeaagles/graphics/MapPage.hpp"
 
 namespace oe {
-
-namespace base { class String; }
-
+namespace base { class Number; class String; }
 namespace rpf {
-
 class TexturePager;
 class CadrgMap;
 

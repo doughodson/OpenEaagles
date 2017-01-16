@@ -4,7 +4,7 @@
 #include "openeaagles/base/FileReader.hpp"
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 
 #include <cstring>
@@ -134,7 +134,7 @@ void Database::setArea(const double lat, const double lon, const double mr)
 {
    refLat = lat;
    refLon = lon;
-   coslat = std::cos(lat * base::Angle::D2RCC);
+   coslat = std::cos(lat * base::angle::D2RCC);
    mrng   = mr;
 }
 

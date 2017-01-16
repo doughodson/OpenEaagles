@@ -7,7 +7,7 @@
 namespace oe {
 
 namespace base {
-namespace ubf { class Behavior; class State; }
+namespace ubf { class AbstractBehavior; class AbstractState; }
 }
 
 namespace simulation { class Station; }
@@ -44,11 +44,11 @@ protected:
    // generic controller
    virtual void controller(const double dt = 0.0);
 
-   void setState(base::ubf::State* const);
-   base::ubf::State* getState() const                { return state; }
+   void setState(base::ubf::AbstractState* const);
+   base::ubf::AbstractState* getState() const                { return state; }
 
    void setActor(base::Component* c);
-   base::Component* getActor()                       { return actor;}
+   base::Component* getActor()                               { return actor;}
 
    simulation::Station* getStation();
    Simulation* getSimulation();
@@ -56,21 +56,21 @@ protected:
    struct AgentItem
    {
       base::safe_ptr<base::String> actorName;
-      base::safe_ptr<base::ubf::Behavior> behavior;
+      base::safe_ptr<base::ubf::AbstractBehavior> behavior;
       base::safe_ptr<base::Component> actor;
    };
 
    static const unsigned int MAX_AGENTS = 10;
    bool clearAgentList();
-   bool addAgent( base::String* name, base::ubf::Behavior* const b);
+   bool addAgent( base::String* name, base::ubf::AbstractBehavior* const b);
 
    // slot functions
-   bool setSlotState(base::ubf::State* const state);
+   bool setSlotState(base::ubf::AbstractState* const state);
    bool setSlotAgentList(base::PairStream* const msg);
 
 private:
    base::Component* actor;
-   base::ubf::State* state;
+   base::ubf::AbstractState* state;
    simulation::Station* myStation;
 
    // agent/behavior list

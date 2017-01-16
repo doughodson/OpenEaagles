@@ -1,6 +1,3 @@
-// ---------------------------------------------------------------------------------
-// Class: CadrgMap
-// ---------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/CadrgMap.hpp"
 #include "openeaagles/maps/rpf/CadrgFile.hpp"
@@ -11,6 +8,8 @@
 #include "openeaagles/graphics/Texture.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/String.hpp"
 
 #include <cstring>
 
@@ -32,10 +31,6 @@ BEGIN_SLOT_MAP(CadrgMap)
     ON_SLOT(3, setSlotMapLevel, base::String)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor()
-//------------------------------------------------------------------------------
 CadrgMap::CadrgMap()
 {
     STANDARD_CONSTRUCTOR()
@@ -55,9 +50,6 @@ CadrgMap::CadrgMap()
     initLevelLoaded = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData()
-//------------------------------------------------------------------------------
 void CadrgMap::copyData(const CadrgMap& org, const bool cc)
 {
     // Copy our baseclass stuff first
@@ -94,9 +86,6 @@ void CadrgMap::copyData(const CadrgMap& org, const bool cc)
     initLevelLoaded = org.initLevelLoaded;
 }
 
-//------------------------------------------------------------------------------
-// deleteData()
-//------------------------------------------------------------------------------
 void CadrgMap::deleteData()
 {
     for (int i = 0; i < MAX_FILES; i++) {

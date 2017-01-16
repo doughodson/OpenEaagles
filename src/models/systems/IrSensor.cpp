@@ -20,8 +20,7 @@
 #include "openeaagles/models/Simulation.hpp"
 
 #include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/Angles.hpp"
+#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 
@@ -238,7 +237,7 @@ void IrSensor::transmit(const double dt)
          irQuery->setInstantaneousFieldOfView(getIFOV());
          irQuery->setSendingSensor(this);
          irQuery->setNEI(getNEI());
-         irQuery->setMaxRangeNM(getMaximumRange()* base::Distance::M2NM);
+         irQuery->setMaxRangeNM(getMaximumRange()* base::distance::M2NM);
          seeker->irRequestSignature(irQuery);
          irQuery->unref();
       } // If irQuery not null

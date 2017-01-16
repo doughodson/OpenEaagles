@@ -9,9 +9,23 @@
 //              Object -> Number -> Frequency -> MegaHertz
 //              Object -> Number -> Frequency -> GigaHertz
 //              Object -> Number -> Frequency -> TeraHertz
-//
-// Description:  Numbers as frequencies -- All metric equivalents of Hertz (kilo, nano, etc..)
-//               Base unit for Frequency derivations is a hertz.
+//------------------------------------------------------------------------------
+#ifndef __oe_base_Frequencies_H__
+#define __oe_base_Frequencies_H__
+
+#include "openeaagles/base/Number.hpp"
+#include "openeaagles/base/units/frequency_utils.hpp"
+#include <iostream>
+
+namespace oe {
+namespace base {
+
+//------------------------------------------------------------------------------
+// Class: Frequency
+// Base class:  Object -> Number -> Frequency
+// Description:  Base class for frequencies.  Defined as a hertz which is
+//               equivalent to an instance of Hertz with its value equal
+//               to 1.0.
 //
 //
 // Public methods (Defined in Frequency, and inherited by all derived classes):
@@ -44,34 +58,6 @@
 //        class.
 //
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Frequencies_H__
-#define __oe_base_Frequencies_H__
-
-#include "openeaagles/base/Number.hpp"
-#include <iostream>
-
-namespace oe {
-namespace base {
-
-// -----------------------------------------------------------------------------
-// Defined constants:
-// All constants were collected via the internet from
-//
-// All metric conversions were based on the conversion tables found in
-// the Transportation Energy Data Book: Edition 22 - 2002, which can be found out
-// http://www-cta.ornl.gov/cta/data/tedb22/Edition22_AppendixB.pdf
-// Since all frequency classes are based in hertz, all conversions will either
-// convert to or from hertz.
-///////////////////////////////////////////////
-
-/////////////////////////////////////////////
-//------------------------------------------------------------------------------
-// Class:  Frequency
-// Base class:  Object -> Number -> Frequency
-// Description:  Base class for frequencies.  Defined as a hertz which is
-//               equivalent to an instance of Hertz with its value equal
-//               to 1.0.
-//------------------------------------------------------------------------------
 class Frequency : public Number
 {
     DECLARE_SUBCLASS(Frequency, Number)
@@ -86,18 +72,7 @@ public:
     virtual double toFrequency() const = 0;
     virtual double fromFrequency(const double a) const = 0;
     double convert(const Frequency& n) { return fromFrequency(n.toFrequency()); }
-
-    // Conversion constants
-    static const double Hz2KHz;  // Hertz -> KiloHertz
-    static const double KHz2Hz;  // KiloHertz -> Hertz
-    static const double Hz2MHz;  // Hertz -> MegaHertz
-    static const double MHz2Hz;  // MegaHertz -> Hertz
-    static const double Hz2GHz;  // Hertz -> GigaHertz
-    static const double GHz2Hz;  // GigaHertz -> Hertz
-    static const double Hz2THz;  // TeraHertz -> Hertz
-    static const double THz2Hz;  // Hertz -> TeraHertz
 };
-
 
 inline std::ostream& operator<<(std::ostream& sout, const Frequency& n)
     { sout << "( " << n.getFactoryName() << " " << n.getReal() << " )"; return sout; }
@@ -137,9 +112,9 @@ public:
     KiloHertz(const Frequency& value);
 
 private:
-    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2KHz; }
-    virtual double toFrequency() const override                  { return static_cast<double>(val * KHz2Hz); }
-    virtual double fromFrequency(const double a) const override  { return a * Hz2KHz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * frequency::Hz2KHz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * frequency::KHz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * frequency::Hz2KHz; }
 };
 
 
@@ -157,9 +132,9 @@ public:
     MegaHertz(const double value);
     MegaHertz(const Frequency& value);
 
-    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2MHz; }
-    virtual double toFrequency() const override                  { return static_cast<double>(val * MHz2Hz); }
-    virtual double fromFrequency(const double a) const override  { return a * Hz2MHz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * frequency::Hz2MHz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * frequency::MHz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * frequency::Hz2MHz; }
 };
 
 
@@ -177,9 +152,9 @@ public:
     GigaHertz(const double value);
     GigaHertz(const Frequency& value);
 
-    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2GHz; }
-    virtual double toFrequency() const override                  { return static_cast<double>(val * GHz2Hz); }
-    virtual double fromFrequency(const double a) const override  { return a * Hz2GHz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * frequency::Hz2GHz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * frequency::GHz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * frequency::Hz2GHz; }
 };
 
 
@@ -197,9 +172,9 @@ public:
     TeraHertz(const double value);
     TeraHertz(const Frequency& value);
 
-    static double convertStatic(const Frequency &n)              { return n.toFrequency() * Hz2THz; }
-    virtual double toFrequency() const override                  { return static_cast<double>(val * THz2Hz); }
-    virtual double fromFrequency(const double a) const override  { return a * Hz2THz; }
+    static double convertStatic(const Frequency &n)              { return n.toFrequency() * frequency::Hz2THz; }
+    virtual double toFrequency() const override                  { return static_cast<double>(val * frequency::THz2Hz); }
+    virtual double fromFrequency(const double a) const override  { return a * frequency::Hz2THz; }
 };
 
 }
