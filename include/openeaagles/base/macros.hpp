@@ -138,8 +138,8 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static ::oe::base::ObjMetadata metadata;                                                                           \
-    public: static const ::oe::base::ObjMetadata* getMetadata();                                                                \
+    private: static ::oe::base::Metadata metadata;                                                                              \
+    public: static const ::oe::base::Metadata* getMetadata();                                                                   \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
@@ -152,11 +152,11 @@
 
 
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    ::oe::base::ObjMetadata ThisType::metadata(                                        \
+    ::oe::base::Metadata ThisType::metadata(                                           \
       typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
-    const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
+    const ::oe::base::Metadata* ThisType::getMetadata() { return &metadata; }          \
     const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -190,11 +190,11 @@
 
 
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    ::oe::base::ObjMetadata ThisType::metadata(                                        \
+    ::oe::base::Metadata ThisType::metadata(                                           \
       typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
-    const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
+    const ::oe::base::Metadata* ThisType::getMetadata() { return &metadata; }          \
     const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
@@ -211,11 +211,11 @@
 
 
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    ::oe::base::ObjMetadata ThisType::metadata(                                        \
+    ::oe::base::Metadata ThisType::metadata(                                           \
       typeid(ThisType).name(), FACTORYNAME,                                            \
         &ThisType::slottable, BaseClass::getMetadata()                                 \
     );                                                                                 \
-    const ::oe::base::ObjMetadata* ThisType::getMetadata() { return &metadata; }       \
+    const ::oe::base::Metadata* ThisType::getMetadata() { return &metadata; }          \
     const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \

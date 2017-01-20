@@ -1,25 +1,25 @@
 
-#include "openeaagles/base/ObjMetadata.hpp"
+#include "openeaagles/base/Metadata.hpp"
 
 #include "openeaagles/base/SlotTable.hpp"
 
 namespace oe {
 namespace base {
 
-ObjMetadata::ObjMetadata(
+Metadata::Metadata(
       const char* const cn,
       const char* const fn,
       const SlotTable* const slottbl,
-      const ObjMetadata* const metadata
+      const Metadata* const metadata
    ) : cname(cn), fname(fn), slottable(slottbl), baseMetadata(metadata), count(0), mc(0), tc(0)
 {}
 
-const char* ObjMetadata::getClassName() const
+const char* Metadata::getClassName() const
 {
     return cname;
 }
 
-const char* ObjMetadata::getFactoryName() const
+const char* Metadata::getFactoryName() const
 {
     return fname;
 }

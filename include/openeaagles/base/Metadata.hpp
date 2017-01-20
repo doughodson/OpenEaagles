@@ -1,29 +1,29 @@
 
-#ifndef __oe_base_ObjMetadata_H__
-#define __oe_base_ObjMetadata_H__
+#ifndef __oe_base_Metadata_H__
+#define __oe_base_Metadata_H__
 
 namespace oe {
 namespace base {
 class SlotTable;
 
 //------------------------------------------------------------------------------
-// Class: ObjMetadata
-// Description: Metadata about an object instance.  This includes its name,
+// Class: Metadata
+// Description: Metadata about class attributes and object instances.  This includes its name,
 //              slot table, and even the number of them in existance
 //------------------------------------------------------------------------------
-class ObjMetadata
+class Metadata
 {
 public:
-   ObjMetadata() = default;
-   ObjMetadata(const char* const, const char* const, const SlotTable* const, const ObjMetadata* const);
-   ObjMetadata(const ObjMetadata&) = delete;
-   ObjMetadata& operator=(const ObjMetadata&) = delete;
+   Metadata() = default;
+   Metadata(const char* const, const char* const, const SlotTable* const, const Metadata* const);
+   Metadata(const Metadata&) = delete;
+   Metadata& operator=(const Metadata&) = delete;
 
    const char* getClassName() const;
    const char* getFactoryName() const;
 
    const SlotTable* const slottable;         // pointer to the SlotTable
-   const ObjMetadata* const baseMetadata;    // pointer to the base object's metadata
+   const Metadata* const baseMetadata;       // pointer to the base object's metadata
    int count;                                // current number of object instances
    int mc;                                   // max number of instances in existance at the same time
    int tc;                                   // total number of instances created

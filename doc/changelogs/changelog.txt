@@ -72,7 +72,7 @@ base library
         reducing code clutter.
 
      -- Extracted '_Static' structure from Object and moved into a
-        standalone class called ObjMetadata, which is what it is.  Updated
+        standalone class called Metadata, which is what it is.  Updated
         Object itself to use this object (via, a variable called 'metadata')
         in lue of '_static to store class and object related information.  This has
         NO impact on API, but does make the code more readable, and provides

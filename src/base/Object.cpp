@@ -12,7 +12,7 @@ namespace base {
 // ---
 // Class and object metadata
 // ---
-ObjMetadata Object::metadata(typeid(Object).name(), "Object", &Object::slottable, nullptr);
+Metadata Object::metadata(typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -265,7 +265,7 @@ std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
 //------------------------------------------------------------------------------
 // return class metadata
 //------------------------------------------------------------------------------
-const ObjMetadata* Object::getMetadata()
+const Metadata* Object::getMetadata()
 {
     return &metadata;
 }

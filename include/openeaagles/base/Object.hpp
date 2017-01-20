@@ -14,7 +14,7 @@
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 
-#include "openeaagles/base/ObjMetadata.hpp"
+#include "openeaagles/base/Metadata.hpp"
 
 #include <iosfwd>
 
@@ -370,7 +370,7 @@ public:
       }
    };
 
-   static const ObjMetadata* getMetadata();
+   static const Metadata* getMetadata();
 
 protected:
    // slot table for this object (set to the object's class slot table)
@@ -388,7 +388,7 @@ private:
    mutable long semaphore;          // ref(), unref() semaphore
    mutable unsigned int refCount;   // reference count
 
-   static ObjMetadata metadata;
+   static Metadata metadata;
 };
 
 }
