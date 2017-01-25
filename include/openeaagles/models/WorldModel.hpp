@@ -5,13 +5,12 @@
 #include "openeaagles/simulation/SimExec.hpp"
 
 namespace oe {
-namespace base { class Distance; class String; class EarthModel; class LatLon; class Number; }
 namespace models {
 
 //------------------------------------------------------------------------------
 // Class: WorldModel
 //
-// Description: A model of the world environment in terms of earth model, coordinates,
+// Description: A model of the spatial world in terms of earth model, coordinates,
 //              lat/long, etc.
 //
 //
@@ -26,7 +25,7 @@ namespace models {
 //                   <base::Number>           ! reference (gaming area) longitude (deg)
 //
 //    gamingAreaRange <base::Distance>        ! Max valid range of the simulation's gaming area or zero for unlimited
-//                                            !   default: zero -- unlimited range
+//                                            ! default: zero -- unlimited range
 //
 //    earthModel     <base::EarthModel>       ! Earth model for geodetic lat/lon (default is WGS-84)
 //                   <base::Identifier>       ! Earth model by name (see EarthModel.hpp)
