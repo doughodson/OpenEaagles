@@ -1,9 +1,10 @@
 
 #include "openeaagles/terrain/Terrain.hpp"
 
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Color.hpp"
 #include "openeaagles/base/Hsva.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/Rgba.hpp"
@@ -230,7 +231,7 @@ bool Terrain::targetOcculting(
    // Compute bearing and distance to target (flat earth)
    double brgDeg = 0.0;
    double distNM = 0.0;
-   base::Nav::fll2bd(refLat, refLon, tgtLat, tgtLon, &brgDeg, &distNM);
+   base::nav::fll2bd(refLat, refLon, tgtLat, tgtLon, &brgDeg, &distNM);
    double dist = (distNM * base::distance::NM2M);
 
    // Number of points (default: 100M data)

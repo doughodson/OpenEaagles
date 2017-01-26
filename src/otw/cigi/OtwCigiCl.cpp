@@ -33,7 +33,6 @@
 #include "openeaagles/models/systems/StoresMgr.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -1732,7 +1731,7 @@ bool OtwCigiCl::sendCigiData()
                hotRequest.SetReqType(CigiHatHotReqV3::HOT);
                //osg::Vec3 pos = oldest->getPlayer()->getPosition();
                //double alt;
-               //base::Nav::convertPosVec2LL(
+               //base::nav::convertPosVec2LL(
                //         getRefLatitude(), getRefLongitude(),
                //         pos,
                //         &hotRequest.lat, &hotRequest.lon, &alt);

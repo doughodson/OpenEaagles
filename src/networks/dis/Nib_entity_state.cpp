@@ -18,7 +18,8 @@
 #include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -65,9 +66,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
    // from the PDU and use them to reset the dead reckoning.
    {
       osg::Vec3d geocPos;
-      geocPos[base::Nav::IX] = pdu->entityLocation.X_coord;
-      geocPos[base::Nav::IY] = pdu->entityLocation.Y_coord;
-      geocPos[base::Nav::IZ] = pdu->entityLocation.Z_coord;
+      geocPos[base::nav::IX] = pdu->entityLocation.X_coord;
+      geocPos[base::nav::IY] = pdu->entityLocation.Y_coord;
+      geocPos[base::nav::IZ] = pdu->entityLocation.Z_coord;
       //std::cout << "entityStatePdu2Nib(): geoc POS(";
       //std::cout << geocPos[0] << ", ";
       //std::cout << geocPos[1] << ", ";
@@ -75,9 +76,9 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       //std::cout << std::endl;
 
       osg::Vec3d geocVel;
-      geocVel[base::Nav::IX] = pdu->entityLinearVelocity.component[0];
-      geocVel[base::Nav::IY] = pdu->entityLinearVelocity.component[1];
-      geocVel[base::Nav::IZ] = pdu->entityLinearVelocity.component[2];
+      geocVel[base::nav::IX] = pdu->entityLinearVelocity.component[0];
+      geocVel[base::nav::IY] = pdu->entityLinearVelocity.component[1];
+      geocVel[base::nav::IZ] = pdu->entityLinearVelocity.component[2];
       //std::cout << "entityStatePdu2Nib(): geoc VEL(";
       //std::cout << geocVel[0] << ", ";
       //std::cout << geocVel[1] << ", ";
@@ -85,19 +86,19 @@ void Nib::entityStatePdu2Nib(const EntityStatePDU* const pdu)
       //std::cout << std::endl;
 
       osg::Vec3d geocAcc;
-      geocAcc[base::Nav::IX] = pdu->DRentityLinearAcceleration.component[0];
-      geocAcc[base::Nav::IY] = pdu->DRentityLinearAcceleration.component[1];
-      geocAcc[base::Nav::IZ] = pdu->DRentityLinearAcceleration.component[2];
+      geocAcc[base::nav::IX] = pdu->DRentityLinearAcceleration.component[0];
+      geocAcc[base::nav::IY] = pdu->DRentityLinearAcceleration.component[1];
+      geocAcc[base::nav::IZ] = pdu->DRentityLinearAcceleration.component[2];
 
       osg::Vec3d geocAngles;
-      geocAngles[base::Nav::IPHI] = pdu->entityOrientation.phi;
-      geocAngles[base::Nav::ITHETA] = pdu->entityOrientation.theta;
-      geocAngles[base::Nav::IPSI] = pdu->entityOrientation.psi;
+      geocAngles[base::nav::IPHI] = pdu->entityOrientation.phi;
+      geocAngles[base::nav::ITHETA] = pdu->entityOrientation.theta;
+      geocAngles[base::nav::IPSI] = pdu->entityOrientation.psi;
 
       osg::Vec3d arates;
-      arates[base::Nav::IX] = pdu->DRentityAngularVelocity.x_axis;
-      arates[base::Nav::IY] = pdu->DRentityAngularVelocity.y_axis;
-      arates[base::Nav::IZ] = pdu->DRentityAngularVelocity.z_axis;
+      arates[base::nav::IX] = pdu->DRentityAngularVelocity.x_axis;
+      arates[base::nav::IY] = pdu->DRentityAngularVelocity.y_axis;
+      arates[base::nav::IZ] = pdu->DRentityAngularVelocity.z_axis;
 
 #if 0
       // (re)initialize the dead reckoning function
@@ -525,17 +526,17 @@ bool Nib::entityStateManager(const double curExecTime)
          // Entity location (WorldCoordinates)
          // ---
          osg::Vec3d geocPos = getDrPosition();
-         pdu->entityLocation.X_coord = geocPos[base::Nav::IX];
-         pdu->entityLocation.Y_coord = geocPos[base::Nav::IY];
-         pdu->entityLocation.Z_coord = geocPos[base::Nav::IZ];
+         pdu->entityLocation.X_coord = geocPos[base::nav::IX];
+         pdu->entityLocation.Y_coord = geocPos[base::nav::IY];
+         pdu->entityLocation.Z_coord = geocPos[base::nav::IZ];
 
          // ---
          // Entity orientation (EulerAngles)
          // ---
          osg::Vec3d geocAngles = getDrEulerAngles();
-         pdu->entityOrientation.phi   = static_cast<float>(geocAngles[base::Nav::IPHI]);
-         pdu->entityOrientation.theta = static_cast<float>(geocAngles[base::Nav::ITHETA]);
-         pdu->entityOrientation.psi   = static_cast<float>(geocAngles[base::Nav::IPSI]);
+         pdu->entityOrientation.phi   = static_cast<float>(geocAngles[base::nav::IPHI]);
+         pdu->entityOrientation.theta = static_cast<float>(geocAngles[base::nav::ITHETA]);
+         pdu->entityOrientation.psi   = static_cast<float>(geocAngles[base::nav::IPSI]);
       }
 
       // ---
@@ -681,9 +682,9 @@ bool Nib::entityStateManager(const double curExecTime)
          // Dead reckoning angular velocity (AngularVelocityVectorDIS)
          // ---
          osg::Vec3d geocAngVel = getDrAngularVelocities();
-         pdu->DRentityAngularVelocity.x_axis = static_cast<float>(geocAngVel[base::Nav::IX]);
-         pdu->DRentityAngularVelocity.y_axis = static_cast<float>(geocAngVel[base::Nav::IY]);
-         pdu->DRentityAngularVelocity.z_axis = static_cast<float>(geocAngVel[base::Nav::IZ]);
+         pdu->DRentityAngularVelocity.x_axis = static_cast<float>(geocAngVel[base::nav::IX]);
+         pdu->DRentityAngularVelocity.y_axis = static_cast<float>(geocAngVel[base::nav::IY]);
+         pdu->DRentityAngularVelocity.z_axis = static_cast<float>(geocAngVel[base::nav::IZ]);
       }
 
       // ---

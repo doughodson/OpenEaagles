@@ -7,10 +7,11 @@
 
 #include "openeaagles/terrain/Terrain.hpp"
 
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
@@ -690,13 +691,13 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
         if ( !isLatLonValid() && isPosVecValid() ) {
             // Compute our lat/lon when we only have the Pos Vec
             double elev = 0.0;
-            base::Nav::convertPosVec2LL(nav->getRefLatitude(), nav->getRefLongitude(), posVec, &latitude, &longitude, &elev);
+            base::nav::convertPosVec2LL(nav->getRefLatitude(), nav->getRefLongitude(), posVec, &latitude, &longitude, &elev);
             elevation  = static_cast<double>(elev);
             needLL = false;
         }
         if ( isLatLonValid() && !isPosVecValid() ) {
             // Compute our Pos Vec when we only have the lat/lon
-            base::Nav::convertLL2PosVec(nav->getRefLatitude(), nav->getRefLongitude(), latitude, longitude, elevation, &posVec);
+            base::nav::convertLL2PosVec(nav->getRefLatitude(), nav->getRefLongitude(), latitude, longitude, elevation, &posVec);
             needPosVec = false;
         }
 
@@ -710,7 +711,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             double toBrg = 0.0;
             double toDist = 0.0;
             double toTTG = 0.0;
-            base::Nav::gll2bd(nav->getLatitude(), nav->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
+            base::nav::gll2bd(nav->getLatitude(), nav->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
 
             setTrueBrgDeg( static_cast<double>(toBrg) );
             setDistNM( static_cast<double>(toDist) );
@@ -729,7 +730,7 @@ bool Steerpoint::compute(const Navigation* const nav, const Steerpoint* const fr
             toTTG = 0.0;
             if (from != nullptr) {
                 // When we have a 'from' steerpoint, we can compute this leg's data
-                base::Nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
+                base::nav::gll2bd(from->getLatitude(), from->getLongitude(), getLatitude(), getLongitude(), &toBrg, &toDist);
                 setTrueCrsDeg( static_cast<double>(toBrg) );
                 setMagCrsDeg( base::angle::aepcdDeg( getTrueCrsDeg() - getMagVarDeg() ) );
                 setLegDistNM( static_cast<double>(toDist) );

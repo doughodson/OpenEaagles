@@ -91,6 +91,14 @@ base library
 
      -- Removed Object::getClassName() method - never used, available in MetaObject.
 
+   Nav class (removed)
+     -- This class contained only static methods, so it was restructured as a set of functions within
+	    the oe::base::nav namespace defined in file 'nav_utils.hpp'.
+   
+   NavDR class (removed)
+     -- This class contained only static methods, so it was restructured as a set of functions within
+	    the oe::base::navDR namespace defined in file 'navDR_utils.hpp'.
+	 
    MetaObject
      -- New class that replaces _Static class once defined in Object.
 

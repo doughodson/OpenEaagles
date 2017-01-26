@@ -1,6 +1,7 @@
 
 #include "openeaagles/dafif/Record.hpp"
-#include "openeaagles/base/Nav.hpp"
+
+#include "openeaagles/base/nav_utils.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
@@ -525,7 +526,7 @@ float Record::dsFrequency(const char* const p)
 void Record::printTrueBearingRange(std::ostream& sout, const double aclat, const double aclon, const double acelev)const
 {
    double bearing, range, grdrange;
-   base::Nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
+   base::nav::glla2bd(aclat, aclon, acelev, latitude(), longitude(), elevation(), &bearing, &range, &grdrange);
    sout << "  range " << range << "  grdrange " << grdrange << " true_bearing " << bearing;
 }
 

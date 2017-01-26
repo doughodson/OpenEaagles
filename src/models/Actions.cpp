@@ -10,7 +10,8 @@
 
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/units/Distances.hpp"
@@ -455,7 +456,7 @@ double ActionImagingSar::computeOrientation(const Steerpoint* const wp)
       double dlat = getSarLatitude();
       double dlon = getSarLongitude();
       double brg, distNM;
-      base::Nav::gll2bd(slat, slon, dlat, dlon, &brg, &distNM);
+      base::nav::gll2bd(slat, slon, dlat, dlon, &brg, &distNM);
       orientation = static_cast<double>(-brg);
    }
    return orientation;
@@ -572,7 +573,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
 
             // Computes the target's position vector
             osg::Vec3d tgtPos;                           // Target position  (m) NED
-            base::Nav::convertLL2PosVec(
+            base::nav::convertLL2PosVec(
                refLat, refLon,                           // Ref point (at sea level)
                getTargetLatitude(), getTargetLongitude(), getTargetElevation(),
                &tgtPos); // x,y,z  NED

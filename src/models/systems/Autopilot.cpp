@@ -7,10 +7,11 @@
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
@@ -387,7 +388,7 @@ bool Autopilot::flyLoiterEntry()
       // this is for flying to the loiter first, go back to that
       double brgDeg = 0.0;
       double distNM = 0.0;
-      base::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
+      base::nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
 
       const double hdgErrDeg = base::angle::aepcdDeg(hdgDeg - loiterInboundCourse);
 //      double posErrDeg = base::Angle::aepcdDeg(brgDeg - loiterInboundCourse);
@@ -542,10 +543,10 @@ bool Autopilot::flyLoiter()
       double brgDeg = 0.0;
       double distNM = 0.0;
       if (isInbound) {
-         ok = base::Nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
+         ok = base::nav::fll2bd(osLatDeg, osLonDeg, loiterAnchorLat, loiterAnchorLon, &brgDeg, &distNM);
       }
       else {
-         ok = base::Nav::fll2bd(osLatDeg, osLonDeg, loiterMirrorLat, loiterMirrorLon, &brgDeg, &distNM);
+         ok = base::nav::fll2bd(osLatDeg, osLonDeg, loiterMirrorLat, loiterMirrorLon, &brgDeg, &distNM);
       }
 
       // get position error to determine inbound or outbound
@@ -617,7 +618,7 @@ bool Autopilot::calcMirrorLatLon()
       if (!loiterCcwFlag) brgDeg = base::angle::aepcdDeg(obCrsDeg - brgDeg);
       else brgDeg = base::angle::aepcdDeg(obCrsDeg + brgDeg);
 
-      ok = base::Nav::fbd2ll(loiterAnchorLat, loiterAnchorLon, brgDeg, distNM, &loiterMirrorLat, &loiterMirrorLon);
+      ok = base::nav::fbd2ll(loiterAnchorLat, loiterAnchorLon, brgDeg, distNM, &loiterMirrorLat, &loiterMirrorLon);
    }
 
    return ok;
@@ -652,7 +653,7 @@ bool Autopilot::flyCRS(const double latDeg, const double lonDeg, const double cr
       const double osLon  = pPlr->getLongitude();
       double brgDeg = 0.0;
       double distNM = 0.0;
-      base::Nav::fll2bd(osLat, osLon, latDeg, lonDeg, &brgDeg, &distNM);
+      base::nav::fll2bd(osLat, osLon, latDeg, lonDeg, &brgDeg, &distNM);
 
       //-------------------------------------------------------
       // get current gama error (deg)

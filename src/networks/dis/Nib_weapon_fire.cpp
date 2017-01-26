@@ -10,9 +10,8 @@
 #include "openeaagles/models/players/AirVehicle.hpp"
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -115,15 +114,15 @@ bool Nib::weaponFireMsgFactory(const double)
 
     // World Coordinates
     osg::Vec3d geocPos = mPlayer->getGeocPosition();
-    pdu.location.X_coord = geocPos[base::Nav::IX];
-    pdu.location.Y_coord = geocPos[base::Nav::IY];
-    pdu.location.Z_coord = geocPos[base::Nav::IZ];
+    pdu.location.X_coord = geocPos[base::nav::IX];
+    pdu.location.Y_coord = geocPos[base::nav::IY];
+    pdu.location.Z_coord = geocPos[base::nav::IZ];
 
     // Velocity
     osg::Vec3d geocVel = mPlayer->getGeocVelocity();
-    pdu.velocity.component[0] = static_cast<float>(geocVel[base::Nav::IX]);
-    pdu.velocity.component[1] = static_cast<float>(geocVel[base::Nav::IY]);
-    pdu.velocity.component[2] = static_cast<float>(geocVel[base::Nav::IZ]);
+    pdu.velocity.component[0] = static_cast<float>(geocVel[base::nav::IX]);
+    pdu.velocity.component[1] = static_cast<float>(geocVel[base::nav::IY]);
+    pdu.velocity.component[2] = static_cast<float>(geocVel[base::nav::IZ]);
 
     // ---
     // Burst

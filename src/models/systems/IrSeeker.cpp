@@ -12,11 +12,10 @@
 
 #include "openeaagles/models/environment/IrAtmosphere.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
 #include "openeaagles/base/units/unit_utils.hpp"
@@ -538,14 +537,14 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
    //LET .FIRST.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .FIRST.NODE.POSITION(3), 1.0) )
 
-   double distance1 = std::sqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position1.z()) );
+   double distance1 = std::sqrt( static_cast<double>(2.0f * base::nav::ERADM * -position1.z()) );
    if (distance1 < 1.0f) distance1 = 1.0f;
 
 
    //      LET .SECOND.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .SECOND.NODE.POSITION(3), 1.0) )
 
-   double distance2 = std::sqrt( static_cast<double>(2.0f * base::Nav::ERADM * -position2.z()) );
+   double distance2 = std::sqrt( static_cast<double>(2.0f * base::nav::ERADM * -position2.z()) );
    if (distance2 < 1.0f) distance2 = 1.0f;
 
    //LET .RELATIVE.POSITION(*)

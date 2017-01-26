@@ -10,7 +10,6 @@
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>

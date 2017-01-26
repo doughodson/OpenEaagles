@@ -1,7 +1,7 @@
 
 #include "openeaagles/base/EarthModel.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 
 #include <cstring>
@@ -65,7 +65,7 @@ EarthModel::EarthModel()
 {
    STANDARD_CONSTRUCTOR()
 
-   initData(Nav::WGS84_A, Nav::WGS84_F);
+   initData(nav::WGS84_A, nav::WGS84_F);
 }
 
 void EarthModel::initData(const double a0, const double f0)
@@ -79,7 +79,7 @@ void EarthModel::initData(const double a0, const double f0)
 void EarthModel::copyData(const EarthModel& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (cc) initData(Nav::WGS84_A, Nav::WGS84_F);
+   if (cc) initData(nav::WGS84_A, nav::WGS84_F);
 
    a = org.a;
    b = org.b;

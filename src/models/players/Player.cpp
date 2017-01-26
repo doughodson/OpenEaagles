@@ -28,10 +28,11 @@
 #include "openeaagles/simulation/AbstractNetIO.hpp"
 #include "openeaagles/simulation/AbstractNib.hpp"
 
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Boolean.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Statistic.hpp"
 
@@ -247,13 +248,13 @@ void Player::initData()
    latitude = 0.0;
    longitude = 0.0;
    altitude = 0.0;
-   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::nav::computeWorldMatrix(latitude, longitude, &wm);
 
    angles.set(0,0,0);
-   base::Nav::computeRotationalMatrix(angles, &rm, &scPhi, &scTheta, &scPsi);
+   base::nav::computeRotationalMatrix(angles, &rm, &scPhi, &scTheta, &scPsi);
 
    rmW2B = rm * wm;
-   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    q.set(rm);
 
@@ -859,7 +860,7 @@ bool Player::isDestroyed() const
 // Earth radius (meters)
 double Player::getEarthRadius() const
 {
-   double erad = base::Nav::ERAD60 * base::distance::NM2M;  // (default)
+   double erad = base::nav::ERAD60 * base::distance::NM2M;  // (default)
 
    const WorldModel* sim = getWorldModel();
    if (sim != nullptr) {
@@ -1932,14 +1933,14 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       const double sinRlat = s->getSinRefLat();
-      base::Nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
+      base::nav::convertPosVec2llE(refLat, refLon, sinRlat, cosRlat, posVecNED, &latitude, &longitude, &altitude, em);
    }
    else {
-      base::Nav::convertPosVec2llS(refLat, refLon, cosRlat, posVecNED, &latitude, &longitude, &altitude);
+      base::nav::convertPosVec2llS(refLat, refLon, cosRlat, posVecNED, &latitude, &longitude, &altitude);
    }
 
    // compute the world matrix
-   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::nav::computeWorldMatrix(latitude, longitude, &wm);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
@@ -1947,7 +1948,7 @@ bool Player::setPosition(const double n, const double e, const double d, const b
    // Compute & set the  geocentric position
    double lla[3] = { latitude, longitude, altitude };
    double ecef[3] = { 0, 0, 0 };
-   base::Nav::convertGeod2Ecef(lla, ecef, em);
+   base::nav::convertGeod2Ecef(lla, ecef, em);
    posVecECEF.set( ecef[0], ecef[1], ecef[2] );
 
    altSlaved = slaved;
@@ -1987,7 +1988,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    altitude = alt;
 
    // compute the world matrix
-   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::nav::computeWorldMatrix(latitude, longitude, &wm);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
@@ -1998,10 +1999,10 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       const double sinRlat = s->getSinRefLat();
-      base::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);
+      base::nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, lat, lon, alt, &posVecNED, em);
    }
    else {
-      base::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);
+      base::nav::convertLL2PosVecS(refLat, refLon, cosRlat, lat, lon, alt, &posVecNED);
    }
 
    // The position vector is valid if the gaming area range is unlimited (zero) or
@@ -2011,7 +2012,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
    // Compute & set the geocentric position
    double lla[3] = { lat, lon, alt };
    double ecef[3] = { 0, 0, 0 };
-   base::Nav::convertGeod2Ecef(lla, ecef, em);
+   base::nav::convertGeod2Ecef(lla, ecef, em);
    posVecECEF.set( ecef[0], ecef[1], ecef[2] );
 
    altSlaved = slaved;
@@ -2034,13 +2035,13 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
    // Compute & set the geodetic position
    double ecef[3] = { posVecECEF[0], posVecECEF[1], posVecECEF[2] };
    double lla[3] = { 0, 0, 0 };
-   base::Nav::convertEcef2Geod(ecef, lla, em);
-   latitude = lla[base::Nav::ILAT];
-   longitude = lla[base::Nav::ILON];
-   altitude = lla[base::Nav::IALT];
+   base::nav::convertEcef2Geod(ecef, lla, em);
+   latitude = lla[base::nav::ILAT];
+   longitude = lla[base::nav::ILON];
+   altitude = lla[base::nav::IALT];
 
    // compute the world matrix
-   base::Nav::computeWorldMatrix(latitude, longitude, &wm);
+   base::nav::computeWorldMatrix(latitude, longitude, &wm);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
@@ -2051,10 +2052,10 @@ bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
    const double cosRlat = s->getCosRefLat();
    if (s->isGamingAreaUsingEarthModel()) {
       const double sinRlat = s->getSinRefLat();
-      base::Nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);
+      base::nav::convertLL2PosVecE(refLat, refLon, sinRlat, cosRlat, latitude, longitude, altitude, &posVecNED, em);
    }
    else {
-      base::Nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);
+      base::nav::convertLL2PosVecS(refLat, refLon, cosRlat, latitude, longitude, altitude, &posVecNED);
    }
 
    // The position vector is valid if the gaming area range is unlimited (zero) or
@@ -2075,7 +2076,7 @@ bool Player::setEulerAngles(const double r, const double p, const double y)
    angles.set(r,p,y);
 
    // Compute rotational matrix and the sin/cos values of the angles
-   base::Nav::computeRotationalMatrix(r, p, y, &rm, &scPhi, &scTheta, &scPsi);
+   base::nav::computeRotationalMatrix(r, p, y, &rm, &scPhi, &scTheta, &scPsi);
 
    // Set quaternions
    q.set(rm);
@@ -2084,7 +2085,7 @@ bool Player::setEulerAngles(const double r, const double p, const double y)
    rmW2B = rm * wm;
 
    // compute geocentric orientation angles and their sin/cos values
-   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    return true;
 }
@@ -2102,7 +2103,7 @@ bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
    anglesW = newAngles;
 
    // Compute sin/cos values and directional cosine matrix
-   base::Nav::computeRotationalMatrix(anglesW, &rmW2B, &scPhiW, &scThetaW, &scPsiW);
+   base::nav::computeRotationalMatrix(anglesW, &rmW2B, &scPhiW, &scThetaW, &scPsiW);
 
    // Transpose the world matrix
    osg::Matrixd wmT = wm;
@@ -2112,7 +2113,7 @@ bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
    rm = rmW2B * wmT;
 
    // compute Geodetic orientation angles
-   base::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
+   base::nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // Set quaternions
    q.set(rm);
@@ -2130,13 +2131,13 @@ bool Player::setRotMat(const osg::Matrixd& rr)
    q.set(rm);
 
    // Compute the Euler angles and the sin/cos values of the angles
-   base::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
+   base::nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
 
    // compute geocentric orientation angles and their sin/cos values
-   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    return true;
 }
@@ -2151,13 +2152,13 @@ bool Player::setQuaternions(const osg::Quat& newQ)
    rm.makeRotate(q);
 
    // Compute the Euler angles and the sin/cos values of the angles
-   base::Nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
+   base::nav::computeEulerAngles(rm, &angles, &scPhi, &scTheta, &scPsi);
 
    // compute body/ECEF directional cosines
    rmW2B = rm * wm;
 
    // compute geocentric orientation angles and their sin/cos values
-   base::Nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
+   base::nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    return true;
 }
@@ -3118,10 +3119,10 @@ void Player::positionUpdate(const double dt)
                double lla[3] = { 0, 0, 0 };
 
                const base::EarthModel* em = getWorldModel()->getEarthModel();
-               base::Nav::convertEcef2Geod(ecef, lla, em);
+               base::nav::convertEcef2Geod(ecef, lla, em);
 
                // 3) Set position using these ground clamped coordinates
-               setPositionLLA(lla[base::Nav::ILAT], lla[base::Nav::ILON], alt);
+               setPositionLLA(lla[base::nav::ILAT], lla[base::nav::ILON], alt);
             }
          }
 
@@ -3225,9 +3226,9 @@ void Player::deadReckonPosition(const double dt)
          const base::EarthModel* em = getWorldModel()->getEarthModel();
          double ecef[3] = { drPos[0], drPos[1], drPos[2] };
          double lla[3] = { 0, 0, 0 };
-         base::Nav::convertEcef2Geod(ecef, lla, em);
-         const double lat = lla[base::Nav::ILAT];
-         const double lon = lla[base::Nav::ILON];
+         base::nav::convertEcef2Geod(ecef, lla, em);
+         const double lat = lla[base::nav::ILAT];
+         const double lon = lla[base::nav::ILON];
 
          // 3) Set position using these ground clamped coordinates
          setPositionLLA(lat, lon, alt);

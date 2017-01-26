@@ -9,7 +9,7 @@
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 
 #include "openeaagles/base/units/Angles.hpp"
 
@@ -402,7 +402,7 @@ bool Gun::setAngles(const double r, const double p, const double y)
     angles.set(r,p,y);
 
     // Set rotational matrix
-    base::Nav::computeRotationalMatrix(getRoll(), getPitch(), getYaw(), &rm);
+    base::nav::computeRotationalMatrix(getRoll(), getPitch(), getYaw(), &rm);
 
     return true;
 }

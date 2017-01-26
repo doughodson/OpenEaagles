@@ -12,7 +12,8 @@
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -90,14 +91,14 @@ void NetIO::processDetonationPDU(const DetonationPDU* const pdu)
 
       // Get the geocentric position, velocity and acceleration from the PDU
       osg::Vec3d geocPos;
-      geocPos[base::Nav::IX] = pdu->location.X_coord;
-      geocPos[base::Nav::IY] = pdu->location.Y_coord;
-      geocPos[base::Nav::IZ] = pdu->location.Z_coord;
+      geocPos[base::nav::IX] = pdu->location.X_coord;
+      geocPos[base::nav::IY] = pdu->location.Y_coord;
+      geocPos[base::nav::IZ] = pdu->location.Z_coord;
 
       osg::Vec3d geocVel;
-      geocVel[base::Nav::IX] = pdu->velocity.component[0];
-      geocVel[base::Nav::IY] = pdu->velocity.component[1];
-      geocVel[base::Nav::IZ] = pdu->velocity.component[2];
+      geocVel[base::nav::IX] = pdu->velocity.component[0];
+      geocVel[base::nav::IY] = pdu->velocity.component[1];
+      geocVel[base::nav::IZ] = pdu->velocity.component[2];
 
       osg::Vec3d geocAcc(0,0,0);
       osg::Vec3d geocAngles(0,0,0);

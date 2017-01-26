@@ -10,7 +10,7 @@
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 #include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
@@ -175,7 +175,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
             const osg::Matrixd mm = msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat();
             // compute Geodetic orientation angles
             osg::Vec3d angles;
-            base::Nav::computeEulerAngles(mm, &angles);
+            base::nav::computeEulerAngles(mm, &angles);
             currentViewAngle = angles[Player::IPITCH];
         }
 
@@ -185,7 +185,7 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
             double hTanAng = 0;
 
             // earth radius in meters
-            const double er = base::Nav::ERAD60 * base::distance::NM2M;
+            const double er = base::nav::ERAD60 * base::distance::NM2M;
 
             // distance from the center of the earth
             const double distEC = msg->getOwnship()->getAltitudeM() + er;

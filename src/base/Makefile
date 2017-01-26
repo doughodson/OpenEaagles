@@ -93,8 +93,8 @@ OBJS =  \
 	Matrix.o \
 	MetaObject.o \
 	MonitorMetrics.o \
-	Nav.o \
-	NavDR.o \
+	nav_utils.o \
+	navDR_utils.o \
 	NetHandler.o \
 	Number.o \
 	Object.o \

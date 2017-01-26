@@ -7,9 +7,7 @@
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
-
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
 #include "openeaagles/base/util/str_utils.hpp"
@@ -73,9 +71,9 @@ bool Nib::weaponFireMsgFactory(const double)
 
       // World Coordinates
       WorldLocationStruct firingLocation;
-      base::NetHandler::toNetOrder(&firingLocation.x, geocPos[base::Nav::IX]);
-      base::NetHandler::toNetOrder(&firingLocation.y, geocPos[base::Nav::IY]);
-      base::NetHandler::toNetOrder(&firingLocation.z, geocPos[base::Nav::IZ]);
+      base::NetHandler::toNetOrder(&firingLocation.x, geocPos[base::nav::IX]);
+      base::NetHandler::toNetOrder(&firingLocation.y, geocPos[base::nav::IY]);
+      base::NetHandler::toNetOrder(&firingLocation.z, geocPos[base::nav::IZ]);
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FIRING_LOCATION_WF_PI), 
          reinterpret_cast<char*>(&firingLocation),
@@ -83,9 +81,9 @@ bool Nib::weaponFireMsgFactory(const double)
 
       // Velocity
       VelocityVectorStruct initialVelocityVector; 
-      base::NetHandler::toNetOrder(&initialVelocityVector.xVelocity, static_cast<float>(geocVel[base::Nav::IX]));
-      base::NetHandler::toNetOrder(&initialVelocityVector.yVelocity, static_cast<float>(geocVel[base::Nav::IY]));
-      base::NetHandler::toNetOrder(&initialVelocityVector.zVelocity, static_cast<float>(geocVel[base::Nav::IZ]));
+      base::NetHandler::toNetOrder(&initialVelocityVector.xVelocity, static_cast<float>(geocVel[base::nav::IX]));
+      base::NetHandler::toNetOrder(&initialVelocityVector.yVelocity, static_cast<float>(geocVel[base::nav::IY]));
+      base::NetHandler::toNetOrder(&initialVelocityVector.zVelocity, static_cast<float>(geocVel[base::nav::IZ]));
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::INITIAL_VELOCITY_VECTOR_WF_PI), 
          reinterpret_cast<char*>(&initialVelocityVector),

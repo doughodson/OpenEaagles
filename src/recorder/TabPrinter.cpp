@@ -3,13 +3,12 @@
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 
-//#include "openeaagles/simulation/recorderTokens.hpp"
 #include "openeaagles/base/String.hpp"
 
 #include "openeaagles/base/units/Times.hpp"
 #include "openeaagles/base/units/unit_utils.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -1361,7 +1360,7 @@ void TabPrinter::printPlayerStateMsg(std::ostream& sout, const pb::PlayerState* 
          double pLon(0.0);
          double pAlt(0.0);
          if (( msg->pos().has_x()) && ( msg->pos().has_y()) && ( msg->pos().has_z())) {
-            oe::base::Nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
+            oe::base::nav::convertEcef2Geod(msg->pos().x(), msg->pos().y(),  msg->pos().z(),
                &pLat, &pLon, &pAlt);
             sout << pLat << divider << pLon << divider << pAlt << divider;
          }

@@ -12,8 +12,9 @@
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/String.hpp"
@@ -318,7 +319,7 @@ void AbstractWeapon::dynamics(const double dt)
       // Weapon's orientation at launch
       const osg::Vec3d ia = getInitAngles();
       osg::Matrixd rr;
-      base::Nav::computeRotationalMatrix( ia[0], ia[1], ia[2], &rr);
+      base::nav::computeRotationalMatrix( ia[0], ia[1], ia[2], &rr);
       rr *= lvM;
 
       setRotMat(rr);

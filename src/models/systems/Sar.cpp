@@ -7,7 +7,8 @@
 
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -220,7 +221,7 @@ void Sar::process(const double dt)
          const double refLon = s->getRefLongitude();
 
          osg::Vec3d pos;
-         base::Nav::convertLL2PosVec(
+         base::nav::convertLL2PosVec(
             refLat, refLon,                           // Ref point (at sea level)
             getStarePointLatitude(), getStarePointLongitude(), getStarePointElevation(),
             &pos); // x,y,z  NED

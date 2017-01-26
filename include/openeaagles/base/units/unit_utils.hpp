@@ -2,9 +2,9 @@
 #ifndef __oe_base_unit_utils_H__
 #define __oe_base_unit_utils_H__
 
-//
+//------------------------------------------------------------------------------
 // includes all unit related functions for constants and conversions
-//
+//------------------------------------------------------------------------------
 
 #include "openeaagles/base/units/angle_utils.hpp"
 #include "openeaagles/base/units/area_utils.hpp"

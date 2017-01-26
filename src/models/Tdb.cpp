@@ -7,8 +7,9 @@
 
 #include "openeaagles/terrain/Terrain.hpp"
 
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/units/unit_utils.hpp"
@@ -397,7 +398,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
                      if ( target->isMajorType(Player::SPACE_VEHICLE) ) {
                         // Get the true, great-circle bearing to the target
                         double tbrg(0), distNM(0);
-                        base::Nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
+                        base::nav::vll2bd(osLat, osLon, tgtLat, tgtLon, &tbrg, &distNM);
 
                         // Set the distance to check to 60 nm
                         double dist = 60.0 * base::distance::NM2M;

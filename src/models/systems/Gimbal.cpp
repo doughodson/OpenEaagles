@@ -3,12 +3,12 @@
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/Emission.hpp"
 #include "openeaagles/models/Tdb.hpp"
-//#include "openeaagles/models/WorldModel.hpp"
+
+#include "openeaagles/base/nav_utils.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 
@@ -296,7 +296,7 @@ bool Gimbal::fromPlayerOfInterest(const Emission* const em)
 //------------------------------------------------------------------------------
 double Gimbal::getEarthRadius() const
 {
-   double erad = base::Nav::ERAD60 * base::distance::NM2M;
+   double erad = base::nav::ERAD60 * base::distance::NM2M;
    const Player* own = getOwnship();
    if (own != nullptr) {
       erad = own->getEarthRadius();
@@ -1246,7 +1246,7 @@ void Gimbal::updateMatrix()
 {
    // Start with a rotational matrix
    osg::Matrixd mm1;
-   base::Nav::computeRotationalMatrix( getRoll(), getElevation(), getAzimuth(), &mm1);
+   base::nav::computeRotationalMatrix( getRoll(), getElevation(), getAzimuth(), &mm1);
 
    // Post multiply by a translate to our location
    osg::Matrixd rr;

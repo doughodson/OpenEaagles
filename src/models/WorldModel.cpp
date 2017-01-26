@@ -4,9 +4,10 @@
 #include "openeaagles/base/EarthModel.hpp"
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
+
+#include "openeaagles/base/nav_utils.hpp"
 #include "openeaagles/base/units/unit_utils.hpp"
 
 // environment models
@@ -32,7 +33,7 @@ BEGIN_SLOTTABLE(WorldModel)
    "gamingAreaUseEarthModel", // 5) If true, use the 'earthModel' or its WGS-84 default for flat
                               //    earth projections between geodetic lat/lon and the gaming
                               //    area's NED coordinates.  Otherwise, use a standard spherical
-                              //    earth with a radius of Nav::ERAD60. (default: false)
+                              //    earth with a radius of nav::ERAD60. (default: false)
 
    "terrain",                 //  6) Terrain elevation database
    "atmosphere",              //  7) Atmospheric model
@@ -73,7 +74,7 @@ void WorldModel::initData()
    cosRlat = 1.0;
    maxRefRange = 0.0;
    gaUseEmFlg = false;
-   base::Nav::computeWorldMatrix(refLat, refLon, &wm);
+   base::nav::computeWorldMatrix(refLat, refLon, &wm);
 
    terrain = nullptr;
    atmosphere = nullptr;
@@ -242,7 +243,7 @@ bool WorldModel::setRefLatitude(const double v)
       const double r = base::angle::D2RCC * refLat;
       sinRlat = std::sin(r);
       cosRlat = std::cos(r);
-      base::Nav::computeWorldMatrix(refLat, refLon, &wm);
+      base::nav::computeWorldMatrix(refLat, refLon, &wm);
    }
    return ok;
 }
@@ -254,7 +255,7 @@ bool WorldModel::setRefLongitude(const double v)
    if (ok) {
       // Set the longitude and compute the world matrix
       refLon = v;
-      base::Nav::computeWorldMatrix(refLat, refLon, &wm);
+      base::nav::computeWorldMatrix(refLat, refLon, &wm);
    }
    return ok;
 }

@@ -6,9 +6,6 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
-
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
 namespace oe {

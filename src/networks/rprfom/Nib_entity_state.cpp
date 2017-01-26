@@ -7,7 +7,8 @@
 #include "openeaagles/models/WorldModel.hpp"
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/NetHandler.hpp"
 
 namespace oe {
@@ -257,25 +258,25 @@ void Nib::entityState2Nib()
 
       // Get the geocentric position, velocity and acceleration
       osg::Vec3d geocPos;
-      geocPos[base::Nav::IX] = spatialRvw->worldLocation.x;
-      geocPos[base::Nav::IY] = spatialRvw->worldLocation.y;
-      geocPos[base::Nav::IZ] = spatialRvw->worldLocation.z;
+      geocPos[base::nav::IX] = spatialRvw->worldLocation.x;
+      geocPos[base::nav::IY] = spatialRvw->worldLocation.y;
+      geocPos[base::nav::IZ] = spatialRvw->worldLocation.z;
 
       osg::Vec3d geocVel;
-      geocVel[base::Nav::IX] = spatialRvw->velocityVector.xVelocity;
-      geocVel[base::Nav::IY] = spatialRvw->velocityVector.yVelocity;
-      geocVel[base::Nav::IZ] = spatialRvw->velocityVector.zVelocity;
+      geocVel[base::nav::IX] = spatialRvw->velocityVector.xVelocity;
+      geocVel[base::nav::IY] = spatialRvw->velocityVector.yVelocity;
+      geocVel[base::nav::IZ] = spatialRvw->velocityVector.zVelocity;
 
       osg::Vec3d geocAcc;
-      geocAcc[base::Nav::IX] = spatialRvw->accelerationVector.xAcceleration;
-      geocAcc[base::Nav::IY] = spatialRvw->accelerationVector.yAcceleration;
-      geocAcc[base::Nav::IZ] = spatialRvw->accelerationVector.zAcceleration;
+      geocAcc[base::nav::IX] = spatialRvw->accelerationVector.xAcceleration;
+      geocAcc[base::nav::IY] = spatialRvw->accelerationVector.yAcceleration;
+      geocAcc[base::nav::IZ] = spatialRvw->accelerationVector.zAcceleration;
 
       // Get orientation orientation and rates
       osg::Vec3d geocAngles;
-      geocAngles[base::Nav::IPHI] = spatialRvw->orientation.phi;
-      geocAngles[base::Nav::ITHETA] = spatialRvw->orientation.theta;
-      geocAngles[base::Nav::IPSI] = spatialRvw->orientation.psi; 
+      geocAngles[base::nav::IPHI] = spatialRvw->orientation.phi;
+      geocAngles[base::nav::ITHETA] = spatialRvw->orientation.theta;
+      geocAngles[base::nav::IPSI] = spatialRvw->orientation.psi; 
 
       osg::Vec3d arates(0.0, 0.0, 0.0);
 
@@ -493,20 +494,20 @@ void Nib::updateBasicEntity(
          // Convert position vector to Lat/Lon/Alt
          double alt = 0.0;
          double simCoord[3] = { 0.0, 0.0, 0.0 };
-         base::Nav::convertPosVec2LL(
+         base::nav::convertPosVec2LL(
                refLat, refLon, 
                pos,
-               &simCoord[base::Nav::ILAT], &simCoord[base::Nav::ILON], &alt
+               &simCoord[base::nav::ILAT], &simCoord[base::nav::ILON], &alt
             );
-         simCoord[base::Nav::IALT] = alt;
+         simCoord[base::nav::IALT] = alt;
 
-         //std::cout << "RprFom::Nib::entityState2Nib(): simCoord(" << simCoord[Basic::Nav::ILAT] << "," << simCoord[Basic::Nav::ILON] << "," << simCoord[Basic::Nav::IALT] << ")"  << std::endl;
+         //std::cout << "RprFom::Nib::entityState2Nib(): simCoord(" << simCoord[base::nav::ILAT] << "," << simCoord[base::nav::ILON] << "," << simCoord[base::nav::IALT] << ")"  << std::endl;
 
          // Convert to geocentric coordinates
          double geocPos[3] = { 0.0, 0.0, 0.0 };
          double geocVel[3] = { 0.0, 0.0, 0.0 };
          double geocAcc[3] = { 0.0, 0.0, 0.0 };
-         base::Nav::getWorldPosAccVel(simCoord, vel.ptr(), accel.ptr(), geocPos, geocVel, geocAcc);
+         base::nav::getWorldPosAccVel(simCoord, vel.ptr(), accel.ptr(), geocPos, geocVel, geocAcc);
 
          // Dead reckoning algorithm
          {
@@ -530,9 +531,9 @@ void Nib::updateBasicEntity(
             WorldLocationStruct* worldLocation = &spatialRvw->worldLocation;
             WorldLocationStruct* netWorldLocation = &netSpatialRvw->worldLocation;
 
-            worldLocation->x = geocPos[base::Nav::IX];
-            worldLocation->y = geocPos[base::Nav::IY];
-            worldLocation->z = geocPos[base::Nav::IZ];
+            worldLocation->x = geocPos[base::nav::IX];
+            worldLocation->y = geocPos[base::nav::IY];
+            worldLocation->z = geocPos[base::nav::IZ];
 
             base::NetHandler::toNetOrder(&netWorldLocation->x, worldLocation->x);
             base::NetHandler::toNetOrder(&netWorldLocation->y, worldLocation->y);
@@ -544,9 +545,9 @@ void Nib::updateBasicEntity(
             VelocityVectorStruct* velocityVector = &spatialRvw->velocityVector;
             VelocityVectorStruct* netVelocityVector = &netSpatialRvw->velocityVector;
 
-            velocityVector->xVelocity = static_cast<RTI::Float>(geocVel[base::Nav::IX]);
-            velocityVector->yVelocity = static_cast<RTI::Float>(geocVel[base::Nav::IY]);
-            velocityVector->zVelocity = static_cast<RTI::Float>(geocVel[base::Nav::IZ]);
+            velocityVector->xVelocity = static_cast<RTI::Float>(geocVel[base::nav::IX]);
+            velocityVector->yVelocity = static_cast<RTI::Float>(geocVel[base::nav::IY]);
+            velocityVector->zVelocity = static_cast<RTI::Float>(geocVel[base::nav::IZ]);
 
             base::NetHandler::toNetOrder(&netVelocityVector->xVelocity, velocityVector->xVelocity);
             base::NetHandler::toNetOrder(&netVelocityVector->yVelocity, velocityVector->yVelocity);
@@ -558,9 +559,9 @@ void Nib::updateBasicEntity(
             AccelerationVectorStruct* accelerationVector = &spatialRvw->accelerationVector;
             AccelerationVectorStruct* netAccelerationVector = &netSpatialRvw->accelerationVector;
 
-            accelerationVector->xAcceleration = static_cast<RTI::Float>(geocAcc[base::Nav::IX]);
-            accelerationVector->yAcceleration = static_cast<RTI::Float>(geocAcc[base::Nav::IY]);
-            accelerationVector->zAcceleration = static_cast<RTI::Float>(geocAcc[base::Nav::IZ]);
+            accelerationVector->xAcceleration = static_cast<RTI::Float>(geocAcc[base::nav::IX]);
+            accelerationVector->yAcceleration = static_cast<RTI::Float>(geocAcc[base::nav::IY]);
+            accelerationVector->zAcceleration = static_cast<RTI::Float>(geocAcc[base::nav::IZ]);
 
             base::NetHandler::toNetOrder(&netAccelerationVector->xAcceleration, accelerationVector->xAcceleration);
             base::NetHandler::toNetOrder(&netAccelerationVector->yAcceleration, accelerationVector->yAcceleration);
@@ -574,11 +575,11 @@ void Nib::updateBasicEntity(
 
             // Convert Euler angles to geocentric angles
             double geocAngles[3] = { 0.0, 0.0, 0.0 };
-            base::Nav::getGeocAngle(simCoord, angles.ptr(), geocAngles);
+            base::nav::getGeocAngle(simCoord, angles.ptr(), geocAngles);
 
-            orientation->phi   = static_cast<RTI::Float>(geocAngles[base::Nav::IPHI]);
-            orientation->theta = static_cast<RTI::Float>(geocAngles[base::Nav::ITHETA]);
-            orientation->psi   = static_cast<RTI::Float>(geocAngles[base::Nav::IPSI]);
+            orientation->phi   = static_cast<RTI::Float>(geocAngles[base::nav::IPHI]);
+            orientation->theta = static_cast<RTI::Float>(geocAngles[base::nav::ITHETA]);
+            orientation->psi   = static_cast<RTI::Float>(geocAngles[base::nav::IPSI]);
 
             base::NetHandler::toNetOrder(&netOrientation->phi, orientation->phi);
             base::NetHandler::toNetOrder(&netOrientation->theta, orientation->theta);

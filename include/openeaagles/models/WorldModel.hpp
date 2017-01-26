@@ -35,7 +35,7 @@ class AbstractAtmosphere;
 //    gamingAreaUseEarthModel <base::Boolean> ! If true, use the 'earthModel' or its WGS-84 default for flat
 //                                            ! earth projections between geodetic lat/lon and the gaming
 //                                            ! area's NED coordinates.  Otherwise, use a standard spherical
-//                                            ! earth with a radius of Nav::ERAD60. (default: false)
+//                                            ! earth with a radius of nav::ERAD60. (default: false)
 //
 //                                            ! or zero to use current year (default: 0)
 //

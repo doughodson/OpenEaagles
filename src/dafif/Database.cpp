@@ -2,7 +2,6 @@
 #include "openeaagles/dafif/Database.hpp"
 #include "openeaagles/dafif/Record.hpp"
 #include "openeaagles/base/FileReader.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/units/unit_utils.hpp"
 #include "openeaagles/base/units/Distances.hpp"

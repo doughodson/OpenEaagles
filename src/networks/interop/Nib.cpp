@@ -9,7 +9,8 @@
 #include "openeaagles/models/systems/StoresMgr.hpp"
 #include "openeaagles/models/SynchronizedState.hpp"
 
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
@@ -887,7 +888,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         base::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT;
       }
@@ -898,7 +899,7 @@ bool Nib::mainDeadReckoning(
          osg::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
-         base::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT + drA0*(0.5*dT*dT);
       }
@@ -931,7 +932,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         base::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
@@ -947,7 +948,7 @@ bool Nib::mainDeadReckoning(
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
          osg::Matrixd Rwb = DR * drR0;
 
-         base::Nav::computeEulerAngles(Rwb, pNewRPY);
+         base::nav::computeEulerAngles(Rwb, pNewRPY);
 
          osg::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);

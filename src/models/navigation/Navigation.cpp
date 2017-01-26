@@ -7,10 +7,11 @@
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
+#include "openeaagles/base/nav_utils.hpp"
+
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/List.hpp"
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
@@ -532,7 +533,7 @@ bool Navigation::setAttitude(const double roll0, const double pitch0, const doub
    roll = roll0;
    pitch = pitch0;
    heading = thdg0;
-   base::Nav::computeRotationalMatrixDeg(roll0, pitch0, thdg0, &rm);
+   base::nav::computeRotationalMatrixDeg(roll0, pitch0, thdg0, &rm);
 
    if (magVarValid) mhdg = base::angle::aepcdDeg(heading - magvar);
    else mhdg = heading;
@@ -693,7 +694,7 @@ bool Navigation::updateSysPosition()
         double lat0 = 0;
         double lon0 = 0;
         double alt0 = 0;
-        ok = base::Nav::convertPosVec2LL(refLat, refLon, getOwnship()->getPosition(), &lat0, &lon0, &alt0);
+        ok = base::nav::convertPosVec2LL(refLat, refLon, getOwnship()->getPosition(), &lat0, &lon0, &alt0);
         setPosition(lat0, lon0, alt0);
     }
     return ok;

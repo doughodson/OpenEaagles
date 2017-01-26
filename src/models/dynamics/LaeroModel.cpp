@@ -3,7 +3,6 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
 
@@ -501,7 +500,7 @@ bool LaeroModel::flyPsi(const double psiCmdDeg, const double psiDotCmdDps)
 //      double osLonDeg  = pPlr->getLongitude();
 //      double brgDeg = 0.0;
 //      double rngMtr = 0.0;
-//      base::Nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
+//      base::nav::gll2bd(osLatDeg, osLonDeg, latDeg, lonDeg, &brgDeg,&rngMtr);
 //
 //      //-------------------------------------------------------
 //      // fly to heading necessary to intercept lat/lon

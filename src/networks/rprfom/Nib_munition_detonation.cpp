@@ -7,9 +7,7 @@
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
-
-#include "openeaagles/base/Nav.hpp"
+#include "openeaagles/base/nav_utils.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
 namespace oe {
@@ -69,9 +67,9 @@ bool Nib::munitionDetonationMsgFactory(const double)
 
       // World Coordinates
       WorldLocationStruct detonationLocation;
-      base::NetHandler::toNetOrder(&detonationLocation.x, geocPos[base::Nav::IX]);
-      base::NetHandler::toNetOrder(&detonationLocation.y, geocPos[base::Nav::IY]);
-      base::NetHandler::toNetOrder(&detonationLocation.z, geocPos[base::Nav::IZ]);
+      base::NetHandler::toNetOrder(&detonationLocation.x, geocPos[base::nav::IX]);
+      base::NetHandler::toNetOrder(&detonationLocation.y, geocPos[base::nav::IY]);
+      base::NetHandler::toNetOrder(&detonationLocation.z, geocPos[base::nav::IZ]);
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::DETONATION_LOCATION_MD_PI), 
          reinterpret_cast<char*>(&detonationLocation), 
@@ -79,9 +77,9 @@ bool Nib::munitionDetonationMsgFactory(const double)
 
       // Velocity
       VelocityVectorStruct finalVelocityVector; 
-      base::NetHandler::toNetOrder(&finalVelocityVector.xVelocity, static_cast<float>(geocVel[base::Nav::IX]));
-      base::NetHandler::toNetOrder(&finalVelocityVector.yVelocity, static_cast<float>(geocVel[base::Nav::IY]));
-      base::NetHandler::toNetOrder(&finalVelocityVector.zVelocity, static_cast<float>(geocVel[base::Nav::IZ]));
+      base::NetHandler::toNetOrder(&finalVelocityVector.xVelocity, static_cast<float>(geocVel[base::nav::IX]));
+      base::NetHandler::toNetOrder(&finalVelocityVector.yVelocity, static_cast<float>(geocVel[base::nav::IY]));
+      base::NetHandler::toNetOrder(&finalVelocityVector.zVelocity, static_cast<float>(geocVel[base::nav::IZ]));
       pParams->add(
          netIO->getInteractionParameterHandle(NetIO::FINAL_VELOCITY_VECTOR_MD_PI), 
          reinterpret_cast<char*>(&finalVelocityVector), 
