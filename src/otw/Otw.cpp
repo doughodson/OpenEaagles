@@ -4,7 +4,7 @@
 #include "openeaagles/otw/Otm.hpp"
 #include "openeaagles/otw/OtwModel.hpp"
 
-#include "openeaagles/simulation/AbstractPlayer.hpp"
+#include "openeaagles/models/players/Player.hpp"
 
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
@@ -402,7 +402,7 @@ void Otw::mapPlayers2ElevTable()
 //------------------------------------------------------------------------------
 // computeRangeToPlayer() -- Calculate range from ownship to player
 //------------------------------------------------------------------------------
-double Otw::computeRangeToPlayer(const simulation::AbstractPlayer* const ip) const
+double Otw::computeRangeToPlayer(const models::Player* const ip) const
 {
     double rng = maxRange*2.0 + 1.0;  // Default is out-of-range
     if (ownship != nullptr) {
@@ -416,7 +416,7 @@ double Otw::computeRangeToPlayer(const simulation::AbstractPlayer* const ip) con
 // newModelEntry() -- Generates a new model entry for this player.
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-OtwModel* Otw::newModelEntry(simulation::AbstractPlayer* const ip)
+OtwModel* Otw::newModelEntry(models::Player* const ip)
 {
    OtwModel* model = nullptr;
 
@@ -438,7 +438,7 @@ OtwModel* Otw::newModelEntry(simulation::AbstractPlayer* const ip)
 // newElevEntry() -- Generates a new elevation entry for this player
 //                    Returns a pointer to the new entry, else zero(0)
 //------------------------------------------------------------------------------
-OtwModel* Otw::newElevEntry(simulation::AbstractPlayer* const ip)
+OtwModel* Otw::newElevEntry(models::Player* const ip)
 {
    OtwModel* model = nullptr;
 
@@ -463,13 +463,16 @@ OtwModel* Otw::newElevEntry(simulation::AbstractPlayer* const ip)
 //------------------------------------------------------------------------------
 void Otw::setOwnship(simulation::AbstractPlayer* const newOwnship)
 {
-   setOwnship0(newOwnship);
+   const auto player = dynamic_cast<models::Player*>(newOwnship);
+   if (player != nullptr) {
+      setOwnship0(player);
+   }
 }
 
 //------------------------------------------------------------------------------
 // Sets our ownship player (for derived class control)
 //------------------------------------------------------------------------------
-void Otw::setOwnship0(simulation::AbstractPlayer* const newOwnship)
+void Otw::setOwnship0(models::Player* const newOwnship)
 {
     // Nothing's changed, just return
     if (ownship == newOwnship) return;

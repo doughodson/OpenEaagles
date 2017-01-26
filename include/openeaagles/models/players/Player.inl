@@ -11,36 +11,6 @@ inline const base::String* Player::getType() const
    return type;
 }
 
-// True if the player's name matches
-inline bool Player::isName(const base::Identifier* const tst) const
-{
-   return (*tst == pname);
-}
-
-// True if the player's name matches
-inline bool Player::isName(const char* const tst) const
-{
-   return (tst == pname);
-}
-
-// The player's name
-inline const base::Identifier* Player::getName() const
-{
-   return &pname;
-}
-
-// True if player's ID matches
-inline bool Player::isID(const unsigned short tst) const
-{
-   return (tst == id);
-}
-
-// The player's ID
-inline unsigned short Player::getID() const
-{
-   return id;
-}
-
 // The 'side' that the player is on.
 inline Player::Side Player::getSide() const
 {
@@ -63,60 +33,6 @@ inline bool Player::isNotSide(const unsigned int tst) const
 inline bool Player::isMajorType(const unsigned int tst) const
 {
    return ((tst & getMajorType()) != 0);
-}
-
-// Current mode ( INACTIVE, ACTIVE, DETONATED ... )
-inline Player::Mode Player::getMode() const
-{
-   return mode;
-}
-
-// True if player's mode is active
-inline bool Player::isActive() const
-{
-   return mode == ACTIVE;
-}
-
-// True if player's mode is killed
-inline bool Player::isKilled() const
-{
-   return (mode == KILLED);
-}
-
-// True if player's mode is crashed
-inline bool Player::isCrashed() const
-{
-   return (mode == CRASHED);
-}
-
-// True if player has detonated (weapons only)
-inline bool Player::isDetonated() const
-{
-   return (mode == DETONATED);
-}
-
-// True if player's mode is inactive
-inline bool Player::isInactive() const
-{
-   return mode == INACTIVE;
-}
-
-// True if player is currently this mode
-inline bool Player::isMode(const Mode tst) const
-{
-   return mode == tst;
-}
-
-// True if player is not currently this mode
-inline bool Player::isNotMode(const Mode tst) const
-{
-   return mode != tst;
-}
-
-// True if player's mode is dead
-inline bool Player::isDead() const
-{
-   return isKilled() || isCrashed() || isDetonated();
 }
 
 // Roll Euler angle (Rad)
@@ -640,42 +556,6 @@ inline bool Player::isDtedTerrainInterpolationEnabled() const
 inline bool Player::isTerrainElevationRequired() const
 {
    return tElevReq;
-}
-
-// True if this is a networked player
-inline bool Player::isNetworkedPlayer() const
-{
-   return (nib != nullptr);
-}
-
-// True if this is a local player
-inline bool Player::isLocalPlayer() const
-{
-   return (nib == nullptr);
-}
-
-// ID of a networked player's controlling network model
-inline int Player::getNetworkID() const
-{
-   return netID;
-}
-
-// Networked player's Nib object
-inline simulation::AbstractNib* Player::getNib()
-{
-   return nib;
-}
-
-// Networked player's Nib object  (const version)
-inline const simulation::AbstractNib* Player::getNib() const
-{
-   return nib;
-}
-
-// is player output to the network enabled?
-inline bool Player::isNetOutputEnabled() const
-{
-   return enableNetOutput;
 }
 
 // Returns the coordinate system currently being to update the player's position

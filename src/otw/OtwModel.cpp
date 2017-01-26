@@ -5,7 +5,7 @@
 
 #include "openeaagles/base/String.hpp"
 
-#include "openeaagles/simulation/AbstractPlayer.hpp"
+#include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/simulation/AbstractNib.hpp"
 
 namespace oe {
@@ -51,7 +51,7 @@ void OtwModel::deleteData()
 // ---
 // OtwModel() -- set & ref the player pointer
 // ---
-void OtwModel::setPlayer(simulation::AbstractPlayer* const p)
+void OtwModel::setPlayer(models::Player* const p)
 {
    if (player != nullptr) {
       player->unref();
@@ -77,7 +77,7 @@ void OtwModel::setPlayer(simulation::AbstractPlayer* const p)
 // ---
 // initialize() -- initialize the model
 // ---
-void OtwModel::initialize(simulation::AbstractPlayer* const p, const Otm** const otwModelTable, const unsigned int numModels)
+void OtwModel::initialize(models::Player* const p, const Otm** const otwModelTable, const unsigned int numModels)
 {
    setPlayer(p);
    state = OtwModel::ACTIVE;

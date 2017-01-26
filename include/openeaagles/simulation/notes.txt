@@ -1,0 +1,23 @@
+
+AbstractPlayer
+--------------------
+method              :  dependent class
+
+isLocalPlayer()        Station
+
+
+getID()                SimExec
+setID()                SimExec
+
+setName()              SimExec
+isName()               SimExec
+
+isMode()               SimExec
+isNotMode()            SimExec
+
+isNetworkedPlayer()    SimExec
+getNib()               SimExec
+getNetworkID()         SimExec
+
+
+

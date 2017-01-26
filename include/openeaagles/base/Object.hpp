@@ -14,7 +14,7 @@
 #include "openeaagles/base/macros.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 
-#include "openeaagles/base/Metadata.hpp"
+#include "openeaagles/base/MetaObject.hpp"
 
 #include <iosfwd>
 
@@ -30,7 +30,6 @@ namespace base {
 //       slot tables, exceptions and reference counting.  Most of this needs to
 //       be implemented by each derived class, and the macros in 'macros.h' provide
 //       an easy way to do this.
-//
 //
 // Macros
 //
@@ -134,7 +133,7 @@ namespace base {
 //
 //    Using unref() decrements the reference count, which indicates one less
 //    user.  If the number of references becomes zero, the object is deleted.
-//    Beware - Do not use 'delete' to destroy an object; only use unref()!!!
+//    Beware - Do not use 'delete' to destroy an object; only use unref()!
 //
 //    Using getRefCount() returns the current value of the Object's reference count
 //
@@ -275,12 +274,12 @@ namespace base {
 //       (See macro STANDARD_CONSTRUCTOR())
 //
 //
-// Object Metadata
+// MetaObject
 //
-//    Each class has an associated 'ObjMetadata' object instance which is used
-//    to store additional class and object instance information.  For example,
-//    the metadata object contains the number of instances of a particular class
-//    exists, as well as the total number of objects that have ever been
+//    Each class has an associated 'MetaObject' object instance which is used
+//    to store data related to class and object instances.  For example,
+//    the meta-object contains the number of instances of a particular class in
+//    existance, as well as the total number of objects that have ever been
 //    created and the maximum number that has existed at the same time.  This
 //    capability was added to Object to serves as a debugging tool to monitor
 //    the creation and deletion of large numbers of particular classes of interest
@@ -370,7 +369,7 @@ public:
       }
    };
 
-   static const Metadata* getMetadata();
+   static const MetaObject* getMetaObject();
 
 protected:
    // slot table for this object (set to the object's class slot table)
@@ -388,7 +387,7 @@ private:
    mutable long semaphore;          // ref(), unref() semaphore
    mutable unsigned int refCount;   // reference count
 
-   static Metadata metadata;
+   static MetaObject metaObject;
 };
 
 }

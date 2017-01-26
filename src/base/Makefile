@@ -91,7 +91,7 @@ OBJS =  \
 	List.o \
 	Locus.o \
 	Matrix.o \
-	Metadata.o \
+	MetaObject.o \
 	MonitorMetrics.o \
 	Nav.o \
 	NavDR.o \

@@ -72,11 +72,11 @@ base library
         reducing code clutter.
 
      -- Extracted '_Static' structure from Object and moved into a
-        standalone class called Metadata, which is what it is.  Updated
-        Object itself to use this object (via, a variable called 'metadata')
-        in lue of '_static to store class and object related information.  This has
+        standalone class called MetaObject, which is what it is.  Updated
+        Object itself to use this object (via, a variable called 'metaObject')
+        in lue of '_static' to store class and object related information.  This has
         NO impact on API, but does make the code more readable, and provides
-        an opening to expand upon.
+        a more clear opening to expand upon.
 
      -- Removed both registerClass() and WriteClassList() methods and underlying
         support structure to maintain a list of classes compiled into an application.

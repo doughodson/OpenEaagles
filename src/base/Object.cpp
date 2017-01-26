@@ -12,7 +12,7 @@ namespace base {
 // ---
 // Class and object metadata
 // ---
-Metadata Object::metadata(typeid(Object).name(), "Object", &Object::slottable, nullptr);
+MetaObject Object::metaObject(typeid(Object).name(), "Object", &Object::slottable, nullptr);
 
 // ---
 // Object's SlotTable
@@ -26,7 +26,7 @@ const SlotTable Object::slottable(nullptr, 0);
 
 
 //------------------------------------------------------------------------------
-// Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.h
+// Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.hpp
 //------------------------------------------------------------------------------
 
 Object::Object()
@@ -44,7 +44,6 @@ Object::Object(const Object& org)
    copyData(org,true);
 }
 
-// Destructor
 Object::~Object()
 {
    STANDARD_DESTRUCTOR()
@@ -56,7 +55,6 @@ Object& Object::operator=(const Object& org)
     return *this;
 }
 
-// Clone
 Object* Object::clone() const
 {
    return new Object(*this);
@@ -73,7 +71,7 @@ bool Object::isClassType(const std::type_info& type) const
 bool Object::isFactoryName(const char name[]) const
 {
     if (name == nullptr) return false;
-    if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;
+    if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;
     else return false;
 }
 
@@ -105,10 +103,9 @@ bool Object::setSlotByIndex(const int, Object* const)
 
 const char* Object::getFactoryName()
 {
-    return metadata.getFactoryName();
+    return metaObject.getFactoryName();
 }
 
-// get slot table
 const SlotTable& Object::getSlotTable()
 {
    return slottable;
@@ -263,11 +260,11 @@ std::ostream& Object::serialize(std::ostream& sout, const int, const bool) const
 }
 
 //------------------------------------------------------------------------------
-// return class metadata
+// return object and class metadata
 //------------------------------------------------------------------------------
-const Metadata* Object::getMetadata()
+const MetaObject* Object::getMetaObject()
 {
-    return &metadata;
+    return &metaObject;
 }
 
 }

@@ -6,11 +6,8 @@
 #include "openeaagles/base/safe_ptr.hpp"
 
 namespace oe {
-
 namespace base { class Identifier; class Number; class String; }
-
-namespace simulation { class AbstractPlayer; }
-
+namespace models { class Player; }
 namespace otw {
 
 //------------------------------------------------------------------------------
@@ -72,7 +69,7 @@ public:
     virtual bool setSlotRefTypeName(const base::String* const msg);         // Sets the Reference type name
 
     // True if player's factory & type names match our reference factory and type names.
-    virtual bool isMatchingPlayerType(const simulation::AbstractPlayer* const p) const;
+    virtual bool isMatchingPlayerType(const models::Player* const p) const;
 
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name

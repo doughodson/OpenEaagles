@@ -46,6 +46,319 @@ class IrSignature;
 class RfSignature;
 class Track;
 
+//------------------------------------------------------------------------------
+// Class: Player
+//
+// Description: Abstract interface for all players (e.g., aircraft, ground vehicles, etc.)
+//              Provides interfaces for player IDs, types, status, state vectors,
+//              control flags, subcomponent lists, event handling, etc.
+//
+//
+//------------------------------------------------------------------------------
+// Factory name: AbstractPlayer
+// Slots --
+//
+//    ! ---
+//    ! Player's initial position can be set using any one (but only one)
+//    ! of the following three coordinate systems.  Which initial coordinate
+//    ! system used will determine the default coordinate system is used to
+//    ! update the player's position.
+//    ! ---
+//
+//    ! 1: Player's initial position vector (NED) on the simulation's gaming area
+//
+//    initXPos       <base::Distance>    ! X position (+north) (default: 0)
+//    initXPos       <base::Number>      ! X position (+north) (meters)
+//
+//    initYPos       <base::Distance>    ! Y position (+east) (default: 0)
+//    initYPos       <base::Number>      ! Y position (+east)(meters)
+//
+//    initAlt        <base::Distance>    ! Altitude (+up) (default: 0)
+//    initAlt        <base::Number>      ! Altitude (+up) (meters)
+//
+//    initPosition   <base::List>        ! Position Vector: meters [ north east down ]
+//                                        !   *** initPosition will be removed in later release (use below slots instead) ***
+//
+//    ! 2: Player's initial geodetic position
+//
+//    initLatitude   <base::LatLon>      ! Latitude (default: 0)
+//    initLatitude   <base::Angle>       ! Latitude
+//    initLatitude   <base::Number>      ! Latitude (degs)
+//
+//    initLongitude  <base::LatLon>      ! Longitude (default: 0)
+//    initLongitude  <base::Angle>       ! Longitude
+//    initLongitude  <base::Number>      ! Longitude (degs)
+//
+//    initAlt        <base::Distance>    ! Altitude (HAE) (+up)  ### NES Is this being used?
+//    initAlt        <base::Number>      ! Altitude (HAE) (+up) (meters)
+//
+//
+//    ! 3: Player's initial world position
+//
+//    initGeocentric <base::List>        ! Position vector [ x y z ] (ECEF) (meters) (default: 0,0,0)
+//
+//
+//    ! ---
+//    ! Player's initial Euler angles
+//    ! ---
+//    initRoll       <base::Angle>       ! Initial roll angle (default: 0)
+//    initRoll       <base::Number>      ! Initial roll angle (radians)
+//
+//    initPitch      <base::Angle>       ! Initial pitch angle (default: 0)
+//    initPitch      <base::Number>      ! Initial pitch angle (radians)
+//
+//    initHeading    <base::Angle>       ! Initial heading angle (default: 0)
+//    initHeading    <base::Number>      ! Initial heading angle (radians)
+//
+//    initEuler      <base::List>        ! Initial Euler angles: radians [ roll pitch yaw ]
+//
+//    ! ---
+//    ! Player's initial velocity
+//    ! ---
+//    initVelocity   <base::Number>      ! Initial Velocity: meters/sec (default: 0)
+//
+//    ! ---
+//    ! Player's type, id and and other parameters
+//    ! ---
+//    type           <base::String>      ! Type of player vehicle ("F-16A", "Tank", "SA-6", etc.) (default: 0)
+//    id             <base::Integer>     ! Player id  [ 1 .. 65535 ] (default: 0)
+//    side           <base::String>      ! Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE } (default: GRAY)
+//    mode           <base::String>      ! Initial player mode ( INACTIVE, ACTIVE, DEAD ) (default: ACTIVE)
+//    useCoordSys    <base::String>      ! Coord system to use for updating player position { WORLD, GEOD, LOCAL }
+//                                       !   (default: based on the coord system used to set the initial position)
+//
+//    signature      <RfSignature>       ! Player's RCS signature (default: 0)
+//    irSignature    <IrSignature>       ! Player's IR signature (default: 0)
+//    camouflageType <base::Integer>     ! User defined camouflage type (positive integer or zero for none) (default: 0)
+//
+//    terrainElevReq <base::Boolean>     ! Terrain elevation from the OTW system is requested; otherwise use DTED (default: false)
+//    interpolateTerrain <base::Boolean> ! Interpolate our DTED terrain elevation data (default: false)
+//    terrainOffset  <base::Distance>    ! Ground clamp offset from terrain to player's CG (base::Distance)
+//
+//    positionFreeze <base::Boolean>     ! Position freeze (default: false)
+//    altitudeFreeze <base::Boolean>     ! Altitude freeze (default: false)
+//    attitudeFreeze <base::Boolean>     ! Attitude freeze (default: false)
+//    fuelFreeze     <base::Boolean>     ! Fuel freeze (default: false)
+//    crashOverride  <base::Boolean>     ! Crash Override (i.e., ignore collision and crash events)(default: false)
+//    killOverride   <base::Boolean>     ! Kill/Damage Override -- player can not be killed/damaged (default: false)
+//    killRemoval    <base::Boolean>     ! If true destroyed players are set to KILLED and are eventually removed (default: false)
+//    enableNetOutput <base::Boolean>    ! Enable network output of this player (default: true)
+//
+//    dataLogTime    <base::Time>        ! Time between player data samples to an optional data
+//                                       ! logger, or zero if none (default: 0)
+//
+//    ! ---
+//    ! Angular test rates:
+//    !     If non-zero the Euler angles are updated using the body angular rates.
+//    !     For use only without a dynamics model.
+//    ! ---
+//    testRollRate   <base::Angle>       ! Test roll rate (body) (units per second) (default: 0)
+//    testPitchRate  <base::Angle>       ! Test pitch rate (body) (units per second) (default: 0)
+//    testYawRate    <base::Angle>       ! Test heading rate (body) (units per second) (default: 0)
+//    testBodyAxis   <base::Boolean>     ! Test rates are in the body axis else they're Euler rates (default: false)
+//
+//
+// --------------------
+// Events:
+//    KILL_EVENT              <Player>             ! Killed by
+//    CRASH_EVENT             <Player>             ! Collision with
+//    CRASH_EVENT             (none)               ! Crashed
+//    RF_EMISSION             <Emission>           ! Hit by RF emission
+//    RF_REFLECTIONS_REQUEST  <base::Component>    ! Requests for reflected R/F emissions (must re-request once a second)
+//    RF_REFLECTIONS_CANCEL   <base::Component>    ! Cancel requests for reflected R/F emissions
+//    WPN_REL_EVENT           <base::Boolean>      ! Weapon release switch with position
+//    WPN_REL_EVENT           (none)               ! Weapon release switch (single shot)
+//    TRIGGER_SW_EVENT        <base::Boolean>      ! Trigger switch with position
+//    TRIGGER_SW_EVENT        (none)               ! Trigger switch (single shot)
+//    TGT_STEP_EVENT          (none)               ! Target step switch
+//    DATALINK_MESSAGE        <base::Object>       ! Hit with a datalink message
+//    IR_QUERY_MSG            <IrQueryMsg>         ! IR seeker requests signature
+//
+//
+//
+// Coordinate systems
+//
+//    a) Geocentric or world coordinates (Earth Centered, Earth Fixed - ECEF); origin
+//       is at the center X+ points to zero latitude and zero longitude of the earth;
+//       (i.e., equator at the Greenwich meridian), Z+ points to the north pole and Y
+//       is the cross product of Z into X; ECEF rotates with the earth
+//
+//    b) Geodetic coordinates: latitude, longitude and height above the
+//       ellipsoid (HAE)
+//
+//    c) Simulation's gaming area coordinates (NED); the XY plane is tangent to
+//       and centered at the simulation's geodetic gaming area reference point;
+//       the Z or down axes is perpendicular to the tangent plane (see Simulation.h).
+//       Use simulation::getWorldMat() to transform vectors between ECEF and
+//       this tangent plane.
+//
+//    d) Inertial coordinates or local tangent plane (NED); the XY plane is tangent
+//       to and centered at the player's geodetic present position; the Z or
+//       down axes is perpendicular to the tangent plane.  Use Player::getWorldMat()
+//       to transform vectors from ECEF to this tangent plane.
+//
+//    e) Body coordinates: nose(x+), right wing(y+), and down(z+);  the orientation
+//       of the player's body coordinates to the player's local tangent plane is
+//       defined by the Euler angles (see below).  Use Player::getRotMat() to transform
+//       vectors between the player's inertial coordinates and body coordinates.
+//
+//
+// Player's position:
+//
+//    a) Represented in three of the coordinate systems
+//
+//          1) Geocentric or world (ECEF) position vector [ x y z ]
+//
+//          2) Geodetic position: latitude, longitude and altitude (HAE)
+//
+//          3) NED position vector on the simulation's gaming area.
+//             -- May not be valid for all player types (e.g., SPACE_VEHICLE), so
+//                check isPositionVectorValid()
+//             -- Use simulation::getWorldMat() to get the ECEF to NED
+//                transformation matrix for this tangent plane.
+//
+//    b) Setting the position in any one coordinate system will set the
+//       position for all three coordinate systems and will compute the
+//       world matrix, getWorldMat().
+//
+//    c) Set the initial (i.e., reset) present position using one of the three
+//       sets of initial position slots defined above.
+//
+//    d) The coordinate system that's used to set the player's position will
+//       determine which coordinate system is used to update the player's position
+//       (see "Updating Position" below).
+//
+//
+// Player's orientation:
+//    Inertial (player's local tangent plane) <==> body
+//
+//    a) Represented in three formats
+//       1) As Euler angles; Phi (roll), theta (pitch) and psi (yaw; true heading)
+//       2) As a rotational matrix
+//       3) As a quaternion
+//
+//    b) Setting the player's orientation in any one of the three formats will set
+//       the player's orientation in the other formats as well.
+//
+//    c) The player's dynamics model is responsible for updating the player's
+//       orientation (e.g., rotational equations of motion).  Also, the
+//       dynamics model is responsible for implementing the attitude freeze
+//       (i.e., setAttitudeFreeze()).
+//
+//
+// Player's velocity and acceleration vectors:
+//
+//    a) The velocity and acceleration vectors exist for three coordinate systems;
+//       world, inertial and body coordinates.
+//
+//    b) Setting the player's velocity or acceleration in any one of the three
+//       coordinate systems will set the vectors in the other systems as well.
+//
+//    c) Set the velocity and acceleration vectors after the player's position and
+//       orientation have been set (i.e., after the transformation matrices have
+//       been computed).
+//
+//
+// Player's angular rates:
+//
+//    a) The angular rates exist for both body and world coordinates.
+//
+//    b) Setting the player's angular rates in either coordinate system will set
+//       the angular rates in both systems.
+//
+//    c) Set the angular rates after the player's position and orientation have
+//       been set (i.e., after the transformation matrices have been computed).
+//
+//    d) Angular test rates:
+//
+//       The slots 'testRollRate', 'testPitchRate' and 'testYawRate' are used to
+//       define test angular rates.  If the slot 'testBodyAxis' is true then
+//       these are body rates otherwise they're Euler rates.
+//
+//       When any one of these test rates are non-zero then the player's Euler
+//       angles are updated by this Player class.  Since the player's dynamics
+//       model is normally responsible for updating the Euler angles, these
+//       test rates should be used only on players without a dynamics model
+//       (e.g., a player that is part of a test-rig).  With each update of the
+//       Euler angles, the player's total velocity along the body X axis is
+//       reset to 'initVelocity'.
+//
+//
+// Updating Position:
+//
+//    The function positionUpdate(), which is called from dynamics(), updates
+//    the player's position unless the position is frozen or is slaved to the
+//    dynamics model (i.e., the dynamics model is computing the position).
+//    The positionUpdate() functions is also responsible for updating the
+//    Euler angles if the 'angular test rates' are not zero.
+//
+//    The position is updated using either the player's world coordinates, geodetic
+//    coordinates or gaming area position vector.  Which coordinate system used
+//    is determined by which coordinate system was used to initially set the
+//    player's position.  For example, the player's position will be updated in
+//    world coordinates if the player's position was initially set using world
+//    coordinates.
+//
+//    Dynamics models can inhibit positionUpdate() from updating the position
+//    and/or altitude by using the 'slaved' flags on the set player position
+//    functions (e.g., setPositionLLA()).
+//
+//    The functions setPositionFreeze() and setAltitudeFreeze() will freeze
+//    (i.e., stop updating) the player's position and altitude as follows.
+//
+//       Coord Sys         Position Freeze      Altitude Freeze
+//       -----------       ---------------      ---------------
+//       Gaming area       X and Y              Z
+//       Geodetic          lat and lon          altitude
+//       World             X, Y and Z
+//
+//
+//
+// Player systems and subcomponents:
+//
+//    1) Player's top level system models are all defined using the player's
+//       'components' slot.  Examples:
+//
+//          datalink:      ( Datalink ...        )  // Datalink model
+//          dynamicsModel: ( DynamicsModel ...   )  // Dynamics model
+//          gimbals:       ( Gimbal ...          )  // Gimbal, antenna and/or seeker model
+//          nav:           ( Navigation ...      )  // Navigation model
+//          obc:           ( OnboardComputer ... )  // Onboard computer model
+//          pilot:         ( Pilot ...           )  // Pilot model
+//          radios:        ( Radio ...           )  // Radio model
+//          sensors:       ( RfSensor ...        )  // R/F Sensor model
+//          irSystems:     ( IrSystem ...        )  // IR system model
+//          sms:           ( StoresMgr ...       )  // Stores management model
+//
+//          Where 'datalink' is the name given to the top level datalink object,
+//          'dynamicsModel' is the name given to the dynamics model, etc.
+//
+//    2) There is one top level model for each major system.  Additional system
+//       models are subcomponents to the top level model of the same type.
+//       Examples:
+//
+//          a) Various navigational models (e.g., INS, GPS models) would be
+//             subcomponents of one top level Navigational model (e.g., INav),
+//             or you might have only a single (top level) GPS model.
+//
+//          b) Various gimbal models (e.g., antennas and EO/IR seekers) would be
+//             subcomponents of one top level Gimbal model, or you may have only
+//             a single (top level) antenna model.
+//
+//          c) A top level sensor manager may contain several R/F and IR sensors
+//             as subcomponents.
+//
+//          d) The main on-board computer model can contain several subsystem
+//             on-board computers and track managers.
+//
+//
+// Shutdown event:
+//
+//    At shutdown, the parent object (e.g., the simulation) must send a SHUTDOWN_EVENT
+//    event to this player, which will pass the event to all of the our components.
+//
+//
+//------------------------------------------------------------------------------
 class Player : public simulation::AbstractPlayer
 {
    DECLARE_SUBCLASS(Player, simulation::AbstractPlayer)
@@ -53,227 +366,228 @@ class Player : public simulation::AbstractPlayer
 public:
    Player();
 
+   // Major player type (bits)
+   enum MajorType {
+      GENERIC        = 0x01,  // Unknown type of player
+      AIR_VEHICLE    = 0x02,  // Air Player
+      GROUND_VEHICLE = 0x04,  // Ground Player
+      WEAPON         = 0x08,  // Weapon Player
+      SHIP           = 0x10,  // Ship or subsurface player
+      BUILDING       = 0x20,  // Building
+      LIFE_FORM      = 0x40,  // Life Form
+      SPACE_VEHICLE  = 0x80   // Space Player
+   };
+
+   // Player sides (bits)
+   enum Side {
+      BLUE     = 0x01,        // Blue force
+      RED      = 0x02,        // Red force
+      YELLOW   = 0x04,        // 3rd force
+      CYAN     = 0x08,        // 4th force
+      GRAY     = 0x10,        // Neutral force
+      WHITE    = 0x20         // Commercial/Civilian
+   };
+
+   // Coordinate system to use (or being used) for updating player position
+   enum CoordSys {
+      CS_NONE,    //
+      CS_LOCAL,   // Local: NED from the center of the simulation gaming area
+      CS_GEOD,    // Geodetic coordinates; latitude, longitude and HAE
+      CS_WORLD    // World (ECEF) coordinates
+   };
+
+   enum { IROLL, IPITCH, IYAW };  //Euler angles
+   enum { INORTH, IEAST, IDOWN }; //position vector
+
    // ---
    // Type and ID
    // ---
 
-   virtual unsigned int getMajorType() const override;                    // The player's 'major type' enum
-   virtual bool isMajorType(const unsigned int tst) const override;       // True if player is of these (bit-wise or'd) major types
+   virtual unsigned int getMajorType() const;                             // The player's 'major type' enum
+   virtual bool isMajorType(const unsigned int tst) const;                // True if player is of these (bit-wise or'd) major types
 
-   virtual const base::String* getType() const override;                  // The player's type string (.e.g, "F-16C")
+   virtual const base::String* getType() const;                           // The player's type string (.e.g, "F-16C")
 
-   virtual bool isID(const unsigned short tst) const override;            // True if player's ID matches
-   virtual unsigned short getID() const override;                         // The player's ID
-
-   virtual bool isName(const base::Identifier* const tst) const override; // True if the player's name matches
-   virtual bool isName(const char* const tst) const override;             // True if the player's name matches
-   virtual const base::Identifier* getName() const override;              // The player's name
-
-   virtual Side getSide() const override;                                 // The 'side' that the player is on.
-   virtual bool isSide(const unsigned int tst) const override;            // True if player is with one of these (bit-wise or'd) sides
-   virtual bool isNotSide(const unsigned int tst) const override;         // True if player is not with one one of these (bit-wise or'd) sides
+   virtual Side getSide() const;                                          // The 'side' that the player is on.
+   virtual bool isSide(const unsigned int tst) const;                     // True if player is with one of these (bit-wise or'd) sides
+   virtual bool isNotSide(const unsigned int tst) const;                  // True if player is not with one one of these (bit-wise or'd) sides
 
    // ---
    // State data
    // ---
 
-   virtual Mode getMode() const override;                           // Current mode ( INACTIVE, ACTIVE, DETONATED ... )
-   virtual bool isActive() const override;                          // True if player's mode is active
-   virtual bool isKilled() const override;                          // True if player's mode is killed
-   virtual bool isCrashed() const override;                         // True if player's mode is crashed
-   virtual bool isDetonated() const override;                       // True if player has detonated (weapons only)
-   virtual bool isInactive() const override;                        // True if player's mode is inactive
-   virtual bool isMode(const Mode tst) const override;              // True if player is currently this mode
-   virtual bool isNotMode(const Mode tst) const override;           // True if player is not currently this mode
-   virtual bool isDead() const override;                            // True if player's mode is dead (Killed, Crashed, Detonated, etc....)
+   virtual double getRoll() const;                                  // Roll Euler angle (radians) by default
+   virtual double getRollR() const;                                 // Roll Euler angle (radians)
+   virtual double getRollD() const;                                 // Roll Euler angle (degrees)
+   virtual double getSinRoll() const;                               // Sin of the Euler roll angle
+   virtual double getCosRoll() const;                               // Cos of the  Euler roll angle
 
-   virtual double getRoll() const override;                         // Roll Euler angle (radians) by default
-   virtual double getRollR() const override;                        // Roll Euler angle (radians)
-   virtual double getRollD() const override;                        // Roll Euler angle (degrees)
-   virtual double getSinRoll() const override;                      // Sin of the Euler roll angle
-   virtual double getCosRoll() const override;                      // Cos of the  Euler roll angle
+   virtual double getPitch() const;                                 // Pitch Euler angle (radians) by default
+   virtual double getPitchR() const;                                // Pitch Euler angle (radians)
+   virtual double getPitchD() const;                                // Pitch Euler angle (degrees)
+   virtual double getSinPitch() const;                              // Sin of the pitch Euler angle
+   virtual double getCosPitch() const;                              // Cos of the  pitch Euler angle
 
-   virtual double getPitch() const override;                        // Pitch Euler angle (radians) by default
-   virtual double getPitchR() const override;                       // Pitch Euler angle (radians)
-   virtual double getPitchD() const override;                       // Pitch Euler angle (degrees)
-   virtual double getSinPitch() const override;                     // Sin of the pitch Euler angle
-   virtual double getCosPitch() const override;                     // Cos of the  pitch Euler angle
+   virtual double getHeading() const;                               // Yaw Euler angle (radians) by default
+   virtual double getHeadingR() const;                              // Yaw Euler angle (radians)
+   virtual double getHeadingD() const;                              // Yaw Euler angle (degrees)
+   virtual double getSinHeading() const;                            // Sin of the yaw Euler angle
+   virtual double getCosHeading() const;                            // Cos of the  yaw Euler angle
 
-   virtual double getHeading() const override;                      // Yaw Euler angle (radians) by default
-   virtual double getHeadingR() const override;                     // Yaw Euler angle (radians)
-   virtual double getHeadingD() const override;                     // Yaw Euler angle (degrees)
-   virtual double getSinHeading() const override;                   // Sin of the yaw Euler angle
-   virtual double getCosHeading() const override;                   // Cos of the  yaw Euler angle
+   virtual const osg::Vec3d& getEulerAngles() const;                // Euler angles (radians); geodetic (body/NED)
+   virtual const osg::Quat& getQuaternions() const;                 // Rotational Quaternions
 
-   virtual const osg::Vec3d& getEulerAngles() const override;       // Euler angles (radians); geodetic (body/NED)
-   virtual const osg::Quat& getQuaternions() const override;        // Rotational Quaternions
-
-   virtual const osg::Matrixd& getRotMat() const override;          // Rotational Matrix: (directional cosines)
+   virtual const osg::Matrixd& getRotMat() const;                   // Rotational Matrix: (directional cosines)
                                                                     //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw]
                                                                     //    Usage:
                                                                     //       Vb = M * Vi
                                                                     //       Vi  = Vb * M
                                                                     //    Where: 'Vb' is a body vector; 'Vi' is an inertial vector
 
-   virtual const osg::Matrixd& getRotMatW2B() const override;       // Rotational Matrix: world to body
+   virtual const osg::Matrixd& getRotMatW2B() const;                // Rotational Matrix: world to body
                                                                     //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw] * Ry[-(90+lat)] * Rz[lon]
                                                                     //    Usage:
                                                                     //       Vb = M * Vw
                                                                     //       Vw  = Vb * M
                                                                     //    Where: 'Vb' is a body vector; 'Vw' is a world (ECEF) vector
 
-   virtual const osg::Vec3d& getGeocEulerAngles() const override;   // Geocentric (body/ECEF) Euler angles
+   virtual const osg::Vec3d& getGeocEulerAngles() const;            // Geocentric (body/ECEF) Euler angles
 
-   virtual const osg::Vec3d& getAngularVelocities() const override;       // Body angular rates (radians/second)
-   virtual const osg::Vec3d& getGeocAngularVelocities() const override;   // Geocentric angular rates (radians/second)
+   virtual const osg::Vec3d& getAngularVelocities() const;          // Body angular rates (radians/second)
+   virtual const osg::Vec3d& getGeocAngularVelocities() const;      // Geocentric angular rates (radians/second)
 
-   virtual const osg::Vec3d& getGeocPosition() const override; // Geocentric (ECEF) position vector [ x y z ] (meters)
+   virtual const osg::Vec3d& getGeocPosition() const;               // Geocentric (ECEF) position vector [ x y z ] (meters)
 
-   virtual double getLatitude() const override;                     // Player's latitude (degrees)
-   virtual double getLongitude() const override;                    // Player's longitude (degrees)
+   virtual double getLatitude() const;                              // Player's latitude (degrees)
+   virtual double getLongitude() const;                             // Player's longitude (degrees)
 
-   virtual const osg::Matrixd& getWorldMat() const override;        // World transformation matrix:
-                                                   //    Local inertial tangent plane (NED) <==> World (ECEF)
-                                                   //    Matrix: M = Ry[-(90+lat)] * Rz[lon]
-                                                   //    Usage:
-                                                   //       Vi = M * Vw;
-                                                   //       Vw  = Vi * M
-                                                   //    Where: 'Vw' is a world(ECEF) vector; 'Vi' is an inertial (NED) vector
+   virtual const osg::Matrixd& getWorldMat() const;                 // World transformation matrix:
+                                                                    //    Local inertial tangent plane (NED) <==> World (ECEF)
+                                                                    //    Matrix: M = Ry[-(90+lat)] * Rz[lon]
+                                                                    //    Usage:
+                                                                    //       Vi = M * Vw;
+                                                                    //       Vw  = Vi * M
+                                                                    //    Where: 'Vw' is a world(ECEF) vector; 'Vi' is an inertial (NED) vector
 
-   virtual double getEarthRadius() const override;                  // Earth radius at player's location (meters)
+   virtual double getEarthRadius() const;                           // Earth radius at player's location (meters)
 
-   virtual bool getPositionLL(double* const lat, double* const lon) const override;                     // Player's Lat/lon (degrees)
-   virtual bool getPositionLLA(double* const lat, double* const lon, double* const alt) const override; // Player's Lat/Lon (degrees) and altitude (meters)
+   virtual bool getPositionLL(double* const lat, double* const lon) const;                     // Player's Lat/lon (degrees)
+   virtual bool getPositionLLA(double* const lat, double* const lon, double* const alt) const; // Player's Lat/Lon (degrees) and altitude (meters)
 
-   virtual double getXPosition() const override;                    // North(+) or south(-) of the sim reference point (meters)
-   virtual double getYPosition() const override;                    // East(+) or west(-) of the sim reference point (meters)
-   virtual const osg::Vec3d& getPosition() const override; // Position vector; NED from sim reference point (meters)
-   virtual bool isPositionVectorValid() const override;             // Is the position vector valid
+   virtual double getXPosition() const;                             // North(+) or south(-) of the sim reference point (meters)
+   virtual double getYPosition() const;                             // East(+) or west(-) of the sim reference point (meters)
+   virtual const osg::Vec3d& getPosition() const;                   // Position vector; NED from sim reference point (meters)
+   virtual bool isPositionVectorValid() const;                      // Is the position vector valid
 
-   virtual double getAltitude() const override;                     // Altitude HAE (meters) default
-   virtual double getAltitudeM() const override;                    // Altitude HAE (meters)
-   virtual double getAltitudeFt() const override;                   // Altitude HAE (feet)
+   virtual double getAltitude() const;                              // Altitude HAE (meters) default
+   virtual double getAltitudeM() const;                             // Altitude HAE (meters)
+   virtual double getAltitudeFt() const;                            // Altitude HAE (feet)
 
-   virtual double getAltitudeAgl() const override;                  // Altitude AGL (meters) default
-   virtual double getAltitudeAglM() const override;                 // Altitude AGL (meters)
-   virtual double getAltitudeAglFt() const override;                // Altitude AGL (feet)
+   virtual double getAltitudeAgl() const;                           // Altitude AGL (meters) default
+   virtual double getAltitudeAglM() const;                          // Altitude AGL (meters)
+   virtual double getAltitudeAglFt() const;                         // Altitude AGL (feet)
 
-   virtual bool isTerrainElevationValid() const override;           // Terrain elevation is valid (or at least was where it was set)
-   virtual double getTerrainElevation() const override;             // Terrain elevation at player (meters) default
-   virtual double getTerrainElevationM() const override;            // Terrain elevation at player (meters)
-   virtual double getTerrainElevationFt() const override;           // Terrain elevation at player (feet)
+   virtual bool isTerrainElevationValid() const;                    // Terrain elevation is valid (or at least was where it was set)
+   virtual double getTerrainElevation() const;                      // Terrain elevation at player (meters) default
+   virtual double getTerrainElevationM() const;                     // Terrain elevation at player (meters)
+   virtual double getTerrainElevationFt() const;                    // Terrain elevation at player (feet)
 
-   virtual double getTotalVelocity() const override;                // Total velocity (meters/second)
-   virtual double getTotalVelocityFPS() const override;             // Total velocity (feet/second)
-   virtual double getTotalVelocityKts() const override;             // Total velocity (knots)
+   virtual double getTotalVelocity() const;                         // Total velocity (meters/second)
+   virtual double getTotalVelocityFPS() const;                      // Total velocity (feet/second)
+   virtual double getTotalVelocityKts() const;                      // Total velocity (knots)
 
-   virtual double getGroundSpeed() const override;                  // Ground speed (meters/second)
-   virtual double getGroundSpeedFPS() const override;               // Ground speed (feet/second)
-   virtual double getGroundSpeedKts() const override;               // Ground speed (knots)
+   virtual double getGroundSpeed() const;                           // Ground speed (meters/second)
+   virtual double getGroundSpeedFPS() const;                        // Ground speed (feet/second)
+   virtual double getGroundSpeedKts() const;                        // Ground speed (knots)
 
-   virtual double getGroundTrack() const override;                  // Ground track (radians) default
-   virtual double getGroundTrackR() const override;                 // Ground track (radians)
-   virtual double getGroundTrackD() const override;                 // Ground track (degrees)
+   virtual double getGroundTrack() const;                           // Ground track (radians) default
+   virtual double getGroundTrackR() const;                          // Ground track (radians)
+   virtual double getGroundTrackD() const;                          // Ground track (degrees)
 
-   virtual const osg::Vec3d& getVelocity() const override;          // Velocity vector; NED (meters/second)
-   virtual const osg::Vec3d& getAcceleration() const override;      // Acceleration vector; NED ((meters/second)/second)
+   virtual const osg::Vec3d& getVelocity() const;                   // Velocity vector; NED (meters/second)
+   virtual const osg::Vec3d& getAcceleration() const;               // Acceleration vector; NED ((meters/second)/second)
 
-   virtual const osg::Vec3d& getGeocVelocity() const override;      // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-   virtual const osg::Vec3d& getGeocAcceleration() const override;  // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
+   virtual const osg::Vec3d& getGeocVelocity() const;               // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
+   virtual const osg::Vec3d& getGeocAcceleration() const;           // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
 
-   virtual const osg::Vec3d& getVelocityBody() const override;      // Body velocity vector: Nose/right/down (meters/second)
-   virtual const osg::Vec3d& getAccelerationBody() const override;  // Body Acceleration vector: Nose/right/down ((meters/second)/second)
+   virtual const osg::Vec3d& getVelocityBody() const;               // Body velocity vector: Nose/right/down (meters/second)
+   virtual const osg::Vec3d& getAccelerationBody() const;           // Body Acceleration vector: Nose/right/down ((meters/second)/second)
 
-   virtual double getGrossWeight() const override;          // Player's gross weight (lbs)
-   virtual double getMach() const override;                 // Player's mach number
-   virtual double getCG() const override;                   // Player's Center-of-Gravity (%)
+   virtual double getGrossWeight() const;                          // Player's gross weight (lbs)
+   virtual double getMach() const;                                 // Player's mach number
+   virtual double getCG() const;                                   // Player's Center-of-Gravity (%)
 
 
    // ---
    // Appearance
    // ---
 
-   virtual unsigned int getCamouflageType() const override;     // Returns the user defined camouflage type (or zero for none)
+   virtual unsigned int getCamouflageType() const;                 // Returns the user defined camouflage type (or zero for none)
 
-   virtual bool isDestroyed() const override;                   // True if player is destroyed
-   virtual double getDamage() const override;                   // Returns the player's damage state - no damage(0.0) to destroyed (1.0)
-   virtual double getSmoke() const override;                    // Returns the player's smoke state - (0.0) to maximum (1.0)
-   virtual double getFlames() const override;                   // Returns the player's flames state - (0.0) to maximum (1.0)
+   virtual bool isDestroyed() const;                               // True if player is destroyed
+   virtual double getDamage() const;                               // Returns the player's damage state - no damage(0.0) to destroyed (1.0)
+   virtual double getSmoke() const;                                // Returns the player's smoke state - (0.0) to maximum (1.0)
+   virtual double getFlames() const;                               // Returns the player's flames state - (0.0) to maximum (1.0)
 
-   virtual bool isJustKilled() const override;                  // True if the player was just killed
-   virtual int killedByPlayerID() const override;               // ID of the attacking player that killed us
+   virtual bool isJustKilled() const;                              // True if the player was just killed
+   virtual int killedByPlayerID() const;                           // ID of the attacking player that killed us
 
    // ---
    // Initialization data
    // ---
-   virtual const osg::Vec3d& getInitGeocentricPosition() const override; // Geocentric (ECEF) initial position vector [ x y z ] (meters)
-   virtual bool isInitGeocentricPositionValid() const override;
+   virtual const osg::Vec3d& getInitGeocentricPosition() const;    // Geocentric (ECEF) initial position vector [ x y z ] (meters)
+   virtual bool isInitGeocentricPositionValid() const;
 
-   virtual double getInitLatitude() const override;                 // Player's initial latitude (degrees)
-   virtual double getInitLongitude() const override;                // Player's initial longitude (degrees)
-   virtual bool isInitLatLonValid() const override;
-   virtual double getInitVelocity() const override;                 // Player's initial total velocity
+   virtual double getInitLatitude() const;                         // Player's initial latitude (degrees)
+   virtual double getInitLongitude() const;                        // Player's initial longitude (degrees)
+   virtual bool isInitLatLonValid() const;
+   virtual double getInitVelocity() const;                         // Player's initial total velocity
 
-   virtual const osg::Vec2d& getInitPosition() const override;      // Initial position vector; north and east of sim reference point (meters)
-   virtual bool isInitPositionValid() const override;
+   virtual const osg::Vec2d& getInitPosition() const;              // Initial position vector; north and east of sim reference point (meters)
+   virtual bool isInitPositionValid() const;
 
-   virtual double getInitAltitude() const override;                 // Initial altitude HAE (meters)
+   virtual double getInitAltitude() const;                         // Initial altitude HAE (meters)
 
-   virtual const osg::Vec3d& getInitAngles() const override;        // Initial Euler angles (radians)
+   virtual const osg::Vec3d& getInitAngles() const;                // Initial Euler angles (radians)
 
    // ---
    // Control parameters
    // ---
-   virtual bool isPositionFrozen() const override;                  // True if the player is frozen (paused)
-   virtual bool isAltitudeFrozen() const override;                  // True if the player's altitude is frozen
-   virtual bool isAttitudeFrozen() const override;                  // True if the player's attitude is frozen
-   virtual bool isFuelFrozen() const override;                      // True if the player's fuel is frozen
-   virtual bool isCrashOverride() const override;                   // True if the player is in crash override mode
-   virtual bool isKillOverride() const override;                    // True if the player is in kill override mode
-   virtual bool isKillRemovalEnabled() const override;              // True if the player's kill removal flag is set
-   virtual bool isAltitudeSlaved() const override;                  // True if altitude is slaved to an external model
-   virtual bool isPositionSlaved() const override;                  // True if position is slaved to an external model
+   virtual bool isPositionFrozen() const;                          // True if the player is frozen (paused)
+   virtual bool isAltitudeFrozen() const;                          // True if the player's altitude is frozen
+   virtual bool isAttitudeFrozen() const;                          // True if the player's attitude is frozen
+   virtual bool isFuelFrozen() const;                              // True if the player's fuel is frozen
+   virtual bool isCrashOverride() const;                           // True if the player is in crash override mode
+   virtual bool isKillOverride() const;                            // True if the player is in kill override mode
+   virtual bool isKillRemovalEnabled() const;                      // True if the player's kill removal flag is set
+   virtual bool isAltitudeSlaved() const;                          // True if altitude is slaved to an external model
+   virtual bool isPositionSlaved() const;                          // True if position is slaved to an external model
 
-   virtual double getTerrainOffset() const override;                // Ground clamping offset from the terrain to our CG (meters)
-   virtual bool isDtedTerrainInterpolationEnabled() const override; // Interpolate our terrain from DTED if true
+   virtual double getTerrainOffset() const;                        // Ground clamping offset from the terrain to our CG (meters)
+   virtual bool isDtedTerrainInterpolationEnabled() const;         // Interpolate our terrain from DTED if true
 
-   virtual bool isTerrainElevationRequired() const override;        // True if terrain elevation is required from the OTW system;
-                                                                    // otherwise we use DTED, if available
+   virtual bool isTerrainElevationRequired() const;                // True if terrain elevation is required from the OTW system;
+                                                                   // otherwise we use DTED, if available
 
-   virtual CoordSys getCoordSystemInUse() const override;           // Returns the coordinate system currently being used to
-                                                                    // update the player's position
-
-   // ---
-   // Interoperability network data
-   // ---
-   virtual bool isNetworkedPlayer() const override;                 // True if this is a networked player
-   virtual bool isLocalPlayer() const override;                     // True if this is a local player
-
-   virtual int getNetworkID() const override;                               // ID of a networked player's controlling network model
-   virtual simulation::AbstractNib* getNib() override;                      // Networked player's Nib object
-   virtual const simulation::AbstractNib* getNib() const override;          // Networked player's Nib object  (const version)
-
-   virtual bool isNetOutputEnabled() const override;                                            // Is player output to the network enabled?
-   virtual simulation::AbstractNib* getLocalNib(const unsigned int netId) override;             // Player's outgoing NIB(s)
-   virtual const simulation::AbstractNib* getLocalNib(const unsigned int netId) const override; // Player's outgoing NIB(s)  (const version)
-
+   virtual CoordSys getCoordSystemInUse() const;                   // Returns the coordinate system currently being used to
+                                                                   // update the player's position
    // ---
    // Internal autopilot controls
    // ---
-   virtual bool isHeadingHoldOn() const override;           // True if heading-hold mode is on?
-   virtual double getCommandedHeading() const override;     // Commanded (true) heading, default (radians)
-   virtual double getCommandedHeadingD() const override;    // Commanded (true) heading (degrees)
-   virtual double getCommandedHeadingR() const override;    // Commanded (true) heading (radians)
+   virtual bool isHeadingHoldOn() const;                           // True if heading-hold mode is on?
+   virtual double getCommandedHeading() const;                     // Commanded (true) heading, default (radians)
+   virtual double getCommandedHeadingD() const;                    // Commanded (true) heading (degrees)
+   virtual double getCommandedHeadingR() const;                    // Commanded (true) heading (radians)
 
-   virtual bool isVelocityHoldOn() const override;          // True if velocity-hold mode is on?
-   virtual double getCommandedVelocityKts() const override; // Commanded (true) velocity (knots)
-   virtual double getCommandedVelocityFps() const override; // Commanded (true) velocity (feet/second)
-   virtual double getCommandedVelocityMps() const override; // Commanded (true) velocity (meters/second)
+   virtual bool isVelocityHoldOn() const;                          // True if velocity-hold mode is on?
+   virtual double getCommandedVelocityKts() const;                 // Commanded (true) velocity (knots)
+   virtual double getCommandedVelocityFps() const;                 // Commanded (true) velocity (feet/second)
+   virtual double getCommandedVelocityMps() const;                 // Commanded (true) velocity (meters/second)
 
-   virtual bool isAltitudeHoldOn() const override;          // True if altitude-hold mode is on?
-   virtual double getCommandedAltitude() const override;    // Get commanded (HAE) altitude, default (meters)
-   virtual double getCommandedAltitudeM() const override;   // Get commanded (HAE) altitude (meters)
-   virtual double getCommandedAltitudeFt() const override;  // Get commanded (HAE) altitude (feet)
+   virtual bool isAltitudeHoldOn() const;                          // True if altitude-hold mode is on?
+   virtual double getCommandedAltitude() const;                    // Get commanded (HAE) altitude, default (meters)
+   virtual double getCommandedAltitudeM() const;                   // Get commanded (HAE) altitude (meters)
+   virtual double getCommandedAltitudeFt() const;                  // Get commanded (HAE) altitude (feet)
 
    // ---
    // Sync State Changes
@@ -347,50 +661,40 @@ public:
    // Set functions
    // ---
 
-   virtual bool setType(const base::String* const newTypeString) override; // Sets the player's type string
-   virtual void setName(const base::Identifier& newName) override;         // Sets the player's name (base::String version)
-   virtual void setName(const char* const newName) override;               // Sets the player's name (char* version)
-   virtual void setID(const unsigned short newId) override;                // Sets the player's ID
-   virtual void setSide(const Side newSide) override;                      // Sets the player's side enum
-   virtual void setMode(const Mode newMode) override;                      // Sets the player's current mode
-   virtual void setInitMode(const Mode newMode) override;                  // Sets the player's initial mode (after reset)
-   virtual bool setUseCoordSys(const CoordSys) override;                   // Sets the coord system to use for updating position
+   virtual bool setType(const base::String* const newTypeString);          // Sets the player's type string
+   virtual void setSide(const Side newSide);                               // Sets the player's side enum
+   virtual bool setUseCoordSys(const CoordSys);                            // Sets the coord system to use for updating position
 
-   virtual bool setFuelFreeze(const bool f) override;                      // Sets the player's fuel freeze flag
-   virtual bool setCrashOverride(const bool f) override;                   // Sets the player's crash override flag
-   virtual bool setKillOverride(const bool f) override;                    // Sets the player's kill override flag
-   virtual bool setKillRemoval(const bool f) override;                     // Sets the player's kill removal flag
-   virtual void resetJustKilled() override;                                // Resets the just killed flag
-   virtual bool setDamage(const double v) override;                        // Sets the player's damage state
-   virtual bool setSmoke(const double v) override;                         // Sets the player's smoke state
-   virtual bool setFlames(const double v) override;                        // Sets the player's flames state
-   virtual bool setCamouflageType(const unsigned int v) override;          // Sets the user defined camouflage type (or zero for none)
-   virtual bool setPositionFreeze(const bool f) override;                  // Sets the player's freeze flag
-   virtual bool setAltitudeFreeze(const bool f) override;                  // Sets the player's altitude freeze flag
-   virtual bool setAttitudeFreeze(const bool f) override;                  // Sets the player's attitude freeze flag
+   virtual bool setFuelFreeze(const bool f);                               // Sets the player's fuel freeze flag
+   virtual bool setCrashOverride(const bool f);                            // Sets the player's crash override flag
+   virtual bool setKillOverride(const bool f);                             // Sets the player's kill override flag
+   virtual bool setKillRemoval(const bool f);                              // Sets the player's kill removal flag
+   virtual void resetJustKilled();                                         // Resets the just killed flag
+   virtual bool setDamage(const double v);                                 // Sets the player's damage state
+   virtual bool setSmoke(const double v);                                  // Sets the player's smoke state
+   virtual bool setFlames(const double v);                                 // Sets the player's flames state
+   virtual bool setCamouflageType(const unsigned int v);                   // Sets the user defined camouflage type (or zero for none)
+   virtual bool setPositionFreeze(const bool f);                           // Sets the player's freeze flag
+   virtual bool setAltitudeFreeze(const bool f);                           // Sets the player's altitude freeze flag
+   virtual bool setAttitudeFreeze(const bool f);                           // Sets the player's attitude freeze flag
 
-   virtual bool setHeadingHoldOn(const bool b) override;                   // Turns heading-hold mode on/off
-   virtual bool setCommandedHeading(const double h) override;              // Sets the commanded (true) heading default (radians)
-   virtual bool setCommandedHeadingD(const double h) override;             // Sets the commanded (true) heading (degrees)
-   virtual bool setCommandedHeadingR(const double h) override;             // Sets the commanded (true) heading (radians)
+   virtual bool setHeadingHoldOn(const bool b);                            // Turns heading-hold mode on/off
+   virtual bool setCommandedHeading(const double h);                       // Sets the commanded (true) heading default (radians)
+   virtual bool setCommandedHeadingD(const double h);                      // Sets the commanded (true) heading (degrees)
+   virtual bool setCommandedHeadingR(const double h);                      // Sets the commanded (true) heading (radians)
 
-   virtual bool setVelocityHoldOn(const bool b) override;                  // Turns velocity-hold mode on/off
-   virtual bool setCommandedVelocityKts(const double a) override;          // Sets the commanded (true) velocity (knots)
+   virtual bool setVelocityHoldOn(const bool b);                           // Turns velocity-hold mode on/off
+   virtual bool setCommandedVelocityKts(const double a);                   // Sets the commanded (true) velocity (knots)
 
-   virtual bool setAltitudeHoldOn(const bool b) override;                  // Turns altitude-hold mode on/off
-   virtual bool setCommandedAltitude(const double a) override;             // Sets commanded (HAE) altitude, default (meters)
-   virtual bool setCommandedAltitudeM(const double a) override;            // Sets commanded (HAE) altitude (meters)
-   virtual bool setCommandedAltitudeFt(const double a) override;           // Sets commanded (HAE) altitude (feet)
+   virtual bool setAltitudeHoldOn(const bool b);                           // Turns altitude-hold mode on/off
+   virtual bool setCommandedAltitude(const double a);                      // Sets commanded (HAE) altitude, default (meters)
+   virtual bool setCommandedAltitudeM(const double a);                     // Sets commanded (HAE) altitude (meters)
+   virtual bool setCommandedAltitudeFt(const double a);                    // Sets commanded (HAE) altitude (feet)
 
-   virtual bool setNib(simulation::AbstractNib* const p) override;                                // Sets the networked player's Nib object
-
-   virtual bool setEnableNetOutput(const bool f) override;                                        // Sets the network output enabled flag
-   virtual bool setOutgoingNib(simulation::AbstractNib* const p, const unsigned int id) override; // Sets the outgoing NIB for network 'id'
-
-   virtual void setTerrainElevation(const double v) override;              // Sets the elevation of the terrain at this player's location (meters)
-   virtual bool setTerrainOffset(const double v) override;                 // Sets the ground clamping offset (meters)
-   virtual bool setInterpolateTerrain(const bool f) override;              // sets the DTED terrain interpolation flag
-   virtual bool setTerrainElevationRequired(const bool b) override;        // Sets OTW terrain elevation request flag
+   virtual void setTerrainElevation(const double v);                       // Sets the elevation of the terrain at this player's location (meters)
+   virtual bool setTerrainOffset(const double v);                          // Sets the ground clamping offset (meters)
+   virtual bool setInterpolateTerrain(const bool f);                       // sets the DTED terrain interpolation flag
+   virtual bool setTerrainElevationRequired(const bool b);                 // Sets OTW terrain elevation request flag
 
    // ---
    // Set the player's position
@@ -408,25 +712,25 @@ public:
    // ---
 
    // Sets the 'slaved' altitude (meters)
-   virtual bool setAltitude(const double alt, const bool slaved = false) override;
+   virtual bool setAltitude(const double alt, const bool slaved = false);
 
    // Position relative(grandfather)to the simulation reference point (meters)
-   virtual bool setPosition(const double north, const double east, const bool slaved = false) override;
+   virtual bool setPosition(const double north, const double east, const bool slaved = false);
 
    // Position relative(grandfather)to the simulation reference point (meters)
-   virtual bool setPosition(const double north, const double east, const double down, const bool slaved = false) override;
+   virtual bool setPosition(const double north, const double east, const double down, const bool slaved = false);
 
    // Position vector; NED from simulation reference point (meters)
-   virtual bool setPosition(const osg::Vec3d& newPos, const bool slaved = false) override;
+   virtual bool setPosition(const osg::Vec3d& newPos, const bool slaved = false);
 
    // Sets lat/long position; (degrees)
-   virtual bool setPositionLL(const double lat, const double lon, const bool slaved = false) override;
+   virtual bool setPositionLL(const double lat, const double lon, const bool slaved = false);
 
    // Sets lat/long position; (degrees) and altitude (meters)
-   virtual bool setPositionLLA(const double lat, const double lon, const double alt, const bool slaved = false) override;
+   virtual bool setPositionLLA(const double lat, const double lon, const double alt, const bool slaved = false);
 
    // Geocentric (ECEF) position vector (meters)
-   virtual bool setGeocPosition(const osg::Vec3d& gcPos, const bool slaved = false) override;
+   virtual bool setGeocPosition(const osg::Vec3d& gcPos, const bool slaved = false);
 
    // ---
    // Set the player's orientation angles (roll, pitch and yaw)
@@ -440,17 +744,17 @@ public:
    // ---
 
    // Sets Euler angles (body/NED): (radians) [ roll pitch yaw ]
-   virtual bool setEulerAngles(const double r, const double p, const double y) override;
-   virtual bool setEulerAngles(const osg::Vec3d& newAngles) override;
+   virtual bool setEulerAngles(const double r, const double p, const double y);
+   virtual bool setEulerAngles(const osg::Vec3d& newAngles);
 
    // Sets geocentric (body/ECEF) Euler angles: (radians) [ roll pitch yaw ]
-   virtual bool setGeocEulerAngles(const osg::Vec3d& newAngles) override;
+   virtual bool setGeocEulerAngles(const osg::Vec3d& newAngles);
 
    // Sets the rotational matrix
-   virtual bool setRotMat(const osg::Matrixd&) override;
+   virtual bool setRotMat(const osg::Matrixd&);
 
    // Sets the quaternions
-   virtual bool setQuaternions(const osg::Quat&) override;
+   virtual bool setQuaternions(const osg::Quat&);
 
    // ---
    // Set the player's angular velocities:
@@ -465,11 +769,11 @@ public:
    // ---
 
    // Sets the body angular velocities (radians/second)
-   virtual bool setAngularVelocities(const double pa, const double qa, const double ra) override;
-   virtual bool setAngularVelocities(const osg::Vec3d& newAngVel) override;
+   virtual bool setAngularVelocities(const double pa, const double qa, const double ra);
+   virtual bool setAngularVelocities(const osg::Vec3d& newAngVel);
 
    // Sets the body angular velocities (radians/second)
-   virtual bool setGeocAngularVelocities(const osg::Vec3d& newAngVel) override;
+   virtual bool setGeocAngularVelocities(const osg::Vec3d& newAngVel);
 
    // ---
    // Set the player's velocity and acceleration vectors
@@ -483,28 +787,28 @@ public:
    // ---
 
    // Sets local tangent plane velocities (NED); (meters/second)
-   virtual bool setVelocity(const double ue, const double ve, const double we) override;
-   virtual bool setVelocity(const osg::Vec3d& newVel) override;
+   virtual bool setVelocity(const double ue, const double ve, const double we);
+   virtual bool setVelocity(const osg::Vec3d& newVel);
 
    // Sets local tangent plane accelerations (NED);
-   virtual bool setAcceleration(const double due, const double dve, const double dwe) override;
-   virtual bool setAcceleration(const osg::Vec3d& newAccel) override;
+   virtual bool setAcceleration(const double due, const double dve, const double dwe);
+   virtual bool setAcceleration(const osg::Vec3d& newAccel);
 
    // Sets body velocities: (meters/second) [ ua -> fwd(+), va -> right(+), wa -> down(+) ]
-   virtual bool setVelocityBody(const double ua, const double va, const double wa) override;
-   virtual bool setVelocityBody(const osg::Vec3d& newVelBody) override;
+   virtual bool setVelocityBody(const double ua, const double va, const double wa);
+   virtual bool setVelocityBody(const osg::Vec3d& newVelBody);
 
    // Sets body accelerations
-   virtual bool setAccelerationBody(const double dua, const double dva, const double dwa) override;
-   virtual bool setAccelerationBody(const osg::Vec3d& newAccelBody) override;
+   virtual bool setAccelerationBody(const double dua, const double dva, const double dwa);
+   virtual bool setAccelerationBody(const osg::Vec3d& newAccelBody);
 
    // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-   virtual bool setGeocVelocity(const double vx, const double vy, const double vz) override;
-   virtual bool setGeocVelocity(const osg::Vec3d& newVelEcef) override;
+   virtual bool setGeocVelocity(const double vx, const double vy, const double vz);
+   virtual bool setGeocVelocity(const osg::Vec3d& newVelEcef);
 
    // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
-   virtual bool setGeocAcceleration(const double dvx, const double dvy, const double dvz) override;
-   virtual bool setGeocAcceleration(const osg::Vec3d& newAccelEcef) override;
+   virtual bool setGeocAcceleration(const double dvx, const double dvy, const double dvz);
+   virtual bool setGeocAcceleration(const osg::Vec3d& newAccelEcef);
 
    // ---
    // Set the initial conditions, which are used by reset()
@@ -696,14 +1000,11 @@ private:
    // Player identity
    // ---
    base::safe_ptr<base::String> type;    // Type of vehicle
-   unsigned short id;                    // Player ID
-   base::Identifier  pname;              // Player's Name
    Side side;                            // Which side (see above)
 
    // ---
    // Player State
    // ---
-   Mode        mode;             // Player mode (see above)
    CoordSys    useCoordSys;      // Coordinate system being used to update position
    CoordSys    useCoordSysN1;    // Previous 'useCoordSys'
 
@@ -794,7 +1095,6 @@ private:
 
    double      initAlt;          // Initial altitude (HAE)
    double      initVp;           // Initial Total Velocity
-   Mode        initMode;         // Initial mode
    osg::Vec3d  initAngles;       // Initial (Euler) angles (radians)
    osg::Vec3d  testAngRates;     // Test angular rates (radians/sec)
    bool        testBodyAxis;     // Test angular rates are in the body axis else they're Euler rates
@@ -804,18 +1104,6 @@ private:
    // ---
    double      dataLogTimer;     // Data log timer (seconds)
    double      dataLogTime;      // Data log time (seconds)
-
-   // ---
-   // Incoming network Player support
-   // ---
-   simulation::AbstractNib* nib;        // Network Interface Block (ref()'d)
-   int netID;                           // Network id
-
-   // ---
-   // Outgoing network support data
-   // ---
-   bool enableNetOutput;                // Allow output to the network
-   simulation::AbstractNib** nibList;   // Pointer to a list of outgoing NIBs
 
    // ---
    // System pointers

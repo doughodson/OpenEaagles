@@ -1,7 +1,7 @@
 
 #include "openeaagles/otw/Otm.hpp"
 
-#include "openeaagles/simulation/AbstractPlayer.hpp"
+#include "openeaagles/models/players/Player.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -95,7 +95,7 @@ bool Otm::setSlotRefTypeName(const base::String* const msg)
 //------------------------------------------------------------------------------
 // isMatchingPlayerType() -- Returns true if the factory & type names match
 //------------------------------------------------------------------------------
-bool Otm::isMatchingPlayerType(const simulation::AbstractPlayer* const p) const
+bool Otm::isMatchingPlayerType(const models::Player* const p) const
 {
    bool match = false;
    if (p != nullptr && refFactoryName != nullptr) {

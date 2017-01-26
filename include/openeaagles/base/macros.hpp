@@ -138,8 +138,8 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static ::oe::base::Metadata metadata;                                                                              \
-    public: static const ::oe::base::Metadata* getMetadata();                                                                   \
+    private: static ::oe::base::MetaObject metaObject;                                                                              \
+    public: static const ::oe::base::MetaObject* getMetaObject();                                                                   \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \
@@ -152,16 +152,16 @@
 
 
 #define IMPLEMENT_SUBCLASS(ThisType, FACTORYNAME)                                      \
-    ::oe::base::Metadata ThisType::metadata(                                           \
+    ::oe::base::MetaObject ThisType::metaObject(                                       \
       typeid(ThisType).name(), FACTORYNAME,                                            \
-        &ThisType::slottable, BaseClass::getMetadata()                                 \
+        &ThisType::slottable, BaseClass::getMetaObject()                               \
     );                                                                                 \
-    const ::oe::base::Metadata* ThisType::getMetadata() { return &metadata; }          \
-    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
+    const ::oe::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }    \
+    const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
+        if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable()  { return slottable; }       \
@@ -190,16 +190,16 @@
 
 
 #define IMPLEMENT_PARTIAL_SUBCLASS(ThisType, FACTORYNAME)                              \
-    ::oe::base::Metadata ThisType::metadata(                                           \
+    ::oe::base::MetaObject ThisType::metaObject(                                       \
       typeid(ThisType).name(), FACTORYNAME,                                            \
-        &ThisType::slottable, BaseClass::getMetadata()                                 \
+        &ThisType::slottable, BaseClass::getMetaObject()                               \
     );                                                                                 \
-    const ::oe::base::Metadata* ThisType::getMetadata() { return &metadata; }          \
-    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
+    const ::oe::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }    \
+    const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
+        if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
@@ -211,16 +211,16 @@
 
 
 #define IMPLEMENT_ABSTRACT_SUBCLASS(ThisType, FACTORYNAME)                             \
-    ::oe::base::Metadata ThisType::metadata(                                           \
+    ::oe::base::MetaObject ThisType::metaObject(                                       \
       typeid(ThisType).name(), FACTORYNAME,                                            \
-        &ThisType::slottable, BaseClass::getMetadata()                                 \
+        &ThisType::slottable, BaseClass::getMetaObject()                               \
     );                                                                                 \
-    const ::oe::base::Metadata* ThisType::getMetadata() { return &metadata; }          \
-    const char* ThisType::getFactoryName() { return metadata.getFactoryName(); }       \
+    const ::oe::base::MetaObject* ThisType::getMetaObject() { return &metaObject; }    \
+    const char* ThisType::getFactoryName() { return metaObject.getFactoryName(); }     \
     bool ThisType::isFactoryName(const char name[]) const                              \
     {                                                                                  \
         if (name == nullptr) return false;                                             \
-        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;         \
+        if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;       \
         else return ThisType::BaseClass::isFactoryName(name);                          \
     }                                                                                  \
     const ::oe::base::SlotTable& ThisType::getSlotTable() { return slottable; }        \
@@ -250,13 +250,13 @@
 
 #define STANDARD_CONSTRUCTOR()                                                         \
     slotTable = &slottable;                                                            \
-    if (++metadata.count > metadata.mc) metadata.mc = metadata.count;                  \
-    metadata.tc++;
+    if (++metaObject.count > metaObject.mc) metaObject.mc = metaObject.count;          \
+    metaObject.tc++;
 
 
 #define STANDARD_DESTRUCTOR()                                                          \
     deleteData();                                                                      \
-    metadata.count--;
+    metaObject.count--;
 
 #define EMPTY_SLOTTABLE(ThisType)                                                          \
     const char* ThisType::slotnames[] = { "" };                                            \

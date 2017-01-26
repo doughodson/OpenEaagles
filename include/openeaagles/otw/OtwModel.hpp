@@ -7,7 +7,7 @@
 
 namespace oe {
 namespace base { class String; }
-namespace simulation { class AbstractPlayer; }
+namespace models { class Player; }
 namespace otw {
 class Otm;
 
@@ -45,8 +45,8 @@ public:
     State getState() const                   { return state; }          // Model's state  ( INACTIVE, ACTIVE, etc. }
     void setState(const State newState)      { state = newState; }      // Sets the model's state  ( INACTIVE, ACTIVE, etc. }
 
-    simulation::AbstractPlayer* getPlayer()                      { return player; }         // The player object associated with this model
-    const simulation::AbstractPlayer* getPlayer() const          { return player; }         // The player object associated with this model (const version)
+    models::Player* getPlayer()              { return player; }         // The player object associated with this model
+    const models::Player* getPlayer() const  { return player; }         // The player object associated with this model (const version)
 
     const Otm* getTypeMapper() const         { return typeMapper; }     // OTW unique model type mapper
 
@@ -71,17 +71,17 @@ public:
     // Initializes this model for player, 'p' (we're ACTIVE), and
     // looks up the OTW model type ID in the OTW model table, 'otwModelTable'.
     // If the size of the OTW model table is zero(0), then the model type ID is not set.
-    virtual void initialize(simulation::AbstractPlayer* const p, const Otm** const otwModelTable = nullptr, const unsigned int numModels = 0);
+    virtual void initialize(models::Player* const p, const Otm** const otwModelTable = nullptr, const unsigned int numModels = 0);
 
     // Clear out this model (we're INACTIVE)
     virtual void clear();
 
 protected:
     // Sets the player object, p, associated with this model
-    virtual void setPlayer(simulation::AbstractPlayer* const p);
+    virtual void setPlayer(models::Player* const p);
 
 private:
-    simulation::AbstractPlayer* player;   // This player
+    models::Player* player;               // This player
     State state;                          // Model Active flag
     int ageCount;                         // Age counter (how many times have we've been overlooked)
     bool checked;                         // Model was checked

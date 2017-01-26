@@ -129,8 +129,8 @@ class LinkedList : public Object
     protected: void copyData(const LinkedList& org, const bool cc = false);                                                       
     protected: void deleteData();                                                                                               
     public: virtual bool isClassType(const std::type_info& type) const override;                                                
-    private: static ::oe::base::ObjMetadata metadata;                                                                                     
-    protected: static const ::oe::base::ObjMetadata* getMetadata();                                                                                
+    private: static ::oe::base::MetaObject metaObject;                                                                                     
+    protected: static const ::oe::base::MetaObject* getMetaObject();                                                                                
     public: static const char* getFactoryName();                                                                                
     public: virtual bool isFactoryName(const char name[]) const override;                                                       
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        
@@ -215,24 +215,24 @@ private:
 
                                     
 template <class T>
-    ::oe::base::ObjMetadata LinkedList<T>::metadata(                                               
+    ::oe::base::MetaObject LinkedList<T>::metaObject(                                               
       typeid(LinkedList).name(), "LinkedList",                   
-        &LinkedList::slottable, Object::getMetadata()                                   
+        &LinkedList::slottable, Object::getMetaObject()                                   
     );                                                                                 
 
 
 template <class T>
-    const ::oe::base::ObjMetadata* LinkedList<T>::getMetadata() { return &metadata; }                
+    const ::oe::base::MetaObject* LinkedList<T>::getMetaObject() { return &metaObject; }                
 
 
 template <class T>
-    const char* LinkedList<T>::getFactoryName() { return metadata.getFactoryName(); }                   
+    const char* LinkedList<T>::getFactoryName() { return metaObject.getFactoryName(); }                   
 
 template <class T>
     bool LinkedList<T>::isFactoryName(const char name[]) const                              
     {                                                                                  
         if (name == nullptr) return false;                                             
-        if ( std::strcmp(metadata.getFactoryName(), name) == 0 )  return true;                      
+        if ( std::strcmp(metaObject.getFactoryName(), name) == 0 )  return true;                      
         else return LinkedList<T>::Object::isFactoryName(name);                          
     }                                                                                  
 

@@ -77,36 +77,34 @@ BEGIN_SLOTTABLE(Player)
 
    // Player's type, id and and other parameters
    "type",              // 14) Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
-   "id",                // 15) Player id   [ 1 .. 65535 ]
-   "side",              // 16) Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
-   "mode",              // 17) Initial player mode ( INACTIVE, ACTIVE, DEAD )
+   "side",              // 15) Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
 
-   "signature",         // 18) Player's RCS signature
-   "irSignature",       // 19) Player's IR Signature
-   "camouflageType",    // 20) User defined camouflage type (positive integer or zero for none)
+   "signature",         // 16) Player's RCS signature
+   "irSignature",       // 17) Player's IR Signature
+   "camouflageType",    // 18) User defined camouflage type (positive integer or zero for none)
 
-   "terrainElevReq",    // 21) Terrain elevation update requested
-   "interpolateTerrain",// 22) Interpolate our terrain1 data
-   "terrainOffset",     // 23) Ground clamp offset from terrain to player's CG (base::Distance)
+   "terrainElevReq",    // 19) Terrain elevation update requested
+   "interpolateTerrain",// 20) Interpolate our terrain1 data
+   "terrainOffset",     // 21) Ground clamp offset from terrain to player's CG (base::Distance)
 
-   "positionFreeze",    // 24) Position freeze
-   "altitudeFreeze",    // 25) Altitude freeze
-   "attitudeFreeze",    // 26) Attitude freeze
-   "fuelFreeze",        // 27) Fuel freeze
-   "crashOverride",     // 28) Crash Override (i.e., ignore collision and crash events)
-   "killOverride",      // 29) Kill/Damage Override -- player can not be killed or damaged(by a weapon)
-   "killRemoval",       // 30) If true destroyed players are set to KILLED and are eventually removed (default: false)
-   "enableNetOutput",   // 31) Enable the network output!
+   "positionFreeze",    // 22) Position freeze
+   "altitudeFreeze",    // 23) Altitude freeze
+   "attitudeFreeze",    // 24) Attitude freeze
+   "fuelFreeze",        // 25) Fuel freeze
+   "crashOverride",     // 26) Crash Override (i.e., ignore collision and crash events)
+   "killOverride",      // 27) Kill/Damage Override -- player can not be killed or damaged(by a weapon)
+   "killRemoval",       // 28) If true destroyed players are set to KILLED and are eventually removed (default: false)
+   "enableNetOutput",   // 29) Enable the network output!
 
-   "dataLogTime",       // 32) Data logging time -- time between player data samples
+   "dataLogTime",       // 30) Data logging time -- time between player data samples
 
    // Player's test angular velocities
-   "testRollRate",      // 33) Test roll rate (units per second)
-   "testPitchRate",     // 34) Test pitch rate (units per second)
-   "testYawRate",       // 35) Test heading rate (units per second)
-   "testBodyAxis",      // 36) Test rates are in body coordinates else Euler rates (default: false)
+   "testRollRate",      // 31) Test roll rate (units per second)
+   "testPitchRate",     // 32) Test pitch rate (units per second)
+   "testYawRate",       // 33) Test heading rate (units per second)
+   "testBodyAxis",      // 34) Test rates are in body coordinates else Euler rates (default: false)
 
-   "useCoordSys"        // 37) Coord system to use for position updating { WORLD, GEOD, LOCAL }
+   "useCoordSys"        // 35) Coord system to use for position updating { WORLD, GEOD, LOCAL }
 END_SLOTTABLE(Player)
 
 // Map slot table to handles
@@ -147,34 +145,32 @@ BEGIN_SLOT_MAP(Player)
    ON_SLOT(13, setSlotInitVelocityKts, base::Number)
 
    ON_SLOT(14, setType, base::String)
-   ON_SLOT(15, setSlotID, base::Number)
-   ON_SLOT(16, setSlotSide, base::String)
-   ON_SLOT(17, setSlotInitMode, base::String)
+   ON_SLOT(15, setSlotSide, base::String)
 
-   ON_SLOT(18, setSlotSignature, RfSignature)
-   ON_SLOT(19, setSlotIrSignature, IrSignature)
-   ON_SLOT(20, setSlotCamouflageType, base::Number)
+   ON_SLOT(16, setSlotSignature, RfSignature)
+   ON_SLOT(17, setSlotIrSignature, IrSignature)
+   ON_SLOT(18, setSlotCamouflageType, base::Number)
 
-   ON_SLOT(21, setSlotTerrainElevReq, base::Number)
-   ON_SLOT(22, setSlotInterpolateTerrain, base::Number)
-   ON_SLOT(23, setSlotTerrainOffset, base::Distance)
+   ON_SLOT(19, setSlotTerrainElevReq, base::Number)
+   ON_SLOT(20, setSlotInterpolateTerrain, base::Number)
+   ON_SLOT(21, setSlotTerrainOffset, base::Distance)
 
-   ON_SLOT(24, setSlotPositionFreeze, base::Number)
-   ON_SLOT(25, setSlotAltitudeFreeze, base::Number)
-   ON_SLOT(26, setSlotAttitudeFreeze, base::Number)
-   ON_SLOT(27, setSlotFuelFreeze, base::Number)
-   ON_SLOT(28, setSlotCrashOverride, base::Number)
-   ON_SLOT(29, setSlotKillOverride, base::Number)
-   ON_SLOT(30, setSlotKillRemoval, base::Number)
-   ON_SLOT(31, setSlotEnableNetOutput, base::Number)
-   ON_SLOT(32, setSlotDataLogTime, base::Time)
+   ON_SLOT(22, setSlotPositionFreeze, base::Number)
+   ON_SLOT(23, setSlotAltitudeFreeze, base::Number)
+   ON_SLOT(24, setSlotAttitudeFreeze, base::Number)
+   ON_SLOT(25, setSlotFuelFreeze, base::Number)
+   ON_SLOT(26, setSlotCrashOverride, base::Number)
+   ON_SLOT(27, setSlotKillOverride, base::Number)
+   ON_SLOT(28, setSlotKillRemoval, base::Number)
+   ON_SLOT(29, setSlotEnableNetOutput, base::Number)
+   ON_SLOT(30, setSlotDataLogTime, base::Time)
 
-   ON_SLOT(33, setSlotTestRollRate, base::Angle)
-   ON_SLOT(34, setSlotTestPitchRate, base::Angle)
-   ON_SLOT(35, setSlotTestYawRate, base::Angle)
-   ON_SLOT(36, setSlotTestBodyAxis, base::Number)
+   ON_SLOT(31, setSlotTestRollRate, base::Angle)
+   ON_SLOT(32, setSlotTestPitchRate, base::Angle)
+   ON_SLOT(33, setSlotTestYawRate, base::Angle)
+   ON_SLOT(34, setSlotTestBodyAxis, base::Number)
 
-   ON_SLOT(37, setSlotUseCoordSys, base::String)
+   ON_SLOT(35, setSlotUseCoordSys, base::String)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(Player)
@@ -246,11 +242,8 @@ void Player::initData()
    type = nullptr;
    setType(&generic);
 
-   id = 0;
-   pname = "";
    side = GRAY;
 
-   mode = ACTIVE;
    latitude = 0.0;
    longitude = 0.0;
    altitude = 0.0;
@@ -322,21 +315,12 @@ void Player::initData()
 
    initAlt = 0.0;
    initVp = 0.0;
-   initMode = mode;
    initAngles.set(0,0,0);
    testAngRates.set(0,0,0);
    testBodyAxis = false;
 
    dataLogTimer = 0.0;
    dataLogTime  = 0.0;
-
-   nib = nullptr;
-   netID = 0;
-   enableNetOutput = true;
-   nibList = new simulation::AbstractNib*[simulation::AbstractNetIO::MAX_NETWORD_ID];
-   for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
-      nibList[i] = nullptr;
-   }
 
    sim = nullptr;
    dynamicsModel = nullptr;
@@ -371,15 +355,8 @@ void Player::copyData(const Player& org, const bool cc)
    const base::String* tt = org.type;
    setType( const_cast<base::String*>(static_cast<const base::String*>(tt)) );
 
-   id = org.id;
-
-   if (org.pname != nullptr) {
-      setName(org.pname);
-   }
-
    side = org.side;
 
-   mode = org.mode;
    latitude = org.latitude;
    longitude = org.longitude;
    altitude = org.altitude;
@@ -470,22 +447,12 @@ void Player::copyData(const Player& org, const bool cc)
 
    initAlt = org.initAlt;
    initVp = org.initVp;
-   initMode = org.initMode;
    initAngles = org.initAngles;
    testAngRates = org.testAngRates;
    testBodyAxis = org.testBodyAxis;
 
    dataLogTimer = org.dataLogTimer;
    dataLogTime  = org.dataLogTime;
-
-   netID = org.netID;
-   enableNetOutput = org.enableNetOutput;
-
-   // NIB pointers are not copied!
-   setNib( nullptr );
-   for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
-      setOutgoingNib(nullptr, i);
-   }
 
    // The following are not copied ..
    sim = nullptr;
@@ -520,14 +487,6 @@ void Player::deleteData()
    irSignature = nullptr;
    sim = nullptr;
 
-   setNib(nullptr);
-   if (nibList != nullptr) {
-      for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
-         setOutgoingNib(nullptr, i);
-      }
-      delete[] nibList;
-      nibList = nullptr;
-   }
 
    setDynamicsModel(nullptr);
    setDatalink(nullptr);
@@ -550,13 +509,6 @@ void Player::deleteData()
 //------------------------------------------------------------------------------
 bool Player::shutdownNotification()
 {
-   if (nib != nullptr) nib->event(SHUTDOWN_EVENT);
-   if (nibList != nullptr) {
-      for (unsigned int i = 0; i < simulation::AbstractNetIO::MAX_NETWORD_ID; i++) {
-         if (nibList[i] != nullptr) nibList[i]->event(SHUTDOWN_EVENT);
-      }
-   }
-
    for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
       if (rfReflect[i] != nullptr) { rfReflect[i]->unref(); rfReflect[i] = nullptr; }
    }
@@ -626,7 +578,6 @@ void Player::reset()
       // ---
       // Reset misc
       // ---
-      setMode(initMode);
       setDamage(0.0);
       setSmoke(0.0);
       setFlames(0.0);
@@ -903,26 +854,6 @@ double Player::getCommandedAltitudeFt() const
 bool Player::isDestroyed() const
 {
    return (damage > 0.999f);
-}
-
-// Player's outgoing NIB(s)
-simulation::AbstractNib* Player::getLocalNib(const unsigned int netId)
-{
-   simulation::AbstractNib* p = nullptr;
-   if (nibList != nullptr && netId >= 1 && netId <= simulation::AbstractNetIO::MAX_NETWORD_ID) {
-      p = nibList[netId-1];
-   }
-   return p;
-}
-
-// Player's outgoing NIB(s)  (const version)
-const simulation::AbstractNib* Player::getLocalNib(const unsigned int netId) const
-{
-   const simulation::AbstractNib* p = nullptr;
-   if (nibList != nullptr && netId >= 1 && netId <= simulation::AbstractNetIO::MAX_NETWORD_ID) {
-      p = nibList[netId-1];
-   }
-   return p;
 }
 
 // Earth radius (meters)
@@ -1739,40 +1670,10 @@ bool Player::setType(const base::String* const msg)
    return true;
 }
 
-// Set the player's name
-void Player::setName(const base::Identifier& n)
-{
-   pname = n;
-}
-
-// Set the player's name
-void Player::setName(const char* const str)
-{
-   pname = str;
-}
-
-// Sets the player's ID
-void Player::setID(const unsigned short v)
-{
-   id = v;
-}
-
 // Sets the player's side (BLUE, RED, etc)
 void Player::setSide(const Side s)
 {
    side = s;
-}
-
-// Sets the player's mode (ACTIVE, DEAD, etc)
-void Player::setMode(const Mode m)
-{
-   mode = m;
-}
-
-// Sets the player's initial (reset) mode
-void Player::setInitMode(const Mode m)
-{
-   initMode = m;
 }
 
 // Sets the coord system to use for updating position
@@ -1950,43 +1851,6 @@ bool Player::setCommandedAltitudeM(const double a)
 bool Player::setCommandedAltitudeFt(const double a)
 {
    return setCommandedAltitude( a * base::distance::FT2M );
-}
-
-// Sets a pointer to the Network Interface Block (NIB)
-bool Player::setNib(simulation::AbstractNib* const n)
-{
-   if (nib != nullptr) nib->unref();
-   nib = n;
-   if (nib != nullptr) {
-      // Ref() the new NIB and get the network ID
-      nib->ref();
-      simulation::AbstractNetIO* netIO = nib->getNetIO();
-      if (netIO != nullptr) netID = netIO->getNetworkID();
-   }
-   else {
-      netID = 0;
-   }
-   return true;
-}
-
-// Sets the network output enabled flag
-bool Player::setEnableNetOutput(const bool x)
-{
-   enableNetOutput = x;
-   return true;
-}
-
-// Sets the outgoing NIB for network 'id'
-bool Player::setOutgoingNib(simulation::AbstractNib* const p, const unsigned int id)
-{
-   bool ok = false;
-   if (nibList != nullptr && id >= 1 && id <= simulation::AbstractNetIO::MAX_NETWORD_ID) {
-      unsigned int idx = id - 1;
-      if (nibList[idx] != nullptr) nibList[idx]->unref();
-      nibList[idx] = p;
-      if (nibList[idx] != nullptr) nibList[idx]->ref();
-   }
-   return ok;
 }
 
 // Sets the elevation of the terrain at this player's location (meters)
@@ -4393,24 +4257,7 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
       sout << "OTHER";
    sout << std::endl;
 
-   // initial player mode
-   indent(sout,i+j);
-   sout << "mode: ";
-   if (initMode == ACTIVE)
-      sout << "ACTIVE";
-   else if (initMode == KILLED)
-      sout << "KILLED";
-   else if (initMode == CRASHED)
-      sout << "CRASHED";
-   else if (initMode == DETONATED)
-      sout << "DETONATED";
-   else if (initMode == LAUNCHED)
-      sout << "LAUNCHED";
-   else
-      sout << "INACTIVE";
-   sout << std::endl;
-
-   // initial player mode
+   // initial player coordinate system
    indent(sout,i+j);
    sout << "useCoordSys: ";
    if (useCoordSys == CS_WORLD)
