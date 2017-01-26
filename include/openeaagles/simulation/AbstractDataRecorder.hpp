@@ -8,7 +8,7 @@
 namespace oe {
 namespace base { class List; }
 namespace simulation {
-class SimExec;
+class Simulation;
 class Station;
 
 //------------------------------------------------------------------------------
@@ -37,8 +37,8 @@ public:
    Station* getStation();                     // Our parent station
    const Station* getStation() const;         // Our parent station (const version)
 
-   SimExec* getSimulation();                  // The executable simulation
-   const SimExec* getSimulation() const;      // The executable simulation (const version)
+   Simulation* getSimulation();               // The executable simulation
+   const Simulation* getSimulation() const;   // The executable simulation (const version)
 
    // Record Data function
    bool recordData(
@@ -64,10 +64,10 @@ protected:
 private:
    void initData();
    Station* getStationImp();
-   SimExec* getSimulationImp();
+   Simulation* getSimulationImp();
 
-   Station* sta;         // The Station that owns us (not ref()'d)
-   SimExec* sim;         // The simulation system (not ref()'d)
+   Station* sta;         // The station that owns us (not ref()'d)
+   Simulation* sim;      // The simulation system (not ref()'d)
 };
 
 // Record Data function

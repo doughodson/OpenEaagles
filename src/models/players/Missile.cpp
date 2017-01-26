@@ -3,7 +3,7 @@
 
 #include "openeaagles/models/Track.hpp"
 #include "openeaagles/models/systems/TrackManager.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
@@ -441,7 +441,7 @@ void Missile::weaponGuidance(const double dt)
                   std::cout << "DETONATE_ENTITY_IMPACT rng = " << detRange << std::endl;
                }
 
-               BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+               BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
                   SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
                   SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, detRange )
                END_RECORD_DATA_SAMPLE()
@@ -465,7 +465,7 @@ void Missile::weaponGuidance(const double dt)
                std::cout << "DETONATE_OTHER rng = " << detRange << std::endl;
             }
 
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
                SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
                SAMPLE_2_VALUES( DETONATE_DETONATION, detRange )
             END_RECORD_DATA_SAMPLE()

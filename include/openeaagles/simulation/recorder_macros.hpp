@@ -76,7 +76,7 @@
 //
 // Example:
 //
-//    DataRecorder* p = getSimulation()->getDataRecorder();
+//    DataRecorder* p = getSimExec()->getDataRecorder();
 //    BEGIN_RECORD_DATA_SAMPLE( p, REID_NEW_PLAYER )
 //       SAMPLE_1_OBJECT( newPlayer )
 //    END_RECORD_DATA_SAMPLE()

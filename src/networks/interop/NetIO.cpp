@@ -19,7 +19,7 @@
 #include "openeaagles/models/players/Ships.hpp"
 #include "openeaagles/models/Signatures.hpp"
 
-#include "openeaagles/simulation/SimExec.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/Decibel.hpp"

@@ -9,7 +9,7 @@ namespace base { class IoHandler; class Number; class Thread; class Time; }
 
 namespace simulation {
 class AbstractDataRecorder;
-class SimExec;
+class Simulation;
 class AbstractPlayer;
 class AbstractOtw;
 
@@ -23,7 +23,7 @@ class AbstractOtw;
 //
 // Factory name: Station
 // Slots --
-//    simulation         <SimExec>              ! Executable simulation model (default: nullptr)
+//    simulation         <Simulation>           ! Executable simulation model (default: nullptr)
 //
 //    networks           <base::PairStream>     ! List of interoperability network models (DIS, HLA, TENA) (default: nullptr)
 //
@@ -90,7 +90,7 @@ class AbstractOtw;
 //       priority, that will call our updateTC(); or the application can call
 //       our updateTC() function directly.
 //
-//       a: The updateTC() function calls the updateTC() for the Simulation Class,
+//       a: The updateTC() function calls the updateTC() for the SimExec class,
 //          OTW models, and updates the I/O handlers;
 //
 //       b: And updateTC() calls the static function base::Timer::updateTimers()
@@ -152,11 +152,11 @@ public:
 public:
    Station();
 
-   SimExec* getSimulation();                                        // Simulation model
-   const SimExec* getSimulation() const;                            // Simulation model (const version)
+   Simulation* getSimulation();                                     // Simulation executive
+   const Simulation* getSimulation() const;                         // Simulation executive (const version)
 
-   base::PairStream* getPlayers();                                  // Simulation's player list; pre-ref()'d
-   const base::PairStream* getPlayers() const;                      // Simulation's player list; pre-ref()'d (const version)
+   base::PairStream* getPlayers();                                  // Player list; pre-ref()'d
+   const base::PairStream* getPlayers() const;                      // Player list; pre-ref()'d (const version)
 
    AbstractPlayer* getOwnship();                                    // The ownship (primary) player
    const AbstractPlayer* getOwnship() const;                        // The ownship (primary) player (const version)
@@ -231,7 +231,7 @@ public:
    // ---
    // Slot functions
    // ---
-   virtual bool setSlotSimulation(SimExec* const);
+   virtual bool setSlotSimulation(Simulation* const);
    virtual bool setSlotOutTheWindow(AbstractOtw* const);
    virtual bool setSlotOutTheWindow(base::PairStream* const);
    virtual bool setSlotIoHandler(base::IoHandler* const);
@@ -277,7 +277,7 @@ private:
    virtual void createNetworkProcess();           // Creates a network thread
    virtual void createBackgroundProcess();        // Creates a B/G thread
 
-   SimExec* sim;                                  // Executable simulation model
+   Simulation* sim;                               // Executable simulation model
    base::safe_ptr<base::PairStream> otw;          // List of  Out-The-Window visual system interfaces
    base::safe_ptr<base::PairStream> networks;     // List of networks
    base::safe_ptr<base::PairStream> ioHandlers;   // List of I/O data handlers

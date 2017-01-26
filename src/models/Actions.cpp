@@ -8,7 +8,7 @@
 #include "openeaagles/models/systems/StoresMgr.hpp"
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -566,7 +566,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
          if (sms != nullptr) {
 
             // Get the simulation ref point
-            Simulation* sim = own->getSimulation();
+            WorldModel* sim = own->getWorldModel();
             const double refLat = sim->getRefLatitude();
             const double refLon = sim->getRefLongitude();
 
@@ -752,7 +752,7 @@ bool ActionDecoyRelease::trigger(OnboardComputer* const mgr)
                 else {
                     // release one, then start counting
                     sms->releaseOneDecoy();
-                    tod = own->getSimulation()->getSimTimeOfDay();
+                    tod = own->getWorldModel()->getSimTimeOfDay();
                     startTOD = tod;
                     // decrease our number to launch
                     numToLaunch--;
@@ -783,7 +783,7 @@ void ActionDecoyRelease::process(const double)
     if (mgr != nullptr) {
         Player* own = static_cast<Player*>(mgr->findContainerByType(typeid(Player)));
         if (own != nullptr) {
-            tod = own->getSimulation()->getSimTimeOfDay();
+            tod = own->getWorldModel()->getSimTimeOfDay();
             if (interval < (tod - startTOD)) {
                 // we have hit our interval, release another decoy
                 StoresMgr* sms = own->getStoresManagement();

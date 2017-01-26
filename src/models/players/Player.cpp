@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 #include "openeaagles/models/players/Missile.hpp"
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 #include "openeaagles/models/dynamics/DynamicsModel.hpp"
@@ -639,7 +639,7 @@ void Player::updateTC(const double dt0)
       // Compute delta time for modules running every fourth phase
       // ---
       double dt4 = dt * 4.0f; // Delta time for items running every fourth phase
-      switch (getSimulation()->phase()) {
+      switch (getWorldModel()->phase()) {
 
          // Phase 0 -- Dynamics
          case 0 : {
@@ -653,7 +653,7 @@ void Player::updateTC(const double dt0)
                if (dataLogTimer <= 0.0) {
                   // At timeout, log the player's data and ...
 
-                  BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_DATA )
+                  BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_PLAYER_DATA )
                      SAMPLE_1_OBJECT( this )
                   END_RECORD_DATA_SAMPLE()
 
@@ -861,7 +861,7 @@ double Player::getEarthRadius() const
 {
    double erad = base::Nav::ERAD60 * base::distance::NM2M;  // (default)
 
-   const Simulation* sim = getSimulation();
+   const WorldModel* sim = getWorldModel();
    if (sim != nullptr) {
       const base::EarthModel* pModel = sim->getEarthModel();
       if (pModel == nullptr) pModel = &base::EarthModel::wgs84;
@@ -879,11 +879,10 @@ double Player::getEarthRadius() const
 }
 
 //------------------------------------------------------------------------------
-// Controlling simulation access functions
+// World model access functions
 //------------------------------------------------------------------------------
 
-// Controlling simulation model
-Simulation* Player::getSimulation()
+WorldModel* Player::getWorldModel()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -891,8 +890,7 @@ Simulation* Player::getSimulation()
    return sim;
 }
 
-// Controlling simulation model (const version)
-const Simulation* Player::getSimulation() const
+const WorldModel* Player::getWorldModel() const
 {
    if (sim == nullptr) {
       (const_cast<Player*>(this))->getSimulationImp();
@@ -900,11 +898,11 @@ const Simulation* Player::getSimulation() const
    return sim;
 }
 
-// Find our simulation model
-Simulation* Player::getSimulationImp()
+// Find our world model
+WorldModel* Player::getSimulationImp()
 {
    if (sim == nullptr) {
-      sim = static_cast<Simulation*>(findContainerByType(typeid(Simulation)));
+      sim = static_cast<WorldModel*>(findContainerByType(typeid(WorldModel)));
       if (sim == nullptr && isMessageEnabled(MSG_ERROR)) {
          std::cerr << "Player::getSimulationImp(): ERROR, unable to locate the Simulation class!" << std::endl;
       }
@@ -1917,7 +1915,7 @@ bool Player::setPosition(const double n, const double e, const bool slaved)
 // Position relative to the simulation ref point (meters)
 bool Player::setPosition(const double n, const double e, const double d, const bool slaved)
 {
-   Simulation* s = getSimulation();
+   WorldModel* s = getWorldModel();
    const double maxRefRange = s->getMaxRefRange();
    const base::EarthModel* em = s->getEarthModel();
 
@@ -1979,7 +1977,7 @@ bool Player::setPositionLL(const double lat, const double lon, const bool slaved
 // Sets present position using lat/long position; (degs) and altitude (m)
 bool Player::setPositionLLA(const double lat, const double lon, const double alt, const bool slaved)
 {
-   Simulation* s = getSimulation();
+   WorldModel* s = getWorldModel();
    const double maxRefRange = s->getMaxRefRange();
    const base::EarthModel* em = s->getEarthModel();
 
@@ -2026,7 +2024,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
 // Geocentric position vector (meters)
 bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
 {
-   Simulation* s = getSimulation();
+   WorldModel* s = getWorldModel();
    const double maxRefRange = s->getMaxRefRange();
    const base::EarthModel* em = s->getEarthModel();
 
@@ -2459,7 +2457,7 @@ void Player::processDetonation(const double detRange, AbstractWeapon* const wpn)
 
    // record EVERYTHING that had the potential to cause damage, even if killOverride
 
-   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_DAMAGED )
+   BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_PLAYER_DAMAGED )
       SAMPLE_2_OBJECTS( this, wpn )
    END_RECORD_DATA_SAMPLE()
 
@@ -2504,7 +2502,7 @@ bool Player::killedNotification(Player* const p)
    }
 
    // record kill, even if killOverride
-   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_KILLED )
+   BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_PLAYER_KILLED )
       SAMPLE_2_OBJECTS( this, p )
    END_RECORD_DATA_SAMPLE()
 
@@ -2542,7 +2540,7 @@ bool Player::collisionNotification(Player* const p)
 
    // record EVERYTHING that had the potential to cause damage, even if crashOverride
 
-   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_COLLISION )
+   BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_PLAYER_COLLISION )
       SAMPLE_2_OBJECTS( this, p )
    END_RECORD_DATA_SAMPLE()
 
@@ -2580,7 +2578,7 @@ bool Player::crashNotification()
 
    // record EVERYTHING that had the potential to cause damage, even if crashOverride
 
-   BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_PLAYER_CRASH )
+   BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_PLAYER_CRASH )
       SAMPLE_1_OBJECT( this )
    END_RECORD_DATA_SAMPLE()
 
@@ -2890,8 +2888,8 @@ void Player::dynamics(const double dt)
             syncState1.setGeocAcceleration(getGeocAcceleration());
             syncState1.setGeocEulerAngles(getGeocEulerAngles());
             syncState1.setAngularVelocities(getAngularVelocities());
-            syncState1.setTimeExec(getSimulation()->getExecTimeSec());
-            syncState1.setTimeUtc(getSimulation()->getSysTimeOfDay());
+            syncState1.setTimeExec(getWorldModel()->getExecTimeSec());
+            syncState1.setTimeUtc(getWorldModel()->getSysTimeOfDay());
             syncState1.setValid(true);
             syncState1Ready = true;
             syncState2Ready = false;
@@ -2902,8 +2900,8 @@ void Player::dynamics(const double dt)
             syncState2.setGeocAcceleration(getGeocAcceleration());
             syncState2.setGeocEulerAngles(getGeocEulerAngles());
             syncState2.setAngularVelocities(getAngularVelocities());
-            syncState2.setTimeExec(getSimulation()->getExecTimeSec());
-            syncState2.setTimeUtc(getSimulation()->getSysTimeOfDay());
+            syncState2.setTimeExec(getWorldModel()->getExecTimeSec());
+            syncState2.setTimeUtc(getWorldModel()->getSysTimeOfDay());
             syncState2.setValid(true);
             syncState2Ready = true;
             syncState1Ready = false;
@@ -3036,7 +3034,7 @@ void Player::positionUpdate(const double dt)
             const double slat = std::sin(latitude * base::angle::D2RCC);
             const double clat = std::cos(latitude * base::angle::D2RCC);
 
-            const base::EarthModel* em = getSimulation()->getEarthModel();
+            const base::EarthModel* em = getWorldModel()->getEarthModel();
             if (em == nullptr) em = &base::EarthModel::wgs84;
 
             const double a  = em->getA();   // semi-major axis (meters)
@@ -3119,7 +3117,7 @@ void Player::positionUpdate(const double dt)
                double ecef[3] = { newPosVecECEF[0], newPosVecECEF[1], newPosVecECEF[2] };
                double lla[3] = { 0, 0, 0 };
 
-               const base::EarthModel* em = getSimulation()->getEarthModel();
+               const base::EarthModel* em = getWorldModel()->getEarthModel();
                base::Nav::convertEcef2Geod(ecef, lla, em);
 
                // 3) Set position using these ground clamped coordinates
@@ -3224,7 +3222,7 @@ void Player::deadReckonPosition(const double dt)
          double alt = tElev + tOffset;
 
          // 2) Compute the geodetic lat/lon position
-         const base::EarthModel* em = getSimulation()->getEarthModel();
+         const base::EarthModel* em = getWorldModel()->getEarthModel();
          double ecef[3] = { drPos[0], drPos[1], drPos[2] };
          double lla[3] = { 0, 0, 0 };
          base::Nav::convertEcef2Geod(ecef, lla, em);
@@ -3310,7 +3308,7 @@ void Player::updateElevation()
 {
    // Only if isTerrainElevationRequired() is false, otherwise the terrain
    // elevation is from the OTW system.
-   const Simulation* s = getSimulation();
+   const WorldModel* s = getWorldModel();
    if (s != nullptr && !isTerrainElevationRequired()) {
       const terrain::Terrain* terrain = s->getTerrain();
       if (terrain != nullptr) {
@@ -3327,7 +3325,7 @@ void Player::updateElevation()
 void Player::printTimingStats()
 {
    const base::Statistic* ts = getTimingStats();
-   std::cout << "Player(" << getSimulation()->cycle() << "," << getSimulation()->frame() << "," << getSimulation()->phase() << "): dt=" << ts->value() << ", ave=" << ts->mean() << ", max=" << ts->maxValue() << std::endl;
+   std::cout << "Player(" << getWorldModel()->cycle() << "," << getWorldModel()->frame() << "," << getWorldModel()->phase() << "): dt=" << ts->value() << ", ave=" << ts->mean() << ", max=" << ts->maxValue() << std::endl;
 }
 
 //------------------------------------------------------------------------------

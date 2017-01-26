@@ -5,7 +5,7 @@
 #include "openeaagles/models/systems/Antenna.hpp"
 #include "openeaagles/models/Image.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -215,7 +215,7 @@ void Sar::process(const double dt)
       Antenna* ant = getAntenna();
       if (ant != nullptr) {
 
-         const Simulation* s = getSimulation();
+         const WorldModel* s = getWorldModel();
          const double refLat = s->getRefLatitude();
          const double refLon = s->getRefLongitude();
 

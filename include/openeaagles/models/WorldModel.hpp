@@ -2,10 +2,12 @@
 #ifndef __oe_models_WorldModel_H__
 #define __oe_models_WorldModel_H__
 
-#include "openeaagles/simulation/SimExec.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
 namespace oe {
+namespace terrain { class Terrain; }
 namespace models {
+class AbstractAtmosphere;
 
 //------------------------------------------------------------------------------
 // Class: WorldModel
@@ -37,6 +39,11 @@ namespace models {
 //
 //                                            ! or zero to use current year (default: 0)
 //
+//
+//    terrain        <terrain:Terrain>        ! Terrain elevation database (default: nullptr)
+//    atmosphere     <Atmosphere>             ! Atmosphere
+//
+
 // Gaming area reference point:
 //
 //    The reference latitude and longitude is the center of the simulation's
@@ -61,10 +68,21 @@ namespace models {
 //                   Vecef = Vned * M;
 //
 //
+// Environments:
+//
+//    Current simulation environments include terrain elevation posts, getTerrain(),
+//    and atmosphere model, getAtmosphere().
+//
+// Shutdown:
+//
+//    At shutdown, the parent object must send a SHUTDOWN_EVENT event to
+//    this object, environments and other components.
+//
+
 //------------------------------------------------------------------------------
-class WorldModel : public simulation::SimExec
+class WorldModel : public simulation::Simulation
 {
-    DECLARE_SUBCLASS(WorldModel, simulation::SimExec)
+    DECLARE_SUBCLASS(WorldModel, simulation::Simulation)
 
 public:
     WorldModel();
@@ -87,6 +105,15 @@ public:
 
     bool isGamingAreaUsingEarthModel() const;      // Gaming area using the earth model?
 
+
+
+    // environmental interface
+    const terrain::Terrain* getTerrain() const;            // returns the terrain elevation database
+    AbstractAtmosphere* getAtmosphere();                   // returns the atmosphere model
+    const AbstractAtmosphere* getAtmosphere() const;       // returns the atmosphere model (const version)
+
+    virtual void reset() override;
+
 protected:
 
     virtual bool setEarthModel(const base::EarthModel* const msg); // Sets our earth model
@@ -95,6 +122,10 @@ protected:
     virtual bool setRefLatitude(const double v);      // Sets Ref latitude
     virtual bool setRefLongitude(const double v);     // Sets Ref longitude
     virtual bool setMaxRefRange(const double v);      // Sets the max range (meters) of the gaming area or zero if there's no limit.
+
+   // environmental interface
+    terrain::Terrain* getTerrain();                        // returns the terrain elevation database
+    virtual bool shutdownNotification() override;
 
 private:
    void initData();
@@ -108,6 +139,12 @@ private:
    bool setSlotEarthModel(const base::EarthModel* const msg);
    bool setSlotEarthModel(const base::String* const msg);
    bool setSlotGamingAreaEarthModel(const base::Number* const msg);
+
+   // environmental interface
+   bool setSlotTerrain(terrain::Terrain* const msg);
+   bool setSlotAtmosphere(AbstractAtmosphere* const msg);
+
+
 
    // Our Earth Model, or default to using base::EarthModel::wgs84 if zero
    const base::EarthModel* em;
@@ -123,6 +160,10 @@ private:
                                  //    Usage:
                                  //       ecef = wm; * earthNED
                                  //       earthNED  = ecef * wm;
+
+
+   AbstractAtmosphere* atmosphere;
+   terrain::Terrain* terrain;
 
 };
 

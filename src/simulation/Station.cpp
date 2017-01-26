@@ -6,7 +6,7 @@
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 #include "openeaagles/simulation/AbstractNetIO.hpp"
 #include "openeaagles/simulation/AbstractOtw.hpp"
-#include "openeaagles/simulation/SimExec.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/Color.hpp"
 #include "openeaagles/base/IoHandler.hpp"
@@ -34,7 +34,7 @@ const double Station::DEFAULT_BG_THREAD_PRI  = 0.5;
 const double Station::DEFAULT_NET_THREAD_PRI = 0.5;
 
 BEGIN_SLOTTABLE(Station)
-   "simulation",        //  1: Simulation model
+   "simulation",        //  1: Simulation executive
    "networks",          //  2: List of Network models
    "otw",               //  3: Out-The-Window (OTW) visual system  [ Otw or base::PairStream ]
    "ioHandler",         //  4: I/O data handler(s)  [ base::IoHandler or base::PairStream ]
@@ -55,7 +55,7 @@ BEGIN_SLOTTABLE(Station)
 END_SLOTTABLE(Station)
 
 BEGIN_SLOT_MAP(Station)
-   ON_SLOT( 1,  setSlotSimulation,            SimExec)
+   ON_SLOT( 1,  setSlotSimulation,            Simulation)
 
    ON_SLOT( 2,  setSlotNetworks,              base::PairStream)
 
@@ -140,7 +140,7 @@ void Station::copyData(const Station& org, const bool cc)
 
    // Set the simulation exec
    if (org.sim != nullptr) {
-      SimExec* copy = org.sim->clone();
+      Simulation* copy = org.sim->clone();
       setSlotSimulation( copy );
       copy->unref();
    }
@@ -442,8 +442,8 @@ bool Station::shutdownNotification()
    }
    setSlotIoHandler(static_cast<base::PairStream*>(nullptr));
 
-   // Tell our simulation to shut down
-   SimExec* s = getSimulation();
+   // Tell our simulation executive to shut down
+   Simulation* s = getSimulation();
    if (s != nullptr) {
       s->event(SHUTDOWN_EVENT);
    }
@@ -668,14 +668,14 @@ void Station::processNetworkOutputTasks(const double dt)
 // Get functions
 //------------------------------------------------------------------------------
 
-// Returns the simulation model
-SimExec* Station::getSimulation()
+// Returns the simulation executive
+Simulation* Station::getSimulation()
 {
    return sim;
 }
 
-// Returns the simulation model (const version)
-const SimExec* Station::getSimulation() const
+// Returns the simulation executive (const version)
+const Simulation* Station::getSimulation() const
 {
    return sim;
 }
@@ -1018,9 +1018,9 @@ bool Station::setDataRecorder(AbstractDataRecorder* const p)
 
 
 //-----------------------------------------------------------------------------
-// setSlotSimulation() -- Sets a pointer to our simulation subsystem
+// setSlotSimExec() -- Sets a pointer to our simulation executive
 //-----------------------------------------------------------------------------
-bool Station::setSlotSimulation(SimExec* const p)
+bool Station::setSlotSimulation(Simulation* const p)
 {
     if (sim != nullptr) {
         sim->container(nullptr);

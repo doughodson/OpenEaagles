@@ -11,8 +11,8 @@ OBJS =  \
 	AbstractPlayer.o \
 	AbstractRecorderComponent.o \
 	SimBgThread.o \
-	SimExec.o \
 	SimTcThread.o \
+	Simulation.o \
 	Station.o \
 	StationBgThread.o \
 	StationNetThread.o \

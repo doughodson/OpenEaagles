@@ -13,7 +13,7 @@
 #include "openeaagles/models/players/Ships.hpp"
 #include "openeaagles/models/Signatures.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+//#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"

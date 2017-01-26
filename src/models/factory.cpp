@@ -42,9 +42,8 @@
 #include "openeaagles/models/sensors/Tws.hpp"
 #include "openeaagles/models/sensors/Stt.hpp"
 
-// simulation models
+// world models
 #include "openeaagles/models/WorldModel.hpp"
-#include "openeaagles/models/Simulation.hpp"
 
 // system models
 #include "openeaagles/models/systems/AngleOnlyTrackManager.hpp"
@@ -129,12 +128,9 @@ base::Object* factory(const std::string& name)
       obj = new Tws();
    }
 
-   // Simulation models
+   // world models
    else if ( name == WorldModel::getFactoryName() ) {
       obj = new WorldModel();
-   }
-   else if ( name == Simulation::getFactoryName() ) {
-      obj = new Simulation();
    }
    
    // Players

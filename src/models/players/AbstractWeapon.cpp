@@ -8,7 +8,7 @@
 #include "openeaagles/models/systems/Guns.hpp"
 #include "openeaagles/models/systems/Stores.hpp"
 #include "openeaagles/models/Track.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
@@ -252,7 +252,7 @@ void AbstractWeapon::reset()
 
    // Test player?
    if (tstTgtNam != nullptr) {
-      Simulation* s = getSimulation();
+      WorldModel* s = getWorldModel();
       if (s != nullptr) {
          const auto t = dynamic_cast<Player*>(s->findPlayerByName( *tstTgtNam ));   // added DDH
          if (t != nullptr) setTargetPlayer(t, true);
@@ -271,7 +271,7 @@ void AbstractWeapon::updateTC(const double dt)
 {
    BaseClass::updateTC(dt);
 
-   unsigned int ph = getSimulation()->phase();
+   unsigned int ph = getWorldModel()->phase();
 
    // Phase #0 -- Transition from pre-release to active at the end of dynamics
    // phase (after the call to BaseClass), so that our position, which was
@@ -428,7 +428,7 @@ bool AbstractWeapon::onJettisonEvent()
 //------------------------------------------------------------------------------
 void AbstractWeapon::checkDetonationEffect()
 {
-   Simulation* s = getSimulation();
+   WorldModel* s = getWorldModel();
    if (s != nullptr) {
       // Only local players within 10X max burst range
       double maxRng = 10.0 * getMaxBurstRng();
@@ -488,7 +488,7 @@ bool AbstractWeapon::collisionNotification(Player* const other)
       checkDetonationEffect();
 
       // Log the event
-      BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+      BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
          SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
          SAMPLE_2_VALUES( DETONATE_ENTITY_IMPACT, getDetonationRange() )
       END_RECORD_DATA_SAMPLE()
@@ -527,7 +527,7 @@ bool AbstractWeapon::crashNotification()
       // ---
       // Log the event
       // ---
-      BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+      BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
          SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
          SAMPLE_2_VALUES( DETONATE_GROUND_IMPACT, getDetonationRange() )
       END_RECORD_DATA_SAMPLE()
@@ -547,7 +547,7 @@ AbstractWeapon* AbstractWeapon::prerelease()
 
    // If we're not already (pre)released or jettisoned,
    //   and we'll need a launching player and a simulation
-   Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
+   WorldModel* sim = static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) );
    Player* lplayer = getLaunchVehicle();
    if (!isReleased() && !isJettisoned() && flyout == nullptr && lplayer != nullptr && sim != nullptr) {
 
@@ -615,7 +615,7 @@ AbstractWeapon* AbstractWeapon::release()
 
          // and we have a launching player and a simulation ...
          Player* lplayer = getLaunchVehicle();
-         Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
+         const auto sim = static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) );
          if ( lplayer != nullptr && sim != nullptr) {
 
             // then release the weapon!
@@ -676,7 +676,7 @@ AbstractWeapon* AbstractWeapon::release()
                sim->addNewPlayer(pname,flyout);
             }
 
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_RELEASED )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_RELEASED )
                SAMPLE_3_OBJECTS( flyout, getLaunchVehicle(), nullptr )  // weapon, shooter, target
                SAMPLE_2_VALUES( 0, 0.0 )
             END_RECORD_DATA_SAMPLE()
@@ -688,7 +688,7 @@ AbstractWeapon* AbstractWeapon::release()
          // We have a hung store
          setHung(true);
 
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_HUNG )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_HUNG )
             SAMPLE_3_OBJECTS( this, getLaunchVehicle(), nullptr )
          END_RECORD_DATA_SAMPLE()
 
@@ -705,7 +705,7 @@ void AbstractWeapon::atReleaseInit()
 {
    // Set the release event
    if (eventID == 0) {
-      eventID = getSimulation()->getNewWeaponEventID();
+      eventID = getWorldModel()->getNewWeaponEventID();
    }
 
    // Reset the dynamics mode (if any)
@@ -752,7 +752,7 @@ void AbstractWeapon::updateTOF(const double dt)
          setMode(DETONATED);
          setDetonationResults( DETONATE_DETONATION );
 
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_WEAPON_DETONATION )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_WEAPON_DETONATION )
             SAMPLE_3_OBJECTS( this, getLaunchVehicle(), getTargetPlayer() )
             SAMPLE_2_VALUES( DETONATE_DETONATION, 0.0 )
          END_RECORD_DATA_SAMPLE()

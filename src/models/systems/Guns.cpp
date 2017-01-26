@@ -2,7 +2,7 @@
 #include "openeaagles/models/systems/Guns.hpp"
 
 #include "openeaagles/models/players/Bullet.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -310,7 +310,7 @@ void Gun::burstFrame()
       Player* ownship = static_cast<Player*>( findContainerByType(typeid(Player)) );
 
       if (ownship != nullptr) {
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_GUN_FIRED )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_GUN_FIRED )
             SAMPLE_1_OBJECT( ownship )
             SAMPLE_1_VALUE( rcount )
          END_RECORD_DATA_SAMPLE()
@@ -319,7 +319,7 @@ void Gun::burstFrame()
       // When we have a bullet model ... we're going to create a bullet (weapon)
       // player to flyout the rounds.
       Bullet* wpn = getBulletType();
-      Simulation* sim = static_cast<Simulation*>( findContainerByType(typeid(Simulation)) );
+      const auto sim = static_cast<WorldModel*>( findContainerByType(typeid(WorldModel)) );
       if (wpn != nullptr && ownship != nullptr && sim != nullptr) {
 
          // Compute the bullet burst's initial position and velocity

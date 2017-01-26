@@ -1,5 +1,5 @@
 
-#include "openeaagles/simulation/SimExec.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/simulation/AbstractPlayer.hpp"
 
@@ -22,9 +22,9 @@
 namespace oe {
 namespace simulation {
 
-IMPLEMENT_PARTIAL_SUBCLASS(SimExec, "SimExec")
+IMPLEMENT_PARTIAL_SUBCLASS(Simulation, "Simulation")
 
-BEGIN_SLOTTABLE(SimExec)
+BEGIN_SLOTTABLE(Simulation)
    "players",        // 1) All players
    "simulationTime", // 2) Simulation time
    "day",            // 3) Initial simulated day of month [ 1 .. 31 ]
@@ -35,9 +35,9 @@ BEGIN_SLOTTABLE(SimExec)
 
    "numTcThreads",   // 7) Number of T/C threads to use with the player list
    "numBgThreads"    // 8) Number of background threads to use with the player list
-END_SLOTTABLE(SimExec)
+END_SLOTTABLE(Simulation)
 
-BEGIN_SLOT_MAP(SimExec)
+BEGIN_SLOT_MAP(Simulation)
     ON_SLOT( 1, setSlotPlayers,         base::PairStream)
 
     ON_SLOT( 2, setSlotSimulationTime,  base::Time)
@@ -51,36 +51,36 @@ BEGIN_SLOT_MAP(SimExec)
     ON_SLOT( 8, setSlotNumBgThreads,    base::Number)
 END_SLOT_MAP()
 
-SimExec::SimExec() : newPlayerQueue(MAX_NEW_PLAYERS)
+Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
 
    initData();
 }
 
-SimExec::SimExec(const SimExec& org) : newPlayerQueue(MAX_NEW_PLAYERS)
+Simulation::Simulation(const Simulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
 
-SimExec::~SimExec()
+Simulation::~Simulation()
 {
    STANDARD_DESTRUCTOR()
 }
 
-SimExec& SimExec::operator=(const SimExec& org)
+Simulation& Simulation::operator=(const Simulation& org)
 {
     if (this != &org) copyData(org,false);
     return *this;
 }
 
-SimExec* SimExec::clone() const
+Simulation* Simulation::clone() const
 {
-   return new SimExec(*this);
+   return new Simulation(*this);
 }
 
-void SimExec::initData()
+void Simulation::initData()
 {
    origPlayers = nullptr;
    players = nullptr;
@@ -125,7 +125,7 @@ void SimExec::initData()
    bgThreadsFailed = false;
 }
 
-void SimExec::copyData(const SimExec& org, const bool cc)
+void Simulation::copyData(const Simulation& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
@@ -198,7 +198,7 @@ void SimExec::copyData(const SimExec& org, const bool cc)
    reqBgThreads = org.reqBgThreads;
 }
 
-void SimExec::deleteData()
+void Simulation::deleteData()
 {
    if (origPlayers != nullptr) { origPlayers = nullptr; }
    if (players != nullptr)     { players = nullptr; }
@@ -231,7 +231,7 @@ void SimExec::deleteData()
 //------------------------------------------------------------------------------
 // reset() -- Reset the simulation & players
 //------------------------------------------------------------------------------
-void SimExec::reset()
+void Simulation::reset()
 {
    // ---
    // Something old and something new ...
@@ -442,7 +442,7 @@ void SimExec::reset()
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation
 //------------------------------------------------------------------------------
-bool SimExec::shutdownNotification()
+bool Simulation::shutdownNotification()
 {
    // ---
    // Shutdown our baseclass, which will notify our components
@@ -505,7 +505,7 @@ bool SimExec::shutdownNotification()
 //------------------------------------------------------------------------------
 // updateTC() -- update time critical stuff here
 //------------------------------------------------------------------------------
-void SimExec::updateTC(const double dt)
+void Simulation::updateTC(const double dt)
 {
    // ---
    // Update the executive time
@@ -645,7 +645,7 @@ void SimExec::updateTC(const double dt)
 // Time critical thread processing for every n'th player starting
 // with the idx'th player
 //------------------------------------------------------------------------------
-void SimExec::updateTcPlayerList(
+void Simulation::updateTcPlayerList(
    base::PairStream* const playerList,
    const double dt,
    const unsigned int idx,
@@ -671,7 +671,7 @@ void SimExec::updateTcPlayerList(
 //------------------------------------------------------------------------------
 // updateData() -- update non-time critical stuff here
 //------------------------------------------------------------------------------
-void SimExec::updateData(const double dt)
+void Simulation::updateData(const double dt)
 {
     // Delta-Time (Frozen?)
     double dt0 = dt;
@@ -721,7 +721,7 @@ void SimExec::updateData(const double dt)
 // Background thread processing for every n'th player starting
 // with the idx'th player
 //------------------------------------------------------------------------------
-void SimExec::updateBgPlayerList(
+void Simulation::updateBgPlayerList(
          base::PairStream* const playerList,
          const double dt,
          const unsigned int idx,
@@ -747,7 +747,7 @@ void SimExec::updateBgPlayerList(
 //------------------------------------------------------------------------------
 // printTimingStats() -- Update time critical stuff here
 //------------------------------------------------------------------------------
-void SimExec::printTimingStats()
+void Simulation::printTimingStats()
 {
    const base::Statistic* ts = getTimingStats();
    int c = cycle();
@@ -764,61 +764,61 @@ void SimExec::printTimingStats()
 //------------------------------------------------------------------------------
 
 // Returns the player list
-base::PairStream* SimExec::getPlayers()
+base::PairStream* Simulation::getPlayers()
 {
    return players.getRefPtr();
 }
 
 // Returns the player list (const version)
-const base::PairStream* SimExec::getPlayers() const
+const base::PairStream* Simulation::getPlayers() const
 {
    return players.getRefPtr();
 }
 
 // Real-time cycle counter
-unsigned int SimExec::cycle() const
+unsigned int Simulation::cycle() const
 {
    return cycleCnt;
 }
 
 // Real-time frame counter [0 .. 15]
-unsigned int SimExec::frame() const
+unsigned int Simulation::frame() const
 {
    return frameCnt;
 }
 
 // Real-time phase counter [0 .. 3]
-unsigned int SimExec::phase() const
+unsigned int Simulation::phase() const
 {
    return phaseCnt;
 }
 
 // Returns the exec counter (R/T phases since start)
-unsigned int SimExec::getExecCounter() const
+unsigned int Simulation::getExecCounter() const
 {
    return ((cycleCnt << 6) + (frameCnt << 2) + phaseCnt);
 }
 
 // Returns executive time, which is time since start (sec)
-double SimExec::getExecTimeSec() const
+double Simulation::getExecTimeSec() const
 {
    return execTime;
 }
 
 // Returns computer systems time of day (UTC -- seconds since midnight)
-double SimExec::getSysTimeOfDay() const
+double Simulation::getSysTimeOfDay() const
 {
    return pcTime;
 }
 
 // Returns the simulated time of day (UTC -- seconds since midnight)
-double SimExec::getSimTimeOfDay() const
+double Simulation::getSimTimeOfDay() const
 {
    return simTime;
 }
 
 // Simulated time (UTC) values, where ...
-void SimExec::getSimTimeValues(
+void Simulation::getSimTimeValues(
       unsigned long* const simSec,  // (OUT) The whole seconds since midnight (00:00:00), January 1, 1970
       unsigned long* const simUSec  // (OUT) The number of microseconds in the current second.
    ) const
@@ -828,25 +828,25 @@ void SimExec::getSimTimeValues(
 }
 
 // Generates an unique major simulation event ID [1 .. 65535]
-unsigned short SimExec::getNewEventID()
+unsigned short Simulation::getNewEventID()
 {
    return ++eventID;
 }
 
 // Generates a unique weapon event ID [1 .. 65535]
-unsigned short SimExec::getNewWeaponEventID()
+unsigned short Simulation::getNewWeaponEventID()
 {
    return ++eventWpnID;
 }
 
 // Generates a unique ID number for released weapons
-unsigned short SimExec::getNewReleasedWeaponID()
+unsigned short Simulation::getNewReleasedWeaponID()
 {
    return relWpnId++;
 };
 
 // Returns the data recorder
-AbstractDataRecorder* SimExec::getDataRecorder()
+AbstractDataRecorder* Simulation::getDataRecorder()
 {
    AbstractDataRecorder* p = nullptr;
    Station* sta = getStation();
@@ -855,7 +855,7 @@ AbstractDataRecorder* SimExec::getDataRecorder()
 }
 
 // Our Station
-Station* SimExec::getStation()
+Station* Simulation::getStation()
 {
    if (station == nullptr) {
       getStationImp();
@@ -864,15 +864,15 @@ Station* SimExec::getStation()
 }
 
 // Our Station (const version)
-const Station* SimExec::getStation() const
+const Station* Simulation::getStation() const
 {
    if (station == nullptr) {
-      (const_cast<SimExec*>(this))->getStationImp();
+      (const_cast<Simulation*>(this))->getStationImp();
    }
    return station;
 }
 
-Station* SimExec::getStationImp()
+Station* Simulation::getStationImp()
 {
    if (station == nullptr) {
       station = static_cast<Station*>(findContainerByType(typeid(Station)));
@@ -883,13 +883,11 @@ Station* SimExec::getStationImp()
    return station;
 }
 
-
-
 //------------------------------------------------------------------------------
 // setSlotPlayers() -- set the original player list (make sure we have only
 // player type objects with unique names and IDs)
 //------------------------------------------------------------------------------
-bool SimExec::setSlotPlayers(base::PairStream* const pl)
+bool Simulation::setSlotPlayers(base::PairStream* const pl)
 {
    // Early out if we're just zeroing the player lists
    if (pl == nullptr) {
@@ -1008,7 +1006,7 @@ bool SimExec::setSlotPlayers(base::PairStream* const pl)
 //                       1) remove 'deleteRequest' mode players
 //                       2) add new players
 //------------------------------------------------------------------------------
-void SimExec::updatePlayerList()
+void Simulation::updatePlayerList()
 {
     // ---
     // Do we need to swap player lists?  Only if a player
@@ -1101,7 +1099,7 @@ void SimExec::updatePlayerList()
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool SimExec::addNewPlayer(base::Pair* const player)
+bool Simulation::addNewPlayer(base::Pair* const player)
 {
     if (player == nullptr) return false;
     player->ref();
@@ -1117,7 +1115,7 @@ bool SimExec::addNewPlayer(base::Pair* const player)
 //                   the next frame.  Returns true of player will be added
 //                   or false if there is an error.
 //------------------------------------------------------------------------------
-bool SimExec::addNewPlayer(const char* const playerName, AbstractPlayer* const player)
+bool Simulation::addNewPlayer(const char* const playerName, AbstractPlayer* const player)
 {
     if (playerName == nullptr || player == nullptr) return false;
 
@@ -1130,7 +1128,7 @@ bool SimExec::addNewPlayer(const char* const playerName, AbstractPlayer* const p
 //------------------------------------------------------------------------------
 // insertPlayerSort() -- Insert the new player into the new list in sorted order
 //------------------------------------------------------------------------------
-bool SimExec::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream* const newList)
+bool Simulation::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream* const newList)
 {
     newList->ref();
 
@@ -1200,17 +1198,17 @@ bool SimExec::insertPlayerSort(base::Pair* const newPlayerPair, base::PairStream
 //------------------------------------------------------------------------------
 // findPlayer() -- Find a player that matches 'id' and 'networkID'
 //------------------------------------------------------------------------------
-AbstractPlayer* SimExec::findPlayer(const short id, const int netID)
+AbstractPlayer* Simulation::findPlayer(const short id, const int netID)
 {
    return findPlayerPrivate(id, netID);
 }
 
-const AbstractPlayer* SimExec::findPlayer(const short id, const int netID) const
+const AbstractPlayer* Simulation::findPlayer(const short id, const int netID) const
 {
    return findPlayerPrivate(id, netID);
 }
 
-AbstractPlayer* SimExec::findPlayerPrivate(const short id, const int netID) const
+AbstractPlayer* Simulation::findPlayerPrivate(const short id, const int netID) const
 {
     // Quick out
     if (players == nullptr) return nullptr;
@@ -1244,17 +1242,17 @@ AbstractPlayer* SimExec::findPlayerPrivate(const short id, const int netID) cons
 //------------------------------------------------------------------------------
 // findPlayerByName() -- Find a player by name
 //------------------------------------------------------------------------------
-AbstractPlayer* SimExec::findPlayerByName(const char* const playerName)
+AbstractPlayer* Simulation::findPlayerByName(const char* const playerName)
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-const AbstractPlayer* SimExec::findPlayerByName(const char* const playerName) const
+const AbstractPlayer* Simulation::findPlayerByName(const char* const playerName) const
 {
    return findPlayerByNamePrivate(playerName);
 }
 
-AbstractPlayer* SimExec::findPlayerByNamePrivate(const char* const playerName) const
+AbstractPlayer* Simulation::findPlayerByNamePrivate(const char* const playerName) const
 {
     // Quick out
     if (players == nullptr || playerName == nullptr) return nullptr;
@@ -1281,44 +1279,44 @@ AbstractPlayer* SimExec::findPlayerByNamePrivate(const char* const playerName) c
 //------------------------------------------------------------------------------
 
 // Sets the initial simulation time (sec; or less than zero to slave to UTC)
-bool SimExec::setInitialSimulationTime(const long time)
+bool Simulation::setInitialSimulationTime(const long time)
 {
    simTime0 = time;
    return true;
 }
 
 // Increment the cycle counter
-void SimExec::incCycle()
+void Simulation::incCycle()
 {
    cycleCnt++;
 }
 
 // Sets the cycle counter
-void SimExec::setCycle(const unsigned int c)
+void Simulation::setCycle(const unsigned int c)
 {
    cycleCnt = c;
 }
 
 // Sets the frame counter
-void SimExec::setFrame(const unsigned int f)
+void Simulation::setFrame(const unsigned int f)
 {
    frameCnt = f;
 }
 
 // Sets the phase counter
-void SimExec::setPhase(const unsigned int c)
+void Simulation::setPhase(const unsigned int c)
 {
    phaseCnt = c;
 }
 
 // Sets the simulation event ID counter
-void SimExec::setEventID(unsigned short id)
+void Simulation::setEventID(unsigned short id)
 {
    eventID = id;
 }
 
 // Sets the weapon ID event counter
-void SimExec::setWeaponEventID(unsigned short id)
+void Simulation::setWeaponEventID(unsigned short id)
 {
    eventWpnID = id;
 }
@@ -1327,7 +1325,7 @@ void SimExec::setWeaponEventID(unsigned short id)
 // Set Slot routines
 //------------------------------------------------------------------------------
 
-bool SimExec::setSlotSimulationTime(const base::Time* const msg)
+bool Simulation::setSlotSimulationTime(const base::Time* const msg)
 {
     bool ok = false;
     if (msg != nullptr) {
@@ -1336,13 +1334,13 @@ bool SimExec::setSlotSimulationTime(const base::Time* const msg)
           ok = setInitialSimulationTime(t);
        }
        else {
-         std::cerr << "simulation::setSlotSimulationTime(): invalid time of day: " << t << " seconds; use [ 0 .. 86400 ] seconds or -1" << std::endl;
+         std::cerr << "SimExec::setSlotSimulationTime(): invalid time of day: " << t << " seconds; use [ 0 .. 86400 ] seconds or -1" << std::endl;
        }
     }
     return ok;
 }
 
-bool SimExec::setSlotDay(const base::Number* const msg)
+bool Simulation::setSlotDay(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1358,7 +1356,7 @@ bool SimExec::setSlotDay(const base::Number* const msg)
    return ok;
 }
 
-bool SimExec::setSlotMonth(const base::Number* const msg)
+bool Simulation::setSlotMonth(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1374,7 +1372,7 @@ bool SimExec::setSlotMonth(const base::Number* const msg)
    return ok;
 }
 
-bool SimExec::setSlotYear(const base::Number* const msg)
+bool Simulation::setSlotYear(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1390,7 +1388,7 @@ bool SimExec::setSlotYear(const base::Number* const msg)
    return ok;
 }
 
-bool SimExec::setSlotFirstWeaponId(const base::Number* const msg)
+bool Simulation::setSlotFirstWeaponId(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1407,7 +1405,7 @@ bool SimExec::setSlotFirstWeaponId(const base::Number* const msg)
    return ok;
 }
 
-bool SimExec::setSlotNumTcThreads(const base::Number* const msg)
+bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1432,7 +1430,7 @@ bool SimExec::setSlotNumTcThreads(const base::Number* const msg)
    return ok;
 }
 
-bool SimExec::setSlotNumBgThreads(const base::Number* const msg)
+bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
@@ -1457,7 +1455,7 @@ bool SimExec::setSlotNumBgThreads(const base::Number* const msg)
    return ok;
 }
 
-std::ostream& SimExec::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
+std::ostream& Simulation::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
     if ( !slotsOnly ) {

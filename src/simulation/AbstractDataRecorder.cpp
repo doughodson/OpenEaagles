@@ -1,7 +1,7 @@
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
-#include "openeaagles/simulation/SimExec.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include "openeaagles/base/List.hpp"
@@ -80,7 +80,7 @@ Station* AbstractDataRecorder::getStationImp()
 }
 
 // The simulation
-SimExec* AbstractDataRecorder::getSimulation()
+Simulation* AbstractDataRecorder::getSimulation()
 {
    if (sim == nullptr) {
       getSimulationImp();
@@ -88,7 +88,7 @@ SimExec* AbstractDataRecorder::getSimulation()
    return sim;
 }
 
-const SimExec* AbstractDataRecorder::getSimulation() const
+const Simulation* AbstractDataRecorder::getSimulation() const
 {
    if (sim == nullptr) {
       (const_cast<AbstractDataRecorder*>(this))->getSimulationImp();
@@ -97,7 +97,7 @@ const SimExec* AbstractDataRecorder::getSimulation() const
 }
 
 // The simulation
-SimExec* AbstractDataRecorder::getSimulationImp()
+Simulation* AbstractDataRecorder::getSimulationImp()
 {
    if (sim == nullptr) {
       Station* p = getStation();

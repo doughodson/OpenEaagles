@@ -7,8 +7,11 @@
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
-
 #include "openeaagles/base/units/unit_utils.hpp"
+
+// environment models
+#include "openeaagles/models/environment/AbstractAtmosphere.hpp"
+#include "openeaagles/terrain/Terrain.hpp"
 
 #include <cmath>
 
@@ -16,7 +19,6 @@ namespace oe {
 namespace models {
 
 IMPLEMENT_SUBCLASS(WorldModel, "WorldModel")
-EMPTY_DELETEDATA(WorldModel)
 
 BEGIN_SLOTTABLE(WorldModel)
    "latitude",                // 1) Ref latitude
@@ -27,10 +29,13 @@ BEGIN_SLOTTABLE(WorldModel)
 
    "earthModel",              // 4) Earth model for geodetic lat/lon (default is WGS-84)
 
-   "gamingAreaUseEarthModel"  // 5) If true, use the 'earthModel' or its WGS-84 default for flat
+   "gamingAreaUseEarthModel", // 5) If true, use the 'earthModel' or its WGS-84 default for flat
                               //    earth projections between geodetic lat/lon and the gaming
                               //    area's NED coordinates.  Otherwise, use a standard spherical
                               //    earth with a radius of Nav::ERAD60. (default: false)
+
+   "terrain",                 //  6) Terrain elevation database
+   "atmosphere",              //  7) Atmospheric model
 END_SLOTTABLE(WorldModel)
 
 BEGIN_SLOT_MAP(WorldModel)
@@ -46,6 +51,9 @@ BEGIN_SLOT_MAP(WorldModel)
     ON_SLOT( 4, setSlotEarthModel,      base::String)
 
     ON_SLOT( 5, setSlotGamingAreaEarthModel, base::Number)
+
+    ON_SLOT( 6, setSlotTerrain,      terrain::Terrain)
+    ON_SLOT( 7, setSlotAtmosphere,   AbstractAtmosphere)
 END_SLOT_MAP()
 
 WorldModel::WorldModel()
@@ -66,6 +74,9 @@ void WorldModel::initData()
    maxRefRange = 0.0;
    gaUseEmFlg = false;
    base::Nav::computeWorldMatrix(refLat, refLon, &wm);
+
+   terrain = nullptr;
+   atmosphere = nullptr;
 }
 
 void WorldModel::copyData(const WorldModel& org, const bool cc)
@@ -83,6 +94,66 @@ void WorldModel::copyData(const WorldModel& org, const bool cc)
    maxRefRange = org.maxRefRange;
    gaUseEmFlg = org.gaUseEmFlg;
    wm = org.wm;
+
+
+   if (org.terrain != nullptr) {
+      terrain::Terrain* copy = org.terrain->clone();
+      setSlotTerrain( copy );
+      copy->unref();
+   }
+   else {
+      setSlotTerrain(nullptr);
+   }
+
+   if (org.atmosphere != nullptr) {
+      AbstractAtmosphere* copy = org.atmosphere->clone();
+      setSlotAtmosphere( copy );
+      copy->unref();
+   }
+   else {
+      setSlotAtmosphere(nullptr);
+   }
+}
+
+void WorldModel::deleteData()
+{
+   setSlotAtmosphere( nullptr );
+   setSlotTerrain( nullptr );
+}
+
+void WorldModel::reset()
+{
+   BaseClass::reset();
+
+   // ---
+   // First time reset of terrain database will load the data
+   // ---
+   if (terrain != nullptr) {
+      std::cout << "Loading Terrain Data..." << std::endl;
+      terrain->reset();
+      std::cout << "Finished!" << std::endl;
+   }
+
+   // ---
+   // Reset atmospheric model
+   // ---
+   if (atmosphere != nullptr) atmosphere->reset();
+}
+
+bool WorldModel::shutdownNotification()
+{
+   // ---
+   // Shutdown our baseclass, which will notify our components
+   // ---
+   BaseClass::shutdownNotification();
+
+   // ---
+   // Tell the environments ...
+   // ---
+   if (atmosphere != nullptr) atmosphere->event(SHUTDOWN_EVENT);
+   if (terrain != nullptr) terrain->event(SHUTDOWN_EVENT);
+
+   return true;
 }
 
 //------------------------------------------------------------------------------
@@ -324,6 +395,45 @@ std::ostream& WorldModel::serialize(std::ostream& sout, const int i, const bool 
     }
 
     return sout;
+}
+
+// returns the terrain elevation database
+const terrain::Terrain* WorldModel::getTerrain() const
+{
+   return terrain;
+}
+
+terrain::Terrain* WorldModel::getTerrain()
+{
+   return terrain;
+}
+
+// returns the atmosphere model
+AbstractAtmosphere* WorldModel::getAtmosphere()
+{
+   return atmosphere;
+}
+
+// returns the atmospheric model
+const AbstractAtmosphere* WorldModel::getAtmosphere() const
+{
+   return atmosphere;
+}
+
+bool WorldModel::setSlotTerrain(terrain::Terrain* const msg)
+{
+   if (terrain != nullptr) terrain->unref();
+   terrain = msg;
+   if (terrain != nullptr) terrain->ref();
+   return true;
+}
+
+bool WorldModel::setSlotAtmosphere(AbstractAtmosphere* const msg)
+{
+   if (atmosphere != nullptr) atmosphere->unref();
+   atmosphere = msg;
+   if (atmosphere != nullptr) atmosphere->ref();
+   return true;
 }
 
 }

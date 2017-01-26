@@ -5,11 +5,9 @@
 #include "openeaagles/base/ubf/Agent.hpp"
 
 namespace oe {
-
 namespace simulation { class Station; }
-
 namespace models {
-class Simulation;
+class WorldModel;
 
 //------------------------------------------------------------------------------
 // Class: SimAgent
@@ -35,7 +33,7 @@ protected:
    virtual void initActor() override;
 
    simulation::Station* getStation();
-   Simulation* getSimulation();
+   WorldModel* getWorldModel();
 
    // sets which component ("actor") the agent is for
    void setActorPlayerByName(const char*);
@@ -64,7 +62,7 @@ private:
 //      )
 //   } // components
 //
-//   simulation: ( Simulation
+//   simExec: ( WorldModel
 //
 //      players: {
 //

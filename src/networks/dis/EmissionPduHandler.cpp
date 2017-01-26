@@ -12,7 +12,7 @@
 #include "openeaagles/models/systems/Jammer.hpp"
 #include "openeaagles/models/systems/Radar.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/functors/Functions.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
@@ -423,7 +423,7 @@ bool EmissionPduHandler::updateIncoming(const ElectromagneticEmissionPDU* const 
          models::Antenna* antenna = rfSys->getAntenna();
 
          // reset the timeout clock for this Iplayer's emissions
-         setEmPduExecTime(player->getSimulation()->getExecTimeSec());
+         setEmPduExecTime(player->getWorldModel()->getExecTimeSec());
 
          rfSys->setFrequency( bd->parameterData.frequency );
          rfSys->setBandwidth( bd->parameterData.frequencyRange );

@@ -5,7 +5,7 @@
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/Track.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
@@ -480,7 +480,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
 
             if (getLogTrackUpdates()) {
                // Object 1: player, Object 2: Track Data
-               BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+               BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_DATA )
                   SAMPLE_2_OBJECTS( ownship, tracks[i] )
                END_RECORD_DATA_SAMPLE()
             }
@@ -525,7 +525,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
 
              // Object 1: player, Object 2: Track Data
             Player* ownship = getOwnship();
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_REMOVED )
                SAMPLE_2_OBJECTS( ownship, trk )
             END_RECORD_DATA_SAMPLE()
 
@@ -574,7 +574,7 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
             }
 
             // Object 1: player, Object 2: Track Data
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_NEW_TRACK )
                SAMPLE_2_OBJECTS( ownship, newTrk )
             END_RECORD_DATA_SAMPLE()
 
@@ -678,7 +678,7 @@ void AirAngleOnlyTrkMgrPT::removeAgedTracks()
             //}
             // Object 1: player, Object 2: Track Data
            Player* ownship = getOwnship();
-           BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+           BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_REMOVED )
               SAMPLE_2_OBJECTS( ownship, trk )
            END_RECORD_DATA_SAMPLE()
 
@@ -1034,7 +1034,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
             }
 
             // Object 1: player, Object 2: Track Data
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_NEW_TRACK )
                SAMPLE_2_OBJECTS( ownship, newTrk )
             END_RECORD_DATA_SAMPLE()
 

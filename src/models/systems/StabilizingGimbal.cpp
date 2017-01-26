@@ -8,7 +8,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+//#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"

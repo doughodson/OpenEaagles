@@ -12,7 +12,7 @@
 
 #include "openeaagles/models/environment/IrAtmosphere.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+//#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/List.hpp"

@@ -1,6 +1,6 @@
 
 #include "openeaagles/models/players/Bullet.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -12,7 +12,7 @@
 namespace oe {
 namespace models {
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullet,"Bullet")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Bullet, "Bullet")
 EMPTY_SERIALIZER(Bullet)
 
 // Default Parameters
@@ -225,7 +225,7 @@ bool Bullet::checkForTargetHit()
         //double diffAz = 0;
         //double diffEl = 0;
         double maxRange = 1; // close range of detonation
-        Simulation* sim = getSimulation();
+        WorldModel* sim = getWorldModel();
         if (sim != nullptr) {
             base::PairStream* players = sim->getPlayers();
             if (players != nullptr) {

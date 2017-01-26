@@ -5,7 +5,7 @@
 #include "openeaagles/models/navigation/Navigation.hpp"
 #include "openeaagles/models/navigation/Route.hpp"
 #include "openeaagles/models/navigation/Steerpoint.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
@@ -1017,7 +1017,7 @@ const Player* Autopilot::getLeadPlayer()
    if (lead == nullptr && leadName != nullptr) {
       // we have no lead player, but we have a lead name, let's try to get this player
       // find the player in the simulation
-      const Simulation* const sim = getSimulation();
+      const WorldModel* const sim = getWorldModel();
       if (sim != nullptr) {
          const base::PairStream* players = sim->getPlayers();
          if (players != nullptr) {
@@ -1262,7 +1262,7 @@ bool Autopilot::setLeadPlayer(const Player* const p)
 bool Autopilot::setLeadPlayerName(const base::Identifier* const msg)
 {
    // find the player in the simulation
-   const Simulation* const sim = getSimulation();
+   const WorldModel* const sim = getWorldModel();
    bool found = false;
    if (sim != nullptr) {
       const base::PairStream* players = sim->getPlayers();
@@ -1286,7 +1286,7 @@ bool Autopilot::setLeadPlayerName(const base::Identifier* const msg)
 bool Autopilot::setLeadPlayerName(const char* x)
 {
    // find the player in the simulation
-   const Simulation* const sim = getSimulation();
+   const WorldModel* const sim = getWorldModel();
    bool found = false;
    if (sim != nullptr) {
       const base::PairStream* players = sim->getPlayers();

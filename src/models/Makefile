@@ -84,7 +84,6 @@ OBJS =  \
 	Signatures.o \
 	SimAgent.o \
 	SimAgent.o \
-	Simulation.o \
 	SynchronizedState.o \
 	TargetData.o \
 	Tdb.o \

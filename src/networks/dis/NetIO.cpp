@@ -9,7 +9,7 @@
 #include "openeaagles/networks/dis/pdu.hpp"
 
 #include "openeaagles/models/systems/Radar.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/NetHandler.hpp"

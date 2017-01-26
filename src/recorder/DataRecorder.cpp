@@ -13,7 +13,7 @@
 #include "openeaagles/models/Emission.hpp"
 
 #include "openeaagles/simulation/AbstractNib.hpp"
-#include "openeaagles/simulation/SimExec.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
@@ -1084,7 +1084,7 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
 void DataRecorder::timeStamp(pb::DataRecord* const msg)
 {
    if (msg != nullptr) {
-      simulation::SimExec* sim = getSimulation();
+      simulation::Simulation* sim = getSimulation();
       if (sim != nullptr) {
          pb::Time* time = msg->mutable_time();
          time->set_exec_time( sim->getExecTimeSec() );

@@ -3,7 +3,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/systems/Gimbal.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/terrain/Terrain.hpp"
 
@@ -221,7 +221,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    // ---
    const terrain::Terrain* terrain = nullptr;
    if (gimbal->isTerrainOccultingEnabled()) {
-      const Simulation* const sim = ownship->getSimulation();
+      const WorldModel* const sim = ownship->getWorldModel();
       terrain = sim->getTerrain();
    }
 

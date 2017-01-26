@@ -3,7 +3,7 @@
 
 #include "openeaagles/base/Object.hpp"
 
-#include "openeaagles/simulation/SimExec.hpp"
+#include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
 #include <string>
@@ -15,9 +15,8 @@ base::Object* factory(const std::string& name)
 {
     base::Object* obj = nullptr;
 
-    // Simulation
-    if ( name == SimExec::getFactoryName() ) {
-        obj = new SimExec();
+    if ( name == Simulation::getFactoryName() ) {
+        obj = new Simulation();
     }
     else if ( name == Station::getFactoryName() ) {
         obj = new Station();

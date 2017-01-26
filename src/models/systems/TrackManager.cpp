@@ -18,7 +18,7 @@
 #include "openeaagles/base/units/unit_utils.hpp"
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 namespace oe {
 namespace models {
@@ -878,7 +878,7 @@ void AirTrkMgr::processTrackList(const double dt)
 
          // Object 1: player, Object 2: Track Data
          if (getLogTrackUpdates()) {
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_DATA )
                SAMPLE_2_OBJECTS( ownship, tracks[i] )
             END_RECORD_DATA_SAMPLE()
          }
@@ -904,7 +904,7 @@ void AirTrkMgr::processTrackList(const double dt)
       if (trk->getTrackAge() >= getMaxTrackAge()) {
 
          // Object 1: player, Object 2: Track Data
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_REMOVED )
             SAMPLE_2_OBJECTS( ownship, tracks[it] )
          END_RECORD_DATA_SAMPLE()
 
@@ -948,7 +948,7 @@ void AirTrkMgr::processTrackList(const double dt)
             std::cout << "New AIR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
 
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_NEW_TRACK )
             SAMPLE_2_OBJECTS( ownship, tracks[i] )
          END_RECORD_DATA_SAMPLE()
 
@@ -1301,7 +1301,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
 
          if (getLogTrackUpdates()) {
             // Object 1: player, Object 2: Track Data
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_DATA )
                SAMPLE_2_OBJECTS( ownship, tracks[i] )
             END_RECORD_DATA_SAMPLE()
          }
@@ -1329,7 +1329,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
          }
 
          // Object 1: player, Object 2: Track Data
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_REMOVED )
             SAMPLE_2_OBJECTS( ownship, tracks[it] )
          END_RECORD_DATA_SAMPLE()
 
@@ -1369,7 +1369,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
          }
 
          // Object 1: player, Object 2: Track Data
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_NEW_TRACK )
             SAMPLE_2_OBJECTS( ownship, newTrk )
          END_RECORD_DATA_SAMPLE()
 
@@ -1596,7 +1596,7 @@ void RwrTrkMgr::processTrackList(const double dt)
          tracks[i]->setAcceleration( (tpos*A[2][0] + tvel*A[2][1] + tacc*A[2][2]) + (u[i]*b2) );
 
          if (getLogTrackUpdates()) {
-            BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_DATA )
+            BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_DATA )
                SAMPLE_2_OBJECTS( ownship, tracks[i] )
             END_RECORD_DATA_SAMPLE()
          }
@@ -1623,7 +1623,7 @@ void RwrTrkMgr::processTrackList(const double dt)
             std::cout << "Removed Aged RWR track[it] = [" << it << "] id = " << tracks[it]->getTrackID() << std::endl;
          }
 
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_TRACK_REMOVED )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_TRACK_REMOVED )
             SAMPLE_2_OBJECTS( ownship, tracks[it] )
          END_RECORD_DATA_SAMPLE()
 
@@ -1662,7 +1662,7 @@ void RwrTrkMgr::processTrackList(const double dt)
             std::cout << "New RWR track[it] = [" << nTrks << "] id = " << newTrk->getTrackID() << std::endl;
          }
 
-         BEGIN_RECORD_DATA_SAMPLE( getSimulation()->getDataRecorder(), REID_NEW_TRACK )
+         BEGIN_RECORD_DATA_SAMPLE( getWorldModel()->getDataRecorder(), REID_NEW_TRACK )
             SAMPLE_2_OBJECTS( ownship, newTrk )
          END_RECORD_DATA_SAMPLE()
 

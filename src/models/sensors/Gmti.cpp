@@ -5,7 +5,7 @@
 #include "openeaagles/models/systems/Antenna.hpp"
 #include "openeaagles/models/systems/TrackManager.hpp"
 #include "openeaagles/models/Emission.hpp"
-#include "openeaagles/models/Simulation.hpp"
+//#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/Pair.hpp"

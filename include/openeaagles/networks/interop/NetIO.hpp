@@ -7,11 +7,9 @@
 #include "openeaagles/base/String.hpp"
 
 namespace oe {
-
 namespace base { class Angle; class Distance; class Identifier; class List; class String; class Time; }
 namespace models { class Player; }
-namespace simulation { class SimExec; class Station; }
-
+namespace simulation { class Simulation; class Station; }
 namespace interop {
 class Nib;
 class Ntm;
@@ -212,20 +210,20 @@ public:
    virtual double getMaxAge(const Nib* const nib = nullptr) const;
 
    // Network initialization
-   bool isNetworkInitialized() const       { return netInit; }
-   bool didInitializationFail() const      { return netInitFail; }
+   bool isNetworkInitialized() const                      { return netInit; }
+   bool didInitializationFail() const                     { return netInitFail; }
    virtual bool networkInitialization();
 
    // Other components
-   simulation::Station* getStation()                   { return station; }
-   const simulation::Station* getStation() const       { return station; }
+   simulation::Station* getStation()                      { return station; }
+   const simulation::Station* getStation() const          { return station; }
 
-   simulation::SimExec* getSimulation()                { return simulation; }
-   const simulation::SimExec* getSimulation() const    { return simulation; }
+   simulation::Simulation* getSimulation()                { return simulation; }
+   const simulation::Simulation* getSimulation() const    { return simulation; }
 
    // Event IDs
-   unsigned short getNewIffEventID()       { return ++iffEventID; }
-   unsigned short getNewEmissionEventID()  { return ++emEventID; }
+   unsigned short getNewIffEventID()                      { return ++iffEventID; }
+   unsigned short getNewEmissionEventID()                 { return ++emEventID; }
 
    // IPlayer factory: creates a networked player based on NIB data
    virtual models::Player* createIPlayer(Nib* const nib);
@@ -417,7 +415,7 @@ private:
    base::safe_ptr<const base::String> federateName;     // Federate name
 
    base::safe_ptr<simulation::Station> station;         // Our station class
-   base::safe_ptr<simulation::SimExec> simulation;      // Our simulation class
+   base::safe_ptr<simulation::Simulation> simulation;   // Our simulation class
    TSource          timeline;                           // Source of our timeline
    unsigned short   iffEventID;                         // IFF event ID (as needed)
    unsigned short   emEventID;                          // Emission event ID (as needed)

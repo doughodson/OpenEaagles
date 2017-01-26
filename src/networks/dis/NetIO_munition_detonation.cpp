@@ -10,7 +10,7 @@
 #include "openeaagles/models/players/AirVehicle.hpp"
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/players/AbstractWeapon.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Nav.hpp"
 #include "openeaagles/base/NetHandler.hpp"

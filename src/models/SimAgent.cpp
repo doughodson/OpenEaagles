@@ -2,7 +2,7 @@
 #include "openeaagles/models/SimAgent.hpp"
 
 #include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/simulation/Station.hpp"
 
@@ -69,12 +69,12 @@ simulation::Station* SimAgent::getStation()
    return myStation;
 }
 
-Simulation* SimAgent::getSimulation()
+WorldModel* SimAgent::getWorldModel()
 {
-   Simulation* sim = nullptr;
+   WorldModel* sim = nullptr;
    simulation::Station* s = getStation();
    if (s != nullptr) {
-      sim = dynamic_cast<Simulation*>(s->getSimulation());
+      sim = dynamic_cast<WorldModel*>(s->getSimulation());
    }
    return sim;
 }
@@ -88,7 +88,7 @@ void SimAgent::initActor()
          BaseClass::initActor();
       }
       else {
-         Simulation* sim = getSimulation();
+         WorldModel* sim = getWorldModel();
          if ( sim != nullptr ) {
             base::Component* player = sim->findPlayerByName(actorPlayerName->getString());
             if (actorComponentName == nullptr) {

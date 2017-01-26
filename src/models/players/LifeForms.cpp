@@ -7,7 +7,7 @@
 #include "openeaagles/models/systems/StoresMgr.hpp"
 #include "openeaagles/models/systems/Guns.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -104,7 +104,7 @@ void LifeForm::fire()
     const auto pitchObj = new base::Number(lookAngle * base::angle::D2RCC);
     StoresMgr* mgr = getStoresManagement();
     if (mgr != nullptr) {
-        if (getSimulation() != nullptr) {
+        if (getWorldModel() != nullptr) {
             if (weaponSel == LF_MISSILE) {
                 mgr->setGunSelected(false);
                 Missile* missile = mgr->getNextMissile();
@@ -218,7 +218,7 @@ void LifeForm::look(const double up, const double sdws)
             const double maxEl = (0.7f * static_cast<double>(base::angle::D2RCC));
             //double maxRange = 1500.0f; // long range right now
             const double la = lookAngle * static_cast<double>(base::angle::D2RCC);
-            Simulation* sim = getSimulation();
+            WorldModel* sim = getWorldModel();
             if (sim != nullptr) {
                 base::PairStream* players = sim->getPlayers();
                 if (players != nullptr) {

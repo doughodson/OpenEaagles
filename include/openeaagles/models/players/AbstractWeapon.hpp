@@ -81,7 +81,7 @@ class Track;
 //
 //    Pre-release sequence:
 //       --- Create the flyout weapon, using prerelease(), which will add the weapon
-//       to the simulation player list, but will not go active until release() is
+//       to the 'simulation' player list, but will not go active until release() is
 //       later called. (see 'releaseHold' flag).
 //
 //        Initial weapon      Flyout weapon
@@ -199,7 +199,7 @@ public:
 
    bool isTargetPositionValid() const;              // True if we have the target position and is it valid
 
-   const osg::Vec3d& getTargetPosition() const;     // Returns the target position (meters -- NED from simulation ref point)
+   const osg::Vec3d& getTargetPosition() const;     // Returns the target position (meters -- NED from world model ref point)
 
    Track* getTargetTrack();                         // Our target track, if any
    const Track* getTargetTrack() const;             // Our target track, if any (const version)
@@ -224,7 +224,7 @@ public:
    // -- if 'posTrkEnb' is true, we'll follow the target track's position
    virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
 
-   // Sets the target position (meters -- NED from simulation ref point)
+   // Sets the target position (meters -- NED from world model ref point)
    virtual bool setTargetPosition(const osg::Vec3d& newTgtPos);
 
    // Sets the target position valid flag

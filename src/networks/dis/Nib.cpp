@@ -7,7 +7,7 @@
 #include "openeaagles/models/players/AirVehicle.hpp"
 #include "openeaagles/models/systems/Jammer.hpp"
 #include "openeaagles/models/systems/Radar.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"

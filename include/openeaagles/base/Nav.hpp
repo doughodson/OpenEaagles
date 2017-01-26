@@ -734,7 +734,7 @@ public:
       double geocAngle[3]           // OUT: Geocentric Euler angles (radians) [ IPHI ITHETA IPSI ]
    );
 
-   // Converts World (Geocentric) to Simulation (Geodetic) (From SubrDis)
+   // Converts geocentric to geodetic (From SubrDis)
    static bool getSimPosAccVel(
       const double geocPos[3],   // IN:  Geocentric position vector [ IX IY IZ ] (meters)
       const double geocVel[3],   // IN:  Geocentric velocity vector [ IX IY IZ ] (m/sec)
@@ -744,7 +744,7 @@ public:
       double geodAcc[3]          // OUT: Geodetic acceleration vector [ IX IY IZ ] (m/sec/sec)
    );
 
-   // Converts Simulation (Geodetic) to World (Geocentric) (From SubrDis)
+   // Converts geodetic to geocentric (From SubrDis)
    static bool getWorldPosAccVel(
       const double geodPos[3],   // IN:  Geodetic (WGS84) position [ ILAT ILON IALT ] [ degs degs meters ]
       const double geodVel[3],   // IN:  Geodetic velocity vector [ IX IY IZ ] (m/sec)

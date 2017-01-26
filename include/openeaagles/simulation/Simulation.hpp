@@ -1,6 +1,6 @@
 
-#ifndef __oe_simulation_SimExec_H__
-#define __oe_simulation_SimExec_H__
+#ifndef __oe_simulation_Simulation_H__
+#define __oe_simulation_Simulation_H__
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/safe_queue.hpp"
@@ -9,22 +9,20 @@
 namespace oe {
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
 namespace simulation {
-
 class AbstractDataRecorder;
 class SimBgThread;
 class SimTcThread;
 class Station;
-
 class AbstractPlayer;
 
 //------------------------------------------------------------------------------
-// Class: SimExec
+// Class: Simulation
 //
 // Description: Simulation executive, a class to manage the execution of a world
 //              model that contains a list of players
 //
 //
-// Factory name: SimExec
+// Factory name: Simulation
 //
 // Slots --
 //    players        <base::PairStream>       ! Local player list (base::PairStream of AbstractPlayer) (default: nullptr)
@@ -160,9 +158,9 @@ class AbstractPlayer;
 //    this object, which will send it to all players, and other components.
 //
 //------------------------------------------------------------------------------
-class SimExec : public base::Component
+class Simulation : public base::Component
 {
-    DECLARE_SUBCLASS(SimExec, base::Component)
+    DECLARE_SUBCLASS(Simulation, base::Component)
 
 public:
    // Minimum released weapon ID
@@ -173,7 +171,7 @@ public:
    static const int MAX_NEW_PLAYERS = 1000;
 
 public:
-    SimExec();
+    Simulation();
 
     base::PairStream* getPlayers();                // Returns the player list; pre-ref()'d
     const base::PairStream* getPlayers() const;    // Returns the player list; pre-ref()'d (const version)

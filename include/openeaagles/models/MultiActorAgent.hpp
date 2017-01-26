@@ -5,15 +5,12 @@
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-
 namespace base {
 namespace ubf { class AbstractBehavior; class AbstractState; }
 }
-
 namespace simulation { class Station; }
-
 namespace models {
-class Simulation;
+class WorldModel;
 
 //------------------------------------------------------------------------------
 // Class: MultiActorAgent
@@ -51,7 +48,7 @@ protected:
    base::Component* getActor()                               { return actor;}
 
    simulation::Station* getStation();
-   Simulation* getSimulation();
+   WorldModel* getWorldModel();
 
    struct AgentItem
    {
@@ -97,7 +94,7 @@ inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }
 //      )
 //   } // components
 //
-//   simulation: ( Simulation
+//   simExec: ( WorldModel
 //
 //      players: {
 //

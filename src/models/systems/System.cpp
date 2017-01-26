@@ -3,7 +3,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -103,7 +103,7 @@ void System::updateTC(const double dt0)
    // ---
    // Four phases per frame
    // ---
-   Simulation* sim = ownship->getSimulation();
+   WorldModel* sim = ownship->getWorldModel();
    if (sim == nullptr) return;
 
    switch (sim->phase()) {
@@ -174,19 +174,19 @@ bool System::killedNotification(Player* const p)
 // Get (access) functions
 //-----------------------------------------------------------------------------
 
-// Returns a pointer to the main Simulation class
-Simulation* System::getSimulation()
+// Returns a pointer to the world model
+WorldModel* System::getWorldModel()
 {
-   Simulation* p = nullptr;
-   if (ownship != nullptr) p = ownship->getSimulation();
+   WorldModel* p = nullptr;
+   if (ownship != nullptr) p = ownship->getWorldModel();
    return p;
 }
 
-// Returns a pointer to the main Simulation class (const version)
-const Simulation* System::getSimulation() const
+// Returns a pointer to the world model (const version)
+const WorldModel* System::getWorldModel() const
 {
-   const Simulation* p = nullptr;
-   if (ownship != nullptr) p = ownship->getSimulation();
+   const WorldModel* p = nullptr;
+   if (ownship != nullptr) p = ownship->getWorldModel();
    return p;
 }
 

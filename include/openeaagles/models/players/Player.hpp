@@ -17,14 +17,11 @@
 #include "openeaagles/base/units/unit_utils.hpp"
 
 namespace oe {
-
 namespace osg { class Vec2d; class Vec3d; }
 namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; }
 namespace simulation { class AbstractNib; }
-
 namespace models {
-
-class Simulation;
+class WorldModel;
 
 // Major component types
 class Datalink;
@@ -186,10 +183,10 @@ class Track;
 //    b) Geodetic coordinates: latitude, longitude and height above the
 //       ellipsoid (HAE)
 //
-//    c) Simulation's gaming area coordinates (NED); the XY plane is tangent to
+//    c) World model's gaming area coordinates (NED); the XY plane is tangent to
 //       and centered at the simulation's geodetic gaming area reference point;
-//       the Z or down axes is perpendicular to the tangent plane (see Simulation.h).
-//       Use simulation::getWorldMat() to transform vectors between ECEF and
+//       the Z or down axes is perpendicular to the tangent plane (see WorldModel.hpp).
+//       Use models::getWorldMat() to transform vectors between ECEF and
 //       this tangent plane.
 //
 //    d) Inertial coordinates or local tangent plane (NED); the XY plane is tangent
@@ -598,8 +595,8 @@ public:
    // Systems
    // ---
 
-   Simulation* getSimulation();                                       // Controlling simulation model
-   const Simulation* getSimulation() const;                           // Controlling simulation model (const version)
+   WorldModel* getWorldModel();
+   const WorldModel* getWorldModel() const;
 
    DynamicsModel* getDynamicsModel();                                 // Player's dynamics model
    const DynamicsModel* getDynamicsModel() const;                     // Player's dynamics model (const version)
@@ -994,7 +991,7 @@ protected:
 private:
 
    void initData();
-   Simulation* getSimulationImp();
+   WorldModel* getSimulationImp();
 
    // ---
    // Player identity
@@ -1108,7 +1105,7 @@ private:
    // ---
    // System pointers
    // ---
-   Simulation* sim;             // The simulation system that owns us (not ref()'d)
+   WorldModel* sim;             // World model we operate within (not ref()'d)
 
    base::Pair* dynamicsModel;   // Dynamics Model (ref()'d)
    base::Pair* datalink;        // Datalink model (ref()'d)

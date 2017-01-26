@@ -9,7 +9,7 @@ namespace oe {
 namespace base { class String; }
 
 namespace models {
-class Simulation;
+class WorldModel;
 class Player;
 
 //------------------------------------------------------------------------------
@@ -88,8 +88,8 @@ public:
 
 protected:
 
-   virtual Simulation* getSimulation();                  // Returns a pointer to the Simulation model
-   virtual const Simulation* getSimulation() const;      // Returns a pointer to the Simulation model (const version)
+   virtual WorldModel* getWorldModel();
+   virtual const WorldModel* getWorldModel() const;
 
    // Slot function(s)
    virtual bool setSlotPowerSwitch(const base::String* const msg);

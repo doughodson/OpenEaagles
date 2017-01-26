@@ -1,8 +1,6 @@
-//------------------------------------------------------------------------------
-// Class: CadrgFrame
-//------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/CadrgFrame.hpp"
+
 #include "openeaagles/maps/rpf/CadrgFrameEntry.hpp"
 #include "openeaagles/base/String.hpp"
 
@@ -73,8 +71,6 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
     // Image structure
     Image image;
     //char filename[80];
-    ushort indices[6][6];
-    int rowBytes = 0;
 
     // All subframes present indicator
     bool allSubframes = false;
@@ -294,7 +290,7 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 
     // must be 6 x 6 frame, or it will be masked.
     // Determine row bytes
-    rowBytes = 256 / 4 * 3 / 2;
+    //int rowBytes = 256 / 4 * 3 / 2;
 
     // fseek to LOC_IMAGE_DISPLAY_PARAM_SUBHEADER, ID=137
     if (loc[4].physicalIdx == ~0) {
@@ -319,10 +315,11 @@ void CadrgFrame::load(CadrgFrameEntry* entry)
 
     // Read subframes from top left, row-wise
     // Row
+    //ushort indices[6][6];
     for (int i = 0; i < 6; i++) {
         // Column
         for (int j = 0; j < 6; j++) {
-            indices[i][j] = (ushort)(i * 6 + j);
+            //indices[i][j] = (ushort)(i * 6 + j);
             if (!masked[i][j]) {
                 // (256/4)=64.  64*64 * 12bits / 8bits = 6144 bytes
                 fin.read(reinterpret_cast<char*>(subFrameTable[i][j]), frameSize);

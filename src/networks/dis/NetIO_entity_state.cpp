@@ -13,7 +13,7 @@
 #include "openeaagles/models/players/LifeForms.hpp"
 #include "openeaagles/models/players/Missile.hpp"
 #include "openeaagles/models/systems/StoresMgr.hpp"
-#include "openeaagles/models/Simulation.hpp"
+#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/simulation/Station.hpp"
 

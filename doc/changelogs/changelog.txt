@@ -136,17 +136,25 @@ simulation library
       -- Removed 2 undefined methods "isSmoothing()" and "getSmoothingRate()".
          Both were undefined and not used.
 
-   Simulation class (deleted)
-     -- This class served as the connection between simulation infrastructure
-        to execute players within a modeled world.  This is now more explicit
-        with a new SimExec class responsible for execution issues, such as
-        multicore threading and the modeled world being processed.
+   Simulation class
+     -- This class serves as the connection between the execution infrastructure
+        to update players within a simulated world, and a model of that world.
+        This division of responsibilities is now more explicit by keeping all
+        infrastructure related activites, such as, multi-threaded Player execution
+        mechanics away from modeling the world itself.  The world being modeled
+        is defined by a new class (i.e., WorldModel), that resides in the models
+        library.
 
-     -- Extracted functionaliy associated with modeled world can now be found
-        in the class models/WorldModel.
+     -- At the moment, a WorldModel is a subclass of a simulation - existing EDL
+        files need to be updated by replacing "Simulation" references to
+        "WorldModel".
 
-   SimExec (new class)
-     -- The infrastructure code related to executing a model.
+     -- We do recoginize that by subclassing, there still remains a close coupling
+        between these 2 different aspects.  But, even though not optimal, it is a
+        step in the right direction to decouple this relationship.  At some point,
+        the relationship between the simulation execution infrastructure and a world
+        model will probably become an aggregate (i.e., a simulation owns
+        a model to be executed.)
 
 --------------------------------------------------------------------------------
 
