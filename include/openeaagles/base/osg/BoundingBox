@@ -19,7 +19,7 @@
 #include <float.h> 
 
 namespace oe {
-namespace osg {
+namespace base {
 
 template<typename VT>
 class BoundingSphereImpl;

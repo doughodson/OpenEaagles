@@ -3,8 +3,8 @@
 // Description: inline functions
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_nav_utils_inline__
-#define __oe_base_nav_utils_inline__
+#ifndef __oe_base_util_nav_utils_inline__
+#define __oe_base_util_nav_utils_inline__
 
 //------------------------------------------------------------------------------
 // Flat-Earth: Computes the destination (target) lat/lon from starting (ref)
@@ -197,8 +197,8 @@ inline bool fll2bd(
 
 // Using body angles
 inline bool aer2xyz(
-      osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  (meters)
-      const osg::Matrixd& rm,    // IN:  NED to body rotational matrix (see computeRotationalMatrix())
+      Vec3d* const pos,          // OUT: position vector array (NED, player centered)  (meters)
+      const Matrixd& rm,         // IN:  NED to body rotational matrix (see computeRotationalMatrix())
       const double az,           // IN:  azimuth (body)  (radians)
       const double el,           // IN:  elevation (body)  (positive up)   (radians)
       const double rng           // IN:  range (meters)
@@ -222,7 +222,7 @@ inline bool aer2xyz(
       const double r = rng * cel;
       const double n = r * caz;
       const double e = r * saz;
-      osg::Vec3d pos0(n,e,d);
+      Vec3d pos0(n,e,d);
 
       // Rotate from player to NED coordinates (NED, player centered)
       *pos = pos0 * rm;
@@ -236,7 +236,7 @@ inline bool aer2xyz(
 
 // Using NED angles
 inline bool aer2xyz(
-      osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  (meters)
+      Vec3d* const pos,          // OUT: position vector array (NED, player centered)  (meters)
       const double az,           // IN:  azimuth (NED)  (radians)
       const double el,           // IN:  elevation (NED)  (positive up)   (radians)
       const double rng           // IN:  range (meters)
@@ -260,7 +260,7 @@ inline bool aer2xyz(
       const double r = rng * cel;
       const double n = r * caz;
       const double e = r * saz;
-      osg::Vec3d pos0(n,e,d);
+      Vec3d pos0(n,e,d);
 
       // Rotate from player to NED coordinates (NED, player centered)
       *pos = pos0;
@@ -278,7 +278,7 @@ inline bool aer2xyz(
 
 // Computing NED angles
 inline bool xyz2aer(
-      osg::Vec3d* const aer,     // OUT: NED angles (az, elev, rng) [deg,deg,meters]
+      Vec3d* const aer,          // OUT: NED angles (az, elev, rng) [deg,deg,meters]
       const double x,            // IN:  x                        [meters]
       const double y,            // IN:  y                        [meters]
       const double z             // IN:  z                        [meters]
@@ -298,15 +298,15 @@ inline bool xyz2aer(
 
 // Computing body angles
 inline bool xyz2aer(
-      osg::Vec3d* const aer,     // OUT: position vector  (aer)   [deg,deg,meters]
-      const osg::Matrixd& rm,    // IN:  NED to body rotational matrix (see computeRotationalMatrix())
+      Vec3d* const aer,          // OUT: position vector  (aer)   [deg,deg,meters]
+      const Matrixd& rm,         // IN:  NED to body rotational matrix (see computeRotationalMatrix())
       const double x0,           // IN:  x                        [meters]
       const double y0,           // IN:  y                        [meters]
       const double z0            // IN:  z                        [meters]
    )
 {
-   osg::Vec3d vi(x0, y0, z0);    // Earth vector (NED)
-   osg::Vec3d vb = rm * vi;      // Body vector
+   Vec3d vi(x0, y0, z0);    // Earth vector (NED)
+   Vec3d vb = rm * vi;      // Body vector
    const double x = vb[0];
    const double y = vb[1];
    const double z = vb[2];
@@ -330,8 +330,8 @@ inline bool xyz2aer(
 
 // convertEcef2Geod(): using osg::Vec3d vectors
 inline bool convertEcef2Geod(
-            const osg::Vec3d& vec,     // IN: ECEF [ IX IY IZ ]
-            osg::Vec3d* const lla,     // OUT: Geodetic [ ILAT ILON IALT ]
+            const Vec3d& vec,          // IN: ECEF [ IX IY IZ ]
+            Vec3d* const lla,          // OUT: Geodetic [ ILAT ILON IALT ]
             const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
          )
 {
@@ -362,8 +362,8 @@ inline bool convertEcef2Geod(
 
 // convertGeod2Ecef(): using osg::Vec3d vectors
 inline bool convertGeod2Ecef(
-            const osg::Vec3d& lla,     // IN: Geodetic [ ILAT ILON IALT ]
-            osg::Vec3d* const ecef,    // OUT: ECEF [ IX IY IZ ]
+            const Vec3d& lla,          // IN: Geodetic [ ILAT ILON IALT ]
+            Vec3d* const ecef,         // OUT: ECEF [ IX IY IZ ]
             const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
          )
 {
@@ -403,10 +403,10 @@ inline bool computeRotationalMatrixDeg(
             const double phiD,         // IN: roll angle (degrees)
             const double thetaD,       // IN: pitch angle (degrees)
             const double psiD,         // IN: yaw angle (degrees)
-            osg::Matrixd* const rm,    // OUT: Rotational matrix
-            osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
-            osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
-            osg::Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)
+            Matrixd* const rm,         // OUT: Rotational matrix
+            Vec2d* const scPhi,        // OUT: Sin/Cos of phi (Optional)
+            Vec2d* const scTht,        // OUT: Sin/Cos of theta (Optional)
+            Vec2d* const scPsi         // OUT: Sin/Cos of psi (Optional)
          )
 {
    return computeRotationalMatrix(
@@ -418,11 +418,11 @@ inline bool computeRotationalMatrixDeg(
 
 // computeRotationalMatrix() using arrays vectors
 inline bool computeRotationalMatrix(
-            const osg::Vec3d& angles,  // IN: Euler angles [ phi theta psi ] (radians)
-            osg::Matrixd* const m,     // OUT: Matrix
-            osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
-            osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
-            osg::Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)
+            const Vec3d& angles,       // IN: Euler angles [ phi theta psi ] (radians)
+            Matrixd* const m,          // OUT: Matrix
+            Vec2d* const scPhi,        // OUT: Sin/Cos of phi (Optional)
+            Vec2d* const scTht,        // OUT: Sin/Cos of theta (Optional)
+            Vec2d* const scPsi         // OUT: Sin/Cos of psi (Optional)
          )
 {
    return computeRotationalMatrix(
@@ -434,11 +434,11 @@ inline bool computeRotationalMatrix(
 
 // computeRotationalMatrix() using degrees and arrays vectors
 inline bool computeRotationalMatrixDeg(
-            const osg::Vec3d& angles,  // IN: Euler angles [ phi theta psi ] (degrees)
-            osg::Matrixd* const m,     // OUT: Matrix
-            osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
-            osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
-            osg::Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)
+            const Vec3d& angles,       // IN: Euler angles [ phi theta psi ] (degrees)
+            Matrixd* const m,          // OUT: Matrix
+            Vec2d* const scPhi,        // OUT: Sin/Cos of phi (Optional)
+            Vec2d* const scTht,        // OUT: Sin/Cos of theta (Optional)
+            Vec2d* const scPsi         // OUT: Sin/Cos of psi (Optional)
          )
 {
    return computeRotationalMatrix(
@@ -450,14 +450,14 @@ inline bool computeRotationalMatrixDeg(
 
 // computeEulerAnglesDeg() using degrees
 inline bool computeEulerAnglesDeg(
-            const osg::Matrixd& rm,    // IN: Rotational matrix
-            osg::Vec3d* const anglesD, // OUT: Euler angles (degrees)
-            osg::Vec2d* const scPhi, // OUT: Sin/Cos of phi (Optional)
-            osg::Vec2d* const scTht, // OUT: Sin/Cos of theta (Optional)
-            osg::Vec2d* const scPsi  // OUT: Sin/Cos of psi (Optional)
+            const Matrixd& rm,         // IN: Rotational matrix
+            Vec3d* const anglesD,      // OUT: Euler angles (degrees)
+            Vec2d* const scPhi,        // OUT: Sin/Cos of phi (Optional)
+            Vec2d* const scTht,        // OUT: Sin/Cos of theta (Optional)
+            Vec2d* const scPsi         // OUT: Sin/Cos of psi (Optional)
          )
 {
-   osg::Vec3d angles;
+   Vec3d angles;
    bool ok = computeEulerAngles(rm, &angles, scPhi, scTht, scPsi);
    if (ok && anglesD != nullptr) {
       anglesD->set(
@@ -476,15 +476,15 @@ inline bool computeEulerAnglesDeg(
 
 // convertGeodAngles2EcefAngles()
 inline bool convertGeodAngles2EcefAngles(
-            const osg::Matrixd& wm, // IN: World matrix
-            const osg::Matrixd& rm, // IN: Geodetic rotational matrix (body/NED directional cosines)
-            osg::Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
+            const Matrixd& wm,     // IN: World matrix
+            const Matrixd& rm,     // IN: Geodetic rotational matrix (body/NED directional cosines)
+            Vec3d* const vc        // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
          )
 {
    bool ok = false;
    if (vc != nullptr) {
       // compute body/ECEF directional cosines
-      const osg::Matrixd T = rm * wm;
+      const Matrixd T = rm * wm;
       // compute geocentric orientation angles
       computeEulerAngles(T, vc);
       ok = true;
@@ -494,24 +494,24 @@ inline bool convertGeodAngles2EcefAngles(
 
 // convertGeodAngles2EcefAngles()
 inline bool convertGeodAngles2EcefAngles(
-            const osg::Matrixd& wm, // IN: World matrix
-            const osg::Vec3d& rpy,  // IN: Geodetic angles [ roll  pitch yaw ] (radians)
-            osg::Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
+            const Matrixd& wm, // IN: World matrix
+            const Vec3d& rpy,  // IN: Geodetic angles [ roll  pitch yaw ] (radians)
+            Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
          )
 {
-   osg::Matrixd rm; // Rotational matrix (local/body directional cosines)
+   Matrixd rm; // Rotational matrix (local/body directional cosines)
    computeRotationalMatrix(rpy[0], rpy[1], rpy[2], &rm);
    return convertGeodAngles2EcefAngles(wm, rm, vc);
 }
 
 // convertGeodAngles2EcefAngles()
 inline bool convertGeodAngles2EcefAngles(
-            const osg::Vec2d& ll,   // IN: Geodetic position  [ ILAT ILON ] [ degs degs ]
-            const osg::Vec3d& rpy,  // IN: Geodetic angles [ roll  pitch yaw ] (radians)
-            osg::Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
+            const Vec2d& ll,   // IN: Geodetic position  [ ILAT ILON ] [ degs degs ]
+            const Vec3d& rpy,  // IN: Geodetic angles [ roll  pitch yaw ] (radians)
+            Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
          )
 {
-   osg::Matrixd wm; // World (earth) matrix
+   Matrixd wm; // World (earth) matrix
    computeWorldMatrix(ll[0], ll[1], &wm);
    return convertGeodAngles2EcefAngles(wm,rpy,vc);
 }
@@ -523,18 +523,18 @@ inline bool convertGeodAngles2EcefAngles(
 
 // convertEcefAngles2GeodAngles()
 inline bool convertEcefAngles2GeodAngles(
-            const osg::Matrixd& wm, // IN: World matrix
-            const osg::Matrixd& rm, // IN: Geocentric rotational matrix (ECEF/body directional cosines)
-            osg::Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
+            const Matrixd& wm, // IN: World matrix
+            const Matrixd& rm, // IN: Geocentric rotational matrix (ECEF/body directional cosines)
+            Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
          )
 {
    bool ok = false;
    if (vd != nullptr) {
       // Transpose world matrix
-      osg::Matrixd wmT = wm;
+      Matrixd wmT = wm;
       wmT.transpose();
       // Compute body/NED directional cosines
-      osg::Matrixd T = rm * wmT;
+      Matrixd T = rm * wmT;
       // compute Geodetic orientation angles
       computeEulerAngles(T, vd);
       ok = true;
@@ -544,26 +544,26 @@ inline bool convertEcefAngles2GeodAngles(
 
 // convertEcefAngles2GeodAngles()
 inline bool convertEcefAngles2GeodAngles(
-            const osg::Matrixd& wm, // IN: World matrix
-            const osg::Vec3d& rpy,  // IN: Geocentric angles (radians) [ phi theta psi ]
-            osg::Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
+            const Matrixd& wm, // IN: World matrix
+            const Vec3d& rpy,  // IN: Geocentric angles (radians) [ phi theta psi ]
+            Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
          )
 {
-   osg::Matrixd rm;
+   Matrixd rm;
    computeRotationalMatrix(rpy[0], rpy[1], rpy[2], &rm);
    return convertEcefAngles2GeodAngles(wm, rm, vd);
 }
 
 // convertEcefAngles2GeodAngles()
 inline bool convertEcefAngles2GeodAngles(
-            const osg::Vec2d& ll,   // IN: Geodetic position [ ILAT ILON ] [ degs degs ]
-            const osg::Vec3d& rpy,  // IN: Geocentric angles (radians) [ phi theta psi ]
-            osg::Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
+            const Vec2d& ll,   // IN: Geodetic position [ ILAT ILON ] [ degs degs ]
+            const Vec3d& rpy,  // IN: Geocentric angles (radians) [ phi theta psi ]
+            Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
          )
 {
-   osg::Matrixd wm;
+   Matrixd wm;
    computeWorldMatrix(ll[0], ll[1], &wm);
-   osg::Matrixd rm;
+   Matrixd rm;
    computeRotationalMatrix(rpy[0], rpy[1], rpy[2], &rm);
    return convertEcefAngles2GeodAngles(wm, rm, vd);
 }
@@ -581,7 +581,7 @@ inline bool convertPosVec2llE(
       const double slon,         // IN: Reference longitude (degs)
       const double sinSlat,      // IN: Sine of ref latitude
       const double cosSlat,      // IN: Cosine of ref latitude
-      const osg::Vec3d& pos,     // IN: NED position vector from ref point (Meters)
+      const Vec3d& pos,          // IN: NED position vector from ref point (Meters)
       double* const lat,         // OUT: Latitude (degs)
       double* const lon,         // OUT: Longitude (degs)
       double* const alt,         // OUT: Altitude (meters)
@@ -625,7 +625,7 @@ inline bool convertPosVec2llE(
 inline bool convertPosVec2llE(
       const double slat,         // IN: Reference latitude (degs)
       const double slon,         // IN: Reference longitude (degs)
-      const osg::Vec3d& pos,     // IN: NED position vector from ref point (Meters)
+      const Vec3d& pos,          // IN: NED position vector from ref point (Meters)
       double* const lat,         // OUT: Latitude (degs)
       double* const lon,         // OUT: Longitude (degs)
       double* const alt,         // OUT: Altitude (meters)
@@ -646,7 +646,7 @@ inline bool convertPosVec2llS(
       const double slat,      // IN: Starting (reference) latitude (degs)
       const double slon,      // IN: Starting (reference) longitude (degs)
       const double cosSlat,   // IN: Cosine of ref latitude
-      const osg::Vec3d& pos,  // IN: NED position vector from ref point (Meters)
+      const Vec3d& pos,       // IN: NED position vector from ref point (Meters)
       double* const lat,      // OUT: Latitude (degs)
       double* const lon,      // OUT: Longitude (degs)
       double* const alt       // OUT: Altitude (meters)
@@ -673,7 +673,7 @@ inline bool convertPosVec2llS(
 inline bool convertPosVec2LL(
       const double slat,         // IN: Reference latitude (degs)
       const double slon,         // IN: Reference longitude (degs)
-      const osg::Vec3d& pos,     // IN: NED position vector from ref point (Meters)
+      const Vec3d& pos,          // IN: NED position vector from ref point (Meters)
       double* const lat,         // OUT: Latitude (degs)
       double* const lon,         // OUT: Longitude (degs)
       double* const alt          // OUT: Altitude (meters)
@@ -687,13 +687,13 @@ inline bool convertPosVec2LL(
 inline bool convertPosVec2LL(
       const double slat,         // IN: Reference latitude (degs)
       const double slon,         // IN: Reference longitude (degs)
-      const osg::Vec3f& pos,     // IN: NED position vector from ref point (Meters)
+      const Vec3f& pos,          // IN: NED position vector from ref point (Meters)
       double* const lat,         // OUT: Latitude (degs)
       double* const lon,         // OUT: Longitude (degs)
       double* const alt          // OUT: Altitude (meters)
    )
 {
-   const osg::Vec3d posD = pos;
+   const Vec3d posD = pos;
    const double cosSlat = std::cos(angle::D2RCC * slat);
    return convertPosVec2llS(slat, slon, cosSlat, posD, lat, lon, alt);
 }
@@ -710,7 +710,7 @@ inline bool convertLL2PosVecE(
       const double lat,          // IN: Latitude (degs)
       const double lon,          // IN: Longitude (degs)
       const double alt,          // IN: Altitude (meters)
-      osg::Vec3d* const pos,     // OUT: NED position vector from ref point (Meters)
+      Vec3d* const pos,          // OUT: NED position vector from ref point (Meters)
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
    )
 {
@@ -751,7 +751,7 @@ inline bool convertLL2PosVecS(
       const double lat,       // IN: Latitude (degs)
       const double lon,       // IN: Longitude (degs)
       const double alt,       // IN: Altitude (meters)
-      osg::Vec3d* const pos   // OUT: NED position vector from ref point (Meters)
+      Vec3d* const pos        // OUT: NED position vector from ref point (Meters)
    )
 {
    bool ok = false;
@@ -772,7 +772,7 @@ inline bool convertLL2PosVecE(
       const double lat,          // IN: Latitude (degs)
       const double lon,          // IN: Longitude (degs)
       const double alt,          // IN: Altitude (meters)
-      osg::Vec3d* const pos,     // OUT: NED position vector from ref point (Meters)
+      Vec3d* const pos,          // OUT: NED position vector from ref point (Meters)
       const EarthModel* const em // IN: Pointer to an optional earth model (default: WGS-84)
    )
 {
@@ -788,7 +788,7 @@ inline bool convertLL2PosVec(
       const double lat,          // IN: Latitude (degs)
       const double lon,          // IN: Longitude (degs)
       const double alt,          // IN: Altitude (meters)
-      osg::Vec3d* const pos      // OUT: NED position vector from ref point (Meters)
+      Vec3d* const pos           // OUT: NED position vector from ref point (Meters)
    )
 {
    const double cosSlat = std::cos(angle::D2RCC * slat);
@@ -802,13 +802,13 @@ inline bool convertLL2PosVec(
       const double lat,          // IN: Latitude (degs)
       const double lon,          // IN: Longitude (degs)
       const double alt,          // IN: Altitude (meters)
-      osg::Vec3f* const pos      // OUT: NED position vector from ref point (Meters)
+      Vec3f* const pos           // OUT: NED position vector from ref point (Meters)
    )
 {
    bool ok = false;
    if (pos != nullptr) {
       const double cosSlat = std::cos(angle::D2RCC * slat);
-      osg::Vec3d posD;
+      Vec3d posD;
       ok = convertLL2PosVecS(slat, slon, cosSlat, lat, lon, alt, &posD);
       *pos = posD;
    }

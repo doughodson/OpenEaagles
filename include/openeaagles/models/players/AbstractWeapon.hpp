@@ -179,42 +179,42 @@ public:
    bool getWillHang() const;                        // True if the weapon will hang on release
    bool isDummy() const;                            // True if this is a dummy weapon (someone else with fly it out)
 
-   double getTOF() const;                           // Time Of Flight (seconds) since release
-   double getMaxTOF() const;                        // Max TOF (seconds)
-   double getTSG() const;                           // Time-to-Start guidance (seconds since release)
-   double getSOBT() const;                          // Start-Of-Burn time (seconds since release)
-   double getEOBT() const;                          // End-Of-Burn time (seconds since release)
-   virtual bool isGuidanceEnabled() const;          // Is weapon guidance enabled?
-   virtual bool isEngineBurnEnabled() const;        // Weapon engine (rocket) on
-   double getMaxBurstRng() const;                   // Max burst range (meters) -- most players will be damaged within this range
-   double getLethalRange() const;                   // Lethal range (meters) -- most players will be killed within this range
-   double getMaxGimbalAngle() const;                // Max gimbal angle (radians)
+   double getTOF() const;                            // Time Of Flight (seconds) since release
+   double getMaxTOF() const;                         // Max TOF (seconds)
+   double getTSG() const;                            // Time-to-Start guidance (seconds since release)
+   double getSOBT() const;                           // Start-Of-Burn time (seconds since release)
+   double getEOBT() const;                           // End-Of-Burn time (seconds since release)
+   virtual bool isGuidanceEnabled() const;           // Is weapon guidance enabled?
+   virtual bool isEngineBurnEnabled() const;         // Weapon engine (rocket) on
+   double getMaxBurstRng() const;                    // Max burst range (meters) -- most players will be damaged within this range
+   double getLethalRange() const;                    // Lethal range (meters) -- most players will be killed within this range
+   double getMaxGimbalAngle() const;                 // Max gimbal angle (radians)
 
-   Player* getLaunchVehicle();                      // Pointer to the player that launched us
-   const Player* getLaunchVehicle() const;          // Pointer to the player that launched us (const version)
+   Player* getLaunchVehicle();                       // Pointer to the player that launched us
+   const Player* getLaunchVehicle() const;           // Pointer to the player that launched us (const version)
 
-   Detonation getDetonationResults() const;         // Detonation result code (see 'Detonation' enum)
-   double getDetonationRange() const;               // Range to target at detonation (meters)
-   const osg::Vec3d& getDetonationLocation() const; // Location of detonation in target player's coord (meters)
+   Detonation getDetonationResults() const;          // Detonation result code (see 'Detonation' enum)
+   double getDetonationRange() const;                // Range to target at detonation (meters)
+   const base::Vec3d& getDetonationLocation() const; // Location of detonation in target player's coord (meters)
 
-   bool isTargetPositionValid() const;              // True if we have the target position and is it valid
+   bool isTargetPositionValid() const;               // True if we have the target position and is it valid
 
-   const osg::Vec3d& getTargetPosition() const;     // Returns the target position (meters -- NED from world model ref point)
+   const base::Vec3d& getTargetPosition() const;     // Returns the target position (meters -- NED from world model ref point)
 
-   Track* getTargetTrack();                         // Our target track, if any
-   const Track* getTargetTrack() const;             // Our target track, if any (const version)
+   Track* getTargetTrack();                          // Our target track, if any
+   const Track* getTargetTrack() const;              // Our target track, if any (const version)
 
-   Player* getTargetPlayer();                       // Our target player, if any
-   const Player* getTargetPlayer() const;           // Our target player, if any (const version)
+   Player* getTargetPlayer();                        // Our target player, if any
+   const Player* getTargetPlayer() const;            // Our target player, if any (const version)
 
-   AbstractWeapon* getFlyoutWeapon();               // Pre-ref()'d pointer to the fly-out weapon
-   const AbstractWeapon* getFlyoutWeapon() const;   // Pre-ref()'d pointer to the fly-out weapon (const version)
+   AbstractWeapon* getFlyoutWeapon();                // Pre-ref()'d pointer to the fly-out weapon
+   const AbstractWeapon* getFlyoutWeapon() const;    // Pre-ref()'d pointer to the fly-out weapon (const version)
 
-   AbstractWeapon* getInitialWeapon();              // Pre-ref()'d pointer to the initial weapon
-   const AbstractWeapon* getInitialWeapon() const;  // Pre-ref()'d pointer to the initial weapon (const version)
+   AbstractWeapon* getInitialWeapon();               // Pre-ref()'d pointer to the initial weapon
+   const AbstractWeapon* getInitialWeapon() const;   // Pre-ref()'d pointer to the initial weapon (const version)
 
-   unsigned short getReleaseEventID() const;       // Release event ID (to help match weapon launch and detonation events)
-   bool isReleaseHold() const;                     // Is weapon is holding in PRE_RELEASE mode?
+   unsigned short getReleaseEventID() const;         // Release event ID (to help match weapon launch and detonation events)
+   bool isReleaseHold() const;                       // Is weapon is holding in PRE_RELEASE mode?
 
 
    // Sets a pointer to the launcher and our station number
@@ -225,7 +225,7 @@ public:
    virtual bool setTargetTrack(Track* const trk, const bool posTrkEnb);
 
    // Sets the target position (meters -- NED from world model ref point)
-   virtual bool setTargetPosition(const osg::Vec3d& newTgtPos);
+   virtual bool setTargetPosition(const base::Vec3d& newTgtPos);
 
    // Sets the target position valid flag
    virtual bool setTargetPositionValid(const bool b);
@@ -234,31 +234,31 @@ public:
    // -- if 'posTrkEnb' is true, we'll follow the target player's position
    virtual bool setTargetPlayer(Player* const tgt, const bool posTrkEnb);
 
-   virtual bool setPower(const bool f);                     // Sets the weapon power flag
-   virtual bool setBlocked(const bool b);                   // Sets the weapon blocked flag
-   virtual bool setJettisonable(const bool f);              // Sets the jettision enable flag
-   virtual bool setWillHang(const bool f);                  // Sets the 'will' hang flag
-   virtual bool setDummy(const bool f);                     // Sets the dummy weapon flag
-   virtual bool setLaunchVehicle(Player* const lch);        // Sets the pointer to the player that launched us
-   virtual bool setDetonationResults(const Detonation dr);  // Sets the detonation result code (see 'Detonation' enum)
-   virtual bool setDetonationLocation(const osg::Vec3d&);   // Sets the detonation location in target player's coord (meters)
-   virtual bool setMaxBurstRng(const double v);             // Sets the max burst range (meters)
-   virtual bool setLethalRange(const double v);             // Sets the lethal range (meters)
-   virtual bool setMaxGimbalAngle(const double v);          // Sets the max gimbal angle( radians)
-   virtual bool setWeaponID(const int n);                   // Sets the weapon's type ID number
-   virtual bool setReleaseEventID(const unsigned short n);  // Sets the release event ID
+   virtual bool setPower(const bool f);                           // Sets the weapon power flag
+   virtual bool setBlocked(const bool b);                         // Sets the weapon blocked flag
+   virtual bool setJettisonable(const bool f);                    // Sets the jettision enable flag
+   virtual bool setWillHang(const bool f);                        // Sets the 'will' hang flag
+   virtual bool setDummy(const bool f);                           // Sets the dummy weapon flag
+   virtual bool setLaunchVehicle(Player* const lch);              // Sets the pointer to the player that launched us
+   virtual bool setDetonationResults(const Detonation dr);        // Sets the detonation result code (see 'Detonation' enum)
+   virtual bool setDetonationLocation(const base::Vec3d&);        // Sets the detonation location in target player's coord (meters)
+   virtual bool setMaxBurstRng(const double v);                   // Sets the max burst range (meters)
+   virtual bool setLethalRange(const double v);                   // Sets the lethal range (meters)
+   virtual bool setMaxGimbalAngle(const double v);                // Sets the max gimbal angle( radians)
+   virtual bool setWeaponID(const int n);                         // Sets the weapon's type ID number
+   virtual bool setReleaseEventID(const unsigned short n);        // Sets the release event ID
 
    // Check local players for the effects of the detonation
    virtual void checkDetonationEffect();
 
    // Sets the target velocity (m/s) relative to ownship velocity
-   virtual bool setTargetVelocity(const osg::Vec3d& newTgtVel);
+   virtual bool setTargetVelocity(const base::Vec3d& newTgtVel);
 
    // Returns the target velocity (m/s) relative to ownship velocity
-   const osg::Vec3d& getTargetVelocity() const { return tgtVel; }
+   const base::Vec3d& getTargetVelocity() const { return tgtVel; }
 
    // Computes and sets 'loc' to our location relative to the target player, 'tgt'
-   virtual bool computeTargetLocation(osg::Vec3d* const loc, const Player* const tgt);
+   virtual bool computeTargetLocation(base::Vec3d* const loc, const Player* const tgt);
 
    // prerelease() -- prerelease this weapon.
    //    Returns a point to the flyout weapon player, which is still
@@ -357,17 +357,17 @@ private:
     base::safe_ptr<AbstractWeapon>  initialWpn;     // Initial weapon: points to self
                                                     // Cloned flyout: points to the initial weapon
 
-    osg::Vec3d tgtPos;                      // Target Position -- platform coord (NED)
+    base::Vec3d tgtPos;                     // Target Position -- platform coord (NED)
     bool       tgtPosValid;                 // If true, target position is valid
     base::safe_ptr<Player>  tgtPlayer;      // Target Player
     base::safe_ptr<Track>   tgtTrack;       // Target Track
-    osg::Vec3d    tgtVel;                   // Target/Track Velocity (m/s) relative to ownship velocity
+    base::Vec3d    tgtVel;                  // Target/Track Velocity (m/s) relative to ownship velocity
     base::safe_ptr<Player>  launchVehicle;  // Launching/Releasing Player
     bool       posTrkEnb;                   // If true, update tgtPos from the target/track
     double     maxTgtRng;                   // Max target range for default tgt selection      (meters)
     double     maxTgtLosErr;                // Max target LOS error for default tgt selection  (radians)
     double     detonationRange;             // Range to target at time of detonation           (meters)
-    osg::Vec3d  tgtDetLoc;                  // Detonation location in target player's coord    (meters)
+    base::Vec3d  tgtDetLoc;                 // Detonation location in target player's coord    (meters)
 
     base::safe_ptr<Stores> launcher;    // Launcher
     int         station;                // Station number (on launcher)

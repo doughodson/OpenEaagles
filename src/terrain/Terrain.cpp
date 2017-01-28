@@ -1,8 +1,6 @@
 
 #include "openeaagles/terrain/Terrain.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Color.hpp"
 #include "openeaagles/base/Hsva.hpp"
 #include "openeaagles/base/PairStream.hpp"
@@ -10,7 +8,8 @@
 #include "openeaagles/base/Rgba.hpp"
 #include "openeaagles/base/String.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include "openeaagles/base/osg/Vec2d"
 #include "openeaagles/base/osg/Vec3d"
@@ -529,11 +528,11 @@ bool Terrain::aac(
 
    // m1 will be used as a normalized vector along a line from the
    // ref point to the current terrain point.
-   osg::Vec2d m1;
+   base::Vec2d m1;
 
    // m2 will be used is a normalized vector along a line perpendicular
    // to the current terrain slope.
-   osg::Vec2d m2;
+   base::Vec2d m2;
 
    // ---
    // For all elevation points, except the end points, compute the dot product
@@ -595,7 +594,7 @@ bool Terrain::cLight(
       const bool* const maskFlags,  // (Optional) The array of mask flags
       const unsigned int n,         // Size of the arrays
       const double range,           // Range (meters)
-      const osg::Vec2d& lv          // Columnated lighting vector
+      const base::Vec2d& lv         // Columnated lighting vector
    )
 {
    // Early out checks
@@ -608,7 +607,7 @@ bool Terrain::cLight(
 
    // m2 will be used is a normalized vector along a line perpendicular
    // to the current terrain slope.
-   osg::Vec2d m2;
+   base::Vec2d m2;
 
    // ---
    // For all elevation points, except the end points, compute the dot product
@@ -663,7 +662,7 @@ bool Terrain::getElevationColor(
       const double maxz,               // Max elevation
       const base::Hsva** colorTable,   // Color table
       const unsigned int numColors,    // Number of colors
-      osg::Vec3d& rgb)                  // Color
+      base::Vec3d& rgb)                // Color
 {
 
    // early out test
@@ -709,7 +708,7 @@ bool Terrain::getElevationColor(
    }
 
    // Return the RGB value of this new color
-   const osg::Vec3d* p = colorHsv.getRGB();
+   const base::Vec3d* p = colorHsv.getRGB();
    if (p != nullptr) rgb = *p;
 
    return true;

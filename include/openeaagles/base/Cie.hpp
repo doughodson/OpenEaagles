@@ -7,11 +7,8 @@
 #include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
-
-namespace osg { class Vec4d; }
-
 namespace base {
-
+class Vec4d;
 class MonitorMetrics;
 class Table1;
 class List;
@@ -69,17 +66,17 @@ public:
     double luminance() const;
     double x() const;
     double y() const;
-    void getCIE(osg::Vec3d& cie) const;
+    void getCIE(Vec3d& cie) const;
 
     virtual bool setMonitor(MonitorMetrics* const msg);
     virtual bool setLuminance(Number* const msg);
     virtual bool setX(Number* const msg);
     virtual bool setY(Number* const msg);
 
-    static void cie2rgb(osg::Vec4d& rgba, const osg::Vec3d& cie, const MonitorMetrics* m);
+    static void cie2rgb(Vec4d& rgba, const Vec3d& cie, const MonitorMetrics* m);
 
 protected:
-    osg::Vec3d cie;
+    Vec3d cie;
     safe_ptr<const MonitorMetrics> monitor;
 };
 

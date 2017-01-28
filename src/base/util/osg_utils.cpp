@@ -15,9 +15,9 @@ namespace base {
 // Pre-multiply an array of 4D vectors with a 4x4 matrix
 //------------
 void preMultVec4Array(
-      const osg::Vec4d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec4d result[],
+      const Vec4d orig[],
+      const Matrixd& matrix,
+      Vec4d result[],
       const unsigned int n
    )
 {
@@ -27,9 +27,9 @@ void preMultVec4Array(
 }
 
 void preMultVec4Array(
-      const osg::Vec4f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec4f result[],
+      const Vec4f orig[],
+      const Matrixf& matrix,
+      Vec4f result[],
       const unsigned int n
    )
 {
@@ -43,9 +43,9 @@ void preMultVec4Array(
 //------------
 
 void preMultVec3Array(
-      const osg::Vec3d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec3d result[],
+      const Vec3d orig[],
+      const Matrixd& matrix,
+      Vec3d result[],
       const unsigned int n
    )
 {
@@ -55,9 +55,9 @@ void preMultVec3Array(
 }
 
 void preMultVec3Array(
-      const osg::Vec3f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec3f result[],
+      const Vec3f orig[],
+      const Matrixf& matrix,
+      Vec3f result[],
       const unsigned int n
    )
 {
@@ -71,9 +71,9 @@ void preMultVec3Array(
 //------------
 
 void postMultVec4Array(
-      const osg::Vec4d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec4d result[],
+      const Vec4d orig[],
+      const Matrixd& matrix,
+      Vec4d result[],
       const unsigned int n
    )
 {
@@ -83,9 +83,9 @@ void postMultVec4Array(
 }
 
 void postMultVec4Array(
-      const osg::Vec4f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec4f result[],
+      const Vec4f orig[],
+      const Matrixf& matrix,
+      Vec4f result[],
       const unsigned int n
    )
 {
@@ -99,9 +99,9 @@ void postMultVec4Array(
 //------------
 
 void postMultVec3Array(
-      const osg::Vec3d orig[],
-      const osg::Matrixd& matrix,
-      osg::Vec3d result[],
+      const Vec3d orig[],
+      const Matrixd& matrix,
+      Vec3d result[],
       const unsigned int n
    )
 {
@@ -111,9 +111,9 @@ void postMultVec3Array(
 }
 
 void postMultVec3Array(
-      const osg::Vec3f orig[],
-      const osg::Matrixf& matrix,
-      osg::Vec3f result[],
+      const Vec3f orig[],
+      const Matrixf& matrix,
+      Vec3f result[],
       const unsigned int n
    )
 {

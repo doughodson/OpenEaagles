@@ -46,22 +46,22 @@ public:
     Material();
 
     // set data
-    virtual bool setAmbientColor(osg::Vec4d x);
+    virtual bool setAmbientColor(base::Vec4d x);
     virtual bool setAmbientColor(double x, double y, double z, double w = 1.0);
-    virtual bool setDiffuseColor(osg::Vec4d x);
+    virtual bool setDiffuseColor(base::Vec4d x);
     virtual bool setDiffuseColor(double x, double y, double z, double w = 1.0);
-    virtual bool setEmissiveColor(osg::Vec4d x);
+    virtual bool setEmissiveColor(base::Vec4d x);
     virtual bool setEmissiveColor(double x, double y, double z, double w = 1.0);
-    virtual bool setSpecularColor(osg::Vec4d x);
+    virtual bool setSpecularColor(base::Vec4d x);
     virtual bool setSpecularColor(double x, double y, double z, double w = 1.0);
     virtual bool setShininess(double x);
 
     // get data
-    osg::Vec4d& getAmbientColor()       { return ambientColor; }
-    osg::Vec4d& getDiffuseColor()       { return diffuseColor; }
-    osg::Vec4d& getEmissiveColor()      { return emissiveColor; }
-    osg::Vec4d& getSpecularColor()      { return specularColor; }
-    double     getShininess()           { return shininess; }
+    base::Vec4d& getAmbientColor()       { return ambientColor; }
+    base::Vec4d& getDiffuseColor()       { return diffuseColor; }
+    base::Vec4d& getEmissiveColor()      { return emissiveColor; }
+    base::Vec4d& getSpecularColor()      { return specularColor; }
+    double getShininess()                { return shininess; }
 
 protected:
     bool setSlotAmbientColor(const base::PairStream* const x);
@@ -75,11 +75,11 @@ protected:
     bool setSlotShininess(const base::Number*const x);
 
 private:
-    osg::Vec4d ambientColor;     // ambient color
-    osg::Vec4d diffuseColor;     // diffuse color
-    osg::Vec4d emissiveColor;    // emissive color
-    osg::Vec4d specularColor;    // specular color
-    double shininess;            // shininess value
+    base::Vec4d ambientColor;     // ambient color
+    base::Vec4d diffuseColor;     // diffuse color
+    base::Vec4d emissiveColor;    // emissive color
+    base::Vec4d specularColor;    // specular color
+    double shininess;             // shininess value
 };
 
 }

@@ -15,9 +15,9 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Powers.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
 
 #include "openeaagles/base/util/math_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -437,7 +437,7 @@ void Antenna::rfTransmit(Emission* const xmit)
    // ---
    // If we have targets
    // ---
-   const osg::Vec3d* losG = tdb->getGimbalLosVectors();
+   const base::Vec3d* losG = tdb->getGimbalLosVectors();
    if (ntgts > 0 && losG != nullptr) {
 
       // ---
@@ -519,8 +519,8 @@ void Antenna::rfTransmit(Emission* const xmit)
       // Fetch the required data arrays from the TargetDataBlock
       const double* ranges = tdb->getTargetRanges();
       const double* rngRates = tdb->getTargetRangeRates();
-      const osg::Vec3d* losO2T = tdb->getLosVectors();
-      const osg::Vec3d* losT2O = tdb->getTargetLosVectors();
+      const base::Vec3d* losO2T = tdb->getLosVectors();
+      const base::Vec3d* losT2O = tdb->getTargetLosVectors();
       Player** targets = tdb->getTargets();
 
       // ---
@@ -654,13 +654,13 @@ bool Antenna::onRfEmissionEvent(Emission* const em)
          sys1->ref();
 
          // Line-Of-Sight (LOS) vectors back to the transmitter.
-         const osg::Vec3d xlos = em->getTgtLosVec();
-         const osg::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0);
+         const base::Vec3d xlos = em->getTgtLosVec();
+         const base::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0);
 
          // 2) Transform local NED LOS vectors to antenna coordinates
-         osg::Matrixd mm = getRotMat();
+         base::Matrixd mm = getRotMat();
          mm *= ownship->getRotMat();
-         osg::Vec4d losA = mm * los0;
+         base::Vec4d losA = mm * los0;
 
          // ---
          // Compute antenna gains in the direction of the transmitter

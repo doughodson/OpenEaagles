@@ -7,11 +7,8 @@
 #include "openeaagles/base/safe_queue.hpp"
 
 namespace oe {
-
 namespace base { class Distance; class Number; class String; }
-
 namespace models {
-
 class CommRadio;
 class TrackManager;
 

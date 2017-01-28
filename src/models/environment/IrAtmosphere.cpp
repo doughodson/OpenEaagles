@@ -10,8 +10,8 @@
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -172,9 +172,9 @@ bool IrAtmosphere::calculateAtmosphereContribution(IrQueryMsg* const msg, double
 
         // determine elevation angle of gimbal/ownship, negative angles are down
         {
-            const osg::Matrixd mm = msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat();
+            const base::Matrixd mm = msg->getGimbal()->getRotMat() * msg->getOwnship()->getRotMat();
             // compute Geodetic orientation angles
-            osg::Vec3d angles;
+            base::Vec3d angles;
             base::nav::computeEulerAngles(mm, &angles);
             currentViewAngle = angles[Player::IPITCH];
         }

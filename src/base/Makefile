@@ -64,6 +64,8 @@ OBJS =  \
 	util/platform/system_linux.o \
 	util/lfi.o \
 	util/math_utils.o \
+	util/nav_utils.o \
+	util/navDR_utils.o \
 	util/osg_utils.o \
 	util/str_utils.o \
 	util/system.o \
@@ -93,8 +95,6 @@ OBJS =  \
 	Matrix.o \
 	MetaObject.o \
 	MonitorMetrics.o \
-	nav_utils.o \
-	navDR_utils.o \
 	NetHandler.o \
 	Number.o \
 	Object.o \

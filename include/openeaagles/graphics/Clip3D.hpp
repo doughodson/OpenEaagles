@@ -62,13 +62,13 @@ public:
    // user provided output arrays, which must be of at least size 'num'.
    //------------------------------------------------------------------------------
    unsigned int clip(
-         osg::Vec3d* const out,            // Output polygon vertices
-         osg::Vec3d* const outNorm,        // Output polygon vertices
-         osg::Vec2d* const outTCoord,      // Output polygon vertices
-         const osg::Vec3d* const in,       // Input polygon vertices
-         const osg::Vec3d* const inNorm,   // Input polygon vertices
-         const osg::Vec2d* const inTCoord, // Input polygon vertices
-         const unsigned int num            // Number of vertices in arrays
+         base::Vec3d* const out,            // Output polygon vertices
+         base::Vec3d* const outNorm,        // Output polygon vertices
+         base::Vec2d* const outTCoord,      // Output polygon vertices
+         const base::Vec3d* const in,       // Input polygon vertices
+         const base::Vec3d* const inNorm,   // Input polygon vertices
+         const base::Vec2d* const inTCoord, // Input polygon vertices
+         const unsigned int num             // Number of vertices in arrays
       ) const;
 
    //------------------------------------------------------------------------------
@@ -77,17 +77,17 @@ public:
    // of vertices in the clipped polygon is returned by the function.
    //------------------------------------------------------------------------------
    static unsigned int polyClip2Halfspace(
-      osg::Vec3d* const q,           // Output polygon vertices
-      osg::Vec3d* const qn,          // (optional) Output polygon normals
-      osg::Vec2d* const qt,          // (optional) Output polygon texture coordinates
-      const osg::Vec3d* const p,     // Input polygon vertices
-      const osg::Vec3d* const pn,    // (optional) Input polygon normals
-      const osg::Vec2d* const pt,    // (optional) Input polygon texture coordinates
-      const unsigned int n,          // Number of vertices/normals
-      const unsigned int index,      // Coordinate index: X -> 0; Y -> 1; and Z -> 2
-      const double k,                // Value of the clipping plane
-      const bool clipUpperPlane);    // if clipping against an upper plane, 
-                                     //  else against a lower plane
+      base::Vec3d* const q,           // Output polygon vertices
+      base::Vec3d* const qn,          // (optional) Output polygon normals
+      base::Vec2d* const qt,          // (optional) Output polygon texture coordinates
+      const base::Vec3d* const p,     // Input polygon vertices
+      const base::Vec3d* const pn,    // (optional) Input polygon normals
+      const base::Vec2d* const pt,    // (optional) Input polygon texture coordinates
+      const unsigned int n,           // Number of vertices/normals
+      const unsigned int index,       // Coordinate index: X -> 0; Y -> 1; and Z -> 2
+      const double k,                 // Value of the clipping plane
+      const bool clipUpperPlane);     // if clipping against an upper plane, 
+                                      //  else against a lower plane
 
 private:
    double x0, x1;     // left and right

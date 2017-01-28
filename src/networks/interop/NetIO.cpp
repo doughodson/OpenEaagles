@@ -33,8 +33,8 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
 
+#include "openeaagles/base/util/unit_utils.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>
@@ -708,7 +708,7 @@ models::Player* NetIO::createIPlayer(Nib* const nib)
       const simulation::Station* sta = getStation();
       const auto own = dynamic_cast<const models::Player*>(sta->getOwnship());
       if (own != nullptr) {
-         osg::Vec3d delta = nib->getDrPosition() - own->getGeocPosition();
+         base::Vec3d delta = nib->getDrPosition() - own->getGeocPosition();
          inRange = (delta.length2() <= maxRng2);
       }
    }

@@ -1,5 +1,6 @@
 
 #include "openeaagles/graphics/SymbolLoader.hpp"
+
 #include "openeaagles/graphics/Readouts.hpp"
 #include "openeaagles/graphics/Polygon.hpp"
 #include "openeaagles/graphics/Display.hpp"
@@ -7,6 +8,7 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
+
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>

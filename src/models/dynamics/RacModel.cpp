@@ -8,7 +8,8 @@
 
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
@@ -254,7 +255,7 @@ void RacModel::updateRAC(const double dt)
    // ---
    // Get old angular values
    // ---
-   const osg::Vec3d oldRates = pp->getAngularVelocities();
+   const base::Vec3d oldRates = pp->getAngularVelocities();
    //double pa1 = oldRates[simulation::Player::IROLL];
    double qa1 = oldRates[models::Player::IPITCH];
    double ra1 = oldRates[models::Player::IYAW];

@@ -98,13 +98,13 @@ void Translation::computeMatrix()
     m.makeIdentity();
     if (nv == 2) {
         // Translate X and Y
-        osg::Matrixd tt;
+        Matrixd tt;
         tt.makeTranslate(v[0], v[1], 0.0f);
         m.preMult(tt);
     }
     else if (nv >= 3) {
         // Translate X, Y and Z
-        osg::Matrixd tt;
+        Matrixd tt;
         tt.makeTranslate(v[0], v[1], v[2]);
         m.preMult(tt);
     }
@@ -132,13 +132,13 @@ void Rotation::computeMatrix()
     m.makeIdentity();
     if (nv == 1) {
         // Single value: rotate about the Z axis
-        osg::Matrixd rr;
+        Matrixd rr;
         rr.makeRotate(v[0], 0.0f, 0.0f, 1.0f);
         m.preMult(rr);
     }
     else if (nv == 4) {
         // Four values: rotate about vector [ v[0] v[1] v[2] ] by v[3] degrees
-        osg::Matrixd rr;
+        Matrixd rr;
         rr.makeRotate(v[3], v[0], v[1], v[2]);
         m.preMult(rr);
     }
@@ -165,19 +165,19 @@ void Scale::computeMatrix()
     m.makeIdentity();
     if (nv == 1) {
        // Single value: scale X and Y by the value and hold Z constant
-        osg::Matrixd ss;
+        Matrixd ss;
         ss.makeScale(v[0], v[0], 1.0f);
         m.preMult(ss);
     }
     if (nv == 2) {
         // Two values: scale X and Y by the values and hold Z constant
-        osg::Matrixd ss;
+        Matrixd ss;
         ss.makeScale(v[0], v[1], 1.0f);
         m.preMult(ss);
     }
     else if (nv >= 3) {
         // Three values: scale X, Y and Z
-        osg::Matrixd ss;
+        Matrixd ss;
         ss.makeScale(v[0], v[1], v[2]);
         m.preMult(ss);
     }

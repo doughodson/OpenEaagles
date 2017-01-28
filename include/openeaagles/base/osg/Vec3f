@@ -18,7 +18,7 @@
 #include "./Math"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose float triple for use as vertices, vectors and normals.
   * Provides general math operations from addition through to cross products.

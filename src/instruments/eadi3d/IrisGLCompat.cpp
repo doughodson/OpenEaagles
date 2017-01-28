@@ -2,11 +2,10 @@
 #include "openeaagles/instruments/eadi3d/IrisGLCompat.hpp"
 
 #include "openeaagles/base/util/constants.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
-
 #include "openeaagles/base/util/platform_api.hpp"
-#include <GL/gl.h>
+#include "openeaagles/base/util/unit_utils.hpp"
 
+#include <GL/gl.h>
 #include <cmath>
 
 #define MAX_POINTS 64

@@ -7,13 +7,13 @@
 
 #include "openeaagles/terrain/Terrain.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/util/osg_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -178,9 +178,9 @@ bool Tdb::resizeArrays(const unsigned int newSize)
          if (newSize > 0) {
             ranges   = new double[newSize];
             rngRates = new double[newSize];
-            losG     = new osg::Vec3d[newSize];
-            losO2T   = new osg::Vec3d[newSize];
-            losT2O   = new osg::Vec3d[newSize];
+            losG     = new base::Vec3d[newSize];
+            losO2T   = new base::Vec3d[newSize];
+            losT2O   = new base::Vec3d[newSize];
             aar      = new double[newSize];
             aazr     = new double[newSize];
             aelr     = new double[newSize];
@@ -244,13 +244,13 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    // ---
 
    // World (ECEF) to local (NED)
-   osg::Matrixd wm = ownship->getWorldMat();
+   base::Matrixd wm = ownship->getWorldMat();
 
    // Local (NED) to gimbal coord
-   osg::Matrixd rm = gimbal->getRotMat();
+   base::Matrixd rm = gimbal->getRotMat();
    if (ownHdgOnly) {
       // Using heading only, ignore ownship roll and pitch
-      osg::Matrixd rr;
+      base::Matrixd rr;
       rr.makeRotate( ownship->getHeading(), 0, 0, 1);
       rm *= rr;
    }
@@ -269,7 +269,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
    usingEcefFlg = useWorld || !(ownship->isPositionVectorValid());
 
    // Position Vector (ECEF or local gaming area NED
-   osg::Vec3d p0;
+   base::Vec3d p0;
    if (usingEcefFlg) {
       // Using geocentric position (ECEF)
       p0 = ownship->getGeocPosition();
@@ -336,7 +336,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
       if ( processTgt ) {
 
          // Target Line-Of-Sight (LOS) vector
-         osg::Vec3d tlos;
+         base::Vec3d tlos;
          if (usingEcefFlg) tlos = target->getGeocPosition() - p0;
          else tlos = target->getPosition() - p0;
 
@@ -352,7 +352,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
          if (inRange) {
 
             // LOS vector in local tangent plane NED
-            osg::Vec3d losNED = tlos;
+            base::Vec3d losNED = tlos;
             if (usingEcefFlg) {
                // LOS vector: ECEF to NED
                losNED = wm * tlos;
@@ -380,7 +380,7 @@ unsigned int Tdb::processPlayers(base::PairStream* const players)
                bool inFov = (maxAngle == 0);
                if ( !inFov ) {
                   // LOS vector: NED to gimbal coordinates
-                  const osg::Vec3d losG = rm * losNED;
+                  const base::Vec3d losG = rm * losNED;
                   inFov = (losG.x() >= cosMaxFov);
                }
 
@@ -453,11 +453,11 @@ unsigned int Tdb::computeBoresightData()
    // ---
    {
       // Vectors (ECEF or local gaming area NED)
-      osg::Vec3d p0;  // Position Vector
-      osg::Vec3d v0;  // Velocity vector [ x y z ] (meters/second)
+      base::Vec3d p0;  // Position Vector
+      base::Vec3d v0;  // Velocity vector [ x y z ] (meters/second)
 
       // World (ECEF) to local tanget plane (NED)
-      osg::Matrixd wm = ownship->getWorldMat();
+      base::Matrixd wm = ownship->getWorldMat();
 
       if (usingEcefFlg) {
          // Using ECEF
@@ -473,8 +473,8 @@ unsigned int Tdb::computeBoresightData()
       for (unsigned int i = 0; i < numTgts; i++) {
 
          // Target vectors (ECEF or local gaming area NED)
-         osg::Vec3d pt;  // Position Vector
-         osg::Vec3d vt;  // Velocity vector [ x y z ] (meters/second)
+         base::Vec3d pt;  // Position Vector
+         base::Vec3d vt;  // Velocity vector [ x y z ] (meters/second)
          if (usingEcefFlg) {
             // Using ECEF
             pt = targets[i]->getGeocPosition();  // Geocentric position (ECEF)
@@ -487,7 +487,7 @@ unsigned int Tdb::computeBoresightData()
          }
 
          // Target LOS vector
-         osg::Vec3d los = (pt - p0);
+         base::Vec3d los = (pt - p0);
 
          // Normalized and compute length [unit vector and range(meters)]
          ranges[i] = los.normalize();
@@ -518,12 +518,12 @@ unsigned int Tdb::computeBoresightData()
       // ---
 
       // Start with the body to gimbal matrix
-      osg::Matrixd mm = gimbal->getRotMat();
+      base::Matrixd mm = gimbal->getRotMat();
 
       // Post multi by the inertial (NED) to body matrix
       if (ownHdgOnly) {
          // Using heading only, ignore ownship roll and pitch
-         osg::Matrixd rr;
+         base::Matrixd rr;
          rr.makeRotate( ownship->getHeading(), 0, 0, 1);
          mm *= rr;
       }

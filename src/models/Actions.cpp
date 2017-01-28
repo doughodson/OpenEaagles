@@ -10,7 +10,7 @@
 
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/LatLon.hpp"
@@ -572,7 +572,7 @@ bool ActionWeaponRelease::trigger(OnboardComputer* const mgr)
             const double refLon = sim->getRefLongitude();
 
             // Computes the target's position vector
-            osg::Vec3d tgtPos;                           // Target position  (m) NED
+            base::Vec3d tgtPos;                          // Target position  (m) NED
             base::nav::convertLL2PosVec(
                refLat, refLon,                           // Ref point (at sea level)
                getTargetLatitude(), getTargetLongitude(), getTargetElevation(),

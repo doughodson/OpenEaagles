@@ -6,11 +6,8 @@
 #include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
-
 namespace base { class Pair; class PairStream; }
-
 namespace models {
-
 class Image;
 
 //------------------------------------------------------------------------------
@@ -78,7 +75,7 @@ public:
    virtual void cancel();
 
    static void xyz2AzEl(const double x, const double y, const double z, double* const az, double* const el);
-   static void xyz2AzEl(const osg::Vec3d& vec, double* const az, double* const el);
+   static void xyz2AzEl(const base::Vec3d& vec, double* const az, double* const el);
 
 protected:
     virtual bool setResolution(const double res);   // SAR resolution (meters)

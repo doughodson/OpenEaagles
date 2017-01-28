@@ -49,7 +49,7 @@ class MonitorMetrics : public Object
 public:
     MonitorMetrics();
     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
-                   const osg::Matrixd& phosphorCoordinates, const osg::Vec3d& whiteRGB, const osg::Vec3d& whiteCIE);
+                   const Matrixd& phosphorCoordinates, const Vec3d& whiteRGB, const Vec3d& whiteCIE);
     bool setSlotRed(const Table1* red);
     bool setSlotGreen(const Table1* green);
     bool setSlotBlue(const Table1* blue);
@@ -57,13 +57,13 @@ public:
     bool setSlotWhiteRGB(const List* whiteRGB);
     bool setSlotWhiteCIE(const List* whiteCIE);
 
-    void cie2rgb(osg::Vec4d& rgba, const osg::Vec3d& cie) const;
+    void cie2rgb(Vec4d& rgba, const Vec3d& cie) const;
 
 private:
     bool computeMatrix();
 
     // transform matrix from CIE to RGB for this monitor
-    osg::Matrixd transform;
+    Matrixd transform;
 
     // RGB luminance vs RGB level on this monitor
     safe_ptr<const Table1> redLuminance;
@@ -71,11 +71,11 @@ private:
     safe_ptr<const Table1> blueLuminance;
 
     // CIE coordinates of Red, Green, and Blue for this monitor
-    osg::Matrixd phosphorCoordinates;
+    Matrixd phosphorCoordinates;
 
     // CIE and RGB coordinates of a reference white
-    osg::Vec3d refwhiteRGB;
-    osg::Vec3d refwhiteCIE;
+    Vec3d refwhiteRGB;
+    Vec3d refwhiteCIE;
 };
 
 }

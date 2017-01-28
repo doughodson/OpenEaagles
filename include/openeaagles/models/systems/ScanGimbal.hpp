@@ -140,7 +140,7 @@ public:
 public:
     ScanGimbal();
 
-    const osg::Vec2d& getRefPosition() const    { return refAngle; }             // Returns the current reference position vector (rad)
+    const base::Vec2d& getRefPosition() const   { return refAngle; }       // Returns the current reference position vector (rad)
     double getRefAzimuth() const                { return refAngle[AZ_IDX]; }     // Return the current reference azimuth (rad)
     double getRefElevation() const              { return refAngle[ELEV_IDX]; }   // Return the current reference elevation (rad)
 
@@ -173,7 +173,7 @@ public:
     virtual bool setBarSpacing(const double newSpacing);                         // Sets the spacing (radians) between scan bars (horizontal, vertical)
     virtual bool setLeftToRightScan(const bool newLeftToRightScan);              // Sets the left to right scan flag (else right to left scanning)
 
-    virtual void setRefPosition(const osg::Vec2d& nla);                          // Sets the reference position vector (rad)
+    virtual void setRefPosition(const base::Vec2d& nla);                         // Sets the reference position vector (rad)
     virtual bool setRefPosition(const double refAz, const double refEl);         // Sets the reference position vector (rad)
     virtual bool setRefAzimuth(const double az);                                 // Sets the reference azimuth (rad)
     virtual bool setRefElevation(const double el);                               // Sets the reference elevation (rad)
@@ -220,8 +220,8 @@ protected:
    virtual void computeNewBarPos(const int bar, const Side side);
    virtual void nextBar();
 
-   osg::Vec2d& getScanPos()                           { return scanPos; }
-   const osg::Vec2d& getScanPos() const               { return scanPos; }
+   base::Vec2d& getScanPos()                          { return scanPos; }
+   const base::Vec2d& getScanPos() const              { return scanPos; }
    bool setScanPos(const double x, const double y)    { scanPos.set(x,y); return true; }
 
    unsigned int getScanState() const                  { return scanState; }
@@ -244,16 +244,16 @@ protected:
    virtual void dynamics(const double dt) override;
 
 private:
-    osg::Vec2d  scanPos;         // Position in scan pattern     (rad)
-    osg::Vec2d* prScanVertices;  // Pseudo random scan pattern positions
-    unsigned int nprv;           // Number of pseudo random vertices
-    unsigned int cprv;           // Current pseudo random vertice number
-    unsigned int scanMode;       // Gimbal scan mode
-    double     scanWidth;        // Width of scan volume         (rad)
-    double     scanHeight;       // Height of scan volume        (rad)
-    unsigned int scanState;      // Scan state machine
-    osg::Vec2d  refAngle;        // Gimbal reference angles     (rad)
-    osg::Vec2d  lastRefAngle;    // Last gimbal reference angle (rad)
+    base::Vec2d  scanPos;              // Position in scan pattern     (rad)
+    base::Vec2d* prScanVertices;       // Pseudo random scan pattern positions
+    unsigned int nprv;                 // Number of pseudo random vertices
+    unsigned int cprv;                 // Current pseudo random vertice number
+    unsigned int scanMode;             // Gimbal scan mode
+    double     scanWidth;              // Width of scan volume         (rad)
+    double     scanHeight;             // Height of scan volume        (rad)
+    unsigned int scanState;            // Scan state machine
+    base::Vec2d  refAngle;             // Gimbal reference angles     (rad)
+    base::Vec2d  lastRefAngle;         // Last gimbal reference angle (rad)
 
     unsigned int numBars;        // number of bars in our scan
     double     barSpacing;       // width between bars (if applicable) (rad)

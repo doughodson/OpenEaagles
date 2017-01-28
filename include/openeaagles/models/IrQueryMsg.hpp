@@ -5,11 +5,8 @@
 #include "openeaagles/models/SensorMsg.hpp"
 
 namespace oe {
-
 namespace base { class List; }
-
 namespace models {
-
 class IrSensor;
 
 //------------------------------------------------------------------------------
@@ -52,22 +49,22 @@ public:
    void setAngleAspect(const double & n) { angleAspect = n; }
 
    // Position of target player
-   const osg::Vec3d& getPosVec() const { return pos; }
+   const base::Vec3d& getPosVec() const { return pos; }
 
    // Sets the target position
-   void setPosVec(const osg::Vec3d& v) { pos = v; }
+   void setPosVec(const base::Vec3d& v) { pos = v; }
 
    // Velocity of target player
-   const osg::Vec3d& getVelocityVec() const { return vel; }
+   const base::Vec3d& getVelocityVec() const { return vel; }
 
    // Sets the target velocity
-   void setVelocityVec(const osg::Vec3d& v) { vel = v; }
+   void setVelocityVec(const base::Vec3d& v) { vel = v; }
 
    // acceleration of target player
-   const osg::Vec3d& getAccelVec() const { return accel; }
+   const base::Vec3d& getAccelVec() const { return accel; }
 
    // Sets the target acceleration
-   void setAccelVec(const osg::Vec3d& v) { accel = v; }
+   void setAccelVec(const base::Vec3d& v) { accel = v; }
 
    // Lower wavelength  (microns)
    double getLowerWavelength() const {return lowerWavelength;}
@@ -157,9 +154,9 @@ private:
    double         signalToNoiseRatio;        // ratio of Signal to Noise
    double         backgroundNoiseRatio;      // ratio of background noise
    IrSensor*      sendingSensor;             //sensor that reported this message.
-   osg::Vec3d     pos;                       // position of the target.
-   osg::Vec3d     vel;                       // velocity of target.
-   osg::Vec3d     accel;                     // acceleration of target.
+   base::Vec3d pos;                          // position of the target.
+   base::Vec3d vel;                          // velocity of target.
+   base::Vec3d accel;                        // acceleration of target.
    double         angleAspect;               // Angle aspect to target.
    double         angleOffBoresight;         // Angle of target off boresight of sensor
    double         rel;                       // The relative elevation from target to sensor

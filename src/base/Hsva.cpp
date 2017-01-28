@@ -46,9 +46,9 @@ bool Hsva::colorInterpolate(
  )
 {
    const double p = (value - minValue) / (maxValue - minValue );
-   osg::Vec4d deltaColor = maxColor.hsv - minColor.hsv;
+   Vec4d deltaColor = maxColor.hsv - minColor.hsv;
    deltaColor[Hsv::HUE] = angle::aepcdDeg(deltaColor[Hsv::HUE]);
-   osg::Vec4d newColor = minColor.hsv + deltaColor * p;
+   Vec4d newColor = minColor.hsv + deltaColor * p;
    newColor[Hsv::HUE] = angle::aepcdDeg(newColor[Hsv::HUE]);
    if (newColor[Hsv::HUE] < 0) {
       newColor[Hsv::HUE] += 360.0f;

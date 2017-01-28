@@ -1,5 +1,6 @@
 
 #include "openeaagles/graphics/Shapes.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/graphics/ColorGradient.hpp"
@@ -399,7 +400,7 @@ void Point::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3d* v = getVertices();
+   const base::Vec3d* v = getVertices();
    glBegin(GL_POINTS);
    for (unsigned int i = 0; i < n; i++) {
       lcVertex3v( v[i].ptr() );
@@ -423,7 +424,7 @@ void LineLoop::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3d* v = getVertices();
+   const base::Vec3d* v = getVertices();
    if (n >= 2) {
       glBegin(GL_LINE_LOOP);
       for (unsigned int i = 0; i < n; i++) {
@@ -467,7 +468,7 @@ void Line::drawFunc()
 {
    BEGIN_DLIST
    const unsigned int n = getNumberOfVertices();
-   const osg::Vec3d* v = getVertices();
+   const base::Vec3d* v = getVertices();
    if (n >= 2) {
       if (segment) {
          // Draw as line segments (pairs of vertices)
@@ -587,12 +588,12 @@ void Quad::drawFunc()
 
         if (ok) {
             // get our regular vertices here
-            const osg::Vec3d* v = getVertices();
+            const base::Vec3d* v = getVertices();
 
             const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
-                const osg::Vec2d* texCoord = getTextureCoord();
+                const base::Vec2d* texCoord = getTextureCoord();
                 unsigned int tc = 0; // texture count
                 for (unsigned int i = 0; i < nv; i++) {
                     // add our textures coordinates
@@ -718,12 +719,12 @@ void Triangle::drawFunc()
 
         if (ok) {
             // get our regular vertices here
-            const osg::Vec3d* v = getVertices();
+            const base::Vec3d* v = getVertices();
 
             const unsigned int ntc = getNumberOfTextureCoords();
             // draw with texture
             if (ntc > 0 && hasTexture()) {
-                const osg::Vec2d* texCoord = getTextureCoord();
+                const base::Vec2d* texCoord = getTextureCoord();
                 unsigned int tc = 0; // texture count
                 for (unsigned int i = 0; i < nv; i++) {
                     // add our textures coordinates

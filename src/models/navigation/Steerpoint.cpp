@@ -7,7 +7,6 @@
 
 #include "openeaagles/terrain/Terrain.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
@@ -19,7 +18,9 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -331,7 +332,7 @@ void Steerpoint::setPosition(const double x, const double y, const double z)
     needLL = true;
 }
 
-void Steerpoint::setPosition(const osg::Vec3d& newPos)
+void Steerpoint::setPosition(const base::Vec3d& newPos)
 {
     posVec = newPos;
     needPosVec = false;

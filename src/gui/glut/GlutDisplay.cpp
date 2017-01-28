@@ -361,7 +361,7 @@ void GlutDisplay::reshapeIt(int w, int h)
 //-----------------------------------------------------------------------------
 // Reshape subwindow using the subwindows position and size (see note #4)
 //-----------------------------------------------------------------------------
-bool GlutDisplay::reshapeSubWindow(const osg::Vec2d& position, const osg::Vec2d& size)
+bool GlutDisplay::reshapeSubWindow(const base::Vec2d& position, const base::Vec2d& size)
 {
    //std::cout << "reshapeSubWindow(p,s) winID = " << winId << std::endl;
    bool ok = false;

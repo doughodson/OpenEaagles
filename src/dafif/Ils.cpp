@@ -1,9 +1,11 @@
 
 #include "openeaagles/dafif/Ils.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
+
 #include <iostream>
 
 namespace oe {

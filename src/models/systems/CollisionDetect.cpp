@@ -178,10 +178,10 @@ void CollisionDetect::updateData(const double dt)
    if (ownship == nullptr || sim == nullptr || maxPlayers == 0) return;
 
    // World (ECEF) to local (NED)
-   const osg::Matrixd wm = ownship->getWorldMat();
+   const base::Matrixd wm = ownship->getWorldMat();
 
    // Local (NED) to body coordinates
-   const osg::Matrixd rm = ownship->getRotMat();
+   const base::Matrixd rm = ownship->getRotMat();
 
    // We will be using world (ECEF) coordinates when the 'useWorld'
    // flag is true or when our ownship's local gaming area position
@@ -189,7 +189,7 @@ void CollisionDetect::updateData(const double dt)
    const bool usingEcefFlg = useWorld || !(ownship->isPositionVectorValid());
 
    // Position Vector (ECEF or local gaming area NED)
-   osg::Vec3d ownPos;
+   base::Vec3d ownPos;
    if (usingEcefFlg) {
       ownPos = ownship->getGeocPosition();
    }
@@ -233,7 +233,7 @@ void CollisionDetect::updateData(const double dt)
          if ( processTgt ) {
 
             // Target position vector (ECEF or local gaming area NED)
-            osg::Vec3d tgtPos;
+            base::Vec3d tgtPos;
             if (usingEcefFlg) {
                tgtPos = target->getGeocPosition();
             }
@@ -242,7 +242,7 @@ void CollisionDetect::updateData(const double dt)
             }
 
             // Target Line-Of-Sight (LOS) vector
-            osg::Vec3d los = (tgtPos - ownPos);
+            base::Vec3d los = (tgtPos - ownPos);
 
             // Normalized and compute length:
             const double range = los.normalize();
@@ -261,14 +261,14 @@ void CollisionDetect::updateData(const double dt)
                if ( !inFov ) {
 
                   // Transform the LOS vector to local tangent plane NED
-                  osg::Vec3d losNED = los;
+                  base::Vec3d losNED = los;
                   if (usingEcefFlg) {
                      // LOS vector: ECEF to NED
                      losNED = wm * los;
                   }
 
                   // Transform the LOS vector from NED to body coordinates
-                  osg::Vec3d losBody = rm * losNED;
+                  base::Vec3d losBody = rm * losNED;
 
                   // It's within our max FOV angle when the X component is
                   // greater than the cosine of the max FOV angle.
@@ -330,8 +330,8 @@ void CollisionDetect::process(const double dt)
 
    // Ownship position and velocity vectors
    //   (ECEF or local gaming area NED)
-   osg::Vec3d ownPos;
-   osg::Vec3d ownVel;
+   base::Vec3d ownPos;
+   base::Vec3d ownVel;
    if (usingEcefFlg) {
       ownPos = ownship->getGeocPosition();
       ownVel = ownship->getGeocVelocity();
@@ -357,8 +357,8 @@ void CollisionDetect::process(const double dt)
 
          // Target position and velocity vectors
          //   (ECEF or local gaming area NED)
-         osg::Vec3d tgtPos;
-         osg::Vec3d tgtVel;
+         base::Vec3d tgtPos;
+         base::Vec3d tgtVel;
          if (usingEcefFlg) {
             tgtPos = tgt->getGeocPosition();
             tgtVel = tgt->getGeocVelocity();
@@ -369,7 +369,7 @@ void CollisionDetect::process(const double dt)
          }
 
          // Ownship to target Line-Of-Sight (LOS) vector
-         osg::Vec3d los = (tgtPos - ownPos);
+         base::Vec3d los = (tgtPos - ownPos);
 
          // Current and previous target range
          const double tgtRng = los.length();
@@ -392,7 +392,7 @@ void CollisionDetect::process(const double dt)
          if ( !collision && rngRate0 < 0 && rngRate >= 0 && players[i].passCnt >= 2) {
 
             // Compute the relative velocity vector.
-            osg::Vec3d velRel = (tgtVel - ownVel);
+            base::Vec3d velRel = (tgtVel - ownVel);
 
             // Relative velocity squared,
             double velRelSq = velRel.length2();
@@ -403,7 +403,7 @@ void CollisionDetect::process(const double dt)
 
                // Interpolate back to the closest point
                const double ndt = -rdv/velRelSq;
-               osg::Vec3d closestPoint = los + (velRel*ndt);
+               base::Vec3d closestPoint = los + (velRel*ndt);
 
                // Compute the range squared at the closest point
                const double r2 = closestPoint.length2();

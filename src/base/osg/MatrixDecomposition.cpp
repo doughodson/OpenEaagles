@@ -41,9 +41,8 @@
 
 
 namespace oe {
-namespace osg {
-namespace MatrixDecomposition
-{
+namespace base {
+namespace MatrixDecomposition {
 
     typedef struct {double x, y, z, w;} Quat; // Quaternion
     enum QuatPart {X, Y, Z, W};
@@ -51,11 +50,11 @@ namespace MatrixDecomposition
     typedef Quat HVect;   // Homogeneous 3D vector 
     typedef struct
     {
-        osg::Vec4d t;     // Translation Component;
+        Vec4d t;          // Translation Component;
         Quat q;           // Essential Rotation
         Quat  u;          //Stretch rotation      
         HVect k;          //Sign of determinant 
-        double f;          // Sign of determinant 
+        double f;         // Sign of determinant 
     } _affineParts;
 
     HVect spectDecomp(_HMatrix S, _HMatrix U);
@@ -312,7 +311,7 @@ namespace MatrixDecomposition
             Quat p;
 
             //Translation component.
-            parts->t = osg::Vec4d(A[X][W], A[Y][W], A[Z][W], 0);
+            parts->t = Vec4d(A[X][W], A[Y][W], A[Z][W], 0);
             double det = polarDecomp(A, Q, S);
             if (det<0.0)
             {
@@ -579,10 +578,10 @@ namespace MatrixDecomposition
 
 }
 
-void osg::Matrixf::decompose(osg::Vec3f& t,
-                             osg::Quat& r,
-                             osg::Vec3f& s,
-                             osg::Quat& so) const
+void Matrixf::decompose(Vec3f& t,
+                             Quat& r,
+                             Vec3f& s,
+                             Quat& so) const
 {
     Vec3d temp_trans;
     Vec3d temp_scale;
@@ -592,10 +591,10 @@ void osg::Matrixf::decompose(osg::Vec3f& t,
 }
 
 
-void osg::Matrixf::decompose(osg::Vec3d& t,
-                             osg::Quat& r,
-                             osg::Vec3d& s,
-                             osg::Quat& so) const
+void Matrixf::decompose(Vec3d& t,
+                             Quat& r,
+                             Vec3d& s,
+                             Quat& so) const
 {
     MatrixDecomposition::_affineParts parts;
     MatrixDecomposition::_HMatrix hmatrix;
@@ -634,10 +633,10 @@ void osg::Matrixf::decompose(osg::Vec3d& t,
     so.set(parts.u.x, parts.u.y, parts.u.z, parts.u.w);
 }
 
-void osg::Matrixd::decompose(osg::Vec3f& t,
-                             osg::Quat& r,
-                             osg::Vec3f& s,
-                             osg::Quat& so) const
+void Matrixd::decompose(Vec3f& t,
+                        Quat& r,
+                        Vec3f& s,
+                        Quat& so) const
 {
     Vec3d temp_trans;
     Vec3d temp_scale;
@@ -646,10 +645,10 @@ void osg::Matrixd::decompose(osg::Vec3f& t,
     s = temp_scale;
 }
 
-void osg::Matrixd::decompose(osg::Vec3d& t,
-                             osg::Quat& r,
-                             osg::Vec3d& s,
-                             osg::Quat& so) const
+void Matrixd::decompose(Vec3d& t,
+                        Quat& r,
+                        Vec3d& s,
+                        Quat& so) const
 {
     MatrixDecomposition::_affineParts parts;
     MatrixDecomposition::_HMatrix hmatrix;
@@ -690,3 +689,4 @@ void osg::Matrixd::decompose(osg::Vec3d& t,
 
 }
 }
+

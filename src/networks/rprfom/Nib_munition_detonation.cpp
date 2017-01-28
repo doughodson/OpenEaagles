@@ -7,7 +7,7 @@
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
 namespace oe {
@@ -61,9 +61,9 @@ bool Nib::munitionDetonationMsgFactory(const double)
    // Location & Velocity
    // ---
    {
-      osg::Vec3d geocPos = getDrPosition();
-      osg::Vec3d geocVel = getDrVelocity();
-      osg::Vec3d geocAcc = getDrAcceleration();
+      base::Vec3d geocPos = getDrPosition();
+      base::Vec3d geocVel = getDrVelocity();
+      base::Vec3d geocAcc = getDrAcceleration();
 
       // World Coordinates
       WorldLocationStruct detonationLocation;

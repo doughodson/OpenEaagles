@@ -4,13 +4,10 @@
 
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
-//#include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
-
 namespace base { class Number; }
-
 namespace models {
 class Player;
 class Track;
@@ -82,7 +79,7 @@ protected:
    virtual void weaponDynamics(const double dt) override;
 
 private:
-    virtual bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3d* const los, osg::Vec3d* const vel, osg::Vec3d* const posx) const;
+    virtual bool calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const;
 
    // ---
    // Default guidance & dynamics parameters

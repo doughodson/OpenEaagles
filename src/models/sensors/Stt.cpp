@@ -44,7 +44,7 @@ void Stt::dynamics(const double dt)
             // ---
 
             // Relative position vector to track
-            osg::Vec3d dpoi = trackList[0]->getPosition();
+            base::Vec3d dpoi = trackList[0]->getPosition();
 
             // rotate to ownship heading
             double sinHdg = getOwnship()->getSinHeading();

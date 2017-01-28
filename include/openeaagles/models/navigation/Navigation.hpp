@@ -68,7 +68,7 @@ public:
    virtual double getPitchDeg() const;                      // Returns system pitch (degs)
    virtual double getRollDeg() const;                       // Returns system roll  (degs)
    virtual double getHeadingDeg() const;                    // Returns system true heading (degs)
-   virtual const osg::Matrixd& getRotMat() const;           // Rotational Matrix: (inertial to body)
+   virtual const base::Matrixd& getRotMat() const;          // Rotational Matrix: (inertial to body)
                                                             //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw]
                                                             //    Usage:
                                                             //       Vb = M * Vi
@@ -94,8 +94,8 @@ public:
    virtual double getGroundSpeedKts() const;                // Returns ground speed (kts)
    virtual double getTrueAirspeedKts() const;               // Returns true airspeed (kts)
    virtual double getGroundTrackDeg() const;                // Returns true ground track (degs)
-   virtual const osg::Vec3d& getVelocity() const;           // Returns velocity vector (m/s)
-   virtual const osg::Vec3d& getAcceleration() const;       // Returns acceleration vector (m/s/s)
+   virtual const base::Vec3d& getVelocity() const;          // Returns velocity vector (m/s)
+   virtual const base::Vec3d& getAcceleration() const;      // Returns acceleration vector (m/s/s)
 
     // Steering Data
    virtual bool isNavSteeringValid() const;                 // Is system steering data valid?
@@ -121,8 +121,8 @@ public:
    virtual const Bullseye* getBullseye() const;             // Returns the current bullseye (const version)
 
     // FEBA [ North East ] (Nautical Miles)
-    virtual int getFeba(osg::Vec2d* const points, const int max) const;
-    virtual bool setFeba(osg::Vec2d* const points, const int n);
+    virtual int getFeba(base::Vec2d* const points, const int max) const;
+    virtual bool setFeba(base::Vec2d* const points, const int n);
 
     // set/change the current route; does not change the initial route used by reset()
     virtual bool setRoute(Route* const msg);
@@ -161,8 +161,8 @@ protected:
    bool setGroundSpeedKts(const double kts);
    bool setTrueAirspeedKts(const double kts);
    bool setGroundTrackDeg(const double degs);
-   bool setVelocity(const osg::Vec3d& v);
-   bool setAcceleration(const osg::Vec3d& v);
+   bool setVelocity(const base::Vec3d& v);
+   bool setAcceleration(const base::Vec3d& v);
    bool setVelocityDataValid(const bool dataValidFlg);
 
    // Steering Data
@@ -199,7 +199,7 @@ private:
    bool        posValid;       // Position data is valid
 
    // Attitude data
-   osg::Matrixd rm;            // Rotational Matrix (inertial to body)
+   base::Matrixd rm;           // Rotational Matrix (inertial to body)
    double      heading;        // True Heading             (degs)
    double      pitch;          // Pitch angle              (degs)
    double      roll;           // Roll angle               (degs)
@@ -211,13 +211,13 @@ private:
    bool        magVarValid;    // Mag var data is valid
 
    // Winds
-   bool        windsValid;       // Are the winds valid?
-   double      windDirD;         // Returns the wind 'from' direction (degs)
-   double      windSpdKts;       // Returns the wind speed (kts)
+   bool        windsValid;     // Are the winds valid?
+   double      windDirD;       // Returns the wind 'from' direction (degs)
+   double      windSpdKts;     // Returns the wind speed (kts)
 
    // Velocity Data
-   osg::Vec3d  velVec;         // Velocity Vector (earth)      (m/sec)       [ ue, ve, we ] NED
-   osg::Vec3d  accelVec;       // Acceleration Vector (earth)  ((m/sec)/sec) [ due, dve, dwe ] NED
+   base::Vec3d  velVec;        // Velocity Vector (earth)      (m/sec)       [ ue, ve, we ] NED
+   base::Vec3d  accelVec;      // Acceleration Vector (earth)  ((m/sec)/sec) [ due, dve, dwe ] NED
    double      gs;             // Ground speed             (kts)
    double      tas;            // True Air Speed           (kts)
    double      tk;             // Ground Track             (degs)
@@ -240,7 +240,7 @@ private:
    double      initUTC;        // Initial UTC (from slots)
 
    // FEBA Line
-   osg::Vec2d*     feba;        // FEBA Points;  [ North East ]   (nm)
+   base::Vec2d* feba;          // FEBA Points;  [ North East ]   (nm)
    int            nFeba;       // Number of FEBA points
 
    // Ref position

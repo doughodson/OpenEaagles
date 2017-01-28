@@ -4,8 +4,6 @@
 #include "openeaagles/models/Emission.hpp"
 #include "openeaagles/models/Tdb.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/List.hpp"
@@ -14,7 +12,9 @@
 
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -316,7 +316,7 @@ void Gimbal::servoController(const double dt)
       // ---
       // Compute rate
       // ---
-      osg::Vec3d rate1( 0.0f, 0.0f, 0.0f );
+      base::Vec3d rate1( 0.0f, 0.0f, 0.0f );
       if (servoMode == POSITION_SERVO) {
 
          // position servo: drive the gimbal toward the commanded position
@@ -334,15 +334,15 @@ void Gimbal::servoController(const double dt)
          //   Electronic, slow-slew: rate is commanded rate (unlimited)
          // ---
          if (isFastSlewMode() && type == MECHANICAL) {
-               osg::Vec3d step = maxRate * dt;
+               base::Vec3d step = maxRate * dt;
                limitVec(rate1, step);
          }
          else if (isSlowSlewMode()) {
-               osg::Vec3d cmdRate1 = cmdRate;
+               base::Vec3d cmdRate1 = cmdRate;
                if (type == MECHANICAL) {
                   limitVec(cmdRate1, maxRate);
                }
-               osg::Vec3d step = cmdRate1 * dt;
+               base::Vec3d step = cmdRate1 * dt;
                limitVec(rate1, step);
          }
 
@@ -364,7 +364,7 @@ void Gimbal::servoController(const double dt)
       // Compute a new gimbal position
       //    newPos = pos{old} + dt*rate
       // ---
-      osg::Vec3d newPos = pos + (rate*dt);
+      base::Vec3d newPos = pos + (rate*dt);
       newPos[AZ_IDX]   = base::angle::aepcdRad(newPos[AZ_IDX]);
       newPos[ELEV_IDX] = base::angle::aepcdRad(newPos[ELEV_IDX]);
       newPos[ROLL_IDX] = base::angle::aepcdRad(newPos[ROLL_IDX]);
@@ -635,16 +635,16 @@ bool Gimbal::setRollLimits(const double lowerLim, const double upperLim)
 //------------------------------------------------------------------------------
 // setCmdRate() -- put the gimbal servo in rate mode and set the commanded rate.
 //------------------------------------------------------------------------------
-bool Gimbal::setCmdRate(const osg::Vec3d& r)
+bool Gimbal::setCmdRate(const base::Vec3d& r)
 {
    cmdRate = r;
    setServoMode(RATE_SERVO);
    return true;
 }
 
-bool Gimbal::setCmdRate(const osg::Vec2d& r)
+bool Gimbal::setCmdRate(const base::Vec2d& r)
 {
-   osg::Vec3d t;
+   base::Vec3d t;
    t[AZ_IDX]   = r[AZ_IDX];
    t[ELEV_IDX] = r[ELEV_IDX];
    t[ROLL_IDX] = 0;  // default roll to zero
@@ -669,12 +669,12 @@ bool Gimbal::setCmdRate(const double azRate, const double elRate)
 //------------------------------------------------------------------------------
 // setCmdPos() -- put the gimbal servo in position mode and set the commanded position.
 //------------------------------------------------------------------------------
-bool Gimbal::setCmdPos(const osg::Vec3d& p)
+bool Gimbal::setCmdPos(const base::Vec3d& p)
 {
    // ---
    // Limit range from -pi to pi
    // ---
-   osg::Vec3d newPos = p;
+   base::Vec3d newPos = p;
    newPos[AZ_IDX]   = base::angle::aepcdRad(newPos[AZ_IDX]);
    newPos[ELEV_IDX] = base::angle::aepcdRad(newPos[ELEV_IDX]);
    newPos[ROLL_IDX] = base::angle::aepcdRad(newPos[ROLL_IDX]);
@@ -742,9 +742,9 @@ bool Gimbal::setCmdPos(const osg::Vec3d& p)
    return true;
 }
 
-bool Gimbal::setCmdPos(const osg::Vec2d& p)
+bool Gimbal::setCmdPos(const base::Vec2d& p)
 {
-   osg::Vec3d t;
+   base::Vec3d t;
    t[AZ_IDX]   = p[AZ_IDX];
    t[ELEV_IDX] = p[ELEV_IDX];
    t[ROLL_IDX] = 0;  // default roll to zero
@@ -753,7 +753,7 @@ bool Gimbal::setCmdPos(const osg::Vec2d& p)
 
 bool Gimbal::setCmdPos(const double az, const double el, const double roll)
 {
-   osg::Vec3d t;
+   base::Vec3d t;
    t[AZ_IDX]   = az;
    t[ELEV_IDX] = el;
    t[ROLL_IDX] = roll;
@@ -1245,11 +1245,11 @@ bool Gimbal::setSlotUseOwnHeadingOnly(const base::Number* const msg)
 void Gimbal::updateMatrix()
 {
    // Start with a rotational matrix
-   osg::Matrixd mm1;
+   base::Matrixd mm1;
    base::nav::computeRotationalMatrix( getRoll(), getElevation(), getAzimuth(), &mm1);
 
    // Post multiply by a translate to our location
-   osg::Matrixd rr;
+   base::Matrixd rr;
    rr.makeTranslate(getLocation());
    mm1 *= rr;
 
@@ -1272,7 +1272,7 @@ bool Gimbal::isPositioned(const double tol0) const
    double tol = tol0;
    if (tol < 0) tol = defaultTolerance;
 
-   osg::Vec3d t;
+   base::Vec3d t;
    t[AZ_IDX]   = base::angle::aepcdRad( pos[AZ_IDX]   - cmdPos[AZ_IDX] );
    t[ELEV_IDX] = base::angle::aepcdRad( pos[ELEV_IDX] - cmdPos[ELEV_IDX] );
    t[ROLL_IDX] = base::angle::aepcdRad( pos[ROLL_IDX] - cmdPos[ROLL_IDX] );
@@ -1290,7 +1290,7 @@ bool Gimbal::isAtLimits() const
 //------------------------------------------------------------------------------
 // limitVec(Vec,lim) -- symmetrical limit of a vector
 //------------------------------------------------------------------------------
-void Gimbal::limitVec(osg::Vec2d& vec, const osg::Vec2d& lim)
+void Gimbal::limitVec(base::Vec2d& vec, const base::Vec2d& lim)
 {
   double l0 = std::fabs(lim[0]);
   if (vec[0] >  l0)  { vec[0] =  l0; }
@@ -1301,7 +1301,7 @@ void Gimbal::limitVec(osg::Vec2d& vec, const osg::Vec2d& lim)
   if (vec[1] < -l1)  { vec[1] = -l1; }
 }
 
-void Gimbal::limitVec(osg::Vec3d& vec, const osg::Vec3d& lim)
+void Gimbal::limitVec(base::Vec3d& vec, const base::Vec3d& lim)
 {
   double l0 = std::fabs(lim[0]);
   if (vec[0] >  l0)  { vec[0] =  l0; }
@@ -1319,14 +1319,14 @@ void Gimbal::limitVec(osg::Vec3d& vec, const osg::Vec3d& lim)
 //------------------------------------------------------------------------------
 // limitVec(vec,lower,upper) -- asymmetrical limit of a vector
 //------------------------------------------------------------------------------
-void Gimbal::limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul)
+void Gimbal::limitVec(base::Vec2d& vec, const base::Vec2d& ll, const base::Vec2d& ul)
 {
   if (vec[0] > ul[0])  { vec[0] = ul[0]; }
   if (vec[0] < ll[0])  { vec[0] = ll[0]; }
   if (vec[1] > ul[1])  { vec[1] = ul[1]; }
   if (vec[1] < ll[1])  { vec[1] = ll[1]; }
 }
-void Gimbal::limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& ul)
+void Gimbal::limitVec(base::Vec3d& vec, const base::Vec3d& ll, const base::Vec3d& ul)
 {
   if (vec[0] > ul[0])  { vec[0] = ul[0]; }
   if (vec[0] < ll[0])  { vec[0] = ll[0]; }

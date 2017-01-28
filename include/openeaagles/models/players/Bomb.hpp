@@ -5,9 +5,7 @@
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
 namespace oe {
-
 namespace base { class Identifier; }
-
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -53,26 +51,26 @@ public:
     // Predict bomb's TOF and final position.
     // -- positions and ground plane are relative to a common ref point.
     virtual bool impactPrediction(
-      const osg::Vec3d* const initPos, // Initial position (meters)
-      const osg::Vec3d* const initVel, // Initial velocity (meters per sec)
-      const double groundPlane,        // Ground plane (meters)
-      const double dt,                 // Time step (sec)
-      const double maxTime,            // Max TOF (sec)
-      osg::Vec3d* const finalPos,      // Final position (meters)
-      double* const tof                // TOF (sec)
+      const base::Vec3d* const initPos, // Initial position (meters)
+      const base::Vec3d* const initVel, // Initial velocity (meters per sec)
+      const double groundPlane,         // Ground plane (meters)
+      const double dt,                  // Time step (sec)
+      const double maxTime,             // Max TOF (sec)
+      base::Vec3d* const finalPos,      // Final position (meters)
+      double* const tof                 // TOF (sec)
     ) const;
 
     // Predict bomb's TOF and final position.
     // -- positions and ground plane are relative to a common ref point.
     static bool weaponImpactPrediction(
-      const osg::Vec3d* const initPos, // Initial position (meters)
-      const osg::Vec3d* const initVel, // Initial velocity (meters per sec)
-      const double groundPlane,        // Ground plane (meters)
-      const double dt,                 // Time step (sec)
-      const double maxTime,            // Max TOF (sec)
-      const double dragIndex,          // Drag index
-      osg::Vec3d* const finalPos,      // Final position (meters)
-      double* const tof                // TOF (sec)
+      const base::Vec3d* const initPos, // Initial position (meters)
+      const base::Vec3d* const initVel, // Initial velocity (meters per sec)
+      const double groundPlane,         // Ground plane (meters)
+      const double dt,                  // Time step (sec)
+      const double maxTime,             // Max TOF (sec)
+      const double dragIndex,           // Drag index
+      base::Vec3d* const finalPos,      // Final position (meters)
+      double* const tof                 // TOF (sec)
     );
 
     virtual const char* getDescription() const override;
@@ -103,14 +101,14 @@ protected:
 private:
     void initData();
 
-    double    dragIndex;             // Drag Index
+    double    dragIndex;         // Drag Index
 
     // common guidance stuff
-    osg::Vec3d missDistRef;           // Miss distance vector (ref sys)  (meters)
-    osg::Vec3d tgtRangeRef;           // Target range vector  (ref sys)  (meters)
-    double     cmdStrAz;              // Commanded steering azimuth   (radians)
-    double     cmdStrEl;              // Commanded steering elevation (radians)
-    bool       guidanceValid;         // is guidance data valid.
+    base::Vec3d missDistRef;     // Miss distance vector (ref sys)  (meters)
+    base::Vec3d tgtRangeRef;     // Target range vector  (ref sys)  (meters)
+    double     cmdStrAz;         // Commanded steering azimuth   (radians)
+    double     cmdStrEl;         // Commanded steering elevation (radians)
+    bool       guidanceValid;    // is guidance data valid.
 
     // Common arming stuff
     unsigned int arming;    // Arming option

@@ -15,7 +15,7 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/units/Times.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 #include "openeaagles/models/WorldModel.hpp"
@@ -725,8 +725,8 @@ void AirTrkMgr::processTrackList(const double dt)
    // ---
    // 1) Apply ownship dynamics to current track positions and age the tracks by delta time
    // ---
-   osg::Vec3d osVel = ownship->getVelocity();
-   osg::Vec3d osAccel = ownship->getAcceleration();
+   base::Vec3d osVel = ownship->getVelocity();
+   base::Vec3d osAccel = ownship->getAcceleration();
    const double osGndTrk = ownship->getGroundTrack();
 
    base::lock(trkListLock);
@@ -745,7 +745,7 @@ void AirTrkMgr::processTrackList(const double dt)
    Emission* emissions[MAX_REPORTS];
    double newSignal[MAX_REPORTS];
    double newRdot[MAX_REPORTS];
-   osg::Vec3d tgtPos[MAX_REPORTS];
+   base::Vec3d tgtPos[MAX_REPORTS];
    double tmp =0.0;
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
 
@@ -810,7 +810,7 @@ void AirTrkMgr::processTrackList(const double dt)
    // ---
    // 5) Create inputs for current tracks
    // ---
-   osg::Vec3d u[MAX_TRKS];
+   base::Vec3d u[MAX_TRKS];
    double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
 
@@ -853,9 +853,9 @@ void AirTrkMgr::processTrackList(const double dt)
    base::lock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
-      osg::Vec3d tpos = tracks[i]->getPosition();
-      osg::Vec3d tvel = tracks[i]->getVelocity();
-      osg::Vec3d tacc = tracks[i]->getAcceleration();
+      base::Vec3d tpos = tracks[i]->getPosition();
+      base::Vec3d tvel = tracks[i]->getVelocity();
+      base::Vec3d tacc = tracks[i]->getAcceleration();
 
       if (haveU[i]) {
          // Have Input vector U, use ...
@@ -1168,8 +1168,8 @@ void GmtiTrkMgr::processTrackList(const double dt)
    // ---
    // 1) Apply ownship dynamics to current track positions and age the tracks by delta time
    // ---
-   const osg::Vec3d osVel = ownship->getVelocity();
-   const osg::Vec3d osAccel = ownship->getAcceleration();
+   const base::Vec3d osVel = ownship->getVelocity();
+   const base::Vec3d osAccel = ownship->getAcceleration();
    const double osGndTrk = ownship->getGroundTrack();
    base::lock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
@@ -1187,7 +1187,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    Emission* emissions[MAX_REPORTS];
    double newSignal[MAX_REPORTS];
    double newRdot[MAX_REPORTS];
-   osg::Vec3d tgtPos[MAX_REPORTS];
+   base::Vec3d tgtPos[MAX_REPORTS];
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
       Player* tgt = em->getTarget();
@@ -1240,7 +1240,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
    // ---
    // 5) Create inputs for current tracks
    // ---
-   osg::Vec3d u[MAX_TRKS];
+   base::Vec3d u[MAX_TRKS];
    double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
    base::lock(trkListLock);
@@ -1282,9 +1282,9 @@ void GmtiTrkMgr::processTrackList(const double dt)
    base::lock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
-      const osg::Vec3d tpos = tracks[i]->getPosition();
-      const osg::Vec3d tvel = tracks[i]->getVelocity();
-      const osg::Vec3d tacc = tracks[i]->getAcceleration();
+      const base::Vec3d tpos = tracks[i]->getPosition();
+      const base::Vec3d tvel = tracks[i]->getVelocity();
+      const base::Vec3d tacc = tracks[i]->getAcceleration();
 
       if (haveU[i]) {
          // Have Input vector U, use ...
@@ -1470,8 +1470,8 @@ void RwrTrkMgr::processTrackList(const double dt)
    // ---
    // 1) Apply ownship dynamics to current track positions and age the tracks by delta time
    // ---
-   osg::Vec3d osVel = ownship->getVelocity();
-   osg::Vec3d osAccel = ownship->getAcceleration();
+   base::Vec3d osVel = ownship->getVelocity();
+   base::Vec3d osAccel = ownship->getAcceleration();
    double osGndTrk = ownship->getGroundTrack();
    base::lock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
@@ -1489,7 +1489,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    Emission* emissions[MAX_REPORTS];
    double newSignal[MAX_REPORTS];
    double newRdot[MAX_REPORTS];
-   osg::Vec3d tgtPos[MAX_REPORTS];
+   base::Vec3d tgtPos[MAX_REPORTS];
    double tmp = 0.0;
    for (Emission* em = getReport(&tmp); em != nullptr; em = getReport(&tmp)) {
       if (nReports < MAX_REPORTS) {
@@ -1538,7 +1538,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    // ---
    // 5) Create input vectors for the current tracks
    // ---
-   osg::Vec3d u[MAX_TRKS];
+   base::Vec3d u[MAX_TRKS];
    //double age[MAX_TRKS];
    bool haveU[MAX_TRKS];
    base::lock(trkListLock);
@@ -1580,9 +1580,9 @@ void RwrTrkMgr::processTrackList(const double dt)
    base::lock(trkListLock);
    for (unsigned int i = 0; i < nTrks; i++) {
       // Save X(k)
-      osg::Vec3d tpos = tracks[i]->getPosition();
-      osg::Vec3d tvel = tracks[i]->getVelocity();
-      osg::Vec3d tacc = tracks[i]->getAcceleration();
+      base::Vec3d tpos = tracks[i]->getPosition();
+      base::Vec3d tvel = tracks[i]->getVelocity();
+      base::Vec3d tacc = tracks[i]->getAcceleration();
 
       if (haveU[i]) {
          // Have Input vector U, use ...

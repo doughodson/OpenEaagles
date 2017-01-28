@@ -6,7 +6,6 @@
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Frequencies.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
 
 #include <cmath>
 

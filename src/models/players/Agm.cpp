@@ -40,12 +40,12 @@ Agm::Agm()
 //------------------------------------------------------------------------------
 // calculateVectors() --
 //------------------------------------------------------------------------------
-bool Agm::calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3d* const los, osg::Vec3d* const vel, osg::Vec3d* const posx) const
+bool Agm::calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
 {
    if (isTargetPositionValid()) {
-      osg::Vec3d p0 = getPosition();
-      osg::Vec3d tgtPos = getTargetPosition();
-      osg::Vec3d vel0(0.0, 0.0, 0.0);     // zero velocity
+      base::Vec3d p0 = getPosition();
+      base::Vec3d tgtPos = getTargetPosition();
+      base::Vec3d vel0(0.0, 0.0, 0.0);     // zero velocity
       if (los != nullptr) *los = tgtPos - p0;
       if (vel != nullptr) *vel = vel0;
       if (posx != nullptr) *posx = tgtPos;
@@ -54,13 +54,13 @@ bool Agm::calculateVectors(const Player* const tgt, const Track* const trk, osg:
       //los = trk->getPosition();
       //vel = trk->getVelocity();
       const Player* tgt0 = trk->getTarget();
-      osg::Vec3d p0 = getPosition();
+      base::Vec3d p0 = getPosition();
       if (los != nullptr) *los = tgt0->getPosition() -  p0;
       if (vel != nullptr) *vel = tgt0->getVelocity();
       if (posx != nullptr) *posx = tgt0->getPosition();
    }
    else if (tgt != nullptr) {
-      osg::Vec3d p0 = getPosition();
+      base::Vec3d p0 = getPosition();
       if (los != nullptr) *los = tgt->getPosition() -  p0;
       if (vel != nullptr) *vel = tgt->getVelocity();
       if (posx != nullptr) *posx = tgt->getPosition();

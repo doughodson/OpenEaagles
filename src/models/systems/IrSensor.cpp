@@ -20,7 +20,8 @@
 #include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Integer.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -345,12 +346,12 @@ bool IrSensor::calculateIrQueryReturn(IrQueryMsg* const msg)
          outMsg->setAzimuthAoi(msg->getAzimuthAoi());
          outMsg->setElevationAoi(msg->getElevationAoi());
 
-         osg::Vec3d los = msg->getLosVec();
+         base::Vec3d los = msg->getLosVec();
 
          {
             // This is for non-ownHdgOnly-stabilized gimbal angles
-            osg::Vec4d los0( los.x(), los.y(), los.z(), 0.0 );
-            osg::Vec4d los_vec = ownship->getRotMat() * los0;
+            base::Vec4d los0( los.x(), los.y(), los.z(), 0.0 );
+            base::Vec4d los_vec = ownship->getRotMat() * los0;
             double ra = std::sqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
             double az = std::atan2(los_vec.y(), los_vec.x());
             double el = std::atan2(-los_vec.z(), ra);

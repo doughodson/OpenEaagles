@@ -13,7 +13,7 @@
 #define __oe_Energies_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/energy_utils.hpp"
 #include <iostream>
 
 namespace oe {

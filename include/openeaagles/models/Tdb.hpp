@@ -100,28 +100,28 @@ public:
    // ---
 
    // The array of target ranges (m)
-   const double* getTargetRanges() const              { return ranges; }
+   const double* getTargetRanges() const                    { return ranges; }
 
    // The array of target range rates (m/s)
-   const double* getTargetRangeRates() const          { return rngRates; }
+   const double* getTargetRangeRates() const                { return rngRates; }
 
    // The array of normalized LOS vectors (gimbal to target) in Gimbal coordinates ()
-   const osg::Vec3d* getGimbalLosVectors() const      { return losG; }
+   const base::Vec3d* getGimbalLosVectors() const           { return losG; }
 
    // The array of ownship to target normalized LOS vectors (ownship's NED)
-   const osg::Vec3d* getLosVectors() const            { return losO2T; }
+   const base::Vec3d* getLosVectors() const                 { return losO2T; }
 
    // The array of target to ownship normalized LOS vectors (target's NED)
-   const osg::Vec3d* getTargetLosVectors() const      { return losT2O; }
+   const base::Vec3d* getTargetLosVectors() const           { return losT2O; }
 
    // Compute angle off antenna boresight (radians)
-   const double* getBoresightErrorAngles() const      { return aar; }
+   const double* getBoresightErrorAngles() const            { return aar; }
 
    // Compute azimuth off boresight (radians)
-   const double* getBoresightAzimuthErrors() const    { return aazr; }
+   const double* getBoresightAzimuthErrors() const          { return aazr; }
 
    // Compute elevation off boresight (radians)
-   const double* getBoresightElevationErrors() const  { return aelr; }
+   const double* getBoresightElevationErrors() const        { return aelr; }
 
 protected:
    Tdb();
@@ -148,9 +148,9 @@ protected:
    unsigned int maxTargets;   // Max number of targets (i.e., size of the arrays)
    unsigned int numTgts;      // Number of targets
 
-   osg::Vec3d*  losG;         // Normalized LOS vector (gimbal to target) in Gimbal coord 
-   osg::Vec3d*  losO2T;       // Ownship to target normalized LOS vector (ownship's NED)
-   osg::Vec3d*  losT2O;       // Target to ownship normalized LOS vector (target's NED) 
+   base::Vec3d*  losG;        // Normalized LOS vector (gimbal to target) in Gimbal coord 
+   base::Vec3d*  losO2T;      // Ownship to target normalized LOS vector (ownship's NED)
+   base::Vec3d*  losT2O;      // Target to ownship normalized LOS vector (target's NED) 
 
    double*     ranges;        // Range to target (meters)
    double*     rngRates;      // Range Rate (m/s)

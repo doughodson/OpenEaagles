@@ -77,9 +77,9 @@ public:
    virtual bool setBulletType(Bullet* const b);
 
    // Gun position relative to ownship player
-   const osg::Vec3d& getPosition() const           { return posVec; }
-   const osg::Vec3d& getAngles() const             { return angles; }
-   const osg::Matrixd& getRotMat() const           { return rm; }
+   const base::Vec3d& getPosition() const          { return posVec; }
+   const base::Vec3d& getAngles() const            { return angles; }
+   const base::Matrixd& getRotMat() const          { return rm; }
    double getRoll() const                          { return angles[0]; }
    double getPitch() const                         { return angles[1]; }
    double getYaw() const                           { return angles[2]; }
@@ -104,8 +104,8 @@ protected:
 
    virtual void initBullet();
    virtual void burstFrame();
-   virtual osg::Vec3d computeInitBulletPosition();
-   virtual osg::Vec3d computeInitBulletVelocity();
+   virtual base::Vec3d computeInitBulletPosition();
+   virtual base::Vec3d computeInitBulletVelocity();
 
    virtual void process(const double dt) override;
 
@@ -125,9 +125,9 @@ private:
    bool     armed;            // Armed flag
    bool     unlimited;        // Unlimited bullets (aka old western movie mode)
 
-   osg::Vec3d posVec;         // Position vector; relative to ownship body axis (m)
-   osg::Vec3d angles;         // (Euler) angles; relative to ownship body axis (rad)
-   osg::Matrixd rm;           // Rotational Matrix; relative to ownship body axis
+   base::Vec3d posVec;        // Position vector; relative to ownship body axis (m)
+   base::Vec3d angles;        // (Euler) angles; relative to ownship body axis (rad)
+   base::Matrixd rm;          // Rotational Matrix; relative to ownship body axis
 };
 
 }

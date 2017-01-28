@@ -17,7 +17,7 @@
 #include "./Vec3f"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose float quad. Uses include representation
   * of color coordinates.
@@ -107,18 +107,18 @@ class Vec4f
 
         inline unsigned int asABGR() const
         {
-            return (unsigned int)clampTo((_v[0]*255.0f),0.0f,255.0f)<<24 |
-                   (unsigned int)clampTo((_v[1]*255.0f),0.0f,255.0f)<<16 |
-                   (unsigned int)clampTo((_v[2]*255.0f),0.0f,255.0f)<<8  |
-                   (unsigned int)clampTo((_v[3]*255.0f),0.0f,255.0f);
+            return (unsigned int)osg::clampTo((_v[0]*255.0f),0.0f,255.0f)<<24 |
+                   (unsigned int)osg::clampTo((_v[1]*255.0f),0.0f,255.0f)<<16 |
+                   (unsigned int)osg::clampTo((_v[2]*255.0f),0.0f,255.0f)<<8  |
+                   (unsigned int)osg::clampTo((_v[3]*255.0f),0.0f,255.0f);
         }
 
         inline unsigned int asRGBA() const
         {
-            return (unsigned int)clampTo((_v[3]*255.0f),0.0f,255.0f)<<24 |
-                   (unsigned int)clampTo((_v[2]*255.0f),0.0f,255.0f)<<16 |
-                   (unsigned int)clampTo((_v[1]*255.0f),0.0f,255.0f)<<8  |
-                   (unsigned int)clampTo((_v[0]*255.0f),0.0f,255.0f);
+            return (unsigned int)osg::clampTo((_v[3]*255.0f),0.0f,255.0f)<<24 |
+                   (unsigned int)osg::clampTo((_v[2]*255.0f),0.0f,255.0f)<<16 |
+                   (unsigned int)osg::clampTo((_v[1]*255.0f),0.0f,255.0f)<<8  |
+                   (unsigned int)osg::clampTo((_v[0]*255.0f),0.0f,255.0f);
         }
 
         /** Returns true if all components have values that are not NaN. */
@@ -268,4 +268,3 @@ inline Vec4f componentDivide(const Vec4f& lhs, const Vec4f& rhs)
 }
 
 #endif
-

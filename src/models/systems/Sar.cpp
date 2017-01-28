@@ -7,12 +7,12 @@
 
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -220,15 +220,15 @@ void Sar::process(const double dt)
          const double refLat = s->getRefLatitude();
          const double refLon = s->getRefLongitude();
 
-         osg::Vec3d pos;
+         base::Vec3d pos;
          base::nav::convertLL2PosVec(
             refLat, refLon,                           // Ref point (at sea level)
             getStarePointLatitude(), getStarePointLongitude(), getStarePointElevation(),
             &pos); // x,y,z  NED
 
          // Platform (ownship) coord and then body
-         const osg::Vec3d posP = pos - getOwnship()->getPosition();
-         const osg::Vec3d posB = getOwnship()->getRotMat() * posP;
+         const base::Vec3d posP = pos - getOwnship()->getPosition();
+         const base::Vec3d posB = getOwnship()->getRotMat() * posP;
 
          // Convert to az/el
          double tgt_az = 0.0;   // Angle (degs)
@@ -327,7 +327,7 @@ void Sar::xyz2AzEl(const double x, const double y, const double z, double* const
    }
 }
 
-void Sar::xyz2AzEl(const osg::Vec3d& vec, double* const az, double* const el)
+void Sar::xyz2AzEl(const base::Vec3d& vec, double* const az, double* const el)
 {
    xyz2AzEl(vec.x(), vec.y(), vec.z(), az, el);
 }

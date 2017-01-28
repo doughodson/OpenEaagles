@@ -7,8 +7,8 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 // environment models
 #include "openeaagles/models/environment/AbstractAtmosphere.hpp"
@@ -204,7 +204,7 @@ double WorldModel::getMaxRefRange() const
 }
 
 // World transformation matrix:
-const osg::Matrixd& WorldModel::getWorldMat() const
+const base::Matrixd& WorldModel::getWorldMat() const
 {
    return wm;
 }

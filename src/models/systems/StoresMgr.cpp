@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// classes: StoresMgr, SimpleStoresMgr
+// Classes: StoresMgr, SimpleStoresMgr
 //------------------------------------------------------------------------------
 #include "openeaagles/models/systems/StoresMgr.hpp"
 

@@ -33,7 +33,7 @@ BEGIN_SLOT_MAP(MonitorMetrics)
 END_SLOT_MAP()
 
 MonitorMetrics::MonitorMetrics(const Table1* redLumTbl, const Table1* greenLumTbl, const Table1* blueLumTbl,
-                               const osg::Matrixd& phosphorCoordMatrix, const osg::Vec3d& whiteRGB, const osg::Vec3d& whiteCIE)
+                               const Matrixd& phosphorCoordMatrix, const Vec3d& whiteRGB, const Vec3d& whiteCIE)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -168,8 +168,8 @@ bool MonitorMetrics::setSlotWhiteCIE(const List* whiteCIE)
 
 bool MonitorMetrics::computeMatrix()
 {
-    osg::Matrixd phosInv;
-    osg::Vec3d k;
+    Matrixd phosInv;
+    Vec3d k;
 
     // Invert phosphor matrix
     if ( phosInv.invert( phosphorCoordinates ) == false ) {
@@ -192,9 +192,9 @@ bool MonitorMetrics::computeMatrix()
     return true;
 }
 
-void MonitorMetrics::cie2rgb(osg::Vec4d& rgba, const osg::Vec3d& cie) const
+void MonitorMetrics::cie2rgb(Vec4d& rgba, const Vec3d& cie) const
 {
-    osg::Vec3d rgb, ciexyz;
+    Vec3d rgb, ciexyz;
 
     ciexyz.set(cie[Cie::X], cie[Cie::Y], 1-cie[Cie::X]-cie[Cie::Y]);
     rgb = transform * ciexyz;

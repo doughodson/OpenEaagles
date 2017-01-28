@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_area_utils_H__
-#define __oe_base_area_utils_H__
+#ifndef __oe_base_util_area_utils_H__
+#define __oe_base_util_area_utils_H__
 
 #include <cmath>
 

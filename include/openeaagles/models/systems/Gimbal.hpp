@@ -156,7 +156,7 @@ public:  // Public section
    ServoMode getServoMode() const                  { return servoMode; }
 
    // Returns the current position vector [ az el roll ] (radians)
-   const osg::Vec3d& getPosition() const           { return pos; }
+   const base::Vec3d& getPosition() const     { return pos; }
 
    double getAzimuth() const     { return pos[AZ_IDX]; }    // Returns current azimuth position (rad)
    double getElevation() const   { return pos[ELEV_IDX]; }  // Returns current elevation position (rad)
@@ -173,7 +173,7 @@ public:  // Public section
    // Returns true if the gimbal is at a 'physical' limit
    virtual bool isAtLimits() const;
 
-   const osg::Vec3d& getRates() const { return rate; }         // Returns the current rate vector (rad/sec)
+   const base::Vec3d& getRates() const { return rate; }        // Returns the current rate vector (rad/sec)
    double getAzimuthRate() const    { return rate[AZ_IDX]; }   // Returns current azimuth rate (rad/sec)
    double getElevationRate() const  { return rate[ELEV_IDX]; } // Returns current elevation rate (rad/sec)
    double getRollRate() const       { return rate[ROLL_IDX]; } // Returns current roll rate (rad/sec)
@@ -181,26 +181,26 @@ public:  // Public section
    bool isFastSlewMode() const      { return fastSlew; }       // Returns true if the servo is in the 'fast' slewing mode.
    bool isSlowSlewMode() const      { return !fastSlew; }      // Returns true if the servo is in the 'slow' slewing mode.
 
-   const osg::Vec3d& getCmdPosition() const { return cmdPos; } // Returns the commanded position vector [ az el roll ] (radians)
-   double getCmdAz() const          { return cmdPos[AZ_IDX]; } // Returns commanded azimuth position (rad)
-   double getCmdElev() const        { return cmdPos[ELEV_IDX]; }  // Returns commanded elevation position (rad)
-   double getCmdRoll() const        { return cmdPos[ROLL_IDX]; }  // Returns commanded roll position (rad)
+   const base::Vec3d& getCmdPosition() const { return cmdPos; }      // Returns the commanded position vector [ az el roll ] (radians)
+   double getCmdAz() const          { return cmdPos[AZ_IDX]; }       // Returns commanded azimuth position (rad)
+   double getCmdElev() const        { return cmdPos[ELEV_IDX]; }     // Returns commanded elevation position (rad)
+   double getCmdRoll() const        { return cmdPos[ROLL_IDX]; }     // Returns commanded roll position (rad)
 
-   const osg::Vec3d& getCmdRates() const { return cmdRate; }         // Returns the current rate vector (rad/sec)
+   const base::Vec3d& getCmdRates() const { return cmdRate; }        // Returns the current rate vector (rad/sec)
    double getCmdAzRate() const         { return cmdRate[AZ_IDX]; }   // Returns commanded azimuth rate (rad/sec)
    double getCmdElevRate() const       { return cmdRate[ELEV_IDX]; } // Returns commanded elevation rate (rad/sec)
    double getCmdRollRate() const       { return cmdRate[ROLL_IDX]; } // Returns commanded roll rate (rad/sec)
 
-   const osg::Vec3d& getLocation() const  { return location; } // Returns the location vector of the gimbal on its parent container  (meters)
-   const osg::Matrixd& getRotMat() const { return tm; }        // Returns the gimbal's rotational matrix
-                                                               //    body (nose/right/down) <== > this.gimbal(x,y,z)
-                                                               //    Usage:
-                                                               //       Vg = M * Vb
-                                                               //       Vb  = Vg * M
-                                                               //    Where:
-                                                               //       M = Rx[roll] * Ry[pitch] * Rz[yaw] * T[xyz] * M[container]
-                                                               //       Vg is a vector in gimbal coordinates
-                                                               //       Vb is a vector in body coordinates
+   const base::Vec3d& getLocation() const  { return location; }      // Returns the location vector of the gimbal on its parent container  (meters)
+   const base::Matrixd& getRotMat() const { return tm; }             // Returns the gimbal's rotational matrix
+                                                                     //    body (nose/right/down) <== > this.gimbal(x,y,z)
+                                                                     //    Usage:
+                                                                     //       Vg = M * Vb
+                                                                     //       Vb  = Vg * M
+                                                                     //    Where:
+                                                                     //       M = Rx[roll] * Ry[pitch] * Rz[yaw] * T[xyz] * M[container]
+                                                                     //       Vg is a vector in gimbal coordinates
+                                                                     //       Vb is a vector in body coordinates
 
    void getAzimuthLimits(double* const leftLim, double* const rightLim) const;   // Returns the physical azimuth limits (rad)
    void getElevationLimits(double* const lowerLim, double* const upperLim) const;// Returns the physical elevation limits (rad)
@@ -244,12 +244,12 @@ public:  // Public section
    virtual bool setMaxRates(const double azMaxRate, const double ezMaxRate);           // Sets the max mechanical az & el rates (rad/sec)
    virtual bool setMaxRates(const double azMaxRate, const double ezMaxRate, const double rollMaxRate);   // Sets the max mechanical az, el and roll rates (rad/sec)
 
-   virtual bool setCmdPos(const osg::Vec2d& p);                                        // Sets the commanded position vector (rad)
-   virtual bool setCmdPos(const osg::Vec3d& p);                                        // Sets the commanded position vector (rad)
+   virtual bool setCmdPos(const base::Vec2d& p);                                       // Sets the commanded position vector (rad)
+   virtual bool setCmdPos(const base::Vec3d& p);                                       // Sets the commanded position vector (rad)
    virtual bool setCmdPos(const double az, const double el, const double roll = 0);    // Sets the commanded az, el and roll positions (rad)
 
-   virtual bool setCmdRate(const osg::Vec2d& r);                                       // Sets the commanded rate vector (rad/sec)
-   virtual bool setCmdRate(const osg::Vec3d& r);                                       // Sets the commanded rate vector (rad/sec)
+   virtual bool setCmdRate(const base::Vec2d& r);                                      // Sets the commanded rate vector (rad/sec)
+   virtual bool setCmdRate(const base::Vec3d& r);                                      // Sets the commanded rate vector (rad/sec)
    virtual bool setCmdRate(const double azRate, const double elRate);                  // Sets the commanded az & el rates (rad/sec)
    virtual bool setCmdRate(const double azRate, const double elRate, const double rollRate); // Sets the commanded az, el and roll rates (rad/sec)
 
@@ -322,10 +322,10 @@ public:  // Public section
    // Use only the ownship player's heading to when transforming between body and local NED
    virtual bool setSlotUseOwnHeadingOnly(const base::Number* const msg);
 
-   static void limitVec(osg::Vec2d& vec, const osg::Vec2d& lim);
-   static void limitVec(osg::Vec3d& vec, const osg::Vec3d& lim);
-   static void limitVec(osg::Vec2d& vec, const osg::Vec2d& ll, const osg::Vec2d& ul);
-   static void limitVec(osg::Vec3d& vec, const osg::Vec3d& ll, const osg::Vec3d& ul);
+   static void limitVec(base::Vec2d& vec, const base::Vec2d& lim);
+   static void limitVec(base::Vec3d& vec, const base::Vec3d& lim);
+   static void limitVec(base::Vec2d& vec, const base::Vec2d& ll, const base::Vec2d& ul);
+   static void limitVec(base::Vec3d& vec, const base::Vec3d& ll, const base::Vec3d& ul);
 
    virtual bool event(const int event, base::Object* const obj = nullptr) override;
    virtual void reset() override;
@@ -356,21 +356,21 @@ private:
    ServoMode   servoMode;     // Gimbal's servo mode
    bool        fastSlew;      // Fast slewing mode: tell us if we are slewing fast (true) or scanning (slewing slow (false))
 
-   osg::Matrixd tm;           // Transformation matrix (to/from the player's coordinate system)
-   osg::Vec3d  pos;           // Current gimbal position      (rad)
-   osg::Vec3d  rate;          // Current velocity             (rad/sec)
-   osg::Vec3d  cmdPos;        // Commanded position           (rad)
-   osg::Vec3d  cmdRate;       // Commanded rate               (rad/sec)
-   osg::Vec3d  location;      // Gimbal's location on parent  (meters)
-   bool        atLimit;       // Gimbal is at a limit
+   base::Matrixd tm;          // Transformation matrix (to/from the player's coordinate system)
+   base::Vec3d  pos;          // Current gimbal position      (rad)
+   base::Vec3d  rate;         // Current velocity             (rad/sec)
+   base::Vec3d  cmdPos;       // Commanded position           (rad)
+   base::Vec3d  cmdRate;      // Commanded rate               (rad/sec)
+   base::Vec3d  location;     // Gimbal's location on parent  (meters)
+   bool atLimit;              // Gimbal is at a limit
 
-   osg::Vec3d  maxRate;       // Max mechanical rate of gimbal (rad/sec)
-   osg::Vec3d  lowLimits;     // left/lower gimbal limits     (rad)
-   osg::Vec3d  highLimits;    // right/upper gimbal limits    (rad)
+   base::Vec3d  maxRate;      // Max mechanical rate of gimbal (rad/sec)
+   base::Vec3d  lowLimits;    // left/lower gimbal limits     (rad)
+   base::Vec3d  highLimits;   // right/upper gimbal limits    (rad)
 
-   osg::Vec3d  initPos;       // Initial gimbal position      (rad)
-   osg::Vec3d  initCmdPos;    // Initial commanded position   (rad)
-   osg::Vec3d  initCmdRate;   // Initial commanded rate       (rad/sec)
+   base::Vec3d  initPos;      // Initial gimbal position      (rad)
+   base::Vec3d  initCmdPos;   // Initial commanded position   (rad)
+   base::Vec3d  initCmdRate;  // Initial commanded rate       (rad/sec)
 
    double    maxRngPlayers;   // Max range for players of interest or zero for all (meters)
    double    maxAnglePlayers; // Max angle of gimbal boresight for players of interest (or zero for all) (rad)

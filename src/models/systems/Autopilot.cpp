@@ -7,8 +7,6 @@
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/List.hpp"
@@ -19,7 +17,9 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -784,8 +784,8 @@ bool Autopilot::processModeFollowTheLead()
       // ---
       // Compute displacement vector
       // ---
-      const osg::Vec3d posLead = lead->getPosition();
-      const osg::Vec3d posOwn  = getOwnship()->getPosition();
+      const base::Vec3d posLead = lead->getPosition();
+      const base::Vec3d posOwn  = getOwnship()->getPosition();
       const double xi = posLead.x() - posOwn.x();
       const double yi = posLead.y() - posOwn.y();
 

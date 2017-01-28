@@ -24,37 +24,37 @@ public:
 public:
     Ins();
 
-    const osg::Vec3d& getGyroBias() const    { return gyroBias; }
-    const osg::Vec3d& getAccelBias() const   { return accelBias; }
-    double getWanderAngle() const           { return wander; }
-    double getDopplerBias() const           { return dBias; }
-    double getDopplerScaleFactor() const    { return dSFact; }
-    AlignMode getAlignmentMode() const      { return alignMode; }
-    double getAlignmentTTG() const          { return alignTTG; }
-    double getQuality() const               { return quality; }
+    const base::Vec3d& getGyroBias() const         { return gyroBias; }
+    const base::Vec3d& getAccelBias() const        { return accelBias; }
+    double getWanderAngle() const                  { return wander; }
+    double getDopplerBias() const                  { return dBias; }
+    double getDopplerScaleFactor() const           { return dSFact; }
+    AlignMode getAlignmentMode() const             { return alignMode; }
+    double getAlignmentTTG() const                 { return alignTTG; }
+    double getQuality() const                      { return quality; }
 
     virtual void setDopplerBias(const double dBias);
     virtual void setDopplerScaleFactor(const double dSFact);
     virtual void setAlignmentMode(const AlignMode mode);
 
 protected:
-    virtual void setGyroBias(const osg::Vec3d* const p);
-    virtual void setAccelBias(const osg::Vec3d* const p);
+    virtual void setGyroBias(const base::Vec3d* const p);
+    virtual void setAccelBias(const base::Vec3d* const p);
     virtual void setWanderAngle(const double v);
     virtual void setAlignmentTTG(const double v);
     virtual void setQuality(const double v);
 
 private:
-    osg::Vec3d  gyroBias;       // Gyro Bias
-    osg::Vec3d  accelBias;      // Acceleration Bias
-    double      wander;         // Wander angle (degs)
-    double      dBias;          // Doppler bias
-    double      dSFact;         // Doppler Scale Factor
+    base::Vec3d  gyroBias;        // Gyro Bias
+    base::Vec3d  accelBias;       // Acceleration Bias
+    double wander;                // Wander angle (degs)
+    double dBias;                 // Doppler bias
+    double dSFact;                // Doppler Scale Factor
 
     // Alignment data
-    AlignMode   alignMode;      // Alignment mode
-    double      alignTTG;       // Alignment Time to Go (sec)
-    double      quality;        // Quality
+    AlignMode alignMode;          // Alignment mode
+    double alignTTG;              // Alignment Time to Go (sec)
+    double quality;               // Quality
 };
 
 }

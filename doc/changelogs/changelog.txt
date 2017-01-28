@@ -41,18 +41,28 @@ Infrastructure oriented libraries
 --------------------------------------------------------------------------------
 base library
 
--- Changed osg references from aliased types (e.g., Vec3, Vec4, Matrix) to explicit
-   declaration of Vec3d, Vec4d, Matrixd.  Removed Vec3, Vec4 and Matrix include
-   files which did nothing but include other files and define aliases (via typedef).
-   This clarifies the codebase by making it more explicit.
+-- Removed original OSG (OpenSceneGraphic) aliased types Vec3, Vec4, Matrix, etc,
+   with explicit declarations (e.g., Vec3d, Vec3f, Matrixd, etc) throughout framework.
+   Along with this change is the movement of these classes from oe::osg namespace
+   to oe::base namespace.  For example, the aliased oe::osg::Vec3 class has moved
+   from oe::osg to the namespace and explicit oe::base::Vec3d.  These 2 changes make
+   the code easier to read and understand, as all references within 'base' namespace are
+   to the class itself (e.g, Vec3d), and outside the namespace as base::Vec3d.  This
+   aligns these classes with all the other 'base' classes.
+
+   It should be noted that base::Matrixd (an original 'osg' class) is different than
+   base::Matrix (the openeaagles homegrown matrix class).  At some point these different
+   classes that define essentially the same concept should be combined or rectified
+   somehow to avoid the obvious question - why multiple classes to represent
+   the same thing - vectors and matrices?
 
 -- Extracted constants and conversion methods from within unit classes, such as,
-   Angle, Distance, Mass and Power and placed into unit_utils.hpp.  This clarifies
-   the nature of these functions, simplifies the classes, and makes their usage 
-   throughout codebase more clear.  The classes Angle, Mass, etc, are 'abstract',
-   but they have not been renamed to 'AbstractXYZ', etc, to avoid massive changes
-   to existing oe-based programs and their already obvious abstractness as
-   indicated by name.
+   Angle, Distance, Mass and Power and placed into unit_utils.hpp.  This better indicates
+   that these are 'pure' functions without side effects, simplifies the original classes,
+   and makes their usage throughout codebase more clear.  The classes Angle, Mass, etc,
+   are 'abstract', but they have not been renamed in anyway to 'AbstractThis' or
+   'AbstractThat' to avoid massive changes to existing oe-based programs and their already
+   obvious abstractness as indicated by name.
 
 -- Renamed fundamental 'ubf' classes such as Action, Behavior and State to AbsractAction,
    AbstractBehavior and AbstractState to make visible the role they play in defining
@@ -93,11 +103,11 @@ base library
 
    Nav class (removed)
      -- This class contained only static methods, so it was restructured as a set of functions within
-	    the oe::base::nav namespace defined in file 'nav_utils.hpp'.
+	    the oe::base::nav namespace defined in file 'util/nav_utils.hpp'.
    
    NavDR class (removed)
      -- This class contained only static methods, so it was restructured as a set of functions within
-	    the oe::base::navDR namespace defined in file 'navDR_utils.hpp'.
+	    the oe::base::navDR namespace defined in file 'util/navDR_utils.hpp'.
 	 
    MetaObject
      -- New class that replaces _Static class once defined in Object.

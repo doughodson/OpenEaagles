@@ -61,20 +61,20 @@ public:
     double hue() const;
     double lightness() const;
     double saturation() const;
-    void getHLS(osg::Vec3d& hls) const;
+    void getHLS(Vec3d& hls) const;
 
     virtual bool setHue(Number* const msg);
     virtual bool setLightness(Number* const msg);
     virtual bool setSaturation(Number* const msg);
 
-    static void hls2rgb(osg::Vec4d& rgb, const osg::Vec3d& hls);
-    static void rgb2hls(osg::Vec3d& hls, const osg::Vec4d& rgb);
+    static void hls2rgb(Vec4d& rgb, const Vec3d& hls);
+    static void rgb2hls(Vec3d& hls, const Vec4d& rgb);
 
 private:
     static double value(double n1, double n2, double hue);
 
 protected:
-    osg::Vec3d hls;
+    Vec3d hls;
 };
 
 }

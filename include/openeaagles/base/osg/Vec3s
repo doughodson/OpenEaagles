@@ -15,7 +15,7 @@
 #define __oe_osg_Vec3s_H__
 
 namespace oe {
-namespace osg {
+namespace base {
 
 class Vec3s
 {

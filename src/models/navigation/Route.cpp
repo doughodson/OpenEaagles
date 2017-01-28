@@ -18,7 +18,7 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/String.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cstdio>
 

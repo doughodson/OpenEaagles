@@ -28,8 +28,8 @@ public:
     virtual int getCategory() const override;             // returns MISSILE | GUIDED
 
 private:
-   virtual bool calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3d* const los,
-          osg::Vec3d* const vel, osg::Vec3d* const posx) const override;
+   virtual bool calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los,
+          base::Vec3d* const vel, base::Vec3d* const posx) const override;
 };
 
 }

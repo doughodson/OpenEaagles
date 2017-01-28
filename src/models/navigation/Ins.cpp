@@ -57,14 +57,14 @@ void Ins::setAlignmentMode(const AlignMode mode)
    alignMode = mode;
 }
 
-void Ins::setGyroBias(const osg::Vec3d* const p)
+void Ins::setGyroBias(const base::Vec3d* const p)
 {
     if (p != nullptr) {
         gyroBias = *p;
     }
 }
 
-void Ins::setAccelBias(const osg::Vec3d* const p)
+void Ins::setAccelBias(const base::Vec3d* const p)
 {
     if (p != nullptr) {
         accelBias = *p;

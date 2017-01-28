@@ -6,7 +6,7 @@
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/SensorMsg.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -158,7 +158,7 @@ void Track::clear()
 //------------------------------------------------------------------------------
 // ownshipDynamics() -- apply ownship dynamics to predicted track position
 //------------------------------------------------------------------------------
-void Track::ownshipDynamics(const double gtrk, const osg::Vec3d velOS, const osg::Vec3d accelOS, const double)
+void Track::ownshipDynamics(const double gtrk, const base::Vec3d velOS, const base::Vec3d accelOS, const double)
 {
    osGndTrk = gtrk;
    osVel = velOS;
@@ -254,7 +254,7 @@ void Track::clearLatLonValid()
 }
 
 // setPosition() -- set track's position vector
-bool Track::setPosition(const osg::Vec3d& p)
+bool Track::setPosition(const base::Vec3d& p)
 {
    // set position vector
    pos = p;
@@ -278,9 +278,9 @@ bool Track::setPosition(const osg::Vec3d& p)
 
 
 // setPosition() -- set track's position vector with a 4D vector; use only x, y and z
-bool Track::setPosition(const osg::Vec4d& p)
+bool Track::setPosition(const base::Vec4d& p)
 {
-   osg::Vec3d pos3(p.x(),p.y(),p.z());
+   base::Vec3d pos3(p.x(),p.y(),p.z());
    return setPosition(pos3);
 }
 
@@ -299,12 +299,12 @@ bool Track::setVerticalError(const double err)
 }
 
 // setVelocity() -- set track's velocity vector and compute ground speed & track
-bool Track::setVelocity(const osg::Vec3d v)
+bool Track::setVelocity(const base::Vec3d v)
 {
    vel = v;
 
    // Total velocity (NED) (m/s)
-   osg::Vec3d totalVel = vel + osVel;
+   base::Vec3d totalVel = vel + osVel;
 
    gndSpd = std::sqrt(totalVel[0]*totalVel[0] + totalVel[1]*totalVel[1]);
    gndTrk = std::atan2(totalVel[1], totalVel[0]);
@@ -318,7 +318,7 @@ bool Track::setVelocity(const osg::Vec3d v)
 }
 
 // setAcceleration() -- set track's acceleration vector
-bool Track::setAcceleration(const osg::Vec3d a)
+bool Track::setAcceleration(const base::Vec3d a)
 {
    accel = a;
    return true;
@@ -564,7 +564,7 @@ bool IrTrack::setSignal(const double snDbl, const IrQueryMsg* const q)
 }
 
 // setPosition() -- set track's position vector - but do not set rel az or el
-bool IrTrack::setPosition(const osg::Vec3d& p)
+bool IrTrack::setPosition(const base::Vec3d& p)
 {
    // set position vector
    pos = p;

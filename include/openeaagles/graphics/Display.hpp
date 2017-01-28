@@ -117,7 +117,7 @@ public:
    virtual void drawIt();                          // Selects, configures and draws then swaps buffers
    virtual void reshapeIt(int w, int h);           // Resizes the displays's width and height
 
-   const osg::Vec4d& getClearColor() const;        // Returns the clear (background) color as a Vec4 vector (RGBA).
+   const base::Vec4d& getClearColor() const;       // Returns the clear (background) color as a Vec4 vector (RGBA).
    void setClearColor(const base::Color& ccolor);  // Set the display's clear (background) color
 
    GLclampd getClearDepth() const;                 // Returns the value that the depth buffer is cleared to.
@@ -136,8 +136,8 @@ public:
    GLfloat getStdLineWidth() const;                   // Returns the standard line width
    void setStdLineWidth(const GLfloat);               // Sets the standard and current line widths
 
-   const osg::Vec4d& getCurrentColor() const;         // Returns the current color RGBA vector
-   void setColor(const osg::Vec4d& color);            // Sets the current color by an RGBA vector.
+   const base::Vec4d& getCurrentColor() const;        // Returns the current color RGBA vector
+   void setColor(const base::Vec4d& color);           // Sets the current color by an RGBA vector.
    void setColor(const char* cname1);                 // Sets the current color by name (color table)
 
    base::Color* getColor(const char* const name);     // Returns a color by name from the color table
@@ -391,8 +391,8 @@ private:
 
     GLclampd  clearDepth;              // Display clear depth
     base::PairStream* colorTable;      // Color table
-    osg::Vec4d color;                  // Current Color
-    osg::Vec4d clearColor;             // Clear (background) color
+    base::Vec4d color;                 // Current Color
+    base::Vec4d clearColor;            // Clear (background) color
     base::Identifier* colorName;       // Current color name
     const base::Color* normColor;      // Color of a normal text field
     const base::Color* hiColor;        // Color of a high lighted text field.
@@ -417,17 +417,17 @@ inline bool Display::isSubdisplay() const                              { return 
 inline Display::Orientation Display::getDisplayOrientation() const     { return orientation; }
 inline bool Display::isDisplayOrientation(const Orientation o) const   { return (o == getDisplayOrientation()); }
 inline bool Display::isAntialiasing() const                            { return antialias; }
-inline const osg::Vec4d& Display::getClearColor() const                { return clearColor; }
+inline const base::Vec4d& Display::getClearColor() const               { return clearColor; }
 inline GLclampd Display::getClearDepth() const                         { return clearDepth; }
 inline void Display::setClearDepth(const GLclampd depth)               { clearDepth = depth; }
 
-inline void Display::setDisplayOrientation(const Orientation o) { orientation = o; }
+inline void Display::setDisplayOrientation(const Orientation o)  { orientation = o; }
 
-inline GLfloat Display::getLinewidth() const                    { return linewidth; }
-inline GLfloat Display::getStdLineWidth() const                 { return stdLinewidth; }
-inline const osg::Vec4d& Display::getCurrentColor() const       { return color; }
+inline GLfloat Display::getLinewidth() const                     { return linewidth; }
+inline GLfloat Display::getStdLineWidth() const                  { return stdLinewidth; }
+inline const base::Vec4d& Display::getCurrentColor() const       { return color; }
 
-inline void Display::getMouse(int* const x, int* const y) const { *x = mx; *y = my; }
+inline void Display::getMouse(int* const x, int* const y) const  { *x = mx; *y = my; }
 
 inline Font* Display::getCurrentFont()                         { return currentFont; }
 inline bool Display::isFontReversed() const                    { return reversedFlg; }

@@ -32,11 +32,11 @@ public:
 
    // Fire (add) a burst of bullets
    virtual bool burstOfBullets(
-      const osg::Vec3d* const pos,    // Initial burst position
-      const osg::Vec3d* const vel,    // Initial velocity of bullets
-      const int num,                  // Number of bullets in burst
-      const int rate,                 // Rate of fire (rounds per minute)
-      const int re                    // Release event id
+      const base::Vec3d* const pos,     // Initial burst position
+      const base::Vec3d* const vel,     // Initial velocity of bullets
+      const int num,                    // Number of bullets in burst
+      const int rate,                   // Rate of fire (rounds per minute)
+      const int re                      // Release event id
    );
 
    virtual const char* getDescription() const override;
@@ -62,13 +62,13 @@ protected:
    struct Burst {
       enum Status { ACTIVE, HIT, MISS };
       Burst() : bPos(0,0,0), bVel(0,0,0), bTof(0), bNum(0), bRate(0), bEvent(0), bStatus(ACTIVE) {}
-      osg::Vec3d bPos;      // Burst positions -- world  (m)
-      osg::Vec3d bVel;      // Burst velocities -- world (m)
-      double    bTof;       // Burst time of flight      (sec)
-      int       bNum;       // Number of rounds in burst
-      int       bRate;      // Round rate for this burst (rds per min)
-      int       bEvent;     // Release event number for burst
-      Status    bStatus;    // Burst status
+      base::Vec3d bPos;        // Burst positions -- world  (m)
+      base::Vec3d bVel;        // Burst velocities -- world (m)
+      double    bTof;          // Burst time of flight      (sec)
+      int       bNum;          // Number of rounds in burst
+      int       bRate;         // Round rate for this burst (rds per min)
+      int       bEvent;        // Release event number for burst
+      Status    bStatus;       // Burst status
    };
 
 private:

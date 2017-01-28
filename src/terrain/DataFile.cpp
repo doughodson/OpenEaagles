@@ -1,14 +1,8 @@
 
-#include <fstream>
-#include <string>
-#include <stdlib.h>
-#include <iomanip>
-#include <cmath>
-
 #include "openeaagles/terrain/DataFile.hpp"
-#include "openeaagles/base/NetHandler.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace terrain {
@@ -17,9 +11,6 @@ IMPLEMENT_ABSTRACT_SUBCLASS(DataFile, "DataFile")
 EMPTY_SLOTTABLE(DataFile)
 EMPTY_SERIALIZER(DataFile)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 DataFile::DataFile()
 {
    STANDARD_CONSTRUCTOR()
@@ -33,9 +24,6 @@ DataFile::DataFile()
    voidValue = -32767; // default void (missing) elevation value
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void DataFile::copyData(const DataFile& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -74,9 +62,6 @@ void DataFile::copyData(const DataFile& org, const bool cc)
 
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void DataFile::deleteData()
 {
     clearData();

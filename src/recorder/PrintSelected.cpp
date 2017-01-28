@@ -8,7 +8,7 @@
 #include "openeaagles/base/Float.hpp"
 #include "openeaagles/base/Integer.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include "google/protobuf/descriptor.h"
 #include "google/protobuf/message.h"

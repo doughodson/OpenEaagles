@@ -148,7 +148,7 @@ public:
       const bool* const maskFlags,  // (Optional) The array of mask flags
       const unsigned int n,         // Size of the arrays
       const double range,           // Range (meters)
-      const osg::Vec2d& lv          // Lighting vector
+      const base::Vec2d& lv         // Lighting vector
    );
 
    // Converts an elevation to a color (or gray scale)
@@ -171,7 +171,7 @@ public:
       const double maxz,                // Max elevtion  (units: same as elevation)
       const base::Hsva** colorTable,    // Color table
       const unsigned int numColors,     // Number of colors
-      osg::Vec3d& rgb);                 // Color
+      base::Vec3d& rgb);                // Color
 
    virtual void reset() override;
 

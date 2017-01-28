@@ -5,13 +5,12 @@
 #include "openeaagles/models/systems/Antenna.hpp"
 #include "openeaagles/models/systems/TrackManager.hpp"
 #include "openeaagles/models/Emission.hpp"
-//#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -55,7 +54,7 @@ void Gmti::dynamics(const double dt)
     // ---
     if (getAntenna() != nullptr && getOwnship() != nullptr) {
         // Compute relative vector to POI
-        osg::Vec3d dpoi = getPoi() - getOwnship()->getPosition();
+        base::Vec3d dpoi = getPoi() - getOwnship()->getPosition();
 
         // rotate to ownship heading
         double sinHdg = getOwnship()->getSinHeading();
@@ -104,7 +103,7 @@ void Gmti::setPoi(const double x, const double y, const double z)
     poiVec.set(x, y, z);
 }
 
-void Gmti::setPoi(const osg::Vec3d& newPoi)
+void Gmti::setPoi(const base::Vec3d& newPoi)
 {
     poiVec = newPoi;
 }

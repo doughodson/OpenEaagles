@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 
 #include "openeaagles/base/util/osg_utils.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
@@ -26,8 +26,8 @@ enum Status { NORMAL, SPECIAL_CASE, BAD_INPUT, TOO_MANY_LOOPS, POLAR_POINT,
 
 // Using body angles
 bool aer2xyzArray(
-      osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  (meters)
-      const osg::Matrixd& rm,    // IN:  NED to body rotational matrix (see computeRotationalMatrix())
+      Vec3d* const pos,          // OUT: position vector array (NED, player centered)  (meters)
+      const Matrixd& rm,         // IN:  NED to body rotational matrix (see computeRotationalMatrix())
       const double* const az,    // IN:  azimuth (body) array  (radians)
       const double* const el,    // IN:  elevation (body) array (positive up) (radians)
       const double* const rng,   // IN:  range array (meters)
@@ -47,7 +47,7 @@ bool aer2xyzArray(
    // ---
    // Compute to x, y and z positions (player coordinates)
    // ---
-   const auto pos0 = new osg::Vec3d[n];
+   const auto pos0 = new Vec3d[n];
    for (unsigned int i = 0; i < n; i++) {
       const double d = -rng[i] * sel[i];    // Down
       const double r = rng[i] * cel[i];     // [Ground Range]
@@ -70,7 +70,7 @@ bool aer2xyzArray(
 
 // Using NED angles
 bool aer2xyzArray(
-      osg::Vec3d* const pos,     // OUT: position vector array (NED, player centered)  (meters)
+      Vec3d* const pos,          // OUT: position vector array (NED, player centered)  (meters)
       const double* const az,    // IN:  azimuth (NED) array  (radians)
       const double* const el,    // IN:  elevation (NED) array (positive up) (radians)
       const double* const rng,   // IN:  range array (meters)
@@ -779,10 +779,10 @@ bool computeRotationalMatrix(
       const double phi,          // IN: roll angle (radians)
       const double theta,        // IN: pitch angle (radians)
       const double psi,          // IN: yaw angle (radians)
-      osg::Matrixd* const m,     // OUT: Matrix M
-      osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
-      osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
-      osg::Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)
+      Matrixd* const m,          // OUT: Matrix M
+      Vec2d* const scPhi,        // OUT: Sin/Cos of phi (Optional)
+      Vec2d* const scTht,        // OUT: Sin/Cos of theta (Optional)
+      Vec2d* const scPsi         // OUT: Sin/Cos of psi (Optional)
    )
 {
    const double sphi = std::sin(phi);
@@ -825,11 +825,11 @@ bool computeRotationalMatrix(
 // Euler angles from a rotational matrix:
 //------------------------------------------------------------------------------
 bool computeEulerAngles(
-      const osg::Matrixd& rm,    // IN: Rotational matrix
-      osg::Vec3d* const angles,  // OUT: Euler angles (radians)
-      osg::Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
-      osg::Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
-      osg::Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)
+      const Matrixd& rm,    // IN: Rotational matrix
+      Vec3d* const angles,  // OUT: Euler angles (radians)
+      Vec2d* const scPhi,   // OUT: Sin/Cos of phi (Optional)
+      Vec2d* const scTht,   // OUT: Sin/Cos of theta (Optional)
+      Vec2d* const scPsi    // OUT: Sin/Cos of psi (Optional)
    )
 {
    double stht = -rm(0,2);
@@ -895,7 +895,7 @@ bool computeEulerAngles(
 bool computeWorldMatrix(
       const double latD,      // IN: Reference latitude (degs)
       const double lonD,      // IN: Reference longitude (degs)
-      osg::Matrixd* const m   // OUT: Matrix M
+      Matrixd* const m        // OUT: Matrix M
    )
 {
    const double phi  = 0;
@@ -1377,20 +1377,20 @@ bool getGeocAngle(
       double geocAngle[3]           // OUT: Geocentric Euler angles (radians) [ IPHI ITHETA IPSI ]
    )
 {
-    osg::Matrixd mat;
-    osg::Matrixd mat2;
+    Matrixd mat;
+    Matrixd mat2;
 
-    mat.makeRotate(geodAngle[IROLL],   osg::Y_AXIS,
-                   geodAngle[IPITCH],  osg::X_AXIS,
-                   geodAngle[IYAW],    osg::Z_AXIS);
+    mat.makeRotate(geodAngle[IROLL],   Y_AXIS,
+                   geodAngle[IPITCH],  X_AXIS,
+                   geodAngle[IYAW],    Z_AXIS);
 
-    mat2.makeRotate(osg::DegreesToRadians(0.0),                   osg::Y_AXIS,
-                    osg::DegreesToRadians(90.0 - geodPos[ILAT]),  osg::X_AXIS,
-                    osg::DegreesToRadians(geodPos[ILON]),         osg::Z_AXIS);
+    mat2.makeRotate(osg::DegreesToRadians(0.0),                   Y_AXIS,
+                    osg::DegreesToRadians(90.0 - geodPos[ILAT]),  X_AXIS,
+                    osg::DegreesToRadians(geodPos[ILON]),         Z_AXIS);
 
     mat = mat * mat2;
 
-    osg::Vec3d hpVec(0.0, 1.0, 0.0);
+    Vec3d hpVec(0.0, 1.0, 0.0);
 
     hpVec = mat.transform3x3(hpVec, mat);
     const double d = std::sqrt(hpVec.x() * hpVec.x() + hpVec.y() * hpVec.y());
@@ -1398,14 +1398,14 @@ bool getGeocAngle(
     const double yawd   = -1.0 * std::atan2(hpVec.x(), hpVec.y());
     double pitchd = std::atan2(static_cast<double>(hpVec.z()), d);
 
-    osg::Vec3d rollVec(1.0, 0.0, 0.0);
+    Vec3d rollVec(1.0, 0.0, 0.0);
 
     rollVec = mat.transform3x3(rollVec, mat);
 
-    osg::Matrixd hpMat;
-    hpMat.makeRotate(0.0,    osg::Y_AXIS,
-                     pitchd, osg::X_AXIS,
-                     yawd,   osg::Z_AXIS);
+    Matrixd hpMat;
+    hpMat.makeRotate(0.0,    Y_AXIS,
+                     pitchd, X_AXIS,
+                     yawd,   Z_AXIS);
 
     hpMat.invert(hpMat);
 

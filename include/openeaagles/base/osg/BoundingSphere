@@ -18,7 +18,7 @@
 #include "./Vec3d"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 template<typename VT>
 class BoundingBoxImpl;

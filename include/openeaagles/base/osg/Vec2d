@@ -17,7 +17,7 @@
 #include "./Vec2f"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose double pair, uses include representation of
   * texture coordinates.

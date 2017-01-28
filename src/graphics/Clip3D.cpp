@@ -79,7 +79,7 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    // Get the vertices and make sure we have at least two
    // ---
    const unsigned int num = inPoly.getNumberOfVertices();
-   const osg::Vec3d* const in = inPoly.getVertices();
+   const base::Vec3d* const in = inPoly.getVertices();
    if (in == nullptr || inPoly.getNumberOfVertices() < 2) return nullptr;
 
    // ---
@@ -124,27 +124,27 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    // ---
    // Gather input data
    // ---
-   const osg::Vec3d* const inNorm   = inPoly.getNormals();
-   const unsigned int numNorms     = inPoly.getNumberOfNormals();
-   const osg::Vec2d* const inTCoord = inPoly.getTextureCoord();
-   const unsigned int numTCoords   = inPoly.getNumberOfTextureCoords();
+   const base::Vec3d* const inNorm   = inPoly.getNormals();
+   const unsigned int numNorms            = inPoly.getNumberOfNormals();
+   const base::Vec2d* const inTCoord = inPoly.getTextureCoord();
+   const unsigned int numTCoords          = inPoly.getNumberOfTextureCoords();
 
    // ---
    // Our temporary polygons
    // ---
 
    // p: pre-clipped polygon
-   const auto poly1 = new osg::Vec3d[num*3];
+   const auto poly1 = new base::Vec3d[num*3];
    for (unsigned int i = 0; i < num; i++) {
       poly1[i] = in[i];
    }
-   osg::Vec3d* p = poly1;
+   base::Vec3d* p = poly1;
 
    // pn: pre-clipped normals
-   osg::Vec3d* norm1 = nullptr;
-   osg::Vec3d* pn = nullptr;
+   base::Vec3d* norm1 = nullptr;
+   base::Vec3d* pn = nullptr;
    if (inNorm != nullptr && numNorms == num) {
-      norm1 = new osg::Vec3d[numNorms*3];
+      norm1 = new base::Vec3d[numNorms*3];
       for (unsigned int i = 0; i < numNorms; i++) {
          norm1[i] = inNorm[i];
       }
@@ -152,10 +152,10 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    }
 
    // pt: pre-clipped texture coords
-   osg::Vec2d* tcoord1 = nullptr;
-   osg::Vec2d* pt = nullptr;
+   base::Vec2d* tcoord1 = nullptr;
+   base::Vec2d* pt = nullptr;
    if (inTCoord != nullptr && numTCoords == num) {
-      tcoord1 = new osg::Vec2d[numTCoords*3];
+      tcoord1 = new base::Vec2d[numTCoords*3];
       for (unsigned int i = 0; i < numTCoords; i++) {
          tcoord1[i] = inTCoord[i];
       }
@@ -163,22 +163,22 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    }
 
    // q: clipped polygon
-   const auto poly2 = new osg::Vec3d[num*3];
-   osg::Vec3d* q = poly2;
+   const auto poly2 = new base::Vec3d[num*3];
+   base::Vec3d* q = poly2;
 
    // qn: clipped normals
-   osg::Vec3d* norm2 = nullptr;
-   osg::Vec3d* qn = nullptr;
+   base::Vec3d* norm2 = nullptr;
+   base::Vec3d* qn = nullptr;
    if (inNorm != nullptr && numNorms == num) {
-      norm2 = new osg::Vec3d[numNorms*3];
+      norm2 = new base::Vec3d[numNorms*3];
       qn = norm2;
    }
 
    // qt: clippped texture coords
-   osg::Vec2d* tcoord2 = nullptr;
-   osg::Vec2d* qt = nullptr;
+   base::Vec2d* tcoord2 = nullptr;
+   base::Vec2d* qt = nullptr;
    if (inTCoord != nullptr && numTCoords == num) {
-      tcoord2 = new osg::Vec2d[numTCoords*3];
+      tcoord2 = new base::Vec2d[numTCoords*3];
       qt = tcoord2;
    }
 
@@ -189,39 +189,39 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
    unsigned int n = num;
    if (x0Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 0, x0, false);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (x1Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 0, x1, true);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (y0Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 1, y0, false);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (y1Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 1, y1, true);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (z0Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 2, z0, false);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (z1Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 2, z1, true);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
 
    // copy the clipped polygon to the output arrays, which after the
@@ -262,13 +262,13 @@ Polygon* Clip3D::clip(const Polygon& inPoly) const
 // user provided array, 'out', which must be at least of size 'num'.
 //------------------------------------------------------------------------------
 unsigned int Clip3D::clip(
-      osg::Vec3d* const out,            // Output polygon vertex array
-      osg::Vec3d* const outNorm,        // (optional) Output polygon normals (or zero)
-      osg::Vec2d* const outTCoord,      // (optional) Output polygon texture coordinates (or zero)
-      const osg::Vec3d* const in,       // Input polygon vertex array
-      const osg::Vec3d* const inNorm,   // (optional) Input polygon normals (or zero)
-      const osg::Vec2d* const inTCoord, // (optional) Input polygon texture coordinates (or zero)
-      const unsigned int num            // Number of vertices in arrays
+      base::Vec3d* const out,            // Output polygon vertex array
+      base::Vec3d* const outNorm,        // (optional) Output polygon normals (or zero)
+      base::Vec2d* const outTCoord,      // (optional) Output polygon texture coordinates (or zero)
+      const base::Vec3d* const in,       // Input polygon vertex array
+      const base::Vec3d* const inNorm,   // (optional) Input polygon normals (or zero)
+      const base::Vec2d* const inTCoord, // (optional) Input polygon texture coordinates (or zero)
+      const unsigned int num             // Number of vertices in arrays
    ) const
 {
    // quick out
@@ -317,17 +317,17 @@ unsigned int Clip3D::clip(
    // ---
 
    // p: pre-clipped polygon
-   osg::Vec3d* const poly1 = new osg::Vec3d[num*3];
+   base::Vec3d* const poly1 = new base::Vec3d[num*3];
    for (unsigned int i = 0; i < num; i++) {
       poly1[i] = in[i];
    }
-   osg::Vec3d* p = poly1;
+   base::Vec3d* p = poly1;
 
    // pn: pre-clipped normals
-   osg::Vec3d* norm1 = nullptr;
-   osg::Vec3d* pn = nullptr;
+   base::Vec3d* norm1 = nullptr;
+   base::Vec3d* pn = nullptr;
    if (inNorm != nullptr && outNorm != nullptr) {
-      norm1 = new osg::Vec3d[num*3];
+      norm1 = new base::Vec3d[num*3];
       for (unsigned int i = 0; i < num; i++) {
          norm1[i] = inNorm[i];
       }
@@ -335,10 +335,10 @@ unsigned int Clip3D::clip(
    }
 
    // pt: pre-clipped texture coords
-   osg::Vec2d* tcoord1 = nullptr;
-   osg::Vec2d* pt = nullptr;
+   base::Vec2d* tcoord1 = nullptr;
+   base::Vec2d* pt = nullptr;
    if (inTCoord != nullptr && outTCoord != nullptr) {
-      tcoord1 = new osg::Vec2d[num*3];
+      tcoord1 = new base::Vec2d[num*3];
       for (unsigned int i = 0; i < num; i++) {
          tcoord1[i] = inTCoord[i];
       }
@@ -346,22 +346,22 @@ unsigned int Clip3D::clip(
    }
 
    // q: clipped polygon
-   osg::Vec3d* const poly2 = new osg::Vec3d[num*3];
-   osg::Vec3d* q = poly2;
+   base::Vec3d* const poly2 = new base::Vec3d[num*3];
+   base::Vec3d* q = poly2;
 
    // qn: clipped normals
-   osg::Vec3d* norm2 = nullptr;
-   osg::Vec3d* qn = nullptr;
+   base::Vec3d* norm2 = nullptr;
+   base::Vec3d* qn = nullptr;
    if (inNorm != nullptr && outNorm != nullptr) {
-      norm2 = new osg::Vec3d[num*3];
+      norm2 = new base::Vec3d[num*3];
       qn = norm2;
    }
 
    // qt: clippped texture coords
-   osg::Vec2d* tcoord2 = nullptr;
-   osg::Vec2d* qt = nullptr;
+   base::Vec2d* tcoord2 = nullptr;
+   base::Vec2d* qt = nullptr;
    if (inTCoord != nullptr && outTCoord != nullptr) {
-      tcoord2 = new osg::Vec2d[num*3];
+      tcoord2 = new base::Vec2d[num*3];
       qt = tcoord2;
    }
 
@@ -372,39 +372,39 @@ unsigned int Clip3D::clip(
    unsigned int n = num;
    if (x0Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 0, x0, false);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (x1Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 0, x1, true);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (y0Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 1, y0, false);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (y1Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 1, y1, true);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (z0Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 2, z0, false);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
    if (z1Out > 0 && n > 1) {
       n = polyClip2Halfspace(q, qn, qt, p, pn, pt, n, 2, z1, true);
-      { osg::Vec3d* r = p; p = q; q = r; }
-      if (pn != nullptr) { osg::Vec3d* r = pn; pn = qn; qn = r; }
-      if (pt != nullptr) { osg::Vec2d* r = pt; pt = qt; qt = r; }
+      { base::Vec3d* r = p; p = q; q = r; }
+      if (pn != nullptr) { base::Vec3d* r = pn; pn = qn; qn = r; }
+      if (pt != nullptr) { base::Vec2d* r = pt; pt = qt; qt = r; }
    }
 
    // copy the clipped polygon to the output arrays, which after the
@@ -446,17 +446,17 @@ unsigned int Clip3D::clip(
 // of vertices in the clipped polygon is returned by the function.
 //------------------------------------------------------------------------------
 unsigned int Clip3D::polyClip2Halfspace(
-   osg::Vec3d* const q,           // Output polygon vertex array
-   osg::Vec3d* const qn,          // (optional) Output polygon normals
-   osg::Vec2d* const qt,          // (optional) Output polygon texture coordinates
-   const osg::Vec3d* const p,     // Input polygon vertex array
-   const osg::Vec3d* const pn,    // (optional) Input polygon normals
-   const osg::Vec2d* const pt,    // (optional) Input polygon texture coordinates
-   const unsigned int n,          // Number of vertices/normals
-   const unsigned int index,      // Coordinate index: X -> 0; Y -> 1; and Z -> 2
-   const double k,                // Value of the clipping plane
-   const bool clipUpperPlane)     // if clipping against an upper plane,
-                                  // else against a lower plane
+   base::Vec3d* const q,           // Output polygon vertex array
+   base::Vec3d* const qn,          // (optional) Output polygon normals
+   base::Vec2d* const qt,          // (optional) Output polygon texture coordinates
+   const base::Vec3d* const p,     // Input polygon vertex array
+   const base::Vec3d* const pn,    // (optional) Input polygon normals
+   const base::Vec2d* const pt,    // (optional) Input polygon texture coordinates
+   const unsigned int n,           // Number of vertices/normals
+   const unsigned int index,       // Coordinate index: X -> 0; Y -> 1; and Z -> 2
+   const double k,                 // Value of the clipping plane
+   const bool clipUpperPlane)      // if clipping against an upper plane,
+                                   // else against a lower plane
 {
    unsigned int m = 0;  // Number of clipper vertices generated
 

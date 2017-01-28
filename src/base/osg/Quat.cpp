@@ -22,7 +22,7 @@
 /// http://mathworld.wolfram.com/Quaternion.html
 
 namespace oe {
-namespace osg {
+namespace base {
 
 void Quat::set(const Matrixf& matrix)
 {
@@ -309,7 +309,7 @@ void Quat::slerp( value_type t, const Quat& from, const Quat& to )
     const double epsilon = 0.00001;
     double omega, cosomega, sinomega, scale_from, scale_to ;
     
-    osg::Quat quatTo(to);
+    Quat quatTo(to);
     // this is a dot product
     
     cosomega = from.asVec4() * to.asVec4();

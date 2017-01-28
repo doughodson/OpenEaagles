@@ -36,14 +36,14 @@ Matrix::Matrix(const unsigned int r, const unsigned int c, const double* const d
    setMatrix(r,c,data,dataSize);
 }
 
-Matrix::Matrix(const osg::Matrixd& m)
+Matrix::Matrix(const Matrixd& m)
 {
    STANDARD_CONSTRUCTOR()
    initData();
    *this = m;
 }
 
-Matrix::Matrix(const osg::Matrixf& m)
+Matrix::Matrix(const Matrixf& m)
 {
    STANDARD_CONSTRUCTOR()
    initData();
@@ -91,13 +91,13 @@ void Matrix::deleteData()
 //------------------------------------------------------------------------------
 // Assigned from an OSG matrix (double and float)
 //------------------------------------------------------------------------------
-Matrix& Matrix::operator=(const osg::Matrixd& m)
+Matrix& Matrix::operator=(const Matrixd& m)
 {
    setMatrix(4,4,m.ptr(), 16);
    return *this;
 }
 
-Matrix& Matrix::operator=(const osg::Matrixf& m)
+Matrix& Matrix::operator=(const Matrixf& m)
 {
    setMatrix(4,4,m.ptr(), 16);
    return *this;

@@ -1,8 +1,9 @@
 
 #include "openeaagles/dafif/Record.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
 #include "openeaagles/base/String.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <iostream>

@@ -406,7 +406,7 @@ double Otw::computeRangeToPlayer(const models::Player* const ip) const
 {
     double rng = maxRange*2.0 + 1.0;  // Default is out-of-range
     if (ownship != nullptr) {
-        osg::Vec3d diff = ip->getPosition() - ownship->getPosition();
+        base::Vec3d diff = ip->getPosition() - ownship->getPosition();
         rng = diff.length();
     }
     return rng;

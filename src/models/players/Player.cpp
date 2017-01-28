@@ -28,8 +28,6 @@
 #include "openeaagles/simulation/AbstractNetIO.hpp"
 #include "openeaagles/simulation/AbstractNib.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Boolean.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/LatLon.hpp"
@@ -43,7 +41,9 @@
 
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -1958,7 +1958,7 @@ bool Player::setPosition(const double n, const double e, const double d, const b
 }
 
 // Position vector; NED from simulation ref point (meters)
-bool Player::setPosition(const osg::Vec3d& pos, const bool slaved)
+bool Player::setPosition(const base::Vec3d& pos, const bool slaved)
 {
    return setPosition(pos[INORTH], pos[IEAST], pos[IDOWN], slaved);
 }
@@ -2023,7 +2023,7 @@ bool Player::setPositionLLA(const double lat, const double lon, const double alt
 
 
 // Geocentric position vector (meters)
-bool Player::setGeocPosition(const osg::Vec3d& pos, const bool slaved)
+bool Player::setGeocPosition(const base::Vec3d& pos, const bool slaved)
 {
    WorldModel* s = getWorldModel();
    const double maxRefRange = s->getMaxRefRange();
@@ -2091,13 +2091,13 @@ bool Player::setEulerAngles(const double r, const double p, const double y)
 }
 
 // Sets Euler angle vector: (rad) [ roll pitch yaw ]
-bool Player::setEulerAngles(const osg::Vec3d& newAngles)
+bool Player::setEulerAngles(const base::Vec3d& newAngles)
 {
    return setEulerAngles(newAngles.x(), newAngles.y(), newAngles.z());
 }
 
 // Sets geocentric (body/ECEF) Euler angles: (radians) [ roll pitch yaw ]
-bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
+bool Player::setGeocEulerAngles(const base::Vec3d& newAngles)
 {
    // Set the geocentric angles
    anglesW = newAngles;
@@ -2106,7 +2106,7 @@ bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
    base::nav::computeRotationalMatrix(anglesW, &rmW2B, &scPhiW, &scThetaW, &scPsiW);
 
    // Transpose the world matrix
-   osg::Matrixd wmT = wm;
+   base::Matrixd wmT = wm;
    wmT.transpose();
 
    // Compute rotational matrix: body/NED directional cosines
@@ -2122,7 +2122,7 @@ bool Player::setGeocEulerAngles(const osg::Vec3d& newAngles)
 }
 
 // Sets the rotational matrix
-bool Player::setRotMat(const osg::Matrixd& rr)
+bool Player::setRotMat(const base::Matrixd& rr)
 {
    // set the matrix
    rm = rr;
@@ -2143,7 +2143,7 @@ bool Player::setRotMat(const osg::Matrixd& rr)
 }
 
 // Sets the quaternion
-bool Player::setQuaternions(const osg::Quat& newQ)
+bool Player::setQuaternions(const base::Quat& newQ)
 {
    // Set quaternions
    q = newQ;
@@ -2178,13 +2178,13 @@ bool Player::setAngularVelocities(const double pa, const double qa, const double
 }
 
 // Sets the body angular velocity vector (radians/second)
-bool Player::setAngularVelocities(const osg::Vec3d& newAngVel)
+bool Player::setAngularVelocities(const base::Vec3d& newAngVel)
 {
    return setAngularVelocities(newAngVel[0],newAngVel[1],newAngVel[2]);
 }
 
 // Sets the body angular velocities (radians/second)
-bool Player::setGeocAngularVelocities(const osg::Vec3d& newAngVel)
+bool Player::setGeocAngularVelocities(const base::Vec3d& newAngVel)
 {
    gcAngVel = newAngVel;
 
@@ -2217,7 +2217,7 @@ bool Player::setVelocity(const double ue, const double ve, const double we)
 }
 
 // Sets local NED velocity vector; (meters/sec) NED
-bool Player::setVelocity(const osg::Vec3d& newVel)
+bool Player::setVelocity(const base::Vec3d& newVel)
 {
    setVelocity(newVel.x(), newVel.y(), newVel.z());
    return true;
@@ -2232,7 +2232,7 @@ bool Player::setAcceleration(const double due, const double dve, const double dw
    return true;
 }
 
-bool Player::setAcceleration(const osg::Vec3d& newAccel)
+bool Player::setAcceleration(const base::Vec3d& newAccel)
 {
    setAcceleration(newAccel.x(), newAccel.y(), newAccel.z());
    return true;
@@ -2255,7 +2255,7 @@ bool Player::setVelocityBody(const double ua, const double va, const double wa)
    return true;
 }
 
-bool Player::setVelocityBody(const osg::Vec3d& newVelBody)
+bool Player::setVelocityBody(const base::Vec3d& newVelBody)
 {
    setVelocityBody(newVelBody.x(), newVelBody.y(), newVelBody.z());
    return true;
@@ -2271,7 +2271,7 @@ bool Player::setAccelerationBody(const double dua, const double dva, const doubl
    return true;
 }
 
-bool Player::setAccelerationBody(const osg::Vec3d& newAccelBody)
+bool Player::setAccelerationBody(const base::Vec3d& newAccelBody)
 {
    setAccelerationBody(newAccelBody.x(), newAccelBody.y(), newAccelBody.z());
    return true;
@@ -2294,7 +2294,7 @@ bool Player::setGeocVelocity(const double vx, const double vy, const double vz)
    return true;
 }
 
-bool Player::setGeocVelocity(const osg::Vec3d& newVelEcef)
+bool Player::setGeocVelocity(const base::Vec3d& newVelEcef)
 {
    setGeocVelocity(newVelEcef.x(), newVelEcef.y(), newVelEcef.z());
    return true;
@@ -2309,7 +2309,7 @@ bool Player::setGeocAcceleration(const double dvx, const double dvy, const doubl
    return true;
 }
 
-bool Player::setGeocAcceleration(const osg::Vec3d& newAccelEcef)
+bool Player::setGeocAcceleration(const base::Vec3d& newAccelEcef)
 {
    setGeocAcceleration(newAccelEcef.x(), newAccelEcef.y(), newAccelEcef.z());
    return true;
@@ -2317,7 +2317,7 @@ bool Player::setGeocAcceleration(const osg::Vec3d& newAccelEcef)
 
 
 // Initial geocentric position vector
-bool Player::setInitGeocentricPosition(const osg::Vec3d& pos)
+bool Player::setInitGeocentricPosition(const base::Vec3d& pos)
 {
    initGeoPosVec = pos;
    initGeoPosFlg = true;
@@ -2333,7 +2333,7 @@ bool Player::setInitPosition(const double x, const double y)
 }
 
 // Initial position vector (after reset); North/East from simulation reference point (meters)
-bool Player::setInitPosition(const osg::Vec2d& pos)
+bool Player::setInitPosition(const base::Vec2d& pos)
 {
    return setInitPosition(pos.x(), pos.y());
 }
@@ -2666,12 +2666,12 @@ bool Player::onRfEmissionEventPlayer(Emission* const em)
    // ---
    //  1) Compute the Line-Of-Sight vectors back to the transmitter (los0)
    // ---
-   osg::Vec3d xlos = em->getTgtLosVec();
-   osg::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0 );
+   base::Vec3d xlos = em->getTgtLosVec();
+   base::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0 );
 
    // 2) Transform the LOS vector to our player coordinates to get
    // the Angle Of Incidence (AOI) vector
-   osg::Vec4d aoi = rm * los0;
+   base::Vec4d aoi = rm * los0;
    em->setAoiVector(aoi);
 
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
@@ -2814,12 +2814,12 @@ bool Player::onIrMsgEventPlayer(IrQueryMsg* const msg)
    // ---
    //  1) Compute the Line-Of-Sight vectors back to the seeker (los0)
    // ---
-   osg::Vec3d xlos = msg->getTgtLosVec();
-   osg::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0 );
+   base::Vec3d xlos = msg->getTgtLosVec();
+   base::Vec4d los0( xlos.x(), xlos.y(), xlos.z(), 0.0 );
 
    // 2) Transform the LOS vector to our player coordinates to get
    // the Angle Of Incidence (AOI) vector
-   osg::Vec4d aoi = rm * los0;
+   base::Vec4d aoi = rm * los0;
    msg->setAoiVector(aoi);
 
    // 3) Compute the azimuth and elevation angles of incidence (AOI)
@@ -2970,7 +2970,7 @@ void Player::positionUpdate(const double dt)
          //std::cout << "( " << posVecECEF[0] << ", " << posVecECEF[1] << ", " << posVecECEF[2] << " ); ";
          //std::cout << std::endl;
 
-         osg::Vec3d  newPosVecNED = posVecNED;
+         base::Vec3d newPosVecNED = posVecNED;
 
          // Current velocities
          const double ue = velVecNED.x();
@@ -3101,7 +3101,7 @@ void Player::positionUpdate(const double dt)
 
          if (!pfrz) {
             // Update our position
-            osg::Vec3d newPosVecECEF = posVecECEF + (velVecECEF + velVecN1) * 0.5 * dt;
+            base::Vec3d newPosVecECEF = posVecECEF + (velVecECEF + velVecN1) * 0.5 * dt;
 
             if (!gcEnabled) {
                // Set the our position
@@ -3163,8 +3163,8 @@ void Player::positionUpdate(const double dt)
       }
 
       // Update angles
-      osg::Vec3d oldAngles = getEulerAngles();
-      osg::Vec3d newAngles;
+      base::Vec3d oldAngles = getEulerAngles();
+      base::Vec3d newAngles;
       newAngles[0] = base::angle::aepcdRad(oldAngles[0] + (pe * dt));
       newAngles[1] = base::angle::aepcdRad(oldAngles[1] + (qe * dt));
       newAngles[2] = base::angle::aepcdRad(oldAngles[2] + (re * dt));
@@ -3199,8 +3199,8 @@ void Player::deadReckonPosition(const double dt)
       nib->ref();
 
       // Dead reckon our position and orientation
-      osg::Vec3d drPos;
-      osg::Vec3d drAngles;
+      base::Vec3d drPos;
+      base::Vec3d drAngles;
       nib->updateDeadReckoning(dt, &drPos, &drAngles);
          //std::cout << "deadReckonPosition(): geoc pos(";
          //std::cout << drPos[0] << ", ";
@@ -3538,7 +3538,7 @@ bool Player::setSlotInitXPos(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      osg::Vec2d pos = getInitPosition();
+      base::Vec2d pos = getInitPosition();
       pos[INORTH] = base::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
    }
@@ -3550,7 +3550,7 @@ bool Player::setSlotInitXPos(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      osg::Vec2d pos = getInitPosition();
+      base::Vec2d pos = getInitPosition();
       pos[INORTH] = msg->getReal();
       ok = setInitPosition(pos);
    }
@@ -3562,7 +3562,7 @@ bool Player::setSlotInitYPos(const base::Distance* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      osg::Vec2d pos = getInitPosition();
+      base::Vec2d pos = getInitPosition();
       pos[IEAST] = base::Meters::convertStatic(*msg);
       ok = setInitPosition(pos);
    }
@@ -3574,7 +3574,7 @@ bool Player::setSlotInitYPos(const base::Number* const msg)
 {
    bool ok = false;
    if (msg != nullptr) {
-      osg::Vec2d pos = getInitPosition();
+      base::Vec2d pos = getInitPosition();
       pos[IEAST] = msg->getReal();
       ok = setInitPosition(pos);
    }
@@ -3722,7 +3722,7 @@ bool Player::setSlotInitGeocentric(const base::List* const msg)
    double values[3];
    const int n = msg->getNumberList(values, 3);
    if (n == 3) {
-      osg::Vec3d pos(values[0], values[1], values[2]);
+      base::Vec3d pos(values[0], values[1], values[2]);
       ok = setInitGeocentricPosition(pos);
    }
    return ok;
@@ -4152,7 +4152,7 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
 
    if ( isInitGeocentricPositionValid() ) {
       // initial geocentric position
-      const osg::Vec3d& vec = getInitGeocentricPosition();
+      const base::Vec3d& vec = getInitGeocentricPosition();
       indent(sout,i+j);
       sout << "initGeocentric: [ ";
       sout << vec.x();
@@ -4199,7 +4199,7 @@ std::ostream& Player::serialize(std::ostream& sout, const int i, const bool slot
 
    else if ( isInitPositionValid() ) {
       // initial position vector from sim ref pt
-      const osg::Vec2d& vec = getInitPosition();
+      const base::Vec2d& vec = getInitPosition();
 
       indent(sout,i+j);
       sout << "initXPos: ( Meters " << vec.x() << " )" << std::endl;

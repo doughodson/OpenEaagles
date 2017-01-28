@@ -327,8 +327,8 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
     // ---
     // 1)Age the tracks by delta time
     // ---
-    const osg::Vec3d osVel = ownship->getVelocity();
-    const osg::Vec3d osAccel = ownship->getAcceleration();
+    const base::Vec3d osVel = ownship->getVelocity();
+    const base::Vec3d osAccel = ownship->getAcceleration();
     const double osGndTrk = ownship->getGroundTrack();
     base::lock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
@@ -653,8 +653,8 @@ void AirAngleOnlyTrkMgrPT::copyData(const AirAngleOnlyTrkMgrPT& org, const bool)
 //------------------------------------------------------------------------------
 void AirAngleOnlyTrkMgrPT::updateTrackAges(const double dt)
 {
-    const osg::Vec3d osVel = getOwnship()->getVelocity();
-    const osg::Vec3d osAccel = getOwnship()->getAcceleration();
+    const base::Vec3d osVel = getOwnship()->getVelocity();
+    const base::Vec3d osAccel = getOwnship()->getAcceleration();
     const double osGndTrk = getOwnship()->getGroundTrack();
     base::lock(trkListLock);
     for (unsigned int i = 0; i < nTrks; i++) {
@@ -851,8 +851,8 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
         // ---
         base::lock(trkListLock);
         for (unsigned int it = 0; it < nTrks; it++) {
-            osg::Vec3d uPosition;
-            osg::Vec3d uVelocity;
+            base::Vec3d uPosition;
+            base::Vec3d uVelocity;
             double uAzimuth(0.0);
             double uElevation(0.0);
             //double age = tracks[it]->getTrackAge();
@@ -943,7 +943,7 @@ void AirAngleOnlyTrkMgrPT::processTrackList(const double dt)
                 // update az/el for ownship dynamics only, since no new report
                 // do not update for ownship dynamics if sim is frozen
                 // assume same los, but use GT rotmat to generate new rel az and rel el
-                const osg::Vec3d los_vec = getOwnship()->getRotMat() * tracks[it]->getLosVec();
+                const base::Vec3d los_vec = getOwnship()->getRotMat() * tracks[it]->getLosVec();
                 const double ra = std::sqrt(los_vec.x() * los_vec.x() + los_vec.y()*los_vec.y());
                 const double az = std::atan2(los_vec.y(), los_vec.x());
                 const double el = std::atan2(-los_vec.z(), ra);

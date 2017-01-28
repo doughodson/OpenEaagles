@@ -44,12 +44,12 @@ public:
    Matrix(const unsigned int r, const unsigned int c, const double* const data, const unsigned int dataSize);
 
    // Construct the matrix from an OSG matrix (double and float)
-   Matrix(const osg::Matrixd& m);
-   Matrix(const osg::Matrixf& m);
+   Matrix(const Matrixd& m);
+   Matrix(const Matrixf& m);
 
    // Assigned from an OSG matrix (double and float)
-   Matrix& operator=(const osg::Matrixd& m);
-   Matrix& operator=(const osg::Matrixf& m);
+   Matrix& operator=(const Matrixd& m);
+   Matrix& operator=(const Matrixf& m);
 
    unsigned int getRows() const                                         { return rows; }
    unsigned int getCols() const                                         { return cols; }

@@ -9,8 +9,6 @@
 #include "openeaagles/models/systems/TrackManager.hpp"
 #include "openeaagles/models/Emission.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
-
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -20,9 +18,9 @@
 #include "openeaagles/base/units/Frequencies.hpp"
 #include "openeaagles/base/units/Powers.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
 
 #include "openeaagles/base/util/str_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace models {

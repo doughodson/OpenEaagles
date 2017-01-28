@@ -50,7 +50,7 @@ void SynchronizedState::clear()
 //------------------------------------------------------------------------------
 // Geocentric position vector (meters)
 //------------------------------------------------------------------------------
-bool SynchronizedState::setGeocPosition(const osg::Vec3d& gcPos)
+bool SynchronizedState::setGeocPosition(const base::Vec3d& gcPos)
 {
    posVecECEF = gcPos;
    return true;
@@ -59,7 +59,7 @@ bool SynchronizedState::setGeocPosition(const osg::Vec3d& gcPos)
 //------------------------------------------------------------------------------
 // Geocentric velocity vector (meters/second)
 //------------------------------------------------------------------------------
-bool SynchronizedState::setGeocVelocity(const osg::Vec3d& newVelEcef)
+bool SynchronizedState::setGeocVelocity(const base::Vec3d& newVelEcef)
 {
    velVecECEF = newVelEcef;
    return true;
@@ -68,7 +68,7 @@ bool SynchronizedState::setGeocVelocity(const osg::Vec3d& newVelEcef)
 //------------------------------------------------------------------------------
 // Geocentric acceleration vector (meters/second/second)
 //------------------------------------------------------------------------------
-bool SynchronizedState::setGeocAcceleration(const osg::Vec3d& newAccelEcef)
+bool SynchronizedState::setGeocAcceleration(const base::Vec3d& newAccelEcef)
 {
    accelVecECEF = newAccelEcef;
    return true;
@@ -77,7 +77,7 @@ bool SynchronizedState::setGeocAcceleration(const osg::Vec3d& newAccelEcef)
 //------------------------------------------------------------------------------
 // Geocentric Euler angles (radians)
 //------------------------------------------------------------------------------
-bool SynchronizedState::setGeocEulerAngles(const osg::Vec3d& newAngles)
+bool SynchronizedState::setGeocEulerAngles(const base::Vec3d& newAngles)
 {
    anglesW = newAngles;
    return true;
@@ -86,7 +86,7 @@ bool SynchronizedState::setGeocEulerAngles(const osg::Vec3d& newAngles)
 //------------------------------------------------------------------------------
 // Body angular velocities (radians/second)
 //------------------------------------------------------------------------------
-bool SynchronizedState::setAngularVelocities(const osg::Vec3d& newAngVel)
+bool SynchronizedState::setAngularVelocities(const base::Vec3d& newAngVel)
 {
    angVel = newAngVel;
    return true;

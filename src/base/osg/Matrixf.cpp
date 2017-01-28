@@ -18,23 +18,25 @@
 #define  Matrix_implementation Matrixf
 
 namespace oe {
+namespace base {
 
-osg::Matrixf::Matrixf( const osg::Matrixd& mat )
+Matrixf::Matrixf( const Matrixd& mat )
 {
     set(mat.ptr());
 }
 
-osg::Matrixf& osg::Matrixf::operator = (const osg::Matrixd& rhs)
+Matrixf& Matrixf::operator = (const Matrixd& rhs)
 {
     set(rhs.ptr());
     return *this;
 }
 
-void osg::Matrixf::set(const osg::Matrixd& rhs)
+void Matrixf::set(const Matrixd& rhs)
 {
     set(rhs.ptr());
 }
 
+}
 }
 
 // now compile up Matrix via Matrix_implementation

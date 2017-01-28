@@ -92,7 +92,7 @@ public:
     double getSinRefLat() const;                   // Returns the sine of the reference latitude
     double getCosRefLat() const;                   // Returns the cosine of the reference latitude
     double getMaxRefRange() const;                 // Max valid range (meters) of the gaming area or zero if there's no limit.
-    const osg::Matrixd& getWorldMat() const;       // World transformation matrix
+    const base::Matrixd& getWorldMat() const;      // World transformation matrix
                                                    //    ECEF <==> NED
                                                    //       where the NED XY plane is tangent at our ref point
                                                    //    matrix = Rz[-lon] * Ry[90+lat]
@@ -155,7 +155,7 @@ private:
    double  cosRlat;              // Cosine of ref latitude
    double  maxRefRange;          // Max valid range (meters) of the gaming area or zero if there's no limit.
    bool gaUseEmFlg;              // Gaming area using earth model projections
-   osg::Matrixd wm;              // World transformation matrix:
+   base::Matrixd wm;             // World transformation matrix:
                                  //    Local tangent plane (NED) <==> Earth Centered, Earth Fixed (ECEF)
                                  //    Usage:
                                  //       ecef = wm; * earthNED

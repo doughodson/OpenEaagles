@@ -15,7 +15,7 @@
 #define __oe_osg_Vec2b_H__
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose float triple.
   * Uses include representation of color coordinates.
@@ -148,8 +148,6 @@ class Vec2b
         }
 
 };    // end of class Vec2b
-
-
 
 }
 }

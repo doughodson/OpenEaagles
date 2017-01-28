@@ -2,12 +2,11 @@
 
 #include "openeaagles/instruments/eadi3d/Eadi3DObjects.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
-
-#include <cmath>
-
 #include "openeaagles/base/util/platform_api.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
+
 #include <GL/gl.h>
+#include <cmath>
 
 #define MR2IN 0.026785714      // font was scaled by this
 

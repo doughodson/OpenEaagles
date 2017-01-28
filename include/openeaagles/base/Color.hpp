@@ -6,11 +6,8 @@
 #include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
-
-namespace osg { class Vec3d; }
-
 namespace base {
-
+class Vec3d;
 class Number;
 
 //------------------------------------------------------------------------------
@@ -62,8 +59,8 @@ public:
 public:
     Color();
 
-    operator const osg::Vec3d*() const;
-    operator const osg::Vec4d*() const;
+    operator const Vec3d*() const;
+    operator const Vec4d*() const;
 
     double red() const;
     double green() const;
@@ -75,14 +72,14 @@ public:
     virtual bool setBlue(const double b);
     virtual bool setAlpha(const double a);
 
-    const osg::Vec3d* getRGB() const;
-    const osg::Vec4d* getRGBA() const;
+    const Vec3d* getRGB() const;
+    const Vec4d* getRGBA() const;
 
     static double getDefaultAlpha();
     static void setDefaultAlpha(const double alpha);
 
 protected:
-    osg::Vec4d color;                // RGBA color vector
+    Vec4d color;                // RGBA color vector
     static double defaultAlpha;
 };
 

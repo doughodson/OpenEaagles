@@ -494,7 +494,7 @@ void Display::clear()
       glDisable(GL_DEPTH_TEST);
    }
 
-   osg::Vec4f cc = getClearColor();
+   base::Vec4f cc = getClearColor();
    glClearColor(cc[base::Color::RED], cc[base::Color::GREEN], cc[base::Color::BLUE], cc[base::Color::ALPHA]);
 
    if (clearDepth >= 0.0f)
@@ -820,7 +820,7 @@ void Display::clearScissor()
 //------------------------------------------------------------------------------
 // setColor() -- change the current color vector
 //------------------------------------------------------------------------------
-void Display::setColor(const osg::Vec4d& newColor)
+void Display::setColor(const base::Vec4d& newColor)
 {
    if (color != newColor) {
       color = newColor;
@@ -1104,7 +1104,7 @@ bool Display::setNormalFont(const base::Identifier* const fontName)
 void Display::outputTextLC(const int ln, const int cp, const char* sp, const int n, const bool vf) const
 {
    if (currentFont == nullptr || n <= 0) return;
-   osg::Vec4d ocolor = getCurrentColor();
+   base::Vec4d ocolor = getCurrentColor();
 
    const auto that = const_cast<Display*>(this);
    // If manual reverse text, draw a background polygon
@@ -1219,7 +1219,7 @@ void Display::outputText(const char* sp, const int n, const bool vf) const
    if (currentFont == nullptr || n <= 0) return;
 
    const auto that = const_cast<Display*>(this);
-   osg::Vec4d ocolor = getCurrentColor();
+   base::Vec4d ocolor = getCurrentColor();
    // If manual reverse text, draw a background polygon
    if (reversedFlg) {
       // Offsets to center to polygon

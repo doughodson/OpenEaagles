@@ -11,14 +11,21 @@
 #include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/osg/Quat"
 
-//#include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
-namespace osg { class Vec2d; class Vec3d; }
-namespace base { class Angle; class Boolean; class Distance; class LatLon; class List; class Time; }
+namespace base {
+class Vec2d;
+class Vec3d;
+class Angle;
+class Boolean;
+class Distance;
+class LatLon;
+class List;
+class Time;
+}
 namespace simulation { class AbstractNib; }
 namespace models {
 class WorldModel;
@@ -431,34 +438,34 @@ public:
    virtual double getSinHeading() const;                            // Sin of the yaw Euler angle
    virtual double getCosHeading() const;                            // Cos of the  yaw Euler angle
 
-   virtual const osg::Vec3d& getEulerAngles() const;                // Euler angles (radians); geodetic (body/NED)
-   virtual const osg::Quat& getQuaternions() const;                 // Rotational Quaternions
+   virtual const base::Vec3d& getEulerAngles() const;               // Euler angles (radians); geodetic (body/NED)
+   virtual const base::Quat& getQuaternions() const;                // Rotational Quaternions
 
-   virtual const osg::Matrixd& getRotMat() const;                   // Rotational Matrix: (directional cosines)
+   virtual const base::Matrixd& getRotMat() const;                  // Rotational Matrix: (directional cosines)
                                                                     //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw]
                                                                     //    Usage:
                                                                     //       Vb = M * Vi
                                                                     //       Vi  = Vb * M
                                                                     //    Where: 'Vb' is a body vector; 'Vi' is an inertial vector
 
-   virtual const osg::Matrixd& getRotMatW2B() const;                // Rotational Matrix: world to body
+   virtual const base::Matrixd& getRotMatW2B() const;               // Rotational Matrix: world to body
                                                                     //    Matrix: M = Rx[roll] * Ry[pitch] * Rz[yaw] * Ry[-(90+lat)] * Rz[lon]
                                                                     //    Usage:
                                                                     //       Vb = M * Vw
                                                                     //       Vw  = Vb * M
                                                                     //    Where: 'Vb' is a body vector; 'Vw' is a world (ECEF) vector
 
-   virtual const osg::Vec3d& getGeocEulerAngles() const;            // Geocentric (body/ECEF) Euler angles
+   virtual const base::Vec3d& getGeocEulerAngles() const;           // Geocentric (body/ECEF) Euler angles
 
-   virtual const osg::Vec3d& getAngularVelocities() const;          // Body angular rates (radians/second)
-   virtual const osg::Vec3d& getGeocAngularVelocities() const;      // Geocentric angular rates (radians/second)
+   virtual const base::Vec3d& getAngularVelocities() const;         // Body angular rates (radians/second)
+   virtual const base::Vec3d& getGeocAngularVelocities() const;     // Geocentric angular rates (radians/second)
 
-   virtual const osg::Vec3d& getGeocPosition() const;               // Geocentric (ECEF) position vector [ x y z ] (meters)
+   virtual const base::Vec3d& getGeocPosition() const;              // Geocentric (ECEF) position vector [ x y z ] (meters)
 
    virtual double getLatitude() const;                              // Player's latitude (degrees)
    virtual double getLongitude() const;                             // Player's longitude (degrees)
 
-   virtual const osg::Matrixd& getWorldMat() const;                 // World transformation matrix:
+   virtual const base::Matrixd& getWorldMat() const;                // World transformation matrix:
                                                                     //    Local inertial tangent plane (NED) <==> World (ECEF)
                                                                     //    Matrix: M = Ry[-(90+lat)] * Rz[lon]
                                                                     //    Usage:
@@ -473,7 +480,7 @@ public:
 
    virtual double getXPosition() const;                             // North(+) or south(-) of the sim reference point (meters)
    virtual double getYPosition() const;                             // East(+) or west(-) of the sim reference point (meters)
-   virtual const osg::Vec3d& getPosition() const;                   // Position vector; NED from sim reference point (meters)
+   virtual const base::Vec3d& getPosition() const;                  // Position vector; NED from sim reference point (meters)
    virtual bool isPositionVectorValid() const;                      // Is the position vector valid
 
    virtual double getAltitude() const;                              // Altitude HAE (meters) default
@@ -501,18 +508,18 @@ public:
    virtual double getGroundTrackR() const;                          // Ground track (radians)
    virtual double getGroundTrackD() const;                          // Ground track (degrees)
 
-   virtual const osg::Vec3d& getVelocity() const;                   // Velocity vector; NED (meters/second)
-   virtual const osg::Vec3d& getAcceleration() const;               // Acceleration vector; NED ((meters/second)/second)
+   virtual const base::Vec3d& getVelocity() const;                  // Velocity vector; NED (meters/second)
+   virtual const base::Vec3d& getAcceleration() const;              // Acceleration vector; NED ((meters/second)/second)
 
-   virtual const osg::Vec3d& getGeocVelocity() const;               // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
-   virtual const osg::Vec3d& getGeocAcceleration() const;           // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
+   virtual const base::Vec3d& getGeocVelocity() const;              // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
+   virtual const base::Vec3d& getGeocAcceleration() const;          // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
 
-   virtual const osg::Vec3d& getVelocityBody() const;               // Body velocity vector: Nose/right/down (meters/second)
-   virtual const osg::Vec3d& getAccelerationBody() const;           // Body Acceleration vector: Nose/right/down ((meters/second)/second)
+   virtual const base::Vec3d& getVelocityBody() const;              // Body velocity vector: Nose/right/down (meters/second)
+   virtual const base::Vec3d& getAccelerationBody() const;          // Body Acceleration vector: Nose/right/down ((meters/second)/second)
 
-   virtual double getGrossWeight() const;                          // Player's gross weight (lbs)
-   virtual double getMach() const;                                 // Player's mach number
-   virtual double getCG() const;                                   // Player's Center-of-Gravity (%)
+   virtual double getGrossWeight() const;                           // Player's gross weight (lbs)
+   virtual double getMach() const;                                  // Player's mach number
+   virtual double getCG() const;                                    // Player's Center-of-Gravity (%)
 
 
    // ---
@@ -532,7 +539,7 @@ public:
    // ---
    // Initialization data
    // ---
-   virtual const osg::Vec3d& getInitGeocentricPosition() const;    // Geocentric (ECEF) initial position vector [ x y z ] (meters)
+   virtual const base::Vec3d& getInitGeocentricPosition() const;   // Geocentric (ECEF) initial position vector [ x y z ] (meters)
    virtual bool isInitGeocentricPositionValid() const;
 
    virtual double getInitLatitude() const;                         // Player's initial latitude (degrees)
@@ -540,12 +547,12 @@ public:
    virtual bool isInitLatLonValid() const;
    virtual double getInitVelocity() const;                         // Player's initial total velocity
 
-   virtual const osg::Vec2d& getInitPosition() const;              // Initial position vector; north and east of sim reference point (meters)
+   virtual const base::Vec2d& getInitPosition() const;             // Initial position vector; north and east of sim reference point (meters)
    virtual bool isInitPositionValid() const;
 
    virtual double getInitAltitude() const;                         // Initial altitude HAE (meters)
 
-   virtual const osg::Vec3d& getInitAngles() const;                // Initial Euler angles (radians)
+   virtual const base::Vec3d& getInitAngles() const;               // Initial Euler angles (radians)
 
    // ---
    // Control parameters
@@ -718,7 +725,7 @@ public:
    virtual bool setPosition(const double north, const double east, const double down, const bool slaved = false);
 
    // Position vector; NED from simulation reference point (meters)
-   virtual bool setPosition(const osg::Vec3d& newPos, const bool slaved = false);
+   virtual bool setPosition(const base::Vec3d& newPos, const bool slaved = false);
 
    // Sets lat/long position; (degrees)
    virtual bool setPositionLL(const double lat, const double lon, const bool slaved = false);
@@ -727,7 +734,7 @@ public:
    virtual bool setPositionLLA(const double lat, const double lon, const double alt, const bool slaved = false);
 
    // Geocentric (ECEF) position vector (meters)
-   virtual bool setGeocPosition(const osg::Vec3d& gcPos, const bool slaved = false);
+   virtual bool setGeocPosition(const base::Vec3d& gcPos, const bool slaved = false);
 
    // ---
    // Set the player's orientation angles (roll, pitch and yaw)
@@ -742,16 +749,16 @@ public:
 
    // Sets Euler angles (body/NED): (radians) [ roll pitch yaw ]
    virtual bool setEulerAngles(const double r, const double p, const double y);
-   virtual bool setEulerAngles(const osg::Vec3d& newAngles);
+   virtual bool setEulerAngles(const base::Vec3d& newAngles);
 
    // Sets geocentric (body/ECEF) Euler angles: (radians) [ roll pitch yaw ]
-   virtual bool setGeocEulerAngles(const osg::Vec3d& newAngles);
+   virtual bool setGeocEulerAngles(const base::Vec3d& newAngles);
 
    // Sets the rotational matrix
-   virtual bool setRotMat(const osg::Matrixd&);
+   virtual bool setRotMat(const base::Matrixd&);
 
    // Sets the quaternions
-   virtual bool setQuaternions(const osg::Quat&);
+   virtual bool setQuaternions(const base::Quat&);
 
    // ---
    // Set the player's angular velocities:
@@ -767,10 +774,10 @@ public:
 
    // Sets the body angular velocities (radians/second)
    virtual bool setAngularVelocities(const double pa, const double qa, const double ra);
-   virtual bool setAngularVelocities(const osg::Vec3d& newAngVel);
+   virtual bool setAngularVelocities(const base::Vec3d& newAngVel);
 
    // Sets the body angular velocities (radians/second)
-   virtual bool setGeocAngularVelocities(const osg::Vec3d& newAngVel);
+   virtual bool setGeocAngularVelocities(const base::Vec3d& newAngVel);
 
    // ---
    // Set the player's velocity and acceleration vectors
@@ -785,27 +792,27 @@ public:
 
    // Sets local tangent plane velocities (NED); (meters/second)
    virtual bool setVelocity(const double ue, const double ve, const double we);
-   virtual bool setVelocity(const osg::Vec3d& newVel);
+   virtual bool setVelocity(const base::Vec3d& newVel);
 
    // Sets local tangent plane accelerations (NED);
    virtual bool setAcceleration(const double due, const double dve, const double dwe);
-   virtual bool setAcceleration(const osg::Vec3d& newAccel);
+   virtual bool setAcceleration(const base::Vec3d& newAccel);
 
    // Sets body velocities: (meters/second) [ ua -> fwd(+), va -> right(+), wa -> down(+) ]
    virtual bool setVelocityBody(const double ua, const double va, const double wa);
-   virtual bool setVelocityBody(const osg::Vec3d& newVelBody);
+   virtual bool setVelocityBody(const base::Vec3d& newVelBody);
 
    // Sets body accelerations
    virtual bool setAccelerationBody(const double dua, const double dva, const double dwa);
-   virtual bool setAccelerationBody(const osg::Vec3d& newAccelBody);
+   virtual bool setAccelerationBody(const base::Vec3d& newAccelBody);
 
    // Geocentric (ECEF) velocity vector [ x y z ] (meters/second)
    virtual bool setGeocVelocity(const double vx, const double vy, const double vz);
-   virtual bool setGeocVelocity(const osg::Vec3d& newVelEcef);
+   virtual bool setGeocVelocity(const base::Vec3d& newVelEcef);
 
    // Geocentric (ECEF) acceleration vector [ x y z ] ((meters/second)/second)
    virtual bool setGeocAcceleration(const double dvx, const double dvy, const double dvz);
-   virtual bool setGeocAcceleration(const osg::Vec3d& newAccelEcef);
+   virtual bool setGeocAcceleration(const base::Vec3d& newAccelEcef);
 
    // ---
    // Set the initial conditions, which are used by reset()
@@ -821,13 +828,13 @@ public:
    virtual bool setInitAltitude(const double altitude);
 
    // Initial geocentric (ECEF) position vector
-   virtual bool setInitGeocentricPosition(const osg::Vec3d& newPos);
+   virtual bool setInitGeocentricPosition(const base::Vec3d& newPos);
 
    // Initial position (after reset) relative to the simulation reference point (meters)
    virtual bool setInitPosition(const double north, const double east);
 
    // Initial position vector (after reset); north and east of simulation reference point (meters)
-   virtual bool setInitPosition(const osg::Vec2d& newPos);
+   virtual bool setInitPosition(const base::Vec2d& newPos);
 
    // ---
    // Roll Control Input
@@ -1002,52 +1009,52 @@ private:
    // ---
    // Player State
    // ---
-   CoordSys    useCoordSys;      // Coordinate system being used to update position
-   CoordSys    useCoordSysN1;    // Previous 'useCoordSys'
+   CoordSys    useCoordSys;         // Coordinate system being used to update position
+   CoordSys    useCoordSysN1;       // Previous 'useCoordSys'
 
-   double      latitude;         // Latitude                          (degrees)
-   double      longitude;        // Longitude                         (degrees)
-   double      altitude;         // Altitude                          (meters) (HAE)
-   osg::Vec3d  posVecNED;        // Local gaming area position vector (meters) [ x, y, z ] NED
-   osg::Vec3d  posVecECEF;       // Geocentric position vector        (meters)  (ECEF)
+   double      latitude;            // Latitude                          (degrees)
+   double      longitude;           // Longitude                         (degrees)
+   double      altitude;            // Altitude                          (meters) (HAE)
+   base::Vec3d  posVecNED;          // Local gaming area position vector (meters) [ x, y, z ] NED
+   base::Vec3d  posVecECEF;         // Geocentric position vector        (meters)  (ECEF)
 
-   osg::Vec3d  velVecNED;        // Inertial axes velocity vector     (meters/second)  [ ue, ve, we ] NED
-   osg::Vec3d  velVecECEF;       // Geocentric velocity vector        (meters/second)  (ECEF)
-   osg::Vec3d  velVecBody;       // Body axes velocity vector         (meters/second)  [ ua  va  wa ]
-   osg::Vec3d  velVecN1;         // Previous velocity vector          (meters/second)  (based on 'useCoordSys')
+   base::Vec3d  velVecNED;          // Inertial axes velocity vector     (meters/second)  [ ue, ve, we ] NED
+   base::Vec3d  velVecECEF;         // Geocentric velocity vector        (meters/second)  (ECEF)
+   base::Vec3d  velVecBody;         // Body axes velocity vector         (meters/second)  [ ua  va  wa ]
+   base::Vec3d  velVecN1;           // Previous velocity vector          (meters/second)  (based on 'useCoordSys')
 
-   osg::Vec3d  accelVecNED;      // Inertial axes acceleration vector ((meters/second)/second) [ due, dve, dwe ] NED
-   osg::Vec3d  accelVecECEF;     // Geocentric acceleration vector    ((meters/second)/second) (ECEF)
-   osg::Vec3d  accelVecBody;     // Body axes acceleration vector     ((meters/second)/second) [ dua, dva, dwa ]
+   base::Vec3d  accelVecNED;        // Inertial axes acceleration vector ((meters/second)/second) [ due, dve, dwe ] NED
+   base::Vec3d  accelVecECEF;       // Geocentric acceleration vector    ((meters/second)/second) (ECEF)
+   base::Vec3d  accelVecBody;       // Body axes acceleration vector     ((meters/second)/second) [ dua, dva, dwa ]
 
-   double      vp;               // Total Velocity                    (meters/second)
-   double      gndSpd;           // Ground Speed                      (meters/second)
-   double      gndTrk;           // Ground Track                      (radians)
+   double      vp;          // Total Velocity                    (meters/second)
+   double      gndSpd;      // Ground Speed                      (meters/second)
+   double      gndTrk;      // Ground Track                      (radians)
 
-   osg::Vec3d  angles;           // Geodetic (body/NED) Euler angles (radians) [ roll pitch yaw ] AKA [ phi theta psi ]
-   osg::Vec2d  scPhi;            // Sin/Cos of roll (phi)
-   osg::Vec2d  scTheta;          // Sin/Cos of pitch (theta)
-   osg::Vec2d  scPsi;            // Sin/Cos of yaw (psi)
+   base::Vec3d  angles;     // Geodetic (body/NED) Euler angles (radians) [ roll pitch yaw ] AKA [ phi theta psi ]
+   base::Vec2d  scPhi;      // Sin/Cos of roll (phi)
+   base::Vec2d  scTheta;    // Sin/Cos of pitch (theta)
+   base::Vec2d  scPsi;      // Sin/Cos of yaw (psi)
 
-   osg::Vec3d  anglesW;          // World (body/ECEF) Euler angles (radians)
-   osg::Vec2d  scPhiW;           // Sin/Cos of world phi
-   osg::Vec2d  scThetaW;         // Sin/Cos of world theta
-   osg::Vec2d  scPsiW;           // Sin/Cos of world psi
+   base::Vec3d  anglesW;    // World (body/ECEF) Euler angles (radians)
+   base::Vec2d  scPhiW;     // Sin/Cos of world phi
+   base::Vec2d  scThetaW;   // Sin/Cos of world theta
+   base::Vec2d  scPsiW;     // Sin/Cos of world psi
 
-   osg::Vec3d  angularVel;       // Body angular velocities (radians/seconds)
-   osg::Vec3d  gcAngVel;         // Geocentric (ECEF) angular velocities (radians/seconds)
+   base::Vec3d  angularVel; // Body angular velocities (radians/seconds)
+   base::Vec3d  gcAngVel;   // Geocentric (ECEF) angular velocities (radians/seconds)
 
-   osg::Quat   q;                // Quaternions for the rotational matrix
+   base::Quat   q;          // Quaternions for the rotational matrix
 
-   osg::Matrixd rm;              // Rotational Matrix: inertial to body directional cosines
+   base::Matrixd rm;        // Rotational Matrix: inertial to body directional cosines
                                  //    RM = Rx[roll] * Ry[pitch] * Rz[yaw]
 
-   osg::Matrixd wm;              // World transformation matrix:
-                                 //    Local inertial tangent plane (NED) <==> World (ECEF)
-                                 //    WM = Ry[-(90+lat)] * Rz[lon]
+   base::Matrixd wm;        // World transformation matrix:
+                            //    Local inertial tangent plane (NED) <==> World (ECEF)
+                            //    WM = Ry[-(90+lat)] * Rz[lon]
 
-   osg::Matrixd rmW2B;           // Rotational Matrix: world to body directional cosines
-                                 //    RM = Rx[gcRoll] * Ry[gcPitch] * Rz[gcYaw]
+   base::Matrixd rmW2B;     // Rotational Matrix: world to body directional cosines
+                            //    RM = Rx[gcRoll] * Ry[gcPitch] * Rz[gcYaw]
 
    double      tElev;            // Terrain Elevation  (meters -- up+)
    bool        tElevValid;       // Terrain elevation is valid
@@ -1068,8 +1075,8 @@ private:
    // ---
    // Appearance
    // ---
-   base::safe_ptr<RfSignature> signature;   // Player's RCS signature
-   base::safe_ptr<IrSignature> irSignature; // Player's IR signature
+   base::safe_ptr<RfSignature> signature;    // Player's RCS signature
+   base::safe_ptr<IrSignature> irSignature;  // Player's IR signature
    unsigned int camouflage;                  // Camouflage type (0 is none)
    double      damage;                       // Damage state from no damage(0.0) to destroyed (1.0)
    double      smoking;                      // Smoke state from no smoke (0.0) to maximum (1.0)
@@ -1080,21 +1087,21 @@ private:
    // ---
    // Initialization, Controls, Freeze and Reset
    // ---
-   osg::Vec2d  initPosVec;       // Initial Position vector [x y ]  (meters)
-   bool        initPosFlg;       // Initial position vector is valid
+   base::Vec2d initPosVec;     // Initial Position vector [x y ]  (meters)
+   bool        initPosFlg;     // Initial position vector is valid
 
-   osg::Vec3d  initGeoPosVec;    // Initial geocentric position vector [ x y z ] (ECEF) (meters)
-   bool        initGeoPosFlg;    // Initial position vector is valid
+   base::Vec3d initGeoPosVec;  // Initial geocentric position vector [ x y z ] (ECEF) (meters)
+   bool        initGeoPosFlg;  // Initial position vector is valid
 
-   double      initLat;          // Initial latitude (degrees)
-   double      initLon;          // Initial longitude (degrees)
-   bool        initLatLonFlg;    // Initial lat/lon valid
+   double initLat;             // Initial latitude (degrees)
+   double initLon;             // Initial longitude (degrees)
+   bool initLatLonFlg;         // Initial lat/lon valid
 
-   double      initAlt;          // Initial altitude (HAE)
-   double      initVp;           // Initial Total Velocity
-   osg::Vec3d  initAngles;       // Initial (Euler) angles (radians)
-   osg::Vec3d  testAngRates;     // Test angular rates (radians/sec)
-   bool        testBodyAxis;     // Test angular rates are in the body axis else they're Euler rates
+   double      initAlt;        // Initial altitude (HAE)
+   double      initVp;         // Initial Total Velocity
+   base::Vec3d  initAngles;    // Initial (Euler) angles (radians)
+   base::Vec3d  testAngRates;  // Test angular rates (radians/sec)
+   bool        testBodyAxis;   // Test angular rates are in the body axis else they're Euler rates
 
    // ---
    // Data collection timer

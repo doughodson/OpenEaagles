@@ -3,7 +3,6 @@
 // StatuteMiles 
 //------------------------------------------------------------------------------
 #include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/osg/Math"
 #include <iostream>
 
 namespace oe {

@@ -13,7 +13,7 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrixd"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -157,7 +157,7 @@ bool LifeForm::setVelocity(const double ue, const double ve, const double we)
 void LifeForm::move(const double fwd, const double sdws)
 {
     if (getDamage() < 1) {
-        osg::Vec3d old = getEulerAngles();
+        base::Vec3d old = getEulerAngles();
         double hdg = old.z();
 
         double tempFwd = fwd, tempSdws = sdws;
@@ -188,7 +188,7 @@ void LifeForm::look(const double up, const double sdws)
         if (lockMode != LOCKED) {
             lockMode = SEARCHING;
             // our up and sideways come in as -5 to 5, which is a rate to adjust heading
-            const osg::Vec3d old = getEulerAngles();
+            const base::Vec3d old = getEulerAngles();
             double hdg = old.z();
             double ptc = lookAngle;
             double tempSdws = sdws;
@@ -204,15 +204,15 @@ void LifeForm::look(const double up, const double sdws)
             else if (ptc < -90) ptc = -90;
             //std::cout << "HEADING = " << hdg << std::endl;
             setLookAngle(ptc);
-            osg::Vec3d eul(0, 0, hdg);
+            base::Vec3d eul(0, 0, hdg);
             setEulerAngles(eul);
             // now based on this we need to know if we have a target in our crosshairs...
             tgtAquired = false;
             if (tgtPlayer != nullptr) tgtPlayer->unref();
             tgtPlayer = nullptr;
-            const osg::Vec3d myPos = getPosition();
-            osg::Vec3d tgtPos;
-            osg::Vec3d vecPos;
+            const base::Vec3d myPos = getPosition();
+            base::Vec3d tgtPos;
+            base::Vec3d vecPos;
             double az = 0.0, el = 0.0, range = 0.0, diffAz = 0.0, diffEl = 0.0;
             const double maxAz = (0.7f * static_cast<double>(base::angle::D2RCC));
             const double maxEl = (0.7f * static_cast<double>(base::angle::D2RCC));
@@ -260,7 +260,7 @@ void LifeForm::look(const double up, const double sdws)
         else {
             if (tgtPlayer == nullptr) lockMode = SEARCHING;
             else {
-                const osg::Vec3d vecPos = tgtPlayer->getPosition() - getPosition();
+                const base::Vec3d vecPos = tgtPlayer->getPosition() - getPosition();
                 const double az = std::atan2(vecPos.y(), vecPos.x());
                 double range = (vecPos.x() * vecPos.x() + vecPos.y() * vecPos.y());
                 range = std::sqrt(range);

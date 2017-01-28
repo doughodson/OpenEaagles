@@ -112,6 +112,7 @@
 #endif
 
 namespace oe {
+namespace base {
 namespace osg {
 
 // define the standard trig values
@@ -247,6 +248,7 @@ extern double findAsciiToDouble(const char* str);
 /** Detect first ascii POSITIVE number in string and convert to double.*/
 inline float findAsciiToFloat(const char* str) { return static_cast<float>(findAsciiToDouble(str)); }
 
+}
 }
 }
 

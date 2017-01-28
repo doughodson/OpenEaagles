@@ -3,7 +3,7 @@
 #define __oe_base_Distance_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/distance_utils.hpp"
+#include "openeaagles/base/util/distance_utils.hpp"
 #include <iostream>
 
 namespace oe {

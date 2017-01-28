@@ -10,7 +10,7 @@
 #define __oe_base_Masses_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/mass_utils.hpp"
+#include "openeaagles/base/util/mass_utils.hpp"
 
 #include <iostream>
 

@@ -8,8 +8,6 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
-
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/List.hpp"
@@ -101,7 +99,7 @@ void StabilizingGimbal::rollStabilizingController(const double)
 {
     if (getOwnship() == nullptr) return;
 
-    osg::Vec3d tpos = getCmdPosition();
+    base::Vec3d tpos = getCmdPosition();
     if (mountPosition == NOSE){
         tpos[ROLL_IDX] = static_cast<double>(-getOwnship()->getRoll());
     }
@@ -124,7 +122,7 @@ void StabilizingGimbal::elevationStabilizingController(const double)
 {
     if (getOwnship() == nullptr) return;
 
-    osg::Vec3d tpos = getCmdPosition();
+    base::Vec3d tpos = getCmdPosition();
     if (mountPosition == NOSE){
         tpos[ELEV_IDX] = static_cast<double>(-getOwnship()->getPitch());
     }

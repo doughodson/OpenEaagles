@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_mass_utils_H__
-#define __oe_base_mass_utils_H__
+#ifndef __oe_base_util_mass_utils_H__
+#define __oe_base_util_mass_utils_H__
 
 namespace oe {
 namespace base {

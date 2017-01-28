@@ -79,7 +79,7 @@ double Cie::y() const
     return cie[Y];
 }
 
-void Cie::getCIE(osg::Vec3d& hhh) const
+void Cie::getCIE(Vec3d& hhh) const
 {
     hhh.set(cie[LUMINANCE],cie[X],cie[Y]);
 }
@@ -137,7 +137,7 @@ bool Cie::setMonitor(MonitorMetrics* const msg)
 //------------------------------------------------------------------------------
 // cie2rgb() -- converts a CIE color to a Red, Green, Blue (RGB) value.
 //------------------------------------------------------------------------------
-void Cie::cie2rgb(osg::Vec4d& rgb, const osg::Vec3d& cie, const MonitorMetrics* m)
+void Cie::cie2rgb(Vec4d& rgb, const Vec3d& cie, const MonitorMetrics* m)
 {
    if ( m == nullptr )
       return;

@@ -866,19 +866,19 @@ void DataRecorder::genPlayerState(pb::PlayerState* const state, const models::Pl
       if (player != nullptr) {
 
          // position
-         osg::Vec3d pos = player->getGeocPosition();
+         base::Vec3d pos = player->getGeocPosition();
          state->mutable_pos()->set_x(pos[0]);
          state->mutable_pos()->set_y(pos[1]);
          state->mutable_pos()->set_z(pos[2]);
 
          // angles
-         osg::Vec3d angles = player->getGeocEulerAngles();
+         base::Vec3d angles = player->getGeocEulerAngles();
          state->mutable_angles()->set_x(angles[0]);
          state->mutable_angles()->set_y(angles[1]);
          state->mutable_angles()->set_z(angles[2]);
 
          // velocity
-         osg::Vec3d vel = player->getGeocVelocity();
+         base::Vec3d vel = player->getGeocVelocity();
          state->mutable_vel()->set_x(vel[0]);
          state->mutable_vel()->set_y(vel[1]);
          state->mutable_vel()->set_z(vel[2]);
@@ -940,19 +940,19 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const models::Track
          trkMsg->set_longitude(lon);
 
          // Position: getPosition returns osg::Vec3
-         osg::Vec3d pos = track->getPosition();
+         base::Vec3d pos = track->getPosition();
          trkMsg->mutable_position()->set_x(pos[0]);
          trkMsg->mutable_position()->set_y(pos[1]);
          trkMsg->mutable_position()->set_z(pos[2]);
 
          // Velocity: getVelocity returns osg::Vec3
-         osg::Vec3d vel = track->getVelocity();
+         base::Vec3d vel = track->getVelocity();
          trkMsg->mutable_velocity()->set_x(vel[0]);
          trkMsg->mutable_velocity()->set_y(vel[1]);
          trkMsg->mutable_velocity()->set_z(vel[2]);
 
          // Avg signal for RF/IR track:
-         const models::RfTrack* const rfTrk = dynamic_cast<const models::RfTrack*>(track);
+         const auto rfTrk = dynamic_cast<const models::RfTrack*>(track);
          if (rfTrk != nullptr) {
             trkMsg->set_avg_signal(rfTrk->getAvgSignal());
          }

@@ -4,7 +4,7 @@
 
 #include "Graphic.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace base { class Angle; }

@@ -7,7 +7,7 @@
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/constants.hpp"
-#include "openeaagles/base/units/angle_utils.hpp"
+#include "openeaagles/base/util/angle_utils.hpp"
 #include <iostream>
 
 #include <cmath>

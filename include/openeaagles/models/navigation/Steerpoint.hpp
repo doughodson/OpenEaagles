@@ -6,11 +6,8 @@
 #include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
-
 namespace base { class Angle; class Distance; class Identifier; class LatLon; class List; class String; class Time; }
-
 namespace terrain { class Terrain; }
-
 namespace models {
 class Navigation;
 class Action;
@@ -83,7 +80,7 @@ public:
     bool isCmdAirspeedValid() const             { return haveCmdAs; }
 
     // Steerpoint parameters
-    const osg::Vec3d& getPosition() const       { return posVec; }
+    const base::Vec3d& getPosition() const      { return posVec; }
     double getLatitude() const;
     double getLongitude() const;
     double getElevation() const                 { return elevation; }
@@ -126,7 +123,7 @@ public:
     virtual void setSteerpointType(const StptType t)    { stptType = t; }
     virtual void setPosition(const double x, const double y, const double z);
     virtual void setElevation(const double x);
-    virtual void setPosition(const osg::Vec3d& newPos);
+    virtual void setPosition(const base::Vec3d& newPos);
     virtual void setLatitude(const double v);
     virtual void setLongitude(const double v);
     virtual void setPTA(const double v)                 { pta = v; }
@@ -203,7 +200,7 @@ private:
     double      latitude;       // latitude
     double      longitude;      // Longitude
     double      elevation;      // Elevation                (m)
-    osg::Vec3d  posVec;         // Position vector          (m)           [ x, y, z ] NED
+    base::Vec3d  posVec;        // Position vector          (m)           [ x, y, z ] NED
     StptType    stptType;       // Steerpoint type
     double      pta;            // Planned Time of Arrival  (sec)
     double      sca;            // Safe Clearance Alt       (ft)
@@ -221,20 +218,20 @@ private:
     base::safe_ptr<Action> action;     // Action to be performed at this steerpoint
 
     // Initial (reset) data
-    double      initLatitude;   // latitude
-    double      initLongitude;  // Longitude
-    osg::Vec3d  initPosVec;     // Init Position vector (m)           [ x, y, z ] NED
-    double      initMagVar;     // Mag Var entered for this point  (deg)
-    bool        haveInitLat;    // Have initial latitude
-    bool        haveInitLon;    // Have initial longitude
-    bool        haveInitPos;    // Have initial pos vector
-    bool        haveInitMagVar; // Have initial mag var
-    double      initElev;       // Elevation                  (m)
-    bool        haveInitElev;   // Have initial elevation
-    double      initCmdAlt;     // Initial commanded altitude (m)
-    bool        haveInitCmdAlt; // Have initial cmd altitude
-    double      initCmdAirspeed; // Initial commanded airspeed (kts)
-    bool        haveInitCmdAs;   // Have commanded airspeed
+    double      initLatitude;       // latitude
+    double      initLongitude;      // Longitude
+    base::Vec3d  initPosVec;        // Init Position vector (m)           [ x, y, z ] NED
+    double      initMagVar;         // Mag Var entered for this point  (deg)
+    bool        haveInitLat;        // Have initial latitude
+    bool        haveInitLon;        // Have initial longitude
+    bool        haveInitPos;        // Have initial pos vector
+    bool        haveInitMagVar;     // Have initial mag var
+    double      initElev;           // Elevation                  (m)
+    bool        haveInitElev;       // Have initial elevation
+    double      initCmdAlt;         // Initial commanded altitude (m)
+    bool        haveInitCmdAlt;     // Have initial cmd altitude
+    double      initCmdAirspeed;    // Initial commanded airspeed (kts)
+    bool        haveInitCmdAs;      // Have commanded airspeed
     base::safe_ptr<const base::String> initNextStptName; // Name of the inital "next" steerpoint
     int         initNextStptIdx;    // Index of the initial "next" steerpoint
 

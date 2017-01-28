@@ -6,9 +6,9 @@
 #include "openeaagles/base/String.hpp"
 
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...

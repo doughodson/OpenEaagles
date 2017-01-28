@@ -11,7 +11,7 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrixd"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -128,13 +128,13 @@ void Missile::atReleaseInit()
 
       if (getTargetTrack() != nullptr) {
          // Set initial range and range dot
-         osg::Vec3d los = getTargetTrack()->getPosition();
+         base::Vec3d los = getTargetTrack()->getPosition();
          trng = los.length();
          trngT = trng;
       }
       else if (getTargetPlayer() != nullptr) {
          // Set initial range and range dot
-         osg::Vec3d los = getTargetPosition();
+         base::Vec3d los = getTargetPosition();
          trng = los.length();
          trngT = trng;
       }
@@ -151,19 +151,19 @@ void Missile::atReleaseInit()
 //------------------------------------------------------------------------------
 // calculateVectors() --
 //------------------------------------------------------------------------------
-bool Missile::calculateVectors(const Player* const tgt, const Track* const trk, osg::Vec3d* const los, osg::Vec3d* const vel, osg::Vec3d* const posx) const
+bool Missile::calculateVectors(const Player* const tgt, const Track* const trk, base::Vec3d* const los, base::Vec3d* const vel, base::Vec3d* const posx) const
 {
    if (trk != nullptr) {
       //los = trk->getPosition();
       //vel = trk->getVelocity();
       const Player* tgt0 = trk->getTarget();
-      osg::Vec3d p0 = getPosition();
+      base::Vec3d p0 = getPosition();
       if (los != nullptr) *los = tgt0->getPosition() - p0;
       if (vel != nullptr) *vel = tgt0->getVelocity();
       if (posx != nullptr) *posx = tgt0->getPosition();
    }
    else if (tgt != nullptr) {
-      osg::Vec3d p0 = getPosition();
+      base::Vec3d p0 = getPosition();
       if (los != nullptr) *los = tgt->getPosition() - p0;
       if (vel != nullptr) *vel = tgt->getVelocity();
       if (posx != nullptr) *posx = tgt->getPosition();
@@ -304,8 +304,8 @@ void Missile::weaponGuidance(const double dt)
 
    if (tgt != nullptr && !tgt->isActive()) return;
 
-   osg::Vec3d los; // Target Line of Sight
-   osg::Vec3d vel; // Target velocity
+   base::Vec3d los; // Target Line of Sight
+   base::Vec3d vel; // Target velocity
 
    // ---
    // Basic guidance
@@ -314,7 +314,7 @@ void Missile::weaponGuidance(const double dt)
       // ---
       // Get position and velocity vectors from the target/track
       // ---
-      osg::Vec3d posx;
+      base::Vec3d posx;
       calculateVectors(tgt, trk, &los, &vel, &posx);
 
       // compute range to target
@@ -361,7 +361,7 @@ void Missile::weaponGuidance(const double dt)
          if (vclos > 0) dt1 = trng/vclos;
 
          // Use time to intercept to extrapolate target position.
-         osg::Vec3d p1 = (los + (vel * dt1));
+         base::Vec3d p1 = (los + (vel * dt1));
 
          // Compute missile commanded heading and
          cmdHeading = std::atan2(p1.y(),p1.x());
@@ -403,7 +403,7 @@ void Missile::weaponGuidance(const double dt)
          bool missed = true;   // assume the worst
 
          // compute relative velocity vector.
-         const osg::Vec3d velRel = (vel - getVelocity());
+         const base::Vec3d velRel = (vel - getVelocity());
 
          // compute missile velocity squared,
          double vm2 = velRel.length2();
@@ -414,7 +414,7 @@ void Missile::weaponGuidance(const double dt)
 
             // interpolate back to closest point
             const double ndt = -rdv/vm2;
-            const osg::Vec3d p0 = los + (velRel*ndt);
+            const base::Vec3d p0 = los + (velRel*ndt);
 
             // range squared at closest point
             const double r2 = p0.length2();
@@ -428,7 +428,7 @@ void Missile::weaponGuidance(const double dt)
                setDetonationResults( DETONATE_ENTITY_IMPACT );
 
                // compute location of the detonation relative to the target
-               osg::Vec3d p0n = -p0;
+               base::Vec3d p0n = -p0;
                if (tgt != nullptr) p0n = tgt->getRotMat() * p0n;
                setDetonationLocation(p0n);
 
@@ -504,7 +504,7 @@ void Missile::weaponDynamics(const double dt)
    // ---
    // Get old angular values
    // ---
-   const osg::Vec3d oldRates = getAngularVelocities();
+   const base::Vec3d oldRates = getAngularVelocities();
    //double pa1 = oldRates[IROLL];
    const double qa1 = oldRates[IPITCH];
    const double ra1 = oldRates[IYAW];
@@ -543,17 +543,17 @@ void Missile::weaponDynamics(const double dt)
    if(vpdot < -maxAccel) vpdot = -maxAccel;
 
    // Set acceleration vector
-   osg::Vec3d aa(vpdot, 0.0, 0.0);
-   osg::Vec3d ae = aa * getRotMat();
+   base::Vec3d aa(vpdot, 0.0, 0.0);
+   base::Vec3d ae = aa * getRotMat();
    setAcceleration(ae);
 
    // Compute new velocity
    const double newVP = getTotalVelocity() + vpdot * dt;
 
    // Set acceleration vector
-   //osg::Vec3 ve0 = getVelocity();
-   const osg::Vec3d va(newVP, 0.0, 0.0);
-   const osg::Vec3d ve1 = va * getRotMat();
+   //base::Vec3 ve0 = getVelocity();
+   const base::Vec3d va(newVP, 0.0, 0.0);
+   const base::Vec3d ve1 = va * getRotMat();
    setVelocity(ve1);
    setVelocityBody(newVP, 0.0, 0.0);
 }

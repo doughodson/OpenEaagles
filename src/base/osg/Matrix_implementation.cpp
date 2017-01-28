@@ -35,7 +35,7 @@
     +((a)._mat[r][3] * (b)._mat[3][c])
 
 namespace oe {
-namespace osg {
+namespace base {
 
 //using namespace osg;
 
@@ -533,7 +533,7 @@ void Matrix_implementation::orthoNormalize(const Matrix_implementation& rhs)
     value_type y_colMag = (rhs._mat[0][1] * rhs._mat[0][1]) + (rhs._mat[1][1] * rhs._mat[1][1]) + (rhs._mat[2][1] * rhs._mat[2][1]);
     value_type z_colMag = (rhs._mat[0][2] * rhs._mat[0][2]) + (rhs._mat[1][2] * rhs._mat[1][2]) + (rhs._mat[2][2] * rhs._mat[2][2]);
 
-    if(!equivalent((double)x_colMag, 1.0) && !equivalent((double)x_colMag, 0.0))
+    if(!osg::equivalent((double)x_colMag, 1.0) && !osg::equivalent((double)x_colMag, 0.0))
     {
       x_colMag = sqrt(x_colMag);
       _mat[0][0] = rhs._mat[0][0] / x_colMag;
@@ -547,7 +547,7 @@ void Matrix_implementation::orthoNormalize(const Matrix_implementation& rhs)
       _mat[2][0] = rhs._mat[2][0];
     }
 
-    if(!equivalent((double)y_colMag, 1.0) && !equivalent((double)y_colMag, 0.0))
+    if(!osg::equivalent((double)y_colMag, 1.0) && !osg::equivalent((double)y_colMag, 0.0))
     {
       y_colMag = sqrt(y_colMag);
       _mat[0][1] = rhs._mat[0][1] / y_colMag;
@@ -561,7 +561,7 @@ void Matrix_implementation::orthoNormalize(const Matrix_implementation& rhs)
       _mat[2][1] = rhs._mat[2][1];
     }
 
-    if(!equivalent((double)z_colMag, 1.0) && !equivalent((double)z_colMag, 0.0))
+    if(!osg::equivalent((double)z_colMag, 1.0) && !osg::equivalent((double)z_colMag, 0.0))
     {
       z_colMag = sqrt(z_colMag);
       _mat[0][2] = rhs._mat[0][2] / z_colMag;
@@ -888,7 +888,7 @@ void Matrix_implementation::makePerspective(double fovy,double aspectRatio,
                                             double zNear, double zFar)
 {
     // calculate the appropriate left, right etc.
-    double tan_fovy = tan(DegreesToRadians(fovy*0.5));
+    double tan_fovy = tan(osg::DegreesToRadians(fovy*0.5));
     double right  =  tan_fovy * aspectRatio * zNear;
     double left   = -right;
     double top    =  tan_fovy * zNear;
@@ -913,7 +913,7 @@ bool Matrix_implementation::getPerspective(double& fovy,double& aspectRatio,
     bool r = getFrustum(left,right,bottom,top,temp_near,temp_far);
     if (r)
     {
-        fovy = RadiansToDegrees(atan(top/temp_near)-atan(bottom/temp_near));
+        fovy = osg::RadiansToDegrees(atan(top/temp_near)-atan(bottom/temp_near));
         aspectRatio = (right-left)/(top-bottom);
     }
     zNear = temp_near;
@@ -947,9 +947,9 @@ void Matrix_implementation::getLookAt(Vec3f& eye,Vec3f& center,Vec3f& up,value_t
 
     // note: e and c variables must be used inside this method instead of eye and center
     // because eye and center are references and they may point to the same variable.
-    Vec3f e = osg::Vec3f(0.0,0.0,0.0)*inv;
-    up = transform3x3(*this,osg::Vec3f(0.0,1.0,0.0));
-    Vec3f c = transform3x3(*this,osg::Vec3f(0.0,0.0,-1));
+    Vec3f e = Vec3f(0.0,0.0,0.0)*inv;
+    up = transform3x3(*this, Vec3f(0.0,1.0,0.0));
+    Vec3f c = transform3x3(*this, Vec3f(0.0,0.0,-1));
     c.normalize();
     c = e + c * ((Vec3f::value_type)lookDistance);
 
@@ -965,9 +965,9 @@ void Matrix_implementation::getLookAt(Vec3d& eye,Vec3d& center,Vec3d& up,value_t
 
     // note: e and c variables must be used inside this method instead of eye and center
     // because eye and center are references and they may point to the same variable.
-    Vec3d e = osg::Vec3d(0.0,0.0,0.0)*inv;
-    up = transform3x3(*this,osg::Vec3d(0.0,1.0,0.0));
-    Vec3d c = transform3x3(*this,osg::Vec3d(0.0,0.0,-1));
+    Vec3d e = Vec3d(0.0,0.0,0.0)*inv;
+    up = transform3x3(*this, Vec3d(0.0,1.0,0.0));
+    Vec3d c = transform3x3(*this, Vec3d(0.0,0.0,-1));
     c.normalize();
     c = e + c*lookDistance;
 

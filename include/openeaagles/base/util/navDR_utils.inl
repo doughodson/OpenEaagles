@@ -3,15 +3,15 @@
 // Description: inline functions
 //------------------------------------------------------------------------------
 
-#ifndef __oe_base_navDR_utils_inline__
-#define __oe_base_navDR_utils_inline__
+#ifndef __oe_base_util_navDR_utils_inline__
+#define __oe_base_util_navDR_utils_inline__
 
 //==============================================================================
 // Compute R0 Matrix
 //==============================================================================
 inline bool getR0Matrix(
-         const osg::Vec4d RPY,          // body roll, pitch, yaw [radians]
-         osg::Matrixd* const pR0
+         const Vec4d RPY,          // body roll, pitch, yaw [radians]
+         Matrixd* const pR0
       )
 {
    //---------------------------------------------------------------------------
@@ -49,15 +49,15 @@ inline bool getR0Matrix(
 // Compute Inv R0 Matrix
 //==============================================================================
 inline bool getInvR0Matrix(
-         const osg::Vec4d RPY,          // body roll, pitch, yaw [radians]
-         osg::Matrixd* const pInvR0
+         const Vec4d RPY,          // body roll, pitch, yaw [radians]
+         Matrixd* const pInvR0
       )
 {
    
    //---------------------------------------------------------------------------
    // Compute R0 Matrix
    //---------------------------------------------------------------------------
-   osg::Matrixd R0;
+   Matrixd R0;
    getR0Matrix(RPY, &R0);
       
    //---------------------------------------------------------------------------
@@ -76,8 +76,8 @@ inline bool getInvR0Matrix(
 // Compute Wwt Matrix
 //==============================================================================
 inline bool getWwtMatrix(
-         const osg::Vec4d AV,           // body angular velocity [rps]
-         osg::Matrixd* const pwwT
+         const Vec4d AV,           // body angular velocity [rps]
+         Matrixd* const pwwT
       )
 {
    
@@ -110,8 +110,8 @@ inline bool getWwtMatrix(
 // Compute Omega Matrix
 //==============================================================================
 inline bool getOmegaMatrix(
-         const osg::Vec4d AV,           // body angular velocity [rps]
-         osg::Matrixd* const pOmega
+         const Vec4d AV,           // body angular velocity [rps]
+         Matrixd* const pOmega
       )
 {
    
@@ -145,8 +145,8 @@ inline bool getOmegaMatrix(
 //==============================================================================
 inline bool getDrMatrix(
          const double dT,               // time increment (secs)
-         const osg::Vec4d AV,           // body angular velocity [rps]
-         osg::Matrixd* const pDR
+         const Vec4d AV,           // body angular velocity [rps]
+         Matrixd* const pDR
       )
 {
    const double EPS = 1.0E-12; 
@@ -160,7 +160,7 @@ inline bool getDrMatrix(
 
    const double absW1 = std::sqrt(Wx*Wx + Wy*Wy + Wz*Wz);
    if (absW1 < EPS) {
-      osg::Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
+      Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
       *pDR = I3;
    }
    else {
@@ -178,12 +178,12 @@ inline bool getDrMatrix(
       //---------------------------------------------------------------------------
       // Compute Component Matrices (wwT, I3, Omega)
       //---------------------------------------------------------------------------
-      osg::Matrixd wwT;
+      Matrixd wwT;
       getWwtMatrix(AV, &wwT);  // get wwT matrix
 
-      osg::Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
+      Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
 
-      osg::Matrixd Omega;
+      Matrixd Omega;
       getOmegaMatrix(AV, &Omega);  // get Omega matrix
 
       //---------------------------------------------------------------------------
@@ -200,8 +200,8 @@ inline bool getDrMatrix(
 //==============================================================================
 inline bool getQuatDrMatrix(
          const double dT,               // time increment (secs)
-         const osg::Vec4d AV,           // body angular velocity [rps]
-         osg::Matrixd* const pDR
+         const Vec4d AV,           // body angular velocity [rps]
+         Matrixd* const pDR
       )
 {
    
@@ -251,8 +251,8 @@ inline bool getQuatDrMatrix(
 //==============================================================================
 inline bool getR1Matrix(
          const double dT,               // time increment (secs)
-         const osg::Vec4d AV,           // body angular velocity [rps]
-         osg::Matrixd* const pR1
+         const Vec4d AV,           // body angular velocity [rps]
+         Matrixd* const pR1
       )
 {
    const double EPS = 1.0E-12;
@@ -266,7 +266,7 @@ inline bool getR1Matrix(
 
    const double absW1 = std::sqrt(Wx*Wx + Wy*Wy + Wz*Wz);
    if (absW1 < EPS) {
-      osg::Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
+      Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
       *pR1 = I3;
    }
    else {
@@ -286,12 +286,12 @@ inline bool getR1Matrix(
       //---------------------------------------------------------------------------
       // Compute Component Matrices (wwT, I3, Omega)
       //---------------------------------------------------------------------------
-      osg::Matrixd wwT;
+      Matrixd wwT;
       getWwtMatrix(AV, &wwT);
 
-      osg::Matrixd I3;
+      Matrixd I3;
 
-      osg::Matrixd Omega;
+      Matrixd Omega;
       getOmegaMatrix(AV, &Omega);
 
       //---------------------------------------------------------------------------
@@ -307,9 +307,9 @@ inline bool getR1Matrix(
 // Compute R2 Matrix
 //==============================================================================
 inline bool getR2Matrix(
-         const double dT,               // time increment (secs)
-         const osg::Vec4d AV,           // body angular velocity [rps]
-         osg::Matrixd* const pR2
+         const double dT,          // time increment (secs)
+         const Vec4d AV,           // body angular velocity [rps]
+         Matrixd* const pR2
       )
 {
    const double EPS = 1.0E-12;
@@ -323,7 +323,7 @@ inline bool getR2Matrix(
 
    const double absW1 = std::sqrt(Wx*Wx + Wy*Wy + Wz*Wz);
    if (absW1 < EPS) {
-      osg::Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
+      Matrixd I3;  // get 4X4 identity matrix (virtual 3x3 matrix)
       *pR2 = I3;
    } else {
       const double absW2 = absW1 * absW1;
@@ -343,12 +343,12 @@ inline bool getR2Matrix(
       //---------------------------------------------------------------------------
       // Get Component Matrices (wwT, I3, Omega)
       //---------------------------------------------------------------------------
-      osg::Matrixd wwT;
+      Matrixd wwT;
       getWwtMatrix(AV, &wwT);       // gets the wwT matrix
 
-      osg::Matrixd I3;              // gets a 4x4 identity matrix (virtual 3x3)
+      Matrixd I3;              // gets a 4x4 identity matrix (virtual 3x3)
 
-      osg::Matrixd Omega;
+      Matrixd Omega;
       getOmegaMatrix(AV, &Omega);   // gets the Omega matrix
 
       //---------------------------------------------------------------------------
@@ -364,17 +364,17 @@ inline bool getR2Matrix(
 // Compute Rwb Matrix
 //==============================================================================
 inline bool getRwbMatrix(
-         const double dT,               // time increment (secs)
-         const osg::Vec4d RPY,          // body roll, pitch, yaw [radians]
-         const osg::Vec4d AV,           // body angular velocity [rps]
-         osg::Matrixd* const pRwb
+         const double dT,          // time increment (secs)
+         const Vec4d RPY,          // body roll, pitch, yaw [radians]
+         const Vec4d AV,           // body angular velocity [rps]
+         Matrixd* const pRwb
       )
 {
    //---------------------------------------------------------------------------
    // Compute Rwb Matrix
    //---------------------------------------------------------------------------
-   osg::Matrixd R0;
-   osg::Matrixd DR;
+   Matrixd R0;
+   Matrixd DR;
 
    getR0Matrix(RPY, &R0);
    getDrMatrix(dT, AV, &DR);

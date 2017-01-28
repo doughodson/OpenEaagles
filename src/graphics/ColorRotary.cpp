@@ -146,7 +146,7 @@ bool ColorRotary::determineColor(const double value)
         if (pair != nullptr) {
             const auto listcolor = dynamic_cast<base::Color*>(pair->object());
             if (listcolor != nullptr) {
-               const auto vec = static_cast<const osg::Vec4d*>(listcolor->getRGBA());
+               const auto vec = static_cast<const base::Vec4d*>(listcolor->getRGBA());
                color = *vec;
                ok = true;
             }

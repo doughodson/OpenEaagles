@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_time_utils_H__
-#define __oe_base_time_utils_H__
+#ifndef __oe_base_util_time_utils_H__
+#define __oe_base_util_time_utils_H__
 
 #include "openeaagles/base/util/math_utils.hpp"
 

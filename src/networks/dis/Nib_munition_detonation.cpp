@@ -13,7 +13,7 @@
 
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 
 #include "openeaagles/base/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -118,13 +118,13 @@ bool Nib::munitionDetonationMsgFactory(const double)
     // ---
 
     // World Coordinates
-    osg::Vec3d geocPos = mPlayer->getGeocPosition();
+    base::Vec3d geocPos = mPlayer->getGeocPosition();
     pdu.location.X_coord = geocPos[base::nav::IX];
     pdu.location.Y_coord = geocPos[base::nav::IY];
     pdu.location.Z_coord = geocPos[base::nav::IZ];
 
     // Velocity
-    osg::Vec3d geocVel = mPlayer->getGeocVelocity();
+    base::Vec3d geocVel = mPlayer->getGeocVelocity();
     pdu.velocity.component[0] = static_cast<float>(geocVel[base::nav::IX]);
     pdu.velocity.component[1] = static_cast<float>(geocVel[base::nav::IY]);
     pdu.velocity.component[2] = static_cast<float>(geocVel[base::nav::IZ]);
@@ -147,7 +147,7 @@ bool Nib::munitionDetonationMsgFactory(const double)
     // ---
     // Location
     // ---
-    osg::Vec3d lpos = mPlayer->getDetonationLocation();
+    base::Vec3d lpos = mPlayer->getDetonationLocation();
     pdu.locationInEntityCoordinates.component[0] = static_cast<float>(lpos[0]);
     pdu.locationInEntityCoordinates.component[1] = static_cast<float>(lpos[1]);
     pdu.locationInEntityCoordinates.component[2] = static_cast<float>(lpos[2]);

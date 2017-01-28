@@ -65,17 +65,17 @@ public:
     double y() const;
     double i() const;
     double q() const;
-    void getYIQ(osg::Vec3d& yiq) const;
+    void getYIQ(Vec3d& yiq) const;
 
     virtual bool setY(Number* const msg);
     virtual bool setI(Number* const msg);
     virtual bool setQ(Number* const msg);
 
-    static void yiq2rgb(osg::Vec4d& rgb, const osg::Vec3d& yiq);
-    static void rgb2yiq(osg::Vec3d& yiq, const osg::Vec4d& rgb);
+    static void yiq2rgb(Vec4d& rgb, const Vec3d& yiq);
+    static void rgb2yiq(Vec3d& yiq, const Vec4d& rgb);
 
 protected:
-    osg::Vec3d yiq;
+    Vec3d yiq;
 };
 
 }

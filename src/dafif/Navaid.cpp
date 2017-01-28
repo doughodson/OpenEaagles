@@ -1,7 +1,8 @@
 
 #include "openeaagles/dafif/Navaid.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+
 #include "openeaagles/base/units/Angles.hpp"
 #include <iostream>
 

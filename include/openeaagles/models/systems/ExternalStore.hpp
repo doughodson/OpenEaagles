@@ -5,9 +5,7 @@
 #include "openeaagles/models/systems/System.hpp"
 
 namespace oe {
-
 namespace base { class String; }
-
 namespace models {
 
 //------------------------------------------------------------------------------

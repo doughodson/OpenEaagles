@@ -5,13 +5,12 @@
 #include "openeaagles/models/systems/Antenna.hpp"
 #include "openeaagles/models/systems/TrackManager.hpp"
 #include "openeaagles/models/Emission.hpp"
-//#include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 

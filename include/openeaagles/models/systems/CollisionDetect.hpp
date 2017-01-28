@@ -6,11 +6,8 @@
 #include "openeaagles/config.hpp"
 
 namespace oe {
-
 namespace base { class Angle; class Distance; class Number; class PairStream; }
-
 namespace models {
-
 class Player;
 
 //------------------------------------------------------------------------------

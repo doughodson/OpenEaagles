@@ -44,22 +44,22 @@ public:
    // ---
    // construct vectors from OSG vectors
    // ---
-   RVector(const osg::Vec2d& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec2f& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec3d& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec3f& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec4d& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
-   RVector(const osg::Vec4f& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec2d& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec2f& v) : Matrix()   { setMatrix(1,2,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec3d& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec3f& v) : Matrix()   { setMatrix(1,3,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec4d& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   RVector(const Vec4f& v) : Matrix()   { setMatrix(1,4,v.ptr(),4); STANDARD_CONSTRUCTOR() }
 
    // ---
    // Assigned from OSG vectors
    // ---
-   RVector& operator=(const osg::Vec2d& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
-   RVector& operator=(const osg::Vec2f& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
-   RVector& operator=(const osg::Vec3d& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
-   RVector& operator=(const osg::Vec3f& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
-   RVector& operator=(const osg::Vec4d& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
-   RVector& operator=(const osg::Vec4f& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
+   RVector& operator=(const Vec2d& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
+   RVector& operator=(const Vec2f& v)   { setMatrix(1,2,v.ptr(),2); return *this; }
+   RVector& operator=(const Vec3d& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
+   RVector& operator=(const Vec3f& v)   { setMatrix(1,3,v.ptr(),3); return *this; }
+   RVector& operator=(const Vec4d& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
+   RVector& operator=(const Vec4f& v)   { setMatrix(1,4,v.ptr(),4); return *this; }
 
    // Size of the vector
    unsigned int getSize() const     { return getCols(); }
@@ -255,22 +255,22 @@ public:
    // ---
    // construct vectors from OSG vectors
    // ---
-   CVector(const osg::Vec2d& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec2f& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec3d& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec3f& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec4d& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
-   CVector(const osg::Vec4f& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec2d& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec2f& v) : Matrix()   { setMatrix(2,1,v.ptr(),2); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec3d& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec3f& v) : Matrix()   { setMatrix(3,1,v.ptr(),3); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec4d& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
+   CVector(const Vec4f& v) : Matrix()   { setMatrix(4,1,v.ptr(),4); STANDARD_CONSTRUCTOR() }
 
    // ---
    // Assigned from OSG vectors
    // ---
-   CVector& operator=(const osg::Vec2d& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
-   CVector& operator=(const osg::Vec2f& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
-   CVector& operator=(const osg::Vec3d& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
-   CVector& operator=(const osg::Vec3f& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
-   CVector& operator=(const osg::Vec4d& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
-   CVector& operator=(const osg::Vec4f& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
+   CVector& operator=(const Vec2d& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
+   CVector& operator=(const Vec2f& v)   { setMatrix(2,1,v.ptr(),2); return *this; }
+   CVector& operator=(const Vec3d& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
+   CVector& operator=(const Vec3f& v)   { setMatrix(3,1,v.ptr(),3); return *this; }
+   CVector& operator=(const Vec4d& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
+   CVector& operator=(const Vec4f& v)   { setMatrix(4,1,v.ptr(),4); return *this; }
 
 
    // Size of the vector

@@ -19,7 +19,7 @@
 #include "./Quat"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 class Matrixf;
 
@@ -124,16 +124,16 @@ class Matrixf
 
         
         /** decompose the matrix into translation, rotation, scale and scale orientation.*/        
-        void decompose( osg::Vec3f& translation,
-                        osg::Quat& rotation, 
-                        osg::Vec3f& scale, 
-                        osg::Quat& so ) const;
+        void decompose( Vec3f& translation,
+                        Quat& rotation, 
+                        Vec3f& scale, 
+                        Quat& so ) const;
 
         /** decompose the matrix into translation, rotation, scale and scale orientation.*/        
-        void decompose( osg::Vec3d& translation,
-                        osg::Quat& rotation, 
-                        osg::Vec3d& scale, 
-                        osg::Quat& so ) const;
+        void decompose( Vec3d& translation,
+                        Quat& rotation, 
+                        Vec3d& scale, 
+                        Quat& so ) const;
 
 
         /** Set to an orthographic projection.
@@ -378,7 +378,7 @@ class Matrixf
 
         inline Matrixf operator * ( const Matrixf &m ) const
         {
-            osg::Matrixf r;
+            Matrixf r;
             r.mult(*this,m);
             return  r;
         }

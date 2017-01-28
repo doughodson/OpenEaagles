@@ -17,7 +17,7 @@
 #include "./Math"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose float pair. Uses include representation of
   * texture coordinates.

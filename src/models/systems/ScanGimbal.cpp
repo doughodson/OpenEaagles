@@ -9,7 +9,8 @@
 #include "openeaagles/base/Pair.hpp"
 
 #include "openeaagles/base/units/Angles.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -841,7 +842,7 @@ bool ScanGimbal::setScanRadius(const double newScanRadius)
 //------------------------------------------------------------------------------
 // setRefPosition(Vec2) -- set the reference position of the search volume
 //------------------------------------------------------------------------------
-void ScanGimbal::setRefPosition(const osg::Vec2d& nla)
+void ScanGimbal::setRefPosition(const base::Vec2d& nla)
 {
     refAngle = nla;
 }
@@ -1004,7 +1005,7 @@ bool ScanGimbal::setSlotPRVertices(const base::PairStream* const prObj)
         nprv = 0;
         const base::List::Item* item = prObj->getFirstItem();
         // holds our array values
-        osg::Vec2d tempVerts(0.0, 0.0);
+        base::Vec2d tempVerts(0.0, 0.0);
 
         while (item != nullptr && nprv < n) {
             const auto p = dynamic_cast<const base::Pair*>(item->getValue());

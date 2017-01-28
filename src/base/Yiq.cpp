@@ -74,7 +74,7 @@ double Yiq::q() const
     return yiq[Q];
 }
 
-void Yiq::getYIQ(osg::Vec3d& hhh) const
+void Yiq::getYIQ(Vec3d& hhh) const
 {
     hhh.set(yiq[Y],yiq[I],yiq[Q]);
 }
@@ -123,7 +123,7 @@ bool Yiq::setQ(Number* const msg)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Yiq::yiq2rgb(osg::Vec4d& rgb, const osg::Vec3d& yiq)
+void Yiq::yiq2rgb(Vec4d& rgb, const Vec3d& yiq)
 {
     rgb[RED]   = 1.0f * yiq[Y] + 0.948262f * yiq[I] + 0.624013f * yiq[Q];
     rgb[GREEN] = 1.0f * yiq[Y] - 0.276066f * yiq[I] - 0.639810f * yiq[Q];
@@ -134,7 +134,7 @@ void Yiq::yiq2rgb(osg::Vec4d& rgb, const osg::Vec3d& yiq)
 //------------------------------------------------------------------------------
 // rgb2yiq -- converts a Red, Green, Blue (RGB) color to a YIQ value.
 //------------------------------------------------------------------------------
-void Yiq::rgb2yiq(osg::Vec3d& yiq, const osg::Vec4d& rgb)
+void Yiq::rgb2yiq(Vec3d& yiq, const Vec4d& rgb)
 {
     yiq[Y] = 0.30f * rgb[RED] + 0.59f * rgb[GREEN] + 0.11f * rgb[BLUE];
     yiq[I] = 0.60f * rgb[RED] - 0.28f * rgb[GREEN] - 0.32f * rgb[BLUE];

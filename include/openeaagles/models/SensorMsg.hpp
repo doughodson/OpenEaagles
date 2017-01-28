@@ -9,8 +9,8 @@
 
 namespace oe {
 namespace models {
-   class Player;
-   class Gimbal;
+class Player;
+class Gimbal;
 
 //------------------------------------------------------------------------------
 // Class: SensorMsg
@@ -29,14 +29,14 @@ public:
    // ---
    // Normalized ownship to target LOS vector (ownship's NED)
    // ---
-   const osg::Vec3d& getLosVec() const          { return losO2T; }
-   void setLosVec(const osg::Vec3d& v)          { losO2T = v; }
+   const base::Vec3d& getLosVec() const          { return losO2T; }
+   void setLosVec(const base::Vec3d& v)          { losO2T = v; }
 
    // ---
    // Normalized target to ownship LOS vector (target's NED)
    // ---
-   const osg::Vec3d& getTgtLosVec() const       { return losT2O; }
-   void setTgtLosVec(const osg::Vec3d& v)       { losT2O = v; }
+   const base::Vec3d& getTgtLosVec() const       { return losT2O; }
+   void setTgtLosVec(const base::Vec3d& v)       { losT2O = v; }
 
    // ---
    // Angles to target in gimbal coordinates
@@ -94,7 +94,7 @@ public:
    double getElevationAoi() const               { return iel; }
 
    // Target's normalized AOI vector
-   const osg::Vec3d& getAoiVector() const       { return aoi; }
+   const base::Vec3d& getAoiVector() const      { return aoi; }
 
    // Sets the target's azimuth AOI (radians; target body coordinates)
    void setAzimuthAoi(const double a)           { iaz = a; }
@@ -103,8 +103,8 @@ public:
    void setElevationAoi(const double a)         { iel = a; }
 
    // Sets the target's normalized AOI vector
-   void setAoiVector(const osg::Vec3d& v)       { aoi = v; }
-   void setAoiVector(const osg::Vec4d& v)       { aoi.set(v.x(),v.y(),v.z()); }
+   void setAoiVector(const base::Vec3d& v)   { aoi = v; }
+   void setAoiVector(const base::Vec4d& v)   { aoi.set(v.x(),v.y(),v.z()); }
 
    // ---
    // Modes and flags
@@ -162,22 +162,22 @@ public:
 private:
    void initData();
 
-   double          maxRng;         // Maximum range                                (NM)
-   double          rng;            // Range                                        (meters)
-   double          rngRate;        // Range Rate                                   (m/s)
-   double          gaz;            // Gimbal azimuth                               (rad)
-   double          gel;            // Gimbal elevation                             (rad)
-   double          iaz;            // Target's Angle Of Incidence (AOI) azimuth    (rad)
-   double          iel;            // Target's AOI elevation                       (rad)
-   osg::Vec3d      losO2T;         // Normalized ownship to target LOS vector (ownship's NED)
-   osg::Vec3d      losT2O;         // Normalized target to ownship LOS vector (target's NED)
-   osg::Vec3d      aoi;            // Normalized target Angle Of Incidence (AOI) vector
-   Gimbal*         gimbal;         // The gimbal that transmitted the message
-   base::safe_ptr<Player>    ownship;     // The originating (ownship) player
-   base::safe_ptr<Player>    target;      // The Target player
-   base::safe_ptr<base::Object> dataMsg; // Embedded data message (e.g., datalink, etc)
-   bool            returnReq;      // Return Request
-   bool            localOnly;      // Local players only flag
+   double maxRng;            // Maximum range                                (NM)
+   double rng;               // Range                                        (meters)
+   double rngRate;           // Range Rate                                   (m/s)
+   double gaz;               // Gimbal azimuth                               (rad)
+   double gel;               // Gimbal elevation                             (rad)
+   double iaz;               // Target's Angle Of Incidence (AOI) azimuth    (rad)
+   double iel;               // Target's AOI elevation                       (rad)
+   base::Vec3d losO2T;       // Normalized ownship to target LOS vector (ownship's NED)
+   base::Vec3d losT2O;       // Normalized target to ownship LOS vector (target's NED)
+   base::Vec3d aoi;          // Normalized target Angle Of Incidence (AOI) vector
+   Gimbal* gimbal;           // The gimbal that transmitted the message
+   base::safe_ptr<Player> ownship;         // The originating (ownship) player
+   base::safe_ptr<Player> target;          // The Target player
+   base::safe_ptr<base::Object> dataMsg;   // Embedded data message (e.g., datalink, etc)
+   bool returnReq;           // Return Request
+   bool localOnly;           // Local players only flag
 };
 
 }

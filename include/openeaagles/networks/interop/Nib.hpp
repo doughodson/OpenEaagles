@@ -90,41 +90,41 @@ public:
    virtual void setSide(const models::Player::Side s);
 
    // Dead Reckoning (DR) algorithm (see enum DeadReckoning)
-   bool isDeadReckoning(const unsigned char dr) const { return (drNum == dr); }
-   unsigned char getDeadReckoning() const             { return drNum; }
-   bool setDeadReckoning(const unsigned char dr)      { drNum = dr; return true; }
+   bool isDeadReckoning(const unsigned char dr) const         { return (drNum == dr); }
+   unsigned char getDeadReckoning() const                     { return drNum; }
+   bool setDeadReckoning(const unsigned char dr)              { drNum = dr; return true; }
 
    // DR's position vector @ T0 (meters) (ECEF)
-   const osg::Vec3d& getDrPosition() const                    { return drP0; }
+   const base::Vec3d& getDrPosition() const                   { return drP0; }
 
    // DR's velocity vector @ T0 (m/sec)  (ECEF or Body based on the DR algorithm)
-   const osg::Vec3d& getDrVelocity() const override           { return drV0; }
+   const base::Vec3d& getDrVelocity() const override          { return drV0; }
 
    // DR's acceleration vector @ T0 ((m/sec)/sec) (ECEF or Body based on the DR algorithm)
-   const osg::Vec3d& getDrAcceleration() const override       { return drA0; }
+   const base::Vec3d& getDrAcceleration() const override      { return drA0; }
 
    // DR's Euler angles @ T0 (rad) [ phi theta psi ] (Body/ECEF)
-   const osg::Vec3d& getDrEulerAngles() const                 { return drRPY0; }
+   const base::Vec3d& getDrEulerAngles() const                { return drRPY0; }
 
    // DR's angular rates @ T0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
-   const osg::Vec3d& getDrAngularVelocities() const override  { return drAV0; }
+   const base::Vec3d& getDrAngularVelocities() const override { return drAV0; }
 
    // update incoming entity dead reckoning
    bool updateDeadReckoning(
-      const double dt,              // delta time (sec)
-      osg::Vec3d* const pNewPos,    // New DR position
-      osg::Vec3d* const pNewAngles  // New DR orientation
+      const double dt,                    // delta time (sec)
+      base::Vec3d* const pNewPos,         // New DR position
+      base::Vec3d* const pNewAngles       // New DR orientation
    ) override;
 
    // (re)initialize the dead reckoning function
    bool resetDeadReckoning(
-         const unsigned char dr, // Dead-Reckoning algorithm number (see enum DeadReckoning)
-         const osg::Vec3d& p,    // Position vector @ T=0 (meters) (ECEF)
-         const osg::Vec3d& v,    // Velocity vector @ T=0 (m/sec)  (ECEF or Body based on 'dr')
-         const osg::Vec3d& a,    // Acceleration vector @ T=0 ((m/sec)/sec) (ECEF or Body based on 'dr')
-         const osg::Vec3d& rpy,  // Euler angles @ T=0 (rad) [ phi theta psi ] (Body/ECEF)
-         const osg::Vec3d& av,   // Angular rates @ T=0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
-         const double time = 0   // Initial time (seconds) (default: zero)
+         const unsigned char dr,       // Dead-Reckoning algorithm number (see enum DeadReckoning)
+         const base::Vec3d& p,         // Position vector @ T=0 (meters) (ECEF)
+         const base::Vec3d& v,         // Velocity vector @ T=0 (m/sec)  (ECEF or Body based on 'dr')
+         const base::Vec3d& a,         // Acceleration vector @ T=0 ((m/sec)/sec) (ECEF or Body based on 'dr')
+         const base::Vec3d& rpy,       // Euler angles @ T=0 (rad) [ phi theta psi ] (Body/ECEF)
+         const base::Vec3d& av,        // Angular rates @ T=0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
+         const double time = 0         // Initial time (seconds) (default: zero)
       );
 
    // Checked flags
@@ -218,9 +218,9 @@ protected:
 
    // Main Dead Reckoning Function
    bool mainDeadReckoning(
-         const double dT,           // DR time (seconds)
-         osg::Vec3d* const pNewP0,  // DR Position vector @ time = 'dT' (meters) (ECEF)
-         osg::Vec3d* const pNewRPY  // DR Euler angles @ time = 'dT' (rad) [ phi theta psi ] (Body/ECEF)
+         const double dT,                 // DR time (seconds)
+         base::Vec3d* const pNewP0,       // DR Position vector @ time = 'dT' (meters) (ECEF)
+         base::Vec3d* const pNewRPY       // DR Euler angles @ time = 'dT' (rad) [ phi theta psi ] (Body/ECEF)
       ) const;
 
    // Update our DR time and return the new time
@@ -231,44 +231,44 @@ protected:
 private:
    // compute the rotational matrix R0
    static bool drComputeMatrixR0(
-         const osg::Vec3d& RPY,      // [radians]
-         osg::Matrixd* const pR0     // Rotational matrix R0
+         const base::Vec3d& RPY,      // [radians]
+         base::Matrixd* const pR0     // Rotational matrix R0
       );
 
    // compute the wwT matrix
    static bool drComputeMatrixWwT(
-         const osg::Vec3d& av,       // angular velocities [rps]
-         osg::Matrixd* const pwwT    // matrix
+         const base::Vec3d& av,       // angular velocities [rps]
+         base::Matrixd* const pwwT    // matrix
       );
 
    // compute the omega matrix
    static bool drComputeMatrixOmega(
-         const osg::Vec3d& av,      // [rps]
-         osg::Matrixd* const pOmega
+         const base::Vec3d& av,       // [rps]
+         base::Matrixd* const pOmega
       );
 
    static bool drComputeMatrixDR(
-         const double dT,           // DR time [sec]
-         const osg::Vec3d& av,      // angular velocities [rps]
-         const osg::Matrixd& wwT,   // wwT matrix
-         const osg::Matrixd& omega, // omega matrix
-         osg::Matrixd* const pDR    // DR matrix
+         const double dT,             // DR time [sec]
+         const base::Vec3d& av,       // angular velocities [rps]
+         const base::Matrixd& wwT,    // wwT matrix
+         const base::Matrixd& omega,  // omega matrix
+         base::Matrixd* const pDR     // DR matrix
       );
 
    static bool drComputeMatrixR1(
-         const double dT,           // DR time [sec]
-         const osg::Vec3d& av,      // angular velocities [rps]
-         const osg::Matrixd& wwT,   // wwT matrix
-         const osg::Matrixd& omega, // omega matrix
-         osg::Matrixd* const pR1    // Matrix R1
+         const double dT,             // DR time [sec]
+         const base::Vec3d& av,       // angular velocities [rps]
+         const base::Matrixd& wwT,    // wwT matrix
+         const base::Matrixd& omega,  // omega matrix
+         base::Matrixd* const pR1     // Matrix R1
       );
 
    static bool drComputeMatrixR2(
-         const double dT,           // DR time [sec]
-         const osg::Vec3d& av,      // angular velocities [rps]
-         const osg::Matrixd& wwT,   // wwT matrix
-         const osg::Matrixd& omega, // omega matrix
-         osg::Matrixd* const pR2    // Matrix R2
+         const double dT,             // DR time [sec]
+         const base::Vec3d& av,       // angular velocities [rps]
+         const base::Matrixd& wwT,    // wwT matrix
+         const base::Matrixd& omega,  // omega matrix
+         base::Matrixd* const pR2     // Matrix R2
       );
 
 private:
@@ -304,22 +304,22 @@ private:
 
    // Dead Reckoning (DR) data
    unsigned char drNum;                // Dead-Reckoning algorithm (see enum DeadReckoning)
-   osg::Vec3d  drP0;                   // Position vector @ t0 (meters) (ECEF)
-   osg::Vec3d  drV0;                   // Velocity vector @ t0 (m/sec)  (ECEF or Body based on the DR algorithm)
-   osg::Vec3d  drA0;                   // Acceleration vector @ t0 ((m/sec)/sec) (ECEF or Body based on the DR algorithm)
-   osg::Vec3d  drRPY0;                 // Euler angles @ t0 (rad) (Body/ECEF)
-   osg::Vec3d  drAV0;                  // Angular rates @ t0 (rad/sec) (Body/ECEF)
-   osg::Matrixd drR0;                  // R0 matrix
-   osg::Matrixd drWwT;                 // wwT matrix
-   osg::Matrixd drOmega;               // omega matrix
+   base::Vec3d  drP0;                  // Position vector @ t0 (meters) (ECEF)
+   base::Vec3d  drV0;                  // Velocity vector @ t0 (m/sec)  (ECEF or Body based on the DR algorithm)
+   base::Vec3d  drA0;                  // Acceleration vector @ t0 ((m/sec)/sec) (ECEF or Body based on the DR algorithm)
+   base::Vec3d  drRPY0;                // Euler angles @ t0 (rad) (Body/ECEF)
+   base::Vec3d  drAV0;                 // Angular rates @ t0 (rad/sec) (Body/ECEF)
+   base::Matrixd drR0;                 // R0 matrix
+   base::Matrixd drWwT;                // wwT matrix
+   base::Matrixd drOmega;              // omega matrix
 
    // Current DR values (incoming only)
    double drTime;                      // DR time (sec)
-   osg::Vec3d drPos;                   // Current DR position vector (meters) (ECEF)
-   osg::Vec3d drAngles;                // Current DR angles (rad) [ roll pitch yaw ] (Body/ECEF)
+   base::Vec3d drPos;                  // Current DR position vector (meters) (ECEF)
+   base::Vec3d drAngles;               // Current DR angles (rad) [ roll pitch yaw ] (Body/ECEF)
 
    // DR smoothing data
-   osg::Vec3d  smoothVel;              // Smoothing Velocity (meters/second) (ECEF)
+   base::Vec3d  smoothVel;             // Smoothing Velocity (meters/second) (ECEF)
    double      smoothTime;             // Smoothing Time
 
    // Articulated parts (Air Vehicles)

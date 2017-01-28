@@ -7,7 +7,7 @@
 #include "openeaagles/models/WorldModel.hpp"
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 
 #include "openeaagles/base/NetHandler.hpp"
 
@@ -257,28 +257,28 @@ void Nib::entityState2Nib()
       freeze(spatialRvw->isFrozen != 0);
 
       // Get the geocentric position, velocity and acceleration
-      osg::Vec3d geocPos;
+      base::Vec3d geocPos;
       geocPos[base::nav::IX] = spatialRvw->worldLocation.x;
       geocPos[base::nav::IY] = spatialRvw->worldLocation.y;
       geocPos[base::nav::IZ] = spatialRvw->worldLocation.z;
 
-      osg::Vec3d geocVel;
+      base::Vec3d geocVel;
       geocVel[base::nav::IX] = spatialRvw->velocityVector.xVelocity;
       geocVel[base::nav::IY] = spatialRvw->velocityVector.yVelocity;
       geocVel[base::nav::IZ] = spatialRvw->velocityVector.zVelocity;
 
-      osg::Vec3d geocAcc;
+      base::Vec3d geocAcc;
       geocAcc[base::nav::IX] = spatialRvw->accelerationVector.xAcceleration;
       geocAcc[base::nav::IY] = spatialRvw->accelerationVector.yAcceleration;
       geocAcc[base::nav::IZ] = spatialRvw->accelerationVector.zAcceleration;
 
       // Get orientation orientation and rates
-      osg::Vec3d geocAngles;
+      base::Vec3d geocAngles;
       geocAngles[base::nav::IPHI] = spatialRvw->orientation.phi;
       geocAngles[base::nav::ITHETA] = spatialRvw->orientation.theta;
       geocAngles[base::nav::IPSI] = spatialRvw->orientation.psi; 
 
-      osg::Vec3d arates(0.0, 0.0, 0.0);
+      base::Vec3d arates(0.0, 0.0, 0.0);
 
       // (re)initialize the dead reckoning function
       double diffTime(0.0);
@@ -466,11 +466,11 @@ void Nib::updateBasicEntity(
       // Spatial Structure
       if (isAttributeUpdateEnabled(NetIO::SPATIAL_AI)) {
 
-         osg::Vec3d pos = getDrPosition();
-         osg::Vec3d vel = getDrVelocity();
-         osg::Vec3d accel = getDrAcceleration();
-         osg::Vec3d angles = getDrEulerAngles();
-         osg::Vec3d arates = getDrAngularVelocities();
+         base::Vec3d pos = getDrPosition();
+         base::Vec3d vel = getDrVelocity();
+         base::Vec3d accel = getDrAcceleration();
+         base::Vec3d angles = getDrEulerAngles();
+         base::Vec3d arates = getDrAngularVelocities();
 
          // NIB's base entity structures
          SpatialStruct* spatial = &(baseEntity->spatial);

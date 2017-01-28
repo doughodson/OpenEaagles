@@ -5,7 +5,7 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -152,7 +152,7 @@ void Bullet::resetBurstTrajectories()
 //------------------------------------------------------------------------------
 // burstOfBullets() -- add a burst of bullets
 //------------------------------------------------------------------------------
-bool Bullet::burstOfBullets(const osg::Vec3d* const pos, const osg::Vec3d* const vel, const int num, const int rate, const int e)
+bool Bullet::burstOfBullets(const base::Vec3d* const pos, const base::Vec3d* const vel, const int num, const int rate, const int e)
 {
    if (nbt < MBT && pos != nullptr && vel != nullptr) {
       bursts[nbt].bPos = *pos;  // Burst positions -- world  (m)
@@ -193,14 +193,14 @@ bool Bullet::checkForTargetHit()
    Player* ownship = getLaunchVehicle();
    Player* tgt = getTargetPlayer();
    if (ownship != nullptr && tgt != nullptr) {
-      osg::Vec3d osPos = tgt->getPosition();
+      base::Vec3d osPos = tgt->getPosition();
 
       // For all active bursts ...
       for (int i = 0; i < nbt; i++) {
          if (bursts[i].bStatus == Burst::ACTIVE) {
 
             // Check if we're within range of the target
-            osg::Vec3d rPos = bursts[i].bPos - osPos;
+            base::Vec3d rPos = bursts[i].bPos - osPos;
             double rng = rPos.length();
             if (rng < 10.0) {
                // Yes -- it's a hit!
@@ -215,10 +215,10 @@ bool Bullet::checkForTargetHit()
    }
    // if we are just flying along, check our range to the nearest player and tell him we killed it
    else {
-        //osg::Vec3 old = getEulerAngles();
-        osg::Vec3d myPos = getPosition();
-        osg::Vec3d tgtPos;
-        osg::Vec3d vecPos;
+        //base::Vec3 old = getEulerAngles();
+        base::Vec3d myPos = getPosition();
+        base::Vec3d tgtPos;
+        base::Vec3d vecPos;
         //double az = 0;
         //double el = 0;
         double range = 0;

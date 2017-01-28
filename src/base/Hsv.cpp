@@ -73,12 +73,12 @@ double Hsv::value() const
     return hsv[VALUE];
 }
 
-void Hsv::getHSV(osg::Vec3d& hhh) const
+void Hsv::getHSV(Vec3d& hhh) const
 {
     hhh.set(hsv[HUE],hsv[SATURATION],hsv[VALUE]);
 }
 
-void Hsv::getHSVA(osg::Vec4d& hhh) const
+void Hsv::getHSVA(Vec4d& hhh) const
 {
     hhh.set(hsv[HUE],hsv[SATURATION],hsv[VALUE],hsv[ALPHA]);
 }
@@ -138,7 +138,7 @@ bool Hsv::setAlpha(Number* const msg)
 //------------------------------------------------------------------------------
 // setHSV() -- Sets the hsv vector
 //------------------------------------------------------------------------------
-bool Hsv::setHSV(const osg::Vec3d& vec)
+bool Hsv::setHSV(const Vec3d& vec)
 {
    hsv[0] = vec[0];
    hsv[1] = vec[1];
@@ -147,7 +147,7 @@ bool Hsv::setHSV(const osg::Vec3d& vec)
    return true;
 }
 
-bool Hsv::setHSVA(const osg::Vec4d& vec)
+bool Hsv::setHSVA(const Vec4d& vec)
 {
    hsv = vec;
    hsv2rgb(color,hsv);
@@ -160,7 +160,7 @@ bool Hsv::setHSVA(const osg::Vec4d& vec)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Hsv::hsv2rgb(osg::Vec3d& rgb, const osg::Vec3d& hsv)
+void Hsv::hsv2rgb(Vec3d& rgb, const Vec3d& hsv)
 {
     // local HSV values
     double h = angle::aepcdDeg(hsv[HUE]);
@@ -240,10 +240,10 @@ void Hsv::hsv2rgb(osg::Vec3d& rgb, const osg::Vec3d& hsv)
     }
 }
 
-void Hsv::hsv2rgb(osg::Vec4d& rgb, const osg::Vec4d& hsv)
+void Hsv::hsv2rgb(Vec4d& rgb, const Vec4d& hsv)
 {
-   osg::Vec3d hsv3(hsv[0], hsv[1], hsv[2]);
-   osg::Vec3d rgb3;
+   Vec3d hsv3(hsv[0], hsv[1], hsv[2]);
+   Vec3d rgb3;
    hsv2rgb(rgb3, hsv3);
 
    // Copy to output
@@ -261,7 +261,7 @@ void Hsv::hsv2rgb(osg::Vec4d& rgb, const osg::Vec4d& hsv)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Hsv::rgb2hsv(osg::Vec3d& hsv, const osg::Vec3d& rgb)
+void Hsv::rgb2hsv(Vec3d& hsv, const Vec3d& rgb)
 {
    double cmax = std::fmax( rgb[RED], std::fmax(rgb[GREEN],rgb[BLUE]) );
    double cmin = std::fmin( rgb[RED], std::fmin(rgb[GREEN],rgb[BLUE]) );
@@ -295,11 +295,11 @@ void Hsv::rgb2hsv(osg::Vec3d& hsv, const osg::Vec3d& rgb)
    hsv[SATURATION] = s;
 }
 
-void Hsv::rgb2hsv(osg::Vec4d& hsv, const osg::Vec4d& rgb)
+void Hsv::rgb2hsv(Vec4d& hsv, const Vec4d& rgb)
 {
    // Let the Vec3 version do the work
-   osg::Vec3d hsv3;
-   osg::Vec3d rgb3(rgb[0], rgb[1], rgb[2]);
+   Vec3d hsv3;
+   Vec3d rgb3(rgb[0], rgb[1], rgb[2]);
    rgb2hsv(hsv3,rgb3);
 
    // Copy to output (just pass alpha)

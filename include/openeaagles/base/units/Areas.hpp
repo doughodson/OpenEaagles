@@ -18,7 +18,7 @@
 #define __oe_base_Areas_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/area_utils.hpp"
+#include "openeaagles/base/util/area_utils.hpp"
 
 #include <cmath>
 #include <iostream>

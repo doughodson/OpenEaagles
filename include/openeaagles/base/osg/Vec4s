@@ -15,7 +15,7 @@
 #define __oe_osg_Vec4s_H__
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose float quad. Uses include representation
   * of color coordinates.

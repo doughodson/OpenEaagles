@@ -6,8 +6,6 @@
 #include "openeaagles/models/systems/Datalink.hpp"
 #include "openeaagles/models/Emission.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
-
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Number.hpp"

@@ -64,7 +64,7 @@ double Cmy::yellow() const
     return cmy[YELLOW];
 }
 
-void Cmy::getCMY(osg::Vec3d& hhh) const
+void Cmy::getCMY(Vec3d& hhh) const
 {
     hhh.set(cmy[CYAN],cmy[MAGENTA],cmy[YELLOW]);
 }
@@ -114,7 +114,7 @@ bool Cmy::setYellow(Number* const msg)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Cmy::cmy2rgb(osg::Vec4d& rgb, const osg::Vec3d& cmy)
+void Cmy::cmy2rgb(Vec4d& rgb, const Vec3d& cmy)
 {
     rgb[RED]   = 1 - cmy[CYAN];
     rgb[GREEN] = 1 - cmy[MAGENTA];
@@ -128,7 +128,7 @@ void Cmy::cmy2rgb(osg::Vec4d& rgb, const osg::Vec3d& cmy)
 //
 // This code is based on '/usr/people/4Dgifts/iristools/libgutil/colormod.c'
 //------------------------------------------------------------------------------
-void Cmy::rgb2cmy(osg::Vec3d& cmy, const osg::Vec4d& rgb)
+void Cmy::rgb2cmy(Vec3d& cmy, const Vec4d& rgb)
 {
     cmy[CYAN]    = 1 - rgb[RED];
     cmy[MAGENTA] = 1 - rgb[GREEN];

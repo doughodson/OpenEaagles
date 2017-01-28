@@ -7,8 +7,6 @@
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/List.hpp"
@@ -17,7 +15,9 @@
 #include "openeaagles/base/String.hpp"
 
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace models {
@@ -329,7 +329,7 @@ double Navigation::getHeadingDeg() const
 }
 
 // Returns directional cosines
-const osg::Matrixd& Navigation::getRotMat() const
+const base::Matrixd& Navigation::getRotMat() const
 {
    return rm;
 }
@@ -407,13 +407,13 @@ double Navigation::getGroundTrackDeg() const
 }
 
 // Returns velocity vector (m/s)
-const osg::Vec3d& Navigation::getVelocity() const
+const base::Vec3d& Navigation::getVelocity() const
 {
    return velVec;
 }
 
 // Returns acceleration vector (m/s/s)
-const osg::Vec3d& Navigation::getAcceleration() const
+const base::Vec3d& Navigation::getAcceleration() const
 {
    return accelVec;
 }
@@ -608,13 +608,13 @@ bool Navigation::setGroundTrackDeg(const double degs)
    return true;
 }
 
-bool Navigation::setVelocity(const osg::Vec3d& v)
+bool Navigation::setVelocity(const base::Vec3d& v)
 {
    velVec = v;
    return true;
 }
 
-bool Navigation::setAcceleration(const osg::Vec3d& v)
+bool Navigation::setAcceleration(const base::Vec3d& v)
 {
    accelVec = v;
    return true;
@@ -765,7 +765,7 @@ bool Navigation::updateNavSteering()
 //------------------------------------------------------------------------------
 // getFeba() -- FEBA [ North East ] (Nautical Miles)
 //------------------------------------------------------------------------------
-int Navigation::getFeba(osg::Vec2d* const points, const int max) const
+int Navigation::getFeba(base::Vec2d* const points, const int max) const
 {
     int n = 0;
     if (points != nullptr && max > 0 && feba != nullptr && nFeba > 0) {
@@ -785,7 +785,7 @@ int Navigation::getFeba(osg::Vec2d* const points, const int max) const
 //------------------------------------------------------------------------------
 // getFeba() -- FEBA [ North East ] (Nautical Miles)
 //------------------------------------------------------------------------------
-bool Navigation::setFeba(osg::Vec2d* const points, const int n)
+bool Navigation::setFeba(base::Vec2d* const points, const int n)
 {
     // First delete any old FEBA lines
     if (feba != nullptr) delete[] feba;
@@ -794,7 +794,7 @@ bool Navigation::setFeba(osg::Vec2d* const points, const int n)
 
     if (points != nullptr && n >= 2) { // Need at least two points
         nFeba = n;
-        feba = new osg::Vec2d[nFeba];
+        feba = new base::Vec2d[nFeba];
         for (int i = 0; i < nFeba; i++) {
             feba[i] = points[i];
         }
@@ -854,7 +854,7 @@ bool Navigation::setSlotFeba(const base::PairStream* const msg)
     if (msg != nullptr) {
         // allocate space for the points
         int max = msg->entries();
-        const auto tmpFeba = new osg::Vec2d[max];
+        const auto tmpFeba = new base::Vec2d[max];
 
         // Get the points from the pair stream
         int np = 0;

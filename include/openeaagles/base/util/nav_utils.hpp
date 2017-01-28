@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_nav_utils_H__
-#define __oe_base_nav_utils_H__
+#ifndef __oe_base_util_nav_utils_H__
+#define __oe_base_util_nav_utils_H__
 
 #include "openeaagles/base/EarthModel.hpp"
 #include "openeaagles/base/osg/Vec3d"
@@ -10,7 +10,7 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace base {
@@ -146,8 +146,8 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Using body angles
    bool aer2xyz(
-         osg::Vec3d* const pos,       // OUT: Position vector array (NED, player centered)  [meters]
-         const osg::Matrixd& rm,      // IN:  NED to body rotational matrix (see computeRotationalMatrix())
+         Vec3d* const pos,            // OUT: Position vector array (NED, player centered)  [meters]
+         const Matrixd& rm,           // IN:  NED to body rotational matrix (see computeRotationalMatrix())
          const double az,             // IN:  Azimuth (body)  (radians)
          const double el,             // IN:  Elevation (body, positive up, radians)
          const double rng             // IN:  Range [meters]
@@ -155,7 +155,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Using NED angles
    bool aer2xyz(
-         osg::Vec3d* const pos,       // OUT: Position vector array (NED, player centered)  [meters]
+         Vec3d* const pos,            // OUT: Position vector array (NED, player centered)  [meters]
          const double az,             // IN:  Azimuth (NED, radians)
          const double el,             // IN:  Elevation (NED, positive up, radians)
          const double rng             // IN:  Range [meters]
@@ -167,8 +167,8 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Using body angles
    bool aer2xyzArray(
-         osg::Vec3d* const pos,       // OUT: position vector array (NED, player centered)  [meters]
-         const osg::Matrixd& rm,      // IN:  NED to body rotational matrix (see computeRotationalMatrix())
+         Vec3d* const pos,            // OUT: position vector array (NED, player centered)  [meters]
+         const Matrixd& rm,           // IN:  NED to body rotational matrix (see computeRotationalMatrix())
          const double* const az,      // IN:  azimuth (body) array  (radians)
          const double* const el,      // IN:  elevation (body) array (positive up) (radians)
          const double* const rng,     // IN:  range array [meters]
@@ -177,7 +177,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Using NED angles
    bool aer2xyzArray(
-         osg::Vec3d* const pos,       // OUT: position vector array (NED, player centered)  [meters]
+         Vec3d* const pos,            // OUT: position vector array (NED, player centered)  [meters]
          const double* const az,      // IN:  azimuth (NED) array  (radians)
          const double* const el,      // IN:  elevation (NED) array (positive up) (radians)
          const double* const rng,     // IN:  range array [meters]
@@ -190,7 +190,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Computing NED angles
    bool xyz2aer(
-         osg::Vec3d* const aer,       // OUT: position vector  (aer)   [deg,deg,meters]
+         Vec3d* const aer,            // OUT: position vector  (aer)   [deg,deg,meters]
          const double x,              // IN:  x                        [meters]
          const double y,              // IN:  y                        [meters]
          const double z               // IN:  z                        [meters]
@@ -198,8 +198,8 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Computing body angles
    bool xyz2aer(
-         osg::Vec3d* const aer,       // OUT: position vector  (aer)   [deg,deg,meters]
-         const osg::Matrixd& rm,      // IN:  NED to body rotational matrix (see computeRotationalMatrix())
+         Vec3d* const aer,            // OUT: position vector  (aer)   [deg,deg,meters]
+         const Matrixd& rm,           // IN:  NED to body rotational matrix (see computeRotationalMatrix())
          const double x,              // IN:  x                        [meters]
          const double y,              // IN:  y                        [meters]
          const double z               // IN:  z                        [meters]
@@ -379,7 +379,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
    bool computeWorldMatrix(
          const double latD,           // IN:  Reference latitude (degs)
          const double lonD,           // IN:  Reference longitude (degs)
-         osg::Matrixd* const m        // OUT: Matrix
+         Matrixd* const m             // OUT: Matrix
       );
 
    //------------------------------------------------------------------------------
@@ -403,10 +403,10 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double phi,                // IN:  Roll angle (radians)
          const double theta,              // IN:  Pitch angle (radians)
          const double psi,                // IN:  Yaw angle (radians)
-         osg::Matrixd* const rm,          // OUT: Rotational matrix
-         osg::Vec2d* const scPhi=nullptr, // OUT: Sin/Cos of phi (Optional)
-         osg::Vec2d* const scTht=nullptr, // OUT: Sin/Cos of theta (Optional)
-         osg::Vec2d* const scPsi=nullptr  // OUT: Sin/Cos of psi (Optional)
+         Matrixd* const rm,               // OUT: Rotational matrix
+         Vec2d* const scPhi=nullptr,     // OUT: Sin/Cos of phi (Optional)
+         Vec2d* const scTht=nullptr,     // OUT: Sin/Cos of theta (Optional)
+         Vec2d* const scPsi=nullptr      // OUT: Sin/Cos of psi (Optional)
       );
 
    // Version using degrees
@@ -414,28 +414,28 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double phiD,               // IN:  Roll angle (degrees)
          const double thetaD,             // IN:  Pitch angle (degrees)
          const double psiD,               // IN:  Yaw angle (degrees)
-         osg::Matrixd* const rm,          // OUT: Rotational matrix
-         osg::Vec2d* const scPhi=nullptr, // OUT: Sin/Cos of phi (Optional)
-         osg::Vec2d* const scTht=nullptr, // OUT: Sin/Cos of theta (Optional)
-         osg::Vec2d* const scPsi=nullptr  // OUT: Sin/Cos of psi (Optional)
+         Matrixd* const rm,               // OUT: Rotational matrix
+         Vec2d* const scPhi=nullptr,      // OUT: Sin/Cos of phi (Optional)
+         Vec2d* const scTht=nullptr,      // OUT: Sin/Cos of theta (Optional)
+         Vec2d* const scPsi=nullptr       // OUT: Sin/Cos of psi (Optional)
       );
 
    // Vec3 version
    bool computeRotationalMatrix(
-         const osg::Vec3d& angles,        // IN:  Euler angles [ phi theta psi ] (radians)
-         osg::Matrixd* const m,           // OUT: Matrix
-         osg::Vec2d* const scPhi=nullptr, // OUT: Sin/Cos of phi (Optional)
-         osg::Vec2d* const scTht=nullptr, // OUT: Sin/Cos of theta (Optional)
-         osg::Vec2d* const scPsi=nullptr  // OUT: Sin/Cos of psi (Optional)
+         const Vec3d& angles,             // IN:  Euler angles [ phi theta psi ] (radians)
+         Matrixd* const m,                // OUT: Matrix
+         Vec2d* const scPhi=nullptr,      // OUT: Sin/Cos of phi (Optional)
+         Vec2d* const scTht=nullptr,      // OUT: Sin/Cos of theta (Optional)
+         Vec2d* const scPsi=nullptr       // OUT: Sin/Cos of psi (Optional)
       );
 
    // Vec3 version using degrees
    bool computeRotationalMatrixDeg(
-         const osg::Vec3d& angles,        // IN:  Euler angles [ phi theta psi ] (degrees)
-         osg::Matrixd* const m,           // OUT: Matrix
-         osg::Vec2d* const scPhi=nullptr, // OUT: Sin/Cos of phi (Optional)
-         osg::Vec2d* const scTht=nullptr, // OUT: Sin/Cos of theta (Optional)
-         osg::Vec2d* const scPsi=nullptr  // OUT: Sin/Cos of psi (Optional)
+         const Vec3d& angles,             // IN:  Euler angles [ phi theta psi ] (degrees)
+         Matrixd* const m,                // OUT: Matrix
+         Vec2d* const scPhi=nullptr,      // OUT: Sin/Cos of phi (Optional)
+         Vec2d* const scTht=nullptr,      // OUT: Sin/Cos of theta (Optional)
+         Vec2d* const scPsi=nullptr       // OUT: Sin/Cos of psi (Optional)
       );
 
 
@@ -448,20 +448,20 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Version using radians
    bool computeEulerAngles(
-         const osg::Matrixd& rm,          // IN:  Rotational matrix
-         osg::Vec3d* const angles,        // OUT: Euler angles (radians)
-         osg::Vec2d* const scPhi=nullptr, // OUT: Sin/Cos of phi (Optional)
-         osg::Vec2d* const scTht=nullptr, // OUT: Sin/Cos of theta (Optional)
-         osg::Vec2d* const scPsi=nullptr  // OUT: Sin/Cos of psi (Optional)
+         const Matrixd& rm,               // IN:  Rotational matrix
+         Vec3d* const angles,             // OUT: Euler angles (radians)
+         Vec2d* const scPhi=nullptr,      // OUT: Sin/Cos of phi (Optional)
+         Vec2d* const scTht=nullptr,      // OUT: Sin/Cos of theta (Optional)
+         Vec2d* const scPsi=nullptr       // OUT: Sin/Cos of psi (Optional)
       );
 
    // Version using degrees
    bool computeEulerAnglesDeg(
-         const osg::Matrixd& rm,          // IN:  Rotational matrix
-         osg::Vec3d* const anglesD,       // OUT: Euler angles (degrees)
-         osg::Vec2d* const scPhi=nullptr, // OUT: Sin/Cos of phi (Optional)
-         osg::Vec2d* const scTht=nullptr, // OUT: Sin/Cos of theta (Optional)
-         osg::Vec2d* const scPsi=nullptr  // OUT: Sin/Cos of psi (Optional)
+         const Matrixd& rm,               // IN:  Rotational matrix
+         Vec3d* const anglesD,            // OUT: Euler angles (degrees)
+         Vec2d* const scPhi=nullptr,      // OUT: Sin/Cos of phi (Optional)
+         Vec2d* const scTht=nullptr,      // OUT: Sin/Cos of theta (Optional)
+         Vec2d* const scPsi=nullptr       // OUT: Sin/Cos of psi (Optional)
       );
 
 
@@ -478,7 +478,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double slon,                 // IN:  Reference longitude (degs)
          const double sinSlat,              // IN:  Sine of ref latitude
          const double cosSlat,              // IN:  Cosine of ref latitude
-         const osg::Vec3d& pos,             // IN:  NED position vector from ref point (Meters)
+         const Vec3d& pos,                  // IN:  NED position vector from ref point (Meters)
          double* const lat,                 // OUT: Latitude (degs)
          double* const lon,                 // OUT: Longitude (degs)
          double* const alt,                 // OUT: Altitude (meters)
@@ -488,7 +488,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
    bool convertPosVec2llE(
          const double slat,                 // IN:  Reference latitude (degs)
          const double slon,                 // IN:  Reference longitude (degs)
-         const osg::Vec3d& pos,             // IN:  NED position vector from ref point (Meters)
+         const Vec3d& pos,                  // IN:  NED position vector from ref point (Meters)
          double* const lat,                 // OUT: Latitude (degs)
          double* const lon,                 // OUT: Longitude (degs)
          double* const alt,                 // OUT: Altitude (meters)
@@ -503,7 +503,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double slat,         // IN:  Reference latitude (degs)
          const double slon,         // IN:  Reference longitude (degs)
          const double cosSlat,      // IN:  Cosine of ref latitude
-         const osg::Vec3d& pos,     // IN:  NED position vector from ref point (Meters)
+         const Vec3d& pos,          // IN:  NED position vector from ref point (Meters)
          double* const lat,         // OUT: Latitude (degs)
          double* const lon,         // OUT: Longitude (degs)
          double* const alt          // OUT: Altitude (meters)
@@ -516,7 +516,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
    bool convertPosVec2LL(
          const double slat,         // IN:  Reference latitude (degs)
          const double slon,         // IN:  Reference longitude (degs)
-         const osg::Vec3d& pos,     // IN:  NED position vector from ref point (Meters)
+         const Vec3d& pos,          // IN:  NED position vector from ref point (Meters)
          double* const lat,         // OUT: Latitude (degs)
          double* const lon,         // OUT: Longitude (degs)
          double* const alt          // OUT: Altitude (meters)
@@ -525,7 +525,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
    bool convertPosVec2LL(
          const double slat,         // IN:  Reference latitude (degs)
          const double slon,         // IN:  Reference longitude (degs)
-         const osg::Vec3f& pos,     // IN:  NED position vector from ref point (Meters)
+         const Vec3f& pos,          // IN:  NED position vector from ref point (Meters)
          double* const lat,         // OUT: Latitude (degs)
          double* const lon,         // OUT: Longitude (degs)
          double* const alt          // OUT: Altitude (meters)
@@ -543,7 +543,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double lat,                  // IN:  Latitude (degs)
          const double lon,                  // IN:  Longitude (degs)
          const double alt,                  // IN:  Altitude (meters)
-         osg::Vec3d* const pos,             // OUT: NED position vector from ref point (Meters)
+         Vec3d* const pos,                  // OUT: NED position vector from ref point (Meters)
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -553,7 +553,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double lat,                  // IN:  Latitude (degs)
          const double lon,                  // IN:  Longitude (degs)
          const double alt,                  // IN:  Altitude (meters)
-         osg::Vec3d* const pos,             // OUT: NED position vector from ref point (Meters)
+         Vec3d* const pos,                  // OUT: NED position vector from ref point (Meters)
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -568,7 +568,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double lat,          // IN:  Latitude (degs)
          const double lon,          // IN:  Longitude (degs)
          const double alt,          // IN:  Altitude (meters)
-         osg::Vec3d* const pos      // OUT: NED position vector from ref point (Meters)
+         Vec3d* const pos           // OUT: NED position vector from ref point (Meters)
       );
 
    //----------------------------------------------------------
@@ -581,7 +581,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double lat,          // IN:  Latitude (degs)
          const double lon,          // IN:  Longitude (degs)
          const double alt,          // IN:  Altitude (meters)
-         osg::Vec3d* const pos      // OUT: NED position vector from ref point (Meters)
+         Vec3d* const pos           // OUT: NED position vector from ref point (Meters)
       );
    // using float Vec3
    bool convertLL2PosVec(
@@ -590,7 +590,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const double lat,          // IN:  Latitude (degs)
          const double lon,          // IN:  Longitude (degs)
          const double alt,          // IN:  Altitude (meters)
-         osg::Vec3f* const pos      // OUT: NED position vector from ref point (Meters)
+         Vec3f* const pos           // OUT: NED position vector from ref point (Meters)
       );
 
 
@@ -616,8 +616,8 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Using osg::Vec3d vectors
    bool convertEcef2Geod(
-         const osg::Vec3d& vec,             // IN:  ECEF [ IX IY IZ ]
-         osg::Vec3d* const lla,             // OUT: Geodetic [ ILAT ILON IALT ]
+         const Vec3d& vec,                  // IN:  ECEF [ IX IY IZ ]
+         Vec3d* const lla,                  // OUT: Geodetic [ ILAT ILON IALT ]
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -643,8 +643,8 @@ const double ellipseBsq  = ellipseB * ellipseB;
 
    // Using osg::Vec3d vectors
    bool convertGeod2Ecef(
-         const osg::Vec3d& lla,             // IN:  Geodetic [ ILAT ILON IALT ]
-         osg::Vec3d* const ecef,            // OUT: ECEF [ IX IY IZ ]
+         const Vec3d& lla,                  // IN:  Geodetic [ ILAT ILON IALT ]
+         Vec3d* const ecef,                 // OUT: ECEF [ IX IY IZ ]
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 
@@ -666,42 +666,42 @@ const double ellipseBsq  = ellipseB * ellipseB;
    //----------------------------------------------------------
 
    bool convertGeodAngles2EcefAngles(
-         const osg::Matrixd& wm, // IN:  World matrix
-         const osg::Matrixd& rm, // IN:  Geodetic rotational matrix (body/NED directional cosines)
-         osg::Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
+         const Matrixd& wm,      // IN:  World matrix
+         const Matrixd& rm,      // IN:  Geodetic rotational matrix (body/NED directional cosines)
+         Vec3d* const vc         // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
       );
 
    bool convertGeodAngles2EcefAngles(
-         const osg::Matrixd& wm, // IN:  World matrix
-         const osg::Vec3d& rpy,  // IN:  Geodetic angles [ roll  pitch yaw ] (radians)
-         osg::Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
+         const Matrixd& wm,      // IN:  World matrix
+         const Vec3d& rpy,       // IN:  Geodetic angles [ roll  pitch yaw ] (radians)
+         Vec3d* const vc         // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
       );
 
    bool convertGeodAngles2EcefAngles(
-         const osg::Vec2d& ll,   // IN:  Geodetic position  [ ILAT ILON ] [ degs degs ]
-         const osg::Vec3d& rpy,  // IN:  Geodetic angles [ roll  pitch yaw ] (radians)
-         osg::Vec3d* const vc    // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
+         const Vec2d& ll,        // IN:  Geodetic position  [ ILAT ILON ] [ degs degs ]
+         const Vec3d& rpy,       // IN:  Geodetic angles [ roll  pitch yaw ] (radians)
+         Vec3d* const vc         // OUT: Geocentric (ECEF) angles  [ phi theta psi ] (radians)
       );
 
    //----------------------------------------------------------
    // Convert geocentric Euler angles (body/ECEF) to geodetic Euler angles (body/NED)
    //----------------------------------------------------------
    bool convertEcefAngles2GeodAngles(
-         const osg::Matrixd& wm, // IN:  World matrix
-         const osg::Matrixd& rm, // IN:  Geocentric rotational matrix (ECEF/body directional cosines)
-         osg::Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
+         const Matrixd& wm,      // IN:  World matrix
+         const Matrixd& rm,      // IN:  Geocentric rotational matrix (ECEF/body directional cosines)
+         Vec3d* const vd         // Out: Geodetic angles (radians) [ roll pitch yaw ]
       );
 
    bool convertEcefAngles2GeodAngles(
-         const osg::Matrixd& wm, // IN:  World matrix
-         const osg::Vec3d& rpy,  // IN:  Geocentric angles (radians) [ phi theta psi ]
-         osg::Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
+         const Matrixd& wm,      // IN:  World matrix
+         const Vec3d& rpy,       // IN:  Geocentric angles (radians) [ phi theta psi ]
+         Vec3d* const vd         // Out: Geodetic angles (radians) [ roll pitch yaw ]
       );
 
    bool convertEcefAngles2GeodAngles(
-         const osg::Vec2d& ll,   // IN:  Geodetic position [ ILAT ILON ] [ degs degs ]
-         const osg::Vec3d& rpy,  // IN:  Geocentric angles (radians) [ phi theta psi ]
-         osg::Vec3d* const vd    // Out: Geodetic angles (radians) [ roll pitch yaw ]
+         const Vec2d& ll,        // IN:  Geodetic position [ ILAT ILON ] [ degs degs ]
+         const Vec3d& rpy,       // IN:  Geocentric angles (radians) [ phi theta psi ]
+         Vec3d* const vd         // Out: Geodetic angles (radians) [ roll pitch yaw ]
       );
 
 
@@ -783,7 +783,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
       const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
    );
 
-#include "openeaagles/base/nav_utils.inl"
+#include "openeaagles/base/util/nav_utils.inl"
 
 }
 }

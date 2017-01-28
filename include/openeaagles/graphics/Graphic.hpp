@@ -12,15 +12,8 @@
 #include <GL/gl.h>
 
 namespace oe {
-
-namespace base {
-   class Color;
-   class Identifier;
-   class Transform;
-}
-
+namespace base { class Color; class Identifier; class Transform; }
 namespace graphics {
-
 class Display;
 class Material;
 
@@ -240,23 +233,23 @@ public:
    virtual void draw();
    virtual void drawFunc();
 
-   const osg::Vec3d* getVertices() const { return vertices; }            // Vertices
-   unsigned int getNumberOfVertices() const { return nv; }               // Number of vertices
-   bool setVertices(const osg::Vec3d* const v, const unsigned int n);    // Sets the vertices list
+   const base::Vec3d* getVertices() const { return vertices; }             // Vertices
+   unsigned int getNumberOfVertices() const { return nv; }                 // Number of vertices
+   bool setVertices(const base::Vec3d* const v, const unsigned int n);     // Sets the vertices list
 
-   const osg::Vec2d* getTextureCoord() const { return texCoord; }         // Texture Coordinates (at vertices)
-   unsigned int getNumberOfTextureCoords() const { return ntc; }          // Number of texture coordinates
-   bool setTextureCoord(const osg::Vec2d* const v, const unsigned int n); // Sets the list of texture coordinates
+   const base::Vec2d* getTextureCoord() const { return texCoord; }         // Texture Coordinates (at vertices)
+   unsigned int getNumberOfTextureCoords() const { return ntc; }           // Number of texture coordinates
+   bool setTextureCoord(const base::Vec2d* const v, const unsigned int n); // Sets the list of texture coordinates
 
-   const osg::Vec3d* getNormals() const { return norms; }                // Normals (at vertices)
-   unsigned int getNumberOfNormals() const { return nn; }                // Number of Normals
-   bool setNormals(const osg::Vec3d* const v, const unsigned int n);     // Sets the list of normal vectors
+   const base::Vec3d* getNormals() const { return norms; }                 // Normals (at vertices)
+   unsigned int getNumberOfNormals() const { return nn; }                  // Number of Normals
+   bool setNormals(const base::Vec3d* const v, const unsigned int n);      // Sets the list of normal vectors
 
-   bool isVisible() const                 { return visible; }           // Checks the visibility attribute.
-   bool setVisibility(const bool v);                                    // Sets the visibility attribute.
+   bool isVisible() const                 { return visible; }              // Checks the visibility attribute.
+   bool setVisibility(const bool v);                                       // Sets the visibility attribute.
 
-   GLfloat getLineWidth() const           { return linewidth; }         // Gets the line width attribute.
-   bool setLineWidth(const GLfloat v);                                  // Sets the line width attribute.
+   GLfloat getLineWidth() const           { return linewidth; }            // Gets the line width attribute.
+   bool setLineWidth(const GLfloat v);                                     // Sets the line width attribute.
 
    // Color functions
    base::Color* getColor()                                  { return color; }
@@ -291,7 +284,7 @@ public:
 
    // Matrix functions
    bool matrixIsActive()                            { return haveMatrix; }
-   const osg::Matrixd& getMatrix() const            { return m; }
+   const base::Matrixd& getMatrix() const           { return m; }
    void lcRotate(const double a);
    void lcRotate(const double x, const double y, const double z, const double a);
    void lcTranslate(const double, const double);
@@ -334,8 +327,8 @@ public:
 
    // Light functions
    bool setLightPosition(const double x, const double y, const double z = 1, const double w = 0);
-   bool setLightPosition(osg::Vec4d& newPos);
-   osg::Vec4d getLightPos()                          { return lightPos; }
+   bool setLightPosition(base::Vec4d& newPos);
+   base::Vec4d getLightPos()                        { return lightPos; }
 
 
    // Select (pick) functions
@@ -360,12 +353,12 @@ public:
    //    Returns false if the original line is outside of the clip box, and therefore
    //    the endpoints are not changed.
    static bool clipLine2D(
-         osg::Vec2d* ep1,     // Line endpoint #1
-         osg::Vec2d* ep2,     // Line endpoint #2
-         const double minX,   // Clip box min X value
-         const double maxX,   // Clip box max X value
-         const double minY,   // Clip box min Y value
-         const double maxY);  // Clip box max Y value
+         base::Vec2d* ep1,       // Line endpoint #1
+         base::Vec2d* ep2,       // Line endpoint #2
+         const double minX,      // Clip box min X value
+         const double maxX,      // Clip box max X value
+         const double minY,      // Clip box min Y value
+         const double maxY);     // Clip box max Y value
 
    // Functions for native double resolutions
    // Since double is deprecated, we're only defining the double functions
@@ -440,8 +433,8 @@ private:
    void setupMaterial();
 
    base::PairStream* transforms;   // transformations
-   osg::Matrixd   m;               // transformation matrix
-   osg::Matrixd   m1;              // saved 'm'
+   base::Matrixd m;                // transformation matrix
+   base::Matrixd m1;               // saved 'm'
    bool          haveMatrix;       // Have a transformation matrix flag
    bool          haveMatrix1;      // saved 'haveMatrix'
 
@@ -457,13 +450,13 @@ private:
    base::Color*  color;            // Color
    base::Identifier*  colorName;   // Color name (if from color table)
 
-   osg::Vec3d*      vertices;      // Vertices
+   base::Vec3d* vertices;          // Vertices
    unsigned int     nv;            // Number of vertices
 
-   osg::Vec2d*      texCoord;      // Texture Coordinates
+   base::Vec2d* texCoord;          // Texture Coordinates
    unsigned int     ntc;           // Number of texture coordinates
 
-   osg::Vec3d*      norms;         // normals at each vertices
+   base::Vec3d* norms;             // normals at each vertices
    unsigned int     nn;            // number of normal vectors
 
    graphics::Display* displayPtr;     // Points to our Display
@@ -486,7 +479,7 @@ private:
    base::Identifier* materialName;    // our material name
    graphics::Material* materialObj;   // material object, if we have one.
 
-   osg::Vec4d lightPos;               // light position relative to us (default is leave it where it was)
+   base::Vec4d lightPos;              // light position relative to us (default is leave it where it was)
    bool lightMoved;                   // our light is moving!
 };
 
@@ -509,7 +502,7 @@ inline void Graphic::lcRestoreMatrix()
 
 inline void Graphic::lcRotate(const double a)
 {
-   osg::Matrixd rr;
+   base::Matrixd rr;
    rr.makeRotate(a, 0.0f, 0.0f, 1.0f);
    m.preMult(rr);
    haveMatrix = true;
@@ -517,7 +510,7 @@ inline void Graphic::lcRotate(const double a)
 
 inline void Graphic::lcRotate(const double x, const double y, const double z, const double a)
 {
-   osg::Matrixd rr;
+   base::Matrixd rr;
    rr.makeRotate(a, x, y, z);
    m.preMult(rr);
    haveMatrix = true;
@@ -525,7 +518,7 @@ inline void Graphic::lcRotate(const double x, const double y, const double z, co
 
 inline void Graphic::lcScale(const double s)
 {
-   osg::Matrixd ss;
+   base::Matrixd ss;
    ss.makeScale(s,s,s);
    m.preMult(ss);
    haveMatrix = true;
@@ -533,7 +526,7 @@ inline void Graphic::lcScale(const double s)
 
 inline void Graphic::lcScale(const double sx, const double sy)
 {
-   osg::Matrixd ss;
+   base::Matrixd ss;
    ss.makeScale(sx,sy,1.0f);
    m.preMult(ss);
    haveMatrix = true;
@@ -541,7 +534,7 @@ inline void Graphic::lcScale(const double sx, const double sy)
 
 inline void Graphic::lcTranslate(const double x, const double y)
 {
-   osg::Matrixd tt;
+   base::Matrixd tt;
    tt.makeTranslate(x,y,0.0f);
    m.preMult(tt);
    haveMatrix = true;
@@ -549,7 +542,7 @@ inline void Graphic::lcTranslate(const double x, const double y)
 
 inline void Graphic::lcTranslate(const double x, const double y, const double z)
 {
-   osg::Matrixd tt;
+   base::Matrixd tt;
    tt.makeTranslate(x,y,z);
    m.preMult(tt);
    haveMatrix = true;

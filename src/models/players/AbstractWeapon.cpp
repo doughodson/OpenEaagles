@@ -12,8 +12,6 @@
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
@@ -23,7 +21,9 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 // Disable all deprecation warnings for now.  Until we fix them,
 // they are quite annoying to see over and over again...
@@ -303,22 +303,22 @@ void AbstractWeapon::dynamics(const double dt)
       setSide( getLaunchVehicle()->getSide() );
 
       // Launch vehicles rotational matrix
-      osg::Matrixd lvM = getLaunchVehicle()->getRotMat();
+      base::Matrixd lvM = getLaunchVehicle()->getRotMat();
 
       // Set weapon's position at launch
       // 1) Weapon's position is its position relative to the launcher (launcher's body coordinates)
       // 2) Rotate to earth coordinates
       // 3) Add the launcher's position
-      const osg::Vec2d ip = getInitPosition();
-      const osg::Vec3d pos0b(ip.x(), ip.y(), -getInitAltitude());
-      const osg::Vec3d pos0e = pos0b * lvM; // body to earth
-      const osg::Vec3d lpos = getLaunchVehicle()->getPosition();
-      const osg::Vec3d pos1 = lpos + pos0e;
+      const base::Vec2d ip = getInitPosition();
+      const base::Vec3d pos0b(ip.x(), ip.y(), -getInitAltitude());
+      const base::Vec3d pos0e = pos0b * lvM; // body to earth
+      const base::Vec3d lpos = getLaunchVehicle()->getPosition();
+      const base::Vec3d pos1 = lpos + pos0e;
       setPosition( pos1 );
 
       // Weapon's orientation at launch
-      const osg::Vec3d ia = getInitAngles();
-      osg::Matrixd rr;
+      const base::Vec3d ia = getInitAngles();
+      base::Matrixd rr;
       base::nav::computeRotationalMatrix( ia[0], ia[1], ia[2], &rr);
       rr *= lvM;
 
@@ -452,7 +452,7 @@ void AbstractWeapon::checkDetonationEffect()
             Player* p = static_cast<Player*>(pair->object());
             finished = p->isNetworkedPlayer();  // local only
             if (!finished && (p != this) ) {
-               osg::Vec3d dpos = p->getPosition() - getPosition();
+               base::Vec3d dpos = p->getPosition() - getPosition();
                const double rng = dpos.length();
                if ( (rng <= maxRng) || (p == tgt) ) p->processDetonation(rng, this);
             }
@@ -779,8 +779,8 @@ void AbstractWeapon::positionTracking()
 
         else if (tgtPlayer != nullptr) {
             // No sensor, but we have a target player -- fake it and just follow the target
-            osg::Vec3d p0 = getPosition();
-            osg::Vec3d vel = getVelocity();
+            base::Vec3d p0 = getPosition();
+            base::Vec3d vel = getVelocity();
             setTargetPosition(tgtPlayer->getPosition() - p0);
             setTargetVelocity(tgtPlayer->getVelocity() - vel);
         }
@@ -796,12 +796,12 @@ void AbstractWeapon::positionTracking()
 //------------------------------------------------------------------------------
 // Computes and sets 'loc' to our location relative to the target player, 'tgt'
 //------------------------------------------------------------------------------
-bool AbstractWeapon::computeTargetLocation(osg::Vec3d* const loc, const Player* const tgt)
+bool AbstractWeapon::computeTargetLocation(base::Vec3d* const loc, const Player* const tgt)
 {
    bool ok = false;
    if (tgt != nullptr && loc != nullptr) {
-      osg::Vec3d posP = getPosition() - tgt->getPosition();
-      osg::Vec3d posB = tgt->getRotMat() * posP;
+      base::Vec3d posP = getPosition() - tgt->getPosition();
+      base::Vec3d posB = tgt->getRotMat() * posP;
       *loc = posB;
       ok = true;
    }
@@ -824,7 +824,7 @@ bool AbstractWeapon::setLocationOfDetonation()
 
    // computer the location of the detonation relative to the target player
    if (tgt != nullptr) {
-      osg::Vec3d loc;
+      base::Vec3d loc;
       ok = computeTargetLocation(&loc, tgt);
       if (ok) setDetonationLocation(loc);
    }
@@ -1028,7 +1028,7 @@ bool AbstractWeapon::isTargetPositionValid() const
 }
 
 // Returns the target position (meters -- NED from simulation ref point)
-const osg::Vec3d& AbstractWeapon::getTargetPosition() const
+const base::Vec3d& AbstractWeapon::getTargetPosition() const
 {
    return tgtPos;
 }
@@ -1106,7 +1106,7 @@ double AbstractWeapon::getDetonationRange() const
 }
 
 // Location of detonation in target player's coord (meters)
-const osg::Vec3d& AbstractWeapon::getDetonationLocation() const
+const base::Vec3d& AbstractWeapon::getDetonationLocation() const
 {
    return tgtDetLoc;
 }
@@ -1140,7 +1140,7 @@ bool AbstractWeapon::setTargetTrack(Track* const trk, const bool pt)
 }
 
 // setTargetPosition() -- set target position -- platform coord (NED)
-bool AbstractWeapon::setTargetPosition(const osg::Vec3d& newTgtPos)
+bool AbstractWeapon::setTargetPosition(const base::Vec3d& newTgtPos)
 {
     tgtPos = newTgtPos;
     setTargetPositionValid(true);
@@ -1148,7 +1148,7 @@ bool AbstractWeapon::setTargetPosition(const osg::Vec3d& newTgtPos)
 }
 
 // setTargetPosition() -- set target velocity
-bool AbstractWeapon::setTargetVelocity(const osg::Vec3d& newTgtVel)
+bool AbstractWeapon::setTargetVelocity(const base::Vec3d& newTgtVel)
 {
    tgtVel = newTgtVel;
    return true;
@@ -1218,7 +1218,7 @@ bool AbstractWeapon::setDetonationResults(const Detonation dr)
 }
 
 // Sets the detonation location in target player's coord (meters)
-bool AbstractWeapon::setDetonationLocation(const osg::Vec3d& loc)
+bool AbstractWeapon::setDetonationLocation(const base::Vec3d& loc)
 {
    tgtDetLoc = loc;
    detonationRange = loc.length();
@@ -1498,7 +1498,7 @@ bool AbstractWeapon::setSlotTgtPos(const base::List* const numList)
     double values[3];
     const int n = numList->getNumberList(values, 3);
     if (n == 3) {
-      osg::Vec3d tp(values[0], values[1], values[2]);
+      base::Vec3d tp(values[0], values[1], values[2]);
       setTargetPosition(tp);
       ok = true;
     }

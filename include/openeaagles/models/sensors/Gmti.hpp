@@ -21,9 +21,9 @@ class Gmti : public Radar
 public:
     Gmti();
 
-    const osg::Vec3d& getPoi() const                                { return poiVec; }
+    const base::Vec3d& getPoi() const                                { return poiVec; }
     void setPoi(const double x, const double y, const double z);
-    void setPoi(const osg::Vec3d& newPos);
+    void setPoi(const base::Vec3d& newPos);
 
 protected:
     bool setSlotPoi(base::List* const numList);                // Set Point of Interest
@@ -31,7 +31,7 @@ protected:
     virtual void dynamics(const double dt) override;
 
 private:
-    osg::Vec3d poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED
+    base::Vec3d poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED
 };
 
 }

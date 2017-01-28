@@ -244,7 +244,7 @@ double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
    //std::cout << angleOffBoresight * base::Angle::R2DCC << " " << msg->getGimbalAzimuth() * base::Angle::R2DCC << " " << msg->getGimbalElevation() * base::Angle::R2DCC << " DETECTED" << std::endl;
 
    //Calculate the projected area of the box.
-   const osg::Vec3d targetAoiVector = msg->getAoiVector();
+   const base::Vec3d targetAoiVector = msg->getAoiVector();
 
    // front/back of the box to the sensor
    // x, z are members of this object corresponding to width and height.

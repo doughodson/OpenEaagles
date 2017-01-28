@@ -3,7 +3,7 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Times.hpp"
 #include "openeaagles/base/SlotTable.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace base {

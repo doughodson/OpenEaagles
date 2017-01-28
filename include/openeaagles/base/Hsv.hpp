@@ -98,24 +98,24 @@ public:
     double saturation() const;                        // Saturation: 0.0 (white) to 1.0 (pure color)
     double value() const;                             // Value: 0.0 (black) to 1.0 (full)
 
-    void getHSV(osg::Vec3d& vec) const;               // Returns the hsv vector
-    bool setHSV(const osg::Vec3d& vec);               // Sets the hsv vector
+    void getHSV(Vec3d& vec) const;               // Returns the hsv vector
+    bool setHSV(const Vec3d& vec);               // Sets the hsv vector
 
     virtual bool setHue(Number* const msg);
     virtual bool setSaturation(Number* const msg);
     virtual bool setValue(Number* const msg);
     virtual bool setAlpha(Number* const msg);
 
-    static void hsv2rgb(osg::Vec4d& rgb, const osg::Vec4d& hsv); // Converts an HSVA color vector to a RGBA color vector
-    static void hsv2rgb(osg::Vec3d& rgb, const osg::Vec3d& hsv); // Converts an HSV color vector to a RGB color vector
-    static void rgb2hsv(osg::Vec4d& hsv, const osg::Vec4d& rgb); // Converts a RGBA color vector to a HSVA color vector
-    static void rgb2hsv(osg::Vec3d& hsv, const osg::Vec3d& rgb); // Converts a RGB color vector to a HSV color vector
+    static void hsv2rgb(Vec4d& rgb, const Vec4d& hsv); // Converts an HSVA color vector to a RGBA color vector
+    static void hsv2rgb(Vec3d& rgb, const Vec3d& hsv); // Converts an HSV color vector to a RGB color vector
+    static void rgb2hsv(Vec4d& hsv, const Vec4d& rgb); // Converts a RGBA color vector to a HSVA color vector
+    static void rgb2hsv(Vec3d& hsv, const Vec3d& rgb); // Converts a RGB color vector to a HSV color vector
 
 protected:
-    void getHSVA(osg::Vec4d& hsva) const;
-    bool setHSVA(const osg::Vec4d& vec);
+    void getHSVA(Vec4d& hsva) const;
+    bool setHSVA(const Vec4d& vec);
 
-    osg::Vec4d hsv;
+    Vec4d hsv;
 };
 
 }

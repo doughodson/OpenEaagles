@@ -67,7 +67,7 @@ double Hls::lightness() const
     return hls[LIGHTNESS];
 }
 
-void Hls::getHLS(osg::Vec3d& hhh) const
+void Hls::getHLS(Vec3d& hhh) const
 {
     hhh.set(hls[HUE],hls[SATURATION],hls[LIGHTNESS]);
 }
@@ -134,7 +134,7 @@ double Hls::value(double n1, double n2, double hue)
 // hls2rgb() -- converts a Hue, Saturation, Lightness (HLS) color to a
 //              Red, Green, Blue (RGB) value.
 //------------------------------------------------------------------------------
-void Hls::hls2rgb(osg::Vec4d& rgb, const osg::Vec3d& hls)
+void Hls::hls2rgb(Vec4d& rgb, const Vec3d& hls)
 {
     double m1, m2;
 
@@ -162,7 +162,7 @@ void Hls::hls2rgb(osg::Vec4d& rgb, const osg::Vec3d& hls)
 // rgb2hls() -- converts a Red, Green, Blue (RGB) color to a
 //              Hue, Saturation, Lightness (HLS) value.
 //------------------------------------------------------------------------------
-void Hls::rgb2hls(osg::Vec3d& hls, const osg::Vec4d& rgb)
+void Hls::rgb2hls(Vec3d& hls, const Vec4d& rgb)
 {
     const double maxcol = std::fmax( rgb[RED], std::fmax( rgb[GREEN], rgb[BLUE] ) );
     const double mincol = std::fmin( rgb[RED], std::fmin( rgb[GREEN], rgb[BLUE] ) );

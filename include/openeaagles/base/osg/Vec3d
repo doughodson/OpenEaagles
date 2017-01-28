@@ -18,7 +18,7 @@
 #include "./Vec3f"
 
 namespace oe {
-namespace osg {
+namespace base {
 
 /** General purpose double triple for use as vertices, vectors and normals.
   * Provides general math operations from addition through to cross products.

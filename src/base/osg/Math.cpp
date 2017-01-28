@@ -16,8 +16,10 @@
 #include <string.h>
 
 namespace oe {
+namespace base {
+namespace osg {
 
-double osg::asciiToDouble(const char* str)
+double asciiToDouble(const char* str)
 {
     const char* ptr = str;
 
@@ -114,7 +116,7 @@ double osg::asciiToDouble(const char* str)
     }
 }
 
-double osg::findAsciiToDouble(const char* str)
+double findAsciiToDouble(const char* str)
 {
    const char* ptr = str;
    double value = 0.0;
@@ -132,4 +134,6 @@ double osg::findAsciiToDouble(const char* str)
    return 0.0;
 }
 
+}
+}
 }

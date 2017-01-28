@@ -5,7 +5,7 @@
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/osg/Vec3d"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -111,10 +111,10 @@ void Effects::weaponDynamics(const double dt)
    // ---
 
    // First drag
-   const osg::Vec3d tmp = getVelocity() * (-dragIndex);
+   const base::Vec3d tmp = getVelocity() * (-dragIndex);
 
    // then gravity
-   osg::Vec3d ae1 = tmp;
+   base::Vec3d ae1 = tmp;
    ae1[IDOWN] += g;
 
    setAcceleration(ae1);
@@ -122,7 +122,7 @@ void Effects::weaponDynamics(const double dt)
    // ---
    // Compute & set new velocity vector (earth)
    // ---
-   osg::Vec3d ve1 = getVelocity() + (ae1 * dt);
+   base::Vec3d ve1 = getVelocity() + (ae1 * dt);
    setVelocity(ve1);
 
    // ---

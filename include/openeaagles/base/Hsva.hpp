@@ -48,8 +48,8 @@ public:
     Hsva(const double h, const double s, const double v, const double a);
     Hsva();
 
-    void getHSVA(osg::Vec4d& hsva) const   { Hsv::getHSVA(hsva);        }
-    bool setHSVA(const osg::Vec4d& vec)    { return Hsv::setHSVA(vec);  }
+    void getHSVA(Vec4d& hsva) const   { Hsv::getHSVA(hsva);        }
+    bool setHSVA(const Vec4d& vec)    { return Hsv::setHSVA(vec);  }
 
     bool colorInterpolate(
       const double value,      // Value

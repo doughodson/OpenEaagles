@@ -11,7 +11,8 @@
 #include "openeaagles/base/functors/Tables.hpp"
 
 #include "openeaagles/base/units/Areas.hpp"
-#include "openeaagles/base/units/unit_utils.hpp"
+
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 

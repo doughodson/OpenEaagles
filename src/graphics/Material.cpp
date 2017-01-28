@@ -225,7 +225,7 @@ bool Material::setSlotShininess(const base::Number* const x)
 //------------------------------------------------------------------------------
 // setAmbientColor() - set our ambient color with an OSG or double
 //------------------------------------------------------------------------------
-bool Material::setAmbientColor(osg::Vec4d x)
+bool Material::setAmbientColor(base::Vec4d x)
 {
     ambientColor = x;
     return true;
@@ -238,7 +238,7 @@ bool Material::setAmbientColor(double x, double y, double z, double w)
 //------------------------------------------------------------------------------
 // setDiffuseColor() - set our diffuse color with an OSG
 //------------------------------------------------------------------------------
-bool Material::setDiffuseColor(osg::Vec4d x)
+bool Material::setDiffuseColor(base::Vec4d x)
 {
     diffuseColor = x;
     return true;
@@ -251,7 +251,7 @@ bool Material::setDiffuseColor(double x, double y, double z, double w)
 //------------------------------------------------------------------------------
 // setEmissiveColor() - set our emissive color with an OSG
 //------------------------------------------------------------------------------
-bool Material::setEmissiveColor(osg::Vec4d x)
+bool Material::setEmissiveColor(base::Vec4d x)
 {
     emissiveColor = x;
     return true;
@@ -264,7 +264,7 @@ bool Material::setEmissiveColor(double x, double y, double z, double w)
 //------------------------------------------------------------------------------
 // setSpecularColor() - set our specular color with an OSG
 //------------------------------------------------------------------------------
-bool Material::setSpecularColor(osg::Vec4d x)
+bool Material::setSpecularColor(base::Vec4d x)
 {
     specularColor = x;
     return true;

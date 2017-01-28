@@ -12,13 +12,12 @@
 
 #include "openeaagles/models/environment/IrAtmosphere.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -216,15 +215,15 @@ void IrSeeker::irRequestSignature(IrQueryMsg* const irQuery)
    // ---
    // If we have targets
    // ---
-   const osg::Vec3d* losG = tdb0->getGimbalLosVectors();
+   const base::Vec3d* losG = tdb0->getGimbalLosVectors();
    if (ntgts > 0 && losG != nullptr) {
 
       // Fetch the required data arrays from the TargetDataBlock
       const double* ranges = tdb0->getTargetRanges();
       const double* rngRates = tdb0->getTargetRangeRates();
       const double* anglesOffBoresight = tdb0->getBoresightErrorAngles();
-      const osg::Vec3d* losO2T = tdb0->getLosVectors();
-      const osg::Vec3d* losT2O = tdb0->getTargetLosVectors();
+      const base::Vec3d* losO2T = tdb0->getLosVectors();
+      const base::Vec3d* losT2O = tdb0->getTargetLosVectors();
       Player** targets = tdb0->getTargets();
       const double maximumRange = irQuery->getMaxRangeNM()*base::distance::NM2M;
 

@@ -8,11 +8,10 @@
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Vec4d"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace models {
-
 class Emission;
 class IrQueryMsg;
 class Player;
@@ -60,25 +59,25 @@ public:
    bool isRangeAndAngle() const                    { return (trackClass == RANGE_AND_ANGLE); }
 
    // Age of the track (seconds) since last update
-   double getTrackAge() const                      { return age; }
+   double getTrackAge() const                             { return age; }
    virtual bool updateTrackAge(const double dt);
    virtual bool resetTrackAge();
 
    // Quality of the Track (normalized: high(1.0) to low(0.0)
-   double getQuality() const                       { return quality; }
+   double getQuality() const                              { return quality; }
    virtual bool setQuality(const double v);
 
    // Track position is in meters, NED and centered at ownship.
-   const osg::Vec3d& getPosition() const            { return pos; }
-   virtual bool setPosition(const osg::Vec3d& p);
-   virtual bool setPosition(const osg::Vec4d& p);
+   const base::Vec3d& getPosition() const                 { return pos; }
+   virtual bool setPosition(const base::Vec3d& p);
+   virtual bool setPosition(const base::Vec4d& p);
 
    // Track's estimated position error, meters
-   double getCircularError() const                 { return cErr; }
+   double getCircularError() const                        { return cErr; }
    virtual bool setCircularError(const double err);
 
    // Track's estimated vertical (altitude) error, meters
-   double getVerticalError() const                 { return vErr; }
+   double getVerticalError() const                        { return vErr; }
    virtual bool setVerticalError(const double err);
 
    // Tracks position (lat/lon)
@@ -88,7 +87,7 @@ public:
    virtual void clearLatLonValid();
 
    // Line-Of-Sight (LOS) vector; ownship to track
-   const osg::Vec3d& getLosVec() const              { return los; }
+   const base::Vec3d& getLosVec() const            { return los; }
 
    // Range to track (meters)
    double getRange() const                         { return rng; }
@@ -177,12 +176,12 @@ public:
    double getAspectAngleD() const                  { return static_cast<double>(base::angle::R2DCC * aa); }
 
    // Track velocity vector
-   const osg::Vec3d& getVelocity() const            { return vel; }
-   virtual bool setVelocity(const osg::Vec3d v);
+   const base::Vec3d& getVelocity() const          { return vel; }
+   virtual bool setVelocity(const base::Vec3d v);
 
    // Track acceleration vector
-   const osg::Vec3d& getAcceleration() const        { return accel; }
-   virtual bool setAcceleration(const osg::Vec3d a);
+   const base::Vec3d& getAcceleration() const      { return accel; }
+   virtual bool setAcceleration(const base::Vec3d a);
 
    // IFF information
    bool isIffCode(const IffCode s) const           { return (s == iffCode); }
@@ -202,7 +201,7 @@ public:
 
    // OwnshipDynmaics() will apply ownship movements to the track's
    // predicted position, range and velocity.
-   virtual void ownshipDynamics(const double gtrk, const osg::Vec3d vel, const osg::Vec3d accel, const double dt);
+   virtual void ownshipDynamics(const double gtrk, const base::Vec3d vel, const base::Vec3d accel, const double dt);
 
    // Optional pointer to the track target player
    Player* getTarget()                             { return tgt; }
@@ -224,10 +223,10 @@ protected:
    // Track State Vector
    double      latitude;       // Latitude                                (degs)
    double      longitude;      // Longitude                               (degs)
-   osg::Vec3d  los;            // Line-of-sight unit vector (NED)
-   osg::Vec3d  pos;            // position; relative to ownship (NED)     (m)
-   osg::Vec3d  vel;            // Velocity; relative to ownship (NED)     (m/s)
-   osg::Vec3d  accel;          // Acceleration; relative to ownship (NED) ((m/s)/s)
+   base::Vec3d  los;           // Line-of-sight unit vector (NED)
+   base::Vec3d  pos;           // position; relative to ownship (NED)     (m)
+   base::Vec3d  vel;           // Velocity; relative to ownship (NED)     (m/s)
+   base::Vec3d  accel;         // Acceleration; relative to ownship (NED) ((m/s)/s)
    double      rng;            // Range from ownship                      (m)
    double      rngRate;        // Closure rate                            (m/s)
    bool        llValid;        // Latitude & Longitude are valid
@@ -253,8 +252,8 @@ protected:
 
    // Ownship data
    double      osGndTrk;        // Ownship's ground track angle             (r)
-   osg::Vec3d  osVel;           // Ownship velocity (NED)                   (m/s)
-   osg::Vec3d  osAccel;         // Ownship accel (NED)                      ((m/s)/s)
+   base::Vec3d  osVel;          // Ownship velocity (NED)                   (m/s)
+   base::Vec3d  osAccel;        // Ownship accel (NED)                      ((m/s)/s)
 
    Player*     tgt;             // (Optional) pointer to the Track Player
 
@@ -318,7 +317,7 @@ public:
    int getNumSignals() const                                               { return nSig; }
    const IrQueryMsg* getLastQuery() const                                  { return lastQuery; }
    virtual bool setSignal(const double snDbl, const IrQueryMsg* const q);
-   virtual bool setPosition(const osg::Vec3d& p) override;
+   virtual bool setPosition(const base::Vec3d& p) override;
 
    // Missile warning (from an RWR)
    bool isMissileWarning() const                                           { return mslWarn; }

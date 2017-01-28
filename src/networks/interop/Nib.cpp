@@ -9,14 +9,12 @@
 #include "openeaagles/models/systems/StoresMgr.hpp"
 #include "openeaagles/models/SynchronizedState.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
-
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
-
+#include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 
@@ -469,8 +467,8 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
          // Compute our dead reckoned position and angles, which are
          // based on our last packet sent.
-         osg::Vec3d drPos;
-         osg::Vec3d drAngles;
+         base::Vec3d drPos;
+         base::Vec3d drAngles;
          mainDeadReckoning(drTime, &drPos, &drAngles);
 
          // 3-d-1) Position error
@@ -483,8 +481,8 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
             //osg::Vec3d ppos = player->getGeocPosition();
-            const osg::Vec3d ppos = playerState.getGeocPosition();
-            const osg::Vec3d errPos = drPos - ppos;
+            const base::Vec3d ppos = playerState.getGeocPosition();
+            const base::Vec3d errPos = drPos - ppos;
             if (errPos.length2() >= maxPosErr2) {
                result = YES;
             }
@@ -498,7 +496,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
             // Compute angular error
             //osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
-            osg::Vec3d errAngles = drAngles - playerState.getGeocEulerAngles();
+            base::Vec3d errAngles = drAngles - playerState.getGeocEulerAngles();
 
             // Check if any angle error is greater than the max error
             errAngles[0] = std::fabs( base::angle::aepcdDeg(errAngles[0]) );
@@ -752,8 +750,8 @@ void Nib::nib2PlayerState()
 //------------------------------------------------------------------------------
 bool Nib::updateDeadReckoning(
       const double dt,
-      osg::Vec3d* const pNewPos,
-      osg::Vec3d* const pNewAngles
+      base::Vec3d* const pNewPos,
+      base::Vec3d* const pNewAngles
    )
 {
    bool ok = (ioType == NetIO::INPUT_NIB);
@@ -789,16 +787,16 @@ bool Nib::updateDeadReckoning(
 // (re)initialize the dead reckoning function
 //------------------------------------------------------------------------------
 bool Nib::resetDeadReckoning(
-      const unsigned char dr, // Dead-Reckoning algorithm number
-      const osg::Vec3d& p,    // Position vector @ T0 (meters) (ECEF)
-      const osg::Vec3d& v,    // Velocity vector @ T0 (m/sec)  (ECEF or body based on DR algorithm)
-      const osg::Vec3d& a,    // Acceleration vector @ T0 ((m/sec)/sec) (ECEF or body based on DR algorithm)
-      const osg::Vec3d& rpy,  // Euler angles @ T0 (rad) [ phi theta psi ] (Body/ECEF)
-      const osg::Vec3d& av,   // Angular rates @ T0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
-      const double time       // Initial time
+      const unsigned char dr,       // Dead-Reckoning algorithm number
+      const base::Vec3d& p,         // Position vector @ T0 (meters) (ECEF)
+      const base::Vec3d& v,         // Velocity vector @ T0 (m/sec)  (ECEF or body based on DR algorithm)
+      const base::Vec3d& a,         // Acceleration vector @ T0 ((m/sec)/sec) (ECEF or body based on DR algorithm)
+      const base::Vec3d& rpy,       // Euler angles @ T0 (rad) [ phi theta psi ] (Body/ECEF)
+      const base::Vec3d& av,        // Angular rates @ T0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
+      const double time             // Initial time
    )
 {
-   osg::Vec3d drPosN1(drPos);
+   base::Vec3d drPosN1(drPos);
 
    // ---
    // Set the initial DR values
@@ -824,7 +822,7 @@ bool Nib::resetDeadReckoning(
    // ---
    smoothTime = 0; // default is off
    smoothVel.set(0,0,0);
-   osg::Vec3d err;
+   base::Vec3d err;
    if (ioType == NetIO::INPUT_NIB && drTime > 0) {
       err = drPosN1 - drP0;
       const double len = err.length();
@@ -869,9 +867,9 @@ bool Nib::resetDeadReckoning(
 // Main Dead Reckoning Function
 //------------------------------------------------------------------------------
 bool Nib::mainDeadReckoning(
-      const double dT,           // DR time (seconds)
-      osg::Vec3d* const pNewP0,  // DR Position vector @ time = 'dT' (meters) (ECEF)
-      osg::Vec3d* const pNewRPY  // DR Euler angles @ time = 'dT' (rad) [ phi theta psi ] (Body/ECEF)
+      const double dT,                 // DR time (seconds)
+      base::Vec3d* const pNewP0,       // DR Position vector @ time = 'dT' (meters) (ECEF)
+      base::Vec3d* const pNewRPY       // DR Euler angles @ time = 'dT' (rad) [ phi theta psi ] (Body/ECEF)
    ) const
 {
    switch (drNum) {
@@ -885,9 +883,9 @@ bool Nib::mainDeadReckoning(
 
       // World, 1st order rotation, 1st order linear
       case RPW_DRM: {
-         osg::Matrixd DR;
+         base::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
-         osg::Matrixd Rwb = DR * drR0;
+         base::Matrixd Rwb = DR * drR0;
          base::nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT;
@@ -896,9 +894,9 @@ bool Nib::mainDeadReckoning(
 
       // World, 1st order rotation, 2nd order linear
       case RVW_DRM: {
-         osg::Matrixd DR;
+         base::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
-         osg::Matrixd Rwb = DR * drR0;
+         base::Matrixd Rwb = DR * drR0;
          base::nav::computeEulerAngles(Rwb, pNewRPY);
 
          *pNewP0 = drP0 + drV0*dT + drA0*(0.5*dT*dT);
@@ -916,10 +914,10 @@ bool Nib::mainDeadReckoning(
       case FPB_DRM: {
          *pNewRPY = drRPY0;
 
-         osg::Matrixd R1;
+         base::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
 
-         osg::Matrixd Rwb = drR0;
+         base::Matrixd Rwb = drR0;
          Rwb.transpose();
 
          *pNewP0 = drP0 + Rwb * (R1 * drV0);
@@ -928,13 +926,13 @@ bool Nib::mainDeadReckoning(
 
       // Body, 1st order rotation, 1st order linear
       case RPB_DRM: {
-         osg::Matrixd DR;
+         base::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
-         osg::Matrixd Rwb = DR * drR0;
+         base::Matrixd Rwb = DR * drR0;
 
          base::nav::computeEulerAngles(Rwb, pNewRPY);
 
-         osg::Matrixd R1;
+         base::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
 
          Rwb.transpose();
@@ -944,16 +942,16 @@ bool Nib::mainDeadReckoning(
 
       // Body, 1st order rotation, 2nd order linear
       case RVB_DRM: {
-         osg::Matrixd DR;
+         base::Matrixd DR;
          drComputeMatrixDR(dT, drAV0, drWwT, drOmega, &DR);
-         osg::Matrixd Rwb = DR * drR0;
+         base::Matrixd Rwb = DR * drR0;
 
          base::nav::computeEulerAngles(Rwb, pNewRPY);
 
-         osg::Matrixd R1;
+         base::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
 
-         osg::Matrixd R2;
+         base::Matrixd R2;
          drComputeMatrixR2(dT, drAV0, drWwT, drOmega, &R1);
 
          Rwb.transpose();
@@ -965,13 +963,13 @@ bool Nib::mainDeadReckoning(
       case FVB_DRM: {
          *pNewRPY = drRPY0;
 
-         osg::Matrixd R1;
+         base::Matrixd R1;
          drComputeMatrixR1(dT, drAV0, drWwT, drOmega, &R1);
 
-         osg::Matrixd R2;
+         base::Matrixd R2;
          drComputeMatrixR2(dT, drAV0, drWwT, drOmega, &R1);
 
-         osg::Matrixd Rwb = drR0;
+         base::Matrixd Rwb = drR0;
          Rwb.transpose();
 
          *pNewP0 = drP0 + Rwb * ((R1*drV0) + (R2*drA0));
@@ -994,8 +992,8 @@ bool Nib::mainDeadReckoning(
 // drComputeMatrixR0
 //------------------------------------------------------------------------------
 bool Nib::drComputeMatrixR0(
-      const osg::Vec3d& RPY,      // [radians]
-      osg::Matrixd* const pR0    // Rotational matrix R0
+      const base::Vec3d& RPY,      // [radians]
+      base::Matrixd* const pR0     // Rotational matrix R0
    )
 {
    //--------------------------------------------------------------------------
@@ -1036,8 +1034,8 @@ bool Nib::drComputeMatrixR0(
 // Compute wwT matrix
 //------------------------------------------------------------------------------
 bool Nib::drComputeMatrixWwT(
-      const osg::Vec3d& av,       // angular velocities [rps]
-      osg::Matrixd* const pwwT   // matrix
+      const base::Vec3d& av,       // angular velocities [rps]
+      base::Matrixd* const pwwT    // matrix
    )
 {
    //--------------------------------------------------------------------------
@@ -1068,8 +1066,8 @@ bool Nib::drComputeMatrixWwT(
 // Compute the Omega matrix
 //------------------------------------------------------------------------------
 bool Nib::drComputeMatrixOmega(
-      const osg::Vec3d& av,       // angular velocities [rps]
-      osg::Matrixd* const pOmega // matrix
+      const base::Vec3d& av,       // angular velocities [rps]
+      base::Matrixd* const pOmega  // matrix
    )
 {
    //--------------------------------------------------------------------------
@@ -1100,11 +1098,11 @@ bool Nib::drComputeMatrixOmega(
 // drComputeMatrixDR
 //------------------------------------------------------------------------------
 bool Nib::drComputeMatrixDR(
-      const double dT,           // DR time [sec]
-      const osg::Vec3d& av,      // angular velocities [rps]
-      const osg::Matrixd& wwT,   // wwT matrix
-      const osg::Matrixd& omega, // omega matrix
-      osg::Matrixd* const pDR    // DR matrix
+      const double dT,            // DR time [sec]
+      const base::Vec3d& av,      // angular velocities [rps]
+      const base::Matrixd& wwT,   // wwT matrix
+      const base::Matrixd& omega, // omega matrix
+      base::Matrixd* const pDR    // DR matrix
    )
 {
    //--------------------------------------------------------------------------
@@ -1132,7 +1130,7 @@ bool Nib::drComputeMatrixDR(
       //--------------------------------------------------------------------------
       // Compute Dead Reckoning Matrix (DR)
       //--------------------------------------------------------------------------
-      static const osg::Matrixd I3;
+      static const base::Matrixd I3;
       *pDR = wwT*k1 + I3*k2 - omega*k3;
    }
    else {
@@ -1147,11 +1145,11 @@ bool Nib::drComputeMatrixDR(
 // drComputeMatrixR1
 //------------------------------------------------------------------------------
 bool Nib::drComputeMatrixR1(
-      const double dT,           // DR time [sec]
-      const osg::Vec3d& av,      // angular velocities [rps]
-      const osg::Matrixd& wwT,   // wwT matrix
-      const osg::Matrixd& omega, // omega matrix
-      osg::Matrixd* const pR1    // Matrix R1
+      const double dT,            // DR time [sec]
+      const base::Vec3d& av,      // angular velocities [rps]
+      const base::Matrixd& wwT,   // wwT matrix
+      const base::Matrixd& omega, // omega matrix
+      base::Matrixd* const pR1    // Matrix R1
    )
 {
    //--------------------------------------------------------------------------
@@ -1180,7 +1178,7 @@ bool Nib::drComputeMatrixR1(
       //----------------------------------------------------------------------
       // Compute R1 Matrix
       //----------------------------------------------------------------------
-      static const osg::Matrixd I3;
+      static const base::Matrixd I3;
       *pR1 = wwT*k1 + I3*k2 + omega*k3;
    }
    else {
@@ -1195,11 +1193,11 @@ bool Nib::drComputeMatrixR1(
 // drComputeMatrixR2
 //------------------------------------------------------------------------------
 bool Nib::drComputeMatrixR2(
-      const double dT,           // DR time [sec]
-      const osg::Vec3d& av,      // angular velocities [rps]
-      const osg::Matrixd& wwT,   // wwT matrix
-      const osg::Matrixd& omega, // omega matrix
-      osg::Matrixd* const pR2    // Matrix R2
+      const double dT,                 // DR time [sec]
+      const base::Vec3d& av,      // angular velocities [rps]
+      const base::Matrixd& wwT,   // wwT matrix
+      const base::Matrixd& omega, // omega matrix
+      base::Matrixd* const pR2    // Matrix R2
    )
 {
    //--------------------------------------------------------------------------
@@ -1228,7 +1226,7 @@ bool Nib::drComputeMatrixR2(
       //--------------------------------------------------------------------------
       // Compute R2 Matrix
       //--------------------------------------------------------------------------
-      static const osg::Matrixd I3;
+      static const base::Matrixd I3;
       *pR2 = wwT*k1 + I3*k2 + omega*k3;
    }
    else {

@@ -323,11 +323,11 @@ private:
    double maxVelAccNps;             // maximum velocity acceleration
 
    // Follow that lead mode data
-   osg::Vec3d leadOffset;     // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
-   const Player* lead;        // Our lead player
-   const base::Identifier* leadName;   // Name of our lead player
-   double leadHdg;            // lead's heading (rad)
-   bool   followLeadModeOn;   // Follow the lead mode flag
+   base::Vec3d leadOffset;            // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
+   const Player* lead;                // Our lead player
+   const base::Identifier* leadName;  // Name of our lead player
+   double leadHdg;                    // lead's heading (rad)
+   bool   followLeadModeOn;           // Follow the lead mode flag
 
 };
 

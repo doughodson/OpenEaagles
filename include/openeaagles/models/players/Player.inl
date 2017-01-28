@@ -126,49 +126,49 @@ inline double Player::getCosHeading() const
 }
 
 // Euler angles (rad)
-inline const osg::Vec3d& Player::getEulerAngles() const
+inline const base::Vec3d& Player::getEulerAngles() const
 {
    return angles;
 }
 
 // Geocentric Euler angles (rad)
-inline const osg::Vec3d& Player::getGeocEulerAngles() const
+inline const base::Vec3d& Player::getGeocEulerAngles() const
 {
    return anglesW;
 }
 
 // Rotational Quaternions
-inline const osg::Quat& Player::getQuaternions() const
+inline const base::Quat& Player::getQuaternions() const
 {
    return q;
 }
 
 // Rotational Matrix
-inline const osg::Matrixd& Player::getRotMat() const
+inline const base::Matrixd& Player::getRotMat() const
 {
    return rm;
 }
 
 // Rotational Matrix: world to body
-inline const osg::Matrixd& Player::getRotMatW2B() const
+inline const base::Matrixd& Player::getRotMatW2B() const
 {
    return rmW2B;
 }
 
 // Body angular rates (radians/second)
-inline const osg::Vec3d& Player::getAngularVelocities() const
+inline const base::Vec3d& Player::getAngularVelocities() const
 {
    return angularVel;
 }
 
 // Geocentric angular rates (radians/second)
-inline const osg::Vec3d& Player::getGeocAngularVelocities() const
+inline const base::Vec3d& Player::getGeocAngularVelocities() const
 {
    return gcAngVel;
 }
 
 // World transformation matrix:
-inline const osg::Matrixd& Player::getWorldMat() const
+inline const base::Matrixd& Player::getWorldMat() const
 {
    return wm;
 }
@@ -180,7 +180,7 @@ inline bool Player::isPositionVectorValid() const
 }
 
 // Position vector; NED from sim ref pt (m)
-inline const osg::Vec3d& Player::getPosition() const
+inline const base::Vec3d& Player::getPosition() const
 {
    return posVecNED;
 }
@@ -235,7 +235,7 @@ inline bool Player::getPositionLLA(double* const lat, double* const lon, double*
 }
 
 // Geocentric position vector [ x y z ] (meters)
-inline const osg::Vec3d& Player::getGeocPosition() const
+inline const base::Vec3d& Player::getGeocPosition() const
 {
    return posVecECEF;
 }
@@ -331,43 +331,43 @@ inline double Player::getGroundTrackD() const
 }
 
 // Velocity vector; NED (m/s)
-inline const osg::Vec3d& Player::getVelocity() const
+inline const base::Vec3d& Player::getVelocity() const
 {
    return velVecNED;
 }
 
 // Acceleration vector; NED ((m/s)/s)
-inline const osg::Vec3d& Player::getAcceleration() const
+inline const base::Vec3d& Player::getAcceleration() const
 {
    return accelVecNED;
 }
 
 // Body velocity vector: Nose/right/down (m/s)
-inline const osg::Vec3d& Player::getVelocityBody() const
+inline const base::Vec3d& Player::getVelocityBody() const
 {
    return velVecBody;
 }
 
 // Body Acceleration vector: Nose/right/down ((meters/second)/second)
-inline const osg::Vec3d& Player::getAccelerationBody() const
+inline const base::Vec3d& Player::getAccelerationBody() const
 {
    return accelVecBody;
 }
 
 // Geocentric velocity vector [ x y z ] (m/s)
-inline const osg::Vec3d& Player::getGeocVelocity() const
+inline const base::Vec3d& Player::getGeocVelocity() const
 {
    return velVecECEF;
 }
 
 // Geocentric acceleration vector [ x y z ] ((m/s)/s)
-inline const osg::Vec3d& Player::getGeocAcceleration() const
+inline const base::Vec3d& Player::getGeocAcceleration() const
 {
    return accelVecECEF;
 }
 
 // Initial geocentric position vector [ x y z ] (meters)
-inline const osg::Vec3d& Player::getInitGeocentricPosition() const
+inline const base::Vec3d& Player::getInitGeocentricPosition() const
 {
    return initGeoPosVec;
 }
@@ -397,7 +397,7 @@ inline bool Player::isInitLatLonValid() const
 }
 
 // Initial position vector; north/east from sim ref pt (m)
-inline const osg::Vec2d& Player::getInitPosition() const
+inline const base::Vec2d& Player::getInitPosition() const
 {
    return initPosVec;
 }
@@ -421,7 +421,7 @@ inline double Player::getInitVelocity() const
 }
 
 // Initial Euler angles (radians)
-inline const osg::Vec3d& Player::getInitAngles() const
+inline const base::Vec3d& Player::getInitAngles() const
 {
    return initAngles;
 }

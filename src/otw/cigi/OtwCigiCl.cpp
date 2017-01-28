@@ -40,7 +40,7 @@
 #include "openeaagles/base/SlotTable.hpp"
 #include "openeaagles/base/Thread.hpp"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"

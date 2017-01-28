@@ -194,10 +194,10 @@ void Bomb::weaponGuidance(const double)
    if (isGuidanceEnabled()) {
 
       // Get target position
-      const osg::Vec3d tgtPos = getTargetPosition();
+      const base::Vec3d tgtPos = getTargetPosition();
 
       // weapon velocities (platform)
-      const osg::Vec3d vel = getVelocity();
+      const base::Vec3d vel = getVelocity();
 
       // weapon velocities (relative)
       double velG = std::sqrt (vel[0]*vel[0] + vel[1]*vel[1]);
@@ -208,7 +208,7 @@ void Bomb::weaponGuidance(const double)
       const double prsin = vel[1] / velG;
 
       // Target position (platform)
-      const osg::Vec3d tgtPosP = tgtPos - getPosition();
+      const base::Vec3d tgtPosP = tgtPos - getPosition();
 
       // Target range distance
       const double tsrng = tgtPosP.length();
@@ -225,15 +225,15 @@ void Bomb::weaponGuidance(const double)
       // ---
 
       // Inputs
-      osg::Vec3d initPos(0.0, 0.0, static_cast<double>(-getAltitude()));
-      osg::Vec3d initVel = vel;
+      base::Vec3d initPos(0.0, 0.0, static_cast<double>(-getAltitude()));
+      base::Vec3d initVel = vel;
       double groundPlane = tgtPos[2];
       double timeStep = 0.1;
       double maxTime = 60.0;
 
       // Outputs
       double tof = 0;
-      osg::Vec3d ip;
+      base::Vec3d ip;
 
       // Predict platform impact point
       weaponImpactPrediction(&initPos, &initVel, groundPlane, timeStep, maxTime, dragIndex, &ip, &tof);
@@ -244,7 +244,7 @@ void Bomb::weaponGuidance(const double)
       // ---
 
       // miss Dist (Platform)
-      const osg::Vec3d pmd = tgtPosP - ip;
+      const base::Vec3d pmd = tgtPosP - ip;
 
       // rotate to ref coord sys
       missDistRef.set(
@@ -293,16 +293,16 @@ void Bomb::weaponDynamics(const double dt)
    // ---
 
    // First drag
-   const osg::Vec3d tmp = getVelocity() * (-dragIndex);
+   const base::Vec3d tmp = getVelocity() * (-dragIndex);
 
    // then gravity
-   osg::Vec3d ae1 = tmp;
+   base::Vec3d ae1 = tmp;
    ae1[IDOWN] += g;
 
    // and the controls from guidance, if any
    if (guidanceValid) {
       const double h = g * 2.0f;
-      osg::Vec3d ab0(0, 0, 0); // body accelerations
+      base::Vec3d ab0(0, 0, 0); // body accelerations
 
       ab0[1] = h * cmdStrAz;  // body Y accel (m/s/s)
       if (ab0[1] >  h) ab0[1] = h;
@@ -313,14 +313,14 @@ void Bomb::weaponDynamics(const double dt)
       if (ab0[2] < -h) ab0[2] = -h;
 
       // rotate to earth and add to accel vector
-      osg::Vec3d ae0 = ab0 * getRotMat();
+      base::Vec3d ae0 = ab0 * getRotMat();
       ae1 = ae1 + ae0;
    }
 
    // ---
    // Compute new velocity vector (earth)
    // ---
-   const osg::Vec3d ve1 = getVelocity() + (ae1 * dt);
+   const base::Vec3d ve1 = getVelocity() + (ae1 * dt);
 
    // ---
    // Compute Euler angles
@@ -343,12 +343,12 @@ void Bomb::weaponDynamics(const double dt)
 // weaponPrediction -- Predict weapon impact point
 //------------------------------------------------------------------------------
 bool Bomb::impactPrediction(
-      const osg::Vec3d* const initPos,
-      const osg::Vec3d* const initVel,
+      const base::Vec3d* const initPos,
+      const base::Vec3d* const initVel,
       const double groundPlane,
       const double dt,
       const double maxTime,
-      osg::Vec3d* const finalPos,
+      base::Vec3d* const finalPos,
       double* const tof
    ) const
 {
@@ -359,13 +359,13 @@ bool Bomb::impactPrediction(
 // Predict weapon impact point
 //------------------------------------------------------------------------------
 bool Bomb::weaponImpactPrediction(
-      const osg::Vec3d* const initPos,
-      const osg::Vec3d* const initVel,
+      const base::Vec3d* const initPos,
+      const base::Vec3d* const initVel,
       const double groundPlane,
       const double dt,
       const double maxTime,
       const double dragIndex,
-      osg::Vec3d* const finalPos,
+      base::Vec3d* const finalPos,
       double* const tof
    )
 {
@@ -376,8 +376,8 @@ bool Bomb::weaponImpactPrediction(
    if (initPos == nullptr || initVel == nullptr || finalPos == nullptr || tof == nullptr) return false;
 
    // Set initial position & velocity
-   osg::Vec3d pos = *initPos;
-   osg::Vec3d vel = *initVel;
+   base::Vec3d pos = *initPos;
+   base::Vec3d vel = *initVel;
 
    // Run time
    double time = 0.0;
@@ -391,7 +391,7 @@ bool Bomb::weaponImpactPrediction(
       // Compute acceleration vector (earth) ...
 
       //    first drag,
-      osg::Vec3d ae1 = vel * (-dragIndex);
+      base::Vec3d ae1 = vel * (-dragIndex);
 
       //   then gravity
       ae1[IDOWN] += g;

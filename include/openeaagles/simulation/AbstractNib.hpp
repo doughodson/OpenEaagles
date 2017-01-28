@@ -5,9 +5,7 @@
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-
-namespace osg { class Vec3d; }
-
+namespace base { class Vec3d; }
 namespace simulation {
 class AbstractNetIO;
 
@@ -26,19 +24,19 @@ public:
 
    // update incoming entity dead reckoning
    virtual bool updateDeadReckoning(
-      const double dt,              // delta time (sec)
-      osg::Vec3d* const pNewPos,    // New DR position
-      osg::Vec3d* const pNewAngles  // New DR orientation
+      const double dt,                    // delta time (sec)
+      base::Vec3d* const pNewPos,         // New DR position
+      base::Vec3d* const pNewAngles       // New DR orientation
    ) =0;
 
    // DR's velocity vector @ T0 (m/sec)  (ECEF or Body based on the DR algorithm)
-   virtual const osg::Vec3d& getDrVelocity() const =0;
+   virtual const base::Vec3d& getDrVelocity() const =0;
 
    // DR's acceleration vector @ T0 ((m/sec)/sec) (ECEF or Body based on the DR algorithm)
-   virtual const osg::Vec3d& getDrAcceleration() const =0;
+   virtual const base::Vec3d& getDrAcceleration() const =0;
 
    // DR's angular rates @ T0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
-   virtual const osg::Vec3d& getDrAngularVelocities() const =0;
+   virtual const base::Vec3d& getDrAngularVelocities() const =0;
 
 };
 

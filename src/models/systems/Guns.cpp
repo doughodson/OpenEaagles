@@ -9,7 +9,7 @@
 
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
-#include "openeaagles/base/nav_utils.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 
 #include "openeaagles/base/units/Angles.hpp"
 
@@ -323,8 +323,8 @@ void Gun::burstFrame()
       if (wpn != nullptr && ownship != nullptr && sim != nullptr) {
 
          // Compute the bullet burst's initial position and velocity
-         osg::Vec3d ipos = computeInitBulletPosition();
-         osg::Vec3d ivel = computeInitBulletVelocity();
+         base::Vec3d ipos = computeInitBulletPosition();
+         base::Vec3d ivel = computeInitBulletVelocity();
 
          // Get the bullet player being used to fly-out the bullets
          Bullet* flyout = static_cast<Bullet*>( wpn->getFlyoutWeapon() );
@@ -351,13 +351,13 @@ void Gun::burstFrame()
 //------------------------------------------------------------------------------
 // computeInitBulletPosition() -- compute the initial bullet position
 //------------------------------------------------------------------------------
-osg::Vec3d Gun::computeInitBulletPosition()
+base::Vec3d Gun::computeInitBulletPosition()
 {
-   osg::Vec3d pe1 = posVec;
+   base::Vec3d pe1 = posVec;
    const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship != nullptr) {
       // Body position to earth (NED) position
-      osg::Vec3d gunPosE = posVec * ownship->getRotMat();
+      base::Vec3d gunPosE = posVec * ownship->getRotMat();
       pe1 = gunPosE + ownship->getPosition();
    }
    return pe1;
@@ -366,18 +366,18 @@ osg::Vec3d Gun::computeInitBulletPosition()
 //------------------------------------------------------------------------------
 // computeInitBulletVelocity() -- compute the initial bullet position
 //------------------------------------------------------------------------------
-osg::Vec3d Gun::computeInitBulletVelocity()
+base::Vec3d Gun::computeInitBulletVelocity()
 {
-   osg::Vec3d ve1(0,0,0);   // velocity -- earth (m/s)
+   base::Vec3d ve1(0,0,0);   // velocity -- earth (m/s)
    const auto ownship = dynamic_cast<Player*>( findContainerByType(typeid(Player)) );
    if (ownship != nullptr) {
       // compute the earth (NED) to gun matrix
-      osg::Matrixd mm = getRotMat() * ownship->getRotMat();
+      base::Matrixd mm = getRotMat() * ownship->getRotMat();
 
       // Get muzzle velocity in gun axis and transform to earth axis
       double muzzleVel = Bullet::DEFAULT_MUZZLE_VEL;
       if (getBulletType() != nullptr) muzzleVel = getBulletType()->getMuzzleVelocity();
-      osg::Vec3d va(muzzleVel, 0.0, 0.0);
+      base::Vec3d va(muzzleVel, 0.0, 0.0);
       ve1 = va * mm;  // same as:  ve1 = mm(T) * va
    }
    return ve1;

@@ -18,7 +18,7 @@
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/osg/Vec3d"
 
-#include "openeaagles/base/units/unit_utils.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace otw {
@@ -190,7 +190,7 @@ void OtwPC::sendPcData()
         fmd.m_y_cg = 0;
         fmd.m_z_cg = 0;          // altitude
 
-        const osg::Vec3d pos = av->getPosition();
+        const base::Vec3d pos = av->getPosition();
         fmd.m_pilot_eye_x = pos[0] * base::distance::M2FT;
         fmd.m_pilot_eye_y = pos[1] * base::distance::M2FT;
         fmd.m_pilot_eye_z = -pos[2] * base::distance::M2FT;   // altitude

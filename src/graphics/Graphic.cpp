@@ -421,12 +421,12 @@ void Graphic::setupMaterial()
         // now add all the materials we need
 
         // set our ambient color
-        osg::Vec4d amb = tempMat->getAmbientColor();
+        base::Vec4d amb = tempMat->getAmbientColor();
         GLfloat temp[4] = { static_cast<GLfloat>(amb.x()), static_cast<GLfloat>(amb.y()),
                             static_cast<GLfloat>(amb.z()), static_cast<GLfloat>(amb.w()) };
         glMaterialfv(GL_FRONT, GL_AMBIENT, temp);
 
-        osg::Vec4d dif = tempMat->getDiffuseColor();
+        base::Vec4d dif = tempMat->getDiffuseColor();
         // now set the diffuse color
         temp[0] = static_cast<GLfloat>(dif.x());
         temp[1] = static_cast<GLfloat>(dif.y());
@@ -435,7 +435,7 @@ void Graphic::setupMaterial()
         glMaterialfv(GL_FRONT, GL_DIFFUSE, temp);
 
         // now emissive
-        osg::Vec4d emis = tempMat->getEmissiveColor();
+        base::Vec4d emis = tempMat->getEmissiveColor();
         temp[0] = static_cast<GLfloat>(emis.x());
         temp[1] = static_cast<GLfloat>(emis.y());
         temp[2] = static_cast<GLfloat>(emis.z());
@@ -443,7 +443,7 @@ void Graphic::setupMaterial()
         glMaterialfv(GL_FRONT, GL_EMISSION, temp);
 
         // now specular
-        osg::Vec4d spec = tempMat->getSpecularColor();
+        base::Vec4d spec = tempMat->getSpecularColor();
         temp[0] = static_cast<GLfloat>(spec.x());
         temp[1] = static_cast<GLfloat>(spec.y());
         temp[2] = static_cast<GLfloat>(spec.z());
@@ -478,7 +478,7 @@ void Graphic::draw()
 
     // if we have a color and no material, switch to that color
     bool setOldColor = false;
-    osg::Vec4d ocolor;
+    base::Vec4d ocolor;
     if (materialName == nullptr && materialObj == nullptr) {
         if (colorName != nullptr) {
             setOldColor = true;
@@ -488,7 +488,7 @@ void Graphic::draw()
         else if (color != nullptr) {
             setOldColor = true;
             ocolor = display->getCurrentColor();
-            const osg::Vec4d* p = *color;
+            const base::Vec4d* p = *color;
             display->setColor(*p);
         }
     }
@@ -820,12 +820,12 @@ bool Graphic::onSetVisibilityEvent(const base::Number* const msg)
 //    the endpoints are not changed.
 //------------------------------------------------------------------------------
 bool Graphic::clipLine2D(
-            osg::Vec2d* ep1,     // Line endpoint #1
-            osg::Vec2d* ep2,     // Line endpoint #2
-            const double minX,   // Clip box min X value
-            const double maxX,   // Clip box max X value
-            const double minY,   // Clip box min Y value
-            const double maxY)   // Clip box max Y value
+            base::Vec2d* ep1,     // Line endpoint #1
+            base::Vec2d* ep2,     // Line endpoint #2
+            const double minX,    // Clip box min X value
+            const double maxX,    // Clip box max X value
+            const double minY,    // Clip box min Y value
+            const double maxY)    // Clip box max Y value
 {
    double x1 = ep1->_v[0];
    double y1 = ep1->_v[1];
@@ -934,7 +934,7 @@ bool Graphic::clipLine2D(
 //------------------------------------------------------------------------------
 // Sets the vertices
 //------------------------------------------------------------------------------
-bool Graphic::setVertices(const osg::Vec3d* const v, const unsigned int n)
+bool Graphic::setVertices(const base::Vec3d* const v, const unsigned int n)
 {
    // Delete any old vertices
    if (vertices != nullptr) {
@@ -946,7 +946,7 @@ bool Graphic::setVertices(const osg::Vec3d* const v, const unsigned int n)
    // Copy vertices
    if (n > 0 && v != nullptr) {
       nv = n;
-      vertices = new osg::Vec3d[nv];
+      vertices = new base::Vec3d[nv];
       for (unsigned int i = 0; i < nv; i++) {
          vertices[i] = v[i];
       }
@@ -957,7 +957,7 @@ bool Graphic::setVertices(const osg::Vec3d* const v, const unsigned int n)
 //------------------------------------------------------------------------------
 // Sets the normals
 //------------------------------------------------------------------------------
-bool Graphic::setNormals(const osg::Vec3d* const v, const unsigned int n)
+bool Graphic::setNormals(const base::Vec3d* const v, const unsigned int n)
 {
    // Delete any old vertices
    if (norms != nullptr) {
@@ -969,7 +969,7 @@ bool Graphic::setNormals(const osg::Vec3d* const v, const unsigned int n)
    // Copy vertices
    if (n > 0 && v != nullptr) {
       nn = n;
-      norms = new osg::Vec3d[nn];
+      norms = new base::Vec3d[nn];
       for (unsigned int i = 0; i < nn; i++) {
          norms[i] = v[i];
       }
@@ -980,7 +980,7 @@ bool Graphic::setNormals(const osg::Vec3d* const v, const unsigned int n)
 //------------------------------------------------------------------------------
 // Sets the texture coordinates
 //------------------------------------------------------------------------------
-bool Graphic::setTextureCoord(const osg::Vec2d* const v, const unsigned int n)
+bool Graphic::setTextureCoord(const base::Vec2d* const v, const unsigned int n)
 {
    // Delete any old texture coordinates
    if (texCoord != nullptr) {
@@ -992,7 +992,7 @@ bool Graphic::setTextureCoord(const osg::Vec2d* const v, const unsigned int n)
    // Copy texture coordinates
    if (n > 0 && v != nullptr) {
       ntc = n;
-      texCoord = new osg::Vec2d[ntc];
+      texCoord = new base::Vec2d[ntc];
       for (unsigned int i = 0; i < ntc; i++) {
          texCoord[i] = v[i];
       }
@@ -1085,7 +1085,7 @@ bool Graphic::setLightPosition(const double x, const double y, const double z, c
     return true;
     }
 
-bool Graphic::setLightPosition(osg::Vec4d& newPos)
+bool Graphic::setLightPosition(base::Vec4d& newPos)
 {
     lightPos = newPos;
     return true;
@@ -1245,7 +1245,7 @@ bool Graphic::setSlotVertices(const base::PairStream* const msg)
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
-        vertices = new osg::Vec3d[n];
+        vertices = new base::Vec3d[n];
 
         // Get the vertices from the pair stream
         nv = 0;
@@ -1297,7 +1297,7 @@ bool Graphic::setSlotNormals(const base::PairStream* const msg)
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
-        norms = new osg::Vec3d[n];
+        norms = new base::Vec3d[n];
 
         // Get the normals from the pair stream
         nn = 0;
@@ -1350,7 +1350,7 @@ bool Graphic::setSlotTexCoord(const base::PairStream* const msg)
 
         // allocate space for the vertices
         unsigned int n = msg->entries();
-        texCoord = new osg::Vec2d[n];
+        texCoord = new base::Vec2d[n];
 
         // Get the vertices from the pair stream
         ntc = 0;
