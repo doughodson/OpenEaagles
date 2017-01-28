@@ -11,12 +11,12 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_Matrixd_H__
-#define __oe_osg_Matrixd_H__
+#ifndef __oe_base_osg_Matrixd_H__
+#define __oe_base_osg_Matrixd_H__
 
-#include "./Vec3d"
-#include "./Vec4d"
-#include "./Quat"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
+#include "openeaagles/base/osg/Quat"
 
 namespace oe {
 namespace base {

@@ -10,7 +10,7 @@
 
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
-#include "openeaagles/base/osg/Math"
+#include "openeaagles/base/osg/math.hpp"
 
 #include <iostream>
 #include <iomanip>

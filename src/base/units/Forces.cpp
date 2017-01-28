@@ -1,6 +1,6 @@
 
 #include "openeaagles/base/units/Forces.hpp"
-#include "openeaagles/base/osg/Math"
+
 #include <iostream>
 
 namespace oe {

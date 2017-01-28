@@ -11,10 +11,10 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_Vec2f_H__
-#define __oe_osg_Vec2f_H__
+#ifndef __oe_base_osg_Vec2f_H__
+#define __oe_base_osg_Vec2f_H__
 
-#include "./Math"
+#include "openeaagles/base/osg/math.hpp"
 
 namespace oe {
 namespace base {

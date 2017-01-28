@@ -2,7 +2,6 @@
 // Time, Seconds, MilliSeconds, Minutes, Hours, Days
 //------------------------------------------------------------------------------
 #include "openeaagles/base/units/Times.hpp"
-#include "openeaagles/base/osg/Math"
 #include <iostream>
 
 namespace oe {

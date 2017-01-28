@@ -1,6 +1,5 @@
 
 #include "openeaagles/base/units/Volumes.hpp"
-#include "openeaagles/base/osg/Math"
 #include <iostream>
 
 namespace oe {

@@ -11,13 +11,13 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_Quat_H__
-#define __oe_osg_Quat_H__
+#ifndef __oe_base_osg_Quat_H__
+#define __oe_base_osg_Quat_H__
 
-#include "./Vec3f"
-#include "./Vec4f"
-#include "./Vec3d"
-#include "./Vec4d"
+#include "openeaagles/base/osg/Vec3f"
+#include "openeaagles/base/osg/Vec4f"
+#include "openeaagles/base/osg/Vec3d"
+#include "openeaagles/base/osg/Vec4d"
 
 namespace oe {
 namespace base {

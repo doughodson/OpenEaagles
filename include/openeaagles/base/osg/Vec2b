@@ -11,8 +11,8 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_Vec2b_H__
-#define __oe_osg_Vec2b_H__
+#ifndef __oe_base_osg_Vec2b_H__
+#define __oe_base_osg_Vec2b_H__
 
 namespace oe {
 namespace base {

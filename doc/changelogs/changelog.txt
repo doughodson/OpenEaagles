@@ -11,7 +11,7 @@ General framework-wide changes and improvements
    library.  The classes base::Logger, simulation::SimLogger and simulation::TabLogger
    have been removed.
 
--- started using 'auto' keyword to declare types in a significant way; specifically
+-- Started using 'auto' keyword to declare types in a significant way; specifically
    used in places they declare variables that are initialized with rather long and
    obvious type definitions. For example:
 
@@ -28,10 +28,16 @@ General framework-wide changes and improvements
    which results in const'ing the pointer variable itself, if appropriate (i.e.,
    oe::models::Autopilot* const ap).
 
--- renamed many of the classes that are abstract to 'Abstract<<CLASSNAME>>'.  For example,
-   NetIO in simulation library became 'AbstractNetIO'.  This makes those classes more
-   obvious in the role they place in relation to other classes.  Often they define a
-   set of functionality that is common or shared with subclasses.
+-- Renamed several of the key classes that are abstract to 'Abstract<<CLASSNAME>>'.
+   For example, NetIO in simulation library became 'AbstractNetIO'.  This naming
+   convention better indicates the role those classes take in relation to other
+   classes.
+
+   Often abstract classes define a small set of functionality, but maybe more
+   importantly, they define an interface of importance that is partially defined.
+   At this point, there are no classes within the framework that serve as a pure
+   interface-only specification -- all usually implement (by default) something.
+
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -56,8 +62,18 @@ base library
    somehow to avoid the obvious question - why do multiple classes that represent
    the same thing exist?
 
+   Some rework of the OSG-based classes (Vec and Matrix) was done to modernize them from
+   the standpoint of using current, readily available, standard library functionality (e.g.,
+   std::fabs, std::isnan) as opposed to defining new functions that 'wrap' or encapulate
+   platform specific workarounds for very old OS's, such as IRIX.
+
+   This decision allowed for the removal of some included C header files, such as
+   <math.h> and <limits.h> which reduces global namespace polution - and improves
+   the readability of the codebase.  The header file 'Math' was renamed to 'math.hpp'
+   to clearly indicate its nature (i.e., it's not a Math class).
+
 -- Extracted constants and conversion methods from within unit classes, such as,
-   Angle, Distance, Mass and Power and placed into unit_utils.hpp.  This better indicates
+   Angle, Distance, Mass, and placed into unit_utils.hpp.  This better indicates
    that these are 'pure' functions without side effects, simplifies the original classes,
    and makes their usage throughout codebase more clear.  The classes Angle, Mass, etc,
    are 'abstract', but they have not been renamed in anyway to 'AbstractThis' or
@@ -85,15 +101,16 @@ base library
         standalone class called MetaObject - which is, what it is.  Updated
         Object to use this object (via, a variable called 'metaObject')
         in lue of '_static' to store class and object related information.  This has
-        NO impact on API, but does make the code more readable.
+        NO impact on API, but does improve code readable.
 
      -- Removed both registerClass() and WriteClassList() methods and underlying
         support structure to maintain a list of classes compiled into an application.
         This was used so that a developer could print a list of classes
         available within an application and metadata related to them,
-        such as the number of instances currently in existance.  In theory,
-        this information could be used to help debug memory leaks within a running
-        application.  Not only can this capability be replicated outside of
+        such as the number of instances currently in existance.
+
+        In theory, this information could be used to help debug memory leaks within
+        a running application. Not only can this capability be replicated outside of
         Object itself, other tools exist (e.g., Valgrind) that are much more
         comprehensive in this area. Removing the code associated with this functionality
         greatly simplifies Object, its associated macros, and instance creation.
@@ -102,12 +119,12 @@ base library
      -- Removed Object::getClassName() method - never used, available in MetaObject.
 
    Nav class (removed)
-     -- This class contained only static methods, so it was restructured as a set of functions within
-	    the oe::base::nav namespace defined in file 'util/nav_utils.hpp'.
+     -- This class contained only static methods, so it was restructured as a set
+        of functions within the oe::base::nav namespace defined in file 'util/nav_utils.hpp'.
    
    NavDR class (removed)
-     -- This class contained only static methods, so it was restructured as a set of functions within
-	    the oe::base::navDR namespace defined in file 'util/navDR_utils.hpp'.
+     -- This class contained only static methods, so it was restructured as a set
+        of functions within the oe::base::navDR namespace defined in file 'util/navDR_utils.hpp'.
 	 
    MetaObject
      -- New class that replaces _Static class once defined in Object.
@@ -148,7 +165,7 @@ simulation library
 
    Otm class
       -- Renamed 'formName' slot to 'factoryName' to align code with this 
-         termonology.
+         termionology.
 
    AbstractPlayer
       -- Removed 2 undefined methods "isSmoothing()" and "getSmoothingRate()".

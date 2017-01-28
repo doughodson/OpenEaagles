@@ -11,9 +11,9 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#include "openeaagles/base/osg/Math"
+#include "openeaagles/base/osg/math.hpp"
 
-#include <string.h>
+#include <cstring>
 
 namespace oe {
 namespace base {
@@ -24,7 +24,7 @@ double asciiToDouble(const char* str)
     const char* ptr = str;
 
     // check if could be a hex number.
-    if (strncmp(ptr,"0x",2)==0)
+    if (std::strncmp(ptr,"0x",2)==0)
     {
 
         double value = 0.0;

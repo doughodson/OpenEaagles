@@ -36,7 +36,7 @@ OBJS =  \
 	nethandlers/UdpBroadcastHandler.o \
 	nethandlers/UdpMulticastHandler.o \
 	nethandlers/UdpUnicastHandler.o \
-	osg/Math.o \
+	osg/math.o \
 	osg/Matrixd.o \
 	osg/MatrixDecomposition.o \
 	osg/Matrixf.o \

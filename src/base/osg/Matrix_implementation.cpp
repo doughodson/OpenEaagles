@@ -12,11 +12,6 @@
 */
 
 #include "openeaagles/base/osg/Quat"
-//#include <osg/Notify>
-#include "openeaagles/base/osg/Math"
-//#include <osg/Timer>
-
-//#include <osg/GL>
 
 #include <limits>
 #include <stdlib.h>
@@ -36,8 +31,6 @@
 
 namespace oe {
 namespace base {
-
-//using namespace osg;
 
 Matrix_implementation::Matrix_implementation( value_type a00, value_type a01, value_type a02, value_type a03,
                   value_type a10, value_type a11, value_type a12, value_type a13,

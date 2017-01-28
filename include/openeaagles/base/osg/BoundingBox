@@ -11,12 +11,11 @@
  * OpenSceneGraph Public License for more details.
 */
 
-#ifndef __oe_osg_BoundingBox_H__
-#define __oe_osg_BoundingBox_H__
+#ifndef __oe_base_osg_BoundingBox_H__
+#define __oe_base_osg_BoundingBox_H__
 
-#include "./Vec3"
-#include "./Vec3d"
-#include <float.h> 
+#include "openeaagles/base/osg/Vec3"
+#include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
 namespace base {

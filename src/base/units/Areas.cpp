@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "openeaagles/base/units/Areas.hpp"
-#include "openeaagles/base/osg/Math"
+
 #include <iostream>
 
 namespace oe {

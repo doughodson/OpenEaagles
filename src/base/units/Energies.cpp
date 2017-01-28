@@ -1,6 +1,6 @@
 
 #include "openeaagles/base/units/Energies.hpp"
-#include "openeaagles/base/osg/Math"
+
 #include <iostream>
 
 namespace oe {
