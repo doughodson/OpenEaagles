@@ -53,8 +53,8 @@ base library
    It should be noted that base::Matrixd (an original 'osg' class) is different than
    base::Matrix (the openeaagles homegrown matrix class).  At some point these different
    classes that define essentially the same concept should be combined or rectified
-   somehow to avoid the obvious question - why multiple classes to represent
-   the same thing - vectors and matrices?
+   somehow to avoid the obvious question - why do multiple classes that represent
+   the same thing exist?
 
 -- Extracted constants and conversion methods from within unit classes, such as,
    Angle, Distance, Mass and Power and placed into unit_utils.hpp.  This better indicates
