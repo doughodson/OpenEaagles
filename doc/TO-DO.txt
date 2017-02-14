@@ -9,5 +9,16 @@ Scan for places where std::err is being used, they are often near use of 'delete
 cleaning up code to use unique smart pointers.
 
 
+Things to review
+---------------------------
+Thread should not be an Object-based class
+Should LinkedList<> template be based on Object? (same as other templates)
+Should ref/unref concepts be in a separate class (or template?)
+Should Color be in 'base' library?
+Maybe move Color functions out of terrain class and temp subclass in mainTerrain example
+utility functions should not have 'util' all over the places, in filename
+
+
+
 
 
