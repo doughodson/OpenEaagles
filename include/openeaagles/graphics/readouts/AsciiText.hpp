@@ -6,7 +6,6 @@
 
 namespace oe {
 namespace base { class Object; class List; class String; }
-
 namespace graphics {
 
 //------------------------------------------------------------------------------

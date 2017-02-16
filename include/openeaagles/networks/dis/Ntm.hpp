@@ -6,7 +6,7 @@
 #include "openeaagles/networks/dis/NetIO.hpp"
 
 namespace oe {
-
+namespace base { class List; }
 namespace dis {
 
 //------------------------------------------------------------------------------

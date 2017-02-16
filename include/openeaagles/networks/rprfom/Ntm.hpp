@@ -6,6 +6,7 @@
 #include "openeaagles/networks/rprfom/NetIO.hpp"
 
 namespace oe {
+namespace base { class List; }
 namespace rprfom {
 
 //------------------------------------------------------------------------------

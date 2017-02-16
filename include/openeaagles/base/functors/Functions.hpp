@@ -13,15 +13,16 @@ namespace oe {
 namespace base {
 
 class FStorage;
-class List;
 class Table;
+class List;
 
 //------------------------------------------------------------------------------
 // Class: Func1
 // Description: Generic 1-Dimensional function; f(iv1)
 // Factory name: Func1
 //------------------------------------------------------------------------------
-class Func1 : public Function {
+class Func1 : public Function
+{
     DECLARE_SUBCLASS(Func1, Function)
 public:
    Func1();
@@ -36,7 +37,8 @@ public:
 // Description: Generic 2-Dimensional function; f(iv1, iv2)
 // Factory name: Func2
 //------------------------------------------------------------------------------
-class Func2 : public Function {
+class Func2 : public Function
+{
     DECLARE_SUBCLASS(Func2, Function)
 public:
    Func2();
@@ -51,7 +53,8 @@ public:
 // Description: Generic 3-Dimensional function; f(iv1, iv2, iv3)
 // Factory name: Func3
 //------------------------------------------------------------------------------
-class Func3 : public Function {
+class Func3 : public Function
+{
    DECLARE_SUBCLASS(Func3, Function)
 public:
    Func3();
@@ -66,7 +69,8 @@ public:
 // Description: Generic 4-Dimensional function; f(iv1, iv2, iv3, iv4)
 // Factory name: Func4
 //------------------------------------------------------------------------------
-class Func4 : public Function {
+class Func4 : public Function
+{
    DECLARE_SUBCLASS(Func4, Function)
 public:
    Func4();
@@ -81,7 +85,8 @@ public:
 // Description: Generic 5-Dimensional function; f(iv1, iv2, iv3, iv4, iv5)
 // Factory names: Func5
 //------------------------------------------------------------------------------
-class Func5 : public Function {
+class Func5 : public Function
+{
    DECLARE_SUBCLASS(Func5, Function)
 public:
    Func5();
@@ -114,7 +119,8 @@ public:
 //    2) Storage is not used.
 //
 //------------------------------------------------------------------------------
-class Polynomial : public Func1 {
+class Polynomial : public Func1
+{
     DECLARE_SUBCLASS(Polynomial, Func1)
 
 public:

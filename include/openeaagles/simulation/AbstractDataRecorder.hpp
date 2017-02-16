@@ -6,7 +6,6 @@
 #include "openeaagles/simulation/recorder_macros.hpp"
 
 namespace oe {
-namespace base { class List; }
 namespace simulation {
 class Simulation;
 class Station;

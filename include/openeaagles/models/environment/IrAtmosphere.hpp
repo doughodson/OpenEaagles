@@ -12,7 +12,6 @@ namespace oe {
       class Table2;
       class Table3;
       class Table4;
-      class List;
       class Number;
    }
 

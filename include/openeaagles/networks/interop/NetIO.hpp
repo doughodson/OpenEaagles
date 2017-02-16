@@ -7,7 +7,7 @@
 #include "openeaagles/base/String.hpp"
 
 namespace oe {
-namespace base { class Angle; class Distance; class Identifier; class List; class String; class Time; }
+namespace base { class Angle; class Distance; class Identifier; class String; class Time; }
 namespace models { class Player; }
 namespace simulation { class Simulation; class Station; }
 namespace interop {

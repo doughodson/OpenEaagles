@@ -11,7 +11,6 @@ namespace base {
 class Vec4d;
 class MonitorMetrics;
 class Table1;
-class List;
 
 //------------------------------------------------------------------------------
 // Class: Cie
@@ -79,7 +78,6 @@ protected:
     Vec3d cie;
     safe_ptr<const MonitorMetrics> monitor;
 };
-
 
 }
 }

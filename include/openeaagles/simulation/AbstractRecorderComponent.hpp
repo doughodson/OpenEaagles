@@ -20,12 +20,12 @@ namespace simulation {
 //
 //
 // Slots:
-//    enabledList <list>         ! List of data records that are enabled for processing
+//    enabledList <base::List>   ! List of data records that are enabled for processing
 //                               ! Overrides the disabledList!
 //                               ! (default: all records are enabled -- except those
 //                               !  listed in 'disabledList')
 //
-//    disabledList <list>        ! List of data records that are disabled from processing
+//    disabledList <base::List>  ! List of data records that are disabled from processing
 //                               ! Only valid if 'enabledList' is NOT set!
 //                               ! (default: no records are disabled)
 //
