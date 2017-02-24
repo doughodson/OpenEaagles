@@ -43,9 +43,9 @@ public:
    const char* name(const unsigned int slotindex) const;
 
 private:
-   SlotTable* baseTable;   // Pointer to base class's slot table
-   char** slots1;          // Array of slot names
-   unsigned int nslots1;   // Number of slots in table
+   SlotTable* baseTable {};   // Pointer to base class's slot table
+   char** slots1 {};          // Array of slot names
+   unsigned int nslots1 {};   // Number of slots in table
 };
 
 }

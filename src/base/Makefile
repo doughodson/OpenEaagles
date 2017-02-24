@@ -18,6 +18,16 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
 
 OBJS =  \
+	concurrent/platform/Thread_linux.o \
+	concurrent/platform/ThreadPeriodicTask_linux.o \
+	concurrent/platform/ThreadSyncTask_linux.o \
+	concurrent/Thread.o \
+	concurrent/ThreadPeriodicTask.o \
+	concurrent/ThreadPool.o \
+	concurrent/ThreadPoolManager.o \
+	concurrent/ThreadPoolThread.o \
+	concurrent/ThreadSingleTask.o \
+	concurrent/ThreadSyncTask.o \
 	distributions/Exponential.o \
 	distributions/Lognormal.o \
 	distributions/Pareto.o \
@@ -41,7 +51,6 @@ OBJS =  \
 	osg/MatrixDecomposition.o \
 	osg/Matrixf.o \
 	osg/Quat.o \
-	platform/Thread_linux.o \
 	ubf/AbstractAction.o \
 	ubf/AbstractBehavior.o \
 	ubf/AbstractState.o \
@@ -109,8 +118,6 @@ OBJS =  \
 	Statistic.o \
 	StateMachine.o \
 	String.o \
-	Thread.o \
-	ThreadPool.o \
 	Timers.o \
 	Transforms.o \
 	Vectors.o \
@@ -124,12 +131,13 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f concurrent/platform/*.o
+	-rm -f concurrent/*.o
 	-rm -f distributions/*.o
 	-rm -f edl_parser/*.o
 	-rm -f functors/*.o
 	-rm -f nethandlers/*.o
 	-rm -f osg/*.o
-	-rm -f platform/*.o
 	-rm -f ubf/*.o
 	-rm -f units/*.o
 	-rm -f util/platform/*.o

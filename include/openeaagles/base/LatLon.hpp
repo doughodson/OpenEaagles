@@ -6,7 +6,6 @@
 
 namespace oe {
 namespace base {
-
 class String;
 class Number;
 
@@ -98,10 +97,10 @@ protected:
     bool setSec(const double seconds);
 
 private:
-    Dir     dir;                // direction
-    int     deg;                // degrees
-    int     min;                // minutes
-    double  sec;                // seconds
+    Dir     dir {NONE};         // direction
+    int     deg {};             // degrees
+    int     min {};             // minutes
+    double  sec {};             // seconds
 };
 
 }

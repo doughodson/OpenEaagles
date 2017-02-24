@@ -1,14 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: PosixHandler
-//------------------------------------------------------------------------------
-//
-// M$ WinSock has slightly different return types, some different calling, and
-// is missing some of the calls that are standard in Berkeley and POSIX socket
-// implementation.  These slight differences will be handled in setting basic
-// typedefs, defines, and constants that will make each convention match for
-// use later in the code.  This will save a lot of pre-processor intervention
-// and make the code that much more enjoyable to read!
-//
+
 #if defined(WIN32)
     #define _WINSOCK_DEPRECATED_NO_WARNINGS
     #include <sys/types.h>
@@ -39,9 +29,6 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// Class: PosixHandler
-//==============================================================================
 IMPLEMENT_SUBCLASS(PosixHandler, "PosixHandler")
 
 // Slot Table
@@ -68,22 +55,7 @@ BEGIN_SLOT_MAP(PosixHandler)
     ON_SLOT(7, setSlotIgnoreSourcePort, Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
-PosixHandler::PosixHandler() :
-              localIpAddr(nullptr),
-              localAddr(INADDR_ANY),
-              netAddr(INADDR_ANY),
-              fromAddr1(INADDR_NONE),
-              port(0),
-              localPort(0),
-              ignoreSourcePort(0),
-              fromPort1(0),
-              sharedFlg(false),
-              initialized(false),
-              sendBuffSizeKb(32),
-              recvBuffSizeKb(128)
+PosixHandler::PosixHandler():localAddr(INADDR_ANY), netAddr(INADDR_ANY), fromAddr1(INADDR_NONE)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -93,16 +65,9 @@ PosixHandler::PosixHandler() :
    socketNum = INVALID_SOCKET;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void PosixHandler::copyData(const PosixHandler& org, const bool cc)
+void PosixHandler::copyData(const PosixHandler& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-      localIpAddr = nullptr;
-    }
 
     port = org.port;
     localPort = org.localPort;
@@ -123,9 +88,6 @@ void PosixHandler::copyData(const PosixHandler& org, const bool cc)
     }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void PosixHandler::deleteData()
 {
    if (localIpAddr != nullptr) delete[] localIpAddr;

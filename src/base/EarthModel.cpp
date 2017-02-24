@@ -95,7 +95,6 @@ const EarthModel* EarthModel::getEarthModel(const char* const name)
 {
    const EarthModel* em = nullptr;
    if (name != nullptr) {
-
       if      (std::strcmp( name, "airy") == 0) em = &airy;
       else if (std::strcmp( name, "australianNational") == 0) em = &australianNational;
       else if (std::strcmp( name, "bessel1841") == 0) em = &bessel1841;
@@ -118,7 +117,6 @@ const EarthModel* EarthModel::getEarthModel(const char* const name)
       else if (std::strcmp( name, "wgs66") == 0) em = &wgs66;
       else if (std::strcmp( name, "wgs72") == 0) em = &wgs72;
       else if (std::strcmp( name, "wgs84") == 0) em = &wgs84;
-
    }
    return em;
 }

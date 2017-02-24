@@ -22,15 +22,15 @@ public:
    const char* getClassName() const;
    const char* getFactoryName() const;
 
-   const SlotTable* const slottable;         // pointer to the SlotTable
-   const MetaObject* const baseMetaObject;   // pointer to the base object's MetaObject
-   int count;                                // current number of object instances
-   int mc;                                   // max number of instances in existance at the same time
-   int tc;                                   // total number of instances created
+   const SlotTable* const slottable {};         // pointer to the SlotTable
+   const MetaObject* const baseMetaObject {};   // pointer to the base object's MetaObject
+   int count {};                                // current number of object instances
+   int mc {};                                   // max number of instances in existance at the same time
+   int tc {};                                   // total number of instances created
 
 private:
-   const char* const cname;                  // class name from 'type_info'
-   const char* const fname;                  // class factory name
+   const char* const cname {};                  // class name from 'type_info'
+   const char* const fname {};                  // class factory name
 };
 
 }

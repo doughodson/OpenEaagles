@@ -50,7 +50,7 @@ protected:
     virtual bool bindSocket() override;
 
 private:
-    char* ipAddr;                // IP Address
+    char* ipAddr {};                // IP Address
 };
 
 }

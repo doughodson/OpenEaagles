@@ -38,6 +38,16 @@ General framework-wide changes and improvements
    At this point, there are no classes within the framework that serve as a pure
    interface-only specification -- all usually implement (by default) something.
 
+-- Started using in-class brace initializers throughout codebase for member data.
+   This C++11 feature improves code clarity, and potentially reduces
+   data initalization issues by eliminating multiple redundant variable initializations
+   (sometimes by assignment) when several constructors have been defined. This,
+   in some cases, eliminates the need for 'initData()' member methods often defined
+   to support this initialization activity. This eliminates any possible initalization
+   vs assignment performance issues and often reduces the number of tests and code
+   within the 'copyData' member (it reduces code associated with being called by the
+   copy constructor).
+
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -83,6 +93,9 @@ base library
 -- Renamed fundamental 'ubf' classes such as Action, Behavior and State to AbsractAction,
    AbstractBehavior and AbstractState to make visible the role they play in defining
    the UBF pattern.
+
+-- Moved and grouped all thread related classes into the subfolder 'concurrent' to make
+   more obvious the capability provided.
 
    Object class
      -- In Object, the method getSlotByIndex() has been removed.  Therefore any derived
@@ -143,6 +156,10 @@ base library
         methods from long ago, when this might have been an Object-based class.
 
      -- Deleted copy and assignment operators
+
+   safe_ptr template
+     -- Fixed the assignment operators.  This bug has existed for years, but probably
+        'discovered' because nobody ever writes code like this x = x;
 
 --------------------------------------------------------------------------------
 

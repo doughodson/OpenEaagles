@@ -21,24 +21,19 @@ MetaObject Object::metaObject(typeid(Object).name(), "Object", &Object::slottabl
 //    slots to be the first slots -- starting at slot number 1.
 // ---
 const char* Object::slotnames[] = { "" };
-const int Object::nslots = 0;
+const int Object::nslots {};
 const SlotTable Object::slottable(nullptr, 0);
-
 
 //------------------------------------------------------------------------------
 // Standard object stuff -- derived classes used macro IMPLEMENT_SUBCLASS, see macros.hpp
 //------------------------------------------------------------------------------
 
-Object::Object()
+Object::Object():Referenced()
 {
    STANDARD_CONSTRUCTOR()
-   refCount = 1;    // (start out ref() by the creator)
-   semaphore = 0;
-   enbMsgBits = (MSG_ERROR | MSG_WARNING);
-   disMsgBits = 0;
 }
 
-Object::Object(const Object& org)
+Object::Object(const Object& org):Referenced()
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
@@ -82,10 +77,10 @@ void Object::copyData(const Object& org, const bool cc)
     slotTable = org.slotTable;
     enbMsgBits = org.enbMsgBits;
     disMsgBits = org.disMsgBits;
-    if (cc) {
-       refCount = 1;    // (start out ref() by the creator)
-       semaphore = 0;
-    }
+//    if (cc) {
+//       refCount = 1;    // (start out ref() by the creator)
+//       semaphore = 0;
+//    }
 }
 
 // Delete object data -- derived classes should delete
@@ -175,7 +170,7 @@ const char* Object::slotIndex2Name(const int slotindex) const
 //------------------------------------------------------------------------------
 bool Object::isValid() const
 {
-    return (refCount > 0);
+    return true;
 }
 
 //------------------------------------------------------------------------------

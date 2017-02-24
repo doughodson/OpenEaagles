@@ -6,7 +6,7 @@
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/Thread.hpp"
+#include "openeaagles/base/concurrent/ThreadPeriodicTask.hpp"
 #include "openeaagles/base/units/Frequencies.hpp"
 
 namespace oe {
@@ -28,7 +28,6 @@ class IoThread : public ThreadPeriodicTask {
 
 IMPLEMENT_SUBCLASS(IoHandler, "IoHandler")
 
-// slot table for this class type
 BEGIN_SLOTTABLE(IoHandler)
    "ioData",      // 1) Combined input/output data
    "inputData",   // 2) Individual input data (default: none)
@@ -38,7 +37,6 @@ BEGIN_SLOTTABLE(IoHandler)
    "priority"     // 6) Thread priority (zero(0) is lowest, one(1) is highest) (Number, default: 0.5 )
 END_SLOTTABLE(IoHandler)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(IoHandler)
    ON_SLOT(1, setSlotIoData,     IoData)
    ON_SLOT(2, setSlotInputData,  IoData)
@@ -51,27 +49,11 @@ END_SLOT_MAP()
 IoHandler::IoHandler()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void IoHandler::initData()
-{
-   inData = nullptr;
-   outData = nullptr;
-   devices = nullptr;
-
-   netInitialized = false;
-   netInitFailed = false;
-
-   rate = 50;
-   pri = 0.5f;
-   thread = nullptr;
-}
-
-void IoHandler::copyData(const IoHandler& org, const bool cc)
+void IoHandler::copyData(const IoHandler& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // clear the I/O buffers and list of devices
    setSlotIoData(nullptr);

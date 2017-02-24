@@ -2,7 +2,7 @@
 #ifndef __oe_simulation_SimBgThread_H__
 #define __oe_simulation_SimBgThread_H__
 
-#include "openeaagles/base/Thread.hpp"
+#include "openeaagles/base/concurrent/ThreadSyncTask.hpp"
 
 namespace oe {
 namespace base { class Component; class PairStream; }

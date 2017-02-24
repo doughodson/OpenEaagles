@@ -24,19 +24,16 @@ END_SLOT_MAP()
 Complex::Complex()
 {
    STANDARD_CONSTRUCTOR()
-   imag = 0.0;
 }
 
 Complex::Complex(const double r) : Number(r)
 {
    STANDARD_CONSTRUCTOR()
-   imag = 0.0;
 }
 
-Complex::Complex(const double r, const double i) : Number(r)
+Complex::Complex(const double r, const double i) : Number(r), imag(i)
 {
    STANDARD_CONSTRUCTOR()
-   imag = i;
 }
 
 void Complex::copyData(const Complex& org, const bool)

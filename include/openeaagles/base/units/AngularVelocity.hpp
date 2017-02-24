@@ -110,8 +110,8 @@ public:
     bool setSlotTime(const Time* const msg);        //Input as type of time (Seconds, MilliSeconds, ...)
 
 private:
-    double        angle;                            // holds our angle (radians)
-    double        time;                             // holds our time (seconds)
+    double angle {1.0};       // holds our angle (radians)
+    double time {1.0};        // holds our time (seconds)
 };
 
 }

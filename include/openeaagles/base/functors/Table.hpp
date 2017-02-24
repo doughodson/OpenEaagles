@@ -7,7 +7,6 @@
 
 namespace oe {
 namespace base {
-
 class List;
 class Number;
 
@@ -110,12 +109,12 @@ protected:
    static bool loadVector(const List& list, double** table, unsigned int* n);
    static void printVector(std::ostream& sout, const double* table, const unsigned int n);
 
-   bool    valid;     // Table is valid
+   bool valid {};        // Table is valid
 
 private:
-   double* dtable;    // Data Table
-   unsigned int nd;   // Number of data points
-   bool    extFlg;    // Extrapolation enabled flag
+   double* dtable {};    // Data Table
+   unsigned int nd {};   // Number of data points
+   bool extFlg {};       // Extrapolation enabled flag
 };
 
 //------------------------------------------------------------------------------
@@ -125,7 +124,7 @@ class TableStorage : public FStorage {
    DECLARE_SUBCLASS(TableStorage, FStorage)
 public:
    TableStorage();
-   unsigned int xbp, ybp, zbp, wbp, vbp;
+   unsigned int xbp {}, ybp {}, zbp {}, wbp {}, vbp {};
 };
 
 }

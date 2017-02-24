@@ -28,7 +28,6 @@ Transform::Transform()
 {
     STANDARD_CONSTRUCTOR()
     m.makeIdentity();
-    nv = 0;
 }
 
 void Transform::copyData(const Transform& org, const bool)

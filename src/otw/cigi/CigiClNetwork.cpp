@@ -3,7 +3,7 @@
 
 #include "openeaagles/otw/cigi/OtwCigiCl.hpp"
 
-#include "openeaagles/base/Thread.hpp"
+#include "openeaagles/base/concurrent/ThreadSingleTask.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
 #include "cigicl/CigiBaseSignalProcessing.h"

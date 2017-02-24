@@ -36,10 +36,10 @@ public:
 protected:
    virtual bool init() override;
 
-   bool connected;              // true if we are connected
-   bool connectionTerminated;   // true if we had a connection, then lost it (or terminated it ourselves)
+   bool connected {};              // true if we are connected
+   bool connectionTerminated {};   // true if we had a connection, then lost it (or terminated it ourselves)
 
-   bool  noWait;                // TCP's no wait I/O flag
+   bool  noWait {};                // TCP's no wait I/O flag
 };
 
 }

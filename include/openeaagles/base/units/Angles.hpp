@@ -61,7 +61,6 @@ public:
     virtual double toAngle() const = 0;
     virtual double fromAngle(const double a) const = 0;
     double convert(const Angle& n) { return fromAngle(n.toAngle()); }
-
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Angle& n)

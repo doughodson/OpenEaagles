@@ -6,11 +6,11 @@
 
 namespace oe {
 namespace base {
-   class Frequency;
-   class IoData;
-   class Number;
-   class Thread;
-   class IoThread;
+class Frequency;
+class IoData;
+class Number;
+class Thread;
+class IoThread;
 
 //------------------------------------------------------------------------------
 // Class:  IoHandler
@@ -101,8 +101,6 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   void initData();
-
    // Implementations of the I/O device functions
    virtual void inputDevicesImp(const double dt);
    virtual void outputDevicesImp(const double dt);
@@ -113,11 +111,11 @@ private:
    safe_ptr<IoData> outData;      // "output" data sent to the hardware
    safe_ptr<PairStream> devices;  // Device list
 
-   bool netInitialized;       // Networks (if any) are initialized
-   bool netInitFailed;        // Network init has failed
+   bool netInitialized {};        // Networks (if any) are initialized
+   bool netInitFailed {};         // Network init has failed
 
-   double rate;               // Thread Rate (hz)
-   double pri;                // Priority of the thread (0->lowest, 1->highest)
+   double rate {50};              // Thread Rate (hz)
+   double pri {0.5};              // Priority of the thread (0->lowest, 1->highest)
    safe_ptr<base::Thread> thread; // The thread
 };
 

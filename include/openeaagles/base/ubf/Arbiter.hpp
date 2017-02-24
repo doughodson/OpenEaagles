@@ -50,7 +50,7 @@ protected:
    bool setSlotBehaviors(base::PairStream* const);
 
 private:
-   base::List* behaviors;
+   base::List* behaviors {};
 };
 
 inline base::List* Arbiter::getBehaviors()                 { return behaviors; }

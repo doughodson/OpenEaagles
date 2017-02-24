@@ -42,8 +42,8 @@ public:
    virtual bool isValid() const override;
 
 private:
-   Identifier* slotname;   // Slot name
-   Object* obj;            // Object
+   Identifier* slotname {};   // Slot name
+   Object* obj {};            // Object
 };
 
 }

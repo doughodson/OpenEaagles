@@ -2,12 +2,12 @@
 #ifndef __oe_base_Object_H__
 #define __oe_base_Object_H__
 
+#include "openeaagles/base/Referenced.hpp"
+
 // framework configuration file
 #include "openeaagles/config.hpp"
 // keep this include to correct a bug in vs2012 compiler intrinsics
 #include "openeaagles/base/util/platform_api.hpp"
-// lock/unlock, etc - reference system needs it
-#include "openeaagles/base/util/atomics.hpp"
 
 #include <typeinfo>
 
@@ -286,7 +286,7 @@ namespace base {
 //    to spot potential memory leaks.
 //
 //------------------------------------------------------------------------------
-class Object
+class Object : public Referenced
 {
    // -------------------------------------------------------------------------
    // Standard object stuff --
@@ -340,40 +340,11 @@ public:
    bool enableMessageTypes(const unsigned short msgTypeBits);
    bool disableMessageTypes(const unsigned short msgTypeBits);
 
-   // ref(), unref() and getRefCount()
-   #include "openeaagles/base/ref.inl"
-
-   // general exception class
-   class Exception {
-   public:
-      Exception()                                { }
-      virtual ~Exception()                       { }
-      virtual const char* getDescription() const {
-         return "Unknown";
-      }
-   };
-
-   class ExpInvalidRefCount : public Exception {
-   public:
-      ExpInvalidRefCount() : Exception() {}
-      virtual const char* getDescription() const override {
-         return "invalid reference count";
-      }
-   };
-
-   class ExpInvalidRefCountDelete : public Exception {
-   public:
-      ExpInvalidRefCountDelete() : Exception() {}
-      virtual const char* getDescription() const override {
-         return "deleting object with positive reference count";
-      }
-   };
-
    static const MetaObject* getMetaObject();
 
 protected:
    // slot table for this object (set to the object's class slot table)
-   const SlotTable* slotTable;
+   const SlotTable* slotTable {};
 
    // indents the output steam by 'ident' spaces. (used with serialize())
    void indent(std::ostream& sout, const int ident) const;
@@ -382,10 +353,8 @@ protected:
    unsigned short getMessageDisableBits() const { return disMsgBits; }
 
 private:
-   unsigned short enbMsgBits;       // Enabled message bits
-   unsigned short disMsgBits;       // Disabled message bits
-   mutable long semaphore;          // ref(), unref() semaphore
-   mutable unsigned int refCount;   // reference count
+   unsigned short enbMsgBits { MSG_ERROR | MSG_WARNING };  // Enabled message bits
+   unsigned short disMsgBits {};                           // Disabled message bits
 
    static MetaObject metaObject;
 };

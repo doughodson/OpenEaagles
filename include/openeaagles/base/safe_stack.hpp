@@ -27,9 +27,9 @@ namespace base {
 template <class T> class safe_stack
 {
 public:
-   safe_stack(const unsigned int ssize) : SIZE(ssize), sp(ssize), semaphore(0)     { stack = new T[SIZE]; }
-   safe_stack(const safe_stack<T> &s1) : SIZE(s1.SIZE), sp(s1.SIZE), semaphore(0)  { stack = new T[SIZE]; }
-   ~safe_stack()                                                                   { delete[] stack; }
+   safe_stack(const unsigned int ssize) : SIZE(ssize), sp(ssize)     { stack = new T[SIZE]; }
+   safe_stack(const safe_stack<T> &s1) : SIZE(s1.SIZE), sp(s1.SIZE)  { stack = new T[SIZE]; }
+   ~safe_stack()                                                     { delete[] stack; }
 
    unsigned int entries() const   { return (SIZE - sp); }
    bool isEmpty() const           { return (sp == SIZE); /* Empty when stack pointer equals stack size */ }
@@ -67,10 +67,10 @@ public:
 
 private:
    safe_stack<T>& operator=(safe_stack<T>&) { return *this; }
-   T* stack;                // The Stack
-   const unsigned int SIZE; // Max size of the stack
-   unsigned int sp;         // Stack pointer
-   mutable long semaphore;  // ref(), unref() semaphore
+   T* stack {};                // The Stack
+   const unsigned int SIZE {}; // Max size of the stack
+   unsigned int sp {};         // Stack pointer
+   mutable long semaphore {};  // ref(), unref() semaphore
 };
 
 }

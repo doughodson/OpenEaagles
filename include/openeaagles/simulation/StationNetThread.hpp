@@ -1,7 +1,7 @@
 #ifndef __oe_simulation_StationNetThread_H__
 #define __oe_simulation_StationNetThread_H__
 
-#include "openeaagles/base/Thread.hpp"
+#include "openeaagles/base/concurrent/ThreadPeriodicTask.hpp"
 
 namespace oe {
 namespace simulation {

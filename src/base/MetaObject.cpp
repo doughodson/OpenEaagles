@@ -11,7 +11,7 @@ MetaObject::MetaObject(
       const char* const fn,
       const SlotTable* const slottbl,
       const MetaObject* const metaobj
-   ) : slottable(slottbl), baseMetaObject(metaobj), count(0), mc(0), tc(0), cname(cn), fname(fn)
+   ) : slottable(slottbl), baseMetaObject(metaobj), cname(cn), fname(fn)
 {}
 
 const char* MetaObject::getClassName() const

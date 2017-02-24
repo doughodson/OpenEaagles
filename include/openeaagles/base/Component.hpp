@@ -265,7 +265,7 @@ public:
 
    // SendData class used by the send() member functions
    class SendData {
-      public:  SendData()   { obj = nullptr; past = nullptr; }
+      public:  SendData() = default;
       public:  ~SendData()  { empty(); }
       public:  void empty();
       public:  Component* getObject(Component* p, const char* const id, const int n = 0);
@@ -275,8 +275,8 @@ public:
       public:  Object* getValue(const double value);
       public:  Object* getValue(const char* const value);
       public:  Object* getValue(const bool value);
-      private: Component* obj;   // Object to send to
-      private: Object* past;     // Old value
+      private: Component* obj {};   // Object to send to
+      private: Object* past {};     // Old value
    };
 
 public:
@@ -403,16 +403,16 @@ protected:
       );
 
 private:
-   safe_ptr<PairStream> components; // Child components
-   Component* containerPtr;         // We are a component of this container
+   safe_ptr<PairStream> components;    // Child components
+   Component* containerPtr {};         // We are a component of this container
 
-   Component* selected;             // Selected child (process only this one)
-   Object*    selection;            // Name of selected child
+   Component* selected {};             // Selected child (process only this one)
+   Object* selection {};               // Name of selected child
 
-   Statistic* timingStats;          // Timing statistics
-   bool pts;                        // Print timing statistics
-   bool frz;                        // Freeze flag -- true if this component is frozen
-   bool shutdown;                   // True if this component is being (or has been) shutdown
+   Statistic* timingStats {};          // Timing statistics
+   bool pts {};                        // Print timing statistics
+   bool frz {};                        // Freeze flag -- true if this component is frozen
+   bool shutdown {};                   // True if this component is being (or has been) shutdown
 };
 
 }

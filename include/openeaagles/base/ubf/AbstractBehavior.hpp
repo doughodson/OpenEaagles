@@ -38,7 +38,7 @@ protected:
    bool setSlotVote(const base::Number* const num);
 
 private:
-   unsigned int vote;
+   unsigned int vote {};
 };
 
 inline void AbstractBehavior::setVote(const unsigned int x)    { vote = x; }

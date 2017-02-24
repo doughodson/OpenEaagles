@@ -34,7 +34,7 @@ public:
    virtual bool execute(base::Component* actor)=0;
 
 private:
-   unsigned int vote;
+   unsigned int vote {};
 };
 
 inline void AbstractAction::setVote(const unsigned int x)      { vote = x; return; }

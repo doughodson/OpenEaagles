@@ -44,7 +44,7 @@ public:
     virtual void operation();
 
 protected:
-    double n2;
+    double n2 {};
 };
 
 //------------------------------------------------------------------------------

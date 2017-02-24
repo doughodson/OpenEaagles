@@ -17,47 +17,30 @@ EMPTY_SERIALIZER(Matrix)
 Matrix::Matrix()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
 Matrix::Matrix(const unsigned int r, const unsigned int c)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
-
    setMatrix(r,c);
 }
 
 Matrix::Matrix(const unsigned int r, const unsigned int c, const double* const data, const unsigned int dataSize)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
-
    setMatrix(r,c,data,dataSize);
 }
 
 Matrix::Matrix(const Matrixd& m)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
    *this = m;
 }
 
 Matrix::Matrix(const Matrixf& m)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
    *this = m;
-}
-
-void Matrix::initData()
-{
-   rows = 0;
-   cols = 0;
-   mda = nullptr;
-
-   fldWidth = DEF_FLDWIDTH;
-   decPoint = DEF_DECPOINT;
 }
 
 //------------------------------------------------------------------------------
@@ -66,7 +49,6 @@ void Matrix::initData()
 void Matrix::copyData(const Matrix& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    emptyMatrix();
 

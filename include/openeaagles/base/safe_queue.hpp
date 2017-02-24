@@ -27,9 +27,9 @@ namespace base {
 template <class T> class safe_queue
 {
 public:
-   safe_queue(const unsigned int qsize) : SIZE(qsize), in(0), n(0), semaphore(0)   { queue = new T[SIZE]; }
-   safe_queue(const safe_queue<T> &q1) : SIZE(q1.SIZE), in(0), n(0), semaphore(0)  { queue = new T[SIZE]; }
-   ~safe_queue()                                                                   { delete[] queue; }
+   safe_queue(const unsigned int qsize) : SIZE(qsize)   { queue = new T[SIZE]; }
+   safe_queue(const safe_queue<T> &q1) : SIZE(q1.SIZE)  { queue = new T[SIZE]; }
+   ~safe_queue()                                        { delete[] queue; }
 
    bool isEmpty() const           { return (n == 0); }
    bool isNotEmpty() const        { return (n != 0); }
@@ -100,11 +100,11 @@ public:
 
 private:
    safe_queue<T>& operator=(safe_queue<T>&) { return *this; }
-   T* queue;                // The Queue
-   const unsigned int SIZE; // Max size of the queue
-   unsigned int in;         // In (put) Index
-   unsigned int n;          // Number of items in queue
-   mutable long semaphore;  // semaphore
+   T* queue {};                // The Queue
+   const unsigned int SIZE {}; // Max size of the queue
+   unsigned int in {};         // In (put) Index
+   unsigned int n {};          // Number of items in queue
+   mutable long semaphore {};  // semaphore
 };
 
 }

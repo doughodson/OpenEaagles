@@ -49,30 +49,17 @@ BEGIN_SLOT_MAP(TcpServerMultiple)
     ON_SLOT(1 ,setSlotBacklog, Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
+EMPTY_DELETEDATA(TcpServerMultiple)
+
 TcpServerMultiple::TcpServerMultiple()
 {
    STANDARD_CONSTRUCTOR()
-
-   backlog = 1;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void TcpServerMultiple::copyData(const TcpServerMultiple& org, const bool)
 {
     BaseClass::copyData(org);
     backlog = org.backlog;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void TcpServerMultiple::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

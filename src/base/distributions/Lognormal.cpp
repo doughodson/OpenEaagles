@@ -27,12 +27,9 @@ EMPTY_DELETEDATA(Lognormal)
 Lognormal::Lognormal()
 {
   STANDARD_CONSTRUCTOR()
-  sigma = 0.0;
-  mu = 0.0;
-  gamma = 0.0;
 }
 
-void Lognormal::copyData(const Lognormal& org, const bool cc)
+void Lognormal::copyData(const Lognormal& org, const bool)
 {
   BaseClass::copyData(org);
   sigma = org.sigma;

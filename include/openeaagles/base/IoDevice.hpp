@@ -6,7 +6,7 @@
 
 namespace oe {
 namespace base {
-   class IoData;
+class IoData;
 
 //------------------------------------------------------------------------------
 // Class:  IoDevice
@@ -91,8 +91,8 @@ protected:
 private:
    void initData();
 
-   safe_ptr<PairStream>  adapters;   // Adapter list
-   safe_ptr<PairStream>  devices;    // Device list
+   safe_ptr<PairStream> adapters;   // Adapter list
+   safe_ptr<PairStream> devices;    // Device list
 };
 
 }

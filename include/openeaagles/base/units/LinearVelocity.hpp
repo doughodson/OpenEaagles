@@ -127,8 +127,8 @@ public:
     static const double FPS2KTSCC;    // feet per second to knots (conversion constant)
 
 private:
-    double        distance;                // holds our distance (meters)
-    double        time;                    // holds our time seconds)
+    double distance {1.0};                // holds our distance (meters)
+    double time {1.0};                    // holds our time seconds)
 
 };
 

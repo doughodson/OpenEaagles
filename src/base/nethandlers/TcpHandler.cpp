@@ -52,19 +52,11 @@ EMPTY_DELETEDATA(TcpHandler)
 TcpHandler::TcpHandler()
 {
    STANDARD_CONSTRUCTOR()
-
-   connected = false;
-   connectionTerminated = false;
-   noWait = false;
 }
 
 TcpHandler::TcpHandler(const LcSocket sn)
 {
    STANDARD_CONSTRUCTOR()
-
-   connected = true;
-   connectionTerminated = false;
-   noWait = false;
    socketNum = sn;
    setSendBuffSize();
    setRecvBuffSize();

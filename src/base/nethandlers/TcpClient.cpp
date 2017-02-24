@@ -48,10 +48,7 @@ BEGIN_SLOT_MAP(TcpClient)
     ON_SLOT(1,setSlotIpAddress,String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
-TcpClient::TcpClient() : ipAddr(nullptr)
+TcpClient::TcpClient()
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -59,13 +56,9 @@ TcpClient::TcpClient() : ipAddr(nullptr)
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void TcpClient::copyData(const TcpClient& org, const bool cc)
+void TcpClient::copyData(const TcpClient& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-      ipAddr = nullptr;
-    }
 
     if (ipAddr != nullptr) delete[] ipAddr;
     ipAddr = nullptr;

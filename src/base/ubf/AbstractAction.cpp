@@ -14,7 +14,6 @@ EMPTY_SERIALIZER(AbstractAction)
 AbstractAction::AbstractAction()
 {
    STANDARD_CONSTRUCTOR()
-   vote = 0;
 }
 
 void AbstractAction::copyData(const AbstractAction& org, const bool cc)

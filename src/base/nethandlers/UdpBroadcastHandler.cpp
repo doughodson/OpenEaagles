@@ -52,10 +52,7 @@ BEGIN_SLOT_MAP(UdpBroadcastHandler)
     ON_SLOT(1,setSlotNetworkMask,String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
-UdpBroadcastHandler::UdpBroadcastHandler() : networkMask(nullptr)
+UdpBroadcastHandler::UdpBroadcastHandler()
 {
     STANDARD_CONSTRUCTOR()
 }
@@ -63,13 +60,9 @@ UdpBroadcastHandler::UdpBroadcastHandler() : networkMask(nullptr)
 //------------------------------------------------------------------------------
 // copyData() -- copy member data
 //------------------------------------------------------------------------------
-void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool cc)
+void UdpBroadcastHandler::copyData(const UdpBroadcastHandler& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        networkMask = nullptr;
-    }
 
     if (networkMask != nullptr) delete[] networkMask;
     networkMask = nullptr;

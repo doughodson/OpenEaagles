@@ -64,7 +64,7 @@ public:
     virtual bool setSlotValue(const Number* const svobj) override;
 
 private:
-    double db;    // value in dBs
+    double db {};    // value in dBs
 };
 
 //------------------------------------------------------------------------------

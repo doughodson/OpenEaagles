@@ -89,10 +89,10 @@ protected:
     virtual bool bindSocket() override;
 
 private:
-    char* multicastGroup;           // Multicast Group Name
-    int   ttl;                      // Time-to-live value
-    bool  loopback;                 // Loop back flag
-    bool  initialized;              // handler has been initialized
+    char* multicastGroup {};           // Multicast Group Name
+    int   ttl {1};                     // Time-to-live value
+    bool  loopback {true};             // Loop back flag
+    bool  initialized {};              // handler has been initialized
 };
 
 }

@@ -74,9 +74,9 @@ public:
     virtual void setString(const String& str, const size_t w, const Justify j = NONE);
 
 private:
-    char* str;      // the character string
-    size_t n;       // length of this string
-    size_t nn;      // length of the memory allocated for this string
+    char* str {};      // the character string
+    size_t n {};       // length of this string
+    size_t nn {};      // length of the memory allocated for this string
 };
 
 //------------------------------------------------------------------------------

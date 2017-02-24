@@ -12,12 +12,12 @@ namespace base {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(List, "List")
 
-List::List() : headP(nullptr), tailP(nullptr), num(0)
+List::List()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-List::List(const double values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
+List::List(const double values[], const unsigned int nv)
 {
     STANDARD_CONSTRUCTOR()
 
@@ -29,7 +29,7 @@ List::List(const double values[], const unsigned int nv) : headP(nullptr), tailP
     }
 }
 
-List::List(const int values[], const unsigned int nv) : headP(nullptr), tailP(nullptr), num(0)
+List::List(const int values[], const unsigned int nv)
 {
     STANDARD_CONSTRUCTOR()
 

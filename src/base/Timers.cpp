@@ -19,9 +19,6 @@ unsigned int Timer::nTimers = 0;    // Number of timers in the list
 long Timer::semaphore = 0;          // Semaphore for the timer list
 
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Timer)
    "timerValue",         // 1: Timer interval (default: 0)
    "alarmTime",          // 2: Alarm time (default: 0)
@@ -35,22 +32,9 @@ BEGIN_SLOT_MAP(Timer)
    ON_SLOT(3, setSlotTimerActive,Number)
 END_SLOT_MAP()
 
-// -----------------------------------------------------------------------------
-// Constructor(s)
-// -----------------------------------------------------------------------------
 Timer::Timer()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
-}
-
-void Timer::initData()
-{
-   active = false;
-   timerValue = 0.0f;
-   ctime  = 0.0f;
-   alarmTime = 0.0f;
-   dir = DOWN;
    addToTimerList(this);
 }
 
@@ -58,22 +42,19 @@ Timer::Timer(const Type direction, const double rtime)
 {
     STANDARD_CONSTRUCTOR()
 
-    initData();
-
     timerValue = rtime;
     ctime  = rtime;
     dir = direction;
+
+    addToTimerList(this);
 }
 
-// -----------------------------------------------------------------------------
-// copyData() -- copy member data
-// -----------------------------------------------------------------------------
 void Timer::copyData(const Timer& org, const bool cc)
 {
     active = false;
 
     BaseClass::copyData(org);
-    if (cc) initData();
+    if (cc) { addToTimerList(this); }
 
     timerValue = org.timerValue;
     ctime  = org.ctime;
@@ -82,9 +63,6 @@ void Timer::copyData(const Timer& org, const bool cc)
     active = org.active;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Timer::deleteData()
 {
    removeFromTimerList(this);

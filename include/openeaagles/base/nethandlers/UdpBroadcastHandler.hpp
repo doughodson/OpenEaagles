@@ -46,7 +46,7 @@ protected:
     virtual bool bindSocket() override;
 
 private:
-    char* networkMask;           // Network Mask
+    char* networkMask {};           // Network Mask
 };
 
 }

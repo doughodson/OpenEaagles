@@ -28,9 +28,9 @@ LinearVelocity::LinearVelocity()
     STANDARD_CONSTRUCTOR()
 
     //Set a default distance, time, and linearVelocity
-    distance = 1;
-    time = 1;
-    val = 1;
+    distance = 1.0;
+    time = 1.0;
+    val = 1.0;
 }
 
 LinearVelocity::LinearVelocity(const double newLinearVelocityMetersPerSec)
@@ -39,7 +39,7 @@ LinearVelocity::LinearVelocity(const double newLinearVelocityMetersPerSec)
 
     //Set the distance to the input and linearVelocity to the input and make seconds 1 to get meters per second
     distance = newLinearVelocityMetersPerSec;
-    time = 1;
+    time = 1.0;
     val = newLinearVelocityMetersPerSec;
 }
 
@@ -47,8 +47,8 @@ LinearVelocity::LinearVelocity(const Distance* const newDistance, const Time* co
 {
     STANDARD_CONSTRUCTOR()
 
-    distance = 1;
-    time = 1;
+    distance = 1.0;
+    time = 1.0;
 
     //Set checks to false
     bool okDistance = false;
@@ -57,14 +57,14 @@ LinearVelocity::LinearVelocity(const Distance* const newDistance, const Time* co
     //Check and convert the distance to meters
     if (newDistance != nullptr)
     {
-        double finalDistance = Meters::convertStatic( *newDistance );
+        const double finalDistance = Meters::convertStatic( *newDistance );
         okDistance = setMeters(finalDistance);
     }
 
     //Check and convert the time to seconds
     if (newTime != nullptr)
     {
-        double finaltime = Seconds::convertStatic( *newTime );
+        const double finaltime = Seconds::convertStatic( *newTime );
         okTime = setSeconds(finaltime);
     }
 

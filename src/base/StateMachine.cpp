@@ -43,29 +43,10 @@ StateMachine::StateMachine()
 
 void StateMachine::initData()
 {
-   nState = INVALID_STATE;
-   nSubstate = INVALID_STATE;
-   nArg = nullptr;
-   nMode = HOLD_STATE;
-
-   state = INVALID_STATE;
-   substate = INVALID_STATE;
-   mode = HOLD_STATE;
-   arg = nullptr;
-   stMach = nullptr;
-   stMachName = nullptr;
-
-   pState = INVALID_STATE;
-   pSubstate = INVALID_STATE;
-   pStMach = nullptr;
-
-   sp = STACK_SIZE;
    for (unsigned int i = 0; i < STACK_SIZE; i++) {
       stateStack[i] = INVALID_STATE;
       substateStack[i] = INVALID_STATE;
    }
-
-   stMachList = nullptr;
 }
 
 void StateMachine::copyData(const StateMachine& org, const bool cc)

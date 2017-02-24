@@ -39,12 +39,12 @@ class Number : public Object
    DECLARE_SUBCLASS(Number, Object)
 
 public:
-   Number()                         { val = 0.0;   STANDARD_CONSTRUCTOR() }
+   Number()                         { STANDARD_CONSTRUCTOR() }
    Number(const int value)          { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
    Number(const int64_t value)      { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
    Number(const bool value)         { val = (value ? 1.0 : 0.0); STANDARD_CONSTRUCTOR() }
    Number(const double value)       { val = value; STANDARD_CONSTRUCTOR() }
-   Number(const float value)        { val = value; STANDARD_CONSTRUCTOR() }
+   Number(const float value)        { val = static_cast<double>(value); STANDARD_CONSTRUCTOR() }
 
    double getReal() const           { return val; }
    double getDouble() const         { return val; }
@@ -58,7 +58,7 @@ public:
    virtual bool setSlotValue(const Number* const svobj);
 
 protected:
-   double val;   // value of this object
+   double val {};   // value of this object
 };
 
 }

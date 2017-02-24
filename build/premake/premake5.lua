@@ -95,7 +95,7 @@ workspace "oe"
          "../../src/base/osg/Matrix_implementation.cpp",
          "../../src/base/util/platform/system_linux.cpp",
          "../../src/base/util/platform/system_mingw.cpp",
-         "../../src/base/platform/Thread_linux.cpp"
+         "../../src/base/concurrent/platform/*_linux.cpp"
       }
       targetname "base"
 

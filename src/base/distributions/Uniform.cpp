@@ -25,8 +25,6 @@ EMPTY_DELETEDATA(Uniform)
 Uniform::Uniform()
 {
   STANDARD_CONSTRUCTOR()
-  min = 0.0;
-  max  = 0.0;
 }
 
 void Uniform::copyData(const Uniform& org, const bool cc)

@@ -25,8 +25,6 @@ EMPTY_DELETEDATA(Pareto)
 Pareto::Pareto()
 {
   STANDARD_CONSTRUCTOR()
-  alpha = 0.030;
-  beta = 1.0;
 }
 
 void Pareto::copyData(const Pareto& org, const bool cc)

@@ -59,9 +59,9 @@ public:
 
 protected:
     virtual void computeMatrix();
-    Matrixd m;                  // transformation matrix
-    double      v[4];           // values
-    int         nv;             // Number of values
+    Matrixd m;    // transformation matrix
+    double v[4];  // values
+    int nv {};    // Number of values
 };
 
 //------------------------------------------------------------------------------

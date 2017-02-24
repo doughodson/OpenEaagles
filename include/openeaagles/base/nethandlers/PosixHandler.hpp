@@ -55,6 +55,15 @@ class String;
 //
 //      localPort#      <-------     <any-port>    ! Receiving anytime that 'localPort' is defined.
 //
+// Notes:
+//
+// M$ WinSock has slightly different return types, some different calling, and
+// is missing some of the calls that are standard in Berkeley and POSIX socket
+// implementation.  These slight differences will be handled in setting basic
+// typedefs, defines, and constants that will make each convention match for
+// use later in the code.  This will save a lot of pre-processor intervention
+// and make the code that much more enjoyable to read!
+//
 //------------------------------------------------------------------------------
 class PosixHandler : public NetHandler
 {
@@ -123,21 +132,21 @@ protected:
    // Sets the input buffer size
    bool setRecvBuffSize();
 
-   LcSocket socketNum;             // Our Socket
+   LcSocket socketNum;                 // Our Socket
 
 private:
-   char* localIpAddr;              // Local host IP address
-   uint32_t localAddr;             // Local host address
-   uint32_t netAddr;               // Network (remote) host address
-   uint32_t fromAddr1;             // Last recvData() 'from' ip address
-   uint16_t port;                  // Port
-   uint16_t localPort;             // Local (source) port
-   uint16_t ignoreSourcePort;      // Ignore message from this source port
-   uint16_t fromPort1;             // Last recvData() 'from' port number
-   bool sharedFlg;                 // Shared port flag
-   bool initialized;               // handler has been initialized
-   unsigned int sendBuffSizeKb;    // Send buffer size in KBs
-   unsigned int recvBuffSizeKb;    // Receive buffer size in KBs
+   char* localIpAddr {};               // Local host IP address
+   uint32_t localAddr {};              // Local host address
+   uint32_t netAddr {};                // Network (remote) host address
+   uint32_t fromAddr1 {};              // Last recvData() 'from' ip address
+   uint16_t port {};                   // Port
+   uint16_t localPort {};              // Local (source) port
+   uint16_t ignoreSourcePort {};       // Ignore message from this source port
+   uint16_t fromPort1 {};              // Last recvData() 'from' port number
+   bool sharedFlg {};                  // Shared port flag
+   bool initialized {};                // handler has been initialized
+   unsigned int sendBuffSizeKb {32};   // Send buffer size in KBs
+   unsigned int recvBuffSizeKb {128};  // Receive buffer size in KBs
 };
 
 // Port#

@@ -19,16 +19,11 @@ EMPTY_SERIALIZER(TableStorage)
 TableStorage::TableStorage()
 {
    STANDARD_CONSTRUCTOR()
-   xbp = 0;
-   ybp = 0;
-   zbp = 0;
-   wbp = 0;
-   vbp = 0;
 }
 
-void TableStorage::copyData(const TableStorage& org, const bool cc)
+void TableStorage::copyData(const TableStorage& org, const bool)
 {
-    BaseClass::copyData(org);
+   BaseClass::copyData(org);
    xbp = org.xbp;
    ybp = org.ybp;
    zbp = org.zbp;
@@ -55,15 +50,12 @@ END_SLOT_MAP()
 //------------------------------------------------------------------------------
 // Class support functions
 //------------------------------------------------------------------------------
-Table::Table() : valid(false), extFlg(false)
+Table::Table()
 {
    STANDARD_CONSTRUCTOR()
-   dtable = nullptr;
-   nd = 0;
 }
 
 Table::Table(const double* dtbl, const unsigned int dsize)
-   : valid(false), dtable(nullptr), nd(0), extFlg(false)
 {
     STANDARD_CONSTRUCTOR()
     if (dtbl != nullptr && dsize > 0) {   /* Copy the data table */

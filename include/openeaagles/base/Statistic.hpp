@@ -5,6 +5,7 @@
 #include "openeaagles/base/Object.hpp"
 
 #include <cmath>
+#include <limits>
 
 namespace oe {
 namespace base {
@@ -84,13 +85,13 @@ public:
    void clear();          // Clears the statistics
 
 private:
-   unsigned long n;       // number of values
-   double   maximum;      // max value
-   double   minimum;      // min value
-   double   sum;          // sum of values
-   double   absSum;       // sum of abs values
-   double   sumSq;        // sum of the squares
-   double   value1;       // last value added
+   unsigned long n {};       // number of values
+   double   maximum {-std::numeric_limits<double>::max()};     // max value
+   double   minimum {std::numeric_limits<double>::max()};      // min value
+   double   sum {};          // sum of values
+   double   absSum {};       // sum of abs values
+   double   sumSq {};        // sum of the squares
+   double   value1 {};       // last value added
 } ;
 
 // adds a data point

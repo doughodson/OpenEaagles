@@ -38,9 +38,6 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// Class: UdpMulticastHandler
-//==============================================================================
 IMPLEMENT_SUBCLASS(UdpMulticastHandler, "UdpMulticastHandler")
 
 BEGIN_SLOTTABLE(UdpMulticastHandler)
@@ -63,20 +60,11 @@ BEGIN_SLOT_MAP(UdpMulticastHandler)
     ON_SLOT(3,setSlotLoopback,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
-UdpMulticastHandler::UdpMulticastHandler() : multicastGroup(nullptr)
+UdpMulticastHandler::UdpMulticastHandler()
 {
     STANDARD_CONSTRUCTOR()
-    setTTL(1);
-    setLoopback(true);
-    initialized = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
 {
     BaseClass::copyData(org);
@@ -92,9 +80,6 @@ void UdpMulticastHandler::copyData(const UdpMulticastHandler& org, const bool)
     initialized = org.initialized;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void UdpMulticastHandler::deleteData()
 {
     if (multicastGroup != nullptr) delete[] multicastGroup;

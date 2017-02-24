@@ -36,9 +36,6 @@
 namespace oe {
 namespace base {
 
-//==============================================================================
-// Class: UdpUnicastHandler
-//==============================================================================
 IMPLEMENT_SUBCLASS(UdpUnicastHandler, "UdpUnicastHandler")
 
 BEGIN_SLOTTABLE(UdpUnicastHandler)
@@ -51,24 +48,14 @@ BEGIN_SLOT_MAP(UdpUnicastHandler)
     ON_SLOT(1,setSlotIpAddress,String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
-UdpUnicastHandler::UdpUnicastHandler() : ipAddr(nullptr)
+UdpUnicastHandler::UdpUnicastHandler()
 {
     STANDARD_CONSTRUCTOR()
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool cc)
+void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        ipAddr = nullptr;
-    }
 
     // IP Address
     if (ipAddr != nullptr) delete[] ipAddr;
@@ -80,9 +67,6 @@ void UdpUnicastHandler::copyData(const UdpUnicastHandler& org, const bool cc)
     }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void UdpUnicastHandler::deleteData()
 {
     if (ipAddr != nullptr) delete[] ipAddr;

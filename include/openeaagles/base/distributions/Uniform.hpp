@@ -28,11 +28,8 @@ public:
   bool setSlotMax(const Number* const);
 
 protected:
-
-  double min;
-  double max;
-
-
+  double min {};
+  double max {};
 };
 
 }

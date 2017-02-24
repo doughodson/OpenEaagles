@@ -55,9 +55,9 @@ public:
     bool setSlotTime(Time* newTime);
 
 private:
-    Volume*   myVolume;       // holds our distance type
-    Time*     myTime;         // holds our time type
-    double    flowRate;       // holds our velocity
+    Volume* myVolume {};       // holds our distance type
+    Time*   myTime {};         // holds our time type
+    double  flowRate {1.0};    // holds our velocity
 };
 
 }

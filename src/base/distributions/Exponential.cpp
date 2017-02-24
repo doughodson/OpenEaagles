@@ -25,11 +25,9 @@ EMPTY_DELETEDATA(Exponential)
 Exponential::Exponential()
 {
   STANDARD_CONSTRUCTOR()
-  lambda = 1.0;
-  gamma = 0.0;
 }
 
-void Exponential::copyData(const Exponential& org, const bool cc)
+void Exponential::copyData(const Exponential& org, const bool)
 {
   BaseClass::copyData(org);
   lambda = org.lambda;

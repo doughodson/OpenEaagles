@@ -62,8 +62,8 @@ public:
     bool setSlotVolume(const Volume* newVolume);
 
     private:
-    safe_ptr<const Mass>     myMass;         // holds our mass type
-    safe_ptr<const Volume>   myVolume;       // holds our volume type
+    safe_ptr<const Mass>   myMass;         // holds our mass type
+    safe_ptr<const Volume> myVolume;       // holds our volume type
 };
 
 inline std::ostream& operator<<(std::ostream& sout, const Density& n)

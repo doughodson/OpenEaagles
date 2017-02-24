@@ -31,13 +31,11 @@ END_SLOT_MAP()
 Table1::Table1() : Table()
 {
    STANDARD_CONSTRUCTOR()
-   xtable = nullptr;
-   nx = 0;
 }
 
 Table1::Table1(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize)
-                   : Table(dtbl, dsize), xtable(nullptr), nx(0)
+                   : Table(dtbl, dsize)
 {
     STANDARD_CONSTRUCTOR()
     if (xtbl != nullptr && xsize > 0) {   /* Copy the x breakpoints */
@@ -218,14 +216,12 @@ END_SLOT_MAP()
 Table2::Table2() : Table1()
 {
    STANDARD_CONSTRUCTOR()
-   ytable = nullptr;
-   ny = 0;
 }
 
 Table2::Table2(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize,
                    const double* ytbl, const unsigned int ysize)
-                   : Table1(dtbl, dsize, xtbl, xsize), ytable(nullptr), ny(0)
+                   : Table1(dtbl, dsize, xtbl, xsize)
 {
     STANDARD_CONSTRUCTOR()
     if (ytbl != nullptr && ysize > 0) {   /* Copy the y breakpoints */
@@ -449,16 +445,13 @@ END_SLOT_MAP()
 Table3::Table3() : Table2()
 {
    STANDARD_CONSTRUCTOR()
-   ztable = nullptr;
-   nz = 0;
 }
 
 Table3::Table3(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize,
                    const double* ytbl, const unsigned int ysize,
                    const double* ztbl, const unsigned int zsize)
-                   : Table2(dtbl, dsize, xtbl, xsize, ytbl, ysize),
-                     ztable(nullptr), nz(0)
+                   : Table2(dtbl, dsize, xtbl, xsize, ytbl, ysize)
 {
     STANDARD_CONSTRUCTOR()
     if (ztbl != nullptr && zsize > 0) {   /* Copy the z breakpoints */
@@ -706,16 +699,13 @@ END_SLOT_MAP()
 Table4::Table4() : Table3()
 {
    STANDARD_CONSTRUCTOR()
-   wtable = nullptr;
-   nw = 0;
 }
 Table4::Table4(const double* dtbl, const unsigned int dsize,
                    const double* xtbl, const unsigned int xsize,
                    const double* ytbl, const unsigned int ysize,
                    const double* ztbl, const unsigned int zsize,
                    const double* wtbl, const unsigned int wsize)
-                   : Table3(dtbl, dsize, xtbl, xsize, ytbl, ysize, ztbl, zsize),
-                     wtable(nullptr), nw(0)
+                   : Table3(dtbl, dsize, xtbl, xsize, ytbl, ysize, ztbl, zsize)
 {
     STANDARD_CONSTRUCTOR()
     if (wtbl != nullptr && wsize > 0) {   /* Copy the w breakpoints */

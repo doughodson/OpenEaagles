@@ -32,14 +32,6 @@ FileReader::FileReader()
 {
    STANDARD_CONSTRUCTOR()
 
-   dbf = nullptr;
-
-   rec = nullptr;
-   rlen = 0;
-
-   rnum = 1;
-   crnum = -1;
-
    pathname[0] = '\0';
    filename[0] = '\0';
 }
@@ -48,8 +40,6 @@ void FileReader::copyData(const FileReader& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) {
-      rec = nullptr;
-      dbf = nullptr;
       pathname[0] = '\0';
       filename[0] = '\0';
    }

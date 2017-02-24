@@ -138,8 +138,8 @@
     protected: void copyData(const ThisType& org, const bool cc = false);                                                       \
     protected: void deleteData();                                                                                               \
     public: virtual bool isClassType(const std::type_info& type) const override;                                                \
-    private: static ::oe::base::MetaObject metaObject;                                                                              \
-    public: static const ::oe::base::MetaObject* getMetaObject();                                                                   \
+    private: static ::oe::base::MetaObject metaObject;                                                                          \
+    public: static const ::oe::base::MetaObject* getMetaObject();                                                               \
     public: static const char* getFactoryName();                                                                                \
     public: virtual bool isFactoryName(const char name[]) const override;                                                       \
     protected: virtual bool setSlotByIndex(const int slotindex, ::oe::base::Object* const obj) override;                        \

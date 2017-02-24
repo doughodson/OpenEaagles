@@ -64,7 +64,7 @@
 #include "openeaagles/base/EarthModel.hpp"
 #include "openeaagles/base/IoData.hpp"
 #include "openeaagles/base/IoHandler.hpp"
-#include "openeaagles/base/ThreadPool.hpp"
+#include "openeaagles/base/concurrent/ThreadPool.hpp"
 
 // Ubf
 #include "openeaagles/base/ubf/Agent.hpp"

@@ -62,14 +62,14 @@ public:
     virtual void clearData();
 
 private:
-    double  refLat;     // Reference latitude (degs)
-    double  refLon;     // Reference longitude (degs)
-    double* data;       // Data array
-    double  angle;      // True direction (heading) angle of the data (degs)
-    double  minRng;     // Range to first data point (meters)
-    double  maxRng;     // Range to last data point  (meters)
-    double  deltaRng;   // Range between data points (meters)
-    unsigned int np;    // Number of data points
+    double  refLat {};     // Reference latitude (degs)
+    double  refLon {};     // Reference longitude (degs)
+    double* data {};       // Data array
+    double  angle {};      // True direction (heading) angle of the data (degs)
+    double  minRng {};     // Range to first data point (meters)
+    double  maxRng {};     // Range to last data point  (meters)
+    double  deltaRng {};   // Range between data points (meters)
+    unsigned int np {};    // Number of data points
 };
 
 }

@@ -23,20 +23,11 @@ Pair::Pair(const char* slot, Object* object)
         obj = object;
         obj->ref();
     }
-    else {
-        obj  = nullptr;
-    }
 }
 
-void Pair::copyData(const Pair& pair1, const bool cc)
+void Pair::copyData(const Pair& pair1, const bool)
 {
     BaseClass::copyData(pair1);
-
-    // If we're the copy constructor, init the following
-    if (cc) {
-        slotname = nullptr;
-        obj = nullptr;
-    }
 
     // unref() any old data
     if (slotname != nullptr) {

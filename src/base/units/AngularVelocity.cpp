@@ -27,9 +27,6 @@ AngularVelocity::AngularVelocity()
 {
     STANDARD_CONSTRUCTOR()
 
-    //Set a default angle, time, and angularVelocity
-    angle = 1;
-    time = 1;
     val = 1;
 }
 

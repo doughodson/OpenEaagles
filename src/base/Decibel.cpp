@@ -11,7 +11,6 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Decibel, "dB")
 
 Decibel::Decibel()
 {
-   db = 0.0;
    STANDARD_CONSTRUCTOR()
 }
 

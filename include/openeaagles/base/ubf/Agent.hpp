@@ -60,8 +60,8 @@ protected:
    bool setSlotState(AbstractState* const state);
 
 private:
-   AbstractBehavior* behavior;
-   AbstractState* state;
+   AbstractBehavior* behavior {};
+   AbstractState* state {};
    safe_ptr<base::Component> myActor;
 };
 

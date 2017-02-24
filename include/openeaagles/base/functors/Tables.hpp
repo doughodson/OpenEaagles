@@ -10,7 +10,6 @@
 
 namespace oe {
 namespace base {
-
 class List;
 class Number;
 
@@ -56,8 +55,8 @@ protected:
    virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   double* xtable;    // X Breakpoint Table
-   unsigned int nx;   // Number of x breakpoints
+   double* xtable {};    // X Breakpoint Table
+   unsigned int nx {};   // Number of x breakpoints
 };
 
 //------------------------------------------------------------------------------
@@ -105,8 +104,8 @@ protected:
    virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   double* ytable;    // Y Breakpoint Table
-   unsigned int ny;   // Number of y breakpoints
+   double* ytable {};    // Y Breakpoint Table
+   unsigned int ny {};   // Number of y breakpoints
 };
 
 //------------------------------------------------------------------------------
@@ -156,8 +155,8 @@ protected:
    virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   double* ztable;    // Z Breakpoint Table
-   unsigned int nz;   // Number of z breakpoints
+   double* ztable {};    // Z Breakpoint Table
+   unsigned int nz {};   // Number of z breakpoints
 };
 
 //------------------------------------------------------------------------------
@@ -209,8 +208,8 @@ protected:
    virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   double* wtable;    // W Breakpoint Table
-   unsigned int nw;   // Number of w breakpoints
+   double* wtable {};    // W Breakpoint Table
+   unsigned int nw {};   // Number of w breakpoints
 };
 
 //------------------------------------------------------------------------------
@@ -263,8 +262,8 @@ protected:
    virtual void printData(std::ostream& sout, const double* table, const unsigned int indent) const override;
 
 private:
-   double* vtable;     // V Breakpoint Table
-   unsigned int nv;    // Number of v breakpoints
+   double* vtable {};     // V Breakpoint Table
+   unsigned int nv {};    // Number of v breakpoints
 };
 
 }

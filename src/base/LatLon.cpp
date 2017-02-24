@@ -28,11 +28,7 @@ END_SLOT_MAP()
 
 LatLon::LatLon()
 {
-    STANDARD_CONSTRUCTOR()
-    dir = NONE;
-    deg = 0;
-    min = 0;
-    sec = 0.0;
+   STANDARD_CONSTRUCTOR()
 }
 
 void LatLon::copyData(const LatLon& org, const bool)

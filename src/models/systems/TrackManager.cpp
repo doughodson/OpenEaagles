@@ -1485,7 +1485,7 @@ void RwrTrkMgr::processTrackList(const double dt)
    // ---
 
    // Get each new emission report from the queue
-   unsigned int nReports = 0;
+   unsigned int nReports {};
    Emission* emissions[MAX_REPORTS];
    double newSignal[MAX_REPORTS];
    double newRdot[MAX_REPORTS];

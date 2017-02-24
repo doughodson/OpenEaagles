@@ -43,7 +43,6 @@ END_SLOT_MAP()
 Add::Add()
 {
    STANDARD_CONSTRUCTOR()
-   n2 = 0.0;
 }
 
 Subtract::Subtract()

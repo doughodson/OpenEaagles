@@ -36,8 +36,8 @@ public:
 
 protected:
 
-  double alpha;
-  double beta;
+  double alpha {0.03};
+  double beta {1.0};
 
 };
 

@@ -321,29 +321,29 @@ private:
    void initData();
 
    // Next state
-   unsigned short nState;     // Next state number
-   unsigned short nSubstate;  // Next substate number
-   safe_ptr<Object> nArg;         // Next argument
-   Mode nMode;                // Next mode
+   unsigned short nState {INVALID_STATE};     // Next state number
+   unsigned short nSubstate {INVALID_STATE};  // Next substate number
+   safe_ptr<Object> nArg;                     // Next argument
+   Mode nMode {HOLD_STATE};                   // Next mode
 
    // Current state
-   unsigned short state;      // Current state number
-   unsigned short substate;   // Current substate number
-   Mode mode;                 // Current mode
-   safe_ptr<Object> arg;          // Current argument
-   StateMachine* stMach;      // Current state's state machine object
-   Identifier* stMachName;    // Current state's state machine name
+   unsigned short state {INVALID_STATE};      // Current state number
+   unsigned short substate {INVALID_STATE};   // Current substate number
+   Mode mode {HOLD_STATE};                    // Current mode
+   safe_ptr<Object> arg;                      // Current argument
+   StateMachine* stMach {};                   // Current state's state machine object
+   Identifier* stMachName {};                 // Current state's state machine name
 
    // Previous state
-   unsigned short pState;     // Previous state number
-   unsigned short pSubstate;  // Previous substate number
-   StateMachine* pStMach;     // Previous state's state machine object
+   unsigned short pState {INVALID_STATE};     // Previous state number
+   unsigned short pSubstate {INVALID_STATE};  // Previous substate number
+   StateMachine* pStMach {};                  // Previous state's state machine object
 
    // State stack and stack pointer
    static const unsigned short STACK_SIZE = 10;
-   unsigned short stateStack[STACK_SIZE];    // State number stack
-   unsigned short substateStack[STACK_SIZE]; // Substate number stack
-   unsigned short sp;                        // Stack pointer
+   unsigned short stateStack[STACK_SIZE];     // State number stack
+   unsigned short substateStack[STACK_SIZE];  // Substate number stack
+   unsigned short sp {STACK_SIZE};            // Stack pointer
 
    // List of state machines
    safe_ptr<PairStream> stMachList;

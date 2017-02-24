@@ -36,9 +36,6 @@ END_SLOT_MAP()
 Agent::Agent()
 {
    STANDARD_CONSTRUCTOR()
-   myActor = nullptr;
-   behavior = nullptr;
-   state = nullptr;
 }
 
 void Agent::deleteData()

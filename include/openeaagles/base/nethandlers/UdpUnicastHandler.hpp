@@ -70,7 +70,7 @@ protected:
    virtual bool bindSocket() override;
 
 private:
-   char* ipAddr;   // Host's name or IP Address
+   char* ipAddr {};   // Host's name or IP Address
 };
 
 }

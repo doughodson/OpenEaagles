@@ -146,7 +146,7 @@ class LinkedList : public Object
 public:
 
    struct Item {
-      Item() { next = nullptr; previous = nullptr; value = nullptr; }
+      Item() = default;
 
       Item* getNext()                  { return next; }
       const Item* getNext() const      { return next; }
@@ -157,9 +157,9 @@ public:
       T* getValue()                    { return value; }
       const T* getValue() const        { return value; }
 
-      Item* next;                      // Pointer to next entry
-      Item* previous;                  // Pointer to previous entry
-      T* value;                        // Data
+      Item* next {};                   // Pointer to next entry
+      Item* previous {};               // Pointer to previous entry
+      T* value {};                     // Data
    };
 
 public:
@@ -203,10 +203,10 @@ public:
 private:
    const T* getPosition1(const unsigned int n) const;
 
-   Item* headP;            // Pointer to head object
-   Item* tailP;            // Pointer to last object
+   Item* headP {};            // Pointer to head object
+   Item* tailP {};            // Pointer to last object
 
-   unsigned int num;       // Number of list objects
+   unsigned int num {};       // Number of list objects
 };
 
 //-------------------------------------------------------------------------------------

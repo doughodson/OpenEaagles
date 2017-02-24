@@ -41,9 +41,9 @@ public:
 
 protected:
 
-  double sigma;
-  double mu;
-  double gamma;
+  double sigma {};
+  double mu {};
+  double gamma {};
 
 };
 

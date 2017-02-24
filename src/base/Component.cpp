@@ -24,9 +24,6 @@ namespace base {
 
 IMPLEMENT_SUBCLASS(Component, "Component")
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Component)
     "components",          // 1) Children components                                  (PairStream)
     "select",              // 2) Manage only this child component (component idx)     (Number)
@@ -37,7 +34,6 @@ BEGIN_SLOTTABLE(Component)
     "disableMessageType"   // 7) Disable message type { WARNING INFO DEBUG USER DATA }
 END_SLOTTABLE(Component)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Component)
     ON_SLOT( 1, setSlotComponent, PairStream)
     ON_SLOT( 1, setSlotComponent, Component)
@@ -52,7 +48,6 @@ BEGIN_SLOT_MAP(Component)
     ON_SLOT( 7, setSlotDisableMsgType, Number)
 END_SLOT_MAP()
 
-// Event Table
 BEGIN_EVENT_HANDLER(Component)
     ON_EVENT_OBJ(SELECT,select,Number)
     ON_EVENT_OBJ(SELECT,select,String)
@@ -71,34 +66,11 @@ BEGIN_EVENT_HANDLER(Component)
 Component::Component()
 {
    STANDARD_CONSTRUCTOR()
-
-   // Child components and our container
-   components = nullptr;
-   containerPtr = nullptr;
-
-   // Nothing selected
-   selected = nullptr;
-   selection = nullptr;
-
-   timingStats = nullptr;
-   pts = false;
-
-   frz = false;    // We're not frozen
-   shutdown = false;
 }
 
-void Component::copyData(const Component& org, const bool cc)
+void Component::copyData(const Component& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      components = nullptr;
-      containerPtr = nullptr;
-      selected = nullptr;
-      selection = nullptr;
-      timingStats = nullptr;
-      shutdown = false;
-   }
 
    // Copy selection
    setSelectionName(org.selection);

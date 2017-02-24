@@ -54,7 +54,7 @@ protected:
    virtual bool listenForConnections();
 
 private:
-   unsigned int backlog;
+   unsigned int backlog {1};
 };
 
 }

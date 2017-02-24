@@ -10,7 +10,6 @@ namespace base {
 
 //------------------------------------------------------------------------------
 // Class:  Float
-// Base class:  Object -> Number -> Float
 //
 // Description:  Class for float numbers.
 //

@@ -129,7 +129,7 @@ class List : public Object
 
 public:
    struct Item {
-      Item() { next = nullptr; previous = nullptr; value = nullptr; }
+      Item() = default;
 
       Item* getNext()                  { return next; }
       const Item* getNext() const      { return next; }
@@ -140,9 +140,9 @@ public:
       Object* getValue()               { return value; }
       const Object* getValue() const   { return value; }
 
-      Item* next;                      // Pointer to next entry
-      Item* previous;                  // Pointer to previous entry
-      Object* value;                   // Data
+      Item* next {};                   // Pointer to next entry
+      Item* previous {};               // Pointer to previous entry
+      Object* value {};                // Data
    };
 
 public:
@@ -192,11 +192,10 @@ public:
 private:
    const Object* getPosition1(const unsigned int n) const;
 
-   Item* headP;            // Pointer to head object
-   Item* tailP;            // Pointer to last object
+   Item* headP {};            // Pointer to head object
+   Item* tailP {};            // Pointer to last object
 
-   unsigned int num;       // Number of list objects
-
+   unsigned int num {};       // Number of list objects
 };
 
 }

@@ -243,14 +243,12 @@ protected:
    bool remRowCol(const unsigned int, const unsigned int);
 
 private:
-   void initData();        // initialize data
+   unsigned int rows {};      // number of rows
+   unsigned int cols {};      // number of columns
+   double* mda {};            // pointer to the Matrix Data Array
 
-   unsigned int rows;      // number of rows
-   unsigned int cols;      // number of columns
-   double* mda;            // pointer to the Matrix Data Array
-
-   unsigned int fldWidth;  // matrix element field width for display of matrix
-   unsigned int decPoint;  // decimal point accuracy for display of matrix
+   unsigned int fldWidth {DEF_FLDWIDTH};  // matrix element field width for display of matrix
+   unsigned int decPoint {DEF_DECPOINT};  // decimal point accuracy for display of matrix
 };
 
 

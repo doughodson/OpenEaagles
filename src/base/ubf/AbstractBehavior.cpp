@@ -25,7 +25,6 @@ END_SLOT_MAP()
 AbstractBehavior::AbstractBehavior()
 {
    STANDARD_CONSTRUCTOR()
-   vote = 0;
 }
 
 //------------------------------------------------------------------------------
