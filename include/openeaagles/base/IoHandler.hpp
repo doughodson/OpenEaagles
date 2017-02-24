@@ -9,7 +9,7 @@ namespace base {
 class Frequency;
 class IoData;
 class Number;
-class Thread;
+class AbstractThread;
 class IoThread;
 
 //------------------------------------------------------------------------------
@@ -114,9 +114,9 @@ private:
    bool netInitialized {};        // Networks (if any) are initialized
    bool netInitFailed {};         // Network init has failed
 
-   double rate {50};              // Thread Rate (hz)
-   double pri {0.5};              // Priority of the thread (0->lowest, 1->highest)
-   safe_ptr<base::Thread> thread; // The thread
+   double rate {50};                      // Thread Rate (hz)
+   double pri {0.5};                      // Priority of the thread (0->lowest, 1->highest)
+   safe_ptr<base::AbstractThread> thread; // The thread
 };
 
 }

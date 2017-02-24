@@ -18,16 +18,16 @@ include ../makedefs
 LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
 
 OBJS =  \
-	concurrent/platform/Thread_linux.o \
-	concurrent/platform/ThreadPeriodicTask_linux.o \
-	concurrent/platform/ThreadSyncTask_linux.o \
-	concurrent/Thread.o \
-	concurrent/ThreadPeriodicTask.o \
+	concurrent/platform/AbstractThread_linux.o \
+	concurrent/platform/PeriodicTask_linux.o \
+	concurrent/platform/SyncTask_linux.o \
+	concurrent/AbstractThread.o \
+	concurrent/PeriodicTask.o \
+	concurrent/SingleTask.o \
+	concurrent/SyncTask.o \
 	concurrent/ThreadPool.o \
 	concurrent/ThreadPoolManager.o \
 	concurrent/ThreadPoolThread.o \
-	concurrent/ThreadSingleTask.o \
-	concurrent/ThreadSyncTask.o \
 	distributions/Exponential.o \
 	distributions/Lognormal.o \
 	distributions/Pareto.o \

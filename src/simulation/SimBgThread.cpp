@@ -15,8 +15,7 @@ EMPTY_COPYDATA(SimBgThread)
 EMPTY_DELETEDATA(SimBgThread)
 EMPTY_SERIALIZER(SimBgThread)
 
-SimBgThread::SimBgThread(base::Component* const parent, const double priority)
-      : base::ThreadSyncTask(parent, priority)
+SimBgThread::SimBgThread(base::Component* const parent, const double priority): base::SyncTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
 

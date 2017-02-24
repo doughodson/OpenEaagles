@@ -95,7 +95,9 @@ base library
    the UBF pattern.
 
 -- Moved and grouped all thread related classes into the subfolder 'concurrent' to make
-   more obvious the capability provided.
+   more obvious the capability provided.  Along with this is the renaming of classes to
+   easy to digest names, such as ThreadPeriodicTask to PeriodicTask, or Thread to
+   AbstractThread to more clearly indicate role in relation to thread subclasses.
 
    Object class
      -- In Object, the method getSlotByIndex() has been removed.  Therefore any derived

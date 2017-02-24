@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/concurrent/ThreadSyncTask.hpp"
+#include "openeaagles/base/concurrent/SyncTask.hpp"
 
 #include "openeaagles/base/Component.hpp"
 #include <iostream>
@@ -7,30 +7,30 @@
 namespace oe {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(ThreadSyncTask, "ThreadSyncTask")
-EMPTY_SLOTTABLE(ThreadSyncTask)
-EMPTY_SERIALIZER(ThreadSyncTask)
+IMPLEMENT_ABSTRACT_SUBCLASS(SyncTask, "AbstractSyncTask")
+EMPTY_SLOTTABLE(SyncTask)
+EMPTY_SERIALIZER(SyncTask)
 
-ThreadSyncTask::ThreadSyncTask(Component* const p, const double pri) : Thread(p, pri)
+SyncTask::SyncTask(Component* const p, const double pri) : AbstractThread(p, pri)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-ThreadSyncTask::ThreadSyncTask()
+SyncTask::SyncTask()
 {
    STANDARD_CONSTRUCTOR()
-   std::cerr << "ThreadSyncTask(" << this << ")::ThreadSyncTask() -- ERROR: Do not use the default constructor" << std::endl;
-   std::cerr << "ThreadSyncTask(" << this << ")::ThreadSyncTask() -- ERROR: Did NOT create the thread!" << std::endl;
+   std::cerr << "SyncTask(" << this << ")::SyncTask() -- ERROR: Do not use the default constructor" << std::endl;
+   std::cerr << "SyncTask(" << this << ")::SyncTask() -- ERROR: Did NOT create the thread!" << std::endl;
 }
 
-void ThreadSyncTask::copyData(const ThreadSyncTask& org, const bool)
+void SyncTask::copyData(const SyncTask& org, const bool)
 {
    BaseClass::copyData(org);
 
-   std::cerr << "ThreadSyncTask(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
+   std::cerr << "SyncTask(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
 }
 
-void ThreadSyncTask::deleteData()
+void SyncTask::deleteData()
 {
    closeSignals();
 }
@@ -38,7 +38,7 @@ void ThreadSyncTask::deleteData()
 //-----------------------------------------------------------------------------
 // Configure thread
 //-----------------------------------------------------------------------------
-bool ThreadSyncTask::configThread()
+bool SyncTask::configThread()
 {
    bool ok = BaseClass::configThread();
 
@@ -46,7 +46,7 @@ bool ThreadSyncTask::configThread()
    if (ok) ok = createSignals();
 
    if (!ok) {
-      std::cerr << "ThreadSyncTask(" << this << ")::configThread() -- ERROR: Did NOT create the signals!" << std::endl;
+      std::cerr << "SyncTask(" << this << ")::configThread() -- ERROR: Did NOT create the signals!" << std::endl;
    }
 
    return ok;
@@ -55,7 +55,7 @@ bool ThreadSyncTask::configThread()
 //-----------------------------------------------------------------------------
 // Our main thread function
 //-----------------------------------------------------------------------------
-unsigned long ThreadSyncTask::mainThreadFunc()
+unsigned long SyncTask::mainThreadFunc()
 {
    unsigned long rtn = 0;
 
@@ -63,7 +63,7 @@ unsigned long ThreadSyncTask::mainThreadFunc()
    bool ok = configThread();
 
    if ( getParent()->isMessageEnabled(MSG_INFO) ) {
-      std::cout << "ThreadSyncTask(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
+      std::cout << "SyncTask(" << this << ")::mainThreadFunc(): thread handle = " << getThreadHandle() << std::endl;
    }
 
    // Main start-complete loop ...
@@ -91,7 +91,7 @@ unsigned long ThreadSyncTask::mainThreadFunc()
 //-----------------------------------------------------------------------------
 // Terminate the thread
 //-----------------------------------------------------------------------------
-bool ThreadSyncTask::terminate()
+bool SyncTask::terminate()
 {
    signalCompleted();
    return BaseClass::terminate();

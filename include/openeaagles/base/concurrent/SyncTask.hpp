@@ -1,15 +1,15 @@
 
-#ifndef __oe_base_ThreadSyncTask_H__
-#define __oe_base_ThreadSyncTask_H__
+#ifndef __oe_base_SyncTask_H__
+#define __oe_base_SyncTask_H__
 
-#include "openeaagles/base/concurrent/Thread.hpp"
+#include "openeaagles/base/concurrent/AbstractThread.hpp"
 
 namespace oe {
 namespace base {
 class Component;
 
 //------------------------------------------------------------------------------
-// Class:  ThreadSyncTask
+// Class: SyncTask
 //
 // Description: Abstract sync task (i.e., start/complete loop) thread;
 //
@@ -21,19 +21,19 @@ class Component;
 //    wait for several sync task threads.  Loop will end with the shutdown of
 //    the parent.
 //------------------------------------------------------------------------------
-class ThreadSyncTask : public Thread
+class SyncTask : public AbstractThread
 {
-   DECLARE_SUBCLASS(ThreadSyncTask, Thread)
+   DECLARE_SUBCLASS(SyncTask, AbstractThread)
 
 public:
-   ThreadSyncTask(Component* const parent, const double priority);
+   SyncTask(Component* const parent, const double priority);
 
    void signalStart();
    void waitForCompleted();
-   static void waitForAllCompleted(ThreadSyncTask** threads, const unsigned int num);
+   static void waitForAllCompleted(SyncTask** threads, const unsigned int num);
 
    //Returns the index of the first thread that is completed, or -1 if an error
-   static int waitForAnyCompleted(ThreadSyncTask** threads, const unsigned int num);
+   static int waitForAnyCompleted(SyncTask** threads, const unsigned int num);
 
    virtual bool terminate() override;
 
@@ -41,7 +41,7 @@ public:
    private:  virtual unsigned long userFunc() =0;
 
 protected:
-   ThreadSyncTask();
+   SyncTask();
 
    void waitForStart();
    void signalCompleted();

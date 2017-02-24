@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/concurrent/ThreadSyncTask.hpp"
+#include "openeaagles/base/concurrent/SyncTask.hpp"
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
@@ -17,7 +17,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 // create the signals
 //-----------------------------------------------------------------------------
-bool ThreadSyncTask::createSignals()
+bool SyncTask::createSignals()
 {
    // create the start mutex already set, signalStart() will release it.
    {
@@ -41,7 +41,7 @@ bool ThreadSyncTask::createSignals()
 //-----------------------------------------------------------------------------
 // Close the signals
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::closeSignals()
+void SyncTask::closeSignals()
 {
    {
       pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(startSig);
@@ -59,7 +59,7 @@ void ThreadSyncTask::closeSignals()
 //-----------------------------------------------------------------------------
 // Signal 'start'
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::signalStart()
+void SyncTask::signalStart()
 {
    pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(startSig);
    pthread_mutex_unlock(mutex);
@@ -68,7 +68,7 @@ void ThreadSyncTask::signalStart()
 //-----------------------------------------------------------------------------
 // Wait for the 'start' signal
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::waitForStart()
+void SyncTask::waitForStart()
 {
    pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(startSig);
    pthread_mutex_lock(mutex);
@@ -77,7 +77,7 @@ void ThreadSyncTask::waitForStart()
 //-----------------------------------------------------------------------------
 // Signal 'completed'
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::signalCompleted()
+void SyncTask::signalCompleted()
 {
    pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(completedSig);
    pthread_mutex_unlock(mutex);
@@ -86,7 +86,7 @@ void ThreadSyncTask::signalCompleted()
 //-----------------------------------------------------------------------------
 // Wait for the 'completed' signal
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::waitForCompleted()
+void SyncTask::waitForCompleted()
 {
    pthread_mutex_t* mutex = static_cast<pthread_mutex_t*>(completedSig);
    pthread_mutex_lock(mutex);
@@ -95,7 +95,7 @@ void ThreadSyncTask::waitForCompleted()
 //-----------------------------------------------------------------------------
 // Wait for all of these threads to complete.
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigned int num)
+void SyncTask::waitForAllCompleted(SyncTask** threads, const unsigned int num)
 {
    if (threads != nullptr && num > 0) {
       for (unsigned int i = 0; i < num; i++) {
@@ -109,7 +109,7 @@ void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigne
 //-----------------------------------------------------------------------------
 // Wait for any of these threads to complete.
 //-----------------------------------------------------------------------------
-int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned int num)
+int SyncTask::waitForAnyCompleted(SyncTask** threads, const unsigned int num)
 {
    if (threads != nullptr && num > 0) {
       //Make sure we have at least one valid thread (since we'll enter an infinite loop and deadlock otherwise)

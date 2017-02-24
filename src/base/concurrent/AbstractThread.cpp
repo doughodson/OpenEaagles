@@ -1,38 +1,36 @@
 
-#include "openeaagles/base/concurrent/Thread.hpp"
+#include "openeaagles/base/concurrent/AbstractThread.hpp"
 
 #include "openeaagles/base/Component.hpp"
-//#include "openeaagles/base/util/math_utils.hpp"
-//#include "openeaagles/base/util/system.hpp"
 #include <iostream>
 
 namespace oe {
 namespace base {
 
-IMPLEMENT_ABSTRACT_SUBCLASS(Thread, "Thread")
-EMPTY_SLOTTABLE(Thread)
-EMPTY_SERIALIZER(Thread)
+IMPLEMENT_ABSTRACT_SUBCLASS(AbstractThread, "AbstractThread")
+EMPTY_SLOTTABLE(AbstractThread)
+EMPTY_SERIALIZER(AbstractThread)
 
-Thread::Thread(Component* const p, const double pri) : parent(p), priority(pri)
+AbstractThread::AbstractThread(Component* const p, const double pri) : parent(p), priority(pri)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-Thread::Thread()
+AbstractThread::AbstractThread()
 {
    STANDARD_CONSTRUCTOR()
-   std::cerr << "Thread(" << this << ")::Thread() -- ERROR: Do not use the default constructor" << std::endl;
-   std::cerr << "Thread(" << this << ")::Thread() -- ERROR: Did NOT create the thread!" << std::endl;
+   std::cerr << "AbstractThread(" << this << ")::AbstractThread() -- ERROR: Do not use the default constructor" << std::endl;
+   std::cerr << "AbstractThread(" << this << ")::AbstractThread() -- ERROR: Did NOT create the thread!" << std::endl;
 }
 
-void Thread::copyData(const Thread& org, const bool)
+void AbstractThread::copyData(const AbstractThread& org, const bool)
 {
    BaseClass::copyData(org);
 
-   std::cerr << "Thread(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a Thread!" << std::endl;
+   std::cerr << "AbstractThread(" << this << ")::copyData() -- ERROR: Can NOT copy or clone a AbstractThread!" << std::endl;
 }
 
-void Thread::deleteData()
+void AbstractThread::deleteData()
 {
    if (!isTerminated()) {
       terminate();
@@ -43,7 +41,7 @@ void Thread::deleteData()
 //------------------------------------------------------------------------------
 // Create the thread
 //------------------------------------------------------------------------------
-bool Thread::create()
+bool AbstractThread::create()
 {
    bool ok = true;
 
@@ -74,28 +72,28 @@ bool Thread::create()
 //-----------------------------------------------------------------------------
 // Get functions
 //-----------------------------------------------------------------------------
-bool Thread::isTerminated() const
+bool AbstractThread::isTerminated() const
 {
    return killed;
 }
 
-double Thread::getPriority() const
+double AbstractThread::getPriority() const
 {
    return priority;
 }
 
-Component* Thread::getParent()
+Component* AbstractThread::getParent()
 {
    return parent;
 }
 
-const void* Thread::getThreadHandle() const
+const void* AbstractThread::getThreadHandle() const
 {
    return theThread;
 }
 
 // thread stack size in bytes (or zero if using the default stack size)
-size_t Thread::getStackSize() const
+size_t AbstractThread::getStackSize() const
 {
    return stackSize;
 }
@@ -105,14 +103,14 @@ size_t Thread::getStackSize() const
 //-----------------------------------------------------------------------------
 
 // Set the thread's stack size in bytes (or zero to use the system default size)
-bool Thread::setStackSize(const size_t size)
+bool AbstractThread::setStackSize(const size_t size)
 {
    stackSize = size;
    return true;
 }
 
 // Set the terminated flag
-void Thread::setTerminated()
+void AbstractThread::setTerminated()
 {
    killed = true;
 }

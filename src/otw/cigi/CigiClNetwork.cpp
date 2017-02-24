@@ -3,7 +3,7 @@
 
 #include "openeaagles/otw/cigi/OtwCigiCl.hpp"
 
-#include "openeaagles/base/concurrent/ThreadSingleTask.hpp"
+#include "openeaagles/base/concurrent/SingleTask.hpp"
 #include "openeaagles/base/NetHandler.hpp"
 
 #include "cigicl/CigiBaseSignalProcessing.h"
@@ -139,9 +139,9 @@ void CigiClNetworkSignalProcessing::OnSensorResp(CigiBasePacket* packet)
 // CigiClNetwork main loop thread
 //==============================================================================
 
-class NetThread : public base::ThreadSingleTask
+class NetThread : public base::SingleTask
 {
-   DECLARE_SUBCLASS(NetThread, base::ThreadSingleTask)
+   DECLARE_SUBCLASS(NetThread, base::SingleTask)
    public: NetThread(base::Component* const parent, const double priority);
    private: virtual unsigned long userFunc() override;
 };
@@ -152,7 +152,7 @@ EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
 EMPTY_SERIALIZER(NetThread)
 
-NetThread::NetThread(base::Component* const parent, const double priority): base::ThreadSingleTask(parent, priority)
+NetThread::NetThread(base::Component* const parent, const double priority): base::SingleTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
 }

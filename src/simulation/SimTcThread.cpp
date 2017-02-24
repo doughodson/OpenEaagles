@@ -15,8 +15,7 @@ EMPTY_COPYDATA(SimTcThread)
 EMPTY_DELETEDATA(SimTcThread)
 EMPTY_SERIALIZER(SimTcThread)
 
-SimTcThread::SimTcThread(base::Component* const parent, const double priority)
-      : base::ThreadSyncTask(parent, priority)
+SimTcThread::SimTcThread(base::Component* const parent, const double priority): base::SyncTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
 

@@ -6,7 +6,7 @@
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
-#include "openeaagles/base/concurrent/ThreadPeriodicTask.hpp"
+#include "openeaagles/base/concurrent/PeriodicTask.hpp"
 #include "openeaagles/base/units/Frequencies.hpp"
 
 namespace oe {
@@ -16,8 +16,9 @@ namespace base {
 // Declare the I/O thread
 //=============================================================================
 
-class IoThread : public ThreadPeriodicTask {
-   DECLARE_SUBCLASS(IoThread,ThreadPeriodicTask)
+class IoThread : public PeriodicTask
+{
+   DECLARE_SUBCLASS(IoThread, PeriodicTask)
    public: IoThread(Component* const parent, const double priority, const double rate);
    private: virtual unsigned long userFunc(const double dt) override;
 };
@@ -426,8 +427,7 @@ EMPTY_COPYDATA(IoThread)
 EMPTY_DELETEDATA(IoThread)
 EMPTY_SERIALIZER(IoThread)
 
-IoThread::IoThread(Component* const parent, const double priority, const double rate)
-      : ThreadPeriodicTask(parent, priority, rate)
+IoThread::IoThread(Component* const parent, const double priority, const double rate): PeriodicTask(parent, priority, rate)
 {
    STANDARD_CONSTRUCTOR()
 }

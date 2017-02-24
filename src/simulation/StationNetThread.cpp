@@ -12,8 +12,7 @@ EMPTY_COPYDATA(NetThread)
 EMPTY_DELETEDATA(NetThread)
 EMPTY_SERIALIZER(NetThread)
 
-NetThread::NetThread(base::Component* const parent, const double priority, const double rate)
-      : base::ThreadPeriodicTask(parent, priority, rate)
+NetThread::NetThread(base::Component* const parent, const double priority, const double rate): base::PeriodicTask(parent, priority, rate)
 {
    STANDARD_CONSTRUCTOR()
 }

@@ -618,8 +618,8 @@ void Simulation::updateTC(const double dt)
             updateTcPlayerList(currentPlayerList, (dt0/4.0), reqTcThreads, reqTcThreads);
 
             // Now wait for the other thread(s) to complete
-            base::ThreadSyncTask** pp = reinterpret_cast<base::ThreadSyncTask**>(&tcThreads[0]);
-            base::ThreadSyncTask::waitForAllCompleted(pp, numTcThreads);
+            base::SyncTask** pp = reinterpret_cast<base::SyncTask**>(&tcThreads[0]);
+            base::SyncTask::waitForAllCompleted(pp, numTcThreads);
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {
@@ -704,8 +704,8 @@ void Simulation::updateData(const double dt)
             updateBgPlayerList(currentPlayerList, dt0, reqBgThreads, reqBgThreads);
 
             // Now wait for the other thread(s) to complete
-            base::ThreadSyncTask** pp = reinterpret_cast<base::ThreadSyncTask**>(&bgThreads[0]);
-            base::ThreadSyncTask::waitForAllCompleted(pp, numBgThreads);
+            base::SyncTask** pp = reinterpret_cast<base::SyncTask**>(&bgThreads[0]);
+            base::SyncTask::waitForAllCompleted(pp, numBgThreads);
 
          }
          else if (isMessageEnabled(MSG_ERROR)) {
@@ -1412,7 +1412,7 @@ bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np = base::Thread::getNumProcessors();
+      const unsigned short np = base::AbstractThread::getNumProcessors();
       unsigned short maxT = 1;
       if (np > 1) maxT = np - 1;
 
@@ -1437,7 +1437,7 @@ bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np = base::Thread::getNumProcessors();
+      const unsigned short np = base::AbstractThread::getNumProcessors();
       unsigned short maxT = 1;
       if (np > 1) maxT = np - 1;
 

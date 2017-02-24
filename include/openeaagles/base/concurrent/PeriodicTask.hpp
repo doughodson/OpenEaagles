@@ -1,8 +1,8 @@
 
-#ifndef __oe_base_ThreadPeriodicTask_H__
-#define __oe_base_ThreadPeriodicTask_H__
+#ifndef __oe_base_PeriodicTask_H__
+#define __oe_base_PeriodicTask_H__
 
-#include "openeaagles/base/concurrent/Thread.hpp"
+#include "openeaagles/base/concurrent/AbstractThread.hpp"
 #include "openeaagles/base/Statistic.hpp"
 
 namespace oe {
@@ -10,7 +10,7 @@ namespace base {
 class Component;
 
 //------------------------------------------------------------------------------
-// Class:  ThreadPeriodicTask
+// Class: PeriodicTask
 //
 // Description: Abstract periodic task thread
 //
@@ -19,12 +19,12 @@ class Component;
 //    until the parent component is shutdown.  A value of 1.0/rate is passed
 //    to userFunc() as the delta time parameter.
 //------------------------------------------------------------------------------
-class ThreadPeriodicTask : public Thread
+class PeriodicTask : public AbstractThread
 {
-   DECLARE_SUBCLASS(ThreadPeriodicTask, Thread)
+   DECLARE_SUBCLASS(PeriodicTask, AbstractThread)
 
 public:
-   ThreadPeriodicTask(Component* const parent, const double priority, const double rate);
+   PeriodicTask(Component* const parent, const double priority, const double rate);
 
    double getRate() const;                         // Update rate (must be greater than zero)
    unsigned int getTotalFrameCount() const;        // Total frame count
@@ -44,7 +44,7 @@ public:
    private: virtual unsigned long userFunc(const double dt) =0;
 
 protected:
-   ThreadPeriodicTask();
+   PeriodicTask();
 
 private:
    virtual unsigned long mainThreadFunc() override;

@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/concurrent/ThreadSyncTask.hpp"
+#include "openeaagles/base/concurrent/SyncTask.hpp"
 
 namespace oe {
 namespace base {
@@ -11,9 +11,9 @@ class ThreadPoolManager;
 //
 // Description: The implementation of ThreadSyncTask used for the ThreadPool
 //------------------------------------------------------------------------------
-class ThreadPoolThread : public ThreadSyncTask
+class ThreadPoolThread : public SyncTask
 {
-   DECLARE_SUBCLASS(ThreadPoolThread, ThreadSyncTask)
+   DECLARE_SUBCLASS(ThreadPoolThread, SyncTask)
    friend class ThreadPool;
 
 public:

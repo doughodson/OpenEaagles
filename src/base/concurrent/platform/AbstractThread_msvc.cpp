@@ -1,8 +1,7 @@
 
-#include "openeaagles/base/concurrent/Thread.hpp"
+#include "openeaagles/base/concurrent/AbstractThread.hpp"
 
 #include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
 #include "openeaagles/base/util/system.hpp"
 #include <iostream>
 
@@ -21,16 +20,16 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 // Static thread function
 //-----------------------------------------------------------------------------
-DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
+DWORD WINAPI AbstractThread::staticThreadFunc(LPVOID lpParam)
 {
-   const auto thread = static_cast<Thread*>(lpParam);
+   const auto thread = static_cast<AbstractThread*>(lpParam);
    Component* parent = thread->getParent();
 
-   // Make sure that our Thread class and its parent are not going to go a way.
+   // Make sure that our AbstractThread class and its parent are not going to go a way.
    thread->ref();
    parent->ref();
 
-   // The main thread function, which is a Thread class memeber function,
+   // The main thread function, which is a AbstractThread class memeber function,
    // will handle the rest.
    DWORD rtn = thread->mainThreadFunc();
    thread->setTerminated();
@@ -44,7 +43,7 @@ DWORD WINAPI Thread::staticThreadFunc(LPVOID lpParam)
 //-----------------------------------------------------------------------------
 // Static function returns the number of processors assigned to this process
 //-----------------------------------------------------------------------------
-unsigned short Thread::getNumProcessors()
+unsigned short AbstractThread::getNumProcessors()
 {
    unsigned short num = 0;
 
@@ -67,7 +66,7 @@ unsigned short Thread::getNumProcessors()
 //-----------------------------------------------------------------------------
 // Create the thread
 //-----------------------------------------------------------------------------
-bool Thread::createThread()
+bool AbstractThread::createThread()
 {
    // Creation flags
    DWORD dwCreationFlags = 0;
@@ -84,7 +83,7 @@ bool Thread::createThread()
       );
 
    if ( hnd != 0 && parent->isMessageEnabled(MSG_INFO) ) {
-      std::cout << "Thread(" << this << ")::createThread(): CreateThread() handle = " << hnd << std::endl;
+      std::cout << "AbstractThread(" << this << ")::createThread(): CreateThread() handle = " << hnd << std::endl;
    }
 
    theThread = hnd;
@@ -95,15 +94,15 @@ bool Thread::createThread()
 //-----------------------------------------------------------------------------
 // Configure thread
 //-----------------------------------------------------------------------------
-bool Thread::configThread()
+bool AbstractThread::configThread()
 {
    // Get handles
    HANDLE hProcess = GetCurrentProcess();
    HANDLE hThread  = GetCurrentThread();
 
    if (parent->isMessageEnabled(MSG_INFO)) {
-      std::cout << "Thread(" << this << ")::configThread(): process handle = " << hProcess << std::endl;
-      std::cout << "Thread(" << this << ")::configThread(): thread handle = " << hThread  << std::endl;
+      std::cout << "AbstractThread(" << this << ")::configThread(): process handle = " << hProcess << std::endl;
+      std::cout << "AbstractThread(" << this << ")::configThread(): thread handle = " << hThread  << std::endl;
    }
 
    // ---
@@ -120,11 +119,11 @@ bool Thread::configThread()
          BOOL stat = SetPriorityClass(hProcess,pclass);
 
          if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
-            std::cerr << "Thread(" << this << ")::configThread(): Error: SetPriorityClass() failed! ";
+            std::cerr << "AbstractThread(" << this << ")::configThread(): Error: SetPriorityClass() failed! ";
             std::cerr << GetLastError() << std::endl;
          }
          else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
-            std::cout << "Thread(" << this << ")::configThread(): SetPriorityClass() set!" << std::endl;
+            std::cout << "AbstractThread(" << this << ")::configThread(): SetPriorityClass() set!" << std::endl;
          }
       }
    }
@@ -161,11 +160,11 @@ bool Thread::configThread()
       BOOL stat = SetThreadPriority(hThread,value);
 
       if (stat == 0 && parent->isMessageEnabled(MSG_ERROR)) {
-         std::cerr << "Thread(" << this << ")::configThread(): Error: SetThreadPriority(" << value << ") failed! ";
+         std::cerr << "AbstractThread(" << this << ")::configThread(): Error: SetThreadPriority(" << value << ") failed! ";
          std::cerr << GetLastError()  << std::endl;
       }
       else if (stat != 0 && parent->isMessageEnabled(MSG_INFO)) {
-         std::cout << "Thread(" << this << ")::configThread(): SetThreadPriority(" << value << ") set!" << std::endl;
+         std::cout << "AbstractThread(" << this << ")::configThread(): SetThreadPriority(" << value << ") set!" << std::endl;
       }
    }
 
@@ -175,7 +174,7 @@ bool Thread::configThread()
 //-----------------------------------------------------------------------------
 // Close the thread
 //-----------------------------------------------------------------------------
-void Thread::closeThread()
+void AbstractThread::closeThread()
 {
    CloseHandle(theThread);
    parent = 0;
@@ -185,11 +184,11 @@ void Thread::closeThread()
 //-----------------------------------------------------------------------------
 // Treminate the thread
 //-----------------------------------------------------------------------------
-bool Thread::terminate()
+bool AbstractThread::terminate()
 {
    if (theThread != nullptr && !killed) {
       if ( parent->isMessageEnabled(MSG_INFO) ) {
-         std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
+         std::cout << "AbstractThread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
 
       TerminateThread(theThread, 0);

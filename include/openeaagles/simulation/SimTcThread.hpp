@@ -2,7 +2,7 @@
 #ifndef __oe_simulation_SimTcThread_H__
 #define __oe_simulation_SimTcThread_H__
 
-#include "openeaagles/base/concurrent/ThreadSyncTask.hpp"
+#include "openeaagles/base/concurrent/SyncTask.hpp"
 
 namespace oe {
 namespace base { class Component; class PairStream; }
@@ -12,9 +12,9 @@ namespace simulation {
 // Class: SimTcThread
 // Description: Time critical thread
 //------------------------------------------------------------------------------
-class SimTcThread : public base::ThreadSyncTask
+class SimTcThread : public base::SyncTask
 {
-   DECLARE_SUBCLASS(SimTcThread, base::ThreadSyncTask)
+   DECLARE_SUBCLASS(SimTcThread, base::SyncTask)
 
 public:
    SimTcThread(base::Component* const parent, const double priority);

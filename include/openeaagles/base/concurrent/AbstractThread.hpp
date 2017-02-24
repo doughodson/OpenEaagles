@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // Classes:
 //
-//    Thread               -- Base class for all thread classes.
+//    AbstractThread       -- Abstract base class for all thread classes.
 //
 //    ThreadSingleTask     -- Single task thread; single call to the user's
 //                            function
@@ -19,8 +19,8 @@
 // ThreadSyncTask thread classes that are used can be found in the "otw/OtwCigiCl.cpp",
 // "simulation/Station.cpp" and "simulation/Simulation.cpp" files, respectively.
 //------------------------------------------------------------------------------
-#ifndef __oe_base_Thread_H__
-#define __oe_base_Thread_H__
+#ifndef __oe_base_AbstractThread_H__
+#define __oe_base_AbstractThread_H__
 
 #include "openeaagles/base/Object.hpp"
 #include "openeaagles/base/util/platform_api.hpp"
@@ -88,12 +88,12 @@ class Component;
 //              0.0           THREAD_PRIORITY_IDLE(-15)
 //
 //------------------------------------------------------------------------------
-class Thread : public Object
+class AbstractThread : public Object
 {
-   DECLARE_SUBCLASS(Thread, Object)
+   DECLARE_SUBCLASS(AbstractThread, Object)
 
 public:
-   Thread(Component* const parent, const double priority);
+   AbstractThread(Component* const parent, const double priority);
 
    double getPriority() const;
    bool isTerminated() const;
@@ -115,7 +115,7 @@ public:
    static unsigned short getNumProcessors();
 
 protected: // Functions
-   Thread();
+   AbstractThread();
    Component* getParent();
    const void* getThreadHandle() const;
 

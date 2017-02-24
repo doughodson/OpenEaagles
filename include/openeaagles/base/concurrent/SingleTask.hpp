@@ -1,32 +1,32 @@
 
-#ifndef __oe_base_ThreadSingleTask_H__
-#define __oe_base_ThreadSingleTask_H__
+#ifndef __oe_base_SingleTask_H__
+#define __oe_base_SingleTask_H__
 
-#include "openeaagles/base/concurrent/Thread.hpp"
+#include "openeaagles/base/concurrent/AbstractThread.hpp"
 
 namespace oe {
 namespace base {
 class Component;
 
 //------------------------------------------------------------------------------
-// Class:  ThreadSingleTask
+// Class: SingleTask
 // Description: Abstract single task thread class
 //
 //    User's will need to derive a class from this class and define the
 //    work function, userFunc(), which is only called once.
 //------------------------------------------------------------------------------
-class ThreadSingleTask : public Thread
+class SingleTask : public AbstractThread
 {
-   DECLARE_SUBCLASS(ThreadSingleTask, Thread)
+   DECLARE_SUBCLASS(SingleTask, AbstractThread)
 
 public:
-   ThreadSingleTask(Component* const parent, const double priority);
+   SingleTask(Component* const parent, const double priority);
 
    // User defined work function
    private:  virtual unsigned long userFunc() =0;
 
 protected:
-   ThreadSingleTask();
+   SingleTask();
 
 private:
    // Thread class function

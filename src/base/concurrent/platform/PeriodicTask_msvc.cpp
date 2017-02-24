@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/concurrent/ThreadPeriodicTask.hpp"
+#include "openeaagles/base/concurrent/PeriodicTask.hpp"
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
@@ -21,7 +21,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 // Our main thread function
 //-----------------------------------------------------------------------------
-unsigned long ThreadPeriodicTask::mainThreadFunc()
+unsigned long PeriodicTask::mainThreadFunc()
 {
    unsigned long rtn = 0;
 

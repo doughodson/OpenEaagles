@@ -2,7 +2,7 @@
 #ifndef __oe_simulation_SimBgThread_H__
 #define __oe_simulation_SimBgThread_H__
 
-#include "openeaagles/base/concurrent/ThreadSyncTask.hpp"
+#include "openeaagles/base/concurrent/SyncTask.hpp"
 
 namespace oe {
 namespace base { class Component; class PairStream; }
@@ -12,9 +12,9 @@ namespace simulation {
 // Class: SimBgThread
 // Description: Background thread
 //------------------------------------------------------------------------------
-class SimBgThread : public base::ThreadSyncTask
+class SimBgThread : public base::SyncTask
 {
-   DECLARE_SUBCLASS(SimBgThread, base::ThreadSyncTask)
+   DECLARE_SUBCLASS(SimBgThread, base::SyncTask)
 
 public:
    SimBgThread(base::Component* const parent, const double priority);

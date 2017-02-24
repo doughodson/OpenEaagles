@@ -1,10 +1,8 @@
 
-#include "openeaagles/base/concurrent/ThreadSyncTask.hpp"
+#include "openeaagles/base/concurrent/SyncTask.hpp"
 
 #include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/util/math_utils.hpp"
 #include "openeaagles/base/util/system.hpp"
-#include <iostream>
 
 /* ----------------------------------------------------------------- */
 /* Define 'USE_REALTIME_PRI_CLASS' to use 'REALTIME_PRIORITY_CLASS'  */
@@ -21,7 +19,7 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 // create the signals
 //-----------------------------------------------------------------------------
-bool ThreadSyncTask::createSignals()
+bool SyncTask::createSignals()
 {
    // create the start semaphore already set, signalStart() will release it.
    startSig = CreateSemaphore(NULL, 0, 1, NULL);
@@ -35,7 +33,7 @@ bool ThreadSyncTask::createSignals()
 //-----------------------------------------------------------------------------
 // Close the signals
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::closeSignals()
+void SyncTask::closeSignals()
 {
    CloseHandle(startSig);
    startSig = 0;
@@ -47,7 +45,7 @@ void ThreadSyncTask::closeSignals()
 //-----------------------------------------------------------------------------
 // Signal 'start'
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::signalStart()
+void SyncTask::signalStart()
 {
    ReleaseSemaphore(static_cast<HANDLE>(startSig),1,NULL);
 }
@@ -55,7 +53,7 @@ void ThreadSyncTask::signalStart()
 //-----------------------------------------------------------------------------
 // Wait for the 'start' signal
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::waitForStart()
+void SyncTask::waitForStart()
 {
    WaitForSingleObject(static_cast<HANDLE>(startSig), INFINITE);
 }
@@ -63,7 +61,7 @@ void ThreadSyncTask::waitForStart()
 //-----------------------------------------------------------------------------
 // Signal 'completed'
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::signalCompleted()
+void SyncTask::signalCompleted()
 {
    ReleaseSemaphore(static_cast<HANDLE>(completedSig), 1, NULL);
 }
@@ -71,7 +69,7 @@ void ThreadSyncTask::signalCompleted()
 //-----------------------------------------------------------------------------
 // Wait for the 'completed' signal
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::waitForCompleted()
+void SyncTask::waitForCompleted()
 {
    WaitForSingleObject(static_cast<HANDLE>(completedSig), INFINITE);
 }
@@ -79,7 +77,7 @@ void ThreadSyncTask::waitForCompleted()
 //-----------------------------------------------------------------------------
 // Wait for all of these threads to complete.
 //-----------------------------------------------------------------------------
-void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigned int num)
+void SyncTask::waitForAllCompleted(SyncTask** threads, const unsigned int num)
 {
    if (threads != 0 && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
@@ -99,7 +97,7 @@ void ThreadSyncTask::waitForAllCompleted(ThreadSyncTask** threads, const unsigne
 //-----------------------------------------------------------------------------
 // Wait for any of these threads to complete.
 //-----------------------------------------------------------------------------
-int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned int num)
+int SyncTask::waitForAnyCompleted(SyncTask** threads, const unsigned int num)
 {
    if (threads != nullptr && num > 0) {
       HANDLE handles[MAXIMUM_WAIT_OBJECTS];
@@ -115,10 +113,10 @@ int ThreadSyncTask::waitForAnyCompleted(ThreadSyncTask** threads, const unsigned
 
       if (count > 0) {
          DWORD ret = WaitForMultipleObjects(count, handles, FALSE, INFINITE);
-         if(ret >= WAIT_OBJECT_0 && ret <= (WAIT_OBJECT_0 + num - 1)) {
+         if (ret >= WAIT_OBJECT_0 && ret <= (WAIT_OBJECT_0 + num - 1)) {
             return indexes[ret - WAIT_OBJECT_0];
          }
-         if(ret >= WAIT_ABANDONED_0 && ret <= (WAIT_ABANDONED_0 + num - 1)) {
+         if (ret >= WAIT_ABANDONED_0 && ret <= (WAIT_ABANDONED_0 + num - 1)) {
             return indexes[ret - WAIT_ABANDONED_0];
          }
       }
