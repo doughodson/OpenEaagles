@@ -1,7 +1,7 @@
 
 #include "openeaagles/terrain/DataFile.hpp"
 
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {

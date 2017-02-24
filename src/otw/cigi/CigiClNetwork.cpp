@@ -4,7 +4,7 @@
 #include "openeaagles/otw/cigi/OtwCigiCl.hpp"
 
 #include "openeaagles/base/concurrent/SingleTask.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 
 #include "cigicl/CigiBaseSignalProcessing.h"
 

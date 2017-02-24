@@ -21,14 +21,14 @@
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/Operators.hpp"
 
-// Net handlers
-#include "openeaagles/base/nethandlers/TcpHandler.hpp"
-#include "openeaagles/base/nethandlers/TcpClient.hpp"
-#include "openeaagles/base/nethandlers/TcpServerMultiple.hpp"
-#include "openeaagles/base/nethandlers/TcpServerSingle.hpp"
-#include "openeaagles/base/nethandlers/UdpBroadcastHandler.hpp"
-#include "openeaagles/base/nethandlers/UdpMulticastHandler.hpp"
-#include "openeaagles/base/nethandlers/UdpUnicastHandler.hpp"
+// Network handlers
+#include "openeaagles/base/network/TcpHandler.hpp"
+#include "openeaagles/base/network/TcpClient.hpp"
+#include "openeaagles/base/network/TcpServerMultiple.hpp"
+#include "openeaagles/base/network/TcpServerSingle.hpp"
+#include "openeaagles/base/network/UdpBroadcastHandler.hpp"
+#include "openeaagles/base/network/UdpMulticastHandler.hpp"
+#include "openeaagles/base/network/UdpUnicastHandler.hpp"
 
 // Colors
 #include "openeaagles/base/Cie.hpp"

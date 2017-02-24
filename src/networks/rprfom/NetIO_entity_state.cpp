@@ -6,7 +6,7 @@
 
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 
 namespace oe {
 namespace rprfom {

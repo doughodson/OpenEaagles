@@ -38,14 +38,15 @@ OBJS =  \
 	functors/Functions.o \
 	functors/Table.o \
 	functors/Tables.o \
-	nethandlers/PosixHandler.o \
-	nethandlers/TcpClient.o \
-	nethandlers/TcpHandler.o \
-	nethandlers/TcpServerMultiple.o \
-	nethandlers/TcpServerSingle.o \
-	nethandlers/UdpBroadcastHandler.o \
-	nethandlers/UdpMulticastHandler.o \
-	nethandlers/UdpUnicastHandler.o \
+	network/NetHandler.o \
+	network/PosixHandler.o \
+	network/TcpClient.o \
+	network/TcpHandler.o \
+	network/TcpServerMultiple.o \
+	network/TcpServerSingle.o \
+	network/UdpBroadcastHandler.o \
+	network/UdpMulticastHandler.o \
+	network/UdpUnicastHandler.o \
 	osg/math.o \
 	osg/Matrixd.o \
 	osg/MatrixDecomposition.o \
@@ -104,7 +105,6 @@ OBJS =  \
 	Matrix.o \
 	MetaObject.o \
 	MonitorMetrics.o \
-	NetHandler.o \
 	Number.o \
 	Object.o \
 	Operators.o \

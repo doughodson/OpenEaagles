@@ -2,7 +2,7 @@
 #ifndef __oe_base_PosixHandler_H__
 #define __oe_base_PosixHandler_H__
 
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 
 namespace oe {
 namespace base {

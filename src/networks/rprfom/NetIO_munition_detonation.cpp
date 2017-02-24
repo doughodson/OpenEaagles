@@ -7,7 +7,7 @@
 #include "openeaagles/models/players/Player.hpp"
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 
 #include "openeaagles/base/util/str_utils.hpp"
 

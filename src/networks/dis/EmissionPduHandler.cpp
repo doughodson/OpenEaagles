@@ -17,7 +17,7 @@
 #include "openeaagles/base/functors/Functions.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/Decibel.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 
 #include "openeaagles/base/util/unit_utils.hpp"

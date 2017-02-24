@@ -1,6 +1,6 @@
 
 #include "openeaagles/terrain/ded/DedFile.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <fstream>

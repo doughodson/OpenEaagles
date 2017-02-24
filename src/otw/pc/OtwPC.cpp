@@ -10,7 +10,7 @@
 #include "openeaagles/models/players/Missile.hpp"
 #include "openeaagles/models/players/Player.hpp"
 
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/SlotTable.hpp"
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Pair.hpp"

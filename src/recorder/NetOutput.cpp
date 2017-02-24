@@ -2,7 +2,7 @@
 #include "openeaagles/recorder/NetOutput.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 #include "openeaagles/recorder/DataRecordHandle.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 #include <iostream>
 

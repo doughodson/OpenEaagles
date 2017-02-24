@@ -16,7 +16,7 @@ namespace base {
 //              TCP/IP, Multicast and Broadcast.  Each handler manages a socket
 //              and can be used to send data, receive data, or both.
 //
-// Windows: using Winsock2.h; link with Ws2_32.lib
+// Windows: using Winsock2.h - link with Ws2_32.lib
 //
 //------------------------------------------------------------------------------
 class NetHandler : public Component

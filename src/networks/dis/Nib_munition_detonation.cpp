@@ -15,7 +15,7 @@
 
 #include "openeaagles/base/util/nav_utils.hpp"
 
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 

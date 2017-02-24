@@ -2,7 +2,7 @@
 #ifndef __oe_base_TcpServerSingle_H__
 #define __oe_base_TcpServerSingle_H__
 
-#include "openeaagles/base/nethandlers/TcpHandler.hpp"
+#include "openeaagles/base/network/TcpHandler.hpp"
 
 namespace oe {
 namespace base {

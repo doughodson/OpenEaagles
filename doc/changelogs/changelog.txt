@@ -99,6 +99,10 @@ base library
    easy to digest names, such as ThreadPeriodicTask to PeriodicTask, or Thread to
    AbstractThread to more clearly indicate role in relation to thread subclasses.
 
+-- Renamed subdirectory 'nethandlers' to 'network' as this better conveys the code it
+   contains - namely, component interfaces to network sockets. Also moved NetHandler
+   class into this directory.
+
    Object class
      -- In Object, the method getSlotByIndex() has been removed.  Therefore any derived
         Object-based classes no longer need to define it.  For legacy code, methods of

@@ -26,7 +26,7 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/base/nethandlers/UdpBroadcastHandler.hpp"
+#include "openeaagles/base/network/UdpBroadcastHandler.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"

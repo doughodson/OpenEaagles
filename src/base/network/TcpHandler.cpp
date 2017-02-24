@@ -27,7 +27,8 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/base/nethandlers/TcpHandler.hpp"
+#include "openeaagles/base/network/TcpHandler.hpp"
+
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"

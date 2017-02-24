@@ -17,7 +17,8 @@
     static const int SOCKET_ERROR   = -1;
 #endif
 
-#include "openeaagles/base/nethandlers/PosixHandler.hpp"
+#include "openeaagles/base/network/PosixHandler.hpp"
+
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Number.hpp"

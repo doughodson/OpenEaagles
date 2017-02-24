@@ -2,7 +2,7 @@
 #ifndef __oe_base_UdpBroadcastHandler_H__
 #define __oe_base_UdpBroadcastHandler_H__
 
-#include "openeaagles/base/nethandlers/PosixHandler.hpp"
+#include "openeaagles/base/network/PosixHandler.hpp"
 
 namespace oe {
 namespace base {

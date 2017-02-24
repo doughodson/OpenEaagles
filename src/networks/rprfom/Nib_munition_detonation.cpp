@@ -8,7 +8,7 @@
 #include "openeaagles/models/players/AbstractWeapon.hpp"
 
 #include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/NetHandler.hpp"
+#include "openeaagles/base/network/NetHandler.hpp"
 
 namespace oe {
 namespace rprfom {
