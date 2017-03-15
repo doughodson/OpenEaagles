@@ -18,11 +18,10 @@
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(NumericReadout,"NumericReadout")
+IMPLEMENT_SUBCLASS(NumericReadout, "NumericReadout")
 
 ReformatScanner* NumericReadout::reformatter = new ReformatScanner();
 
-// Slot table
 BEGIN_SLOTTABLE(NumericReadout)
    "value",            //  1: Value to be displayed
    "maxValue",         //  2: Maximum value that can be displayed
@@ -53,7 +52,6 @@ BEGIN_SLOT_MAP(NumericReadout)
    ON_SLOT(11, setSlotBlankZero, base::Number)
 END_SLOT_MAP()
 
-// Event handlers for NumericReadout events
 BEGIN_EVENT_HANDLER(NumericReadout)
 ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Float)
 ON_EVENT_OBJ(UPDATE_VALUE,onUpdateValue, base::Integer)
@@ -65,8 +63,6 @@ NumericReadout::NumericReadout()
    STANDARD_CONSTRUCTOR()
 
    maxNum = base::UNDEFINED_VALUE;
-   cbuf[0]   = '\0';
-   format[0] = '\0';
    base::utStrcpy(format, FORMAT_LENGTH, "%.0f");
    justification(base::String::RIGHT);
 }

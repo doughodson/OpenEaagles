@@ -115,8 +115,8 @@ protected:
    static const size_t CBUF_LENGTH = 32;    // Max length of cbuf
    static const size_t FORMAT_LENGTH = 32;  // Max length of format
 
-   char cbuf[CBUF_LENGTH];       // buffer
-   char format[FORMAT_LENGTH];   // Current format string
+   char cbuf[CBUF_LENGTH] {};       // buffer
+   char format[FORMAT_LENGTH] {};   // Current format string
 
    char plusChar {};                // Positive value character
    char minusChar {};               // Negative value character
