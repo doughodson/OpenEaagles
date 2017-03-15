@@ -18,14 +18,9 @@
 
 %{
 
-// disable all deprecation warnings for now, until we fix
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-#pragma warning(disable: 4996)
-#endif
-
 #include <cstdio>
 #include <string>
+#include <fstream>
 
 #include "openeaagles/base/edl_parser.hpp"
 #include "openeaagles/base/Object.hpp"
@@ -74,7 +69,7 @@ inline void yyerror(const char* s)
 //------------------------------------------------------------------------------
 static oe::base::Object* parse(const std::string& name, oe::base::PairStream* arg_list)
 {
-    oe::base::Object* obj = nullptr;
+    oe::base::Object* obj {nullptr};
 
     if (factory != nullptr) {
 
@@ -150,7 +145,7 @@ arglist :                           { $$ = new oe::base::PairStream(); }
         | arglist form              { if ($2 != 0) {
                                         int i = $1->entries();
                                         char cbuf[20];
-                                        std::sprintf(cbuf,"%i", i+1);
+                                        std::sprintf(cbuf, "%i", i+1);
                                         oe::base::Pair* p = new oe::base::Pair(cbuf, $2);
                                         $2->unref();
                                         $1->put(p);
@@ -195,8 +190,8 @@ numlist : number                    { $$ = new oe::base::List(); $$->put($1); $1
         | numlist number            { $$ = $1; $$->put($2); $2->unref(); }
         ;
 
-number  : INTEGERconstant       { $$ = new oe::base::Integer($1); }
-        | FLOATINGconstant      { $$ = new oe::base::Float($1); }
+number  : INTEGERconstant           { $$ = new oe::base::Integer($1); }
+        | FLOATINGconstant          { $$ = new oe::base::Float($1); }
         ;
 %%
 
@@ -220,7 +215,7 @@ Object* edl_parser(const std::string& filename, factory_func f, unsigned int* nu
     scanner = new EdlScanner(&fin);
 
     //yydebug = 1;
-    Object* obj = nullptr;
+    Object* obj {nullptr};
     if (yyparse() == 0) {    // returns 0 on success
         obj = result;
     }

@@ -22,10 +22,6 @@ END_SLOT_MAP()
 FuelTank::FuelTank()
 {
     STANDARD_CONSTRUCTOR()
-
-    capacity   = -1;
-    fuelWt     = -1;
-    initFuelWt = -1;
 }
 
 void FuelTank::copyData(const FuelTank& org, const bool)

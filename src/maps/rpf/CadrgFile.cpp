@@ -1,11 +1,8 @@
-//------------------------------------------------------------------------------
-// Class: CadrgFile
-//------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/CadrgFile.hpp"
 #include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/maps/rpf/support.hpp"
+#include "openeaagles/maps/rpf/map_utils.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>
@@ -15,41 +12,18 @@
 namespace oe {
 namespace rpf {
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 IMPLEMENT_SUBCLASS(CadrgFile, "CadrgFile")
 EMPTY_SLOTTABLE(CadrgFile)
 EMPTY_SERIALIZER(CadrgFile)
 
-//--------------------------------------------------------------------------
-// Constructor
-//--------------------------------------------------------------------------
 CadrgFile::CadrgFile()
 {
     STANDARD_CONSTRUCTOR()
-    numBoundaries = 0;
-    cib = false;
-    for (int i = 0; i < MAX_TOC_ENTRIES; i++) entries[i] = nullptr;
-    originalDir = nullptr;
 }
 
-//--------------------------------------------------------------------------
-// copyData()
-//--------------------------------------------------------------------------
-void CadrgFile::copyData(const CadrgFile& org, const bool cc)
+void CadrgFile::copyData(const CadrgFile& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
-
-    if (cc) {
-        for (int i = 0; i < MAX_TOC_ENTRIES; i++) entries[i] = nullptr;
-        originalDir = nullptr;
-    }
 
     numBoundaries = org.numBoundaries;
 
@@ -71,9 +45,6 @@ void CadrgFile::copyData(const CadrgFile& org, const bool cc)
     }
 }
 
-//--------------------------------------------------------------------------
-// deleteData()
-//--------------------------------------------------------------------------
 void CadrgFile::deleteData()
 {
     for (int i = 0; i < MAX_TOC_ENTRIES; i++) {

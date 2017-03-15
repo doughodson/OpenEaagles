@@ -5,11 +5,8 @@
 #include "openeaagles/base/IoAdapter.hpp"
 
 namespace oe {
-
 namespace base { class Angle; class Frequency; class String; }
-
 namespace iodevice {
-
 class IoDevice;
 class IoData;
 
@@ -88,15 +85,14 @@ protected:
 private:
    void initData();
 
-   unsigned int location;  // AI signal gen: IoData's AI channel
-   unsigned int channel;   // AO signal gen: Output device channel number
+   unsigned int location {};  // AI signal gen: IoData's AI channel
+   unsigned int channel {};   // AO signal gen: Output device channel number
 
-   Signal signal;          // Signal type
-   double phase;           // Phase shift (rad)
-   double freq;            // Frequency (rad/sec)
-   double time;            // Time since last reset
+   Signal signal {SINE};      // Signal type
+   double phase {};           // Phase shift (rad)
+   double freq {};            // Frequency (rad/sec)
+   double time {};            // Time since last reset
 };
-
 
 }
 }

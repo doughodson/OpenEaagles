@@ -20,18 +20,16 @@ namespace models {
 IMPLEMENT_PARTIAL_SUBCLASS(Rwr, "Rwr")
 EMPTY_SLOTTABLE(Rwr)
 
-Rwr::Rwr() : rptQueue(MAX_EMISSIONS)
+Rwr::Rwr()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
    setReceiverEnabledFlag(true);
 }
 
-Rwr::Rwr(const Rwr& org) : rptQueue(MAX_EMISSIONS)
+Rwr::Rwr(const Rwr& org)
 {
     STANDARD_CONSTRUCTOR()
-    copyData(org,true);
+    copyData(org, true);
 }
 
 Rwr::~Rwr()
@@ -50,16 +48,9 @@ Rwr* Rwr::clone() const
     return new Rwr(*this);
 }
 
-void Rwr::initData()
-{
-   clearRays(0);
-   clearRays(1);
-}
-
-void Rwr::copyData(const Rwr& org, const bool cc)
+void Rwr::copyData(const Rwr& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 }
 
 void Rwr::deleteData()

@@ -82,7 +82,6 @@ END_SLOT_MAP()
 FtglFonts::FtglFonts()
 {
     STANDARD_CONSTRUCTOR()
-    fSize = DEFAULT_FACE_SIZE;
 }
 FtglFonts::FtglFonts(const FtglFonts& org)
 {
@@ -110,7 +109,6 @@ FtglBitmapFont::FtglBitmapFont()
 FtglExtrdFont::FtglExtrdFont()
 {
     STANDARD_CONSTRUCTOR();
-    depth = DEFAULT_DEPTH;
 }
 FtglOutlineFont::FtglOutlineFont()
 {
@@ -131,9 +129,6 @@ FtglTextureFont::FtglTextureFont()
 FtglHaloFont::FtglHaloFont()
 {
     STANDARD_CONSTRUCTOR();
-    outline = nullptr;
-    haloColor = nullptr;
-    linewidth = 1;
 }
 
 void FtglFonts::copyData(const FtglFonts& org, const bool)

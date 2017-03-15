@@ -9,6 +9,7 @@
 #include "openeaagles/base/osg/Vec4d"
 
 #include "openeaagles/base/util/unit_utils.hpp"
+#include <array>
 
 namespace oe {
 namespace models {
@@ -213,57 +214,57 @@ public:
 
 protected:
    // General track ID and status
-   int         id;             // Track id;
-   short       type;           // Track type: the bit-wise OR of various type bits (see enum above)
-   IffCode     iffCode;        // Friend or Foe (see above)
-   TrackClass  trackClass;     // Track class (see above) [RF or IR]
-   double      age;            // Track age                               (sec)
-   double      quality;        // Quality of Track; normalized: high(1.0) to low(0.0)
+   int         id {};              // Track id;
+   short       type {};            // Track type: the bit-wise OR of various type bits (see enum above)
+   IffCode     iffCode {UNKNOWN};  // Friend or Foe (see above)
+   TrackClass  trackClass;         // Track class (see above) [RF or IR]
+   double      age {};             // Track age                               (sec)
+   double      quality {};         // Quality of Track; normalized: high(1.0) to low(0.0)
 
    // Track State Vector
-   double      latitude;       // Latitude                                (degs)
-   double      longitude;      // Longitude                               (degs)
-   base::Vec3d  los;           // Line-of-sight unit vector (NED)
-   base::Vec3d  pos;           // position; relative to ownship (NED)     (m)
-   base::Vec3d  vel;           // Velocity; relative to ownship (NED)     (m/s)
-   base::Vec3d  accel;         // Acceleration; relative to ownship (NED) ((m/s)/s)
-   double      rng;            // Range from ownship                      (m)
-   double      rngRate;        // Closure rate                            (m/s)
-   bool        llValid;        // Latitude & Longitude are valid
-   double      cErr;           // Circular position error                 (m)
-   double      vErr;           // Vertical (altitude) error               (m)
+   double      latitude {};       // Latitude                                (degs)
+   double      longitude {};      // Longitude                               (degs)
+   base::Vec3d los;               // Line-of-sight unit vector (NED)
+   base::Vec3d pos;               // position; relative to ownship (NED)     (m)
+   base::Vec3d vel;               // Velocity; relative to ownship (NED)     (m/s)
+   base::Vec3d accel;             // Acceleration; relative to ownship (NED) ((m/s)/s)
+   double      rng {};            // Range from ownship                      (m)
+   double      rngRate {};        // Closure rate                            (m/s)
+   bool        llValid;           // Latitude & Longitude are valid
+   double      cErr {};           // Circular position error                 (m)
+   double      vErr {};           // Vertical (altitude) error               (m)
 
    // Data computed from state vector
-   double      raz[3];           // Relative azimuth angle (ownship 2 track)  (r)
-   double      rel[3];           // Relative elevation angle (ownship 2 trk)  (r)
-   double      predictedRaz[3];  // Predicted Relative azimuth angle (ownship 2 track)  (r)
-   double      predictedRel[3];  // Predicted Relative elevation angle (ownship 2 trk)  (r)
-   double      gndRng;         // Ground Range                              (m)
-   double      taz;            // True azimuth angle (ownship to track)     (r)
-   double      aa;             // Aspect angle                              (r)
-   double      gndSpd;         // Ground speed                              (m/s)
-   double      gndTrk;         // Ground track angle                        (r)
-   double      relGndTrk;      // Ground track angle relative to ownship    (r)
+   double      raz[3] {};         // Relative azimuth angle (ownship 2 track)  (r)
+   double      rel[3] {};         // Relative elevation angle (ownship 2 trk)  (r)
+   double      predictedRaz[3];   // Predicted Relative azimuth angle (ownship 2 track)  (r)
+   double      predictedRel[3];   // Predicted Relative elevation angle (ownship 2 trk)  (r)
+   double      gndRng {};         // Ground Range                              (m)
+   double      taz {};            // True azimuth angle (ownship to track)     (r)
+   double      aa {};             // Aspect angle                              (r)
+   double      gndSpd {};         // Ground speed                              (m/s)
+   double      gndTrk {};         // Ground track angle                        (r)
+   double      relGndTrk {};      // Ground track angle relative to ownship    (r)
 
    // Shoot list support
-   int         shootList;      // Shoot list index
-   bool        wpnRel;         // Released weapon on this track
-   bool        rejected;       // Target Rejected (from shoot list)
+   int         shootList {};      // Shoot list index
+   bool        wpnRel {};         // Released weapon on this track
+   bool        rejected {};       // Target Rejected (from shoot list)
 
    // Ownship data
-   double      osGndTrk;        // Ownship's ground track angle             (r)
-   base::Vec3d  osVel;          // Ownship velocity (NED)                   (m/s)
-   base::Vec3d  osAccel;        // Ownship accel (NED)                      ((m/s)/s)
+   double      osGndTrk {};       // Ownship's ground track angle             (r)
+   base::Vec3d  osVel;            // Ownship velocity (NED)                   (m/s)
+   base::Vec3d  osAccel;          // Ownship accel (NED)                      ((m/s)/s)
 
-   Player*     tgt;             // (Optional) pointer to the Track Player
+   Player*     tgt {};            // (Optional) pointer to the Track Player
 
-   bool        mslWarn;         // Missile warning flag
+   bool        mslWarn {};         // Missile warning flag
    static const int MAX_SIG = 4;
-   double      lastSN[MAX_SIG]; // Last MAX_SIG signal values               (dB)
-   double      avgSig;          // Average signal                           (dB)
-   double      maxSig;          // Max Signal                               (dB)
-   int         nSig;            // Number of signals
-   int         iSig;            // Signal index;
+   std::array<double, MAX_SIG> lastSN{}; // Last MAX_SIG signal values         (dB)
+   double      avgSig {};                // Average signal                     (dB)
+   double      maxSig {};                // Max Signal                         (dB)
+   int         nSig {};                  // Number of signals
+   int         iSig {};                  // Signal index;
 };
 
 
@@ -274,7 +275,7 @@ protected:
 //------------------------------------------------------------------------------
 class RfTrack : public Track
 {
-   DECLARE_SUBCLASS(RfTrack,Track)
+   DECLARE_SUBCLASS(RfTrack, Track)
 
 public:
    RfTrack();
@@ -295,7 +296,7 @@ public:
    virtual bool setLastEmission(const Emission* const em);
 
 protected:
-   const Emission* lastEM;      // Last emission
+   const Emission* lastEM {};      // Last emission
 
 };
 
@@ -306,7 +307,7 @@ protected:
 //------------------------------------------------------------------------------
 class IrTrack : public Track
 {
-   DECLARE_SUBCLASS(IrTrack,Track)
+   DECLARE_SUBCLASS(IrTrack, Track)
 
 public:
    IrTrack();
@@ -329,7 +330,7 @@ public:
    virtual bool setLastQuery(const IrQueryMsg* const q);
 
 protected:
-   const IrQueryMsg* lastQuery; // Last query
+   const IrQueryMsg* lastQuery {}; // Last query
 
 };
 

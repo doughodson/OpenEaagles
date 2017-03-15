@@ -236,22 +236,11 @@ END_SLOT_MAP()
 Polynomial::Polynomial()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void Polynomial::initData()
-{
-   m = 0;
-   for (unsigned int i = 0; i < MAX_COEFF; i++) {
-      a[i] = 0;
-   }
-}
-
-void Polynomial::copyData(const Polynomial& org, const bool cc)
+void Polynomial::copyData(const Polynomial& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setCoefficients(org.a, org.m);
 }

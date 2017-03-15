@@ -1,21 +1,4 @@
 
-//==============================================================================
-// UsbJoystick -- MS Windows implementation
-//
-// Standard MS Windows joystick has 8 channels ...
-//
-//    channel     Axis
-//       0         X
-//       1         Y
-//       2         Z
-//       3         R
-//       4         U
-//       5         V
-//       6         POV: back(1.0); forward(-1.0); center(0.0)
-//       7         POV: right(1.0); left(-1.0); center(0.0)
-//
-//==============================================================================
-
 #include "UsbJoystick_msvc.h"
 #include "openeaagles/base/util/platform_api.hpp"
 #include <iostream>
@@ -26,10 +9,8 @@ namespace iodevice {
 IMPLEMENT_SUBCLASS(UsbJoystick, "UsbJoystick")
 EMPTY_SLOTTABLE(UsbJoystick)
 EMPTY_SERIALIZER(UsbJoystick)
+EMPTY_DELETEDATA(UsbJoystick)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 UsbJoystick::UsbJoystick()
 {
    STANDARD_CONSTRUCTOR()
@@ -37,9 +18,6 @@ UsbJoystick::UsbJoystick()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// Init our data
-//------------------------------------------------------------------------------
 void UsbJoystick::initData()
 {
    for (unsigned int i = 0; i < MAX_AI; i++) {
@@ -48,9 +26,6 @@ void UsbJoystick::initData()
    }
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void UsbJoystick::copyData(const UsbJoystick& org, const bool)
 {
    BaseClass::copyData(org);
@@ -62,13 +37,6 @@ void UsbJoystick::copyData(const UsbJoystick& org, const bool)
       cmax[i] = org.cmax[i];
    }
 
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void UsbJoystick::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -107,7 +75,6 @@ void UsbJoystick::reset()
             numDI = tmp;
          }
       }
-
    }
 }
 
@@ -169,7 +136,7 @@ void UsbJoystick::processInputs(double dt, base::IoData* const pInData)
    }
 
    // Update our base class, which will call our component DI handlers
-   BaseClass::processInputs(dt,pInData);
+   BaseClass::processInputs(dt, pInData);
 }
 
 

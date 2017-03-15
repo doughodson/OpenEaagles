@@ -5,7 +5,7 @@
 #include "Graphic.hpp"
 
 namespace oe {
-   namespace base { class Number; }
+namespace base { class Number; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -45,9 +45,9 @@ private:
     bool onUpdateY(const base::Number* const newY);
     bool onUpdateZ(const base::Number* const newZ);
 
-    double myXPos;
-    double myYPos;
-    double myZPos;
+    double myXPos {};
+    double myYPos {};
+    double myZPos {};
 };
 
 }

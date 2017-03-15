@@ -61,29 +61,11 @@ END_SLOT_MAP()
 TargetData::TargetData()
 {
     STANDARD_CONSTRUCTOR()
-
-    enabled      = false;
-    completed    = false;
-    wpnType      = nullptr;
-    quantity     = 0;
-    stickType    = MIDPOINT;
-    stickDist    = 0.0;
-    maxMissDist  = 0.0;
-    interval     = 0.0;
-    manualAssign = false;
-    armDelay     = 0.0;
-    angle        = 0.0;
-    azimuth      = 0.0;
-    velocity     = 0.0;
 }
 
-void TargetData::copyData(const TargetData& org, const bool cc)
+void TargetData::copyData(const TargetData& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-      wpnType = nullptr;
-    }
 
     enabled      = org.enabled;
     completed    = org.completed;

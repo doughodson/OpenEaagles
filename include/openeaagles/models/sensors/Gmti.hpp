@@ -5,9 +5,7 @@
 #include "openeaagles/base/osg/Vec3d"
 
 namespace oe {
-
 namespace base { class List; }
-
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -16,22 +14,22 @@ namespace models {
 //------------------------------------------------------------------------------
 class Gmti : public Radar
 {
-    DECLARE_SUBCLASS(Gmti, Radar)
+   DECLARE_SUBCLASS(Gmti, Radar)
 
 public:
-    Gmti();
+   Gmti();
 
-    const base::Vec3d& getPoi() const                                { return poiVec; }
-    void setPoi(const double x, const double y, const double z);
-    void setPoi(const base::Vec3d& newPos);
+   const base::Vec3d& getPoi() const                                { return poiVec; }
+   void setPoi(const double x, const double y, const double z);
+   void setPoi(const base::Vec3d& newPos);
 
 protected:
-    bool setSlotPoi(base::List* const numList);                // Set Point of Interest
+   bool setSlotPoi(base::List* const numList);                // Set Point of Interest
 
-    virtual void dynamics(const double dt) override;
+   virtual void dynamics(const double dt) override;
 
 private:
-    base::Vec3d poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED
+   base::Vec3d poiVec;    // Point Of Interest vector  (m) [ x, y, z ] NED
 };
 
 }

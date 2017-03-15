@@ -14,7 +14,7 @@ OBJS = \
 	MapDrawer.o \
 	TexturePager.o \
 	TextureTable.o \
-	support.o
+	map_utils.o
 
 .PHONY: all clean
 

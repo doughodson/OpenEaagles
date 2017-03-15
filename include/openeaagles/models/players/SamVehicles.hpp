@@ -48,9 +48,9 @@ public:
    virtual void updateData(const double dt = 0.0) override;
 
 private:
-   double            maxMslRng;        // Max Launch Range        (meters)
-   double            minMslRng;        // Min Launch Range        (meters)
-   unsigned int      numMsl;           // Number of missile available
+   double       maxMslRng {};        // Max Launch Range        (meters)
+   double       minMslRng {};        // Min Launch Range        (meters)
+   unsigned int numMsl {};           // Number of missile available
 };
 
 }

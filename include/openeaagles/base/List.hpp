@@ -130,6 +130,8 @@ class List : public Object
 public:
    struct Item {
       Item() = default;
+      Item(const Item&) = delete;
+      Item& operator=(const Item&) = delete;
 
       Item* getNext()                  { return next; }
       const Item* getNext() const      { return next; }

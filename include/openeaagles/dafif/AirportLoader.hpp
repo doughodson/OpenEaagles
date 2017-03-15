@@ -106,22 +106,22 @@ public:
    virtual void printResults(std::ostream& sout) override;
 
    // Key used for quick ILS record lookup
-   struct IlsKey : public Database::Key {
-
-      RunwayKey* parent;
-      char   key[ILS_KEY_LEN+1];    // DAFIF Key Code
-      char   id[ILS_IDENT_LEN+1];   // DAFIF Identifier
-      IlsKey* next;                 // Next ILS key in list
-      float  freq;                  // ILS component frequency (MHz)
-      int    chan;                  // ILS component channel#
-      Ils::IlsType type;            // ILS component type
+   struct IlsKey : public Database::Key
+   {
+      RunwayKey* parent {};
+      char key[ILS_KEY_LEN+1] {};    // DAFIF Key Code
+      char id[ILS_IDENT_LEN+1] {};   // DAFIF Identifier
+      IlsKey* next {};               // Next ILS key in list
+      float freq {};                 // ILS component frequency (MHz)
+      int chan {};                   // ILS component channel#
+      Ils::IlsType type {Ils::ANY};  // ILS component type
 
 #ifdef ALT_ILS_FILE
-      float  gs;                    // ILS glide slope
-      float  magvar;                // magvar
-      int    loc;                   // position of antenna
-      int    elev;                  // elevation
-      char   name[ILS_NAME_LEN+1];  // ILS name
+      float gs {};                   // ILS glide slope
+      float magvar {};               // magvar
+      int loc {};                    // position of antenna
+      int elev {};                   // elevation
+      char name[ILS_NAME_LEN+1] {};  // ILS name
 
       IlsKey(const long idx);
 #endif
@@ -135,13 +135,13 @@ public:
    };
 
    // Key used for quick Runway record lookup
-   struct RunwayKey : public Database::Key {
-
-      AirportKey* parent;
-      char key[RW_KEY_LEN+1]; // DAFIF Key Code
-      RunwayKey* next;        // Next runway key in list
-      IlsKey* ils;            // List of ILS records
-      int rwlen;              // Runway length
+   struct RunwayKey : public Database::Key
+   {
+      AirportKey* parent {};
+      char key[RW_KEY_LEN+1] {}; // DAFIF Key Code
+      RunwayKey* next {};        // Next runway key in list
+      IlsKey* ils {};            // List of ILS records
+      int rwlen {};              // Runway length
 
       RunwayKey(const long idx, const Runway& runway);
       RunwayKey(const char* key);
@@ -152,19 +152,19 @@ public:
    };
 
    // Key used for quick Airport record lookup
-   struct AirportKey : public Database::Key {
-
-      char   key[AP_KEY_LEN+1];     // DAFIF Key Code
-      RunwayKey* runways;           // List of runways for this AP
-      AirportKey* next;             // Next Airport key in list
-      Airport::AirportType type;  // Airport component type
-
+   struct AirportKey : public Database::Key
+   {
       AirportKey(const long idx, const Airport& airport);
       AirportKey(const char* key);
 
       ~AirportKey();
 
       void serialize(std::ostream& sout) const;
+
+      char key[AP_KEY_LEN+1] {};                  // DAFIF Key Code
+      RunwayKey* runways {};                      // List of runways for this AP
+      AirportKey* next {};                        // Next Airport key in list
+      Airport::AirportType type {Airport::ANY};   // Airport component type
    };
 
 #ifdef ALT_ILS_FILE    /* Alternate ILS File */
@@ -191,7 +191,7 @@ protected:
 
    static int kl_cmp(const void* p1, const void* p2);
 
-   AirportKey* firstAirport;  // first airport in linked-list
+   AirportKey* firstAirport {};  // first airport in linked-list
 
 private:
 

@@ -49,10 +49,8 @@ protected:
    bool setSlotTextureFileName(base::String* const s);
 
 private:
-   void initData();
-
-   char texPath[MAX_PATH_LEN+1];       // Path to texture directory
-   char texFile[MAX_FILENAME_LEN+1];   // BmpTexture filename
+   char texPath[MAX_PATH_LEN+1] {};       // Path to texture directory
+   char texFile[MAX_FILENAME_LEN+1] {};   // BmpTexture filename
 };
 
 //------------------------------------------------------------------------------

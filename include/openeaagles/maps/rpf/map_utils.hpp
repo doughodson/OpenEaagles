@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// Support functions for the rpf map library.
+// Utility functions for the rpf map library.
 //
 // This contains a lot of enumerated types that allow the CadrgFile to seek to 
 // the right portion of the .Toc and other files, all which contain RPF data.
@@ -18,8 +18,8 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __oe_maps_rpf_support_H__
-#define __oe_maps_rpf_support_H__
+#ifndef __oe_maps_rpf_map_utils_H__
+#define __oe_maps_rpf_map_utils_H__
 
 #include <fstream>
 
@@ -30,8 +30,9 @@ typedef unsigned char uchar;
 namespace oe {
 namespace rpf {
 
-// Swap bytes.
+// Swap bytes
 void swap(unsigned char* ptr, int count);
+
 // Change string to lower case
 char* stringToLowercase(char* str, int flag);
 

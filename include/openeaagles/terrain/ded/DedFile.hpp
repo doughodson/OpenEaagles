@@ -6,7 +6,6 @@
 
 namespace oe {
 namespace terrain {
-
 struct DedStdHdr;
 struct DedStats;
 struct DedCellHdr;
@@ -36,9 +35,9 @@ private:
    bool getFileHeaders( std::istream& in );
    bool getData( std::istream& in );
 
-   DedCellHdr** cells;     // Array of Cell headers
-   DedStdHdr* stdhdr;      // Standard header
-   DedStats* fstat;        // Statistics header
+   DedCellHdr** cells {};     // Array of Cell headers
+   DedStdHdr* stdhdr {};      // Standard header
+   DedStats* fstat {};        // Statistics header
 
    // terrain::Database private interface
    virtual bool loadData() override;   // Load the data file

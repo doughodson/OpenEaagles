@@ -4,12 +4,11 @@
 
 #include "openeaagles/base/Color.hpp"
 
+#include <array>
+
 namespace oe {
-
 namespace base { class PairStream; }
-
 namespace graphics {
-
 
 //------------------------------------------------------------------------------
 // Class: ColorRotary
@@ -63,9 +62,9 @@ protected:
 
 private:
     static const unsigned int MAX_VALUES = 50;
-    base::PairStream* myColors;              // our colors (rgba value)
-    double myValues[MAX_VALUES];              // our values
-    unsigned int numVals;                    // number of values
+    base::PairStream* myColors {};               // our colors (rgba value)
+    std::array<double, MAX_VALUES> myValues {};  // our values
+    unsigned int numVals {};                     // number of values
 };
 
 }

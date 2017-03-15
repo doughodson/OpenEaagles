@@ -134,8 +134,8 @@ private:
 
    static const size_t FILENAME_LENGTH = 256; // Max length of file name
    static const size_t PATHNAME_LENGTH = 256; // Max length of path name
-   char filename[FILENAME_LENGTH];            // file name
-   char pathname[PATHNAME_LENGTH];            // path name
+   char filename[FILENAME_LENGTH] {};         // file name
+   char pathname[PATHNAME_LENGTH] {};         // path name
 };
 
 inline bool FileReader::setRecordNumber(const int num)

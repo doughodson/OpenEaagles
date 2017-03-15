@@ -104,13 +104,13 @@ bool Nib::isIffUpdateRequired(const double curExecTime, const models::Iff* const
 
    // System status Bits
    static const unsigned short SYSTEM_STATUS_ON     = 0x0001;
-   static const unsigned short SYSTEM_STATUS_NO_P1  = 0x0002;
-   static const unsigned short SYSTEM_STATUS_NO_P2  = 0x0004;
-   static const unsigned short SYSTEM_STATUS_NO_P3  = 0x0008;
-   static const unsigned short SYSTEM_STATUS_NO_P4  = 0x0010;
-   static const unsigned short SYSTEM_STATUS_NO_P5  = 0x0020;
+   //static const unsigned short SYSTEM_STATUS_NO_P1  = 0x0002;
+   //static const unsigned short SYSTEM_STATUS_NO_P2  = 0x0004;
+   //static const unsigned short SYSTEM_STATUS_NO_P3  = 0x0008;
+   //static const unsigned short SYSTEM_STATUS_NO_P4  = 0x0010;
+   //static const unsigned short SYSTEM_STATUS_NO_P5  = 0x0020;
    static const unsigned short SYSTEM_STATUS_NO_P6  = 0x0040;
-   static const unsigned short SYSTEM_STATUS_FAILED = 0x0080;
+   //static const unsigned short SYSTEM_STATUS_FAILED = 0x0080;
 
    // Parameter bits
    static const unsigned short MODE_ON             = 0x2000;
@@ -123,7 +123,6 @@ bool Nib::isIffUpdateRequired(const double curExecTime, const models::Iff* const
    // Informational layer bits
    static const unsigned short LAYER_1_PRESENT     = 0x0002;
    static const unsigned short LAYER_2_PRESENT     = 0x0004;
-
 
    enum { NO, YES, UNSURE } result = UNSURE;    // Result of update check
    unsigned char options = 0;                   // New IFF PDU option bits

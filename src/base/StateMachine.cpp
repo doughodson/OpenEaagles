@@ -18,7 +18,6 @@ BEGIN_SLOT_MAP(StateMachine)
     ON_SLOT(1, setSlotStateMachines, PairStream)
 END_SLOT_MAP()
 
-
 BEGIN_EVENT_HANDLER(StateMachine)
 
     ON_EVENT_OBJ(ON_ENTRY, onEntry, Object)     // always check w/Object first
@@ -34,7 +33,6 @@ BEGIN_EVENT_HANDLER(StateMachine)
    if (stMach != nullptr && !_used) _used = stMach->event(_event,_obj);
 END_EVENT_HANDLER()
 
-
 StateMachine::StateMachine()
 {
    STANDARD_CONSTRUCTOR()
@@ -43,10 +41,8 @@ StateMachine::StateMachine()
 
 void StateMachine::initData()
 {
-   for (unsigned int i = 0; i < STACK_SIZE; i++) {
-      stateStack[i] = INVALID_STATE;
-      substateStack[i] = INVALID_STATE;
-   }
+   stateStack.fill(INVALID_STATE);
+   substateStack.fill(INVALID_STATE);
 }
 
 void StateMachine::copyData(const StateMachine& org, const bool cc)

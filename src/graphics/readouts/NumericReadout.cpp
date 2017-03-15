@@ -15,12 +15,6 @@
 #include <cstdlib>
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace graphics {
 
@@ -70,21 +64,11 @@ NumericReadout::NumericReadout()
 {
    STANDARD_CONSTRUCTOR()
 
-   num  = 0.0;
    maxNum = base::UNDEFINED_VALUE;
    cbuf[0]   = '\0';
    format[0] = '\0';
-   base::utStrcpy(format,FORMAT_LENGTH,"%.0f");
+   base::utStrcpy(format, FORMAT_LENGTH, "%.0f");
    justification(base::String::RIGHT);
-   plusChar = '\0';
-   minusChar = '\0';
-   dpChar    = '\0';
-   undefinedChar = '-';
-   overflowChar  = '*';
-   postSign = false;
-   maxValid = base::UNDEFINED_VALUE;
-   minValid = base::UNDEFINED_VALUE;
-   blankZero = false;
 }
 
 void NumericReadout::copyData(const NumericReadout& org, const bool)

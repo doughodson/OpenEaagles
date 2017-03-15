@@ -38,9 +38,9 @@ protected:
     bool setSlotLightRadius(const base::Number* const newLR);
 
 private:
-    double lRadius;     // our light radius
-    double gearCurrent; // our gear current value
-    SendData selSD;     // our selection
+    double lRadius {};     // our light radius - 0 means don't use it
+    double gearCurrent {}; // our gear current value
+    SendData selSD;        // our selection
 };
 
 }

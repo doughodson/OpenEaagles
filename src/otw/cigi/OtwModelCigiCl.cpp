@@ -17,50 +17,11 @@ EMPTY_SERIALIZER(OtwModelCigiCl)
 OtwModelCigiCl::OtwModelCigiCl()
 {
    STANDARD_CONSTRUCTOR()
-
-   for (unsigned int i = 0; i < OtwCigiCl::NUM_BUFFERS; i++) {
-      parentEC[i]    = nullptr;
-      trailEC[i]     = nullptr;
-      explosionEC[i] = nullptr;
-      smokeEC[i]     = nullptr;
-      damageCC[i]    = nullptr;
-      animationCC[i] = nullptr;
-      attachedEC[i]  = nullptr;
-      launcherAPC[i] = nullptr;
-      attachedCC[i]  = nullptr;
-   }
-
-   parentActive = false;
-   trailActive = false;
-   explosionActive = false;
-   smokeActive = false;
-   damageActive = false;
-   animationActive = false;
-   attachedEcActive = false;
-   launcherApcActive = false;
-   attachedCcActive = false;
-   isGroundPlayer = false;
-   effectsTimer = 0.0;
-   id = 0;
 }
 
-void OtwModelCigiCl::copyData(const OtwModelCigiCl& org, const bool cc)
+void OtwModelCigiCl::copyData(const OtwModelCigiCl& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      for (unsigned int i = 0; i < OtwCigiCl::NUM_BUFFERS; i++) {
-         parentEC[i]    = nullptr;
-         trailEC[i]     = nullptr;
-         explosionEC[i] = nullptr;
-         smokeEC[i]     = nullptr;
-         damageCC[i]    = nullptr;
-         animationCC[i] = nullptr;
-         attachedEC[i]  = nullptr;
-         launcherAPC[i] = nullptr;
-         attachedCC[i]  = nullptr;
-      }
-   }
 
    parentActive = false;
    trailActive = false;

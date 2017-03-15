@@ -3,18 +3,12 @@
 #define __oe_models_RfSensor_H__
 
 #include "openeaagles/models/systems/RfSystem.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
-   namespace base {
-      class Angle;
-      class Frequency;
-      class Integer;
-      class List;
-      class String;
-      class Time;
-   }
+namespace base { class Angle; class Frequency; class Integer;
+                 class List;  class String;    class Time; }
 namespace models {
-
 class Antenna;
 class Player;
 class TrackManager;
@@ -138,27 +132,27 @@ protected:
 private:
     bool processModes();
 
-    base::PairStream*  modes;        // Our Submodes
-    double*        ranges;           // List of ranges (nm)
-    int            nRanges;          // Number of ranges
-    double         rng;              // Current range (nm)
-    int            rngIdx;           // Range index [ 1 .. nRanges ]
-    int            initRngIdx;       // Initial range [ 1 .. nRanges ]
-    bool           scanning;         // Scanning flag (should be transmitting)
-    int            scanBar;          // Scan (bar) number
-    bool           syncXmitWithScan; // Sync transmitter with antenna scan flag
+    base::PairStream* modes {};        // Our Submodes
+    double*        ranges {};           // List of ranges (nm)
+    int            nRanges {};          // Number of ranges
+    double         rng {50.0};          // Current range (nm)
+    int            rngIdx {1};          // Range index [ 1 .. nRanges ]
+    int            initRngIdx {1};      // Initial range [ 1 .. nRanges ]
+    bool           scanning {};         // Scanning flag (should be transmitting)
+    int            scanBar {};          // Scan (bar) number
+    bool           syncXmitWithScan {}; // Sync transmitter with antenna scan flag
 
-    base::String* tmName;           // Name of our track manager
-    RfSensor*      masterModePtr;   // Our Master (Parent) mode (e.g., Sensor)
-    TrackManager*  trackManager;    // Our Track manager -- managed by the onboard computer
+    base::String* tmName {};            // Name of our track manager
+    RfSensor*     masterModePtr {};     // Our Master (Parent) mode (e.g., Sensor)
+    TrackManager* trackManager {};      // Our Track manager -- managed by the onboard computer
 
     static const unsigned int TYPE_ID_LENGTH = 64;
-    char typeId[TYPE_ID_LENGTH];    // R/F system type ID
+    char typeId[TYPE_ID_LENGTH] {};     // R/F system type ID
 
     // Characteristics
-    double prf;                     // Pulse Repetition Frequency   (Hz)
-    double pulseWidth;              // Pulse Width                  (Sec)
-    double beamWidth;               // Beamwidth                    (R)
+    double prf {};                                // Pulse Repetition Frequency   (Hz)
+    double pulseWidth {};                         // Pulse Width                  (Sec)
+    double beamWidth {base::angle::D2RCC * 3.5};  // Beamwidth                    (R)
 
 };
 

@@ -18,7 +18,6 @@ BEGIN_SLOTTABLE(AirVehicle)
                         //      number: zero for up, non-zero for down
 END_SLOTTABLE(AirVehicle)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(AirVehicle)
     ON_SLOT(1,setInitGearPos, base::String)
     ON_SLOT(1,setInitGearPos, base::Number)

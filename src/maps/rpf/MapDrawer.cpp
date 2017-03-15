@@ -30,56 +30,18 @@ BEGIN_SLOT_MAP(MapDrawer)
     ON_SLOT(3, setSlotShowMap, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-//  Constructor()
-//------------------------------------------------------------------------------
 MapDrawer::MapDrawer()
 {
     STANDARD_CONSTRUCTOR()
 
-    // Default our values
-    gridSize = 0;
-
-    // Initialize our pagers, zones, and texture info
-    for (int i = 0; i < MAX_PAGERS; i++) {
-        pagers[i] = nullptr;
-        zones[i] = -1;
-        textureRow[i] = 0;
-        textureCol[i] = 0;
-        pixelRow[i] = 0.0;
-        pixelCol[i] = 0.0;
-        scalingNorth[i] = 1;
-        scalingEast[i] = 1;
-    }
-
-    // The cadrg map
-    myMap = nullptr;
-
-    pixPerTile = 256.0;
-
-    drawGrid = false;
-    mapIntensity = 1.0f;
-
-    sinAng = 0.0;
-    cosAng = 0.0;
-
-    showMap = true;
-    vpWL = 0.0;
-    vpHL = 0.0;
+    zones.fill(-1);
+    scalingNorth.fill(1);
+    scalingEast.fill(1);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- Copy member data.
-//------------------------------------------------------------------------------
-void MapDrawer::copyData(const MapDrawer& org, const bool cc)
+void MapDrawer::copyData(const MapDrawer& org, const bool)
 {
-    // Copy baseclass stuff first
     BaseClass::copyData(org);
-
-    if (cc) {
-        myMap = nullptr;
-        for (int i = 0; i < MAX_PAGERS; i++) pagers[i] = nullptr;
-    }
 
     if (org.myMap != nullptr) {
         if (myMap != nullptr) myMap->unref();
@@ -115,9 +77,6 @@ void MapDrawer::copyData(const MapDrawer& org, const bool cc)
     pixPerTile = org.pixPerTile;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -
-//------------------------------------------------------------------------------
 void MapDrawer::deleteData()
 {
     if (myMap != nullptr) {

@@ -37,12 +37,6 @@ public:
     Object* pop();
 };
 
-
-inline Stack::Stack() : List()
-{
-}
-
-
 inline void Stack::push(Object* object)
 {
     List::addHead(object);

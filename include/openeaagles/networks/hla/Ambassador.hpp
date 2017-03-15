@@ -35,7 +35,7 @@ public:
    NetIO* getNetIO()                           { return hlaIo; }
 
 private:
-   NetIO* hlaIo;         // Our controlling NetIO
+   NetIO* hlaIo {};         // Our controlling NetIO
 
 // ---
 // -- Standard FederateAmbassador interface --

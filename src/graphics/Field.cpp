@@ -14,9 +14,6 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Field, "Field")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Field)
     "position",         // 1) Starting Position ( ln cp )
     "width",            // 2) Field width
@@ -32,9 +29,6 @@ BEGIN_SLOTTABLE(Field)
     "startCharPos",     //12) Our starting character position (we may want to skip!)
 END_SLOTTABLE(Field)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Field)
     ON_SLOT(1, setPosition, base::List)
     ON_SLOT(2, setSlotWidth, base::Number)
@@ -50,9 +44,6 @@ BEGIN_SLOT_MAP(Field)
     ON_SLOT(12, setSlotStartCharPos, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Field)
     if (mode == input) {
         bool kb = ( _event >= 0x20 && _event <= 0x7f );
@@ -80,22 +71,10 @@ BEGIN_EVENT_HANDLER(Field)
     ON_EVENT_OBJ(SET_JUSTIFICATION,setSlotJustification,base::String)
 END_EVENT_HANDLER()
 
-Field::Field() : origStr(), inputExample(), str()
+Field::Field()
 {
     STANDARD_CONSTRUCTOR()
-    ln = 0;
-    cp = 0;
-    w  = 0;
-    dmode = 0;
     jmode = base::String::NONE;
-    mode = display;
-    icp = 0;
-    inpDspMode = 0;
-    inpModeHold = false;
-    linked = false;
-    inheritColor = false;
-    fontName = nullptr;
-    startCP = 0;
 }
 
 void Field::copyData(const Field& org, const bool)

@@ -1,8 +1,5 @@
-//------------------------------------------------------------------------------
-// Support functions for the map library.
-//------------------------------------------------------------------------------
 
-#include "openeaagles/maps/rpf/support.hpp"
+#include "openeaagles/maps/rpf/map_utils.hpp"
 #include <ctype.h>
 #include <cctype>
 #include <cstring>
@@ -59,12 +56,12 @@ void parseLocations(std::ifstream& fin, Location* locs, int count)
     //          <component length>           uint     4             - Length of the component (named by the id)
     //          <component location>         uint     4             - Physical address of the component
 
-    ushort numRecords;
-    ushort id;
-    uint physicalIdx;
+    ushort numRecords {};
+    ushort id {};
+    uint physicalIdx {};
     // Easy way to skip length uint (4) and ushort (2)
-    uint skipLong;
-    ushort skip;
+    uint skipLong {};
+    ushort skip {};
 
     // Initialize indices so we can later tell if they weren't found
     for (int j = 0; j < count; j++) {

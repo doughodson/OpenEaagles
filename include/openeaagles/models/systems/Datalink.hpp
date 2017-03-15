@@ -100,21 +100,21 @@ private:
 
    static const int MAX_MESSAGES = 1000;  // Max number of messages in queues
 
-   base::safe_queue<base::Object*>* inQueue;     // Received message queue
-   base::safe_queue<base::Object*>* outQueue;    // Queue for messages going out over the network/DIS
-   double noRadioMaxRange;                       // Max range of our datalink (NM)
+   base::safe_queue<base::Object*>* inQueue {};   // Received message queue
+   base::safe_queue<base::Object*>* outQueue {};  // Queue for messages going out over the network/DIS
+   double noRadioMaxRange {5000.0};               // Max range of our datalink (NM)
 
-   const base::String* radioName;     // Name of our radio
-   CommRadio* radio;                  // Our radio
+   const base::String* radioName {};     // Name of our radio
+   CommRadio* radio {};                  // Our radio
 
-   unsigned short radioId;            // Radio ID input
-   bool useRadioIdFlg;                // Use the 'radioId' flag
+   unsigned short radioId {};            // Radio ID input
+   bool useRadioIdFlg {};                // Use the 'radioId' flag
 
-   bool sendLocal;                    // Send to local players flag; direct or via the radio
-   bool queueForNetwork;              // Send the message to the network output queue
+   bool sendLocal {true};                // Send to local players flag; direct or via the radio
+   bool queueForNetwork {true};          // Send the message to the network output queue
 
-   TrackManager* trackManager;        // Track manager
-   const base::String* tmName;        // Track manager name
+   TrackManager* trackManager {};        // Track manager
+   const base::String* tmName {};        // Track manager name
 };
 
 }

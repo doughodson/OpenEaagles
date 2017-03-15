@@ -19,36 +19,27 @@ namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Radar, "Radar")
 
-// Slot table
 BEGIN_SLOTTABLE(Radar)
    "igain",    //  1: RF: Integrator gain (dB or no units; def: 1.0)
 END_SLOTTABLE(Radar)
 
-//  Map slot table
 BEGIN_SLOT_MAP(Radar)
     ON_SLOT(1,  setSlotIGain, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator & clone()
-//------------------------------------------------------------------------------
-Radar::Radar() :
-      myLock(0), rptQueue(MAX_EMISSIONS), rptSnQueue(MAX_EMISSIONS)
+Radar::Radar()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 
    setTransmitterEnableFlag(true);
    setReceiverEnabledFlag(true);
    setTypeId("RADAR");
 }
 
-Radar::Radar(const Radar& org) :
-      myLock(0), rptQueue(MAX_EMISSIONS), rptSnQueue(MAX_EMISSIONS)
+Radar::Radar(const Radar& org)
 {
     STANDARD_CONSTRUCTOR()
-    copyData(org,true);
+    copyData(org, true);
 }
 
 Radar::~Radar()
@@ -67,32 +58,9 @@ Radar* Radar::clone() const
     return new Radar(*this);
 }
 
-void Radar::initData()
-{
-   for (unsigned int i = 0; i < MAX_REPORTS; i++) {
-      reports[i] = nullptr;
-      rptMaxSn[i] = 0;
-   }
-   numReports = 0;
-
-   endOfScanFlg = false;
-
-   for (unsigned int i = 0; i < NUM_SWEEPS; i++) clearSweep(i);
-   csweep = 0;
-
-   currentJamSignal = 0.0;
-   numberOfJammedEmissions = 0;
-
-   rfIGain = 1.0;
-}
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void Radar::copyData(const Radar& org, const bool cc)
+void Radar::copyData(const Radar& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // ---
    // ### Clear out the reports and queues
@@ -110,9 +78,6 @@ void Radar::copyData(const Radar& org, const bool cc)
    rfIGain = org.rfIGain;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Radar::deleteData()
 {
    clearTracksAndQueues();

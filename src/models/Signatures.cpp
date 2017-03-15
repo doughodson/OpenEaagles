@@ -22,7 +22,7 @@ namespace models {
 //==============================================================================
 // Class: RfSignature
 //==============================================================================
-IMPLEMENT_ABSTRACT_SUBCLASS(RfSignature,"Signature")
+IMPLEMENT_ABSTRACT_SUBCLASS(RfSignature, "Signature")
 EMPTY_SLOTTABLE(RfSignature)
 EMPTY_SERIALIZER(RfSignature)
 
@@ -52,7 +52,6 @@ BEGIN_SLOTTABLE(SigConstant)
                     //   base::Number(square meters) or base::Decibel(square meters) or base::Area()
 END_SLOTTABLE(SigConstant)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(SigConstant)
     ON_SLOT(1,setRCS,base::Number)
 END_SLOT_MAP()
@@ -60,7 +59,6 @@ END_SLOT_MAP()
 SigConstant::SigConstant()
 {
     STANDARD_CONSTRUCTOR()
-    rcs = 0.0;
 }
 
 SigConstant::SigConstant(const double r)
@@ -196,7 +194,6 @@ BEGIN_SLOTTABLE(SigPlate)
     "b",        // 2 width of the plate
 END_SLOTTABLE(SigPlate)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(SigPlate)
     ON_SLOT(1,setA,base::Number)
     ON_SLOT(2,setB,base::Number)
@@ -205,8 +202,6 @@ END_SLOT_MAP()
 SigPlate::SigPlate()
 {
     STANDARD_CONSTRUCTOR()
-    a = 0.0;
-    b = 0.0;
 }
 
 SigPlate::SigPlate(const double a1, const double b1)
@@ -459,32 +454,20 @@ END_SLOT_MAP()
 SigAzEl::SigAzEl()
 {
    STANDARD_CONSTRUCTOR()
-
-   tbl = nullptr;
-   swapOrderFlg = false;
-   degFlg = false;
-   dbFlg = false;
 }
 
 SigAzEl::SigAzEl(const base::Table2* const tbl0)
 {
    STANDARD_CONSTRUCTOR()
 
-   tbl = nullptr;
    if (tbl0 != nullptr) {
       tbl = tbl0->clone();
    }
-   swapOrderFlg = false;
-   degFlg = false;
-   dbFlg = false;
 }
 
-void SigAzEl::copyData(const SigAzEl& org, const bool cc)
+void SigAzEl::copyData(const SigAzEl& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) {
-      tbl = nullptr;
-   }
 
    if (tbl != nullptr) { tbl->unref(); tbl = nullptr; }
    if (org.tbl != nullptr) {

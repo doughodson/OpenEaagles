@@ -5,11 +5,7 @@
 #include "openeaagles/base/Object.hpp"
 
 namespace oe {
-   namespace base {
-      class Frequency;
-      class Number;
-   }
-
+namespace base { class Frequency; class Number; }
 namespace linearsystem {
 
 //------------------------------------------------------------------------------
@@ -80,17 +76,14 @@ protected:
    // Initialize this control/filter
    virtual void initialize();
 
-   unsigned int n;   // Number coefficients (order)
-   double* px;       // X input array
-   double* py;       // Y output array
+   unsigned int n {};   // Number coefficients (order)
+   double* px {};       // X input array
+   double* py {};       // Y output array
 
    // Parameters and initial values
-   unsigned int rate;
-   double x0;
-   double y0;
-
-private:
-   void initData();  // Initialize our data
+   unsigned int rate {};
+   double x0 {};
+   double y0 {};
 };
 
 }

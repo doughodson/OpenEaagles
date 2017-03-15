@@ -19,9 +19,6 @@ BEGIN_SLOTTABLE(AoAIndexer)
     "belowMin",     // max value when aoa is below in-range value
 END_SLOTTABLE(AoAIndexer)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Transform
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(AoAIndexer)
     ON_SLOT(1, setSlotAoaRedMax, base::Number)
     ON_SLOT(2, setSlotAoaRedMin, base::Number)
@@ -31,31 +28,14 @@ BEGIN_SLOT_MAP(AoAIndexer)
     ON_SLOT(6, setSlotAoaYellowMin, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AoAIndexer::AoAIndexer()
 {
     STANDARD_CONSTRUCTOR()
-    aoaState = 2;   // default to no valid state
-    displayList = 0;
-    isDlist = false;
-    // default values
-    aoaRedMax = 15;
-    aoaRedMin = 10;
-    aoaYellowMax = -5;
-    aoaYellowMin = -10;
-    aoaGreenMax = 10;
-    aoaGreenMin = -5;
     selectSD.empty();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AoAIndexer::copyData(const AoAIndexer& org, const bool)
 {
-    // copy base class stuff first
     BaseClass::copyData(org);
 
     aoaState = org.aoaState;
@@ -70,9 +50,6 @@ void AoAIndexer::copyData(const AoAIndexer& org, const bool)
     selectSD.empty();
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void AoAIndexer::deleteData()
 {
     // Delete display lists

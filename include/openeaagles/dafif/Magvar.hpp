@@ -24,58 +24,58 @@
 //        and time.
 //
 //------------------------------------------------------------------------------
-class DsMagvar {
+class DsMagvar
+{
 public:
    DsMagvar(const char* file = "/magnavar/geomagu/wmm-95.dat");
    virtual ~DsMagvar();
 
    virtual float magvar(const double lat, const double lon, const float alt, const time_t tim);
 
-
 private:
    void  geomag(const int maxdeg, const char* file);
    float geomag(const double lat, const double lon,
                 const float alt, const double tim);
 
-   int maxord;
+   int maxord {};
 
-   double c[13][13];
-   double cd[13][13];
-   double tc[13][13];
-   double dp[13][13];
-   double snorm[169];
-   double sp[13];
-   double cp[13];
-   double fn[13];
-   double fm[13];
-   double pp[13];
-   double k[13][13];
+   double c[13][13] {};
+   double cd[13][13] {};
+   double tc[13][13] {};
+   double dp[13][13] {};
+   double snorm[169] {};
+   double sp[13] {};
+   double cp[13] {};
+   double fn[13] {};
+   double fm[13] {};
+   double pp[13] {};
+   double k[13][13] {};
 
-   double epoc;
+   double epoc {};
 
-   double ra;
-   double ct, st;
-   double ca, sa;
+   double ra {};
+   double ct {}, st {};
+   double ca {}, sa {};
 
-   double otim;
-   double oalt;
-   double olat;
-   double olon;
+   double otim {};
+   double oalt {};
+   double olat {};
+   double olon {};
 
-   struct tm* gtim;
-   double dtim;
+   struct tm* gtim {};
+   double dtim {};
 
-   int haveData;
+   bool haveData {};
 };
 
 inline DsMagvar::DsMagvar(const char* file)
 {
    if (file != nullptr) {
-      geomag(12,file);
+      geomag(12, file);
       haveData = true;
    }
    else {
-      haveData = 0;
+      haveData = false;
    }
 }
 

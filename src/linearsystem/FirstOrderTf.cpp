@@ -8,6 +8,7 @@ namespace linearsystem {
 IMPLEMENT_SUBCLASS(FirstOrderTf, "FirstOrderTf")
 EMPTY_SLOTTABLE(FirstOrderTf)
 EMPTY_SERIALIZER(FirstOrderTf)
+EMPTY_DELETEDATA(FirstOrderTf)
 
 FirstOrderTf::FirstOrderTf()
 {
@@ -36,11 +37,6 @@ FirstOrderTf::FirstOrderTf(const unsigned int ir,
 
 void FirstOrderTf::initData()
 {
-   n1 = 0;
-   n2 = 0;
-   d1 = 0;
-   d2 = 0;
-
    allocateMemory(ORDER);
    clearMemory();
 
@@ -61,10 +57,6 @@ void FirstOrderTf::copyData(const FirstOrderTf& org, const bool cc)
    d2 = org.d2;
 
    initialize();
-}
-
-void FirstOrderTf::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

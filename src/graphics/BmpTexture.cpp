@@ -20,45 +20,24 @@ IMPLEMENT_SUBCLASS(BmpTexture,"BitmapTexture")
 EMPTY_SERIALIZER(BmpTexture)
 EMPTY_DELETEDATA(BmpTexture)
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(BmpTexture)
     "path",         // 1) Path to the texture directory
     "file",         // 2) BmpTexture file name
 END_SLOTTABLE(BmpTexture)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(BmpTexture)
     ON_SLOT(1, setSlotTexturePath, base::String)
     ON_SLOT(2, setSlotTextureFileName, base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 BmpTexture::BmpTexture()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void BmpTexture::initData()
-{
-   texPath[0] = '\0';
-   texFile[0] = '\0';
-}
-
-//------------------------------------------------------------------------------
-// copyData() -
-//------------------------------------------------------------------------------
-void BmpTexture::copyData(const BmpTexture& org, const bool cc)
+void BmpTexture::copyData(const BmpTexture& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    base::utStrcpy(texPath, sizeof(texPath), org.texPath);
    base::utStrcpy(texFile, sizeof(texFile), org.texFile);

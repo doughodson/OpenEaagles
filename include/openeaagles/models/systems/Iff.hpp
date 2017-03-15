@@ -89,32 +89,32 @@ public:
 private:
 
    // Codes
-   unsigned short mode1;      // Mode 1 Code
-   unsigned short mode2;      // Mode 2 Code
-   unsigned short mode3a;     // Mode 3a Code
-   unsigned short mode4a;     // Mode 4a Codes
-   unsigned short mode4b;     // Mode 4b Codes
+   unsigned short mode1 {};      // Mode 1 Code
+   unsigned short mode2 {};      // Mode 2 Code
+   unsigned short mode3a {};     // Mode 3a Code
+   unsigned short mode4a {};     // Mode 4a Codes
+   unsigned short mode4b {};     // Mode 4b Codes
 
    // Enabled flags
-   bool enableMode1;          // Mode 1 on
-   bool enableMode2;          // Mode 2 on
-   bool enableMode3a;         // Mode 3a on
-   bool enableMode4;          // Mode 4 on
-   bool enableModeC;          // Mode C on
+   bool enableMode1 {};          // Mode 1 on
+   bool enableMode2 {};          // Mode 2 on
+   bool enableMode3a {};         // Mode 3a on
+   bool enableMode4 {};          // Mode 4 on
+   bool enableModeC {};          // Mode C on
 
    // Initial (reset) conditions (set by slot functions)
-   unsigned short icMode1;    // Initial Mode 1 Code
-   unsigned short icMode2;    // Initial Mode 2 Code
-   unsigned short icMode3a;   // Initial Mode 3a Code
-   unsigned short icMode4a;   // Initial Mode 4a Code
-   unsigned short icMode4b;   // Initial Mode 4b Code
-   bool icMode1Flg;           // Initial Mode 1 flag
-   bool icMode2Flg;           // Initial Mode 2 flag
-   bool icMode3aFlg;          // Initial Mode 3a flag
-   bool icMode4Flg;           // Initial Mode 4 flag
-   bool icModeCFlg;           // Initial Mode C flag
-   bool whichMode4;           // Tells us which mode 4 we are using (A/B)
-   bool icWhichMode4;         // Initial Mode 4 mode
+   unsigned short icMode1 {};    // Initial Mode 1 Code
+   unsigned short icMode2 {};    // Initial Mode 2 Code
+   unsigned short icMode3a {};   // Initial Mode 3a Code
+   unsigned short icMode4a {};   // Initial Mode 4a Code
+   unsigned short icMode4b {};   // Initial Mode 4b Code
+   bool icMode1Flg {};           // Initial Mode 1 flag
+   bool icMode2Flg {};           // Initial Mode 2 flag
+   bool icMode3aFlg {};          // Initial Mode 3a flag
+   bool icMode4Flg {};           // Initial Mode 4 flag
+   bool icModeCFlg {};           // Initial Mode C flag
+   bool whichMode4 {};           // Tells us which mode 4 we are using (A/B)
+   bool icWhichMode4 {};         // Initial Mode 4 mode
 };
 
 }

@@ -14,7 +14,6 @@ namespace iodevice {
 
 IMPLEMENT_SUBCLASS(AnalogOutput, "AnalogOutput")
 
-// slot table for this class type
 BEGIN_SLOTTABLE(AnalogOutput)
     "ao",         // 1) Analog Output location (IoData AO's channel)
     "channel",    // 2) Device channel number
@@ -24,7 +23,6 @@ BEGIN_SLOTTABLE(AnalogOutput)
     "table"       // 6) Shaping function table (default: none)
 END_SLOTTABLE(AnalogOutput)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(AnalogOutput)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotChannel,  base::Number)
@@ -37,25 +35,11 @@ END_SLOT_MAP()
 AnalogOutput::AnalogOutput()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void AnalogOutput::initData()
-{
-   devEnb = false;
-   location = 0;
-   channel  = 0;
-   value = 0;
-   gain  = 1.0f;
-   offset = 0.0;
-   table = nullptr;
-}
-
-void AnalogOutput::copyData(const AnalogOutput& org, const bool cc)
+void AnalogOutput::copyData(const AnalogOutput& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    devEnb = org.devEnb;
    location = org.location;

@@ -6,21 +6,14 @@
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class ScalerFunc
-//==============================================================================
 IMPLEMENT_ABSTRACT_SUBCLASS(ScalerFunc,"ScalerFunc")
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(ScalerFunc)
     "rate",   //  1: Master update rate
     "x0",     //  2: Initial (previous) input value: X(0)
     "y0",     //  3: Initial (previous) output value: Y(0)
 END_SLOTTABLE(ScalerFunc)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(ScalerFunc)
    ON_SLOT( 1, setSlotRate, base::Frequency)
    ON_SLOT( 1, setSlotRate, base::Number)
@@ -28,45 +21,19 @@ BEGIN_SLOT_MAP(ScalerFunc)
    ON_SLOT( 3, setSlotY0, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 ScalerFunc::ScalerFunc()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-ScalerFunc::ScalerFunc(const unsigned int r)
+ScalerFunc::ScalerFunc(const unsigned int r): rate(r)
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
-   rate = r;
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
-void ScalerFunc::initData()
-{
-   rate = 0;
-   x0 = 0;
-   y0 = 0;
-
-   px = nullptr;
-   py = nullptr;
-   n = 0;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void ScalerFunc::copyData(const ScalerFunc& org, const bool cc)
+void ScalerFunc::copyData(const ScalerFunc& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    rate = org.rate;
    x0 = org.x0;

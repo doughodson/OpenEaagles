@@ -6,12 +6,8 @@
 #include "openeaagles/base/util/constants.hpp"
 
 namespace oe {
-   namespace base {
-      class Number;
-      class Table2;
-   }
+namespace base { class Number; class Table2; }
 namespace models {
-
 class Emission;
 
 //------------------------------------------------------------------------------
@@ -49,7 +45,7 @@ public:
 
     virtual double getRCS(const Emission* const em) override;
 private:
-    double rcs;         // Constant RCS value
+    double rcs {};         // Constant RCS value
 };
 
 //------------------------------------------------------------------------------
@@ -67,13 +63,13 @@ public:
     SigSphere();
     SigSphere(const double r);
     virtual bool setRadiusFromSlot(base::Number* const num);
-    double computeRcs(const double r)                          { return static_cast<float>(base::PI * r * r); }
+    double computeRcs(const double r)                          { return static_cast<double>(base::PI * r * r); }
     void setRadius(const double r)                             { radius = r; rcs = computeRcs(radius); }
 
     virtual double getRCS(const Emission* const em) override;
 private:
-    double radius;      // Sphere radius
-    double rcs;         // RCS of sphere
+    double radius {};      // Sphere radius
+    double rcs {};         // RCS of sphere
 };
 
 //------------------------------------------------------------------------------
@@ -101,8 +97,8 @@ public:
 
     virtual double getRCS(const Emission* const em) override;
 private:
-    double a;       // Length dimension
-    double b;       // Width dimension
+    double a {};       // Length dimension
+    double b {};       // Width dimension
 };
 
 //------------------------------------------------------------------------------
@@ -120,7 +116,7 @@ public:
 
     virtual double getRCS(const Emission* const em) override;
 private:
-    double length;      // Length dimension
+    double length {};      // Length dimension
 };
 
 
@@ -217,10 +213,10 @@ public:
 
    virtual double getRCS(const Emission* const em) override;
 protected:
-   const base::Table2* tbl;      // The table
-   bool swapOrderFlg;            // Swap independent data order from az/el to el/az
-   bool degFlg;                  // independent data in degrees
-   bool dbFlg;                   // dependent data in decibels
+   const base::Table2* tbl {};      // The table
+   bool swapOrderFlg {};            // Swap independent data order from az/el to el/az
+   bool degFlg {};                  // independent data in degrees
+   bool dbFlg {};                   // dependent data in decibels
 };
 
 }

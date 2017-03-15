@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: GaugeSlider
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_GuageSlider_H__
 #define __oe_instruments_GuageSlider_H__
 
@@ -25,7 +23,7 @@ public:
     virtual void draw() override;
 
 private:
-    double sliderPos;       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
+    double sliderPos {};       // direction, in inches, to move our slider (either Y or X-axis depending on the vertical flag)
 };
 
 }

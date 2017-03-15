@@ -5,9 +5,7 @@
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-
 namespace base { class String; }
-
 namespace models {
 class WorldModel;
 class Player;
@@ -87,7 +85,6 @@ public:
    virtual bool isFrozen() const override;
 
 protected:
-
    virtual WorldModel* getWorldModel();
    virtual const WorldModel* getWorldModel() const;
 
@@ -104,8 +101,8 @@ protected:
 private:
    bool findOwnship();
 
-   Player* ownship;      // Our player (not ref()'d because the own player owns us).
-   unsigned int pwrSw;   // System's master power switch
+   Player* ownship {};           // Our player (not ref()'d because the own player owns us).
+   unsigned int pwrSw {PWR_ON};  // System's master power switch
 };
 
 }

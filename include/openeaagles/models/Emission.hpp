@@ -144,21 +144,21 @@ public:
    virtual void clear() override;                    // Clear this emission's data
 
 private:
-   double          freq;           // Frequency                        (Hz)
-   double          lambda;         // Wavelength                       (meters)
-   double          pw;             // Pulse Width                      (Sec)
-   double          bw;             // Bandwidth                        (Hz)
-   double          prf;            // Pulse Repetition Frequency       (Hz)
-   unsigned int    pulses;         // Number of Pulses this packet     (no units)
-   double          power;          // Effective Radiated Power (erp)   (Watts)
-   double          gain;           // Effective antenna gain           (no units)
-   double          lossRng;        // Loss due to range                (m^-2)
-   double          lossAtmos;      // Atmospheric Attenuation Loss     (no units)
-   double          lossXmit;       // Transmit loss (default: 1.0)     (no units)
-   double          rcs;            // Radar Cross Section (RCS)        (m^2)
-   Antenna::Polarization polar;    // Antenna polarization             (enum)
-   RfSystem*       transmitter;    // The system that transmitted the emission
-   unsigned int    ecmFlag;        // ECM enumeration
+   double freq {};           // Frequency                        (Hz)
+   double lambda {};         // Wavelength                       (meters)
+   double pw {};             // Pulse Width                      (Sec)
+   double bw {};             // Bandwidth                        (Hz)
+   double prf {};            // Pulse Repetition Frequency       (Hz)
+   unsigned int pulses {1};  // Number of Pulses this packet     (no units)
+   double power {};          // Effective Radiated Power (erp)   (Watts)
+   double gain {};           // Effective antenna gain           (no units)
+   double lossRng {1.0};     // Loss due to range                (m^-2)
+   double lossAtmos {1.0};   // Atmospheric Attenuation Loss     (no units)
+   double lossXmit {1.0};    // Transmit loss (default: 1.0)     (no units)
+   double rcs {};            // Radar Cross Section (RCS)        (m^2)
+   Antenna::Polarization polar {Antenna::NONE};  // Antenna polarization   (enum)
+   RfSystem* transmitter {};                     // The system that transmitted the emission
+   unsigned int ecmFlag {ECM_OFF};               // ECM enumeration
 };
 
 }

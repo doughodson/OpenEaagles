@@ -3,11 +3,11 @@
 #define __oe_maps_rpf_CadrgFile_H__
 
 #include "openeaagles/base/Object.hpp"
+#include <array>
 
 namespace oe {
 namespace base { class String; }
 namespace rpf {
-
 class CadrgTocEntry;
 
 //------------------------------------------------------------------------------
@@ -81,10 +81,11 @@ public:
     void setDirectory(const char* x);
 
 private:
-    int numBoundaries;                          // How many boundaries are there?
-    CadrgTocEntry* entries[MAX_TOC_ENTRIES];    // Holds our table of contents entries
-    bool cib;                                   // CIB flag
-    base::String* originalDir;                  // directory of the file we are associated with
+    void initData();
+    int numBoundaries {};                       // How many boundaries are there?
+    std::array<CadrgTocEntry*, MAX_TOC_ENTRIES> entries {};  // Holds our table of contents entries
+    bool cib {};                                // CIB flag
+    base::String* originalDir {};               // directory of the file we are associated with
 };
 
 }

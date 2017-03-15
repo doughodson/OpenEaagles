@@ -1,11 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: DialArcSegment
-// Base class: graphics::Graphic -> AnalogDial -> DialArcSegment
-//
-// Description: An arc or circle that will be drawn according to the start
-// angle and sweep angle set in AnalogDial.
-// Input:  UPDATE_INSTRUMENTS (from Instrument)
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_DialArcSegment_H__
 #define __oe_instruments_DialArcSegment_H__
 
@@ -14,7 +7,15 @@
 namespace oe {
 namespace instruments {
 
-class DialArcSegment : public AnalogDial {
+//------------------------------------------------------------------------------
+// Class: DialArcSegment
+//
+// Description: An arc or circle that will be drawn according to the start
+// angle and sweep angle set in AnalogDial.
+// Input:  UPDATE_INSTRUMENTS (from Instrument)
+//------------------------------------------------------------------------------
+class DialArcSegment : public AnalogDial
+{
     DECLARE_SUBCLASS(DialArcSegment,AnalogDial)
 
 public:
@@ -37,9 +38,9 @@ protected:
     virtual bool onUpdateRadius(const base::Number* const x) override;
 
 private:
-    bool isDynamic;     // are we setting sweep angle based on value?
-    double outerRadius;
-    bool filled;
+    bool isDynamic {};          // are we setting sweep angle based on value?
+    double outerRadius {0.5};   // just a bit bigger than analog dial
+    bool filled {true};
 };
 
 }

@@ -7,29 +7,21 @@
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class LowpassFilter
-//==============================================================================
 IMPLEMENT_SUBCLASS(LowpassFilter,"LowpassFilter")
+EMPTY_COPYDATA(LowpassFilter)
+EMPTY_DELETEDATA(LowpassFilter)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(LowpassFilter)
     "wc",      //  1: Cutoff Frequency
     "wc",      //  1: Filer time constant (radians/sec)
 END_SLOTTABLE(LowpassFilter)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(LowpassFilter)
    ON_SLOT( 1, setSlotWc, base::Frequency)
    ON_SLOT( 1, setSlotWc, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
-LowpassFilter::LowpassFilter() : wc(0.0)
+LowpassFilter::LowpassFilter()
 {
    STANDARD_CONSTRUCTOR()
 }
@@ -38,12 +30,8 @@ LowpassFilter::LowpassFilter(const unsigned int rate, const double w)
                         : FirstOrderTf(rate, 0.0f, w, 1.0f, w)
 {
    STANDARD_CONSTRUCTOR()
-
    wc = w;
 }
-
-EMPTY_COPYDATA(LowpassFilter)
-EMPTY_DELETEDATA(LowpassFilter)
 
 //------------------------------------------------------------------------------
 // Set functions

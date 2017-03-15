@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Class: CadrgFrameEntry
-//------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/CadrgFrameEntry.hpp"
 #include "openeaagles/maps/rpf/CadrgFrame.hpp"
@@ -9,40 +6,18 @@
 namespace oe {
 namespace rpf {
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 IMPLEMENT_SUBCLASS(CadrgFrameEntry, "CadrgFrameEntry")
 EMPTY_SLOTTABLE(CadrgFrameEntry)
 EMPTY_SERIALIZER(CadrgFrameEntry)
 
-//--------------------------------------------------------------------------
-// constructor()
-//--------------------------------------------------------------------------
 CadrgFrameEntry::CadrgFrameEntry()
 {
     STANDARD_CONSTRUCTOR()
-    exists = false;
-    loaded = false;
-    directory = nullptr;
-    frame = nullptr;
-    filename[0] = '\0';
-    cib = false;
 }
 
-//--------------------------------------------------------------------------
-// copyData()
-//--------------------------------------------------------------------------
-void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
+void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
-
-    if (cc) frame = nullptr;
 
     setFrame(org.frame);
 
@@ -52,9 +27,6 @@ void CadrgFrameEntry::copyData(const CadrgFrameEntry& org, const bool cc)
     cib = org.cib;
 }
 
-//--------------------------------------------------------------------------
-// deleteData()
-//--------------------------------------------------------------------------
 void CadrgFrameEntry::deleteData()
 {
     if (frame != nullptr) frame->unref();

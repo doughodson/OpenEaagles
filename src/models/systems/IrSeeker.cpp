@@ -39,31 +39,20 @@ EMPTY_SERIALIZER(IrSeeker)
 EMPTY_SLOTTABLE(IrSeeker)
 EMPTY_COPYDATA(IrSeeker)
 
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(IrSeeker)
     ON_EVENT_OBJ(IR_QUERY_RETURN, irQueryReturnEvent,IrQueryMsg)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
-IrSeeker::IrSeeker() :
-               freeQueryStack(MAX_QUERIES), freeQueryLock(0),
-               inUseQueryQueue(MAX_QUERIES), inUseQueryLock(0)
+IrSeeker::IrSeeker()
 {
    STANDARD_CONSTRUCTOR()
 }
 
-IrSeeker::IrSeeker(const IrSeeker& org) :
-               freeQueryStack(MAX_QUERIES), freeQueryLock(0),
-               inUseQueryQueue(MAX_QUERIES), inUseQueryLock(0)
+IrSeeker::IrSeeker(const IrSeeker& org)
 {
    STANDARD_CONSTRUCTOR()
    copyData(org,true);
 }
-
 
 IrSeeker::~IrSeeker()
 {
@@ -339,33 +328,16 @@ bool IrSeeker::irQueryReturnEvent(IrQueryMsg* const msg)
 IMPLEMENT_SUBCLASS(TdbIr,"Seeker_TdbIr")
 EMPTY_SLOTTABLE(TdbIr)
 EMPTY_SERIALIZER(TdbIr)
+EMPTY_DELETEDATA(TdbIr)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 TdbIr::TdbIr(const unsigned int mt, const Gimbal* const gp) : Tdb(mt,gp)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-TdbIr::TdbIr()
-{
-   STANDARD_CONSTRUCTOR()
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void TdbIr::copyData(const TdbIr& org, const bool)
 {
    BaseClass::copyData(org);
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void TdbIr::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -403,8 +375,8 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
    // Get our position and velocity vectors
    // ## using ownship position for now; should include the location of the gimbal ##
    // ---
-   osg::Vec3 p0 = ownship->getPosition();  // Position Vector
-   osg::Vec3 v0 = ownship->getVelocity();  // Ownship Velocity Vector
+   base::Vec3d p0 = ownship->getPosition();  // Position Vector
+   base::Vec3d v0 = ownship->getVelocity();  // Ownship Velocity Vector
 
    // ---
    // 1) Scan the player list --- compute the normalized Line-Of-Sight (LOS) vectors,
@@ -412,10 +384,9 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
    // ---
    for (base::List::Item* item = players->getFirstItem(); item != 0 && numTgts < maxTargets; item = item->getNext()) {
 
-
       // Get the pointer to the target player
-      base::Pair* pair = (base::Pair*)(item->getValue());
-      Player* target = (Player*)(pair->object());
+      base::Pair* pair = static_cast<base::Pair*>(item->getValue());
+      Player* target = static_cast<Player*>(pair->object());
 
      // FAB - testing - exclude our launch vehicle in tdb
      //if (ownship->isMajorType(Player::WEAPON) && ((Weapon*)ownship)->getLaunchVehicle() == target)
@@ -431,12 +402,12 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
          // Determine if target is within azimuth and elevation checks. If it is, keep it.
          // Otherwise, reject.
 
-         osg::Vec3 targetPosition = target->getPosition();
-         osg::Vec3 losVector = targetPosition - p0;
+         base::Vec3d targetPosition = target->getPosition();
+         base::Vec3d losVector = targetPosition - p0;
          //osg::Vec3 xlos = -losVector;
-       double aazr;
-       double aelr;
-       double ra;
+       double aazr {};
+       double aelr {};
+       double ra {};
 
       if (irSensor->getSeeker()->getOwnHeadingOnly()) {
          // FAB - this calc for gimbal ownHeadingOnly true
@@ -445,22 +416,22 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
          ra = std::sqrt(gndRng2);
 
          // compute angles
-         double los_az = std::atan2(losVector.y(),losVector.x());
-         double hdng = ownship->getHeadingR();
-         aazr = base::Angle::aepcdRad(los_az - static_cast<float>(hdng));
+         const double los_az = std::atan2(losVector.y(), losVector.x());
+         const double hdng = ownship->getHeadingR();
+         aazr = base::angle::aepcdRad(los_az - static_cast<float>(hdng));
          aelr = std::atan2(-losVector.z(), ra);
       }
       else {
          // FAB - this calc for gimbal ownHeadingOnly false
          //osg::Vec4 los0( losVector.x(), losVector.y(), losVector.z(), 0.0 );
          //osg::Vec4 aoi = ownship->getRotMat() * los0;
-         osg::Vec3 aoi = ownship->getRotMat() * losVector;
+         base::Vec3d aoi = ownship->getRotMat() * losVector;
          // 3) Compute the azimuth and elevation angles of incidence (AOI)
 
          // 3-a) Get the aoi vector values & compute range squared
-         double xa = aoi.x();
-         double ya = aoi.y();
-         double za = -aoi.z();
+         const double xa = aoi.x();
+         const double ya = aoi.y();
+         const double za = -aoi.z();
 
          ra = std::sqrt(xa*xa + ya*ya);
          // 3-b) Compute azimuth: az = atan2(ya, xa)
@@ -470,7 +441,6 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
       }
 
          double absoluteAzimuth = aazr;
-
          if (aazr < 0) absoluteAzimuth = -aazr;
 
          double absoluteElevation = aelr;
@@ -528,23 +498,22 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
 // return TRUE if they are both within horizon distance, FALSE if they
 // are over the horizon.
 //------------------------------------------------------------------------------
-bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
+bool TdbIr::horizonCheck(const base::Vec3d& position1, const base::Vec3d& position2)
 {
-
-   bool aboveHorizon = true;
+   bool aboveHorizon {true};
 
    //LET .FIRST.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .FIRST.NODE.POSITION(3), 1.0) )
 
    double distance1 = std::sqrt( static_cast<double>(2.0f * base::nav::ERADM * -position1.z()) );
-   if (distance1 < 1.0f) distance1 = 1.0f;
+   if (distance1 < 1.0f) distance1 = 1.0;
 
 
    //      LET .SECOND.NODE.DISTANCE.TO.HORIZON
    //         = SQRT.F(MAX.F (2.0 * EARTH.RADIUS * .SECOND.NODE.POSITION(3), 1.0) )
 
    double distance2 = std::sqrt( static_cast<double>(2.0f * base::nav::ERADM * -position2.z()) );
-   if (distance2 < 1.0f) distance2 = 1.0f;
+   if (distance2 < 1.0f) distance2 = 1.0;
 
    //LET .RELATIVE.POSITION(*)
    //   = UT.LINEAR.COMBINATION.OF.VECTORS.F(1.0, .FIRST.NODE.POSITION(*),
@@ -553,9 +522,9 @@ bool TdbIr::horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2)
 
    // LET .GROUND.TRACK.RANGE = UT.NORM.F(.RELATIVE.POSITION(*))
 
-   osg::Vec3 groundVec = position1 - position2;
+   base::Vec3d groundVec = position1 - position2;
 
-   double gndRng = std::sqrt ((groundVec.x() * groundVec.x())
+   const double gndRng = std::sqrt ((groundVec.x() * groundVec.x())
                      + (groundVec.y() * groundVec.y()));
 
    //IF .GROUND.TRACK.RANGE < .FIRST.NODE.DISTANCE.TO.HORIZON

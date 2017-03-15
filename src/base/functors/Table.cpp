@@ -47,9 +47,6 @@ BEGIN_SLOT_MAP(Table)
     ON_SLOT(2,setExtrapolationEnabled,Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Table::Table()
 {
    STANDARD_CONSTRUCTOR()
@@ -103,8 +100,9 @@ void Table::copyData(const Table& org, const bool cc)
     if (org.dtable != nullptr) {
         dtable = new double[nd];
         for (unsigned int i = 0; i < nd; i++) dtable[i] = org.dtable[i];
+    } else {
+        dtable = nullptr;
     }
-    else dtable = nullptr;
     valid = org.valid;
     extFlg = org.extFlg;
 }

@@ -1,3 +1,4 @@
+
 #include "openeaagles/instruments/dials/GMeterDial.hpp"
 
 #include "openeaagles/base/PairStream.hpp"
@@ -7,25 +8,16 @@ namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(GMeterDial,"GMeterDial")
 EMPTY_SERIALIZER(GMeterDial)
+EMPTY_DELETEDATA(GMeterDial)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 GMeterDial::GMeterDial()
 {
     STANDARD_CONSTRUCTOR()
-    rotation = 0.0;
-    maxG = 0;    // both at 1 and -1 (on the dial)
-    minG = 0;
-
     gsSD.empty();
     minGSD.empty();
     maxGSD.empty();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void GMeterDial::copyData(const GMeterDial& org, const bool)
 {
     BaseClass::copyData(org);
@@ -36,11 +28,6 @@ void GMeterDial::copyData(const GMeterDial& org, const bool)
     minGSD.empty();
     maxGSD.empty();
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(GMeterDial)
 
 //------------------------------------------------------------------------------
 // reset() -- re-initialize our data

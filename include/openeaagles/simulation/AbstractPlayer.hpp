@@ -104,26 +104,24 @@ protected:
    virtual bool setSlotID(const base::Number* const msg);
    virtual bool setSlotInitMode(base::String* const msg);
 
-   Mode mode;                    // Player mode (see above)
-   AbstractNib* nib;             // Network Interface Block (ref()'d)
+   Mode mode {ACTIVE};           // Player mode (see above)
+   AbstractNib* nib {};          // Network Interface Block (ref()'d)
 
 private:
-
    void initData();
 
    // player identity
-   unsigned short id;            // ID
-   base::Identifier pname;       // Name
+   unsigned short id {};          // ID
+   base::Identifier pname;        // Name
 
-   Mode initMode;                // Initial mode
+   Mode initMode {ACTIVE};        // Initial mode
 
    // incoming network support
-   int netID;                    // Network id
+   int netID {};                  // Network id
 
    // outgoing network support data
-   AbstractNib** nibList;        // Pointer to a list of outgoing NIBs
-   bool enableNetOutput;         // Allow output to the network
-
+   AbstractNib** nibList {};      // Pointer to a list of outgoing NIBs
+   bool enableNetOutput {true};   // Allow output to the network
 };
 
 #include "openeaagles/simulation/AbstractPlayer.inl"

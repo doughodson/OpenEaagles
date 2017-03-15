@@ -1,12 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: graphics::Graphic -> AnalogDial -> GMeterDial
-//
-// Description: G meter, which simply keeps track of min and max and actual G's
-//
-// Inputs:
-//      UPDATE_INSTRUMENTS (from instruments) -> g's
-//      RESET_EVENT -> resets min and max g's
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_GMeterDial_H__
 #define __oe_instruments_GMeterDial_H__
 
@@ -15,8 +7,18 @@
 namespace oe {
 namespace instruments {
 
-class GMeterDial : public AnalogDial {
-    DECLARE_SUBCLASS(GMeterDial,AnalogDial)
+//------------------------------------------------------------------------------
+// Class: GMeterDial
+//
+// Description: G meter, which simply keeps track of min and max and actual G's
+//
+// Inputs:
+//      UPDATE_INSTRUMENTS (from instruments) -> g's
+//      RESET_EVENT -> resets min and max g's
+//------------------------------------------------------------------------------
+class GMeterDial : public AnalogDial
+{
+    DECLARE_SUBCLASS(GMeterDial, AnalogDial)
 
 public:
     GMeterDial();
@@ -27,9 +29,9 @@ public:
     virtual void reset() override;
 
 private:
-    double rotation;    // our rotation angle (of the gauge arrow)
-    double maxG;        // max g value
-    double minG;        // min g value
+    double rotation {}; // our rotation angle (of the gauge arrow)
+    double maxG {};     // max g value - both at 1 and -1 (on the dial)
+    double minG {};     // min g value
 
     SendData gsSD;      // actual gs
     SendData minGSD;    // min gs

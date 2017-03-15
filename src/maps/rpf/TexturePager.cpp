@@ -1,6 +1,3 @@
-// ------------------------------------------------------------------------------
-// Class: TexturePager
-// ------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/TexturePager.hpp"
 #include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
@@ -16,35 +13,14 @@ IMPLEMENT_SUBCLASS(TexturePager, "TexturePager")
 EMPTY_SLOTTABLE(TexturePager)
 EMPTY_SERIALIZER(TexturePager)
 
-//------------------------------------------------------------------------------
-// Constructor()
-//------------------------------------------------------------------------------
 TexturePager::TexturePager()
 {
     STANDARD_CONSTRUCTOR()
-    maxTableSize = 0;
-    map = nullptr;
-    row = 0;
-    col = 0;
-    diffRow = 0;
-    diffCol = 0;
-    stack = nullptr;
-    toc = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData()
-//------------------------------------------------------------------------------
-void TexturePager::copyData(const TexturePager& org, const bool cc)
+void TexturePager::copyData(const TexturePager& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
-
-    if (cc) {
-        map = nullptr;
-        stack = nullptr;
-        toc = nullptr;
-    }
 
     table = org.table;
 
@@ -67,9 +43,6 @@ void TexturePager::copyData(const TexturePager& org, const bool cc)
     diffCol = org.diffCol;
 }
 
-//------------------------------------------------------------------------------
-// deleteData()
-//------------------------------------------------------------------------------
 void TexturePager::deleteData()
 {
     if (map != nullptr) map->unref();

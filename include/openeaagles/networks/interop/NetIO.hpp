@@ -5,6 +5,7 @@
 #include "openeaagles/simulation/AbstractNetIO.hpp"
 
 #include "openeaagles/base/String.hpp"
+#include <array>
 
 namespace oe {
 namespace base { class Angle; class Distance; class Identifier; class String; class Time; }
@@ -320,7 +321,7 @@ protected:
 
    // Returns the input list
    Nib** getInputList() {
-      return inputList;
+      return inputList.data();
    }
 
    // Number of NIBs on the output list
@@ -330,7 +331,7 @@ protected:
 
    // Returns the input list
    Nib** getOutputList() {
-      return outputList;
+      return outputList.data();
    }
 
    // Returns the idx'th NIB from the output list
@@ -356,7 +357,8 @@ public:
    virtual const Ntm* findNetworkTypeMapper(const models::Player* const p) const;
 
    // NTM input node
-   class NtmInputNode : public base::Object {
+   class NtmInputNode : public base::Object
+   {
       DECLARE_SUBCLASS(NtmInputNode, base::Object)
    public:
       NtmInputNode();
@@ -366,7 +368,8 @@ public:
    };
 
    // NTM output node
-   class NtmOutputNode : public base::Object {
+   class NtmOutputNode : public base::Object
+   {
       DECLARE_SUBCLASS(NtmOutputNode, base::Object)
    public:
       NtmOutputNode();
@@ -410,50 +413,47 @@ private:
    void cleanupInputList();                             // Clean-up the Input-List (remove out of date items)
 
    // Network Model IDs
-   unsigned short netID;                                // Network ID
+   unsigned short netID {1};                            // Network ID
    base::safe_ptr<const base::String> federationName;   // Federation name
    base::safe_ptr<const base::String> federateName;     // Federate name
 
    base::safe_ptr<simulation::Station> station;         // Our station class
    base::safe_ptr<simulation::Simulation> simulation;   // Our simulation class
-   TSource          timeline;                           // Source of our timeline
-   unsigned short   iffEventID;                         // IFF event ID (as needed)
-   unsigned short   emEventID;                          // Emission event ID (as needed)
+   TSource timeline {UTC};                              // Source of our timeline
+   unsigned short iffEventID {};                        // IFF event ID (as needed)
+   unsigned short emEventID {};                         // Emission event ID (as needed)
 
    // Network Model mode flags
-   bool              inputFlg;         // Network input enabled
-   bool              outputFlg;        // Network output enabled
-   bool              relayFlg;         // Network relay enabled
-   bool              netInit;          // Network has been initialized
-   bool              netInitFail;      // Initialization attempt failed
+   bool inputFlg {true};     // Network input enabled
+   bool outputFlg {true};    // Network output enabled
+   bool relayFlg {true};     // Network relay enabled
+   bool netInit {};          // Network has been initialized
+   bool netInitFail {};      // Initialization attempt failed
 
    // Distance filter by entity kind/domain
-   double            maxEntityRange;   // Max range from ownship           (meters)
-   double            maxEntityRange2;  // Max range squared from ownship   (meters^2)
+   double maxEntityRange {};   // Max range from ownship           (meters)
+   double maxEntityRange2 {};  // Max range squared from ownship   (meters^2)
 
    // Dead Reckoning (DR) parameters by entity kind/domain
-   double            maxTimeDR;          // Maximum DR time                  (seconds)
-   double            maxPositionErr;     // Maximum position error           (meters)
-   double            maxOrientationErr;  // Maximum orientation error        (radians)
-   double            maxAge;             // Maximum age of networked players (seconds)
+   double maxTimeDR {};          // Maximum DR time                  (seconds)
+   double maxPositionErr {};     // Maximum position error           (meters)
+   double maxOrientationErr {};  // Maximum orientation error        (radians)
+   double maxAge {};             // Maximum age of networked players (seconds)
 
 private: // Nib related private
    // input tables
-   Nib*  inputList[MAX_OBJECTS];    // Table of input objects in name order
-   unsigned int   nInNibs;          // Number of input objects in both tables
+   std::array<Nib*, MAX_OBJECTS> inputList {};  // Table of input objects in name order
+   unsigned int nInNibs {};                    // Number of input objects in both tables
 
    // output tables
-   Nib*  outputList[MAX_OBJECTS];   // Table of output objects in name order
-   unsigned int   nOutNibs;         // Number of output objects in both tables
+   std::array<Nib*, MAX_OBJECTS> outputList {}; // Table of output objects in name order
+   unsigned int nOutNibs {};                   // Number of output objects in both tables
 
    // NIB quick lookup key
    struct NibKey {
-      NibKey(const unsigned short playerId, const base::String* const federateName) {
-         fName = federateName;
-         id = playerId;
-      }
+      NibKey(const unsigned short playerId, const base::String* const federateName): id(playerId), fName(federateName) {}
       // NIB IDs  -- Comparisons in this order --
-      unsigned short id;                           // Player id
+      unsigned short id {};                        // Player id
       base::safe_ptr<const base::String> fName;    // Federate name
    };
 
@@ -464,18 +464,17 @@ private: // Nib related private
 private:  // Ntm related private
    static const unsigned int MAX_ENTITY_TYPES = OE_CONFIG_MAX_NETIO_ENTITY_TYPES;
 
-   NtmInputNode* inputNtmTree;   // Input NTM quick lookup tree
-   NtmOutputNode* outputNtmTree; // Output NTM quick lookuptree
+   NtmInputNode* inputNtmTree {};   // Input NTM quick lookup tree
+   NtmOutputNode* outputNtmTree {}; // Output NTM quick lookuptree
 
    // Input entity type table
-   const Ntm*     inputEntityTypes[MAX_ENTITY_TYPES]; // Table of pointers to input entity type mappers; Ntm objects
-   unsigned int   nInputEntityTypes;                  // Number of input entity mappers (Ntm objects) in the table, 'inputEntityTypes'
+   std::array<const Ntm*, MAX_ENTITY_TYPES> inputEntityTypes {};  // Table of pointers to input entity type mappers; Ntm objects
+   unsigned int nInputEntityTypes {};              // Number of input entity mappers (Ntm objects) in the table, 'inputEntityTypes'
 
    // Output entity type table
-   const Ntm*     outputEntityTypes[MAX_ENTITY_TYPES]; // Table of pointers to output entity type mappers; Ntm objects
-   unsigned int   nOutputEntityTypes;                  // Number of output entity mappers (Ntm objects) in the table, 'outputEntityTypes'
+   std::array<const Ntm*, MAX_ENTITY_TYPES> outputEntityTypes {};  // Table of pointers to output entity type mappers; Ntm objects
+   unsigned int nOutputEntityTypes {};             // Number of output entity mappers (Ntm objects) in the table, 'outputEntityTypes'
 };
-
 
 }
 }

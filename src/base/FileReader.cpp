@@ -21,7 +21,6 @@ BEGIN_SLOTTABLE(FileReader)
     "recordLength",  // 3) Length (in characters) of the records
 END_SLOTTABLE(FileReader)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(FileReader)
     ON_SLOT(1,setSlotPathname,String)
     ON_SLOT(2,setSlotFilename,String)
@@ -31,18 +30,11 @@ END_SLOT_MAP()
 FileReader::FileReader()
 {
    STANDARD_CONSTRUCTOR()
-
-   pathname[0] = '\0';
-   filename[0] = '\0';
 }
 
-void FileReader::copyData(const FileReader& org, const bool cc)
+void FileReader::copyData(const FileReader& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) {
-      pathname[0] = '\0';
-      filename[0] = '\0';
-   }
 
    // Close the old file (we'll need to open() the new one)
    if (dbf != nullptr) dbf->close();

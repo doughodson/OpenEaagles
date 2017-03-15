@@ -5,9 +5,7 @@
 #include "openeaagles/models/players/Player.hpp"
 
 namespace oe {
-
 namespace base { class Angle; class Distance; class String; class Time; }
-
 namespace models {
 class Designator;
 class Stores;
@@ -351,53 +349,53 @@ private:
     static const double DEFAULT_MAX_TGT_RNG;     // meters
     static const double DEFAULT_MAX_TGT_LOS_ERR; // radians
 
-    base::safe_ptr<AbstractWeapon>  flyoutWpn;      // Initial weapon: points to the cloned flyout weapon
-                                                    // Cloned flyout: weapon: points to self
+    base::safe_ptr<AbstractWeapon> flyoutWpn;      // Initial weapon: points to the cloned flyout weapon
+                                                   // Cloned flyout: weapon: points to self
 
-    base::safe_ptr<AbstractWeapon>  initialWpn;     // Initial weapon: points to self
-                                                    // Cloned flyout: points to the initial weapon
+    base::safe_ptr<AbstractWeapon> initialWpn;     // Initial weapon: points to self
+                                                   // Cloned flyout: points to the initial weapon
 
     base::Vec3d tgtPos;                     // Target Position -- platform coord (NED)
-    bool       tgtPosValid;                 // If true, target position is valid
-    base::safe_ptr<Player>  tgtPlayer;      // Target Player
-    base::safe_ptr<Track>   tgtTrack;       // Target Track
-    base::Vec3d    tgtVel;                  // Target/Track Velocity (m/s) relative to ownship velocity
-    base::safe_ptr<Player>  launchVehicle;  // Launching/Releasing Player
-    bool       posTrkEnb;                   // If true, update tgtPos from the target/track
-    double     maxTgtRng;                   // Max target range for default tgt selection      (meters)
-    double     maxTgtLosErr;                // Max target LOS error for default tgt selection  (radians)
-    double     detonationRange;             // Range to target at time of detonation           (meters)
+    bool       tgtPosValid {};                 // If true, target position is valid
+    base::safe_ptr<Player> tgtPlayer;      // Target Player
+    base::safe_ptr<Track>  tgtTrack;       // Target Track
+    base::Vec3d    tgtVel {};                  // Target/Track Velocity (m/s) relative to ownship velocity
+    base::safe_ptr<Player> launchVehicle;  // Launching/Releasing Player
+    bool       posTrkEnb {};                   // If true, update tgtPos from the target/track
+    double     maxTgtRng {DEFAULT_MAX_TGT_RNG};                   // Max target range for default tgt selection      (meters)
+    double     maxTgtLosErr {DEFAULT_MAX_TGT_LOS_ERR};                // Max target LOS error for default tgt selection  (radians)
+    double     detonationRange {};             // Range to target at time of detonation           (meters)
     base::Vec3d  tgtDetLoc;                 // Detonation location in target player's coord    (meters)
 
     base::safe_ptr<Stores> launcher;    // Launcher
-    int         station;                // Station number (on launcher)
+    int         station {};                // Station number (on launcher)
 
-    int         weaponID;               // Weapon type ID (user defined)
-    unsigned short eventID;             // Release event ID
-    bool        power;                  // Weapon power flag
-    bool        failed;                 // Weapon failed flag
-    bool        released;               // Released flag
-    bool        releaseHold;            // Weapon is holding in PRE_RELEASE mode
-    bool        willHang;               // Weapon will hang (or jam) on release.
-    bool        hung;                   // Hung (or jammed) weapon flag
-    bool        blocked;                // Weapon blocked flag
-    bool        canJettison;            // Weapon can be jettisioned.
-    bool        jettisoned;             // Weapon has been jettisioned.
-    bool        dummyFlg;               // Dummy (launch, but don't flyout or detonate)
-    Detonation  results;                // Results of weapon detonation
+    int         weaponID {};               // Weapon type ID (user defined)
+    unsigned short eventID {};             // Release event ID
+    bool        power {true};                  // Weapon power flag
+    bool        failed {};                 // Weapon failed flag
+    bool        released {};               // Released flag
+    bool        releaseHold {};            // Weapon is holding in PRE_RELEASE mode
+    bool        willHang {};               // Weapon will hang (or jam) on release.
+    bool        hung {};                   // Hung (or jammed) weapon flag
+    bool        blocked {};                // Weapon blocked flag
+    bool        canJettison {true};            // Weapon can be jettisioned.
+    bool        jettisoned {};             // Weapon has been jettisioned.
+    bool        dummyFlg {};               // Dummy (launch, but don't flyout or detonate)
+    Detonation  results {DETONATE_NONE};                // Results of weapon detonation
     base::safe_ptr<const base::String> tstTgtNam; // Test only: target player name
 
     // ---
     // Default guidance & dynamics parameters
     // ---
-    double tof;            // Current time of flight   (sec)   (tod)
-    double maxTOF;         // max time of flight       (sec)
-    double tsg;            // time to start guidance   (sec)
-    double maxBurstRng;    // max burst range -- most entities are damaged within this range. (meters)
-    double lethalRange;    // lethal range -- most entities are killed within this range.     (meters)
-    double sobt;           // start-of-burn time       (sec)
-    double eobt;           // end-of-burn time         (sec)
-    double maxGimbal;      // max gimbal angle         (radians)
+    double tof {};                // Current time of flight   (sec)   (tod)
+    double maxTOF {60.0};         // max time of flight       (sec)
+    double tsg {9999.0};          // time to start guidance   (sec)
+    double maxBurstRng {500.0};   // max burst range -- most entities are damaged within this range. (meters)
+    double lethalRange {50.0};    // lethal range -- most entities are killed within this range.     (meters)
+    double sobt {9999.0};         // start-of-burn time       (sec)
+    double eobt {};               // end-of-burn time         (sec)
+    double maxGimbal {};          // max gimbal angle         (radians)
 };
 
 }

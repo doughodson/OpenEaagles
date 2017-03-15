@@ -32,7 +32,7 @@ BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(3, setSlotConstrainedTime, base::Number)
 END_SLOT_MAP()
 
-NetIO::NetIO() : rtiAmb(nullptr), fedAmb(nullptr)
+NetIO::NetIO()
 {
    STANDARD_CONSTRUCTOR()
 
@@ -45,22 +45,14 @@ NetIO::NetIO() : rtiAmb(nullptr), fedAmb(nullptr)
 
    setFederationName(nullptr);
    setFederateName(nullptr);
-   fedFileName = nullptr;
-
-   otaFlag = RTI::RTI_FALSE;
-   rFlag = RTI::RTI_FALSE;
-   cFlag = RTI::RTI_FALSE;
 
    rtiAmb = new RTI::RTIambassador();
-
-   nInObjects = 0;
-   nOutObjects = 0;
 }
 
 NetIO::NetIO(const NetIO& org)
 { 
    STANDARD_CONSTRUCTOR()
-   copyData(org,true);
+   copyData(org, true);
 }
 
 NetIO::~NetIO()
@@ -94,12 +86,7 @@ void NetIO::copyData(const NetIO& org, const bool cc)
 
       setFederationName(nullptr);
       setFederateName(nullptr);
-      fedFileName = nullptr;
-      fedAmb = nullptr;
       rtiAmb = new RTI::RTIambassador();
-
-      nInObjects = 0;
-      nOutObjects = 0;
    }
 
    nInObjects = 0;      // ******
@@ -802,13 +789,13 @@ void NetIO::addNibToObjectTables(interop::Nib* const nib, const IoType ioType)
    if (hlaNib != nullptr && nInObjects < MAX_OBJECTS) {
       // Add to the 'by object name' and 'by object handle' tables
       if (ioType == INPUT_NIB ) {
-         addNibToNameTable(hlaNib, inNameTbl, nInObjects);
-         addNibToHandleTable(hlaNib, inHandleTbl, nInObjects);
+         addNibToNameTable(hlaNib, inNameTbl.data(), nInObjects);
+         addNibToHandleTable(hlaNib, inHandleTbl.data(), nInObjects);
          nInObjects++;
       }
       else if (ioType == OUTPUT_NIB) {
-         addNibToNameTable(hlaNib, outNameTbl, nOutObjects);
-         addNibToHandleTable(hlaNib, outHandleTbl, nOutObjects);
+         addNibToNameTable(hlaNib, outNameTbl.data(), nOutObjects);
+         addNibToHandleTable(hlaNib, outHandleTbl.data(), nOutObjects);
          nOutObjects++;
       }
    }
@@ -863,13 +850,13 @@ void NetIO::removeNibFromObjectTables(interop::Nib* const nib, const IoType ioTy
    if (hlaNib != nullptr && nInObjects > 0) {
       // Remove from the 'by object name' and 'by object handle' tables
       if (ioType == INPUT_NIB) {
-         removeNibFromTable(hlaNib, inNameTbl, nInObjects);
-         removeNibFromTable(hlaNib, inHandleTbl, nInObjects);
+         removeNibFromTable(hlaNib, inNameTbl.data(), nInObjects);
+         removeNibFromTable(hlaNib, inHandleTbl.data(), nInObjects);
          nInObjects--;
       }
       else if (ioType == OUTPUT_NIB) {
-         removeNibFromTable(hlaNib, outNameTbl, nOutObjects);
-         removeNibFromTable(hlaNib, outHandleTbl, nOutObjects);
+         removeNibFromTable(hlaNib, outNameTbl.data(), nOutObjects);
+         removeNibFromTable(hlaNib, outHandleTbl.data(), nOutObjects);
          nOutObjects--;
       }
    }
@@ -901,11 +888,11 @@ Nib* NetIO::findNibByObjectHandle(RTI::ObjectHandle handle, const IoType ioType)
 {
    Nib* found = nullptr;
    if (ioType == INPUT_NIB) {
-      Nib** k = static_cast<Nib**>(bsearch(&handle, inHandleTbl, nInObjects, sizeof(Nib*), compareObjHandles));
+      Nib** k = static_cast<Nib**>(bsearch(&handle, inHandleTbl.data(), nInObjects, sizeof(Nib*), compareObjHandles));
       if (k != nullptr) found = *k;
    }
    else {
-      Nib** k = static_cast<Nib**>(bsearch(&handle, outHandleTbl, nOutObjects, sizeof(Nib*), compareObjHandles));
+      Nib** k = static_cast<Nib**>(bsearch(&handle, outHandleTbl.data(), nOutObjects, sizeof(Nib*), compareObjHandles));
       if (k != nullptr) found = *k;
    }
    return found;
@@ -918,11 +905,11 @@ Nib* NetIO::findNibByObjectName(const char* name, const IoType ioType)
 {
    Nib* found = nullptr;
    if (ioType == INPUT_NIB) {
-      Nib** k = static_cast<Nib**>(bsearch(name, inNameTbl, nInObjects, sizeof(Nib*), compareObjNames));
+      Nib** k = static_cast<Nib**>(bsearch(name, inNameTbl.data(), nInObjects, sizeof(Nib*), compareObjNames));
       if (k != nullptr) found = *k;
    }
    else {
-      Nib** k = static_cast<Nib**>(bsearch(name, outNameTbl, nOutObjects, sizeof(Nib*), compareObjNames));
+      Nib** k = static_cast<Nib**>(bsearch(name, outNameTbl.data(), nOutObjects, sizeof(Nib*), compareObjNames));
       if (k != nullptr) found = *k;
    }
    return found;

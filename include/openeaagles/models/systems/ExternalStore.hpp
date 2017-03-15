@@ -18,7 +18,7 @@ namespace models {
 // Factory name: ExternalStore
 // Slots:
 //    type         <base::String>  ! Type string (default: 0)
-//    jettisonable <Boolean>        ! Store can be jettisoned (default: true )
+//    jettisonable <Boolean>       ! Store can be jettisoned (default: true )
 //
 // Events:
 //      JETTISON_EVENT      Jettison event
@@ -57,11 +57,9 @@ protected:
    virtual bool setSlotJettisonable(base::Number* const p);
 
 private:
-   void initData();
-
-   base::safe_ptr<const base::String> type; // Type string for external store
-   bool        canJettison;     // Weapon can be jettisoned.
-   bool        jettisoned;      // Weapon has been jettisoned.
+   base::safe_ptr<const base::String> type;   // Type string for external store
+   bool canJettison {true};                   // Weapon can be jettisoned.
+   bool jettisoned {};                        // Weapon has been jettisoned.
 };
 
 }

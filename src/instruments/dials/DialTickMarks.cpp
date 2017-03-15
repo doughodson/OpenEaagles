@@ -15,42 +15,26 @@ BEGIN_SLOTTABLE(DialTickMarks)
     "tickGraphic",      // sets a graphic to use instead of a line
 END_SLOTTABLE(DialTickMarks)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(DialTickMarks)
     ON_SLOT(1, setSlotLength, base::Number)
     ON_SLOT(2, setSlotQuantity, base::Number)
     ON_SLOT(3, setTickGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 DialTickMarks::DialTickMarks()
 {
     STANDARD_CONSTRUCTOR()
-    length = 1;
-    quantity = 1;
-    myGraphic = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void DialTickMarks::copyData(const DialTickMarks& org, const bool cc)
+void DialTickMarks::copyData(const DialTickMarks& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) myGraphic = nullptr;
 
     length = org.length;
     quantity = org.quantity;
         setTickGraphic(org.myGraphic);
     }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void DialTickMarks::deleteData()
 {
     if (myGraphic != nullptr) myGraphic->unref();

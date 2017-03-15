@@ -8,13 +8,10 @@
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(MapPage,"MapPage")
+IMPLEMENT_SUBCLASS(MapPage, "MapPage")
 EMPTY_SERIALIZER(MapPage)
 EMPTY_DELETEDATA(MapPage)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(MapPage)
     "outerRadius",              // 1) radius (centered) of our outer circle (units)
     "outerRadiusDecentered",    // 2) radius (de-centered) of our outer arc (units)
@@ -39,10 +36,6 @@ BEGIN_SLOT_MAP(MapPage)
     ON_SLOT(9, setSlotNorthUp, base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-//  Event Handler
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(MapPage)
     ON_EVENT_OBJ(UPDATE_VALUE,  onUpdateRange, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateHeading, base::Number)
@@ -54,42 +47,15 @@ BEGIN_EVENT_HANDLER(MapPage)
     ON_EVENT_OBJ(UPDATE_VALUE8, onUpdateDisplacement, base::Number)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 MapPage::MapPage()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void MapPage::initData()
-{
-   heading = 0;
-   referenceLat = 0;
-   referenceLon = 0;
-   cosineLatReference = 1.0;
-   headingSin = 0;
-   headingCos = 1.0;
-
-   range = 1.0;
-   outerRadius = 1.0;
-   outerRadiusDC = 1.0;
-   nm2Screen = 1.0;
-   displacement = 0;
-   isCentered = true;   // we are centered
-   northUp = true;      // start in north up mode
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void MapPage::copyData(const MapPage& org, const bool cc)
+void MapPage::copyData(const MapPage& org, const bool)
 {
    // copy base class stuff first
    BaseClass::copyData(org);
-   if (cc) initData();
 
    heading = org.heading;
    headingSin = org.headingSin;

@@ -12,36 +12,11 @@ EMPTY_SERIALIZER(Image)
 Image::Image()
 {
     STANDARD_CONSTRUCTOR()
-
-    id = 0;
-    xmitEnble = false;
-    latitude = 0.0;
-    longitude = 0.0;
-    elevation = 0.0;
-    orientation = 0.0;
-    resolution = 0.0;
-
-    data = nullptr;
-    size = 0;
-    width = 0;
-    height = 0;
-    depth = 0;
-
-    origData = nullptr;
-    origSize = 0;
-    origCompressed = 0;
 }
 
-void Image::copyData(const Image& org, const bool cc)
+void Image::copyData(const Image& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        data = nullptr;
-        size = 0;
-        origData = nullptr;
-        origSize = 0;
-    }
 
     // Copy the SAR data
     setDatalinkTransmitEnable( org.xmitEnble );

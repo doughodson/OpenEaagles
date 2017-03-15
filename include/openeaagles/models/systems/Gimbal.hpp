@@ -120,28 +120,28 @@ class Gimbal : public System
 
 public:
 
-    // Servo type
-    enum Type {
-       MECHANICAL,   // Mechanical gimbal
-       ELECTRONIC    // Electronic servo (e.g., phased array)
-    };
+   // Servo type
+   enum Type {
+      MECHANICAL,   // Mechanical gimbal
+      ELECTRONIC    // Electronic servo (e.g., phased array)
+   };
 
-    // Servo Mode
-    enum ServoMode {
-       FREEZE_SERVO,    // Servo is frozen
-       RATE_SERVO,      // Rate servo
-       POSITION_SERVO   // Position servo
-    };
+   // Servo Mode
+   enum ServoMode {
+      FREEZE_SERVO,    // Servo is frozen
+      RATE_SERVO,      // Rate servo
+      POSITION_SERVO   // Position servo
+   };
 
-    // Position/velocity vector indexes
-    enum {
-       AZ_IDX,    // Azimuth index
-       ELEV_IDX,  // Elevation index
-       ROLL_IDX   // Roll index
-    };
+   // Position/velocity vector indexes
+   enum {
+      AZ_IDX,    // Azimuth index
+      ELEV_IDX,  // Elevation index
+      ROLL_IDX   // Roll index
+   };
 
    // Max number of players of interest
-    enum { MAX_PLAYERS = OE_CONFIG_MAX_PLAYERS_OF_INTEREST };
+   enum { MAX_PLAYERS = OE_CONFIG_MAX_PLAYERS_OF_INTEREST };
 
 public:  // Public section
    Gimbal();
@@ -352,9 +352,9 @@ private:
 
    static const double defaultTolerance;
 
-   Type        type;          // Mechanical or Electronic gimbal (affects maxRates)
-   ServoMode   servoMode;     // Gimbal's servo mode
-   bool        fastSlew;      // Fast slewing mode: tell us if we are slewing fast (true) or scanning (slewing slow (false))
+   Type        type {ELECTRONIC};          // Mechanical or Electronic gimbal (affects maxRates)
+   ServoMode   servoMode {FREEZE_SERVO};   // Gimbal's servo mode
+   bool        fastSlew {true};            // Fast slewing mode: tell us if we are slewing fast (true) or scanning (slewing slow (false))
 
    base::Matrixd tm;          // Transformation matrix (to/from the player's coordinate system)
    base::Vec3d  pos;          // Current gimbal position      (rad)
@@ -362,7 +362,7 @@ private:
    base::Vec3d  cmdPos;       // Commanded position           (rad)
    base::Vec3d  cmdRate;      // Commanded rate               (rad/sec)
    base::Vec3d  location;     // Gimbal's location on parent  (meters)
-   bool atLimit;              // Gimbal is at a limit
+   bool atLimit {};           // Gimbal is at a limit
 
    base::Vec3d  maxRate;      // Max mechanical rate of gimbal (rad/sec)
    base::Vec3d  lowLimits;    // left/lower gimbal limits     (rad)
@@ -372,15 +372,15 @@ private:
    base::Vec3d  initCmdPos;   // Initial commanded position   (rad)
    base::Vec3d  initCmdRate;  // Initial commanded rate       (rad/sec)
 
-   double    maxRngPlayers;   // Max range for players of interest or zero for all (meters)
-   double    maxAnglePlayers; // Max angle of gimbal boresight for players of interest (or zero for all) (rad)
-   unsigned int playerTypes;  // Player of interest type mask
-   unsigned int maxPlayers;   // Max number of players of interest (i.e., size of the arrays)
-   bool     localOnly;        // Local players of interest only
-   bool     terrainOcculting; // Target terrain occulting enabled flag
-   bool     checkHorizon;     // Horizon masking check enabled flag
-   bool     useWorld;         // Using player of interest's world coordinates
-   bool     ownHeadingOnly;   // Whether only the ownship heading is used by the target data block
+   double    maxRngPlayers {};         // Max range for players of interest or zero for all (meters)
+   double    maxAnglePlayers {};       // Max angle of gimbal boresight for players of interest (or zero for all) (rad)
+   unsigned int playerTypes {0xFFFF};  // Player of interest type mask (default: all players)
+   unsigned int maxPlayers {200};      // Max number of players of interest (i.e., size of the arrays)
+   bool     localOnly {};              // Local players of interest only
+   bool     terrainOcculting {};       // Target terrain occulting enabled flag
+   bool     checkHorizon {true};       // Horizon masking check enabled flag
+   bool     useWorld {true};           // Using player of interest's world coordinates
+   bool     ownHeadingOnly {true};     // Whether only the ownship heading is used by the target data block
 
    base::safe_ptr<Tdb> tdb;  // Current Target Data Block
 };

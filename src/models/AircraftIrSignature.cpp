@@ -19,9 +19,6 @@ namespace models {
 IMPLEMENT_SUBCLASS(AircraftIrSignature, "AircraftIrSignature")
 EMPTY_SERIALIZER(AircraftIrSignature)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(AircraftIrSignature)
    "airframeSignatureTable",  // mapping of
             // signature to  pla, where pla is in % from 0 - 100
@@ -67,7 +64,6 @@ BEGIN_SLOTTABLE(AircraftIrSignature)
 
 END_SLOTTABLE(AircraftIrSignature)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(AircraftIrSignature)
    ON_SLOT(1,setSlotAirframeSignatureTable,base::Table4)
    ON_SLOT(2,setSlotAirframeWavebandFactorTable,base::Table2)
@@ -80,27 +76,11 @@ END_SLOT_MAP()
 AircraftIrSignature::AircraftIrSignature()
 {
     STANDARD_CONSTRUCTOR()
-
-    initData();
 }
 
-void AircraftIrSignature::initData()
-{
-    airframeSignatureTable = nullptr;
-    airframeWavebandFactorTable = nullptr;
-    plumeSignatureTable = nullptr;
-    plumeWavebandFactorTable = nullptr;
-    hotPartsSignatureTable = nullptr;
-    hotPartsWavebandFactorTable = nullptr;
-    airframeSig = nullptr;
-    plumeSigs = nullptr;
-    hotPartsSigs = nullptr;
-}
-
-void AircraftIrSignature::copyData(const AircraftIrSignature& org, const bool cc)
+void AircraftIrSignature::copyData(const AircraftIrSignature& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) initData();
 
     if (org.airframeSignatureTable != nullptr) {
         base::Table4* copy = org.airframeSignatureTable->clone();

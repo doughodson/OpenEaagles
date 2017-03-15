@@ -9,7 +9,6 @@ namespace dafif {
 
 //------------------------------------------------------------------------------
 // Class: Ils
-// Base class: base::Object -> base::String -> Record -> Ils
 //
 // Description: Access to the DAFIF ILS records.
 //

@@ -13,15 +13,6 @@ EMPTY_DELETEDATA(Ins)
 Ins::Ins() : gyroBias(), accelBias()
 {
     STANDARD_CONSTRUCTOR()
-
-    wander      = 0.0;
-    dBias       = 0.0;
-    dSFact      = 0.0;
-
-    // Alignment/Kalman filter data
-    alignMode   = SHDG;
-    alignTTG    = 0.0;
-    quality     = 0.0;
 }
 
 void Ins::copyData(const Ins& org, const bool)

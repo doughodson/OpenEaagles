@@ -50,7 +50,7 @@ private:
    virtual unsigned long mainThreadFunc() override;
 
    double rate {};         // Loop rate (hz); until our parent shuts down
-   Statistic bfStats;      // Busted (overrun) frame statistics (windows only)
+   Statistic bfStats {};   // Busted (overrun) frame statistics (windows only)
    unsigned int tcnt {};   // total frame count
    bool vdtFlg {};         // Variable delta time flag
 };

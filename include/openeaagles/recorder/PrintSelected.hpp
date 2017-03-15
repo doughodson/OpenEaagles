@@ -13,16 +13,16 @@
 #include "google/protobuf/message.h"
 
 namespace oe {
-      namespace base { class Float; class Integer; }
+namespace base { class Float; class Integer; }
 namespace recorder {
-   namespace pb {
-      class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
-      class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
-      class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
-      class WeaponDetonationEventMsg; class GunFiredEventMsg; class NewTrackEventMsg;
-      class TrackRemovedEventMsg; class TrackDataMsg; class PlayerId; class PlayerState;
-      class TrackData; class EmissionData;
-   }
+namespace pb {
+class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
+class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
+class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
+class WeaponDetonationEventMsg; class GunFiredEventMsg; class NewTrackEventMsg;
+class TrackRemovedEventMsg; class TrackDataMsg; class PlayerId; class PlayerState;
+class TrackData; class EmissionData;
+}
 
 //------------------------------------------------------------------------------
 // Class: PrintSelected
@@ -88,24 +88,18 @@ protected:
    std::string printTimeMsg(double time);
 
 private:
-   void initData();
-
-   // slot data:
-
-   unsigned int msgToken;
-   double compareValD;
-   int compareValI;
-   Condition condition;
+   unsigned int msgToken {};
+   double compareValD {};
+   int compareValI {};
+   Condition condition {EQ};
 
    std::string fieldNameStr;
    std::string compareStr;
-   const google::protobuf::Message* recMsg;
-   const google::protobuf::Message* eventMsg;
-   bool foundSelected;
-   bool printHeader;
-   bool timeOnly;
-
-
+   const google::protobuf::Message* recMsg {};
+   const google::protobuf::Message* eventMsg {};
+   bool foundSelected {};
+   bool printHeader {};
+   bool timeOnly {};
 };
 
 inline unsigned int PrintSelected::getMsgToken() const { return msgToken; }

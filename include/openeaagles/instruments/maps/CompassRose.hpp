@@ -63,11 +63,11 @@ protected:
     bool onUpdateCentered(const base::Number* const x);
 
 private:
-    double rot;         // rotation angle (rads)
-    double cenRadius;   // our centered radius (inches)
-    double decRadius;   // our decentered radius (inches)
-    bool centered;      // centered flag
-    double displacement;// how far to translate when we go decentered (inches)
+    double rot {};              // rotation angle (rads)
+    double cenRadius {0.5};     // our centered radius (inches)
+    double decRadius {1.0};     // our decentered radius (inches)
+    bool centered {true};       // centered flag
+    double displacement {-0.5}; // how far to translate when we go decentered (inches)
 
     SendData lTicksSD;
     SendData sTicksSD;

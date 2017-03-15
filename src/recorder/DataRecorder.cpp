@@ -20,21 +20,12 @@
 
 #include <cstdio>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
 IMPLEMENT_SUBCLASS(DataRecorder,"DataRecorder")
 EMPTY_SERIALIZER(DataRecorder)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(DataRecorder)
    "outputHandler",     // 1)  Output handler
    "eventName",         // 2) Event (i.e., test, study, demo, exercise) name
@@ -61,10 +52,6 @@ BEGIN_SLOT_MAP(DataRecorder)
    ON_SLOT( 10, setSlotYear,       base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// DataRecorder dispatch table
-//------------------------------------------------------------------------------
 BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
    ON_RECORDER_EVENT_ID( REID_MARKER,            recordMarker )
    ON_RECORDER_EVENT_ID( REID_DI_EVENT,          recordDI )
@@ -86,38 +73,14 @@ BEGIN_RECORDER_HANDLER_TABLE(DataRecorder)
    ON_RECORDER_EVENT_ID( REID_TRACK_DATA,        recordTrackData)
 END_RECORDER_HANDLER_TABLE()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 DataRecorder::DataRecorder()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void DataRecorder::initData()
-{
-   outputHandler = nullptr;
-   setFirstPass(true);
-
-   eventName = "";
-   application = "";
-   caseNum = 0;
-   missionNum = 0;
-   subjectNum = 0;
-   runNum = 0;
-   day = 0;
-   month = 0;
-   year = 0;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void DataRecorder::copyData(const DataRecorder& org, const bool cc)
+void DataRecorder::copyData(const DataRecorder& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    {  // clone the original's output handler
       OutputHandler* copy = nullptr;
@@ -136,14 +99,10 @@ void DataRecorder::copyData(const DataRecorder& org, const bool cc)
    year = org.year;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void DataRecorder::deleteData()
 {
    setOutputHandler(nullptr);
 }
-
 
 //------------------------------------------------------------------------------
 // Background thread processing of the output data record queue

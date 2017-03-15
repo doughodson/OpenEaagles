@@ -6,9 +6,8 @@
 
 namespace oe {
 namespace recorder {
-
-   // Main (protocol buffer) data record
-   namespace pb { class DataRecord; }
+// Main (protocol buffer) data record
+namespace pb { class DataRecord; }
 
 //------------------------------------------------------------------------------
 // Class: DataRecordHandle
@@ -37,7 +36,7 @@ protected:
    DataRecordHandle();  // Default Constructor
 
 private:
-   pb::DataRecord* record;
+   pb::DataRecord* record {};
 };
 
 inline const pb::DataRecord* DataRecordHandle::getRecord() const { return record; }

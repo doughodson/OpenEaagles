@@ -4,13 +4,13 @@
 
 #include "openeaagles/networks/interop/Nib.hpp"
 #include "openeaagles/networks/hla/NetIO.hpp"
+#include <array>
 
 #include <RTI.hh>
 #include <fedtime.hh>
 
 namespace oe {
 namespace hla {
-
 class Ambassador;
 
 //------------------------------------------------------------------------------
@@ -73,11 +73,12 @@ protected:
     virtual void clearAllAttributeUpdateRequiredFlags();
 
 private:
-    base::String oname;                         // Our object name
-    RTI::ObjectHandle handle;                   // Our object handle
-    unsigned int objectClassIndex;              // We are of this FOM object class
-    bool updateEnabled[NetIO::MAX_ATTRIBUTES];  // If true, an attribute update is enabled
-    bool updateRequired[NetIO::MAX_ATTRIBUTES]; // If true, an attribute update is required (see note above)
+    base::String oname;                          // Our object name
+    RTI::ObjectHandle handle {0};                // Our object handle
+    unsigned int objectClassIndex {};            // We are of this FOM object class
+
+    std::array<bool, NetIO::MAX_ATTRIBUTES> updateEnabled {};   // If true, an attribute update is enabled
+    std::array<bool, NetIO::MAX_ATTRIBUTES> updateRequired {};  // If true, an attribute update is required (see note above)
 };
 
 }

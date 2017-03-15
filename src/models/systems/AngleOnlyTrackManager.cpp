@@ -24,13 +24,11 @@ namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(AngleOnlyTrackManager, "AngleOnlyTrackManager")
 
-// Slot table
 BEGIN_SLOTTABLE(AngleOnlyTrackManager)
     "azimuthBin",       // 1: Azimuth Bin
     "elevationBin",     // 2: Elevation Bin
 END_SLOTTABLE(AngleOnlyTrackManager)
 
-//  Map slot table
 BEGIN_SLOT_MAP(AngleOnlyTrackManager)
     ON_SLOT(1, setSlotAzimuthBin, base::Number)
     ON_SLOT(2, setSlotElevationBin, base::Number)
@@ -39,11 +37,6 @@ END_SLOT_MAP()
 AngleOnlyTrackManager::AngleOnlyTrackManager() : queryQueue(MAX_TRKS)
 {
     STANDARD_CONSTRUCTOR()
-
-    oneMinusAlpha = 0.0;
-    oneMinusBeta = 1.0;
-    azimuthBin = static_cast<double>(base::PI);
-    elevationBin = static_cast<double>(base::PI);
 }
 
 AngleOnlyTrackManager::AngleOnlyTrackManager(const AngleOnlyTrackManager& org) : queryQueue(MAX_TRKS)
@@ -78,9 +71,6 @@ void AngleOnlyTrackManager::copyData(const AngleOnlyTrackManager& org, const boo
     oneMinusBeta = org.oneMinusBeta;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void AngleOnlyTrackManager::deleteData()
 {
     clearTracksAndQueues();
@@ -279,30 +269,18 @@ std::ostream& AngleOnlyTrackManager::serialize(std::ostream& sout, const int i, 
 //==============================================================================
 // Class: AirAngleOnlyTrkMgr
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AirAngleOnlyTrkMgr,"AirAngleOnlyTrkMgr")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AirAngleOnlyTrkMgr, "AirAngleOnlyTrkMgr")
+EMPTY_DELETEDATA(AirAngleOnlyTrkMgr)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AirAngleOnlyTrkMgr::AirAngleOnlyTrkMgr()
 {
     STANDARD_CONSTRUCTOR()
     setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AirAngleOnlyTrkMgr::copyData(const AirAngleOnlyTrkMgr& org, const bool)
 {
     BaseClass::copyData(org);
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void AirAngleOnlyTrkMgr::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -587,9 +565,6 @@ void AirAngleOnlyTrkMgr::processTrackList(const double dt)
 
 }
 
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -610,7 +585,6 @@ std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, con
 }
 
 
-
 //==============================================================================
 // Class: AirAngleOnlyTrkMgrPT - perceived truth version of above
 //==============================================================================
@@ -625,28 +599,20 @@ std::ostream& AirAngleOnlyTrkMgr::serialize(std::ostream& sout, const int i, con
 // if !usePerceivedData, it uses track target position, which is a ground truth target position for one
 // of the entities in the merged track
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AirAngleOnlyTrkMgrPT,"AirAngleOnlyTrkMgrPT")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AirAngleOnlyTrkMgrPT, "AirAngleOnlyTrkMgrPT")
 EMPTY_DELETEDATA(AirAngleOnlyTrkMgrPT)
 EMPTY_SERIALIZER(AirAngleOnlyTrkMgrPT)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AirAngleOnlyTrkMgrPT::AirAngleOnlyTrkMgrPT()
 {
     STANDARD_CONSTRUCTOR()
-    usePerceivedPosVel = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AirAngleOnlyTrkMgrPT::copyData(const AirAngleOnlyTrkMgrPT& org, const bool)
 {
     BaseClass::copyData(org);
     usePerceivedPosVel = org.usePerceivedPosVel;
 }
-
 
 //------------------------------------------------------------------------------
 // Age the tracks by delta time

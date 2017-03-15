@@ -55,7 +55,7 @@ public:
    virtual void OnSensorResp(CigiBasePacket* packet);
 
 private:
-   OtwCigiCl* p;
+   OtwCigiCl* p {};
 };
 
 CigiClNetworkSignalProcessing::~CigiClNetworkSignalProcessing()
@@ -191,22 +191,13 @@ BEGIN_SLOT_MAP(CigiClNetwork)
 END_SLOT_MAP()
 
 CigiClNetwork::CigiClNetwork()
- : netInput(nullptr), netOutput(nullptr), thread(nullptr), msgIn(nullptr), msgOut(nullptr), sigProcessor(nullptr)
 {
    STANDARD_CONSTRUCTOR()
-
-   networkInitialized = false;
-   networkInitFailed = false;
 }
 
-void CigiClNetwork::copyData(const CigiClNetwork& org, const bool cc)
+void CigiClNetwork::copyData(const CigiClNetwork& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      netInput = nullptr;
-      netOutput = nullptr;
-   }
 
    // We need to init this ourselves, so ...
    netInput = nullptr;

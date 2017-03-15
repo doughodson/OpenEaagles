@@ -7,6 +7,7 @@
 #include "openeaagles/base/safe_queue.hpp"
 #include "openeaagles/base/safe_stack.hpp"
 #include "openeaagles/base/util/constants.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace base { class Angle; class Function; class Power; }
@@ -130,32 +131,30 @@ protected:
 
    virtual bool shutdownNotification() override;
 
-   base::safe_stack<Emission*> freeEmStack;  // Free emission stack
-   mutable long freeEmLock;                  // Semaphore to protect 'freeEmStack'
+   base::safe_stack<Emission*> freeEmStack {MAX_EMISSIONS};  // Free emission stack
+   mutable long freeEmLock {};                               // Semaphore to protect 'freeEmStack'
 
-   base::safe_queue<Emission*> inUseEmQueue; // In use emission queue
-   mutable long inUseEmLock;                 // Semaphore to protect 'inUseEmQueue'
+   base::safe_queue<Emission*> inUseEmQueue {MAX_EMISSIONS}; // In use emission queue
+   mutable long inUseEmLock {};                              // Semaphore to protect 'inUseEmQueue'
 
 private:
-   void initData();
-
    static const int MAX_EMISSIONS = 10000;   // Max size of emission queues and arrays
 
-   RfSystem*    sys;               // Assigned R/F system (e.g., sensor, radio)
+   RfSystem* sys {};                // Assigned R/F system (e.g., sensor, radio)
 
    // Antenna parameters
-   Polarization polar;             // Polarization                 (enum)
-   double      gain;               // Gain                         (no units)
-   base::Function* gainPattern;    // Gain pattern                 (Function)
+   Polarization polar {NONE};       // Polarization                 (enum)
+   double gain {1.0};               // Gain                         (no units)
+   base::Function* gainPattern {};  // Gain pattern                 (Function)
 
-   double      threshold;          // Antenna threshold; don't send emission if
-                                   // power is below this threshold (watts)
+   double threshold {};             // Antenna threshold; don't send emission if
+                                    // power is below this threshold (watts)
 
-   double      beamWidth;          // Beamwidth                    (radians)
+   double beamWidth {base::angle::D2RCC * 3.5};  // Beamwidth (radians)
 
-   bool        gainPatternDeg;     // Gain pattern is in degrees flag (else radians)
+   bool gainPatternDeg {};          // Gain pattern is in degrees flag (else radians)
 
-   bool        recycle;            // Recycle emissions flag
+   bool recycle {true};             // Recycle emissions flag
 };
 
 }

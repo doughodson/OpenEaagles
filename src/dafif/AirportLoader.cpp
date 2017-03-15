@@ -22,7 +22,6 @@ AirportLoader::AirportLoader() : Database()
    // default file
    db->setPathname("/data/dafif/fullall/");
    db->setFilename("file0");
-   firstAirport = nullptr;
 }
 
 AirportLoader::AirportLoader(
@@ -36,7 +35,6 @@ AirportLoader::AirportLoader(
    db->setPathname(path);
    db->setFilename(file);
    load(country);
-   firstAirport = nullptr;
 }
 
 void AirportLoader::copyData(const AirportLoader& org, const bool cc)
@@ -45,7 +43,6 @@ void AirportLoader::copyData(const AirportLoader& org, const bool cc)
    if (cc) {
       db->setPathname("/data/dafif/fullall/");
       db->setFilename("file0");
-      firstAirport = nullptr;
    }
 }
 
@@ -1351,7 +1348,7 @@ AirportLoader::IlsKey::IlsKey(const long idx, const Ils& ils) : Key(idx)
 AirportLoader::IlsKey::IlsKey(const char* key1) : Key(0)
 {
    size = ILS_RECORD_LEN;
-   Record::dsGetString(key,key1,ILS_KEY_LEN);
+   Record::dsGetString(key, key1, ILS_KEY_LEN);
    id[0] = '\0';
    parent = nullptr;
    next = nullptr;

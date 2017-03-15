@@ -21,7 +21,7 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Eadi3DObjects, "Eadi3DObjects")
 EMPTY_SLOTTABLE(Eadi3DObjects)
 EMPTY_SERIALIZER(Eadi3DObjects)
 
-Eadi3DObjects::Eadi3DObjects(float radius) : base(0), radius(radius), made(false)
+Eadi3DObjects::Eadi3DObjects(const float radius) : radius(radius)
 {
 }
 

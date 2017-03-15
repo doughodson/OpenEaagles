@@ -15,12 +15,6 @@
 
 #include <iomanip>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
@@ -52,30 +46,11 @@ EMPTY_DELETEDATA(PrintSelected)
 PrintSelected::PrintSelected()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void PrintSelected::initData()
-{
-
-   msgToken = 0;
-   compareValD = 0.0;
-   compareValI = 0;
-   condition = EQ;
-
-   fieldNameStr = "";
-   compareStr = "";
-   recMsg = nullptr;
-   eventMsg = nullptr;
-   foundSelected = false;
-   printHeader = false;
-   timeOnly = false;
-}
-
-void PrintSelected::copyData(const PrintSelected& org, const bool cc)
+void PrintSelected::copyData(const PrintSelected& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    msgToken = org.msgToken;
    compareValD = org.compareValD;

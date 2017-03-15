@@ -1,3 +1,12 @@
+
+#ifndef __oe_instruments_AltitudeDial_H__
+#define __oe_instruments_AltitudeDial_H__
+
+#include "openeaagles/instruments/Instrument.hpp"
+
+namespace oe {
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: AltitudeDial
 //
@@ -13,14 +22,6 @@
 //      5) thouScissors - same as hun
 //      6) tenThouScissors - same as hun and thou
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_AltitudeDial_H__
-#define __oe_instruments_AltitudeDial_H__
-
-#include "openeaagles/instruments/Instrument.hpp"
-
-namespace oe {
-namespace instruments {
-
 class AltitudeDial : public Instrument
 {
     DECLARE_SUBCLASS(AltitudeDial,Instrument)

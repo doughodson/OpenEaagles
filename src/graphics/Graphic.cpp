@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: Graphic
-//------------------------------------------------------------------------------
+
 #include "openeaagles/graphics/Graphic.hpp"
 #include "openeaagles/graphics/Display.hpp"
 #include "openeaagles/graphics/ColorRotary.hpp"
@@ -22,9 +20,6 @@ IMPLEMENT_SUBCLASS(Graphic, "Graphic")
 double Graphic::fTimer = 0.0f;
 GLuint Graphic::autoSelName = 0x00800000;
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Graphic)
     "color",                //  1: color
     "linewidth",            //  2: linewidth
@@ -50,9 +45,6 @@ BEGIN_SLOTTABLE(Graphic)
     "translateLight",       // 22: Translate our current light to a new position (BEFORE DRAWING)
 END_SLOTTABLE(Graphic)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Graphic)
     ON_SLOT( 1, setColor, base::Color)
     ON_SLOT( 1, setColor, base::Identifier)
@@ -81,9 +73,6 @@ BEGIN_SLOT_MAP(Graphic)
     ON_SLOT(22, setSlotTranslateLight, base::PairStream)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event Table
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_COLOR,setColor,base::Color)       // Color given as a base::Color object (e.g., rgb)
     ON_EVENT_OBJ(SET_COLOR,setColor,base::Identifier)  // Color given as a string (e.g., "red")
@@ -96,9 +85,6 @@ BEGIN_EVENT_HANDLER(Graphic)
     ON_EVENT_OBJ(SET_VISIBILITY,onSetVisibilityEvent,base::Number)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Graphic::Graphic()
 {
     STANDARD_CONSTRUCTOR()
@@ -108,74 +94,13 @@ Graphic::Graphic()
 
 void Graphic::initData()
 {
-    // Our Display
-    displayPtr = nullptr;
-
-    // This object is visible
-    visible  = true;
-
-    // No color
-    color = nullptr;
-    colorName = nullptr;
-
-    // No texture
-    texture = 0;
-    texName = nullptr;
-
-    // No linewidth
-    linewidth = 0.0f;
-
-    // Flash rate
-    fRate = 0.0;
-
-    // Select name
-    selName = 0;
-
     // No transforms
-    haveMatrix  = false;
-    haveMatrix1 = false;
     m.makeIdentity();
     m1.makeIdentity();
-    transforms = nullptr;
-
-    // No vertices
-    vertices = nullptr;
-    nv = 0;
-
-    // No texture coordinates
-    texCoord = nullptr;
-    ntc = 0;
-
-    // No Normals
-    norms = nullptr;
-    nn = 0;
-
-    // Scissor parameters
-    scissorX = 0;
-    scissorY = 0;
-    scissorHeight = 0;
-    scissorWidth = 0;
-
-    // Default display list
-    dlist = 0;
-    noDisplayList = false;
-    postDraw = false;
-
-    stipple = false;
-    stippleFactor = 1;
-    stipplePattern = 0xFFFF;
-
-    mask = false;
-    materialName = nullptr;
-    materialObj = nullptr;
 
     lightPos.set(0.0, 0.0, 1.0, 0.0);
-    lightMoved = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Graphic::copyData(const Graphic& org, const bool cc)
 {
     BaseClass::copyData(org);

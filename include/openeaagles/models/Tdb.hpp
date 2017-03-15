@@ -7,7 +7,6 @@
 
 namespace oe {
 namespace models {
-
 class Gimbal;
 class Player;
 
@@ -60,6 +59,7 @@ class Tdb : public base::Object
    DECLARE_SUBCLASS(Tdb, base::Object)
 
 public:
+   Tdb() = delete;
    Tdb(const unsigned int maxTargets, const Gimbal* const gimbal);
 
    //------------------------------------------------------------------------------
@@ -124,9 +124,6 @@ public:
    const double* getBoresightElevationErrors() const        { return aelr; }
 
 protected:
-   Tdb();
-   void initData();
-
    // Sets our Gimbal
    virtual void setGimbal(const Gimbal* const gimbal); 
 
@@ -137,33 +134,33 @@ protected:
    // -- old data is lost
    virtual bool resizeArrays(const unsigned int newSize);
 
-   const Player* ownship;     // Our ownship player (set using setGimbal())
-   const Gimbal* gimbal;      // Our gimbal (set in setGimbal())
+   const Player* ownship {};     // Our ownship player (set using setGimbal())
+   const Gimbal* gimbal {};      // Our gimbal (set in setGimbal())
 
-   bool usingEcefFlg;         // Using ECEF flag --
-                              //   When gimbal's 'useWorld' is true or when our ownship's
-                              //   local gaming area position is not valid
+   bool usingEcefFlg {};         // Using ECEF flag --
+                                 //   When gimbal's 'useWorld' is true or when our ownship's
+                                 //   local gaming area position is not valid
 
-   Player**    targets;       // Target pointer
-   unsigned int maxTargets;   // Max number of targets (i.e., size of the arrays)
-   unsigned int numTgts;      // Number of targets
+   Player**    targets {};       // Target pointer
+   unsigned int maxTargets {};   // Max number of targets (i.e., size of the arrays)
+   unsigned int numTgts {};      // Number of targets
 
-   base::Vec3d*  losG;        // Normalized LOS vector (gimbal to target) in Gimbal coord 
-   base::Vec3d*  losO2T;      // Ownship to target normalized LOS vector (ownship's NED)
-   base::Vec3d*  losT2O;      // Target to ownship normalized LOS vector (target's NED) 
+   base::Vec3d* losG {};         // Normalized LOS vector (gimbal to target) in Gimbal coord 
+   base::Vec3d* losO2T {};       // Ownship to target normalized LOS vector (ownship's NED)
+   base::Vec3d* losT2O {};       // Target to ownship normalized LOS vector (target's NED) 
 
-   double*     ranges;        // Range to target (meters)
-   double*     rngRates;      // Range Rate (m/s)
-   double*     aar;           // Compute angle off antenna boresight (radians)
-   double*     aazr;          // Compute azimuth off boresight (radians)
-   double*     aelr;          // Compute elevation off boresight (radians)
+   double* ranges {};        // Range to target (meters)
+   double* rngRates {};      // Range Rate (m/s)
+   double* aar {};           // Compute angle off antenna boresight (radians)
+   double* aazr {};          // Compute azimuth off boresight (radians)
+   double* aelr {};          // Compute elevation off boresight (radians)
 
    // computeBoresightData() arrays
-   double* xa;
-   double* ya;
-   double* za;
-   double* ra2;
-   double* ra;
+   double* xa {};
+   double* ya {};
+   double* za {};
+   double* ra2 {};
+   double* ra {};
 };
 
 }

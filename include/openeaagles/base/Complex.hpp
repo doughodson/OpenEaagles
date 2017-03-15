@@ -7,7 +7,7 @@
 
 namespace oe {
 namespace base {
-   class Number;
+class Number;
 
 //------------------------------------------------------------------------------
 // Class: Complex

@@ -7,7 +7,6 @@
 
 namespace oe {
 namespace base {
-
 class Identifier;
 class Number;
 class Pair;
@@ -266,6 +265,8 @@ public:
    // SendData class used by the send() member functions
    class SendData {
       public:  SendData() = default;
+      public:  SendData(const SendData&) = delete;
+      public:  SendData& operator=(const SendData&) = delete;
       public:  ~SendData()  { empty(); }
       public:  void empty();
       public:  Component* getObject(Component* p, const char* const id, const int n = 0);

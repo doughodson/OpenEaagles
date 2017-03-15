@@ -5,11 +5,8 @@
 #include "openeaagles/models/systems/RfSystem.hpp"
 
 namespace oe {
-
 namespace base { class PairStream; }
-
 namespace models {
-
 class Datalink;
 
 //------------------------------------------------------------------------------
@@ -133,16 +130,14 @@ protected:
    virtual void receive(const double dt) override;
 
 private:
-   void initData();
-
-   unsigned short channel;    // Channel number [ 1 .. numChan ]; or zero for "not set"
-   unsigned short numChan;    // Number of channels
+   unsigned short channel {};    // Channel number [ 1 .. numChan ]; or zero for "not set"
+   unsigned short numChan {};    // Number of channels
 
    // Channel table
-   double* chanFreqTbl;       // Channel Frequency table (hertz)
+   double* chanFreqTbl {};       // Channel Frequency table (hertz)
 
-   double  maxDetectRange;      // Radio maximum detection range  (NM)
-   unsigned short radioId;
+   double  maxDetectRange {120.0};  // Radio maximum detection range  (NM)
+   unsigned short radioId {};
 };
 
 //------------------------------------------------------------------------------
@@ -170,8 +165,6 @@ protected:
    virtual void receivedEmissionReport(Emission* const em) override;
 
 private:
-   void initData();
-
    base::safe_ptr<Datalink> datalink;   // Our companion datalink system
 };
 

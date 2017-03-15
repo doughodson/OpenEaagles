@@ -29,78 +29,14 @@ EMPTY_DELETEDATA(LaeroModel)
 const double LaeroModel::HALF_PI    = base::PI / 2.0;
 const double LaeroModel::EPSILON    = 1.0E-10;
 
-//----------------------------------------------------------
-// constructor
-//----------------------------------------------------------
 LaeroModel::LaeroModel()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-//----------------------------------------------------------
-// initData() -- initialize member data
-//----------------------------------------------------------
-void LaeroModel::initData()
-{
-   dT       = 0.0;
-
-   // Body angular vel, acc components
-   p        = 0.0;
-   q        = 0.0;
-   r        = 0.0;
-   pDot     = 0.0;
-   qDot     = 0.0;
-   rDot     = 0.0;
-
-   // Euler rotation angle, rate components
-   phi      = 0.0;
-   tht      = 0.0;
-   psi      = 0.0;
-   phiDot   = 0.0;
-   thtDot   = 0.0;
-   psiDot   = 0.0;
-
-   // Body linear vel, acc components
-   u        = 0.0;
-   v        = 0.0;
-   w        = 0.0;
-   uDot     = 0.0;
-   vDot     = 0.0;
-   wDot     = 0.0;
-
-   // NED pos, vel, acc components
-   refPosN  = 0.0;
-   refPosE  = 0.0;
-   refPosD  = 0.0;
-   posN     = 0.0;
-   posE     = 0.0;
-   posD     = 0.0;
-
-   velN     = 0.0;
-   velE     = 0.0;
-   velD     = 0.0;
-   accN     = 0.0;
-   accE     = 0.0;
-   accD     = 0.0;
-
-   // Hold components
-   phiDot1  = 0.0;
-   thtDot1  = 0.0;
-   psiDot1  = 0.0;
-
-   uDot1    = 0.0;
-   vDot1    = 0.0;
-   wDot1    = 0.0;
-}
-
-//----------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//----------------------------------------------------------
-void LaeroModel::copyData(const LaeroModel& org, const bool cc)
+void LaeroModel::copyData(const LaeroModel& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    dT       = org.dT;
 

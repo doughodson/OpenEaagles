@@ -16,61 +16,21 @@ EMPTY_SERIALIZER(Scanline)
 Scanline::Scanline()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void Scanline::initData()
 {
-   angle = 0.0f;
-
-   cx = 239.5f;
-   cy = 239.5f;
-
-   sx = 479.0f;
-   sy = 479.0f;
-
-   ix = 480;
-   iy = 480;
-
-   curX = 0;
-   curY = 0;
-   curPoly = nullptr;
-
-   for (unsigned int i = 0; i < MAX_POLYS; i++) {
-      pt[i] = nullptr;
-   }
-   nPT = 0;
-
-   for (unsigned int i = 0; i < MAX_ACTIVE_POLYS; i++) {
-      apt[i] = nullptr;
-   }
-   nAPT = 0;
-
-   for (unsigned int i = 0; i < MAX_EDGES; i++) {
-      et[i] = nullptr;
-   }
-   nET = 0;
-   refET = 0;
-
-   for (unsigned int i = 0; i < MAX_ACTIVE_EDGES; i++) {
-      aet[i] = nullptr;
-   }
-   nAET = 0;
-   refAET = 0;
-
    setMatrix();
 
    clipper = new Clip3D();
    clipper->setClippingBox(0.0f, static_cast<float>(ix-1), 0.0f, static_cast<float>(iy-1));
 }
 
-
 void Scanline::copyData(const Scanline& org, const bool cc)
 {
    BaseClass::copyData(org);
    if (cc) initData();
-
 }
 
 void Scanline::deleteData()
@@ -126,7 +86,7 @@ void Scanline::reset()
    nAPT = 0;
    curY = 0.0f;
    curPoly = nullptr;
-   if (nET > 0) sortEdges(et,nET,1);
+   if (nET > 0) sortEdges(et.data(), nET, 1);
 }
 
 //------------------------------------------------------------------------------
@@ -361,7 +321,6 @@ bool Scanline::addPolygon(const Polygon* const polygon)
       delete[] tv;
    }
 
-
    //// Reduce the vertices
    reduceVert(tmpPolygon);
 
@@ -434,7 +393,6 @@ bool Scanline::addPolygon(const Polygon* const polygon)
    return true;
 }
 
-
 //------------------------------------------------------------------------------
 // scan() -- one pass through the scan pattern
 //------------------------------------------------------------------------------
@@ -492,7 +450,7 @@ void Scanline::scanline(const int y)
    }
 
    // Sort the AET
-   sortEdges(aet, nAET, 0);
+   sortEdges(aet.data(), nAET, 0);
 }
 
 
@@ -595,21 +553,20 @@ void Scanline::toggleActivePolygon()
 IMPLEMENT_PARTIAL_SUBCLASS(Scanline::PolyData, "ScanlinePolyData")
 EMPTY_SLOTTABLE(Scanline::PolyData)
 EMPTY_SERIALIZER(Scanline::PolyData)
+EMPTY_DELETEDATA(Scanline::PolyData)
 
 Scanline::PolyData::PolyData() : polygon(nullptr), orig(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
-   x0 = 0.0f;
-   n0.set(0.0f,0.0f,1.0f);
-   nslope.set(0.0f,0.0f,0.0f);
-   aptEdge2 = false;
+   n0.set(0.0f, 0.0f, 1.0f);
+   nslope.set(0.0f, 0.0f, 0.0f);
 }
 
 Scanline::PolyData::PolyData(const Scanline::PolyData& org) : polygon(nullptr), orig(nullptr)
 {
    STANDARD_CONSTRUCTOR()
-   copyData(org,true);
+   copyData(org, true);
 }
 
 Scanline::PolyData::~PolyData()
@@ -628,10 +585,6 @@ Scanline::PolyData* Scanline::PolyData::clone() const
    return new Scanline::PolyData(*this);
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Scanline::PolyData::copyData(const Scanline::PolyData& org, const bool)
 {
    BaseClass::copyData(org);
@@ -655,13 +608,6 @@ void Scanline::PolyData::copyData(const Scanline::PolyData& org, const bool)
 }
 
 //------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void Scanline::PolyData::deleteData()
-{
-}
-
-//------------------------------------------------------------------------------
 // Functions --
 //------------------------------------------------------------------------------
 
@@ -678,20 +624,15 @@ IMPLEMENT_PARTIAL_SUBCLASS(Scanline::Edge, "ScanlineEdge")
 EMPTY_SLOTTABLE(Scanline::Edge)
 EMPTY_SERIALIZER(Scanline::Edge)
 
-Scanline::Edge::Edge() : polygon(nullptr)
+Scanline::Edge::Edge()
 {
    STANDARD_CONSTRUCTOR()
 
    lv.set(0,0);
    uv.set(0,0);
-   x = 0;
-   slope = 0;
    lvn.set(0.0f,0.0f,1.0f);
    cn.set(0.0f,0.0f,1.0f);
    nslope.set(0.0f,0.0f,0.0f);
-   valid = false;
-   pointLock = false;
-   polygon = nullptr;
 }
 
 Scanline::Edge::Edge(
@@ -700,7 +641,7 @@ Scanline::Edge::Edge(
                const double v1[2],
                const base::Vec3d& vn1,
                PolyData* const p
-            ) : polygon(nullptr)
+            )
 {
    base::Vec3d uvn;
    if (v0[1] <= v1[1]) {
@@ -737,14 +678,13 @@ Scanline::Edge::Edge(
    }
 
    polygon = p;
-   pointLock = false;
 }
 
 Scanline::Edge::Edge(
                const double v0[2],
                const double v1[2],
                PolyData* const p
-            ) : polygon(nullptr)
+            )
 {
    if (v0[1] <= v1[1]) {
       lv.set(v0[0],v0[1]);
@@ -767,16 +707,15 @@ Scanline::Edge::Edge(
    }
 
    polygon = p;
-   pointLock = false;
    lvn.set(0.0f,0.0f,1.0f);
    cn.set(0.0f,0.0f,1.0f);
    nslope.set(0.0f,0.0f,0.0f);
 }
 
-Scanline::Edge::Edge(const Scanline::Edge& org) : polygon(nullptr)
+Scanline::Edge::Edge(const Scanline::Edge& org)
 {
    STANDARD_CONSTRUCTOR()
-   copyData(org,true);
+   copyData(org, true);
 }
 
 Scanline::Edge::~Edge()
@@ -795,9 +734,6 @@ Scanline::Edge* Scanline::Edge::clone() const
    return new Scanline::Edge(*this);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Scanline::Edge::copyData(const Scanline::Edge& org, const bool)
 {
    BaseClass::copyData(org);
@@ -816,16 +752,13 @@ void Scanline::Edge::copyData(const Scanline::Edge& org, const bool)
    polygon = const_cast<PolyData*>(static_cast<const PolyData*>(pp));
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Scanline::Edge::deleteData()
 {
    polygon = nullptr;
 }
 
 //------------------------------------------------------------------------------
-// v() -- increment the edge's start data.
+// incEdgeStart() -- increment the edge's start data.
 //------------------------------------------------------------------------------
 void Scanline::Edge::incEdgeStart()
 {
@@ -846,7 +779,6 @@ void Scanline::Edge::incEdgeStart()
 
     cn = lvn;
 }
-
 
 }
 }

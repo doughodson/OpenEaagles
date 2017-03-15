@@ -25,7 +25,6 @@ const int Gun::DEFAULT_ROUNDS_PER_MINUTE = 6600;   // Default rate (rds per min)
 const int Gun::DEFAULT_NUM_ROUNDS = 510;           // Default load
 const int Gun::DEFAULT_BURST_RATE = 10;            // Default burst rate
 
-// Slot table
 BEGIN_SLOTTABLE(Gun)
     "bulletType",       //  1: Type of bullet (have have bullets to work)
     "rounds",           //  2: Number of rounds
@@ -40,7 +39,6 @@ BEGIN_SLOTTABLE(Gun)
     "yaw"               //  9: heading; relative to ownship axis (radians, base::Angle)
 END_SLOTTABLE(Gun)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Gun)
     ON_SLOT(1, setBulletType, Bullet)
     ON_SLOT(2, setSlotNumRounds,  base::Number)
@@ -57,20 +55,8 @@ Gun::Gun()
 {
    STANDARD_CONSTRUCTOR()
 
-   bullet = nullptr;
+   burstFrameTime = 1.0 / static_cast<double>(DEFAULT_BURST_RATE);
 
-   armed = false;
-   fire = false;
-   unlimited = false;
-
-   burstFrameTimer = 0;
-   burstFrameTime = 1.0f / static_cast<double>(DEFAULT_BURST_RATE);
-   rcount = 0.0;
-
-   shortBurstTimer = 0.0;
-   shortBurstTime  = 0.5;
-
-   rounds = 0;
    initRounds = DEFAULT_NUM_ROUNDS;
 
    rpm = DEFAULT_ROUNDS_PER_MINUTE;
@@ -78,19 +64,11 @@ Gun::Gun()
    setPosition(0.0, 0.0, 0.0);
    setAngles(0.0, 0.0, 0.0);
    // Note: rotation matrix (mm) was initialized by setAngles()
-
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void Gun::copyData(const Gun& org, const bool cc)
+void Gun::copyData(const Gun& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      bullet = nullptr;
-   }
 
    if (org.getBulletType() != nullptr) {
       Bullet* b = org.getBulletType()->clone();

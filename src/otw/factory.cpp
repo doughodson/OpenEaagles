@@ -13,7 +13,6 @@
 #include <string>
 
 namespace oe {
-
 namespace otw {
 
 base::Object* factory(const std::string& name)

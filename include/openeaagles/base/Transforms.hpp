@@ -5,6 +5,8 @@
 #include "openeaagles/base/Object.hpp"
 #include "openeaagles/base/osg/Matrixd"
 
+#include <array>
+
 namespace oe {
 namespace base {
 class Angle;
@@ -59,9 +61,9 @@ public:
 
 protected:
     virtual void computeMatrix();
-    Matrixd m;    // transformation matrix
-    double v[4];  // values
-    int nv {};    // Number of values
+    Matrixd m;                   // transformation matrix
+    std::array<double, 4> v {};  // values
+    int nv {};                   // Number of values
 };
 
 //------------------------------------------------------------------------------

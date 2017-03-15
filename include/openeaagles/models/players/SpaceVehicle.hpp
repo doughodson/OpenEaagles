@@ -20,8 +20,8 @@ public:
    SpaceVehicle();
 
    // Vehicle data
-   virtual double getFuelWt() const;                   // wt: lbs
-   virtual double getFuelWtMax() const;                // wt: lbs
+   virtual double getFuelWt() const;     // wt: lbs
+   virtual double getFuelWtMax() const;  // wt: lbs
 
    // Engine data
    virtual int getNumberOfEngines() const;

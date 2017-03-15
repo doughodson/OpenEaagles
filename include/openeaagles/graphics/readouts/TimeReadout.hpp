@@ -40,7 +40,7 @@ public:
 protected:
    virtual void makeText() override;
    virtual void reformat(const char* const example) override;
-   TimeMode tmode;
+   TimeMode tmode {hhmmss};
 };
 
 }

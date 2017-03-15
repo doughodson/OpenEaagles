@@ -5,11 +5,11 @@
 #include "openeaagles/graphics/MapPage.hpp"
 
 #include "openeaagles/base/util/unit_utils.hpp"
+#include <array>
 
 namespace oe {
 namespace base { class Degrees; }
 namespace graphics {
-
 class SlSymbol;
 
 //------------------------------------------------------------------------------
@@ -185,10 +185,10 @@ protected:
 private:
    void initData();
 
-   base::PairStream* templates;    // holds our pairstream of templates
-   SlSymbol* symbols[MAX_SYMBOLS];  // holds our array of symbols
-   bool showInRangeOnly;            // only show the symbols within our range, else draw all the symbols if false
-   bool interconnect;               // Connect our symbols with a line?
+   base::PairStream* templates {};                // holds our pairstream of templates
+   std::array<SlSymbol*, MAX_SYMBOLS> symbols {}; // holds our array of symbols
+   bool showInRangeOnly {true};                   // only show the symbols within our range, else draw all the symbols if false
+   bool interconnect {};                          // Connect our symbols with a line?
 };
 
 //------------------------------------------------------------------------------
@@ -250,26 +250,26 @@ public:
 private:
    void initData();
 
-   bool visibility;        // our symbol's visibility
-   bool llFlg;             // Position is Lat/lon (not X/Y)
-   bool acFlg;             // aircraft nose/wing coordinate flag
-   bool scrnFlg;           // using screen coordinates only
+   bool visibility {true};    // our symbol's visibility
+   bool llFlg {};             // Position is Lat/lon (not X/Y)
+   bool acFlg {};             // aircraft nose/wing coordinate flag
+   bool scrnFlg {};           // using screen coordinates only
 
-   int type;               // numeric type (for looking up in slottable)
-   char id[MAX_ID_SIZE+1]; // ID (or name) sent to the '
-   base::Object* value;    // optional value (sent to the symbol as an UPDATE_VALUE event)
-   base::Pair* pntr;       // The graphical component
+   int type {};               // numeric type (for looking up in slottable)
+   char id[MAX_ID_SIZE+1];    // ID (or name) sent to the '
+   base::Object* value {};    // optional value (sent to the symbol as an UPDATE_VALUE event)
+   base::Pair* pntr {};       // The graphical component
 
-   double xPos;            // X position ( latitude or NM north/south )
-   double yPos;            // Y position { longitude or NM east/west )
+   double xPos {};            // X position ( latitude or NM north/south )
+   double yPos {};            // Y position { longitude or NM east/west )
 
-   double xScreenPos;      // x position: Screen
-   double yScreenPos;      // y position: Screen
+   double xScreenPos {};      // x position: Screen
+   double yScreenPos {};      // y position: Screen
 
-   double hdg;             // symbol heading (degrees)
-   bool hdgValid;          // Heading valid flag
-   Graphic* phdg;          // Object named 'hdg' to handle heading rotation
-   base::Degrees* hdgAng;  // Value sent to the heading 'hdg' object
+   double hdg {};             // symbol heading (degrees)
+   bool hdgValid {};          // Heading valid flag
+   Graphic* phdg {};          // Object named 'hdg' to handle heading rotation
+   base::Degrees* hdgAng {};  // Value sent to the heading 'hdg' object
 };
 
 inline int SymbolLoader::getMaxSymbols() const { return MAX_SYMBOLS; }

@@ -38,7 +38,6 @@ Material::Material()
     diffuseColor.set(1,1,1,1);      // white light diffuse off of the material (this is the closest thing to actual material color)
     emissiveColor.set(0,0,0,1);     // no emissive color
     specularColor.set(0,0,0,1);     // no specular color
-    shininess = 0;                  // no shine
 }
 
 void Material::copyData(const Material& org, const bool)

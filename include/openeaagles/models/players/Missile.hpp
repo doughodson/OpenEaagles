@@ -84,19 +84,18 @@ private:
    // ---
    // Default guidance & dynamics parameters
    // ---
-   double      trng;           // target range             (m)
-   double      trngT;          // target range (truth)     (m)
-   double      trdot;          // target range rate        (m/s)
-   double      trdotT;          // target range rate (truth)(m/s)
-   double      cmdPitch;       // Commanded Pitch          (rad)
-   double      cmdHeading;     // Commanded Heading        (rad)
-   double      cmdVelocity;    // Commanded speed          (m/s)
-   double      vpMin;          // Minimum Velocity         (m/s)
-   double      vpMax;          // Maximum Velocity         (m/s)
-   double      maxAccel;       // Max longitudual acceleration ((f/s)/s)
-   double      maxG;           // Max lateral G's (pitch/yaw)  (gees)
-   double      vpMaxG;         // Velocity for Max G's     (gees)
-
+   double trng {};          // target range             (m)
+   double trngT {};         // target range (truth)     (m)
+   double trdot {};         // target range rate        (m/s)
+   double trdotT {};        // target range rate (truth)(m/s)
+   double cmdPitch {};      // Commanded Pitch          (rad)
+   double cmdHeading {};    // Commanded Heading        (rad)
+   double cmdVelocity {};   // Commanded speed          (m/s)
+   double vpMin {};         // Minimum Velocity         (m/s)
+   double vpMax {};         // Maximum Velocity         (m/s)
+   double maxAccel {};      // Max longitudual acceleration ((f/s)/s)
+   double maxG {};          // Max lateral G's (pitch/yaw)  (gees)
+   double vpMaxG {};        // Velocity for Max G's     (gees)
 };
 
 }

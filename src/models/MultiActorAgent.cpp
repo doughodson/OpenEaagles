@@ -21,13 +21,11 @@ IMPLEMENT_ABSTRACT_SUBCLASS(MultiActorAgent, "MultiActorAgent")
 EMPTY_SERIALIZER(MultiActorAgent)
 EMPTY_COPYDATA(MultiActorAgent)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(MultiActorAgent)
    "state",                      //  1) state
    "agentList"                   //  2) behavior pairstream
 END_SLOTTABLE(MultiActorAgent)
 
-//  mapping of slots to handles
 BEGIN_SLOT_MAP(MultiActorAgent)
    ON_SLOT(1,  setSlotState, base::ubf::AbstractState)
    ON_SLOT(2,  setSlotAgentList, base::PairStream)
@@ -36,10 +34,6 @@ END_SLOT_MAP()
 MultiActorAgent::MultiActorAgent()
 {
    STANDARD_CONSTRUCTOR()
-   nAgents = 0;
-   state = nullptr;
-   myStation = nullptr;
-   actor = nullptr;
 }
 
 void MultiActorAgent::deleteData()

@@ -89,14 +89,11 @@ END_SLOT_MAP()
 Sphere::Sphere()
 {
     STANDARD_CONSTRUCTOR()
-    stacks = 10;
 }
 
 Cylinder::Cylinder()
 {
     STANDARD_CONSTRUCTOR()
-    topRadius = 1;
-    height = 1;
 }
 
 Cone::Cone()
@@ -107,13 +104,11 @@ Cone::Cone()
 Cube::Cube()
 {
     STANDARD_CONSTRUCTOR()
-    size = 1;
 }
 
 Torus::Torus()
 {
     STANDARD_CONSTRUCTOR()
-    oRadius = 2;
 }
 
 Dodecahedron::Dodecahedron()

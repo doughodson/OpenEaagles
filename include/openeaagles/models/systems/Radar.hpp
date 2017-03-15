@@ -6,6 +6,7 @@
 #include "openeaagles/base/safe_queue.hpp"
 
 #include <cmath>
+#include <array>
 
 namespace oe {
 namespace models {
@@ -82,35 +83,34 @@ protected:
 protected: // (#temporary#) allow subclasses to access and use report queue
 
    // Semaphore to protect 'rptQueue', 'rptSnQueue', 'reports' and 'rptMaxSn'
-   mutable long myLock;
+   mutable long myLock {};
 
    // Queues
-   base::safe_queue<Emission*>   rptQueue;       // Reporting emission queue
-   base::safe_queue<double>      rptSnQueue;     // Reporting Signal/Nose queue  (dB)
+   base::safe_queue<Emission*> rptQueue {MAX_EMISSIONS};    // Reporting emission queue
+   base::safe_queue<double> rptSnQueue {MAX_EMISSIONS};     // Reporting Signal/Nose queue  (dB)
 
    // Reports
-   Emission*   reports[MAX_REPORTS];   // Best emission for this report
-   double      rptMaxSn[MAX_REPORTS];  // Signal/Nose value            (dB)
-   unsigned int numReports;            // Number of reports this sweep
+   std::array<Emission*, MAX_REPORTS> reports {};  // Best emission for this report
+   std::array<double, MAX_REPORTS> rptMaxSn {};    // Signal/Nose value (dB)
+   unsigned int numReports {};                     // Number of reports this sweep
 
 private:
-   void initData();
    void clearTracksAndQueues();
    void clearSweep(const unsigned int i);
    void ageSweeps();
    unsigned int computeSweepIndex(const double az);
    unsigned int computeRangeIndex(const double rng);
 
-   bool        endOfScanFlg;           // End of scan flag
+   bool endOfScanFlg {};               // End of scan flag
 
-   double      sweeps[NUM_SWEEPS][PTRS_PER_SWEEP];
-   double      vclos[NUM_SWEEPS][PTRS_PER_SWEEP];
-   int         csweep;                     // Current sweep
+   double sweeps[NUM_SWEEPS][PTRS_PER_SWEEP] {};
+   double vclos[NUM_SWEEPS][PTRS_PER_SWEEP] {};
+   int    csweep;                     // Current sweep
 
-   double      currentJamSignal;
-   int         numberOfJammedEmissions;
+   double currentJamSignal {};
+   int    numberOfJammedEmissions {};
 
-   double      rfIGain;                // Integrator gain (default: 1.0) (no units)
+   double rfIGain {1.0};              // Integrator gain (default: 1.0) (no units)
 };
 
 }

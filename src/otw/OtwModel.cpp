@@ -14,19 +14,14 @@ namespace otw {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OtwModel, "OtwModel")
 EMPTY_SERIALIZER(OtwModel)
 
-OtwModel::OtwModel() : player(nullptr), federateName(nullptr)
+OtwModel::OtwModel()
 {
    STANDARD_CONSTRUCTOR()
-
-   clear();
 }
 
-void OtwModel::copyData(const OtwModel& org, const bool cc)
+void OtwModel::copyData(const OtwModel& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) {
-        player = nullptr;
-    }
 
     setPlayer(org.player);
 

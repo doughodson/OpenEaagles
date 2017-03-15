@@ -20,7 +20,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Datalink, "Datalink")
 
-// Slot table
 BEGIN_SLOTTABLE(Datalink)
    "radioId",           // 1: Radio ID (see note #1)
    "maxRange",          // 2: Max range of the datalink (w/o a radio model)
@@ -28,7 +27,6 @@ BEGIN_SLOTTABLE(Datalink)
    "trackManagerName",  // 4: Track Manager Name
 END_SLOTTABLE(Datalink)
 
-//  Map slot table
 BEGIN_SLOT_MAP(Datalink)
     ON_SLOT(1,setSlotRadioId,base::Number)
     ON_SLOT(2,setSlotMaxRange,base::Distance)
@@ -36,39 +34,18 @@ BEGIN_SLOT_MAP(Datalink)
     ON_SLOT(4,setTrackManagerName,base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Datalink)
     ON_EVENT_OBJ(DATALINK_MESSAGE,onDatalinkMessageEvent,base::Object)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 Datalink::Datalink()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void Datalink::initData()
 {
-   noRadioMaxRange = 5000; //default is high in case someone doesn't set it correctly
-
-   radioId = 0;
-   useRadioIdFlg = false;
-
-   sendLocal = true;
-   queueForNetwork = true;
-
-   radio = nullptr;
-   radioName = nullptr;
-
-   trackManager = nullptr;
-   tmName = nullptr;
-
    inQueue = new base::safe_queue<base::Object*>(MAX_MESSAGES);
    outQueue = new base::safe_queue<base::Object*>(MAX_MESSAGES);
 }

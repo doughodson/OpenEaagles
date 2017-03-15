@@ -9,13 +9,6 @@
 namespace oe {
 namespace rpf {
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...+
-
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 IMPLEMENT_SUBCLASS(CadrgTocEntry, "CadrgTocEntry")
 EMPTY_SLOTTABLE(CadrgTocEntry)
 EMPTY_SERIALIZER(CadrgTocEntry)
@@ -23,35 +16,11 @@ EMPTY_SERIALIZER(CadrgTocEntry)
 CadrgTocEntry::CadrgTocEntry()
 {
     STANDARD_CONSTRUCTOR()
-    initData();
 }
 
-void CadrgTocEntry::initData()
+void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool)
 {
-    nwLat = 0.0;
-    nwLon = 0.0;
-    seLat = 0.0;
-    seLon = 0.0;
-    swLat = 0.0;
-    swLon = 0.0;
-    neLat = 0.0;
-    neLon = 0.0;
-    vertInterval = 0.0;
-    horizInterval = 0.0;
-    vertResolution = 0.0;
-    horizResolution = 0.0;
-    horizFrames = 0;
-    vertFrames = 0;
-    mapImage = 0;
-    frames = nullptr;
-    mapIndex = -1;
-}
-
-void CadrgTocEntry::copyData(const CadrgTocEntry& org, const bool cc)
-{
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
-    if (cc) initData();
 
     nwLat = org.nwLat;
     nwLon = org.nwLon;

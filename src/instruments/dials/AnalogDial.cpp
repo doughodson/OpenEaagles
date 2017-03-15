@@ -9,8 +9,8 @@ namespace instruments {
 
 IMPLEMENT_SUBCLASS(AnalogDial, "AnalogDial")
 EMPTY_SERIALIZER(AnalogDial)
+EMPTY_DELETEDATA(AnalogDial)
 
-// Event handler
 BEGIN_EVENT_HANDLER(AnalogDial)
     ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRadius, base::Number)
 END_EVENT_HANDLER()
@@ -23,9 +23,6 @@ BEGIN_SLOTTABLE(AnalogDial)
     "slices",               // 5) number of slices to use
 END_SLOTTABLE(AnalogDial)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(AnalogDial)
     ON_SLOT(1, setSlotOriginAngle, base::Number)
     ON_SLOT(2, setSlotSweepAngle, base::Number)
@@ -34,23 +31,11 @@ BEGIN_SLOT_MAP(AnalogDial)
     ON_SLOT(5, setSlotSlices, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AnalogDial::AnalogDial()
 {
     STANDARD_CONSTRUCTOR()
-    positionAngle = 0;
-    originAngle = 0;
-    sweepAngle = 360;
-    radius = 0;
-    isMobile = false;
-    slices = 1000;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AnalogDial::copyData(const AnalogDial& org, const bool)
 {
     BaseClass::copyData(org);
@@ -62,11 +47,6 @@ void AnalogDial::copyData(const AnalogDial& org, const bool)
     isMobile = org.isMobile;
     slices = org.slices;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(AnalogDial)
 
 //------------------------------------------------------------------------------
 // drawFunc() -- draws the object(s)

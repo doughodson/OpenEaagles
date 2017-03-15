@@ -5,13 +5,10 @@
 #include "openeaagles/networks/hla/NetIO.hpp"
 
 namespace oe {
-
 namespace models { class Player; }
 namespace hla { class Ambassador; }
 namespace interop { class NetIO; class Nib; }
-
 namespace rprfom {
-
 class BaseEntity;
 class EmitterBeam;
 class Ntm;
@@ -30,7 +27,7 @@ class NetIO : public hla::NetIO
 
 public:
     // Object Class Indexes
-    // (see RpfFom.h for class declarations)
+    // (see RpfFom.hpp for class declarations)
     enum {
         BASE_ENTITY_CLASS = 1,
         PHYSICAL_ENTITY_CLASS = 2,
@@ -51,7 +48,7 @@ public:
     };
 
     // Object Attribute Indexes
-    // (see RpfFom.h for class declarations)
+    // (see RpfFom.hpp for class declarations)
     enum {
         // Base Entity arguments indexes (AI)
         ENTITY_TYPE_AI = 1,

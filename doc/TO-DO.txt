@@ -7,17 +7,106 @@ File: Table.cpp
 
 Scan for places where std::err is being used, they are often near use of 'delete' is used -- consider
 cleaning up code to use unique smart pointers.
+################################
 
+File: Page.hpp
+subpageStack array is never initialized
+
+################################
+
+File: SolenoidSwitch
+in copyData, code for timer seems wrong
+
+################################
 
 Things to review
 ---------------------------
 Thread should not be an Object-based class
+
 Should LinkedList<> template be based on Object? (same as other templates)
-Should ref/unref concepts be in a separate class (or template?)
+
+Should ref/unref concepts be in a separate class (or template?) -- yes, resolved!
+
 Should Color be in 'base' library?
 Maybe move Color functions out of terrain class and temp subclass in mainTerrain example
 utility functions should not have 'util' all over the places, in filename
 
+-- SendData should automatically initialize to empty -- lots of classes in instrument
+   lib are calling empty() in contructors, probably not needed
+
+-- Classes that define a constructor with parameters will NOT generate a default constructor.
+   This is fine for the cases noticed, but that also means that will NOT have a slottable,
+   which is also fine.  Because this is happening, should they really be derived off Object?
+
+-- rprfom and HLA in general should be tested
+
+################################
+
+Libs/classes to move to brace initialization and utilize std::array
+library name : (brace, std::array)
+
+base         : (done, done)
+dafif        : (done, done)
+dis          : (done, done)
+glut         : (done, done)
+graphics     : (done, done)
+hla          : (done, done)
+instruments  : (done, done)
+interop      : (done, done)
+iodevice     : (done, done)
+linearsystem : (done, done)
+models       : (done)
+otw          : (done, done)
+recorder     : (done, done)
+rpf          : (done, done)
+rprfom       : (done, done)
+simulation   : (done, done)
+terrain      : (done, done)
+
+################################
+
+directory names need to change for consistency model, model/player, maps -> map,
+networks -> interop
+
+################################
+
+The testIoHandler program is displaying DI switch hits from 6-10 on ST290
+this shouldn't be the case, the joystick has a total of 6 DIs.
+
+################################
+
+move IoAdapter, IoData, IoDevice and IoHandler to iodevice -- there is really no
+need for them to be in 'base' library.
+
+################################
+
+Rename AbstractThread back to Thread
+
+################################
+
+LinkedList --> linked_list
+
+################################
+
+Start using std::array in a big way with all sequences -- this is RAII and aggregate!
+
+-- Some of this is done in the following classes -- but need to be fleshed out
+   and used to more advantage.
+
+StateMachine, ColorRotary, Page, ScanLine, SymbolLoader, RotarySwitch, SolenoidSwitch,
+EngPage, Tape, Controller, CadrgClut, CadrgFile, CadrgFrame, CadrgMap, MapDrawer,
+dis::NetIO, dis::Nib, hla::NetIO, hla::Nib, interop::NetIO, interop::Nib,
+Otw, OtwCigiCL, OtwModelCigiCl, Simulation, Track, Player, Radar, RfSystem,
+Stores
+
+
+################################
+ 
+Use std::string in place of fixed length char arrays in FileReader, BmpTexture,
+CadrgFrameEntry
+
+
+################################
 
 
 

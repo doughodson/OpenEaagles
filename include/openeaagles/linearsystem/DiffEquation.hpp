@@ -31,11 +31,8 @@ protected:
    virtual void clearMemory() override;
 
    // Difference equation coef arrays
-   double* pa;    // (a[k] * y[k]) terms; for k = 1 .. n
-   double* pb;    // (b[k] * x[k]) terms; for k = 0 .. n
-
-private:
-   void initData();  // Initialize our data
+   double* pa {};    // (a[k] * y[k]) terms; for k = 1 .. n
+   double* pb {};    // (b[k] * x[k]) terms; for k = 0 .. n
 };
 
 }

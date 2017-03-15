@@ -5,7 +5,7 @@
 #include "../DataFile.hpp"
 
 namespace oe {
-   namespace base { class Number; }
+namespace base { class Number; }
 namespace terrain {
 
 //------------------------------------------------------------------------------
@@ -37,7 +37,7 @@ private:
 
     virtual bool loadData() override;
 
-   bool verifyChecksum;    // verify the file checksum flag
+   bool verifyChecksum {true};    // verify the file checksum flag
 };
 
 

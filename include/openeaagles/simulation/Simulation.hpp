@@ -5,6 +5,7 @@
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/safe_queue.hpp"
 #include "openeaagles/base/osg/Matrixd"
+#include <array>
 
 namespace oe {
 namespace base { class Distance; class EarthModel; class LatLon; class Pair; class Time; }
@@ -247,7 +248,6 @@ protected:
     virtual bool shutdownNotification() override;
 
 private:
-   void initData();
    Station* getStationImp();
 
    bool insertPlayerSort(base::Pair* const newPlayer, base::PairStream* const newList);
@@ -267,47 +267,47 @@ private:
    base::safe_ptr<base::PairStream> players;     // Main player list (sorted by network and player IDs)
    base::safe_ptr<base::PairStream> origPlayers; // Original player list
 
-   unsigned int  cycleCnt;       // Real-Time Cycle Counter (Cycles consist of Frames)
-   unsigned int  frameCnt;       // Real-Time Frame Counter (Frames consist of Phases)
-   unsigned int  phaseCnt;       // Real-Time Phase Counter
+   unsigned int cycleCnt {};     // Real-Time Cycle Counter (Cycles consist of Frames)
+   unsigned int frameCnt {};     // Real-Time Frame Counter (Frames consist of Phases)
+   unsigned int phaseCnt {};     // Real-Time Phase Counter
 
-   double execTime;              // Executive time (seconds since start of application )
+   double execTime {};           // Executive time (seconds since start of application )
 
-   double pcTime;                // Computer system UTC time of day (seconds since midnight)
-   unsigned long pcTvSec;        // Computer system UTC time value: Whole seconds since midnight (00:00:00), January 1, 1970
-   unsigned long pcTvUSec;       // Computer system UTC time value: Microseconds
+   double pcTime {};             // Computer system UTC time of day (seconds since midnight)
+   unsigned long pcTvSec {};     // Computer system UTC time value: Whole seconds since midnight (00:00:00), January 1, 1970
+   unsigned long pcTvUSec {};    // Computer system UTC time value: Microseconds
 
-   double simTime;               // Simulated UTC time of day (seconds since midnight)
-   unsigned long simTvSec;       // Simulated UTC time value: Whole seconds since midnight (00:00:00), January 1, 1970
-   unsigned long simTvUSec;      // Simulated UTC time value: Microseconds
-   bool simTimeSlaved;           // Simulated time is slaved to the computer time
+   double simTime {};            // Simulated UTC time of day (seconds since midnight)
+   unsigned long simTvSec {};    // Simulated UTC time value: Whole seconds since midnight (00:00:00), January 1, 1970
+   unsigned long simTvUSec {};   // Simulated UTC time value: Microseconds
+   bool simTimeSlaved {true};    // Simulated time is slaved to the computer time
 
-   long simTime0;                // Initial time of day since midnight (default: -1.0, which slaves to UTC time)
-   unsigned short simDay0;       // Initial day of the month [ 1 .. 31 ] (default: 0, which slaves to UTC time)
-   unsigned short simMonth0;     // Initial month [ 1 .. 12 ] (default: 0, which slaves to UTC time)
-   unsigned short simYear0;      // Initial year YYYY (default: 0, which slaves to UTC time)
+   long simTime0 {-1};           // Initial time of day since midnight (default: -1.0, which slaves to UTC time)
+   unsigned short simDay0 {};    // Initial day of the month [ 1 .. 31 ] (default: 0, which slaves to UTC time)
+   unsigned short simMonth0 {};  // Initial month [ 1 .. 12 ] (default: 0, which slaves to UTC time)
+   unsigned short simYear0 {};   // Initial year YYYY (default: 0, which slaves to UTC time)
 
-   unsigned short eventID;       // Major event ID
-   unsigned short eventWpnID;    // Weapon event ID
-   unsigned short relWpnId;      // Current released weapon ID
+   unsigned short eventID {};              // Major event ID
+   unsigned short eventWpnID {};           // Weapon event ID
+   unsigned short relWpnId {MIN_WPN_ID};   // Current released weapon ID
 
    base::safe_queue<base::Pair*> newPlayerQueue;   // Queue of new players
 
-   Station* station;             // The Station that owns us (not ref()'d)
+   Station* station {};          // The Station that owns us (not ref()'d)
 
    // Time critical thread pool
    static const unsigned short MAX_TC_THREADS = 32;
-   SimTcThread* tcThreads[MAX_TC_THREADS]; // Thread pool; 'numTcThreads' threads
-   unsigned int reqTcThreads;              // Requested number of threads
-   unsigned int numTcThreads;              // Number of threads in pool; should be (reqTcThreads - 1)
-   bool tcThreadsFailed;                   // Failed to create threads.
+   std::array<SimTcThread*, MAX_TC_THREADS> tcThreads {};  // Thread pool; 'numTcThreads' threads
+   unsigned int reqTcThreads {1};                          // Requested number of threads
+   unsigned int numTcThreads {};                           // Number of threads in pool; should be (reqTcThreads - 1)
+   bool tcThreadsFailed {};                                // Failed to create threads.
 
    // Background thread pool
    static const unsigned short MAX_BG_THREADS = 32;
-   SimBgThread* bgThreads[MAX_BG_THREADS]; // Thread pool; 'reqBgThreads' threads
-   unsigned int reqBgThreads;              // Requested number of threads
-   unsigned int numBgThreads;              // Number of threads in pool; should be (reqBgThreads - 1)
-   bool bgThreadsFailed;                   // Failed to create threads.
+   std::array<SimBgThread*, MAX_BG_THREADS> bgThreads {};  // Thread pool; 'reqBgThreads' threads
+   unsigned int reqBgThreads {1};                          // Requested number of threads
+   unsigned int numBgThreads {};                           // Number of threads in pool; should be (reqBgThreads - 1)
+   bool bgThreadsFailed {};                                // Failed to create threads.
 };
 
 }

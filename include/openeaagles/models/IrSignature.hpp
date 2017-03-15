@@ -5,9 +5,7 @@
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-
 namespace base { class Number; class List; class Table1; }
-
 namespace models {
 class IrQueryMsg;
 class IrShape;
@@ -128,14 +126,14 @@ protected:
 
 private:
 
-   unsigned int numWaveBands;            // Total number of wavebands
-   const base::Table1* waveBandTable;   // Table of waveband centers and widths
-   IrShape* irShapeSignature;            // Shape of this IR signature
-   double baseHeatSignature;             // The base heat signature   (Watts per steradian)
-   double emissivity;                    // The emissivity for the player, what part of incident radiation
-                                         // is absorbed. The value ranges from 0.0 for total reflection to
-                                         // 1.0 for total absorption.
-   double effectiveArea;                 // The effective area for heat calculations  (m^2)
+   unsigned int numWaveBands {};           // Total number of wavebands
+   const base::Table1* waveBandTable {};   // Table of waveband centers and widths
+   IrShape* irShapeSignature {};           // Shape of this IR signature
+   double baseHeatSignature {};            // The base heat signature   (Watts per steradian)
+   double emissivity {};                   // The emissivity for the player, what part of incident radiation
+                                           // is absorbed. The value ranges from 0.0 for total reflection to
+                                           // 1.0 for total absorption.
+   double effectiveArea {1e-12};           // The effective area for heat calculations  (m^2) (near zero, but non-zero)
 };
 
 }

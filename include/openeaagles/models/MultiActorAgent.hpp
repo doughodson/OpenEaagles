@@ -3,6 +3,7 @@
 #define __oe_models_MultiActorAgent_H__
 
 #include "openeaagles/base/Component.hpp"
+#include <array>
 
 namespace oe {
 namespace base {
@@ -66,13 +67,13 @@ protected:
    bool setSlotAgentList(base::PairStream* const msg);
 
 private:
-   base::Component* actor;
-   base::ubf::AbstractState* state;
-   simulation::Station* myStation;
+   base::Component* actor {};
+   base::ubf::AbstractState* state {};
+   simulation::Station* myStation {};
 
    // agent/behavior list
-   unsigned int nAgents;          // Number of input behavior/agent pairs
-   AgentItem agentList[MAX_AGENTS];
+   unsigned int nAgents {};          // Number of input behavior/agent pairs
+   std::array<AgentItem, MAX_AGENTS> agentList;
 };
 
 inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }
@@ -94,7 +95,7 @@ inline void MultiActorAgent::setActor(base::Component* c) { actor=c; }
 //      )
 //   } // components
 //
-//   simExec: ( WorldModel
+//   simulation: ( WorldModel
 //
 //      players: {
 //

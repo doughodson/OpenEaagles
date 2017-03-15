@@ -31,18 +31,11 @@ END_EVENT_HANDLER()
 Instrument::Instrument()
 {
     STANDARD_CONSTRUCTOR()
-    myTable = nullptr;
-    instVal = 0;
-    allowPassing = true;
-    preScaleInstVal = 0;
 }
 
-void Instrument::copyData(const Instrument& org, const bool cc)
+void Instrument::copyData(const Instrument& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
-
-    if (cc) myTable = nullptr;
 
     if (org.myTable != nullptr) {
         base::Table1* copy = org.myTable->clone();

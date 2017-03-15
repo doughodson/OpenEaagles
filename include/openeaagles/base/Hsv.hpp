@@ -52,7 +52,7 @@ namespace base {
 //
 //      getHSV(osg::Vec3& vec) const;
 //          Returns the hsv vector
-
+//
 //      setHSV(const osg::Vec3& vec);
 //          Sets the hsv vector
 //

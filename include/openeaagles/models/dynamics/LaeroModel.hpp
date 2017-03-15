@@ -44,57 +44,56 @@ protected:
 private:
    static const double HALF_PI;
    static const double EPSILON;
-   void initData();
    void update4DofModel(const double dt);
 
-   double dT;
+   double dT {};
 
    // Body angular vel, acc components
-   double   p;
-   double   q;
-   double   r;
-   double   pDot;
-   double   qDot;
-   double   rDot;
+   double p {};
+   double q {};
+   double r {};
+   double pDot {};
+   double qDot {};
+   double rDot {};
 
    // Euler rotation angle, rate components
-   double   phi;
-   double   tht;
-   double   psi;
-   double   phiDot;
-   double   thtDot;
-   double   psiDot;
+   double phi {};
+   double tht {};
+   double psi {};
+   double phiDot {};
+   double thtDot {};
+   double psiDot {};
 
    // Body linear vel, acc components
-   double   u;
-   double   v;
-   double   w;
-   double   uDot;
-   double   vDot;
-   double   wDot;
+   double u {};
+   double v {};
+   double w {};
+   double uDot {};
+   double vDot {};
+   double wDot {};
 
    // NED pos, vel, acc components
-   double   refPosN;
-   double   refPosE;
-   double   refPosD;
-   double   posN;
-   double   posE;
-   double   posD;
+   double refPosN {};
+   double refPosE {};
+   double refPosD {};
+   double posN {};
+   double posE {};
+   double posD {};
 
-   double   velN;
-   double   velE;
-   double   velD;
-   double   accN;
-   double   accE;
-   double   accD;
+   double velN {};
+   double velE {};
+   double velD {};
+   double accN {};
+   double accE {};
+   double accD {};
 
    // Hold components
-   double   phiDot1;
-   double   thtDot1;
-   double   psiDot1;
-   double   uDot1;
-   double   vDot1;
-   double   wDot1;
+   double phiDot1 {};
+   double thtDot1 {};
+   double psiDot1 {};
+   double uDot1 {};
+   double vDot1 {};
+   double wDot1 {};
 };
 
 }

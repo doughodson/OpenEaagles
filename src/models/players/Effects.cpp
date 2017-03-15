@@ -14,6 +14,7 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Effects,"Effects")
 EMPTY_SERIALIZER(Effects)
+EMPTY_DELETEDATA(Effects)
 
 BEGIN_SLOTTABLE(Effects)
     "dragIndex",        // 1: drag index used by default dynamics
@@ -35,8 +36,6 @@ Effects::Effects()
     static base::String generic("Effects");
     setType(&generic);
 
-    setDragIndex(0.0006f);
-
     // Default: unguided, ballistic
     setMaxTOF(10.0);
     setLethalRange(50.0f);
@@ -50,10 +49,6 @@ void Effects::copyData(const Effects& org, const bool)
 {
     BaseClass::copyData(org);
     dragIndex = org.dragIndex;
-}
-
-void Effects::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

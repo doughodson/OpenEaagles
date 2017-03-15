@@ -5,13 +5,6 @@
 //              into another)
 //------------------------------------------------------------------------------
 
-// disable all deprecation warnings for now, until we fix
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-#pragma warning(disable: 4996)
-#pragma warning(disable: 4005)
-#endif
-
 %}
 
 
@@ -115,11 +108,11 @@ int ReformatScanner::yylex(const DataType dt)
 int ReformatScanner::processInteger(const char* text, const int len)
 {
    switch (dataType) {
-   case number:			// We're looking for a number,
-   case hex:			//   a Hexadecimal number, or
-   case octal:			//   an Octal number.
+   case number:         // We're looking for a number,
+   case hex:            //   a Hexadecimal number, or
+   case octal:          //   an Octal number.
       break;
-   default:			// No, we didn't want any of these
+   default:             // No, we didn't want any of these
       return formatError(text);
    }
 
@@ -569,11 +562,11 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
          j+= std::sprintf(&format[j], "%dd", dd);
 
       if (dc)
-	 format[j++] = dc;
+         format[j++] = dc;
 
       if (mm > 0) {
-	 format[j++] = '%';
-	 format[j++] = '0';
+         format[j++] = '%';
+         format[j++] = '0';
       }
    }
 
@@ -589,11 +582,11 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
          j+= std::sprintf(&format[j], "%dd", mm);
 
       if (mc)
-	 format[j++] = mc;
+         format[j++] = mc;
 
       if (ss > 0) {
-	 format[j++] = '%';
-	 format[j++] = '0';
+         format[j++] = '%';
+         format[j++] = '0';
       }
    }
 

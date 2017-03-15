@@ -24,18 +24,14 @@ END_SLOT_MAP()
 RotarySwitch::RotarySwitch()
 {
     STANDARD_CONSTRUCTOR()
-    numAngs = 0;
-    for (int i = 0; i < MAX_ANGLES; i++) angles[i] = 0;
     angleSD.empty();
-    currentPosition = 1;
-    startPosition = 1;
 }
 
 void RotarySwitch::copyData(const RotarySwitch& org, const bool)
 {
     BaseClass::copyData(org);
     numAngs = org.numAngs;
-    for (int i = 0; i < MAX_ANGLES; i++) angles[i] = org.angles[i];
+    angles = org.angles;
     angleSD.empty();
     currentPosition = org.currentPosition;
     startPosition = org.startPosition;

@@ -11,30 +11,17 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Translator, "Translator")
 EMPTY_SERIALIZER(Translator)
 EMPTY_DELETEDATA(Translator)
 
-// -----------------------------------------------------------------------------
-// Event Handler (s)
-// -----------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Translator)
     ON_EVENT_OBJ(UPDATE_VALUE, onUpdateX, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateY, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE3, onUpdateZ, base::Number)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Translator::Translator()
 {
     STANDARD_CONSTRUCTOR()
-
-    myXPos = 0.0;
-    myYPos = 0.0;
-    myZPos = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Translator::copyData(const Translator& org, const bool)
 {
     BaseClass::copyData(org);

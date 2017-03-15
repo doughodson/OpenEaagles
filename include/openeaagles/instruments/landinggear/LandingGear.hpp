@@ -43,14 +43,14 @@ protected:
     bool setSlotGearUpValue(const base::Number* const newUV);
 
 private:
-    int gearState;      // is our gear down, up, or in transit?
-    bool inTransit;     // are we going from one commanded position to another?
-    double gearPos;     // our gear position
-    double gearDV;      // our gear down indicator value
-    double gearUV;      // our gear up indicator value
+    int gearState {};      // is our gear down, up, or in transit?
+    bool inTransit {};     // are we going from one commanded position to another?
+    double gearPos {};     // our gear position
+    double gearDV {1.0};   // our gear down indicator value
+    double gearUV {};      // our gear up indicator value
 
-    SendData gearSelSD; // which gear position we are setting
-    bool haveRotary;    // do we have a rotary now that is our components (we won't draw if we do)
+    SendData gearSelSD;    // which gear position we are setting
+    bool haveRotary {};    // do we have a rotary now that is our components (we won't draw if we do)
 };
 
 }

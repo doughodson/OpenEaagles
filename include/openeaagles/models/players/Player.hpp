@@ -12,20 +12,12 @@
 #include "openeaagles/base/osg/Quat"
 
 #include "openeaagles/base/units/Distances.hpp"
-
 #include "openeaagles/base/util/unit_utils.hpp"
+#include <array>
 
 namespace oe {
-namespace base {
-class Vec2d;
-class Vec3d;
-class Angle;
-class Boolean;
-class Distance;
-class LatLon;
-class List;
-class Time;
-}
+namespace base { class Vec2d;    class Vec3d;  class Angle; class Boolean;
+                 class Distance; class LatLon; class List;  class Time; }
 namespace simulation { class AbstractNib; }
 namespace models {
 class WorldModel;
@@ -996,7 +988,6 @@ protected:
       ) override;
 
 private:
-
    void initData();
    WorldModel* getSimulationImp();
 
@@ -1004,17 +995,17 @@ private:
    // Player identity
    // ---
    base::safe_ptr<base::String> type;    // Type of vehicle
-   Side side;                            // Which side (see above)
+   Side side {GRAY};                     // Which side (see above)
 
    // ---
    // Player State
    // ---
-   CoordSys    useCoordSys;         // Coordinate system being used to update position
-   CoordSys    useCoordSysN1;       // Previous 'useCoordSys'
+   CoordSys    useCoordSys {CS_NONE};    // Coordinate system being used to update position
+   CoordSys    useCoordSysN1 {CS_NONE};  // Previous 'useCoordSys'
 
-   double      latitude;            // Latitude                          (degrees)
-   double      longitude;           // Longitude                         (degrees)
-   double      altitude;            // Altitude                          (meters) (HAE)
+   double      latitude {};         // Latitude                          (degrees)
+   double      longitude {};        // Longitude                         (degrees)
+   double      altitude {};         // Altitude                          (meters) (HAE)
    base::Vec3d  posVecNED;          // Local gaming area position vector (meters) [ x, y, z ] NED
    base::Vec3d  posVecECEF;         // Geocentric position vector        (meters)  (ECEF)
 
@@ -1027,9 +1018,9 @@ private:
    base::Vec3d  accelVecECEF;       // Geocentric acceleration vector    ((meters/second)/second) (ECEF)
    base::Vec3d  accelVecBody;       // Body axes acceleration vector     ((meters/second)/second) [ dua, dva, dwa ]
 
-   double      vp;          // Total Velocity                    (meters/second)
-   double      gndSpd;      // Ground Speed                      (meters/second)
-   double      gndTrk;      // Ground Track                      (radians)
+   double      vp {};       // Total Velocity   (meters/second)
+   double      gndSpd {};   // Ground Speed     (meters/second)
+   double      gndTrk {};   // Ground Track     (radians)
 
    base::Vec3d  angles;     // Geodetic (body/NED) Euler angles (radians) [ roll pitch yaw ] AKA [ phi theta psi ]
    base::Vec2d  scPhi;      // Sin/Cos of roll (phi)
@@ -1056,90 +1047,90 @@ private:
    base::Matrixd rmW2B;     // Rotational Matrix: world to body directional cosines
                             //    RM = Rx[gcRoll] * Ry[gcPitch] * Rz[gcYaw]
 
-   double      tElev;            // Terrain Elevation  (meters -- up+)
-   bool        tElevValid;       // Terrain elevation is valid
-   bool        tElevReq;         // Height-Of-Terrain is required from the OTW system
-   bool        interpTrrn;       // interpolate between terrain elevation posts (local terrain database only)
-   double      tOffset;          // Offset from the terrain to the player's CG for ground clamping
-   bool        posVecValid;      // Local position vector valid
-   bool        altSlaved;        // Player's altitude is slaved to the dynamics software (default: false)
-   bool        posSlaved;        // Player's position is slaved to the dynamics software (default: false)
-   bool        posFrz;           // Player's position is frozen
-   bool        altFrz;           // Player's altitude is frozen
-   bool        attFrz;           // Player's attitude is frozen
-   bool        fuelFrz;          // Player's fuel quantity is frozen
-   bool        crashOverride;    // If true, player can NOT crash
-   bool        killOverride;     // If true, player can NOT be killed
-   bool        killRemoval;      // If true then on kill notification the player will be set to KILLED and eventually removed
+   double tElev {};         // Terrain Elevation  (meters -- up+)
+   bool   tElevValid {};    // Terrain elevation is valid
+   bool   tElevReq {};      // Height-Of-Terrain is required from the OTW system (default: terrain height isn't required)
+   bool   interpTrrn {};    // interpolate between terrain elevation posts (local terrain database only)
+   double tOffset {};       // Offset from the terrain to the player's CG for ground clamping
+   bool   posVecValid {};   // Local position vector valid
+   bool   altSlaved {};     // Player's altitude is slaved to the dynamics software (default: false)
+   bool   posSlaved {};     // Player's position is slaved to the dynamics software (default: false)
+   bool   posFrz {};        // Player's position is frozen
+   bool   altFrz {};        // Player's altitude is frozen
+   bool   attFrz {};        // Player's attitude is frozen
+   bool   fuelFrz {};       // Player's fuel quantity is frozen
+   bool   crashOverride {}; // If true, player can NOT crash
+   bool   killOverride {};  // If true, player can NOT be killed
+   bool   killRemoval {};   // If true then on kill notification the player will be set to KILLED and eventually removed
 
    // ---
    // Appearance
    // ---
    base::safe_ptr<RfSignature> signature;    // Player's RCS signature
    base::safe_ptr<IrSignature> irSignature;  // Player's IR signature
-   unsigned int camouflage;                  // Camouflage type (0 is none)
-   double      damage;                       // Damage state from no damage(0.0) to destroyed (1.0)
-   double      smoking;                      // Smoke state from no smoke (0.0) to maximum (1.0)
-   double      flames;                       // Flames state from no flames (0.0) to maximum (1.0)
-   bool        justKilled;                   // Just killed flag
-   unsigned short killedBy;                  // Killed by player ID
+   unsigned int camouflage {};               // Camouflage type (0 is none)
+   double      damage {};                    // Damage state from no damage(0.0) to destroyed (1.0)
+   double      smoking {};                   // Smoke state from no smoke (0.0) to maximum (1.0)
+   double      flames {};                    // Flames state from no flames (0.0) to maximum (1.0)
+   bool        justKilled {};                // Just killed flag
+   unsigned short killedBy {};               // Killed by player ID
 
    // ---
    // Initialization, Controls, Freeze and Reset
    // ---
-   base::Vec2d initPosVec;     // Initial Position vector [x y ]  (meters)
-   bool        initPosFlg;     // Initial position vector is valid
+   base::Vec2d initPosVec;        // Initial Position vector [x y ]  (meters)
+   bool        initPosFlg {};     // Initial position vector is valid
 
-   base::Vec3d initGeoPosVec;  // Initial geocentric position vector [ x y z ] (ECEF) (meters)
-   bool        initGeoPosFlg;  // Initial position vector is valid
+   base::Vec3d initGeoPosVec;     // Initial geocentric position vector [ x y z ] (ECEF) (meters)
+   bool        initGeoPosFlg {};  // Initial position vector is valid
 
-   double initLat;             // Initial latitude (degrees)
-   double initLon;             // Initial longitude (degrees)
-   bool initLatLonFlg;         // Initial lat/lon valid
+   double initLat {};             // Initial latitude (degrees)
+   double initLon {};             // Initial longitude (degrees)
+   bool initLatLonFlg {};         // Initial lat/lon valid
 
-   double      initAlt;        // Initial altitude (HAE)
-   double      initVp;         // Initial Total Velocity
-   base::Vec3d  initAngles;    // Initial (Euler) angles (radians)
-   base::Vec3d  testAngRates;  // Test angular rates (radians/sec)
-   bool        testBodyAxis;   // Test angular rates are in the body axis else they're Euler rates
+   double      initAlt {};        // Initial altitude (HAE)
+   double      initVp {};         // Initial Total Velocity
+   base::Vec3d  initAngles;       // Initial (Euler) angles (radians)
+   base::Vec3d  testAngRates;     // Test angular rates (radians/sec)
+   bool        testBodyAxis {};   // Test angular rates are in the body axis else they're Euler rates
 
    // ---
    // Data collection timer
    // ---
-   double      dataLogTimer;     // Data log timer (seconds)
-   double      dataLogTime;      // Data log time (seconds)
+   double dataLogTimer {};        // Data log timer (seconds)
+   double dataLogTime {};         // Data log time (seconds)
 
    // ---
    // System pointers
    // ---
-   WorldModel* sim;             // World model we operate within (not ref()'d)
+   WorldModel* sim {};            // World model we operate within (not ref()'d)
 
-   base::Pair* dynamicsModel;   // Dynamics Model (ref()'d)
-   base::Pair* datalink;        // Datalink model (ref()'d)
-   base::Pair* gimbal;          // Gimbal/antenna/optic models (ref()'d)
-   base::Pair* nav;             // Navigation (ref()'d)
-   base::Pair* obc;             // Onboard Computer (ref()'d)
-   base::Pair* pilot;           // Pilot Model (e.g., autopilot, PDL) (ref()'d)
-   base::Pair* radio;           // Radio models (ref()'d)
-   base::Pair* sensor;          // R/F Sensor models (ref()'d)
-   base::Pair* irSystem;        // IR Sensor models (ref()'d)
-   base::Pair* sms;             // Stores Management System (ref()'d)
-   bool loadSysPtrs;             // Load system pointers flag
+   base::Pair* dynamicsModel {};  // Dynamics Model (ref()'d)
+   base::Pair* datalink {};       // Datalink model (ref()'d)
+   base::Pair* gimbal {};         // Gimbal/antenna/optic models (ref()'d)
+   base::Pair* nav {};            // Navigation (ref()'d)
+   base::Pair* obc {};            // Onboard Computer (ref()'d)
+   base::Pair* pilot {};          // Pilot Model (e.g., autopilot, PDL) (ref()'d)
+   base::Pair* radio {};          // Radio models (ref()'d)
+   base::Pair* sensor {};         // R/F Sensor models (ref()'d)
+   base::Pair* irSystem {};       // IR Sensor models (ref()'d)
+   base::Pair* sms {};            // Stores Management System (ref()'d)
+   bool loadSysPtrs {true};       // Load system pointers flag
 
    // ---
    // Reflected emissions
    // ---
-   static const unsigned int MAX_RF_REFLECTIONS = 4;   // Max number of reflected emissions we'll send (let's keep it small)
-   base::Component* rfReflect[MAX_RF_REFLECTIONS];    // Objects that are interested in the emissions hitting us
-   double  rfReflectTimer[MAX_RF_REFLECTIONS];         // Request for reflected emissions will timeout
+   static const unsigned int MAX_RF_REFLECTIONS = 4;               // Max number of reflected emissions we'll send (let's keep it small)
+   std::array<base::Component*, MAX_RF_REFLECTIONS> rfReflect {};  // Objects that are interested in the emissions hitting us
+   std::array<double, MAX_RF_REFLECTIONS> rfReflectTimer {};       // Request for reflected emissions will timeout
 
    // ---
    // sync state changes
    // ---
-   bool                 syncState1Ready;
-   bool                 syncState2Ready;
-   SynchronizedState    syncState1;
-   SynchronizedState    syncState2;
+   bool              syncState1Ready {};
+   bool              syncState2Ready {};
+   SynchronizedState syncState1;
+   SynchronizedState syncState2;
 };
 
 #include "openeaagles/models/players/Player.inl"

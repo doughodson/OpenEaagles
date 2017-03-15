@@ -3,10 +3,10 @@
 #define __oe_models_Stores_H__
 
 #include "openeaagles/models/systems/ExternalStore.hpp"
+#include <array>
 
 namespace oe {
-   namespace base { class Number; class PairStream; }
-
+namespace base { class Number; class PairStream; }
 namespace models {
 class AbstractWeapon;
 
@@ -206,14 +206,14 @@ private:
    base::safe_ptr<base::PairStream> storesList;
 
    // Station tables
-   base::safe_ptr<AbstractWeapon> weaponTbl[MAX_STATIONS];    // Weapons by station
-   unsigned int numWpn;                                       // Number of weapons in table
+   std::array<base::safe_ptr<AbstractWeapon>, MAX_STATIONS> weaponTbl;  // Weapons by station
+   unsigned int numWpn {};                                              // Number of weapons in table
 
-   base::safe_ptr<ExternalStore> esTbl[MAX_STATIONS];  // External store by station
-   unsigned int numEs;                                 // Number of external stores in table
+   std::array<base::safe_ptr<ExternalStore>, MAX_STATIONS> esTbl;  // External store by station
+   unsigned int numEs {};                                          // Number of external stores in table
 
-   unsigned int ns;                       // Number of Stations
-   unsigned int selected;                 // Selection station number [ 1 ... ns ] (or zero if none)
+   unsigned int ns {};         // Number of Stations
+   unsigned int selected {};   // Selection station number [ 1 ... ns ] (or zero if none)
 
    // Maps station number, or zero for selected, to a
    // stations[] index; returns -1 if invalid

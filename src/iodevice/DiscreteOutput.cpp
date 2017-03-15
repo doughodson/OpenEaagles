@@ -11,8 +11,8 @@ namespace oe {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(DiscreteOutput, "DiscreteOutput")
+EMPTY_DELETEDATA(DiscreteOutput)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(DiscreteOutput)
     "do",         // 1) Discrete Output location (IoData's DO channel)
     "port",       // 2) Device port number (default: 0)
@@ -22,7 +22,6 @@ BEGIN_SLOTTABLE(DiscreteOutput)
     "num"         // 6) Number of DOs to manage starting at 'do' and 'channel'
 END_SLOTTABLE(DiscreteOutput)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(DiscreteOutput)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotPort,     base::Number)
@@ -35,25 +34,11 @@ END_SLOT_MAP()
 DiscreteOutput::DiscreteOutput()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void DiscreteOutput::initData()
-{
-   devEnb = false;
-   location = 0;
-   port = 0;
-   channel = 0;
-   value = false;
-   invert = false;
-   num = 1;
-}
-
-void DiscreteOutput::copyData(const DiscreteOutput& org, const bool cc)
+void DiscreteOutput::copyData(const DiscreteOutput& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    devEnb = org.devEnb;
    location = org.location;
@@ -62,10 +47,6 @@ void DiscreteOutput::copyData(const DiscreteOutput& org, const bool cc)
    value = org.value;
    invert = org.invert;
    num = org.num;
-}
-
-void DiscreteOutput::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

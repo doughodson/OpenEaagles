@@ -2,6 +2,7 @@
 #----------------------------------------------------------------------------------------
 # To build parser and scanner:
 #
+# cd edl_parser
 # dos2unix edl_parser.y
 # dos2unix edl_scanner.l
 # bison -d edl_parser.y -o EdlParser.cpp  // creates EdlParser.cpp and EdlParser.hpp

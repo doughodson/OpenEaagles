@@ -62,12 +62,8 @@ protected:
    enum { WAYPOINT_MAX_RECORDS = 140000 };
 
    // Memory key used for quick Waypoint record lookup
-   struct WaypointKey : public Database::Key {
-
-      char   key[WP_KEY_LEN+1];           // DAFIF Key Code
-      char   ident[WP_IDENT_LEN+1];       // Identifier
-      char   countryCode[WP_CCODE_LEN+1]; // Country Code
-
+   struct WaypointKey : public Database::Key
+   {
       WaypointKey(const long idx, const Waypoint& waypoint);
       WaypointKey(const char* id, const char* country);
       WaypointKey(const char* key);
@@ -75,11 +71,14 @@ protected:
       ~WaypointKey();
 
       void serialize(std::ostream& sout) const;
+
+      char key[WP_KEY_LEN+1] {};             // DAFIF Key Code
+      char ident[WP_IDENT_LEN+1] {};         // Identifier
+      char countryCode[WP_CCODE_LEN+1] {};   // Country Code
    };
 
    static int il_cmp(const void* p1, const void* p2);
    static int kl_cmp(const void* p1, const void* p2);
-
 };
 
 }

@@ -47,9 +47,9 @@ private:
    base::Vec3d accelVecECEF;     // Geocentric acceleration vector ((meters/second)/second) (ECEF)
    base::Vec3d anglesW;          // World (body/ECEF) Euler angles (radians)
    base::Vec3d angVel;           // Body angular velocities (radians/seconds)
-   double timeExec;
-   double timeUtc;
-   bool valid;
+   double timeExec {};
+   double timeUtc {};
+   bool valid {};
 };
 
 }

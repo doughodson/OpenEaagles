@@ -54,27 +54,11 @@ END_SLOT_MAP()
 EmissionPduHandler::EmissionPduHandler()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void EmissionPduHandler::initData()
-{
-   noTemplatesFound = false;
-   defaultIn = false;
-   defaultOut = false;
-
-   emitterIdNumber = 0;
-   emitterName = 0;
-   emitterFunction = ESF_FIRE_CONTROL; // Default
-
-   emPduExecTime = 0;
-}
-
-void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool cc)
+void EmissionPduHandler::copyData(const EmissionPduHandler& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // Copy handler info
    setEmitterName( org.emitterName );

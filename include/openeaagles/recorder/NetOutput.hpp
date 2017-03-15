@@ -5,8 +5,7 @@
 #include "openeaagles/recorder/OutputHandler.hpp"
 
 namespace oe {
-   namespace base { class NetHandler; class Number; }
-
+namespace base { class NetHandler; class Number; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -37,12 +36,10 @@ protected:
    virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
-   void initData();
-
     base::safe_ptr<base::NetHandler> netHandler; // Network handler (input/output, or just output if netInput is defined)
-    bool   networkInitialized;                     // Network has been initialized
-    bool   networkInitFailed;                      // Network initialization has failed
-    bool   noWaitFlag;                             // No wait (unblocked) I/O flag
+    bool networkInitialized {};    // Network has been initialized
+    bool networkInitFailed {};     // Network initialization has failed
+    bool noWaitFlag {};            // No wait (unblocked) I/O flag
 };
 
 }

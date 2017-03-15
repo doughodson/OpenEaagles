@@ -5,11 +5,7 @@
 #include "Graphic.hpp"
 
 namespace oe {
-
-   namespace base {
-      class Number;
-   }
-
+namespace base { class Number; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -63,9 +59,9 @@ protected:
     bool updateRadius(const base::Number* const x);
 
 private:
-    double radius;
-    bool  filled;
-    int   slices;
+    double radius {1.0};
+    bool filled {};
+    int slices {16};
 };
 
 //------------------------------------------------------------------------------
@@ -94,7 +90,7 @@ protected:
     bool setSlotOuterRadius(const base::Number* const x);
 
 private:
-    double outerRadius;          // portion that is occluded
+    double outerRadius {1.1};        // portion that is occluded (just a bit bigger than inner radius)
 };
 
 
@@ -142,9 +138,9 @@ protected:
     bool setSlotIsConnected(const base::Number* const x);
 
 private:
-    double startAngle;
-    double arcLength;
-    bool  connected;
+    double startAngle {};
+    double arcLength {90.0};
+    bool connected {};
 };
 
 //------------------------------------------------------------------------------
@@ -173,7 +169,8 @@ protected:
     bool setSlotOuterRadius(const base::Number* const x);
 
 private:
-    double outerRadius;          // portion that is occluded
+    // outer radius just a bit bigger than inner radius
+    double outerRadius {1.1};          // portion that is occluded
 };
 
 
@@ -245,7 +242,7 @@ protected:
     bool setSlotSegments(const base::Number* const x);
 
 private:
-    bool segment;            // True if line segments
+    bool segment {};         // True if line segments
 };
 
 //------------------------------------------------------------------------------
@@ -269,7 +266,7 @@ public:
 
 protected:
     bool setSlotStrip(const base::Number* const x);
-    bool strip;     // are we a Quad Strip?
+    bool strip {};     // are we a Quad Strip?
 
 };
 
@@ -297,7 +294,7 @@ protected:
     bool setSlotFan(const base::Number* const x);
 
 private:
-    bool fan;       // are we a triangle fan?
+    bool fan {};       // are we a triangle fan?
 };
 
 }

@@ -79,7 +79,7 @@ private:
     base::Vec4d diffuseColor;     // diffuse color
     base::Vec4d emissiveColor;    // emissive color
     base::Vec4d specularColor;    // specular color
-    double shininess;             // shininess value
+    double shininess {};          // shininess value (default: no shine)
 };
 
 }

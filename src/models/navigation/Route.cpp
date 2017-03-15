@@ -2,13 +2,9 @@
 #include "openeaagles/models/navigation/Route.hpp"
 
 #include "openeaagles/models/navigation/Steerpoint.hpp"
-
 #include "openeaagles/models/players/Player.hpp"
-
 #include "openeaagles/models/navigation/Navigation.hpp"
-
 #include "openeaagles/models/systems/OnboardComputer.hpp"
-
 #include "openeaagles/models/Actions.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
@@ -22,20 +18,11 @@
 
 #include <cstdio>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace models {
 
 IMPLEMENT_SUBCLASS(Route,"Route")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Route)
     "to",               // 1) Initial "TO" steerpoint: by name (base::Identifier) or index (base::Number)
     "autoSequence",     // 2) Auto sequence flag
@@ -43,7 +30,6 @@ BEGIN_SLOTTABLE(Route)
     "wrap",             // 4) Route wrap flag (wrap back to the beginning when past the end)
 END_SLOTTABLE(Route)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Route)
     ON_SLOT(1,setSlotTo,base::Identifier)
     ON_SLOT(1,setSlotTo,base::Number)
@@ -53,40 +39,17 @@ BEGIN_SLOT_MAP(Route)
     ON_SLOT(4,setSlotWrap,base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Route)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 Route::Route()
 {
     STANDARD_CONSTRUCTOR()
-
-    to = nullptr;
-    initToStptName = nullptr;
-
-    initToStptIdx = 0;
-    stptIdx = 0;
-    autoSeqDistNM = 2.0;
-    autoSeq = true;
-    wrap = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
-void Route::copyData(const Route& org, const bool cc)
+void Route::copyData(const Route& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        to = nullptr;
-        initToStptName = nullptr;
-    }
 
     to = nullptr; // find it using 'initToStptName' or 'initToStptIdx'
 
@@ -104,10 +67,6 @@ void Route::copyData(const Route& org, const bool cc)
     wrap = org.wrap;
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Route::deleteData()
 {
    directTo(static_cast<unsigned int>(0));

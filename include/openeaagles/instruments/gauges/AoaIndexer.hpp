@@ -1,5 +1,14 @@
+
+#ifndef __oe_instruments_AoAIndexer_H__
+#define __oe_instruments_AoAIndexer_H__
+
+#include "openeaagles/instruments/Instrument.hpp"
+
+namespace oe {
+namespace instruments {
+
 //------------------------------------------------------------------------------
-// Class: Instrument -> AoAIndexer
+// Class: AoAIndexer
 //
 // Description: Generic AOA gauge that, given limits, will indicate over, under,
 // and in-range aoa values.
@@ -12,14 +21,6 @@
 //      green -> in limit area
 //      yellow -> under limit area
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_AoAIndexer_H__
-#define __oe_instruments_AoAIndexer_H__
-
-#include "openeaagles/instruments/Instrument.hpp"
-
-namespace oe {
-namespace instruments {
-
 class AoAIndexer : public Instrument
 {
     DECLARE_SUBCLASS(AoAIndexer,Instrument)
@@ -64,16 +65,16 @@ private:
 //
 //  --  -> aoaMin
 
-    double aoaRedMin;       // min value of where the red portion of our aoa lights up
-    double aoaRedMax;       // max value of where the red portion of our aoa lights up
-    double aoaYellowMin;    // min value of where the yellow portion of our aoa lights up
-    double aoaYellowMax;    // max value of where the yellow portion of our aoa lights up
-    double aoaGreenMin;     // min value of where the green portion of our aoa lights up
-    double aoaGreenMax;     // max value of where the green portion of our aoa lights up
+    double aoaRedMin {10};       // min value of where the red portion of our aoa lights up
+    double aoaRedMax {15};       // max value of where the red portion of our aoa lights up
+    double aoaYellowMin {-10};   // min value of where the yellow portion of our aoa lights up
+    double aoaYellowMax {-5};    // max value of where the yellow portion of our aoa lights up
+    double aoaGreenMin {-5};     // min value of where the green portion of our aoa lights up
+    double aoaGreenMax {10};     // max value of where the green portion of our aoa lights up
 
-    GLuint displayList;     // our display list name
-    bool isDlist;           // do we have a display list?
-    int aoaState;           // shows which state we are in
+    GLuint displayList {};  // our display list name
+    bool isDlist {};        // do we have a display list?
+    int aoaState {2};       // shows which state we are in
     SendData selectSD;      // which graphics are we selecting? (If we are using a rotary)
 };
 

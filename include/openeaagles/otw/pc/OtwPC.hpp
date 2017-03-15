@@ -41,9 +41,9 @@ private:
    bool setSlotNetOutput(base::NetHandler* const msg);
 
    base::safe_ptr<base::NetHandler> netOutput;  // Output network handler
-   bool netInit;                                // Network has been initialized
-   bool netInitFail;                            // Initialization attempt failed
-   int scnt;                                    // Send timer
+   bool netInit {};                             // Network has been initialized
+   bool netInitFail {};                         // Initialization attempt failed
+   int scnt {};                                 // Send timer
 };
 
 }

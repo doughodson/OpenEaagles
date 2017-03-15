@@ -3,6 +3,7 @@
 #define __oe_maps_rpf_CadrgMap_H__
 
 #include "openeaagles/graphics/MapPage.hpp"
+#include <array>
 
 namespace oe {
 namespace base { class Number; class String; class List; }
@@ -133,15 +134,15 @@ public:
 
     // A color structure to hold GLubytes color
     struct RGBColor {
-        GLubyte red;
-        GLubyte green;
-        GLubyte blue;
+        GLubyte red {};
+        GLubyte green {};
+        GLubyte blue {};
     };
 
     // Quick color array for holding our RGB values
     struct ColorArray {
         // [row][column] 3 components per pixel
-        RGBColor texel[256][256];
+        RGBColor texel[256][256] {};
     };
 
     // Set functions - these functions must be set for it to work properly
@@ -190,16 +191,18 @@ protected:
 
 private:
     static const int MAX_FILES = 10;            // Holds the maximum number of cadrg files we can hold
-    CadrgFile* cadrgFiles[MAX_FILES];           // List of cadrg files
-    CadrgFile* mergedCadrgFiles[MAX_FILES];     // Merged list of cadrg files from all paths
-    int numFiles;                               // Number of CADRG files we are holding
-    CadrgFile* curCadrgFile;                    // The current CADRG file we are using
-    base::PairStream* pathNames;               // Holds our path names for the directories of our files
-    int maxTableSize;                           // Our max table size
-    base::List* stack;                         // Stack of unused frames
+
+    std::array<CadrgFile*, MAX_FILES> cadrgFiles {};        // List of cadrg files
+    std::array<CadrgFile*, MAX_FILES> mergedCadrgFiles {};  // Merged list of cadrg files from all paths
+
+    int numFiles {};                            // Number of CADRG files we are holding
+    CadrgFile* curCadrgFile {};                 // The current CADRG file we are using
+    base::PairStream* pathNames {};             // Holds our path names for the directories of our files
+    int maxTableSize {};                        // Our max table size
+    base::List* stack {};                       // Stack of unused frames
     ColorArray outTile;                         // Holds the tile color information
-    base::String* mapLevel;                    // Our map "level" we are ("1:500K", etc..)
-    bool initLevelLoaded;                       // Has our initial map level been loaded?
+    base::String* mapLevel {};                  // Our map "level" we are ("1:500K", etc..)
+    bool initLevelLoaded {};                    // Has our initial map level been loaded?
 };
 
 }

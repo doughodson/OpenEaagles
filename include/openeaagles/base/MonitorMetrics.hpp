@@ -10,7 +10,6 @@
 
 namespace oe {
 namespace base {
-
 class Table1;
 class List;
 

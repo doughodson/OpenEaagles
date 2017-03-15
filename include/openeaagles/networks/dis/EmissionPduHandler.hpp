@@ -6,9 +6,7 @@
 #include "openeaagles/networks/dis/structs.hpp"
 
 namespace oe {
-
 namespace models { class Antenna; class RfSensor; }
-
 namespace dis {
 
 //------------------------------------------------------------------------------
@@ -174,25 +172,23 @@ protected:
     bool setTemplatesFound(const bool flg);
 
 private:
-   void initData();
-
-   EmissionSystem  emissionSystemN1;                // Saved (n-1) Description of the Emitter System
-   EmitterBeamData emitterBeamDataN1[MAX_EM_BEAMS]; // Saved (n-1) EmitterBeamData
+   EmissionSystem  emissionSystemN1;                                    // Saved (n-1) Description of the Emitter System
+   EmitterBeamData emitterBeamDataN1[MAX_EM_BEAMS];                     // Saved (n-1) EmitterBeamData
    TrackJamTargets tjTargetsN1[MAX_EM_BEAMS][MAX_TARGETS_IN_TJ_FIELD];  // Saved (n-1) TrackJamTargets
 
-   bool defaultIn;                  // This is the default handler for incoming PDUs
-   bool defaultOut;                 // This is the default handler for outgoing PDUs
-   bool noTemplatesFound;           // No template sensor and/or antenna found
+   bool defaultIn {};                  // This is the default handler for incoming PDUs
+   bool defaultOut {};                 // This is the default handler for outgoing PDUs
+   bool noTemplatesFound {};           // No template sensor and/or antenna found
 
-   unsigned short emitterName;      // DIS emitter number -- see DIS enums (e.g., 1805 )
-   unsigned char emitterIdNumber;   // Unique ID number for each emitter system
-   unsigned char emitterFunction;   // Emitter function code
+   unsigned short emitterName {};                      // DIS emitter number -- see DIS enums (e.g., 1805 )
+   unsigned char emitterIdNumber {};                   // Unique ID number for each emitter system
+   unsigned char emitterFunction {ESF_FIRE_CONTROL};   // Emitter function code
 
-   base::safe_ptr<models::RfSensor> sensor;              // The R/F sensor (radar, jammers, etc)
-   base::safe_ptr<models::RfSensor> sensorModel;         // Our template sensor model
-   base::safe_ptr<models::Antenna>  antennaModel;        // Our template antenna model
+   base::safe_ptr<models::RfSensor> sensor;            // The R/F sensor (radar, jammers, etc)
+   base::safe_ptr<models::RfSensor> sensorModel;       // Our template sensor model
+   base::safe_ptr<models::Antenna>  antennaModel;      // Our template antenna model
 
-   double           emPduExecTime;                 // Exec time of last Emission PDU output (seconds)
+   double emPduExecTime {};                            // Exec time of last Emission PDU output (seconds)
 };
 
 inline unsigned char EmissionPduHandler::getEmitterIdNumber() const  { return emitterIdNumber; }

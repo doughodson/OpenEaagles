@@ -5,11 +5,8 @@
 #include "openeaagles/models/systems/IrSensor.hpp"
 
 namespace oe {
-
 namespace base { class Integer; class Number; class String; }
-
 namespace models {
-
 class IrSeeker;
 class IrQueryMsg;
 class Player;
@@ -47,10 +44,10 @@ protected:
    virtual bool setSlotElevationBin(const base::Number* const msg);   // Sets the Elevation Bin
 
 private:
-   double azimuthBin;         // minimum azimuth we can distinguish -- two signals whose
+   double azimuthBin {};      // minimum azimuth we can distinguish -- two signals whose
                               // azimuth differs by less than this will be merged
 
-   double elevationBin;       // minimum azimuth we can distinguish -- two signals whose
+   double elevationBin {};    // minimum azimuth we can distinguish -- two signals whose
                               // azimuth differs by less than this will be merged
 };
 

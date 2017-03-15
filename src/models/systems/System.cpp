@@ -29,9 +29,6 @@ END_EVENT_HANDLER()
 System::System()
 {
    STANDARD_CONSTRUCTOR()
-
-   pwrSw = PWR_ON;   // Default: power is ON
-   ownship = nullptr;
 }
 
 void System::copyData(const System& org, const bool)

@@ -22,7 +22,6 @@ IMPLEMENT_SUBCLASS(IrAtmosphere, "IrAtmosphere")
 EMPTY_SERIALIZER(IrAtmosphere)
 EMPTY_COPYDATA(IrAtmosphere)
 
-// slot table
 BEGIN_SLOTTABLE(IrAtmosphere)
    "waveBands",                // The size of the wavelength bins used in the tables
    "transmissivityTable1",     // transmissivities expressed as coefficients of (absorption+scattering), per km
@@ -30,7 +29,6 @@ BEGIN_SLOTTABLE(IrAtmosphere)
    "earthRadiance",            // Simple background radiance for targets on ground
 END_SLOTTABLE(IrAtmosphere)
 
-// slot map
 BEGIN_SLOT_MAP(IrAtmosphere)
    ON_SLOT(1,setSlotWaveBands, base::Table1)
    ON_SLOT(2,setSlotTransmissivityTable1, base::Table1)
@@ -38,22 +36,11 @@ BEGIN_SLOT_MAP(IrAtmosphere)
    ON_SLOT(4,setSlotEarthRadiance, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 IrAtmosphere::IrAtmosphere()
 {
     STANDARD_CONSTRUCTOR()
-    waveBandTable = nullptr;
-    numWaveBands = 0;
-    transmissivityTable1 = nullptr;
-    skyRadiance = 0.0;
-    earthRadiance = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void IrAtmosphere::deleteData()
 {
     if (waveBandTable != nullptr)        { waveBandTable->unref();        waveBandTable = nullptr;        }

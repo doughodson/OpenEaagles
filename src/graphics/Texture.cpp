@@ -44,29 +44,15 @@ END_SLOT_MAP()
 Texture::Texture()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void Texture::initData()
 {
-    texture = 0;
-
     setWidth(256);
     setHeight(256);
     setFormat(GL_RGB);
     setNumComponents(3);
-
-    wrapS = GL_REPEAT;
-    wrapT = GL_REPEAT;
-    magFilter = GL_NEAREST;
-    minFilter = GL_NEAREST;
-    redScale = 1.0f;
-    redBias = 0.0f;
-    greenScale = 1.0f;
-    greenBias = 0.0f;
-    blueScale = 1.0f;
-    blueBias = 0.0f;
 }
 
 void Texture::copyData(const Texture& org, const bool cc)

@@ -6,27 +6,18 @@
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class SaH
-//==============================================================================
-IMPLEMENT_SUBCLASS(SaH,"SaH")
+IMPLEMENT_SUBCLASS(SaH, "SaH")
+EMPTY_DELETEDATA(SaH)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(SaH)
     "sampleRate",   //  1: Sample update rate
 END_SLOTTABLE(SaH)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(SaH)
    ON_SLOT( 1, setSlotSampleRate, base::Frequency)
    ON_SLOT( 1, setSlotSampleRate, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 SaH::SaH()
 {
    STANDARD_CONSTRUCTOR()
@@ -44,22 +35,12 @@ SaH::SaH(const unsigned int r, const unsigned int sr) : ScalerFunc(r)
    initialize();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init member data
-//------------------------------------------------------------------------------
 void SaH::initData()
 {
-   sampleRate = 0;
-   time = 0;
-   stime = 0;
-
    allocateMemory(ORDER);
    clearMemory();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void SaH::copyData(const SaH& org, const bool cc)
 {
    if (cc) {
@@ -74,13 +55,6 @@ void SaH::copyData(const SaH& org, const bool cc)
    stime = org.stime;
 
    initialize();
-}
-
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void SaH::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

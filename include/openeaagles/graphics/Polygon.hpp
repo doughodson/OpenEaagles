@@ -94,10 +94,10 @@ public:
    virtual void drawFunc() override;
 
 private:
-   base::Vec4d     coeff;        // Coefficients of the plane equation
-   bool           coeffValid;    // 'coeff' numbers are valid
-   base::Vec3d     norm;         // normal to the polygon
-   unsigned int   layerValue;    // Layer value
+   base::Vec4d coeff;          // Coefficients of the plane equation
+   bool coeffValid {false};    // 'coeff' numbers are valid
+   base::Vec3d norm;           // normal to the polygon
+   unsigned int layerValue {}; // Layer value
 };
 
 }

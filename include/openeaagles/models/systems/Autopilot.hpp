@@ -265,31 +265,31 @@ private:
    bool flyCRS(const double latDeg, const double lonDeg, const double crsCmdDeg);
 
    // Input controls
-   double   stickRollPos;     // Stick roll position:  -1.0 -> max left;    0.0 -> center;  1.0 -> max right
-   double   stickPitchPos;    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
+   double stickRollPos {};     // Stick roll position:  -1.0 -> max left;    0.0 -> center;  1.0 -> max right
+   double stickPitchPos {};    // Stick pitch position: -1.0 -> max forward; 0.0 -> center;  1.0 -> max back
 
    // Throttles
    static const unsigned int MAX_THR = 8;
-   double   thrPos[MAX_THR];  // Throttle positions: min(0.0) to full(1.0)
-   unsigned int nThrPos;      // Number of throttles
+   double thrPos[MAX_THR] {};    // Throttle positions: min(0.0) to full(1.0)
+   unsigned int nThrPos {};      // Number of throttles
 
    // Commanded values
-   double   cmdHdg;           // Commanded Heading  (deg)
-   double   cmdAlt;           // Commanded Altitude (ft)
-   double   cmdSpd;           // Commanded Velocity (kts)
-   bool     holdHdgSet;       // Hold heading set by slot flag
-   bool     holdAltSet;       // Hold altitude set by slot flag
-   bool     holdSpdSet;       // Hold velocity set by slot flag
+   double cmdHdg {};           // Commanded Heading  (deg)
+   double cmdAlt {};           // Commanded Altitude (ft)
+   double cmdSpd {};           // Commanded Velocity (kts)
+   bool   holdHdgSet {};       // Hold heading set by slot flag
+   bool   holdAltSet {};       // Hold altitude set by slot flag
+   bool   holdSpdSet {};       // Hold velocity set by slot flag
 
    // Mode flags
-   bool     rollSasOn;        // Roll SAS flag
-   bool     pitchSasOn;       // Pitch SAS flag
-   bool     yawSAsOn;         // Yaw SAS flag
-   bool     hdgHoldOn;        // Heading hold flag
-   bool     altHoldOn;        // Altitude hold flag
-   bool     spdHoldOn;        // Velocity hold flag
-   bool     navModeOn;        // Nav mode flag
-   bool     loiterModeOn;     // Loiter mode flag
+   bool rollSasOn {true};    // Roll SAS flag
+   bool pitchSasOn {true};   // Pitch SAS flag
+   bool yawSAsOn {true};     // Yaw SAS flag
+   bool hdgHoldOn {true};    // Heading hold flag
+   bool altHoldOn {true};    // Altitude hold flag
+   bool spdHoldOn {true};    // Velocity hold flag
+   bool navModeOn {true};    // Nav mode flag
+   bool loiterModeOn {};     // Loiter mode flag
 
    // Loiter mode data
    // Entry modes for loiter
@@ -302,33 +302,32 @@ private:
       LOITER
    };
 
-   double   loiterAnchorLat;        // Loiter orbit pattern anchor point latitude  (degs)
-   double   loiterAnchorLon;        // Loiter orbit pattern anchor point longitude (degs)
-   double   loiterMirrorLat;        // Loiter orbit pattern mirror point latitude  (degs)
-   double   loiterMirrorLon;        // Loiter orbit pattern mirror point longitude (degs)
-   double   loiterLength;           // Loiter pattern length (nm)
-   bool     loiterCcwFlag;          // Loiter pattern counter-clockwise flag
-   double   loiterInboundCourse;    // Loiter course we started the loiter pattern on (degs)
-   EntryMode  loiterEntryMode;      // Entry mode into the loiter
-   unsigned int loiterEntryPhase;   // Phase of the entry mode
-   bool isInbound;                  // are we on the inbound loiter
-   double loiterTime;               // loiter time (seconds)
-   bool loiterTimeBased;          // is our loiter based on time instead of length?
+   double   loiterAnchorLat {};            // Loiter orbit pattern anchor point latitude  (degs)
+   double   loiterAnchorLon {};            // Loiter orbit pattern anchor point longitude (degs)
+   double   loiterMirrorLat {};            // Loiter orbit pattern mirror point latitude  (degs)
+   double   loiterMirrorLon {};            // Loiter orbit pattern mirror point longitude (degs)
+   double   loiterLength {10.0};           // Loiter pattern length (nm)
+   bool     loiterCcwFlag {};              // Loiter pattern counter-clockwise flag
+   double   loiterInboundCourse {};        // Loiter course we started the loiter pattern on (degs)
+   EntryMode loiterEntryMode {PREENTRY};   // Entry mode into the loiter
+   unsigned int loiterEntryPhase {};       // Phase of the entry mode
+   bool isInbound {};                      // are we on the inbound loiter
+   double loiterTime {};                   // loiter time (seconds)
+   bool loiterTimeBased {};                // is our loiter based on time instead of length?
 
    // Pilot limits
-   double maxTurnRateDps;           // maximum turn rate
-   double maxBankAngleDegs;         // maximum bank angle
-   double maxClimbRateMps;          // maximum climb/dive rate (meters per second)
-   double maxPitchAngleDegs;        // maximum pitch angle
-   double maxVelAccNps;             // maximum velocity acceleration
+   double maxTurnRateDps {};               // maximum turn rate
+   double maxBankAngleDegs {};             // maximum bank angle
+   double maxClimbRateMps {};              // maximum climb/dive rate (meters per second)
+   double maxPitchAngleDegs {};            // maximum pitch angle
+   double maxVelAccNps {};                 // maximum velocity acceleration
 
    // Follow that lead mode data
-   base::Vec3d leadOffset;            // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
-   const Player* lead;                // Our lead player
-   const base::Identifier* leadName;  // Name of our lead player
-   double leadHdg;                    // lead's heading (rad)
-   bool   followLeadModeOn;           // Follow the lead mode flag
-
+   base::Vec3d leadOffset;                 // Offsets from lead player (meters) Default -1NM and 2NM and 2000ft
+   const Player* lead {};                  // Our lead player
+   const base::Identifier* leadName {};    // Name of our lead player
+   double leadHdg {};                      // lead's heading (rad)
+   bool   followLeadModeOn {};             // Follow the lead mode flag
 };
 
 inline bool Autopilot::setMaxTurnRateDps(const double x)    { maxTurnRateDps = x; return true; }

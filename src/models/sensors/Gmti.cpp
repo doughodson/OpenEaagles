@@ -19,19 +19,17 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Gmti, "Gmti")
 
-// Slot table
 BEGIN_SLOTTABLE(Gmti)
     "poi",            // 1: Point-Of-Interest (POI): meters [ north east down ]
 END_SLOTTABLE(Gmti)
 
-//  Map slot table
 BEGIN_SLOT_MAP(Gmti)
     ON_SLOT(1,setSlotPoi,base::List)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(Gmti)
 
-Gmti::Gmti() : poiVec(0,0,0)
+Gmti::Gmti()
 {
     STANDARD_CONSTRUCTOR()
 }

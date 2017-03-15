@@ -3,11 +3,10 @@
 #define __oe_models_ScanGimbal_H__
 
 #include "openeaagles/models/systems/Gimbal.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
-
 namespace base { class Integer; }
-
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -244,29 +243,29 @@ protected:
    virtual void dynamics(const double dt) override;
 
 private:
-    base::Vec2d  scanPos;              // Position in scan pattern     (rad)
-    base::Vec2d* prScanVertices;       // Pseudo random scan pattern positions
-    unsigned int nprv;                 // Number of pseudo random vertices
-    unsigned int cprv;                 // Current pseudo random vertice number
-    unsigned int scanMode;             // Gimbal scan mode
-    double     scanWidth;              // Width of scan volume         (rad)
-    double     scanHeight;             // Height of scan volume        (rad)
-    unsigned int scanState;            // Scan state machine
-    base::Vec2d  refAngle;             // Gimbal reference angles     (rad)
-    base::Vec2d  lastRefAngle;         // Last gimbal reference angle (rad)
+    base::Vec2d  scanPos;                 // Position in scan pattern     (rad)
+    base::Vec2d* prScanVertices {};       // Pseudo random scan pattern positions
+    unsigned int nprv {};                 // Number of pseudo random vertices
+    unsigned int cprv {};                 // Current pseudo random vertice number
+    unsigned int scanMode {MANUAL_SCAN};  // Gimbal scan mode
+    double     scanWidth {};              // Width of scan volume         (rad)
+    double     scanHeight {};             // Height of scan volume        (rad)
+    unsigned int scanState {};            // Scan state machine
+    base::Vec2d refAngle;                 // Gimbal reference angles     (rad)
+    base::Vec2d lastRefAngle;             // Last gimbal reference angle (rad)
 
-    unsigned int numBars;        // number of bars in our scan
-    double     barSpacing;       // width between bars (if applicable) (rad)
-    bool       oddNumberOfBars;  // flag used to reverse sequence of bar scans
-    bool       leftToRightScan;  // flag to tell us if we scan from right to left or left to right
-    bool       reverseScan;      // Scanning the reverse direction
-    unsigned int barNum;         // Bar number that we are on
-    double     conAngle;         // Conical scan angle (degrees)
-    double     revPerSec;        // Revolutions per second (hz)
-    double     scanRadius;       // Radius of the conical or circular scan (rad)
-    double     myLastAngle;      // Angle (radians) of our last position in a rate servo
-    double     numRevs;          // Spiral Scan - current number of revolutions
-    double     maxNumRevs;       // Spiral Scan - maximum number of revolutions
+    unsigned int numBars {1};             // number of bars in our scan
+    double     barSpacing {};             // width between bars (if applicable) (rad)
+    bool       oddNumberOfBars {};        // flag used to reverse sequence of bar scans
+    bool       leftToRightScan {true};    // flag to tell us if we scan from right to left or left to right
+    bool       reverseScan {};            // Scanning the reverse direction
+    unsigned int barNum {1};              // Bar number that we are on
+    double     conAngle {};               // Conical scan angle (degrees)
+    double     revPerSec {5.0};           // Revolutions per second (hz)
+    double     scanRadius {2.0 * base::angle::D2RCC};    // Radius of the conical or circular scan (rad)
+    double     myLastAngle {};            // Angle (radians) of our last position in a rate servo
+    double     numRevs {};                // Spiral Scan - current number of revolutions
+    double     maxNumRevs {1.0};          // Spiral Scan - maximum number of revolutions
 };
 
 }

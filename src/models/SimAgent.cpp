@@ -12,24 +12,15 @@
 namespace oe {
 namespace models {
 
-//------------------------------------------------------------------------------
-// Class: SimAgent
-//
-// Description: An Agent that manages a component (the "actor") with a behavior
-// (either a player, or a player's component)
-//------------------------------------------------------------------------------
-
 IMPLEMENT_SUBCLASS(SimAgent, "SimAgent")
 EMPTY_SERIALIZER(SimAgent)
 EMPTY_COPYDATA(SimAgent)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(SimAgent)
    "actorPlayerName",                 //  1) The agent's actor - playerName
    "actorComponentName"               //  1) The agent's actor - componentName
 END_SLOTTABLE(SimAgent)
 
-//  mapping of slots to handles
 BEGIN_SLOT_MAP(SimAgent)
    ON_SLOT(1, setSlotActorPlayerName, base::String )
    ON_SLOT(2, setSlotActorComponentName, base::String )
@@ -38,14 +29,8 @@ END_SLOT_MAP()
 SimAgent::SimAgent()
 {
    STANDARD_CONSTRUCTOR()
-   actorPlayerName = nullptr;
-   actorComponentName = nullptr;
-   myStation = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void SimAgent::deleteData()
 {
    if (actorPlayerName!=nullptr) {

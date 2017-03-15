@@ -5,18 +5,9 @@
 #include "openeaagles/models/environment/AbstractAtmosphere.hpp"
 
 namespace oe {
-
-   namespace base {
-      class Number;
-      class Table1;
-      class Table2;
-      class Table3;
-      class Table4;
-      class Number;
-   }
-
+namespace base { class Number; class Table1; class Table2; class Table3;
+                 class Table4; class Number; }
 namespace models {
-
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
@@ -138,12 +129,12 @@ protected:
 
 private:
 
-   unsigned int numWaveBands;
-   const base::Table1* waveBandTable;
-   const base::Table1* transmissivityTable1;
+   unsigned int numWaveBands {};
+   const base::Table1* waveBandTable {};
+   const base::Table1* transmissivityTable1 {};
 
-   double skyRadiance;      // Simple background radiance for targets in sky
-   double earthRadiance;    // Simple background radiance for targets on ground
+   double skyRadiance {};      // Simple background radiance for targets in sky
+   double earthRadiance {};    // Simple background radiance for targets on ground
 };
 
 }

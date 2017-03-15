@@ -18,7 +18,6 @@ namespace graphics {
 
 //----------------------------------------------------------------------------------------------------------------------------------
 // Class: FtglFonts, FtglBitmapFont, FtglExtrdFont, FtglOutlineFont, FtglPixmapFont, FtglPolygonFont, FtglTextureFont
-// Base class:  Object -> Font -> FtglFonts -> (all other fonts are derived from FtglFonts)
 //
 // Description: all the Freetype font classes
 //---------------------------------------------------------------------------------
@@ -65,7 +64,7 @@ public:
 
 private:
     static const int DEFAULT_FACE_SIZE;
-    int fSize;      // face size
+    int fSize {DEFAULT_FACE_SIZE};      // face size
 };
 
 //------------------------------------------------------------------------------
@@ -136,7 +135,7 @@ public:
 
 private:
     static const float DEFAULT_DEPTH;
-    float depth;        // depth of the extruded font (for 3D purposes)
+    float depth {DEFAULT_DEPTH};        // depth of the extruded font (for 3D purposes)
 };
 
 //------------------------------------------------------------------------------
@@ -270,9 +269,9 @@ protected:
     bool setLinewidth(const base::Number* const x);
 
 private:
-    FTGLOutlineFont* outline;
-    base::Color* haloColor;
-    float linewidth;
+    FTGLOutlineFont* outline {};
+    base::Color* haloColor {};
+    float linewidth {1.0};
 };
 
 //------------------------------------------------------------------------------

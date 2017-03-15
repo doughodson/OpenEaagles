@@ -5,12 +5,9 @@
 #include "openeaagles/networks/hla/Nib.hpp"
 
 namespace oe {
-
 namespace models { class Player; }
 namespace interop { class NetIO; }
-
 namespace rprfom {
-
 class BaseEntity;
 
 //------------------------------------------------------------------------------
@@ -81,27 +78,27 @@ public:
    virtual bool munitionDetonationMsgFactory(const double curExecTime) override;
 
 private:
-   unsigned short siteID;     // Site ID
-   unsigned short appID;      // Application ID
+   unsigned short siteID {};     // Site ID
+   unsigned short appID {};      // Application ID
 
    // Standard (DIS based) type codes
-   unsigned char  disKind;          // DIS kind code
-   unsigned char  disDomain;        // DIS domain code
-   unsigned short disCountry;       // DIS country code
-   unsigned char  disCategory;      // DIS category code
-   unsigned char  disSubcategory;   // DIS subcategory code
-   unsigned char  disSpecific;      // DIS specific code
-   unsigned char  disExtra;         // DIS extra code
+   unsigned char  disKind {};          // DIS kind code
+   unsigned char  disDomain {};        // DIS domain code
+   unsigned short disCountry {};       // DIS country code
+   unsigned char  disCategory {};      // DIS category code
+   unsigned char  disSubcategory {};   // DIS subcategory code
+   unsigned char  disSpecific {};      // DIS specific code
+   unsigned char  disExtra {};         // DIS extra code
 
-   BaseEntity* baseEntity;         // The object's data
-   double geodPos[3];              // Geodetic position of entity
-   unsigned short fireEvent;       // Weapon fire event (for Weapon type objects)
+   BaseEntity* baseEntity {};         // The object's data
+   double geodPos[3] {};              // Geodetic position of entity
+   unsigned short fireEvent {};       // Weapon fire event (for Weapon type objects)
 
    // Things we need before creating an IPlayer
-   bool haveEntityIdFlg;
-   bool haveEntityTypeFlg;
-   bool haveWorldLocationFlg;
-   bool haveOrientationFlg;
+   bool haveEntityIdFlg {};
+   bool haveEntityTypeFlg {};
+   bool haveWorldLocationFlg {};
+   bool haveOrientationFlg {};
 };
 
 }

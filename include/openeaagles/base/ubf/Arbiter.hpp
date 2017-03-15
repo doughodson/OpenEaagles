@@ -5,13 +5,12 @@
 #include "AbstractBehavior.hpp"
 
 namespace oe {
-
 namespace base {
-   class List;
+class List;
 
 namespace ubf {
-   class AbstractState;
-   class AbstractAction;
+class AbstractState;
+class AbstractAction;
 
 //------------------------------------------------------------------------------
 // Class: Arbiter

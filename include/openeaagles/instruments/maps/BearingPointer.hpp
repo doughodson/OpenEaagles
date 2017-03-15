@@ -56,11 +56,11 @@ private:
     bool onUpdateRadBearingPointer(const base::Number* const msg);
     bool onUpdateDegBearingPointer(const base::Number* const msg);
 
-    double bearing;     // used for bearing pointer, or if anyone else needs it for calculations (radians)
-    double myRotation;  // how much we are going to rotate the compass
-    double myRadius;    // our radius (comes from dial radius)
-    graphics::Graphic* head;    // our head graphic (if we have one)
-    graphics::Graphic* tail;    // our tail graphic (if we have one)
+    double bearing {};     // used for bearing pointer, or if anyone else needs it for calculations (radians)
+    double myRotation {};  // how much we are going to rotate the compass
+    double myRadius {};    // our radius (comes from dial radius)
+    graphics::Graphic* head {};    // our head graphic (if we have one)
+    graphics::Graphic* tail {};    // our tail graphic (if we have one)
 };
 
 }

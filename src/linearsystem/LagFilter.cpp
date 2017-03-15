@@ -6,32 +6,21 @@
 namespace oe {
 namespace linearsystem {
 
-//==============================================================================
-// Class LagFilter
-//==============================================================================
 IMPLEMENT_SUBCLASS(LagFilter,"LagFilter")
+EMPTY_DELETEDATA(LagFilter)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(LagFilter)
     "tau",      //  1: Filer time constant (Time or sec)
 END_SLOTTABLE(LagFilter)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(LagFilter)
    ON_SLOT( 1, setSlotTau, base::Time)
    ON_SLOT( 1, setSlotTau, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 LagFilter::LagFilter()
 {
    STANDARD_CONSTRUCTOR()
-
-   tau = 1.0;
 }
 
 LagFilter::LagFilter(const unsigned int rate, const double t)
@@ -49,8 +38,6 @@ void LagFilter::copyData(const LagFilter& org, const bool)
 
     tau = org.tau;
 }
-
-EMPTY_DELETEDATA(LagFilter)
 
 //------------------------------------------------------------------------------
 // Set functions

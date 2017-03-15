@@ -8,30 +8,11 @@ namespace models {
 IMPLEMENT_SUBCLASS(Gps, "Gps")
 EMPTY_SLOTTABLE(Gps)
 EMPTY_SERIALIZER(Gps)
+EMPTY_DELETEDATA(Gps)
 
 Gps::Gps()
 {
     STANDARD_CONSTRUCTOR()
-
-    mode    = INIT;
-    bsr     = PRIMARY;
-    rcvr    = RCVR_INVALID;
-    aided   = true;
-    keyOvrd = false;
-
-    crypto  = NO_LOAD;
-    almanac = NO_LOAD;
-
-    quality = A;
-    state   = 0;
-    ehe     = 0;
-    eve     = 0;
-    fom     = 0;
-    cnr     = 0;
-
-    date    = 123199;
-    keyType = GUV;
-    days    = 5;
 }
 
 void Gps::copyData(const Gps& org, const bool)
@@ -57,10 +38,6 @@ void Gps::copyData(const Gps& org, const bool)
     date    = org.date;
     keyType = org.keyType;
     days    = org.days;
-}
-
-void Gps::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

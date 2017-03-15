@@ -6,11 +6,8 @@
 #include "openeaagles/base/safe_queue.hpp"
 
 namespace oe {
-
 namespace base { class Integer; class Number; class String; }
-
 namespace models {
-
 class IrSeeker;
 class IrQueryMsg;
 class Player;
@@ -168,8 +165,8 @@ protected:
    virtual IrQueryMsg* getStoredMessage();
    virtual IrQueryMsg* peekStoredMessage(unsigned int i);
 
-   base::safe_queue<IrQueryMsg*> storedMessagesQueue;
-   mutable long storedMessagesLock;          // Semaphore to protect 'storedMessagesQueue'
+   base::safe_queue<IrQueryMsg*> storedMessagesQueue {MAX_EMISSIONS};
+   mutable long storedMessagesLock {};        // Semaphore to protect 'storedMessagesQueue'
 
 private:
    static const int MAX_EMISSIONS = 10000;   // Max size of emission queues and arrays
@@ -177,29 +174,29 @@ private:
    void clearTracksAndQueues();
 
    // Characteristics
-   double lowerWavelength;          // Lower wavelength limit (microns)
-   double upperWavelength;          // Upper wavelength limit (microns)
-   double nei;                      // Noise Equivalent Irradiance  (watts/str-cm^2)
-   double threshold;                // Signal to Noise Threshold
-   double ifov;                     // Instantaneous Field of View  (steradians) (what is in view without gimbal movement)
-   double ifovTheta;                // IFOV planar angle, where ifov = 2 * pi * (1-cos(ifovTheta/2)
+   double lowerWavelength {};          // Lower wavelength limit (microns)
+   double upperWavelength {};          // Upper wavelength limit (microns)
+   double nei {};                      // Noise Equivalent Irradiance  (watts/str-cm^2)
+   double threshold {};                // Signal to Noise Threshold
+   double ifov {};                     // Instantaneous Field of View  (steradians) (what is in view without gimbal movement)
+   double ifovTheta {};                // IFOV planar angle, where ifov = 2 * pi * (1-cos(ifovTheta/2)
 
    // results in a simple cone.
-   SensorType sensorType;             // Sensor Type(CONTRAST, HOTSPOT)
-   //double fieldOfRegard;            // Field of Regard (steradians) (what can be in view to gimbals limits)
-   //double fieldOfRegardTheta;       // Field of Regard planar angle, where fieldOfRegard = 2 * pi * (1-cos(fieldOfRegardTheta/2)
+   SensorType sensorType {HOTSPOT};    // Sensor Type(CONTRAST, HOTSPOT)
+   //double fieldOfRegard {};          // Field of Regard (steradians) (what can be in view to gimbals limits)
+   //double fieldOfRegardTheta {};     // Field of Regard planar angle, where fieldOfRegard = 2 * pi * (1-cos(fieldOfRegardTheta/2)
 
    // above results in a simple cone.
-   base::String* tmName;          // Name of our track manager
-   TrackManager*  trackManager;    // Our Track manager -- managed by the onboard computer
+   base::String* tmName {};          // Name of our track manager
+   TrackManager* trackManager {};    // Our Track manager -- managed by the onboard computer
 
-   //double azimuthBin;            // minimum azimuth we can distinguish -- two signals whose
-                                   // azimuth differs by less than this will be merged
+   //double azimuthBin {};           // minimum azimuth we can distinguish -- two signals whose
+                                     // azimuth differs by less than this will be merged
 
-   //double elevationBin;          // minimum azimuth we can distinguish -- two signals whose
-                                   // azimuth differs by less than this will be merged
+   //double elevationBin {};         // minimum azimuth we can distinguish -- two signals whose
+                                     // azimuth differs by less than this will be merged
 
-   double maximumRange;            // max sensor range.
+   double maximumRange {};           // max sensor range.
 };
 
 }

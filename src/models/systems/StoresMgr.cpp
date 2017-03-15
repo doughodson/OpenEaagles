@@ -21,12 +21,6 @@
 #include "openeaagles/base/PairStream.hpp"
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace models {
 
@@ -47,29 +41,11 @@ END_EVENT_HANDLER()
 StoresMgr::StoresMgr()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init our member data
-//------------------------------------------------------------------------------
-void StoresMgr::initData()
-{
-   weaponsList = nullptr;
-   externalList = nullptr;
-   fuelList = nullptr;
-   gunPtr = nullptr;
-
-   gunFlg = false;
-   mode = NAV;
-   masterArm = ARMED;  // default is armed and dangerous
-}
-
-void StoresMgr::copyData(const StoresMgr& org, const bool cc)
+void StoresMgr::copyData(const StoresMgr& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    gunFlg = org.gunFlg;
    mode = org.mode;
@@ -425,8 +401,6 @@ bool StoresMgr::setSlotStores(const base::PairStream* const msg)
    return true;
 }
 
-
-
 //==============================================================================
 // Class SimpleStoresMgr
 //==============================================================================
@@ -434,43 +408,20 @@ IMPLEMENT_SUBCLASS(SimpleStoresMgr,"StoresMgr")
 EMPTY_SLOTTABLE(SimpleStoresMgr)
 EMPTY_SERIALIZER(SimpleStoresMgr)
 
-
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 SimpleStoresMgr::SimpleStoresMgr()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init our member data
-//------------------------------------------------------------------------------
-void SimpleStoresMgr::initData()
-{
-   wpnRelTimer = 0.0;
-   curWpnID = 0;
-   nCurWpn = 0;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void SimpleStoresMgr::copyData(const SimpleStoresMgr& org, const bool cc)
+void SimpleStoresMgr::copyData(const SimpleStoresMgr& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    wpnRelTimer = org.wpnRelTimer;
    curWpnID = org.curWpnID;
    nCurWpn = org.nCurWpn;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void SimpleStoresMgr::deleteData()
 {
    setSlotStores(nullptr);

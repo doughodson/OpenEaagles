@@ -1,3 +1,13 @@
+
+#ifndef __oe_instruments_Instrument_H__
+#define __oe_instruments_Instrument_H__
+
+#include "openeaagles/graphics/Graphic.hpp"
+
+namespace oe {
+namespace base { class Table1; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: Instrument
 // Base class: graphics::Graphic -> Instrument
@@ -12,17 +22,8 @@
 //      it if there is a scaling table available.  The flag allowPassing will
 //      determine if we pass the token down to our component instruments or not.
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_Instrument_H__
-#define __oe_instruments_Instrument_H__
-
-#include "openeaagles/graphics/Graphic.hpp"
-
-namespace oe {
-   namespace base { class Table1; }
-
-namespace instruments {
-
-class Instrument : public graphics::Graphic {
+class Instrument : public graphics::Graphic
+{
     DECLARE_SUBCLASS(Instrument, graphics::Graphic)
 
 public:
@@ -52,10 +53,10 @@ protected:
 
 private:
     // member variables
-    const base::Table1* myTable;    // holds our scaling data
-    double instVal;                 // our instrument value
-    double preScaleInstVal;         // our pre-scaled instrument value (before linear interpolation)
-    bool allowPassing;              // do we pass our instrument value down to our components?
+    const base::Table1* myTable {};    // holds our scaling data
+    double instVal {};                 // our instrument value
+    double preScaleInstVal {};         // our pre-scaled instrument value (before linear interpolation)
+    bool allowPassing {true};          // do we pass our instrument value down to our components?
 };
 
 }

@@ -36,7 +36,8 @@ namespace dis {
 // Description: DIS incoming NTM class
 //==============================================================================
 
-class NtmInputNode : public interop::NetIO::NtmInputNode {
+class NtmInputNode : public interop::NetIO::NtmInputNode
+{
    DECLARE_SUBCLASS(NtmInputNode, interop::NetIO::NtmInputNode)
 
 public:
@@ -65,7 +66,7 @@ private:
    unsigned int level;        // Level
    unsigned int code;         // Code for this level
    const Ntm* ourNtm;         // Our default NTM
-   base::List* subnodeList;  // List of NtmInputNode nodes below this level
+   base::List* subnodeList;   // List of NtmInputNode nodes below this level
 };
 
 
@@ -100,10 +101,6 @@ static const double EE_PRF_THRSH  = static_cast<double>(1.0);           //  Hz
 static const double EE_PW_THRSH   = static_cast<double>(1e-6);          //  seconds
 //static const unsigned int EE_HIGH_DENSITY_THRSH = 10;               //  no units
 
-
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(NetIO)
    "netInput",             //  1) Network input handler
    "netOutput",            //  2) Network output handler
@@ -119,7 +116,6 @@ BEGIN_SLOTTABLE(NetIO)
    "exerciseID",           // 12: Exercise Identification
 END_SLOTTABLE(NetIO)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1, setSlotNetInput,            base::NetHandler)
    ON_SLOT(2, setSlotNetOutput,           base::NetHandler)
@@ -150,31 +146,17 @@ END_SLOT_MAP()
 NetIO::NetIO() : netInput(nullptr), netOutput(nullptr)
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void NetIO::initData()
 {
-   // DIS parameters
-   setVersion(VERSION_1278_1A);
-
-   siteID = 1;
-   appID = 1;
-   exerciseID = 1;
-
    // First the defaults
    setMaxTimeDR(HRT_BEAT_TIMER, 255, 255);                   //  (seconds)
    setMaxPositionErr(DRA_POS_THRST_DFLT, 255, 255);          //  (meters)
    setMaxOrientationErr(DRA_ORIENT_THRST_DFLT, 255, 255);    //  (radians)
    setMaxAge(HRT_BEAT_MPLIER*HRT_BEAT_TIMER, 255, 255);      //  (seconds)
    setMaxEntityRange(static_cast<double>(0), 255, 255);      // no range filtering
-
-   // Clear emission PDU handle table
-   for (unsigned int i = 0; i < MAX_EMISSION_HANDLERS; i++) {
-      emissionHandlers[i] = nullptr;
-   }
-   nEmissionHandlers = 0;
 }
 
 void NetIO::copyData(const NetIO& org, const bool cc)

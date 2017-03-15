@@ -39,7 +39,6 @@ UsbJoystick::UsbJoystick()
 //------------------------------------------------------------------------------
 void UsbJoystick::initData()
 {
-   stream = 0;
    deviceName[0] = '\0';
 }
 

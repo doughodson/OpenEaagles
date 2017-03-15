@@ -10,14 +10,14 @@
 
 namespace oe {
 namespace recorder {
-   namespace pb {
-      class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
-      class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
-      class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
-      class WeaponDetonationEventMsg; class GunFiredEventMsg; class NewTrackEventMsg;
-      class TrackRemovedEventMsg; class TrackDataMsg; class PlayerId; class PlayerState;
-      class TrackData; class EmissionData;
-   }
+namespace pb {
+class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
+class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
+class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
+class WeaponDetonationEventMsg; class GunFiredEventMsg; class NewTrackEventMsg;
+class TrackRemovedEventMsg; class TrackDataMsg; class PlayerId; class PlayerState;
+class TrackData; class EmissionData;
+}
 
 //------------------------------------------------------------------------------
 // Class: PrintPlayer
@@ -42,9 +42,7 @@ protected:
    virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
-   void initData();
-
-   const base::String* name;    // Player name
+   const base::String* name {};    // Player name
 };
 
 }

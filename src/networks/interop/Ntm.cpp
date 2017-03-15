@@ -19,17 +19,11 @@ END_SLOT_MAP()
 Ntm::Ntm()
 {
    STANDARD_CONSTRUCTOR()
-
-   tPlayer = nullptr;
 }
 
-void Ntm::copyData(const Ntm& org, const bool cc)
+void Ntm::copyData(const Ntm& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      tPlayer = nullptr;
-   }
 
    setSlotTemplatePlayer( org.tPlayer );
 }

@@ -9,12 +9,6 @@
 #include <fstream>
 #include <cstdlib>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
@@ -39,12 +33,6 @@ FileReader::FileReader()
 void FileReader::initData()
 {
    ibuf = new char[MAX_INPUT_BUFFER_SIZE];
-   sin = nullptr;
-   filename = nullptr;
-   pathname = nullptr;
-   fileOpened = false;
-   fileFailed = false;
-   firstPassFlg = true;
 }
 
 void FileReader::copyData(const FileReader& org, const bool cc)

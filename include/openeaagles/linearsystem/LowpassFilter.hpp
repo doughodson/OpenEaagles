@@ -39,7 +39,7 @@ public:
    virtual bool setSlotWc(const base::Number* const msg);
 
 private:
-   double wc;    // Cutoff frequency (rad/sec)
+   double wc {};    // Cutoff frequency (rad/sec)
 };
 
 }

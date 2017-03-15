@@ -3,6 +3,7 @@
 #define __oe_terrain_QuadMap_H__
 
 #include "openeaagles/terrain/Terrain.hpp"
+#include <array>
 
 namespace oe {
 namespace terrain {
@@ -20,15 +21,15 @@ class QuadMap : public Terrain
 public:
    QuadMap();
 
-    unsigned int getNumDataFiles() const;
-    const Terrain* getDataFile(const unsigned int i) const;
-    bool setDataFile(const unsigned int i, Terrain* newDF);
+   unsigned int getNumDataFiles() const;
+   const Terrain* getDataFile(const unsigned int i) const;
+   bool setDataFile(const unsigned int i, Terrain* newDF);
 
    // ---
    // simulation::Terrain interface
    // ---
 
-    virtual bool isDataLoaded() const override;
+   virtual bool isDataLoaded() const override;
 
    // Locates an array of (at least two) elevation points (and sets valid flags if found)
    // returns the number of points found within this QuadMap
@@ -62,8 +63,8 @@ protected:
 private:
    static const unsigned int MAX_DATA_FILES = 4;    // Only 4 files (as in Quad!)
 
-   const Terrain* dataFiles[MAX_DATA_FILES];        // Terrain data files
-   unsigned int numDataFiles;                       // Number of data files
+   std::array<const Terrain*, MAX_DATA_FILES> dataFiles {}; // Terrain data files
+   unsigned int numDataFiles {};                            // Number of data files
 
    virtual bool loadData() override;
 };

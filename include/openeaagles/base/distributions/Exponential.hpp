@@ -40,8 +40,6 @@ protected:
 
   double lambda {1.0}; // continuous inverse scale parameter
   double gamma {};     // continuous location parameter
-
-
 };
 
 }

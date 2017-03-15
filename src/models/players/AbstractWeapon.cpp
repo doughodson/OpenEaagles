@@ -25,12 +25,6 @@
 #include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/util/unit_utils.hpp"
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace models {
 
@@ -40,7 +34,6 @@ IMPLEMENT_ABSTRACT_SUBCLASS(AbstractWeapon, "AbstractWeapon")
 const double AbstractWeapon::DEFAULT_MAX_TGT_RNG = 2000.0f;    // meters
 const double AbstractWeapon::DEFAULT_MAX_TGT_LOS_ERR = 1.0f;   // radians
 
-// Slot table
 BEGIN_SLOTTABLE(AbstractWeapon)
     "released",         //  1: Weapon has been released
     "failed",           //  2: Weapon failed (e.g., reasonableness Test)
@@ -61,7 +54,6 @@ BEGIN_SLOTTABLE(AbstractWeapon)
     "testTgtName"       // 17: TEST only: target player name
 END_SLOTTABLE(AbstractWeapon)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(AbstractWeapon)
     ON_SLOT( 1,  setSlotReleased,    base::Number)
     ON_SLOT( 2,  setSlotFailed,      base::Number)
@@ -96,7 +88,6 @@ BEGIN_SLOT_MAP(AbstractWeapon)
     ON_SLOT(17, setSlotTestTgtName, base::String)
 END_SLOT_MAP()
 
-// Event() map
 BEGIN_EVENT_HANDLER(AbstractWeapon)
     ON_EVENT_OBJ(DESIGNATOR_EVENT, onDesignatorEvent, Designator)
     ON_EVENT( JETTISON_EVENT, onJettisonEvent)
@@ -116,45 +107,9 @@ AbstractWeapon::AbstractWeapon()
 
 void AbstractWeapon::initData()
 {
-   flyoutWpn = nullptr;
-   initialWpn = nullptr;
-
    tgtPos.set(0,0,0);
    tgtVel.set(0,0,0);
-   tgtPosValid = false;
-   tgtPlayer = nullptr;
-   tgtTrack = nullptr;
-   launchVehicle = nullptr;
-   posTrkEnb = false;
-   maxTgtRng = DEFAULT_MAX_TGT_RNG;
-   maxTgtLosErr = DEFAULT_MAX_TGT_LOS_ERR;
-   detonationRange = 0.0;
    tgtDetLoc.set(0,0,0);
-   launcher = nullptr;
-   station = 0;
-   weaponID = 0;
-   eventID = 0;
-
-   power       = true;
-   failed      = false;
-   released    = false;
-   releaseHold = false;
-   willHang    = false;
-   hung        = false;
-   blocked     = false;
-   canJettison = true; // default
-   jettisoned  = false;
-   dummyFlg    = false;
-   results     = DETONATE_NONE;
-   tstTgtNam   = nullptr;
-
-   tof = 0.0;
-   setMaxTOF(60.0);
-   setTSG(9999.0);
-   setMaxBurstRng(500.0);
-   setLethalRange(50.0);
-   setSOBT(9999.0);
-   setEOBT(0.0);
    setMaxGimbalAngle(30.0 * static_cast<double>(base::angle::D2RCC));
 }
 

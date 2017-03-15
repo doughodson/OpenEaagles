@@ -3,15 +3,27 @@ Changes since v16.11
 ================================================================================
 
 --------------------------------------------------------------------------------
-General framework-wide changes and improvements
-
--- Updated several found null pointer 0's with nullptr.
+General framework-wide changes/improvements
 
 -- Old logger functionality has been removed in favor of binary data recorder
    library.  The classes base::Logger, simulation::SimLogger and simulation::TabLogger
    have been removed.
 
--- Started using 'auto' keyword to declare types in a significant way; specifically
+-- Renamed several of the key classes that are abstract to 'Abstract<<CLASSNAME>>'.
+   For example, NetIO in simulation library became 'AbstractNetIO'.  This naming
+   convention better indicates the role those classes take in relation to other
+   classes.
+
+   Often abstract classes define a small set of functionality, but maybe more
+   importantly, they define an interface of importance that is partially defined.
+   At this point, there are no classes within the framework that serve as a pure
+   interface-only specification -- all usually implement (by default) something.
+
+Modern C++ Improvements (code modernization, enhancements and general improvements)
+
+-- Replaced several found null pointer 0's with nullptr.
+
+-- Now using 'auto' keyword to declare types in a significant way; specifically
    used in places they declare variables that are initialized with rather long and
    obvious type definitions. For example:
 
@@ -28,25 +40,24 @@ General framework-wide changes and improvements
    which results in const'ing the pointer variable itself, if appropriate (i.e.,
    oe::models::Autopilot* const ap).
 
--- Renamed several of the key classes that are abstract to 'Abstract<<CLASSNAME>>'.
-   For example, NetIO in simulation library became 'AbstractNetIO'.  This naming
-   convention better indicates the role those classes take in relation to other
-   classes.
-
-   Often abstract classes define a small set of functionality, but maybe more
-   importantly, they define an interface of importance that is partially defined.
-   At this point, there are no classes within the framework that serve as a pure
-   interface-only specification -- all usually implement (by default) something.
-
--- Started using in-class brace initializers throughout codebase for member data.
+-- Now using in-class brace initializers throughout codebase for member data.
    This C++11 feature improves code clarity, and potentially reduces
    data initalization issues by eliminating multiple redundant variable initializations
    (sometimes by assignment) when several constructors have been defined. This,
    in some cases, eliminates the need for 'initData()' member methods often defined
-   to support this initialization activity. This eliminates any possible initalization
-   vs assignment performance issues and often reduces the number of tests and code
-   within the 'copyData' member (it reduces code associated with being called by the
-   copy constructor).
+   to support this initialization activity.
+
+   This also eliminates any possible initalization vs assignment performance issues
+   and often reduces the amount of code within the 'copyData' member - specifically,
+   it often reduces or completely eliminates code associated copy construction.
+
+-- Now using std::array for all single dimension data array.  This is a zero cost
+   abstraction.  At this point, only class data member declarations have been
+   changed -- specific use of this template throughout rest of code is to be done.
+
+-- Not really a Modern C++ improvement, but all pragma's associated with turning
+   on/off compiler generated warnings have been removed from code.  They are now made
+   explicit with command line options to enable/disable (much all -Wall in GCC).
 
 --------------------------------------------------------------------------------
 
@@ -61,16 +72,16 @@ base library
    with explicit declarations (e.g., Vec3d, Vec3f, Matrixd, etc) throughout framework.
    Along with this change is the movement of these classes from oe::osg namespace
    to oe::base namespace.  For example, the aliased oe::osg::Vec3 class has moved
-   from oe::osg to the namespace and explicit oe::base::Vec3d.  These 2 changes make
-   the code easier to read and understand, as all references within 'base' namespace are
-   to the class itself (e.g, Vec3d), and outside the namespace as base::Vec3d.  This
-   aligns these classes with all the other 'base' classes.
+   from oe::osg to the namespace and explicitly defined as oe::base::Vec3d.
+   Both of these changes improve code readability, as all references within 'base'
+   namespace are to the class itself (e.g, Vec3d), and outside the namespace as
+   base::Vec3d.  This aligns these classes with all the other 'base' classes.
 
    It should be noted that base::Matrixd (an original 'osg' class) is different than
-   base::Matrix (the openeaagles homegrown matrix class).  At some point these different
-   classes that define essentially the same concept should be combined or rectified
+   base::Matrix (the homegrown openeaagles matrix class).  At some point these different
+   classes that essentially define the same concept should be combined or rectified
    somehow to avoid the obvious question - why do multiple classes that represent
-   the same thing exist?
+   the same concept exist?
 
    Some rework of the OSG-based classes (Vec and Matrix) was done to modernize them from
    the standpoint of using current, readily available, standard library functionality (e.g.,
@@ -96,8 +107,8 @@ base library
 
 -- Moved and grouped all thread related classes into the subfolder 'concurrent' to make
    more obvious the capability provided.  Along with this is the renaming of classes to
-   easy to digest names, such as ThreadPeriodicTask to PeriodicTask, or Thread to
-   AbstractThread to more clearly indicate role in relation to thread subclasses.
+   easy to digest names, such as ThreadPeriodicTask to PeriodicTask to avoid overloading
+   of names.
 
 -- Renamed subdirectory 'nethandlers' to 'network' as this better conveys the code it
    contains - namely, component interfaces to network sockets. Also moved NetHandler
@@ -130,8 +141,8 @@ base library
 
         In theory, this information could be used to help debug memory leaks within
         a running application. Not only can this capability be replicated outside of
-        Object itself, other tools exist (e.g., Valgrind) that are much more
-        comprehensive in this area. Removing the code associated with this functionality
+        Object itself, other tools exist (e.g., Valgrind) which are much more
+        comprehensive for this purpose. Removing the code associated with this functionality
         greatly simplifies Object, its associated macros, and instance creation.
         It also reduces the barrier to understanding what the code is doing.
 
@@ -140,11 +151,11 @@ base library
    Nav class (removed)
      -- This class contained only static methods, so it was restructured as a set
         of functions within the oe::base::nav namespace defined in file 'util/nav_utils.hpp'.
-   
+
    NavDR class (removed)
      -- This class contained only static methods, so it was restructured as a set
         of functions within the oe::base::navDR namespace defined in file 'util/navDR_utils.hpp'.
-	 
+
    MetaObject
      -- New class that replaces _Static class once defined in Object.
 
@@ -165,7 +176,7 @@ base library
 
    safe_ptr template
      -- Fixed the assignment operators.  This bug has existed for years, but probably
-        'discovered' because nobody ever writes code like this x = x;
+        noticed or 'discovered' because nobody writes code like this x = x;
 
 --------------------------------------------------------------------------------
 
@@ -174,12 +185,12 @@ base library
 simulation library
 
 -- Created mostly abstract interface classes for NetIO, Otw and Player.  The
-   relationship between these classes serve as the defining archecture for
+   relationship between these classes serve as the defining architecture for
    simulation applications.  It also draws a clear line between the infrastructure
    needed to execute a simulation and the models being processed.
 
 -- Moved all models into respective libraries -- models, terrain, otw.
-   The goal was to divorce, simplify, and focus the contents of the
+   The goal was to divorce, simplify, and focus the contents of this
    library to defining the basic architecture of a simulation.  It is now much
    less concerned about models and interoperability interfaces.
    In domain driven design (DDD) literature, this is called refactoring a ball
@@ -187,11 +198,11 @@ simulation library
    understanding and improves clarity.
 
    Otm class
-      -- Renamed 'formName' slot to 'factoryName' to align code with this 
-         termionology.
+      -- Renamed 'formName' slot to 'factoryName' to align code with existing
+         framework termionology.
 
    AbstractPlayer
-      -- Removed 2 undefined methods "isSmoothing()" and "getSmoothingRate()".
+      -- Removed two undefined methods "isSmoothing()" and "getSmoothingRate()".
          Both were undefined and not used.
 
    Simulation class
@@ -207,12 +218,12 @@ simulation library
         files need to be updated by replacing "Simulation" references to
         "WorldModel".
 
-     -- We do recoginize that by subclassing, there still remains a close coupling
-        between these 2 different aspects.  But, even though not optimal, it is a
-        step in the right direction to decouple this relationship.  At some point,
-        the relationship between the simulation execution infrastructure and a world
-        model will probably become an aggregate (i.e., a simulation owns
-        a model to be executed.)
+     -- It is recoginized that by subclassing, there still remains a close coupling
+        between these two different aspects (models and simulation execution).  But,
+        even though not optimal, it is a step in the right direction to decouple
+        this relationship.  At some point, the relationship between the simulation
+        execution infrastructure and a world model will probably become an aggregate
+        (i.e., a simulation owns a model to be executed.)
 
 --------------------------------------------------------------------------------
 
@@ -289,12 +300,13 @@ models library
    capability can also be used to land an aircraft through instrumentation.  The models
    as designed can not do a full landing, but can navigate to a location.  They
    have been moved into the testDafif example to retain the code and show how to extend
-   a world model that taps DAFIF data.
+   a world model to include DAFIF data.
 
    WorldModel (new class)
       -- Contains the guts of what used to be in Simulation class concerning
          the modeled world -- class does not contain any code related to
          execution of players, etc.
+
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------

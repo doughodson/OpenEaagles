@@ -3,13 +3,11 @@
 #define __oe_dis_Nib_H__
 
 #include "openeaagles/networks/interop/Nib.hpp"
-
 #include "openeaagles/networks/dis/NetIO.hpp"
+#include <array>
 
 namespace oe {
-
 namespace dis {
-
 class Ntm;
 
 //------------------------------------------------------------------------------
@@ -80,38 +78,38 @@ protected:
    virtual bool shutdownNotification() override;
 
    // Electromagnetic Emitter handlers (protected for now)
-   unsigned char    numEmissionSystems;                           // Number of emission systems
-   unsigned char    emissionSystemsIndex;                         // Emission systems index (outgoing only)
-   EmissionPduHandler* emitterSysHandler[MAX_EM_SYSTEMS];         // Handler for each emitter system
+   unsigned char numEmissionSystems {};                           // Number of emission systems
+   unsigned char emissionSystemsIndex {};                         // Emission systems index (outgoing only)
+   std::array<EmissionPduHandler*, MAX_EM_SYSTEMS> emitterSysHandler {}; // Handler for each emitter system
 
 private:
-   unsigned short  siteID;     // Site ID
-   unsigned short  appID;      // Application ID
+   unsigned short siteID {};     // Site ID
+   unsigned short appID {};      // Application ID
 
    // IFF PDU data
-   FundamentalOpData* iffFunOpData;   // IFF Functional Operational Data
-   double        iffLastExecTime;     // Exec time of last IFF update
-   unsigned short iffEventId;         // IFF event ID
-   unsigned char  iffOptions;         // IFF PDU option bits
+   FundamentalOpData* iffFunOpData {};   // IFF Functional Operational Data
+   double iffLastExecTime {};            // Exec time of last IFF update
+   unsigned short iffEventId {};         // IFF event ID
+   unsigned char  iffOptions {};         // IFF PDU option bits
 
    // Attached missile entity types
-   const Ntm* apartMslTypes[MAX_AMSL];
+   std::array<const Ntm*, MAX_AMSL> apartMslTypes {};
 
    // Standard (DIS based) type codes
-   unsigned char  disKind;          // DIS kind code
-   unsigned char  disDomain;        // DIS domain code
-   unsigned short disCountry;       // DIS country code
-   unsigned char  disCategory;      // DIS category code
-   unsigned char  disSubcategory;   // DIS subcategory code
-   unsigned char  disSpecific;      // DIS specific code
-   unsigned char  disExtra;         // DIS extra code
+   unsigned char  disKind {};          // DIS kind code
+   unsigned char  disDomain {};        // DIS domain code
+   unsigned short disCountry {};       // DIS country code
+   unsigned char  disCategory {};      // DIS category code
+   unsigned char  disSubcategory {};   // DIS subcategory code
+   unsigned char  disSpecific {};      // DIS specific code
+   unsigned char  disExtra {};         // DIS extra code
 
    // timeOffset has 2 uses
    // 1) In a time synchronized network, it is merely as estimation of PDU latency
    //    Over time, it is updated so that i will eventually become the minimum observed latency
    // 2) If time is not synchronized across the network, then it becomes the time difference + latency
    //    This allows applications to run time relative
-   double timeOffset;
+   double timeOffset {};
 };
 
 }

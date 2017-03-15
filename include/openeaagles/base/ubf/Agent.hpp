@@ -7,7 +7,6 @@
 namespace oe {
 namespace base {
 namespace ubf {
-
 class AbstractBehavior;
 class AbstractState;
 class AbstractAction;

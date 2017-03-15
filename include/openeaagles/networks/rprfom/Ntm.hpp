@@ -57,13 +57,13 @@ public:
 
 private:
    // Standard type codes
-   unsigned char  kind;
-   unsigned char  domain;
-   unsigned short country;
-   unsigned char  category;
-   unsigned char  subcategory;
-   unsigned char  specific;
-   unsigned char  extra;
+   unsigned char  kind {};
+   unsigned char  domain {};
+   unsigned short country {};
+   unsigned char  category {};
+   unsigned char  subcategory {};
+   unsigned char  specific {};
+   unsigned char  extra {};
 };
 
 }

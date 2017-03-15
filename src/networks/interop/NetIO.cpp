@@ -78,7 +78,6 @@ BEGIN_SLOTTABLE(NetIO)
    "maxEntityRange",       // 14: Max entity range of networked players
 END_SLOTTABLE(NetIO)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(NetIO)
    ON_SLOT(1,  setSlotNetworkID,          base::Number)
    ON_SLOT(2,  setSlotFederationName,     base::String)
@@ -103,65 +102,17 @@ NetIO::NetIO()
 {
    STANDARD_CONSTRUCTOR()
 
-   station = nullptr;
-   simulation = nullptr;
-   timeline = UTC;
-   iffEventID = 0;
-   emEventID = 0;
-   netID = 1;  // default network ID
-
-   inputFlg = true;
-   outputFlg = true;
-   relayFlg = true;
-   netInit = false;
-   netInitFail = false;
-
    // set the defaults
    setMaxEntityRange(0);                       // no range filtering
    setMaxTimeDR(NET_UPDATE_RATE);              //  (seconds)
    setMaxPositionErr(NET_THRESHOLD_MTR);       //  (meters)
    setMaxOrientationErr(NET_THRESHOLD_RAD);    //  (radians)
    setMaxAge(NET_TIMEOUT);                     //  (seconds)
-
-   nInNibs = 0;
-   nOutNibs = 0;
-
-   for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
-      inputEntityTypes[i] = nullptr;
-   }
-   nInputEntityTypes = 0;
-
-   for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
-      outputEntityTypes[i] = nullptr;
-   }
-   nOutputEntityTypes = 0;
-
-   inputNtmTree = nullptr;
-   outputNtmTree = nullptr;
 }
 
-void NetIO::copyData(const NetIO& org, const bool cc)
+void NetIO::copyData(const NetIO& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-
-      station = nullptr;
-      simulation = nullptr;
-      federateName = nullptr;
-      federationName = nullptr;
-
-      for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
-         inputEntityTypes[i] = nullptr;
-      }
-      nInputEntityTypes = 0;
-
-      for (unsigned int i = 0; i < MAX_ENTITY_TYPES; i++) {
-         outputEntityTypes[i] = nullptr;
-      }
-      nOutputEntityTypes = 0;
-
-   }
 
    station = nullptr;
    simulation = nullptr;
@@ -816,12 +767,12 @@ Nib* NetIO::findNib(const unsigned short playerID, const base::String* const fed
    Nib* found = nullptr;
    if (ioType == INPUT_NIB) {
       Nib** k =
-         static_cast<Nib**>(bsearch(&key, inputList, nInNibs, sizeof(Nib*), compareKey2Nib));
+         static_cast<Nib**>(bsearch(&key, inputList.data(), nInNibs, sizeof(Nib*), compareKey2Nib));
       if (k != nullptr) found = *k;
    }
    else {
       Nib** k =
-         static_cast<Nib**>(bsearch(&key, outputList, nOutNibs, sizeof(Nib*), compareKey2Nib));
+         static_cast<Nib**>(bsearch(&key, outputList.data(), nOutNibs, sizeof(Nib*), compareKey2Nib));
       if (k != nullptr) found = *k;
    }
    return found;
@@ -851,10 +802,10 @@ bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
 {
    bool ok = false;
    if (nib != nullptr) {
-      Nib** tbl = inputList;
+      Nib** tbl = inputList.data();
       int n = nInNibs;
       if (ioType == OUTPUT_NIB) {
-         tbl = outputList;
+         tbl = outputList.data();
          n = nOutNibs;
       }
 
@@ -894,10 +845,10 @@ bool NetIO::addNibToList(Nib* const nib, const IoType ioType)
 //------------------------------------------------------------------------------
 void NetIO::removeNibFromList(Nib* const nib, const IoType ioType)
 {
-   Nib** tbl = inputList;
+   Nib** tbl = inputList.data();
    int n = nInNibs;
    if (ioType == OUTPUT_NIB) {
-      tbl = outputList;
+      tbl = outputList.data();
       n = nOutNibs;
    }
 

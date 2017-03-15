@@ -72,7 +72,6 @@ public:
 
     // Sets the commanded wing sweep angle (radians)
     virtual void setCmdWingSweepAngle(const double rad);
-
 };
 
 }

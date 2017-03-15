@@ -3,6 +3,7 @@
 #define __oe_otw_OtwCigiCl_H__
 
 #include "openeaagles/otw/Otw.hpp"
+#include <array>
 
 class CigiIGCtrlV3;
 class CigiLosVectReqV3;   // CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS request packet
@@ -28,20 +29,10 @@ class CigiIGMsgV3;       // CGBCGB CIGI_IG_RESPONSE_MESSAGE
 namespace oe {
 namespace base { class Number; class NetHandler; class Thread; }
 namespace models {
-class AirVehicle;
-class Building;
-class Effects;
-class GroundVehicle;
-class LifeForm;
-class Missile;
-class Player;
-class Ship;
-class SpaceVehicle;
-class AbstractWeapon;
+class AirVehicle; class Building; class Effects; class GroundVehicle; class LifeForm;
+class Missile; class Player; class Ship; class SpaceVehicle; class AbstractWeapon;
 }
-
 namespace otw {
-
 class CigiCl;
 class OtwModelCigiCl;
 
@@ -216,53 +207,53 @@ protected:
 
 private:
    base::safe_ptr<CigiCl> cigi;         // CIGI handler (direct, networked, ...)
-   bool   asyncMode;                     // Running in ASYNC mode if true
-   bool   hideOwn;                       // Hide ownship model flag
+   // CIGI init support
+   bool cigiInitialized {};            // CIGI has been initialized
+   bool cigiInitFailed {};             // CIGI initialization has failed
 
-   bool   resetRequest;                  // IG reset request
-   unsigned short entityIdCount;         // Entity ID count
-   unsigned short elevReqIdCount;        // Elevation request ID count
+   bool asyncMode {};                   // Running in ASYNC mode if true
+   bool hideOwn {true};                 // Hide ownship model flag
+   bool resetRequest {true};                  // IG reset request
+
+   unsigned short entityIdCount {};         // Entity ID count
+   unsigned short elevReqIdCount {};        // Elevation request ID count
 
    // Terrain elevation request data
-   bool    elevReqFlg;                   // Elevation request flag
-   double  elevReqTimer;                 // Elevation request timer
+   bool elevReqFlg {};                      // Elevation request flag
+   double elevReqTimer {};                  // Elevation request timer
 
    // Line of sight (LOS) data
-   double  losRespLat;                   // LOS Response latitude intersection point (deg)
-   double  losRespLon;                   // LOS Response longitude intersection point (deg)
-   double  losRespAlt;                   // LOS Response altitude intersection point (m)
-   double  losRespRange;                 // LOS response range (m)
-   unsigned short losRespId;             // LOS Response ID
-   bool    losRespDataValid;             // LOS response data is valid flag
-   unsigned short losReqId;              // LOS Request ID
-   bool    newLosReq;                    // New LOS request flag
-   double  losReqTimer;                  // LOS request timer
+   double losRespLat {};                    // LOS Response latitude intersection point (deg)
+   double losRespLon {};                    // LOS Response longitude intersection point (deg)
+   double losRespAlt {};                    // LOS Response altitude intersection point (m)
+   double losRespRange {};                  // LOS response range (m)
+   unsigned short losRespId {};             // LOS Response ID
+   bool losRespDataValid {true};            // LOS response data is valid flag
+   unsigned short losReqId {};              // LOS Request ID
+   bool newLosReq {true};                   // New LOS request flag
+   double losReqTimer {};                   // LOS request timer
 
    // CIGI entity data buffers
-   unsigned int iw;                      // Write buffer index
-   unsigned int iw0;                     // Last write buffer index
-   unsigned int ir;                      // Read index
+   unsigned int iw {NUM_BUFFERS};           // Write buffer index
+   unsigned int iw0 {NUM_BUFFERS};          // Last write buffer index
+   unsigned int ir {NUM_BUFFERS};           // Read index
 
    // Packets
-   CigiEntityCtrlV3* ownshipEC[NUM_BUFFERS]; // Ownship entity control packet
-   CigiCompCtrlV3*   ownshipCC[NUM_BUFFERS]; // ownship component control packet
-   CigiIGCtrlV3*     igc;                    // IG control packet
-   CigiLosVectReqV3* los;                    // LOS request packet
-   CigiViewCtrlV3*   view;                   // View control packet (optional, set by derived classes)
-   CigiViewDefV3*    fov;                    // FOV definition packet (optional, set by derived classes
-   CigiSensorCtrlV3* sensor;                 // Sensor Control packet
+   std::array<CigiEntityCtrlV3*, NUM_BUFFERS> ownshipEC {}; // Ownship entity control packet
+   std::array<CigiCompCtrlV3*, NUM_BUFFERS> ownshipCC {};   // ownship component control packet
+   CigiIGCtrlV3*     igc {};                    // IG control packet
+   CigiLosVectReqV3* los {};                    // LOS request packet
+   CigiViewCtrlV3*   view {};                   // View control packet (optional, set by derived classes)
+   CigiViewDefV3*    fov {};                    // FOV definition packet (optional, set by derived classes
+   CigiSensorCtrlV3* sensor {};                 // Sensor Control packet
 
    // special model IDs
-   unsigned short cmtOwnship;             // Ownship's model ID
-   unsigned short cmtMslTrail;            // "Missile Trail" effect model ID
-   unsigned short cmtSmokePlume;          // "Smoke Plume" effect model ID
-   unsigned short cmtAirExplosion;        // "Air Explosion" effect model ID
-   unsigned short cmtGroundExplosion;     // "Ground Explosion" effect model ID
-   unsigned short cmtShipWake;            // "Ship Wake" effect model ID
-
-   // CIGI init support
-   bool cigiInitialized;            // CIGI has been initialized
-   bool cigiInitFailed;             // CIGI initialization has failed
+   unsigned short cmtOwnship {302};             // Ownship's model ID
+   unsigned short cmtMslTrail {1100};           // "Missile Trail" effect model ID
+   unsigned short cmtSmokePlume {1101};         // "Smoke Plume" effect model ID
+   unsigned short cmtAirExplosion {1102};       // "Air Explosion" effect model ID
+   unsigned short cmtGroundExplosion {1103};    // "Ground Explosion" effect model ID
+   unsigned short cmtShipWake {1104};           // "Ship Wake" effect model ID
 };
 
 }

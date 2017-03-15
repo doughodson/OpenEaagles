@@ -4,6 +4,7 @@
 
 #include "openeaagles/models/systems/System.hpp"
 #include "openeaagles/config.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace base { class Angle; class Distance; class Number; class PairStream; }
@@ -94,41 +95,41 @@ protected:
    virtual void process(const double dt) override;     // Phase 3
 
 protected:
-   struct PlayerOfInterest {
-      base::safe_ptr<Player> player;    // The player
-      double range;                     // Previous range (m)
-      double rangeRate;                 // Previous range rate (m/s)
-      double distance;                  // Distance at collision (m)
-      unsigned int passCnt;             // Pass count
-      bool active;                      // This entry is active (in-use)
-      bool collided;                    // We've collided with this player
-      bool unmatched;                   // Entry not yet matched during an update
-
-      PlayerOfInterest()
-         : player(0), range(0.0), rangeRate(0.0),
-           distance(0.0), passCnt(0), active(false),
-           collided(false), unmatched(false) {}
-
+   class PlayerOfInterest
+   {
+   public:
+      PlayerOfInterest() = default;
+      PlayerOfInterest(const PlayerOfInterest&) = delete;
+      PlayerOfInterest& operator=(const PlayerOfInterest&) = delete;
       ~PlayerOfInterest() { player = nullptr; }
+      
       void clear()        { player = nullptr; active = false; }
 
+      base::safe_ptr<Player> player;    // The player
+      double range {};                  // Previous range (m)
+      double rangeRate {};              // Previous range rate (m/s)
+      double distance {};               // Distance at collision (m)
+      unsigned int passCnt {};          // Pass count
+      bool active {};                   // This entry is active (in-use)
+      bool collided {};                 // We've collided with this player
+      bool unmatched {};                // Entry not yet matched during an update
    };
 
 private:
    void initData();
 
-   mutable long poiLock;      // Semaphore to protect the POI list
+   mutable long poiLock {};      // Semaphore to protect the POI list
 
-   unsigned int playerTypes;  // Player types mask
-   double maxRange2Players;   // Max range from ownship to players of interest, or zero for all (meters)
-   double maxAngle2Players;   // Max angle off the 'nose' of our ownship to players of interest, or zero for all (radians)
-   double collisionRange;     // Collision range (meters)
-   bool useWorld;             // Using player of interest's world coordinates
-   bool localOnly;            // Local players only
-   bool sendCrashEvents;      // Send crash events
+   unsigned int playerTypes {0xFFFF};  // Player types mask (default: all types)
+   double maxRange2Players {1.0 * base::distance::NM2M};   // Max range from ownship to players of interest, or zero for all (meters) (default: 1.0 NM)
+   double maxAngle2Players {};         // Max angle off the 'nose' of our ownship to players of interest, or zero for all (radians)
+   double collisionRange {4.0};        // Collision range (meters)
+   bool useWorld {true};               // Using player of interest's world coordinates
+   bool localOnly {};                  // Local players only
+   bool sendCrashEvents {};            // Send crash events
 
-   PlayerOfInterest* players; // Player of interest (POI) list
-   unsigned int maxPlayers;   // Max number of players of interest
+   PlayerOfInterest* players {};       // Player of interest (POI) list
+   unsigned int maxPlayers {};         // Max number of players of interest
 };
 
 inline double CollisionDetect::getCollisionRange() const       { return collisionRange; }

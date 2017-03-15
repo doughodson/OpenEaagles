@@ -15,7 +15,6 @@ BEGIN_SLOTTABLE(Ntm)
     "entityType", // 1) Entity type (base::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
     ON_SLOT(1, setSlotEntityType, base::List)
 END_SLOT_MAP()
@@ -23,14 +22,6 @@ END_SLOT_MAP()
 Ntm::Ntm()
 {
    STANDARD_CONSTRUCTOR()
-
-   kind = 0;
-   domain = 0;
-   country = 0;
-   category = 0;
-   subcategory = 0;
-   specific = 0;
-   extra = 0;
 }
 
 void Ntm::copyData(const Ntm& org, const bool)

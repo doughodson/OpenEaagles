@@ -5,9 +5,7 @@
 #include "openeaagles/base/Object.hpp"
 
 namespace oe {
-
 namespace graphics { class Texture; }
-
 namespace rpf {
 
 // ------------------------------------------------------------------------------
@@ -66,14 +64,14 @@ public:
 private:
     static const int MAX_TABLE_SIZE = 25;    // Maximum number of data in our tables
 
-    int maxTableSize;
-    int centerTablePos;
-    int lowerBound;
-    int upperBound;
-    int row;
-    int col;
-    int size;
-    graphics::Texture* texes[MAX_TABLE_SIZE][MAX_TABLE_SIZE];    // Holds our textures.
+    int maxTableSize {MAX_TABLE_SIZE};
+    int centerTablePos {};
+    int lowerBound {};
+    int upperBound {};
+    int row {};
+    int col {};
+    int size {};
+    graphics::Texture* texes[MAX_TABLE_SIZE][MAX_TABLE_SIZE] {};   // Holds our textures.
 };
 
 }

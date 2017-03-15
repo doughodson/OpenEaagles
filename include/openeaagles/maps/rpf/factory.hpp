@@ -5,14 +5,9 @@
 #include <string>
 
 namespace oe {
-
 namespace base { class Object; }
-
 namespace rpf {
-
-// factory function
-base::Object* factory(const std::string& name);
-
+base::Object* factory(const std::string&);
 }
 }
 

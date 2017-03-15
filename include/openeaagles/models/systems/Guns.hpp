@@ -8,11 +8,8 @@
 #include "openeaagles/base/osg/Matrixd"
 
 namespace oe {
-
 namespace base { class List; class Number; }
-
 namespace models {
-
 class Bullet;
 
 //------------------------------------------------------------------------------
@@ -112,18 +109,18 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   Bullet*  bullet;           // Type of bullet
-   double   shortBurstTimer;  // Single short burst timer (when firing a single burst) (sec)
-   double   shortBurstTime;   // Length of the single short burst                 (sec)
-   double   burstFrameTimer;  // Timer used to generate small bursts bullets      (sec)
-   double   burstFrameTime;   // Length of a small burst of bullets               (sec)
-   double   rcount;           // Rounds being fired this burst
-   int      rounds;           // Number of rounds remaining
-   int      initRounds;       // Initial rounds
-   int      rpm;              // Rounds per minute
-   bool     fire;             // Gun is firing
-   bool     armed;            // Armed flag
-   bool     unlimited;        // Unlimited bullets (aka old western movie mode)
+   Bullet*  bullet {};             // Type of bullet
+   double   shortBurstTimer {};    // Single short burst timer (when firing a single burst) (sec)
+   double   shortBurstTime {0.5};  // Length of the single short burst                 (sec)
+   double   burstFrameTimer {};    // Timer used to generate small bursts bullets      (sec)
+   double   burstFrameTime {};     // Length of a small burst of bullets               (sec)
+   double   rcount {};             // Rounds being fired this burst
+   int      rounds {};             // Number of rounds remaining
+   int      initRounds {};         // Initial rounds
+   int      rpm {};                // Rounds per minute
+   bool     fire {};               // Gun is firing
+   bool     armed {};              // Armed flag
+   bool     unlimited {};          // Unlimited bullets (aka old western movie mode)
 
    base::Vec3d posVec;        // Position vector; relative to ownship body axis (m)
    base::Vec3d angles;        // (Euler) angles; relative to ownship body axis (rad)

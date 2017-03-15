@@ -56,25 +56,25 @@ public:
 
 private:
     // SAR data
-    int    id;                  // image ID
-    double latitude;            // (stare point) latitude (degrees)
-    double longitude;           // (stare point) longitude (degrees)
-    double elevation;           // (stare point) elevation (meters)
-    double orientation;         // orientation (true) (degrees)
-    double resolution;          // resolution (meters/pixel)
+    int    id {};                  // image ID
+    double latitude {};            // (stare point) latitude (degrees)
+    double longitude {};           // (stare point) longitude (degrees)
+    double elevation {};           // (stare point) elevation (meters)
+    double orientation {};         // orientation (true) (degrees)
+    double resolution {};          // resolution (meters/pixel)
 
     // Image data
-    unsigned char*  data;           // Pointer to the image data
-    unsigned int    size;           // Image size in bytes
-    unsigned int    width;          // Width  (pixels: must be power of two)
-    unsigned int    height;         // Height (pixels: must be power of two)
-    unsigned int    depth;          // Depth (bytes: 1, 2, 3 or 4)
-    bool            xmitEnble;      // Image should be transmitted over datalink
+    unsigned char* data {};           // Pointer to the image data
+    unsigned int   size {};           // Image size in bytes
+    unsigned int   width {};          // Width  (pixels: must be power of two)
+    unsigned int   height {};         // Height (pixels: must be power of two)
+    unsigned int   depth {};          // Depth (bytes: 1, 2, 3 or 4)
+    bool           xmitEnble {};      // Image should be transmitted over datalink
 
     // Original image data
-    unsigned char*  origData;       // Original image data
-    unsigned int    origSize;       // Image size in bytes
-    bool            origCompressed; // Original image is compressed
+    unsigned char* origData {};       // Original image data
+    unsigned int   origSize {};       // Image size in bytes
+    bool           origCompressed {}; // Original image is compressed
 };
 
 }

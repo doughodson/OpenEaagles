@@ -12,11 +12,8 @@
 //#define USE_TDBIR
 
 namespace oe {
-
 namespace base { class PairStream; }
-
 namespace models {
-
 class Player;
 class IrSystem;
 class IrSensor;
@@ -31,10 +28,9 @@ class IrQueryMsg;
 //------------------------------------------------------------------------------
 class IrSeeker : public ScanGimbal
 {
-    DECLARE_SUBCLASS(IrSeeker, ScanGimbal)
+   DECLARE_SUBCLASS(IrSeeker, ScanGimbal)
 
 public:
-
    IrSeeker();
 
    virtual void irRequestSignature(IrQueryMsg* const irQuery);
@@ -59,11 +55,11 @@ protected:
 
    virtual bool shutdownNotification() override;
 
-   base::safe_stack<IrQueryMsg*> freeQueryStack;  // stack of free queries of target IR signatures
-   mutable long freeQueryLock;                     // Semaphore to protect 'freeQueryStack'
+   base::safe_stack<IrQueryMsg*> freeQueryStack {MAX_QUERIES};   // stack of free queries of target IR signatures
+   mutable long freeQueryLock {};                                // Semaphore to protect 'freeQueryStack'
 
-   base::safe_queue<IrQueryMsg*> inUseQueryQueue; // Queue of in use queries of target IR signatures
-   mutable long inUseQueryLock;                    // Semaphore to protect 'inUseQueryQueue'
+   base::safe_queue<IrQueryMsg*> inUseQueryQueue {MAX_QUERIES};  // Queue of in use queries of target IR signatures
+   mutable long inUseQueryLock {};                               // Semaphore to protect 'inUseQueryQueue'
 
 private:
    static const int MAX_QUERIES = 10000;   // Max size of queues and arrays
@@ -80,6 +76,7 @@ class TdbIr : public Tdb
    DECLARE_SUBCLASS(TdbIr, Tdb)
 
 public:
+   TdbIr() = delete;
    TdbIr(const unsigned int maxTargets, const Gimbal* const gimbal);
 
    //------------------------------------------------------------------------------
@@ -89,10 +86,7 @@ public:
    //------------------------------------------------------------------------------
    virtual unsigned int processPlayers(base::PairStream* const players);
 
-   static bool horizonCheck(const osg::Vec3& position1, const osg::Vec3& position2);
-
-protected:
-   TdbIr();
+   static bool horizonCheck(const base::Vec3d& position1, const base::Vec3d& position2);
 };
 #endif
 

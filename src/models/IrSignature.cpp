@@ -26,7 +26,6 @@ BEGIN_SLOTTABLE(IrSignature)
    "effectiveArea",           // 5 Effective area
 END_SLOTTABLE(IrSignature)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(IrSignature)
    ON_SLOT(1,setSlotWaveBandSizes,base::Table1)
    ON_SLOT(2,setSlotIrShapeSignature, IrShape)
@@ -38,14 +37,6 @@ END_SLOT_MAP()
 IrSignature::IrSignature()
 {
    STANDARD_CONSTRUCTOR()
-
-   waveBandTable = nullptr;
-   numWaveBands = 0;
-   baseHeatSignature = 0.0;
-   emissivity = 0.0;
-   effectiveArea = 1e-12;    // default area to near-zero but non-zero
-   irShapeSignature = nullptr;
-
    // create a default waveband, middle infrared band : 3-5 micron (100 THz - 60 THz)
    //double xdata[8] = { 4.0f };
    //double gdata[8] = { 2.0f };
@@ -53,18 +44,9 @@ IrSignature::IrSignature()
    //numWaveBands=1;
 }
 
-void IrSignature::copyData(const IrSignature& org, const bool cc)
+void IrSignature::copyData(const IrSignature& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      waveBandTable = nullptr;
-      numWaveBands = 0;
-      baseHeatSignature = 0.0;
-      emissivity = 0.0;
-      effectiveArea = 0;
-      irShapeSignature = nullptr;
-   }
 
    baseHeatSignature = org.baseHeatSignature;
    emissivity        = org.emissivity;

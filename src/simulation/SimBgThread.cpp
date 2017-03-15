@@ -18,11 +18,6 @@ EMPTY_SERIALIZER(SimBgThread)
 SimBgThread::SimBgThread(base::Component* const parent, const double priority): base::SyncTask(parent, priority)
 {
    STANDARD_CONSTRUCTOR()
-
-   pl0 = nullptr;
-   dt0 = 0.0;
-   idx0 = 0;
-   n0 = 0;
 }
 
 void SimBgThread::start(

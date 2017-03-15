@@ -1,5 +1,3 @@
-//
-// Class: Page
 
 #include "openeaagles/graphics/Page.hpp"
 #include "openeaagles/graphics/Display.hpp"
@@ -36,18 +34,9 @@ BEGIN_EVENT_HANDLER(Page)
     ON_ANYKEY(onKeyHit)
 END_EVENT_HANDLER()
 
-Page::Page() : cpName()
+Page::Page()
 {
    STANDARD_CONSTRUCTOR()
-   cp = nullptr;
-   np = nullptr;
-   subpages = nullptr;
-   pageChgEvents = nullptr;
-   pageArg = nullptr;
-   caller = nullptr;
-   postDraw1 = false;
-   focusSlavedToSubpage = true;
-   subpageSP = SUBPAGE_STACK_SIZE;
 }
 
 void Page::copyData(const Page& org, const bool cc)

@@ -27,100 +27,54 @@ IMPLEMENT_ABSTRACT_SUBCLASS(Otw, "AbstractOtw")
 EMPTY_SERIALIZER(Otw)
 
 BEGIN_SLOTTABLE(Otw)
-    "maxRange",         // 1: Max range of visual system (distance: meters)
-    "maxModels",        // 2: Max number of models
-    "maxElevations",    // 3: Max number of terrain elevation requests
-    "latitude",         // 4: Visual reference latitude (deg)
-    "longitude",        // 5: Visual reference longitude (deg)
-    "otwModelTypes",    // 6: OTW system's model type IDs (PairStream of Otm objects)
+   "maxRange",         // 1: Max range of visual system (distance: meters)
+   "maxModels",        // 2: Max number of models
+   "maxElevations",    // 3: Max number of terrain elevation requests
+   "latitude",         // 4: Visual reference latitude (deg)
+   "longitude",        // 5: Visual reference longitude (deg)
+   "otwModelTypes",    // 6: OTW system's model type IDs (PairStream of Otm objects)
 END_SLOTTABLE(Otw)
 
 BEGIN_SLOT_MAP(Otw)
-    ON_SLOT(1, setSlotMaxRange,      base::Distance)
-    ON_SLOT(1, setSlotMaxRange,      base::Number)
-    ON_SLOT(2, setSlotMaxModels,     base::Number)
-    ON_SLOT(3, setSlotMaxElevations, base::Number)
-    ON_SLOT(4, setSlotRefLatitude,   base::Number)
-    ON_SLOT(5, setSlotRefLongitude,  base::Number)
-    ON_SLOT(6, setSlotOtwModelTypes, base::PairStream)
+   ON_SLOT(1, setSlotMaxRange,      base::Distance)
+   ON_SLOT(1, setSlotMaxRange,      base::Number)
+   ON_SLOT(2, setSlotMaxModels,     base::Number)
+   ON_SLOT(3, setSlotMaxElevations, base::Number)
+   ON_SLOT(4, setSlotRefLatitude,   base::Number)
+   ON_SLOT(5, setSlotRefLongitude,  base::Number)
+   ON_SLOT(6, setSlotOtwModelTypes, base::PairStream)
 END_SLOT_MAP()
 
 Otw::Otw()
 {
-    STANDARD_CONSTRUCTOR()
-
-    ownship = nullptr;
-    playerList = nullptr;
-    rstFlg = false;
-    rstReq = false;
-
-    refLat  = 0.0;
-    refLon  = 0.0;
-
-    maxRange = 20000.0;          // Default: 20km
-
-    maxModels = 0;               // Default: no models
-    maxElevations = 0;           // Default: no elevation requests
-
-    // Clear the tables
-    for (unsigned int i = 0; i < MAX_MODELS; i++) {
-        modelTbl[i] = nullptr;
-    }
-    nModels = 0;
-
-    for (unsigned int i = 0; i < MAX_MODELS; i++) {
-        hotTbl[i] = nullptr;
-    }
-    nHots = 0;
-
-    for (unsigned int i = 0; i < MAX_MODELS_TYPES; i++) {
-        otwModelTypes[i] = nullptr;
-    }
-    nOtwModelTypes = 0;
+   STANDARD_CONSTRUCTOR()
 }
 
-void Otw::copyData(const Otw& org, const bool cc)
+void Otw::copyData(const Otw& org, const bool)
 {
    BaseClass::copyData(org);
 
-   if (cc) {
-      ownship = nullptr;
-      playerList = nullptr;
-      for (unsigned int i = 0; i < MAX_MODELS; i++) {
-         modelTbl[i] = nullptr;
-      }
-      nModels = 0;
-      for (unsigned int i = 0; i < MAX_MODELS; i++) {
-         hotTbl[i] = nullptr;
-      }
-      nHots = 0;
-      for (unsigned int i = 0; i < MAX_MODELS_TYPES; i++) {
-         otwModelTypes[i] = nullptr;
-      }
-      nOtwModelTypes = 0;
+   resetTables();
+
+   clearOtwModelTypes();
+   for (unsigned int i = 0; i < org.nOtwModelTypes; i++) {
+      org.otwModelTypes[i]->ref();
+      otwModelTypes[i] = org.otwModelTypes[i];
+      nOtwModelTypes++;
    }
 
-    resetTables();
+   maxRange = org.maxRange;
+   maxModels = org.maxModels;
+   maxElevations = org.maxElevations;
+   rstFlg = org.rstFlg;
+   rstReq = org.rstReq;
 
-    clearOtwModelTypes();
-    for (unsigned int i = 0; i < org.nOtwModelTypes; i++) {
-       org.otwModelTypes[i]->ref();
-       otwModelTypes[i] = org.otwModelTypes[i];
-       nOtwModelTypes++;
-    }
+   // Posiiton
+   refLat = org.refLat;
+   refLon = org.refLon;
 
-    maxRange = org.maxRange;
-    maxModels = org.maxModels;
-    maxElevations = org.maxElevations;
-    rstFlg = org.rstFlg;
-    rstReq = org.rstReq;
-
-    // Posiiton
-    refLat = org.refLat;
-    refLon = org.refLon;
-
-    setOwnship(org.ownship);
-    setPlayerList(org.playerList);
+   setOwnship(org.ownship);
+   setPlayerList(org.playerList);
 }
 
 void Otw::deleteData()
@@ -136,9 +90,9 @@ void Otw::deleteData()
 //------------------------------------------------------------------------------
 void Otw::reset()
 {
-    BaseClass::reset();
-    setPlayerList(nullptr);
-    rstReq = true;
+   BaseClass::reset();
+   setPlayerList(nullptr);
+   rstReq = true;
 }
 
 //------------------------------------------------------------------------------
@@ -146,19 +100,19 @@ void Otw::reset()
 //------------------------------------------------------------------------------
 void Otw::resetTables()
 {
-    // Clear the model table
-    // (in reverse order just in case another thread is traversing the
-    //  table from bottom up)
-    while (nModels > 0) {
-        removeModelFromList(nModels-1, MODEL_TABLE);
-    }
+   // Clear the model table
+   // (in reverse order just in case another thread is traversing the
+   //  table from bottom up)
+   while (nModels > 0) {
+      removeModelFromList(nModels-1, MODEL_TABLE);
+   }
 
-    // Clear the elevation table
-    // (in reverse order just in case another thread is traversing the
-    //  table from bottom up)
-    while (nHots > 0) {
-        removeModelFromList(nHots-1, HOT_TABLE);
-    }
+   // Clear the elevation table
+   // (in reverse order just in case another thread is traversing the
+   //  table from bottom up)
+   while (nHots > 0) {
+      removeModelFromList(nHots-1, HOT_TABLE);
+   }
 }
 
 //------------------------------------------------------------------------------
@@ -181,21 +135,21 @@ void Otw::clearOtwModelTypes()
 //------------------------------------------------------------------------------
 void Otw::updateTC(const double dt)
 {
-    // Update base classes stuff
-    BaseClass::updateTC(dt);
+   // Update base classes stuff
+   BaseClass::updateTC(dt);
 
-    // Check reset flag
-    if (rstReq) {
-        rstFlg = true;
-        rstReq = false;
-    }
+   // Check reset flag
+   if (rstReq) {
+      rstFlg = true;
+      rstReq = false;
+   }
 
-    // update one visual system frame
-    processesModels();
-    processesElevations();
-    frameSync();
+   // update one visual system frame
+   processesModels();
+   processesElevations();
+   frameSync();
 
-    rstFlg = false;
+   rstFlg = false;
 }
 
 //------------------------------------------------------------------------------
@@ -203,8 +157,8 @@ void Otw::updateTC(const double dt)
 //------------------------------------------------------------------------------
 void Otw::processesModels()
 {
-    mapPlayerList2ModelTable();     // Map current player list to model table
-    sendOwnshipAndModels();         // Send ownship model & model table
+   mapPlayerList2ModelTable();     // Map current player list to model table
+   sendOwnshipAndModels();         // Send ownship model & model table
 }
 
 //------------------------------------------------------------------------------
@@ -427,7 +381,7 @@ OtwModel* Otw::newModelEntry(models::Player* const ip)
       model = modelFactory();
       if (model != nullptr) {
          // Yes, initialize the model entry
-         model->initialize(ip, otwModelTypes, nOtwModelTypes);
+         model->initialize(ip, otwModelTypes.data(), nOtwModelTypes);
          addModelToList(model, MODEL_TABLE);
       }
    }
@@ -537,11 +491,11 @@ bool Otw::addModelToList(OtwModel* const model, const TableType type)
    if (model != nullptr) {
 
       // Select the table
-      OtwModel** tbl = modelTbl;
+      OtwModel** tbl = modelTbl.data();
       int n = nModels;
       int max = maxModels;
       if (type == HOT_TABLE) {
-         tbl = hotTbl;
+         tbl = hotTbl.data();
          n = nHots;
          max = maxElevations;
       }
@@ -593,9 +547,9 @@ void Otw::removeModelFromList(const int idx, const TableType type)
    if (idx >= 0 && idx < n) {
 
       // Select the table
-      OtwModel** tbl = modelTbl;
+      OtwModel** tbl = modelTbl.data();
       if (type == HOT_TABLE) {
-         tbl = hotTbl;
+         tbl = hotTbl.data();
       }
 
       // Remember the model
@@ -621,10 +575,10 @@ void Otw::removeModelFromList(const int idx, const TableType type)
 
 void Otw::removeModelFromList(OtwModel* const model, const TableType type)
 {
-   OtwModel** tbl = modelTbl;
+   OtwModel** tbl = modelTbl.data();
    int n = nModels;
    if (type == HOT_TABLE) {
-      tbl = hotTbl;
+      tbl = hotTbl.data();
       n = nHots;
    }
 
@@ -667,12 +621,12 @@ OtwModel* Otw::findModel(const unsigned short playerID, const base::String* cons
    OtwModel* found = nullptr;
    if (type == HOT_TABLE) {
       OtwModel** k =
-         static_cast<OtwModel**>(bsearch(&key, hotTbl, nHots, sizeof(OtwModel*), compareKey2Model));
+         static_cast<OtwModel**>(bsearch(&key, hotTbl.data(), nHots, sizeof(OtwModel*), compareKey2Model));
       if (k != nullptr) found = *k;
    }
    else {
       OtwModel** k =
-         static_cast<OtwModel**>(bsearch(&key, modelTbl, nModels, sizeof(OtwModel*), compareKey2Model));
+         static_cast<OtwModel**>(bsearch(&key, modelTbl.data(), nModels, sizeof(OtwModel*), compareKey2Model));
       if (k != nullptr) found = *k;
    }
    return found;

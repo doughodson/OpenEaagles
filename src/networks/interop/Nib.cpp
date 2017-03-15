@@ -24,40 +24,18 @@ namespace interop {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Nib, "Nib")
 EMPTY_SERIALIZER(Nib)
 
-Nib::Nib(const NetIO::IoType t) : ioType(t),
-             pPlayer(nullptr), pNetIO(nullptr), ntm(nullptr)
+Nib::Nib(const NetIO::IoType t) : ioType(t)
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void Nib::initData()
 {
-   federateName = nullptr;
-   pPlayer = nullptr;
-   pNetIO = nullptr;
-   checked = false;
-   playerID = 0;
-
-   ntm = nullptr;
-   entityTypeChecked = false;
-
    base::utStrcpy(pname, PNAME_BUF_SIZE, "OPENEAAGLES");
    side = models::Player::BLUE;
    mode = models::Player::INACTIVE;
 
-   timeoutEnbFlg = true;
-   damage = 0.0;
-   smoking = 0.0;
-   flames = 0.0;
-   camouflage = 0;
-   detMsgSent = false;
-
-   execTime = 0.0;
-   utcTime = 0.0;
-
-   drNum = STATIC_DRM;
    drP0.set(0,0,0);
    drV0.set(0,0,0);
    drA0.set(0,0,0);
@@ -67,29 +45,11 @@ void Nib::initData()
    drWwT.identity();
    drOmega.identity();
 
-   drTime = 0.0;
    drPos.set(0,0,0);
    drAngles.set(0,0,0);
 
    smoothVel.set(0,0,0);
-   smoothTime = 0.0;
-
-   apartWingSweepCnt = 0;
-   apartGearPosCnt = 0;
-   apartBayDoorCnt = 0;
-   apartLnchrElevCnt = 0;
-   apartWingSweep = 0.0;
-   apartLandingGear = 0.0;
-   apartBayDoor = 0.0;
-   apartLnchrElev = 0.0;
-   for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      apartMsl[i] = nullptr;
-      apartMslCnt[i] = 0;
-      apartMslAttached[i] = false;
-   }
-   apartNumMissiles = 0;
 }
-
 
 void Nib::copyData(const Nib& org, const bool cc)
 {

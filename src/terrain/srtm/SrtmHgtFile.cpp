@@ -75,38 +75,24 @@ namespace terrain {
 // SrtmHgtFile class
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(SrtmHgtFile,"SrtmHgtFile")
+IMPLEMENT_SUBCLASS(SrtmHgtFile, "SrtmHgtFile")
 EMPTY_SLOTTABLE(SrtmHgtFile)
+EMPTY_DELETEDATA(SrtmHgtFile)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 SrtmHgtFile::SrtmHgtFile()
 {
    STANDARD_CONSTRUCTOR()
    voidValue = -32768; // Voids in a SRTM database are represented by this value
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void SrtmHgtFile::copyData(const SrtmHgtFile& org, const bool)
 {
    BaseClass::copyData(org);
 }
 
 //------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void SrtmHgtFile::deleteData()
-{
-}
-
-
-//------------------------------------------------------------------------------
 // Slot functions
 //------------------------------------------------------------------------------
-
 
 //------------------------------------------------------------------------------
 // Load a SRTM cell into memory
@@ -308,11 +294,9 @@ short SrtmHgtFile::readValue(const unsigned char hbyte, const unsigned char lbyt
 //------------------------------------------------------------------------------
 std::ostream& SrtmHgtFile::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
-    int j = 0;
     if ( !slotsOnly ) {
         indent(sout,i);
         sout << "( " << getFactoryName() << std::endl;
-        j = 4;
     }
 
     if ( !slotsOnly ) {

@@ -59,18 +59,16 @@ protected:
    virtual void processRecordImp(const DataRecordHandle* const handle) override;
 
 private:
-   void initData();
+   // from FileWriter.hpp:
+   std::ofstream* sout {};            // output file stream (pointer)
+   char* fullFilename {};             // Full file name of the output file
+   const base::String* filename {};   // Output file name
+   const base::String* pathname {};   // Path to the output file directory
 
-   // from FileWriter.h:
-   std::ofstream* sout;             // output file stream (pointer)
-   char* fullFilename;              // Full file name of the output file
-   const base::String* filename;   // Output file name
-   const base::String* pathname;   // Path to the output file directory
-
-   bool fileOpened;                 // File opened
-   bool fileFailed;                 // Open or write failed
-   bool firstPassFlg;               // First pass flag
-   bool fileEmpty;                  // Is the file opened and empty?
+   bool fileOpened {};                // File opened
+   bool fileFailed {};                // Open or write failed
+   bool firstPassFlg {true};          // First pass flag
+   bool fileEmpty {true};             // Is the file opened and empty?
 };
 
 }

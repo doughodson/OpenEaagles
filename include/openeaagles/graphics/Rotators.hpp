@@ -73,9 +73,9 @@ private:
     bool onZRotate(const base::Number* const rotation);
     bool onZRotateDeg(const base::Number* const rotation);
 
-    double xRot;  // x axis rotation
-    double yRot;  // y axis rotation
-    double zRot;  // z axis rotation
+    double xRot {-1.0};  // x axis rotation
+    double yRot {-1.0};  // y axis rotation
+    double zRot {-1.0};  // z axis rotation
 };
 
 }

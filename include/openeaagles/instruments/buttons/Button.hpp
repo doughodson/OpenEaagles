@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// Class:       Button
-// Base class:  base::Object -> base::Component -> graphics::Graphic -> Button
-// Description: Generic button that knows when it is clicked
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_Button_H__
 #define __oe_instruments_Button_H__
 
@@ -11,7 +7,12 @@
 namespace oe {
 namespace instruments {
 
-class Button : public graphics::Graphic {
+//------------------------------------------------------------------------------
+// Class: Button
+// Description: Generic button that knows when it is clicked
+//------------------------------------------------------------------------------
+class Button : public graphics::Graphic
+{
     DECLARE_SUBCLASS(Button,graphics::Graphic)
 
 public:
@@ -37,7 +38,7 @@ protected:
     virtual bool setSlotEventId(const base::Number* const newEvent);
 
 private:
-    int eventId;        // holds our event number
+    int eventId {-1};        // holds our event number
 };
 
 }

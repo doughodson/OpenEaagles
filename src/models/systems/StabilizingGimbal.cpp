@@ -22,45 +22,27 @@ namespace oe {
 namespace models {
 
 IMPLEMENT_SUBCLASS(StabilizingGimbal, "StabilizingGimbal")
+EMPTY_DELETEDATA(StabilizingGimbal)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(StabilizingGimbal)
     "stabilizingMode",      //  4: Sets the type of stabilization we desire  (elevation, roll, horizon)
 END_SLOTTABLE(StabilizingGimbal)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(StabilizingGimbal)
     ON_SLOT(1,setSlotStabilizingMode,base::String);
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 StabilizingGimbal::StabilizingGimbal()
 {
    STANDARD_CONSTRUCTOR()
-
-   // Defaults
-   stabilizingMode = HORIZON;
-   mountPosition = NOSE;
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void StabilizingGimbal::copyData(const StabilizingGimbal& org, const bool)
 {
    BaseClass::copyData(org);
 
    stabilizingMode = org.stabilizingMode;
    mountPosition = org.mountPosition;;
-}
-
-void StabilizingGimbal::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

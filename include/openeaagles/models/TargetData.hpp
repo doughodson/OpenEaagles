@@ -104,22 +104,22 @@ protected:
     bool setSlotVelocity(const base::Number* const msg);
 
 private:
-    bool enabled;
-    bool completed;
-    const base::String* wpnType;
+    bool enabled {};
+    bool completed {};
+    const base::String* wpnType {};
 
-    double angle;          // degs
-    double azimuth;        // degs
+    double angle {};          // degs
+    double azimuth {};        // degs
 
-    double armDelay;       // sec
-    double velocity;       // ft/sec
-    double stickDist;      // ft
-    double maxMissDist;    // ft
-    double interval;       // MS
+    double armDelay {};       // sec
+    double velocity {};       // ft/sec
+    double stickDist {};      // ft
+    double maxMissDist {};    // ft
+    double interval {};       // MS
 
-    unsigned int quantity;
-    unsigned int stickType;
-    bool manualAssign;
+    unsigned int quantity {};
+    unsigned int stickType {MIDPOINT};
+    bool manualAssign {};
 };
 
 inline bool TargetData::isEnabled() const                    { return enabled; }

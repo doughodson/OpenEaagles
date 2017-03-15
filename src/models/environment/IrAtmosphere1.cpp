@@ -20,14 +20,12 @@ namespace models {
 IMPLEMENT_SUBCLASS(IrAtmosphere1, "IrAtmosphere1")
 EMPTY_SERIALIZER(IrAtmosphere1)
 
-// slot table
 BEGIN_SLOTTABLE(IrAtmosphere1)
    "solarRadiationTable",      // The tables containing solar radiation tables
    "backgroundRadiationTable", // The background radiation table
    "transmissivityTable",      // The tables containing transmissivity data
 END_SLOTTABLE(IrAtmosphere1)
 
-// slot map
 BEGIN_SLOT_MAP(IrAtmosphere1)
    ON_SLOT(1,setSlotSolarRadiationTable,base::Table2)
    ON_SLOT(2,setSlotBackgroundRadiationTable,base::Table3)
@@ -37,10 +35,6 @@ END_SLOT_MAP()
 IrAtmosphere1::IrAtmosphere1()
 {
    STANDARD_CONSTRUCTOR()
-
-   solarRadiationTable = nullptr;
-   backgroundRadiationTable = nullptr;
-   transmissivityTable = nullptr;
 }
 
 void IrAtmosphere1::copyData(const IrAtmosphere1& org, const bool)

@@ -25,7 +25,6 @@ END_EVENT_HANDLER()
 Button::Button()
 {
     STANDARD_CONSTRUCTOR()
-    eventId = -1;
 }
 
 void Button::copyData(const Button& org, const bool)

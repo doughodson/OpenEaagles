@@ -16,13 +16,11 @@ BEGIN_SLOTTABLE(BearingPointer)
     "tailGraphic",  // the graphic we will draw for the tail
 END_SLOTTABLE(BearingPointer)
 
-//  Map slot table to handles for Bearing Pointer
 BEGIN_SLOT_MAP(BearingPointer)
     ON_SLOT(1, setSlotHeadGraphic, graphics::Graphic)
     ON_SLOT(2, setSlotTailGraphic, graphics::Graphic)
 END_SLOT_MAP()
 
-// Macro event handlers for Bearing Pointer events
 BEGIN_EVENT_HANDLER(BearingPointer)
     ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Angle)    // Sets bearing to this base::Angle
     ON_EVENT_OBJ(UPDATE_VALUE7,onUpdateRadBearingPointer, base::Number)   // Sets bearing to this angle in radians
@@ -32,22 +30,11 @@ END_EVENT_HANDLER()
 BearingPointer::BearingPointer()
 {
     STANDARD_CONSTRUCTOR()
-
-    bearing = 0;
-    myRotation = 0.0;
-    myRadius = 0;
-    head = nullptr;
-    tail = nullptr;
 }
 
-void BearingPointer::copyData(const BearingPointer& org, const bool cc)
+void BearingPointer::copyData(const BearingPointer& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        head = nullptr;
-        tail = nullptr;
-    }
 
     setSlotHeadGraphic(org.head);
     setSlotTailGraphic(org.tail);

@@ -1,3 +1,15 @@
+
+#ifndef __oe_instruments_Adi_H__
+#define __oe_instruments_Adi_H__
+
+#include "openeaagles/instruments/Instrument.hpp"
+
+#include "openeaagles/base/util/unit_utils.hpp"
+
+namespace oe {
+namespace base { class Number; class Angle; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: Adi
 //
@@ -13,17 +25,6 @@
 //      UPDATE_VALUE2 = updates roll (radians)
 //      UPDATE_VALUE3 = updates max rate (degrees/second)
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_Adi_H__
-#define __oe_instruments_Adi_H__
-
-#include "openeaagles/instruments/Instrument.hpp"
-
-#include "openeaagles/base/util/unit_utils.hpp"
-
-namespace oe {
-namespace base { class Number; class Angle; }
-namespace instruments {
-
 class Adi : public Instrument
 {
     DECLARE_SUBCLASS(Adi, Instrument)
@@ -59,12 +60,13 @@ private:
     bool onUpdateRollRadAdi(const base::Number* const newR);
     bool onUpdateMaxRateAdi(const base::Number* const newMR);
 
-    double pitch;       // actual pitch (degrees)
-    double scaledPitch; // our pitch value (inches)
-    double curTheta;    // our current pitch value (degrees)
-    double curPhi;      // our current roll value (radians)
-    double roll;        // our roll value (radians)
-    double maxRate;     // maximum mechanical rate at which the adi can move pitch or roll
+    double pitch {};         // actual pitch (degrees)
+    double scaledPitch {};   // our pitch value (inches)
+    double curTheta {};      // our current pitch value (degrees)
+    double curPhi {};        // our current roll value (radians)
+    double roll {};          // our roll value (radians)
+    double maxRate {500.0};  // maximum mechanical rate at which the adi can move pitch or roll
+                             // default set high degrees/second (for instantaneous movement)
 };
 
 }

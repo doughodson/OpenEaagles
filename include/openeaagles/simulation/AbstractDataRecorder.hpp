@@ -61,12 +61,11 @@ protected:
    virtual bool processUnhandledId(const unsigned int id) =0;
 
 private:
-   void initData();
    Station* getStationImp();
    Simulation* getSimulationImp();
 
-   Station* sta;         // The station that owns us (not ref()'d)
-   Simulation* sim;      // The simulation system (not ref()'d)
+   Station* sta {};         // The station that owns us (not ref()'d)
+   Simulation* sim {};      // The simulation system (not ref()'d)
 };
 
 // Record Data function

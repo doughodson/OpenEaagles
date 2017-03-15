@@ -11,7 +11,6 @@
 
 namespace oe {
 namespace base {
-
 class FStorage;
 class Table;
 class List;
@@ -140,11 +139,10 @@ protected:
    bool setCoefficients(const double* const coeff, const unsigned short n);
 
 private:
-   void initData();
    static const unsigned short MAX_COEFF = (MAX_DEGREE+1);
 
-   double  a[MAX_COEFF];   // Constant coefficients vector
-   unsigned short m;       // Number of coefficients (degree + 1)
+   double  a[MAX_COEFF] {};   // Constant coefficients vector
+   unsigned short m {};       // Number of coefficients (degree + 1)
 };
 
 }

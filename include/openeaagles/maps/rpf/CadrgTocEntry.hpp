@@ -91,29 +91,27 @@ public:
     virtual void generateItems();
 
 private:
-    void initData();
-
-    char type[5];               // Type of map entry we are (ie.. CADRG)
-    char  scale[12];            // Scale of this entry (1:500K, etc.)
-    char  zone[1];              // Zone this entry falls in
-    double nwLat;               // Northwest latitude of entry
-    double nwLon;               // Northwest longitude of entry
-    double seLat;               // Southeast latitude of entry
-    double seLon;               // Southeast longitude of entry
-    double swLat;               // Southwest latitude of entry
-    double swLon;               // Southwest longitude of entry
-    double neLat;               // Northeast latitude of entry
-    double neLon;               // Northeast longitude of entry
-    double vertInterval;        // Distance (deg) between each pixel in this entry NS
-    double horizInterval;       // Distance (deg) between each pixel in the entry EW
-    double vertResolution;      // Resolution (pixels) NS
-    double horizResolution;     // Resolution (pixels) EW
-    int horizFrames;            // Number of horizontal frames (rows)
-    int vertFrames;             // Number of vertical frames (cols)
-    char title[100];            // Full name of file we represent
-    int   mapImage;             // are we a map image?
-    int mapIndex;               // index to keep track of which map file we belong to
-    CadrgFrameEntry** frames;   // Our array of frames that make up this entry.
+    char type[5] {};              // Type of map entry we are (ie.. CADRG)
+    char scale[12] {};            // Scale of this entry (1:500K, etc.)
+    char zone[1] {};              // Zone this entry falls in
+    double nwLat {};              // Northwest latitude of entry
+    double nwLon {};              // Northwest longitude of entry
+    double seLat {};              // Southeast latitude of entry
+    double seLon {};              // Southeast longitude of entry
+    double swLat {};              // Southwest latitude of entry
+    double swLon {};              // Southwest longitude of entry
+    double neLat {};              // Northeast latitude of entry
+    double neLon {};              // Northeast longitude of entry
+    double vertInterval {};       // Distance (deg) between each pixel in this entry NS
+    double horizInterval {};      // Distance (deg) between each pixel in the entry EW
+    double vertResolution {};     // Resolution (pixels) NS
+    double horizResolution {};    // Resolution (pixels) EW
+    int horizFrames {};           // Number of horizontal frames (rows)
+    int vertFrames {};            // Number of vertical frames (cols)
+    char title[100];              // Full name of file we represent
+    int mapImage {};              // are we a map image?
+    int mapIndex {-1};            // index to keep track of which map file we belong to
+    CadrgFrameEntry** frames {};  // Our array of frames that make up this entry.
 };
 
 }

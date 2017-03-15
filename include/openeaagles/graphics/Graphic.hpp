@@ -432,55 +432,56 @@ private:
    void setupMatrix();
    void setupMaterial();
 
-   base::PairStream* transforms;   // transformations
-   base::Matrixd m;                // transformation matrix
-   base::Matrixd m1;               // saved 'm'
-   bool          haveMatrix;       // Have a transformation matrix flag
-   bool          haveMatrix1;      // saved 'haveMatrix'
+   base::PairStream* transforms {};  // transformations
+   base::Matrixd m;                  // transformation matrix
+   base::Matrixd m1;                 // saved 'm'
+   bool haveMatrix {};               // Have a transformation matrix flag
+   bool haveMatrix1 {};              // saved 'haveMatrix'
 
-   bool          postDraw;                       // Post draw component (child) graphic
-   GLuint        texture;                        // Texture
-   base::safe_ptr<base::Identifier> texName;     // Texture name
+   bool postDraw {};                 // Post draw component (child) graphic
 
-   bool          visible;          // True if this object is visible
-   GLfloat       linewidth;        // Linewidth
-   GLuint        selName;          // Select name
-   double        fRate;            // Flash rate
+   GLuint texture {};                        // Texture
+   base::safe_ptr<base::Identifier> texName; // Texture name
 
-   base::Color*  color;            // Color
-   base::Identifier*  colorName;   // Color name (if from color table)
+   bool    visible {true};   // True if this object is visible
+   GLfloat linewidth {};     // Linewidth
+   GLuint  selName {};       // Select name
+   double  fRate {};         // Flash rate
 
-   base::Vec3d* vertices;          // Vertices
-   unsigned int     nv;            // Number of vertices
+   base::Color* color {};            // Color
+   base::Identifier* colorName {};   // Color name (if from color table)
 
-   base::Vec2d* texCoord;          // Texture Coordinates
-   unsigned int     ntc;           // Number of texture coordinates
+   base::Vec3d* vertices {};         // Vertices
+   unsigned int nv {};               // Number of vertices
 
-   base::Vec3d* norms;             // normals at each vertices
-   unsigned int     nn;            // number of normal vectors
+   base::Vec2d* texCoord {};         // Texture Coordinates
+   unsigned int ntc {};              // Number of texture coordinates
 
-   graphics::Display* displayPtr;     // Points to our Display
+   base::Vec3d* norms {};            // normals at each vertices
+   unsigned int nn {};               // number of normal vectors
 
-   GLuint         dlist;              // Possible Display list
-   bool           noDisplayList;      // True to disable Display List
+   graphics::Display* displayPtr {};     // Points to our Display
 
-   double        scissorX;            // Left edge of the scissor box
-   double        scissorY;            // Bottom edge of the scissor box
-   double        scissorWidth;        // How far to extend the scissor horizontally
-   double        scissorHeight;       // How far to extend the scissor vertically
+   GLuint dlist {};                      // Possible Display list
+   bool   noDisplayList {};              // True to disable Display List
 
-   static double fTimer;              // Flash control timer
-   static GLuint autoSelName;         // our automatic select name counter
+   double scissorX {};                   // Left edge of the scissor box
+   double scissorY {};                   // Bottom edge of the scissor box
+   double scissorWidth {};               // How far to extend the scissor horizontally
+   double scissorHeight {};              // How far to extend the scissor vertically
 
-   bool          stipple;             // line stipple flag (line, lineloop, circle (not filled))
-   GLuint        stippleFactor;       // line stipple factor (multiplier for each bit in line stipple pattern)
-   GLushort      stipplePattern;      // line stipple pattern (16-bit pattern for which fragments of line to draw)
-   bool          mask;                // are we masking?
-   base::Identifier* materialName;    // our material name
-   graphics::Material* materialObj;   // material object, if we have one.
+   static double fTimer;                 // Flash control timer
+   static GLuint autoSelName;            // our automatic select name counter
 
-   base::Vec4d lightPos;              // light position relative to us (default is leave it where it was)
-   bool lightMoved;                   // our light is moving!
+   bool stipple {};                      // line stipple flag (line, lineloop, circle (not filled))
+   GLuint   stippleFactor {1};           // line stipple factor (multiplier for each bit in line stipple pattern)
+   GLushort stipplePattern {0xFFFF};     // line stipple pattern (16-bit pattern for which fragments of line to draw)
+   bool mask {};                         // are we masking?
+   base::Identifier* materialName {};    // our material name
+   graphics::Material* materialObj {};   // material object, if we have one.
+
+   base::Vec4d lightPos;                 // light position relative to us (default is leave it where it was)
+   bool lightMoved {};                   // our light is moving!
 };
 
 inline GLuint Graphic::getNewSelectName()

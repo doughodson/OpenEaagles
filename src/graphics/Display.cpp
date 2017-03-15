@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Display
-//------------------------------------------------------------------------------
+
 #include "openeaagles/graphics/Display.hpp"
 
 #include "openeaagles/graphics/Font.hpp"
@@ -27,20 +25,11 @@
 #include <GL/glext.h>
 #endif
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(Display,"Display")
+IMPLEMENT_SUBCLASS(Display, "Display")
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Display)
    "name",                 //  1) Display name
    "colorTable",           //  2) Color table
@@ -71,47 +60,40 @@ BEGIN_SLOTTABLE(Display)
    "antiAliasing",         // 25) Turn on/off anti-aliasing.
 END_SLOTTABLE(Display)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(Display)
-   ON_SLOT(1,setName,base::String)
-   ON_SLOT(2,setColorTable,base::PairStream)
-   ON_SLOT(3,setNormalFont,Font)
-   ON_SLOT(3,setNormalFont,base::Identifier)
-   ON_SLOT(4,setSlotLeftOrthoBound,base::Number)
-   ON_SLOT(5,setSlotRightOrthoBound,base::Number)
-   ON_SLOT(6,setSlotBottomOrthoBound,base::Number)
-   ON_SLOT(7,setSlotTopOrthoBound,base::Number)
-   ON_SLOT(8,setSlotNearOrthoBound,base::Number)
-   ON_SLOT(9,setSlotFarOrthoBound,base::Number)
-   ON_SLOT(10,setSlotViewportXOrigin,base::Number)
-   ON_SLOT(11,setSlotViewportYOrigin,base::Number)
-   ON_SLOT(12,setSlotViewportWidth,base::Number)
-   ON_SLOT(13,setSlotViewportHeight,base::Number)
-   ON_SLOT(14,setSlotSubdisplayStream,base::PairStream)
-   ON_SLOT(14,setSlotSubdisplaySingle,Display)
-   ON_SLOT(15,setSlotStdLineWidth,base::Number)
-   ON_SLOT(16,setSlotTexturesStream,base::PairStream)
-   ON_SLOT(16,setSlotTexturesSingle,Texture)
-   ON_SLOT(17,setSlotClearColor,base::Color)
-   ON_SLOT(18,setSlotLeftBracketCharacter,base::Number)
-   ON_SLOT(18,setSlotLeftBracketCharacter,base::String)
-   ON_SLOT(19,setSlotRightBracketCharacter,base::Number)
-   ON_SLOT(19,setSlotRightBracketCharacter,base::String)
-   ON_SLOT(20,setSlotReverseVideoBrackets,base::Number)
-   ON_SLOT(21,setFontList,base::PairStream)
-   ON_SLOT(22,setSlotClearDepth,base::Number)
-   ON_SLOT(23,setSlotDisplayOrientation,base::String)
-   ON_SLOT(24,setSlotMaterials,base::PairStream)
-   ON_SLOT(24,setSlotMaterials,Material)
-   ON_SLOT(25,setSlotAntialias,base::Number)
+   ON_SLOT( 1, setName,base::String)
+   ON_SLOT( 2, setColorTable,base::PairStream)
+   ON_SLOT( 3, setNormalFont,Font)
+   ON_SLOT( 3, setNormalFont,base::Identifier)
+   ON_SLOT( 4, setSlotLeftOrthoBound,base::Number)
+   ON_SLOT( 5, setSlotRightOrthoBound,base::Number)
+   ON_SLOT( 6, setSlotBottomOrthoBound,base::Number)
+   ON_SLOT( 7, setSlotTopOrthoBound,base::Number)
+   ON_SLOT( 8, setSlotNearOrthoBound,base::Number)
+   ON_SLOT( 9, setSlotFarOrthoBound,base::Number)
+   ON_SLOT(10, setSlotViewportXOrigin,base::Number)
+   ON_SLOT(11, setSlotViewportYOrigin,base::Number)
+   ON_SLOT(12, setSlotViewportWidth,base::Number)
+   ON_SLOT(13, setSlotViewportHeight,base::Number)
+   ON_SLOT(14, setSlotSubdisplayStream,base::PairStream)
+   ON_SLOT(14, setSlotSubdisplaySingle,Display)
+   ON_SLOT(15, setSlotStdLineWidth,base::Number)
+   ON_SLOT(16, setSlotTexturesStream,base::PairStream)
+   ON_SLOT(16, setSlotTexturesSingle,Texture)
+   ON_SLOT(17, setSlotClearColor,base::Color)
+   ON_SLOT(18, setSlotLeftBracketCharacter,base::Number)
+   ON_SLOT(18, setSlotLeftBracketCharacter,base::String)
+   ON_SLOT(19, setSlotRightBracketCharacter,base::Number)
+   ON_SLOT(19, setSlotRightBracketCharacter,base::String)
+   ON_SLOT(20, setSlotReverseVideoBrackets,base::Number)
+   ON_SLOT(21, setFontList,base::PairStream)
+   ON_SLOT(22, setSlotClearDepth,base::Number)
+   ON_SLOT(23, setSlotDisplayOrientation,base::String)
+   ON_SLOT(24, setSlotMaterials,base::PairStream)
+   ON_SLOT(24, setSlotMaterials,Material)
+   ON_SLOT(25, setSlotAntialias,base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Display::Display()
 {
    STANDARD_CONSTRUCTOR()
@@ -122,81 +104,28 @@ Display::Display()
 void Display::initData()
 {
    name = new base::String(" ");
-   subdisplays = nullptr;
-   textures = nullptr;
-   stdLinewidth = 1;
-   linewidth = 1;
-
-   subdisplayFlg = false;
-   antialias = true;
-   focusPtr = nullptr;
-   mx = 0;
-   my = 0;
-
-   orientation = NORMAL;
-
-   // Z-buffer
-   clearDepth = -1.0;
 
    // Colors
    color.set(1.0f,1.0f,1.0f,1.0f);
    clearColor.set(0.0f,0.0f,0.0f,0.0f);
 
    {
-      colorTable = nullptr;
       base::PairStream* p = defaultColors();
       setColorTable(p);
       p->unref();
 
       colorName = new base::Identifier();
 
-      normColor = nullptr;
       const auto nc = new base::Rgba(0.0, 1.0, 0.0, 1.0); // default: green
       setNormColor( nc );
       nc->unref();
 
-      hiColor = nullptr;
       const auto hc = new base::Rgba(1.0, 0.0, 0.0, 1.0); // default: red
       setHighlightColor( hc );
       hc->unref();
    }
-
-   // Font
-   fontList = nullptr;
-   currentFont = nullptr;
-   normalFont    = nullptr;
-   normalFontName = nullptr;
-
-   // default viewport size
-   vpX      = -1;
-   vpY      = -1;
-   vpWidth  = 300;
-   vpHeight = 300;
-
-   // Ortho parameters
-   oLeft   = -0.5;
-   oRight  = 640.5;
-   oBottom = -0.5;
-   oTop    = 480.5;
-   oNear   = -1;
-   oFar    = 1;
-
-   // Brackets
-   leftBracketChar = '[';
-   rightBracketChar = ']';
-   rvBrackets    = false;
-   reversedFlg   = false;
-   underlinedFlg = false;
-
-   // materials
-   materials = nullptr;
-
-   okToSwap = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Display::copyData(const Display& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -267,9 +196,6 @@ void Display::copyData(const Display& org, const bool cc)
    underlinedFlg = org.underlinedFlg;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Display::deleteData()
 {
    if (name != nullptr) name->unref();
@@ -292,7 +218,6 @@ void Display::deleteData()
    if (normalFont != nullptr) { normalFont->unref(); normalFont = nullptr; }
    if (normalFontName != nullptr) { normalFontName->unref(); normalFontName = nullptr; }
 }
-
 
 //------------------------------------------------------------------------------
 // updateTC() -- Update time critical stuff here

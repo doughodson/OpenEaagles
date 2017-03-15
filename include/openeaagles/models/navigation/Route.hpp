@@ -5,7 +5,8 @@
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-namespace base { class Identifier; class Distance; class NauticalMiles; class Number; class Pair; class PairStream; }
+namespace base { class Identifier; class Distance; class NauticalMiles;
+                 class Number; class Pair; class PairStream; }
 namespace models {
 class Navigation;
 class Steerpoint;
@@ -141,11 +142,11 @@ private:
 
    base::safe_ptr<base::Pair>         to;               // "To" Steerpoint pair [ name steerpoint ]
    base::safe_ptr<const base::String> initToStptName;   // Name of the initial "to" steerpoint
-   unsigned int              initToStptIdx;             // Index of the initial "to" steerpoint
-   unsigned int              stptIdx;                   // Steerpoint index [ 1 ... n ] in list
-   double                    autoSeqDistNM;             // Distance to auto sequence (NM)
-   bool                      autoSeq;                   // Auto sequence of steerpoint
-   bool                      wrap;                      // Wrap around route when inc or dec 'to' steerpoint
+   unsigned int initToStptIdx {};                       // Index of the initial "to" steerpoint
+   unsigned int stptIdx {};                             // Steerpoint index [ 1 ... n ] in list
+   double       autoSeqDistNM {2.0};                    // Distance to auto sequence (NM)
+   bool         autoSeq {true};                         // Auto sequence of steerpoint
+   bool         wrap {true};                            // Wrap around route when inc or dec 'to' steerpoint
 };
 
 inline Steerpoint* Route::getSteerpoint()

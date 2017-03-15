@@ -9,8 +9,7 @@ namespace oe {
 namespace instruments {
 
 //------------------------------------------------------------------------------
-// Class:  Eadi3DObjects
-// Base class:  Object -> Eadi3DObjects
+// Class: Eadi3DObjects
 //
 // Description:  Eadi3D font
 //
@@ -26,7 +25,7 @@ class Eadi3DObjects : public base::Object
     DECLARE_SUBCLASS(Eadi3DObjects, base::Object)
 
 public:
-    Eadi3DObjects(float radius = 1.625);
+    Eadi3DObjects(const float radius = 1.625);
 
     enum EadiObj {
         FONT_0 = 0,    // Desc: Character '0'
@@ -149,9 +148,9 @@ private:
     void drawArrow(float bAngle, float s, float c);
     void drawArrow2(float bAngle, float s, float c);
 
-    unsigned int base;
-    float radius;
-    bool made;
+    unsigned int base {};
+    float radius {1.625};
+    bool made {};
 };
 
 }

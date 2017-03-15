@@ -52,7 +52,6 @@ typedef double               float_8;
 
 typedef float_8 GEO_FLOAT;
 
-
 typedef struct
 {
   int_2   x;

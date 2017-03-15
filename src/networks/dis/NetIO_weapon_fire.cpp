@@ -53,24 +53,24 @@ void NetIO::processFirePDU(const FirePDU* const pdu)
     // ---
     // 1) Find the target (local) player
     // ---
-    models::Player* tPlayer = nullptr;
-    if (tSiteId == getSiteID() && tApplicationId == getApplicationID()) {
+//    models::Player* tPlayer = nullptr;
+//    if (tSiteId == getSiteID() && tApplicationId == getApplicationID()) {
         // Must be local
-        base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
-        tPlayer = dynamic_cast<models::Player*>(getSimulation()->findPlayer(tPlayerId));  // added DDH
-    }
+//        base::safe_ptr<base::PairStream> players( getSimulation()->getPlayers() );
+//        tPlayer = dynamic_cast<models::Player*>(getSimulation()->findPlayer(tPlayerId));  // added DDH
+//    }
     //std::cout << "Net Fire(2) tPlayer = " << tPlayer << std::endl;
 
     // ---
     // 2) Find the firing player and munitions (networked) IPlayers
     // ---
-    interop::Nib* fNib = nullptr;
-    interop::Nib* mNib = nullptr;
-    if (fSiteId != getSiteID() || fApplicationId != getApplicationID()) {
+//    interop::Nib* fNib = nullptr;
+//    interop::Nib* mNib = nullptr;
+//    if (fSiteId != getSiteID() || fApplicationId != getApplicationID()) {
         // Must be networked players
-        fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
-        mNib = findDisNib(mPlayerId, mSiteId, mApplicationId, INPUT_NIB);
-    }
+//        fNib = findDisNib(fPlayerId, fSiteId, fApplicationId, INPUT_NIB);
+//        mNib = findDisNib(mPlayerId, mSiteId, mApplicationId, INPUT_NIB);
+//    }
     //std::cout << "Net Fire(3) fNib = " << fNib << ", mNib = " << mNib << std::endl;
 
     // --- Nothing really needs to be done.

@@ -34,32 +34,13 @@ END_SLOT_MAP()
 CadrgMap::CadrgMap()
 {
     STANDARD_CONSTRUCTOR()
-
-    stack = nullptr;
-    pathNames = nullptr;
-    for (int i = 0; i < MAX_FILES; i++) {
-        cadrgFiles[i] = nullptr;
-    }
-    for (int i = 0; i < MAX_FILES; i++) {
-        mergedCadrgFiles[i] = nullptr;
-    }
-    numFiles = 0;
-    curCadrgFile = nullptr;
     setMaxTableSize(3);
-    mapLevel = nullptr;
-    initLevelLoaded = false;
 }
 
-void CadrgMap::copyData(const CadrgMap& org, const bool cc)
+void CadrgMap::copyData(const CadrgMap& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
-    if (cc) {
-        curCadrgFile = nullptr;
-        stack = nullptr;
-        mapLevel = nullptr;
-    }
     for (int i = 0; i < MAX_FILES; i++) {
         if (cadrgFiles[i] != nullptr) cadrgFiles[i]->unref();
         cadrgFiles[i] = org.cadrgFiles[i]->clone();

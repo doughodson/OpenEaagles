@@ -44,8 +44,8 @@ PROJECTS += "gui/glut"
 #
 PROJECTS += networks/interop
 PROJECTS += networks/dis
-#PROJECTS += networks/hla
-#PROJECTS += networks/rprfom
+PROJECTS += networks/hla
+PROJECTS += networks/rprfom
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface

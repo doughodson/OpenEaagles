@@ -154,21 +154,23 @@ public:
 
    // Memory key used for quick dafif record lookup
    struct Key {
-      int      idx;     // Database index
-      int      size;    // Size of record
-
-      double   lat;     // Latitude
-      double   lon;     // Longitude
-
-      double   rng2;    // Range squared to ref point (nm**2)
-
-      char icao[ICAO_CODE_LEN+1]; // ICAO code
-
+      Key() = delete;
       Key(const int idx);
       Key(const float lat, const float lon);
       Key(const char* code);
       ~Key();
+
       void serialize(std::ostream& sout) const;
+
+      int idx {};        // Database index
+      int size {};       // Size of record
+
+      double lat {};     // Latitude
+      double lon {};     // Longitude
+
+      double rng2 {};    // Range squared to ref point (nm**2)
+
+      char icao[ICAO_CODE_LEN+1] {}; // ICAO code
    };
 
 protected:
@@ -205,27 +207,27 @@ protected:
    static void stripSpaces(char buff[], const int n);
    static void fillSpaces(char buff[], const int n);
 
-   base::FileReader* db; // The database (loaders)
-   long ncache;      // Number of keys alloced
+   base::FileReader* db {};  // The database (loaders)
+   long ncache {};           // Number of keys allocated
 
-   Key** rl;         // List of DAFIF records in the database
-   long  nrl;        // Number of Records in rl
+   Key** rl {};         // List of DAFIF records in the database
+   long nrl {};         // Number of Records in rl
 
-   Key** ol;         // List of DAFIF records in ICAO code order
-   long  nol;        // Number of Records in ol
+   Key** ol {};         // List of DAFIF records in ICAO code order
+   long nol {};         // Number of Records in ol
 
-   Key** ql;         // query list -- results of query (usually sorted
-                     //   by range)
-   int   nql;        // Number of record found
-   int   qlimit;     // Query limit (zero if no limit)
+   Key** ql {};         // query list -- results of query (usually sorted
+                        //   by range)
+   int nql {};          // Number of record found
+   int qlimit {};       // Query limit (zero if no limit)
 
-   double refLat;    // Ref point latitude
-   double refLon;    // Ref point longitude
-   double coslat;    // cos(ref point latitude)
-   double mrng;      // max range (nm)
+   double refLat {};    // Ref point latitude
+   double refLon {};    // Ref point longitude
+   double coslat {};    // cos(ref point latitude)
+   double mrng {};      // max range (nm)
 
-   bool dbInUse;     // Database In-Use flag
-   bool dbLoaded;    // Database has been loader
+   bool dbInUse {};     // Database In-Use flag
+   bool dbLoaded {};    // Database has been loader
 };
 
 }

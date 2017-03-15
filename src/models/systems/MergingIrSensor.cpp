@@ -8,8 +8,6 @@
 #include "openeaagles/models/environment/IrAtmosphere.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
 
-//#include "openeaagles/models/WorldModel.hpp"
-
 #include "openeaagles/base/Integer.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Angles.hpp"
@@ -21,38 +19,27 @@ IMPLEMENT_SUBCLASS(MergingIrSensor, "MergingIrSensor")
 EMPTY_SERIALIZER(MergingIrSensor)
 EMPTY_DELETEDATA(MergingIrSensor)
 
-// Slot table
 BEGIN_SLOTTABLE(MergingIrSensor)
    "azimuthBin",        // 1: azimuthBin
    "elevationBin",      // 2: elevationBin
 END_SLOTTABLE(MergingIrSensor)
 
-//  Map slot table
 BEGIN_SLOT_MAP(MergingIrSensor)
    ON_SLOT(1,setSlotAzimuthBin,base::Number)
    ON_SLOT(2,setSlotElevationBin,base::Number)
 END_SLOT_MAP()
 
-
-//------------------------------------------------------------------------------
-//------------------------------------------------------------------------------
 MergingIrSensor::MergingIrSensor()
 {
    STANDARD_CONSTRUCTOR()
-   azimuthBin = 0.0;
-   elevationBin = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void MergingIrSensor::copyData(const MergingIrSensor& org, const bool)
 {
    BaseClass::copyData(org);
    azimuthBin = org.azimuthBin;
    elevationBin = org.elevationBin;
 }
-
 
 //------------------------------------------------------------------------------
 // reset() -- Reset parameters

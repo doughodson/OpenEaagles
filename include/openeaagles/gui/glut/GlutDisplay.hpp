@@ -158,19 +158,19 @@ private:
    static void motionFuncCB(int x, int y);
    static void entryFuncCB(int state);
 
-   int   winId;                     // Window ID
-   bool  accumBuff;                 // Accumulation buffer enabled
-   bool  stencilBuff;               // Stencil buffer enabled
-   GLdouble pickWidth;              // Width of the pick area
-   GLdouble pickHeight;             // Height of the pick area
-   bool  okToResize;                // Ok to resize our subwindows (main windows only)
+   int winId {-1};                     // Window ID
+   bool accumBuff {};                  // Accumulation buffer enabled
+   bool stencilBuff {};                // Stencil buffer enabled
+   GLdouble pickWidth {10.0};          // Width of the pick area
+   GLdouble pickHeight {10.0};         // Height of the pick area
+   bool okToResize {};                 // Ok to resize our subwindows (main windows only)
 
    // main window only data
-   bool  fullScreenFlg;             // Full screen flag (main window only)
+   bool fullScreenFlg {};           // Full screen flag (main window only)
    unsigned int idleSleepTimeMS;    // Idle callback sleep time (MS)
 
    // Subwindow only data
-   int   mainWinId;                 // Main window ID (sub-window only)
+   int mainWinId {-1};              // Main window ID (sub-window only)
    base::Vec2d swPosition;          // Our X and Y positions as a ratio [ 0 ... 1 ] of our main window
    base::Vec2d swSize;              // Our width and height as a ratio [ 0 ... 1 ] of our main window
 
@@ -178,7 +178,7 @@ private:
    static int idList[MAX_DISPLAYS];                    // List of window IDs
    static GlutDisplay* displayList[MAX_DISPLAYS];      // Display List
    static int numGlutDisplays;                         // Number of GlutDisplays
-   Graphic* picked;                                    // our "picked graphic"
+   Graphic* picked {};                                 // our "picked graphic"
 };
 
 inline int GlutDisplay::getWindowId() const                               { return winId;           }

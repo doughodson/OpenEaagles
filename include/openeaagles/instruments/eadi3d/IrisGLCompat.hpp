@@ -9,7 +9,7 @@ namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: IrisGLCompat
-// Description:  IrisGL compatibility
+// Description: IrisGL compatibility
 //------------------------------------------------------------------------------
 class IrisGLCompat : public base::Object
 {
@@ -32,8 +32,8 @@ public:
     void rdr2(float x, float y);
 
 private:
-    float vertexX;
-    float vertexY;
+    float vertexX {};
+    float vertexY {};
 };
 
 }

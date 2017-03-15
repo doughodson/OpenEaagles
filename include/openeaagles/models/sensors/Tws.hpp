@@ -17,9 +17,6 @@ class Tws : public Radar
 
 public:
     Tws();
-
-private:
-
 };
 
 }

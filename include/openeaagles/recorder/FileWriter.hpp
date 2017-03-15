@@ -5,7 +5,7 @@
 #include "openeaagles/recorder/OutputHandler.hpp"
 
 namespace oe {
-   namespace base { class String; }
+namespace base { class String; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -65,17 +65,15 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   void initData();
+   std::ofstream* sout {};            // Output stream
 
-   std::ofstream* sout;             // Output stream
+   char* fullFilename {};             // Full file name of the output file
+   const base::String* filename {};   // Output file name
+   const base::String* pathname {};   // Path to the output file directory
 
-   char* fullFilename;              // Full file name of the output file
-   const base::String* filename;   // Output file name
-   const base::String* pathname;   // Path to the output file directory
-
-   bool fileOpened;                 // File opened
-   bool fileFailed;                 // Open or write failed
-   bool eodFlag;                    // REID_END_OF_DATA message has been written
+   bool fileOpened {};                // File opened
+   bool fileFailed {};                // Open or write failed
+   bool eodFlag {};                   // REID_END_OF_DATA message has been written
 };
 
 }

@@ -18,11 +18,7 @@ Message::Message()
 
 void Message::initData()
 {
-   timeStamp = 0.0;
-   lifeSpan = 5.0;    // seconds
-   ack = ACK;
    senderName = new base::String();
-   destNames = nullptr;
 }
 
 void Message::deleteData()

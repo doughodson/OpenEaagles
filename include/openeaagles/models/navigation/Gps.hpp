@@ -68,29 +68,29 @@ private:
     static const unsigned int MAX_CRYPTO_KEYS = 8; // max GPS Crypto variables
 
    // GPS Status Data
-   RcvrStat rcvr;       // Receiver status
-   OperMode mode;       // Operation mode
-   bool      aided;     // GPS Aiding YES/NO
-   BsrStat  bsr;        // Bus Switch Relay Status
-   bool      keyOvrd;   // Key Override DSBL/ENBL
+   RcvrStat rcvr {RCVR_INVALID};  // Receiver status
+   OperMode mode {INIT};          // Operation mode
+   bool aided {true};             // GPS Aiding YES/NO
+   BsrStat  bsr {PRIMARY};        // Bus Switch Relay Status
+   bool keyOvrd {};               // Key Override DSBL/ENBL
 
    // Load Status Data
-   LoadStat crypto;     // Status of crypto key data files
-   LoadStat almanac;    // status of GPS almanac
+   LoadStat crypto {NO_LOAD};     // Status of crypto key data files
+   LoadStat almanac {NO_LOAD};    // status of GPS almanac
 
    // GPS Quality Data
-   QualCode quality;    // Data quality code
-   long     state;      // GPS state
-   long     ehe;        // Estimated horizontal error
-   long     eve;        // Estimated vertical error
-   long     fom;        // Figure of merit
-   long     cnr;        // Carrier to noise ratio, in dB
+   QualCode quality {A};   // Data quality code
+   long     state {};      // GPS state
+   long     ehe {};        // Estimated horizontal error
+   long     eve {};        // Estimated vertical error
+   long     fom {};        // Figure of merit
+   long     cnr {};        // Carrier to noise ratio, in dB
 
    // Crypto Variable Data
-   long     date;       // Effective date of keys
-   KeyType  keyType;    // Type of keys loaded
-   long     days;       // Number of days the keys remain valid
-   double   cryptoKeys[2][MAX_CRYPTO_KEYS]; // Crypto Variables
+   long     date {123199};                     // Effective date of keys
+   KeyType  keyType {GUV};                     // Type of keys loaded
+   long     days {5};                          // Number of days the keys remain valid
+   double   cryptoKeys[2][MAX_CRYPTO_KEYS] {}; // Crypto Variables
 };
 
 }

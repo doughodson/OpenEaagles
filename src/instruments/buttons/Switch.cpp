@@ -23,8 +23,6 @@ END_SLOT_MAP()
 Switch::Switch()
 {
     STANDARD_CONSTRUCTOR()
-    currentState = 1;
-    numSelections = 1;
     currentStateSD.empty();
 }
 

@@ -1,4 +1,3 @@
-// Polygon
 
 #include "openeaagles/graphics/Polygon.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -11,22 +10,15 @@ namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Polygon,"Polygon")
 EMPTY_SERIALIZER(Polygon)
+EMPTY_DELETEDATA(Polygon)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Polygon::Polygon()
 {
    STANDARD_CONSTRUCTOR()
    coeff.set(0,0,0,0);
-   coeffValid = false;
    norm.set(1,0,0);
-   layerValue = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Polygon::copyData(const Polygon& org, const bool)
 {
    BaseClass::copyData(org);
@@ -36,11 +28,6 @@ void Polygon::copyData(const Polygon& org, const bool)
    norm = org.norm;
    layerValue = org.layerValue;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Polygon)
 
 //------------------------------------------------------------------------------
 // compute the vector normal to polygon

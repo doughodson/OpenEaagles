@@ -37,8 +37,8 @@ private:
 
    static const unsigned int ORDER = 1;
 
-   double       lower;      // Lower limit
-   double       upper;      // Upper limit
+   double lower {};      // Lower limit
+   double upper {};      // Upper limit
 };
 
 }

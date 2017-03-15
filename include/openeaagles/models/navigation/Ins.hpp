@@ -45,16 +45,16 @@ protected:
     virtual void setQuality(const double v);
 
 private:
-    base::Vec3d  gyroBias;        // Gyro Bias
-    base::Vec3d  accelBias;       // Acceleration Bias
-    double wander;                // Wander angle (degs)
-    double dBias;                 // Doppler bias
-    double dSFact;                // Doppler Scale Factor
+    base::Vec3d gyroBias;    // Gyro Bias
+    base::Vec3d accelBias;   // Acceleration Bias
+    double wander {};        // Wander angle (degs)
+    double dBias {};         // Doppler bias
+    double dSFact {};        // Doppler Scale Factor
 
-    // Alignment data
-    AlignMode alignMode;          // Alignment mode
-    double alignTTG;              // Alignment Time to Go (sec)
-    double quality;               // Quality
+    // Alignment/Kalman filter data
+    AlignMode alignMode {SHDG};   // Alignment mode
+    double alignTTG {};           // Alignment Time to Go (sec)
+    double quality {};            // Quality
 };
 
 }

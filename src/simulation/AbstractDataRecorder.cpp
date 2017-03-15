@@ -17,19 +17,11 @@ EMPTY_SERIALIZER(AbstractDataRecorder)
 AbstractDataRecorder::AbstractDataRecorder()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void AbstractDataRecorder::initData()
-{
-   sta = nullptr;
-   sim = nullptr;
-}
-
-void AbstractDataRecorder::copyData(const AbstractDataRecorder& org, const bool cc)
+void AbstractDataRecorder::copyData(const AbstractDataRecorder& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    sta = nullptr;
    sim = nullptr;

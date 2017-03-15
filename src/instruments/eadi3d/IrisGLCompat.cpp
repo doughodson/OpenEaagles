@@ -16,21 +16,20 @@ namespace instruments {
 IMPLEMENT_ABSTRACT_SUBCLASS(IrisGLCompat, "IrisGLCompat")
 EMPTY_SLOTTABLE(IrisGLCompat)
 EMPTY_SERIALIZER(IrisGLCompat)
+EMPTY_DELETEDATA(IrisGLCompat)
 
-IrisGLCompat::IrisGLCompat() : vertexX(0.0), vertexY(0.0)
+IrisGLCompat::IrisGLCompat()
 {
+    STANDARD_CONSTRUCTOR()
 }
 
 void IrisGLCompat::copyData(const IrisGLCompat& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
 
     vertexX = org.vertexX;
     vertexY = org.vertexY;
 }
-
-EMPTY_DELETEDATA(IrisGLCompat)
 
 void IrisGLCompat::arc(float x, float y, float r, float startAng, float endAng)
 {

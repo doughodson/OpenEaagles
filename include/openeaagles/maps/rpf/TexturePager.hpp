@@ -6,11 +6,8 @@
 #include "TextureTable.hpp"
 
 namespace oe {
-
 namespace base { class List; }
-
 namespace rpf {
-
 class CadrgMap;
 class CadrgTocEntry;
 
@@ -80,16 +77,16 @@ private:
     void reuseTextures();
     void loadNewTextures();
 
-    base::List* stack;
+    base::List* stack {};
 
     TextureTable table;
-    int maxTableSize;
-    CadrgMap* map;
-    int row;
-    int col;
-    int diffRow;
-    int diffCol;
-    CadrgTocEntry* toc;
+    int maxTableSize {};
+    CadrgMap* map {};
+    int row {};
+    int col {};
+    int diffRow {};
+    int diffCol {};
+    CadrgTocEntry* toc {};
 };
 
 }

@@ -58,13 +58,13 @@ public:
 
 private:
     // Standard (DIS based) type codes
-    unsigned char  disKind;      // DIS kind code
-    unsigned char  disDomain;    // DIS domain code
-    unsigned short disCountry;   // DIS country code
-    unsigned char  disCategory;  // DIS category code
-    unsigned char  disSubcategory; // DIS subcategory code
-    unsigned char  disSpecific;  // DIS specific code
-    unsigned char  disExtra;     // DIS extra code
+    unsigned char  disKind {};      // DIS kind code
+    unsigned char  disDomain {};    // DIS domain code
+    unsigned short disCountry {};   // DIS country code
+    unsigned char  disCategory {};  // DIS category code
+    unsigned char  disSubcategory {}; // DIS subcategory code
+    unsigned char  disSpecific {};  // DIS specific code
+    unsigned char  disExtra {};     // DIS extra code
 };
 
 }

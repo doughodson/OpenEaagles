@@ -7,64 +7,30 @@
 
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class PrintHandler
-//==============================================================================
 IMPLEMENT_SUBCLASS(PrintHandler,"PrintHandler")
+EMPTY_SERIALIZER(PrintHandler)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(PrintHandler)
    "filename",     // 1) Data file name (required)
    "pathname",     // 2) Path to the data file directory (optional)
 END_SLOTTABLE(PrintHandler)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(PrintHandler)
    ON_SLOT( 1, setFilename,        base::String)
    ON_SLOT( 2, setPathName,        base::String)
 END_SLOT_MAP()
 
-EMPTY_SERIALIZER(PrintHandler)
-
-//------------------------------------------------------------------------------
-// Default Constructor
-//------------------------------------------------------------------------------
 PrintHandler::PrintHandler()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void PrintHandler::initData()
-{
-   sout = nullptr;
-   fullFilename = nullptr;
-   filename = nullptr;
-   pathname = nullptr;
-   fileOpened = false;
-   fileFailed = false;
-   firstPassFlg = true;
-   fileEmpty = true;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void PrintHandler::copyData(const PrintHandler& org, const bool cc)
+void PrintHandler::copyData(const PrintHandler& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setFilename(org.filename);
    setPathName(org.pathname);
@@ -82,9 +48,6 @@ void PrintHandler::copyData(const PrintHandler& org, const bool cc)
    setFullFilename(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void PrintHandler::deleteData()
 {
    if (sout != nullptr) {

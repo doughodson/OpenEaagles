@@ -93,53 +93,10 @@ Autopilot::Autopilot()
 {
    STANDARD_CONSTRUCTOR()
 
-   stickRollPos   = 0.0;
-   stickPitchPos  = 0.0;
-
-   for (unsigned int i = 0; i < MAX_THR; i++) {
-      thrPos[i] = 0;
-   }
-   nThrPos = 0;
-
-   cmdHdg         = 0.0;
-   cmdAlt         = 0.0;
-   cmdSpd         = 0.0;
-
-   holdHdgSet     = false;
-   holdAltSet     = false;
-   holdSpdSet     = false;
-
-   rollSasOn      = true;
-   pitchSasOn     = true;
-   yawSAsOn       = true;
-   hdgHoldOn      = true;
-   altHoldOn      = true;
-   spdHoldOn      = true;
-   navModeOn      = true;
-   loiterModeOn   = false;
-
-   loiterAnchorLat = 0.0;
-   loiterAnchorLon = 0.0;
-   loiterMirrorLat = 0.0;
-   loiterMirrorLon = 0.0;
-   //loiterState     = 0;
-   loiterLength    = 10.0;
-   loiterInboundCourse = 0.0;
-   loiterCcwFlag   = false;
-   loiterEntryMode  = PREENTRY;
-   loiterEntryPhase = 0;
-   isInbound = false;
-   loiterTime = 0.0;
-   loiterTimeBased = false;
-
    setLeadFollowingDistanceTrail( base::distance::NM2M );             // Default: 1 NM trail
    setLeadFollowingDistanceRight( base::distance::NM2M );             // Default: 1 NM right
    setLeadFollowingDeltaAltitude( -2000.0f * base::distance::FT2M );  // Default: 2000ft below
 
-   lead = nullptr;
-   leadName = nullptr;
-   leadHdg = 0.0;
-   followLeadModeOn = false;
    maxTurnRateDps = STD_RATE_TURN_DPS;
    maxBankAngleDegs = STD_MAX_BANK_ANGLE;
    maxClimbRateMps = STD_MAX_CLIMB_RATE;
@@ -147,14 +104,9 @@ Autopilot::Autopilot()
    maxVelAccNps = STD_MAX_ACCEL_NPS;
 }
 
-void Autopilot::copyData(const Autopilot& org, const bool cc)
+void Autopilot::copyData(const Autopilot& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      lead = nullptr;
-      leadName = nullptr;
-   }
 
    stickRollPos  = org.stickRollPos;
    stickPitchPos = org.stickPitchPos;

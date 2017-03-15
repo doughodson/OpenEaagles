@@ -81,17 +81,17 @@ protected:
     virtual void setPlayer(models::Player* const p);
 
 private:
-    models::Player* player;               // This player
-    State state;                          // Model Active flag
-    int ageCount;                         // Age counter (how many times have we've been overlooked)
-    bool checked;                         // Model was checked
-    const Otm* typeMapper;                // OTW unique model type mapper
+    models::Player* player {};     // This player
+    State state {INACTIVE};        // Model Active flag
+    int ageCount {};               // Age counter (how many times have we've been overlooked)
+    bool checked {};               // Model was checked
+    const Otm* typeMapper {};      // OTW unique model type mapper
 
-    int rcount;                          // HOT request counter (how many times have we asked)
-    bool hotActive;                      // HOT entry is active
+    int rcount {};                 // HOT request counter (how many times have we asked)
+    bool hotActive {};             // HOT entry is active
 
     // Model IDs  -- Comparisons in this order --
-    unsigned short playerID;                           // Player ID
+    unsigned short playerID {};                        // Player ID
     base::safe_ptr<const base::String> federateName;   // Federate name
 };
 

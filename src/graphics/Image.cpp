@@ -13,10 +13,6 @@
 #include <GL/glext.h>
 #endif
 
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace graphics {
 
@@ -118,7 +114,7 @@ static uint16_t convertUInt16(const uint16_t v)
 //==============================================================================
 // Class: Image
 //==============================================================================
-IMPLEMENT_SUBCLASS(Image,"Image")
+IMPLEMENT_SUBCLASS(Image, "Image")
 EMPTY_SERIALIZER(Image)
 EMPTY_SLOTTABLE(Image)
 
@@ -126,8 +122,6 @@ EMPTY_SLOTTABLE(Image)
 Image::Image()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
 Image::Image(
@@ -140,8 +134,6 @@ Image::Image(
 {
    STANDARD_CONSTRUCTOR()
 
-   initData();
-
    setWidth(w);
    setHeight(h);
    setFormat(f);
@@ -149,23 +141,9 @@ Image::Image(
    setPixels(image);
 }
 
-void Image::initData()
-{
-   width = 0;
-   height = 0;
-   numComponents = 0;
-   format = GL_RGB;
-   pixels = nullptr;
-
-   xPixPerMeter = 3937;  // Default: about 100 pixels per inch
-   yPixPerMeter = 3937;
-}
-
-// Copy data
-void Image::copyData(const Image& org, const bool cc)
+void Image::copyData(const Image& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    width = org.width;
    height = org.height;
@@ -251,7 +229,7 @@ bool Image::setYResolutionPPM(const unsigned int ppm)
 //------------------------------------------------------------------------------
 bool Image::readFileBMP(const char* const filename, const char* const path)
 {
-   static const unsigned int BITMAPFILE_SIZE = (MAX_PATH_LEN+MAX_FILENAME_LEN);
+   static const unsigned int BITMAPFILE_SIZE = (MAX_PATH_LEN + MAX_FILENAME_LEN);
    char bitmapFile[BITMAPFILE_SIZE];
    bitmapFile[0] = '\0';
 

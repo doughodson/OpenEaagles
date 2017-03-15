@@ -27,20 +27,11 @@ END_SLOT_MAP()
 Otm::Otm()
 {
    STANDARD_CONSTRUCTOR()
-
-   refFactoryName = nullptr;
-   refTypeName = nullptr;
-   typeId = 0;
 }
 
-void Otm::copyData(const Otm& org, const bool cc)
+void Otm::copyData(const Otm& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      refFactoryName = nullptr;
-      refTypeName = nullptr;
-   }
 
    setTypeId( org.typeId );
    setSlotRefFactoryName( org.refFactoryName );

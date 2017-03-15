@@ -25,8 +25,6 @@
 namespace oe {
 namespace simulation {
 
-static const unsigned int DEFAULT_FAST_FORWARD_RATE = 1;
-
 IMPLEMENT_SUBCLASS(Station, "Station")
 
 const double Station::DEFAULT_TC_THREAD_PRI  = 0.8;
@@ -89,49 +87,11 @@ END_SLOT_MAP()
 Station::Station()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// Init member data
-//------------------------------------------------------------------------------
-void Station::initData()
-{
-   sim = nullptr;
-   otw = nullptr;
-   networks = nullptr;
-   ioHandlers = nullptr;
-   ownshipName = nullptr;
-   ownship = nullptr;
-   dataRecorder = nullptr;
-
-   tcRate = 50.0;                   // default time-critical thread rate
-   tcPri = DEFAULT_TC_THREAD_PRI;
-   tcStackSize = 0;
-   tcThread = nullptr;
-   fastForwardRate = DEFAULT_FAST_FORWARD_RATE;
-
-   netRate = 0.0;                   // default network thread rate
-   netPri = DEFAULT_NET_THREAD_PRI;
-   netStackSize = 0;
-   netThread = nullptr;
-
-   bgRate = 0.0;                    // default network thread rate
-   bgPri = DEFAULT_BG_THREAD_PRI;
-   bgStackSize = 0;
-   bgThread = nullptr;
-
-   tmrUpdateEnbl = false;
-
-   startupResetTimer0 = nullptr;
-   startupResetTimer = -1.0;
-}
-
-void Station::copyData(const Station& org, const bool cc)
+void Station::copyData(const Station& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // Terminate any old threads
    setTcThread(nullptr);

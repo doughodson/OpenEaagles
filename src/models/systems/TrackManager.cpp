@@ -25,7 +25,6 @@ namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(TrackManager, "TrackManager")
 
-// Slot table
 BEGIN_SLOTTABLE(TrackManager)
    "maxTracks",        // 1: Maximum number of tracks
    "maxTrackAge",      // 2: Maximum track age (time: sec)
@@ -36,7 +35,6 @@ BEGIN_SLOTTABLE(TrackManager)
    "logTrackUpdates",  // 7: whether to log all updates to tracks (default: true)
 END_SLOTTABLE(TrackManager)
 
-//  Map slot table
 BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(1, setSlotMaxTracks,base::Number)
    ON_SLOT(2, setSlotMaxTrackAge,base::Number)
@@ -47,19 +45,15 @@ BEGIN_SLOT_MAP(TrackManager)
    ON_SLOT(7, setSlotLogTrackUpdates, base::Number)
 END_SLOT_MAP()
 
-TrackManager::TrackManager() :
-      trkListLock(0), emQueue(MAX_TRKS), snQueue(MAX_TRKS), queueLock(0)
+TrackManager::TrackManager()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-TrackManager::TrackManager(const TrackManager& org) :
-   trkListLock(0), emQueue(MAX_TRKS), snQueue(MAX_TRKS), queueLock(0)
+TrackManager::TrackManager(const TrackManager& org)
 {
    STANDARD_CONSTRUCTOR()
-   copyData(org,true);
+   copyData(org, true);
 }
 
 TrackManager::~TrackManager()
@@ -78,44 +72,9 @@ TrackManager* TrackManager::clone() const
    return nullptr;
 }
 
-//------------------------------------------------------------------------------
-// initialize the member data
-//------------------------------------------------------------------------------
-void TrackManager::initData()
-{
-   nTrks = 0;
-   for (unsigned int i = 0; i < MAX_TRKS; i++) tracks[i] = nullptr;
-   maxTrks = MAX_TRKS;
-   maxTrackAge = 3.0;        // default age (2 sec)
-
-   trkListLock = 0;
-   queueLock = 0;
-
-   type = 0;
-   firstTrkId = 1000;      // default starting track id
-   nextTrkId = firstTrkId;
-
-   // clear the A matrix
-   haveMatrixA = false;
-   for (int i = 0; i < 3; i++)
-      for (int j = 0; j < 3; j++)
-         A[i][j] = 0.0;
-
-   // Default Parameters
-   alpha = 1.0;
-   beta = 0.0;
-   gamma = 0.0;
-
-   logTrackUpdates = true;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void TrackManager::copyData(const TrackManager& org, const bool cc)
+void TrackManager::copyData(const TrackManager& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    logTrackUpdates = org.logTrackUpdates;
 
@@ -140,9 +99,6 @@ void TrackManager::copyData(const TrackManager& org, const bool cc)
    gamma   = org.gamma;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void TrackManager::deleteData()
 {
    clearTracksAndQueues();
@@ -610,23 +566,18 @@ std::ostream& TrackManager::serialize(std::ostream& sout, const int i, const boo
 //==============================================================================
 IMPLEMENT_SUBCLASS(AirTrkMgr,"AirTrkMgr")
 
-// Slot table
 BEGIN_SLOTTABLE(AirTrkMgr)
    "positionGate",     // 1: Position Gate (meters)
    "rangeGate",        // 2: Range Gate (meters)
    "velocityGate",     // 3: Velocity Gate (m/s)
 END_SLOTTABLE(AirTrkMgr)
 
-//  Map slot table
 BEGIN_SLOT_MAP(AirTrkMgr)
    ON_SLOT(1, setPositionGate, base::Number)
    ON_SLOT(2, setRangeGate, base::Number)
    ON_SLOT(3, setVelocityGate, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AirTrkMgr::AirTrkMgr()
 {
    STANDARD_CONSTRUCTOR()
@@ -637,10 +588,6 @@ AirTrkMgr::AirTrkMgr()
 void AirTrkMgr::initData()
 {
    setType( Track::ONBOARD_SENSOR_BIT | Track::AIR_TRACK_BIT );
-
-   posGate =  2.0 * base::distance::NM2M;
-   rngGate =  500.0;
-   velGate =   10.0;
 
    reportNumMatches = new unsigned int[MAX_REPORTS];
    trackNumMatches = new unsigned int[MAX_TRKS];
@@ -657,9 +604,6 @@ void AirTrkMgr::initData()
    }
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AirTrkMgr::copyData(const AirTrkMgr& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -680,9 +624,6 @@ void AirTrkMgr::copyData(const AirTrkMgr& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void AirTrkMgr::deleteData()
 {
    if (report2TrackMatch != nullptr) {
@@ -1073,13 +1014,10 @@ std::ostream& AirTrkMgr::serialize(std::ostream& sout, const int i, const bool s
 //==============================================================================
 // Class: GmtiTrkMgr
 //==============================================================================
-IMPLEMENT_SUBCLASS(GmtiTrkMgr,"GmtiTrkMgr")
+IMPLEMENT_SUBCLASS(GmtiTrkMgr, "GmtiTrkMgr")
 EMPTY_SLOTTABLE(GmtiTrkMgr)
 EMPTY_SERIALIZER(GmtiTrkMgr)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 GmtiTrkMgr::GmtiTrkMgr()
 {
    STANDARD_CONSTRUCTOR()
@@ -1105,9 +1043,6 @@ void GmtiTrkMgr::initData()
    }
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void GmtiTrkMgr::copyData(const GmtiTrkMgr& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -1124,9 +1059,6 @@ void GmtiTrkMgr::copyData(const GmtiTrkMgr& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void GmtiTrkMgr::deleteData()
 {
    if (report2TrackMatch != nullptr) {
@@ -1385,7 +1317,7 @@ void GmtiTrkMgr::processTrackList(const double dt)
 //==============================================================================
 // Class: RwrTrkMgr
 //==============================================================================
-IMPLEMENT_SUBCLASS(RwrTrkMgr,"RwrTrkMgr")
+IMPLEMENT_SUBCLASS(RwrTrkMgr, "RwrTrkMgr")
 EMPTY_SLOTTABLE(RwrTrkMgr)
 EMPTY_SERIALIZER(RwrTrkMgr)
 

@@ -1,3 +1,4 @@
+
 //------------------------------------------------------------------------------
 // Classes: IrShape, IrSphere, IrBox
 //------------------------------------------------------------------------------
@@ -24,11 +25,11 @@ namespace models {
 IMPLEMENT_ABSTRACT_SUBCLASS(IrShape, "IrShape")
 
 BEGIN_SLOTTABLE(IrShape)
-"area",
+   "area",
 END_SLOTTABLE(IrShape)
 
 BEGIN_SLOT_MAP(IrShape)
-ON_SLOT(1,setSlotIrShapeArea,base::Number)
+   ON_SLOT(1,setSlotIrShapeArea,base::Number)
 END_SLOT_MAP()
 
 EMPTY_DELETEDATA(IrShape)
@@ -37,7 +38,6 @@ EMPTY_SERIALIZER(IrShape)
 IrShape::IrShape()
 {
    STANDARD_CONSTRUCTOR()
-   area = 0.0;
 }
 
 void IrShape::copyData(const IrShape& org, const bool)
@@ -83,29 +83,25 @@ double IrShape::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 //==============================================================================
 IMPLEMENT_SUBCLASS(IrSphere, "IrSphere")
 EMPTY_SERIALIZER(IrSphere)
+EMPTY_DELETEDATA(IrSphere)
 
 BEGIN_SLOTTABLE(IrSphere)
-"radius",
+   "radius",
 END_SLOTTABLE(IrSphere)
 
 BEGIN_SLOT_MAP(IrSphere)
-ON_SLOT(1,setSlotIrSphereRadius,base::Number)
+   ON_SLOT(1,setSlotIrSphereRadius,base::Number)
 END_SLOT_MAP()
 
 IrSphere::IrSphere()
 {
    STANDARD_CONSTRUCTOR()
-   radius = 10.0;
 }
 
 void IrSphere::copyData(const IrSphere& org, const bool)
 {
    BaseClass::copyData(org);
    radius = org.radius;
-}
-
-void IrSphere::deleteData()
-{
 }
 
 bool IrSphere::setSlotIrSphereRadius(const oe::base::Number* const s)
@@ -140,23 +136,20 @@ IMPLEMENT_SUBCLASS(IrBox, "IrBox")
 EMPTY_SERIALIZER(IrBox)
 
 BEGIN_SLOTTABLE(IrBox)
-"x",
-"y",
-"z",
+   "x",
+   "y",
+   "z",
 END_SLOTTABLE(IrBox)
 
 BEGIN_SLOT_MAP(IrBox)
-ON_SLOT(1,setSlotIrBoxX,base::Number)
-ON_SLOT(2,setSlotIrBoxY,base::Number)
-ON_SLOT(3,setSlotIrBoxZ,base::Number)
+   ON_SLOT(1,setSlotIrBoxX,base::Number)
+   ON_SLOT(2,setSlotIrBoxY,base::Number)
+   ON_SLOT(3,setSlotIrBoxZ,base::Number)
 END_SLOT_MAP()
 
 IrBox::IrBox()
 {
    STANDARD_CONSTRUCTOR()
-   x = 10.0;
-   y = 10.0;
-   z = 10.0;
 }
 
 void IrBox::copyData(const IrBox& org, const bool)

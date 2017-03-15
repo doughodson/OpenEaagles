@@ -22,17 +22,11 @@ bool CigiCl::cigiInitFailed  = false;    // CIGI initialization has failed
 CigiCl::CigiCl()
 {
    STANDARD_CONSTRUCTOR()
-
-   session = nullptr;
-   otwCigi = nullptr;
 }
 
 void CigiCl::copyData(const CigiCl& org, const bool)
 {
    BaseClass::copyData(org);
-
-   session = nullptr;
-   otwCigi = nullptr;  // don't unref();
 }
 
 void CigiCl::deleteData()

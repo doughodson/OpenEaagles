@@ -16,37 +16,11 @@ EMPTY_SERIALIZER(IrQueryMsg)
 IrQueryMsg::IrQueryMsg()
 {
    STANDARD_CONSTRUCTOR()
-
-   lowerWavelength = 0.0;
-   upperWavelength = 0.0;
-   instantaneousFieldOfView = 0.0;
-   nei = 0.0;
-   signatureByWaveband = nullptr;
-   signatureAtRange = 0.0;
-   emissivity = 1.0;
-   projectedArea = 0.0;
-   signalToNoiseRatio = 0.0;     // ratio of Signal to Noise
-   backgroundNoiseRatio = 0.0;
-   sendingSensor = nullptr;
-   pos.set(0,0,0);
-   vel.set(0,0,0);
-   accel.set(0,0,0);
-   angleAspect = 0.0;
-   angleOffBoresight = 0.0;
-   rel = 0.0;
-   raz = 0.0;
-   mergedQueryStatus = NOT_MERGED;
 }
 
-void IrQueryMsg::copyData(const IrQueryMsg& org, const bool cc)
+void IrQueryMsg::copyData(const IrQueryMsg& org, const bool)
 {
     BaseClass::copyData(org);
-
-   // If copy constructor, init these pointers
-   if (cc) {
-      signatureByWaveband = nullptr;
-      sendingSensor = nullptr;
-   }
 
 //   if (org.signatureByWaveband != 0) {
 //      setSignatureByWaveband((double*) org.signatureByWaveband->clone());

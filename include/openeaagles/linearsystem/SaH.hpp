@@ -52,9 +52,9 @@ private:
 
    static const unsigned int ORDER = 1;
 
-   double       time;       // Current time since last sample (s)
-   double       stime;      // Sample time: time of next sample (s)
-   unsigned int sampleRate; // Sample rate (hz)
+   double       time {};       // Current time since last sample (s)
+   double       stime {};      // Sample time: time of next sample (s)
+   unsigned int sampleRate {}; // Sample rate (hz)
 };
 
 }

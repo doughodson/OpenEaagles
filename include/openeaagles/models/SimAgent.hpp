@@ -17,6 +17,9 @@ class WorldModel;
 //    newUbf actions know how to execute themselves, so agent does not need to know anything about action class.
 //    newUbf agent's state is initialized by slot, so agent does not need to know anything about state class.
 //
+// Description: An Agent that manages a component (the "actor") with a behavior
+// (either a player, or a player's component)
+//
 // Factory name: SimAgent
 // Slots:
 //    actorPlayerName      <String>    ! The agent's actor - playerName
@@ -45,9 +48,9 @@ protected:
    bool setSlotActorComponentName(const base::String* const);
 
 private:
-   const base::String* actorPlayerName;
-   const base::String* actorComponentName;
-   simulation::Station* myStation;
+   const base::String* actorPlayerName {};
+   const base::String* actorComponentName {};
+   simulation::Station* myStation {};
 };
 
 

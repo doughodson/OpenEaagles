@@ -11,6 +11,7 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Iff, "Iff")
 EMPTY_SERIALIZER(Iff)
+EMPTY_DELETEDATA(Iff)
 
 BEGIN_SLOTTABLE(Iff)
    "mode1",          //  1) Mode 1 Code   (range: 00 to 073 octal)
@@ -27,7 +28,6 @@ BEGIN_SLOTTABLE(Iff)
    "enableModeC",    // 11) Mode C on
 END_SLOTTABLE(Iff)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Iff)
    ON_SLOT( 1, setSlotMode1,        base::Number)
    ON_SLOT( 2, setSlotMode2,        base::Number)
@@ -45,31 +45,6 @@ END_SLOT_MAP()
 Iff::Iff()
 {
    STANDARD_CONSTRUCTOR()
-
-   mode1 = 0;
-   mode2 = 0;
-   mode3a = 0;
-   mode4a = 0;
-   mode4b = 0;
-
-   enableMode1 = 0;
-   enableMode2 = 0;
-   enableMode3a = 0;
-   enableMode4 = 0;
-   enableModeC = 0;
-
-   whichMode4 = false;
-   icMode1 = 0;
-   icMode2 = 0;
-   icMode3a = 0;
-   icMode4a = 0;
-   icMode4b = 0;
-   icMode1Flg = 0;
-   icMode2Flg = 0;
-   icMode3aFlg = 0;
-   icMode4Flg = 0;
-   icModeCFlg = 0;
-   icWhichMode4 = 0;
 }
 
 void Iff::copyData(const Iff& org, const bool)
@@ -100,10 +75,6 @@ void Iff::copyData(const Iff& org, const bool)
    icMode4Flg = org.icMode4Flg;
    icModeCFlg = org.icModeCFlg;
    icWhichMode4 = org.icWhichMode4;
-}
-
-void Iff::deleteData()
-{
 }
 
 void Iff::reset()

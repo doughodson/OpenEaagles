@@ -120,21 +120,11 @@ static const double NUM_SECS_PER_DEG_10 = 36000.0;    // # seconds in a degree *
 DedFile::DedFile()
 {
    STANDARD_CONSTRUCTOR()
-
-   stdhdr = nullptr;
-   fstat = nullptr;
-   cells = nullptr;
 }
 
-void DedFile::copyData(const DedFile& org, const bool cc)
+void DedFile::copyData(const DedFile& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      stdhdr = nullptr;
-      fstat = nullptr;
-      cells = nullptr;
-   }
 
    clearHeaders();
 

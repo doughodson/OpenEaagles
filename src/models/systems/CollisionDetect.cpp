@@ -16,7 +16,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(CollisionDetect, "CollisionDetect")
 
-// Slot table
 BEGIN_SLOTTABLE(CollisionDetect)
    "collisionRange",       //  1: Collision range (default: 4 Meters)
    "maxPlayers",           //  2: Max number of players of interest (default: 20)
@@ -28,7 +27,6 @@ BEGIN_SLOTTABLE(CollisionDetect)
    "sendCrashEvents",      //  8: Send 'CRASH_EVENT' events on collisions (default: false)
 END_SLOTTABLE(CollisionDetect)
 
-//  Map slot table
 BEGIN_SLOT_MAP(CollisionDetect)
     ON_SLOT( 1,  setSlotCollisionRange,      base::Distance)
     ON_SLOT( 2,  setSlotMaxPlayers,          base::Number)
@@ -40,30 +38,14 @@ BEGIN_SLOT_MAP(CollisionDetect)
     ON_SLOT( 8,  setSlotSendCrashEvents,     base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Class Support Functions
-//------------------------------------------------------------------------------
 CollisionDetect::CollisionDetect()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void CollisionDetect::initData()
 {
-   poiLock = 0;
-
-   playerTypes = 0xFFFF;      // Default: all types
-   maxRange2Players = (1.0 * base::distance::NM2M); // Default: 1.0 NM
-   maxAngle2Players = 0.0;    // Default: all angles
-   collisionRange = 4.0;      // Default: 4 meters
-   useWorld = true;           // Default: Using ECEF
-   localOnly = false;         // Default: Include networked players
-   sendCrashEvents = false;   // Default: sending crash events is not enabled
-
-   players = nullptr;
-   maxPlayers = 0;
    resizePoiList(20);         // Default: 20 POI
 }
 

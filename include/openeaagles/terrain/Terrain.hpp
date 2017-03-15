@@ -188,12 +188,12 @@ protected:
 private:
    virtual bool loadData() =0;      // Load the data file
 
-   const base::String* path;        // Data path name
-   const base::String* file;        // Data file name
-   double neLat, neLon;             // Northeast lat/lon (degs)
-   double swLat, swLon;             // Southwest lat/lon (degs)
-   double minElev;                  // Minimum elevation (m)
-   double maxElev;                  // Maximum elevation (m)
+   const base::String* path {};     // Data path name
+   const base::String* file {};     // Data file name
+   double neLat {}, neLon {};       // Northeast lat/lon (degs)
+   double swLat {}, swLon {};       // Southwest lat/lon (degs)
+   double minElev {};               // Minimum elevation (m)
+   double maxElev {};               // Maximum elevation (m)
 };
 
 }

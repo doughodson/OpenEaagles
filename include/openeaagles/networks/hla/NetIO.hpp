@@ -5,13 +5,13 @@
 #include "openeaagles/networks/interop/NetIO.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/safe_ptr.hpp"
+#include <array>
 
 #include <RTI.hh>
 #include <fedtime.hh>
 
 namespace oe {
 namespace hla {
-
 class Ambassador;
 class Nib;
 
@@ -203,39 +203,39 @@ protected:
 private:
    RTI::ObjectClassHandle  objectClassHandles[MAX_CLASSES];                // Object class handles
    RTI::AttributeHandle objectAttributeHandles[MAX_ATTRIBUTES];            // Object attribute handles
-   bool regEnbl[MAX_CLASSES];                                              // Object registration enabled flags
-   bool objectClassPublished[MAX_CLASSES];                                 // Object class is published
-   bool objectClassSubscribed[MAX_CLASSES];                                // Object class is subscribed
+   std::array<bool, MAX_CLASSES> regEnbl {};                               // Object registration enabled flags
+   std::array<bool, MAX_CLASSES> objectClassPublished {};                  // Object class is published
+   std::array<bool, MAX_CLASSES> objectClassSubscribed {};                 // Object class is subscribed
 
-   RTI::InteractionClassHandle interactionClassHandles[MAX_INTERACTIONS];  // Interaction class handles
-   RTI::ParameterHandle interactionParameterHandles[MAX_PARAMETERS];       // Interaction parameter handles
-   bool interactEnbl[MAX_INTERACTIONS];                                    // Interaction enable flags
-   bool interactionClassPublished[MAX_INTERACTIONS];                       // Interaction class is published
-   bool interactionClassSubscribed[MAX_INTERACTIONS];                      // Interaction class is subscribed
+   std::array<RTI::InteractionClassHandle, MAX_INTERACTIONS> interactionClassHandles;  // Interaction class handles
+   std::array<RTI::ParameterHandle, MAX_PARAMETERS> interactionParameterHandles;       // Interaction parameter handles
+   std::array<bool, MAX_INTERACTIONS> interactEnbl {};                     // Interaction enable flags
+   std::array<bool, MAX_INTERACTIONS> interactionClassPublished {};        // Interaction class is published
+   std::array<bool, MAX_INTERACTIONS> interactionClassSubscribed {};       // Interaction class is subscribed
 
-   RTI::RTIambassador* rtiAmb;                   // RTI's Ambassador
-   Ambassador* fedAmb;                           // Our Fed Ambassador
+   RTI::RTIambassador* rtiAmb {};                // RTI's Ambassador
+   Ambassador* fedAmb {};                        // Our Fed Ambassador
    base::safe_ptr<base::String> fedFileName;     // FED filename
 
-   RTIfedTime      lookAhead;              // lookahead time
-   RTIfedTime      timeIncrement;          // time to increment clock by
-   RTIfedTime      federationTime;         // current federation time
-   RTI::Boolean    otaFlag;                // Outstanding time advance flag
-   RTI::Boolean    rFlag;                  // Time Regulating flag
-   RTI::Boolean    cFlag;                  // Time constrained flag
+   RTIfedTime lookAhead {};                      // lookahead time
+   RTIfedTime timeIncrement {};                  // time to increment clock by
+   RTIfedTime federationTime {};                 // current federation time
+   RTI::Boolean otaFlag {RTI::RTI_FALSE};        // Outstanding time advance flag
+   RTI::Boolean rFlag {RTI::RTI_FALSE};          // Time Regulating flag
+   RTI::Boolean cFlag {RTI::RTI_FALSE};          // Time constrained flag
 
    // ---
    // Quick lookup tables
    // ---
    // input tables
-   Nib*  inNameTbl[MAX_OBJECTS];    // Table of input objects in name order
-   Nib*  inHandleTbl[MAX_OBJECTS];  // Table of input objects in handle order
-   unsigned int nInObjects;         // Number of input objects in both tables
+   std::array<Nib*, MAX_OBJECTS> inNameTbl {};    // Table of input objects in name order
+   std::array<Nib*, MAX_OBJECTS> inHandleTbl {};  // Table of input objects in handle order
+   unsigned int nInObjects {};                    // Number of input objects in both tables
 
    // output tables
-   Nib* outNameTbl[MAX_OBJECTS];    // Table of output objects in name order
-   Nib* outHandleTbl[MAX_OBJECTS];  // Table of output objects in handle order
-   unsigned int nOutObjects;        // Number of output objects in both tables
+   std::array<Nib*, MAX_OBJECTS> outNameTbl {};    // Table of output objects in name order
+   std::array<Nib*, MAX_OBJECTS> outHandleTbl {};  // Table of output objects in handle order
+   unsigned int nOutObjects {};                    // Number of output objects in both tables
 
    // Support functions
    void addNibToNameTable(Nib* const nib, Nib** tbl, const unsigned int n);

@@ -9,7 +9,6 @@ namespace iodevice {
 
 IMPLEMENT_SUBCLASS(IoData, "IoData")
 
-// slot table for this class type
 BEGIN_SLOTTABLE(IoData)
     "numAI",     // 1) Number of analog inputs (AIs)
     "numAO",     // 2) Number of analog outputs (AOs)
@@ -17,7 +16,6 @@ BEGIN_SLOTTABLE(IoData)
     "numDO",     // 4) Number of discrete outputs (DOs)
 END_SLOTTABLE(IoData)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(IoData)
    ON_SLOT( 1, setSlotNumAI,    base::Number)
    ON_SLOT( 2, setSlotNumAO,    base::Number)
@@ -28,29 +26,11 @@ END_SLOT_MAP()
 IoData::IoData()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void IoData::initData()
-{
-   numAI = 0;
-   aiTable = nullptr;
-
-   numAO = 0;
-   aoTable = nullptr;
-
-   numDI = 0;
-   diTable = nullptr;
-
-   numDO = 0;
-   doTable = nullptr;
-}
-
-void IoData::copyData(const IoData& org, const bool cc)
+void IoData::copyData(const IoData& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setNumAI(org.numAI);
    if (aiTable != nullptr) {
@@ -71,7 +51,6 @@ void IoData::copyData(const IoData& org, const bool cc)
    if (doTable != nullptr) {
       for (unsigned int i = 0; i < numAI; i++) doTable[i] = org.doTable[i];
    }
-
 }
 
 void IoData::deleteData()
@@ -271,7 +250,6 @@ bool IoData::setNumAO(const unsigned int num)
       }
 
    }
-
    return true;
 }
 

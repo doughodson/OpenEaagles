@@ -30,7 +30,7 @@ protected:
 
 private:
     static const int MAX_VALUES = 50;
-    base::PairStream* myColors;
+    base::PairStream* myColors {};
 };
 
 }

@@ -18,7 +18,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(RfSystem, "RfSystem")
 
-// Slot table
 BEGIN_SLOTTABLE(RfSystem)
    "antennaName",          //  1: Name of the requested Antenna  (base::String)
    "frequency",            //  2: Frequency     (Hz; def: 0)   (base::Number or base::Frequency)
@@ -34,7 +33,6 @@ BEGIN_SLOTTABLE(RfSystem)
    "bandwidthNoise",       // 12: Bandwidth Noise (Hz; def: 'bandwidth') (base::Number or base::Frequency)
 END_SLOTTABLE(RfSystem)
 
-//  Map slot table
 BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(1,  setSlotAntennaName,  base::String)
     ON_SLOT(2,  setSlotFrequency,    base::Number)
@@ -50,50 +48,16 @@ BEGIN_SLOT_MAP(RfSystem)
     ON_SLOT(12, setSlotBandwidthNoise, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
-RfSystem::RfSystem() : packetLock(0), antenna(nullptr), antennaName(nullptr)
+RfSystem::RfSystem()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
-}
-
-void RfSystem::initData()
-{
-   xmitEnable = false;
-   recvEnable = false;
-   disableEmissions = false;
-   bwNoiseSet =  false;
-
-   frequency = 0.0;
-
-   rfNoiseFigure = 1.0;
-   rfSysTemp = 290.0;
-   rfThreshold = 0.0;
-   rfLossXmit = 1.0;
-   rfLossRecv = 1.0;
-   rfLossSignalProcess = 1.0;
-
-   jamSignal = 0.0;
-   np = 0;
-   for (unsigned int i = 0; i < MAX_EMISSIONS; i++) {
-      signals[i] = 0.0;
-      packets[i] = nullptr;
-   }
-   packetLock = 0;
-
    computeReceiverNoise();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void RfSystem::copyData(const RfSystem& org, const bool cc)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
+   if (cc) computeReceiverNoise();
 
    // No antenna yet
    setAntenna(nullptr);

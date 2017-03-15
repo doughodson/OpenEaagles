@@ -9,34 +9,18 @@
 namespace oe {
 namespace recorder {
 
-//==============================================================================
-// Class OutputHandler
-//==============================================================================
-IMPLEMENT_SUBCLASS(OutputHandler,"RecorderOutputHandler")
+IMPLEMENT_SUBCLASS(OutputHandler, "RecorderOutputHandler")
 EMPTY_SLOTTABLE(OutputHandler)
 EMPTY_SERIALIZER(OutputHandler)
 
-//------------------------------------------------------------------------------
-// Constructor
-//------------------------------------------------------------------------------
 OutputHandler::OutputHandler():semaphore(0)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void OutputHandler::initData()
-{
-   semaphore = 0;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void OutputHandler::copyData(const OutputHandler& org, const bool cc)
+void OutputHandler::copyData(const OutputHandler& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // Don't copy the queue
    base::lock(semaphore);
@@ -44,9 +28,6 @@ void OutputHandler::copyData(const OutputHandler& org, const bool cc)
    base::unlock(semaphore);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void OutputHandler::deleteData()
 {
    // clear the queue
@@ -54,7 +35,6 @@ void OutputHandler::deleteData()
    queue.clear();
    base::unlock(semaphore);
 }
-
 
 //------------------------------------------------------------------------------
 // shutdownNotification() -- Shutdown the simulation

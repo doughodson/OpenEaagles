@@ -22,12 +22,10 @@ namespace models {
 IMPLEMENT_SUBCLASS(Sar, "Sar")
 EMPTY_SERIALIZER(Sar)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(Sar)
     "chipSize",         // 1) Chip size (pixels)   <base::Number>
 END_SLOTTABLE(Sar)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(Sar)
     ON_SLOT( 1, setSlotChipSize,  base::Number)
 END_SLOT_MAP()
@@ -39,21 +37,8 @@ Sar::Sar() : imgList(nullptr)
 {
    STANDARD_CONSTRUCTOR()
 
-   nextId = 1;
-   stareLatitude = 0.0;
-   stareLongitude = 0.0;
-   stareElevation = 0.0;
-   resolution = 1.0;
-   chipSize = 0;
-   busy = false;
-   haveLL = false;
-
    setReceiverEnabledFlag(false);
    setTransmitterEnableFlag(false);
-
-   width = 0;
-   height = 0;
-   timer = 0;
 }
 
 void Sar::copyData(const Sar& org, const bool cc)
@@ -61,7 +46,6 @@ void Sar::copyData(const Sar& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      imgList = nullptr;
       setReceiverEnabledFlag(false);
       setTransmitterEnableFlag(false);
    }

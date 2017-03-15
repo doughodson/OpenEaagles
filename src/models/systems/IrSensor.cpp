@@ -32,7 +32,6 @@ namespace models {
 IMPLEMENT_PARTIAL_SUBCLASS(IrSensor, "IrSensor")
 EMPTY_SERIALIZER(IrSensor)
 
-// Slot table
 BEGIN_SLOTTABLE(IrSensor)
    "lowerWavelength",   // 1: Lower wavelength limit       (microns)
    "upperWavelength",   // 2: Upper wavelength limit       (microns)
@@ -47,7 +46,6 @@ BEGIN_SLOTTABLE(IrSensor)
    "trackManagerName",  // 8: Name of the requested Track Manager (base::String)
 END_SLOTTABLE(IrSensor)
 
-//  Map slot table
 BEGIN_SLOT_MAP(IrSensor)
    ON_SLOT(1,setSlotLowerWavelength,base::Number)
    ON_SLOT(2,setSlotUpperWavelength,base::Number)
@@ -62,25 +60,9 @@ BEGIN_SLOT_MAP(IrSensor)
    ON_SLOT(8,setSlotTrackManagerName,base::String)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
-IrSensor::IrSensor() : storedMessagesQueue(MAX_EMISSIONS), storedMessagesLock(0), tmName(nullptr), trackManager(nullptr)
+IrSensor::IrSensor()
 {
    STANDARD_CONSTRUCTOR()
-
-   lowerWavelength = 0.0;
-   upperWavelength = 0.0;
-   nei = 0.0;
-   threshold = 0.0;
-   ifov = 0.0;
-   ifovTheta = 0.0;
-   sensorType = HOTSPOT;
-   //fieldOfRegard = 0;
-   //fieldOfRegardTheta = 0;
-   //azimuthBin = 0.0f;
-   //elevationBin = 0.0f;
-   maximumRange = 0.0;
 }
 
 IrSensor::~IrSensor()
@@ -88,7 +70,7 @@ IrSensor::~IrSensor()
    STANDARD_DESTRUCTOR()
 }
 
-IrSensor::IrSensor(const IrSensor& org) : storedMessagesQueue(MAX_EMISSIONS), storedMessagesLock(0)
+IrSensor::IrSensor(const IrSensor& org)
 {
     STANDARD_CONSTRUCTOR()
     copyData(org, true);
@@ -99,17 +81,9 @@ IrSensor* IrSensor::clone() const
     return new IrSensor(*this);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void IrSensor::copyData(const IrSensor& org, const bool cc)
+void IrSensor::copyData(const IrSensor& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-       tmName = nullptr;
-       trackManager = nullptr;
-   }
 
    lowerWavelength = org.lowerWavelength;
    upperWavelength = org.upperWavelength;
@@ -137,10 +111,6 @@ void IrSensor::copyData(const IrSensor& org, const bool cc)
    clearTracksAndQueues();
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void IrSensor::deleteData()
 {
    setTrackManager(nullptr);

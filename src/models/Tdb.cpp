@@ -27,15 +27,8 @@ EMPTY_SERIALIZER(Tdb)
 Tdb::Tdb(const unsigned int mt, const Gimbal* const gp)
 {
    STANDARD_CONSTRUCTOR()
-   initData();
    setGimbal(gp);
    resizeArrays(mt);
-}
-
-Tdb::Tdb()
-{
-   STANDARD_CONSTRUCTOR()
-   initData();
 }
 
 Tdb::Tdb(const Tdb& org)
@@ -60,36 +53,9 @@ Tdb* Tdb::clone() const
     return new Tdb(*this);
 }
 
-void Tdb::initData()
-{
-   ownship = nullptr;
-   gimbal = nullptr;
-   usingEcefFlg = false;
-
-   targets = nullptr;
-   maxTargets = 0;
-   numTgts = 0;
-
-   ranges = nullptr;
-   rngRates = nullptr;
-   losG = nullptr;
-   losO2T = nullptr;
-   losT2O = nullptr;
-   aar = nullptr;
-   aazr = nullptr;
-   aelr = nullptr;
-
-   xa = nullptr;
-   ya = nullptr;
-   za = nullptr;
-   ra2 = nullptr;
-   ra = nullptr;
-}
-
-void Tdb::copyData(const Tdb& org, const bool cc)
+void Tdb::copyData(const Tdb& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setGimbal(org.gimbal);
 

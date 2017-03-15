@@ -277,27 +277,27 @@ protected:
    virtual bool setSlotFont(const base::String* const font);
    virtual bool setSlotStartCharPos(const base::Number* const x);
 
-   base::String origStr;        // Original text saved by setText
-   base::String inputExample;   // Input Template String
-   base::String str;            // Text stored in field
-   Mode     mode;                // Current mode
-   int      icp;                 // Input character pointer
-   int      inpDspMode;          // Auto switches to this display mode during input mode
-   bool     inpModeHold;         // Hold input mode until after first input character
+   base::String origStr;         // Original text saved by setText
+   base::String inputExample;    // Input Template String
+   base::String str;             // Text stored in field
+   Mode mode {display};          // Current mode
+   int icp {};                   // Input character pointer
+   int inpDspMode {};            // Auto switches to this display mode during input mode
+   bool inpModeHold {};          // Hold input mode until after first input character
 
 private:
-   void adjust()  { str.setString(origStr,w,jmode); }
+   void adjust()  { str.setString(origStr, w, jmode); }
 
-   int      ln;                     // Line this field is on
-   int      cp;                     // Starting character position of field
-   size_t   w;                      // Width of the field
-   bool     linked;                 // Linked field (on input)
-   unsigned int startCP;            // our starting character position that we "write" from
+   int      ln {};                     // Line this field is on
+   int      cp {};                     // Starting character position of field
+   size_t   w {};                      // Width of the field
+   bool     linked {};                 // Linked field (on input)
+   unsigned int startCP {};            // our starting character position that we "write" from
 
-   int      dmode;                  // Display mode flags
-   base::String::Justify jmode;    // Justification mode
-   bool     inheritColor;           // Inherit color instead of using a default color
-   base::String* fontName;         // name of the font we want our display to use (if overridden)
+   int      dmode {};                  // Display mode flags
+   base::String::Justify jmode {};     // Justification mode
+   bool     inheritColor {};           // Inherit color instead of using a default color
+   base::String* fontName {};          // name of the font we want our display to use (if overridden)
 };
 
 }

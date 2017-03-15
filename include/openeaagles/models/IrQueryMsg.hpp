@@ -142,26 +142,26 @@ public:
 
 private:
 
-   double         lowerWavelength;           //Lower wavelength          (microns)
-   double         upperWavelength;           //Upper wavelength          (microns)
-   double         instantaneousFieldOfView;  //IFOV                      (steradians)
-   double         nei;                       //NEI
-   double         signatureAtRange;          //Transmitted signal
-   double* signatureByWaveband;              //Transmitted signal by waveband  2d array where x = number of
-                                             // waveband bins, y = 0 (lower wavelength) , 1 (upper wavelength), 2 (sig)
-   double         emissivity;                //Emissivity (unitless)
-   double         projectedArea;             //Projected area observed   (m^2)
-   double         signalToNoiseRatio;        // ratio of Signal to Noise
-   double         backgroundNoiseRatio;      // ratio of background noise
-   IrSensor*      sendingSensor;             //sensor that reported this message.
-   base::Vec3d pos;                          // position of the target.
-   base::Vec3d vel;                          // velocity of target.
-   base::Vec3d accel;                        // acceleration of target.
-   double         angleAspect;               // Angle aspect to target.
-   double         angleOffBoresight;         // Angle of target off boresight of sensor
-   double         rel;                       // The relative elevation from target to sensor
-   double         raz;                       // The relative azimuth from target to sensor
-   MergedQueryStatus mergedQueryStatus;      // Flags status of query merging   // FAB
+   double  lowerWavelength {};           //Lower wavelength          (microns)
+   double  upperWavelength {};           //Upper wavelength          (microns)
+   double  instantaneousFieldOfView {};  //IFOV                      (steradians)
+   double  nei {};                       //NEI
+   double  signatureAtRange {};          //Transmitted signal
+   double* signatureByWaveband {};       //Transmitted signal by waveband  2d array where x = number of
+                                         // waveband bins, y = 0 (lower wavelength) , 1 (upper wavelength), 2 (sig)
+   double  emissivity {1.0};             //Emissivity (unitless)
+   double  projectedArea {};             //Projected area observed   (m^2)
+   double  signalToNoiseRatio {};        // ratio of Signal to Noise
+   double  backgroundNoiseRatio {};      // ratio of background noise
+   IrSensor* sendingSensor {};           //sensor that reported this message.
+   base::Vec3d pos;                      // position of the target.
+   base::Vec3d vel;                      // velocity of target.
+   base::Vec3d accel;                    // acceleration of target.
+   double angleAspect {};                // Angle aspect to target.
+   double angleOffBoresight {};          // Angle of target off boresight of sensor
+   double rel {};                        // The relative elevation from target to sensor
+   double raz {};                        // The relative azimuth from target to sensor
+   MergedQueryStatus mergedQueryStatus {NOT_MERGED};   // Flags status of query merging   // FAB
 };
 
 }

@@ -6,7 +6,6 @@
 
 namespace oe {
 namespace models {
-
 class AerodynamicsModel;
 
 //------------------------------------------------------------------------------
@@ -153,10 +152,10 @@ protected:
    bool setInitGearPos(const base::Number* const pos);
 
 private:
-   double initGearPos;     // initial gear position
-   double gearPos;         // Percent Gear position (0 -> up; 100 -> down)
-   double wpnBayDoorPos;   // Percent Weapon bay door position (0 -> closed; 100 -> open)
-   double wingSweep;       // Wing sweep angle (radians; zero for no wing sweep)
+   double initGearPos {};          // initial gear position
+   double gearPos {100.0};         // Percent Gear position (0 -> up; 100 -> down)
+   double wpnBayDoorPos {100.0};   // Percent Weapon bay door position (0 -> closed; 100 -> open)
+   double wingSweep {};            // Wing sweep angle (radians; zero for no wing sweep)
 };
 
 

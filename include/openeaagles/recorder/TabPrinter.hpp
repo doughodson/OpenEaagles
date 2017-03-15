@@ -10,14 +10,14 @@
 
 namespace oe {
 namespace recorder {
-   namespace pb {
-      class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
-      class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
-      class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
-      class WeaponDetonationEventMsg; class GunFiredEventMsg; class NewTrackEventMsg;
-      class TrackRemovedEventMsg; class TrackDataMsg; class PlayerId; class PlayerState;
-      class TrackData; class EmissionData; class MarkerMsg; class InputDeviceMsg;
-   }
+namespace pb {
+class Time; class FileIdMsg; class NewPlayerEventMsg; class PlayerRemovedEventMsg; class PlayerDataMsg;
+class PlayerDamagedEventMsg; class PlayerCollisionEventMsg; class PlayerCrashEventMsg;
+class PlayerKilledEventMsg; class WeaponReleaseEventMsg; class WeaponHungEventMsg;
+class WeaponDetonationEventMsg; class GunFiredEventMsg; class NewTrackEventMsg;
+class TrackRemovedEventMsg; class TrackDataMsg; class PlayerId; class PlayerState;
+class TrackData; class EmissionData; class MarkerMsg; class InputDeviceMsg;
+}
 
 //------------------------------------------------------------------------------
 // Class: TabPrinter
@@ -30,7 +30,7 @@ namespace recorder {
 //------------------------------------------------------------------------------
 class TabPrinter : public PrintHandler
 {
-    DECLARE_SUBCLASS(TabPrinter, PrintHandler)
+   DECLARE_SUBCLASS(TabPrinter, PrintHandler)
 
 public:
    enum MsgHdrOptions { NO_HDR, ALL_MSGS, NEW_MSG, ON_CHANGE };
@@ -40,7 +40,7 @@ public:
 
    // set message header options
    void setMsgHdrOptions(MsgHdrOptions msg);
-   bool isSimReset() const;                          // True if reset msg recorded
+   bool isSimReset() const;                   // True if reset msg recorded
 
    // set divider string
    bool setSlotDivider(const base::String* const msg);
@@ -104,39 +104,37 @@ protected:
 
    virtual void setMsgHeaders(const bool f);
 private:
-   void initData();
-
    // print options
-   bool printHeader;
-   bool simReset;
+   bool printHeader {};
+   bool simReset {true};
 
    // individual headers
-   bool fileIdHdr;
-   bool playerNewHdr;
-   bool playerRemovedHdr;
-   bool playerDataHdr;
-   bool playerDamagedHdr;
-   bool playerCollisionHdr;
-   bool playerCrashHdr;
-   bool playerKilledHdr;
-   bool weaponReleaseHdr;
-   bool weaponHungHdr;
-   bool weaponDetonateHdr;
-   bool gunFiredHdr;
-   bool trackNewHdr;
-   bool trackRemovedHdr;
-   bool trackDataHdr;
-   bool markerHdr;
-   bool inputDeviceHdr;
+   bool fileIdHdr {true};
+   bool playerNewHdr {true};
+   bool playerRemovedHdr {true};
+   bool playerDataHdr {true};
+   bool playerDamagedHdr {true};
+   bool playerCollisionHdr {true};
+   bool playerCrashHdr {true};
+   bool playerKilledHdr {true};
+   bool weaponReleaseHdr {true};
+   bool weaponHungHdr {true};
+   bool weaponDetonateHdr {true};
+   bool gunFiredHdr {true};
+   bool trackNewHdr {true};
+   bool trackRemovedHdr {true};
+   bool trackDataHdr {true};
+   bool markerHdr {true};
+   bool inputDeviceHdr {true};
 
    // Group headers
-   bool playerHeader;
-   bool weaponHeader;
-   bool trackHeader;
+   bool playerHeader {true};
+   bool weaponHeader {true};
+   bool trackHeader {true};
 
-   MsgHdrOptions option;     // options for printing field names
-   unsigned int lastMessage; // previous message printed
-   const char* divider;      // divider between message fields
+   MsgHdrOptions option {NO_HDR};                       // options for printing field names
+   unsigned int lastMessage {REID_UNHANDLED_ID_TOKEN};  // previous message printed
+   const char* divider {"\t"};                          // divider between message fields
 };
 
 inline bool TabPrinter::isSimReset() const { return simReset; }

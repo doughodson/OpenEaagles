@@ -13,7 +13,6 @@
 #include "openeaagles/base/PairStream.hpp"
 
 namespace oe {
-
 namespace dis {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Nib, "DisNib")
@@ -22,34 +21,7 @@ EMPTY_SERIALIZER(Nib)
 
 Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType)
 {
-   iffFunOpData = nullptr;
-   iffOptions = 0;
-   iffLastExecTime = 0;
-   iffEventId = 0;
-
-   disKind = 0;
-   disDomain = 0;
-   disCountry = 0;
-   disCategory = 0;
-   disSubcategory = 0;
-   disSpecific = 0;
-   disExtra = 0;
-
-   siteID = 0;
-   appID = 0;
-
-   for (unsigned int i = 0; i < MAX_AMSL; i++) {
-      apartMslTypes[i] = nullptr;
-   }
-
-   numEmissionSystems = 0;
-   for (unsigned int i = 0; i < MAX_EM_SYSTEMS; i++) {
-      emitterSysHandler[i] = nullptr;
-   }
-   emissionSystemsIndex = 0;
-   timeOffset = 0.0;
 }
-
 
 Nib::Nib(const Nib& org) : interop::Nib(org.getIoType())
 {
@@ -64,7 +36,7 @@ Nib::~Nib()
 
 Nib& Nib::operator=(const Nib& org)
 {
-    if (this != &org) copyData(org,false);
+    if (this != &org) copyData(org, false);
     return *this;
 }
 

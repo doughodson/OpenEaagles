@@ -15,15 +15,9 @@ EMPTY_SERIALIZER(NavaidLoader)
 NavaidLoader::NavaidLoader() : Database()
 {
    STANDARD_CONSTRUCTOR()
-
    // default file
    db->setPathname("/data/dafif/fullall/");
    db->setFilename("file2");
-
-   fl = 0;
-   nfl = 0;
-   cl = 0;
-   ncl = 0;
 }
 
 NavaidLoader::NavaidLoader(
@@ -33,15 +27,8 @@ NavaidLoader::NavaidLoader(
                : Database()
 {
    STANDARD_CONSTRUCTOR()
-
    db->setPathname(path);
    db->setFilename(file);
-
-   fl = 0;
-   nfl = 0;
-   cl = 0;
-   ncl = 0;
-
    load(country);
 }
 
@@ -51,10 +38,6 @@ void NavaidLoader::copyData(const NavaidLoader& org, const bool cc)
    if (cc) {
       db->setPathname("/data/dafif/fullall/");
       db->setFilename("file2");
-      fl = 0;
-      nfl = 0;
-      cl = 0;
-      ncl = 0;
    }
 }
 
@@ -401,32 +384,23 @@ NavaidLoader::NavaidKey::NavaidKey(const char* id, const char* ccode) : Key(0)
    else
       countryCode[0] = '\0';
 
-   freq = 0.0f;
-   channel = 0;
    key[0] = '\0';
-   type = Navaid::ANY;
 }
 
-NavaidLoader::NavaidKey::NavaidKey(const float freq1) : Key(0)
+NavaidLoader::NavaidKey::NavaidKey(const float freq1) : Key(0), freq(freq1) 
 {
    size = NAVAID_RECORD_LEN;
    ident[0] = '\0';
    countryCode[0] = '\0';
-   freq = freq1;
-   channel = 0;
    key[0] = '\0';
-   type = Navaid::ANY;
 }
 
-NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0)
+NavaidLoader::NavaidKey::NavaidKey(const long chan) : Key(0), channel(chan) 
 {
    size = NAVAID_RECORD_LEN;
    ident[0] = '\0';
    countryCode[0] = '\0';
-   freq = 0.0f;
-   channel = chan;
    key[0] = '\0';
-   type = Navaid::ANY;
 }
 
 
@@ -435,10 +409,8 @@ NavaidLoader::NavaidKey::NavaidKey(const char* key1) : Key(0)
    size = NAVAID_RECORD_LEN;
    Record::dsGetString(ident,key1,4);
    type = Navaid::NavaidType(key1[4]);
-   Record::dsGetString(countryCode,&key1[5],2);
-   Record::dsGetString(key,key1,NA_KEY_LEN);
-   freq = 0.0f;
-   channel = 0;
+   Record::dsGetString(countryCode, &key1[5],2);
+   Record::dsGetString(key, key1, NA_KEY_LEN);
 }
 
 

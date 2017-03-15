@@ -43,8 +43,8 @@ protected:
    virtual void dynamics(const double dt) override;
 
 private:
-   StabilizingMode  stabilizingMode; // Gimbal stabilization mode
-   MountPosition    mountPosition;   // Gimbal Mount position
+   StabilizingMode stabilizingMode {HORIZON};  // Gimbal stabilization mode
+   MountPosition mountPosition {NOSE};         // Gimbal Mount position
 };
 
 }

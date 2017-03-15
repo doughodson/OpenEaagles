@@ -28,7 +28,7 @@ public:
 private:
    void initData();
 
-   int stream;
+   int stream {};
    char deviceName[128];
 };
 

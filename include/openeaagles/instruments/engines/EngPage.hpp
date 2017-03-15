@@ -1,17 +1,18 @@
-//------------------------------------------------------------------------------
-// Class: EngPage
-// Base class: ... -> graphics::Page -> EngPage
-//
-// Description: Tests the secondary pfd page
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_EngPage_H__
 #define __oe_instruments_EngPage_H__
 
 #include "openeaagles/graphics/Page.hpp"
+#include <array>
 
 namespace oe {
 namespace instruments {
 
+//------------------------------------------------------------------------------
+// Class: EngPage
+//
+// Description: Tests the secondary pfd page
+//------------------------------------------------------------------------------
 class EngPage : public graphics::Page
 {
    DECLARE_SUBCLASS(EngPage,graphics::Page)
@@ -38,27 +39,27 @@ public:
 private:
 
     // engine n1
-    double   n1[NUM_ENG];          // %RPM
-    SendData n1SD[NUM_ENG];
-    SendData n1ROSD[NUM_ENG];
-    SendData n1BoxSD[NUM_ENG];
+    std::array<double, NUM_ENG> n1 {};          // %RPM
+    std::array<SendData, NUM_ENG> n1SD;
+    std::array<SendData, NUM_ENG> n1ROSD;
+    std::array<SendData, NUM_ENG> n1BoxSD;
 
     // engine n2
-    double   n2[NUM_ENG];          // %RPM
-    SendData n2SD[NUM_ENG];
-    SendData n2ROSD[NUM_ENG];
-    SendData n2BoxSD[NUM_ENG];
+    std::array<double, NUM_ENG> n2 {};          // %RPM
+    std::array<SendData, NUM_ENG> n2SD;
+    std::array<SendData, NUM_ENG> n2ROSD;
+    std::array<SendData, NUM_ENG> n2BoxSD;
 
     // engine tit
-    double   tit[NUM_ENG];         // Degs C
-    SendData titSD[NUM_ENG];
-    SendData titROSD[NUM_ENG];
-    SendData titBoxSD[NUM_ENG];
+    std::array<double, NUM_ENG> tit {};        // Degs C
+    std::array<SendData, NUM_ENG> titSD;
+    std::array<SendData, NUM_ENG> titROSD;
+    std::array<SendData, NUM_ENG> titBoxSD;
 
     // engin1 fuel flow
-    double ff[NUM_ENG];             // lbs/hrs
-    SendData ffSD[NUM_ENG];
-    SendData ffROSD[NUM_ENG];
+    std::array<double, NUM_ENG> ff;            // lbs/hrs
+    std::array<SendData, NUM_ENG> ffSD;
+    std::array<SendData, NUM_ENG> ffROSD;
 };
 
 }

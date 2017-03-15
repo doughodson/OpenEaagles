@@ -1,17 +1,18 @@
-//------------------------------------------------------------------------------
-// Class: Tape
-// Base class: Instrument -> Tape
-// Description: Dynamic class that renders only the portion of the tape
-//              that is needed on the screen
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_Tape_H__
 #define __oe_instruments_Tape_H__
 
 #include "openeaagles/instruments/Instrument.hpp"
+#include <array>
 
 namespace oe {
 namespace instruments {
 
+//------------------------------------------------------------------------------
+// Class: Tape
+// Description: Dynamic class that renders only the portion of the tape
+//              that is needed on the screen
+//------------------------------------------------------------------------------
 class Tape : public Instrument
 {
     DECLARE_SUBCLASS(Tape, Instrument)
@@ -43,21 +44,21 @@ private:
     SendData transTapeGraphicVSD;   // vertical
 
     static const int MAX_NUMBERS = 25;
-    int numberValsHunds[MAX_NUMBERS];
-    int numberValsHundsVis[MAX_NUMBERS];
-    int numberValsThous[MAX_NUMBERS];
-    int numberValsThousVis[MAX_NUMBERS];
-    SendData numberValsHundsSD[MAX_NUMBERS];
-    SendData numberValsThousSD[MAX_NUMBERS];
-    SendData numberValsHundsVisSD[MAX_NUMBERS];
-    SendData numberValsThousVisSD[MAX_NUMBERS];
-    int range;
-    double height;
-    int increment;
-    bool vertical;
-    double maxNum;
-    double minNum;
-    bool convert;
+    std::array<int, MAX_NUMBERS> numberValsHunds {};
+    std::array<int, MAX_NUMBERS> numberValsHundsVis {};
+    std::array<int, MAX_NUMBERS> numberValsThous {};
+    std::array<int, MAX_NUMBERS> numberValsThousVis {};
+    std::array<SendData, MAX_NUMBERS> numberValsHundsSD {};
+    std::array<SendData, MAX_NUMBERS> numberValsThousSD {};
+    std::array<SendData, MAX_NUMBERS> numberValsHundsVisSD {};
+    std::array<SendData, MAX_NUMBERS> numberValsThousVisSD {};
+    int range {};
+    double height {};
+    int increment {1};
+    bool vertical {true};
+    double maxNum {-1.0};
+    double minNum {-1.0};
+    bool convert {};
 };
 
 }

@@ -28,22 +28,13 @@ LifeForm::LifeForm()
     STANDARD_CONSTRUCTOR()
     static base::String generic("LifeForm");
     setType(&generic);
-    actionState = UPRIGHT_STANDING;
-    lookAngle = 0.0;
-    tgtAquired = false;
-    tgtPlayer = nullptr;
-    lockMode = SEARCHING;
-    weaponSel = LF_GUN;
 
     setTerrainOffset(1.0);      // default offset from terrain to CG
 }
 
-void LifeForm::copyData(const LifeForm& org, const bool cc)
+void LifeForm::copyData(const LifeForm& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) {
-       tgtPlayer = nullptr;
-    }
     actionState = org.actionState;
     tgtAquired = org.tgtAquired;
     if (tgtPlayer != nullptr) tgtPlayer->unref();

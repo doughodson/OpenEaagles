@@ -10,7 +10,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Bomb,"Bomb")
 
-// Slot table
 BEGIN_SLOTTABLE(Bomb)
     "arming",           // 1: Bomb arming option
     "noseFuze",         // 2: Nose fuze flag
@@ -21,7 +20,6 @@ BEGIN_SLOTTABLE(Bomb)
     "dragIndex",        // 7: drag index used by default dynamics
 END_SLOTTABLE(Bomb)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Bomb)
    ON_SLOT( 1, setSlotArmingOption, base::Identifier)
    ON_SLOT( 2, setSlotNoseFuze,     base::Number)
@@ -49,30 +47,15 @@ Bomb::Bomb()
 
 void Bomb::initData()
 {
-
-   // Default fuze, guidance & ballistic values for generic bomb
-   // (derived models will override these values)
-
-   arming    = NONE;
-   noseFuze  = false;
-   midFuze   = false;
-   tailFuze  = false;
-   fuzeAlt   = 0.0;
-   fuzeTime  = 0.0;
-   setDragIndex(0.0006f);
-
    missDistRef.set(0,0,0);
    tgtRangeRef.set(0,0,0);
-   cmdStrAz = 0;
-   cmdStrEl = 0;
-   guidanceValid = false;
 
-   setMaxTOF(60.0f);
-   setLethalRange(50.0f);
-   setMaxBurstRng(500.0f);
-   setTSG(9999.0f);
-   setSOBT(9999.0f);
-   setEOBT(0.0f);
+   setMaxTOF(60.0);
+   setLethalRange(50.0);
+   setMaxBurstRng(500.0);
+   setTSG(9999.0);
+   setSOBT(9999.0);
+   setEOBT(0.0);
 }
 
 void Bomb::copyData(const Bomb& org, const bool cc)

@@ -50,11 +50,11 @@ public:
 private:
    void initData();
 
-   base::String* senderName;    // name of sending player
-   base::List* destNames;       // player names to whome this message is intended for
-   double timeStamp;             // time at which this message was sent
-   double lifeSpan;              // seconds
-   AckCodes ack;                 // ack code
+   base::String* senderName {};    // name of sending player
+   base::List* destNames {};       // player names to whome this message is intended for
+   double timeStamp {};            // time at which this message was sent
+   double lifeSpan {5.0};          // seconds
+   AckCodes ack {ACK};             // ack code
 };
 
 inline const base::String* Message::getSenderName() const               { return senderName;    }

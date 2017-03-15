@@ -23,7 +23,7 @@ public:
    SingleTask(Component* const parent, const double priority);
 
    // User defined work function
-   private:  virtual unsigned long userFunc() =0;
+   private: virtual unsigned long userFunc() =0;
 
 protected:
    SingleTask();

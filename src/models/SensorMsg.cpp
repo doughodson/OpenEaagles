@@ -21,23 +21,9 @@ SensorMsg::SensorMsg()
 
 void SensorMsg::initData()
 {
-    maxRng = 0.0;
-    rng   = 0.0;
-    rngRate = 0.0;
-    gaz  = 0.0;
-    gel  = 0.0;
-    iaz  = 0.0;
-    iel  = 0.0;
     losO2T.set(0,0,0);
     losT2O.set(0,0,0);
     aoi.set(0,0,0);
-    ownship = nullptr;
-    gimbal = nullptr;
-    target = nullptr;
-    dataMsg = nullptr;
-
-    returnReq = false;
-    localOnly = false;
 }
 
 void SensorMsg::copyData(const SensorMsg& org, const bool cc)

@@ -9,12 +9,6 @@
 
 #include <cstdio>
 
-// disable all deprecation warnings for now, until we fix
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace hla {
 
@@ -25,8 +19,6 @@ EMPTY_SERIALIZER(Nib)
 Nib::Nib(const interop::NetIO::IoType ioType) : interop::Nib(ioType), oname()
 {
    STANDARD_CONSTRUCTOR()
-   handle = 0;
-   objectClassIndex = 0;
    setTimeoutEnabled(true);
    clearAllAttributeUpdateEnabledFlags();
    clearAllAttributeUpdateRequiredFlags();
@@ -120,14 +112,14 @@ void Nib::setAttributeUpdateRequiredFlag(const unsigned int attribIndex, const b
 void Nib::setAllAttributeUpdateRequiredFlags()
 {
    for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
-      setAttributeUpdateRequiredFlag(i,true);
+      setAttributeUpdateRequiredFlag(i, true);
    }
 }
 
 void Nib::clearAllAttributeUpdateRequiredFlags()
 {
    for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
-      setAttributeUpdateRequiredFlag(i,false);
+      setAttributeUpdateRequiredFlag(i, false);
    }
 }
 
@@ -142,7 +134,7 @@ void Nib::setAttributeUpdateEnabledFlag(const unsigned int attribIndex, const bo
 void Nib::clearAllAttributeUpdateEnabledFlags()
 {
    for (unsigned int i = 1; i <= NetIO::MAX_ATTRIBUTES; i++) {
-      setAttributeUpdateEnabledFlag(i,false);
+      setAttributeUpdateEnabledFlag(i, false);
    }
 }
 

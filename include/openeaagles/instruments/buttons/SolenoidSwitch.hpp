@@ -1,3 +1,15 @@
+
+#ifndef __oe_instruments_SolenoidSwitch_H__
+#define __oe_instruments_SolenoidSwitch_H__
+
+#include "openeaagles/graphics/Graphic.hpp"
+#include "openeaagles/instruments/buttons/Button.hpp"
+#include <array>
+
+namespace oe {
+namespace base { class UpTimer; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: SolenoidSwitch
 //
@@ -7,16 +19,6 @@
 // center position (no holding).
 // You can retrieve the button position at any time, or
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_SolenoidSwitch_H__
-#define __oe_instruments_SolenoidSwitch_H__
-
-#include "openeaagles/graphics/Graphic.hpp"
-#include "openeaagles/instruments/buttons/Button.hpp"
-
-namespace oe {
-namespace base { class UpTimer; }
-namespace instruments {
-
 class SolenoidSwitch : public graphics::Graphic
 {
     DECLARE_SUBCLASS(SolenoidSwitch,graphics::Graphic)
@@ -55,15 +57,15 @@ protected:
     bool setSlotEventMap(const base::PairStream* const x);
 
 private:
-    bool picked[NUM_BUTTONS];   // tells our buttons if they are currently picked or not
-    SendData pickedSD[NUM_BUTTONS];
-    int eventMap[NUM_BUTTONS];  // actual event id we want to generate for each button hit
-    int currButtonId;           // button ID of our current hold button (one being clicked)
-    int lastButtonId;           // button ID of the last button that was "pushed"
-    base::UpTimer* timer;      // our selection timer
-    bool latched;               // our latch flag, which, without a timer, will be a logical
-                                // flag to determine when to keep the switch up or down, or
-                                // make the switch return to it's starting position
+    std::array<bool, NUM_BUTTONS> picked {};     // tells our buttons if they are currently picked or not
+    std::array<SendData, NUM_BUTTONS> pickedSD;
+    std::array<int, NUM_BUTTONS> eventMap {};    // actual event id we want to generate for each button hit
+    int currButtonId {CENTER_BUTTON};            // button ID of our current hold button (one being clicked)
+    int lastButtonId {CENTER_BUTTON};            // button ID of the last button that was "pushed"
+    base::UpTimer* timer {};                     // our selection timer
+    bool latched {};                             // our latch flag, which, without a timer, will be a logical
+                                                 // flag to determine when to keep the switch up or down, or
+                                                 // make the switch return to it's starting position
 };
 
 //------------------------------------------------------------------------------
@@ -87,10 +89,9 @@ public:
     virtual void updateData(const double dt = 0.0) override;
 
 private:
-    bool noTimer;    // this flag tells this button that we don't time, we simply switch
-    bool pushed;     // flag that tells us we have the mouse down on our current graphic
+    bool noTimer {};    // this flag tells this button that we don't time, we simply switch
+    bool pushed {};     // flag that tells us we have the mouse down on our current graphic
     SendData pushedSD;
-
 };
 
 }

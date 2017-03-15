@@ -11,6 +11,7 @@ namespace instruments {
 
 IMPLEMENT_SUBCLASS(DialArcSegment, "DialArcSegment")
 EMPTY_SERIALIZER(DialArcSegment)
+EMPTY_DELETEDATA(DialArcSegment)
 
 BEGIN_SLOTTABLE(DialArcSegment)
     "dynamic",                  // do we draw around a circle according to our value?
@@ -18,29 +19,17 @@ BEGIN_SLOTTABLE(DialArcSegment)
     "filled",                   // fill the inside?
 END_SLOTTABLE(DialArcSegment)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles for Analog Dial
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(DialArcSegment)
     ON_SLOT(1, setSlotIsDynamic, base::Number)
     ON_SLOT(2, setSlotOuterRadius, base::Number)
     ON_SLOT(3, setSlotFilled, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 DialArcSegment::DialArcSegment()
 {
     STANDARD_CONSTRUCTOR()
-    isDynamic = false;
-    outerRadius = 0.5f; // just a bit bigger than analog dial
-    filled = true;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void DialArcSegment::copyData(const DialArcSegment& org, const bool)
 {
     // copy base stuff first
@@ -49,11 +38,6 @@ void DialArcSegment::copyData(const DialArcSegment& org, const bool)
     outerRadius = org.outerRadius;
     filled = org.filled;
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(DialArcSegment)
 
 // SLOT FUNCTION(s)
 //------------------------------------------------------------------------------

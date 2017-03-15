@@ -8,8 +8,8 @@ namespace instruments {
 
 IMPLEMENT_SUBCLASS(CompassRose, "CompassRose")
 EMPTY_SERIALIZER(CompassRose)
+EMPTY_DELETEDATA(CompassRose)
 
-// Event handler
 BEGIN_EVENT_HANDLER(CompassRose)
     ON_EVENT_OBJ(UPDATE_VALUE, onUpdateRotDeg, base::Number)
     ON_EVENT_OBJ(UPDATE_VALUE2, onUpdateRadius, base::Number)
@@ -31,24 +31,16 @@ BEGIN_SLOT_MAP(CompassRose)
     ON_SLOT(3, setSlotDisplacement, base::Number)
 END_SLOT_MAP()
 
-EMPTY_DELETEDATA(CompassRose)
-
 CompassRose::CompassRose()
 {
     STANDARD_CONSTRUCTOR()
-    centered = true;
-    cenRadius = 0.5;
-    decRadius = 1.0;
-    displacement = -0.5;
     sTicksSD.empty();
     lTicksSD.empty();
     dialSD.empty();
-    rot = 0;
 }
 
 void CompassRose::copyData(const CompassRose& org, const bool)
 {
-    // copy our base class stuff first
     BaseClass::copyData(org);
     
     centered = org.centered;

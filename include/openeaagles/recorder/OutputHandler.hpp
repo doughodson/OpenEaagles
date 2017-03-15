@@ -6,8 +6,7 @@
 #include "openeaagles/base/List.hpp"
 
 namespace oe {
-   namespace base { class List; }
-
+namespace base { class List; }
 namespace recorder {
 class DataRecordHandle;
 
@@ -67,10 +66,8 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   void initData();
-
    base::List queue;         // Data Record Queue
-   mutable long semaphore;
+   mutable long semaphore {};
 };
 
 }

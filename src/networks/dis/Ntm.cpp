@@ -19,7 +19,6 @@ BEGIN_SLOTTABLE(Ntm)
     "disEntityType", // 1) DIS Entity type (base::List -- number vector)  [ kind domain country category ... ]
 END_SLOTTABLE(Ntm)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Ntm)
     ON_SLOT(1, setSlotDisEntityType, base::List)
 END_SLOT_MAP()
@@ -27,14 +26,6 @@ END_SLOT_MAP()
 Ntm::Ntm()
 {
    STANDARD_CONSTRUCTOR()
-
-   disKind = 0;
-   disDomain = 0;
-   disCountry = 0;
-   disCategory = 0;
-   disSubcategory = 0;
-   disSpecific = 0;
-   disExtra = 0;
 }
 
 void Ntm::copyData(const Ntm& org, const bool)

@@ -23,7 +23,7 @@ BEGIN_SLOT_MAP(NetInput)
     ON_SLOT(2, setSlotNoWait,    oe::base::Number)
 END_SLOT_MAP()
 
-NetInput::NetInput() : netHandler(nullptr)
+NetInput::NetInput()
 {
    STANDARD_CONSTRUCTOR()
    initData();
@@ -32,11 +32,6 @@ NetInput::NetInput() : netHandler(nullptr)
 void NetInput::initData()
 {
    ibuf = new char[MAX_INPUT_BUFFER_SIZE];
-
-   networkInitialized = false;
-   networkInitFailed = false;
-   noWaitFlag = false;
-   firstPassFlg = true;
 }
 
 void NetInput::copyData(const NetInput& org, const bool cc)

@@ -20,7 +20,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Missile, "Missile")
 
-// Slot table
 BEGIN_SLOTTABLE(Missile)
 "minSpeed",         //  1: Minimum Velocity           (m/s)
 "maxSpeed",         //  2: Maximum Velocity           (m/s)
@@ -32,7 +31,6 @@ BEGIN_SLOTTABLE(Missile)
 "cmdSpeed",         //  8: Command speed              (m/s)
 END_SLOTTABLE(Missile)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Missile)
    ON_SLOT(1, setSlotVpMin, base::Number)
    ON_SLOT(2, setSlotVpMax, base::Number)
@@ -44,7 +42,6 @@ BEGIN_SLOT_MAP(Missile)
    ON_SLOT(8, setSlotCmdVelocity, base::Number)
 END_SLOT_MAP()
 
-// Event() map
 BEGIN_EVENT_HANDLER(Missile)
 END_EVENT_HANDLER()
 
@@ -71,15 +68,6 @@ Missile::Missile()
    setVpMaxG(800.0f);
    setMaxG(4.0);
    setMaxAccel(50.0);
-
-   trng = 0.0;
-   trngT = 0.0;
-   trdot = 0.0;
-   trdotT = 0.0;
-   cmdPitch = 0.0;
-   cmdHeading = 0.0;
-   cmdVelocity = 0.0;
-
 }
 
 void Missile::copyData(const Missile& org, const bool)

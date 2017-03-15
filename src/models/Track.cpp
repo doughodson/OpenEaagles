@@ -17,22 +17,15 @@ IMPLEMENT_SUBCLASS(Track, "Track")
 EMPTY_SLOTTABLE(Track)
 EMPTY_SERIALIZER(Track)
 
-Track::Track() : tgt(nullptr)
+Track::Track()
 {
     STANDARD_CONSTRUCTOR()
-
-    id = 0;
     clear();
 }
 
-void Track::copyData(const Track& org, const bool cc)
+void Track::copyData(const Track& org, const bool)
 {
    BaseClass::copyData(org);
-
-   // If copy constructor, init these pointers
-   if (cc) {
-      tgt = nullptr;
-   }
 
    setTarget( org.tgt );
 
@@ -390,14 +383,9 @@ RfTrack::RfTrack() : lastEM(nullptr)
     clear();
 }
 
-void RfTrack::copyData(const RfTrack& org, const bool cc)
+void RfTrack::copyData(const RfTrack& org, const bool)
 {
     BaseClass::copyData(org);
-
-    // If copy constructor, init these pointers
-    if (cc) {
-        lastEM = nullptr;
-    }
 
     setLastEmission( org.lastEM );
 
@@ -493,9 +481,6 @@ IMPLEMENT_SUBCLASS(IrTrack,"IrTrack")
 EMPTY_SLOTTABLE(IrTrack)
 EMPTY_SERIALIZER(IrTrack)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 IrTrack::IrTrack() : lastQuery(nullptr)
 {
     STANDARD_CONSTRUCTOR()
@@ -503,17 +488,9 @@ IrTrack::IrTrack() : lastQuery(nullptr)
     clear();
 }
 
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void IrTrack::copyData(const IrTrack& org, const bool cc)
+void IrTrack::copyData(const IrTrack& org, const bool)
 {
     BaseClass::copyData(org);
-
-    // If copy constructor, init these pointers
-    if (cc) {
-        lastQuery = nullptr;
-    }
 
     setLastQuery( org.lastQuery );
 

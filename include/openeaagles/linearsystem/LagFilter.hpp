@@ -5,8 +5,7 @@
 #include "openeaagles/linearsystem/FirstOrderTf.hpp"
 
 namespace oe {
-   namespace base { class Time; }
-
+namespace base { class Time; }
 namespace linearsystem {
 
 //------------------------------------------------------------------------------
@@ -44,7 +43,7 @@ public:
    virtual bool setSlotTau(const base::Number* const msg);
 
 private:
-   double tau;    // filter time constant (seconds)
+   double tau {1.0};    // filter time constant (seconds)
 };
 
 }

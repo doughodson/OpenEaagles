@@ -9,12 +9,6 @@
 #include <fstream>
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
@@ -33,24 +27,11 @@ END_SLOT_MAP()
 FileWriter::FileWriter()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void FileWriter::initData()
-{
-   sout = nullptr;
-   fullFilename = nullptr;
-   filename = nullptr;
-   pathname = nullptr;
-   fileOpened = false;
-   fileFailed = false;
-   eodFlag    = false;
-}
-
-void FileWriter::copyData(const FileWriter& org, const bool cc)
+void FileWriter::copyData(const FileWriter& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setFilename(org.filename);
    setPathName(org.pathname);

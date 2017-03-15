@@ -5,10 +5,10 @@
 #include "openeaagles/base/Number.hpp"
 
 // setup local variables and static variables
-#define RADIUS_180      1.625                   /* 180 in view */
-#define RADIUS_160      1.650                   /* 160 in view */
-#define RADIUS_140      1.729                   /* 140 in view */
-#define RADIUS_120      1.877                   /* 120 in view */
+#define RADIUS_180  1.625                   /* 180 in view */
+#define RADIUS_160  1.650                   /* 160 in view */
+#define RADIUS_140  1.729                   /* 140 in view */
+#define RADIUS_120  1.877                   /* 120 in view */
 
 namespace oe {
 namespace instruments {
@@ -19,10 +19,10 @@ static double WHITE[3] =  { 1.0f, 1.0f, 1.0f };
 static double BLACK[3] =  { 0.0f, 0.0f, 0.0f };
 static double GREEN[3] =  { 0.0f, 1.0f, 0.0f };
 
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Eadi3DPage,"Eadi3DPage")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Eadi3DPage, "Eadi3DPage")
 EMPTY_SERIALIZER(Eadi3DPage)
+EMPTY_DELETEDATA(Eadi3DPage)
 
-// Event handler
 BEGIN_EVENT_HANDLER(Eadi3DPage)
     ON_EVENT_OBJ(USER_EVENTS+100, onEventSetAltitude, base::Number)
     ON_EVENT_OBJ(USER_EVENTS+101, onEventSetAirspeed, base::Number)
@@ -46,39 +46,11 @@ BEGIN_EVENT_HANDLER(Eadi3DPage)
     ON_EVENT_OBJ(USER_EVENTS+119, onEventSetLocalizerValid, base::Number)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Eadi3DPage::Eadi3DPage() : radius(RADIUS_180), eadiObjs(RADIUS_180)
 {
     STANDARD_CONSTRUCTOR()
-
-    altitudeFT = 0.0;
-    airspeedKTS = 0.0;
-    headingDEG = 0.0;
-    aoaDEG = 0.0;
-    machNo = 0.0;
-    vviFPM = 0.0;
-    pitchDEG = 0.0;
-    rollDEG = 0.0;
-    Gload = 0.0;
-    landingMode = false;
-    pitchSteeringCmd = 0.0;
-    rollSteeringCmd = 0.0;
-    pitchSteeringValid = false;
-    rollSteeringValid = false;
-    glideslopeDevDOTS = 0.0;
-    localizerDevDOTS = 0.0;
-    turnRateDOTS = 0.0;
-    slipIndDOTS = 0.0;
-    glideslopeDevValid = false;
-    localizerDevValid = false;
 }
 
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
 void Eadi3DPage::copyData(const Eadi3DPage& org, const bool)
 {
     BaseClass::copyData(org);
@@ -105,12 +77,6 @@ void Eadi3DPage::copyData(const Eadi3DPage& org, const bool)
     glideslopeDevValid = org.glideslopeDevValid;
     localizerDevValid = org.localizerDevValid;
 }
-
-
-//------------------------------------------------------------------------------
-// deleteData() -
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(Eadi3DPage)
 
 // Event functions
 //------------------------------------------------------------------------------

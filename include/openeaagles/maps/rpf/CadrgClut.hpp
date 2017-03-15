@@ -4,6 +4,8 @@
 
 #include "openeaagles/base/Object.hpp"
 
+#include <array>
+
 namespace oe {
 namespace rpf {
 
@@ -50,9 +52,9 @@ private:
     static const int MAXOFFSETRECS = 10;    // Max # of color/gray offset records: usually 3
     static const int MAXCCRECS = 5;         // Max # of color converter records: usually 2
 
-    unsigned int cct[CADRG_COLORS];         // Holds the list of RGB colors
+    std::array<unsigned int, CADRG_COLORS> cct {};  // Holds the list of RGB colors
 
-    Rgb colorTable[255];                    // Holds our individual colors
+    std::array<Rgb, 255> colorTable;        // Holds our individual colors
 };
 
 }

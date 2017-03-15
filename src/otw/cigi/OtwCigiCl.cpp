@@ -1,15 +1,4 @@
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
-// disable all of the unreferenced parameter warnings
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4100)
-#endif
-
 #include "openeaagles/otw/cigi/OtwCigiCl.hpp"
 
 #include "openeaagles/otw/cigi/CigiCl.hpp"
@@ -82,7 +71,6 @@ BEGIN_SLOTTABLE(OtwCigiCl)
    "shipWakeModel",        // 9) Ship Wake" effect model ID
 END_SLOTTABLE(OtwCigiCl)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(OtwCigiCl)
    ON_SLOT(1, setSlotCigi,                  CigiCl)
    ON_SLOT(2, setSlotASyncMode,             base::Number)
@@ -101,33 +89,9 @@ END_SLOT_MAP()
 static const int MAX_BUF_SIZE = 1472;
 static const double LOS_REQ_TIMEOUT = 2.0;     // one second timeout
 
-OtwCigiCl::OtwCigiCl() : cigi(nullptr)
+OtwCigiCl::OtwCigiCl()
 {
    STANDARD_CONSTRUCTOR()
-
-   cigi = nullptr;
-   cigiInitialized = false;
-   cigiInitFailed = false;
-
-   asyncMode = false;
-   hideOwn = true;
-   resetRequest = true;
-
-   entityIdCount = 0;
-   elevReqIdCount = 0;
-
-   elevReqFlg = false;
-   elevReqTimer = 0;
-
-   losRespLat = 0;
-   losRespLon = 0;
-   losRespAlt = 0;
-   losRespRange = 0;
-   losRespId = 0;
-   losRespDataValid = true;
-   losReqId = 0;
-   newLosReq = true;
-   losReqTimer = 0;
 
    for (unsigned int i = 0; i < NUM_BUFFERS; i++) {
       ownshipEC[i] = new CigiEntityCtrlV3();
@@ -136,20 +100,7 @@ OtwCigiCl::OtwCigiCl() : cigi(nullptr)
 
    igc =  new CigiIGCtrlV3();
    los = new CigiLosVectReqV3();
-   view = nullptr;
    fov = new CigiViewDefV3();
-   sensor = nullptr;
-
-   iw = NUM_BUFFERS;
-   iw0 = NUM_BUFFERS;
-   ir = NUM_BUFFERS;
-
-   cmtOwnship = 302;
-   cmtMslTrail = 1100;
-   cmtSmokePlume = 1101;
-   cmtAirExplosion = 1102;
-   cmtGroundExplosion = 1103;
-   cmtShipWake = 1104;
 }
 
 void OtwCigiCl::copyData(const OtwCigiCl& org, const bool cc)
@@ -157,20 +108,12 @@ void OtwCigiCl::copyData(const OtwCigiCl& org, const bool cc)
    BaseClass::copyData(org);
 
    if (cc) {
-      cigi = nullptr;
-
       for (unsigned int i = 0; i < NUM_BUFFERS; i++) {
          ownshipEC[i] = new CigiEntityCtrlV3();
          ownshipCC[i] = new CigiCompCtrlV3();
       }
       igc =  new CigiIGCtrlV3();
       los = new CigiLosVectReqV3();
-      view = nullptr;
-      fov = nullptr;
-
-      iw = NUM_BUFFERS;
-      iw0 = NUM_BUFFERS;
-      ir = NUM_BUFFERS;
    }
 
    cigi = nullptr;

@@ -89,8 +89,6 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   void initData();
-
    safe_ptr<PairStream> adapters;   // Adapter list
    safe_ptr<PairStream> devices;    // Device list
 };

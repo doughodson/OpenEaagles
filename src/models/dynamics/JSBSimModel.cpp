@@ -48,16 +48,12 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(JSBSimModel, "JSBSimModel")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(JSBSimModel)
     "rootDir",      //  1: JSBSim root directory for models
     "model",        //  2: JSBSim model
     "debugLevel",   //  3: JSBSim debug level (controls verbosity)
 END_SLOTTABLE(JSBSimModel)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(JSBSimModel)
     ON_SLOT(1, setRootDir,    base::String)
     ON_SLOT(2, setModel,      base::String)
@@ -66,49 +62,14 @@ END_SLOT_MAP()
 
 EMPTY_SERIALIZER(JSBSimModel)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 JSBSimModel::JSBSimModel()
 {
     STANDARD_CONSTRUCTOR()
-
-    initData();
 }
 
-void JSBSimModel::initData()
-{
-    // slot parameters
-    rootDir = nullptr;
-    model = nullptr;
-    debugLevel = 0;
-
-    fdmex = nullptr;
-    propMgr = nullptr;
-    pitchTrimPos         = static_cast<double>(0.0);
-    pitchTrimRate        = static_cast<double>(0.1);
-    pitchTrimSw          = static_cast<double>(0.0);
-    rollTrimPos          = static_cast<double>(0.0);
-    rollTrimRate         = static_cast<double>(0.1);
-    rollTrimSw           = static_cast<double>(0.0);
-    headingHoldOn        = false;
-    altitudeHoldOn       = false;
-    velocityHoldOn       = false;
-    commandedHeadingDeg  = 0.0;
-    commandedAltitudeFt  = 0.0;
-    commandedVelocityKts = 0.0;
-    hasHeadingHold       = false;
-    hasVelocityHold      = false;
-    hasAltitudeHold      = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void JSBSimModel::copyData(const JSBSimModel& org, const bool cc)
+void JSBSimModel::copyData(const JSBSimModel& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) initData();
 
     fdmex = nullptr;
     propMgr = nullptr;
@@ -137,9 +98,6 @@ void JSBSimModel::copyData(const JSBSimModel& org, const bool cc)
     hasAltitudeHold      = org.hasAltitudeHold;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete instance of JSBSim, if any
-//------------------------------------------------------------------------------
 void JSBSimModel::deleteData()
 {
     if (fdmex != nullptr) {

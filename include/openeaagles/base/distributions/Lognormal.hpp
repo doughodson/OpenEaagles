@@ -40,11 +40,9 @@ public:
   bool setSlotGamma(const Number* const);
 
 protected:
-
   double sigma {};
   double mu {};
   double gamma {};
-
 };
 
 }

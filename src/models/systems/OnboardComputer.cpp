@@ -15,28 +15,14 @@ namespace models {
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(OnboardComputer, "OnboardComputer")
 EMPTY_SERIALIZER(OnboardComputer)
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 OnboardComputer::OnboardComputer()
 {
    STANDARD_CONSTRUCTOR()
-
-   nextToShoot = nullptr;
-   action = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void OnboardComputer::copyData(const OnboardComputer& org, const bool cc)
+void OnboardComputer::copyData(const OnboardComputer& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      nextToShoot = nullptr;
-      action = nullptr;
-   }
 
    action = nullptr; // Need to trigger the action
 
@@ -44,9 +30,6 @@ void OnboardComputer::copyData(const OnboardComputer& org, const bool cc)
    setNextToShoot(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void OnboardComputer::deleteData()
 {
    setNextToShoot(nullptr);

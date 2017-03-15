@@ -5,8 +5,7 @@
 #include "openeaagles/graphics/Image.hpp"
 
 namespace oe {
-   namespace base { class Number; class Identifier; }
-
+namespace base { class Number; class Identifier; }
 namespace graphics {
 
 //------------------------------------------------------------------------------
@@ -158,21 +157,21 @@ protected:
 private:
    void initData();
 
-   GLuint texture;                 // open GL texture identifier
+   GLuint texture {};             // open GL texture identifier
 
    // glTexParameteri() Attributes
-   int         wrapS;              // GL_REPEAT (default) or GL_CLAMP
-   int         wrapT;              // GL_REPEAT (default) or GL_CLAMP
-   int         magFilter;          // GL_NEAREST (default) or GL_LINEAR
-   int         minFilter;          // GL_NEAREST (default) or GL_LINEAR
+   int wrapS {GL_REPEAT};         // GL_REPEAT (default) or GL_CLAMP
+   int wrapT {GL_REPEAT};         // GL_REPEAT (default) or GL_CLAMP
+   int magFilter {GL_NEAREST};    // GL_NEAREST (default) or GL_LINEAR
+   int minFilter {GL_NEAREST};    // GL_NEAREST (default) or GL_LINEAR
 
    // glPixelTransferf() Attributes
-   GLfloat      redScale;
-   GLfloat      redBias;
-   GLfloat      greenScale;
-   GLfloat      greenBias;
-   GLfloat      blueScale;
-   GLfloat      blueBias;
+   GLfloat redScale {1.0};
+   GLfloat redBias {0.0};
+   GLfloat greenScale {1.0};
+   GLfloat greenBias {0.0};
+   GLfloat blueScale {1.0};
+   GLfloat blueBias {0.0};
 };
 
 inline GLuint Texture::getTexture() const          { return texture; }

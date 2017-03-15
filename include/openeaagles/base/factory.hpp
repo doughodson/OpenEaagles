@@ -8,10 +8,7 @@ namespace oe {
 namespace base {
 
 class Object;
-
-// factory function
-Object* factory(const std::string& name);
-
+Object* factory(const std::string&);
 }
 }
 

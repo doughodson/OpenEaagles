@@ -6,6 +6,7 @@
 
 #include "openeaagles/networks/interop/NetIO.hpp"
 #include "openeaagles/models/players/Player.hpp"
+#include <array>
 
 namespace oe {
 namespace models { class Missile; }
@@ -279,31 +280,31 @@ private:
    base::safe_ptr<const base::String> federateName; // Federate name
    base::safe_ptr<models::Player> pPlayer;          // Our player
    base::safe_ptr<NetIO> pNetIO;                    // Our Network
-   bool checked;                                    // NIB was checked
-   unsigned short  playerID;                        // Player ID
+   bool checked {};                                 // NIB was checked
+   unsigned short playerID {};                      // Player ID
 
    // Type mapper and type checked flags
    base::safe_ptr<const Ntm> ntm;      // Type mapper
-   bool entityTypeChecked;             // Entity type has been checked
+   bool entityTypeChecked {};          // Entity type has been checked
 
    // Player data
    static const unsigned int PNAME_BUF_SIZE = 64;
-   char        pname[PNAME_BUF_SIZE];  // Name
-   models::Player::Side side;          // Side
-   models::Player::Mode mode;          // NIB Mode
-   bool        timeoutEnbFlg;          // NIB can timeout flag
-   double      damage;                 // Damage state from no damage(0.0) to destroyed (1.0)
-   double      smoking;                // Smoke state from no smoke (0.0) to maximum (1.0)
-   double      flames;                 // Flames state from no flames (0.0) to maximum (1.0)
-   unsigned int camouflage;            // Camouflage type (0 is none)
-   bool        detMsgSent;             // True if detonation message was sent
+   char        pname[PNAME_BUF_SIZE] {};  // Name
+   models::Player::Side side;             // Side
+   models::Player::Mode mode;             // NIB Mode
+   bool        timeoutEnbFlg {true};      // NIB can timeout flag
+   double      damage {};                 // Damage state from no damage(0.0) to destroyed (1.0)
+   double      smoking {};                // Smoke state from no smoke (0.0) to maximum (1.0)
+   double      flames {};                 // Flames state from no flames (0.0) to maximum (1.0)
+   unsigned int camouflage {};            // Camouflage type (0 is none)
+   bool        detMsgSent {};             // True if detonation message was sent
 
    // Times
-   double      execTime;               // Exec time of last update (seconds)
-   double      utcTime;                // UTC time of last update (seconds)
+   double execTime {};                 // Exec time of last update (seconds)
+   double utcTime {};                  // UTC time of last update (seconds)
 
    // Dead Reckoning (DR) data
-   unsigned char drNum;                // Dead-Reckoning algorithm (see enum DeadReckoning)
+   unsigned char drNum {STATIC_DRM};   // Dead-Reckoning algorithm (see enum DeadReckoning)
    base::Vec3d  drP0;                  // Position vector @ t0 (meters) (ECEF)
    base::Vec3d  drV0;                  // Velocity vector @ t0 (m/sec)  (ECEF or Body based on the DR algorithm)
    base::Vec3d  drA0;                  // Acceleration vector @ t0 ((m/sec)/sec) (ECEF or Body based on the DR algorithm)
@@ -314,28 +315,28 @@ private:
    base::Matrixd drOmega;              // omega matrix
 
    // Current DR values (incoming only)
-   double drTime;                      // DR time (sec)
+   double drTime {};                   // DR time (sec)
    base::Vec3d drPos;                  // Current DR position vector (meters) (ECEF)
    base::Vec3d drAngles;               // Current DR angles (rad) [ roll pitch yaw ] (Body/ECEF)
 
    // DR smoothing data
-   base::Vec3d  smoothVel;             // Smoothing Velocity (meters/second) (ECEF)
-   double      smoothTime;             // Smoothing Time
+   base::Vec3d smoothVel;              // Smoothing Velocity (meters/second) (ECEF)
+   double smoothTime {};               // Smoothing Time
 
    // Articulated parts (Air Vehicles)
-   unsigned int apartWingSweepCnt;     // Articulated Part: wing sweep angle change count
-   unsigned int apartGearPosCnt;       // Articulated Part: gear position change count
-   unsigned int apartBayDoorCnt;       // Articulated Part: bay door position change count
-   unsigned int apartLnchrElevCnt;     // Articulated Part: launcher elevation angle change count
-   double apartWingSweep;              // Articulated Part: wing sweep angle (radians)
-   double apartLandingGear;            // Articulated Part: landing gear position (% [0% up; 100% down] )
-   double apartBayDoor;                // Articulated Part: bay door position (% [0% closed; 100% open] )
-   double apartLnchrElev;              // Articulated Part: Launcher elevation angle (radians)
+   unsigned int apartWingSweepCnt {};     // Articulated Part: wing sweep angle change count
+   unsigned int apartGearPosCnt {};       // Articulated Part: gear position change count
+   unsigned int apartBayDoorCnt {};       // Articulated Part: bay door position change count
+   unsigned int apartLnchrElevCnt {};     // Articulated Part: launcher elevation angle change count
+   double apartWingSweep {};              // Articulated Part: wing sweep angle (radians)
+   double apartLandingGear {};            // Articulated Part: landing gear position (% [0% up; 100% down] )
+   double apartBayDoor {};                // Articulated Part: bay door position (% [0% closed; 100% open] )
+   double apartLnchrElev {};              // Articulated Part: Launcher elevation angle (radians)
 
-   const models::Missile* apartMsl[MAX_AMSL];  // Articulated Part: Attached missiles
-   unsigned int apartMslCnt[MAX_AMSL];         // Articulated Part: Attached missile change counts
-   bool apartMslAttached[MAX_AMSL];            // Articulated Part: Missile attached (not launched) flag
-   unsigned int apartNumMissiles;              // Articulated Part: Number of attached missiles
+   std::array<const models::Missile*, MAX_AMSL> apartMsl {};  // Articulated Part: Attached missiles
+   std::array<unsigned int, MAX_AMSL> apartMslCnt {};         // Articulated Part: Attached missile change counts
+   std::array<bool, MAX_AMSL> apartMslAttached {};            // Articulated Part: Missile attached (not launched) flag
+   unsigned int apartNumMissiles {};                          // Articulated Part: Number of attached missiles
 };
 
 }

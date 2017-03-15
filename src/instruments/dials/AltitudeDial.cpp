@@ -7,10 +7,8 @@ namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(AltitudeDial, "AltitudeDial")
 EMPTY_SERIALIZER(AltitudeDial)
+EMPTY_DELETEDATA(AltitudeDial)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 AltitudeDial::AltitudeDial()
 {
     STANDARD_CONSTRUCTOR()
@@ -21,9 +19,6 @@ AltitudeDial::AltitudeDial()
     altTenThousandsSD.empty();
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void AltitudeDial::copyData(const AltitudeDial& org, const bool)
 {
     BaseClass::copyData(org);
@@ -33,11 +28,6 @@ void AltitudeDial::copyData(const AltitudeDial& org, const bool)
     altOneThousandsSD.empty();
     altTenThousandsSD.empty();
 }
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-EMPTY_DELETEDATA(AltitudeDial)
 
 //------------------------------------------------------------------------------
 // updateData() - update non time-critical threads here
@@ -93,13 +83,13 @@ void AltitudeDial::updateData(const double dt)
 bool AltitudeDial::figureRotation(const double thisAlt)
 {
     // break down our number to tenThousands, thousands, and hundreds
-    double hundreds = 0;
-    double thousands = 0;
-    double tenThousands = 0;
+//    double hundreds = 0;
+//    double thousands = 0;
+//    double tenThousands = 0;
 
-    tenThousands = thisAlt/10000;
-    thousands = (thisAlt/1000) - (static_cast<int>(thisAlt/10000)* 10);
-    hundreds = ((thisAlt - (static_cast<int>(thisAlt/1000) * 1000)) / 100);
+//    tenThousands = thisAlt/10000;
+//    thousands = (thisAlt/1000) - (static_cast<int>(thisAlt/10000)* 10);
+//    hundreds = ((thisAlt - (static_cast<int>(thisAlt/1000) * 1000)) / 100);
 
     return true;
 }

@@ -7,7 +7,6 @@
 
 namespace oe {
 namespace base {
-
 class FStorage;
 class Table;
 

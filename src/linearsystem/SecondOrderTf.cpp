@@ -38,13 +38,6 @@ SecondOrderTf::SecondOrderTf(const unsigned int ir,
 
 void SecondOrderTf::initData()
 {
-   n1 = 0;
-   n2 = 0;
-   n3 = 0;
-   d1 = 0;
-   d2 = 0;
-   d3 = 0;
-
    allocateMemory(ORDER);
    clearMemory();
 }

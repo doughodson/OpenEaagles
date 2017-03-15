@@ -77,12 +77,12 @@ private:
    base::safe_ptr<base::NetHandler> netInput;    // Input network handler
    base::safe_ptr<base::NetHandler> netOutput;   // Output network handler
    base::safe_ptr<base::AbstractThread> thread;  // The thread
-   bool networkInitialized;               // CIGI has been initialized
-   bool networkInitFailed;                // CIGI initialization has failed
+   bool networkInitialized {};               // CIGI has been initialized
+   bool networkInitFailed {};                // CIGI initialization has failed
 
-   CigiIncomingMsg* msgIn;
-   CigiOutgoingMsg* msgOut;
-   CigiClNetworkSignalProcessing* sigProcessor;
+   CigiIncomingMsg* msgIn {};
+   CigiOutgoingMsg* msgOut {};
+   CigiClNetworkSignalProcessing* sigProcessor {};
 };
 
 }

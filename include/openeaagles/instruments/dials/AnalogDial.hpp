@@ -1,3 +1,12 @@
+
+#ifndef __oe_instruments_AnalogDial_H__
+#define __oe_instruments_AnalogDial_H__
+
+#include "openeaagles/instruments/Instrument.hpp"
+
+namespace oe {
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: AnalogDial
 //
@@ -10,14 +19,6 @@
 //      UPDATE_INSTRUMENTS -> (from instrument), sets our rotation angle
 //      UPDATE_VALUE -> setRadius (inches)
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_AnalogDial_H__
-#define __oe_instruments_AnalogDial_H__
-
-#include "openeaagles/instruments/Instrument.hpp"
-
-namespace oe {
-namespace instruments {
-
 class AnalogDial : public Instrument
 {
     DECLARE_SUBCLASS(AnalogDial,Instrument)
@@ -53,12 +54,12 @@ protected:
     virtual bool onUpdateRadius(const base::Number* const x);
 
 private:
-    double originAngle;             // angle we start drawing ticks from (degrees, default is 0)
-    double positionAngle;           // our position (if we are being rotated)
-    double  sweepAngle;             // how far around the circle we sweep
-    double   radius;                // radius of our background
-    bool    isMobile;               // are we moving around on the dial, or just sending the value down (to our components)
-    int slices;                     // number of slices to use while drawing
+    double originAngle {};     // angle we start drawing ticks from (degrees, default is 0)
+    double positionAngle {};   // our position (if we are being rotated)
+    double sweepAngle {360};   // how far around the circle we sweep
+    double radius {};          // radius of our background
+    bool isMobile {};          // are we moving around on the dial, or just sending the value down (to our components)
+    int slices {1000};         // number of slices to use while drawing
 };
 
 }

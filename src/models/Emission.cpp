@@ -16,32 +16,11 @@ EMPTY_SERIALIZER(Emission)
 Emission::Emission()
 {
     STANDARD_CONSTRUCTOR()
-
-    freq  = 0.0;
-    lambda = 0.0;
-    pw    = 0.0;
-    bw = 0.0;
-    prf   = 0.0;
-    pulses = 1;
-    power = 0.0;
-    gain = 0.0;
-    lossRng = 1.0;
-    lossAtmos = 1.0;
-    lossXmit = 1.0;
-    rcs = 0.0;
-    polar = Antenna::NONE;
-    transmitter = nullptr;
-    ecmFlag = ECM_OFF;
 }
 
-void Emission::copyData(const Emission& org, const bool cc)
+void Emission::copyData(const Emission& org, const bool)
 {
     BaseClass::copyData(org);
-
-    // If copy constructor, init these pointers
-    if (cc) {
-        transmitter = nullptr;
-    }
 
     // Copy the data
     freq = org.freq;

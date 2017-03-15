@@ -50,17 +50,6 @@ Font::Font()
 
 void Font::initData()
 {
-   leftSide = 0;
-   topSide = 0;
-   b = 0;
-   pLUT = nullptr;
-   pFTGL = nullptr;
-   fontPath = nullptr;
-   fontFile = nullptr;
-   loaded = false;
-   charSpacing = 0;
-   lineSpacing = 0;
-
    setFontWidth( defaultFontWidth );
    setFontHeight( defaultFontHeight );
 
@@ -90,9 +79,6 @@ Font* Font::clone() const
    return nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Font::copyData(const Font& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -142,9 +128,6 @@ void Font::copyData(const Font& org, const bool cc)
    bHeight = org.bHeight;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Font::deleteData()
 {
    if (pLUT != nullptr) delete[] pLUT;
@@ -169,7 +152,6 @@ void Font::position(const int ln, const int cp, GLdouble& px, GLdouble& py) cons
    py = topSide - lineSpacing*ln;
 }
 
-
 //------------------------------------------------------------------------------
 // setTextOrigin() -- sets the upper left corner
 //------------------------------------------------------------------------------
@@ -178,7 +160,6 @@ void Font::setTextOrigin(const GLdouble x, const GLdouble y)
     leftSide = x;
     topSide = y;
 }
-
 
 //------------------------------------------------------------------------------
 // xferChars() -- transfer characters

@@ -1,6 +1,15 @@
+
+#ifndef __oe_instruments_Knob_H__
+#define __oe_instruments_Knob_H__
+
+#include "openeaagles/instruments/buttons/Button.hpp"
+
+namespace oe {
+namespace base { class Table1; }
+namespace instruments {
+
 //------------------------------------------------------------------------------
-// Class:       Knob
-// Base class:  base::Object -> base::Component -> graphics::Graphic -> Rotators -> Knob
+// Class: Knob
 // Description: Basic knob that will rotate from a starting fixed angle to a
 // given finish angle, and you can specify the values returned from those angles based on
 // start and finish value (Table1)
@@ -12,16 +21,8 @@
 //  )
 //  startAngle: 20      // angle from which to start rotation
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_Knob_H__
-#define __oe_instruments_Knob_H__
-
-#include "openeaagles/instruments/buttons/Button.hpp"
-
-namespace oe {
-namespace base { class Table1; }
-namespace instruments {
-
-class Knob : public Button{
+class Knob : public Button
+{
     DECLARE_SUBCLASS(Knob,Button)
 
 public:
@@ -53,20 +54,20 @@ protected:
 
 private:
     void computeRotation();     // translate our x,y to rotation from 0 values
-    base::Table1* table;     // holds our values for rotation and value
-    double value;               // value we currently have
-    int startX;                 // starting mouse x position (pixels) of the center of our graphic
-    int startY;                 // starting mouse y position (pixels) of the center of our graphic
-    double angle;               // current angle
-    double lastAngle;           // our last angle
-    int degsRotation;           // how much to rotate
-    double findStartTimer;
-    bool start;
-    double running;
-    double startAngle;
-    bool endless;               // does our knob keep spinning?
-    double endlessStart;        // start value of the endless knob (default to 0)
-    double endlessLimit;        // end value of the endless knob (default to 360)
+    base::Table1* table {};     // holds our values for rotation and value
+    double value {};            // value we currently have
+    int startX {};              // starting mouse x position (pixels) of the center of our graphic
+    int startY {};              // starting mouse y position (pixels) of the center of our graphic
+    double angle {};            // current angle
+    double lastAngle {};        // our last angle
+    int degsRotation {};        // how much to rotate
+    double findStartTimer {};
+    bool start {true};
+    double running {};
+    double startAngle {};
+    bool endless {};            // does our knob keep spinning?
+    double endlessStart {};     // start value of the endless knob (default to 0)
+    double endlessLimit {360};  // end value of the endless knob (default to 360)
 };
 
 }

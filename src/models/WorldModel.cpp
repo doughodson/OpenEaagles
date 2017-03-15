@@ -60,24 +60,12 @@ END_SLOT_MAP()
 WorldModel::WorldModel()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void WorldModel::initData()
 {
-   em = nullptr;
-
-   refLat = 0.0;
-   refLon = 0.0;
-   sinRlat = 0.0;
-   cosRlat = 1.0;
-   maxRefRange = 0.0;
-   gaUseEmFlg = false;
    base::nav::computeWorldMatrix(refLat, refLon, &wm);
-
-   terrain = nullptr;
-   atmosphere = nullptr;
 }
 
 void WorldModel::copyData(const WorldModel& org, const bool cc)

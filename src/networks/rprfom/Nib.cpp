@@ -28,33 +28,12 @@ EMPTY_SERIALIZER(Nib)
 Nib::Nib(const interop::NetIO::IoType ioType) : hla::Nib(ioType) 
 {
    STANDARD_CONSTRUCTOR()
-
-   baseEntity = nullptr;
-   fireEvent = 0;
-   geodPos[0] = 0;
-   geodPos[1] = 0;
-   geodPos[2] = 0;
-   haveWorldLocationFlg = false;
-   haveOrientationFlg = false;
-   haveEntityTypeFlg = false;
-   haveEntityIdFlg = false;
-
-   disKind = 0;
-   disDomain = 0;
-   disCountry = 0;
-   disCategory = 0;
-   disSubcategory = 0;
-   disSpecific = 0;
-   disExtra = 0;
-
-   siteID = 0;
-   appID = 0;
 }
 
 Nib::Nib(const Nib& org) : hla::Nib(org.getIoType())
 { 
    STANDARD_CONSTRUCTOR()
-    copyData(org,true);
+   copyData(org, true);
 }
 
 Nib::~Nib()
@@ -64,22 +43,19 @@ Nib::~Nib()
 
 Nib& Nib::operator=(const Nib& org)
 {
-    deleteData();
-    copyData(org,false);
-    return *this;
+   deleteData();
+   copyData(org,false);
+   return *this;
 }
 
 Nib* Nib::clone() const
 {
-    return new Nib(*this);
+   return new Nib(*this);
 }
 
-void Nib::copyData(const Nib& org, const bool cc)
+void Nib::copyData(const Nib& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) {
-      baseEntity = nullptr;
-   }
 
    // Base entity
    if (org.baseEntity != nullptr)

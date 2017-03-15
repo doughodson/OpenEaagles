@@ -39,27 +39,11 @@ END_EVENT_HANDLER()
 Knob::Knob()
 {
     STANDARD_CONSTRUCTOR()
-    table = nullptr;
-    value = 0;
-    startX = 0;
-    startY = 0;
-    angle = 0;
-    lastAngle = 0;
-    degsRotation = 0;
-    findStartTimer = 0;
-    start = true;
-    running = 0;
-    startAngle = 0;
-    endless = false;
-    endlessStart = 0;
-    endlessLimit = 360;
 }
 
-void Knob::copyData(const Knob& org, const bool cc)
+void Knob::copyData(const Knob& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) table = nullptr;
 
     setSlotValueTable(org.table);
 

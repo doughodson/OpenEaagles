@@ -169,25 +169,23 @@ protected:
    virtual bool setSlotRefHdg(const base::Number* const x);
 
 private:
-   void initData();
+   double referenceLat {};           // our latitude from center reference point (degs)
+   double referenceLon {};           // our longitude from center reference point (degs)
+   double cosineLatReference {1.0};  // cosine of our reference latitude
+   double heading {};                // heading (rad)
+   double headingCos {1.0};          // cosine of heading
+   double headingSin {};             // sine of heading
 
-   double referenceLat;        // our latitude from center reference point (degs)
-   double referenceLon;        // our longitude from center reference point (degs)
-   double cosineLatReference;  // cosine of our reference latitude
-   double heading;             // heading (rad)
-   double headingCos;          // cosine of heading
-   double headingSin;          // sine of heading
-
-   double nm2Screen;           // nautical miles to screen units
-   double range;               // range scale of the system (NM)
-   bool northUp;               // flag to determine north up
+   double nm2Screen {1.0};           // nautical miles to screen units
+   double range {1.0};               // range scale of the system (NM)
+   bool northUp {true};              // flag to determine north up
 
    // (we keep these separate because we need both of them)
-   double outerRadius;         // radius of the outer circle's ring (screen units)
-   double outerRadiusDC;       // radius if we are de-centered (screen units)
+   double outerRadius {1.0};         // radius of the outer circle's ring (screen units)
+   double outerRadiusDC {1.0};       // radius if we are de-centered (screen units)
 
-   double displacement;        // how far to translate up or down when centered/decentered (display units)
-   bool   isCentered;          // flag for centering our map page
+   double displacement {};           // how far to translate up or down when centered/decentered (display units)
+   bool   isCentered {true};         // flag for centering our map page
 };
 
 inline double MapPage::getReferenceLatDeg() const  { return referenceLat; }

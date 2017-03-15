@@ -1,6 +1,4 @@
 
-#include <fstream>
-
 #ifndef _oe_base_EdlScanner_H_
 #define _oe_base_EdlScanner_H_
 
@@ -9,6 +7,8 @@
 #include "openeaagles/base/util/FlexLexer.h"
 #undef yyFlexLexer
 #endif
+
+#include <fstream>
 
 namespace oe {
 namespace base {

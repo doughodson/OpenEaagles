@@ -8,9 +8,7 @@
 #include "openeaagles/base/osg/Matrixd"
 
 namespace oe {
-
 namespace base { class Time; }
-
 namespace models {
 class Player;
 class Route;
@@ -120,21 +118,21 @@ public:
    virtual Bullseye* getBullseye();                         // Returns the current bullseye (non-const version)
    virtual const Bullseye* getBullseye() const;             // Returns the current bullseye (const version)
 
-    // FEBA [ North East ] (Nautical Miles)
-    virtual int getFeba(base::Vec2d* const points, const int max) const;
-    virtual bool setFeba(base::Vec2d* const points, const int n);
+   // FEBA [ North East ] (Nautical Miles)
+   virtual int getFeba(base::Vec2d* const points, const int max) const;
+   virtual bool setFeba(base::Vec2d* const points, const int n);
 
-    // set/change the current route; does not change the initial route used by reset()
-    virtual bool setRoute(Route* const msg);
+   // set/change the current route; does not change the initial route used by reset()
+   virtual bool setRoute(Route* const msg);
 
-    // Slot functions
-    virtual bool setSlotRoute(const Route* const msg);  // and the initial route used by reset()
-    virtual bool setSlotUtc(const base::Time* const msg);
-    virtual bool setSlotFeba(const base::PairStream* const msg);
-    virtual bool setSlotBullseye(Bullseye* const msg);
+   // Slot functions
+   virtual bool setSlotRoute(const Route* const msg);  // and the initial route used by reset()
+   virtual bool setSlotUtc(const base::Time* const msg);
+   virtual bool setSlotFeba(const base::PairStream* const msg);
+   virtual bool setSlotBullseye(Bullseye* const msg);
 
-    virtual void updateData(const double dt = 0.0) override;
-    virtual void reset() override;
+   virtual void updateData(const double dt = 0.0) override;
+   virtual void reset() override;
 
 protected:
    // Set positional data
@@ -193,59 +191,59 @@ private:
    base::safe_ptr<Bullseye> bull;         // our bullseye (just one for now)
 
    // Positional data
-   double      latitude;       // System Latitude          (degs)
-   double      longitude;      // System Longitude         (degs)
-   double      altitude;       // System altitude          (m)
-   bool        posValid;       // Position data is valid
+   double latitude {};       // System Latitude          (degs)
+   double longitude {};      // System Longitude         (degs)
+   double altitude {};       // System altitude          (m)
+   bool   posValid {};       // Position data is valid
 
    // Attitude data
    base::Matrixd rm;           // Rotational Matrix (inertial to body)
-   double      heading;        // True Heading             (degs)
-   double      pitch;          // Pitch angle              (degs)
-   double      roll;           // Roll angle               (degs)
-   bool        attValid;       // Attitude data is valid
+   double heading {};        // True Heading             (degs)
+   double pitch {};          // Pitch angle              (degs)
+   double roll {};           // Roll angle               (degs)
+   bool attValid {};       // Attitude data is valid
 
    // Mag var data
-   double      magvar;         // Mag Var                  (degs)
-   double      mhdg;           // Mag heading              (degs)
-   bool        magVarValid;    // Mag var data is valid
+   double magvar {};         // Mag Var                  (degs)
+   double mhdg {};           // Mag heading              (degs)
+   bool   magVarValid {};    // Mag var data is valid
 
    // Winds
-   bool        windsValid;     // Are the winds valid?
-   double      windDirD;       // Returns the wind 'from' direction (degs)
-   double      windSpdKts;     // Returns the wind speed (kts)
+   bool   windsValid {};     // Are the winds valid?
+   double windDirD {};       // Returns the wind 'from' direction (degs)
+   double windSpdKts {};     // Returns the wind speed (kts)
 
    // Velocity Data
-   base::Vec3d  velVec;        // Velocity Vector (earth)      (m/sec)       [ ue, ve, we ] NED
-   base::Vec3d  accelVec;      // Acceleration Vector (earth)  ((m/sec)/sec) [ due, dve, dwe ] NED
-   double      gs;             // Ground speed             (kts)
-   double      tas;            // True Air Speed           (kts)
-   double      tk;             // Ground Track             (degs)
-   bool        velValid;       // Velocity data is valid
+   base::Vec3d velVec;        // Velocity Vector (earth)      (m/sec)       [ ue, ve, we ] NED
+   base::Vec3d accelVec;      // Acceleration Vector (earth)  ((m/sec)/sec) [ due, dve, dwe ] NED
+   double gs {};             // Ground speed             (kts)
+   double tas {};            // True Air Speed           (kts)
+   double tk {};             // Ground Track             (degs)
+   bool   velValid {};       // Velocity data is valid
 
    // Steering data
-   bool        navStrValid;    // Nav steering data is valid
-   double      tbrg;           // True bearing to destination    (deg)
-   double      mbrg;           // Mag bearing to destination     (deg)
-   double      dst;            // Direct distance to destination (nm)
-   double      ttg;            // Time-To-Go to destination      (sec)
-   double      tcrs;           // True course to destination     (degs)
-   double      mcrs;           // Mag course to destination      (degs)
-   double      xte;            // Cross Track Err                (nm)
-   double      eta;            // Est Time of Arrival            (sec-utc)
+   bool   navStrValid {};    // Nav steering data is valid
+   double tbrg {};           // True bearing to destination    (deg)
+   double mbrg {};           // Mag bearing to destination     (deg)
+   double dst {};            // Direct distance to destination (nm)
+   double ttg {};            // Time-To-Go to destination      (sec)
+   double tcrs {};           // True course to destination     (degs)
+   double mcrs {};           // Mag course to destination      (degs)
+   double xte {};            // Cross Track Err                (nm)
+   double eta {};            // Est Time of Arrival            (sec-utc)
 
    // UTC data
-   double      utc;            // UTC time                       (sec)
-   bool        utcValid;       // Nav steering data is valid
-   double      initUTC;        // Initial UTC (from slots)
+   double utc {};            // UTC time                       (sec)
+   bool   utcValid {};       // Nav steering data is valid
+   double initUTC {};        // Initial UTC (from slots)
 
    // FEBA Line
-   base::Vec2d* feba;          // FEBA Points;  [ North East ]   (nm)
-   int            nFeba;       // Number of FEBA points
+   base::Vec2d* feba {};  // FEBA Points;  [ North East ]   (nm)
+   int nFeba {};          // Number of FEBA points
 
    // Ref position
-   double  refLat;             // Ref latitude (deg)
-   double  refLon;             // Ref longitude (deg)
+   double refLat {};      // Ref latitude (deg)
+   double refLon {};      // Ref longitude (deg)
 };
 
 }

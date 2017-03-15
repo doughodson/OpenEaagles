@@ -11,9 +11,6 @@ IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Rotators, "Rotators")
 EMPTY_SERIALIZER(Rotators)
 EMPTY_DELETEDATA(Rotators)
 
-// -----------------------------------------------------------------------------
-// Event Handler (s)
-// -----------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Rotators)
     ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    base::Angle)
     ON_EVENT_OBJ(UPDATE_VALUE,  onXRotate,    base::Number)
@@ -26,21 +23,11 @@ BEGIN_EVENT_HANDLER(Rotators)
     ON_EVENT_OBJ(UPDATE_VALUE6, onZRotateDeg, base::Number)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Rotators::Rotators()
 {
     STANDARD_CONSTRUCTOR()
-
-    xRot = -1;
-    yRot = -1;
-    zRot = -1;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void Rotators::copyData(const Rotators& org, const bool)
 {
     BaseClass::copyData(org);

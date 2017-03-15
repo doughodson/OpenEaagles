@@ -34,26 +34,11 @@ END_SLOT_MAP()
 Terrain::Terrain()
 {
    STANDARD_CONSTRUCTOR()
-
-   path = nullptr;
-   file = nullptr;
-
-   neLat = 0.0;
-   neLon = 0.0;
-   swLat = 0.0;
-   swLon = 0.0;
-   minElev = 0.0;
-   maxElev = 0.0;
 }
 
-void Terrain::copyData(const Terrain& org, const bool cc)
+void Terrain::copyData(const Terrain& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      path = nullptr;
-      file = nullptr;
-   }
 
    clearData();
 

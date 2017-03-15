@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Bitmap Font
-//------------------------------------------------------------------------------
+
 #include "openeaagles/graphics/BitmapFont.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
@@ -9,46 +7,30 @@
 #include <cstdio>
 #include <cmath>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace graphics {
 
-IMPLEMENT_SUBCLASS(BitmapFont,"BitmapFont")
+IMPLEMENT_SUBCLASS(BitmapFont, "BitmapFont")
 EMPTY_DELETEDATA(BitmapFont)
 
 // Default font size
 const unsigned int defaultFontWidth = 10;
 const unsigned int defaultFontHeight = 15;
 
-//------------------------------------------------------------------------------
-// Slot table for this form type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(BitmapFont)
     "reverse",      // Invert the bitmap's bits (reverse video)
 END_SLOTTABLE(BitmapFont)
 
-//------------------------------------------------------------------------------
-//  Map slot table to handles
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(BitmapFont)
     ON_SLOT(1, setReverse, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 BitmapFont::BitmapFont()
 {
     STANDARD_CONSTRUCTOR()
 
     fontMap = defaultFontMap;
     numFonts = defaultNumFonts;
-    reverse = false;
 
     setFontWidth( defaultFontWidth );
     setFontHeight( defaultFontHeight );
@@ -57,9 +39,6 @@ BitmapFont::BitmapFont()
     setBitmapHeight( defaultFontHeight );
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void BitmapFont::copyData(const BitmapFont& org, const bool)
 {
     BaseClass::copyData(org);
@@ -139,7 +118,6 @@ void BitmapFont::outputText(const char* txt, const int n, const bool vf, const b
         glCallLists(nn, GL_UNSIGNED_BYTE, cbuf);
     }
 }
-
 
 //------------------------------------------------------------------------------
 // Font loader -- loads the font
@@ -531,15 +509,11 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
       return nullptr;
    }
 
-   // used to store the num of input items successfully matched and assigned
-   // by fscanf function
-   int nItemsMatched(0);
-
    // Calculate the size of the font
    unsigned int width1(0);
-   nItemsMatched = std::fscanf(fp, "%u\n", &width1);
+   std::fscanf(fp, "%u\n", &width1);
    unsigned int height1(0);
-   nItemsMatched = std::fscanf(fp, "%u\n", &height1);
+   std::fscanf(fp, "%u\n", &height1);
 
    unsigned int numBytesWide = static_cast<int>(std::ceil(static_cast<double>(width1) / 8.0));
    unsigned int numFileBytes = numBytesWide * height1;
@@ -558,7 +532,7 @@ GLubyte* BitmapFont::loadTypeFace(const GLint index, const GLenum reverse)
    // Read in the bitmap bytes
    for (; i < numFontBytes; i++) {
       int value;
-      nItemsMatched = std::fscanf(fp, "0x%x\n", &value);
+      std::fscanf(fp, "0x%x\n", &value);
       bitmap[i] = reverse ? GLubyte(~value) : GLubyte(value);
    }
 

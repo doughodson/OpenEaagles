@@ -26,20 +26,11 @@ END_SLOT_MAP()
 IoDevice::IoDevice()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void IoDevice::initData()
-{
-   adapters = nullptr;
-   devices = nullptr;
-}
-
-void IoDevice::copyData(const IoDevice& org, const bool cc)
+void IoDevice::copyData(const IoDevice& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // clear our old lists of adapters and devices
    setSlotAdapters(nullptr);

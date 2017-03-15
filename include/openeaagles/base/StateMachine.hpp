@@ -4,9 +4,11 @@
 
 #include "openeaagles/base/Component.hpp"
 
+#include <array>
+
 namespace oe {
 namespace base {
-   class PairStream;
+class PairStream;
 
 //------------------------------------------------------------------------------
 // Class: StateMachine
@@ -282,7 +284,6 @@ protected:
    // Goto the 'newSubstate' substate number
    bool goToSubstate(const unsigned short newSubstate);
 
-
    // ---
    // Parent State Machine's transition functions -- these control movement
    // between our parent state machine's states.
@@ -341,9 +342,9 @@ private:
 
    // State stack and stack pointer
    static const unsigned short STACK_SIZE = 10;
-   unsigned short stateStack[STACK_SIZE];     // State number stack
-   unsigned short substateStack[STACK_SIZE];  // Substate number stack
-   unsigned short sp {STACK_SIZE};            // Stack pointer
+   std::array<unsigned short, STACK_SIZE> stateStack {};     // State number stack
+   std::array<unsigned short, STACK_SIZE> substateStack {};  // Substate number stack
+   unsigned short sp {STACK_SIZE};                           // Stack pointer
 
    // List of state machines
    safe_ptr<PairStream> stMachList;

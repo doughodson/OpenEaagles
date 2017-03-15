@@ -9,7 +9,6 @@
 
 #include "openeaagles/graphics/Display.hpp"
 
-
 namespace oe {
 namespace instruments {
 
@@ -35,23 +34,13 @@ END_SLOT_MAP()
 GhostHorizon::GhostHorizon()
 {
     STANDARD_CONSTRUCTOR()
-
     skyColor.set(1, 1, 1);
     groundColor.set(1, 1, 1);
-    gColorName = nullptr;
-    sColorName = nullptr;
-    width = 20;
-    height = 20;
 }
 
-void GhostHorizon::copyData(const GhostHorizon& org, const bool cc)
+void GhostHorizon::copyData(const GhostHorizon& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        gColorName = nullptr;
-        sColorName = nullptr;
-    }
 
     skyColor = org.skyColor;
     groundColor = org.groundColor;

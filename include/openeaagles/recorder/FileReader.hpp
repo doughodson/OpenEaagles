@@ -5,7 +5,7 @@
 #include "openeaagles/recorder/InputHandler.hpp"
 
 namespace oe {
-   namespace base { class String; }
+namespace base { class String; }
 namespace recorder {
 
 //------------------------------------------------------------------------------
@@ -49,14 +49,14 @@ protected:
 private:
    void initData();
 
-   char* ibuf;                      // Input data buffer
+   char* ibuf {};                    // Input data buffer
 
-   std::ifstream* sin;              // Input stream
-   const base::String* filename;   // File name
-   const base::String* pathname;   // Path to the data file's directory
-   bool fileOpened;                 // File opened
-   bool fileFailed;                 // Open or read failed
-   bool firstPassFlg;               // First pass flag
+   std::ifstream* sin {};            // Input stream
+   const base::String* filename {};  // File name
+   const base::String* pathname {};  // Path to the data file's directory
+   bool fileOpened {};               // File opened
+   bool fileFailed {};               // Open or read failed
+   bool firstPassFlg {true};         // First pass flag
 };
 
 }

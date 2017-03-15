@@ -74,7 +74,7 @@ public:
 private:
     base::safe_ptr<const base::Identifier> refFactoryName;    // Reference factory name
     base::safe_ptr<const base::String> refTypeName;           // Reference type name (e.g., "F-16C", "T-71")
-    unsigned int typeId;                                      // OTW entity type ID number
+    unsigned int typeId {};                                   // OTW entity type ID number
 };
 
 }

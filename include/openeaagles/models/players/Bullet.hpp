@@ -3,6 +3,7 @@
 #define __oe_models_Bullet_H__
 
 #include "openeaagles/models/players/AbstractWeapon.hpp"
+#include <array>
 
 namespace oe {
 namespace models {
@@ -61,25 +62,25 @@ protected:
 
    struct Burst {
       enum Status { ACTIVE, HIT, MISS };
-      Burst() : bPos(0,0,0), bVel(0,0,0), bTof(0), bNum(0), bRate(0), bEvent(0), bStatus(ACTIVE) {}
-      base::Vec3d bPos;        // Burst positions -- world  (m)
-      base::Vec3d bVel;        // Burst velocities -- world (m)
-      double    bTof;          // Burst time of flight      (sec)
-      int       bNum;          // Number of rounds in burst
-      int       bRate;         // Round rate for this burst (rds per min)
-      int       bEvent;        // Release event number for burst
-      Status    bStatus;       // Burst status
+      Burst() : bPos(0,0,0), bVel(0,0,0) {}
+      base::Vec3d bPos;         // Burst positions -- world  (m)
+      base::Vec3d bVel;         // Burst velocities -- world (m)
+      double bTof {};           // Burst time of flight      (sec)
+      int    bNum {};           // Number of rounds in burst
+      int    bRate {};          // Round rate for this burst (rds per min)
+      int    bEvent {};         // Release event number for burst
+      Status bStatus {ACTIVE};  // Burst status
    };
 
 private:
-   enum { MBT = 100 };        // Max number of burst trajectories
+   enum { MBT = 100 };         // Max number of burst trajectories
 
-   double   muzzleVel;                 // Muzzle velocity (m/s)
-   base::safe_ptr<Player> hitPlayer;  // Player we hit (if any)
+   double muzzleVel {DEFAULT_MUZZLE_VEL}; // Muzzle velocity (m/s)
+   base::safe_ptr<Player> hitPlayer;      // Player we hit (if any)
 
    // Bullet trajectories
-   int       nbt;             // Number of burst trajectories
-   Burst bursts[MBT];         // Bursts
+   int nbt {};                     // Number of burst trajectories
+   std::array<Burst, MBT> bursts;  // Bursts
 };
 
 }

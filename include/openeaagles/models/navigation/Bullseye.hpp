@@ -6,6 +6,7 @@
 
 namespace oe {
 namespace models {
+
 //------------------------------------------------------------------------------
 // Class: Bullseye
 // Description: Generic Bullseye, used as a reference point

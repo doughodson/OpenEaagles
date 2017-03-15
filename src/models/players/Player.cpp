@@ -108,7 +108,6 @@ BEGIN_SLOTTABLE(Player)
    "useCoordSys"        // 35) Coord system to use for position updating { WORLD, GEOD, LOCAL }
 END_SLOTTABLE(Player)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Player)
 
    ON_SLOT( 1, setSlotInitXPos, base::Distance)
@@ -234,20 +233,11 @@ Player::Player()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init our member data
-//------------------------------------------------------------------------------
 void Player::initData()
 {
    static base::String generic("GenericPlayer");
-   type = nullptr;
    setType(&generic);
 
-   side = GRAY;
-
-   latitude = 0.0;
-   longitude = 0.0;
-   altitude = 0.0;
    base::nav::computeWorldMatrix(latitude, longitude, &wm);
 
    angles.set(0,0,0);
@@ -257,12 +247,6 @@ void Player::initData()
    base::nav::computeEulerAngles(rmW2B, &anglesW, &scPhiW, &scThetaW, &scPsiW);
 
    q.set(rm);
-
-   vp = 0.0;
-   gndSpd = 0.0;
-   gndTrk = 0.0;
-   useCoordSys = CS_NONE;
-   useCoordSysN1 = CS_NONE;
 
    posVecNED.set(0,0,0);
    velVecNED.set(0,0,0);
@@ -277,75 +261,14 @@ void Player::initData()
    angularVel.set(0,0,0);
    gcAngVel.set(0,0,0);
 
-   tElev    = 0.0;
-   tElevValid = false;
-
-   altSlaved = false;
-   posSlaved = false;
-
-   posVecValid = false;
-   posFrz = false;
-   altFrz = false;
-   attFrz = false;
-   fuelFrz = false;
-   crashOverride = false;
-   killOverride = false;
-   killRemoval = false;
-   tElevReq = false;     // default: terrain height isn't required
-   interpTrrn = false;
-   tOffset = 0.0;
-
-   signature = nullptr;
-   irSignature = nullptr;
-   camouflage = 0;
-   damage = 0.0;
-   smoking = 0.0;
-   flames = 0.0;
-   justKilled = false;
-   killedBy = 0;
-
    initPosVec.set(0,0);
-   initPosFlg = false;
-
    initGeoPosVec.set(0,0,0);
-   initGeoPosFlg = false;
 
-   initLat = 0.0;
-   initLon = 0.0;
-   initLatLonFlg = false;
-
-   initAlt = 0.0;
-   initVp = 0.0;
    initAngles.set(0,0,0);
    testAngRates.set(0,0,0);
-   testBodyAxis = false;
 
-   dataLogTimer = 0.0;
-   dataLogTime  = 0.0;
-
-   sim = nullptr;
-   dynamicsModel = nullptr;
-   datalink = nullptr;
-   gimbal = nullptr;
-   nav = nullptr;
-   obc = nullptr;
-   pilot = nullptr;
-   radio = nullptr;
-   sensor = nullptr;
-   irSystem = nullptr;
-   sms = nullptr;
-   loadSysPtrs = true;
-
-   for (unsigned int i = 0; i < MAX_RF_REFLECTIONS; i++) {
-      rfReflect[i] = nullptr;
-      rfReflectTimer[i] = 0;
-   }
-
-   syncState1Ready = false;
-   syncState2Ready = false;
    syncState1.clear();
    syncState2.clear();
-
 }
 
 void Player::copyData(const Player& org, const bool cc)

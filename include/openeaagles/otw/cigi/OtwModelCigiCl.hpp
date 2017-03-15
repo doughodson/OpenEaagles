@@ -5,6 +5,7 @@
 #include "openeaagles/otw/OtwModel.hpp"
 
 #include "openeaagles/otw/cigi/OtwCigiCl.hpp"
+#include <array>
 
 class CigiEntityCtrlV3;
 class CigiCompCtrlV3;
@@ -50,32 +51,34 @@ public:
    void setID(const unsigned short i)    { id = i; }
 
    // private: or at least should have been!
-   CigiEntityCtrlV3* parentEC[OtwCigiCl::NUM_BUFFERS];      // (entity_id)   Our main entity
-   CigiEntityCtrlV3* trailEC[OtwCigiCl::NUM_BUFFERS];       // (entity_id+1) Trails (missile, smoke, wake, etc.)
-   CigiEntityCtrlV3* explosionEC[OtwCigiCl::NUM_BUFFERS];   // (entity_id+2) Expolsions (air or ground)
-   CigiEntityCtrlV3* smokeEC[OtwCigiCl::NUM_BUFFERS];       // (entity_id+3) Smoke from damage
-   CigiCompCtrlV3* damageCC[OtwCigiCl::NUM_BUFFERS];        // Damage Component Control (CC)
-   CigiCompCtrlV3* animationCC[OtwCigiCl::NUM_BUFFERS];     // animation component control
-   CigiEntityCtrlV3* attachedEC[OtwCigiCl::NUM_BUFFERS];    // (entity_id+4) Attached missile
-   CigiArtPartCtrlV3* launcherAPC[OtwCigiCl::NUM_BUFFERS];  // Entity's launcher Articulated Part Control (APC)
-   CigiCompCtrlV3* attachedCC[OtwCigiCl::NUM_BUFFERS];      // attached missile component control
+   std::array<CigiEntityCtrlV3*, OtwCigiCl::NUM_BUFFERS> parentEC {};      // (entity_id)   Our main entity
+   std::array<CigiEntityCtrlV3*, OtwCigiCl::NUM_BUFFERS> trailEC {};       // (entity_id+1) Trails (missile, smoke, wake, etc.)
+   std::array<CigiEntityCtrlV3*, OtwCigiCl::NUM_BUFFERS> explosionEC {};   // (entity_id+2) Expolsions (air or ground)
+   std::array<CigiEntityCtrlV3*, OtwCigiCl::NUM_BUFFERS> smokeEC {};       // (entity_id+3) Smoke from damage
+   std::array<CigiCompCtrlV3*, OtwCigiCl::NUM_BUFFERS> damageCC {};        // Damage Component Control (CC)
+   std::array<CigiCompCtrlV3*, OtwCigiCl::NUM_BUFFERS> animationCC {};     // animation component control
+   std::array<CigiEntityCtrlV3*, OtwCigiCl::NUM_BUFFERS> attachedEC {};    // (entity_id+4) Attached missile
+   std::array<CigiArtPartCtrlV3*, OtwCigiCl::NUM_BUFFERS> launcherAPC {};  // Entity's launcher Articulated Part Control (APC)
+   std::array<CigiCompCtrlV3*, OtwCigiCl::NUM_BUFFERS> attachedCC {};      // attached missile component control
 
-   bool parentActive;
-   bool trailActive;
-   bool explosionActive;
-   bool smokeActive;
-   bool damageActive;
-   bool animationActive;
-   bool attachedEcActive;
-   bool launcherApcActive;
-   bool attachedCcActive;
+   bool parentActive {};
+   bool trailActive {};
+   bool explosionActive {};
+   bool smokeActive {};
+   bool damageActive {};
+   bool animationActive {};
+   bool attachedEcActive {};
+   bool launcherApcActive {};
+   bool attachedCcActive {};
 
-   bool isGroundPlayer;
-   double effectsTimer;
+   bool isGroundPlayer {};
+   double effectsTimer {};
 
 private:
+   void initData();
+
    // entity ID
-   unsigned short id;
+   unsigned short id {};
 };
 
 }

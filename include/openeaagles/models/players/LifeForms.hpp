@@ -62,12 +62,12 @@ protected:
     virtual bool shutdownNotification() override;
 
 private:
-    int actionState;    // the action we are doing (for DIS enumerations)
-    double lookAngle;   // the look angle we are looking at (up or down 90 degs)
-    bool tgtAquired;    // we have a target in our crosshairs
-    int lockMode;       // the mode we are in (searching, tgt in sight, locked)
-    Player* tgtPlayer;  // our target player that we have aquired
-    int weaponSel;      // the weapon we have selected
+    int actionState {UPRIGHT_STANDING}; // the action we are doing (for DIS enumerations)
+    double lookAngle {};                // the look angle we are looking at (up or down 90 degs)
+    bool tgtAquired {};                 // we have a target in our crosshairs
+    int lockMode {SEARCHING};           // the mode we are in (searching, tgt in sight, locked)
+    Player* tgtPlayer {};               // our target player that we have aquired
+    int weaponSel {LF_GUN};             // the weapon we have selected
 };
 
 }

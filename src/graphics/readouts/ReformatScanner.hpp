@@ -26,7 +26,7 @@ class ReformatScanner : public rfFlexLexer
 public:
    enum DataType { invalid, number, octal, hex, time, dir };
 
-   ReformatScanner() : rfFlexLexer(), dataType(invalid), postSign(false) { }
+   ReformatScanner() : rfFlexLexer() { }
    virtual ~ReformatScanner() { }
 
    const char* getFormat() const { return dataType != invalid ? format : nullptr; }
@@ -51,10 +51,9 @@ protected:
    int formatError(const char* text);
 
 private:
-   DataType dataType;
-
-   char format[256];
-   bool  postSign;
+   DataType dataType {invalid};
+   char format[256] {};
+   bool postSign {};
 };
 
 }

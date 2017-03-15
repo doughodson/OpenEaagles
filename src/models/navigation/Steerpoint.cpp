@@ -29,9 +29,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Steerpoint, "Steerpoint")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Steerpoint)
     "stptType",         //  1) Steerpoint type          (Identifier) { ROUTE, DEST, MARK, FIX, OAP, TGT }; default: DEST
     "latitude",         //  2) Latitude                 (latLon)
@@ -49,7 +46,6 @@ BEGIN_SLOTTABLE(Steerpoint)
     "action",           // 14) Steerpoint action        (Action)
 END_SLOTTABLE(Steerpoint)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Steerpoint)
     ON_SLOT( 1, setSlotSteerpointType, base::Identifier)
 
@@ -92,71 +88,13 @@ Steerpoint::Steerpoint()
 {
     STANDARD_CONSTRUCTOR()
 
-    description = nullptr;
-    action = nullptr;
-
-    latitude = 0.0;
-    longitude = 0.0;
-    elevation = 0.0;
     posVec.set(0,0,0);
-    stptType = DEST;
-    pta = 0.0;
-    sca = 0.0;
-    magvar = 0.0;
-    needPosVec = true;
-    needLL = true;
-    cmdAlt = 0.0;
-    haveCmdAlt = false;
-    cmdAirspeed = 0.0;
-    haveCmdAs = false;
-    next = nullptr;
-
-    initLatitude = 0.0;
-    initLongitude = 0.0;
-    initElev = 0.0;
     initPosVec.set(0,0,0);
-    initMagVar = 0.0;
-    haveInitLat = false;
-    haveInitLon = false;
-    haveInitPos = false;
-    haveInitMagVar = false;
-    haveInitElev = false;
-    initCmdAlt = 0.0;
-    haveInitCmdAlt = false;
-    initCmdAirspeed = 0.0;
-    haveInitCmdAs = false;
-    initNextStptName = nullptr;
-    initNextStptIdx = 0;
-
-    tbrg = 0.0;
-    mbrg = 0.0;
-    dst = 0.0;
-    ttg = 0.0;
-    xte = 0.0;
-
-    tcrs = 0.0;
-    mcrs = 0.0;
-    tlt = 0.0;
-    tld = 0.0;
-
-    tde = 0.0;
-    ete = 0.0;
-    eta = 0.0;
-    elt = 0.0;
-    scaWarn = false;
-    navDataValid = false;
 }
 
-void Steerpoint::copyData(const Steerpoint& org, const bool cc)
+void Steerpoint::copyData(const Steerpoint& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        next = nullptr;
-        initNextStptName = nullptr;
-        description = nullptr;
-        action = nullptr;
-    }
 
     next = nullptr; // find it using 'initNextStptName' or 'initNexStptIdx'
 

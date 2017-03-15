@@ -8,7 +8,7 @@ namespace oe {
 namespace linearsystem {
 
 //------------------------------------------------------------------------------
-// Class:  SecondOrderTf
+// Class: SecondOrderTf
 // ##### IN-WORK #####
 //
 // Description: Models a second order continuous transfer function in the discrete
@@ -57,12 +57,12 @@ private:
    static const unsigned int ORDER = 6;
 
    // Parameters and initial values
-   double n1;
-   double n2;
-   double n3;
-   double d1;
-   double d2;
-   double d3;
+   double n1 {};
+   double n2 {};
+   double n3 {};
+   double d1 {};
+   double d2 {};
+   double d3 {};
 };
 
 }

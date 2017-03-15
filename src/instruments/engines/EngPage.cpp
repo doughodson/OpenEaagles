@@ -6,6 +6,7 @@ namespace instruments {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(EngPage, "EngPage")
 EMPTY_SERIALIZER(EngPage)
+EMPTY_DELETEDATA(EngPage)
 
 EngPage::EngPage()
 {
@@ -35,7 +36,6 @@ EngPage::EngPage()
 
 void EngPage::copyData(const EngPage& org, const bool)
 {
-    // Always copy base class stuff first
     BaseClass::copyData(org);
 
     for (int i = 0; i < NUM_ENG; i++) {
@@ -59,8 +59,6 @@ void EngPage::copyData(const EngPage& org, const bool)
         ffROSD[i].empty();
     }
 }
-
-EMPTY_DELETEDATA(EngPage)
 
 // Set functions
 //------------------------------------------------------------------------------
@@ -124,9 +122,9 @@ void EngPage::updateData(const double dt)
     BaseClass::updateData(dt);
 
     // Box visibility flags
-    int n1Box[NUM_ENG];
-    int n2Box[NUM_ENG];
-    int titBox[NUM_ENG];
+    int n1Box[NUM_ENG] {};
+    int n2Box[NUM_ENG] {};
+    int titBox[NUM_ENG] {};
 
     for (int i = 0; i < NUM_ENG; i++) {
         n1Box[i] =  (n1[i] > 106.9 || n1[i] < 17);
@@ -135,27 +133,27 @@ void EngPage::updateData(const double dt)
     }
 
     // send all of our engine 1 n1 values out
-    send("eng%1dn1",    UPDATE_INSTRUMENTS, n1, n1SD, NUM_ENG);
-    send("eng%1dn1ro",  UPDATE_VALUE, n1, n1ROSD, NUM_ENG);
-    send("eng%1dn1box", SET_VISIBILITY, n1Box, n1BoxSD, NUM_ENG);
+    send("eng%1dn1",    UPDATE_INSTRUMENTS, n1.data(), n1SD.data(), NUM_ENG);
+    send("eng%1dn1ro",  UPDATE_VALUE, n1.data(), n1ROSD.data(), NUM_ENG);
+    send("eng%1dn1box", SET_VISIBILITY, n1Box, n1BoxSD.data(), NUM_ENG);
 
-    //// send all of our engine 1 N2 values out
-    send("eng%1dn2",    UPDATE_INSTRUMENTS, n2, n2SD, NUM_ENG);
-    send("eng%1dn2ro",  UPDATE_VALUE, n2, n2ROSD, NUM_ENG);
-    send("eng%1dn2box", SET_VISIBILITY, n1Box, n2BoxSD, NUM_ENG);
+    // send all of our engine 1 n2 values out
+    send("eng%1dn2",    UPDATE_INSTRUMENTS, n2.data(), n2SD.data(), NUM_ENG);
+    send("eng%1dn2ro",  UPDATE_VALUE, n2.data(), n2ROSD.data(), NUM_ENG);
+    send("eng%1dn2box", SET_VISIBILITY, n2Box, n2BoxSD.data(), NUM_ENG);
 
-    //// send all of our engine 1 TIT values
-    send("eng%1dtit",    UPDATE_INSTRUMENTS, tit, titSD, NUM_ENG);
-    send("eng%1dtitro",  UPDATE_VALUE, tit, titROSD, NUM_ENG);
-    send("eng%1dtitbox", SET_VISIBILITY, titBox, titBoxSD, NUM_ENG);
+    // send all of our engine 1 TIT values
+    send("eng%1dtit",    UPDATE_INSTRUMENTS, tit.data(), titSD.data(), NUM_ENG);
+    send("eng%1dtitro",  UPDATE_VALUE, tit.data(), titROSD.data(), NUM_ENG);
+    send("eng%1dtitbox", SET_VISIBILITY, titBox, titBoxSD.data(), NUM_ENG);
 
     // send all of our engine 1 fuel flow valuew
     double ff1K[NUM_ENG];
     for (int i = 0; i < NUM_ENG; i++) {
         ff1K[i] = ff[i]/1000.0f;    // convert to Klbs/hrs
     }
-    send("eng%1dff",   UPDATE_INSTRUMENTS, ff1K, ffSD, NUM_ENG);
-    send("eng%1dffro", UPDATE_VALUE,       ff1K, ffROSD, NUM_ENG);
+    send("eng%1dff",   UPDATE_INSTRUMENTS, ff1K, ffSD.data(), NUM_ENG);
+    send("eng%1dffro", UPDATE_VALUE,       ff1K, ffROSD.data(), NUM_ENG);
 
 }
 

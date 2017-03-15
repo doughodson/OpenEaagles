@@ -26,7 +26,6 @@ BEGIN_SLOTTABLE(GroundVehicle)
     "launcherMoveTime",       // 4: Max time to move between 'down' and 'up' positions (base::Time)
 END_SLOTTABLE(GroundVehicle)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(GroundVehicle)
     ON_SLOT(1, setSlotCommandedPosition, base::Identifier)
     ON_SLOT(2, setSlotLauncherDownAngle, base::Angle)
@@ -43,10 +42,6 @@ GroundVehicle::GroundVehicle()
    lnchrDownAngle = DEFAULT_LAUNCHER_DOWN_ANGLE;
    lnchrUpAngle   = DEFAULT_LAUNCHER_UP_ANGLE;
    lnchrMoveTime  = DEFAULT_LAUNCHER_MOVE_TIME;
-   lnchrAngle     = 0.0;
-   lnchrRate      = 0.0;
-   initLnchrPos   = NONE;
-   cmdLnchrPos    = NONE;
 
    setTerrainOffset(1.5);      // default offset from terrain to CG
 }

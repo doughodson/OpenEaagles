@@ -81,12 +81,12 @@ public:
       ) const override;
 
 protected:
-   short**  columns;                // Array of data columns (values in meters)
-   double   latSpacing;             // Spacing between latitude points (degs)
-   double   lonSpacing;             // Spacing between longitude points (degs)
-   unsigned int nptlat;             // Number of points in latitude (i.e., number of elevations per column)
-   unsigned int nptlong;            // Number of points in longitude (i.e., number of columns)
-   short    voidValue;              // Value representing a void (missing) data point
+   short**  columns {};           // Array of data columns (values in meters)
+   double   latSpacing {};        // Spacing between latitude points (degs)
+   double   lonSpacing {};        // Spacing between longitude points (degs)
+   unsigned int nptlat {};        // Number of points in latitude (i.e., number of elevations per column)
+   unsigned int nptlong {};       // Number of points in longitude (i.e., number of columns)
+   short    voidValue {-32767};   // Value representing a void (missing) data point
 
    virtual void clearData() override;
 };

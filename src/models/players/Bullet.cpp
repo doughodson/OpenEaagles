@@ -30,17 +30,11 @@ Bullet::Bullet()
    static base::String generic("Bullet");
    setType(&generic);
 
-   nbt = 0;
-
    setMaxTOF( DEFAULT_MAX_TOF );
-
-   muzzleVel = DEFAULT_MUZZLE_VEL;
-   hitPlayer = nullptr;
 }
 
 void Bullet::copyData(const Bullet& org, const bool)
 {
-
    BaseClass::copyData(org);
 
    nbt = 0;

@@ -4,10 +4,10 @@
 
 #include "openeaagles/models/systems/System.hpp"
 #include "openeaagles/base/safe_queue.hpp"
+#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace models {
-
 class Emission;
 class Player;
 class Track;
@@ -94,25 +94,25 @@ protected:
    virtual bool setSlotLogTrackUpdates(const base::Number* const num); // Sets logTrackUpdates
 
    // Track List
-   Track*              tracks[MAX_TRKS];   // Tracks
-   unsigned int        nTrks;              // Number of tracks
-   unsigned int        maxTrks;            // Max number of tracks (input)
-   mutable long        trkListLock;        // Semaphore to protect the track list
+   Track*       tracks[MAX_TRKS] {};   // Tracks
+   unsigned int nTrks {};              // Number of tracks
+   unsigned int maxTrks {MAX_TRKS};    // Max number of tracks (input)
+   mutable long trkListLock {};        // Semaphore to protect the track list
 
    // Prediction parameters
    void makeMatrixA(const double dt);
-   double              A[3][3];            // A Matrix
-   bool                haveMatrixA;        // Matrix A has be initialized
-   double              alpha;              // Alpha parameter
-   double              beta;               // Beta parameter
-   double              gamma;              // Gamma parameter
+   double A[3][3] {};            // A Matrix
+   bool   haveMatrixA {};        // Matrix A has be initialized
+   double alpha {1.0};           // Alpha parameter
+   double beta {};               // Beta parameter
+   double gamma {};              // Gamma parameter
 
-   unsigned int        nextTrkId;          // Next track ID
-   unsigned int        firstTrkId;         // First (starting) track ID
+   unsigned int nextTrkId {1000};          // Next track ID
+   unsigned int firstTrkId {1000};         // First (starting) track ID
 
-   base::safe_queue<Emission*>   emQueue; // Emission input queue
-   base::safe_queue<double>      snQueue; // S/N input queue.
-   mutable long        queueLock;          // Semaphore to protect both emQueue and snQueue
+   base::safe_queue<Emission*> emQueue {MAX_TRKS}; // Emission input queue
+   base::safe_queue<double>    snQueue {MAX_TRKS}; // S/N input queue.
+   mutable long queueLock {};                      // Semaphore to protect both emQueue and snQueue
 
    // System class Interface -- phase() callbacks
    virtual void process(const double dt) override;     // Phase 3
@@ -121,11 +121,9 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   void initData();
-
-   double              maxTrackAge;        // Max Track age (sec)
-   short               type;               // Track type: the bit-wise OR of various type bits (see enum TypeBits in Track.h)
-   bool                logTrackUpdates;    // input slot; if false, updates to tracks are not logged.
+   double maxTrackAge {3.0};      // Max Track age (sec)
+   short  type {};                // Track type: the bit-wise OR of various type bits (see enum TypeBits in Track.h)
+   bool   logTrackUpdates {true}; // input slot; if false, updates to tracks are not logged.
 };
 
 //------------------------------------------------------------------------------
@@ -146,9 +144,9 @@ class AirTrkMgr : public TrackManager
 public:
    AirTrkMgr();
 
-   double getPosGate()                             { return posGate;}
-   double getRngGate()                             { return rngGate;}
-   double getVelGate()                             { return velGate;}
+   double getPosGate()     { return posGate;}
+   double getRngGate()     { return rngGate;}
+   double getVelGate()     { return velGate;}
 
 protected:
    virtual void processTrackList(const double dt) override;
@@ -160,14 +158,14 @@ private:
    bool setVelocityGate(const base::Number* const num);
 
    // Prediction parameters
-   double              posGate;            // Position Gate (meters)
-   double              rngGate;            // Range Gate (meters)
-   double              velGate;            // Velocity Gate (m/s)
+   double posGate {2.0 * base::distance::NM2M};   // Position Gate (meters)
+   double rngGate {500.0};   // Range Gate (meters)
+   double velGate {10.0};    // Velocity Gate (m/s)
 
    // Used by processTrackList()
-   bool** report2TrackMatch;                 // Report/Track matched matrix
-   unsigned int* reportNumMatches;           // Number of matches for each report
-   unsigned int* trackNumMatches;            // Number of matcher for each track
+   bool** report2TrackMatch {};           // Report/Track matched matrix
+   unsigned int* reportNumMatches {};     // Number of matches for each report
+   unsigned int* trackNumMatches {};      // Number of matcher for each track
 };
 
 //------------------------------------------------------------------------------
@@ -190,9 +188,9 @@ private:
    void initData();
 
    // Used by processTrackList()
-   bool** report2TrackMatch;                 // Report/Track matched matrix
-   unsigned int* reportNumMatches;           // Number of matches for each report
-   unsigned int* trackNumMatches;            // Number of matcher for each track
+   bool** report2TrackMatch {};                 // Report/Track matched matrix
+   unsigned int* reportNumMatches {};           // Number of matches for each report
+   unsigned int* trackNumMatches {};            // Number of matcher for each track
 };
 
 //------------------------------------------------------------------------------
@@ -215,9 +213,9 @@ private:
    void initData();
 
    // Used by processTrackList()
-   bool** report2TrackMatch;                 // Report/Track matched matrix
-   unsigned int* reportNumMatches;           // Number of matches for each report
-   unsigned int* trackNumMatches;            // Number of matcher for each track
+   bool** report2TrackMatch {};                 // Report/Track matched matrix
+   unsigned int* reportNumMatches {};           // Number of matches for each report
+   unsigned int* trackNumMatches {};            // Number of matcher for each track
 };
 
 }

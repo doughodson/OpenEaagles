@@ -5,11 +5,8 @@
 #include "openeaagles/base/Object.hpp"
 
 namespace oe {
-
 namespace base { class Number; }
-
 namespace models {
-
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
@@ -28,7 +25,7 @@ public:
    virtual double getReflectorAreaInFieldOfView(const IrQueryMsg* const msg);
    virtual bool setSlotIrShapeArea(const base::Number* const s);
 private:
-   double area;
+   double area {};
 };
 
 //------------------------------------------------------------------------------
@@ -53,8 +50,7 @@ public:
    virtual bool setSlotIrSphereRadius(const base::Number* const s);
 
 private:
-
-   double radius;
+   double radius {10.0};
 };
 
 //------------------------------------------------------------------------------
@@ -82,8 +78,7 @@ public:
    virtual bool setSlotIrBoxZ(const base::Number* const s);
 
 private:
-
-   double x,y,z;
+   double x {10.0}, y {10.0}, z {10.0};
 };
 
 }

@@ -6,8 +6,8 @@
 
 namespace oe {
 namespace base {
-   class IoData;
-   class IoDevice;
+class IoData;
+class IoDevice;
 
 //------------------------------------------------------------------------------
 // Class: IoAdapter
@@ -20,7 +20,7 @@ namespace base {
 //------------------------------------------------------------------------------
 class IoAdapter : public Component
 {
-    DECLARE_SUBCLASS(IoAdapter, Component)
+   DECLARE_SUBCLASS(IoAdapter, Component)
 
 public:
    IoAdapter();

@@ -72,30 +72,30 @@ private:
     void heading(double hdg, double hdgCmd);
     void background();
 
-    double radius;
+    double radius {};
     Eadi3DObjects eadiObjs;
 
-    double altitudeFT;
-    double airspeedKTS;
-    double headingDEG;
-    double aoaDEG;
-    double vviFPM;
-    double pitchDEG;
-    double rollDEG;
-    double machNo;
+    double altitudeFT {};
+    double airspeedKTS {};
+    double headingDEG {};
+    double aoaDEG {};
+    double vviFPM {};
+    double pitchDEG {};
+    double rollDEG {};
+    double machNo {};
 
-    double Gload;
-    bool   landingMode;
-    double pitchSteeringCmd;
-    double rollSteeringCmd;
-    bool   pitchSteeringValid;
-    bool   rollSteeringValid;
-    double glideslopeDevDOTS;
-    double localizerDevDOTS;
-    double turnRateDOTS;
-    double slipIndDOTS;
-    bool   glideslopeDevValid;
-    bool   localizerDevValid;
+    double Gload {};
+    bool   landingMode {};
+    double pitchSteeringCmd {};
+    double rollSteeringCmd {};
+    bool   pitchSteeringValid {};
+    bool   rollSteeringValid {};
+    double glideslopeDevDOTS {};
+    double localizerDevDOTS {};
+    double turnRateDOTS {};
+    double slipIndDOTS {};
+    bool   glideslopeDevValid {};
+    bool   localizerDevValid {};
 };
 
 }

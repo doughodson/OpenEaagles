@@ -22,22 +22,11 @@ END_SLOT_MAP()
 AbstractRecorderComponent::AbstractRecorderComponent()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void AbstractRecorderComponent::initData()
-{
-   enabledList = nullptr;
-   numEnabled = 0;
-
-   disabledList = nullptr;
-   numDisabled = 0;
-}
-
-void AbstractRecorderComponent::copyData(const AbstractRecorderComponent& org, const bool cc)
+void AbstractRecorderComponent::copyData(const AbstractRecorderComponent& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setEnabledList(org.enabledList, org.numEnabled);
    setDisabledList(org.disabledList, org.numDisabled);

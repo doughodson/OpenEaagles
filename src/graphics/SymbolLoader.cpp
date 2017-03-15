@@ -13,12 +13,6 @@
 
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace graphics {
 
@@ -31,40 +25,20 @@ BEGIN_SLOTTABLE(SymbolLoader)
    "interconnect",      // 3) Interconnect the symbols
 END_SLOTTABLE(SymbolLoader)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(SymbolLoader)
    ON_SLOT(1,setSlotTemplates,base::PairStream)
    ON_SLOT(2,setSlotShowInRangeOnly,base::Number)
    ON_SLOT(3,setSlotInterconnect,base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 SymbolLoader::SymbolLoader()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void SymbolLoader::initData()
-{
-   templates = nullptr;
-   for (int i = 0; i < MAX_SYMBOLS; i++) {
-      symbols[i] = nullptr;
-   }
-   showInRangeOnly = true;
-   interconnect = false;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void SymbolLoader::copyData(const SymbolLoader& org, const bool cc)
+void SymbolLoader::copyData(const SymbolLoader& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // Clear the symbols; the user will need to
    // create these with the new template list.
@@ -83,9 +57,6 @@ void SymbolLoader::copyData(const SymbolLoader& org, const bool cc)
    interconnect = org.interconnect;
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void SymbolLoader::deleteData()
 {
    if (templates != nullptr) templates->unref();
@@ -100,7 +71,6 @@ void SymbolLoader::deleteData()
       }
    }
 }
-
 
 //------------------------------------------------------------------------------
 // getNumberOfActiveSymbols() - returns the count of active symbols
@@ -360,7 +330,6 @@ bool SymbolLoader::removeSymbol(const int idx)
 
          ok = true;
       }
-
    }
    return ok;
 }
@@ -690,7 +659,6 @@ bool SymbolLoader::setSymbolFlashRate(const int idx, const char* name, const dou
    return ok;
 }
 
-
 //------------------------------------------------------------------------------
 // update the symbol's color
 //------------------------------------------------------------------------------
@@ -729,7 +697,6 @@ bool SymbolLoader::setSymbolColor(const int idx, const char* name, const base::C
          }
       }
    }
-
    return ok;
 }
 
@@ -1060,31 +1027,9 @@ SlSymbol::SlSymbol()
 
 void SlSymbol::initData()
 {
-   visibility = true;
-   llFlg = false;
-   acFlg = false;
-   scrnFlg = false;
-
-   type = 0;
    id[0] = '\0';
-   value = nullptr;
-   pntr = nullptr;
-
-   xPos = 0;
-   yPos = 0;
-
-   xScreenPos = 0;
-   yScreenPos = 0;
-
-   hdg = 0;
-   hdgValid = false;
-   hdgAng = nullptr;
-   phdg = nullptr;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void SlSymbol::copyData(const SlSymbol& org, const bool cc)
 {
    BaseClass::copyData(org);
@@ -1124,9 +1069,6 @@ void SlSymbol::copyData(const SlSymbol& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void SlSymbol::deleteData()
 {
    setSymbolPair(nullptr);

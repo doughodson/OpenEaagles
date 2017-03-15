@@ -1,9 +1,4 @@
-//------------------------------------------------------------------------------
-// Class:       Switch
-// Base class:  base::Object -> base::Component -> graphics::Graphic -> Button -> Switch
-// Description: Button that can have multiple formats, up to as many as the user
-// wants.
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_Switch_H__
 #define __oe_instruments_Switch_H__
 
@@ -12,9 +7,14 @@
 namespace oe {
 namespace instruments {
 
-class Switch : public Button {
+//------------------------------------------------------------------------------
+// Class: Switch
+// Description: Button that can have multiple formats, up to as many as the user
+// wants.
+//------------------------------------------------------------------------------
+class Switch : public Button
+{
     DECLARE_SUBCLASS(Switch,Button)
-
 
 public:
     Switch();
@@ -35,8 +35,8 @@ protected:
     bool setSlotCurrentState(const base::Number* const msg);
 
 private:
-    int currentState;   // which state are we currently in?
-    int numSelections;  // number of selections to go through
+    int currentState {1};   // which state are we currently in?
+    int numSelections {1};  // number of selections to go through
     SendData currentStateSD;
 };
 

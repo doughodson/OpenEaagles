@@ -37,7 +37,6 @@ public:
 
    // DR's angular rates @ T0 (rad/sec)  [ phi theta psi ] (Body/ECEF)
    virtual const base::Vec3d& getDrAngularVelocities() const =0;
-
 };
 
 }

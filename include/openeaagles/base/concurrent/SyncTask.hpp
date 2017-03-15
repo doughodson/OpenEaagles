@@ -38,7 +38,7 @@ public:
    virtual bool terminate() override;
 
    // User defined work function
-   private:  virtual unsigned long userFunc() =0;
+   private: virtual unsigned long userFunc() =0;
 
 protected:
    SyncTask();

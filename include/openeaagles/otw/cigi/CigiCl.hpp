@@ -17,7 +17,6 @@ class CigiLosVectReqV3;   // CGBCGB CIGI_LOS_RANGE_REQUEST* los;          // LOS
 
 namespace oe {
 namespace otw {
-
 class OtwCigiCl;
 
 //------------------------------------------------------------------------------
@@ -72,10 +71,10 @@ protected:
    static CigiCl* getSession(const int id) { return (id >= 0 && id < MAX_SESSIONS) ? sessions[id] : 0; }
 
 private:
-   OtwCigiCl* otwCigi;   // Our parent OtwCigiCl
+   OtwCigiCl* otwCigi {};   // Our parent OtwCigiCl
    // (no need to ref(), it owns us and it's not going to be deleted before us)
 
-   CigiHostSession* session;
+   CigiHostSession* session {};
 
    // Static table of CIGI session objects ...
    static const int MAX_SESSIONS = 8;

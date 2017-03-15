@@ -8,7 +8,6 @@
 namespace oe {
 namespace base { class Distance; class LatLon; class Number; }
 namespace models {
-
 class OnboardComputer;
 class Sar;
 class Steerpoint;
@@ -64,8 +63,8 @@ protected:
 
 private:
    base::safe_ptr<OnboardComputer> manager;   // Our manager (only set while we're in progress)
-   int refId;                                 // Ref ID
-   bool completed;                            // True if action has been completed
+   int refId {};                              // Ref ID
+   bool completed {};                         // True if action has been completed
 };
 
 
@@ -122,14 +121,14 @@ protected:
    virtual void setCompleted(const bool flg) override;
 
 private:
-   double sarLatitude;        // Latitude (deg)
-   double sarLongitude;       // Longitude (deg)
-   double sarElevation;       // Elevation (meters)
-   double resolution;         // Image resolution (meters)
-   double orientation;        // orientation (true) (degrees)
-   unsigned int imgSize;      // Image size (pixels)
-   double timer;              // Time-Out timer
-   Sar* sar;                  // SAR system
+   double sarLatitude {};        // Latitude (deg)
+   double sarLongitude {};       // Longitude (deg)
+   double sarElevation {};       // Elevation (meters)
+   double resolution {3};        // Image resolution (meters)
+   double orientation {};        // orientation (true) (degrees)
+   unsigned int imgSize {512};   // Image size (pixels)
+   double timer {};              // Time-Out timer
+   Sar* sar {};                  // SAR system
 };
 
 
@@ -172,10 +171,10 @@ protected:
    bool setSlotStationNum(const base::Number* newStation);
 
 private:
-   double targetLatitude;        // latitude (deg)
-   double targetLongitude;       // longitude (deg)
-   double targetElevation;       // elevation (meters)
-   unsigned int station;         // station number
+   double targetLatitude {};      // latitude (deg)
+   double targetLongitude {};     // longitude (deg)
+   double targetElevation {};     // elevation (meters)
+   unsigned int station {};       // station number
 };
 
 //------------------------------------------------------------------------------
@@ -207,10 +206,10 @@ protected:
     bool setSlotNumToLaunch(const base::Number* x);
 
 private:
-    int numToLaunch;    // how many decoys to launch this action?
-    double interval;    // seconds delay between launch... default is 0
-    double tod;         // the sim time of day (we are going to add to it)
-    double startTOD;    // our starting tod (that way we know when we've elapsed so far)
+    int numToLaunch {1};   // how many decoys to launch this action?
+    double interval {};    // seconds delay between launch... default is 0
+    double tod {};         // the sim time of day (we are going to add to it)
+    double startTOD {};    // our starting tod (that way we know when we've elapsed so far)
 };
 
 
@@ -238,7 +237,7 @@ public:
    virtual bool trigger(OnboardComputer* const mgr) override;
 
 private:
-   unsigned int camouflage;    // Camouflage type (0 is none)
+   unsigned int camouflage {};    // Camouflage type (0 is none)
 };
 
 }

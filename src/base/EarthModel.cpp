@@ -59,7 +59,7 @@ EarthModel::EarthModel(const double a0, const double f0)
 {
    STANDARD_CONSTRUCTOR()
 
-   initData(a0,f0);
+   initData(a0, f0);
 }
 
 EarthModel::EarthModel()

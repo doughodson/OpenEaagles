@@ -44,15 +44,6 @@ END_SLOT_MAP()
 RacModel::RacModel()
 {
    STANDARD_CONSTRUCTOR()
-
-   vpMin = 0.0;
-   vpMaxG = 250.0;
-   gMax = 4.0;
-   maxAccel = 10.0;
-
-   cmdAltitude = -9999.0;
-   cmdHeading = -9999.0;
-   cmdVelocity = -9999.0;
 }
 
 void RacModel::copyData(const RacModel& org, const bool)

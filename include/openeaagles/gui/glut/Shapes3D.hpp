@@ -13,7 +13,7 @@ namespace base { class Number; }
 namespace glut {
 
 //------------------------------------------------------------------------------
-// Class: Circle -> Sphere
+// Class: Sphere
 // Description - draws a sphere with X slices and Y stacks
 //
 // Factory name: Sphere
@@ -39,11 +39,11 @@ protected:
     bool setSlotStacks(const base::Number* const x);
 
 private:
-    int stacks;
+    int stacks {10};
 };
 
 //------------------------------------------------------------------------------
-// Class: Circle -> Sphere -> Cylinder
+// Class: Cylinder
 // Description - adds a top radius and height and draws a cylinder
 //
 // Factory name: Cylinder
@@ -69,8 +69,8 @@ protected:
     bool setSlotHeight(const base::Number* const x);
 
 private:
-    double topRadius;
-    double height;
+    double topRadius {1.0};
+    double height {1.0};
 };
 
 //------------------------------------------------------------------------------
@@ -89,7 +89,7 @@ public:
 };
 
 //------------------------------------------------------------------------------
-// Class: Circle -> Cube
+// Class: Cube
 // Description - Draws a simple cube.  I derived it from Circle to use the filled
 // flag only.  All other flags are ignored.
 //
@@ -112,11 +112,11 @@ protected:
     bool setSlotSize(const base::Number* const srobj);
 
 private:
-    double size;
+    double size {1.0};
 };
 
 //------------------------------------------------------------------------------
-// Class: Sphere -> Torus
+// Class: Torus
 // Description - Uses filled slot to determine if wireframe or not.  Uses slices
 // as number of sides, and stacks as number of rings
 //
@@ -139,7 +139,7 @@ protected:
     bool setSlotOuterRadius(const base::Number* const x);
 
 private:
-    double oRadius;
+    double oRadius {2.0};
 };
 
 

@@ -4,6 +4,8 @@
 
 #include "openeaagles/base/Object.hpp"
 
+#include <array>
+
 namespace oe {
 namespace base {
 class Number;
@@ -87,10 +89,10 @@ private:
    double priority {0.5};
 
    unsigned int actualThreads {};
-   ThreadPoolThread* allThreads[MAX_THREADS];
+   std::array<ThreadPoolThread*, MAX_THREADS> allThreads {};
 
    // Keeps track of which threads are available to avoid performance penalty of checking signal state
-   ThreadPoolThread* availableThreads[MAX_THREADS];
+   std::array<ThreadPoolThread*, MAX_THREADS> availableThreads {};
 
    // Semaphore to protect the available thread pool
    mutable long availableThreadsLock {};

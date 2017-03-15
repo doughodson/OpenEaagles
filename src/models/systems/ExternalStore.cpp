@@ -12,46 +12,28 @@ namespace models {
 //------------------------------------------------------------
 IMPLEMENT_SUBCLASS(ExternalStore, "ExternalStore")
 
-// Slot table
 BEGIN_SLOTTABLE(ExternalStore)
    "type",        // 1) Type of external store string
    "jettisonable" // 2) External store can be jettisoned (default: true)
 END_SLOTTABLE(ExternalStore)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(ExternalStore)
    ON_SLOT( 1, setSlotType, base::String)
    ON_SLOT( 2, setSlotJettisonable, base::Number )
 END_SLOT_MAP()
 
-// Event() map
 BEGIN_EVENT_HANDLER(ExternalStore)
    ON_EVENT( JETTISON_EVENT, onJettisonEvent)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Class support functions
-//------------------------------------------------------------------------------
 ExternalStore::ExternalStore()
 {
    STANDARD_CONSTRUCTOR()
-
-      initData();
 }
 
-// init member data
-void ExternalStore::initData()
-{
-   type = nullptr;
-   canJettison = true; // default
-   jettisoned = false;
-}
-
-// Copy member data
-void ExternalStore::copyData(const ExternalStore& org, const bool cc)
+void ExternalStore::copyData(const ExternalStore& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    {
       const base::String* p = nullptr;
@@ -64,7 +46,6 @@ void ExternalStore::copyData(const ExternalStore& org, const bool cc)
    jettisoned = org.jettisoned;
 }
 
-// Delete member data
 void ExternalStore::deleteData()
 {
    type = nullptr;

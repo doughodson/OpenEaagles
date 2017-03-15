@@ -54,14 +54,12 @@ END_SLOT_MAP()
 Simulation::Simulation() : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
 Simulation::Simulation(const Simulation& org) : newPlayerQueue(MAX_NEW_PLAYERS)
 {
    STANDARD_CONSTRUCTOR()
-   copyData(org,true);
+   copyData(org, true);
 }
 
 Simulation::~Simulation()
@@ -80,55 +78,9 @@ Simulation* Simulation::clone() const
    return new Simulation(*this);
 }
 
-void Simulation::initData()
-{
-   origPlayers = nullptr;
-   players = nullptr;
-   station = nullptr;
-
-   cycleCnt = 0;
-   frameCnt = 0;
-   phaseCnt = 0;
-
-   execTime = 0.0;
-
-   pcTime = 0.0;
-   pcTvSec = 0;
-   pcTvUSec = 0;
-
-   simTime = 0.0;
-   simTvSec = 0;
-   simTvUSec = 0;
-   simTimeSlaved = true;
-
-   simTime0 = -1;
-   simDay0 = 0;
-   simMonth0 = 0;
-   simYear0 = 0;
-
-   eventID = 0;
-   eventWpnID = 0;
-   relWpnId = MIN_WPN_ID;
-
-   reqTcThreads = 1;  // Default is one -- no additional T/C threads
-   numTcThreads = 0;
-   for (unsigned int i = 0; i < MAX_TC_THREADS; i++) {
-      tcThreads[i] = nullptr;
-   }
-   tcThreadsFailed = false;
-
-   reqBgThreads = 1;  // Default is one -- no additional background threads
-   numBgThreads = 0;
-   for (unsigned int i = 0; i < MAX_BG_THREADS; i++) {
-      bgThreads[i] = nullptr;
-   }
-   bgThreadsFailed = false;
-}
-
-void Simulation::copyData(const Simulation& org, const bool cc)
+void Simulation::copyData(const Simulation& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // Find our own Station
    station = nullptr;

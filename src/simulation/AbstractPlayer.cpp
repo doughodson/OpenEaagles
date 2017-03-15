@@ -28,24 +28,12 @@ AbstractPlayer::AbstractPlayer()
    initData();
 }
 
-//------------------------------------------------------------------------------
-// initData() -- init our member data
-//------------------------------------------------------------------------------
 void AbstractPlayer::initData()
 {
-   id = 0;
-   pname = "";
-
-   mode = ACTIVE;
-   initMode = mode;
-
-   nib = nullptr;
-   netID = 0;
    nibList = new AbstractNib*[AbstractNetIO::MAX_NETWORD_ID];
    for (unsigned int i = 0; i < AbstractNetIO::MAX_NETWORD_ID; i++) {
       nibList[i] = nullptr;
    }
-   enableNetOutput = true;
 }
 
 void AbstractPlayer::copyData(const AbstractPlayer& org, const bool cc)

@@ -6,7 +6,6 @@
 
 namespace oe {
 namespace base {
-
 class Number;
 class String;
 

@@ -45,7 +45,6 @@
 #include <cstdint>
 
 namespace oe {
-
 namespace dis {
 
 //--------------------------------------------------------------
@@ -322,14 +321,14 @@ struct EntityType {
 //-----------------------------------------------
 // 6.2.79 -- Simulation Address Record
 //-----------------------------------------------
-struct SimulationAddressDIS{
+struct SimulationAddressDIS {
 
-   uint16_t siteIdentification;
-   uint16_t applicationIdentification;
+   uint16_t siteIdentification {};
+   uint16_t applicationIdentification {};
 
    // Constructors
    SimulationAddressDIS(const uint16_t a, const uint16_t b) : siteIdentification(a), applicationIdentification(b) { }
-   SimulationAddressDIS() : siteIdentification(0), applicationIdentification(0) { }
+   SimulationAddressDIS() = default;
 
    // Swap bytes 'to' or 'from' the network
    void swapBytes() {
@@ -392,7 +391,7 @@ struct SimulationAddressDIS{
 //-----------------------------------------------
 struct VectorDIS {
 
-   float component[3];        // X, Y Z components of the vectory
+   float component[3] {};        // X, Y Z components of the vectory
 
    // Constructor(s)
    VectorDIS(const float x, const float y, const float z) {
@@ -400,11 +399,7 @@ struct VectorDIS {
       component[1] = y;
       component[2] = z;
    }
-   VectorDIS() {
-      component[0] = 0;
-      component[1] = 0;
-      component[2] = 0;
-   }
+   VectorDIS() = default;
 
    // Compare to another VectorDIS structure
    bool operator==(const VectorDIS& s2) const {
@@ -450,12 +445,12 @@ struct VectorDIS {
 //-----------------------------------------------
 struct WorldCoordinates {
 
-   double X_coord;
-   double Y_coord;
-   double Z_coord;
+   double X_coord {};
+   double Y_coord {};
+   double Z_coord {};
 
    WorldCoordinates(const double a, const double b, const double c) : X_coord(a), Y_coord(b), Z_coord(c) {}
-   WorldCoordinates() : X_coord(0), Y_coord(0), Z_coord(0) {}
+   WorldCoordinates() = default;
 
    // Assignmnent operator
    void operator=(const WorldCoordinates& _v) {
@@ -509,9 +504,9 @@ struct WorldCoordinates {
 //-----------------------------------------------
 struct AngularVelocityVectorDIS {
 
-   float x_axis;
-   float y_axis;
-   float z_axis;
+   float x_axis {};
+   float y_axis {};
+   float z_axis {};
 
    void swapBytes() {
       x_axis = convertFloat(x_axis);
@@ -543,17 +538,17 @@ struct AngularVelocityVectorDIS {
 //-----------------------------------------------
 struct AntennaPattern {
 
-   float psi;
-   float theta;
-   float phi;
-   float azimuthBeamWidth;
-   float elevationBeamWidth;
-   int8_t referenceSystem;
-   int8_t padding1[3];
-   float ez;
-   float ex;
-   float phase;
-   float padding2; // (IEEE P1278.1/D15 ????)
+   float psi {};
+   float theta {};
+   float phi {};
+   float azimuthBeamWidth {};
+   float elevationBeamWidth {};
+   int8_t referenceSystem {};
+   int8_t padding1[3] {};
+   float ez {};
+   float ex {};
+   float phase {};
+   float padding2 {}; // (IEEE P1278.1/D15 ????)
 
    void swapBytes() {
       psi                = convertFloat(psi);
@@ -598,15 +593,13 @@ struct AntennaPattern {
 //-----------------------------------------------
 struct BeamData {
 
-   float beamAzimuthCenter;         // Azimuth center of sweep volume (radians)
-   float beamAzimuthSweep;          // Azimuth sweep width, half angle (radians)
-   float beamElevationCenter;       // Elevation center of sweep volume (radians)
-   float beamElevationSweep;        // Elevation sweep height, half angle (radians)
-   float beamSweepSync;             // Percent of sweep completed
+   float beamAzimuthCenter {};         // Azimuth center of sweep volume (radians)
+   float beamAzimuthSweep {};          // Azimuth sweep width, half angle (radians)
+   float beamElevationCenter {};       // Elevation center of sweep volume (radians)
+   float beamElevationSweep {};        // Elevation sweep height, half angle (radians)
+   float beamSweepSync {};             // Percent of sweep completed
 
-   // Constructor(s)
-   BeamData() :  beamAzimuthCenter(0), beamAzimuthSweep(0), beamElevationCenter(0),
-      beamElevationSweep(0), beamSweepSync(0) { }
+   BeamData() = default;
 
    // Assignment operator
    void operator=(const BeamData& _v) {
@@ -668,8 +661,8 @@ struct BeamData {
 //-----------------------------------------------
 struct ClockTime{
 
-   float hour;
-   float timePastTheHour;
+   float hour {};
+   float timePastTheHour {};
 
    void swapBytes() {
       hour            = convertFloat(hour);
@@ -715,11 +708,11 @@ struct DatumSpecification{
 //-----------------------------------------------
 struct BurstDescriptor {
 
-   EntityType munition;
-   uint16_t warhead;
-   uint16_t fuse;
-   uint16_t quantity;
-   uint16_t rate;
+   EntityType munition {};
+   uint16_t warhead {};
+   uint16_t fuse {};
+   uint16_t quantity {};
+   uint16_t rate {};
 
    void swapBytes() {
       munition.swapBytes();
@@ -756,15 +749,13 @@ struct BurstDescriptor {
 //-----------------------------------------------
 struct EeFundamentalParameterData {
 
-   float frequency;                 // Center frequency (Hz)
-   float frequencyRange;            // Beam width (i.e., at 3db) or zero (Hz)
-   float effectiveRadiatedPower;    // Effective radiated power ( watts dB)
-   float pulseRepetitiveFrequency;  // PRF (hz)
-   float pulseWidth;                // Pulse Width (uSec)
+   float frequency {};                 // Center frequency (Hz)
+   float frequencyRange {};            // Beam width (i.e., at 3db) or zero (Hz)
+   float effectiveRadiatedPower {};    // Effective radiated power ( watts dB)
+   float pulseRepetitiveFrequency {};  // PRF (hz)
+   float pulseWidth {};                // Pulse Width (uSec)
 
-   // Constructor(s)
-   EeFundamentalParameterData() :
-         frequency(0), frequencyRange(0), effectiveRadiatedPower(0), pulseRepetitiveFrequency(0), pulseWidth(0) { }
+   EeFundamentalParameterData() = default;
 
    // Assignment operator
    void operator=(const EeFundamentalParameterData& _v) {
@@ -826,12 +817,11 @@ struct EeFundamentalParameterData {
 //-----------------------------------------------
 struct EmitterSystem {
 
-   uint16_t emitterName;                  // Emitter Name enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.1.1)
-   uint8_t  function;                     // Function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.2)
-   uint8_t  emitterIdentificationNumber;  // Unique emitter system number
+   uint16_t emitterName {};                  // Emitter Name enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.1.1)
+   uint8_t  function {};                     // Function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.2)
+   uint8_t  emitterIdentificationNumber {};  // Unique emitter system number
 
-   // Constructor(s)
-   EmitterSystem() : emitterName(0), function(0), emitterIdentificationNumber(0) {}
+   EmitterSystem() = default;
 
    // Assignment operator
    void operator=(const EmitterSystem& _v) {
@@ -884,11 +874,10 @@ struct EmitterSystem {
 //-----------------------------------------------
 struct EntityIdentifierDIS {
 
-   SimulationAddressDIS simulationID;      // ID of the simulation
-   uint16_t             ID;                // Entity ID within the simulation
+   SimulationAddressDIS simulationID {};      // ID of the simulation
+   uint16_t             ID {};                // Entity ID within the simulation
 
-   // Constructors
-   EntityIdentifierDIS() : simulationID(), ID(0)  {}
+   EntityIdentifierDIS() = default;
    EntityIdentifierDIS(const uint16_t a, const uint16_t b, const uint16_t c) : simulationID(a,b), ID(c) {}
 
    // Assignment operator
@@ -951,8 +940,8 @@ struct EntityIdentifierDIS {
 struct EntityMarking {
 
    static const uint32_t BUFF_SIZE = 11;
-   uint8_t characterSet;         // Marking character set
-   uint8_t marking[BUFF_SIZE];   // Entity marking buffer
+   uint8_t characterSet {};         // Marking character set
+   uint8_t marking[BUFF_SIZE] {};   // Entity marking buffer
 
    friend std::ostream& operator << ( std::ostream& s, const EntityMarking& v ) {
       s  << "  Character Set:   " << static_cast<int>(v.characterSet) << std::endl
@@ -977,22 +966,12 @@ struct EntityMarking {
 //-----------------------------------------------
 struct EulerAngles{
 
-   float psi;
-   float theta;
-   float phi;
+   float psi {};
+   float theta {};
+   float phi {};
 
-   EulerAngles() {
-      psi   = 0.0;
-      theta = 0.0;
-      phi   = 0.0;
-   };
-
-   EulerAngles(float a,float b,float c) {
-      psi   = a;
-      theta = b;
-      phi   = c;
-   };
-
+   EulerAngles() = default;
+   EulerAngles(float a,float b,float c):psi(a), theta(b), phi(c)  {};
    ~EulerAngles() {};
 
    void swapBytes() {
@@ -1031,8 +1010,8 @@ struct EulerAngles{
 //-----------------------------------------------
 struct EventIdentifier {
 
-   SimulationAddressDIS simulationID;
-   uint16_t             eventNumber;
+   SimulationAddressDIS simulationID {};
+   uint16_t             eventNumber {};
 
    void swapBytes() {
       simulationID.swapBytes();
@@ -1063,8 +1042,8 @@ struct EventIdentifier {
 //-----------------------------------------------
 struct FixedDatum {
 
-   uint32_t fixedDatumID;
-   uint32_t fixedDatumValue;
+   uint32_t fixedDatumID {};
+   uint32_t fixedDatumValue {};
 
    void swapBytes() {
       fixedDatumID    = convertUInt32(fixedDatumID);
@@ -1078,29 +1057,18 @@ struct FixedDatum {
 //-----------------------------------------------
 struct FundamentalOpData {
 
-   uint8_t  systemStatus;
-   uint8_t  alternateParam4;
-   uint8_t  informationLayers;
-   uint8_t  modifier;
-   uint16_t param1;
-   uint16_t param2;
-   uint16_t param3;
-   uint16_t param4;
-   uint16_t param5;
-   uint16_t param6;
+   uint8_t  systemStatus {};
+   uint8_t  alternateParam4 {};
+   uint8_t  informationLayers {};
+   uint8_t  modifier {};
+   uint16_t param1 {};
+   uint16_t param2 {};
+   uint16_t param3 {};
+   uint16_t param4 {};
+   uint16_t param5 {};
+   uint16_t param6 {};
 
-   FundamentalOpData() {
-      systemStatus = 0;
-      alternateParam4 = 0;
-      informationLayers = 0;
-      modifier = 0;
-      param1 = 0;
-      param2 = 0;
-      param3 = 0;
-      param4 = 0;
-      param5 = 0;
-      param6 = 0;
-   };
+   FundamentalOpData() = default;
 
    void swapBytes() {
       param1 = convertUInt16(param1);
@@ -1164,13 +1132,12 @@ struct FundamentalOpData {
 //-----------------------------------------------
 struct JammingTechnique {
 
-   uint8_t kind;                // Jamming technique kind
-   uint8_t category;            // Jamming technique category
-   uint8_t subcat;              // Jamming technique subcategory
-   uint8_t specific;            // Jamming technique specific
+   uint8_t kind {};                // Jamming technique kind
+   uint8_t category {};            // Jamming technique category
+   uint8_t subcat {};              // Jamming technique subcategory
+   uint8_t specific {};            // Jamming technique specific
 
-   // Constructor(s)
-   JammingTechnique() : kind(0), category(0), subcat(0), specific(0) {}
+   JammingTechnique() = default;
 
    // Returns the jamming mode sequence (pre P1278.1/D15)
    uint32_t getJammingModeSequence() const {
@@ -1256,13 +1223,12 @@ struct JammingTechnique {
 //-----------------------------------------------
 struct ModulationType {
 
-   uint16_t spreadSpectrum;         // Spread Spectrum
-   uint16_t majorModulationType;    // Major Modulation type
-   uint16_t detail;                 // Detail
-   uint16_t system;                 // system
+   uint16_t spreadSpectrum {};         // Spread Spectrum
+   uint16_t majorModulationType {};    // Major Modulation type
+   uint16_t detail {};                 // Detail
+   uint16_t system {};                 // system
 
-   // Constructor(s)
-   ModulationType() : spreadSpectrum(0), majorModulationType(0), detail(0), system(0) {}
+   ModulationType() = default;
 
    // Assignment operator
    void operator=(const ModulationType& _v) {
@@ -1320,14 +1286,14 @@ struct ModulationType {
 //-----------------------------------------------
 struct PDUHeader {
 
-   uint8_t  protocolVersion;
-   uint8_t  exerciseIdentifier;
-   uint8_t  PDUType;
-   uint8_t  protocolFamily;
-   uint32_t timeStamp;
-   uint16_t length;
-   uint8_t  status;     // IEEE P1278.1/D15
-   uint8_t  padding;
+   uint8_t  protocolVersion {};
+   uint8_t  exerciseIdentifier {};
+   uint8_t  PDUType {};
+   uint8_t  protocolFamily {};
+   uint32_t timeStamp {};
+   uint16_t length {};
+   uint8_t  status {};     // IEEE P1278.1/D15
+   uint8_t  padding {};
 
    void swapBytes() {
       timeStamp = convertUInt32(timeStamp);
@@ -1362,15 +1328,14 @@ struct PDUHeader {
 //-----------------------------------------------
 struct RadioEntityType {
 
-   uint8_t  kind;                // Kind
-   uint8_t  domain;              // Domain
-   uint16_t country;             // Country
-   uint8_t  category;            // Category
-   uint8_t  nomenclatureVersion; // Nomenclature Version
-   uint16_t nomenclature;        // Nomenclature
+   uint8_t  kind {};                // Kind
+   uint8_t  domain {};              // Domain
+   uint16_t country {};             // Country
+   uint8_t  category {};            // Category
+   uint8_t  nomenclatureVersion {}; // Nomenclature Version
+   uint16_t nomenclature {};        // Nomenclature
 
-   // Constructor(s)
-   RadioEntityType() : kind(0), domain(0), country(0), category(0), nomenclatureVersion(0), nomenclature(0) {}
+   RadioEntityType() = default;
 
    // Assignmnent operator
    void operator=(const RadioEntityType& _v) {
@@ -1432,9 +1397,9 @@ struct RadioEntityType {
 //-----------------------------------------------
 struct SimulationManagementPDUHeader{
 
-   PDUHeader        header;
-   EntityIdentifierDIS originatingEntityID;
-   EntityIdentifierDIS receivingEntityID;
+   PDUHeader        header {};
+   EntityIdentifierDIS originatingEntityID {};
+   EntityIdentifierDIS receivingEntityID {};
 
    void swapBytes() {
       header.swapBytes();
@@ -1469,8 +1434,8 @@ struct SimulationManagementPDUHeader{
 //-----------------------------------------------
 struct SupplyQuantity{
 
-   EntityType supplyType;
-   float      quantity;
+   EntityType supplyType {};
+   float      quantity {};
 
    void swapBytes() {
       supplyType.swapBytes();
@@ -1502,10 +1467,10 @@ struct SupplyQuantity{
 //-----------------------------------------------
 struct SystemID {
 
-   uint16_t systemType;
-   uint16_t systemName;
-   uint8_t  systemMode;
-   uint8_t  options;
+   uint16_t systemType {};
+   uint16_t systemName {};
+   uint8_t  systemMode {};
+   uint8_t  options {};
 
    void swapBytes() {
       systemType = convertUInt16(systemType);
@@ -1543,12 +1508,11 @@ struct SystemID {
 //-----------------------------------------------
 struct TrackJamTargets {
 
-   EntityIdentifierDIS targetID; // Track/Jam target ID
-   uint8_t emitterID;      // Target's emitter ID being jammed
-   uint8_t beamID;         // Target's beam ID being jammed
+   EntityIdentifierDIS targetID {}; // Track/Jam target ID
+   uint8_t emitterID {};            // Target's emitter ID being jammed
+   uint8_t beamID {};               // Target's beam ID being jammed
 
-   // Constructor(s)
-   TrackJamTargets() : targetID(), emitterID(0), beamID(0) {}
+   TrackJamTargets() = default;
 
    // Assignment operator
    void operator=(const TrackJamTargets& _v) {
@@ -1602,8 +1566,8 @@ struct TrackJamTargets {
 //-----------------------------------------------
 struct VariableDatum {
 
-   uint32_t   variableDatumID;
-   uint32_t   variableDatumLength;
+   uint32_t variableDatumID {};
+   uint32_t variableDatumLength {};
 
    // Swap bytes 'to' or 'from' the network.
    void swapBytes() {
@@ -1685,10 +1649,10 @@ struct VpArticulatedPart {
    };
 
    // data structure
-   uint8_t  parameterTypeDesignator;
-   uint8_t  changeIndicator;
-   uint16_t id;
-   uint32_t parameterType;
+   uint8_t  parameterTypeDesignator {};
+   uint8_t  changeIndicator {};
+   uint16_t id {};
+   uint32_t parameterType {};
    union ParameterValue {
       float value[2];
       EntityType entityType;
@@ -1739,23 +1703,18 @@ struct EmitterBeamData {
    // Enum for highDensityTracks, (see IST-CF-03-01, May 5, 2003, Sec 8.1.5)
    enum { NOT_SELECTED, SELECTED };
 
-   uint8_t            beamDataLength;        // Length of this beam data, in 32bit words, including the track/jam targets
-   uint8_t            beamIDNumber;          // Unique ID for this beam
-   uint16_t           beamParameterIndex;    // Use for the lookup of stored database parameters
-   EeFundamentalParameterData parameterData; // Parameter data
-   BeamData           beamData;              // Beam data
-   uint8_t            beamFunction;          // Beam function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.4)
-   uint8_t            numberOfTargetsInTrack; // Number of track/jam targets that will follow
-   uint8_t            highDensityTracks;     // High Density Tracks flag
-   uint8_t            beamStatus;            // Beam active/inactive flag (IEEE P1278.1/D15; see 6.2.14)
-   JammingTechnique   jammingTechnique;      //  (IEEE P1278.1/D15)
+   uint8_t            beamDataLength {};         // Length of this beam data, in 32bit words, including the track/jam targets
+   uint8_t            beamIDNumber {};           // Unique ID for this beam
+   uint16_t           beamParameterIndex {};     // Use for the lookup of stored database parameters
+   EeFundamentalParameterData parameterData {};  // Parameter data
+   BeamData           beamData {};               // Beam data
+   uint8_t            beamFunction {};           // Beam function enum (see IST-CF-03-01, May 5, 2003, Sec 8.1.4)
+   uint8_t            numberOfTargetsInTrack {}; // Number of track/jam targets that will follow
+   uint8_t            highDensityTracks {};      // High Density Tracks flag
+   uint8_t            beamStatus {};             // Beam active/inactive flag (IEEE P1278.1/D15; see 6.2.14)
+   JammingTechnique   jammingTechnique {};       //  (IEEE P1278.1/D15)
 
-   // Constructor(s)
-   EmitterBeamData() :
-      beamDataLength(0), beamIDNumber(0), beamParameterIndex(0), parameterData(),
-      beamData(),
-      beamFunction(0), numberOfTargetsInTrack(0), highDensityTracks(0), beamStatus(0),
-      jammingTechnique() { }
+   EmitterBeamData()  = default;
 
    // Assignment operator
    void operator=(const EmitterBeamData& _v) {
@@ -1867,14 +1826,13 @@ struct EmitterBeamData {
 //-----------------------------------
 struct EmissionSystem {
 
-   uint8_t        systemDataLength;    // Length of this system data, in 32bit words, including the Emitter Beam Data
-   uint8_t        numberOfBeams;       // Number of beams (EmitterBeamData's that follow)
-   uint16_t       padding1;
-   EmitterSystem  emitterSystem;       // Description of the Emitter System
-   VectorDIS      location;            // Location of emitter system; entities ref system (meters)
+   uint8_t        systemDataLength {};    // Length of this system data, in 32bit words, including the Emitter Beam Data
+   uint8_t        numberOfBeams {};       // Number of beams (EmitterBeamData's that follow)
+   uint16_t       padding1 {};
+   EmitterSystem  emitterSystem {};       // Description of the Emitter System
+   VectorDIS      location {};            // Location of emitter system; entities ref system (meters)
 
-   // Constructor(s)
-   EmissionSystem() : systemDataLength(0), numberOfBeams(0), padding1(0), emitterSystem(), location() {}
+   EmissionSystem() = default;
 
    // Assignment operator (does NOT copy the beams which follow the EmissionSystem structure)
    void operator=(const EmissionSystem& _v) {

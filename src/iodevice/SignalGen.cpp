@@ -14,8 +14,8 @@ namespace iodevice {
 
 
 IMPLEMENT_SUBCLASS(SignalGen, "SignalGenAI")
+EMPTY_DELETEDATA(SignalGen)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(SignalGen)
     "signal",     // 1) Signal type { SINE, COSINE, SQUARE, SAW }
     "frequency",  // 2) Signal frequency
@@ -24,7 +24,6 @@ BEGIN_SLOTTABLE(SignalGen)
     "channel",    // 5) Device channel number
 END_SLOTTABLE(SignalGen)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(SignalGen)
    ON_SLOT( 1, setSlotSignal,    base::String)
    ON_SLOT( 2, setSlotFrequency, base::Frequency)
@@ -33,31 +32,14 @@ BEGIN_SLOT_MAP(SignalGen)
    ON_SLOT( 5, setSlotChannel,   base::Number)
 END_SLOT_MAP()
 
-EMPTY_DELETEDATA(SignalGen)
-
 SignalGen::SignalGen()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void SignalGen::initData()
-{
-   location = 0;
-   channel = 0;
-
-   signal = SINE;
-   phase = 0;
-   freq = 0;
-   time = 0;
-}
-
-void SignalGen::copyData(const SignalGen& org, const bool cc)
+void SignalGen::copyData(const SignalGen& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) initData();
 
    signal = org.signal;
    phase = org.phase;

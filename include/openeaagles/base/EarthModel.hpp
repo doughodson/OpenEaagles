@@ -6,8 +6,8 @@
 
 namespace oe {
 namespace base {
-   class Distance;
-   class Number;
+class Distance;
+class Number;
 
 //------------------------------------------------------------------------------
 // Class: EarthModel
@@ -27,7 +27,7 @@ namespace base {
 //------------------------------------------------------------------------------
 class EarthModel : public Object
 {
-    DECLARE_SUBCLASS(EarthModel, Object)
+   DECLARE_SUBCLASS(EarthModel, Object)
 
 public:
    // Some pre-defined earth models             -- getEarthModel() by name list
@@ -81,10 +81,10 @@ protected:
 private:
    void initData(const double a0, const double f0);
 
-   double a;   // semi major axis (meters)
-   double b;   // semi minor axis (meters)
-   double f;   // flattening
-   double e2;  // Eccentricity Squared
+   double a {};   // semi major axis (meters)
+   double b {};   // semi minor axis (meters)
+   double f {};   // flattening
+   double e2 {};  // Eccentricity Squared
 };
 
 inline double EarthModel::getA() const  { return a; }

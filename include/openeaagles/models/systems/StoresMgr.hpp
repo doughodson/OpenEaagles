@@ -5,11 +5,7 @@
 #include "openeaagles/models/systems/Stores.hpp"
 
 namespace oe {
-   namespace base {
-      class Boolean;
-      class PairStream;
-   }
-
+namespace base { class Boolean; class PairStream; }
 namespace models {
 class Bomb;
 class Chaff;
@@ -135,7 +131,6 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   void initData();
    void searchAndAdd(base::PairStream* const, const std::type_info&, base::PairStream*);
 
    base::safe_ptr<base::PairStream> weaponsList;  // Weapon list; set by setSlotStores()
@@ -143,9 +138,9 @@ private:
    base::safe_ptr<base::PairStream> fuelList;     // External fuel tank list; set by setSlotStores()
    base::safe_ptr<Gun> gunPtr;                    // Gun model; set by setSlotStores()
 
-   bool   gunFlg;                // Gun has been selected
-   unsigned int   mode;          // Weapon delivery mode
-   unsigned int masterArm;       // Master arming mode
+   bool gunFlg {};                   // Gun has been selected
+   unsigned int mode {NAV};          // Weapon delivery mode
+   unsigned int masterArm {ARMED};   // Master arming mode
 };
 
 //------------------------------------------------------------------------------
@@ -217,8 +212,6 @@ protected:
    virtual void process(const double dt) override;
 
 private:
-   void initData();
-
    Missile* getNextMissileImp();        // First available missile from our weapons list (Pre-ref()'d) (const version)
    Sam* getNextSamImp();                // First available SAM from our weapons list (Pre-ref()'d) (const version)
    Bomb* getNextBombImp();              // First available bomb from our weapons list (Pre-ref()'d) (const version)
@@ -226,9 +219,9 @@ private:
    Flare* getNextFlareImp();            // First available flare from our weapons list (Pre-ref()'d) (const version)
    Decoy* getNextDecoyImp();            // First available decoy from our weapons list (Pre-ref()'d) (const version)
 
-   double wpnRelTimer;     // Weapon released timer
-   int    curWpnID;        // Current Weapon ID
-   int    nCurWpn;         // Number of weapons of the current type
+   double wpnRelTimer {};     // Weapon released timer
+   int    curWpnID {};        // Current Weapon ID
+   int    nCurWpn {};         // Number of weapons of the current type
 };
 
 }

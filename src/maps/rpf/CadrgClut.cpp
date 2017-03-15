@@ -1,10 +1,7 @@
-//------------------------------------------------------------------------------
-// Class: CadrgClut
-//------------------------------------------------------------------------------
 
 #include "openeaagles/maps/rpf/CadrgClut.hpp"
 #include "openeaagles/maps/rpf/CadrgFrameEntry.hpp"
-#include "openeaagles/maps/rpf/support.hpp"
+#include "openeaagles/maps/rpf/map_utils.hpp"
 #include "openeaagles/base/String.hpp"
 
 #include <cstring>
@@ -12,30 +9,16 @@
 namespace oe {
 namespace rpf {
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 IMPLEMENT_SUBCLASS(CadrgClut, "CadrgClut")
 EMPTY_SLOTTABLE(CadrgClut)
 EMPTY_SERIALIZER(CadrgClut)
+EMPTY_COPYDATA(CadrgClut)
+EMPTY_DELETEDATA(CadrgClut)
 
-// -------------------------------------------------------------------------------------
-// Constructor()
-// -------------------------------------------------------------------------------------
 CadrgClut::CadrgClut()
 {
     STANDARD_CONSTRUCTOR()
 }
-
-// -------------------------------------------------------------------------------------
-// copyData() && deleteData()
-// -------------------------------------------------------------------------------------
-EMPTY_COPYDATA(CadrgClut)
-EMPTY_DELETEDATA(CadrgClut)
 
 // -------------------------------------------------------------------------------------
 // load() - Load our color table from the frame entry file.
@@ -333,7 +316,7 @@ void CadrgClut::load(CadrgFrameEntry& frame, int cib, ColorTableSizes clutSize)
                 fin.seekg(loc[2].physicalIdx + ccTblOff[i], std::ios::beg);
 
                 // Read color conversion table: NOW 4 bytes, NOT 1
-                fin.read(reinterpret_cast<char*>(cct), 4 * cctNumRecs[i]);
+                fin.read(reinterpret_cast<char*>(cct.data()), 4 * cctNumRecs[i]);
             }
         }
     }

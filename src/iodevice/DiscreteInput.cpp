@@ -12,8 +12,8 @@ namespace oe {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(DiscreteInput, "DiscreteInput")
+EMPTY_DELETEDATA(DiscreteInput)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(DiscreteInput)
     "di",         // 1) Discrete Input location (IoData's DI channel)
     "port",       // 2) Device port number (default: 0)
@@ -23,7 +23,6 @@ BEGIN_SLOTTABLE(DiscreteInput)
     "num"         // 6) Number of DIs to manage starting at 'di' and 'channel'
 END_SLOTTABLE(DiscreteInput)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(DiscreteInput)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotPort,     base::Number)
@@ -36,25 +35,11 @@ END_SLOT_MAP()
 DiscreteInput::DiscreteInput()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void DiscreteInput::initData()
-{
-   devEnb = false;
-   location = 0;
-   port = 0;
-   channel = 0;
-   value = false;
-   invert = false;
-   num = 1;
-}
-
-void DiscreteInput::copyData(const DiscreteInput& org, const bool cc)
+void DiscreteInput::copyData(const DiscreteInput& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    devEnb = org.devEnb;
    location = org.location;
@@ -63,10 +48,6 @@ void DiscreteInput::copyData(const DiscreteInput& org, const bool cc)
    value = org.value;
    invert = org.invert;
    num = org.num;
-}
-
-void DiscreteInput::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

@@ -5,14 +5,7 @@
 #include "Page.hpp"
 
 namespace oe {
-
-namespace base {
-class Color;
-class PairStream;
-class Identifier;
-class String;
-}
-
+namespace base { class Color; class PairStream; class Identifier; class String; }
 namespace graphics {
 class Font;
 class Image;
@@ -369,46 +362,50 @@ private:
     bool processTextures();
     bool processMaterials();
 
-    base::String* name;                // Display Name
-    base::PairStream* subdisplays;     // Sub-displays
+    base::String* name {};             // Display Name
+    base::PairStream* subdisplays {};  // Sub-displays
 
-    Graphic* focusPtr;                 // Input focus
-    base::PairStream* materials;       // list of material objects
+    Graphic* focusPtr {};              // Input focus
+    base::PairStream* materials {};    // list of material objects
 
-    base::PairStream* textures;        // List of textures
+    base::PairStream* textures {};     // List of textures
 
-    GLsizei  vpX, vpY, vpWidth, vpHeight;                   // viewport size
-    GLdouble oLeft, oRight, oBottom, oTop, oNear, oFar;     // Ortho parameters
+    GLsizei  vpX {-1}, vpY {-1};             // viewport size
+    GLsizei  vpWidth {300}, vpHeight {300};
 
-    GLfloat linewidth;                 // Current Linewidth (last glLineWidth())
-    GLfloat stdLinewidth;              // Standard linewidth
+    GLdouble oLeft {-0.5}, oRight {640.5};   // Ortho parameters
+    GLdouble oBottom {-0.5}, oTop {480.5};
+    GLdouble oNear {-1.0}, oFar {1.0};
 
-    bool subdisplayFlg;                // We're a sub-display
-    bool antialias;                    // Anti-alias flag  (default off)
-    int mx, my;                        // Mouse x, y
+    GLfloat linewidth {1.0};              // Current Linewidth (last glLineWidth())
+    GLfloat stdLinewidth {1.0};           // Standard linewidth
 
-    Orientation orientation;           // Display orientation
+    bool subdisplayFlg {};                // We're a sub-display
+    bool antialias {true};                // Anti-alias flag  (default on)
+    int mx {}, my {};                     // Mouse x, y
 
-    GLclampd  clearDepth;              // Display clear depth
-    base::PairStream* colorTable;      // Color table
-    base::Vec4d color;                 // Current Color
-    base::Vec4d clearColor;            // Clear (background) color
-    base::Identifier* colorName;       // Current color name
-    const base::Color* normColor;      // Color of a normal text field
-    const base::Color* hiColor;        // Color of a high lighted text field.
+    Orientation orientation {NORMAL};     // Display orientation
 
-    base::PairStream* fontList;        // List of fonts
-    Font* currentFont;                 // Current font
-    Font* normalFont;                  // Normal font
-    base::Identifier* normalFontName;  // Normal font name
-    bool    reversedFlg;               // Current font setting
-    bool    underlinedFlg;             // Current font setting
+    GLclampd clearDepth {-1.0};           // Display clear depth
+    base::PairStream* colorTable {};      // Color table
+    base::Vec4d color;                    // Current Color
+    base::Vec4d clearColor;               // Clear (background) color
+    base::Identifier* colorName {};       // Current color name
+    const base::Color* normColor {};      // Color of a normal text field
+    const base::Color* hiColor {};        // Color of a high lighted text field.
 
-    bool    rvBrackets;                // Reverse video brackets flag
-    char    leftBracketChar;           // Left bracket character
-    char    rightBracketChar;          // right bracket character
+    base::PairStream* fontList {};        // List of fonts
+    Font* currentFont {};                 // Current font
+    Font* normalFont {};                  // Normal font
+    base::Identifier* normalFontName {};  // Normal font name
+    bool reversedFlg {};                  // Current font setting
+    bool underlinedFlg {};                // Current font setting
 
-    bool okToSwap;                     // just in case we don't want to swap buffers every time, we can wait.
+    bool rvBrackets {};                   // Reverse video brackets flag
+    char leftBracketChar {'['};           // Left bracket character
+    char rightBracketChar {']'};          // right bracket character
+
+    bool okToSwap {true};                 // just in case we don't want to swap buffers every time, we can wait.
 };
 
 inline const char* Display::getName() const                            { return *name; }

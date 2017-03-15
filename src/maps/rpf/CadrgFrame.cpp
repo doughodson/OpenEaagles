@@ -9,13 +9,6 @@
 namespace oe {
 namespace rpf {
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 IMPLEMENT_SUBCLASS(CadrgFrame, "CadrgFrame")
 EMPTY_SLOTTABLE(CadrgFrame)
 EMPTY_SERIALIZER(CadrgFrame)
@@ -23,20 +16,12 @@ EMPTY_SERIALIZER(CadrgFrame)
 CadrgFrame::CadrgFrame()
 {
     STANDARD_CONSTRUCTOR()
-    frameEntry = nullptr;
-    nitfHdrLength = 0;
 }
 
 
-// -------------------------------------------------------------------------------------
-// copyData()
-// -------------------------------------------------------------------------------------
-void CadrgFrame::copyData(const CadrgFrame& org, const bool cc)
+void CadrgFrame::copyData(const CadrgFrame& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
-
-    if (cc) frameEntry = nullptr;
 
     if (org.frameEntry != nullptr) {
         if (frameEntry != nullptr) frameEntry->unref();
@@ -46,9 +31,6 @@ void CadrgFrame::copyData(const CadrgFrame& org, const bool cc)
     nitfHdrLength = org.nitfHdrLength;
 }
 
-// -------------------------------------------------------------------------------------
-// deleteData()
-// -------------------------------------------------------------------------------------
 void CadrgFrame::deleteData()
 {
     if (frameEntry != nullptr) frameEntry->unref();

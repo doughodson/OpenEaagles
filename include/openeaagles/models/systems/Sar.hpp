@@ -66,10 +66,10 @@ public:
          const unsigned int width,       // Image width (pixels)
          const unsigned int height,      // Image height (pixels)
          const double resolution         // Image Resolution (meters/pixel)
-      );
+   );
 
-    bool addImage(base::Pair* const newImage);
-    int getNextId();
+   bool addImage(base::Pair* const newImage);
+   int getNextId();
 
    // Cancel the current SAR imaging
    virtual void cancel();
@@ -78,26 +78,26 @@ public:
    static void xyz2AzEl(const base::Vec3d& vec, double* const az, double* const el);
 
 protected:
-    virtual bool setResolution(const double res);   // SAR resolution (meters)
+   virtual bool setResolution(const double res);   // SAR resolution (meters)
 
-    virtual void process(const double dt) override;
+   virtual void process(const double dt) override;
 
-    double timer;                   // SAR timer
+   double timer {};                 // SAR timer
 
 private:
-    base::PairStream* imgList;      // List of SAR images
+   base::PairStream* imgList {};    // List of SAR images
 
-    int             nextId;         // Next image ID
-    double          stareLatitude;  // Degrees
-    double          stareLongitude; // Degrees
-    double          stareElevation; // Meters
-    double          resolution;     // Image Resolution (meters/pixel)
-    unsigned int    chipSize;       // Chip Size (pixels)
-    bool            busy;           // Busy generating an image
-    bool            haveLL;         // Have latitude and longitude of the stare point
+   int          nextId {1};         // Next image ID
+   double       stareLatitude {};   // Degrees
+   double       stareLongitude {};  // Degrees
+   double       stareElevation {};  // Meters
+   double       resolution {1.0};   // Image Resolution (meters/pixel)
+   unsigned int chipSize {};        // Chip Size (pixels)
+   bool         busy {};            // Busy generating an image
+   bool         haveLL {};          // Have latitude and longitude of the stare point
 
-    unsigned int   width;           // Image width (pixels)
-    unsigned int   height;          // Image height (pixels)
+   unsigned int width {};           // Image width (pixels)
+   unsigned int height {};          // Image height (pixels)
 };
 
 }

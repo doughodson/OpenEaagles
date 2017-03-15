@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: AnalogGauge
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_AnalogGuage_H__
 #define __oe_instruments_AnalogGuage_H__
 
@@ -11,7 +9,6 @@ namespace instruments {
 
 //------------------------------------------------------------------------------
 // Class: AnalogGauge
-// Base class: graphics::Graphic -> Instrument -> AnalogGauge
 //
 // Description: This will create a gauge that will
 // draw vertically or horizontally depending on a flag.
@@ -54,12 +51,12 @@ protected:
     virtual bool setSlotIsVertical(const base::Number* const newV);
 
 private:
-    double gaugePos;                // direction, in inches, that we want to scale our gauge
-    double leftBoundary;            // our left boundary (in inches)
-    double rightBoundary;           // our right boundary (in inches)
-    bool outline;                   // are we an outline or filled?
-    bool vertical;                  // are we sliding vertically or horizontally? (True = vertical)
-    bool drawMe;                    // this is for derived classes that don't want us to draw
+    double gaugePos {};           // direction, in inches, that we want to scale our gauge
+    double leftBoundary {-1.0};   // our left boundary (in inches)
+    double rightBoundary {1.0};   // our right boundary (in inches)
+    bool outline {};              // are we an outline or filled?
+    bool vertical {true};         // are we sliding vertically or horizontally? (True = vertical)
+    bool drawMe {true};           // this is for derived classes that don't want us to draw
 };
 
 }

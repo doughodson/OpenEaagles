@@ -8,9 +8,9 @@ namespace oe {
 namespace instruments {
 
 //------------------------------------------------------------------------------
-// Class:  Eadi3DFont
+// Class: Eadi3DFont
 //
-// Description:  Eadi3D font
+// Description: Eadi3D font
 //
 // public methods (member functions):
 //      (All of the classes derived from Font have the same public methods.)

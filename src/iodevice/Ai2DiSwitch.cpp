@@ -11,8 +11,8 @@ namespace oe {
 namespace iodevice {
 
 IMPLEMENT_SUBCLASS(Ai2DiSwitch, "Ai2DiSwitch")
+EMPTY_DELETEDATA(Ai2DiSwitch)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(Ai2DiSwitch)
     "di",         // 1) Discrete Input location (IoData's DI channel)
     "channel",    // 2) Device's AI channel number
@@ -20,7 +20,6 @@ BEGIN_SLOTTABLE(Ai2DiSwitch)
     "inverted"    // 4) Inverted bit flag (default: false)
 END_SLOTTABLE(Ai2DiSwitch)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(Ai2DiSwitch)
     ON_SLOT( 1, setSlotLocation, base::Number)
     ON_SLOT( 2, setSlotChannel,  base::Number)
@@ -31,24 +30,11 @@ END_SLOT_MAP()
 Ai2DiSwitch::Ai2DiSwitch()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void Ai2DiSwitch::initData()
-{
-   devEnb = false;
-   location = 0;
-   channel = 0;
-   level = false;
-   invert = false;
-}
-
-void Ai2DiSwitch::copyData(const Ai2DiSwitch& org, const bool cc)
+void Ai2DiSwitch::copyData(const Ai2DiSwitch& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) initData();
 
    devEnb = org.devEnb;
    location = org.location;
@@ -57,9 +43,6 @@ void Ai2DiSwitch::copyData(const Ai2DiSwitch& org, const bool cc)
    invert = org.invert;
 }
 
-void Ai2DiSwitch::deleteData()
-{
-}
 
 //------------------------------------------------------------------------------
 // Get functions

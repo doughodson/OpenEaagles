@@ -1,6 +1,4 @@
-//------------------------------------------------------------------------------
-// Class: TickMarks
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_TickMarks_H__
 #define __oe_instruments_TickMarks_H__
 
@@ -42,11 +40,11 @@ protected:
     bool setSlotFlip(const base::Number* const x);
 
 private:
-    double lengthTM;       // tick mark length (if not a graphic)
-    int    quantity;       // how many tick marks will we have?
-    double gaugeLength;    // length we are spanning our tick marks over
-    bool   flip;           // our flip variable
-    graphics::Graphic* myGraphic; // our graphic (if we choose to use one for a tick mark)
+    double lengthTM {1.0};           // tick mark length (if not a graphic)
+    int    quantity {1};             // how many tick marks will we have?
+    double gaugeLength {};           // length we are spanning our tick marks over
+    bool   flip {};                  // our flip variable
+    graphics::Graphic* myGraphic {}; // our graphic (if we choose to use one for a tick mark)
 };
 
 }

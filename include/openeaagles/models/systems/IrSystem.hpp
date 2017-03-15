@@ -6,9 +6,9 @@
 
 namespace oe {
 namespace models {
-   class IrSeeker;
-   class IrQueryMsg;
-   class OnboardComputer;
+class IrSeeker;
+class IrQueryMsg;
+class OnboardComputer;
 
 //------------------------------------------------------------------------------
 // Class: IrSystem
@@ -66,10 +66,10 @@ protected:
    virtual bool shutdownNotification() override;
 
 private:
-   IrSeeker*  seeker;               // Our seeker
-   base::String* seekerName;       // Name of our seeker
+   IrSeeker* seeker {};            // Our seeker
+   base::String* seekerName {};    // Name of our seeker
 
-   bool disableQueries;             // Disable sending queries flag
+   bool disableQueries {};         // Disable sending queries flag
 };
 
 }

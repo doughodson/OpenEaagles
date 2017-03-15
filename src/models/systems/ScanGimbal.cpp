@@ -20,9 +20,6 @@ namespace models {
 IMPLEMENT_SUBCLASS(ScanGimbal, "ScanGimbal")
 EMPTY_DELETEDATA(ScanGimbal)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(ScanGimbal)
     "scanMode",             //  1: Sets the type of scan we desire (manual, horizontal, vertical, conical, circular, pseudorandom)
     "leftToRightScan",      //  2: True to scan from left to right (else right to left) (Default: true) (up to down or down to up)
@@ -37,7 +34,6 @@ BEGIN_SLOTTABLE(ScanGimbal)
     "maxRevolutions",       // 11: Spiral Scan - Maximum number of revolutions
 END_SLOTTABLE(ScanGimbal)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT( 1, setSlotScanMode,          base::String)
     ON_SLOT( 2, setSlotLeftToRightScan,   base::Number)
@@ -52,48 +48,20 @@ BEGIN_SLOT_MAP(ScanGimbal)
     ON_SLOT(11, setSlotMaxRevs,           base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(ScanGimbal)
     ON_EVENT_OBJ(SCAN_START, onStartScanEvent,  base::Integer)
     ON_EVENT_OBJ(SCAN_END,   onEndScanEvent,    base::Integer)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 ScanGimbal::ScanGimbal()
 {
    STANDARD_CONSTRUCTOR()
 
    scanPos.set(0,0);
-   scanMode = MANUAL_SCAN;
-   scanState = 0;
-   scanWidth = 0.0;
-   scanHeight = 0.0;
    refAngle.set(0,0);
-   barSpacing = 0.0;
-   numBars = 1;
-   oddNumberOfBars = false;
-   reverseScan = false;
-   leftToRightScan = true;
-   barNum = 1;
-   conAngle = 0.0;
-   revPerSec = 5.0;  // 5 hz
-   scanRadius = (2.0 * base::angle::D2RCC); // 2 degree radius
-   myLastAngle = 0.0;
-   prScanVertices = nullptr;
-   nprv = 0;
-   cprv = 0;
-   numRevs = 0.0;
-   maxNumRevs = 1.0;
    lastRefAngle.set(0,0);
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void ScanGimbal::copyData(const ScanGimbal& org, const bool)
 {
    BaseClass::copyData(org);

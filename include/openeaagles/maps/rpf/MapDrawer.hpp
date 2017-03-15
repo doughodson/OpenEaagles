@@ -3,6 +3,7 @@
 #define __oe_maps_rpf_MapDrawer_H__
 
 #include "openeaagles/graphics/MapPage.hpp"
+#include <array>
 
 namespace oe {
 namespace base { class Number; class String; }
@@ -92,31 +93,32 @@ private:
     void drawMap(const int zone, const int idx);
     // Function to determine how to scale our non-center zones to line up with the center zone
     void determineScaling(const int idx);
-    CadrgMap* myMap;                    // The map
-    double pixPerTile;                  // Number of pixels per tile
-    int gridSize;                       // Size of the map grid 1x1 or 3x3 or NxN
-    bool drawGrid;                      // Will the grid be drawn?
-    double mapIntensity;                // Map brightness factor
 
-    double sinAng;                      // SIN of heading
-    double cosAng;                      // COS of heading
+    CadrgMap* myMap {};                 // The map
+    double pixPerTile {256.0};          // Number of pixels per tile
+    int gridSize {};                    // Size of the map grid 1x1 or 3x3 or NxN
+    bool drawGrid {};                   // Will the grid be drawn?
+    double mapIntensity {1.0};          // Map brightness factor
 
-    bool showMap;                       // Flag used to command the drawing of actual textures or not
+    double sinAng {};                   // SIN of heading
+    double cosAng {};                   // COS of heading
 
-    double vpWL;                        // Viewport width and height
-    double vpHL;                        // Viewport width and height
+    bool showMap {true};                // Flag used to command the drawing of actual textures or not
 
-    TexturePager* pagers[MAX_PAGERS];   // List of texture pagers
+    double vpWL {};                     // Viewport width and height
+    double vpHL {};                     // Viewport width and height
 
-    float scalingNorth[MAX_PAGERS];     // Scaling of our north size from center pager
-    float scalingEast[MAX_PAGERS];      // Scaling of our east size from center pager
-    int zones[MAX_PAGERS];              // Holds our zones
-    int textureRow[MAX_PAGERS];         // Holds our row numbers of the textures to draw
-    int textureCol[MAX_PAGERS];         // Holds our col numbers of the textures to draw
-    float pixelRow[MAX_PAGERS];         // Pixel row position of the textures to draw
-    float pixelCol[MAX_PAGERS];         // Pixel col position of the textures to draw
-    float originRow[MAX_PAGERS];        // Pixel + texture row of the textures to draw
-    float originCol[MAX_PAGERS];        // Pixel + texture col of the textures to draw
+    std::array<TexturePager*, MAX_PAGERS> pagers {};   // List of texture pagers
+
+    std::array<float, MAX_PAGERS> scalingNorth {}; // Scaling of our north size from center pager
+    std::array<float, MAX_PAGERS> scalingEast {};  // Scaling of our east size from center pager
+    std::array<int, MAX_PAGERS> zones {};          // Holds our zones
+    std::array<int, MAX_PAGERS> textureRow {};     // Holds our row numbers of the textures to draw
+    std::array<int, MAX_PAGERS> textureCol {};     // Holds our col numbers of the textures to draw
+    std::array<float, MAX_PAGERS> pixelRow {};     // Pixel row position of the textures to draw
+    std::array<float, MAX_PAGERS> pixelCol {};     // Pixel col position of the textures to draw
+    std::array<float, MAX_PAGERS> originRow {};    // Pixel + texture row of the textures to draw
+    std::array<float, MAX_PAGERS> originCol {};    // Pixel + texture col of the textures to draw
 };
 
 }

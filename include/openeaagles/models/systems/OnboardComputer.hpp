@@ -72,7 +72,7 @@ protected:
 
 private:
    base::safe_ptr<Action> action;  // Current steerpoint action
-   Track*         nextToShoot;      // Next to shoot track
+   Track* nextToShoot {};          // Next to shoot track
 };
 
 }

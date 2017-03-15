@@ -8,6 +8,7 @@ namespace linearsystem {
 IMPLEMENT_SUBCLASS(LimitFunc, "LimitFunc")
 EMPTY_SLOTTABLE(LimitFunc)
 EMPTY_SERIALIZER(LimitFunc)
+EMPTY_DELETEDATA(LimitFunc)
 
 LimitFunc::LimitFunc()
 {
@@ -30,9 +31,6 @@ LimitFunc::LimitFunc(const double ll, const double uu) : ScalerFunc()
 
 void LimitFunc::initData()
 {
-   lower = 0;
-   upper = 0;
-
    allocateMemory(ORDER);
    clearMemory();
 }
@@ -50,10 +48,6 @@ void LimitFunc::copyData(const LimitFunc& org, const bool cc)
    upper = org.upper;
 
    initialize();
-}
-
-void LimitFunc::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

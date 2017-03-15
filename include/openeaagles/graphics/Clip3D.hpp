@@ -90,9 +90,9 @@ public:
                                       //  else against a lower plane
 
 private:
-   double x0, x1;     // left and right
-   double y0, y1;     // top and bottom
-   double z0, z1;     // near and far
+   double x0 {-std::numeric_limits<float>::max()}, x1 {std::numeric_limits<float>::max()};   // left and right
+   double y0 {-std::numeric_limits<float>::max()}, y1 {std::numeric_limits<float>::max()};   // top and bottom
+   double z0 {-std::numeric_limits<float>::max()}, z1 {std::numeric_limits<float>::max()};   // near and far
 };
 
 }

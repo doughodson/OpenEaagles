@@ -1,8 +1,4 @@
-//------------------------------------------------------------------------------
-// Class:       PushButton
-// Base class:  base::Object -> base::Component -> graphics::Graphic -> Button -> PushButton
-// Description: Button which will select one or another graphic based on being pressed or not.
-//------------------------------------------------------------------------------
+
 #ifndef __oe_instruments_PushButton_H__
 #define __oe_instruments_PushButton_H__
 
@@ -11,6 +7,10 @@
 namespace oe {
 namespace instruments {
 
+//------------------------------------------------------------------------------
+// Class: PushButton
+// Description: Button which will select one or another graphic based on being pressed or not.
+//------------------------------------------------------------------------------
 class PushButton : public Button
 {
     DECLARE_SUBCLASS(PushButton,Button)
@@ -42,11 +42,11 @@ protected:
    bool setSlotStartState(const base::Number* const newFunction);
 
 private:
-   bool  functionType;     //false = momentary, true = maintained
-   bool  currentState;     //false = off, true = on
-   bool  mouseDown;        //mouse press down status
-   SendData buttonStatusSD; // what is our button doing?
-   bool initState;          // initial state
+   bool functionType {};     // false = momentary, true = maintained
+   bool currentState {};     // false = off, true = on
+   bool mouseDown {};        // mouse press down status
+   SendData buttonStatusSD;  // what is our button doing?
+   bool initState {};        // initial state
 };
 
 }

@@ -200,7 +200,6 @@ public:
    static float  dsMagHeading(const char* const p);   // convert string to magnetic heading
    static float  dsFrequency(const char* const p);    // convert string to frequency  (MHz)
 
-
 protected:
    const char* makePointer(const size_t offset) const;
    void resetData();
@@ -229,7 +228,7 @@ protected:
       int magVariance;     // Offset to mag var
    };
 
-   const Ptbl* ptbl;    // Position table; one for each instance
+   const Ptbl* ptbl {};    // Position table; one for each instance
 };
 
 }

@@ -7,15 +7,11 @@
 
 #include <iostream>
 
-// turn off the "unreferenced formal parameter" warning.
-#pragma warning(disable:4100)
-
 namespace oe {
 namespace hla {
 
-Ambassador::Ambassador(NetIO* n)
+Ambassador::Ambassador(NetIO* netIO): hlaIo(netIO)
 {
-   hlaIo = n;
 }
 
 Ambassador::~Ambassador() throw(RTI::FederateInternalError)

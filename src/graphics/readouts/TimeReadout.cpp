@@ -9,12 +9,6 @@
 #include <cstdlib>
 #include <cstring>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace graphics {
 
@@ -27,7 +21,6 @@ TimeReadout::TimeReadout()
    STANDARD_CONSTRUCTOR()
 
    base::utStrcpy(format, FORMAT_LENGTH, "%02d:%02d:%04.1f");
-   tmode = hhmmss;
 }
 
 void TimeReadout::copyData(const TimeReadout& org, const bool)

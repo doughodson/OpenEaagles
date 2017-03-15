@@ -5,18 +5,9 @@
 #include "openeaagles/models/environment/IrAtmosphere.hpp"
 
 namespace oe {
-
-   namespace base {
-      class Number;
-      class Table1;
-      class Table2;
-      class Table3;
-      class Table4;
-      class Number;
-   }
-
+namespace base { class Number; class Table1; class Table2; class Table3;
+                 class Table4; class Number; }
 namespace models {
-
 class IrQueryMsg;
 
 //------------------------------------------------------------------------------
@@ -156,9 +147,9 @@ protected:
    virtual bool setSlotTransmissivityTable(const base::Table4* const tbl);
 
 private:
-   const base::Table2* solarRadiationTable;
-   const base::Table3* backgroundRadiationTable;
-   const base::Table4* transmissivityTable;
+   const base::Table2* solarRadiationTable {};
+   const base::Table3* backgroundRadiationTable {};
+   const base::Table4* transmissivityTable {};
 };
 
 }

@@ -11,8 +11,8 @@
 
 namespace oe {
 namespace base {
-   class CVector; // Column vector
-   class RVector; // Row vector
+class CVector; // Column vector
+class RVector; // Row vector
 
 //------------------------------------------------------------------------------
 // Class: Matrix

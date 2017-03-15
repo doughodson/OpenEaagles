@@ -54,10 +54,10 @@ public:
    virtual void print(std::ostream& sout, const int icnt) const override;
 
 private:
-   unsigned int level;        // Level
-   unsigned int code;         // Code for this level
-   const Ntm* ourNtm;         // Our default NTM
-   base::List* subnodeList;   // List of NtmInputNode nodes below this level
+   unsigned int level {};        // Level
+   unsigned int code {};         // Code for this level
+   const Ntm* ourNtm {};         // Our default NTM
+   base::List* subnodeList {};   // List of NtmInputNode nodes below this level
 };
 
 
@@ -331,7 +331,7 @@ interop::NetIO::NtmInputNode* NetIO::rootNtmInputNodeFactory() const
 // Class support functions
 //------------------------------------------------------------------------------
 NtmInputNode::NtmInputNode(const unsigned int l, const unsigned int c, const Ntm* ntm)
-   : level(l), code(c), ourNtm(nullptr), subnodeList(nullptr)
+   : level(l), code(c)
 {
    STANDARD_CONSTRUCTOR()
 
@@ -342,14 +342,9 @@ NtmInputNode::NtmInputNode(const unsigned int l, const unsigned int c, const Ntm
    subnodeList = new base::List();
 }
 
-void NtmInputNode::copyData(const NtmInputNode& org, const bool cc)
+void NtmInputNode::copyData(const NtmInputNode& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      ourNtm = nullptr;
-      subnodeList = nullptr;
-   }
 
    level = org.level;
    code = org.code;

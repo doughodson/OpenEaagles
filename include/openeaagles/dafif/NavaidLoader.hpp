@@ -86,17 +86,8 @@ protected:
    enum { NAVAID_MAX_RECORDS = 80000 };
 
    // Memory key used for quick Navaid record lookup
-   struct NavaidKey : public Database::Key {
-
-      float  freq;         // Frequency
-      int    channel;      // TACAN channel
-                           //   (+channel ==> X band)
-                           //   (-channel ==> Y band)
-      char   key[NA_KEY_LEN+1];           // DAFIF Key
-      char   ident[NA_IDENT_LEN+1];       // Identifier
-      char   countryCode[NA_CCODE_LEN+1]; // Country Code
-      Navaid::NavaidType type;          // Type
-
+   struct NavaidKey : public Database::Key
+   {
       NavaidKey(const long idx, const Navaid& navaid);
       NavaidKey(const char* key);
       NavaidKey(const char* id, const char* country);
@@ -106,6 +97,15 @@ protected:
       ~NavaidKey();
 
       void serialize(std::ostream& sout) const;
+
+      float freq {};            // Frequency
+      int channel {};           // TACAN channel
+                                //   (+channel ==> X band)
+                                //   (-channel ==> Y band)
+      char key[NA_KEY_LEN+1] {};               // DAFIF Key
+      char ident[NA_IDENT_LEN+1] {};           // Identifier
+      char countryCode[NA_CCODE_LEN+1] {};     // Country Code
+      Navaid::NavaidType type {Navaid::ANY};   // Type
    };
 
    static int il_cmp(const void* p1, const void* p2);
@@ -114,11 +114,11 @@ protected:
    static int cl_cmp(const void* p1, const void* p2);
 
 private:
-   NavaidKey** fl;   // List of DAFIF records in frequency order
-   long  nfl;        // Number of Records in fl
+   NavaidKey** fl {};   // List of DAFIF records in frequency order
+   long nfl {};         // Number of Records in fl
 
-   NavaidKey** cl;   // List of DAFIF records in channel order
-   long  ncl;        // Number of Records in cl
+   NavaidKey** cl {};   // List of DAFIF records in channel order
+   long ncl {};         // Number of Records in cl
 
 };
 

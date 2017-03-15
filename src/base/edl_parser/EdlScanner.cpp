@@ -1997,14 +1997,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 // Description: Scans EDL syntax and generates tokens for parser
 //------------------------------------------------------------------------------
 
-// disable all deprecation warnings for now, until we fix
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-#pragma warning(disable: 4996)
-#pragma warning(disable: 4005)
-#endif
-
-#line 17 "edl_scanner.l"
+#line 10 "edl_scanner.l"
 #include <iostream>
 #include <cstring>
 #include <cstdlib>
@@ -2018,7 +2011,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
-#include "EdlScanner.h"
+#include "EdlScanner.hpp"
 #include "EdlParser.hpp"
 
 #define YY_BREAK  /* We'll put in the break commands to stop the warnings */
@@ -2030,7 +2023,7 @@ static yyconst yy_state_type yy_NUL_trans[93] =
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "edlFlexLexer" */
 /* derived 'oe::base::EdlScanner' is a subclass of edlFlexLexer */
-#line 2034 "EdlScanner.cpp"
+#line 2027 "EdlScanner.cpp"
 
 #define INITIAL 0
 
@@ -2157,10 +2150,10 @@ YY_DECL
 		}
 
 	{
-#line 63 "edl_scanner.l"
+#line 56 "edl_scanner.l"
 
 
-#line 2164 "EdlScanner.cpp"
+#line 2157 "EdlScanner.cpp"
 
 	while ( 1 )		/* loops until end-of-file is reached */
 		{
@@ -2212,7 +2205,7 @@ YY_LINENO_REWIND_TO(yy_cp - 1);
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 65 "edl_scanner.l"
+#line 58 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // Use C preprocessor inserted text to cue filename and line number information
@@ -2242,7 +2235,7 @@ case 2:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up yytext again */
 YY_RULE_SETUP
-#line 89 "edl_scanner.l"
+#line 82 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // ignore C++ like comments
@@ -2253,7 +2246,7 @@ YY_RULE_SETUP
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
-#line 96 "edl_scanner.l"
+#line 89 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // ignore backslashes at end of lines
@@ -2265,7 +2258,7 @@ YY_RULE_SETUP
 case 4:
 /* rule 4 can match eol */
 YY_RULE_SETUP
-#line 104 "edl_scanner.l"
+#line 97 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // count line numbers
@@ -2276,7 +2269,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 112 "edl_scanner.l"
+#line 105 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // ignore white characters
@@ -2286,7 +2279,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 119 "edl_scanner.l"
+#line 112 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // special characters
@@ -2296,7 +2289,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 126 "edl_scanner.l"
+#line 119 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // Boolean constant: true
@@ -2307,7 +2300,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 134 "edl_scanner.l"
+#line 127 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // Boolean constant: true
@@ -2318,7 +2311,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 142 "edl_scanner.l"
+#line 135 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // Boolean constant: false
@@ -2329,7 +2322,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 150 "edl_scanner.l"
+#line 143 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // Boolean constant: false
@@ -2340,7 +2333,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 158 "edl_scanner.l"
+#line 151 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // decode hex into integer: 0Xnnn
@@ -2366,7 +2359,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 181 "edl_scanner.l"
+#line 174 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // decode octal into integer: 0nnn
@@ -2386,7 +2379,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 198 "edl_scanner.l"
+#line 191 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // standard integer
@@ -2397,7 +2390,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 206 "edl_scanner.l"
+#line 199 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // floating point format
@@ -2408,7 +2401,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 214 "edl_scanner.l"
+#line 207 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // floating point format
@@ -2419,7 +2412,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 222 "edl_scanner.l"
+#line 215 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // floating point format
@@ -2431,7 +2424,7 @@ YY_RULE_SETUP
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 230 "edl_scanner.l"
+#line 223 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // literal string (i.e., in double quotes): "hi there"
@@ -2447,7 +2440,7 @@ YY_RULE_SETUP
 case 18:
 /* rule 18 can match eol */
 YY_RULE_SETUP
-#line 242 "edl_scanner.l"
+#line 235 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // literal string (i.e., in brackets): <hi there>
@@ -2462,7 +2455,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 254 "edl_scanner.l"
+#line 247 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // slot-id is one or more legal characters followed by a ':'
@@ -2476,7 +2469,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 265 "edl_scanner.l"
+#line 258 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // ident: one or more legal characters
@@ -2489,7 +2482,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 275 "edl_scanner.l"
+#line 268 "edl_scanner.l"
 {
            //-----------------------------------------------------------------------------
            // ignore all other characters
@@ -2499,10 +2492,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 282 "edl_scanner.l"
+#line 275 "edl_scanner.l"
 ECHO;
 	YY_BREAK
-#line 2506 "EdlScanner.cpp"
+#line 2499 "EdlScanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -3396,7 +3389,7 @@ void edlfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 282 "edl_scanner.l"
+#line 275 "edl_scanner.l"
 
 
 

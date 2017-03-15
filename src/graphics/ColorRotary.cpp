@@ -13,17 +13,11 @@ namespace graphics {
 IMPLEMENT_SUBCLASS(ColorRotary,"ColorRotary")
 EMPTY_SERIALIZER(ColorRotary)
 
-//------------------------------------------------------------------------------
-// slot table for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(ColorRotary)
     "breakcolors",      // set colors
     "breakpoints",      // set our breakpoints
 END_SLOTTABLE(ColorRotary)
 
-//------------------------------------------------------------------------------
-// Map the slots for this class type
-//------------------------------------------------------------------------------
 BEGIN_SLOT_MAP(ColorRotary)
     ON_SLOT(1, setSlotColors, base::PairStream)
     ON_SLOT(2, setSlotValues, base::PairStream)
@@ -37,25 +31,11 @@ ColorRotary::ColorRotary()
     color[Color::GREEN] = 0;
     color[Color::BLUE] = 0;
     color[Color::ALPHA] = getDefaultAlpha();
-
-    // inits
-    myColors = nullptr;
-    numVals = 0;
-    for (unsigned int i=0; i<MAX_VALUES; i++) {
-        myValues[i] = 0;
-    }
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void ColorRotary::copyData(const ColorRotary& org, const bool cc)
+void ColorRotary::copyData(const ColorRotary& org, const bool)
 {
     BaseClass::copyData(org);
-    if (cc) {
-        myColors = nullptr;
-    }
 
     if (org.numVals > 0) {
         for (unsigned int i = 0; i < org.numVals; i++) {
@@ -69,9 +49,6 @@ void ColorRotary::copyData(const ColorRotary& org, const bool cc)
     numVals = org.numVals;
 }
 
-//------------------------------------------------------------------------------
-//deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void ColorRotary::deleteData()
 {
     if (myColors != nullptr) myColors->unref();

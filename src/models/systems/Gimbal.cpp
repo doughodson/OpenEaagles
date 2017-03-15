@@ -72,7 +72,6 @@ BEGIN_SLOTTABLE(Gimbal)
     "ownHeadingOnly",               // 36: Whether only the ownship heading is used by the target data block
 END_SLOTTABLE(Gimbal)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Gimbal)
 
     ON_SLOT(1, setSlotType, base::String)                       // Physical gimbal type: "mechanical" or "electronic"
@@ -142,9 +141,6 @@ Gimbal::Gimbal()
 
 void Gimbal::initData()
 {
-   type = ELECTRONIC;
-   servoMode = FREEZE_SERVO;
-
    pos.set(0,0,0);
    rate.set(0,0,0);
    cmdPos.set(0,0,0);
@@ -153,27 +149,12 @@ void Gimbal::initData()
    cmdRate.set((base::angle::D2RCC *   0.0), (base::angle::D2RCC *   0.0), (base::angle::D2RCC *   0.0));
    maxRate.set((base::angle::D2RCC * 120.0), (base::angle::D2RCC * 120.0), (base::angle::D2RCC * 120.0));
 
-   atLimit = false;
-   fastSlew = true;
-
    lowLimits.set( (base::angle::D2RCC * -720.0), (base::angle::D2RCC * -720.0), (base::angle::D2RCC * -720.0));   // default: no limits
    highLimits.set((base::angle::D2RCC *  720.0), (base::angle::D2RCC *  720.0), (base::angle::D2RCC *  720.0));    // default: no limits
 
    initPos = pos;
    initCmdRate = cmdRate;
    initCmdPos = cmdPos;
-
-   maxRngPlayers = 0.0;
-   maxAnglePlayers = 0.0;
-   terrainOcculting = false;
-   checkHorizon = true;
-   localOnly = false;
-   useWorld = true;
-   ownHeadingOnly = true;
-   playerTypes = 0xFFFF;   // all types
-   maxPlayers = 200;
-
-   tdb = nullptr;
 }
 
 void Gimbal::copyData(const Gimbal& org, const bool cc)

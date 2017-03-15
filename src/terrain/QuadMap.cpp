@@ -19,25 +19,13 @@ EMPTY_SERIALIZER(QuadMap)
 QuadMap::QuadMap()
 {
    STANDARD_CONSTRUCTOR()
-
-   numDataFiles = 0;
-   for (unsigned int i = 0; i < MAX_DATA_FILES; i++) {
-      dataFiles[i] = nullptr;
-   }
 }
 
-void QuadMap::copyData(const QuadMap& org, const bool cc)
+void QuadMap::copyData(const QuadMap& org, const bool)
 {
    // Our base class(s) will will copy our components, which include the
    // original QuadMap's DataFile objects.
    BaseClass::copyData(org);
-
-   if (cc) {
-      numDataFiles = 0;
-      for (unsigned int i = 0; i < MAX_DATA_FILES; i++) {
-         dataFiles[i] = nullptr;
-      }
-   }
 
    // Find the new DataFile objects
    findDataFiles();

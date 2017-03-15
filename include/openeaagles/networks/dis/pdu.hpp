@@ -42,22 +42,22 @@ namespace dis {
 //-----------------------------------------------
 struct EntityStatePDU {
 
-   PDUHeader            header;
-   EntityIdentifierDIS  entityID;
-   uint8_t              forceID;
-   uint8_t              numberOfArticulationParameters;
-   EntityType           entityType;
-   EntityType           alternativeType;
-   VectorDIS            entityLinearVelocity;
-   WorldCoordinates     entityLocation;
-   EulerAngles          entityOrientation;
-   uint32_t             appearance;
-   uint8_t              deadReckoningAlgorithm;
-   uint8_t              otherParameters[15];
-   VectorDIS            DRentityLinearAcceleration;
-   AngularVelocityVectorDIS DRentityAngularVelocity;
-   EntityMarking        entityMarking;
-   uint32_t             capabilites;
+   PDUHeader            header {};
+   EntityIdentifierDIS  entityID {};
+   uint8_t              forceID {};
+   uint8_t              numberOfArticulationParameters {};
+   EntityType           entityType {};
+   EntityType           alternativeType {};
+   VectorDIS            entityLinearVelocity {};
+   WorldCoordinates     entityLocation {};
+   EulerAngles          entityOrientation {};
+   uint32_t             appearance {};
+   uint8_t              deadReckoningAlgorithm {};
+   uint8_t              otherParameters[15] {};
+   VectorDIS            DRentityLinearAcceleration {};
+   AngularVelocityVectorDIS DRentityAngularVelocity {};
+   EntityMarking        entityMarking {};
+   uint32_t             capabilites {};
 
    // Returns a pointer to the idx'th VpArticulatedPart structure;
    // Note: This ONLY works after the PDU have been created and initialized!
@@ -175,15 +175,15 @@ struct EntityStatePDU {
 //-----------------------------------------------
 struct CollisionPDU {
 
-   PDUHeader            header;
-   EntityIdentifierDIS  issuingEntityID;
-   EntityIdentifierDIS  collidingEntityID;
-   EventIdentifier      eventID;
-   uint8_t              collisionType;
-   uint8_t              padding;
-   VectorDIS            velocity;
-   float                mass;
-   VectorDIS            location;
+   PDUHeader            header {};
+   EntityIdentifierDIS  issuingEntityID {};
+   EntityIdentifierDIS  collidingEntityID {};
+   EventIdentifier      eventID {};
+   uint8_t              collisionType {};
+   uint8_t              padding {};
+   VectorDIS            velocity {};
+   float                mass {};
+   VectorDIS            location {};
 
    void swapBytes() {
       header.swapBytes();
@@ -205,16 +205,16 @@ struct CollisionPDU {
 //-----------------------------------------------
 struct FirePDU {
 
-   PDUHeader            header;
-   EntityIdentifierDIS  firingEntityID;
-   EntityIdentifierDIS  targetEntityID;
-   EntityIdentifierDIS  munitionID;
-   EventIdentifier      eventID;
-   uint32_t             fireMissionIndex;
-   WorldCoordinates     location;
-   BurstDescriptor      burst;
-   VectorDIS            velocity;
-   float                range;
+   PDUHeader            header {};
+   EntityIdentifierDIS  firingEntityID {};
+   EntityIdentifierDIS  targetEntityID {};
+   EntityIdentifierDIS  munitionID {};
+   EventIdentifier      eventID {};
+   uint32_t             fireMissionIndex {};
+   WorldCoordinates     location {};
+   BurstDescriptor      burst {};
+   VectorDIS            velocity {};
+   float                range {};
 
    void swapBytes() {
       header.swapBytes();
@@ -253,18 +253,18 @@ struct FirePDU {
 //-----------------------------------------------
 struct DetonationPDU {
 
-   PDUHeader            header;
-   EntityIdentifierDIS  firingEntityID;
-   EntityIdentifierDIS  targetEntityID;
-   EntityIdentifierDIS  munitionID;
-   EventIdentifier      eventID;
-   VectorDIS            velocity;
-   WorldCoordinates     location;
-   BurstDescriptor      burst;
-   VectorDIS            locationInEntityCoordinates;
-   uint8_t              detonationResult;
-   uint8_t              numberOfArticulationParameters;
-   uint16_t             padding;
+   PDUHeader            header {};
+   EntityIdentifierDIS  firingEntityID {};
+   EntityIdentifierDIS  targetEntityID {};
+   EntityIdentifierDIS  munitionID {};
+   EventIdentifier      eventID {};
+   VectorDIS            velocity {};
+   WorldCoordinates     location {};
+   BurstDescriptor      burst {};
+   VectorDIS            locationInEntityCoordinates {};
+   uint8_t              detonationResult {};
+   uint8_t              numberOfArticulationParameters {};
+   uint16_t             padding {};
 
    void swapBytes() {
       header.swapBytes();
@@ -303,12 +303,12 @@ struct DetonationPDU {
 //-----------------------------------
 struct StartPDU{
 
-   PDUHeader            header;
-   EntityIdentifierDIS  originatingID;
-   EntityIdentifierDIS  receivingID;
-   ClockTime            realWorldTime;
-   ClockTime            simTime;
-   uint32_t             requestID;
+   PDUHeader            header {};
+   EntityIdentifierDIS  originatingID {};
+   EntityIdentifierDIS  receivingID {};
+   ClockTime            realWorldTime {};
+   ClockTime            simTime {};
+   uint32_t             requestID {};
 
    void swapBytes() {
       header.swapBytes();
@@ -337,14 +337,14 @@ struct StartPDU{
 
 struct StopPDU{
 
-   PDUHeader            header;
-   EntityIdentifierDIS  originatingID;
-   EntityIdentifierDIS  receivingID;
-   ClockTime            realWorldTime;
-   uint8_t              reason;
-   uint8_t              frozenBehavior;
-   uint16_t             padding;
-   uint32_t             requestID;
+   PDUHeader            header {};
+   EntityIdentifierDIS  originatingID {};
+   EntityIdentifierDIS  receivingID {};
+   ClockTime            realWorldTime {};
+   uint8_t              reason {};
+   uint8_t              frozenBehavior {};
+   uint16_t             padding {};
+   uint32_t             requestID {};
 
    void swapBytes() {
       header.swapBytes();
@@ -373,12 +373,12 @@ struct StopPDU{
 //-----------------------------------
 struct AcknowledgePDU{
 
-   PDUHeader              header;
-   EntityIdentifierDIS    originatingID;
-   EntityIdentifierDIS    receivingID;
-   uint16_t               acknowledgeFlag;
-   uint16_t               responseFlag;
-   uint32_t               requestID;
+   PDUHeader              header {};
+   EntityIdentifierDIS    originatingID {};
+   EntityIdentifierDIS    receivingID {};
+   uint16_t               acknowledgeFlag {};
+   uint16_t               responseFlag {};
+   uint32_t               requestID {};
 
    void dumpData() const {
       std::cout << "------------------------------------------------" << std::endl;
@@ -407,13 +407,13 @@ struct AcknowledgePDU{
 //-----------------------------------
 struct ActionRequestPDU {
 
-   PDUHeader            header;
-   EntityIdentifierDIS  originatingID;
-   EntityIdentifierDIS  receivingID;
-   uint32_t             requestID;
-   uint32_t             actionID;
-   uint32_t             numFixedRecords;
-   uint32_t             numVariableRecords;
+   PDUHeader            header {};
+   EntityIdentifierDIS  originatingID {};
+   EntityIdentifierDIS  receivingID {};
+   uint32_t             requestID {};
+   uint32_t             actionID {};
+   uint32_t             numFixedRecords {};
+   uint32_t             numVariableRecords {};
 
    uint8_t* getData() {
       uint8_t *p = reinterpret_cast<uint8_t*>(this);
@@ -467,13 +467,13 @@ struct ActionRequestPDU {
 //-----------------------------------------------
 struct DataQueryPDU{
 
-   PDUHeader              header;
-   EntityIdentifierDIS    originatingID;
-   EntityIdentifierDIS    receivingID;
-   uint32_t               requestID;
-   uint32_t               timeInterval;
-   uint32_t               numFixedRecords;
-   uint32_t               numVariableRecords;
+   PDUHeader              header {};
+   EntityIdentifierDIS    originatingID {};
+   EntityIdentifierDIS    receivingID {};
+   uint32_t               requestID {};
+   uint32_t               timeInterval {};
+   uint32_t               numFixedRecords {};
+   uint32_t               numVariableRecords {};
 
    // Returns a pointer to the start of the fixed/variable records
    uint8_t* getData() {
@@ -529,13 +529,13 @@ struct DataQueryPDU{
 //-----------------------------------------------
 struct DataPDU{
 
-   PDUHeader              header;
-   EntityIdentifierDIS    originatingID;
-   EntityIdentifierDIS    receivingID;
-   uint32_t               requestID;
-   uint32_t               padding;
-   uint32_t               numFixedRecords;
-   uint32_t               numVariableRecords;
+   PDUHeader              header {};
+   EntityIdentifierDIS    originatingID {};
+   EntityIdentifierDIS    receivingID {};
+   uint32_t               requestID {};
+   uint32_t               padding {};
+   uint32_t               numFixedRecords {};
+   uint32_t               numVariableRecords {};
 
    uint8_t* getData() {
       uint8_t *p = reinterpret_cast<uint8_t*>(this);
@@ -587,11 +587,11 @@ struct DataPDU{
 //-----------------------------------------------
 struct CommentPDU{
 
-   PDUHeader              header;
-   EntityIdentifierDIS    originatingID;
-   EntityIdentifierDIS    receivingID;
-   uint32_t               numFixedRecords;
-   uint32_t               numVariableRecords;
+   PDUHeader              header {};
+   EntityIdentifierDIS    originatingID {};
+   EntityIdentifierDIS    receivingID {};
+   uint32_t               numFixedRecords {};
+   uint32_t               numVariableRecords {};
 
    uint8_t* getData() {
       uint8_t *p = reinterpret_cast<uint8_t*>(this);
@@ -702,12 +702,12 @@ struct ElectromagneticEmissionPDU {
    // (IST-CF-03-01, May 5, 2003)
    enum { STATE_UPDATE = 0, CHANGED_DATA_UPDATE = 1 };
 
-   PDUHeader            header;                 // PDU Header
-   EntityIdentifierDIS  emittingEntityID;       // Entity that owns these systems
-   EventIdentifier      eventID;                // Event ID
-   uint8_t              stateUpdateIndicator;   // State
-   uint8_t              numberOfSystems;        // Number of systems (EmissionSystem) that follow
-   uint16_t             padding;
+   PDUHeader            header {};                 // PDU Header
+   EntityIdentifierDIS  emittingEntityID {};       // Entity that owns these systems
+   EventIdentifier      eventID {};                // Event ID
+   uint8_t              stateUpdateIndicator {};   // State
+   uint8_t              numberOfSystems {};        // Number of systems (EmissionSystem) that follow
+   uint16_t             padding {};
 
    // Returns a pointer to the idx'th EmissionSystem structure;
    // Note: This ONLY works after the PDU and emissions systems have been created and initialized!
@@ -789,18 +789,18 @@ struct ElectromagneticEmissionPDU {
 //-----------------------------------------------
 struct DesignatorPDU {
 
-   PDUHeader            header;                 // PDU Header
-   EntityIdentifierDIS  designatingEntityID;    // Entity that is positioning the designator
-   uint16_t             codeName;               // code name for the designation system
-   EntityIdentifierDIS  designatedEntityID;     // Entity that is currently being designated
-   uint16_t             designatorCode;
-   float                power;
-   float                wavelength;
-   VectorDIS            spotPosition;
-   WorldCoordinates     spotLocation;
-   uint8_t              deadReckoningAlgorithm;
-   uint8_t              padding[3];
-   VectorDIS            DRentityLinearAcceleration;
+   PDUHeader            header {};                 // PDU Header
+   EntityIdentifierDIS  designatingEntityID {};    // Entity that is positioning the designator
+   uint16_t             codeName {};               // code name for the designation system
+   EntityIdentifierDIS  designatedEntityID {};     // Entity that is currently being designated
+   uint16_t             designatorCode {};
+   float                power {};
+   float                wavelength {};
+   VectorDIS            spotPosition {};
+   WorldCoordinates     spotLocation {};
+   uint8_t              deadReckoningAlgorithm {};
+   uint8_t              padding[3] {};
+   VectorDIS            DRentityLinearAcceleration {};
 
    // Swap bytes 'to' or 'from' the network.
    void swapBytes(){
@@ -843,14 +843,14 @@ struct IffAtcNavaidsPDU
 {
 
    // Layer 1 -- basic data
-   PDUHeader            header;
-   EntityIdentifierDIS  emittingEntityID;
-   EventIdentifier      eventID;
-   VectorDIS            location;
-   SystemID             systemID;
-   uint8_t              sysDesig;         // IEEE P1278.1/D15
-   uint8_t              sysSpecData;      // IEEE P1278.1/D15
-   FundamentalOpData    operationalData;
+   PDUHeader            header {};
+   EntityIdentifierDIS  emittingEntityID {};
+   EventIdentifier      eventID {};
+   VectorDIS            location {};
+   SystemID             systemID {};
+   uint8_t              sysDesig {};         // IEEE P1278.1/D15
+   uint8_t              sysSpecData {};      // IEEE P1278.1/D15
+   FundamentalOpData    operationalData {};
 
    void swapBytes() {
       header.swapBytes();
@@ -880,34 +880,34 @@ struct IffAtcNavaidsPDU
 //-----------------------------------------------
 struct TransmitterPDU {
 
-   PDUHeader            header;                 // PDU Header
-   EntityIdentifierDIS  radioRefID;             // Entity that owns these systems
-   uint16_t             radioID;                // Radio ID (unique to entity)
-   RadioEntityType      radioEntityType;        // Radio entity type
-   uint8_t              txState;                // Transmit state
-   uint8_t              inputSource;            // Operator position: pilot, co-pilot, etc
-   uint16_t             padding;
+   PDUHeader            header {};                 // PDU Header
+   EntityIdentifierDIS  radioRefID {};             // Entity that owns these systems
+   uint16_t             radioID {};                // Radio ID (unique to entity)
+   RadioEntityType      radioEntityType {};        // Radio entity type
+   uint8_t              txState {};                // Transmit state
+   uint8_t              inputSource {};            // Operator position: pilot, co-pilot, etc
+   uint16_t             padding {};
 
    // Antenna location on entity
-   double               antLoc_X_coord;
-   double               antLoc_Y_coord;
-   double               antLoc_Z_coord;
-   float                antLoc_x_coord;
-   float                antLoc_y_coord;
-   float                antLoc_z_coord;
+   double               antLoc_X_coord {};
+   double               antLoc_Y_coord {};
+   double               antLoc_Z_coord {};
+   float                antLoc_x_coord {};
+   float                antLoc_y_coord {};
+   float                antLoc_z_coord {};
 
-   uint16_t             antennaPatternType;     // Pattern type
-   uint16_t             antennaPatternLength;   // Pattern length
-   uint64_t             frequency;              // Center frequency (hz)
-   float                transmitFrequencyBandwidth; //Bandwidth (hz)
-   float                power;                  // Power decibel-milliwatts
-   ModulationType       modulationType;         // Modulation type
-   uint16_t             cryptoSystem;           // Crypto system
-   uint16_t             cryptoKeyID;            // Crypto key id
-   uint8_t              lengthOfModulationParameters;
-   uint8_t              padding1;
-   uint8_t              padding2;
-   uint8_t              padding3;
+   uint16_t             antennaPatternType {};     // Pattern type
+   uint16_t             antennaPatternLength {};   // Pattern length
+   uint64_t             frequency {};              // Center frequency (hz)
+   float                transmitFrequencyBandwidth {}; //Bandwidth (hz)
+   float                power {};                  // Power decibel-milliwatts
+   ModulationType       modulationType {};         // Modulation type
+   uint16_t             cryptoSystem {};           // Crypto system
+   uint16_t             cryptoKeyID {};            // Crypto key id
+   uint8_t              lengthOfModulationParameters {};
+   uint8_t              padding1 {};
+   uint8_t              padding2 {};
+   uint8_t              padding3 {};
 
    void swapBytes(){
       header.swapBytes();
@@ -979,14 +979,14 @@ struct TransmitterPDU {
 //-----------------------------------------------
 struct SignalPDU {
 
-   PDUHeader           header;
-   EntityIdentifierDIS radioRefID;
-   uint16_t            radioID;
-   uint16_t            encodingScheme;
-   uint16_t            TDLType;
-   uint32_t            sampleRate;
-   uint16_t            dataLength;
-   uint16_t            samples;
+   PDUHeader           header {};
+   EntityIdentifierDIS radioRefID {};
+   uint16_t            radioID {};
+   uint16_t            encodingScheme {};
+   uint16_t            TDLType {};
+   uint32_t            sampleRate {};
+   uint16_t            dataLength {};
+   uint16_t            samples {};
 
    uint8_t* getData() {
       uint8_t *p = reinterpret_cast<uint8_t*>(this);
@@ -1055,17 +1055,17 @@ struct SignalPDU {
 //-----------------------------------
 struct ActionRequestPDU_R {
 
-   PDUHeader            header;
-   EntityIdentifierDIS  originatingID;
-   EntityIdentifierDIS  receivingID;
-   uint8_t              reliabilityService;
-   uint8_t              padding1;
-   uint8_t              padding2;
-   uint8_t              padding3;
-   uint32_t             requestID;
-   uint32_t             actionID;
-   uint32_t             numFixedRecords;
-   uint32_t             numVariableRecords;
+   PDUHeader            header {};
+   EntityIdentifierDIS  originatingID {};
+   EntityIdentifierDIS  receivingID {};
+   uint8_t              reliabilityService {};
+   uint8_t              padding1 {};
+   uint8_t              padding2 {};
+   uint8_t              padding3 {};
+   uint32_t             requestID {};
+   uint32_t             actionID {};
+   uint32_t             numFixedRecords {};
+   uint32_t             numVariableRecords {};
 
    uint8_t* getData() {
       uint8_t *p = reinterpret_cast<uint8_t*>(this);
@@ -1116,13 +1116,13 @@ struct ActionRequestPDU_R {
 //-----------------------------------
 struct ActionResponsePDU_R {
 
-   PDUHeader                 header;
-   EntityIdentifierDIS       originatingID;
-   EntityIdentifierDIS       receivingID;
-   uint32_t                  requestID;
-   uint32_t                  responseStatus;
-   uint32_t                  numFixedRecords;
-   uint32_t                  numVariableRecords;
+   PDUHeader                 header {};
+   EntityIdentifierDIS       originatingID {};
+   EntityIdentifierDIS       receivingID {};
+   uint32_t                  requestID {};
+   uint32_t                  responseStatus {};
+   uint32_t                  numFixedRecords {};
+   uint32_t                  numVariableRecords {};
 
    uint8_t* getData() {
       uint8_t *p = reinterpret_cast<uint8_t*>(this);

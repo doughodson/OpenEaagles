@@ -3,13 +3,12 @@
 #define __oe_dis_NetIO_H__
 
 #include "openeaagles/networks/interop/NetIO.hpp"
+#include <array>
 
 namespace oe {
-
 namespace base { class Angle; class NetHandler; }
 namespace models { class Iff; class RfSensor; }
 namespace interop { class Nib; }
-
 namespace dis {
 class Nib;
 class Ntm;
@@ -48,14 +47,14 @@ struct ActionResponsePDU_R;
 //    netOutput   <base::NetHandler>     ! Network output handler
 //
 //    version     <base::Number>         ! DIS version number [ 0 .. 6 ] (IST-CF-03-01, May 5, 2003)
-//                                        !   0 => Other
-//                                        !   1 => DIS PDU version 1.0 (May 92)
-//                                        !   2 => IEEE 1278-1993
-//                                        !   3 => DIS PDU version 2.0 - third draft (May 93)
-//                                        !   4 => DIS PDU version 2.0 - fourth draft (revised) March 16, 1994
-//                                        !   5 => IEEE 1278.1-1995
-//                                        !   6 => IEEE 1278.1A-1998
-//                                        !   7 => IEEE 1278.1 -- draft 15
+//                                       !   0 => Other
+//                                       !   1 => DIS PDU version 1.0 (May 92)
+//                                       !   2 => IEEE 1278-1993
+//                                       !   3 => DIS PDU version 2.0 - third draft (May 93)
+//                                       !   4 => DIS PDU version 2.0 - fourth draft (revised) March 16, 1994
+//                                       !   5 => IEEE 1278.1-1995
+//                                       !   6 => IEEE 1278.1A-1998
+//                                       !   7 => IEEE 1278.1 -- draft 15
 //
 //    siteID         <base::Number>      ! Site Identification (default: 1)
 //    applicationID  <base::Number>      ! Application Identification (default: 1)
@@ -64,11 +63,11 @@ struct ActionResponsePDU_R;
 //    maxTimeDR   <base::Time>           ! Max DR time (default: 5 seconds)
 //                <base::PairStream>     ! List of max DR times by kinds and domains (see note #4)
 //
-//    maxPositionError <base::Distance>  ! Max DR position error (default: 3 meters)
-//                   <base::PairStream> ! List of max DR position errors by kinds and domains (see note #4)
+//    maxPositionError <base::Distance>      ! Max DR position error (default: 3 meters)
+//                     <base::PairStream>    ! List of max DR position errors by kinds and domains (see note #4)
 //
-//    maxOrientationError <base::Angle>  ! Max DR angular error (default: 3 degrees)
-//                    <base::PairStream> ! List of max DR angular errors by kinds and domains (see note #4)
+//    maxOrientationError <base::Angle>      ! Max DR angular error (default: 3 degrees)
+//                        <base::PairStream> ! List of max DR angular errors by kinds and domains (see note #4)
 //
 //    maxAge         <base::Time>        ! Max age (without update) (default: 12.5 seconds)
 //                   <base::PairStream>  ! List of max ages (without update) by kinds and domains (see note #4)
@@ -370,33 +369,33 @@ private:
 
     base::safe_ptr<base::NetHandler> netInput;    // Input network handler
     base::safe_ptr<base::NetHandler> netOutput;   // Output network handler
-    unsigned char version;                        // Version number [ 0 .. 6 ]
+    unsigned char version {VERSION_1278_1A};      // Version number [ 0 .. 6 ]
 
    // Network Model IDs
-   unsigned short siteID;                         // Site ID
-   unsigned short appID;                          // Application ID
-   unsigned char  exerciseID;                     // Exercise ID
+   unsigned short siteID {1};                     // Site ID
+   unsigned short appID {1};                      // Application ID
+   unsigned char exerciseID {1};                  // Exercise ID
 
-   static const unsigned int MAX_PDUs = 500;            // Max PDUs in input buffer
-   unsigned int inputBuffer[MAX_PDUs][MAX_PDU_SIZE/4];  // Input buffer
+   static const unsigned int MAX_PDUs = 500;               // Max PDUs in input buffer
+   unsigned int inputBuffer[MAX_PDUs][MAX_PDU_SIZE/4] {};  // Input buffer
 
    // Distance filter by entity kind/domain
-   double  maxEntityRange[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Max range from ownship           (meters)
-   double  maxEntityRange2[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];    // Max range squared from ownship   (meters^2)
+   double  maxEntityRange[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS] {};     // Max range from ownship           (meters)
+   double  maxEntityRange2[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS] {};    // Max range squared from ownship   (meters^2)
 
    // Dead Reckoning (DR) parameters by entity kind/domain
-   double  maxTimeDR[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];          // Maximum DR time                  (seconds)
-   double  maxPositionErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];     // Maximum position error           (meters)
-   double  maxOrientationErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];  // Maximum orientation error        (radians)
-   double  maxAge[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS];             // Maximum age of networked players (seconds)
+   double  maxTimeDR[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS] {};          // Maximum DR time                  (seconds)
+   double  maxPositionErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS] {};     // Maximum position error           (meters)
+   double  maxOrientationErr[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS] {};  // Maximum orientation error        (radians)
+   double  maxAge[NUM_ENTITY_KINDS][MAX_ENTITY_DOMAINS] {};             // Maximum age of networked players (seconds)
 
    static const unsigned int MAX_EMISSION_HANDLERS = 500;            // Max table size
 
    // Table of pointers to emission PDU handlers; EmissionPduHandler objects
-   const EmissionPduHandler* emissionHandlers[MAX_EMISSION_HANDLERS];
+   std::array<const EmissionPduHandler*, MAX_EMISSION_HANDLERS> emissionHandlers {};
 
    // Number of emission PDU handlers in the table, 'emissionHandlers'
-   unsigned int   nEmissionHandlers;
+   unsigned int nEmissionHandlers {};
 };
 
 }

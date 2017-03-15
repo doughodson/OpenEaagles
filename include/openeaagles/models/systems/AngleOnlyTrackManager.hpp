@@ -4,6 +4,7 @@
 
 #include "openeaagles/models/systems/TrackManager.hpp"
 #include "openeaagles/base/safe_queue.hpp"
+#include "openeaagles/base/util/constants.hpp"
 
 namespace oe {
 namespace models {
@@ -44,15 +45,14 @@ protected:
    virtual bool shutdownNotification() override;
 
    // Prediction parameters
-   double              azimuthBin;         // Azimuth Bin
-   double              elevationBin;       // Elevation Bin
-   double              oneMinusAlpha;      // 1 - Alpha parameter
-   double              oneMinusBeta;       // 1 - Beta parameter
+   double azimuthBin {base::PI};     // Azimuth Bin
+   double elevationBin {base::PI};   // Elevation Bin
+   double oneMinusAlpha {};          // 1 - Alpha parameter
+   double oneMinusBeta {1.0};        // 1 - Beta parameter
 
 private:
    base::safe_queue<IrQueryMsg*> queryQueue;  // Emission input queue (used with the
                                               //   TrackManager::queueLock semaphore)
-
 };
 
 //------------------------------------------------------------------------------
@@ -101,7 +101,7 @@ protected:
    virtual void updateTrackAges(const double dt);
    virtual void removeAgedTracks();
 private:
-   bool usePerceivedPosVel;
+   bool usePerceivedPosVel {true};
 };
 
 }

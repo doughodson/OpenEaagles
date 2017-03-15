@@ -54,9 +54,7 @@ public:
 
 private:
    static const Ptbl ptable;
-
 };
-
 
 //------------------------------------------------------------------------------
 // inline member functions

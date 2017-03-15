@@ -40,12 +40,6 @@
 #include <cstring>
 #include <iostream>
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace terrain {
 
@@ -102,14 +96,13 @@ struct dtedColumnFooter
 // DtedFile class
 //==============================================================================
 
-IMPLEMENT_SUBCLASS(DtedFile,"DtedFile")
+IMPLEMENT_SUBCLASS(DtedFile, "DtedFile")
+EMPTY_DELETEDATA(DtedFile)
 
-// slot table
 BEGIN_SLOTTABLE(DtedFile)
    "verifyChecksum",    // 1) Verify the file checksum if true (default: true)
 END_SLOTTABLE(DtedFile)
 
-// slot map
 BEGIN_SLOT_MAP(DtedFile)
    ON_SLOT(1, setSlotVerifyChecksum, base::Number)
 END_SLOT_MAP()
@@ -124,8 +117,6 @@ static const char  UHL_FIXED_BY_STANDARD_BYTE = '1';
 DtedFile::DtedFile()
 {
    STANDARD_CONSTRUCTOR()
-   voidValue = -32767; // Voids in a DTED database are represented by this value
-   verifyChecksum = true;
 }
 
 void DtedFile::copyData(const DtedFile& org, const bool)
@@ -133,10 +124,6 @@ void DtedFile::copyData(const DtedFile& org, const bool)
    BaseClass::copyData(org);
 
    verifyChecksum = org.verifyChecksum;
-}
-
-void DtedFile::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

@@ -3,12 +3,14 @@
 #define __oe_otw_Otw_H__
 
 #include "openeaagles/simulation/AbstractOtw.hpp"
+#include <array>
 
 namespace oe {
 namespace base { class Distance; class Identifier; class Number; class PairStream; class String; }
 namespace models { class Player; }
 namespace otw {
-class OtwModel; class Otm;
+class OtwModel;
+class Otm;
 
 //------------------------------------------------------------------------------
 // Class: Otw
@@ -112,8 +114,8 @@ protected:
     // Derived class' access to the tables
     unsigned int getModelTableSize() const      { return nModels; }
     unsigned int getElevationTableSize() const  { return nHots; }
-    OtwModel** getModelTable()                  { return modelTbl; }
-    OtwModel** getElevationTable()              { return hotTbl; }
+    OtwModel** getModelTable()                  { return modelTbl.data(); }
+    OtwModel** getElevationTable()              { return hotTbl.data(); }
 
     // Create OtwModel objects to manage player/models
     // OTW/HUD system unique versions must be implemented by derived classes
@@ -140,6 +142,8 @@ protected:
     virtual void frameSync()=0;
 
 private:
+   void initData();
+
    static const unsigned int MAX_MODELS = 400;          // Max model table size
    static const unsigned int MAX_MODELS_TYPES = 400;    // Max OTW model type table size
 
@@ -153,39 +157,39 @@ private:
    OtwModel* newElevEntry(models::Player* const ip);      // Create a new elevation entry for this player & return the table index
 
    // Parameters
-   double         maxRange;                        // Max range of visual system  (meters)
-   unsigned int   maxModels;                       // Max number of models (must be <= MAX_MODELS)
-   unsigned int   maxElevations;                   // Max number of terrain elevation requests
+   double       maxRange {20000.0};        // Max range of visual system  (meters) (default: 20km)
+   unsigned int maxModels {};              // Max number of models (must be <= MAX_MODELS)
+   unsigned int maxElevations {};          // Max number of terrain elevation requests (default: no requests)
 
    // Ref position
-   double         refLat;                          // Visual database reference latitude (deg)
-   double         refLon;                          // Visual database reference longitude (deg)
+   double refLat {};                       // Visual database reference latitude (deg)
+   double refLon {};                       // Visual database reference longitude (deg)
 
    // Simulation inputs
-   models::Player* ownship;                        // Current ownship
-   base::PairStream* playerList;                   // Current player list
-   bool           rstFlg;                          // Reset in progress
-   bool           rstReq;                          // Reset request flag
+   models::Player* ownship {};             // Current ownship
+   base::PairStream* playerList {};        // Current player list
+   bool rstFlg {};                         // Reset in progress
+   bool rstReq {};                         // Reset request flag
 
    // Model table
-   OtwModel*      modelTbl[MAX_MODELS];            // The table of models
-   unsigned int   nModels;                         // Number of models
+   std::array<OtwModel*, MAX_MODELS> modelTbl {};  // The table of models
+   unsigned int nModels {};                        // Number of models
 
    // Height-Of-Terrain request table
-   OtwModel*      hotTbl[MAX_MODELS];              // Height-Of-Terrain request table
-   unsigned int   nHots;                           // Number of HOTs requests
+   std::array<OtwModel*, MAX_MODELS> hotTbl {};    // Height-Of-Terrain request table
+   unsigned int nHots {};                          // Number of HOTs requests
 
    // OtwModel quick lookup key
     struct OtwModelKey {
       OtwModelKey(const unsigned short pid, const base::String* const federateName);
       // OtwModel IDs  -- Comparisons in this order --
-      unsigned short  playerID;   // Player ID
+      unsigned short playerID;   // Player ID
       base::safe_ptr<const base::String> fName;  // Federate name
    };
 
    // OTW model type table
-   const Otm*     otwModelTypes[MAX_MODELS_TYPES]; // Table of pointers to OTW type mappers; Otm objects
-   unsigned int   nOtwModelTypes;                  // Number of type mappers (Otm objects) in the table, 'otwModelTable'
+   std::array<const Otm*, MAX_MODELS_TYPES> otwModelTypes {}; // Table of pointers to OTW type mappers; Otm objects
+   unsigned int nOtwModelTypes {};                            // Number of type mappers (Otm objects) in the table, 'otwModelTable'
 
    // bsearch callbacks: object name compare function --
    //   True types are (const OtwModelKey* key, const OtwModel** model)

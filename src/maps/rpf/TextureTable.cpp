@@ -13,32 +13,11 @@ EMPTY_SERIALIZER(TextureTable)
 TextureTable::TextureTable()
 {
     STANDARD_CONSTRUCTOR()
-    maxTableSize = MAX_TABLE_SIZE;
-    centerTablePos = 0;
-    lowerBound = 0;
-    upperBound = 0;
-    row = 0;
-    col = 0;
-    size = 0;
-    for (int i = 0; i < MAX_TABLE_SIZE; i++ ){
-        for (int j = 0; j < MAX_TABLE_SIZE; j++) {
-            texes[i][j] = nullptr;
-        }
-    }
 }
 
-void TextureTable::copyData(const TextureTable& org, const bool cc)
+void TextureTable::copyData(const TextureTable& org, const bool)
 {
-    // Copy our baseclass stuff first
     BaseClass::copyData(org);
-
-    if (cc) {
-        for (int i = 0; i < maxTableSize; i++) {
-            for (int j = 0; j < maxTableSize; j++) {
-                texes[i][j] = nullptr;
-            }
-        }
-    }
 
     maxTableSize = org.maxTableSize;
     centerTablePos = org.centerTablePos;

@@ -2,9 +2,10 @@
 #----------------------------------------------------------------------------------------
 # To build scanner:
 #
+# cd readouts
 # dos2unix reformat_scanner.l
 # flex -f -oReformatScanner.cpp reformat_scanner.l   // creates ReformatScanner.cpp
-#   (ReformatScanner.h already exists)
+#   (ReformatScanner.hpp already exists)
 #
 # search for "FlexLexer.h" in ReformatScanner.cpp - replace:
 #   #include <FlexLexer.h>
@@ -48,11 +49,11 @@ OBJS =  \
 	Scanline.o \
 	Shapes.o \
 	StrokeFont.o \
-	Texture.o \
-	MfdPage.o \
-	MapPage.o \
 	SymbolLoader.o \
-	Translator.o
+	Texture.o \
+	Translator.o \
+	MfdPage.o \
+	MapPage.o
 
 CPPFLAGS += -I$(FREETYPE2_INC_DIR)
 

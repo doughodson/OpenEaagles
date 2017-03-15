@@ -7,15 +7,13 @@
 namespace oe {
 namespace iodevice {
 
-// both the linux and windows version use the 'UsbJoystick' factory name
 IMPLEMENT_SUBCLASS(Controller, "Controller")
+EMPTY_DELETEDATA(Controller)
 
-// slot table for this class type
 BEGIN_SLOTTABLE(Controller)
     "deviceIndex",   // 1) Device Index (default: 0)
 END_SLOTTABLE(Controller)
 
-//  Map slot table to handles
 BEGIN_SLOT_MAP(Controller)
     ON_SLOT( 1, setSlotDeviceIndex,  oe::base::Number)
 END_SLOT_MAP()
@@ -23,49 +21,19 @@ END_SLOT_MAP()
 Controller::Controller()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
-}
-
-void Controller::initData()
-{
-   deviceIndex = 0;
-
-   numAI = 0;
-   for (unsigned int i = 0; i < MAX_AI; i++) {
-      inData[i] = 0;
-   }
-
-   numDI = 0;
-   for (unsigned int i = 0; i < MAX_DI; i++) {
-      inBits[i] = false;
-   }
 }
 
 void Controller::copyData(const Controller& org, const bool)
 {
    BaseClass::copyData(org);
 
-   initData();
-
    deviceIndex = org.deviceIndex;
 
    numAI = org.numAI;
-   for (unsigned int i = 0; i < MAX_AI; i++) {
-      inData[i] = org.inData[i];
-   }
+   inData = org.inData;
 
    numDI = org.numDI;
-   for (unsigned int i = 0; i < MAX_DI; i++) {
-      inBits[i] = org.inBits[i];
-   }
-
-}
-
-void Controller::deleteData()
-{
-   numAI = 0;
-   numDI = 0;
+   inBits = org.inBits;
 }
 
 //------------------------------------------------------------------------------

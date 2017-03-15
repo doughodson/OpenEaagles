@@ -41,9 +41,6 @@ OtwPC::OtwPC() : netOutput(nullptr)
     setMaxRange(0);
     setMaxModels(0);
     setMaxElevations(0);
-    netInit = false;
-    netInitFail = false;
-    scnt = 0;
 }
 
 void OtwPC::copyData(const OtwPC& org, const bool cc)
@@ -51,7 +48,6 @@ void OtwPC::copyData(const OtwPC& org, const bool cc)
     BaseClass::copyData(org);
 
     if (cc) {
-        netOutput = nullptr;
         setMaxRange(0);
         setMaxModels(0);
         setMaxElevations(0);

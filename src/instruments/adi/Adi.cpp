@@ -33,12 +33,6 @@ END_EVENT_HANDLER()
 Adi::Adi()
 {
     STANDARD_CONSTRUCTOR()
-    scaledPitch = 0;
-    roll = 0;
-    pitch = 0;
-    curTheta = 0;
-    curPhi = 0;
-    maxRate = 500;  // default to extremely high degrees/second (for instantaneous movement)
 }
 
 void Adi::copyData(const Adi& org, const bool)
@@ -68,13 +62,16 @@ void Adi::updateData(const double dt)
 
     // drive our adi toward the actual pitch, from our current pitch, no faster
     // than our MAX_RATE (this allows for greater fidelity, simulates an analog adi)
-    double delta = 0;
-    delta = base::alim (base::angle::aepcdDeg(pitch - curTheta), maxRate * dt);
-    curTheta = base::angle::aepcdDeg(curTheta + delta);
+    {
+        const double delta = base::alim (base::angle::aepcdDeg(pitch - curTheta), maxRate * dt);
+        curTheta = base::angle::aepcdDeg(curTheta + delta);
+    }
 
     // now do the same thing for roll
-    delta = base::alim (base::angle::aepcdRad(roll - curPhi), maxRate * dt);
-    curPhi = base::angle::aepcdRad(curPhi + delta);
+    {
+        const double delta = base::alim (base::angle::aepcdRad(roll - curPhi), maxRate * dt);
+        curPhi = base::angle::aepcdRad(curPhi + delta);
+    }
 
     // get our table, and do the linear interpolation ourself
     setInstVal(curTheta);

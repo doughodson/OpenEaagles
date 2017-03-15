@@ -16,6 +16,7 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(SamVehicle, "SamVehicle")
 EMPTY_SERIALIZER(SamVehicle)
+EMPTY_DELETEDATA(SamVehicle)
 
 //------------------------------------------------------------------------------
 // Local parameters
@@ -42,7 +43,6 @@ SamVehicle::SamVehicle()
 
    maxMslRng = DEFAULT_MAX_LAUNCH_RANGE;
    minMslRng = DEFAULT_MIN_LAUNCH_RANGE;
-   numMsl = 0;
 }
 
 void SamVehicle::copyData(const SamVehicle& org, const bool)
@@ -52,10 +52,6 @@ void SamVehicle::copyData(const SamVehicle& org, const bool)
    maxMslRng = org.maxMslRng;
    minMslRng = org.minMslRng;
    numMsl = org.numMsl;
-}
-
-void SamVehicle::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

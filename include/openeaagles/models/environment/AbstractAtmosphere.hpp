@@ -13,7 +13,6 @@ class AbstractAtmosphere : public base::Component
 
 public:
    AbstractAtmosphere();
-
 };
 
 }

@@ -35,10 +35,8 @@ public:
   bool setSlotBeta(const Number* const);
 
 protected:
-
   double alpha {0.03};
   double beta {1.0};
-
 };
 
 }

@@ -53,13 +53,11 @@ protected:
    bool setSlotDisabledList(const base::List* const list);
 
 private:
-   void initData();
+   unsigned int* enabledList {};    // List of data records enabled for processing (default: all)
+   unsigned int numEnabled {};      // Number of enabled record IDs, or zero for all records enabled
 
-   unsigned int* enabledList;       // List of data records enabled for processing (default: all)
-   unsigned int numEnabled;         // Number of enabled record IDs, or zero for all records enabled
-
-   unsigned int* disabledList;      // List of data records disabled from being processed (default: none)
-   unsigned int numDisabled;        // Number of disabled record IDs
+   unsigned int* disabledList {};   // List of data records disabled from being processed (default: none)
+   unsigned int numDisabled {};     // Number of disabled record IDs
 };
 
 

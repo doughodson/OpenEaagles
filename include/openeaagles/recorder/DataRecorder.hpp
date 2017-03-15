@@ -6,14 +6,13 @@
 #include <string>
 
 namespace oe {
-   namespace models { class Player; class Track; class Emission; }
-   namespace base { class String; }
-
+namespace models { class Player; class Track; class Emission; }
+namespace base { class String; }
 namespace recorder {
-   namespace pb { class DataRecord; class PlayerId; class PlayerState;
-      class TrackData; class EmissionData; }
-   class DataRecordHandle;
-   class OutputHandler;
+namespace pb { class DataRecord; class PlayerId; class PlayerState;
+               class TrackData; class EmissionData; }
+class DataRecordHandle;
+class OutputHandler;
 
 //------------------------------------------------------------------------------
 // Class: DataRecorder
@@ -135,18 +134,18 @@ protected:
 private:
    void initData();
 
-   OutputHandler* outputHandler;          // Our output handler
-   bool firstPass;
+   OutputHandler* outputHandler {};          // Our output handler
+   bool firstPass {true};
 
-   const char* eventName;
-   const char* application;
-   unsigned int caseNum;
-   unsigned int missionNum;
-   unsigned int subjectNum;
-   unsigned int runNum;
-   unsigned int day;
-   unsigned int month;
-   unsigned int year;
+   const char* eventName {};
+   const char* application {};
+   unsigned int caseNum {};
+   unsigned int missionNum {};
+   unsigned int subjectNum {};
+   unsigned int runNum {};
+   unsigned int day {};
+   unsigned int month {};
+   unsigned int year {};
 };
 
 #include "openeaagles/recorder/DataRecorder.inl"

@@ -30,7 +30,6 @@ namespace models {
 //==============================================================================
 IMPLEMENT_SUBCLASS(RfSensor, "RfSensor")
 
-// Slot table
 BEGIN_SLOTTABLE(RfSensor)
     "trackManagerName", // 1: Name of the requested Track Manager (base::String)
     "modes",            // 2: Submodes
@@ -43,7 +42,6 @@ BEGIN_SLOTTABLE(RfSensor)
     "syncXmitWithScan", // 9: Flag: If true, transmitter on is sync'd with the antenna scan (default: false)
 END_SLOTTABLE(RfSensor)
 
-//  Map slot table
 BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(1,setSlotTrackManagerName,base::String)
     ON_SLOT(2,setSlotModeStream,base::PairStream)
@@ -60,7 +58,6 @@ BEGIN_SLOT_MAP(RfSensor)
     ON_SLOT(9,setSlotSyncXmitWithScan,base::Number)
 END_SLOT_MAP()
 
-// Event() map
 BEGIN_EVENT_HANDLER(RfSensor)
     ON_EVENT(TGT_DESIGNATE,onTgtDesignateEvent)
     ON_EVENT(SENSOR_RTS,onReturnToSearchEvent)
@@ -68,44 +65,14 @@ BEGIN_EVENT_HANDLER(RfSensor)
     ON_EVENT_OBJ(SCAN_END, onEndScanEvent, base::Integer)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
-RfSensor::RfSensor() : modes(nullptr), ranges(nullptr), masterModePtr(nullptr), trackManager(nullptr)
+RfSensor::RfSensor()
 {
     STANDARD_CONSTRUCTOR()
-
-    tmName = nullptr;
-    scanning = false;
-    scanBar = 0;
-    nRanges = 0;
-    rng = 50.0;
-    rngIdx = 1;
-    initRngIdx = 1;
-    prf = 0.0;
-    pulseWidth = 0.0;
-    beamWidth = (static_cast<double>(base::angle::D2RCC) * 3.5);
-    syncXmitWithScan = false;
-
-    typeId[0] = '\0';
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void RfSensor::copyData(const RfSensor& org, const bool cc)
+void RfSensor::copyData(const RfSensor& org, const bool)
 {
     BaseClass::copyData(org);
-
-    // If copy constructor, init the following pointers
-    if (cc) {
-        modes = nullptr;
-        ranges = nullptr;
-        nRanges = 0;
-        tmName = nullptr;
-        trackManager = nullptr;
-        masterModePtr = nullptr;
-    }
 
     // Copy subpages
     if (modes != nullptr) { modes->unref(); }
@@ -139,9 +106,6 @@ void RfSensor::copyData(const RfSensor& org, const bool cc)
     setTypeId(org.typeId);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void RfSensor::deleteData()
 {
     setRanges(nullptr,0);

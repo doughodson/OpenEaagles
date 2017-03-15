@@ -43,10 +43,7 @@ Matrix::Matrix(const Matrixf& m)
    *this = m;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void Matrix::copyData(const Matrix& org, const bool cc)
+void Matrix::copyData(const Matrix& org, const bool)
 {
    BaseClass::copyData(org);
 
@@ -62,9 +59,6 @@ void Matrix::copyData(const Matrix& org, const bool cc)
    }
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void Matrix::deleteData()
 {
    emptyMatrix();

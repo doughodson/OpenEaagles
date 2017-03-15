@@ -11,22 +11,11 @@ IMPLEMENT_SUBCLASS(Clip3D, "Clip3D")
 EMPTY_SLOTTABLE(Clip3D)
 EMPTY_SERIALIZER(Clip3D)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 Clip3D::Clip3D()
 {
    STANDARD_CONSTRUCTOR()
-
-   setClippingBox(-std::numeric_limits<float>::max(), std::numeric_limits<float>::max(),
-                  -std::numeric_limits<float>::max(), std::numeric_limits<float>::max(),
-                  -std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void Clip3D::copyData(const Clip3D& org, const bool)
 {
     BaseClass::copyData(org);
@@ -39,10 +28,6 @@ void Clip3D::copyData(const Clip3D& org, const bool)
     z1 = org.z1;
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
 void Clip3D::deleteData()
 {
    setClippingBox(-std::numeric_limits<float>::max(), std::numeric_limits<float>::max(),

@@ -1,6 +1,14 @@
+
+#ifndef __oe_instruments_DialTickMarks_H__
+#define __oe_instruments_DialTickMarks_H__
+
+#include "openeaagles/instruments/dials/AnalogDial.hpp"
+
+namespace oe {
+namespace instruments {
+
 //------------------------------------------------------------------------------
 // Class: DialTickMarks
-// Base class: graphics::Graphic -> AnalogDial -> DialTickMarks
 //
 // Description: Handles tick marks for an analog dial, or any other general
 // application.
@@ -13,14 +21,6 @@
 //      this will override the setLength() function and will use a graphic to
 //      draw.
 //------------------------------------------------------------------------------
-#ifndef __oe_instruments_DialTickMarks_H__
-#define __oe_instruments_DialTickMarks_H__
-
-#include "openeaagles/instruments/dials/AnalogDial.hpp"
-
-namespace oe {
-namespace instruments {
-
 class DialTickMarks : public AnalogDial
 {
     DECLARE_SUBCLASS(DialTickMarks,AnalogDial)
@@ -44,9 +44,9 @@ protected:
     bool setSlotQuantity(const base::Number* const newQ);
 
 private:
-    double      length;             // tick mark length (if not a graphic)
-    int         quantity;           // how many tick marks will we have?
-    graphics::Graphic*  myGraphic; // our graphic (if we choose to use on for a tick mark)
+    double length {1.0};    // tick mark length (if not a graphic)
+    int quantity {1};       // how many tick marks will we have?
+    graphics::Graphic* myGraphic {};  // our graphic (if we choose to use on for a tick mark)
 };
 
 }

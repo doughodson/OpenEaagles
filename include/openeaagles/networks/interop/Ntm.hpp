@@ -5,9 +5,7 @@
 #include "openeaagles/networks/interop/NetIO.hpp"
 
 namespace oe {
-
 namespace models { class Player; }
-
 namespace interop {
 class Nib;
 

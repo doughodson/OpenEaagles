@@ -31,17 +31,11 @@ SolenoidSwitch::SolenoidSwitch()
 {
     STANDARD_CONSTRUCTOR()
 
-    timer = nullptr;               // we will create our timer if we set a timer slot
-    currButtonId = CENTER_BUTTON;  // default to first current button
     picked[0] = true;              // center button picked
-    picked[1] = false;
-    picked[2] = false;
     for (int i = 0; i < NUM_BUTTONS; i++) {
         pickedSD[i].empty();
         eventMap[i] = -1;
     }
-    lastButtonId = CENTER_BUTTON;
-    latched = false;
 }
 
 void SolenoidSwitch::copyData(const SolenoidSwitch& org, const bool)
@@ -248,7 +242,7 @@ void SolenoidSwitch::updateData(const double dt)
     }
 
     // tell our buttons what position they have
-    send("button%d", USER_KEY_EVENT, picked, pickedSD, NUM_BUTTONS);
+    send("button%d", USER_KEY_EVENT, picked.data(), pickedSD.data(), NUM_BUTTONS);
 }
 
 
@@ -264,8 +258,6 @@ END_EVENT_HANDLER()
 SolenoidButton::SolenoidButton()
 {
    STANDARD_CONSTRUCTOR()
-   noTimer = false;
-   pushed = false;
    pushedSD.empty();
 }
 

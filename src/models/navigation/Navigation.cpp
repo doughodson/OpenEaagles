@@ -52,50 +52,8 @@ Navigation::Navigation() : rm()
 
 void Navigation::initData()
 {
-   priRoute = nullptr;
-   initRoute = nullptr;
-   bull = nullptr;
-
-   latitude = 0.0;
-   longitude = 0.0;
-   altitude = 0.0;
-   posValid = false;
-   heading = 0.0;
-   pitch = 0.0;
-   roll = 0.0;
-   attValid = false;
    velVec.set(0,0,0);
    accelVec.set(0,0,0);
-   gs = 0.0;
-   tas = 0.0;
-   tk = 0.0;
-   velValid = false;
-   magvar = 0.0;
-   mhdg = 0.0;
-   magVarValid = false;
-   windDirD = 0.0;
-   windSpdKts = 0.0;
-   windsValid = false;
-   navStrValid = false;
-   tbrg = 0.0;
-   mbrg = 0.0;
-   dst = 0.0;
-   ttg = 0.0;
-   tcrs = 0.0;
-   mcrs = 0.0;
-   xte = 0.0;
-   eta = 0.0;
-
-   utc = 0.0;
-   initUTC = 0.0;
-   utcValid = false;
-
-   // No FEBA
-   feba = nullptr;
-   nFeba = 0;
-
-   refLat = 0.0;
-   refLon = 0.0;
 }
 
 void Navigation::copyData(const Navigation& org, const bool cc)

@@ -63,24 +63,23 @@ public:
    virtual bool setPixels(const GLubyte* const image);
 
    // Read/write a bitmap (BMP) format file
-   virtual bool readFileBMP(const char* const filename, const char* const path=0);
-   virtual bool writeFileBMP(const char* const filename, const char* const path=0);
+   virtual bool readFileBMP(const char* const filename, const char* const path=nullptr);
+   virtual bool writeFileBMP(const char* const filename, const char* const path=nullptr);
 
 private:
-   void initData();
    GLubyte* readRgbValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const;
    GLubyte* readColorValuesBMP(FILE* const fp, const unsigned int offset, const BITMAPINFOHEADER_X* const bmfi) const;
 
-   unsigned int width;           // width in pixels
-   unsigned int height;          // height in pixels
-   unsigned int numComponents;   // Number of color components (3 or 4)
-   GLenum format;                // GL_RGB, GL_BGRA_EXT, etc.
+   unsigned int width {};           // width in pixels
+   unsigned int height {};          // height in pixels
+   unsigned int numComponents {};   // Number of color components (3 or 4)
+   GLenum format {GL_RGB};          // GL_RGB, GL_BGRA_EXT, etc.
 
-   GLubyte* pixels;              // Pointer to our pixels; number of pixel bytes must
-                                 // be equal to (width*height*numComponents)
+   GLubyte* pixels {};              // Pointer to our pixels; number of pixel bytes must
+                                    // be equal to (width*height*numComponents)
 
-   unsigned int xPixPerMeter;   // X pixels per meter
-   unsigned int yPixPerMeter;   // Y pixels per meter
+   unsigned int xPixPerMeter {3937};   // X pixels per meter (about 100 pixels per inch)
+   unsigned int yPixPerMeter {3937};   // Y pixels per meter (about 100 pixels per inch)
 };
 
 inline unsigned int Image::getWidth() const           { return width; }

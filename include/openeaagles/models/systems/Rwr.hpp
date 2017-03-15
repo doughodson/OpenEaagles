@@ -55,11 +55,9 @@ protected:
    }
 
 private:
-   void initData();
+   base::safe_queue<Emission*> rptQueue {MAX_EMISSIONS};   // Report queue
 
-   base::safe_queue<Emission*> rptQueue;   // Report queue
-
-   double rays[2][NUM_RAYS];     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
+   double rays[2][NUM_RAYS] {};     // Back (sensor) buffer [0][*] and front (graphics) buffer [1][*]
 };
 
 }

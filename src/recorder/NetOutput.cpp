@@ -17,23 +17,14 @@ BEGIN_SLOTTABLE(NetOutput)
    "noWait",               // 2) No wait (unblocked) I/O flag (default: false -- blocked I/O)
 END_SLOTTABLE(NetOutput)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(NetOutput)
     ON_SLOT(1, setSlotNetwork,   oe::base::NetHandler)
     ON_SLOT(2, setSlotNoWait,    oe::base::Number)
 END_SLOT_MAP()
 
-NetOutput::NetOutput() : netHandler(nullptr)
+NetOutput::NetOutput()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
-}
-
-void NetOutput::initData()
-{
-   networkInitialized = false;
-   networkInitFailed = false;
-   noWaitFlag = false;
 }
 
 void NetOutput::copyData(const NetOutput& org, const bool)
@@ -51,7 +42,6 @@ void NetOutput::deleteData()
    closeConnections();
    netHandler = nullptr;
 }
-
 
 //------------------------------------------------------------------------------
 // Returns true if the networks are initialized and connected

@@ -5,6 +5,7 @@
 -- Targets of interest:
 --     vs2013     (Visual Studio 2013)
 --     vs2015     (Visual Studio 2015)
+--     vs2017     (Visual Studio 2017)
 --
 if (_ACTION == nil) then
     return
@@ -61,11 +62,19 @@ workspace "oe"
    --
    configurations { "Release32", "Debug32" }
 
+   -- visual studio options and warnings
+   -- /wd4351 (C4351 warning) - disable warning associated with array brace initialization
+   -- /wd4996 (C4996 warning) - disable deprecated declarations
+   -- /wd4005 (C4005 warning) - disable macro redefinition
+   -- /wd4100 (C4100 warning) - disable unreferenced formal parameter
+   -- /Oi - generate intrinsic functions
+   buildoptions( { "/wd4351", "/wd4996", "/wd4005", "/wd4100", "/Oi" } )
+
    -- common release configuration flags and symbols
    filter { "Release32" }
       flags { "Optimize" }
-      -- enable compiler intrinsics and favour speed over size
-      buildoptions { "/Oi", "/Ot" }
+      -- favor speed over size
+      buildoptions { "/Ot" }
       defines { "WIN32", "_LIB", "NDEBUG" }
 
    -- common debug configuration flags and symbols
@@ -73,7 +82,6 @@ workspace "oe"
       targetsuffix "_d"
       symbols "On"
       -- enable compiler intrinsics
-      buildoptions { "/Oi" }
       defines { "WIN32", "_LIB", "_DEBUG" }
 
    --

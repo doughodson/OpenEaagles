@@ -19,23 +19,17 @@ EMPTY_SERIALIZER(Record)
 Record::Record()
 {
    STANDARD_CONSTRUCTOR()
-   ptbl = nullptr;
 }
 
 Record::Record(const char* const s)
 {
    STANDARD_CONSTRUCTOR()
-
-   ptbl = nullptr;
    setStr(s);
 }
 
-void Record::copyData(const Record& org, const bool cc)
+void Record::copyData(const Record& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) {
-      ptbl = nullptr;
-   }
    setStr( org );
    ptbl = org.ptbl;
 }

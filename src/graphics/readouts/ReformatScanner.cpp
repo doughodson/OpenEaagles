@@ -1717,14 +1717,7 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 //              into another)
 //------------------------------------------------------------------------------
 
-// disable all deprecation warnings for now, until we fix
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-#pragma warning(disable: 4996)
-#pragma warning(disable: 4005)
-#endif
-
-#line 19 "reformat_scanner.l"
+#line 12 "reformat_scanner.l"
 #include <iostream>
 #include <cstring>
 #include <cstdio>
@@ -1739,7 +1732,7 @@ static yyconst yy_state_type yy_NUL_trans[77] =
 #define YY_NO_UNISTD_H 1
 /* change the name of the scanner class - results in "rfFlexLexer" */
 /* derived 'oe::graphics::ReformatScanner' is a subclass of rfFlexLexer */
-#line 1743 "ReformatScanner.cpp"
+#line 1736 "ReformatScanner.cpp"
 
 #define INITIAL 0
 
@@ -1866,10 +1859,10 @@ YY_DECL
 		}
 
 	{
-#line 45 "reformat_scanner.l"
+#line 38 "reformat_scanner.l"
 
 
-#line 1873 "ReformatScanner.cpp"
+#line 1866 "ReformatScanner.cpp"
 
 	while ( 1 )		/* loops until end-of-file is reached */
 		{
@@ -1916,94 +1909,94 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 47 "reformat_scanner.l"
+#line 40 "reformat_scanner.l"
 {   // "+0#" (Integer w/sign and leading zeros)
                             return oe::graphics::ReformatScanner::processInteger(yytext, yyleng);
                         }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 51 "reformat_scanner.l"
+#line 44 "reformat_scanner.l"
 {   // "+0#.#" (Floating w/sign and leading zeros)
                             return oe::graphics::ReformatScanner::processFloat(yytext, yyleng);
                         }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 55 "reformat_scanner.l"
+#line 48 "reformat_scanner.l"
 {   // HH:MM:SS (Hours, minutes and seconds)
                                   return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::hhmmss, yytext, yyleng);
                               }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 59 "reformat_scanner.l"
+#line 52 "reformat_scanner.l"
 {   // HH:MM (Hours and minutes)
                                   return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::hhmm, yytext, yyleng);
                               }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 63 "reformat_scanner.l"
+#line 56 "reformat_scanner.l"
 {   // HH (Hours)
                             return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::hh, yytext, yyleng);
 			}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 67 "reformat_scanner.l"
+#line 60 "reformat_scanner.l"
 {   // MM:SS (Minutes and seconds)
                                   return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::mmss, yytext, yyleng);
                               }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 71 "reformat_scanner.l"
+#line 64 "reformat_scanner.l"
 {   // MM (Minutes)
                             return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::mm, yytext, yyleng);
                         }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 75 "reformat_scanner.l"
+#line 68 "reformat_scanner.l"
 {  // SS (Seconds)
                            return oe::graphics::ReformatScanner::processTime(oe::graphics::TimeReadout::ss, yytext, yyleng);
                         }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 79 "reformat_scanner.l"
+#line 72 "reformat_scanner.l"
 {   // +DDMMSS (Degrees, minutes and seconds)
                                             return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::ddmmss, yytext, yyleng);
                                         }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 83 "reformat_scanner.l"
+#line 76 "reformat_scanner.l"
 {   // +DDMM (Degrees and minutes)
                                        return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::ddmm, yytext, yyleng);
                                    }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 87 "reformat_scanner.l"
+#line 80 "reformat_scanner.l"
 {   // +DD (Degrees)
                                   return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::dd, yytext, yyleng);
                               }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 91 "reformat_scanner.l"
+#line 84 "reformat_scanner.l"
 {   // +DD (Degrees)
                                   return oe::graphics::ReformatScanner::processDirection(oe::graphics::DirectionReadout::dd, yytext, yyleng);
                               }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 95 "reformat_scanner.l"
+#line 88 "reformat_scanner.l"
 ECHO;
 	YY_BREAK
-#line 2007 "ReformatScanner.cpp"
+#line 2000 "ReformatScanner.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2897,7 +2890,7 @@ void rffree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 95 "reformat_scanner.l"
+#line 88 "reformat_scanner.l"
 
 
 
@@ -2922,11 +2915,11 @@ int ReformatScanner::yylex(const DataType dt)
 int ReformatScanner::processInteger(const char* text, const int len)
 {
    switch (dataType) {
-   case number:			// We're looking for a number,
-   case hex:			//   a Hexadecimal number, or
-   case octal:			//   an Octal number.
+   case number:         // We're looking for a number,
+   case hex:            //   a Hexadecimal number, or
+   case octal:          //   an Octal number.
       break;
-   default:			// No, we didn't want any of these
+   default:             // No, we didn't want any of these
       return formatError(text);
    }
 
@@ -3376,11 +3369,11 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
          j+= std::sprintf(&format[j], "%dd", dd);
 
       if (dc)
-	 format[j++] = dc;
+         format[j++] = dc;
 
       if (mm > 0) {
-	 format[j++] = '%';
-	 format[j++] = '0';
+         format[j++] = '%';
+         format[j++] = '0';
       }
    }
 
@@ -3396,11 +3389,11 @@ int ReformatScanner::processDirection(const DirectionReadout::DirMode dm, const 
          j+= std::sprintf(&format[j], "%dd", mm);
 
       if (mc)
-	 format[j++] = mc;
+         format[j++] = mc;
 
       if (ss > 0) {
-	 format[j++] = '%';
-	 format[j++] = '0';
+         format[j++] = '%';
+         format[j++] = '0';
       }
    }
 

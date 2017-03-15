@@ -5,20 +5,12 @@
 #include "openeaagles/models/IrSignature.hpp"
 
 namespace oe {
-   namespace base {
-      class Number;
-      class List;
-      class Table1;
-      class Table2;
-      class Table3;
-      class Table4;
-      class Table5;
-   }
-
+namespace base { class Number; class List; class Table1; class Table2;
+                 class Table3; class Table4; class Table5; }
 namespace models {
-   class AirVehicle;
-   class IrQueryMsg;
-   class IrShape;
+class AirVehicle;
+class IrQueryMsg;
+class IrShape;
 
 //------------------------------------------------------------------------------
 // Class: AircraftIrSignature
@@ -88,14 +80,13 @@ protected:
    virtual double getPLA(const AirVehicle* const airModel);
 
 private:
-   void initData();
-
-   const base::Table4* airframeSignatureTable; // mapping of
+   const base::Table4* airframeSignatureTable {};
+            // mapping of
             // signature  x is the velocity (in mach #) and y is altitude (in sim prevailing units --
             // meters, I believe), z is azimuth in radians, za is
             // elevation in radians. Data is the heat signature in watts per steradian.
 
-   const base::Table2*  airframeWavebandFactorTable;
+   const base::Table2*  airframeWavebandFactorTable {};
             // airframe wavebands
             // x - waveband center
             // y - waveband width
@@ -103,7 +94,7 @@ private:
             // factor to get the plume energy in this particular waveband.
             // the different factors should all sum to 1.0  .
 
-   const base::Table5* plumeSignatureTable;
+   const base::Table5* plumeSignatureTable {};
             // mapping of signature in watts/steradian to
             // x- pla % from 0 - 100.
             // y - velocity (mach #)
@@ -111,7 +102,7 @@ private:
             // azimuth (radians)
             // elevation (radians)
 
-   const base::Table2*  plumeWavebandFactorTable;
+   const base::Table2* plumeWavebandFactorTable {};
             // plume wavebands
             // x - waveband center
             // y - waveband width
@@ -119,7 +110,7 @@ private:
             // factor to get the plume energy in this particular waveband.
             // the different factors should all sum to 1.0
 
-   const base::Table5* hotPartsSignatureTable;
+   const base::Table5* hotPartsSignatureTable {};
             // mapping of signature in watts/steradian to
             // x- pla % from 0 - 100.
             // y - velocity (knots)
@@ -127,7 +118,7 @@ private:
             // azimuth (radians)
             // elevation (radians)
 
-   const base::Table2*  hotPartsWavebandFactorTable;
+   const base::Table2* hotPartsWavebandFactorTable {};
             // plume wavebands
             // x - waveband center
             // y - waveband width
@@ -135,11 +126,10 @@ private:
             // factor to get the plume energy in this particular waveband.
             // the different factors should all sum to 1.0  .
 
-   double* airframeSig;       // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
-   double* plumeSigs;         // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
-   double* hotPartsSigs;      // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
+   double* airframeSig {};       // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
+   double* plumeSigs {};         // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
+   double* hotPartsSigs {};      // 2 dimensions i = bin, j = lower wavelength, upper wavelength, signature
 };
-
 
 }
 }

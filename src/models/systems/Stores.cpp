@@ -13,60 +13,31 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Stores, "Stores")
 
-// Slot table
 BEGIN_SLOTTABLE(Stores)
    "numStations",  //  1: Number of stations (less than or equal MAX_STATIONS)
    "stores",      //  2: Our weapons and other external stores
    "selected"     //  3: Selected weapon station number
 END_SLOTTABLE(Stores)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Stores)
    ON_SLOT( 1, setSlotNumStations,   base::Number)
    ON_SLOT( 2, setSlotStores,   base::PairStream)
    ON_SLOT( 3, setSlotSelected,   base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Stores)
     ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, AbstractWeapon )
     ON_EVENT_OBJ( JETTISON_EVENT, onJettisonEvent, ExternalStore )
 END_EVENT_HANDLER()
 
-
-//------------------------------------------------------------------------------
-// Constructors
-//------------------------------------------------------------------------------
 Stores::Stores()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void Stores::initData()
-{
-   storesList = nullptr;
-
-   for (unsigned int s = 0; s < MAX_STATIONS; s++) {
-      weaponTbl[s] = nullptr;
-      esTbl[s] = nullptr;
-   }
-   numWpn = 0;
-   numEs = 0;
-   ns = 0;
-   selected = 0;
-}
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void Stores::copyData(const Stores& org, const bool cc)
+void Stores::copyData(const Stores& org, const bool)
 {
    Object::copyData(org);
-   if (cc) initData();
 
    ns = org.ns;
    selected = org.selected;
@@ -78,7 +49,6 @@ void Stores::deleteData()
    setSlotStores(nullptr);
    setNumberOfStations(0);
 }
-
 
 //------------------------------------------------------------------------------
 // Reset()

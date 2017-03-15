@@ -14,25 +14,11 @@ EMPTY_SERIALIZER(DataFile)
 DataFile::DataFile()
 {
    STANDARD_CONSTRUCTOR()
-
-   columns = nullptr;
-
-   latSpacing = 0;
-   lonSpacing = 0;
-   nptlat = 0;
-   nptlong = 0;
-   voidValue = -32767; // default void (missing) elevation value
 }
 
-void DataFile::copyData(const DataFile& org, const bool cc)
+void DataFile::copyData(const DataFile& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      columns = nullptr;
-      nptlat = 0;
-      nptlong = 0;
-   }
 
    voidValue = org.voidValue;
 

@@ -17,39 +17,24 @@ namespace models {
 IMPLEMENT_SUBCLASS(IrSystem, "IrSystem")
 EMPTY_SERIALIZER(IrSystem)
 
-// Slot table
 BEGIN_SLOTTABLE(IrSystem)
    "seekerName",        //  1: Name of the requested Seeker  (base::String)
    "disableQueries",    //  2: Disable sending queries packets flag (default: false)
 END_SLOTTABLE(IrSystem)
 
-//  Map slot table
 BEGIN_SLOT_MAP(IrSystem)
    ON_SLOT(1,  setSlotSeekerName,  base::String)
    ON_SLOT(2,  setSlotDisableQueries,  base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
-IrSystem::IrSystem() : seeker(nullptr) , seekerName(nullptr)
+IrSystem::IrSystem()
 {
    STANDARD_CONSTRUCTOR()
-
-   disableQueries = false;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void IrSystem::copyData(const IrSystem& org, const bool cc)
+void IrSystem::copyData(const IrSystem& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      seeker = nullptr;
-      seekerName = nullptr;
-   }
 
    disableQueries = org.disableQueries;
 
@@ -59,10 +44,6 @@ void IrSystem::copyData(const IrSystem& org, const bool cc)
    setSlotSeekerName( p );
 }
 
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void IrSystem::deleteData()
 {
    setSeeker(nullptr);

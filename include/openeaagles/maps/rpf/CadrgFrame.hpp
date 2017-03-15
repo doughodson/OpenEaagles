@@ -3,7 +3,7 @@
 #define __oe_maps_rpf_CadrgFrame_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/maps/rpf/support.hpp"
+#include "openeaagles/maps/rpf/map_utils.hpp"
 
 namespace oe {
 namespace rpf {
@@ -36,12 +36,12 @@ public:
     virtual int decompressSubframe(const int x, const int y, Subframe& subFrame);
 
 private:
-    static const int frameSize = 6144;              // Total frame size
-    CadrgFrameEntry* frameEntry;                    // Pointer to our frame entry parent
-    unsigned char subFrameTable[6][6][frameSize];   // Subframe table array
-    int nitfHdrLength;                              // Nitf header length
-    int masked[6][6];                               // Subframe masked array
-    unsigned char lookupTable[4096][4][4];          // Lookup table
+    static const int frameSize = 6144;                 // Total frame size
+    CadrgFrameEntry* frameEntry {};                    // Pointer to our frame entry parent
+    unsigned char subFrameTable[6][6][frameSize] {};   // Subframe table array
+    int nitfHdrLength {};                              // Nitf header length
+    int masked[6][6] {};                               // Subframe masked array
+    unsigned char lookupTable[4096][4][4] {};          // Lookup table
 };
 
 }

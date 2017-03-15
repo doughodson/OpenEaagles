@@ -144,26 +144,23 @@ private:
    bool setSlotTerrain(terrain::Terrain* const msg);
    bool setSlotAtmosphere(AbstractAtmosphere* const msg);
 
-
-
    // Our Earth Model, or default to using base::EarthModel::wgs84 if zero
-   const base::EarthModel* em;
+   const base::EarthModel* em {};
 
-   double  refLat;               // Reference (center of gaming area) latitude (deg)
-   double  refLon;               // Reference (center of gaming area) longitude (deg)
-   double  sinRlat;              // Sine of ref latitude
-   double  cosRlat;              // Cosine of ref latitude
-   double  maxRefRange;          // Max valid range (meters) of the gaming area or zero if there's no limit.
-   bool gaUseEmFlg;              // Gaming area using earth model projections
-   base::Matrixd wm;             // World transformation matrix:
-                                 //    Local tangent plane (NED) <==> Earth Centered, Earth Fixed (ECEF)
-                                 //    Usage:
-                                 //       ecef = wm; * earthNED
-                                 //       earthNED  = ecef * wm;
+   double refLat {};          // Reference (center of gaming area) latitude (deg)
+   double refLon {};          // Reference (center of gaming area) longitude (deg)
+   double sinRlat {};         // Sine of ref latitude
+   double cosRlat {1.0};      // Cosine of ref latitude
+   double maxRefRange {};     // Max valid range (meters) of the gaming area or zero if there's no limit.
+   bool gaUseEmFlg {};        // Gaming area using earth model projections
+   base::Matrixd wm;          // World transformation matrix:
+                              //    Local tangent plane (NED) <==> Earth Centered, Earth Fixed (ECEF)
+                              //    Usage:
+                              //       ecef = wm; * earthNED
+                              //       earthNED  = ecef * wm;
 
-
-   AbstractAtmosphere* atmosphere;
-   terrain::Terrain* terrain;
+   AbstractAtmosphere* atmosphere {};
+   terrain::Terrain* terrain {};
 
 };
 

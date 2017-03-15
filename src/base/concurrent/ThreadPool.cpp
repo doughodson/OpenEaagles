@@ -17,21 +17,19 @@ BEGIN_SLOTTABLE(ThreadPool)
 END_SLOTTABLE(ThreadPool)
 
 BEGIN_SLOT_MAP(ThreadPool)
-   ON_SLOT( 1,  setSlotNumThreads, Number)
-   ON_SLOT( 2,  setSlotPriority,   Number)
+   ON_SLOT( 1, setSlotNumThreads, Number)
+   ON_SLOT( 2, setSlotPriority,   Number)
 END_SLOT_MAP()
 
 ThreadPool::ThreadPool()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
 ThreadPool::ThreadPool( ThreadPoolManager* mgr )
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
-   initData();
 }
 
 ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num )
@@ -39,7 +37,6 @@ ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num )
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
-   initData();
 }
 
 ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num, const double pri )
@@ -47,18 +44,6 @@ ThreadPool::ThreadPool( ThreadPoolManager* mgr, const unsigned int num, const do
 {
    STANDARD_CONSTRUCTOR()
    setManager(mgr);
-   initData();
-}
-
-void ThreadPool::initData()
-{
-   actualThreads = 0;
-   for (unsigned int i = 0; i < MAX_THREADS; i++) {
-      allThreads[i] = nullptr;
-      availableThreads[i] = nullptr;
-   }
-   availableThreadsLock = 0;
-   unthreadedObj = nullptr;
 }
 
 //------------------------------------------------------------------------------
@@ -240,12 +225,10 @@ void ThreadPool::destroy()
 // Object overloads
 //------------------------------------------------------------------------------
 
-void ThreadPool::copyData(const ThreadPool& org, const bool cc)
+void ThreadPool::copyData(const ThreadPool& org, const bool)
 {
    BaseClass::copyData(org);
    destroy();
-   if (cc)
-      initData();
 
    // Copy the manager, number of threads, and priority
    if (org.manager != nullptr)

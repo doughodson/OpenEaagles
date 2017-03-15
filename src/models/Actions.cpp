@@ -25,20 +25,11 @@ EMPTY_SLOTTABLE(Action)
 Action::Action()
 {
    STANDARD_CONSTRUCTOR()
-
-   manager = nullptr;
-
-   refId = 0;
-   completed = false;
 }
 
-void Action::copyData(const Action& org, const bool cc)
+void Action::copyData(const Action& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      manager = nullptr;
-   }
 
    refId = org.refId;
    completed = org.completed;
@@ -154,9 +145,6 @@ bool Action::execute(base::Component* actor)
    return ok;
 }
 
-//------------------------------------------------------------------------------
-// serialize
-//------------------------------------------------------------------------------
 std::ostream& Action::serialize(std::ostream& sout, const int i, const bool slotsOnly) const
 {
     int j = 0;
@@ -178,7 +166,7 @@ std::ostream& Action::serialize(std::ostream& sout, const int i, const bool slot
 
 
 // =============================================================================
-// class: ActionImagingSar
+// Class: ActionImagingSar
 // =============================================================================
 IMPLEMENT_SUBCLASS(ActionImagingSar,"ActionImagingSar")
 
@@ -201,26 +189,11 @@ END_SLOT_MAP()
 ActionImagingSar::ActionImagingSar()
 {
    STANDARD_CONSTRUCTOR()
-
-   sar = nullptr;
-
-   sarLatitude = 0.0;
-   sarLongitude = 0.0;
-   sarElevation = 0.0;
-   resolution = 3;
-   imgSize = 512;
-   orientation = 0.0;
-
-   timer = 0.0;
 }
 
-void ActionImagingSar::copyData(const ActionImagingSar& org, const bool cc)
+void ActionImagingSar::copyData(const ActionImagingSar& org, const bool)
 {
    BaseClass::copyData(org);
-
-   if (cc) {
-      sar = nullptr;
-   }
 
    sarLatitude = org.sarLatitude;
    sarLongitude = org.sarLongitude;
@@ -498,11 +471,11 @@ std::ostream& ActionImagingSar::serialize(std::ostream& sout, const int i, const
 
 
 // =============================================================================
-// class: ActionWeaponRelease
+// Class: ActionWeaponRelease
 // =============================================================================
 
 IMPLEMENT_SUBCLASS(ActionWeaponRelease,"ActionWeaponRelease")
-//EMPTY_SLOTTABLE(ActionWeaponRelease)
+EMPTY_DELETEDATA(ActionWeaponRelease)
 
 BEGIN_SLOTTABLE(ActionWeaponRelease)
    "targetLatitude",    //  1) Target's latitude (LatLon)
@@ -511,7 +484,6 @@ BEGIN_SLOTTABLE(ActionWeaponRelease)
    "station",           //  4) Station number to use (default to next available)
 END_SLOTTABLE(ActionWeaponRelease)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(ActionWeaponRelease)
     ON_SLOT(1, setSlotTargetLat, base::LatLon)
     ON_SLOT(2, setSlotTargetLon, base::LatLon)
@@ -519,22 +491,11 @@ BEGIN_SLOT_MAP(ActionWeaponRelease)
     ON_SLOT(4, setSlotStationNum, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 ActionWeaponRelease::ActionWeaponRelease()
 {
    STANDARD_CONSTRUCTOR()
-
-   station = 0;
-   targetLatitude = 0.0;
-   targetLongitude = 0.0;
-   targetElevation = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void ActionWeaponRelease::copyData(const ActionWeaponRelease& org, const bool)
 {
    BaseClass::copyData(org);
@@ -543,13 +504,6 @@ void ActionWeaponRelease::copyData(const ActionWeaponRelease& org, const bool)
    targetLatitude = org.targetLatitude;
    targetLongitude = org.targetLongitude;
    targetElevation = org.targetElevation;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void ActionWeaponRelease::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -684,36 +638,27 @@ std::ostream& ActionWeaponRelease::serialize(std::ostream& sout, const int i, co
 }
 
 // =============================================================================
-// class: ActionDecoyRelease
+// Class: ActionDecoyRelease
 // =============================================================================
 
 IMPLEMENT_SUBCLASS(ActionDecoyRelease,"ActionDecoyRelease")
+EMPTY_DELETEDATA(ActionDecoyRelease)
+
 BEGIN_SLOTTABLE(ActionDecoyRelease)
    "numToLaunch",    //  1) number of decoys to launch
    "interval",       //  2) time, in seconds, between launches
 END_SLOTTABLE(ActionDecoyRelease)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(ActionDecoyRelease)
     ON_SLOT(1, setSlotNumToLaunch, base::Number)
     ON_SLOT(2, setSlotInterval, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 ActionDecoyRelease::ActionDecoyRelease()
 {
    STANDARD_CONSTRUCTOR()
-   interval = 0.0;
-   numToLaunch = 1;
-   tod = 0.0;
-   startTOD = 0.0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void ActionDecoyRelease::copyData(const ActionDecoyRelease& org, const bool)
 {
    BaseClass::copyData(org);
@@ -721,13 +666,6 @@ void ActionDecoyRelease::copyData(const ActionDecoyRelease& org, const bool)
    numToLaunch = org.numToLaunch;
    tod = org.tod;
    startTOD = org.startTOD;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void ActionDecoyRelease::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------
@@ -844,48 +782,30 @@ std::ostream& ActionDecoyRelease::serialize(std::ostream& sout, const int i, con
 
 
 // =============================================================================
-// class: ActionCamouflageType
+// Class: ActionCamouflageType
 // =============================================================================
 
-IMPLEMENT_SUBCLASS(ActionCamouflageType,"ActionCamouflageType")
+IMPLEMENT_SUBCLASS(ActionCamouflageType, "ActionCamouflageType")
+EMPTY_DELETEDATA(ActionCamouflageType)
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(ActionCamouflageType)
    "camouflageType",    //  1) User defined camouflage type (positive integer or zero for none)
 END_SLOTTABLE(ActionCamouflageType)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(ActionCamouflageType)
     ON_SLOT( 1, setSlotCamouflageType, base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Constructors, destructor, copy operator and clone()
-//------------------------------------------------------------------------------
 ActionCamouflageType::ActionCamouflageType()
 {
    STANDARD_CONSTRUCTOR()
-
-   camouflage = 0;
 }
 
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void ActionCamouflageType::copyData(const ActionCamouflageType& org, const bool)
 {
    BaseClass::copyData(org);
 
    camouflage = org.camouflage;
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
-void ActionCamouflageType::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

@@ -31,16 +31,11 @@ BEGIN_EVENT_HANDLER(Circle)
     ON_EVENT_OBJ(UPDATE_VALUE, updateRadius, base::Number)
 END_EVENT_HANDLER()
 
-// Constructor
 Circle::Circle()
 {
     STANDARD_CONSTRUCTOR()
-    radius = 1.0;
-    filled = false;
-    slices = 16;
 }
 
-// Copy data
 void Circle::copyData(const Circle& org, const bool)
 {
    BaseClass::copyData(org);
@@ -126,7 +121,7 @@ std::ostream& Circle::serialize(std::ostream& sout, const int i, const bool slot
 //==============================================================================
 // Class: OcclusionCircle
 //==============================================================================
-IMPLEMENT_SUBCLASS(OcclusionCircle,"OcclusionCircle")
+IMPLEMENT_SUBCLASS(OcclusionCircle, "OcclusionCircle")
 EMPTY_DELETEDATA(OcclusionCircle)
 
 BEGIN_SLOTTABLE(OcclusionCircle)
@@ -137,17 +132,13 @@ BEGIN_SLOT_MAP(OcclusionCircle)
     ON_SLOT(1,setSlotOuterRadius,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 OcclusionCircle::OcclusionCircle()
 {
     STANDARD_CONSTRUCTOR()
-    // outer radius just a bit bigger than inner radius
-    outerRadius = 1.1f;
     setFilled(true);
     setSlices(100);
 }
 
-// Copy data
 void OcclusionCircle::copyData(const OcclusionCircle& org, const bool)
 {
     BaseClass::copyData(org);
@@ -220,16 +211,11 @@ BEGIN_SLOT_MAP(Arc)
     ON_SLOT(3,setSlotIsConnected,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 Arc::Arc()
 {
     STANDARD_CONSTRUCTOR()
-    startAngle = 0.0;
-    arcLength = 90.0;
-    setIsConnected(false);
 }
 
-// Copy data
 void Arc::copyData(const Arc& org, const bool)
 {
    BaseClass::copyData(org);
@@ -320,17 +306,13 @@ BEGIN_SLOT_MAP(OcclusionArc)
     ON_SLOT(1,setSlotOuterRadius,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 OcclusionArc::OcclusionArc()
 {
     STANDARD_CONSTRUCTOR()
-    // outer radius just a bit bigger than inner radius
-    outerRadius = 1.1f;
     setFilled(true);
     setSlices(100);
 }
 
-// Copy data
 void OcclusionArc::copyData(const OcclusionArc& org, const bool)
 {
     BaseClass::copyData(org);
@@ -450,11 +432,9 @@ BEGIN_SLOT_MAP(Line)
     ON_SLOT(1,setSlotSegments,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 Line::Line()
 {
    STANDARD_CONSTRUCTOR()
-   segment = false;
 }
 
 void Line::copyData(const Line& org, const bool)
@@ -538,7 +518,6 @@ END_SLOT_MAP()
 Quad::Quad()
 {
     STANDARD_CONSTRUCTOR()
-    strip = false;
 }
 
 void Quad::copyData(const Quad& org, const bool)
@@ -557,7 +536,6 @@ bool Quad::setSlotStrip(const base::Number* const x)
     }
     return ok;
 }
-
 
 // Draw function
 void Quad::drawFunc()
@@ -665,11 +643,9 @@ BEGIN_SLOT_MAP(Triangle)
     ON_SLOT(1,setSlotFan,base::Number)
 END_SLOT_MAP()
 
-// Constructor
 Triangle::Triangle()
 {
     STANDARD_CONSTRUCTOR()
-    fan = false;
 }
 
 void Triangle::copyData(const Triangle& org, const bool)
@@ -779,7 +755,6 @@ std::ostream& Triangle::serialize(std::ostream& sout, const int i, const bool sl
    }
    return sout;
 }
-
 
 }
 }

@@ -42,9 +42,9 @@ protected:
    virtual bool setSlotCapacity(const base::Number* const msg);
 
 private:
-   double capacity;      // Fuel capacity (lb)
-   double fuelWt;        // Fuel contents (lb)
-   double initFuelWt;    // Fuel contents at reset (lb)
+   double capacity {-1.0};      // Fuel capacity (lb)
+   double fuelWt {-1.0};        // Fuel contents (lb)
+   double initFuelWt {-1.0};    // Fuel contents at reset (lb)
 };
 
 }

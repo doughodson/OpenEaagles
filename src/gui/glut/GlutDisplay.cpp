@@ -1,6 +1,3 @@
-//------------------------------------------------------------------------------
-// Glut Display
-//------------------------------------------------------------------------------
 
 #include "openeaagles/gui/glut/GlutDisplay.hpp"
 
@@ -59,23 +56,12 @@ END_EVENT_HANDLER()
 GlutDisplay::GlutDisplay()
 {
    STANDARD_CONSTRUCTOR()
-
    initData();
 }
 
 void GlutDisplay::initData()
 {
-   winId = -1;
-   fullScreenFlg = false;
-   pickWidth = 10.0;
-   pickHeight = 10.0;
-   accumBuff = false;
-   stencilBuff = false;
    idleSleepTimeMS = DEFAULT_IDLE_SLEEP;
-   okToResize = false;
-   picked = nullptr;
-
-   mainWinId = -1;
    swPosition.set(0.0, 0.0);
    swSize.set(50.0, 50.0);
 }

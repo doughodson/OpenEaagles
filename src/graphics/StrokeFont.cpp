@@ -7,6 +7,7 @@ namespace graphics {
 
 IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(StrokeFont, "StrokeFont")
 EMPTY_SERIALIZER(StrokeFont)
+EMPTY_DELETEDATA(StrokeFont)
 
 // SGI font scaled so six stroke font points (units used below) is 1 screen unit
 static const double XSCALE = (1.0/6.0);
@@ -16,9 +17,6 @@ static const double YSCALE = (1.0/6.0);
 const double defaultFontWidth = 6.0f * XSCALE;
 const double defaultFontHeight = 9.0f * YSCALE;
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 StrokeFont::StrokeFont()
 {
     STANDARD_CONSTRUCTOR()
@@ -29,20 +27,9 @@ StrokeFont::StrokeFont()
     setLineSpacing( defaultFontHeight );
 }
 
-
-//------------------------------------------------------------------------------
-// copyData() -- copy this object's data
-//------------------------------------------------------------------------------
 void StrokeFont::copyData(const StrokeFont& org, const bool)
 {
     BaseClass::copyData(org);
-}
-
-//------------------------------------------------------------------------------
-// deleteData() -- delete this object's data
-//------------------------------------------------------------------------------
-void StrokeFont::deleteData()
-{
 }
 
 //------------------------------------------------------------------------------

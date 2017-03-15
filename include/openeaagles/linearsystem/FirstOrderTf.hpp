@@ -51,10 +51,10 @@ private:
    static const unsigned int ORDER = 2;
 
    // Parameters and initial values
-   double n1;
-   double n2;
-   double d1;
-   double d2;
+   double n1 {};
+   double n2 {};
+   double d1 {};
+   double d2 {};
 };
 
 }

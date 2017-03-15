@@ -56,7 +56,7 @@ public:
 protected:
    virtual void makeText() override;
    virtual void reformat(const char* const example) override;
-   DirMode tmode;
+   DirMode tmode {dd};
 };
 
 }

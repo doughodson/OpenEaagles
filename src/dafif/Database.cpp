@@ -28,26 +28,7 @@ END_SLOT_MAP()
 Database::Database()
 {
    STANDARD_CONSTRUCTOR()
-
    db = new base::FileReader();
-
-   ncache = 0;
-   rl = nullptr;
-   nrl = 0;
-
-   ol = nullptr;
-   nol = 0;
-
-   ql = nullptr;
-   nql = 0;
-   qlimit = 0;
-
-   refLat = 0.0f;
-   refLon = 0.0f;
-   coslat = 1.0f;
-   mrng = 0.0f;
-   dbInUse = false;
-   dbLoaded = false;
 }
 
 void Database::copyData(const Database& org, const bool cc)
@@ -534,39 +515,16 @@ std::ostream& Database::serialize(std::ostream& sout, const int i, const bool sl
 //------------------------------------------------------------------------------
 // Database::Key
 //------------------------------------------------------------------------------
-Database::Key::Key(const int idx1)
+Database::Key::Key(const int idx1): idx(idx1)
 {
-   idx = idx1;
-   size = 0;
-
-   lat  = 0.0f;
-   lon  = 0.0f;
-   rng2 = 0.0f;
-
-   icao[0] = '\0';
 }
 
-Database::Key::Key(const float lat1, const float lon1)
+Database::Key::Key(const float lat1, const float lon1): lat(lat1), lon(lon1)
 {
-   idx = 0;
-   size = 0;
-
-   lat  = lat1;
-   lon  = lon1;
-   rng2 = 0.0f;
-
-   icao[0] = '\0';
 }
 
 Database::Key::Key(const char* code)
 {
-   idx = 0;
-   size = 0;
-
-   lat  = 0.0f;
-   lon  = 0.0f;
-   rng2 = 0.0f;
-
    Record::dsGetString(icao,code,ICAO_CODE_LEN);
 }
 

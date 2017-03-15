@@ -4,6 +4,8 @@
 
 #include "openeaagles/graphics/Field.hpp"
 
+#include "openeaagles/base/util/constants.hpp"
+
 namespace oe {
 namespace base { class Object; class Float; class Integer; class Number; }
 
@@ -110,27 +112,27 @@ protected:
    virtual void redisplay();
    virtual void reformat(const char* const example);
 
-   static const size_t CBUF_LENGTH = 32;   // Max length of cbuf
-   static const size_t FORMAT_LENGTH = 32; // Max length of format
+   static const size_t CBUF_LENGTH = 32;    // Max length of cbuf
+   static const size_t FORMAT_LENGTH = 32;  // Max length of format
 
    char cbuf[CBUF_LENGTH];       // buffer
    char format[FORMAT_LENGTH];   // Current format string
 
-   char plusChar;                // Positive value character
-   char minusChar;               // Negative value character
-   char dpChar;                  // Decimal point character
-   char undefinedChar;           // Undefined value character
-   char overflowChar;            // Overflow character
-   bool postSign;                // If true, sign char is at end of string
+   char plusChar {};                // Positive value character
+   char minusChar {};               // Negative value character
+   char dpChar {};                  // Decimal point character
+   char undefinedChar {'-'};        // Undefined value character
+   char overflowChar {'*'};         // Overflow character
+   bool postSign {};                // If true, sign char is at end of string
 
    static ReformatScanner* reformatter; // Generates format statements by example
 
 private:
-   double   num;            // Value as double
-   double   maxNum;         // Maximum value
-   double   maxValid;       // Maximum valid input value
-   double   minValid;       // Minimum valid input value
-   bool     blankZero;      // Display blank instead of zero value
+   double num {};                            // Value as double
+   double maxNum {base::UNDEFINED_VALUE};    // Maximum value
+   double maxValid {base::UNDEFINED_VALUE};  // Maximum valid input value
+   double minValid {base::UNDEFINED_VALUE};  // Minimum valid input value
+   bool blankZero {};                        // Display blank instead of zero value
 };
 
 }

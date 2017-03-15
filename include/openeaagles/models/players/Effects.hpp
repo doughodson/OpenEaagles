@@ -45,7 +45,7 @@ protected:
     virtual void updateTOF(const double dt) override;
 
 private:
-    double dragIndex;             // Drag Index
+    double dragIndex {0.0006};   // Drag Index
 };
 
 //------------------------------------------------------------------------------

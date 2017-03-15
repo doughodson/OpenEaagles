@@ -21,7 +21,6 @@ namespace models {
 
 IMPLEMENT_SUBCLASS(Radio, "Radio")
 
-// Slot table
 BEGIN_SLOTTABLE(Radio)
    "numChannels",       // 1: Number of channels (less than or equal MAX_CHANNELS)
    "channels",          // 2: Our channels (list of base::Frequency objects)
@@ -30,7 +29,6 @@ BEGIN_SLOTTABLE(Radio)
    "radioID",           // 5: radioID used by DIS
 END_SLOTTABLE(Radio)
 
-//  Map slot table
 BEGIN_SLOT_MAP(Radio)
     ON_SLOT(1, setSlotNumChannels,  base::Number)
     ON_SLOT(2, setSlotChannels,     base::PairStream)
@@ -42,23 +40,11 @@ END_SLOT_MAP()
 Radio::Radio()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void Radio::initData()
-{
-   channel = 0;
-   chanFreqTbl = nullptr;
-   numChan = 0;
-   maxDetectRange = 120.0;
-   radioId = 0;
-}
-
-void Radio::copyData(const Radio& org, const bool cc)
+void Radio::copyData(const Radio& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // (Re)set the number of channels
    setNumberOfChannels(org.numChan);
@@ -429,36 +415,19 @@ IMPLEMENT_SUBCLASS(CommRadio, "CommRadio")
 EMPTY_SLOTTABLE(CommRadio)
 EMPTY_SERIALIZER(CommRadio)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 CommRadio::CommRadio()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-void CommRadio::initData()
-{
-   datalink = nullptr;
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void CommRadio::copyData(const CommRadio& org, const bool cc)
+void CommRadio::copyData(const CommRadio& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    // No datalink yet
    setDatalink(nullptr);
 }
 
-//------------------------------------------------------------------------------
-// deleteData() -- delete member data
-//------------------------------------------------------------------------------
 void CommRadio::deleteData()
 {
    setDatalink(nullptr);

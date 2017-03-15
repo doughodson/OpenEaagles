@@ -7,9 +7,7 @@
 namespace JSBSim { class FGFDMExec; class FGPropertyManager; }
 
 namespace oe {
-
 namespace base { class String; class Integer; }
-
 namespace models {
 
 //------------------------------------------------------------------------------
@@ -82,32 +80,32 @@ public:
 
 protected:
 
-    JSBSim::FGFDMExec* fdmex;
-    JSBSim::FGPropertyManager* propMgr;
+    JSBSim::FGFDMExec* fdmex {};
+    JSBSim::FGPropertyManager* propMgr {};
 
 private:
     void initData();
 
-    const base::String* rootDir;   // root directory for JSBSim models
-    const base::String* model;     // JSBSim model
-    int   debugLevel;
+    const base::String* rootDir {};  // root directory for JSBSim models
+    const base::String* model {};    // JSBSim model
+    int   debugLevel {};
 
-    double pitchTrimPos;    // +/- 1.0
-    double pitchTrimRate;   // maxVal(1.0) per sec
-    double pitchTrimSw;
-    double rollTrimPos;     // +/- 1.0
-    double rollTrimRate;    // maxVal(1.0) per sec
-    double rollTrimSw;
+    double pitchTrimPos {};          // +/- 1.0
+    double pitchTrimRate {};         // maxVal(1.0) per sec
+    double pitchTrimSw {};
+    double rollTrimPos {};           // +/- 1.0
+    double rollTrimRate {};          // maxVal(1.0) per sec
+    double rollTrimSw {};
 
-    bool        headingHoldOn;
-    bool        altitudeHoldOn;
-    bool        velocityHoldOn;
-    double      commandedHeadingDeg;
-    double      commandedAltitudeFt;
-    double      commandedVelocityKts;
-    bool        hasHeadingHold;
-    bool        hasVelocityHold;
-    bool        hasAltitudeHold;
+    bool   headingHoldOn {};
+    bool   altitudeHoldOn {};
+    bool   velocityHoldOn {};
+    double commandedHeadingDeg {};
+    double commandedAltitudeFt {};
+    double commandedVelocityKts {};
+    bool   hasHeadingHold {};
+    bool   hasVelocityHold {};
+    bool   hasAltitudeHold {};
 };
 
 }

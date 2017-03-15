@@ -66,13 +66,13 @@ public:
 private:
     void updateRAC(const double dt);
 
-    double      vpMin;        // Minimum Velocity              (m/s)
-    double      vpMaxG;       // Velocity for Max G's          (g's)
-    double      gMax;         // Max G's                       (g's)
-    double      maxAccel;     // Max longitudinal acceleration (m/s/s)
-    double      cmdAltitude;  // Commanded Altitude            (meters)
-    double      cmdHeading;   // Commanded Heading             (degs)
-    double      cmdVelocity;  // Commanded speed               (kts)
+    double vpMin {};               // Minimum Velocity              (m/s)
+    double vpMaxG {250.0};         // Velocity for Max G's          (g's)
+    double gMax {4.0};             // Max G's                       (g's)
+    double maxAccel {10.0};        // Max longitudinal acceleration (m/s/s)
+    double cmdAltitude {-9999.0};  // Commanded Altitude            (meters)
+    double cmdHeading {-9999.0};   // Commanded Heading             (degs)
+    double cmdVelocity {-9999.0};  // Commanded speed               (kts)
 };
 
 }

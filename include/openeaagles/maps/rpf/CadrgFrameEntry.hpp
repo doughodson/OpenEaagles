@@ -50,13 +50,13 @@ public:
     virtual void setFrame(CadrgFrame* newFrame);
 
 private:
-    bool exists;        // Does this entry exist (has a path name been set?)
-    char* directory;    // Directory
-    char filename[16];  // Filename
-    CadrgClut clut;     // Color lookup table
-    CadrgFrame* frame;  // Pointer to our child frame
-    bool loaded;        // Loaded flag
-    bool cib;           // Are we a CIB or not?
+    bool exists {};        // Does this entry exist (has a path name been set?)
+    char* directory {};    // Directory
+    char filename[16] {};  // Filename
+    CadrgClut clut;        // Color lookup table
+    CadrgFrame* frame {};  // Pointer to our child frame
+    bool loaded {};        // Loaded flag
+    bool cib {};           // Are we a CIB or not?
 };
 
 }

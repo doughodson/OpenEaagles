@@ -10,64 +10,31 @@
 #include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/util/unit_utils.hpp"
 
-// Disable all deprecation warnings for now.  Until we fix them,
-// they are quite annoying to see over and over again...
-#if(_MSC_VER>=1400)   // VC8+
-# pragma warning(disable: 4996)
-#endif
-
 namespace oe {
 namespace recorder {
 
+IMPLEMENT_SUBCLASS(TabPrinter, "TabPrinter")
+EMPTY_SERIALIZER(TabPrinter)
+EMPTY_DELETEDATA(TabPrinter)
 
-//==============================================================================
-// Class TabPrinter
-//==============================================================================
-IMPLEMENT_SUBCLASS(TabPrinter,"TabPrinter")
-
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(TabPrinter)
    "msgHdrOptn",   // 1) Msg Header options (see TabPrinter.h)
    "divider",      // 2) Field divider
 END_SLOTTABLE(TabPrinter)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(TabPrinter)
-   ON_SLOT( 1, setSlotMsgHdr,      base::String)
-   ON_SLOT( 2, setSlotDivider,     base::String)
+   ON_SLOT( 1, setSlotMsgHdr,  base::String)
+   ON_SLOT( 2, setSlotDivider, base::String)
 END_SLOT_MAP()
 
-EMPTY_SERIALIZER(TabPrinter)
-EMPTY_DELETEDATA(TabPrinter)
-
-//------------------------------------------------------------------------------
-// Default Constructor
-//------------------------------------------------------------------------------
 TabPrinter::TabPrinter()
 {
    STANDARD_CONSTRUCTOR()
-   initData();
 }
 
-void TabPrinter::initData()
-{
-   printHeader = false;   // print either Header or message values
-   simReset = true;
-   setMsgHeaders(true);
-   option = NO_HDR;
-   lastMessage = REID_UNHANDLED_ID_TOKEN;
-   divider = "\t";
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
-void TabPrinter::copyData(const TabPrinter& org, const bool cc)
+void TabPrinter::copyData(const TabPrinter& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    printHeader = org.printHeader;
    option = org.option;
@@ -105,7 +72,6 @@ void TabPrinter::setMsgHeaders(const bool f)
 //------------------------------------------------------------------------------
 // slot functions
 //------------------------------------------------------------------------------
-
 
 //------------------------------------------------------------------------------
 // setSlotMsgHdr

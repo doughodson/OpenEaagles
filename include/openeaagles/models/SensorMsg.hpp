@@ -155,29 +155,28 @@ public:
    // Sets the optional data message attached to sensor message
    void setDataMessage(base::Object* const msg);
 
-
    // Clear data
    virtual void clear();
 
 private:
    void initData();
 
-   double maxRng;            // Maximum range                                (NM)
-   double rng;               // Range                                        (meters)
-   double rngRate;           // Range Rate                                   (m/s)
-   double gaz;               // Gimbal azimuth                               (rad)
-   double gel;               // Gimbal elevation                             (rad)
-   double iaz;               // Target's Angle Of Incidence (AOI) azimuth    (rad)
-   double iel;               // Target's AOI elevation                       (rad)
+   double maxRng {};         // Maximum range                                (NM)
+   double rng {};            // Range                                        (meters)
+   double rngRate {};        // Range Rate                                   (m/s)
+   double gaz {};            // Gimbal azimuth                               (rad)
+   double gel {};            // Gimbal elevation                             (rad)
+   double iaz {};            // Target's Angle Of Incidence (AOI) azimuth    (rad)
+   double iel {};            // Target's AOI elevation                       (rad)
    base::Vec3d losO2T;       // Normalized ownship to target LOS vector (ownship's NED)
    base::Vec3d losT2O;       // Normalized target to ownship LOS vector (target's NED)
    base::Vec3d aoi;          // Normalized target Angle Of Incidence (AOI) vector
-   Gimbal* gimbal;           // The gimbal that transmitted the message
+   Gimbal* gimbal {};        // The gimbal that transmitted the message
    base::safe_ptr<Player> ownship;         // The originating (ownship) player
    base::safe_ptr<Player> target;          // The Target player
    base::safe_ptr<base::Object> dataMsg;   // Embedded data message (e.g., datalink, etc)
-   bool returnReq;           // Return Request
-   bool localOnly;           // Local players only flag
+   bool returnReq {};        // Return Request
+   bool localOnly {};        // Local players only flag
 };
 
 }

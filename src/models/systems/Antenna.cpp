@@ -26,9 +26,6 @@ namespace models {
 
 IMPLEMENT_PARTIAL_SUBCLASS(Antenna, "Antenna")
 
-//------------------------------------------------------------------------------
-// Slot table
-//------------------------------------------------------------------------------
 BEGIN_SLOTTABLE(Antenna)
     "polarization",         //  1: Antenna Polarization  { none, vertical, horizontal, slant, RHC, LHC }
     "threshold",            //  2: Antenna threshold                (base::Power)
@@ -39,7 +36,6 @@ BEGIN_SLOTTABLE(Antenna)
     "beamWidth",            //  7: Beam Width              (Angle) or (Number: Radian)
 END_SLOTTABLE(Antenna)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(1,  setSlotPolarization,      base::String)
     ON_SLOT(2,  setSlotThreshold,         base::Power)
@@ -51,31 +47,19 @@ BEGIN_SLOT_MAP(Antenna)
     ON_SLOT(7,  setSlotBeamWidth,         base::Number)
 END_SLOT_MAP()
 
-//------------------------------------------------------------------------------
-// Event() map
-//------------------------------------------------------------------------------
 BEGIN_EVENT_HANDLER(Antenna)
     ON_EVENT_OBJ(RF_EMISSION_RETURN,onRfEmissionReturnEventAntenna,Emission)
 END_EVENT_HANDLER()
 
-//------------------------------------------------------------------------------
-// constructor(s)
-//------------------------------------------------------------------------------
-Antenna::Antenna() : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
-                     inUseEmQueue(MAX_EMISSIONS), inUseEmLock(0),
-                     sys(nullptr), gainPattern(nullptr)
+Antenna::Antenna()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-Antenna::Antenna(const Antenna& org) : freeEmStack(MAX_EMISSIONS), freeEmLock(0),
-                                       inUseEmQueue(MAX_EMISSIONS), inUseEmLock(0),
-                                       sys(nullptr), gainPattern(nullptr)
+Antenna::Antenna(const Antenna& org)
 {
     STANDARD_CONSTRUCTOR()
-    copyData(org,true);
+    copyData(org, true);
 }
 
 Antenna::~Antenna()
@@ -94,26 +78,9 @@ Antenna* Antenna::clone() const
     return new Antenna(*this);
 }
 
-void Antenna::initData()
-{
-   gainPattern = nullptr;
-   sys = nullptr;
-
-   gain = 1.0;
-   polar = NONE;
-   threshold = 0.0;
-   gainPatternDeg = false;  // default: radians
-   recycle = true;          // recycle emissions
-   beamWidth = (base::angle::D2RCC * 3.5);
-}
-
-//------------------------------------------------------------------------------
-// copyData(), deleteData() -- copy (delete) member data
-//------------------------------------------------------------------------------
-void Antenna::copyData(const Antenna& org, const bool cc)
+void Antenna::copyData(const Antenna& org, const bool)
 {
    BaseClass::copyData(org);
-   if (cc) initData();
 
    setSystem(nullptr);
    polar = org.polar;
@@ -141,10 +108,6 @@ void Antenna::deleteData()
    clearQueues();
 }
 
-
-//------------------------------------------------------------------------------
-// reset() -- Reset parameters
-//------------------------------------------------------------------------------
 void Antenna::reset()
 {
     BaseClass::reset();
@@ -572,22 +535,22 @@ void Antenna::rfTransmit(Emission* const xmit)
                // c) Send the emission to the target
                targets[i]->event(RF_EMISSION, em);
 
-               // d) Recycle the emission
-               bool recycled = false;
-               if (recycle) {
-                  base::lock(inUseEmLock);
-                  if (inUseEmQueue.isNotFull()) {
+               // d) Recycle the emission (we don't bother)
+               //bool recycled = false;
+               //if (recycle) {
+               //   base::lock(inUseEmLock);
+               //   if (inUseEmQueue.isNotFull()) {
                      // Store for future reference
-                     inUseEmQueue.put(em);
-                     recycled = true;
-                  }
-                  base::unlock(inUseEmLock);
-               }
+               //      inUseEmQueue.put(em);
+               //      recycled = true;
+               //   }
+               //   base::unlock(inUseEmLock);
+               //}
 
                // or just forget it
-               else {
+               //else {
                   em->unref();
-              }
+               //}
 
             }
             else {

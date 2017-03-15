@@ -26,39 +26,39 @@ namespace models {
 //------------------------------------------------------------------------------
 class GroundVehicle : public Player
 {
-    DECLARE_SUBCLASS(GroundVehicle,Player)
+   DECLARE_SUBCLASS(GroundVehicle, Player)
 
 public:
    enum LauncherCommand { NONE, DOWN, UP };
 
 public:
-    GroundVehicle();
+   GroundVehicle();
 
-    virtual double getGrossWeight() const override;     // wt: lbs
+   virtual double getGrossWeight() const override;     // wt: lbs
 
-    virtual double getFuelWt() const;                   // wt: lbs
-    virtual double getFuelWtMax() const;                // wt: lbs
+   virtual double getFuelWt() const;                   // wt: lbs
+   virtual double getFuelWtMax() const;                // wt: lbs
 
-    virtual double getLauncherPosition() const;         // Launcher elevation angle (rad)
-    virtual double getLauncherRate() const;             // Launcher rate (rad/sec)
-    virtual LauncherCommand getLauncherCommand() const; // Returns the launcher's command position (UP/DOWN) or NONE if not commanded
+   virtual double getLauncherPosition() const;         // Launcher elevation angle (rad)
+   virtual double getLauncherRate() const;             // Launcher rate (rad/sec)
+   virtual LauncherCommand getLauncherCommand() const; // Returns the launcher's command position (UP/DOWN) or NONE if not commanded
 
 
-    // Commands the launcher to the up/down position
-    virtual bool commandLauncher(const LauncherCommand cmd);
+   // Commands the launcher to the up/down position
+   virtual bool commandLauncher(const LauncherCommand cmd);
 
-    // Sets the launcher elevation angle (rad), and removes the old position command
-    virtual bool setLauncherPosition(const double rad);
+   // Sets the launcher elevation angle (rad), and removes the old position command
+   virtual bool setLauncherPosition(const double rad);
 
-    // Slot functions
-    virtual bool setSlotCommandedPosition(const base::Identifier* const msg);
-    virtual bool setSlotLauncherDownAngle(const base::Angle* const msg);
-    virtual bool setSlotLauncherUpAngle(const base::Angle* const msg);
-    virtual bool setSlotLauncherMoveTime(const base::Time* const msg);
+   // Slot functions
+   virtual bool setSlotCommandedPosition(const base::Identifier* const msg);
+   virtual bool setSlotLauncherDownAngle(const base::Angle* const msg);
+   virtual bool setSlotLauncherUpAngle(const base::Angle* const msg);
+   virtual bool setSlotLauncherMoveTime(const base::Time* const msg);
 
-    virtual unsigned int getMajorType() const override;
+   virtual unsigned int getMajorType() const override;
 
-    virtual void reset() override;
+   virtual void reset() override;
 
 protected:
    // Launcher dynamics -- moves launcher to its commanded position
@@ -68,13 +68,13 @@ protected:
    virtual void dynamics(const double  dt = 0.0) override;
 
 private:
-   double            lnchrAngle;       // Current launcher angle  (rad)
-   double            lnchrRate;        // Rate the launcher is moving (rad/sec)
-   double            lnchrDownAngle;   // Min launcher angle      (rad)
-   double            lnchrUpAngle;     // Max launcher angle      (rad)
-   double            lnchrMoveTime;    // Time to move between min & max angles (sec)
-   LauncherCommand   initLnchrPos;     // Initial launcher position
-   LauncherCommand   cmdLnchrPos;      // Commanded launcher position
+   double            lnchrAngle {};        // Current launcher angle  (rad)
+   double            lnchrRate {};         // Rate the launcher is moving (rad/sec)
+   double            lnchrDownAngle {};    // Min launcher angle      (rad)
+   double            lnchrUpAngle {};      // Max launcher angle      (rad)
+   double            lnchrMoveTime {};     // Time to move between min & max angles (sec)
+   LauncherCommand   initLnchrPos {NONE};  // Initial launcher position
+   LauncherCommand   cmdLnchrPos {NONE};   // Commanded launcher position
 };
 
 
@@ -84,10 +84,10 @@ private:
 //------------------------------------------------------------------------------
 class Tank : public GroundVehicle
 {
-    DECLARE_SUBCLASS(Tank, GroundVehicle)
+   DECLARE_SUBCLASS(Tank, GroundVehicle)
 
 public:
-    Tank();
+   Tank();
 };
 
 //------------------------------------------------------------------------------
@@ -96,10 +96,10 @@ public:
 //------------------------------------------------------------------------------
 class ArmoredVehicle : public GroundVehicle
 {
-    DECLARE_SUBCLASS(ArmoredVehicle, GroundVehicle)
+   DECLARE_SUBCLASS(ArmoredVehicle, GroundVehicle)
 
 public:
-    ArmoredVehicle();
+   ArmoredVehicle();
 };
 
 //------------------------------------------------------------------------------
@@ -108,10 +108,10 @@ public:
 //------------------------------------------------------------------------------
 class WheeledVehicle : public GroundVehicle
 {
-    DECLARE_SUBCLASS(WheeledVehicle, GroundVehicle)
+   DECLARE_SUBCLASS(WheeledVehicle, GroundVehicle)
 
 public:
-    WheeledVehicle();
+   WheeledVehicle();
 };
 
 //------------------------------------------------------------------------------
@@ -120,10 +120,10 @@ public:
 //------------------------------------------------------------------------------
 class Artillery : public GroundVehicle
 {
-    DECLARE_SUBCLASS(Artillery, GroundVehicle)
+   DECLARE_SUBCLASS(Artillery, GroundVehicle)
 
 public:
-    Artillery();
+   Artillery();
 };
 
 //------------------------------------------------------------------------------
@@ -132,10 +132,10 @@ public:
 //------------------------------------------------------------------------------
 class GroundStation : public GroundVehicle
 {
-    DECLARE_SUBCLASS(GroundStation, GroundVehicle)
+   DECLARE_SUBCLASS(GroundStation, GroundVehicle)
 
 public:
-    GroundStation();
+   GroundStation();
 };
 
 //------------------------------------------------------------------------------
@@ -144,10 +144,10 @@ public:
 //------------------------------------------------------------------------------
 class GroundStationRadar : public GroundStation
 {
-    DECLARE_SUBCLASS(GroundStationRadar, GroundStation)
+   DECLARE_SUBCLASS(GroundStationRadar, GroundStation)
 
 public:
-    GroundStationRadar();
+   GroundStationRadar();
 };
 
 //------------------------------------------------------------------------------
@@ -156,10 +156,10 @@ public:
 //------------------------------------------------------------------------------
 class GroundStationUav : public GroundStation
 {
-    DECLARE_SUBCLASS(GroundStationUav, GroundStation)
+   DECLARE_SUBCLASS(GroundStationUav, GroundStation)
 
 public:
-    GroundStationUav();
+   GroundStationUav();
 };
 
 }
