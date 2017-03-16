@@ -743,9 +743,9 @@ bool Station::doWeHaveTheTcThread() const
 }
 
 // Pre-ref() pointer to the T/Cthread
-base::AbstractThread* Station::getTcThread()
+base::Thread* Station::getTcThread()
 {
-   base::AbstractThread* p = nullptr;
+   base::Thread* p = nullptr;
    if (tcThread != nullptr) {
       p = tcThread.getRefPtr();
    }
@@ -777,9 +777,9 @@ bool Station::doWeHaveTheBgThread() const
 }
 
 // Pre-ref() pointer to the Background thread
-base::AbstractThread* Station::getBgThread()
+base::Thread* Station::getBgThread()
 {
-   base::AbstractThread* p = nullptr;
+   base::Thread* p = nullptr;
    if (bgThread != nullptr) {
       p = bgThread.getRefPtr();
    }
@@ -811,9 +811,9 @@ bool Station::doWeHaveTheNetThread() const
 }
 
 // Pre-ref() pointer to the Network thread
-base::AbstractThread* Station::getNetThread()
+base::Thread* Station::getNetThread()
 {
-   base::AbstractThread* p = nullptr;
+   base::Thread* p = nullptr;
    if (netThread != nullptr) {
       p = netThread.getRefPtr();
    }
@@ -859,19 +859,19 @@ bool Station::setBackgroundStackSize(const unsigned int bytes)
 //------------------------------------------------------------------------------
 // Set thread handle functions
 //------------------------------------------------------------------------------
-void Station::setTcThread(base::AbstractThread* h)
+void Station::setTcThread(base::Thread* h)
 {
    if (tcThread != nullptr) tcThread->terminate();
    tcThread = h;
 }
 
-void Station::setNetThread(base::AbstractThread* h)
+void Station::setNetThread(base::Thread* h)
 {
    if (netThread != nullptr) netThread->terminate();
    netThread = h;
 }
 
-void Station::setBgThread(base::AbstractThread* h)
+void Station::setBgThread(base::Thread* h)
 {
    if (bgThread != nullptr) bgThread->terminate();
    bgThread = h;

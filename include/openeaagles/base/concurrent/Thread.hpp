@@ -1,26 +1,22 @@
 //------------------------------------------------------------------------------
 // Classes:
 //
-//    AbstractThread       -- Abstract base class for all thread classes.
+//    Thread               -- Abstract base class for all thread classes.
 //
-//    ThreadSingleTask     -- Single task thread; single call to the user's
+//    SingleTask           -- Single task thread; single call to the user's
 //                            function
 //
-//    ThreadPeriodicTask   -- Periodic task thread; multiple calls to the user's
+//    PeriodicTask         -- Periodic task thread; multiple calls to the user's
 //                            function at a fixed rate
 //
-//    ThreadSyncTask       -- Synchronized task thread; multiple calls to the
+//    SyncTask             -- Synchronized task thread; multiple calls to the
 //                            user's function with start/complete signals
 //
 //
 //    ### All of these classes are abstract. ###
-//
-// Examples of how to use the ThreadSingleTask, ThreadPeriodicTask and
-// ThreadSyncTask thread classes that are used can be found in the "otw/OtwCigiCl.cpp",
-// "simulation/Station.cpp" and "simulation/Simulation.cpp" files, respectively.
 //------------------------------------------------------------------------------
-#ifndef __oe_base_AbstractThread_H__
-#define __oe_base_AbstractThread_H__
+#ifndef __oe_base_Thread_H__
+#define __oe_base_Thread_H__
 
 #include "openeaagles/base/Object.hpp"
 #include "openeaagles/base/util/platform_api.hpp"
@@ -30,7 +26,7 @@ namespace base {
 class Component;
 
 //------------------------------------------------------------------------------
-// Class:  Thread
+// Class: Thread
 //
 // Description: Abstract thread class
 //
@@ -88,12 +84,12 @@ class Component;
 //              0.0           THREAD_PRIORITY_IDLE(-15)
 //
 //------------------------------------------------------------------------------
-class AbstractThread : public Object
+class Thread : public Object
 {
-   DECLARE_SUBCLASS(AbstractThread, Object)
+   DECLARE_SUBCLASS(Thread, Object)
 
 public:
-   AbstractThread(Component* const parent, const double priority);
+   Thread(Component* const parent, const double priority);
 
    double getPriority() const;
    bool isTerminated() const;
@@ -115,7 +111,7 @@ public:
    static unsigned short getNumProcessors();
 
 protected: // Functions
-   AbstractThread();
+   Thread();
    Component* getParent();
    const void* getThreadHandle() const;
 

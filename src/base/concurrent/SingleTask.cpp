@@ -12,7 +12,7 @@ EMPTY_SLOTTABLE(SingleTask)
 EMPTY_SERIALIZER(SingleTask)
 EMPTY_DELETEDATA(SingleTask)
 
-SingleTask::SingleTask(Component* const p, const double pri) : AbstractThread(p, pri)
+SingleTask::SingleTask(Component* const p, const double pri) : Thread(p, pri)
 {
    STANDARD_CONSTRUCTOR()
 }

@@ -11,7 +11,7 @@ IMPLEMENT_ABSTRACT_SUBCLASS(SyncTask, "AbstractSyncTask")
 EMPTY_SLOTTABLE(SyncTask)
 EMPTY_SERIALIZER(SyncTask)
 
-SyncTask::SyncTask(Component* const p, const double pri) : AbstractThread(p, pri)
+SyncTask::SyncTask(Component* const p, const double pri) : Thread(p, pri)
 {
    STANDARD_CONSTRUCTOR()
 }

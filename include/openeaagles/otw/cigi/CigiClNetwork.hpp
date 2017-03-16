@@ -18,7 +18,7 @@ class CigiIncomingMsg;
 class CigiOutgoingMsg;
 
 namespace oe {
-namespace base { class NetHandler; class AbstractThread; }
+namespace base { class NetHandler; class Thread; }
 namespace otw {
 class OtwCigiCl;
 class CigiClNetworkSignalProcessing;
@@ -74,11 +74,11 @@ protected:
    bool initCigiNetwork();          // Initialize the network
 
 private:
-   base::safe_ptr<base::NetHandler> netInput;    // Input network handler
-   base::safe_ptr<base::NetHandler> netOutput;   // Output network handler
-   base::safe_ptr<base::AbstractThread> thread;  // The thread
-   bool networkInitialized {};               // CIGI has been initialized
-   bool networkInitFailed {};                // CIGI initialization has failed
+   base::safe_ptr<base::NetHandler> netInput;   // Input network handler
+   base::safe_ptr<base::NetHandler> netOutput;  // Output network handler
+   base::safe_ptr<base::Thread> thread;         // The thread
+   bool networkInitialized {};                  // CIGI has been initialized
+   bool networkInitFailed {};                   // CIGI initialization has failed
 
    CigiIncomingMsg* msgIn {};
    CigiOutgoingMsg* msgOut {};

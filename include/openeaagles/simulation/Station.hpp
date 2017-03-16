@@ -5,7 +5,7 @@
 #include "openeaagles/base/Component.hpp"
 
 namespace oe {
-namespace base { class IoHandler; class Number; class AbstractThread; class Time; }
+namespace base { class IoHandler; class Number; class Thread; class Time; }
 namespace simulation {
 class AbstractDataRecorder;
 class Simulation;
@@ -259,14 +259,14 @@ protected:
    virtual void inputDevices(const double dt);    // Handle device inputs
    virtual void outputDevices(const double dt);   // Handle device output
 
-   base::AbstractThread* getTcThread();           // Pre-ref() pointer to the Time-critical thread
-   void setTcThread(base::AbstractThread*);
+   base::Thread* getTcThread();                   // Pre-ref() pointer to the Time-critical thread
+   void setTcThread(base::Thread*);
 
-   base::AbstractThread* getNetThread();          // Pre-ref() pointer to the Network thread
-   void setNetThread(base::AbstractThread*);
+   base::Thread* getNetThread();                  // Pre-ref() pointer to the Network thread
+   void setNetThread(base::Thread*);
 
-   base::AbstractThread* getBgThread();           // Pre-ref() pointer to the Background thread
-   void setBgThread(base::AbstractThread*);
+   base::Thread* getBgThread();                   // Pre-ref() pointer to the Background thread
+   void setBgThread(base::Thread*);
 
    // base::Component protected functions
    virtual bool shutdownNotification() override;
@@ -287,18 +287,18 @@ private:
    double tcRate {50.0};                                     // Time-critical thread Rate (hz)
    double tcPri {DEFAULT_TC_THREAD_PRI};                     // Priority of the time-critical thread (0->lowest, 1->highest)
    unsigned int tcStackSize {};                              // Time-critical thread stack size (bytes or zero for system default size)
-   base::safe_ptr<base::AbstractThread> tcThread;            // The Time-critical thread
+   base::safe_ptr<base::Thread> tcThread;                    // The Time-critical thread
    unsigned int fastForwardRate {DEFAULT_FAST_FORWARD_RATE}; // Time-critical thread fast forward rate
 
    double netRate {};                                // Network thread Rate (hz)
    double netPri {DEFAULT_NET_THREAD_PRI};           // Priority of the Network thread (0->lowest, 1->highest)
    unsigned int netStackSize {};                     // Network thread stack size (bytes or zero for system default size)
-   base::safe_ptr<base::AbstractThread> netThread;   // The optional network thread
+   base::safe_ptr<base::Thread> netThread;           // The optional network thread
 
    double bgRate {};                                 // Background thread Rate (hz)
    double bgPri {DEFAULT_BG_THREAD_PRI};             // Priority of the Background thread (0->lowest, 1->highest)
    unsigned int bgStackSize {};                      // Background thread stack size (bytes or zero for system default size)
-   base::safe_ptr<base::AbstractThread> bgThread;    // The optional background thread
+   base::safe_ptr<base::Thread> bgThread;            // The optional background thread
 
    double startupResetTimer {-1.0};             // Startup RESET timer (sends a RESET_EVENT after timeout)
    const base::Time* startupResetTimer0 {};     // Init value of the startup RESET timer

@@ -1364,7 +1364,7 @@ bool Simulation::setSlotNumTcThreads(const base::Number* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np = base::AbstractThread::getNumProcessors();
+      const unsigned short np = base::Thread::getNumProcessors();
       unsigned short maxT = 1;
       if (np > 1) maxT = np - 1;
 
@@ -1389,7 +1389,7 @@ bool Simulation::setSlotNumBgThreads(const base::Number* const msg)
 
       // Max threads is the number of processors assigned to this
       // process minus one, or minimum of one.
-      const unsigned short np = base::AbstractThread::getNumProcessors();
+      const unsigned short np = base::Thread::getNumProcessors();
       unsigned short maxT = 1;
       if (np > 1) maxT = np - 1;
 

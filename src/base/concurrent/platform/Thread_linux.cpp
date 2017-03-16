@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/concurrent/AbstractThread.hpp"
+#include "openeaagles/base/concurrent/Thread.hpp"
 
 #include "openeaagles/base/Component.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
@@ -17,16 +17,16 @@ static const unsigned int MAX_CPUS = 32;
 //-----------------------------------------------------------------------------
 // Static thread function
 //-----------------------------------------------------------------------------
-void* AbstractThread::staticThreadFunc(void* lpParam)
+void* Thread::staticThreadFunc(void* lpParam)
 {
-   const auto thread = static_cast<AbstractThread*>(lpParam);
+   const auto thread = static_cast<Thread*>(lpParam);
    Component* parent = thread->getParent();
 
-   // Make sure that our AbstractThread class and its parent are not going to go a way.
+   // Make sure that our Thread class and its parent are not going to go a way.
    thread->ref();
    parent->ref();
 
-   // The main thread function, which is a AbstractThread class memeber function,
+   // The main thread function, which is a Thread class memeber function,
    // will handle the rest.
    unsigned long rtn = thread->mainThreadFunc();
    thread->setTerminated();
@@ -40,7 +40,7 @@ void* AbstractThread::staticThreadFunc(void* lpParam)
 //-----------------------------------------------------------------------------
 // Static function returns the number of processors assigned to this process
 //-----------------------------------------------------------------------------
-unsigned short AbstractThread::getNumProcessors()
+unsigned short Thread::getNumProcessors()
 {
    unsigned short num = 0;
 
@@ -59,7 +59,7 @@ unsigned short AbstractThread::getNumProcessors()
 //-----------------------------------------------------------------------------
 // Create the thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::createThread()
+bool Thread::createThread()
 {
    // thread attributes
    pthread_attr_t attr;
@@ -112,7 +112,7 @@ bool AbstractThread::createThread()
    pthread_create(thread, &attr, staticThreadFunc, this);
 
    //if ( stat != 0 && parent->isMessageEnabled(MSG_INFO) ) {
-      std::cout << "AbstractThread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;
+      std::cout << "Thread(" << this << ")::createThread(): pthread_create() thread = " << thread << ", pri = " << param.sched_priority << std::endl;
    //}
 
    theThread = thread;
@@ -123,7 +123,7 @@ bool AbstractThread::createThread()
 //-----------------------------------------------------------------------------
 // Configure thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::configThread()
+bool Thread::configThread()
 {
    // Nothing to do
    return true;
@@ -132,18 +132,18 @@ bool AbstractThread::configThread()
 //-----------------------------------------------------------------------------
 // Close the thread
 //-----------------------------------------------------------------------------
-void AbstractThread::closeThread()
+void Thread::closeThread()
 {
 }
 
 //-----------------------------------------------------------------------------
 // Treminate the thread
 //-----------------------------------------------------------------------------
-bool AbstractThread::terminate()
+bool Thread::terminate()
 {
    if (theThread != nullptr && !killed) {
       if ( getParent()->isMessageEnabled(MSG_INFO) ) {
-         std::cout << "AbstractThread(" << this << ")::terminate(): handle = " << theThread << std::endl;
+         std::cout << "Thread(" << this << ")::terminate(): handle = " << theThread << std::endl;
       }
 
       pthread_t* thread = static_cast<pthread_t*>(theThread);

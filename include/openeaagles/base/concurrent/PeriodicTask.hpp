@@ -2,7 +2,7 @@
 #ifndef __oe_base_PeriodicTask_H__
 #define __oe_base_PeriodicTask_H__
 
-#include "openeaagles/base/concurrent/AbstractThread.hpp"
+#include "openeaagles/base/concurrent/Thread.hpp"
 #include "openeaagles/base/Statistic.hpp"
 
 namespace oe {
@@ -19,9 +19,9 @@ class Component;
 //    until the parent component is shutdown.  A value of 1.0/rate is passed
 //    to userFunc() as the delta time parameter.
 //------------------------------------------------------------------------------
-class PeriodicTask : public AbstractThread
+class PeriodicTask : public Thread
 {
-   DECLARE_SUBCLASS(PeriodicTask, AbstractThread)
+   DECLARE_SUBCLASS(PeriodicTask, Thread)
 
 public:
    PeriodicTask(Component* const parent, const double priority, const double rate);

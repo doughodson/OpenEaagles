@@ -12,12 +12,12 @@ EMPTY_SLOTTABLE(PeriodicTask)
 EMPTY_SERIALIZER(PeriodicTask)
 EMPTY_DELETEDATA(PeriodicTask)
 
-PeriodicTask::PeriodicTask(Component* const p, const double pri, const double rt) : AbstractThread(p, pri), rate(rt)
+PeriodicTask::PeriodicTask(Component* const p, const double pri, const double rt) : Thread(p, pri), rate(rt)
 {
    STANDARD_CONSTRUCTOR()
 }
 
-PeriodicTask::PeriodicTask() : AbstractThread()
+PeriodicTask::PeriodicTask() : Thread()
 {
    STANDARD_CONSTRUCTOR()
    std::cerr << "ThreadPeriodicTask(" << this << ")::ThreadPeriodicTask() -- ERROR: Do not use the default constructor" << std::endl;

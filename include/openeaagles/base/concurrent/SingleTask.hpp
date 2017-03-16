@@ -2,7 +2,7 @@
 #ifndef __oe_base_SingleTask_H__
 #define __oe_base_SingleTask_H__
 
-#include "openeaagles/base/concurrent/AbstractThread.hpp"
+#include "openeaagles/base/concurrent/Thread.hpp"
 
 namespace oe {
 namespace base {
@@ -15,9 +15,9 @@ class Component;
 //    User's will need to derive a class from this class and define the
 //    work function, userFunc(), which is only called once.
 //------------------------------------------------------------------------------
-class SingleTask : public AbstractThread
+class SingleTask : public Thread
 {
-   DECLARE_SUBCLASS(SingleTask, AbstractThread)
+   DECLARE_SUBCLASS(SingleTask, Thread)
 
 public:
    SingleTask(Component* const parent, const double priority);

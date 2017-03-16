@@ -42,26 +42,25 @@ utility functions should not have 'util' all over the places, in filename
 
 ################################
 
-Libs/classes to move to brace initialization and utilize std::array
-library name : (brace, std::array)
+Libs/classes to use enum classes
 
-base         : (done, done)
-dafif        : (done, done)
-dis          : (done, done)
-glut         : (done, done)
-graphics     : (done, done)
-hla          : (done, done)
-instruments  : (done, done)
-interop      : (done, done)
-iodevice     : (done, done)
-linearsystem : (done, done)
-models       : (done)
-otw          : (done, done)
-recorder     : (done, done)
-rpf          : (done, done)
-rprfom       : (done, done)
-simulation   : (done, done)
-terrain      : (done, done)
+base         : 
+dafif        : 
+dis          : 
+glut         : 
+graphics     : 
+hla          : 
+instruments  : 
+interop      : 
+iodevice     : 
+linearsystem : 
+models       : 
+otw          : 
+recorder     : 
+rpf          : 
+rprfom       : 
+simulation   : 
+terrain      : 
 
 ################################
 
@@ -77,10 +76,6 @@ this shouldn't be the case, the joystick has a total of 6 DIs.
 
 move IoAdapter, IoData, IoDevice and IoHandler to iodevice -- there is really no
 need for them to be in 'base' library.
-
-################################
-
-Rename AbstractThread back to Thread
 
 ################################
 

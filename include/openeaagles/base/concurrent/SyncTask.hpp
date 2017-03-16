@@ -2,7 +2,7 @@
 #ifndef __oe_base_SyncTask_H__
 #define __oe_base_SyncTask_H__
 
-#include "openeaagles/base/concurrent/AbstractThread.hpp"
+#include "openeaagles/base/concurrent/Thread.hpp"
 
 namespace oe {
 namespace base {
@@ -21,9 +21,9 @@ class Component;
 //    wait for several sync task threads.  Loop will end with the shutdown of
 //    the parent.
 //------------------------------------------------------------------------------
-class SyncTask : public AbstractThread
+class SyncTask : public Thread
 {
-   DECLARE_SUBCLASS(SyncTask, AbstractThread)
+   DECLARE_SUBCLASS(SyncTask, Thread)
 
 public:
    SyncTask(Component* const parent, const double priority);
