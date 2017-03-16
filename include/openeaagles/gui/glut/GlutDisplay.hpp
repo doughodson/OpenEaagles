@@ -1,6 +1,6 @@
 
-#ifndef __oe_glut_GlutDisplay_H__
-#define __oe_glut_GlutDisplay_H__
+#ifndef __oe_gui_glut_GlutDisplay_H__
+#define __oe_gui_glut_GlutDisplay_H__
 
 #include "openeaagles/graphics/Display.hpp"
 

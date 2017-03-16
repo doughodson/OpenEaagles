@@ -119,12 +119,12 @@ workspace "oe"
       targetname "graphics"
 
    -- OpenGL GLUT interface library
-   project "glut"
+   project "gui_glut"
       files {
          "../../include/openeaagles/gui/glut/**.h*",
          "../../src/gui/glut/**.cpp"
       }
-      targetname "glut"
+      targetname "gui_glut"
 
    -- DAFIF airport loader library
    project "dafif"

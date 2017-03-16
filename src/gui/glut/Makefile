@@ -1,7 +1,7 @@
 #
 include ../../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboe_glut.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_gui_glut.a
 
 OBJS =  \
 	factory.o \

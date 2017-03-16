@@ -5,8 +5,8 @@ include makedefs
 # ------------------------------------------------------------------------
 # base            : -
 # dafif           : -
-# graphics        : FTGL, freetype
-# gui/glut        : freeglut
+# graphics        : OpenGL, FTGL, freetype
+# gui_glut        : freeglut
 # instruments     : -
 # interop         : -
 # interop_dis     : -
