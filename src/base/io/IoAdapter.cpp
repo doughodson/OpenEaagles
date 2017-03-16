@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/IoAdapter.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
 #include <iostream>
 
 namespace oe {

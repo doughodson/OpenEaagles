@@ -9,7 +9,7 @@ namespace base {
 class IoData;
 
 //------------------------------------------------------------------------------
-// Class:  IoDevice
+// Class: IoDevice
 //
 // Description: I/O device handler.
 //

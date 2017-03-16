@@ -9,7 +9,7 @@
 #include "openeaagles/simulation/Simulation.hpp"
 
 #include "openeaagles/base/Color.hpp"
-#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"

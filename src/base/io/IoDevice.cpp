@@ -1,7 +1,7 @@
 
-#include "openeaagles/base/IoDevice.hpp"
-#include "openeaagles/base/IoAdapter.hpp"
-#include "openeaagles/base/IoHandler.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
 
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"

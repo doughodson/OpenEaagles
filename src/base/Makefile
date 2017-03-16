@@ -39,6 +39,10 @@ OBJS =  \
 	functors/Functions.o \
 	functors/Table.o \
 	functors/Tables.o \
+	io/IoAdapter.o \
+	io/IoData.o \
+	io/IoDevice.o \
+	io/IoHandler.o \
 	network/NetHandler.o \
 	network/PosixHandler.o \
 	network/TcpClient.o \
@@ -96,10 +100,6 @@ OBJS =  \
 	Hsv.o \
 	Identifier.o \
 	Integer.o \
-	IoAdapter.o \
-	IoData.o \
-	IoDevice.o \
-	IoHandler.o \
 	LatLon.o \
 	List.o \
 	Locus.o \

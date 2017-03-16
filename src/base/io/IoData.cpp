@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/IoData.hpp"
+#include "openeaagles/base/io/IoData.hpp"
 #include <iostream>
 
 namespace oe {

@@ -77,6 +77,8 @@ this shouldn't be the case, the joystick has a total of 6 DIs.
 move IoAdapter, IoData, IoDevice and IoHandler to iodevice -- there is really no
 need for them to be in 'base' library.
 
+-- first step is to move them into base/io to keep them more physically separate for now
+
 ################################
 
 LinkedList --> linked_list

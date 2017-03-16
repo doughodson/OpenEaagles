@@ -21,6 +21,10 @@
 #include "openeaagles/base/LatLon.hpp"
 #include "openeaagles/base/Operators.hpp"
 
+// IO
+#include "openeaagles/base/io/IoData.hpp"
+#include "openeaagles/base/io/IoHandler.hpp"
+
 // Network handlers
 #include "openeaagles/base/network/TcpHandler.hpp"
 #include "openeaagles/base/network/TcpClient.hpp"
@@ -62,8 +66,6 @@
 
 // Others
 #include "openeaagles/base/EarthModel.hpp"
-#include "openeaagles/base/IoData.hpp"
-#include "openeaagles/base/IoHandler.hpp"
 #include "openeaagles/base/concurrent/ThreadPool.hpp"
 
 // Ubf

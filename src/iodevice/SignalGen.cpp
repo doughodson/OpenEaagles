@@ -1,8 +1,9 @@
 
 #include "openeaagles/iodevice/SignalGen.hpp"
 
-#include "openeaagles/base/IoData.hpp"
-#include "openeaagles/base/IoDevice.hpp"
+#include "openeaagles/base/io/IoData.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
+
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Frequencies.hpp"

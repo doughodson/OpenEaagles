@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_Controller_H__
 #define __oe_iodevice_Controller_H__
 
-#include "openeaagles/base/IoDevice.hpp"
+#include "openeaagles/base/io/IoDevice.hpp"
 
 #include <array>
 

@@ -8,8 +8,8 @@ namespace oe {
 namespace base {
 
 //------------------------------------------------------------------------------
-// Class:  IoData
-// Description:  I/O data buffer
+// Class: IoData
+// Description: I/O data buffer
 //
 //    Common interface to I/O channels that are used to hold data coming from
 //    and going to our I/O devices.  These I/O channels contain applications

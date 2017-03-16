@@ -13,9 +13,9 @@ class Thread;
 class IoThread;
 
 //------------------------------------------------------------------------------
-// Class:  IoHandler
+// Class: IoHandler
 //
-// Description:  Handles the flow of I/O data to and from the I/O devices.
+// Description: Handles the flow of I/O data to and from the I/O devices.
 //
 //    The I/O data is buffered using application specific IoData classes
 //    (see IoData.h) that are attached to the I/O handler using the 'ioData',

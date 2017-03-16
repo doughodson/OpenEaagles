@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_AnalogOutput_H__
 #define __oe_iodevice_AnalogOutput_H__
 
-#include "openeaagles/base/IoAdapter.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
 
 namespace oe {
 namespace base { class Number; class Table1; }

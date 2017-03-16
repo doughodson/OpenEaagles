@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_IoData_H__
 #define __oe_iodevice_IoData_H__
 
-#include "openeaagles/base/IoData.hpp"
+#include "openeaagles/base/io/IoData.hpp"
 
 namespace oe {
 namespace base { class Number; }

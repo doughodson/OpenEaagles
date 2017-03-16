@@ -114,6 +114,9 @@ base library
    contains - namely, component interfaces to network sockets. Also moved NetHandler
    class into this directory.
 
+-- Created subdirectory 'io' to store all IO related classes (e.g., IoData, etc.).  At
+   some point these will be moved into iodevice library
+
    Object class
      -- In Object, the method getSlotByIndex() has been removed.  Therefore any derived
         Object-based classes no longer need to define it.  For legacy code, methods of

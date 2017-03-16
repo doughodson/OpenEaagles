@@ -2,7 +2,7 @@
 #ifndef __oe_iodevice_SignalGen_H__
 #define __oe_iodevice_SignalGen_H__
 
-#include "openeaagles/base/IoAdapter.hpp"
+#include "openeaagles/base/io/IoAdapter.hpp"
 
 namespace oe {
 namespace base { class Angle; class Frequency; class String; }
