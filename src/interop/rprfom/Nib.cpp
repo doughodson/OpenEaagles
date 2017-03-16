@@ -7,9 +7,9 @@
 
 #include "openeaagles/interop/dis/Ntm.hpp"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/players/Missile.hpp"
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/Missile.hpp"
+#include "openeaagles/models/player/Player.hpp"
 #include "openeaagles/models/Signatures.hpp"
 
 #include "openeaagles/base/Pair.hpp"

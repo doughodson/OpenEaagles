@@ -1,8 +1,8 @@
 
 #include "openeaagles/models/Tdb.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/systems/Gimbal.hpp"
+#include "openeaagles/models/player/Player.hpp"
+#include "openeaagles/models/system/Gimbal.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/terrain/Terrain.hpp"

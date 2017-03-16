@@ -2,7 +2,7 @@
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 
 #include "openeaagles/models/navigation/Navigation.hpp"
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 #include "openeaagles/models/Actions.hpp"
 
 #include "openeaagles/terrain/Terrain.hpp"

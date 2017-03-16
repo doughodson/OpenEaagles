@@ -8,12 +8,12 @@
 #include "openeaagles/interop/dis/Ntm.hpp"
 #include "openeaagles/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/players/GroundVehicle.hpp"
-#include "openeaagles/models/players/LifeForms.hpp"
-#include "openeaagles/models/players/Missile.hpp"
-#include "openeaagles/models/players/AbstractWeapon.hpp"
-#include "openeaagles/models/systems/StoresMgr.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/GroundVehicle.hpp"
+#include "openeaagles/models/player/LifeForms.hpp"
+#include "openeaagles/models/player/Missile.hpp"
+#include "openeaagles/models/player/AbstractWeapon.hpp"
+#include "openeaagles/models/system/StoresMgr.hpp"
 
 #include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"

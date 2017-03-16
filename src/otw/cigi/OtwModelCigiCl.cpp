@@ -2,7 +2,7 @@
 #include "openeaagles/otw/cigi/OtwModelCigiCl.hpp"
 #include "openeaagles/otw/cigi/OtwCigiCl.hpp"
 
-#include "openeaagles/models/players/GroundVehicle.hpp"
+#include "openeaagles/models/player/GroundVehicle.hpp"
 
 #include "cigicl/CigiEntityCtrlV3.h"
 #include "cigicl/CigiCompCtrlV3.h"

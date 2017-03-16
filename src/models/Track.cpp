@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/Track.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 #include "openeaagles/models/Emission.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/SensorMsg.hpp"

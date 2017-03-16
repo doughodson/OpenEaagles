@@ -1,7 +1,7 @@
 
 #include "openeaagles/interop/common/Ntm.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 
 namespace oe {
 namespace interop {

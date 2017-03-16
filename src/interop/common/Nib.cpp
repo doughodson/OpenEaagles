@@ -2,11 +2,11 @@
 #include "openeaagles/interop/common/Nib.hpp"
 #include "openeaagles/interop/common/Ntm.hpp"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/players/GroundVehicle.hpp"
-#include "openeaagles/models/players/Missile.hpp"
-#include "openeaagles/models/players/SamVehicles.hpp"
-#include "openeaagles/models/systems/StoresMgr.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/GroundVehicle.hpp"
+#include "openeaagles/models/player/Missile.hpp"
+#include "openeaagles/models/player/SamVehicles.hpp"
+#include "openeaagles/models/system/StoresMgr.hpp"
 #include "openeaagles/models/SynchronizedState.hpp"
 
 #include "openeaagles/base/Pair.hpp"

@@ -3,7 +3,7 @@
 #define __oe_models_Emission_H__
 
 #include "openeaagles/models/SensorMsg.hpp"
-#include "openeaagles/models/systems/Antenna.hpp"
+#include "openeaagles/models/system/Antenna.hpp"
 
 namespace oe {
 namespace models {

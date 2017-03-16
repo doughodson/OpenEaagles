@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/dynamics/JSBSimModel.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/functors/Tables.hpp"

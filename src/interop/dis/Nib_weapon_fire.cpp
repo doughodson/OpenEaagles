@@ -7,8 +7,8 @@
 #include "openeaagles/interop/dis/Nib.hpp"
 #include "openeaagles/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/players/AbstractWeapon.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/AbstractWeapon.hpp"
 
 #include "openeaagles/base/util/nav_utils.hpp"
 

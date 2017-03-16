@@ -4,9 +4,9 @@
 #include "openeaagles/otw/Otm.hpp"
 #include "openeaagles/otw/OtwModel.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 
-#include "openeaagles/models/players/AbstractWeapon.hpp"
+#include "openeaagles/models/player/AbstractWeapon.hpp"
 
 #include "openeaagles/simulation/AbstractNib.hpp"
 

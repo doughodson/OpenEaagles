@@ -8,7 +8,7 @@
 #include "openeaagles/interop/dis/EmissionPduHandler.hpp"
 #include "openeaagles/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/systems/Radar.hpp"
+#include "openeaagles/models/system/Radar.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/List.hpp"

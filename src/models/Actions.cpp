@@ -1,11 +1,11 @@
 
 #include "openeaagles/models/Actions.hpp"
 
-#include "openeaagles/models/players/Bomb.hpp"
-#include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/systems/OnboardComputer.hpp"
-#include "openeaagles/models/systems/Sar.hpp"
-#include "openeaagles/models/systems/StoresMgr.hpp"
+#include "openeaagles/models/player/Bomb.hpp"
+#include "openeaagles/models/player/Player.hpp"
+#include "openeaagles/models/system/OnboardComputer.hpp"
+#include "openeaagles/models/system/Sar.hpp"
+#include "openeaagles/models/system/StoresMgr.hpp"
 #include "openeaagles/models/navigation/Steerpoint.hpp"
 
 #include "openeaagles/models/WorldModel.hpp"

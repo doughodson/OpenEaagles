@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/navigation/Navigation.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 #include "openeaagles/models/navigation/Bullseye.hpp"
 #include "openeaagles/models/navigation/Route.hpp"
 #include "openeaagles/models/navigation/Steerpoint.hpp"

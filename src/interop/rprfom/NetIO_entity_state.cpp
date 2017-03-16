@@ -4,7 +4,7 @@
 #include "openeaagles/interop/rprfom/Nib.hpp"
 #include "openeaagles/interop/hla/Ambassador.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 
 #include "openeaagles/base/network/NetHandler.hpp"
 

@@ -295,7 +295,7 @@ models library (oe_models)
    into this library.
 
 -- Grouped somewhat obvious highly related models into subfolders within the models
-   library.  This includes folders for players, systems, dynamic models, environment,
+   library.  This includes folders called player, system, dynamics, environment,
    navigation, etc.  This can be improved, but it's a good start.
 
 -- Removed NavRadio-based classes: NavRadio, IlsRadio and TacanRadio.  These classes

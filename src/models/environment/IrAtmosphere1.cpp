@@ -1,9 +1,9 @@
 
 #include "openeaagles/models/environment/IrAtmosphere1.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/systems/IrSensor.hpp"
-#include "openeaagles/models/systems/Gimbal.hpp"
+#include "openeaagles/models/player/Player.hpp"
+#include "openeaagles/models/system/IrSensor.hpp"
+#include "openeaagles/models/system/Gimbal.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
 
 #include "openeaagles/base/List.hpp"

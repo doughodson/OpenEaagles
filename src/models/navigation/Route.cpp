@@ -2,9 +2,9 @@
 #include "openeaagles/models/navigation/Route.hpp"
 
 #include "openeaagles/models/navigation/Steerpoint.hpp"
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 #include "openeaagles/models/navigation/Navigation.hpp"
-#include "openeaagles/models/systems/OnboardComputer.hpp"
+#include "openeaagles/models/system/OnboardComputer.hpp"
 #include "openeaagles/models/Actions.hpp"
 
 #include "openeaagles/base/Identifier.hpp"

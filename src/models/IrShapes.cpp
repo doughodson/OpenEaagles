@@ -4,8 +4,8 @@
 //------------------------------------------------------------------------------
 #include "openeaagles/models/IrShapes.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/systems/IrSensor.hpp"
+#include "openeaagles/models/player/Player.hpp"
+#include "openeaagles/models/system/IrSensor.hpp"
 #include "openeaagles/models/IrSignature.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
 

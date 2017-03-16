@@ -4,7 +4,7 @@
 #include "openeaagles/models/environment/IrAtmosphere.hpp"
 #include "openeaagles/models/IrShapes.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
-#include "openeaagles/models/players/AirVehicle.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
 
 #include "openeaagles/models/WorldModel.hpp"
 

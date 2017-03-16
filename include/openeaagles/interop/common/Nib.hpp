@@ -5,7 +5,7 @@
 #include "openeaagles/simulation/AbstractNib.hpp"
 
 #include "openeaagles/interop/common/NetIO.hpp"
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 #include <array>
 
 namespace oe {

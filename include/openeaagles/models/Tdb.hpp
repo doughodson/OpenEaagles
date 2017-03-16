@@ -2,7 +2,7 @@
 #ifndef __oe_models_Tdb_H__
 #define __oe_models_Tdb_H__
 
-#include "openeaagles/models/systems/System.hpp"
+#include "openeaagles/models/system/System.hpp"
 #include "openeaagles/base/osg/Vec3d"
 
 namespace oe {

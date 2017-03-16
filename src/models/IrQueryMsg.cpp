@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/IrQueryMsg.hpp"
 
-#include "openeaagles/models/systems/IrSensor.hpp"
+#include "openeaagles/models/system/IrSensor.hpp"
 
 #include "openeaagles/base/List.hpp"
 #include <iostream>

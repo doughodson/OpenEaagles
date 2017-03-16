@@ -7,7 +7,7 @@
 #include "openeaagles/interop/dis/Nib.hpp"
 #include "openeaagles/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/systems/Iff.hpp"
+#include "openeaagles/models/system/Iff.hpp"
 
 #include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"

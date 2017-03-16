@@ -4,9 +4,9 @@
 #include "openeaagles/interop/dis/EmissionPduHandler.hpp"
 #include "openeaagles/interop/dis/pdu.hpp"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/systems/Jammer.hpp"
-#include "openeaagles/models/systems/Radar.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/system/Jammer.hpp"
+#include "openeaagles/models/system/Radar.hpp"
 #include "openeaagles/models/WorldModel.hpp"
 
 #include "openeaagles/base/Pair.hpp"

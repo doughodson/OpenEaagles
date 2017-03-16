@@ -1,7 +1,7 @@
 
 #include "openeaagles/otw/Otm.hpp"
 
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/Player.hpp"
 
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/Number.hpp"

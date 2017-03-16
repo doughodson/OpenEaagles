@@ -1,7 +1,7 @@
 
 #include "openeaagles/models/Emission.hpp"
 
-#include "openeaagles/models/systems/RfSystem.hpp"
+#include "openeaagles/models/system/RfSystem.hpp"
 
 #include <cmath>
 #include <iostream>

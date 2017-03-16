@@ -5,10 +5,10 @@
 
 #include "dsFlightModelData.hpp"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/players/GroundVehicle.hpp"
-#include "openeaagles/models/players/Missile.hpp"
-#include "openeaagles/models/players/Player.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/GroundVehicle.hpp"
+#include "openeaagles/models/player/Missile.hpp"
+#include "openeaagles/models/player/Player.hpp"
 
 #include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/SlotTable.hpp"

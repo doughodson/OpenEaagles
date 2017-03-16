@@ -5,12 +5,12 @@
 #include "openeaagles/interop/rprfom/RprFom.hpp"
 #include "openeaagles/interop/hla/Ambassador.hpp"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/players/GroundVehicle.hpp"
-#include "openeaagles/models/players/LifeForms.hpp"
-#include "openeaagles/models/players/Missile.hpp"
-#include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/Ships.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/GroundVehicle.hpp"
+#include "openeaagles/models/player/LifeForms.hpp"
+#include "openeaagles/models/player/Missile.hpp"
+#include "openeaagles/models/player/Player.hpp"
+#include "openeaagles/models/player/Ships.hpp"
 #include "openeaagles/models/Signatures.hpp"
 
 #include "openeaagles/base/Pair.hpp"

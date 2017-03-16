@@ -5,7 +5,7 @@
 
 #include "openeaagles/models/IrShapes.hpp"
 #include "openeaagles/models/IrQueryMsg.hpp"
-#include "openeaagles/models/systems/IrSensor.hpp"
+#include "openeaagles/models/system/IrSensor.hpp"
 
 #include "openeaagles/base/functors/Tables.hpp"
 #include "openeaagles/base/List.hpp"

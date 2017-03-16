@@ -5,10 +5,10 @@
 #include "openeaagles/recorder/DataRecordHandle.hpp"
 #include "openeaagles/recorder/protobuf/DataRecord.pb.h"
 
-#include "openeaagles/models/players/AirVehicle.hpp"
-#include "openeaagles/models/players/Player.hpp"
-#include "openeaagles/models/players/AbstractWeapon.hpp"
-#include "openeaagles/models/systems/Antenna.hpp"
+#include "openeaagles/models/player/AirVehicle.hpp"
+#include "openeaagles/models/player/Player.hpp"
+#include "openeaagles/models/player/AbstractWeapon.hpp"
+#include "openeaagles/models/system/Antenna.hpp"
 #include "openeaagles/models/Track.hpp"
 #include "openeaagles/models/Emission.hpp"
 
