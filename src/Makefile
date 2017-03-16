@@ -4,19 +4,20 @@ include makedefs
 # Library         : Requires
 # ------------------------------------------------------------------------
 # base            : -
-# graphics        : freeglut, FTGL, freetype
 # dafif           : -
-# gui             :
+# graphics        : FTGL, freetype
+# gui/glut        : freeglut
 # instruments     : -
+# interop         : -
+# interop_dis     : -
+# interop_hla     : HLA RTI
+# interop_rprfom  : HLA RTI
 # iodevice        : -
 # linearsystem    : -
+# map_rpf         : -
 # models          : JSBSim
-# networks/dis    : -
-# networks/hla    : HLA RTI
-# networks/rprfom : HLA RTI
 # otw             : CIGICL 3.x
 # recorder        : Google protocol buffers
-# rpf             : -
 # simulation      : -
 # terrain         : -
 #
@@ -55,7 +56,7 @@ PROJECTS += otw
 #
 # Map format reader libraries
 #
-PROJECTS += maps/rpf
+PROJECTS += map/rpf
 
 .PHONY: all clean $(PROJECTS)
 

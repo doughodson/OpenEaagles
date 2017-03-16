@@ -3,8 +3,8 @@
 // Application Protocols - Enumerations for DIS PDU's
 // Standard: 1278.1a
 //--------------------------------------------------------------
-#ifndef __oe_dis_Enum_H__
-#define __oe_dis_Enum_H__
+#ifndef __oe_interop_dis_Enum_H__
+#define __oe_interop_dis_Enum_H__
 
 namespace oe {
 namespace dis {

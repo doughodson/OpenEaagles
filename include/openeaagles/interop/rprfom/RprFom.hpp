@@ -1,6 +1,6 @@
 
-#ifndef __oe_rprfom_H__
-#define __oe_rprfom_H__
+#ifndef __oe_interop_rprfom_H__
+#define __oe_interop_rprfom_H__
 
 #include <RTI.hh>
 #include "openeaagles/base/Object.hpp"

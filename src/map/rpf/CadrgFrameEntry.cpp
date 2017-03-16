@@ -1,6 +1,6 @@
 
-#include "openeaagles/maps/rpf/CadrgFrameEntry.hpp"
-#include "openeaagles/maps/rpf/CadrgFrame.hpp"
+#include "openeaagles/map/rpf/CadrgFrameEntry.hpp"
+#include "openeaagles/map/rpf/CadrgFrame.hpp"
 #include <cstring>
 
 namespace oe {

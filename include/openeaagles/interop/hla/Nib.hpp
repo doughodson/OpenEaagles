@@ -1,6 +1,6 @@
 
-#ifndef __oe_hla_Nib_H__
-#define __oe_hla_Nib_H__
+#ifndef __oe_interop_hla_Nib_H__
+#define __oe_interop_hla_Nib_H__
 
 #include "openeaagles/interop/common/Nib.hpp"
 #include "openeaagles/interop/hla/NetIO.hpp"

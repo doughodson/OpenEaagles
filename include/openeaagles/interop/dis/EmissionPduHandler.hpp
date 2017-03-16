@@ -1,6 +1,6 @@
 
-#ifndef __oe_dis_EmissionPduHandler_H__
-#define __oe_dis_EmissionPduHandler_H__
+#ifndef __oe_interop_dis_EmissionPduHandler_H__
+#define __oe_interop_dis_EmissionPduHandler_H__
 
 #include "openeaagles/interop/dis/NetIO.hpp"
 #include "openeaagles/interop/dis/structs.hpp"

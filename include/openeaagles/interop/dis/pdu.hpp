@@ -23,8 +23,8 @@
 //    7.11.8   ActionResponsePDU_R
 //
 //--------------------------------------------------------------
-#ifndef __oe_dis_Pdu_H__
-#define __oe_dis_Pdu_H__
+#ifndef __oe_interop_dis_Pdu_H__
+#define __oe_interop_dis_Pdu_H__
 
 #include "openeaagles/interop/dis/structs.hpp"
 #include "openeaagles/interop/dis/enums.hpp"

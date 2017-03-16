@@ -1,6 +1,6 @@
 
-#ifndef __oe_rprfom_factory_H__
-#define __oe_rprfom_factory_H__
+#ifndef __oe_interop_rprfom_factory_H__
+#define __oe_interop_rprfom_factory_H__
 
 #include <string>
 

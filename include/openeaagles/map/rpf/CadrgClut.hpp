@@ -1,6 +1,6 @@
 
-#ifndef __oe_maps_rpf_CadrgClut_H__
-#define __oe_maps_rpf_CadrgClut_H__
+#ifndef __oe_map_rpf_CadrgClut_H__
+#define __oe_map_rpf_CadrgClut_H__
 
 #include "openeaagles/base/Object.hpp"
 

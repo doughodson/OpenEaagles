@@ -1,8 +1,8 @@
 
-#include "openeaagles/maps/rpf/CadrgFile.hpp"
-#include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
+#include "openeaagles/map/rpf/CadrgFile.hpp"
+#include "openeaagles/map/rpf/CadrgTocEntry.hpp"
 #include "openeaagles/base/String.hpp"
-#include "openeaagles/maps/rpf/map_utils.hpp"
+#include "openeaagles/map/rpf/map_utils.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>

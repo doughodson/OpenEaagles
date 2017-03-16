@@ -1,6 +1,6 @@
 
-#ifndef __oe_hla_NetIO_H__
-#define __oe_hla_NetIO_H__
+#ifndef __oe_interop_hla_NetIO_H__
+#define __oe_interop_hla_NetIO_H__
 
 #include "openeaagles/interop/common/NetIO.hpp"
 #include "openeaagles/base/String.hpp"

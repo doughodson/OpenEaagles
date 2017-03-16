@@ -1,6 +1,6 @@
 
-#ifndef __oe_hla_Ambassador_H__
-#define __oe_hla_Ambassador_H__
+#ifndef __oe_interop_hla_Ambassador_H__
+#define __oe_interop_hla_Ambassador_H__
 
 #include <RTI.hh>
 #include <fedtime.hh>

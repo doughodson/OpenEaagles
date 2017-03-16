@@ -66,7 +66,7 @@ Infrastructure oriented libraries
 #####################################################
 
 --------------------------------------------------------------------------------
-base library
+base library (oe_base)
 
 -- Removed original OSG (OpenSceneGraphic) aliased types Vec3, Vec4, Matrix, etc,
    with explicit declarations (e.g., Vec3d, Vec3f, Matrixd, etc) throughout framework.
@@ -185,7 +185,7 @@ base library
 
 
 --------------------------------------------------------------------------------
-simulation library
+simulation library (oe_simulation)
 
 -- Created mostly abstract interface classes for NetIO, Otw and Player.  The
    relationship between these classes serve as the defining architecture for
@@ -235,15 +235,15 @@ Graphics oriented libraries
 #####################################################
 
 --------------------------------------------------------------------------------
-graphics library
+graphics library (oe_graphics)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-glut library
+glut library (oe_glut)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-instruments library
+instruments library (oe_instruments)
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -251,7 +251,7 @@ Interoperability oriented libraries
 #####################################################
 
 --------------------------------------------------------------------------------
-interop library
+interop library (oe_interop)
 
 -- Moved all interoperability implementation code into this new library.
    This removes circular references between 'simulation', 'models',
@@ -260,15 +260,15 @@ interop library
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-dis library
+dis library (oe_interop_dis)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-hla library
+hla library (oe_interop_hla)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-rprfom library
+rprfom library (oe_interop_rprfom)
 --------------------------------------------------------------------------------
 
 #####################################################
@@ -276,7 +276,7 @@ Out the window (OTW) oriented libraries
 #####################################################
 
 --------------------------------------------------------------------------------
-otw library
+otw library (oe_otw)
 
 -- Much cleanup of this library by breaking out and making explicit all the OTW
    related code.  This includes all cigi classes now logically grouped within 'cigi'
@@ -289,7 +289,7 @@ Models & general capabilities oriented libraries
 #####################################################
 
 --------------------------------------------------------------------------------
-models library
+models library (oe_models)
 
 -- Moved all players, systems and component-based models from simulation library
    into this library.
@@ -313,7 +313,7 @@ models library
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-dafif library
+dafif library (oe_dafif)
 
 -- Removed all dependencies to this library throughout framework. Add new 'testDafif'
    example that loads DAFIF data and performs allows one to interact with it to
@@ -322,22 +322,22 @@ dafif library
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-iodevice library
+iodevice library (oe_iodevice)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-linearsystem library
+linearsystem library (oe_linearsystem)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-rpf library
+rpf library (oe_map_rpf)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-recorder library
+recorder library (oe_recorder)
 --------------------------------------------------------------------------------
 
 --------------------------------------------------------------------------------
-terrain library
+terrain library (oe_terrain)
 --------------------------------------------------------------------------------
 

@@ -190,13 +190,13 @@ workspace "oe"
       defines { "_SCL_SECURE_NO_WARNINGS" } -- suppress protocol buffer warning
       targetname "recorder"
 
-   -- raster product format maps library
-   project "rpf"
+   -- raster product format map library
+   project "map_rpf"
       files {
-         "../../include/openeaagles/maps/rpf/**.h*",
-         "../../src/maps/rpf/**.cpp"
+         "../../include/openeaagles/map/rpf/**.h*",
+         "../../src/map/rpf/**.cpp"
       }
-      targetname "rpf"
+      targetname "map_rpf"
 
    -- simulation library
    project "simulation"

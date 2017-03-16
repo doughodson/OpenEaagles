@@ -1,6 +1,6 @@
 
-#ifndef __oe_rprfom_Ntm_H__
-#define __oe_rprfom_Ntm_H__
+#ifndef __oe_interop_rprfom_Ntm_H__
+#define __oe_interop_rprfom_Ntm_H__
 
 #include "openeaagles/interop/common/Ntm.hpp"
 #include "openeaagles/interop/rprfom/NetIO.hpp"

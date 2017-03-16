@@ -1,8 +1,8 @@
 
-#ifndef __oe_maps_rpf_CadrgTocEntry_H__
-#define __oe_maps_rpf_CadrgTocEntry_H__
+#ifndef __oe_map_rpf_CadrgTocEntry_H__
+#define __oe_map_rpf_CadrgTocEntry_H__
 
-#include "openeaagles/maps/rpf/CadrgFrameEntry.hpp"
+#include "openeaagles/map/rpf/CadrgFrameEntry.hpp"
 #include "openeaagles/base/Object.hpp"
 
 namespace oe {

@@ -1,6 +1,6 @@
 
-#ifndef __oe_rprfom_NetIO_H__
-#define __oe_rprfom_NetIO_H__
+#ifndef __oe_interop_rprfom_NetIO_H__
+#define __oe_interop_rprfom_NetIO_H__
 
 #include "openeaagles/interop/hla/NetIO.hpp"
 

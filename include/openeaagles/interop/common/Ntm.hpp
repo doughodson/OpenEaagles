@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_Ntm_H__
-#define __oe_interop_Ntm_H__
+#ifndef __oe_interop_common_Ntm_H__
+#define __oe_interop_common_Ntm_H__
 
 #include "openeaagles/interop/common/NetIO.hpp"
 

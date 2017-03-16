@@ -1,6 +1,6 @@
 
-#ifndef __oe_maps_rpf_factory_H__
-#define __oe_maps_rpf_factory_H__
+#ifndef __oe_map_rpf_factory_H__
+#define __oe_map_rpf_factory_H__
 
 #include <string>
 

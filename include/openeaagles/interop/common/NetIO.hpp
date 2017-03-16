@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_NetIO_H__
-#define __oe_interop_NetIO_H__
+#ifndef __oe_interop_common_NetIO_H__
+#define __oe_interop_common_NetIO_H__
 
 #include "openeaagles/simulation/AbstractNetIO.hpp"
 

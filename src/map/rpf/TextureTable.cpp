@@ -1,5 +1,5 @@
 
-#include "openeaagles/maps/rpf/TextureTable.hpp"
+#include "openeaagles/map/rpf/TextureTable.hpp"
 #include "openeaagles/graphics/Texture.hpp"
 #include <iostream>
 

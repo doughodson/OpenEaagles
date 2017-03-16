@@ -1,6 +1,6 @@
 
-#ifndef __oe_interop_Nib_H__
-#define __oe_interop_Nib_H__
+#ifndef __oe_interop_common_Nib_H__
+#define __oe_interop_common_Nib_H__
 
 #include "openeaagles/simulation/AbstractNib.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __oe_maps_rpf_MapDrawer_H__
-#define __oe_maps_rpf_MapDrawer_H__
+#ifndef __oe_map_rpf_MapDrawer_H__
+#define __oe_map_rpf_MapDrawer_H__
 
 #include "openeaagles/graphics/MapPage.hpp"
 #include <array>

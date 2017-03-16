@@ -18,8 +18,8 @@
 //
 //------------------------------------------------------------------------------
 
-#ifndef __oe_maps_rpf_map_utils_H__
-#define __oe_maps_rpf_map_utils_H__
+#ifndef __oe_map_rpf_map_utils_H__
+#define __oe_map_rpf_map_utils_H__
 
 #include <fstream>
 

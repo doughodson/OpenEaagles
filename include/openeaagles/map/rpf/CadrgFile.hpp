@@ -1,6 +1,6 @@
 
-#ifndef __oe_maps_rpf_CadrgFile_H__
-#define __oe_maps_rpf_CadrgFile_H__
+#ifndef __oe_map_rpf_CadrgFile_H__
+#define __oe_map_rpf_CadrgFile_H__
 
 #include "openeaagles/base/Object.hpp"
 #include <array>

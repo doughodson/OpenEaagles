@@ -1,7 +1,7 @@
 
-#include "openeaagles/maps/rpf/CadrgClut.hpp"
-#include "openeaagles/maps/rpf/CadrgFrameEntry.hpp"
-#include "openeaagles/maps/rpf/map_utils.hpp"
+#include "openeaagles/map/rpf/CadrgClut.hpp"
+#include "openeaagles/map/rpf/CadrgFrameEntry.hpp"
+#include "openeaagles/map/rpf/map_utils.hpp"
 #include "openeaagles/base/String.hpp"
 
 #include <cstring>

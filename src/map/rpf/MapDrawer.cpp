@@ -1,8 +1,8 @@
 
-#include "openeaagles/maps/rpf/MapDrawer.hpp"
-#include "openeaagles/maps/rpf/CadrgMap.hpp"
-#include "openeaagles/maps/rpf/TexturePager.hpp"
-#include "openeaagles/maps/rpf/CadrgTocEntry.hpp"
+#include "openeaagles/map/rpf/MapDrawer.hpp"
+#include "openeaagles/map/rpf/CadrgMap.hpp"
+#include "openeaagles/map/rpf/TexturePager.hpp"
+#include "openeaagles/map/rpf/CadrgTocEntry.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/graphics/Display.hpp"

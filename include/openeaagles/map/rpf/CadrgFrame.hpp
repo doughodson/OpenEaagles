@@ -1,9 +1,9 @@
 
-#ifndef __oe_maps_rpf_CadrgFrame_H__
-#define __oe_maps_rpf_CadrgFrame_H__
+#ifndef __oe_map_rpf_CadrgFrame_H__
+#define __oe_map_rpf_CadrgFrame_H__
 
 #include "openeaagles/base/Object.hpp"
-#include "openeaagles/maps/rpf/map_utils.hpp"
+#include "openeaagles/map/rpf/map_utils.hpp"
 
 namespace oe {
 namespace rpf {
