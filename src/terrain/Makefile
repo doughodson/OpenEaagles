@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboeterrain.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_terrain.a
 
 OBJS =  \
 	ded/DedFile.o \

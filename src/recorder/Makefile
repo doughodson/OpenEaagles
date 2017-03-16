@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboerecorder.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_recorder.a
 
 OBJS =  \
 	protobuf/DataRecord.pb.o \

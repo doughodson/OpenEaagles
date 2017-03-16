@@ -16,7 +16,7 @@
 
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboebase.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_base.a
 
 OBJS =  \
 	concurrent/platform/PeriodicTask_linux.o \

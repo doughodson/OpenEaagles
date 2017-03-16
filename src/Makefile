@@ -42,10 +42,10 @@ PROJECTS += "gui/glut"
 #
 # Interoperability interfaces
 #
-PROJECTS += networks/interop
-PROJECTS += networks/dis
-PROJECTS += networks/hla
-PROJECTS += networks/rprfom
+PROJECTS += interop/common
+PROJECTS += interop/dis
+PROJECTS += interop/hla
+PROJECTS += interop/rprfom
 
 # Out-the-Window interface classes to talk to visual systems
 # - CIGI Class Library 3.x interface

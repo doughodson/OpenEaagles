@@ -15,7 +15,7 @@
 
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboegraphics.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_graphics.a
 
 OBJS =  \
 	readouts/AsciiText.o \

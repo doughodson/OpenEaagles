@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboelinearsystem.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_linearsystem.a
 
 OBJS =  \
 	DiffEquation.o \

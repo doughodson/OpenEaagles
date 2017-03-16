@@ -6,37 +6,35 @@
    -- Common interoperability code
    project "interop"
       files {
-         "../../include/openeaagles/networks/interop/**.h*",
-         "../../src/networks/interop/**.cpp"
+         "../../include/openeaagles/interop/common/**.h*",
+         "../../src/interop/common/**.cpp"
       }
       targetname "interop"
 
    -- IEEE DIS interface library
-   project "dis"
+   project "interop_dis"
       files {
-         "../../include/openeaagles/networks/dis/**.h*",
-         "../../src/networks/dis/**.cpp"
+         "../../include/openeaagles/interop/dis/**.h*",
+         "../../src/interop/dis/**.cpp"
       }
-      targetname "dis"
+      targetname "interop_dis"
 
    -- IEEE HLA interface library (common code)
-   project "hla"
+   project "interop_hla"
       files {
-         "../../include/openeaagles/networks/hla/**.h*",
-         "../../src/networks/hla/**.cpp"
+         "../../include/openeaagles/interop/hla/**.h*",
+         "../../src/interop/hla/**.cpp"
       }
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }
-      targetname "hla"
+      targetname "interop_hla"
 
    -- IEEE HLA interface library for RPR FOM
-   project "rprfom"
+   project "interop_rprfom"
       files {
-         "../../include/openeaagles/networks/rprfom/**.h*",
-         "../../src/networks/rprfom/**.cpp"
+         "../../include/openeaagles/interop/rprfom/**.h*",
+         "../../src/interop/rprfom/**.cpp"
       }
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }
-      targetname "rprfom"
-
-
+      targetname "interop_rprfom"

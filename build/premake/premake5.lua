@@ -53,7 +53,7 @@ workspace "oe"
    includedirs { OEIncPath, OE3rdPartyIncPath }
 
    -- target suffix (all configurations/all projects)
-   targetprefix "oe"
+   targetprefix "oe_"
 
    --
    -- Build (solution) configuration options:

@@ -1,7 +1,7 @@
 #
 include ../makedefs
 
-LIB = $(OPENEAAGLES_LIB_DIR)/liboesimulation.a
+LIB = $(OPENEAAGLES_LIB_DIR)/liboe_simulation.a
 
 OBJS =  \
 	AbstractDataRecorder.o \
