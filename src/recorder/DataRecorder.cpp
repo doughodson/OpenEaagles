@@ -15,6 +15,7 @@
 #include "openeaagles/simulation/AbstractNib.hpp"
 #include "openeaagles/simulation/Simulation.hpp"
 
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
 

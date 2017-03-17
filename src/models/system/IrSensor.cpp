@@ -21,7 +21,7 @@
 
 #include "openeaagles/base/Integer.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/Distances.hpp"
 
 #include <cmath>
 

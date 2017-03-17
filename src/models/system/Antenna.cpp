@@ -17,7 +17,6 @@
 #include "openeaagles/base/units/Powers.hpp"
 
 #include "openeaagles/base/util/math_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 

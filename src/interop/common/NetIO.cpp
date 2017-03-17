@@ -34,7 +34,6 @@
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
 
 #include <cstring>

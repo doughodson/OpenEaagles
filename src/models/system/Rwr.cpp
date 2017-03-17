@@ -10,7 +10,6 @@
 #include "openeaagles/base/Pair.hpp"
 
 #include "openeaagles/base/util/math_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 

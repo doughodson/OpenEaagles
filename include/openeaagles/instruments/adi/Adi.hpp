@@ -4,7 +4,7 @@
 
 #include "openeaagles/instruments/Instrument.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
 
 namespace oe {
 namespace base { class Number; class Angle; }

@@ -6,7 +6,8 @@
 #include "openeaagles/models/IrQueryMsg.hpp"
 #include "openeaagles/models/SensorMsg.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/util/distance.hpp"
 
 #include <cmath>
 

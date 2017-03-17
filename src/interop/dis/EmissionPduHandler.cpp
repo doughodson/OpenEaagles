@@ -20,8 +20,6 @@
 #include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
-
 #include <cmath>
 #include <cstring>
 

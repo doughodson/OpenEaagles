@@ -7,8 +7,7 @@
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/Pair.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/util/navigation.hpp"
 
 // environment models
 #include "openeaagles/models/environment/AbstractAtmosphere.hpp"

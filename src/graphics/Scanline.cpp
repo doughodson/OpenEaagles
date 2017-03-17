@@ -4,7 +4,7 @@
 #include "openeaagles/graphics/Clip3D.hpp"
 #include "openeaagles/graphics/Polygon.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
 
 namespace oe {
 namespace graphics {

@@ -16,8 +16,7 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/util/navigation.hpp"
 
 #include <cmath>
 

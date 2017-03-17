@@ -18,8 +18,6 @@
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/osg/Vec3d"
 
-#include "openeaagles/base/util/unit_utils.hpp"
-
 namespace oe {
 namespace otw {
 

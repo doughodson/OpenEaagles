@@ -4,8 +4,7 @@
 #include "openeaagles/base/List.hpp"
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/osg/Vec3d"
-
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/Number.hpp"
 
 #include <cmath>
 

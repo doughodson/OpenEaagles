@@ -25,8 +25,6 @@ Thread should not be an Object-based class
 
 Should LinkedList<> template be based on Object? (same as other templates)
 
-Should ref/unref concepts be in a separate class (or template?) -- yes, resolved!
-
 Should Color be in 'base' library?
 Maybe move Color functions out of terrain class and temp subclass in mainTerrain example
 utility functions should not have 'util' all over the places, in filename
@@ -64,11 +62,6 @@ terrain      :
 
 ################################
 
-directory names need to change for consistency model, model/player, maps -> map,
-networks -> interop
-
-################################
-
 The testIoHandler program is displaying DI switch hits from 6-10 on ST290
 this shouldn't be the case, the joystick has a total of 6 DIs.
 
@@ -96,7 +89,6 @@ dis::NetIO, dis::Nib, hla::NetIO, hla::Nib, interop::NetIO, interop::Nib,
 Otw, OtwCigiCL, OtwModelCigiCl, Simulation, Track, Player, Radar, RfSystem,
 Stores
 
-
 ################################
  
 Use std::string in place of fixed length char arrays in FileReader, BmpTexture,
@@ -104,7 +96,3 @@ CadrgFrameEntry
 
 
 ################################
-
-
-
-

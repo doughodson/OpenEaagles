@@ -18,7 +18,7 @@
 #include "openeaagles/simulation/Simulation.hpp"
 #include "openeaagles/simulation/Station.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/navigation.hpp"
 
 #include "openeaagles/base/network/NetHandler.hpp"
 #include "openeaagles/base/Pair.hpp"

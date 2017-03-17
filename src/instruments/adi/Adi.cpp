@@ -4,7 +4,6 @@
 #include "openeaagles/base/units/Angles.hpp"
 
 #include "openeaagles/base/util/math_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace instruments {

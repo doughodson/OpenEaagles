@@ -4,7 +4,7 @@
 
 #include "openeaagles/graphics/MfdPage.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
 
 #include <cmath>
 

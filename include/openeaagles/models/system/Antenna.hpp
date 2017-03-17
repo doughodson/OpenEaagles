@@ -7,7 +7,6 @@
 #include "openeaagles/base/safe_queue.hpp"
 #include "openeaagles/base/safe_stack.hpp"
 #include "openeaagles/base/util/constants.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace base { class Angle; class Function; class Power; }
@@ -80,10 +79,10 @@ public:
 
    // Gain pattern
    const base::Function* gainPatternTable() const { return gainPattern; }
-   bool isGainPatternDegrees() const           { return gainPatternDeg; }
+   bool isGainPatternDegrees() const              { return gainPatternDeg; }
 
    // Antenna threshold (watts)
-   double getTransmitThreshold() const         { return threshold; }
+   double getTransmitThreshold() const            { return threshold; }
 
    // Antenna effective area (m^2)
    static double getEffectiveArea(const double gain, const double lambda) {

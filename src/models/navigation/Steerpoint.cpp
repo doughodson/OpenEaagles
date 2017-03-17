@@ -19,8 +19,7 @@
 #include "openeaagles/base/units/Distances.hpp"
 #include "openeaagles/base/units/Times.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/util/navigation.hpp"
 
 #include <cmath>
 

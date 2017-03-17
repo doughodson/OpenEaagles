@@ -4,7 +4,7 @@
 
 #include "openeaagles/models/system/System.hpp"
 #include "openeaagles/config.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/distance.hpp"
 
 namespace oe {
 namespace base { class Angle; class Distance; class Number; class PairStream; }

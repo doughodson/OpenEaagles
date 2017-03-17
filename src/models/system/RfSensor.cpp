@@ -20,7 +20,6 @@
 #include "openeaagles/base/units/Times.hpp"
 
 #include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
 
 namespace oe {
 namespace models {
@@ -43,19 +42,19 @@ BEGIN_SLOTTABLE(RfSensor)
 END_SLOTTABLE(RfSensor)
 
 BEGIN_SLOT_MAP(RfSensor)
-    ON_SLOT(1,setSlotTrackManagerName,base::String)
-    ON_SLOT(2,setSlotModeStream,base::PairStream)
-    ON_SLOT(2,setSlotModeSingle,RfSensor)
-    ON_SLOT(3,setSlotRanges,base::List)
-    ON_SLOT(4,setSlotInitRangeIdx,base::Number)
-    ON_SLOT(5,setSlotPrf,base::Frequency)             // Check for base::Frequency before base::Number
-    ON_SLOT(5,setSlotPrf,base::Number)
-    ON_SLOT(6,setSlotPulseWidth,base::Time)           // Check for base::Time before base::Number
-    ON_SLOT(6,setSlotPulseWidth,base::Number)
-    ON_SLOT(7,setSlotBeamWidth,base::Angle)           // Check for base::Angle before base::Number
-    ON_SLOT(7,setSlotBeamWidth,base::Number)
-    ON_SLOT(8,setSlotTypeId,base::String)
-    ON_SLOT(9,setSlotSyncXmitWithScan,base::Number)
+    ON_SLOT(1, setSlotTrackManagerName, base::String)
+    ON_SLOT(2, setSlotModeStream,       base::PairStream)
+    ON_SLOT(2, setSlotModeSingle,       RfSensor)
+    ON_SLOT(3, setSlotRanges,           base::List)
+    ON_SLOT(4, setSlotInitRangeIdx,     base::Number)
+    ON_SLOT(5, setSlotPrf,              base::Frequency)      // Check for base::Frequency before base::Number
+    ON_SLOT(5, setSlotPrf,              base::Number)
+    ON_SLOT(6, setSlotPulseWidth,       base::Time)           // Check for base::Time before base::Number
+    ON_SLOT(6, setSlotPulseWidth,       base::Number)
+    ON_SLOT(7, setSlotBeamWidth,        base::Angle)          // Check for base::Angle before base::Number
+    ON_SLOT(7, setSlotBeamWidth,        base::Number)
+    ON_SLOT(8, setSlotTypeId,           base::String)
+    ON_SLOT(9, setSlotSyncXmitWithScan, base::Number)
 END_SLOT_MAP()
 
 BEGIN_EVENT_HANDLER(RfSensor)

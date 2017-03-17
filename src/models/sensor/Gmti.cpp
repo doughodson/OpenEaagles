@@ -10,8 +10,6 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
-
 #include <cmath>
 
 namespace oe {

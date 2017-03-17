@@ -1,5 +1,5 @@
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/navigation.hpp"
 
 #include "openeaagles/base/util/osg_utils.hpp"
 #include "openeaagles/base/util/math_utils.hpp"

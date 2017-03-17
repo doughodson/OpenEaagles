@@ -8,7 +8,9 @@
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Vec4d"
 
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/util/distance.hpp"
+
 #include <array>
 
 namespace oe {

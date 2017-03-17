@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_distance_utils_H__
-#define __oe_base_util_distance_utils_H__
+#ifndef __oe_base_util_distance_H__
+#define __oe_base_util_distance_H__
 
 namespace oe {
 namespace base {

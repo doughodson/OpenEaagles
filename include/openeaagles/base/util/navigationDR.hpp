@@ -118,7 +118,7 @@ bool getRwbMatrix(
       Matrixd* const pRwb
    );
 
-#include "openeaagles/base/util/navDR_utils.inl"
+#include "openeaagles/base/util/navigationDR.inl"
 
 }
 }

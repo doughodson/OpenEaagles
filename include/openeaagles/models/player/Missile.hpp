@@ -4,8 +4,6 @@
 
 #include "openeaagles/models/player/AbstractWeapon.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
-
 namespace oe {
 namespace base { class Number; }
 namespace models {

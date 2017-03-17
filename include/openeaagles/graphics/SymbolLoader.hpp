@@ -4,7 +4,6 @@
 
 #include "openeaagles/graphics/MapPage.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
 #include <array>
 
 namespace oe {

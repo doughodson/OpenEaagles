@@ -2,7 +2,8 @@
 #include "openeaagles/terrain/DataFile.hpp"
 
 #include "openeaagles/base/network/NetHandler.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/util/distance.hpp"
 
 namespace oe {
 namespace terrain {

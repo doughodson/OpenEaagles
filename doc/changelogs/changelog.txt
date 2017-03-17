@@ -94,7 +94,7 @@ base library (oe_base)
    to clearly indicate its nature (i.e., it's not a Math class).
 
 -- Extracted constants and conversion methods from within unit classes, such as,
-   Angle, Distance, Mass, and placed into unit_utils.hpp.  This better indicates
+   Angle, Distance, Mass, and placed into individual files.  This better indicates
    that these are 'pure' functions without side effects, simplifies the original classes,
    and makes their usage throughout codebase more clear.  The classes Angle, Mass, etc,
    are 'abstract', but they have not been renamed in anyway to 'AbstractThis' or

@@ -3,7 +3,7 @@
 #define __oe_models_RfSensor_H__
 
 #include "openeaagles/models/system/RfSystem.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
 
 namespace oe {
 namespace base { class Angle; class Frequency; class Integer;

@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_force_utils_H__
-#define __oe_base_util_force_utils_H__
+#ifndef __oe_base_util_force_H__
+#define __oe_base_util_force_H__
 
 namespace oe {
 namespace base {

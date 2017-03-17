@@ -8,10 +8,9 @@
 #include "openeaagles/simulation/AbstractDataRecorder.hpp"
 
 #include "openeaagles/base/List.hpp"
+#include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/PairStream.hpp"
 #include "openeaagles/base/osg/Matrixd"
-
-#include "openeaagles/base/util/unit_utils.hpp"
 
 #include <cmath>
 

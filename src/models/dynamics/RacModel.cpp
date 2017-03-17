@@ -9,8 +9,6 @@
 #include "openeaagles/base/units/Angles.hpp"
 #include "openeaagles/base/units/Distances.hpp"
 
-#include "openeaagles/base/util/unit_utils.hpp"
-
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"
 

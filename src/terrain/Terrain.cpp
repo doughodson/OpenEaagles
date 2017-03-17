@@ -8,8 +8,7 @@
 #include "openeaagles/base/Rgba.hpp"
 #include "openeaagles/base/String.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/util/navigation.hpp"
 
 #include "openeaagles/base/osg/Vec2d"
 #include "openeaagles/base/osg/Vec3d"

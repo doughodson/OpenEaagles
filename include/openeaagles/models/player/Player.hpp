@@ -11,8 +11,9 @@
 #include "openeaagles/base/osg/Matrixd"
 #include "openeaagles/base/osg/Quat"
 
-#include "openeaagles/base/units/Distances.hpp"
-#include "openeaagles/base/util/unit_utils.hpp"
+#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/util/distance.hpp"
+
 #include <array>
 
 namespace oe {

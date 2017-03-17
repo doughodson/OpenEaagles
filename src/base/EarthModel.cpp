@@ -1,7 +1,7 @@
 
 #include "openeaagles/base/EarthModel.hpp"
 
-#include "openeaagles/base/util/nav_utils.hpp"
+#include "openeaagles/base/util/navigation.hpp"
 
 #include "openeaagles/base/units/Distances.hpp"
 

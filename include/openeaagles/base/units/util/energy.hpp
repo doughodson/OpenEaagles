@@ -1,6 +1,6 @@
 
-#ifndef __oe_base_util_energy_utils_H__
-#define __oe_base_util_energy_utils_H__
+#ifndef __oe_base_util_energy_H__
+#define __oe_base_util_energy_H__
 
 namespace oe {
 namespace base {
