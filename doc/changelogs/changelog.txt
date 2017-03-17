@@ -11,7 +11,7 @@ General framework-wide changes/improvements
 
 -- Renamed several of the key classes that are abstract to 'Abstract<<CLASSNAME>>'.
    For example, NetIO in simulation library became 'AbstractNetIO'.  This naming
-   convention better indicates the role those classes take in relation to other
+   convention better indicates the role those classes play in relation to other
    classes.
 
    Often abstract classes define a small set of functionality, but maybe more
@@ -24,7 +24,7 @@ Modern C++ Improvements (code modernization, enhancements and general improvemen
 -- Replaced several found null pointer 0's with nullptr.
 
 -- Now using 'auto' keyword to declare types in a significant way; specifically
-   used in places they declare variables that are initialized with rather long and
+   used in places where they declare variables that are initialized with rather long and
    obvious type definitions. For example:
 
    oe::models::Autopilot* ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
@@ -33,7 +33,7 @@ Modern C++ Improvements (code modernization, enhancements and general improvemen
 
    auto ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
 
-   and improved upon like this:
+   and improved slightly like this:
 
    const auto ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
 
@@ -42,22 +42,23 @@ Modern C++ Improvements (code modernization, enhancements and general improvemen
 
 -- Now using in-class brace initializers throughout codebase for member data.
    This C++11 feature improves code clarity, and potentially reduces
-   data initalization issues by eliminating multiple redundant variable initializations
+   data initalization issues by eliminating multiple redundant initializations
    (sometimes by assignment) when several constructors have been defined. This,
    in some cases, eliminates the need for 'initData()' member methods often defined
    to support this initialization activity.
 
    This also eliminates any possible initalization vs assignment performance issues
-   and often reduces the amount of code within the 'copyData' member - specifically,
-   it often reduces or completely eliminates code associated copy construction.
+   and often reduces the amount of code within the 'copyData' method. Specifically,
+   this often reduces or completely eliminates additional code associated to support
+   copy construction.
 
--- Now using std::array for all single dimension data array.  This is a zero cost
-   abstraction.  At this point, only class data member declarations have been
+-- Now using std::array for all single dimension arrays; this is a zero cost
+   abstraction.  To date, only class data member declarations have been
    changed -- specific use of this template throughout rest of code is to be done.
 
 -- Not really a Modern C++ improvement, but all pragma's associated with turning
    on/off compiler generated warnings have been removed from code.  They are now made
-   explicit with command line options to enable/disable (much all -Wall in GCC).
+   explicit with command line options to enable/disable (much like gcc's -Wall).
 
 --------------------------------------------------------------------------------
 
@@ -72,10 +73,10 @@ base library (oe_base)
    with explicit declarations (e.g., Vec3d, Vec3f, Matrixd, etc) throughout framework.
    Along with this change is the movement of these classes from oe::osg namespace
    to oe::base namespace.  For example, the aliased oe::osg::Vec3 class has moved
-   from oe::osg to the namespace and explicitly defined as oe::base::Vec3d.
+   from oe::osg to the namespace oe::base and explicitly defined as oe::base::Vec3d.
    Both of these changes improve code readability, as all references within 'base'
    namespace are to the class itself (e.g, Vec3d), and outside the namespace as
-   base::Vec3d.  This aligns these classes with all the other 'base' classes.
+   base::Vec3d.  This better aligns these classes with all the other 'base' classes.
 
    It should be noted that base::Matrixd (an original 'osg' class) is different than
    base::Matrix (the homegrown openeaagles matrix class).  At some point these different
@@ -94,7 +95,7 @@ base library (oe_base)
    to clearly indicate its nature (i.e., it's not a Math class).
 
 -- Extracted constants and conversion methods from within unit classes, such as,
-   Angle, Distance, Mass, and placed into individual files.  This better indicates
+   Angle, Distance, Mass, etc., have been placed into individual files.  This better indicates
    that these are 'pure' functions without side effects, simplifies the original classes,
    and makes their usage throughout codebase more clear.  The classes Angle, Mass, etc,
    are 'abstract', but they have not been renamed in anyway to 'AbstractThis' or
@@ -107,14 +108,14 @@ base library (oe_base)
 
 -- Moved and grouped all thread related classes into the subfolder 'concurrent' to make
    more obvious the capability provided.  Along with this is the renaming of classes to
-   easy to digest names, such as ThreadPeriodicTask to PeriodicTask to avoid overloading
+   easier to digest names, such as ThreadPeriodicTask to PeriodicTask to avoid overloading
    of names.
 
 -- Renamed subdirectory 'nethandlers' to 'network' as this better conveys the code it
    contains - namely, component interfaces to network sockets. Also moved NetHandler
    class into this directory.
 
--- Created subdirectory 'io' to store all IO related classes (e.g., IoData, etc.).  At
+-- Created subdirectory 'io' to store all I/O related classes (e.g., IoData, etc.).  At
    some point these will be moved into iodevice library
 
    Object class
@@ -132,7 +133,7 @@ base library (oe_base)
 
      -- Extracted '_Static' structure (i.e., struct) from Object and moved into a
         standalone class called MetaObject - which is, what it is.  Updated
-        Object to use this object (via, a variable called 'metaObject')
+        Object to use this object (via, the variable called 'metaObject')
         in lue of '_static' to store class and object related information.  This has
         NO impact on API, but does improve code readable.
 
@@ -153,11 +154,11 @@ base library (oe_base)
 
    Nav class (removed)
      -- This class contained only static methods, so it was restructured as a set
-        of functions within the oe::base::nav namespace defined in file 'util/nav_utils.hpp'.
+        of functions within the oe::base::nav namespace defined in file 'util/navigation.hpp'.
 
    NavDR class (removed)
      -- This class contained only static methods, so it was restructured as a set
-        of functions within the oe::base::navDR namespace defined in file 'util/navDR_utils.hpp'.
+        of functions within the oe::base::navDR namespace defined in file 'util/navigationDR.hpp'.
 
    MetaObject
      -- New class that replaces _Static class once defined in Object.
@@ -205,7 +206,7 @@ simulation library (oe_simulation)
          framework termionology.
 
    AbstractPlayer
-      -- Removed two undefined methods "isSmoothing()" and "getSmoothingRate()".
+      -- Removed two undefined methods 'isSmoothing()' and 'getSmoothingRate()'.
          Both were undefined and not used.
 
    Simulation class
@@ -218,8 +219,8 @@ simulation library (oe_simulation)
         library.
 
      -- At the moment, a WorldModel is a subclass of a simulation - existing EDL
-        files need to be updated by replacing "Simulation" references to
-        "WorldModel".
+        files need to be updated by replacing 'Simulation' references to
+        'WorldModel'.
 
      -- It is recoginized that by subclassing, there still remains a close coupling
         between these two different aspects (models and simulation execution).  But,
