@@ -194,10 +194,10 @@ public:
 private:
    const Object* getPosition1(const unsigned int n) const;
 
-   Item* headP {};            // Pointer to head object
-   Item* tailP {};            // Pointer to last object
+   Item* headP {};       // Pointer to head object
+   Item* tailP {};       // Pointer to last object
 
-   unsigned int num {};       // Number of list objects
+   unsigned int num {};  // Number of list objects
 };
 
 }

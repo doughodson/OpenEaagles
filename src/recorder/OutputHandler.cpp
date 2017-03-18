@@ -13,7 +13,7 @@ IMPLEMENT_SUBCLASS(OutputHandler, "RecorderOutputHandler")
 EMPTY_SLOTTABLE(OutputHandler)
 EMPTY_SERIALIZER(OutputHandler)
 
-OutputHandler::OutputHandler():semaphore(0)
+OutputHandler::OutputHandler()
 {
    STANDARD_CONSTRUCTOR()
 }

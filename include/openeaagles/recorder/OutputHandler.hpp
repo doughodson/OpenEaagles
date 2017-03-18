@@ -57,16 +57,16 @@ protected:
    bool isDataTypeEnabled(const DataRecordHandle* const handle) const;
 
    virtual void processComponents(
-      base::PairStream* const list,        // Source list of components
-      const std::type_info& filter,        // Type filter
-      base::Pair* const add = 0,           // Optional pair to add
-      base::Component* const remove = 0    // Optional subcomponent to remove
+      base::PairStream* const list,             // Source list of components
+      const std::type_info& filter,             // Type filter
+      base::Pair* const add = nullptr,          // Optional pair to add
+      base::Component* const remove = nullptr   // Optional subcomponent to remove
    ) override;
 
    virtual bool shutdownNotification() override;
 
 private:
-   base::List queue;         // Data Record Queue
+   base::List queue;            // Data Record Queue
    mutable long semaphore {};
 };
 

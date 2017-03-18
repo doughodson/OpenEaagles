@@ -41,15 +41,9 @@ List::List(const int values[], const unsigned int nv)
     }
 }
 
-void List::copyData(const List& org, const bool cc)
+void List::copyData(const List& org, const bool)
 {
     BaseClass::copyData(org);
-
-    if (cc) {
-        headP = nullptr;
-        tailP = nullptr;
-        num = 0;
-    }
 
     // Clear the old list (if any)
     clear();

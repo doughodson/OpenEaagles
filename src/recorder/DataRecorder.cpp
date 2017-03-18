@@ -24,11 +24,11 @@
 namespace oe {
 namespace recorder {
 
-IMPLEMENT_SUBCLASS(DataRecorder,"DataRecorder")
+IMPLEMENT_SUBCLASS(DataRecorder, "DataRecorder")
 EMPTY_SERIALIZER(DataRecorder)
 
 BEGIN_SLOTTABLE(DataRecorder)
-   "outputHandler",     // 1)  Output handler
+   "outputHandler",     // 1) Output handler
    "eventName",         // 2) Event (i.e., test, study, demo, exercise) name
    "application",       // 3) Application name (e.g., "mainSimExec")
    "caseNum",           // 4) Case id number (i.e., conditions)
@@ -1007,6 +1007,7 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
 
          // create and send File ID
          const auto msg = new pb::DataRecord();
+
          // DataRecord header
          timeStamp(msg);
          msg->set_id( REID_FILE_ID );
@@ -1027,8 +1028,10 @@ void DataRecorder::sendDataRecord(pb::DataRecord* const msg)
 
          // Create a handle and send the message to be processed
          const auto h = new DataRecordHandle(msg);
+
          outputHandler->processRecord(h);
          h->unref();
+
       }
 
       // Create a handle and send the message to be processed

@@ -137,8 +137,8 @@ private:
    OutputHandler* outputHandler {};          // Our output handler
    bool firstPass {true};
 
-   const char* eventName {};
-   const char* application {};
+   const char* eventName {""};
+   const char* application {""};
    unsigned int caseNum {};
    unsigned int missionNum {};
    unsigned int subjectNum {};
