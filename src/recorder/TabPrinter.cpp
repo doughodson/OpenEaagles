@@ -81,19 +81,19 @@ bool TabPrinter::setSlotMsgHdr(const base::String* const msg)
    if (msg != nullptr) {
 
       if ((*msg == "NO_HDR") || (*msg == "no_hdr") ) {
-         option = NO_HDR;
+         option = MsgHdrOptions::NO_HDR;
          ok = true;
       }
       else if ((*msg == "ALL_MSGS") || (*msg == "all_msgs") ) {
-         option = ALL_MSGS;
+         option = MsgHdrOptions::ALL_MSGS;
          ok = true;
       }
       else if ((*msg == "NEW_MSG") || (*msg == "new_msg") ) {
-         option = NEW_MSG;
+         option = MsgHdrOptions::NEW_MSG;
          ok = true;
       }
       else if ((*msg == "ON_CHANGE") || (*msg == "on_change") ) {
-         option = ON_CHANGE;
+         option = MsgHdrOptions::ON_CHANGE;
          ok = true;
       }
 
@@ -146,19 +146,19 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       setMsgHeaders(true);
 
    }
-   if (option == NO_HDR) {
+   if (option == MsgHdrOptions::NO_HDR) {
       printHeader = false;
    }
-   else if (option == ALL_MSGS) {
+   else if (option == MsgHdrOptions::ALL_MSGS) {
       printHeader = true;
    }
-   else if (option == ON_CHANGE) {
+   else if (option == MsgHdrOptions::ON_CHANGE) {
       if (messageId != lastMessage) {
          printHeader = true;
       }
       else printHeader = false;
    }
-   else if (option == NEW_MSG) {
+   else if (option == MsgHdrOptions::NEW_MSG) {
       // Has this header been printed before
       printHeader = false;  // need to check each message
 
@@ -168,7 +168,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_FILE_ID : {
          if (dataRecord->has_file_id_msg()) {
-            if ((option == NEW_MSG) && (fileIdHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (fileIdHdr)) printHeader = true;
             fileIdHdr = false;
             const pb::FileIdMsg* msg = &dataRecord->file_id_msg();
             printFileIdMsg(timeMsg, msg);
@@ -179,7 +179,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       // events:
       case REID_NEW_PLAYER : {
          if (dataRecord->has_new_player_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::NewPlayerEventMsg* msg = &dataRecord->new_player_event_msg();
             printNewPlayerEventMsg(timeMsg, msg);
@@ -189,7 +189,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_PLAYER_REMOVED : {
          if (dataRecord->has_player_removed_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerRemovedEventMsg* msg = &dataRecord->player_removed_event_msg();
             printPlayerRemovedEventMsg(timeMsg, msg);
@@ -199,7 +199,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
 
       case REID_PLAYER_DATA : {
          if (dataRecord->has_player_data_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerDataMsg* msg = &dataRecord->player_data_msg();
             printPlayerDataMsg(timeMsg, msg);
@@ -208,7 +208,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
      case REID_PLAYER_DAMAGED : {
         if (dataRecord->has_player_damaged_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerDamagedEventMsg* msg = &dataRecord->player_damaged_event_msg();
             printPlayerDamagedEventMsg(timeMsg, msg);
@@ -217,7 +217,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_COLLISION : {
          if (dataRecord->has_player_collision_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerCollisionEventMsg* msg = &dataRecord->player_collision_event_msg();
             printPlayerCollisionEventMsg(timeMsg, msg);
@@ -226,7 +226,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_CRASH : {
          if (dataRecord->has_player_crash_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerCrashEventMsg* msg = &dataRecord->player_crash_event_msg();
             printPlayerCrashEventMsg(timeMsg, msg);
@@ -235,7 +235,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_PLAYER_KILLED : {
          if (dataRecord->has_player_killed_event_msg()) {
-            if ((option == NEW_MSG) && (playerHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (playerHeader)) printHeader = true;
             playerHeader = false;
             const pb::PlayerKilledEventMsg* msg = &dataRecord->player_killed_event_msg();
             printPlayerKilledEventMsg(timeMsg, msg);
@@ -244,7 +244,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_RELEASED : {
          if (dataRecord->has_weapon_release_event_msg()) {
-            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
             const pb::WeaponReleaseEventMsg* msg = &dataRecord->weapon_release_event_msg();
             printWeaponReleaseEventMsg(timeMsg, msg);
@@ -253,7 +253,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_HUNG : {
          if (dataRecord->has_weapon_hung_event_msg()) {
-            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
             const pb::WeaponHungEventMsg* msg = &dataRecord->weapon_hung_event_msg();
             printWeaponHungEventMsg(timeMsg, msg);
@@ -262,7 +262,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_WEAPON_DETONATION : {
          if (dataRecord->has_weapon_detonation_event_msg()) {
-            if ((option == NEW_MSG) && (weaponHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (weaponHeader)) printHeader = true;
             weaponHeader = false;
             const pb::WeaponDetonationEventMsg* msg = &dataRecord->weapon_detonation_event_msg();
             printWeaponDetonationEventMsg(timeMsg, msg);
@@ -271,7 +271,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_GUN_FIRED : {
          if (dataRecord->has_gun_fired_event_msg()) {
-            if ((option == NEW_MSG) && (gunFiredHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (gunFiredHdr)) printHeader = true;
             gunFiredHdr = false;
             const pb::GunFiredEventMsg* msg = &dataRecord->gun_fired_event_msg();
             printGunFiredEventMsg(timeMsg, msg);
@@ -280,7 +280,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_NEW_TRACK : {
          if (dataRecord->has_new_track_event_msg()) {
-            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
             const pb::NewTrackEventMsg* msg = &dataRecord->new_track_event_msg();
             printNewTrackEventMsg(timeMsg, msg);
@@ -289,7 +289,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_TRACK_REMOVED : {
          if (dataRecord->has_track_removed_event_msg()) {
-            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
             const pb::TrackRemovedEventMsg* msg = &dataRecord->track_removed_event_msg();
             printTrackRemovedEventMsg(timeMsg, msg);
@@ -298,7 +298,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       }
       case REID_TRACK_DATA : {
          if (dataRecord->has_track_data_msg()) {
-            if ((option == NEW_MSG) && (trackHeader)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (trackHeader)) printHeader = true;
             trackHeader = false;
             const pb::TrackDataMsg* msg = &dataRecord->track_data_msg();
             printTrackDataMsg(timeMsg, msg);
@@ -313,7 +313,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       case REID_MARKER: {
          // Marker msg with ID, source, and time fields.
          if (dataRecord->has_marker_msg()) {
-            if ((option == NEW_MSG) && (markerHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (markerHdr)) printHeader = true;
             markerHdr = false;
             const pb::MarkerMsg* msg = &dataRecord->marker_msg();
             printMarkerMsg(timeMsg, msg);
@@ -323,7 +323,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       case REID_AI_EVENT: {
          // Analog Input device msg with ID, source, value, and time fields.
          if (dataRecord->has_input_device_msg()) {
-            if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
             const pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
             printInputDeviceMsg(timeMsg, msg, messageId);
@@ -333,7 +333,7 @@ void TabPrinter::processRecordImp(const DataRecordHandle* const handle)
       case REID_DI_EVENT: {
          // Discrete Input device msg with ID, source, value, and time fields.
          if (dataRecord->has_input_device_msg()) {
-            if ((option == NEW_MSG) && (inputDeviceHdr)) printHeader = true;
+            if ((option == MsgHdrOptions::NEW_MSG) && (inputDeviceHdr)) printHeader = true;
             inputDeviceHdr = false;
             const pb::InputDeviceMsg* msg = &dataRecord->input_device_msg();
             printInputDeviceMsg(timeMsg, msg, messageId);

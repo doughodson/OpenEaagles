@@ -33,7 +33,7 @@ class TabPrinter : public PrintHandler
    DECLARE_SUBCLASS(TabPrinter, PrintHandler)
 
 public:
-   enum MsgHdrOptions { NO_HDR, ALL_MSGS, NEW_MSG, ON_CHANGE };
+   enum class MsgHdrOptions { NO_HDR, ALL_MSGS, NEW_MSG, ON_CHANGE };
 
 public:
    TabPrinter();
@@ -132,7 +132,7 @@ private:
    bool weaponHeader {true};
    bool trackHeader {true};
 
-   MsgHdrOptions option {NO_HDR};                       // options for printing field names
+   MsgHdrOptions option {MsgHdrOptions::NO_HDR};        // options for printing field names
    unsigned int lastMessage {REID_UNHANDLED_ID_TOKEN};  // previous message printed
    const char* divider {"\t"};                          // divider between message fields
 };

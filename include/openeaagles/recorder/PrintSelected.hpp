@@ -54,7 +54,7 @@ public:
    virtual bool setSlotCompareToDbl(const base::Number* const msg);
    virtual bool setSlotCondition(const base::String* const msg);
    virtual bool setSlotTimeOnly(const base::Number* const msg);
-   enum Condition { EQ, LT, GT };
+   enum class Condition { EQ, LT, GT };
 
    unsigned int getMsgToken() const;
    std::string getFieldName() const;
@@ -91,7 +91,7 @@ private:
    unsigned int msgToken {};
    double compareValD {};
    int compareValI {};
-   Condition condition {EQ};
+   Condition condition {Condition::EQ};
 
    std::string fieldNameStr;
    std::string compareStr;
