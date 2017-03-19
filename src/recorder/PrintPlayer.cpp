@@ -65,10 +65,10 @@ void PrintPlayer::processRecordImp(const DataRecordHandle* const handle)
    if (dataRecord == nullptr) return;  // cannot continue
 
    // Get the time msg
-   const pb::Time* timeMsg = nullptr;
-   if (dataRecord->has_time()) {
-      timeMsg = &dataRecord->time();
-   }
+//   const pb::Time* timeMsg = nullptr;
+//   if (dataRecord->has_time()) {
+//      timeMsg = &dataRecord->time();
+//   }
 
    // Get message id
    unsigned int messageId = dataRecord->id();

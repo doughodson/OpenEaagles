@@ -58,15 +58,15 @@ class DataRecorder : public simulation::AbstractDataRecorder
 public:
    DataRecorder();
 
-   const char* getEventName() const       { return eventName; }
-   const char* getApplication() const     { return application; }
-   unsigned int getCaseNum() const        { return caseNum; }
-   unsigned int getMissionNum() const     { return missionNum; }
-   unsigned int getSubjectNum() const     { return subjectNum; }
-   unsigned int getRunNum() const         { return runNum; }
-   unsigned int getDay() const            { return day; }
-   unsigned int getMonth() const          { return month; }
-   unsigned int getYear() const           { return year; }
+   const char*  getEventName() const    { return eventName.c_str(); }
+   const char*  getApplication() const  { return application.c_str(); }
+   unsigned int getCaseNum() const      { return caseNum; }
+   unsigned int getMissionNum() const   { return missionNum; }
+   unsigned int getSubjectNum() const   { return subjectNum; }
+   unsigned int getRunNum() const       { return runNum; }
+   unsigned int getDay() const          { return day; }
+   unsigned int getMonth() const        { return month; }
+   unsigned int getYear() const         { return year; }
 
    virtual void processRecords() override;
    virtual void reset() override;
@@ -137,8 +137,8 @@ private:
    OutputHandler* outputHandler {};          // Our output handler
    bool firstPass {true};
 
-   const char* eventName {""};
-   const char* application {""};
+   std::string eventName;
+   std::string application;
    unsigned int caseNum {};
    unsigned int missionNum {};
    unsigned int subjectNum {};
