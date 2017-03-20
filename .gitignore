@@ -47,9 +47,6 @@ build/qt/*/*/*Makefile*
 # executables
 *.exe
 
-# except for premake tool
-!premake4.exe
-
 # compiled object files
 *.[oa]
 
