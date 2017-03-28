@@ -91,8 +91,8 @@ base library (oe_base)
 
    This decision allowed for the removal of some included C header files, such as
    <math.h> and <limits.h> which reduces global namespace polution - and improves
-   the readability of the codebase.  The header file 'Math' was renamed to 'math.hpp'
-   to clearly indicate its nature (i.e., it's not a Math class).
+   the readability of the codebase.  The header file 'Math' was renamed to 'osg_math.hpp'
+   to clearly indicate its nature (i.e., it's math functions to support osg classes).
 
 -- Extracted constants and conversion methods from within unit classes, such as,
    Angle, Distance, Mass, etc., have been placed into individual files.  This better indicates
@@ -107,7 +107,7 @@ base library (oe_base)
    the UBF pattern.
 
 -- Moved and grouped all thread related classes into the subfolder 'concurrent' to make
-   more obvious the capability provided.  Along with this is the renaming of classes to
+   more obvious the capability they provide.  Along with this is the renaming of classes to
    easier to digest names, such as ThreadPeriodicTask to PeriodicTask to avoid overloading
    of names.
 
@@ -154,11 +154,11 @@ base library (oe_base)
 
    Nav class (removed)
      -- This class contained only static methods, so it was restructured as a set
-        of functions within the oe::base::nav namespace defined in file 'util/navigation.hpp'.
+        of functions within the oe::base::nav namespace defined in file 'util/nav_utils.hpp'.
 
    NavDR class (removed)
      -- This class contained only static methods, so it was restructured as a set
-        of functions within the oe::base::navDR namespace defined in file 'util/navigationDR.hpp'.
+        of functions within the oe::base::navDR namespace defined in file 'util/navDR_utils.hpp'.
 
    MetaObject
      -- New class that replaces _Static class once defined in Object.
@@ -180,7 +180,7 @@ base library (oe_base)
 
    safe_ptr template
      -- Fixed the assignment operators.  This bug has existed for years, but probably
-        noticed or 'discovered' because nobody writes code like this x = x;
+        not noticed or 'discovered' because nobody writes code like this x = x;
 
 --------------------------------------------------------------------------------
 

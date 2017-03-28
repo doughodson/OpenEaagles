@@ -14,7 +14,7 @@
 #ifndef __oe_base_osg_Vec2f_H__
 #define __oe_base_osg_Vec2f_H__
 
-#include "openeaagles/base/osg/math.hpp"
+#include "openeaagles/base/osg/osg_math.hpp"
 
 namespace oe {
 namespace base {
