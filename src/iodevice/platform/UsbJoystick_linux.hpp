@@ -26,10 +26,8 @@ public:
    virtual void reset() override;
 
 private:
-   void initData();
-
    int stream {};
-   char deviceName[128];
+   char deviceName[128] {};
 };
 
 }

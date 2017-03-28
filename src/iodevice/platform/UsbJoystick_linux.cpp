@@ -12,9 +12,9 @@
 
 #include <linux/joystick.h>
 
-#include "UsbJoystick_linux.h"
+#include "UsbJoystick_linux.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 namespace oe {
 namespace iodevice {
@@ -24,32 +24,14 @@ EMPTY_SLOTTABLE(UsbJoystick)
 EMPTY_SERIALIZER(UsbJoystick)
 EMPTY_DELETEDATA(UsbJoystick)
 
-//------------------------------------------------------------------------------
-// Constructor(s)
-//------------------------------------------------------------------------------
 UsbJoystick::UsbJoystick()
 {
    STANDARD_CONSTRUCTOR()
-
-   initData();
 }
 
-//------------------------------------------------------------------------------
-// Init our data
-//------------------------------------------------------------------------------
-void UsbJoystick::initData()
-{
-   deviceName[0] = '\0';
-}
-
-//------------------------------------------------------------------------------
-// copyData() -- copy member data
-//------------------------------------------------------------------------------
 void UsbJoystick::copyData(const UsbJoystick& org, const bool)
 {
    BaseClass::copyData(org);
-
-   initData();
 }
 
 //------------------------------------------------------------------------------
@@ -63,7 +45,7 @@ void UsbJoystick::reset()
 
       // create the device name based on the device index
       {
-         char cbuff[128];
+         char cbuff[128] {};
          // search for device at "/dev/jsX" first
          std::sprintf(cbuff, "/dev/js%d", getDeviceIndex());
          if (base::doesFileExist(cbuff)) {
@@ -95,14 +77,14 @@ void UsbJoystick::reset()
       // determine characteristics and print out info message
       if (stream != -1) {
 
-         int driverVersion;
+         int driverVersion {};
          ioctl(stream, JSIOCGVERSION, &driverVersion);
 
-         char modelName[128];
+         char modelName[128] {};
          ioctl(stream, JSIOCGNAME(128), modelName);
 
          {
-            unsigned char numOfAxes(0);
+            unsigned char numOfAxes {};
             ioctl(stream, JSIOCGAXES, &numOfAxes);
             unsigned short tmp = static_cast<unsigned short>(numOfAxes);
             if (tmp > MAX_AI)
@@ -111,7 +93,7 @@ void UsbJoystick::reset()
          }
 
          {
-            unsigned char numOfBtns(0);
+            unsigned char numOfBtns {};
             ioctl(stream, JSIOCGBUTTONS, &numOfBtns);
             unsigned short tmp = static_cast<unsigned short>(numOfBtns);
             if (tmp > MAX_DI)
@@ -175,7 +157,7 @@ void UsbJoystick::processInputs(const double dt, base::IoData* const pInData)
    }
 
    // Update our base class, which will call our component DI handlers
-   BaseClass::processInputs(dt,pInData);
+   BaseClass::processInputs(dt, pInData);
 }
 
 }

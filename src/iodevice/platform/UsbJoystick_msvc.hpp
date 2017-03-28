@@ -38,15 +38,14 @@ public:
    virtual void reset() override;
 
 private:
-   void initData();
-   bool setMaxMin(unsigned int channel, double max, double min);
-   bool setInputScaled(unsigned int channel, double raw);
+   bool setMaxMin(const unsigned int channel, const double max, const double min);
+   bool setInputScaled(const unsigned int channel, const double raw);
 
    // ---
    // analog
    // ---
-   double cmin[MAX_AI];     // channel min values
-   double cmax[MAX_AI];     // channel max values
+   double cmin[MAX_AI] {};     // channel min values
+   double cmax[MAX_AI] {};     // channel max values
 
 };
 
