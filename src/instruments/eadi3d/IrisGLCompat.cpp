@@ -3,7 +3,7 @@
 
 #include "openeaagles/base/util/constants.hpp"
 #include "openeaagles/base/util/platform_api.hpp"
-#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
 
 #include <GL/gl.h>
 #include <cmath>

@@ -4,7 +4,7 @@
 
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
 #include "openeaagles/base/functors/Tables.hpp"
 
 #include <GL/glu.h>

@@ -14,7 +14,7 @@
 #define __oe_base_Frequencies_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/util/frequency.hpp"
+#include "openeaagles/base/units/frequency_utils.hpp"
 #include <iostream>
 
 namespace oe {

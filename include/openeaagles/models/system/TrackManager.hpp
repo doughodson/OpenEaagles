@@ -4,7 +4,7 @@
 
 #include "openeaagles/models/system/System.hpp"
 #include "openeaagles/base/safe_queue.hpp"
-#include "openeaagles/base/units/util/distance.hpp"
+#include "openeaagles/base/units/distance_utils.hpp"
 
 namespace oe {
 namespace models {

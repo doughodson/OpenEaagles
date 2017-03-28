@@ -3,7 +3,7 @@
 #define __oe_instruments_CompassRose_H__
 
 #include "openeaagles/graphics/Graphic.hpp"
-#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
 
 namespace oe {
 namespace base { class Number; }

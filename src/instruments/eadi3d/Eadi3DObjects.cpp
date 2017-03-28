@@ -3,7 +3,7 @@
 #include "openeaagles/instruments/eadi3d/Eadi3DObjects.hpp"
 
 #include "openeaagles/base/util/platform_api.hpp"
-#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
 
 #include <GL/gl.h>
 #include <cmath>

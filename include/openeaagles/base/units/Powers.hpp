@@ -13,7 +13,7 @@
 #define __oe_base_Powers_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/util/power.hpp"
+#include "openeaagles/base/units/power_utils.hpp"
 
 #include <cmath>
 #include <iostream>

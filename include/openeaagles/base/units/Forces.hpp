@@ -12,7 +12,7 @@
 #define __oe_base_Forces_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/util/force.hpp"
+#include "openeaagles/base/units/force_utils.hpp"
 #include <iostream>
 
 namespace oe {

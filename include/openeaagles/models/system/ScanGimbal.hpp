@@ -3,7 +3,7 @@
 #define __oe_models_ScanGimbal_H__
 
 #include "openeaagles/models/system/Gimbal.hpp"
-#include "openeaagles/base/units/util/angle.hpp"
+#include "openeaagles/base/units/angle_utils.hpp"
 
 namespace oe {
 namespace base { class Integer; }

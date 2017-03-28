@@ -6,7 +6,7 @@
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
 
-#include "openeaagles/base/units/util/time.hpp"
+#include "openeaagles/base/units/time_utils.hpp"
 
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Quat"

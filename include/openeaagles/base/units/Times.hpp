@@ -15,7 +15,7 @@
 
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/math_utils.hpp"
-#include "openeaagles/base/units/util/time.hpp"
+#include "openeaagles/base/units/time_utils.hpp"
 #include <iostream>
 
 namespace oe {

@@ -12,7 +12,7 @@
 #define __oe_base_Volumes_H__
 
 #include "openeaagles/base/Number.hpp"
-#include "openeaagles/base/units/util/volume.hpp"
+#include "openeaagles/base/units/volume_utils.hpp"
 #include <iostream>
 
 namespace oe {
