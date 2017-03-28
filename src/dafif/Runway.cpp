@@ -1,7 +1,7 @@
 
 #include "openeaagles/dafif/Runway.hpp"
 
-#include "openeaagles/base/util/navigation.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 #include <iostream>
 
 namespace oe {

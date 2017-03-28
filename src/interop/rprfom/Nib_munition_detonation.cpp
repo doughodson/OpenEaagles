@@ -7,7 +7,7 @@
 #include "openeaagles/models/player/Player.hpp"
 #include "openeaagles/models/player/AbstractWeapon.hpp"
 
-#include "openeaagles/base/util/navigation.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 #include "openeaagles/base/network/NetHandler.hpp"
 
 namespace oe {

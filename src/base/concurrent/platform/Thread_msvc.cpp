@@ -2,7 +2,7 @@
 #include "openeaagles/base/concurrent/Thread.hpp"
 
 #include "openeaagles/base/Component.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 #include <iostream>
 
 /* ----------------------------------------------------------------- */

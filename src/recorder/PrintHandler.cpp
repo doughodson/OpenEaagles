@@ -3,7 +3,7 @@
 #include "openeaagles/base/String.hpp"
 #include "openeaagles/base/Number.hpp"
 #include "openeaagles/base/util/str_utils.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 #include <cstring>
 

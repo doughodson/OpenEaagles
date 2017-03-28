@@ -14,7 +14,7 @@
 #include "openeaagles/base/Pair.hpp"
 #include "openeaagles/base/units/Times.hpp"
 #include "openeaagles/base/Statistic.hpp"
-#include "openeaagles/base/util/system.hpp"
+#include "openeaagles/base/util/system_utils.hpp"
 
 #include <cstring>
 #include <cmath>

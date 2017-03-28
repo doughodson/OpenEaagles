@@ -79,11 +79,11 @@ OBJS =  \
 	util/platform/system_linux.o \
 	util/lfi.o \
 	util/math_utils.o \
-	util/navigation.o \
-	util/navigationDR.o \
+	util/nav_utils.o \
+	util/navDR_utils.o \
 	util/osg_utils.o \
 	util/str_utils.o \
-	util/system.o \
+	util/system_utils.o \
 	Boolean.o \
 	Cie.o \
 	Cmy.o \

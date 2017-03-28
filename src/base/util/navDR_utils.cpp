@@ -1,7 +1,7 @@
 
-#include "openeaagles/base/util/navigationDR.hpp"
+#include "openeaagles/base/util/navDR_utils.hpp"
 
-#include "openeaagles/base/util/navigation.hpp"
+#include "openeaagles/base/util/nav_utils.hpp"
 
 #include "openeaagles/base/osg/Vec3d"
 #include "openeaagles/base/osg/Vec4d"
