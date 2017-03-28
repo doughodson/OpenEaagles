@@ -14,9 +14,9 @@
 #include <string>
 
 #if defined(WIN32)
-   #include "./platform/UsbJoystick_msvc.h"
+   #include "./platform/UsbJoystick_msvc.hpp"
 #else
-   #include "./platform/UsbJoystick_linux.h"
+   #include "./platform/UsbJoystick_linux.hpp"
 #endif
 
 namespace oe {
