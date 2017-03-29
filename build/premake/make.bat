@@ -8,6 +8,7 @@ rem
 rmdir /S /Q ..\vs2013
 rmdir /S /Q ..\vs2015
 rmdir /S /Q ..\vs2017
+rmdir /S /Q ..\obj
 rem
 rem delete old compiled libraries
 rem

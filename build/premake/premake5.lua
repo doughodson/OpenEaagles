@@ -60,7 +60,7 @@ workspace "oe"
    --     Release        (Runtime library is Multi-threaded DLL)
    --     Debug          (Runtime library is Multi-threaded Debug DLL)
    --
-   configurations { "Release32", "Debug32" }
+   configurations { "Release", "Debug" }
 
    -- visual studio options and warnings
    -- /wd4351 (C4351 warning) - disable warning associated with array brace initialization
