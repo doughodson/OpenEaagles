@@ -17,7 +17,7 @@ namespace graphics {
 
 IMPLEMENT_SUBCLASS(Graphic, "Graphic")
 
-double Graphic::fTimer = 0.0f;
+double Graphic::fTimer = 0.0;
 GLuint Graphic::autoSelName = 0x00800000;
 
 BEGIN_SLOTTABLE(Graphic)

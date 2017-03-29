@@ -8,9 +8,7 @@
 
 namespace oe {
 namespace base { class Object; class Float; class Integer; class Number; }
-
 namespace graphics {
-
 class ReformatScanner;
 
 //------------------------------------------------------------------------------
