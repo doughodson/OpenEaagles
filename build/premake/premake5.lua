@@ -71,14 +71,14 @@ workspace "oe"
    buildoptions( { "/wd4351", "/wd4996", "/wd4005", "/wd4100", "/Oi" } )
 
    -- common release configuration flags and symbols
-   filter { "Release32" }
+   filter { "Release" }
       flags { "Optimize" }
       -- favor speed over size
       buildoptions { "/Ot" }
       defines { "WIN32", "_LIB", "NDEBUG" }
 
    -- common debug configuration flags and symbols
-   filter { "Debug32" }
+   filter { "Debug" }
       targetsuffix "_d"
       symbols "On"
       -- enable compiler intrinsics
