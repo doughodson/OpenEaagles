@@ -22,10 +22,7 @@ namespace base {
 //------------------------------------------------------------------------------
 class EdlScanner : public edlFlexLexer {
 public:
-    EdlScanner(std::fstream* f) : edlFlexLexer(f) {
-        fname[0] = 0;
-        line = 1;
-    }
+    EdlScanner(std::fstream* f) : edlFlexLexer(f) {}
 
     virtual int yylex();
     const char* getFilename()    { return fname; }
@@ -33,8 +30,8 @@ public:
 
 private:
     static const unsigned int FNAME_SIZE = 256;
-    char fname[FNAME_SIZE];   // current file name
-    int line;                 // current line number
+    char fname[FNAME_SIZE] {};   // current file name
+    int line {1};                // current line number
 
 };
 

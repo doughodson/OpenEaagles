@@ -351,7 +351,7 @@
 #define BEGIN_EVENT_HANDLER(ThisType)                                                  \
     bool ThisType::event(const int _event, ::oe::base::Object* const _obj)             \
     {                                                                                  \
-        bool _used = false;
+        bool _used {};
 
 
 #define END_EVENT_HANDLER()                                                            \

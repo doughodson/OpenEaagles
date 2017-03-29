@@ -15,6 +15,8 @@ class AbstractAction;
 // Class: Agent
 //
 // Description: Generic agent class to control a component in the simulation - the agent's "actor"
+//              It manages a component (the "actor") with a behavior (either a player, or
+//              a player's component)
 //
 // Notes:
 // 1) Use 'Agent' to update the behavior framework via updateData() and use

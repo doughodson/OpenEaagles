@@ -11,13 +11,6 @@ namespace oe {
 namespace base {
 namespace ubf {
 
-//
-// Class: Agent
-//
-// Description: An Agent that manages a component (the "actor") with a behavior
-//              (either a player, or a player's component)
-//
-
 IMPLEMENT_SUBCLASS(Agent, "UbfAgent")
 EMPTY_SERIALIZER(Agent)
 EMPTY_COPYDATA(Agent)

@@ -61,7 +61,7 @@ public:
     bool setSlotMass(const Mass* newMass);
     bool setSlotVolume(const Volume* newVolume);
 
-    private:
+private:
     safe_ptr<const Mass>   myMass;         // holds our mass type
     safe_ptr<const Volume> myVolume;       // holds our volume type
 };

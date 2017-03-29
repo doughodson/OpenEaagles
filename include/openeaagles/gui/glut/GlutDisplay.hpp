@@ -141,7 +141,7 @@ protected:
    virtual Graphic* findSelected(const GLint hits, const GLuint sbuff[], const int item = 0);
 
 private:
-   enum { MAX_DISPLAYS = 500 };     // Maximum number of GlutDisplay classes
+   static const unsigned int MAX_DISPLAYS = 500;     // Maximum number of GlutDisplay classes
    static const float CLICK_TIME;
 
 private:

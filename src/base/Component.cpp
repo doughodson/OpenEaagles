@@ -41,11 +41,16 @@ BEGIN_SLOT_MAP(Component)
     ON_SLOT( 7, setSlotDisableMsgType, Number)
 END_SLOT_MAP()
 
-BEGIN_EVENT_HANDLER(Component)
-    ON_EVENT_OBJ(SELECT,select,Number)
-    ON_EVENT_OBJ(SELECT,select,String)
-    ON_EVENT(RESET_EVENT, onEventReset )
-    ON_EVENT(SHUTDOWN_EVENT,shutdownNotification)
+bool Component::event(const int _event, ::oe::base::Object* const _obj)
+{
+    bool _used {};
+
+    ON_EVENT_OBJ(SELECT,       select, Number)
+    ON_EVENT_OBJ(SELECT,       select, String)
+
+    ON_EVENT(RESET_EVENT,      onEventReset )
+    ON_EVENT(SHUTDOWN_EVENT,   shutdownNotification)
+
     ON_EVENT_OBJ(FREEZE_EVENT, setSlotFreeze, Number )
 
     // *** Special handling of the end of the EVENT table ***
@@ -259,7 +264,6 @@ void Component::updateTC(const double dt)
     }
 }
 
-
 //------------------------------------------------------------------------------
 // updateData() -- Update non-time critical (background) stuff here
 //------------------------------------------------------------------------------
@@ -306,7 +310,7 @@ const PairStream* Component::getComponents() const
 //------------------------------------------------------------------------------
 unsigned int Component::getNumberOfComponents() const
 {
-   unsigned int n = 0;
+   unsigned int n {};
    const PairStream* subcomponents = components.getRefPtr();
    if (subcomponents != nullptr) {
       n = subcomponents->entries();
@@ -354,7 +358,7 @@ bool Component::shutdownNotification()
 //------------------------------------------------------------------------------
 Component* Component::findContainerByType(const std::type_info& type)
 {
-   Component* p = nullptr;
+   Component* p {};
    if (container() != nullptr) {
       if ( container()->isClassType(type) )
         p = container();
@@ -366,7 +370,7 @@ Component* Component::findContainerByType(const std::type_info& type)
 
 const Component* Component::findContainerByType(const std::type_info& type) const
 {
-   const Component* p = nullptr;
+   const Component* p {};
    if (container() != nullptr) {
       if ( container()->isClassType(type) )
         p = container();
@@ -391,7 +395,7 @@ const Component* Component::findContainerByType(const std::type_info& type) cons
 //------------------------------------------------------------------------------
 const Pair* Component::findByName(const char* const slotname) const
 {
-    const Pair* q = nullptr;
+    const Pair* q {};
     const PairStream* subcomponents = getComponents();
     if (subcomponents != nullptr) {
 
@@ -399,8 +403,8 @@ const Pair* Component::findByName(const char* const slotname) const
         if (slotname[0] == '.') name++;      // remove '.' from hard names
 
         // Copy the name up to a possible period.
-        char fname[128];
-        int i = 0;
+        char fname[128] {};
+        int i {};
         while (name[i] != '\0' && name[i] != '.') {
             fname[i] = name[i];
             i++;
@@ -426,7 +430,6 @@ const Pair* Component::findByName(const char* const slotname) const
             // When it's a simple name ...
             q = subcomponents->findByName(name);
 
-
         // Did we find it?
         if (q == nullptr && slotname[0] != '.') {
             // No, its not one of our components and its not a hard name,
@@ -448,18 +451,17 @@ const Pair* Component::findByName(const char* const slotname) const
 
 Pair* Component::findByName(const char* const slotname)
 {
-   const Component* cThis = this;
+   const Component* cThis {this};
    const Pair* p = cThis->findByName(slotname);
    return const_cast<Pair*>(p);
 }
-
 
 //------------------------------------------------------------------------------
 // findByIndex() -- find component one of our components by slot index
 //------------------------------------------------------------------------------
 const Pair* Component::findByIndex(const int slotindex) const
 {
-   const Pair* p = nullptr;
+   const Pair* p {};
 
    const PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
@@ -473,7 +475,7 @@ const Pair* Component::findByIndex(const int slotindex) const
 
 Pair* Component::findByIndex(const int slotindex)
 {
-   Pair* p = nullptr;
+   Pair* p {};
 
    PairStream* subcomponents = getComponents();
    if (subcomponents != nullptr) {
@@ -491,7 +493,7 @@ Pair* Component::findByIndex(const int slotindex)
 //------------------------------------------------------------------------------
 const Pair* Component::findByType(const std::type_info& type) const
 {
-    const Pair* q = nullptr;
+    const Pair* q {};
     const PairStream* subcomponents = getComponents();
     if (subcomponents != nullptr) {
         q = subcomponents->findByType(type);
@@ -510,7 +512,7 @@ const Pair* Component::findByType(const std::type_info& type) const
 
 Pair* Component::findByType(const std::type_info& type)
 {
-   const Component* cThis = this;
+   const Component* cThis {this};
    const Pair* p = cThis->findByType(type);
    return const_cast<Pair*>(p);
 }
@@ -526,7 +528,7 @@ Pair* Component::findByType(const std::type_info& type)
 //------------------------------------------------------------------------------
 const Identifier* Component::findNameOfComponent(const Component* const p) const
 {
-    const Identifier* name = nullptr;
+    const Identifier* name {};
     const PairStream* subcomponents = getComponents();
     if (subcomponents != nullptr) {
 
@@ -593,7 +595,7 @@ void Component::processComponents(
    // ---
    // Our dynamic_cast (see below) already filters on the Component class
    // ---
-   bool skipFilter = false;
+   bool skipFilter {};
    if (filter == typeid(Component)) {
       skipFilter = true;
    }
@@ -677,7 +679,7 @@ bool Component::setSelectionName(const Object* const s)
 //------------------------------------------------------------------------------
 bool Component::select(const String* const name)
 {
-    bool ok = true;
+    bool ok {true};
     selected = nullptr;
     setSelectionName(nullptr);
     if (name != nullptr) {
@@ -694,7 +696,7 @@ bool Component::select(const String* const name)
 
 bool Component::select(const Number* const num)
 {
-    bool ok = true;
+    bool ok {true};
     selected = nullptr;
     setSelectionName(nullptr);
     if (num != nullptr) {
@@ -753,7 +755,7 @@ bool Component::setPrintTimingStats(const bool b)
 // setSlotEnableTimingStats() -- slot to enable/disable the timing statistics
 bool Component::setSlotEnableTimingStats(const Number* const num)
 {
-   bool ok = false;
+   bool ok {};
    if (num != nullptr) {
       ok = setTimingStatsEnabled(num->getBoolean());
    }
@@ -763,7 +765,7 @@ bool Component::setSlotEnableTimingStats(const Number* const num)
 // setSlotPrintTimingStats() -- slot to enable/disable printing the timing statistics
 bool Component::setSlotPrintTimingStats(const Number* const num)
 {
-   bool ok = false;
+   bool ok {};
    if (num != nullptr) {
       ok = setPrintTimingStats(num->getBoolean());
    }
@@ -773,7 +775,7 @@ bool Component::setSlotPrintTimingStats(const Number* const num)
 // setSlotFreeze() -- slot to set/clear the freeze flag
 bool Component::setSlotFreeze(const Number* const num)
 {
-   bool ok = false;
+   bool ok {};
    if (num != nullptr) {
       freeze(num->getBoolean());
       ok = true;
@@ -808,7 +810,7 @@ bool Component::setSlotComponent(Component* const single)
 // enableMessageType --- Enable message type { WARNING INFO DEBUG DATA USER }
 bool Component::setSlotEnableMsgType(const Identifier* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
 
       const Identifier* p = msg;
@@ -832,7 +834,7 @@ bool Component::setSlotEnableMsgType(const Identifier* const msg)
 // enableMessageType --- Enable message type by number (e.g., 0x0100)
 bool Component::setSlotEnableMsgType(const Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = enableMessageTypes( static_cast<unsigned short>(msg->getInt()) );
    }
@@ -842,7 +844,7 @@ bool Component::setSlotEnableMsgType(const Number* const msg)
 // disableMessageType --- Disable message type { WARNING INFO DEBUG DATA USER }
 bool Component::setSlotDisableMsgType(const Identifier* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
 
       const Identifier* p = msg;
@@ -866,7 +868,7 @@ bool Component::setSlotDisableMsgType(const Identifier* const msg)
 // disableMessageType --- Disable message type by number (e.g., 0x0100)
 bool Component::setSlotDisableMsgType(const Number* const msg)
 {
-   bool ok = false;
+   bool ok {};
    if (msg != nullptr) {
       ok = disableMessageTypes( static_cast<unsigned short>(msg->getInt()) );
    }
@@ -881,7 +883,7 @@ bool Component::setSlotDisableMsgType(const Number* const msg)
 // Send an event message to component 'id'
 bool Component::send(const char* const id, const int event)
 {
-    bool val = false;
+    bool val {};
     Pair* p = findByName(id);
     if (p != nullptr) {
         const auto g = static_cast<Component*>(p->object());
@@ -894,7 +896,7 @@ bool Component::send(const char* const id, const int event)
 // Send an event message with an int value to component 'id'
 bool Component::send(const char* const id, const int event, const int value, SendData& sd)
 {
-   bool val = false;
+   bool val {};
    Object* vv = sd.getValue(value);
    if (vv != nullptr) {
       Component* g = sd.getObject(this,id);
@@ -906,7 +908,7 @@ bool Component::send(const char* const id, const int event, const int value, Sen
 // Send an event message with a float value to component 'id'
 bool Component::send(const char* const id, const int event, const float value, SendData& sd)
 {
-   bool val = false;
+   bool val {};
    Object* vv = sd.getValue(static_cast<double>(value));
    if (vv != nullptr) {
       Component* g = sd.getObject(this,id);
@@ -918,7 +920,7 @@ bool Component::send(const char* const id, const int event, const float value, S
 // Send an event message with a double value to component 'id'
 bool Component::send(const char* const id, const int event, const double value, SendData& sd)
 {
-   bool val = false;
+   bool val {};
    Object* vv = sd.getValue(static_cast<double>(value));
    if (vv != nullptr) {
       Component* g = sd.getObject(this,id);
@@ -930,7 +932,7 @@ bool Component::send(const char* const id, const int event, const double value, 
 // Send an event message with a character string to component 'id'
 bool Component::send(const char* const id, const int event, const char* const value, SendData& sd)
 {
-   bool val = false;
+   bool val {};
    Object* vv = sd.getValue(value);
    if (vv != nullptr) {
       Component* g = sd.getObject(this,id);
@@ -942,7 +944,7 @@ bool Component::send(const char* const id, const int event, const char* const va
 // Send an event message with a boolean to component 'id'
 bool Component::send(const char* const id, const int event, const bool value, SendData& sd)
 {
-   bool val = false;
+   bool val {};
    Object* vv = sd.getValue(value);
    if (vv != nullptr) {
       Component* g = sd.getObject(this,id);
@@ -973,7 +975,7 @@ bool Component::send(const char* const id, const int event, Object* const value,
 // ---
 bool Component::send(const char* const id, const int event, const int value[], SendData sd[], const int n)
 {
-   bool val = false;
+   bool val {};
    for (int i = 0; i < n; i++) {
       Object* vv = sd[i].getValue(value[i]);
       if (vv != nullptr) {
@@ -991,7 +993,7 @@ bool Component::send(const char* const id, const int event, const int value[], S
 // ---
 bool Component::send(const char* const id, const int event, const float value[], SendData sd[], const int n)
 {
-   bool val = false;
+   bool val {};
    for (int i = 0; i < n; i++) {
       Object* vv = sd[i].getValue(value[i]);
       if (vv != nullptr) {
@@ -1009,7 +1011,7 @@ bool Component::send(const char* const id, const int event, const float value[],
 // ---
 bool Component::send(const char* const id, const int event, const double value[], SendData sd[], const int n)
 {
-   bool val = false;
+   bool val {};
    for (int i = 0; i < n; i++) {
       Object* vv = sd[i].getValue(value[i]);
       if (vv != nullptr) {
@@ -1022,7 +1024,7 @@ bool Component::send(const char* const id, const int event, const double value[]
 
 bool Component::send(const char* const id, const int event, const bool value[], SendData sd[], const int n)
 {
-   bool val = false;
+   bool val {};
    for (int i = 0; i < n; i++) {
       Object* vv = sd[i].getValue(value[i]);
       if (vv != nullptr) {
@@ -1035,7 +1037,7 @@ bool Component::send(const char* const id, const int event, const bool value[], 
 
 bool Component::send(const char* const id, const int event, const char* const value[], SendData sd[], const int n)
 {
-   bool val = false;
+   bool val {};
    for (int i = 0; i < n; i++) {
       Object* vv = sd[i].getValue(value[i]);
       if (vv != nullptr) {
@@ -1048,7 +1050,7 @@ bool Component::send(const char* const id, const int event, const char* const va
 
 bool Component::send(const char* const id, const int event, Object* const value[], SendData sd[], const int n)
 {
-   bool val = false;
+   bool val {};
    for (int i = 0; i < n; i++) {
       if (value != nullptr) {
          Component* g = sd[i].getObject(this,id,(i+1));
