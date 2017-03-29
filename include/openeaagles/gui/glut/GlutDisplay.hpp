@@ -166,13 +166,13 @@ private:
    bool okToResize {};                 // Ok to resize our subwindows (main windows only)
 
    // main window only data
-   bool fullScreenFlg {};           // Full screen flag (main window only)
-   unsigned int idleSleepTimeMS;    // Idle callback sleep time (MS)
+   bool fullScreenFlg {};              // Full screen flag (main window only)
+   unsigned int idleSleepTimeMS {};    // Idle callback sleep time (MS)
 
    // Subwindow only data
-   int mainWinId {-1};              // Main window ID (sub-window only)
-   base::Vec2d swPosition;          // Our X and Y positions as a ratio [ 0 ... 1 ] of our main window
-   base::Vec2d swSize;              // Our width and height as a ratio [ 0 ... 1 ] of our main window
+   int mainWinId {-1};                 // Main window ID (sub-window only)
+   base::Vec2d swPosition;             // Our X and Y positions as a ratio [ 0 ... 1 ] of our main window
+   base::Vec2d swSize;                 // Our width and height as a ratio [ 0 ... 1 ] of our main window
 
    // Registered GlutDisplay list
    static int idList[MAX_DISPLAYS];                    // List of window IDs
