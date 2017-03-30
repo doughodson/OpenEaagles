@@ -13,6 +13,7 @@
 #include "openeaagles/base/Identifier.hpp"
 #include "openeaagles/base/PairStream.hpp"
 
+#include <string>
 #include <cstdio>
 #include <cstring>
 #include <cctype>
@@ -61,37 +62,37 @@ BEGIN_SLOTTABLE(Display)
 END_SLOTTABLE(Display)
 
 BEGIN_SLOT_MAP(Display)
-   ON_SLOT( 1, setName,base::String)
-   ON_SLOT( 2, setColorTable,base::PairStream)
-   ON_SLOT( 3, setNormalFont,Font)
-   ON_SLOT( 3, setNormalFont,base::Identifier)
-   ON_SLOT( 4, setSlotLeftOrthoBound,base::Number)
-   ON_SLOT( 5, setSlotRightOrthoBound,base::Number)
-   ON_SLOT( 6, setSlotBottomOrthoBound,base::Number)
-   ON_SLOT( 7, setSlotTopOrthoBound,base::Number)
-   ON_SLOT( 8, setSlotNearOrthoBound,base::Number)
-   ON_SLOT( 9, setSlotFarOrthoBound,base::Number)
-   ON_SLOT(10, setSlotViewportXOrigin,base::Number)
-   ON_SLOT(11, setSlotViewportYOrigin,base::Number)
-   ON_SLOT(12, setSlotViewportWidth,base::Number)
-   ON_SLOT(13, setSlotViewportHeight,base::Number)
-   ON_SLOT(14, setSlotSubdisplayStream,base::PairStream)
-   ON_SLOT(14, setSlotSubdisplaySingle,Display)
-   ON_SLOT(15, setSlotStdLineWidth,base::Number)
-   ON_SLOT(16, setSlotTexturesStream,base::PairStream)
-   ON_SLOT(16, setSlotTexturesSingle,Texture)
-   ON_SLOT(17, setSlotClearColor,base::Color)
-   ON_SLOT(18, setSlotLeftBracketCharacter,base::Number)
-   ON_SLOT(18, setSlotLeftBracketCharacter,base::String)
-   ON_SLOT(19, setSlotRightBracketCharacter,base::Number)
-   ON_SLOT(19, setSlotRightBracketCharacter,base::String)
-   ON_SLOT(20, setSlotReverseVideoBrackets,base::Number)
-   ON_SLOT(21, setFontList,base::PairStream)
-   ON_SLOT(22, setSlotClearDepth,base::Number)
-   ON_SLOT(23, setSlotDisplayOrientation,base::String)
-   ON_SLOT(24, setSlotMaterials,base::PairStream)
-   ON_SLOT(24, setSlotMaterials,Material)
-   ON_SLOT(25, setSlotAntialias,base::Number)
+   ON_SLOT( 1, setName, base::String)
+   ON_SLOT( 2, setColorTable, base::PairStream)
+   ON_SLOT( 3, setNormalFont, Font)
+   ON_SLOT( 3, setNormalFont, base::Identifier)
+   ON_SLOT( 4, setSlotLeftOrthoBound, base::Number)
+   ON_SLOT( 5, setSlotRightOrthoBound, base::Number)
+   ON_SLOT( 6, setSlotBottomOrthoBound, base::Number)
+   ON_SLOT( 7, setSlotTopOrthoBound, base::Number)
+   ON_SLOT( 8, setSlotNearOrthoBound, base::Number)
+   ON_SLOT( 9, setSlotFarOrthoBound, base::Number)
+   ON_SLOT(10, setSlotViewportXOrigin, base::Number)
+   ON_SLOT(11, setSlotViewportYOrigin, base::Number)
+   ON_SLOT(12, setSlotViewportWidth, base::Number)
+   ON_SLOT(13, setSlotViewportHeight, base::Number)
+   ON_SLOT(14, setSlotSubdisplayStream, base::PairStream)
+   ON_SLOT(14, setSlotSubdisplaySingle, Display)
+   ON_SLOT(15, setSlotStdLineWidth, base::Number)
+   ON_SLOT(16, setSlotTexturesStream, base::PairStream)
+   ON_SLOT(16, setSlotTexturesSingle, Texture)
+   ON_SLOT(17, setSlotClearColor, base::Color)
+   ON_SLOT(18, setSlotLeftBracketCharacter, base::Number)
+   ON_SLOT(18, setSlotLeftBracketCharacter, base::String)
+   ON_SLOT(19, setSlotRightBracketCharacter, base::Number)
+   ON_SLOT(19, setSlotRightBracketCharacter, base::String)
+   ON_SLOT(20, setSlotReverseVideoBrackets, base::Number)
+   ON_SLOT(21, setFontList, base::PairStream)
+   ON_SLOT(22, setSlotClearDepth, base::Number)
+   ON_SLOT(23, setSlotDisplayOrientation, base::String)
+   ON_SLOT(24, setSlotMaterials, base::PairStream)
+   ON_SLOT(24, setSlotMaterials, Material)
+   ON_SLOT(25, setSlotAntialias, base::Number)
 END_SLOT_MAP()
 
 Display::Display()
@@ -103,7 +104,7 @@ Display::Display()
 
 void Display::initData()
 {
-   name = new base::String(" ");
+   name = " ";
 
    // Colors
    color.set(1.0f,1.0f,1.0f,1.0f);
@@ -131,7 +132,7 @@ void Display::copyData(const Display& org, const bool cc)
    BaseClass::copyData(org);
    if (cc) initData();
 
-   *name = *org.name;
+   name = org.name;
    subdisplayFlg = org.subdisplayFlg;
 
    orientation = org.orientation;
@@ -198,9 +199,6 @@ void Display::copyData(const Display& org, const bool cc)
 
 void Display::deleteData()
 {
-   if (name != nullptr) name->unref();
-   name = nullptr;
-
    if (subdisplays != nullptr) { subdisplays->unref(); subdisplays = nullptr; }
 
    if (textures != nullptr) { textures->unref(); textures = nullptr; }
@@ -335,8 +333,8 @@ void Display::mouseEvent(const int /* button */, const int /* state */, const in
 //------------------------------------------------------------------------------
 void Display::setMouse(const int x, const int y, Display* const subdisplay)
 {
-   int lx = x;
-   int ly = y;
+   int lx {x};
+   int ly {y};
 
    if (subdisplay != nullptr) {
       // When we're called from a sub-display,
@@ -1423,9 +1421,7 @@ bool Display::setName(base::String* const n)
 {
    bool ok = false;
    if (n != nullptr) {
-      name->unref();
-      n->ref();
-      name = n;
+      name = n->getString();
       ok = true;
    }
    return ok;
@@ -1622,7 +1618,7 @@ bool Display::setSlotTexturesSingle(Texture* const obj)
       if (textures != nullptr) textures->unref();
 
       textures = new base::PairStream();
-      textures->put( new base::Pair("1",obj) );
+      textures->put( new base::Pair("1", obj) );
       ok = processTextures();
    }
    return ok;
@@ -1959,10 +1955,8 @@ std::ostream& Display::serialize(std::ostream& sout, const int i, const bool slo
       j = 4;
    }
 
-   if (name != nullptr) {
-      indent(sout,i+j);
-      sout << "name:" << *name << std::endl;
-   }
+   indent(sout,i+j);
+   sout << "name:" << name << std::endl;
 
    // Orientation
    if (getDisplayOrientation() != NORMAL) {

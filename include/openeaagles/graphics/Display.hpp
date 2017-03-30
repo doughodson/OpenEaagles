@@ -4,6 +4,8 @@
 
 #include "Page.hpp"
 
+#include <string>
+
 namespace oe {
 namespace base { class Color; class PairStream; class Identifier; class String; }
 namespace graphics {
@@ -362,7 +364,7 @@ private:
     bool processTextures();
     bool processMaterials();
 
-    base::String* name {};             // Display Name
+    std::string name;                  // Display name
     base::PairStream* subdisplays {};  // Sub-displays
 
     Graphic* focusPtr {};              // Input focus
@@ -408,7 +410,7 @@ private:
     bool okToSwap {true};                 // just in case we don't want to swap buffers every time, we can wait.
 };
 
-inline const char* Display::getName() const                            { return *name; }
+inline const char* Display::getName() const                            { return name.c_str(); }
 inline bool Display::isMainDisplay() const                             { return !subdisplayFlg; }
 inline bool Display::isSubdisplay() const                              { return subdisplayFlg; }
 inline Display::Orientation Display::getDisplayOrientation() const     { return orientation; }

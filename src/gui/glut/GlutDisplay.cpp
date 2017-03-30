@@ -22,9 +22,9 @@ namespace glut {
 
 IMPLEMENT_SUBCLASS(GlutDisplay,"GlutDisplay")
 
-int GlutDisplay::idList[GlutDisplay::MAX_DISPLAYS];                     // List of window IDs
-GlutDisplay* GlutDisplay::displayList[GlutDisplay::MAX_DISPLAYS];       // Display List
-int GlutDisplay::numGlutDisplays = 0;                                   // Number of  registered GlutDisplays
+int GlutDisplay::idList[GlutDisplay::MAX_DISPLAYS] {};                 // List of window IDs
+GlutDisplay* GlutDisplay::displayList[GlutDisplay::MAX_DISPLAYS] {};   // Display List
+int GlutDisplay::numGlutDisplays {};                                   // Number of  registered GlutDisplays
 
 const float GlutDisplay::CLICK_TIME = 0.5f;                             // our double click timeout
 const unsigned int DEFAULT_IDLE_SLEEP = 40;                             // default idle CB sleep time
