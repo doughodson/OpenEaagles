@@ -154,6 +154,10 @@ basic/units:
 --------------------------------------------------------------------------------
 basicGL:
 
+   Display class
+      1) Replaced use of base::String to store display 'name' variable with
+         std::string.  This does not alter API.
+
    GlutDisplay class
       1) Added the pickWidth and pickHeight slots that allow changing the size
          of the pick area.
