@@ -75,7 +75,7 @@ BEGIN_SLOTTABLE(Player)
    "initVelocity",      // 12) Initial Velocity: meters/sec
    "initVelocityKts",   // 13) Initial Velocity: knots
 
-   // Player's type, id and and other parameters
+   // Player's type and and other parameters
    "type",              // 14) Type of player vehicle ("F-16A", "Tank", "SA-6", etc.)
    "side",              // 15) Which side? { BLUE, RED, YELLOW, CYAN, GRAY, WHITE }
 

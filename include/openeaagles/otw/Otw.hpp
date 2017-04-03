@@ -18,7 +18,7 @@ class Otm;
 //
 // Notes:
 //    1) Derived versions of this class are used to interface with various
-//       visual systems and HUDs (see the Otw project).
+//       visual systems and HUDs.
 //
 //    2) One or more Otw objects can be attached to and managed by a Station object.
 //

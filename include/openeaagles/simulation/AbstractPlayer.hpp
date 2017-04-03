@@ -12,12 +12,10 @@ class AbstractNib;
 
 //------------------------------------------------------------------------------
 // Class: AbstractPlayer
-//
 // Description: Abstract interface for all players
 //
-//
-//------------------------------------------------------------------------------
 // Factory name: AbstractPlayer
+//
 // Slots --
 //
 //    ! ---

@@ -11,7 +11,7 @@ namespace simulation {
 
 //------------------------------------------------------------------------------
 // Class: AbstractRecorderComponent
-// Description: Base class for all data recorder components
+// Description: Abstract base class for data recorder components
 //
 // Notes:
 //    1) Use the setEnabledList() function to limit the processing to only
