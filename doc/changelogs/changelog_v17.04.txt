@@ -1,0 +1,344 @@
+================================================================================
+Changes since v16.11
+================================================================================
+
+--------------------------------------------------------------------------------
+General framework-wide changes/improvements
+
+-- Old logger functionality has been removed in favor of binary data recorder
+   library.  The classes base::Logger, simulation::SimLogger and simulation::TabLogger
+   have been removed.
+
+-- Renamed several of the key classes that are abstract to 'Abstract<<CLASSNAME>>'.
+   For example, NetIO in simulation library became 'AbstractNetIO'.  This naming
+   convention better indicates the role those classes play in relation to other
+   classes.
+
+   Often abstract classes define a small set of functionality, but maybe more
+   importantly, they define an interface of importance that is partially defined.
+   At this point, there are no classes within the framework that serve as a pure
+   interface-only specification -- all usually implement (by default) something.
+
+Modern C++ Improvements (code modernization, enhancements and general improvements)
+
+-- Replaced several found null pointer 0's with nullptr.
+
+-- Now using 'auto' keyword to declare types in a significant way; specifically
+   used in places where they declare variables that are initialized with rather long and
+   obvious type definitions. For example:
+
+   oe::models::Autopilot* ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
+
+   can be written as:
+
+   auto ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
+
+   and improved slightly like this:
+
+   const auto ap = dynamic_cast<oe::models::Autopilot*>(av->getPilot());
+
+   which results in const'ing the pointer variable itself, if appropriate (i.e.,
+   oe::models::Autopilot* const ap).
+
+-- Now using in-class brace initializers throughout codebase for member data.
+   This C++11 feature improves code clarity, and potentially reduces
+   data initalization issues by eliminating multiple redundant initializations
+   (sometimes by assignment) when several constructors have been defined. This,
+   in some cases, eliminates the need for 'initData()' member methods often defined
+   to support this initialization activity.
+
+   This also eliminates any possible initalization vs assignment performance issues
+   and often reduces the amount of code within the 'copyData' method. Specifically,
+   this often reduces or completely eliminates additional code associated to support
+   copy construction.
+
+-- Now using std::array for all single dimension arrays; this is a zero cost
+   abstraction.  To date, only class data member declarations have been
+   changed -- specific use of this template throughout rest of code is to be done.
+
+-- Not really a Modern C++ improvement, but all pragma's associated with turning
+   on/off compiler generated warnings have been removed from code.  They are now made
+   explicit with command line options to enable/disable (much like gcc's -Wall).
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Infrastructure oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+base library (oe_base)
+
+-- Removed original OSG (OpenSceneGraphic) aliased types Vec3, Vec4, Matrix, etc,
+   with explicit declarations (e.g., Vec3d, Vec3f, Matrixd, etc) throughout framework.
+   Along with this change is the movement of these classes from oe::osg namespace
+   to oe::base namespace.  For example, the aliased oe::osg::Vec3 class has moved
+   from oe::osg to the namespace oe::base and explicitly defined as oe::base::Vec3d.
+   Both of these changes improve code readability, as all references within 'base'
+   namespace are to the class itself (e.g, Vec3d), and outside the namespace as
+   base::Vec3d.  This better aligns these classes with all the other 'base' classes.
+
+   It should be noted that base::Matrixd (an original 'osg' class) is different than
+   base::Matrix (the homegrown openeaagles matrix class).  At some point these different
+   classes that essentially define the same concept should be combined or rectified
+   somehow to avoid the obvious question - why do multiple classes that represent
+   the same concept exist?
+
+   Some rework of the OSG-based classes (Vec and Matrix) was done to modernize them from
+   the standpoint of using current, readily available, standard library functionality (e.g.,
+   std::fabs, std::isnan) as opposed to defining new functions that 'wrap' or encapulate
+   platform specific workarounds for very old OS's, such as IRIX.
+
+   This decision allowed for the removal of some included C header files, such as
+   <math.h> and <limits.h> which reduces global namespace polution - and improves
+   the readability of the codebase.  The header file 'Math' was renamed to 'osg_math.hpp'
+   to clearly indicate its nature (i.e., it's math functions to support osg classes).
+
+-- Extracted constants and conversion methods from within unit classes, such as,
+   Angle, Distance, Mass, etc., have been placed into individual files.  This better indicates
+   that these are 'pure' functions without side effects, simplifies the original classes,
+   and makes their usage throughout codebase more clear.  The classes Angle, Mass, etc,
+   are 'abstract', but they have not been renamed in anyway to 'AbstractThis' or
+   'AbstractThat' to avoid massive changes to existing oe-based programs and their already
+   obvious abstractness as indicated by name.
+
+-- Renamed fundamental 'ubf' classes such as Action, Behavior and State to AbsractAction,
+   AbstractBehavior and AbstractState to make visible the role they play in defining
+   the UBF pattern.
+
+-- Moved and grouped all thread related classes into the subfolder 'concurrent' to make
+   more obvious the capability they provide.  Along with this is the renaming of classes to
+   easier to digest names, such as ThreadPeriodicTask to PeriodicTask to avoid overloading
+   of names.
+
+-- Renamed subdirectory 'nethandlers' to 'network' as this better conveys the code it
+   contains - namely, component interfaces to network sockets. Also moved NetHandler
+   class into this directory.
+
+-- Created subdirectory 'io' to store all I/O related classes (e.g., IoData, etc.).  At
+   some point these will be moved into iodevice library
+
+   Object class
+     -- In Object, the method getSlotByIndex() has been removed.  Therefore any derived
+        Object-based classes no longer need to define it.  For legacy code, methods of
+        the form below (in all class definitions), should be deleted.
+
+        base::Object* <<CLASSNAME>>::getSlotByIndex(const int si)
+        {
+           return BaseClass::getSlotByIndex(si);
+        }
+
+        This change simplifies the codebase by eliminating unused methods and
+        reducing code clutter.
+
+     -- Extracted '_Static' structure (i.e., struct) from Object and moved into a
+        standalone class called MetaObject - which is, what it is.  Updated
+        Object to use this object (via, the variable called 'metaObject')
+        in lue of '_static' to store class and object related information.  This has
+        NO impact on API, but does improve code readable.
+
+     -- Removed both registerClass() and WriteClassList() methods and underlying
+        support structure to maintain a list of classes compiled into an application.
+        This was used so that a developer could print a list of classes
+        available within an application and metadata related to them,
+        such as the number of instances currently in existance.
+
+        In theory, this information could be used to help debug memory leaks within
+        a running application. Not only can this capability be replicated outside of
+        Object itself, other tools exist (e.g., Valgrind) which are much more
+        comprehensive for this purpose. Removing the code associated with this functionality
+        greatly simplifies Object, its associated macros, and instance creation.
+        It also reduces the barrier to understanding what the code is doing.
+
+     -- Removed Object::getClassName() method - never used, available in MetaObject.
+
+   Nav class (removed)
+     -- This class contained only static methods, so it was restructured as a set
+        of functions within the oe::base::nav namespace defined in file 'util/nav_utils.hpp'.
+
+   NavDR class (removed)
+     -- This class contained only static methods, so it was restructured as a set
+        of functions within the oe::base::navDR namespace defined in file 'util/navDR_utils.hpp'.
+
+   MetaObject
+     -- New class that replaces _Static class once defined in Object.
+
+     -- Added getClassName() and getFactoryName() to this newly defined class.
+        The intent was to move all 'meta' information about class and object instances
+        away from Object itself, and into this class.
+
+   Component class
+     -- Component-based data logger functionality has been removed.  Removal of
+        this rippled into simulation library with the deletion of SimLogger and
+        TabLogger classes.
+
+   SlotTable class
+     -- Removed useless methods such as copyData, deleteData -- probably remnant
+        methods from long ago, when this might have been an Object-based class.
+
+     -- Deleted copy and assignment operators
+
+   safe_ptr template
+     -- Fixed the assignment operators.  This bug has existed for years, but probably
+        not noticed or 'discovered' because nobody writes code like this x = x;
+
+--------------------------------------------------------------------------------
+
+
+--------------------------------------------------------------------------------
+simulation library (oe_simulation)
+
+-- Created mostly abstract interface classes for NetIO, Otw and Player.  The
+   relationship between these classes serve as the defining architecture for
+   simulation applications.  It also draws a clear line between the infrastructure
+   needed to execute a simulation and the models being processed.
+
+-- Moved all models into respective libraries -- models, terrain, otw.
+   The goal was to divorce, simplify, and focus the contents of this
+   library to defining the basic architecture of a simulation.  It is now much
+   less concerned about models and interoperability interfaces.
+   In domain driven design (DDD) literature, this is called refactoring a ball
+   of mud into more clear boundary contexts. In other words, it simplifies
+   understanding and improves clarity.
+
+   Otm class
+      -- Renamed 'formName' slot to 'factoryName' to align code with existing
+         framework termionology.
+
+   AbstractPlayer
+      -- Removed two undefined methods 'isSmoothing()' and 'getSmoothingRate()'.
+         Both were undefined and not used.
+
+   Simulation class
+     -- This class serves as the connection between the execution infrastructure
+        to update players within a simulated world, and a model of that world.
+        This division of responsibilities is now more explicit by keeping all
+        infrastructure related activites, such as, multi-threaded Player execution
+        mechanics away from modeling the world itself.  The world being modeled
+        is defined by a new class (i.e., WorldModel), that resides in the models
+        library.
+
+     -- At the moment, a WorldModel is a subclass of a simulation - existing EDL
+        files need to be updated by replacing 'Simulation' references to
+        'WorldModel'.
+
+     -- It is recoginized that by subclassing, there still remains a close coupling
+        between these two different aspects (models and simulation execution).  But,
+        even though not optimal, it is a step in the right direction to decouple
+        this relationship.  At some point, the relationship between the simulation
+        execution infrastructure and a world model will probably become an aggregate
+        (i.e., a simulation owns a model to be executed.)
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Graphics oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+graphics library (oe_graphics)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+glut library (oe_gui_glut)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+instruments library (oe_instruments)
+--------------------------------------------------------------------------------
+
+#####################################################
+Interoperability oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+interop library (oe_interop)
+
+-- Moved all interoperability implementation code into this new library.
+   This removes circular references between 'simulation', 'models',
+   'interoperability' and 'otw' functionality.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+dis library (oe_interop_dis)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+hla library (oe_interop_hla)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+rprfom library (oe_interop_rprfom)
+--------------------------------------------------------------------------------
+
+#####################################################
+Out the window (OTW) oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+otw library (oe_otw)
+
+-- Much cleanup of this library by breaking out and making explicit all the OTW
+   related code.  This includes all cigi classes now logically grouped within 'cigi'
+   folder.
+
+--------------------------------------------------------------------------------
+
+#####################################################
+Models & general capabilities oriented libraries
+#####################################################
+
+--------------------------------------------------------------------------------
+models library (oe_models)
+
+-- Moved all players, systems and component-based models from simulation library
+   into this library.
+
+-- Grouped somewhat obvious highly related models into subfolders within the models
+   library.  This includes folders called player, system, dynamics, environment,
+   navigation, etc.  This can be improved, but it's a good start.
+
+-- Removed NavRadio-based classes: NavRadio, IlsRadio and TacanRadio.  These classes
+   used DAFIF data to navigate to airports and navaids.  In the real world, this
+   capability can also be used to land an aircraft through instrumentation.  The models
+   as designed can not do a full landing, but can navigate to a location.  They
+   have been moved into the testDafif example to retain the code and show how to extend
+   a world model to include DAFIF data.
+
+   WorldModel (new class)
+      -- Contains the guts of what used to be in Simulation class concerning
+         the modeled world -- class does not contain any code related to
+         execution of players, etc.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+dafif library (oe_dafif)
+
+-- Removed all dependencies to this library throughout framework. Add new 'testDafif'
+   example that loads DAFIF data and performs allows one to interact with it to
+   understand functionality.
+
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+iodevice library (oe_iodevice)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+linearsystem library (oe_linearsystem)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+rpf library (oe_map_rpf)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+recorder library (oe_recorder)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+terrain library (oe_terrain)
+--------------------------------------------------------------------------------
+
