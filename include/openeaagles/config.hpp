@@ -10,12 +10,12 @@
 #ifndef __oe_config_H__
 #define __oe_config_H__
 
-// OpenEaagles release version number (16.0X)
+// OpenEaagles release version number (17.0X)
 #ifndef OE_VERSION
-#define OE_VERSION                         160X
+#define OE_VERSION                         1704
 #endif
 
-// Max number of interval timers (see Timers.h)
+// Max number of interval timers (see Timers.hpp)
 #ifndef OE_CONFIG_MAX_INTERVAL_TIMERS
 #define OE_CONFIG_MAX_INTERVAL_TIMERS      500
 #endif
@@ -40,7 +40,7 @@
 #define OE_CONFIG_MAX_REPORTS              200
 #endif
 
-// Max number of networked entites (see NetIO.h)
+// Max number of networked entites (see NetIO.hpp)
 #ifndef OE_CONFIG_MAX_NETIO_ENTITIES
 #define OE_CONFIG_MAX_NETIO_ENTITIES       5000
 #endif

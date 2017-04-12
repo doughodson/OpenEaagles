@@ -19,6 +19,7 @@
       }
       targetname "interop_dis"
 
+--[[
    -- IEEE HLA interface library (common code)
    project "interop_hla"
       files {
@@ -38,3 +39,4 @@
       includedirs { HLAIncPath }
       defines { "RTI_USES_STD_FSTREAM" }
       targetname "interop_rprfom"
+--]]
