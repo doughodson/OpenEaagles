@@ -30,7 +30,7 @@ class Number;
 //
 // Public methods: Base class public methods, plus ...
 //
-//      operator const osg::Matrix&()
+//      operator const Matrixd&()
 //          Returns a copy of the transformation matrix
 //
 //      bool setComputeMatrix1(Angle* sc1obj)

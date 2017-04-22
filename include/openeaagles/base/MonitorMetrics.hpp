@@ -35,10 +35,10 @@ class List;
 // Public methods: Base class public methods, plus ...
 //
 //     MonitorMetrics(const Table1* redLuminance, const Table1* greenLuminance, const Table1* blueLuminance,
-//                    const osg::Matrix& phosphorCoordinates, const osg::Vec3& whiteRGB, const osg::Vec3& whiteCIE);
+//                    const Matrixd& phosphorCoordinates, const Vec3d& whiteRGB, const Vec3d& whiteCIE);
 //         Special constructor to initialize the object with the given values.
 //
-//     cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie)
+//     cie2rgb(Vec4d& rgba, const Vec3d& cie)
 //         Convert a CIE color into an RGB value for this monitor.
 //------------------------------------------------------------------------------
 class MonitorMetrics : public Object
@@ -79,7 +79,6 @@ private:
 
 }
 }
-
 
 #endif
 

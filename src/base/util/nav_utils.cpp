@@ -90,7 +90,7 @@ bool aer2xyzArray(
    // ---
    // Compute to x, y and z positions (player coordinates)
    // ---
-   //const auto pos0 = new osg::Vec3d[n];
+   //const auto pos0 = new Vec3d[n];
    for (unsigned int i = 0; i < n; i++) {
       const double d = -rng[i] * sel[i];    // Down
       const double r = rng[i] * cel[i];     // [Ground Range]

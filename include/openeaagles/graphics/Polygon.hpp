@@ -9,14 +9,13 @@ namespace graphics {
 
 //------------------------------------------------------------------------------
 // Class: Polygon
-// Base class:  Object -> Component -> Graphic -> Polygon
 //
 // Description: General purpose polygon
 //
 // Factory name: Polygon
 // Public methods: Base class public methods, plus ...
 //
-//    const osg::Vec3* getNormal() const
+//    const base::Vec3d* getNormal() const
 //       Returns the vector normal to this polygon.  Calling calcNormal() will
 //       compute the normal vector for this polygon.
 //
@@ -28,7 +27,7 @@ namespace graphics {
 //       Computes the vector normal to this polygon.
 //
 //
-//    const osg::Vec4* getPlaneCoeff() const
+//    const base::Vec4d* getPlaneCoeff() const
 //       Returns the plane equation coefficients for the plane
 //       containing this polygon.  Calling calcPlaneCoeff() will
 //       compute these coefficients for this polygon
@@ -42,7 +41,7 @@ namespace graphics {
 //       Computes the plane equation coefficients for this polygon.
 //
 //
-//    double calcZ(const osg::Vec2& p) const
+//    double calcZ(const base::Vec2d& p) const
 //       Computes the Z value for a point, 'p', on this polygon.
 //       The plane equation coefficients must be valid (see arePlaneCoeffValid()).
 //       Calling calcPlaneCoeff() will compute these coefficients for this polygon
@@ -50,15 +49,15 @@ namespace graphics {
 //
 // Static, public methods:
 //
-//    bool calcNormal(osg::Vec3& norm, const osg::Vec3 v[3])
+//    bool calcNormal(base::Vec3d& norm, const base::Vec3d v[3])
 //       Computes the normal vector, 'norm', for the plane define by
 //       the three vectices, v.  Returns true if 'norm' is valid.
 //
-//    bool calcPlaneCoeff(osg::Vec4& coeff, const osg::Vec3 v[3])
+//    bool calcPlaneCoeff(base::Vec4d& coeff, const base::Vec3d v[3])
 //       Computes the plane equation coefficients for the plane defined by
 //       the three vectices, v.  Returns true if 'coeff' is valid.
 //
-//    double calcZ(const osg::Vec2& p, const osg::Vec4& coeff)
+//    double calcZ(const base::Vec2d& p, const base::Vec4d& coeff)
 //       Computes the Z value for a point, 'p', located on a plane, which
 //       is defined by the plane equation coefficients, 'coeff'.
 //

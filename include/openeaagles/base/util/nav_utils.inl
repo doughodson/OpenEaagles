@@ -328,7 +328,7 @@ inline bool xyz2aer(
 // Earth centered, earth fixed (ECEF) coordinates <==> Geodetic coordinates
 //------------------------------------------------------------------------------
 
-// convertEcef2Geod(): using osg::Vec3d vectors
+// convertEcef2Geod(): using Vec3d vectors
 inline bool convertEcef2Geod(
             const Vec3d& vec,          // IN: ECEF [ IX IY IZ ]
             Vec3d* const lla,          // OUT: Geodetic [ ILAT ILON IALT ]
@@ -360,7 +360,7 @@ inline bool convertEcef2Geod(
    return ok;
 }
 
-// convertGeod2Ecef(): using osg::Vec3d vectors
+// convertGeod2Ecef(): using Vec3d vectors
 inline bool convertGeod2Ecef(
             const Vec3d& lla,          // IN: Geodetic [ ILAT ILON IALT ]
             Vec3d* const ecef,         // OUT: ECEF [ IX IY IZ ]

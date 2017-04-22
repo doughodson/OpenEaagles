@@ -30,11 +30,11 @@ namespace base {
 //      double lightness()
 //          Data access routines.  Returns the individual HLS components.
 //
-//      getHLS(osg::Vec3 hls)
+//      getHLS(Vec3d hls)
 //          Returns the HLS components in a vector.
 //
-//      static void hls2rgb(osg::Vec4& rgb, const osg::Vec3& hls);
-//      static void rgb2hls(osg::Vec3& hls, const osg::Vec4& rgb);
+//      static void hls2rgb(Vec4d& rgb, const Vec3d& hls);
+//      static void rgb2hls(Vec3d& hls, const Vec4d& rgb);
 //          Static functions to convert HLS colors to RGB and visa versa.
 //
 // Enumerated:
@@ -42,7 +42,7 @@ namespace base {
 //          Used to index the HLS color vectors.
 //
 //
-// Note:  The operators osg::Vec3*() and osg::Vec4*(), (inherited from Color)
+// Note:  The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
 //        HLS color vector.
 //------------------------------------------------------------------------------

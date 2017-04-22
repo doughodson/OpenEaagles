@@ -109,8 +109,8 @@ class Tdb;
 //
 //
 //  Handy support functions
-//      limitVec(osg::Vec2d& vec, osg::Vec2d& lim)
-//      limitVec(osg::Vec2d& vec, osg::Vec2d& ll, osg::Vec2d& ul)
+//      limitVec(base::Vec2d& vec, base::Vec2d& lim)
+//      limitVec(base::Vec2d& vec, base::Vec2d& ll, base::Vec2d& ul)
 //          Symmetrical and asymmetrical limit checks
 //
 //------------------------------------------------------------------------------

@@ -1669,7 +1669,7 @@ bool OtwCigiCl::sendCigiData()
                hotRequest.SetLat(hotLat);
                hotRequest.SetLon(hotLon);
                hotRequest.SetReqType(CigiHatHotReqV3::HOT);
-               //osg::Vec3 pos = oldest->getPlayer()->getPosition();
+               //base::Vec3 pos = oldest->getPlayer()->getPosition();
                //double alt;
                //base::nav::convertPosVec2LL(
                //         getRefLatitude(), getRefLongitude(),

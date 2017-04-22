@@ -264,36 +264,36 @@ double IrBox::getReflectorAreaInFieldOfView(const IrQueryMsg* const msg)
 
    const Player* sensorPlatform = msg->getOwnship();
    const Player* target = msg->getTarget();
-   osg::Vec3 targetVelocityVector = target->getVelocity();
-   osg::Vec3 targetPosition = target->getPosition();
-   osg::Vec3 sensorPosition = sensorPlatform->getPosition();
-   osg::Vec3 directionToSensor =  sensorPosition - targetPosition;
-   osg::Vec3 normalizedDirectionToSensor = directionToSensor;
+   base::Vec3d targetVelocityVector = target->getVelocity();
+   base::Vec3d targetPosition = target->getPosition();
+   base::Vec3d sensorPosition = sensorPlatform->getPosition();
+   base::Vec3d directionToSensor =  sensorPosition - targetPosition;
+   base::Vec3d normalizedDirectionToSensor = directionToSensor;
    normalizedDirectionToSensor.normalize();
-   osg::Vec3 normalizedTargetVelocityVector = targetVelocityVector;
+   base::Vec3d normalizedTargetVelocityVector = targetVelocityVector;
    normalizedTargetVelocityVector.normalize();
-   osg::Vec3 targetXVector;
+   base::Vec3d targetXVector;
    targetXVector[0] = normalizedTargetVelocityVector[0]; // x
    double frontToSensor = targetXVector * normalizedDirectionToSensor;
    if (frontToSensor < 0) frontToSensor = -frontToSensor;
       area += frontToSensor * x * z; // x, z are members of this object corresponding to
                                      // width and height.
 
-   osg::Vec3 targetYVector;
+   base::Vec3d targetYVector;
    targetYVector[1] = normalizedTargetVelocityVector[1]; // y
    double sideToSensor = targetYVector * normalizedDirectionToSensor;
    if (sideToSensor < 0) sideToSensor = -sideToSensor;
       area += sideToSensor * y * z; // y,z are members of this object corresponding to
                                     // length and height.
 
-   osg::Vec3 targetZVector;
+   base::Vec3d targetZVector;
    targetZVector[2] = normalizedTargetVelocityVector[2]; // y
    double topToSensor = targetZVector * normalizedDirectionToSensor;
    if (topToSensor < 0) topToSensor = -topToSensor;
       area += topToSensor * x * y; // x,y is a member of this object corresponding to
                                    // width and length.
    return area;
-} // end else
+}
 #endif
 
 }

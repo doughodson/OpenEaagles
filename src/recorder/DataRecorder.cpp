@@ -899,13 +899,13 @@ void DataRecorder::genTrackData(pb::TrackData* const trkMsg, const models::Track
          trkMsg->set_latitude(lat);
          trkMsg->set_longitude(lon);
 
-         // Position: getPosition returns osg::Vec3
+         // Position: getPosition returns base::Vec3
          base::Vec3d pos = track->getPosition();
          trkMsg->mutable_position()->set_x(pos[0]);
          trkMsg->mutable_position()->set_y(pos[1]);
          trkMsg->mutable_position()->set_z(pos[2]);
 
-         // Velocity: getVelocity returns osg::Vec3
+         // Velocity: getVelocity returns base::Vec3
          base::Vec3d vel = track->getVelocity();
          trkMsg->mutable_velocity()->set_x(vel[0]);
          trkMsg->mutable_velocity()->set_y(vel[1]);

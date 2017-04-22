@@ -53,7 +53,7 @@ namespace models {
 //
 // Public member functions:
 //
-//      getRefPosition(osg::Vec2d& a)
+//      getRefPosition(base::Vec2d& a)
 //          Returns the current reference position vector (radians)
 //          (i.e., the center of the scan volume).
 //
@@ -98,7 +98,7 @@ namespace models {
 //       bool setLeftToRightScan(const bool newLeftToRightScan)
 //          Sets the left to right scan flag (else right to left scanning)
 //
-//      setRefPosition(osg::Vec2d& nla)
+//      setRefPosition(base::Vec2d& nla)
 //      bool setRefPosition(double az, double el)
 //      bool setRefAzimuth(double az)
 //      bool setRefElevation(double el)

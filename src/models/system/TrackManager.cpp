@@ -1487,7 +1487,7 @@ void RwrTrkMgr::processTrackList(const double dt)
 
                // Create a track input vector
                u[it] = (tgtPos[ir] - tracks[it]->getPosition());
-               //osg::Vec3 trkPos = tracks[it]->getPosition();
+               //base::Vec3d trkPos = tracks[it]->getPosition();
 
                // Track age and flags
                if (!haveU[it]) {

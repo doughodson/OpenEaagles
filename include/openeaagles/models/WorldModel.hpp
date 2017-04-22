@@ -56,7 +56,7 @@ class AbstractAtmosphere;
 //       double getRefLongitude()
 //          Return the reference point (degrees)
 //
-//       const osg::Matrixd& getWorldMat()
+//       const base::Matrixd& getWorldMat()
 //          Returns the world transformation matrix;
 //          earth (NED) <== > Earth Centered, Earth Fixed (ECEF);
 //          where the NED XY plane is tangent to and centered at

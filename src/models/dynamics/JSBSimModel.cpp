@@ -710,9 +710,9 @@ void JSBSimModel::dynamics(const double dt)
 
         //{
         // std::cout << "JSBSim: ---------------------------------" << std::endl;
-        // osg::Vec4 fq;
+        // base::Vec4d fq;
         // fq.set(acData->e1, acData->e2, acData->e4, acData->e4);
-        // osg::Matrix m2;
+        // base::Matrixd m2;
         // m2.set(
         //    acData->l1, acData->l2, acData->l3, 0,
         //    acData->m1, acData->m2, acData->m3, 0,
@@ -720,12 +720,12 @@ void JSBSimModel::dynamics(const double dt)
         //    0,          0,          0,          1
         //    );
         // std::printf("oe*EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
-        // osg::Matrix m0 = getRotationalMatrix();
-        // osg::Quat q0 = getQuaternions();
+        // base::Matrixd m0 = getRotationalMatrix();
+        // base::Quat q0 = getQuaternions();
         // setRotationalMatrix(m2);
         // //setQuaternions(fq);
-        // osg::Quat eq = getQuaternions();
-        // osg::Matrix m1 = getRotationalMatrix();
+        // base::Quat eq = getQuaternions();
+        // base::Matrixd m1 = getRotationalMatrix();
         // std::printf("oe EA: (%6.1f, %6.1f, %6.1f)\n", getRollD(), getPitchD(), getHeadingD());
         // std::printf("JSBSim    EA: (%6.1f, %6.1f, %6.1f)\n", acData->phi, acData->theta, acData->psi);
         // std::printf("oe* Q: (%6.3f, %6.3f, %6.3f, %6.3f)\n", q0[0], q0[1], q0[2], q0[3]);

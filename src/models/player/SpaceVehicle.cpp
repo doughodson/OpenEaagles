@@ -200,8 +200,8 @@ UnmannedSpaceVehicle::UnmannedSpaceVehicle()
 void UnmannedSpaceVehicle::dynamics(const double dt)
 {
    BaseClass::dynamics(dt);
-   //osg::Vec3d p = getGeocPosition();
-   //osg::Vec3d v = getGeocVelocity();
+   //base::Vec3d p = getGeocPosition();
+   //base::Vec3d v = getGeocVelocity();
    //std::cout << "USV::Dyn(" << this << ")";
    //std::cout << " lla=[ " << getLatitude() << ", " << getLongitude() << ", " << (getAltitudeAglM() * base::Distance::M2NM)  << " ]";
    //std::cout << " pos=[ " << p[0] << ", " << p[1] << ", " << p[2] << " ]";

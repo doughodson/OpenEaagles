@@ -403,7 +403,7 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
 
          base::Vec3d targetPosition = target->getPosition();
          base::Vec3d losVector = targetPosition - p0;
-         //osg::Vec3 xlos = -losVector;
+         //base::Vec3d xlos = -losVector;
        double aazr {};
        double aelr {};
        double ra {};
@@ -422,8 +422,8 @@ unsigned int TdbIr::processPlayers(base::PairStream* const players)
       }
       else {
          // FAB - this calc for gimbal ownHeadingOnly false
-         //osg::Vec4 los0( losVector.x(), losVector.y(), losVector.z(), 0.0 );
-         //osg::Vec4 aoi = ownship->getRotMat() * los0;
+         //base::Vec4d los0( losVector.x(), losVector.y(), losVector.z(), 0.0 );
+         //base::Vec4d aoi = ownship->getRotMat() * los0;
          base::Vec3d aoi = ownship->getRotMat() * losVector;
          // 3) Compute the azimuth and elevation angles of incidence (AOI)
 

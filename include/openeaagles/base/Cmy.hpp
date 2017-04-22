@@ -30,11 +30,11 @@ namespace base {
 //      double yellow()
 //          Data access routines.  Returns the individual CMY components.
 //
-//      getCMY(osg::Vec3 cmy)
+//      getCMY(Vec3d cmy)
 //          Returns the CMY components in a vector.
 //
-//      static void cmy2rgb(osg::Vec4& rgb, const osg::Vec3& cmy);
-//      static void rgb2cmy(osg::Vec3& cmy, const osg::Vec4& rgb);
+//      static void cmy2rgb(Vec4d& rgb, const Vec3d& cmy);
+//      static void rgb2cmy(Vec3d& cmy, const Vec4d& rgb);
 //          Static functions to convert CMY colors to RGB and visa versa.
 //
 // Enumerated:
@@ -42,7 +42,7 @@ namespace base {
 //          Used to index the CMY color vectors.
 //
 //
-// Note:  The operators osg::Vec3*() and osg::Vec4*(), (inherited from Color)
+// Note:  The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
 //        CMY color vector.
 //------------------------------------------------------------------------------

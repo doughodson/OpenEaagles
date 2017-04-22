@@ -33,13 +33,13 @@ class Number;
 //      void setDefaultAlpha(double alpha)
 //          Sets defaultAlpha (the default alpha value).
 //
-//      const osg::Vec3*()
-//      const osg::Vec3* getRGB()
-//          Convert a color to an osg::Vec3* RGB vector.
+//      const Vec3d*()
+//      const Vec3d* getRGB()
+//          Convert a color to an Vec3d* RGB vector.
 //
-//      const osg::Vec4*()
-//      const osg::Vec4* getRGBA()
-//          Converts a color to an osg::Vec4* RGBA vector.
+//      const Vec4d*()
+//      const Vec4d* getRGBA()
+//          Converts a color to an Vec4d* RGBA vector.
 //
 //      Comparison operators: ==  !=
 //          Are C++ equivalents.

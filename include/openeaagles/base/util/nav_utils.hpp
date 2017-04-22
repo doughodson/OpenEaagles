@@ -15,7 +15,7 @@ namespace oe {
 namespace base {
 namespace nav {
 
-// osg::Vec2 and osg::Vec3 indexes
+// Vec2d and Vec3d indexes
 enum { INORTH, IEAST, IDOWN };   // North, east and down (NED) position vector
 enum { IX, IY, IZ };             // [ X Y Z ] vector
 enum { ILAT, ILON, IALT };       // Lat/lon/alt position vector
@@ -613,7 +613,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 
-   // Using osg::Vec3d vectors
+   // Using Vec3d vectors
    bool convertEcef2Geod(
          const Vec3d& vec,                  // IN:  ECEF [ IX IY IZ ]
          Vec3d* const lla,                  // OUT: Geodetic [ ILAT ILON IALT ]
@@ -640,7 +640,7 @@ const double ellipseBsq  = ellipseB * ellipseB;
          const EarthModel* const em=nullptr // IN:  Pointer to an optional earth model (default: WGS-84)
       );
 
-   // Using osg::Vec3d vectors
+   // Using Vec3d vectors
    bool convertGeod2Ecef(
          const Vec3d& lla,                  // IN:  Geodetic [ ILAT ILON IALT ]
          Vec3d* const ecef,                 // OUT: ECEF [ IX IY IZ ]

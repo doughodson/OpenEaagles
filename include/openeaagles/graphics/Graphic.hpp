@@ -115,7 +115,7 @@ class Material;
 //  matrixIsActive()
 //    Returns true if we have an active matrix.
 //
-//  osg::Matrix& getMatrix()
+//  base::Matrixd& getMatrix()
 //    Returns the transformation matrix.
 //
 //      lcRotate(double a)

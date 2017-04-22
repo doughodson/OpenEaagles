@@ -439,7 +439,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
 
             // Check if the length of the position error (squared) is greater
             // than the max error (squared)
-            //osg::Vec3d ppos = player->getGeocPosition();
+            //base::Vec3d ppos = player->getGeocPosition();
             const base::Vec3d ppos = playerState.getGeocPosition();
             const base::Vec3d errPos = drPos - ppos;
             if (errPos.length2() >= maxPosErr2) {
@@ -454,7 +454,7 @@ bool Nib::isPlayerStateUpdateRequired(const double curExecTime)
             const double maxAngleErr = getNetIO()->getMaxOrientationErr(this);
 
             // Compute angular error
-            //osg::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
+            //base::Vec3 errAngles = drAngles - player->getGeocEulerAngles();
             base::Vec3d errAngles = drAngles - playerState.getGeocEulerAngles();
 
             // Check if any angle error is greater than the max error
@@ -664,8 +664,8 @@ void Nib::playerState2Nib()
       setTimeUtc( static_cast<double>(player->getSynchronizedState().getTimeUtc()) );
 
       {
-         //osg::Vec3d pos = player->getGeocPosition();
-         //osg::Vec3d vec = player->getGeocVelocity();
+         //base::Vec3d pos = player->getGeocPosition();
+         //base::Vec3d vec = player->getGeocVelocity();
 
          //std::cout << "playerState2Nib(): geoc pos: (";
          //std::cout << pos[0] << ", ";
@@ -729,7 +729,7 @@ bool Nib::updateDeadReckoning(
          drPos += (smoothVel * smoothTime);
          smoothTime -= dt;
       }
-      //osg::Vec3d ss = (smoothVel * smoothTime);
+      //base::Vec3d ss = (smoothVel * smoothTime);
       //std::cout << " smooth(";
       //std::cout << ss[0] << ", ";
       //std::cout << ss[1] << ", ";

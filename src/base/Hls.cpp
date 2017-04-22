@@ -18,7 +18,6 @@ BEGIN_SLOTTABLE(Hls)
     "saturation"   // 3: ... Saturation component, range(0.0 to 1.0)
 END_SLOTTABLE(Hls)
 
-// Map slot table to handles
 BEGIN_SLOT_MAP(Hls)
     ON_SLOT(1,setHue,Number)
     ON_SLOT(2,setLightness,Number)

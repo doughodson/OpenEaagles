@@ -35,10 +35,10 @@ class Table1;
 //     double y()
 //         Data access routines.  Returns the CIE component.
 //
-//     getCIE(osg::Vec3& cie)
+//     getCIE(Vec3d& cie)
 //         Returns the CIE components in a vector.
 //
-//     static void cie2rgb(osg::Vec4& rgba, const osg::Vec3& cie, const MonitorMetrics* m)
+//     static void cie2rgb(Vec4d& rgba, const Vec3d& cie, const MonitorMetrics* m)
 //         Static function to convert a CIE color into RGB.
 //
 // Enumerated:
@@ -46,7 +46,7 @@ class Table1;
 //         Used to index the CIE color vector.
 //
 //
-// Note:  The operators osg::Vec3*() and osg::Vec4*(), (inherited from Color)
+// Note:  The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
 //        CIE color vector.
 //------------------------------------------------------------------------------

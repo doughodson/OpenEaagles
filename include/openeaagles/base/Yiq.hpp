@@ -34,11 +34,11 @@ namespace base {
 //      double q()
 //          Data access routines.  Returns the individual YIQ components.
 //
-//      getYIQ(osg::Vec3 yiq)
+//      getYIQ(Vec3d yiq)
 //          Returns the YIQ components in a vector.
 //
-//      static void yiq2rgb(osg::Vec4& rgb, const osg::Vec3& yiq);
-//      static void rgb2yiq(osg::Vec3& yiq, const osg::Vec4& rgb);
+//      static void yiq2rgb(Vec4d& rgb, const Vec3d& yiq);
+//      static void rgb2yiq(Vec3d& yiq, const Vec4d& rgb);
 //          Static functions to convert YIQ colors to RGB and visa versa.
 //
 // Enumerated:
@@ -46,7 +46,7 @@ namespace base {
 //          Used to index the YIQ color vectors.
 //
 //
-// Note:  The operators osg::Vec3*() and osg::Vec4*(), (inherited from Color)
+// Note:  The operators Vec3d*() and Vec4d*(), (inherited from Color)
 //        return a const pointer to the RGBA color vector and not the
 //        YIQ color vector.
 //------------------------------------------------------------------------------
