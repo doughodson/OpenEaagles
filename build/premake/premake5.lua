@@ -25,11 +25,8 @@ OE3rdPartyIncPath = OE_3RD_PARTY_ROOT.."/include"
 --
 -- directory location for HLA include and library paths
 --
---HLA_ROOT = "../../../portico-2.0.1"
---HLAIncPath = HLA_ROOT.."/include/hla13"
 HLA_ROOT = "../../../openrti"
---HLAIncPath = HLA_ROOT.."/include/RTI13"
-HLAIncPath = HLA_ROOT.."/include"
+HLAIncPath = HLA_ROOT.."/include/RTI13"
 HLALibPath = HLA_ROOT.."/lib"
 print ("HLA Paths:")
 print ("  Include   : "..HLALibPath)
