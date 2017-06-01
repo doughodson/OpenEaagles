@@ -1,1 +1,1 @@
-Developmental version based on v17.04
+Stable version v17.06

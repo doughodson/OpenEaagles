@@ -10,9 +10,9 @@
 #ifndef __oe_config_H__
 #define __oe_config_H__
 
-// OpenEaagles release version number (17.0X)
+// OpenEaagles release version number
 #ifndef OE_VERSION
-#define OE_VERSION                         170X
+#define OE_VERSION                         1706
 #endif
 
 // Max number of interval timers (see Timers.hpp)

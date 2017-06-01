@@ -19,7 +19,7 @@
       }
       targetname "interop_dis"
 
----[[
+--[[
    -- IEEE HLA interface library (common code)
    project "interop_hla"
       files {
