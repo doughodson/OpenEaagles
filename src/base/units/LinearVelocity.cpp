@@ -87,7 +87,7 @@ void LinearVelocity::copyData(const LinearVelocity& org, const bool)
 double LinearVelocity::getMetersPerSecond() const
 {
     return static_cast<double>(val);
-};
+}
 
 //---------------------------------------------------------------------
 // convert() -- converts from meters/sec to desired distance/time ratio:

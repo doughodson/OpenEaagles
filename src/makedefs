@@ -65,6 +65,7 @@ CPPFLAGS += -fPIC
 CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
+#CPPFLAGS += -pedantic
 #CPPFLAGS += -Wextra
 CPPFLAGS += -std=c++11
 # warn of old c-style casts, so they can be replaced

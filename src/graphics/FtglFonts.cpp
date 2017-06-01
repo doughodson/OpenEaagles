@@ -221,7 +221,7 @@ bool FtglFonts::setFaceSize(const base::Number* const faceSize)
     if (faceSize != nullptr) fSize = faceSize->getInt();
     else fSize = DEFAULT_FACE_SIZE;
     return true;
-};
+}
 
 bool FtglExtrdFont::setDepth(const base::Number* const newDepth)
 {

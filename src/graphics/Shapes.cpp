@@ -371,9 +371,9 @@ std::ostream& OcclusionArc::serialize(std::ostream& sout, const int i, const boo
 //==============================================================================
 // Class: Point
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Point,"Point")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(Point, "Point")
 EMPTY_SERIALIZER(Point)
-EMPTY_CONSTRUCTOR(Point);
+EMPTY_CONSTRUCTOR(Point)
 EMPTY_COPYDATA(Point)
 EMPTY_DELETEDATA(Point)
 
@@ -395,9 +395,9 @@ void Point::drawFunc()
 //==============================================================================
 // Class: LineLoop
 //==============================================================================
-IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LineLoop,"LineLoop")
+IMPLEMENT_EMPTY_SLOTTABLE_SUBCLASS(LineLoop, "LineLoop")
 EMPTY_SERIALIZER(LineLoop)
-EMPTY_CONSTRUCTOR(LineLoop);
+EMPTY_CONSTRUCTOR(LineLoop)
 EMPTY_COPYDATA(LineLoop)
 EMPTY_DELETEDATA(LineLoop)
 
@@ -421,7 +421,7 @@ void LineLoop::drawFunc()
 //==============================================================================
 // Class: Line
 //==============================================================================
-IMPLEMENT_SUBCLASS(Line,"Line")
+IMPLEMENT_SUBCLASS(Line, "Line")
 EMPTY_DELETEDATA(Line)
 
 BEGIN_SLOTTABLE(Line)
@@ -503,7 +503,7 @@ std::ostream& Line::serialize(std::ostream& sout, const int i, const bool slotsO
 //==============================================================================
 // Class: Quad
 //==============================================================================
-IMPLEMENT_SUBCLASS(Quad,"Quad")
+IMPLEMENT_SUBCLASS(Quad, "Quad")
 EMPTY_DELETEDATA(Quad)
 
 BEGIN_SLOTTABLE(Quad)
@@ -632,7 +632,7 @@ std::ostream& Quad::serialize(std::ostream& sout, const int i, const bool slotsO
 //==============================================================================
 // Class: Triangle
 //==============================================================================
-IMPLEMENT_SUBCLASS(Triangle,"Triangle")
+IMPLEMENT_SUBCLASS(Triangle, "Triangle")
 EMPTY_DELETEDATA(Triangle)
 
 BEGIN_SLOTTABLE(Triangle)
