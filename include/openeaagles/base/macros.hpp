@@ -31,16 +31,16 @@
 //       this yourself).
 //
 //    STANDARD_CONSTRUCTOR()
-//       Common constructor tasks.  This macro required in every constructor.
+//       Common constructor tasks. This macro required in every constructor.
 //
 //    STANDARD_DESTRUCTOR()
-//       Common destructor tasks.  This macro required in every destructor.
+//       Common destructor tasks. This macro required in every destructor.
 //
 //    BEGIN_SLOTTABLE(ThisType) and END_SLOTTABLE(ThisType)
 //       These macros are used to define a slot table (see Object.hpp)
 //       for the class 'ThisType'.
 //
-//    BEGIN_SLOT_MAP(ThisType) and  END_SLOT_MAP()
+//    BEGIN_SLOT_MAP(ThisType) and END_SLOT_MAP()
 //       These macros, along with the ON_SLOT() macro, define a slot
 //       dispatch table, which maps local slot numbers and argument
 //       types to "set slot" member functions that handle the setting of
